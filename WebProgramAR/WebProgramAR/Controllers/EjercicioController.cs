@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebProgramAR.Entidades;
+using WebProgramAR.Negocio;
 
 namespace WebProgramAR.Controllers
 {
@@ -13,6 +15,9 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Index()
         {
+            List<Ejercicio> ejercicios = EjercicioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
+            List<NivelEjercicio> nivelEjercicios = NivelEjercicioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
+            List<EstadoEjercicio> estadoEjercicios = EstadoEjercicioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
             return View();
         }
 
