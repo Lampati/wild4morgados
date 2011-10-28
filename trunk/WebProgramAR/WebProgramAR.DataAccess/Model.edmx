@@ -1,0 +1,807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebProgramARModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="WebProgramARModelStoreContainer">
+          <EntitySet Name="Curso" EntityType="WebProgramARModel.Store.Curso" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ejercicio" EntityType="WebProgramARModel.Store.Ejercicio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EjercicioCurso" EntityType="WebProgramARModel.Store.EjercicioCurso" store:Type="Tables" store:Schema="dbo" store:Name="EjercicioCurso">
+            <DefiningQuery>SELECT 
+      [EjercicioCurso].[EjercicioId] AS [EjercicioId], 
+      [EjercicioCurso].[CursoId] AS [CursoId]
+      FROM [dbo].[EjercicioCurso] AS [EjercicioCurso]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EstadoEjercicio" EntityType="WebProgramARModel.Store.EstadoEjercicio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Localidad" EntityType="WebProgramARModel.Store.Localidad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NivelEjercicio" EntityType="WebProgramARModel.Store.NivelEjercicio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pais" EntityType="WebProgramARModel.Store.Pais" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Provincia" EntityType="WebProgramARModel.Store.Provincia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TipoUsuario" EntityType="WebProgramARModel.Store.TipoUsuario" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Usuario" EntityType="WebProgramARModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Curso_Usuario" Association="WebProgramARModel.Store.FK_Curso_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Curso" EntitySet="Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_EstadoEjercicio" Association="WebProgramARModel.Store.FK_Ejercicio_EstadoEjercicio">
+            <End Role="EstadoEjercicio" EntitySet="EstadoEjercicio" />
+            <End Role="Ejercicio" EntitySet="Ejercicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_NivelEjercicio" Association="WebProgramARModel.Store.FK_Ejercicio_NivelEjercicio">
+            <End Role="NivelEjercicio" EntitySet="NivelEjercicio" />
+            <End Role="Ejercicio" EntitySet="Ejercicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_Usuario" Association="WebProgramARModel.Store.FK_Ejercicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Ejercicio" EntitySet="Ejercicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EjercicioCurso_Curso" Association="WebProgramARModel.Store.FK_EjercicioCurso_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="EjercicioCurso" EntitySet="EjercicioCurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EjercicioCurso_Ejercicio" Association="WebProgramARModel.Store.FK_EjercicioCurso_Ejercicio">
+            <End Role="Ejercicio" EntitySet="Ejercicio" />
+            <End Role="EjercicioCurso" EntitySet="EjercicioCurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Pais" Association="WebProgramARModel.Store.FK_Localidad_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Provincia" Association="WebProgramARModel.Store.FK_Localidad_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="WebProgramARModel.Store.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Localidad" Association="WebProgramARModel.Store.FK_Usuario_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Pais" Association="WebProgramARModel.Store.FK_Usuario_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Provincia" Association="WebProgramARModel.Store.FK_Usuario_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="WebProgramARModel.Store.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="CursoId" />
+          </Key>
+          <Property Name="CursoId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ejercicio">
+          <Key>
+            <PropertyRef Name="EjercicioId" />
+          </Key>
+          <Property Name="EjercicioId" Type="int" Nullable="false" />
+          <Property Name="Enunciado" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="SolucionTexto" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="Solucion" Type="varbinary(max)" />
+          <Property Name="Global" Type="bit" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="NivelEjercicioId" Type="int" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="EstadoEjercicioId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'WebProgramAR.dbo.EjercicioCurso' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="EjercicioCurso">
+          <Key>
+            <PropertyRef Name="EjercicioId" />
+            <PropertyRef Name="CursoId" />
+          </Key>
+          <Property Name="EjercicioId" Type="int" Nullable="false" />
+          <Property Name="CursoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoEjercicio">
+          <Key>
+            <PropertyRef Name="EstadoEjercicioId" />
+          </Key>
+          <Property Name="EstadoEjercicioId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="LocalidadId" />
+          </Key>
+          <Property Name="LocalidadId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="PaisId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="ProvinciaId" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NivelEjercicio">
+          <Key>
+            <PropertyRef Name="NivelEjercicioId" />
+          </Key>
+          <Property Name="NivelEjercicioId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="PaisId" />
+          </Key>
+          <Property Name="PaisId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="ProvinciaId" />
+          </Key>
+          <Property Name="ProvinciaId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="PaisId" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="TipoUsuarioId" />
+          </Key>
+          <Property Name="TipoUsuarioId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Apellido" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioNombre" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Contrasena" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="TipoUsuarioId" Type="int" Nullable="false" />
+          <Property Name="PaisId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="ProvinciaId" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="LocalidadId" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Curso_Usuario">
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="1" />
+          <End Role="Curso" Type="WebProgramARModel.Store.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_EstadoEjercicio">
+          <End Role="EstadoEjercicio" Type="WebProgramARModel.Store.EstadoEjercicio" Multiplicity="1" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Store.Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEjercicio">
+              <PropertyRef Name="EstadoEjercicioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="EstadoEjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_NivelEjercicio">
+          <End Role="NivelEjercicio" Type="WebProgramARModel.Store.NivelEjercicio" Multiplicity="1" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Store.Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelEjercicio">
+              <PropertyRef Name="NivelEjercicioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="NivelEjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_Usuario">
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="1" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Store.Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EjercicioCurso_Curso">
+          <End Role="Curso" Type="WebProgramARModel.Store.Curso" Multiplicity="1" />
+          <End Role="EjercicioCurso" Type="WebProgramARModel.Store.EjercicioCurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="CursoId" />
+            </Principal>
+            <Dependent Role="EjercicioCurso">
+              <PropertyRef Name="CursoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EjercicioCurso_Ejercicio">
+          <End Role="Ejercicio" Type="WebProgramARModel.Store.Ejercicio" Multiplicity="1" />
+          <End Role="EjercicioCurso" Type="WebProgramARModel.Store.EjercicioCurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ejercicio">
+              <PropertyRef Name="EjercicioId" />
+            </Principal>
+            <Dependent Role="EjercicioCurso">
+              <PropertyRef Name="EjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Pais">
+          <End Role="Pais" Type="WebProgramARModel.Store.Pais" Multiplicity="1" />
+          <End Role="Localidad" Type="WebProgramARModel.Store.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Provincia">
+          <End Role="Provincia" Type="WebProgramARModel.Store.Provincia" Multiplicity="1" />
+          <End Role="Localidad" Type="WebProgramARModel.Store.Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ProvinciaId" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Pais">
+          <End Role="Pais" Type="WebProgramARModel.Store.Pais" Multiplicity="1" />
+          <End Role="Provincia" Type="WebProgramARModel.Store.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Localidad">
+          <End Role="Localidad" Type="WebProgramARModel.Store.Localidad" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="LocalidadId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="LocalidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Pais">
+          <End Role="Pais" Type="WebProgramARModel.Store.Pais" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Provincia">
+          <End Role="Provincia" Type="WebProgramARModel.Store.Provincia" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ProvinciaId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="WebProgramARModel.Store.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebProgramARModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="WebProgramAREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cursos" EntityType="WebProgramARModel.Curso" />
+          <EntitySet Name="Ejercicios" EntityType="WebProgramARModel.Ejercicio" />
+          <EntitySet Name="EstadoEjercicios" EntityType="WebProgramARModel.EstadoEjercicio" />
+          <EntitySet Name="Localidades" EntityType="WebProgramARModel.Localidad" />
+          <EntitySet Name="NivelEjercicios" EntityType="WebProgramARModel.NivelEjercicio" />
+          <EntitySet Name="Paises" EntityType="WebProgramARModel.Pais" />
+          <EntitySet Name="Provincias" EntityType="WebProgramARModel.Provincia" />
+          <EntitySet Name="TipoUsuarios" EntityType="WebProgramARModel.TipoUsuario" />
+          <EntitySet Name="Usuarios" EntityType="WebProgramARModel.Usuario" />
+          <AssociationSet Name="FK_Curso_Usuario" Association="WebProgramARModel.FK_Curso_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Curso" EntitySet="Cursos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_EstadoEjercicio" Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio">
+            <End Role="EstadoEjercicio" EntitySet="EstadoEjercicios" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_NivelEjercicio" Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio">
+            <End Role="NivelEjercicio" EntitySet="NivelEjercicios" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_Usuario" Association="WebProgramARModel.FK_Ejercicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Pais" Association="WebProgramARModel.FK_Usuario_Pais">
+            <End Role="Pais" EntitySet="Paises" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="WebProgramARModel.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="EjercicioCurso" Association="WebProgramARModel.EjercicioCurso">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Pais" Association="WebProgramARModel.FK_Localidad_Pais">
+            <End Role="Pais" EntitySet="Paises" />
+            <End Role="Localidad" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Localidad_Provincia" Association="WebProgramARModel.FK_Localidad_Provincia">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Localidad" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Localidad" Association="WebProgramARModel.FK_Usuario_Localidad">
+            <End Role="Localidad" EntitySet="Localidades" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Pais" Association="WebProgramARModel.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Paises" />
+            <End Role="Provincia" EntitySet="Provincias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Provincia" Association="WebProgramARModel.FK_Usuario_Provincia">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="CursoId" />
+          </Key>
+          <Property Name="CursoId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Curso_Usuario" FromRole="Curso" ToRole="Usuario" />
+          <NavigationProperty Name="Ejercicio" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Curso" ToRole="Ejercicio" />
+        </EntityType>
+        <EntityType Name="Ejercicio">
+          <Key>
+            <PropertyRef Name="EjercicioId" />
+          </Key>
+          <Property Name="EjercicioId" Type="Int32" Nullable="false" />
+          <Property Name="Enunciado" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="SolucionTexto" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="Solucion" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Global" Type="Boolean" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" />
+          <Property Name="NivelEjercicioId" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="EstadoEjercicioId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" FromRole="Ejercicio" ToRole="EstadoEjercicio" />
+          <NavigationProperty Name="NivelEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_NivelEjercicio" FromRole="Ejercicio" ToRole="NivelEjercicio" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Ejercicio" ToRole="Usuario" />
+          <NavigationProperty Name="Curso" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Ejercicio" ToRole="Curso" />
+        </EntityType>
+        <EntityType Name="EstadoEjercicio">
+          <Key>
+            <PropertyRef Name="EstadoEjercicioId" />
+          </Key>
+          <Property Name="EstadoEjercicioId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Ejercicio" Relationship="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" FromRole="EstadoEjercicio" ToRole="Ejercicio" />
+        </EntityType>
+        <EntityType Name="Localidad">
+          <Key>
+            <PropertyRef Name="LocalidadId" />
+          </Key>
+          <Property Name="LocalidadId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PaisId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ProvinciaId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Pais" Relationship="WebProgramARModel.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
+          <NavigationProperty Name="Provincia" Relationship="WebProgramARModel.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Usuario_Localidad" FromRole="Localidad" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="NivelEjercicio">
+          <Key>
+            <PropertyRef Name="NivelEjercicioId" />
+          </Key>
+          <Property Name="NivelEjercicioId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Ejercicio" Relationship="WebProgramARModel.FK_Ejercicio_NivelEjercicio" FromRole="NivelEjercicio" ToRole="Ejercicio" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="PaisId" />
+          </Key>
+          <Property Name="PaisId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Usuario_Pais" FromRole="Pais" ToRole="Usuario" />
+          <NavigationProperty Name="Localidad" Relationship="WebProgramARModel.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
+          <NavigationProperty Name="Provincia" Relationship="WebProgramARModel.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="ProvinciaId" />
+          </Key>
+          <Property Name="ProvinciaId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PaisId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Localidad" Relationship="WebProgramARModel.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+          <NavigationProperty Name="Pais" Relationship="WebProgramARModel.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Usuario_Provincia" FromRole="Provincia" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="TipoUsuarioId" />
+          </Key>
+          <Property Name="TipoUsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" />
+          <Property Name="UsuarioNombre" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="TipoUsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="PaisId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ProvinciaId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="LocalidadId" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Curso" Relationship="WebProgramARModel.FK_Curso_Usuario" FromRole="Usuario" ToRole="Curso" />
+          <NavigationProperty Name="Ejercicio" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Usuario" ToRole="Ejercicio" />
+          <NavigationProperty Name="Pais" Relationship="WebProgramARModel.FK_Usuario_Pais" FromRole="Usuario" ToRole="Pais" />
+          <NavigationProperty Name="TipoUsuario" Relationship="WebProgramARModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Localidad" Relationship="WebProgramARModel.FK_Usuario_Localidad" FromRole="Usuario" ToRole="Localidad" />
+          <NavigationProperty Name="Provincia" Relationship="WebProgramARModel.FK_Usuario_Provincia" FromRole="Usuario" ToRole="Provincia" />
+        </EntityType>
+        <Association Name="FK_Curso_Usuario">
+          <End Role="Usuario" Type="WebProgramARModel.Usuario" Multiplicity="1" />
+          <End Role="Curso" Type="WebProgramARModel.Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Curso">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_EstadoEjercicio">
+          <End Role="EstadoEjercicio" Type="WebProgramARModel.EstadoEjercicio" Multiplicity="1" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEjercicio">
+              <PropertyRef Name="EstadoEjercicioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="EstadoEjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_NivelEjercicio">
+          <End Role="NivelEjercicio" Type="WebProgramARModel.NivelEjercicio" Multiplicity="1" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelEjercicio">
+              <PropertyRef Name="NivelEjercicioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="NivelEjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_Usuario">
+          <End Role="Usuario" Type="WebProgramARModel.Usuario" Multiplicity="1" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Pais">
+          <End Role="Pais" Type="WebProgramARModel.Pais" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="WebProgramARModel.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EjercicioCurso">
+          <End Role="Curso" Type="WebProgramARModel.Curso" Multiplicity="*" />
+          <End Role="Ejercicio" Type="WebProgramARModel.Ejercicio" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Localidad_Pais">
+          <End Type="WebProgramARModel.Pais" Role="Pais" Multiplicity="1" />
+          <End Type="WebProgramARModel.Localidad" Role="Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Localidad_Provincia">
+          <End Type="WebProgramARModel.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="WebProgramARModel.Localidad" Role="Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ProvinciaId" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Localidad">
+          <End Type="WebProgramARModel.Localidad" Role="Localidad" Multiplicity="1" />
+          <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="LocalidadId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="LocalidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Pais">
+          <End Type="WebProgramARModel.Pais" Role="Pais" Multiplicity="1" />
+          <End Type="WebProgramARModel.Provincia" Role="Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Provincia">
+          <End Type="WebProgramARModel.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ProvinciaId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ProvinciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebProgramARModelStoreContainer" CdmEntityContainer="WebProgramAREntities">
+          <EntitySetMapping Name="Cursos"><EntityTypeMapping TypeName="WebProgramARModel.Curso"><MappingFragment StoreEntitySet="Curso">
+            <ScalarProperty Name="CursoId" ColumnName="CursoId" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+            <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Ejercicios"><EntityTypeMapping TypeName="WebProgramARModel.Ejercicio"><MappingFragment StoreEntitySet="Ejercicio">
+            <ScalarProperty Name="EjercicioId" ColumnName="EjercicioId" />
+            <ScalarProperty Name="Enunciado" ColumnName="Enunciado" />
+            <ScalarProperty Name="SolucionTexto" ColumnName="SolucionTexto" />
+            <ScalarProperty Name="Solucion" ColumnName="Solucion" />
+            <ScalarProperty Name="Global" ColumnName="Global" />
+            <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+            <ScalarProperty Name="NivelEjercicioId" ColumnName="NivelEjercicioId" />
+            <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+            <ScalarProperty Name="EstadoEjercicioId" ColumnName="EstadoEjercicioId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="EstadoEjercicios"><EntityTypeMapping TypeName="WebProgramARModel.EstadoEjercicio"><MappingFragment StoreEntitySet="EstadoEjercicio">
+            <ScalarProperty Name="EstadoEjercicioId" ColumnName="EstadoEjercicioId" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Localidades"><EntityTypeMapping TypeName="WebProgramARModel.Localidad"><MappingFragment StoreEntitySet="Localidad">
+            <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+            <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="NivelEjercicios"><EntityTypeMapping TypeName="WebProgramARModel.NivelEjercicio"><MappingFragment StoreEntitySet="NivelEjercicio">
+            <ScalarProperty Name="NivelEjercicioId" ColumnName="NivelEjercicioId" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Paises"><EntityTypeMapping TypeName="WebProgramARModel.Pais"><MappingFragment StoreEntitySet="Pais">
+            <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Provincias"><EntityTypeMapping TypeName="WebProgramARModel.Provincia"><MappingFragment StoreEntitySet="Provincia">
+            <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuarios"><EntityTypeMapping TypeName="WebProgramARModel.TipoUsuario"><MappingFragment StoreEntitySet="TipoUsuario">
+            <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Usuarios"><EntityTypeMapping TypeName="WebProgramARModel.Usuario"><MappingFragment StoreEntitySet="Usuario">
+            <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+            <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+            <ScalarProperty Name="UsuarioNombre" ColumnName="UsuarioNombre" />
+            <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+            <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
+            <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+            <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
+            <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="EjercicioCurso" TypeName="WebProgramARModel.EjercicioCurso" StoreEntitySet="EjercicioCurso">
+            <EndProperty Name="Curso">
+              <ScalarProperty Name="CursoId" ColumnName="CursoId" />
+            </EndProperty>
+            <EndProperty Name="Ejercicio">
+              <ScalarProperty Name="EjercicioId" ColumnName="EjercicioId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model" ZoomLevel="86">
+        <EntityTypeShape EntityType="WebProgramARModel.Curso" Width="1.5" PointX="5.25" PointY="3.625" Height="2.1246875268220897" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.Ejercicio" Width="1.5" PointX="7.5" PointY="2.75" Height="3.4335417143503815" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.EstadoEjercicio" Width="1.5" PointX="5.25" PointY="0.75" Height="1.563750017881393" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.Localidad" Width="1.5" PointX="0.75" PointY="8.25" Height="1.9377083571751914" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.NivelEjercicio" Width="1.5" PointX="5.25" PointY="7.125" Height="1.563750017881393" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.Pais" Width="1.5" PointX="0.75" PointY="3.875" Height="1.563750017881393" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.Provincia" Width="1.5" PointX="7.75" PointY="8.25" Height="1.563750017881393" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="0.875" Height="1.563750017881393" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebProgramARModel.Usuario" Width="1.5" PointX="3" PointY="2.5" Height="4.36843756258488" IsExpanded="true" />
+        <AssociationConnector Association="WebProgramARModel.FK_Curso_Usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="4.6873437634110449" />
+          <ConnectorPoint PointX="5.25" PointY="4.6873437634110449" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="1.5318750089406965" />
+          <ConnectorPoint PointX="8.25" PointY="1.5318750089406965" />
+          <ConnectorPoint PointX="8.25" PointY="2.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="7.65625" />
+          <ConnectorPoint PointX="7.59375" PointY="7.65625" />
+          <ConnectorPoint PointX="7.59375" PointY="6.1835417143503815" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_Usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="3.15625" />
+          <ConnectorPoint PointX="7.5" PointY="3.15625" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Usuario_Pais" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.8438541785875948" />
+          <ConnectorPoint PointX="3" PointY="4.8438541785875948" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Usuario_TipoUsuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.6568750089406965" />
+          <ConnectorPoint PointX="3.75" PointY="1.6568750089406965" />
+          <ConnectorPoint PointX="3.75" PointY="2.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.EjercicioCurso" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="4.6873437634110449" />
+          <ConnectorPoint PointX="7.5" PointY="4.6873437634110449" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Localidad_Pais" >
+          <ConnectorPoint PointX="1.5" PointY="5.8127083571751905" />
+          <ConnectorPoint PointX="1.5" PointY="8.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Localidad_Provincia" >
+          <ConnectorPoint PointX="7.75" PointY="9.5629687723517414" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="9.5629687723517414" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="9.5629687723517414" />
+          <ConnectorPoint PointX="2.25" PointY="9.5629687723517414" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Usuario_Localidad" >
+          <ConnectorPoint PointX="2.25" PointY="8.8752318861758717" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="8.8752318861758717" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="8.8752318861758717" />
+          <ConnectorPoint PointX="3.2347090384615385" PointY="8.8752318861758717" />
+          <ConnectorPoint PointX="3.2347090384615385" PointY="7.2423959018786741" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Provincia_Pais" >
+          <ConnectorPoint PointX="2.2500000000000009" PointY="5.8127083571751905" />
+          <ConnectorPoint PointX="2.625" PointY="6.18770835717519" />
+          <ConnectorPoint PointX="2.625" PointY="10.000080149586916" />
+          <ConnectorPoint PointX="7.75" PointY="10.000080149586916" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Usuario_Provincia" >
+          <ConnectorPoint PointX="9.15625" PointY="8.25" />
+          <ConnectorPoint PointX="9.15625" PointY="6.6542708571751907" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="6.65427085717519" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="6.6542708571751907" />
+          <ConnectorPoint PointX="4.5" PointY="6.6542708571751907" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
