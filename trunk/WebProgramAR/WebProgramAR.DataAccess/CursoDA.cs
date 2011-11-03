@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
+using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
-    public class CursoDA
+    public class CursoDA : IFiltrablePorSeguridadPorValor
     {
+        public static string _nombreTabla = "Curso";
+
         public static Curso GetCursoById(int id)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
@@ -101,8 +104,17 @@ namespace WebProgramAR.DataAccess
                                      //(idCurso == 0 || u.CursoId == idCurso) && u.LastName.Contains(apellido)
                                      select u;
             return query;
-        }   
+        }
 
-      
+
+
+        #region IFiltrarPorSeguridadXValor Members
+
+        public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

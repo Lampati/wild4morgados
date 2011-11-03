@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
+using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
-    public class EjercicioDA
+    public class EjercicioDA : IFiltrablePorSeguridadPorValor
     {
+        public static string _nombreTabla = "Ejercicio";
+
         public static Ejercicio GetEjercicioById(int id)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
@@ -101,8 +104,17 @@ namespace WebProgramAR.DataAccess
                                      //(idEjercicio == 0 || u.EjercicioId == idEjercicio) && u.LastName.Contains(apellido)
                                      select u;
             return query;
-        }   
+        }
 
-      
+
+
+        #region IFiltrablePorSeguridadPorValor Members
+
+        public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

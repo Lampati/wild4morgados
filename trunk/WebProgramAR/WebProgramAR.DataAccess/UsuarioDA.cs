@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
+using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
-    public class UsuarioDA
+    public class UsuarioDA : IFiltrablePorSeguridadPorValor
     {
+        public static string _nombreTabla = "Usuario";
+
         public static Usuario GetUsuarioById(int id)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
@@ -195,5 +198,14 @@ namespace WebProgramAR.DataAccess
         //        ce.SaveChanges();
         //    }
         //}
+
+        #region IFiltrablePorSeguridadPorValor Members
+
+        public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
