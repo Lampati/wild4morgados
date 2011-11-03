@@ -15,17 +15,17 @@ using System.Collections.Specialized;
 
 namespace WebProgramAR.Entidades
 {
-    public partial class TipoUsuario
+    public partial class Tabla
     {
         #region Primitive Properties
     
-        public virtual int TipoUsuarioId
+        public virtual int TablaId
         {
             get;
             set;
         }
     
-        public virtual string Descripcion
+        public virtual string Nombre
         {
             get;
             set;
@@ -34,37 +34,37 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Navigation Properties
     
-        public virtual ICollection<Usuario> Usuario
+        public virtual ICollection<Columna> Columnas
         {
             get
             {
-                if (_usuario == null)
+                if (_columnas == null)
                 {
-                    var newCollection = new FixupCollection<Usuario>();
-                    newCollection.CollectionChanged += FixupUsuario;
-                    _usuario = newCollection;
+                    var newCollection = new FixupCollection<Columna>();
+                    newCollection.CollectionChanged += FixupColumnas;
+                    _columnas = newCollection;
                 }
-                return _usuario;
+                return _columnas;
             }
             set
             {
-                if (!ReferenceEquals(_usuario, value))
+                if (!ReferenceEquals(_columnas, value))
                 {
-                    var previousValue = _usuario as FixupCollection<Usuario>;
+                    var previousValue = _columnas as FixupCollection<Columna>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupUsuario;
+                        previousValue.CollectionChanged -= FixupColumnas;
                     }
-                    _usuario = value;
-                    var newValue = value as FixupCollection<Usuario>;
+                    _columnas = value;
+                    var newValue = value as FixupCollection<Columna>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupUsuario;
+                        newValue.CollectionChanged += FixupColumnas;
                     }
                 }
             }
         }
-        private ICollection<Usuario> _usuario;
+        private ICollection<Columna> _columnas;
     
         public virtual ICollection<ReglasSeguridad> ReglasSeguridads
         {
@@ -101,23 +101,23 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Association Fixup
     
-        private void FixupUsuario(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupColumnas(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
-                foreach (Usuario item in e.NewItems)
+                foreach (Columna item in e.NewItems)
                 {
-                    item.TipoUsuario = this;
+                    item.Tabla = this;
                 }
             }
     
             if (e.OldItems != null)
             {
-                foreach (Usuario item in e.OldItems)
+                foreach (Columna item in e.OldItems)
                 {
-                    if (ReferenceEquals(item.TipoUsuario, this))
+                    if (ReferenceEquals(item.Tabla, this))
                     {
-                        item.TipoUsuario = null;
+                        item.Tabla = null;
                     }
                 }
             }
@@ -129,7 +129,7 @@ namespace WebProgramAR.Entidades
             {
                 foreach (ReglasSeguridad item in e.NewItems)
                 {
-                    item.TipoUsuario = this;
+                    item.Tabla = this;
                 }
             }
     
@@ -137,9 +137,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (ReglasSeguridad item in e.OldItems)
                 {
-                    if (ReferenceEquals(item.TipoUsuario, this))
+                    if (ReferenceEquals(item.Tabla, this))
                     {
-                        item.TipoUsuario = null;
+                        item.Tabla = null;
                     }
                 }
             }

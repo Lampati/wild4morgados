@@ -96,6 +96,36 @@ namespace WebProgramAR.DataAccess
             get { return _usuarios  ?? (_usuarios = CreateObjectSet<Usuario>("Usuarios")); }
         }
         private ObjectSet<Usuario> _usuarios;
+    
+        public ObjectSet<Columna> Columnas
+        {
+            get { return _columnas  ?? (_columnas = CreateObjectSet<Columna>("Columnas")); }
+        }
+        private ObjectSet<Columna> _columnas;
+    
+        public ObjectSet<Comparador> Comparadors
+        {
+            get { return _comparadors  ?? (_comparadors = CreateObjectSet<Comparador>("Comparadors")); }
+        }
+        private ObjectSet<Comparador> _comparadors;
+    
+        public ObjectSet<ReglasSeguridad> ReglasSeguridads
+        {
+            get { return _reglasSeguridads  ?? (_reglasSeguridads = CreateObjectSet<ReglasSeguridad>("ReglasSeguridads")); }
+        }
+        private ObjectSet<ReglasSeguridad> _reglasSeguridads;
+    
+        public ObjectSet<Tabla> Tablas
+        {
+            get { return _tablas  ?? (_tablas = CreateObjectSet<Tabla>("Tablas")); }
+        }
+        private ObjectSet<Tabla> _tablas;
+    
+        public ObjectSet<Tipo> Tipoes
+        {
+            get { return _tipoes  ?? (_tipoes = CreateObjectSet<Tipo>("Tipoes")); }
+        }
+        private ObjectSet<Tipo> _tipoes;
 
         #endregion
     }

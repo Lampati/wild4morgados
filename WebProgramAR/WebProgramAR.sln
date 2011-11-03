@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.Entidades", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.Globales", "WebProgramAR.Globales\WebProgramAR.Globales.csproj", "{127A017E-C2D2-4E3E-9FE9-6D4E31682570}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.WebService", "WebProgramAR.WebService\WebProgramAR.WebService.csproj", "{3AEC4DCF-D753-40A7-943B-8FDCE39DBB5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.WebService", "WebProgramAR.WebService\WebProgramAR.WebService.csproj", "{3E759CF1-2986-473F-85D3-7E5667F6F8B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,10 @@ Global
 		{127A017E-C2D2-4E3E-9FE9-6D4E31682570}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{127A017E-C2D2-4E3E-9FE9-6D4E31682570}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{127A017E-C2D2-4E3E-9FE9-6D4E31682570}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3AEC4DCF-D753-40A7-943B-8FDCE39DBB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3AEC4DCF-D753-40A7-943B-8FDCE39DBB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3AEC4DCF-D753-40A7-943B-8FDCE39DBB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3AEC4DCF-D753-40A7-943B-8FDCE39DBB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

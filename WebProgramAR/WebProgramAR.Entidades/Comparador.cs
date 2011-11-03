@@ -15,17 +15,17 @@ using System.Collections.Specialized;
 
 namespace WebProgramAR.Entidades
 {
-    public partial class TipoUsuario
+    public partial class Comparador
     {
         #region Primitive Properties
     
-        public virtual int TipoUsuarioId
+        public virtual int ComparadorId
         {
             get;
             set;
         }
     
-        public virtual string Descripcion
+        public virtual string Nombre
         {
             get;
             set;
@@ -33,38 +33,6 @@ namespace WebProgramAR.Entidades
 
         #endregion
         #region Navigation Properties
-    
-        public virtual ICollection<Usuario> Usuario
-        {
-            get
-            {
-                if (_usuario == null)
-                {
-                    var newCollection = new FixupCollection<Usuario>();
-                    newCollection.CollectionChanged += FixupUsuario;
-                    _usuario = newCollection;
-                }
-                return _usuario;
-            }
-            set
-            {
-                if (!ReferenceEquals(_usuario, value))
-                {
-                    var previousValue = _usuario as FixupCollection<Usuario>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupUsuario;
-                    }
-                    _usuario = value;
-                    var newValue = value as FixupCollection<Usuario>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupUsuario;
-                    }
-                }
-            }
-        }
-        private ICollection<Usuario> _usuario;
     
         public virtual ICollection<ReglasSeguridad> ReglasSeguridads
         {
@@ -101,35 +69,13 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Association Fixup
     
-        private void FixupUsuario(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Usuario item in e.NewItems)
-                {
-                    item.TipoUsuario = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Usuario item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.TipoUsuario, this))
-                    {
-                        item.TipoUsuario = null;
-                    }
-                }
-            }
-        }
-    
         private void FixupReglasSeguridads(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
                 foreach (ReglasSeguridad item in e.NewItems)
                 {
-                    item.TipoUsuario = this;
+                    item.Comparador = this;
                 }
             }
     
@@ -137,9 +83,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (ReglasSeguridad item in e.OldItems)
                 {
-                    if (ReferenceEquals(item.TipoUsuario, this))
+                    if (ReferenceEquals(item.Comparador, this))
                     {
-                        item.TipoUsuario = null;
+                        item.Comparador = null;
                     }
                 }
             }

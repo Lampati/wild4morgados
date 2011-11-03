@@ -6,6 +6,8 @@
     <edmx:StorageModels>
     <Schema Namespace="WebProgramARModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="WebProgramARModelStoreContainer">
+          <EntitySet Name="Columna" EntityType="WebProgramARModel.Store.Columna" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Comparador" EntityType="WebProgramARModel.Store.Comparador" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Curso" EntityType="WebProgramARModel.Store.Curso" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Ejercicio" EntityType="WebProgramARModel.Store.Ejercicio" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EjercicioCurso" EntityType="WebProgramARModel.Store.EjercicioCurso" store:Type="Tables" store:Schema="dbo" store:Name="EjercicioCurso">
@@ -19,8 +21,19 @@
           <EntitySet Name="NivelEjercicio" EntityType="WebProgramARModel.Store.NivelEjercicio" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Pais" EntityType="WebProgramARModel.Store.Pais" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Provincia" EntityType="WebProgramARModel.Store.Provincia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ReglasSeguridad" EntityType="WebProgramARModel.Store.ReglasSeguridad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tabla" EntityType="WebProgramARModel.Store.Tabla" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tipo" EntityType="WebProgramARModel.Store.Tipo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TipoUsuario" EntityType="WebProgramARModel.Store.TipoUsuario" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Usuario" EntityType="WebProgramARModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Columna_Tabla" Association="WebProgramARModel.Store.FK_Columna_Tabla">
+            <End Role="Tabla" EntitySet="Tabla" />
+            <End Role="Columna" EntitySet="Columna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Columna_Tipo" Association="WebProgramARModel.Store.FK_Columna_Tipo">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Columna" EntitySet="Columna" />
+          </AssociationSet>
           <AssociationSet Name="FK_Curso_Usuario" Association="WebProgramARModel.Store.FK_Curso_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Curso" EntitySet="Curso" />
@@ -57,6 +70,22 @@
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_Comparador" Association="WebProgramARModel.Store.FK_ReglasSeguridad_Comparador">
+            <End Role="Comparador" EntitySet="Comparador" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_Tabla" Association="WebProgramARModel.Store.FK_ReglasSeguridad_Tabla">
+            <End Role="Tabla" EntitySet="Tabla" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_TipoUsuario" Association="WebProgramARModel.Store.FK_ReglasSeguridad_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_Usuario" Association="WebProgramARModel.Store.FK_ReglasSeguridad_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridad" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Localidad" Association="WebProgramARModel.Store.FK_Usuario_Localidad">
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -74,6 +103,22 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Columna">
+          <Key>
+            <PropertyRef Name="ColumnaId" />
+          </Key>
+          <Property Name="ColumnaId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TipoId" Type="int" Nullable="false" />
+          <Property Name="TablaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comparador">
+          <Key>
+            <PropertyRef Name="ComparadorId" />
+          </Key>
+          <Property Name="ComparadorId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="CursoId" />
@@ -147,6 +192,31 @@
           <Property Name="Descripcion" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="PaisId" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
+        <EntityType Name="ReglasSeguridad">
+          <Key>
+            <PropertyRef Name="ReglaId" />
+          </Key>
+          <Property Name="ReglaId" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="TablaId" Type="int" Nullable="false" />
+          <Property Name="TipoUsuarioId" Type="int" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="ComparadorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tabla">
+          <Key>
+            <PropertyRef Name="TablaId" />
+          </Key>
+          <Property Name="TablaId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="TipoId" />
+          </Key>
+          <Property Name="TipoId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="TipoUsuarioId" />
@@ -171,6 +241,30 @@
           <Property Name="ProvinciaId" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="LocalidadId" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
+        <Association Name="FK_Columna_Tabla">
+          <End Role="Tabla" Type="WebProgramARModel.Store.Tabla" Multiplicity="1" />
+          <End Role="Columna" Type="WebProgramARModel.Store.Columna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabla">
+              <PropertyRef Name="TablaId" />
+            </Principal>
+            <Dependent Role="Columna">
+              <PropertyRef Name="TablaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Columna_Tipo">
+          <End Role="Tipo" Type="WebProgramARModel.Store.Tipo" Multiplicity="1" />
+          <End Role="Columna" Type="WebProgramARModel.Store.Columna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="TipoId" />
+            </Principal>
+            <Dependent Role="Columna">
+              <PropertyRef Name="TipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Curso_Usuario">
           <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="1" />
           <End Role="Curso" Type="WebProgramARModel.Store.Curso" Multiplicity="*" />
@@ -276,6 +370,54 @@
             </Principal>
             <Dependent Role="Provincia">
               <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_Comparador">
+          <End Role="Comparador" Type="WebProgramARModel.Store.Comparador" Multiplicity="1" />
+          <End Role="ReglasSeguridad" Type="WebProgramARModel.Store.ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comparador">
+              <PropertyRef Name="ComparadorId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="ComparadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_Tabla">
+          <End Role="Tabla" Type="WebProgramARModel.Store.Tabla" Multiplicity="1" />
+          <End Role="ReglasSeguridad" Type="WebProgramARModel.Store.ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabla">
+              <PropertyRef Name="TablaId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="TablaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_TipoUsuario">
+          <End Role="TipoUsuario" Type="WebProgramARModel.Store.TipoUsuario" Multiplicity="0..1" />
+          <End Role="ReglasSeguridad" Type="WebProgramARModel.Store.ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_Usuario">
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="0..1" />
+          <End Role="ReglasSeguridad" Type="WebProgramARModel.Store.ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="UsuarioId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -389,6 +531,35 @@
             <End Role="Provincia" EntitySet="Provincias" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Columnas" EntityType="WebProgramARModel.Columna" />
+          <EntitySet Name="Comparadors" EntityType="WebProgramARModel.Comparador" />
+          <EntitySet Name="ReglasSeguridads" EntityType="WebProgramARModel.ReglasSeguridad" />
+          <EntitySet Name="Tablas" EntityType="WebProgramARModel.Tabla" />
+          <EntitySet Name="Tipoes" EntityType="WebProgramARModel.Tipo" />
+          <AssociationSet Name="FK_Columna_Tabla" Association="WebProgramARModel.FK_Columna_Tabla">
+            <End Role="Tabla" EntitySet="Tablas" />
+            <End Role="Columna" EntitySet="Columnas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Columna_Tipo" Association="WebProgramARModel.FK_Columna_Tipo">
+            <End Role="Tipo" EntitySet="Tipoes" />
+            <End Role="Columna" EntitySet="Columnas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_Comparador" Association="WebProgramARModel.FK_ReglasSeguridad_Comparador">
+            <End Role="Comparador" EntitySet="Comparadors" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_Tabla" Association="WebProgramARModel.FK_ReglasSeguridad_Tabla">
+            <End Role="Tabla" EntitySet="Tablas" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_TipoUsuario" Association="WebProgramARModel.FK_ReglasSeguridad_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReglasSeguridad_Usuario" Association="WebProgramARModel.FK_ReglasSeguridad_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="ReglasSeguridad" EntitySet="ReglasSeguridads" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Curso">
           <Key>
@@ -476,6 +647,7 @@
           <Property Name="TipoUsuarioId" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+          <NavigationProperty Name="ReglasSeguridads" Relationship="WebProgramARModel.FK_ReglasSeguridad_TipoUsuario" FromRole="TipoUsuario" ToRole="ReglasSeguridad" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -499,6 +671,7 @@
           <NavigationProperty Name="TipoUsuario" Relationship="WebProgramARModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Localidad" Relationship="WebProgramARModel.FK_Usuario_Localidad" FromRole="Usuario" ToRole="Localidad" />
           <NavigationProperty Name="Provincia" Relationship="WebProgramARModel.FK_Usuario_Provincia" FromRole="Usuario" ToRole="Provincia" />
+          <NavigationProperty Name="ReglasSeguridads" Relationship="WebProgramARModel.FK_ReglasSeguridad_Usuario" FromRole="Usuario" ToRole="ReglasSeguridad" />
         </EntityType>
         <Association Name="FK_Curso_Usuario">
           <End Role="Usuario" Type="WebProgramARModel.Usuario" Multiplicity="1" />
@@ -636,6 +809,129 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Columna">
+          <Key>
+            <PropertyRef Name="ColumnaId" />
+          </Key>
+          <Property Type="Int32" Name="ColumnaId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TipoId" Nullable="false" />
+          <Property Type="Int32" Name="TablaId" Nullable="false" />
+          <NavigationProperty Name="Tabla" Relationship="WebProgramARModel.FK_Columna_Tabla" FromRole="Columna" ToRole="Tabla" />
+          <NavigationProperty Name="Tipo" Relationship="WebProgramARModel.FK_Columna_Tipo" FromRole="Columna" ToRole="Tipo" />
+        </EntityType>
+        <EntityType Name="Comparador">
+          <Key>
+            <PropertyRef Name="ComparadorId" />
+          </Key>
+          <Property Type="Int32" Name="ComparadorId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ReglasSeguridads" Relationship="WebProgramARModel.FK_ReglasSeguridad_Comparador" FromRole="Comparador" ToRole="ReglasSeguridad" />
+        </EntityType>
+        <EntityType Name="ReglasSeguridad">
+          <Key>
+            <PropertyRef Name="ReglaId" />
+          </Key>
+          <Property Type="Int32" Name="ReglaId" Nullable="false" />
+          <Property Type="String" Name="Valor" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TablaId" Nullable="false" />
+          <Property Type="Int32" Name="TipoUsuarioId" />
+          <Property Type="Int32" Name="UsuarioId" />
+          <Property Type="Int32" Name="ComparadorId" Nullable="false" />
+          <NavigationProperty Name="Comparador" Relationship="WebProgramARModel.FK_ReglasSeguridad_Comparador" FromRole="ReglasSeguridad" ToRole="Comparador" />
+          <NavigationProperty Name="Tabla" Relationship="WebProgramARModel.FK_ReglasSeguridad_Tabla" FromRole="ReglasSeguridad" ToRole="Tabla" />
+          <NavigationProperty Name="TipoUsuario" Relationship="WebProgramARModel.FK_ReglasSeguridad_TipoUsuario" FromRole="ReglasSeguridad" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_ReglasSeguridad_Usuario" FromRole="ReglasSeguridad" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Tabla">
+          <Key>
+            <PropertyRef Name="TablaId" />
+          </Key>
+          <Property Type="Int32" Name="TablaId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Columnas" Relationship="WebProgramARModel.FK_Columna_Tabla" FromRole="Tabla" ToRole="Columna" />
+          <NavigationProperty Name="ReglasSeguridads" Relationship="WebProgramARModel.FK_ReglasSeguridad_Tabla" FromRole="Tabla" ToRole="ReglasSeguridad" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="TipoId" />
+          </Key>
+          <Property Type="Int32" Name="TipoId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Columnas" Relationship="WebProgramARModel.FK_Columna_Tipo" FromRole="Tipo" ToRole="Columna" />
+        </EntityType>
+        <Association Name="FK_Columna_Tabla">
+          <End Type="WebProgramARModel.Tabla" Role="Tabla" Multiplicity="1" />
+          <End Type="WebProgramARModel.Columna" Role="Columna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabla">
+              <PropertyRef Name="TablaId" />
+            </Principal>
+            <Dependent Role="Columna">
+              <PropertyRef Name="TablaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Columna_Tipo">
+          <End Type="WebProgramARModel.Tipo" Role="Tipo" Multiplicity="1" />
+          <End Type="WebProgramARModel.Columna" Role="Columna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="TipoId" />
+            </Principal>
+            <Dependent Role="Columna">
+              <PropertyRef Name="TipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_Comparador">
+          <End Type="WebProgramARModel.Comparador" Role="Comparador" Multiplicity="1" />
+          <End Type="WebProgramARModel.ReglasSeguridad" Role="ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comparador">
+              <PropertyRef Name="ComparadorId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="ComparadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_Tabla">
+          <End Type="WebProgramARModel.Tabla" Role="Tabla" Multiplicity="1" />
+          <End Type="WebProgramARModel.ReglasSeguridad" Role="ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tabla">
+              <PropertyRef Name="TablaId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="TablaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_TipoUsuario">
+          <End Type="WebProgramARModel.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
+          <End Type="WebProgramARModel.ReglasSeguridad" Role="ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="TipoUsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReglasSeguridad_Usuario">
+          <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="WebProgramARModel.ReglasSeguridad" Role="ReglasSeguridad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="ReglasSeguridad">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -709,6 +1005,52 @@
               <ScalarProperty Name="EjercicioId" ColumnName="EjercicioId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Columnas">
+            <EntityTypeMapping TypeName="WebProgramARModel.Columna">
+              <MappingFragment StoreEntitySet="Columna">
+                <ScalarProperty Name="TablaId" ColumnName="TablaId" />
+                <ScalarProperty Name="TipoId" ColumnName="TipoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ColumnaId" ColumnName="ColumnaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comparadors">
+            <EntityTypeMapping TypeName="WebProgramARModel.Comparador">
+              <MappingFragment StoreEntitySet="Comparador">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ComparadorId" ColumnName="ComparadorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReglasSeguridads">
+            <EntityTypeMapping TypeName="WebProgramARModel.ReglasSeguridad">
+              <MappingFragment StoreEntitySet="ReglasSeguridad">
+                <ScalarProperty Name="ComparadorId" ColumnName="ComparadorId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
+                <ScalarProperty Name="TablaId" ColumnName="TablaId" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="ReglaId" ColumnName="ReglaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tablas">
+            <EntityTypeMapping TypeName="WebProgramARModel.Tabla">
+              <MappingFragment StoreEntitySet="Tabla">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TablaId" ColumnName="TablaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipoes">
+            <EntityTypeMapping TypeName="WebProgramARModel.Tipo">
+              <MappingFragment StoreEntitySet="Tipo">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoId" ColumnName="TipoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -745,9 +1087,10 @@
           <ConnectorPoint PointX="5.25" PointY="4.6873437634110449" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.75" PointY="1.5318750089406965" />
-          <ConnectorPoint PointX="8.25" PointY="1.5318750089406965" />
-          <ConnectorPoint PointX="8.25" PointY="2.75" />
+          <ConnectorPoint PointX="6.75" PointY="2.313750017881393" />
+          <ConnectorPoint PointX="7.125" PointY="2.688750017881393" />
+          <ConnectorPoint PointX="7.125" PointY="2.375" />
+          <ConnectorPoint PointX="7.5" PointY="2.75" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="7.65625" />
@@ -755,16 +1098,16 @@
           <ConnectorPoint PointX="7.59375" PointY="6.1835417143503815" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_Usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="3.15625" />
-          <ConnectorPoint PointX="7.5" PointY="3.15625" />
+          <ConnectorPoint PointX="4.5" PointY="3.1875025000000008" />
+          <ConnectorPoint PointX="7.5" PointY="3.1875025000000008" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Pais" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="4.8438541785875948" />
-          <ConnectorPoint PointX="3" PointY="4.8438541785875948" />
+          <ConnectorPoint PointX="2.25" PointY="4.812601678587594" />
+          <ConnectorPoint PointX="3" PointY="4.812601678587594" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_TipoUsuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="1.6568750089406965" />
-          <ConnectorPoint PointX="3.75" PointY="1.6568750089406965" />
+          <ConnectorPoint PointX="2.25" PointY="1.6874995" />
+          <ConnectorPoint PointX="3.75" PointY="1.6874995" />
           <ConnectorPoint PointX="3.75" PointY="2.5" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.EjercicioCurso" ManuallyRouted="false">
@@ -776,30 +1119,72 @@
           <ConnectorPoint PointX="1.5" PointY="8.25" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Localidad_Provincia" >
-          <ConnectorPoint PointX="7.75" PointY="9.5629687723517414" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="9.5629687723517414" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="9.5629687723517414" />
-          <ConnectorPoint PointX="2.25" PointY="9.5629687723517414" />
+          <ConnectorPoint PointX="7.75" PointY="9.6425574182898082" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="9.6425574182898082" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="9.6425574182898082" />
+          <ConnectorPoint PointX="2.25" PointY="9.6425574182898082" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Localidad" >
-          <ConnectorPoint PointX="2.25" PointY="8.8752318861758717" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="8.8752318861758717" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="8.8752318861758717" />
-          <ConnectorPoint PointX="3.2347090384615385" PointY="8.8752318861758717" />
-          <ConnectorPoint PointX="3.2347090384615385" PointY="7.2423959018786741" />
+          <ConnectorPoint PointX="2.25" PointY="8.9150262091449033" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="8.9150262091449033" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="8.9150262091449033" />
+          <ConnectorPoint PointX="3.75" PointY="8.9150262091449033" />
+          <ConnectorPoint PointX="3.75" PointY="7.0554167322317749" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Provincia_Pais" >
           <ConnectorPoint PointX="2.2500000000000009" PointY="5.8127083571751905" />
           <ConnectorPoint PointX="2.625" PointY="6.18770835717519" />
-          <ConnectorPoint PointX="2.625" PointY="10.000080149586916" />
-          <ConnectorPoint PointX="7.75" PointY="10.000080149586916" />
+          <ConnectorPoint PointX="2.625" PointY="10.039874472555951" />
+          <ConnectorPoint PointX="7.75" PointY="10.039874472555951" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Provincia" >
-          <ConnectorPoint PointX="9.15625" PointY="8.25" />
-          <ConnectorPoint PointX="9.15625" PointY="6.6542708571751907" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="6.65427085717519" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="6.6542708571751907" />
-          <ConnectorPoint PointX="4.5" PointY="6.6542708571751907" />
+          <ConnectorPoint PointX="7.75" PointY="9.247539313717354" />
+          <ConnectorPoint PointX="4.1562525" PointY="9.247539313717354" />
+          <ConnectorPoint PointX="4.1562525" PointY="7.0554167322317749" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="WebProgramARModel.Columna" Width="1.5" PointX="9.75" PointY="16" Height="2.1246875268220897" />
+        <EntityTypeShape EntityType="WebProgramARModel.Comparador" Width="1.5" PointX="7.5" PointY="13.875" Height="1.5637500178813966" />
+        <EntityTypeShape EntityType="WebProgramARModel.ReglasSeguridad" Width="1.5" PointX="9.75" PointY="0.625" Height="2.8726042054096936" />
+        <EntityTypeShape EntityType="WebProgramARModel.Tabla" Width="1.5" PointX="7.5" PointY="16.25" Height="1.7507291875282931" />
+        <EntityTypeShape EntityType="WebProgramARModel.Tipo" Width="1.5" PointX="7.5" PointY="19.375" Height="1.5637500178813966" />
+        <AssociationConnector Association="WebProgramARModel.FK_Columna_Tabla" >
+          <ConnectorPoint PointX="9" PointY="17.125364593764147" />
+          <ConnectorPoint PointX="9.75" PointY="17.125364593764147" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Columna_Tipo" >
+          <ConnectorPoint PointX="9" PointY="20.1568750089407" />
+          <ConnectorPoint PointX="10.5" PointY="20.1568750089407" />
+          <ConnectorPoint PointX="10.5" PointY="18.12468752682209" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Comparador" >
+          <ConnectorPoint PointX="9" PointY="14.656875008940698" />
+          <ConnectorPoint PointX="10.010414666666666" PointY="14.656875008940698" />
+          <ConnectorPoint PointX="10.177081333333334" PointY="14.656875008940698" />
+          <ConnectorPoint PointX="10.5" PointY="14.656875008940698" />
+          <ConnectorPoint PointX="10.5" PointY="3.4976042054096936" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Tabla" >
+          <ConnectorPoint PointX="9" PointY="16.656430296882071" />
+          <ConnectorPoint PointX="9.5" PointY="16.656430296882071" />
+          <ConnectorPoint PointX="9.5" PointY="15.749999999999998" />
+          <ConnectorPoint PointX="10.093748" PointY="15.749999999999998" />
+          <ConnectorPoint PointX="10.093748" PointY="3.4976042054096936" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_TipoUsuario" >
+          <ConnectorPoint PointX="2.25" PointY="2.4068750089406965" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="2.4068750089406961" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="2.4068750089406965" />
+          <ConnectorPoint PointX="6.7597916577259705" PointY="2.4068750089406961" />
+          <ConnectorPoint PointX="6.9264583243926365" PointY="2.4068750089406965" />
+          <ConnectorPoint PointX="9.75" PointY="2.4068750089406965" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Usuario" >
+          <ConnectorPoint PointX="4.5" PointY="2.59375" />
+          <ConnectorPoint PointX="6.946666648785274" PointY="2.5937499999999991" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="2.59375" />
+          <ConnectorPoint PointX="7.260416666666667" PointY="2.5937499999999996" />
+          <ConnectorPoint PointX="7.427083333333333" PointY="2.59375" />
+          <ConnectorPoint PointX="9.75" PointY="2.59375" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

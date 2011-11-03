@@ -261,6 +261,38 @@ namespace WebProgramAR.Entidades
             }
         }
         private Provincia _provincia;
+    
+        public virtual ICollection<ReglasSeguridad> ReglasSeguridads
+        {
+            get
+            {
+                if (_reglasSeguridads == null)
+                {
+                    var newCollection = new FixupCollection<ReglasSeguridad>();
+                    newCollection.CollectionChanged += FixupReglasSeguridads;
+                    _reglasSeguridads = newCollection;
+                }
+                return _reglasSeguridads;
+            }
+            set
+            {
+                if (!ReferenceEquals(_reglasSeguridads, value))
+                {
+                    var previousValue = _reglasSeguridads as FixupCollection<ReglasSeguridad>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupReglasSeguridads;
+                    }
+                    _reglasSeguridads = value;
+                    var newValue = value as FixupCollection<ReglasSeguridad>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupReglasSeguridads;
+                    }
+                }
+            }
+        }
+        private ICollection<ReglasSeguridad> _reglasSeguridads;
 
         #endregion
         #region Association Fixup
@@ -380,6 +412,28 @@ namespace WebProgramAR.Entidades
             if (e.OldItems != null)
             {
                 foreach (Ejercicio item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Usuario, this))
+                    {
+                        item.Usuario = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupReglasSeguridads(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (ReglasSeguridad item in e.NewItems)
+                {
+                    item.Usuario = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (ReglasSeguridad item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Usuario, this))
                     {
