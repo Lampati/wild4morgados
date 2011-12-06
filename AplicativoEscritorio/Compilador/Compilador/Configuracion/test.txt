@@ -1,0 +1,105 @@
+constantes
+const M : numero = 7;
+const MaxArreglo : numero = 3;
+variables
+var N, S : numero;
+
+procedimiento PROC1()
+var A : numero;
+var B : numero;
+comenzar
+  B := M;
+  mientras (B > 0) hacer
+
+    si (B > A) entonces
+      A := A + 1;
+    finsi;
+
+    Mostrar ('Visualizacion ' & B & ' ' & A);
+    B := B - 1;
+
+  finmientras;
+finproc;
+
+
+
+procedimiento PROC2(R : numero)
+
+var W11, Y : numero;
+var W12, Q, S : numero;
+var mensaje : texto;
+var exito : booleano;
+comenzar
+
+  mensaje := 'operacion';
+  S := (S + M) * 2;
+  Q := 1;
+  Y := 16;
+  leer W11;  
+  W12 := (W11 * 2 + S);
+
+  mientras ((W12 - 2) <= R + S) hacer
+    W12 := W12 * 2;
+  finmientras;
+
+  mientras (W12 + M > Y / 2) hacer
+    Q := Q * 2;
+    W12 := W12 / 2;
+    si (W12 <= R) entonces
+      R := R - W12;
+      Q := Q + 1;
+    finsi;
+  finmientras;
+
+  exito := ((Q < 10) and (R > 0));
+
+  si (exito = verdadero) entonces
+    mensaje  := mensaje & ' ' & 'erronea';
+  sino
+    mensaje  := mensaje & ' ' & 'satisfactoria';
+  finsi;
+
+
+finproc;
+
+funcion FUN1(T: numero) : numero
+var N: numero;
+comenzar
+  si (T > 0) entonces
+    N := 45;
+  sino
+    N := 70;
+  finsi;
+finfunc N * 2;
+
+procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
+var I : numero;
+comenzar
+  I := 1;
+
+  mientras (I <= MaxArreglo) hacer
+    Mostrar(A[I]);
+  finmientras;
+
+finproc;
+
+
+
+procedimiento PRINCIPAL()
+var X: numero;
+var A: arreglo[MaxArreglo] de numero;
+comenzar
+  llamar PROC1();
+  S := M;
+
+  llamar PROC2(S + 1);
+  A[1] := FUN1(5);
+  A[2] := FUN1(-2);
+  A[3] := FUN1(5);
+  
+  llamar SALIDA(A);  
+
+
+finproc;
+
+
