@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4A889524-38EC-4DFB-8720-593422EC53DC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Compilador</RootNamespace>
+    <AssemblyName>Compilador</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auxiliares\AF\AFD.cs" />
+    <Compile Include="Auxiliares\AF\Estado.cs" />
+    <Compile Include="Auxiliares\AF\FuncionTransicion.cs" />
+    <Compile Include="Auxiliares\EnumUtils.cs" />
+    <Compile Include="ErrorCompilacionException.cs" />
+    <Compile Include="ErrorCompiladorEventArgs.cs" />
+    <Compile Include="GeneracionCodigoHelpers.cs" />
+    <Compile Include="Lexicografico\AnalizadorLexicografico.cs" />
+    <Compile Include="Lexicografico\CharBuffer.cs" />
+    <Compile Include="Lexicografico\CharHelper.cs" />
+    <Compile Include="Lexicografico\ComponenteLexico.cs" />
+    <Compile Include="Compilador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compilador.Designer.cs">
+      <DependentUpon>Compilador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lexicografico\ErrorLexicoException.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Compilador.resx">
+      <DependentUpon>Compilador.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Semantico\Arbol\ArbolSemantico.cs" />
+    <Compile Include="Semantico\Arbol\Interfases\ITipificable.cs" />
+    <Compile Include="Semantico\Arbol\Interfases\IValorizable.cs" />
+    <Compile Include="Semantico\Arbol\Labels\Label.cs" />
+    <Compile Include="Semantico\Arbol\Labels\ManagerLabels.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoArbolSemantico.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoAsignacion.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloque.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloqueMientras.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloqueSi.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBloqueSiCont.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBlq.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoC.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoCon.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoConstantes.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoConsts.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoDeclaraciones.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoEx.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExp.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExpr.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprBool.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprProced.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoF.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoFir.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoFirma.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoFS.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoId.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdAsign.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdAsignacion.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdDeclaracion.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdent.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIds.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIDSolo.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoL.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLectura.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLinea.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLite.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLiterales.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoLlamadaProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMult.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMults.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoNomProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoNumero.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoOpMultDiv.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoOpSumRes.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoPasaManos.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProced.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProcedimientos.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoProcs.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoStart.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoT.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTerminal.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTipoDato.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoV.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVar.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVariables.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVars.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVis.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVisualizar.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoY.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoYDec.cs" />
+    <Compile Include="Semantico\Arbol\Temporales\ManagerTemporales.cs" />
+    <Compile Include="Semantico\Arbol\Temporales\Temporal.cs" />
+    <Compile Include="Semantico\ErrorSemanticoException.cs" />
+    <Compile Include="Semantico\RecorredorArbol\ColaIndices.cs" />
+    <Compile Include="Semantico\RecorredorArbol\NodoPilaRecorredor.cs" />
+    <Compile Include="Semantico\RecorredorArbol\PilaRecorredor.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\NodoTablaSimbolos.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\TablaSimbolos.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Sintactico\AnalizadorSintactico.cs" />
+    <Compile Include="Sintactico\CadenaEntrada.cs" />
+    <Compile Include="Sintactico\ErrorSintacticoException.cs" />
+    <Compile Include="Sintactico\Gramatica\ElementoGramatica.cs" />
+    <Compile Include="Sintactico\Gramatica\Gramatica.cs" />
+    <Compile Include="Sintactico\Gramatica\NoTerminal.cs" />
+    <Compile Include="Sintactico\Gramatica\Produccion.cs" />
+    <Compile Include="Sintactico\Gramatica\Terminal.cs" />
+    <Compile Include="Sintactico\PilaGramatica.cs" />
+    <Compile Include="Sintactico\TablaGramatica\NodoTablaAnalisisGramatica.cs" />
+    <Compile Include="Sintactico\TablaGramatica\TablaAnalisisGramatica.cs" />
+    <Compile Include="Sintactico\TablaPrimerosSiguientes\NodoTablaPrimeros.cs" />
+    <Compile Include="Sintactico\TablaPrimerosSiguientes\RetornoPrimeros.cs" />
+    <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuracion\AFD_GARGAR.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\Gramatica.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

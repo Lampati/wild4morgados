@@ -1,0 +1,133 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Compilador.Sintactico.Gramatica;
+using Compilador.Semantico.Arbol.Interfases;
+using Compilador.Semantico.TablaDeSimbolos;
+using Compilador.Lexicografico;
+using Compilador.Semantico.Arbol.Nodos.Auxiliares;
+using System.Diagnostics;
+
+namespace Compilador.Semantico.Arbol.Nodos
+{
+    class NodoTerminal : NodoArbolSemantico, IValorizable, ITipificable
+    {
+        public NodoTerminal(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
+            : base(nodoPadre,elem)
+        {
+            inicializado = true;            
+        }
+
+        #region IValorizable Members
+
+        public int ObtenerValor(Terminal t)
+        {
+            switch (t.Componente.Token)
+            {
+                case ComponenteLexico.TokenType.Numero:
+                    return Convert.ToInt32(t.Componente.Lexema);                    
+
+        
+                default:
+                    return int.MinValue;
+            }
+            
+        }
+
+        #endregion
+
+        #region ITipificable Members
+
+        public NodoTablaSimbolos.TipoDeDato ObtenerTipo(Terminal t)
+        {
+            switch (t.Componente.Token)
+            {
+               
+
+                case ComponenteLexico.TokenType.SumaEntero:
+                    return NodoTablaSimbolos.TipoDeDato.Entero;              
+
+
+
+                case ComponenteLexico.TokenType.RestaEntero:
+                    return NodoTablaSimbolos.TipoDeDato.Entero;
+
+               
+
+                case ComponenteLexico.TokenType.MultiplicacionEntero:
+                    return NodoTablaSimbolos.TipoDeDato.Entero;
+
+                
+
+                case ComponenteLexico.TokenType.DivisionEntero:
+                    return NodoTablaSimbolos.TipoDeDato.Entero;
+
+                
+
+                default:
+                    return NodoTablaSimbolos.TipoDeDato.Ninguno;
+            }
+        }
+        #endregion
+
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+
+
+            this.Valor = this.ObtenerValor(t);
+            this.TipoDato = this.ObtenerTipo(t);
+            this.Lexema = t.Componente.Lexema;
+
+            switch (this.Lexema)
+            {
+                case "=":
+                    this.Comparacion = TipoComparacion.Equals;
+                    break;
+                case "<>":
+                    this.Comparacion = TipoComparacion.NotEquals;
+                    break;
+                case "<=":
+                    this.Comparacion = TipoComparacion.LessOrEquals;
+                    break;
+                case "<":
+                    this.Comparacion = TipoComparacion.Less;
+                    break;
+                case ">=":
+                    this.Comparacion = TipoComparacion.GreaterOrEquals;
+                    break;
+                case ">":
+                    this.Comparacion = TipoComparacion.Greater;
+                    break;
+                default:
+                    this.Comparacion = TipoComparacion.None;
+                    break;
+            }
+
+            this.VariablesACrear = new List<Variable>();
+            this.ListaFirma = new List<Firma>();
+
+            return this;
+        }
+
+        public override void ChequearAtributos(Terminal t)
+        {
+
+        }
+
+        public override NodoArbolSemantico SalvarAtributosParaContinuar()
+        {
+            return this;
+        }
+
+        public override void HeredarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
+        {
+
+        }
+
+        public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
+        {
+
+        }
+    }
+}

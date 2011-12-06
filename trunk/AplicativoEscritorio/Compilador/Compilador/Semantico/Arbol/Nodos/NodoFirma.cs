@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Compilador.Sintactico.Gramatica;
+using Compilador.Semantico.Arbol.Nodos.Auxiliares;
+
+namespace Compilador.Semantico.Arbol.Nodos
+{
+    class NodoFirma : NodoArbolSemantico
+    {
+        public NodoFirma(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
+            : base(nodoPadre,elem)
+        {
+            
+        }
+
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            List<Firma> listaFirmas = this.hijosNodo[0].ListaFirma;
+            this.ListaFirma = listaFirmas;
+
+            if (listaFirmas.Count != new List<Firma>(listaFirmas.Distinct()).Count)
+            {
+                throw new ErrorSemanticoException(new StringBuilder("Existen parametros con el mismo nombre").ToString(),
+                    t.Componente.Fila, t.Componente.Columna);
+            }
+
+            foreach (Firma f in listaFirmas)
+            {
+                this.TablaSimbolos.AgregarParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.nombreContextoLocal);
+            }
+
+            
+
+
+            return this;
+        }
+
+        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
+        {
+                
+        }
+
+        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
+        {
+                
+        }
+
+        public override void ChequearAtributos(Terminal t)
+        {
+            
+        }
+
+        public override NodoArbolSemantico SalvarAtributosParaContinuar()
+        {
+            this.ListaFirma = new List<Firma>(this.hijosNodo[0].ListaFirma.Distinct());
+
+            foreach (Firma f in this.ListaFirma)
+            {
+                this.TablaSimbolos.AgregarVariable(f.Lexema, f.Tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal);
+            }
+
+            return this;
+        }
+    }
+}
