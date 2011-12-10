@@ -74,7 +74,7 @@ namespace Compilador.Sintactico
             tabla = this.gramatica.ArmarTablaAnalisis();
 
             this.CargarAnalizadorLexicografico();
-
+            
             cantElementosCadenaEntrada = Convert.ToInt32(ConfigurationSettings.AppSettings["cantElementosCadenaEntrada"].ToString());
             finArch = false;
 
@@ -334,6 +334,7 @@ namespace Compilador.Sintactico
 
                 bool generaProdVacia = false;
 
+                //Que es esto??
                 if (!this.PerteneceNoTerminalesNoEscapeables(nt))
                 {
                     generaProdVacia = this.gramatica.NoTerminalGeneraProduccionVacia(nt);

@@ -63,7 +63,8 @@
 		<NoTerminal>PROCPRINCIPAL</NoTerminal>	
 		<NoTerminal>TEXTO</NoTerminal>
 		<NoTerminal>BOOL</NoTerminal>
-	
+		<NoTerminal>MAXARREGLODEC</NoTerminal>
+		<NoTerminal>VALORCONST</NoTerminal>
 		
 	</NoTerminales>
 	
@@ -131,7 +132,7 @@
 			<Izq>C</Izq>
 			<Ders>
 				<Der>
-					<Expresion>id : TIPODATO = NUMERO</Expresion>
+					<Expresion>id : TIPODATO = VALORCONST</Expresion>
 	
 				</Der>
 			</Ders>
@@ -205,13 +206,16 @@
 					<Expresion>id YDEC</Expresion>
 				</Der>
 			</Ders>
-		</Produccion>		
+		</Produccion>	
+	
 		<Produccion>
 			<Izq>YDEC</Izq>
 			<Ders>
+			<!--	
 				<Der>
 					<Expresion>[ NUMERO ]</Expresion>
 				</Der>
+			-->
 				<Der>
 					<Expresion>lambda</Expresion>
 				</Der>
@@ -226,10 +230,21 @@
 					<Expresion>TIPODATO</Expresion>
 				</Der>
 				<Der>
-					<Expresion>arreglo [ EXPR ] de TIPODATO</Expresion>
+					<Expresion>arreglo [ MAXARREGLODEC ] de TIPODATO</Expresion>
 				</Der>			
 			</Ders>
 		</Produccion>
+		<Produccion>
+			<Izq>MAXARREGLODEC</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id</Expresion>
+				</Der>
+				<Der>
+					<Expresion>numero</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>				
 		<Produccion>
 			<Izq>TIPODATO</Izq>
 			<Ders>
@@ -250,6 +265,20 @@
 				<Der>
 					<Expresion>int</Expresion>
 				</Der>				
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>VALORCONST</Izq>
+			<Ders>
+				<Der>
+					<Expresion>int</Expresion>
+				</Der>		
+				<Der>
+					<Expresion>literal</Expresion>
+				</Der>	
+				<Der>
+					<Expresion>BOOL</Expresion>
+				</Der>					
 			</Ders>
 		</Produccion>
 		<!---->
@@ -590,7 +619,7 @@
 					<Expresion>= EXPR</Expresion>
 				</Der>
 				<Der>
-					<Expresion>!= EXPR</Expresion>
+					<Expresion>&lt;&gt; EXPR</Expresion>
 				</Der>
 				<Der>
 					<Expresion>&lt;= EXPR</Expresion>
@@ -667,12 +696,15 @@
 				<Der>
 					<Expresion>( EXPRBOOLEANAS )</Expresion>
 				</Der>
+				<!--
 				<Der>
-					<Expresion>- EXPRBOOLEANAS </Expresion>
+					<Expresion>- EXPRBOOLEANAS</Expresion>
 				</Der>
+				-->
 				<Der>
-					<Expresion>! EXPRBOOLEANAS </Expresion>
+					<Expresion>! ( EXPRBOOLEANAS )</Expresion>
 				</Der>
+				
 			</Ders>
 		</Produccion>
 		<Produccion>
@@ -717,7 +749,7 @@
 				</Der>
 			</Ders>
 		</Produccion>	
-		<!---->
+		<!-- -->
 		<Produccion>
 			<Izq>OPSUMRES</Izq>
 			<Ders>

@@ -71,16 +71,16 @@ namespace Compilador.Semantico.Arbol.Nodos
                     strBldr.Append(GeneracionCodigoHelpers.GenerarCall("writeSTR"));
 
                 }
-                else if (this.TablaSimbolos.ExisteTemporal(impresion, NodoTablaSimbolos.TipoDeDato.Natural)
-                    || this.TablaSimbolos.ExisteTemporal(impresion, NodoTablaSimbolos.TipoDeDato.Entero))
+                else if (this.TablaSimbolos.ExisteTemporal(impresion, NodoTablaSimbolos.TipoDeDato.Numero)
+                    || this.TablaSimbolos.ExisteTemporal(impresion, NodoTablaSimbolos.TipoDeDato.Numero))
                 {
                     NodoTablaSimbolos.TipoDeDato tipo = this.TablaSimbolos.ObtenerTipoTemporal(impresion);
 
-                    if (tipo == NodoTablaSimbolos.TipoDeDato.Natural)
+                    if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                     {
                         strBldr.AppendFormat("PUSH\t0000h").AppendLine();
                     }
-                    else if (tipo == NodoTablaSimbolos.TipoDeDato.Entero)
+                    else if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                     {
                         strBldr.AppendFormat("PUSH\t0001h").AppendLine();
                     }
@@ -95,11 +95,11 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     NodoTablaSimbolos.TipoDeDato tipo = this.TablaSimbolos.ObtenerTipoVariable(impresion, this.ContextoActual, aux);
 
-                    if (tipo == NodoTablaSimbolos.TipoDeDato.Natural)
+                    if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                     {
                         strBldr.AppendFormat("PUSH\t0000h").AppendLine();
                     }
-                    else if (tipo == NodoTablaSimbolos.TipoDeDato.Entero)
+                    else if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                     {
                         strBldr.AppendFormat("PUSH\t0001h").AppendLine();
                     }
@@ -128,11 +128,11 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {
                         NodoTablaSimbolos.TipoDeDato tipo = this.TablaSimbolos.ObtenerTipoVariableUsandoNombreEntero(impresion);
 
-                        if (tipo == NodoTablaSimbolos.TipoDeDato.Natural)
+                        if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             strBldr.AppendFormat("PUSH\t0000h").AppendLine();
                         }
-                        else if (tipo == NodoTablaSimbolos.TipoDeDato.Entero)
+                        else if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             strBldr.AppendFormat("PUSH\t0001h").AppendLine();
                         }

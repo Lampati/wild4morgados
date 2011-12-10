@@ -46,24 +46,47 @@ namespace Compilador.Semantico.Arbol.Nodos
                
 
                 case ComponenteLexico.TokenType.SumaEntero:
-                    return NodoTablaSimbolos.TipoDeDato.Entero;              
+                    return NodoTablaSimbolos.TipoDeDato.Numero;              
 
 
 
                 case ComponenteLexico.TokenType.RestaEntero:
-                    return NodoTablaSimbolos.TipoDeDato.Entero;
+                    return NodoTablaSimbolos.TipoDeDato.Numero;
 
                
 
                 case ComponenteLexico.TokenType.MultiplicacionEntero:
-                    return NodoTablaSimbolos.TipoDeDato.Entero;
+                    return NodoTablaSimbolos.TipoDeDato.Numero;
 
                 
 
                 case ComponenteLexico.TokenType.DivisionEntero:
-                    return NodoTablaSimbolos.TipoDeDato.Entero;
+                    return NodoTablaSimbolos.TipoDeDato.Numero;
 
-                
+
+                case ComponenteLexico.TokenType.Concatenacion:
+                    return NodoTablaSimbolos.TipoDeDato.String;
+
+                case ComponenteLexico.TokenType.And:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+
+                case ComponenteLexico.TokenType.Or:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+
+                case ComponenteLexico.TokenType.Mayor:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+                case ComponenteLexico.TokenType.MayorIgual:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+                case ComponenteLexico.TokenType.Menor:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+                case ComponenteLexico.TokenType.MenorIgual:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+                case ComponenteLexico.TokenType.Igual:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+                case ComponenteLexico.TokenType.Distinto:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+                case ComponenteLexico.TokenType.Negacion:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
 
                 default:
                     return NodoTablaSimbolos.TipoDeDato.Ninguno;
@@ -84,7 +107,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 case "=":
                     this.Comparacion = TipoComparacion.Equals;
                     break;
-                case "<>":
+                case "!=":
                     this.Comparacion = TipoComparacion.NotEquals;
                     break;
                 case "<=":

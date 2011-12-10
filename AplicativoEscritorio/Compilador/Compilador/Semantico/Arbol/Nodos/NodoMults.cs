@@ -165,22 +165,22 @@ namespace Compilador.Semantico.Arbol.Nodos
                 switch (this.hijosNodo[1].Operacion)
                 {
                     case TipoOperatoria.Multiplicacion:
-                        if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
+                        if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacion(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
                         }
-                        else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
+                        else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacionNatural(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
                         }
                         break;
 
                     case TipoOperatoria.Division:
-                        if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
+                        if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             strBldr.Append(GeneracionCodigoHelpers.GenerarDivision(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
                         }
-                        else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
+                        else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             strBldr.Append(GeneracionCodigoHelpers.GenerarDivisionNatural(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
                         }

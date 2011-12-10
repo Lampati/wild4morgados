@@ -1,8 +1,11 @@
 constantes
+
 const M : numero = 7;
 const MaxArreglo : numero = 3;
 variables
+
 var N, S : numero;
+
 
 procedimiento PROC1()
 var A : numero;
@@ -29,6 +32,7 @@ var W11, Y : numero;
 var W12, Q, S : numero;
 var mensaje : texto;
 var exito : booleano;
+var Procesamiento: booleano;
 comenzar
 
   mensaje := 'operacion';
@@ -52,6 +56,8 @@ comenzar
   finmientras;
 
   exito := ((Q < 10) and (R > 0));
+  exito := !(!(Q < 10) and (!R > 0));
+  Procesamiento := falso and (Q < 10) or true and (R > 0);
 
   si (exito = verdadero) entonces
     mensaje  := mensaje & ' ' & 'erronea';
@@ -87,8 +93,11 @@ finproc;
 
 procedimiento PRINCIPAL()
 var X: numero;
-var A: arreglo[MaxArreglo] de numero;
+{var A: arreglo[MaxArreglo] de numero;}
 comenzar
+
+	X := !(!(Q < 10) and (!(R) > 0));
+	X := 6 + 10 - 10 - 10 - X - (X);
   llamar PROC1();
   S := M;
 
