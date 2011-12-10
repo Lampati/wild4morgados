@@ -104,6 +104,13 @@
     <Compile Include="Semantico\Arbol\Labels\ManagerLabels.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprBooleanas.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoBool.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoDeclaracionesIni.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoExprBoolExtra.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoIdProc.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTexto.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoTipoDatoConArreglo.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoArbolSemantico.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoAsignacion.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoBloque.cs" />

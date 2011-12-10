@@ -61,7 +61,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 this.Comparacion = this.hijosNodo[1].Comparacion;
 
-                if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
+                if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                 {
                     switch (this.Comparacion)
                     {

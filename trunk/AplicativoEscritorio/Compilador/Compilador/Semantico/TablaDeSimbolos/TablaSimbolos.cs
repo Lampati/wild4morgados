@@ -105,7 +105,7 @@ namespace Compilador.Semantico.TablaDeSimbolos
               {
                   return (_nodo.Nombre.Equals(nombre) &&
                       (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Temporal) &&
-                      (_nodo.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural || _nodo.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
+                      (_nodo.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero || _nodo.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                       );
               }
               );

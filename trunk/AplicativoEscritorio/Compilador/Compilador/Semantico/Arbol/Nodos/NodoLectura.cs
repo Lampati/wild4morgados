@@ -37,7 +37,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre, this.ContextoActual, this.nombreContextoLocal);
 
-                    if (tipo == NodoTablaSimbolos.TipoDeDato.Entero)
+                    if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                     {
                         if (this.TablaSimbolos.EsModificableValorVarible(nombre,this.ContextoActual,this.nombreContextoLocal))
                         {
@@ -80,7 +80,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     //{
                         tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre);
 
-                        if (tipo == NodoTablaSimbolos.TipoDeDato.Entero)
+                        if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
                             //this.TablaSimbolos.ModificarValorPosicionArreglo(nombre,indice,int.MinValue);
                             strbldr = new StringBuilder().Append("LECTURA: Uso en parte izquierda de arreglo Global");
@@ -90,7 +90,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                             this.Lexema = nombre;
                             this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
-                            this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Entero);
+                            this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
 
                             this.Lugar = this.Temporal.Nombre;
                         }

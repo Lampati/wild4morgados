@@ -13,10 +13,10 @@ namespace Compilador.Semantico.TablaDeSimbolos
         {
             [DescriptionAttribute("String")]
             String,
-            [DescriptionAttribute("Entero")]
-            Entero,
-            [DescriptionAttribute("Natural")]
-            Natural,
+            [DescriptionAttribute("Numero")]
+            Numero,
+            [DescriptionAttribute("Booleano")]
+            Booleano,
             [DescriptionAttribute("Ninguno")]
             Ninguno
         }

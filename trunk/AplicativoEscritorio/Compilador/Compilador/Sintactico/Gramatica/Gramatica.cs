@@ -441,6 +441,11 @@ namespace Compilador.Sintactico.Gramatica
 
         private List<Terminal> Siguientes(NoTerminal nt)
         {
+            if (nt.Nombre == "NUMERO")
+            {
+                Debugger.Break();
+            }
+
             List<Terminal> terminales = new List<Terminal>();
             List<NoTerminal> listaIteracion = new List<NoTerminal>();  
           
@@ -461,6 +466,7 @@ namespace Compilador.Sintactico.Gramatica
                     {                        
                         subLista.AddRange(this.ObtenerProximoEnParteDerechaDe(noTerminales));
                     }
+                   
                 }
 
                 listaIteracion = new List<NoTerminal>();
@@ -501,7 +507,10 @@ namespace Compilador.Sintactico.Gramatica
 
                                 if (retorno.EsNecesarioSiguiente)
                                 {
-                                    listaIteracion.Add(retorno.NoTerminal);
+                                    if (!listaIteracion.Contains((NoTerminal)retorno.NoTerminal))
+                                    {
+                                        listaIteracion.Add(retorno.NoTerminal);
+                                    }
                                 }
                             }
                         }

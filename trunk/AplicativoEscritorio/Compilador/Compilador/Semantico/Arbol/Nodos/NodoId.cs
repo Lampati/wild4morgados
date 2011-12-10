@@ -88,7 +88,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                                 this.Lexema = nombre;
                                 this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
-                                this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Entero);
+                                this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
 
                                 this.Lugar = this.Temporal.Nombre;
                             }
@@ -129,7 +129,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                         this.Lexema = nombre;
                         this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
-                        this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Entero);
+                        this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
 
                         this.Lugar = this.Temporal.Nombre;
                     }
@@ -184,7 +184,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {            
             //Por defecto coloco entero y un 1 para no alterar demasiado
-            this.TipoDato = NodoTablaSimbolos.TipoDeDato.Entero;
+            this.TipoDato = NodoTablaSimbolos.TipoDeDato.Numero;
             this.Valor = 1;
 
             return this;

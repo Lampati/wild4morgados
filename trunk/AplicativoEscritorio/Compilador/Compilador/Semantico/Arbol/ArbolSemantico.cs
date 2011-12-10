@@ -104,8 +104,7 @@ namespace Compilador.Semantico.Arbol
                 {
                     switch (nodo.TipoDato)
                     {
-                        case NodoTablaSimbolos.TipoDeDato.Natural:
-                        case NodoTablaSimbolos.TipoDeDato.Entero:
+                        case NodoTablaSimbolos.TipoDeDato.Numero:                        
                             if (nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Temporal)
                             {
                                 strBldr.Append(nodo.Nombre).Append(" ");

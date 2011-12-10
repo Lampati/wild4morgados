@@ -23,6 +23,9 @@ namespace Compilador.Semantico.Arbol.Nodos
             Resta,
             Multiplicacion,
             Division,
+            Concatenacion,
+            And,
+            Or,
             Ninguna
         }
 
@@ -46,6 +49,8 @@ namespace Compilador.Semantico.Arbol.Nodos
             GreaterThanZero,
             None
         }
+
+    
 
         public TablaSimbolos TablaSimbolos { get; set; }
         public int Valor { get; set; }

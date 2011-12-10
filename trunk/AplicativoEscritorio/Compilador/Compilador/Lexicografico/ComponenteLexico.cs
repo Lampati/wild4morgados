@@ -126,16 +126,16 @@ namespace Compilador.Lexicografico
             MenorIgual, // <=
             [DescriptionAttribute("<")]
             Menor, // <
-            [DescriptionAttribute("!=")]
+            [DescriptionAttribute("<>")]
             Distinto, // !=
 
             [DescriptionAttribute("!")]
             Negacion, // !=
 
             [DescriptionAttribute("and")]
-            and, // !=
+            And, // !=
             [DescriptionAttribute("or")]
-            or, // !=
+            Or, // !=
 
             [DescriptionAttribute("(")]
             ParentesisApertura, // (

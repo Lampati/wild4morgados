@@ -56,7 +56,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             if (this.EsArreglo)
             {
-                if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Natural)
+                if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Numero)
                 {
                     throw new ErrorSemanticoException(new StringBuilder("El subindice del arreglo debe ser natural.").ToString(),
                     t.Componente.Fila, t.Componente.Columna);
@@ -66,7 +66,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {
-            this.TipoDato = NodoTablaSimbolos.TipoDeDato.Natural;
+            this.TipoDato = NodoTablaSimbolos.TipoDeDato.Numero;
             return this;
         }
 

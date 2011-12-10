@@ -16,7 +16,7 @@ p1..p2..p3..p4..p5..p6..p7..p8..pf9..p10..p11..p12..p13..p14..p15..p16..p17..p18
 s1..s2..s3..s4..s5..sf6..sf7..s8..sf9
 t1..t2..t3..t4..tf5
 v1..v2..vf3..v4..v5..v6..v7..v8..vf9..v10..v11..v12..v13..v14..v15..v16..vf17
-simbf1..simbf2..simbf3..simbf4..simbf5..simbf6..simbf7..simbf8..simbf9..simbf10..simbf11..simbf12..simbf13..simbf14..simbf15..simbf16..simbf17..simbf18..simbf19..simbf20..simbf21..simbf22
+simbf1..simbf2..simbf3..simbf4..simbf5..simbf7..simbf8..simbf9..simbf10..simbf11..simbf12..simbf13..simbf14..simbf15..simbf16..simbf17..simbf18..simbf19..simbf20..simbf21..simbf22..simbf23
 lit1..litf1
 varf1
 numf1
@@ -189,7 +189,6 @@ pp0..-..simbf2
 pp0..*..simbf3
 pp0../..simbf4
 pp0..!..simbf5
-simbf5..=..simbf6
 pp0..&..simbf7
 pp0..(..simbf8
 pp0..)..simbf9
@@ -203,6 +202,7 @@ pp0..{..simbf16
 pp0..}..simbf17
 pp0..<..simbf18
 simbf18..=..simbf19
+simbf18..>..simbf23
 pp0..=..simbf20
 pp0..>..simbf21
 simbf21..=..simbf22
@@ -543,7 +543,6 @@ simbf2..-
 simbf3..*
 simbf4../
 simbf5..!
-simbf6..!=
 simbf7..&
 simbf8..(
 simbf9..)
@@ -560,6 +559,7 @@ simbf19..<=
 simbf20..=
 simbf21..>
 simbf22..>=
+simbf23..<>
 litf1..literal
 numf1..int
 varf1..id

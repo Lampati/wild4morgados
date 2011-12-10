@@ -139,44 +139,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            //StringBuilder strBldr = new StringBuilder();
-
-            //if (this.hijosNodo.Count > 1)
-            //{
-            //    strBldr.Append(this.hijosNodo[1].Codigo);
-            //    strBldr.Append(this.hijosNodo[2].Codigo);
             
-
-            //    if (this.hijosNodo[2].Operacion != TipoOperatoria.Ninguna)
-            //    {
-            //        switch (this.hijosNodo[2].Operacion)
-            //        {
-            //            case TipoOperatoria.Multiplicacion:
-            //                if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
-            //                {
-            //                    strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacion(this.Lugar, this.hijosNodo[1].Lugar, this.hijosNodo[2].Lugar));
-            //                }
-            //                else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
-            //                {
-            //                    strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacionNatural(this.Lugar, this.hijosNodo[1].Lugar, this.hijosNodo[2].Lugar));
-            //                }
-            //                break;
-
-            //            case TipoOperatoria.Division:
-            //                if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
-            //                {
-            //                    strBldr.Append(GeneracionCodigoHelpers.GenerarDivision(this.Lugar, this.hijosNodo[1].Lugar, this.hijosNodo[2].Lugar));
-            //                }
-            //                else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
-            //                {
-            //                    strBldr.Append(GeneracionCodigoHelpers.GenerarDivisionNatural(this.Lugar, this.hijosNodo[1].Lugar, this.hijosNodo[2].Lugar));
-            //                }
-            //                break;
-            //        }
-            //    }
-            //}
-
-            //this.Codigo = strBldr.ToString();
 
 
             StringBuilder strBldr = new StringBuilder();
@@ -194,22 +157,22 @@ namespace Compilador.Semantico.Arbol.Nodos
                     switch (this.hijosNodo[2].Operacion)
                     {
                         case TipoOperatoria.Multiplicacion:
-                            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
+                            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                             {
                                 strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacion(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
                             }
-                            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
+                            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                             {
                                 strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacionNatural(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
                             }
                             break;
 
                         case TipoOperatoria.Division:
-                            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
+                            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                             {
                                 strBldr.Append(GeneracionCodigoHelpers.GenerarDivision(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
                             }
-                            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
+                            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
                             {
                                 strBldr.Append(GeneracionCodigoHelpers.GenerarDivisionNatural(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
                             }
