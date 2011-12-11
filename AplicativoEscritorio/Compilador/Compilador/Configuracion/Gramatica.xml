@@ -320,7 +320,7 @@
 					<Expresion>procedimiento IDPROC ( FIRMA ) DECLARACIONES comenzar BLOQUE finproc ;</Expresion>
 				</Der>
 				<Der>
-					<Expresion>funcion IDSOLO ( FIRMA ) : TIPODATO DECLARACIONES comenzar BLOQUE finfunc EXPR ;</Expresion>
+					<Expresion>funcion IDSOLO ( FIRMA ) : TIPODATO DECLARACIONES comenzar BLOQUE finfunc EXPRBOOLEANAS ;</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>
@@ -530,7 +530,7 @@
 			<Izq>LITE</Izq>
 			<Ders>
 				<Der>
-					<Expresion>&amp; L LITE</Expresion>
+					<Expresion>, L LITE</Expresion>
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>

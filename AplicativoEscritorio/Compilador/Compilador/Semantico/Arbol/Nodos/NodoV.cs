@@ -27,8 +27,8 @@ namespace Compilador.Semantico.Arbol.Nodos
           
             foreach(Variable v in variables)
             {
-
-                if (!v.EsArreglo)
+                if (!this.hijosNodo[2].EsArreglo)
+                //if (!v.EsArreglo)
                 {
                     if (!this.TablaSimbolos.ExisteVariable(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
                     {
@@ -45,26 +45,19 @@ namespace Compilador.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    if (this.ContextoActual == NodoTablaSimbolos.TipoContexto.Global)
+
+                    if (!this.TablaSimbolos.ExisteArreglo(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
                     {
-                        if (!this.TablaSimbolos.ExisteArreglo(v.Lexema))
-                        {
-                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, v.IndiceArreglo, false);
-                            textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                            textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
-                            textoParaArbol.Append(" de ").Append(v.IndiceArreglo.ToString()).Append(" posiciones.");
-                        }
-                        else
-                        {
-                            throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString(),
-                                t.Componente.Fila, t.Componente.Columna);
-                        }
+                        this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.nombreContextoLocal, v.IndiceArreglo, false);
+                        textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
+                        textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
+                        textoParaArbol.Append(" de ").Append(v.IndiceArreglo.ToString()).Append(" posiciones.");
                     }
                     else
                     {
-                        StringBuilder strbldr = new StringBuilder("No se pueden declarar arreglos fuera del contexto global");
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
-                    }
+                        throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString(),
+                            t.Componente.Fila, t.Componente.Columna);
+                    }          
                 }
             }
 

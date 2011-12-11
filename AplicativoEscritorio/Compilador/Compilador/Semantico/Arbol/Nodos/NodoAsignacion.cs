@@ -73,7 +73,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             }
             else
             {
-                if (this.TablaSimbolos.ExisteArreglo(nombre))
+                if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.nombreContextoLocal))
                 {
                     //if (this.TablaSimbolos.ExisteArreglo(nombre, indice))
                     //{

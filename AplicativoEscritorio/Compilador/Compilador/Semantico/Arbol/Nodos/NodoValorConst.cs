@@ -6,9 +6,9 @@ using Compilador.Sintactico.Gramatica;
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
-    class NodoTipoDatoConArreglo : NodoArbolSemantico
+    class NodoValorConst : NodoArbolSemantico
     {
-        public NodoTipoDatoConArreglo(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
+        public NodoValorConst(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
             
@@ -21,28 +21,13 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
-            this.TipoDato = hijoASintetizar.TipoDato;          
-        }
-
-        public override NodoArbolSemantico CalcularAtributos(Terminal t)
-        {
-            if (this.hijosNodo.Count > 1)
-            {
-                this.TipoDato = this.hijosNodo[5].TipoDato;
-                this.EsArreglo = true;
-            }
-            else
-            {
-                this.TipoDato = this.hijosNodo[0].TipoDato;
-                this.EsArreglo = false;
-            }
-
-            return this;
+            this.Valor = hijoASintetizar.Valor;
+            this.TipoDato = hijoASintetizar.TipoDato;
         }
 
         public override void ChequearAtributos(Terminal t)
         {
-           
+            
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()

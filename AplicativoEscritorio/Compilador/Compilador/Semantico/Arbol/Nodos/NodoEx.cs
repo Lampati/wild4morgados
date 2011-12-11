@@ -28,18 +28,20 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            this.TipoDato = this.hijosNodo[1].TipoDato;
-
-            this.Comparacion = this.hijosNodo[0].Comparacion;
-
-            this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
-
-            if (this.Lugar == null || this.Lugar.Equals(string.Empty))
+            if (hijosNodo.Count > 1)
             {
-                this.Lugar = string.Copy(this.hijosNodo[1].Valor.ToString());
+                this.TipoDato = this.hijosNodo[1].TipoDato;
+
+                this.Comparacion = this.hijosNodo[0].Comparacion;
+
+                this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
+
+                if (this.Lugar == null || this.Lugar.Equals(string.Empty))
+                {
+                    this.Lugar = string.Copy(this.hijosNodo[1].Valor.ToString());
+                }
+
             }
-
-
             return this;
         }
 

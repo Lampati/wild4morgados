@@ -117,7 +117,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     int indice = this.hijosNodo[1].IndiceArreglo;
 
-                    if (this.TablaSimbolos.ExisteArreglo(nombre))
+                    if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.nombreContextoLocal))
                     {
                         this.EsArreglo = true;
                         this.TipoDato = this.TablaSimbolos.ObtenerTipoArreglo(nombre);

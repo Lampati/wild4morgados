@@ -87,6 +87,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Configuracion\test.gar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -104,6 +107,8 @@
     <Compile Include="Semantico\Arbol\Labels\ManagerLabels.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoValorConst.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoMaxArregloDec.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoExprBooleanas.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoBool.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoDeclaracionesIni.cs" />
@@ -198,9 +203,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Configuracion\Gramatica.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuracion\test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -36,7 +36,10 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 this.Comparacion = TipoComparacion.None;
                 this.Operacion = this.hijosNodo[0].Operacion;
-                this.TipoDato = this.hijosNodo[0].TipoDato;
+
+                //Si le pongo un and, o le pongo un or, termina siendo siempre un tipo booleano el resultante.
+                //this.TipoDato = this.hijosNodo[0].TipoDato;
+                this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;
 
                 this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
 
@@ -51,17 +54,9 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void ChequearAtributos(Terminal t)
         {
-            StringBuilder strbldr;
+            
 
-            if (this.hijosNodo.Count == 2)
-            {
-                if (this.hijosNodo[0].TipoDato != this.hijosNodo[1].TipoDato)
-                {
-                    strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
-                    strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
-                }
-            }
+            
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
