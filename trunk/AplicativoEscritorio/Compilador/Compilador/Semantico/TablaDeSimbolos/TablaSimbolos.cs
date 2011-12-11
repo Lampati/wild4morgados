@@ -283,7 +283,7 @@ namespace Compilador.Semantico.TablaDeSimbolos
 
         #region Manejo Arreglos
 
-        public void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, int indice, bool esConst)
+        public void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, int indice, bool esConst)
         {
 
             //flanzani Codigo viejo
@@ -299,11 +299,18 @@ namespace Compilador.Semantico.TablaDeSimbolos
             this.listaNodos.Add(
                 
                     new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable,
-                   tdato, int.MinValue, true, indice, esConst, NodoTablaSimbolos.TipoContexto.Global,
-                   EnumUtils.stringValueOf(NodoTablaSimbolos.TipoContexto.Global),
+                   tdato, int.MinValue, true, indice, esConst, contexto,
+                   nombreContexto,
                    indice*TAMANIOENTERO,des)
                    
                    );
+        }
+
+        internal void AgregarArregloParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tipoDeDato, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc)
+        {
+            int des = this.ObtenerDesplazamientoParaContexto(nombreProc);
+
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tipoDeDato, int.MinValue, true, int.MinValue, false, tipoContexto, nombreProc, TAMANIOENTERO, des));
         }
 
         private int ObtenerDesplazamientoParaContexto(string p)
@@ -365,8 +372,8 @@ namespace Compilador.Semantico.TablaDeSimbolos
 
                 delegate(NodoTablaSimbolos _nodo)
                 {
-                    return (_nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global &&
-                         _nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable && 
+                    return (
+                         (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable || _nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro) && 
                          _nodo.EsArreglo == true &&
                          _nodo.Indice == posicion &&
                          _nodo.Nombre.Equals(nombre));
@@ -378,15 +385,19 @@ namespace Compilador.Semantico.TablaDeSimbolos
             return nodo;
         }
 
-        public bool ExisteArreglo(string nombre)
+        public bool ExisteArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             return this.listaNodos.Exists(
 
                 delegate(NodoTablaSimbolos _nodo)
                 {
-                    return ((_nodo.Nombre.Equals(nombre)) && 
-                        (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable) &&
-                        (_nodo.EsArreglo == true));
+                    return ((_nodo.Nombre.Equals(nombre)) &&
+                        (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable || _nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro) &&
+                        (_nodo.EsArreglo == true) &&
+                        (_nodo.Contexto == contexto) &&
+                        (_nodo.NombreContextoLocal == nombreContexto) 
+                        
+                        );
                 }
                 );
         }
@@ -402,26 +413,9 @@ namespace Compilador.Semantico.TablaDeSimbolos
                         (_nodo.EsArreglo == true));
                 }
                 );
-        }
+        }    
 
-        public bool ExisteArreglo(string nombre, int pos)
-        {
-            return this.listaNodos.Exists(
-
-                delegate(NodoTablaSimbolos _nodo)
-                {
-                    return ((_nodo.Nombre.Equals(nombre)) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable)
-                        && (_nodo.EsArreglo == true) && (_nodo.Indice == pos));
-                }
-                );
-        }
-
-        public int ObtenerValorPosicionArreglo(string nombre,int pos)
-        {
-            NodoTablaSimbolos nodo = this.ObtenerPosicionArreglo(nombre,pos);
-            return nodo.Valor;
-        }
-
+      
         public NodoTablaSimbolos.TipoDeDato ObtenerTipoArreglo(string nombre)
         {
             NodoTablaSimbolos nodo = this.ObtenerPosicionArreglo(nombre, 0);
@@ -546,6 +540,8 @@ namespace Compilador.Semantico.TablaDeSimbolos
         #endregion
 
 
-       
+
+
+      
     }
 }

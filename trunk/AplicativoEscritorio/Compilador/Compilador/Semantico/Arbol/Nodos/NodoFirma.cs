@@ -28,7 +28,14 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             foreach (Firma f in listaFirmas)
             {
-                this.TablaSimbolos.AgregarParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.nombreContextoLocal);
+                if (!f.EsArreglo)
+                {
+                    this.TablaSimbolos.AgregarParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.nombreContextoLocal);
+                }
+                else
+                {
+                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.nombreContextoLocal);
+                }
             }
 
             

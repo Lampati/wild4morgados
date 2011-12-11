@@ -43,14 +43,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     this.Lugar = string.Copy(this.hijosNodo[2].Valor.ToString());
                 }
 
-                if (this.hijosNodo[0].Lexema.ToUpper() == "ESPAR")
-                {
-                    this.EsPar = true;
-                }
-                else
-                {
-                    this.EsPar = false;
-                }
+                
             }
             else
             {
@@ -101,11 +94,25 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count == 2)
             {
-                if (this.hijosNodo[0].TipoDato != this.hijosNodo[1].TipoDato)
+                //Si la parte EX no tiene valor pq es lambda, es cuestion de no comprobar nada, y tomar el tipo de dato de EXPR
+                if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Ninguno)
                 {
-                    strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
-                    strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+
+                    if (this.hijosNodo[0].TipoDato != this.hijosNodo[1].TipoDato)
+                    {
+                        strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
+                        strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
+                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    }
+                    else
+                    {
+                        //Entonces lo que se estaba haciendo era una comparacion, pongo que es un dato booleano.
+                        this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;
+                    }
+                }
+                else
+                {
+                    this.TipoDato = this.hijosNodo[0].TipoDato;
                 }
             }
         }

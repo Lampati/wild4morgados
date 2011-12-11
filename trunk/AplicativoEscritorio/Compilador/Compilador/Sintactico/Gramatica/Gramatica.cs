@@ -441,10 +441,10 @@ namespace Compilador.Sintactico.Gramatica
 
         private List<Terminal> Siguientes(NoTerminal nt)
         {
-            if (nt.Nombre == "NUMERO")
-            {
-                Debugger.Break();
-            }
+            //if (nt.Nombre == "NUMERO")
+            //{
+            //    Debugger.Break();
+            //}
 
             List<Terminal> terminales = new List<Terminal>();
             List<NoTerminal> listaIteracion = new List<NoTerminal>();  

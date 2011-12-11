@@ -24,11 +24,11 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            this.ConSaltoLinea = ((NodoVis)this.hijosNodo[0]).ConSaltoLinea;
+          
 
             this.TextoParaImprimirArbol = this.ToString();
 
-            this.ListaElementosVisualizar = this.hijosNodo[1].ListaElementosVisualizar;
+            this.ListaElementosVisualizar = this.hijosNodo[2].ListaElementosVisualizar;
 
             return this;
         }

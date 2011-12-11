@@ -11,6 +11,7 @@ namespace Compilador.Semantico.Arbol.Nodos.Auxiliares
         public string Lexema { get; set; }
         public NodoTablaSimbolos.TipoDeDato Tipo { get; set; }
         public int Valor { get; set; }
+        public bool EsArreglo { get; set; }
 
 
         public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo)

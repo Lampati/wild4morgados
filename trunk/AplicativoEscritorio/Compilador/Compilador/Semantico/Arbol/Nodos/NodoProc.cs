@@ -48,7 +48,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (!this.TablaSimbolos.ExisteFuncion(nombre))
                 {
-                    if (devolucion == this.hijosNodo[12].TipoDato)
+                    if (devolucion == this.hijosNodo[11].TipoDato)
                     {
 
                         this.TablaSimbolos.AgregarFuncion(nombre, listaFirmas, devolucion, ManagerTemporales.Instance.CantidadTemporalesParaProc(nombre));

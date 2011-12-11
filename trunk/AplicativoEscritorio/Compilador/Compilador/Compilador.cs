@@ -114,7 +114,7 @@ namespace Compilador
             {
                 string pathArchGramatica = Path.Combine(directorioActual, System.Configuration.ConfigurationSettings.AppSettings["archGramatica"].ToString());
                analizadorSintactico = new AnalizadorSintactico(pathArchGramatica);
-               analizadorSintactico.HabilitarSemantico = false;
+               analizadorSintactico.HabilitarSemantico = true;
             }
             catch (Exception ex)
             {

@@ -43,7 +43,27 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             switch (t.Componente.Token)
             {
-               
+                case ComponenteLexico.TokenType.Numero:
+                    return NodoTablaSimbolos.TipoDeDato.Numero;
+
+                case ComponenteLexico.TokenType.Verdadero:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+
+                case ComponenteLexico.TokenType.Falso:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+
+                case ComponenteLexico.TokenType.Literal:
+                    return NodoTablaSimbolos.TipoDeDato.String;
+
+                case ComponenteLexico.TokenType.TipoNumero:
+                    return NodoTablaSimbolos.TipoDeDato.Numero;
+
+                case ComponenteLexico.TokenType.TipoBooleano:
+                    return NodoTablaSimbolos.TipoDeDato.Booleano;
+         
+                case ComponenteLexico.TokenType.TipoTexto:
+                    return NodoTablaSimbolos.TipoDeDato.String;  
+
 
                 case ComponenteLexico.TokenType.SumaEntero:
                     return NodoTablaSimbolos.TipoDeDato.Numero;              

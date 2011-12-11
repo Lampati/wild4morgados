@@ -18,7 +18,7 @@ comenzar
       A := A + 1;
     finsi;
 
-    Mostrar ('Visualizacion ' & B & ' ' & A);
+    Mostrar ('Visualizacion ' , B , ' ' , A);
     B := B - 1;
 
   finmientras;
@@ -55,9 +55,10 @@ comenzar
     finsi;
   finmientras;
 
+  exito := (Q < 10);
   exito := ((Q < 10) and (R > 0));
-  exito := !(!(Q < 10) and (!R > 0));
-  Procesamiento := falso and (Q < 10) or true and (R > 0);
+  exito := !(!(Q < 10) and (R > 0));
+  Procesamiento := falso and (Q < 10) or verdadero and (R > 0);
 
   si (exito = verdadero) entonces
     mensaje  := mensaje & ' ' & 'erronea';
@@ -93,10 +94,9 @@ finproc;
 
 procedimiento PRINCIPAL()
 var X: numero;
-{var A: arreglo[MaxArreglo] de numero;}
+var A: arreglo[MaxArreglo] de numero;
 comenzar
 
-	X := !(!(Q < 10) and (!(R) > 0));
 	X := 6 + 10 - 10 - 10 - X - (X);
   llamar PROC1();
   S := M;

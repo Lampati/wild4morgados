@@ -31,7 +31,16 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {           
-            this.TipoDato = this.hijosNodo[0].TipoDato;
+
+            //Si el tipo de dato de ExprBoolExtra es booleano, es pq tiene un and, o un or. Por ende, este tambien sera booleano.
+            if (this.hijosNodo[1].TipoDato == NodoTablaSimbolos.TipoDeDato.Booleano)
+            {
+                this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;
+            }
+            else
+            {
+                this.TipoDato = this.hijosNodo[0].TipoDato;
+            }
 
             this.Comparacion = this.hijosNodo[1].Comparacion;
             this.Operacion = this.hijosNodo[1].Operacion;
@@ -52,11 +61,15 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count == 2)
             {
-                if (this.hijosNodo[0].TipoDato != this.hijosNodo[1].TipoDato)
+                //Si el tipo de dato de ExprBoolExtra es booleano, este tambien debera serlo para poder compararlos 
+                if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Ninguno)
                 {
-                    strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
-                    strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    if (this.hijosNodo[0].TipoDato != this.hijosNodo[1].TipoDato)
+                    {
+                        strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
+                        strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
+                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    }
                 }
             }
         }

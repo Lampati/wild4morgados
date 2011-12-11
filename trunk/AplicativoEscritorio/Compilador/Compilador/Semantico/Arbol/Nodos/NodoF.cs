@@ -18,7 +18,10 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            this.ListaFirma.Add(new Firma(this.hijosNodo[0].Lexema,this.hijosNodo[2].TipoDato));
+            Firma f = new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[2].TipoDato);
+            f.EsArreglo = this.hijosNodo[2].EsArreglo;
+
+            this.ListaFirma.Add(f);
 
             StringBuilder textoArbol = new StringBuilder();
             textoArbol.Append("Declaracion de parámetro ").Append(this.hijosNodo[0].Lexema);
