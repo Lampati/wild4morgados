@@ -42,6 +42,11 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 this.ProcPrincipalYaCreadoyCorrecto = false;
             }
+
+            if (!this.ProcSalidaCrearUnaVez)
+            {
+                this.ProcSalidaYaCreadoyCorrecto = false;
+            }
             
 
             if (esFuncion)
@@ -83,6 +88,17 @@ namespace Compilador.Semantico.Arbol.Nodos
                     }
                 }
 
+                if (nombre.ToLower().Equals("salida"))
+                {
+
+
+                    if (!this.ProcSalidaYaCreadoyCorrecto && this.ProcSalidaCrearUnaVez)
+                    {
+                        this.ProcSalidaYaCreadoyCorrecto = true;
+                        this.ProcSalidaCrearUnaVez = false;
+                    }
+                }
+
                 if (!this.TablaSimbolos.ExisteProcedimiento(nombre))
                 {
                     this.TablaSimbolos.AgregarProcedimiento(nombre, listaFirmas, ManagerTemporales.Instance.CantidadTemporalesParaProc(nombre));
@@ -109,7 +125,8 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             hijoAHeredar.ProcPrincipalYaCreadoyCorrecto = this.ProcPrincipalYaCreadoyCorrecto;
             hijoAHeredar.ProcPrincipalCrearUnaVez = this.ProcPrincipalCrearUnaVez;
-
+            hijoAHeredar.ProcSalidaYaCreadoyCorrecto = this.ProcSalidaYaCreadoyCorrecto;
+            hijoAHeredar.ProcSalidaCrearUnaVez = this.ProcSalidaCrearUnaVez;
             hijoAHeredar.nombreContextoLocal = this.nombreContextoLocal;
 
             

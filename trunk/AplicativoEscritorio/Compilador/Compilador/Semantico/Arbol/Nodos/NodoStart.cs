@@ -20,7 +20,10 @@ namespace Compilador.Semantico.Arbol.Nodos
             this.ContextoActual = NodoTablaSimbolos.TipoContexto.Global;
             this.nombreContextoLocal = EnumUtils.stringValueOf(NodoTablaSimbolos.TipoContexto.Global);
             this.ProcPrincipalYaCreadoyCorrecto = false;
-            this.ProcPrincipalCrearUnaVez = true;               
+            this.ProcPrincipalCrearUnaVez = true;
+
+            this.ProcSalidaYaCreadoyCorrecto = false;
+            this.ProcSalidaCrearUnaVez = true;
         }
 
         public string MemoriaGlobal { get; set; }
@@ -33,6 +36,12 @@ namespace Compilador.Semantico.Arbol.Nodos
                 StringBuilder strbldr = new StringBuilder("Error en el procedimiento principal: Debe haber unicamente un procedimiento principal y debe ser el ultimo.");
                 throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
             }
+
+            if (!this.ProcSalidaYaCreadoyCorrecto)
+            {
+                StringBuilder strbldr = new StringBuilder("Error en el procedimiento salida: Debe haber unicamente un procedimiento salida");
+                throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+            }
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
@@ -40,6 +49,11 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (!this.ProcPrincipalYaCreadoyCorrecto)
             {
                 this.ProcPrincipalYaCreadoyCorrecto = true;
+            }
+
+            if (!this.ProcSalidaYaCreadoyCorrecto)
+            {
+                this.ProcSalidaYaCreadoyCorrecto = true;
             }
 
             return this;

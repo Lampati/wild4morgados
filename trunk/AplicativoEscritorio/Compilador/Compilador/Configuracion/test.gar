@@ -79,6 +79,7 @@ comenzar
   finsi;
 finfunc N * 2;
 
+
 procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
 var I : numero;
 comenzar
@@ -106,7 +107,7 @@ comenzar
   A[2] := FUN1(-2);
   A[3] := FUN1(5);
   
-  llamar SALIDA(A);  
+  llamar SALIDA(A); 
 
 
 finproc;

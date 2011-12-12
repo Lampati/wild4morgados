@@ -59,6 +59,9 @@ namespace Compilador.Semantico.Arbol.Nodos
         public NodoTablaSimbolos.TipoContexto ContextoActual { get; set; }
         public bool ProcPrincipalCrearUnaVez { get; set; }
         public bool ProcPrincipalYaCreadoyCorrecto {get; set;}
+
+        public bool ProcSalidaCrearUnaVez { get; set; }
+        public bool ProcSalidaYaCreadoyCorrecto { get; set; }
         public string Lexema { get; set; }
         public string nombreContextoLocal { get; set; }
         public bool EsArreglo { get; set; }
@@ -208,6 +211,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.nombreContextoLocal = nodoPadre.nombreContextoLocal;
                 this.ProcPrincipalYaCreadoyCorrecto = nodoPadre.ProcPrincipalYaCreadoyCorrecto;
                 this.ProcPrincipalCrearUnaVez = nodoPadre.ProcPrincipalCrearUnaVez;
+                this.ProcSalidaYaCreadoyCorrecto = nodoPadre.ProcSalidaYaCreadoyCorrecto;
+                this.ProcSalidaCrearUnaVez = nodoPadre.ProcSalidaCrearUnaVez;
             }
         }
 
@@ -292,6 +297,8 @@ namespace Compilador.Semantico.Arbol.Nodos
             this.nombreContextoLocal = nodo.nombreContextoLocal;
             this.ProcPrincipalYaCreadoyCorrecto = nodo.ProcPrincipalYaCreadoyCorrecto;
             this.ProcPrincipalCrearUnaVez = nodo.ProcPrincipalCrearUnaVez;
+            this.ProcSalidaYaCreadoyCorrecto = nodo.ProcSalidaYaCreadoyCorrecto;
+            this.ProcSalidaCrearUnaVez = nodo.ProcSalidaCrearUnaVez;
 
 
             //PRUEBA
