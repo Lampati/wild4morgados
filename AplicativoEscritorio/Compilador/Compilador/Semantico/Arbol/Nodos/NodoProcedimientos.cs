@@ -19,12 +19,16 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             hijoAHeredar.ProcPrincipalYaCreadoyCorrecto = this.ProcPrincipalYaCreadoyCorrecto;
             hijoAHeredar.ProcPrincipalCrearUnaVez = this.ProcPrincipalCrearUnaVez;
+            hijoAHeredar.ProcSalidaYaCreadoyCorrecto = this.ProcSalidaYaCreadoyCorrecto;
+            hijoAHeredar.ProcSalidaCrearUnaVez = this.ProcSalidaCrearUnaVez;
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             this.ProcPrincipalYaCreadoyCorrecto = hijoASintetizar.ProcPrincipalYaCreadoyCorrecto;
             this.ProcPrincipalCrearUnaVez = hijoASintetizar.ProcPrincipalCrearUnaVez;
+            this.ProcSalidaYaCreadoyCorrecto = hijoASintetizar.ProcSalidaYaCreadoyCorrecto;
+            this.ProcSalidaCrearUnaVez = hijoASintetizar.ProcSalidaCrearUnaVez;
             this.TablaSimbolos = hijoASintetizar.TablaSimbolos;
 
             this.TextoParaImprimirArbol = this.ToString();
