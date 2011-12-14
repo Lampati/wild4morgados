@@ -74,35 +74,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder sb = new StringBuilder();
 
-            if (this.hijosNodo.Count > 1)
-                sb.Append(this.hijosNodo[1].Codigo);
-
-            if (this.EsArreglo)
-            {
-                sb.Append(GeneracionCodigoHelpers.GenerarPush("AX")); 
-               
-                string nombreArreglo = this.padreNodo.Lugar;
-
-                int tamanio = this.TablaSimbolos.ObtenerTamanioArreglo(nombreArreglo);
-
-                if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                {
-                    //this.Codigo = "uso el valor " + this.Valor.ToString() + "\r\n";
-                    /*No deberia ir el valor string, deberia ir el lugar de [ EXPR ]*/
-                    sb.Append(GeneracionCodigoHelpers.GenerarMov("AX", this.hijosNodo[1].Lugar));
-                }
-                else
-                {
-                    //this.Codigo = "obtengo el valor del temp: " + this.Lugar + "\r\n";
-                    sb.Append(GeneracionCodigoHelpers.GenerarMov("AX", this.Lugar));
-                }
-
-                /*Control fuera de rango*/
-                sb.Append(GeneracionCodigoHelpers.GenerarCmp("AX", tamanio.ToString()));
-                sb.Append(GeneracionCodigoHelpers.GenerarJump("labelArregloFueraLimites", TipoComparacion.AboveOrEquals));
-                sb.Append(GeneracionCodigoHelpers.GenerarCmp("AX", "0"));
-                sb.Append(GeneracionCodigoHelpers.GenerarJump("labelArregloFueraLimites", TipoComparacion.Below));
-            }            
+             
 
             this.Codigo = sb.ToString();
         } 

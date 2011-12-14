@@ -136,21 +136,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder("\t");
-            strBldr.Append(this.hijosNodo[1].Codigo);
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------COMIENZO LECTURA-----"));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPush("Ax"));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPush("0000h"));
-
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPush("0001h"));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarCall("readln"));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPop("Ax"));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarMovDesdeAx(this.Lugar));           
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPop("Ax"));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("--------FINAL LECTURA--------"));
+ 
 
             this.Codigo = strBldr.ToString().Replace("\r\n", "\r\n\t").ToString().TrimEnd('\t');
         }

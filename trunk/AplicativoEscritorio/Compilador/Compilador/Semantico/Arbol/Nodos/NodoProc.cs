@@ -154,39 +154,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             StringBuilder strBldr = new StringBuilder();
 
-            //Para debuguear nomas... SACAR
-            //strBldr.AppendLine(this.Lexema);
-
-
-            if (esFuncion)
-            {
-                strBldr.Append(this.Lexema).Append(" ").AppendLine("PROC NEAR");
-                strBldr.Append(this.hijosNodo[10].Codigo);
-                strBldr.Append(this.hijosNodo[12].Codigo);
-                strBldr.Append("\t").Append(GeneracionCodigoHelpers.GenerarMovHaciaAx(this.hijosNodo[12].Lugar));
-                strBldr.AppendLine("\tRET");
-                strBldr.Append(this.Lexema).Append(" ").AppendLine("ENDP");
-            }
-            else
-            {
-                if (this.Lexema.ToUpper() == "PRINCIPAL")
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarLabel("labelInicial"));
-                }
-                strBldr.Append(this.Lexema).Append(" ").AppendLine("PROC NEAR");
-                strBldr.Append(this.hijosNodo[8].Codigo);
-
-                if (this.Lexema.ToUpper() != "PRINCIPAL")
-                {
-                    strBldr.AppendLine("\tRET");
-                }
-                else
-                {
-                    strBldr.AppendLine("\tINT\t21h");
-                }
-                strBldr.Append(this.Lexema).Append(" ").AppendLine("ENDP");
-            }
-
+            
             this.Codigo = strBldr.ToString();
         }
     }

@@ -121,70 +121,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            //strBldr.Append(this.hijosNodo[0].Codigo);
-            //strBldr.Append(this.hijosNodo[1].Codigo);
-
-            //strBldr.Append(this.hijosNodo[1].Codigo);
-            //strBldr.Append(this.hijosNodo[0].Codigo);
-
-            //if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
-            //{
-            //    switch (this.hijosNodo[1].Operacion)
-            //    {
-            //        case TipoOperatoria.Suma:
-            //            strBldr.Append(GeneracionCodigoHelpers.GenerarSuma(this.Lugar, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-            //            break;
-
-            //        case TipoOperatoria.Resta:
-            //            strBldr.Append(GeneracionCodigoHelpers.GenerarResta(this.Lugar, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-            //            break;
-            //    }
-            //}
-
-            //this.Codigo = strBldr.ToString();
-
-
-            strBldr.Append(this.hijosNodo[0].Codigo);
             
-
-            if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
-            {
-                strBldr.Append(this.hijosNodo[1].ObtenerHijo(1).Codigo);
-
-                //Para que no se le asigne null, en caso que sea un numero nomas.
-                if (this.hijosNodo[1].ObtenerHijo(1).LugarMul == null || this.hijosNodo[1].ObtenerHijo(1).LugarMul == string.Empty)
-                {
-                    this.hijosNodo[1].ObtenerHijo(1).LugarMul = this.hijosNodo[1].ObtenerHijo(1).Lugar;
-                }
-
-                switch (this.hijosNodo[1].Operacion)
-                {
-                        
-
-                    case TipoOperatoria.Suma:
-                        strBldr.Append(GeneracionCodigoHelpers.GenerarSuma(this.LugarExp, this.hijosNodo[0].LugarMul, this.hijosNodo[1].ObtenerHijo(1).LugarMul));
-                        break;
-
-                    case TipoOperatoria.Resta:
-                        strBldr.Append(GeneracionCodigoHelpers.GenerarResta(this.LugarExp, this.hijosNodo[0].LugarMul, this.hijosNodo[1].ObtenerHijo(1).LugarMul));
-                        break;
-                }
-            }
-
-            
-            strBldr.Append(this.hijosNodo[1].Codigo);
-
-            if (this.hijosNodo[1].Operacion == TipoOperatoria.Ninguna)
-            {
-                if (!(this.hijosNodo[0].LugarMul == null || this.hijosNodo[0].LugarMul == string.Empty || this.hijosNodo[0].LugarMul == this.LugarExp))
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarPush("AX"));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarMovHaciaAx(this.hijosNodo[0].LugarMul));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarMovDesdeAx(this.LugarExp));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarPop("AX"));
-                }
-            }
-
             this.Codigo = strBldr.ToString();
         }
 

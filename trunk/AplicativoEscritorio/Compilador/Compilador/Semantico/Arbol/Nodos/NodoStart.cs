@@ -72,24 +72,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine("SEG Segment");
-            strBldr.AppendLine("ASSUME CS:SEG,SS:SEG,DS:SEG,ES:SEG");
-            strBldr.AppendLine("ORG 0100h");
-            strBldr.AppendLine("JMP labelInicial");
-            strBldr.Append(this.MemoriaGlobal);            
-
-            //Pongo los errores
-            strBldr.Append(GeneracionCodigoHelpers.GenerarError("labelErrorNaturalMenorCero", "ErrorNaturalMenorCero", ArbolSemantico.ERROR_NATURAL_MENOR_CERO.Length - 2));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarError("labelArregloFueraLimites", "ArregloFueraLimites", ArbolSemantico.ERROR_ARREGLO_FUERA_LIMITES.Length - 2));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarError("labelDivisionPorCero", "DivisionPorCero", ArbolSemantico.ERROR_DIVISION_POR_CERO.Length - 2));
             
-            
-
-            //Cargo las rutinas de entrada salida
-            strBldr.Append(File.ReadAllText(ConfigurationSettings.AppSettings["archRutinasEentradaSalida"].ToString()));
-            strBldr.Append(this.hijosNodo[1].Codigo);            
-            
-            strBldr.AppendLine("SEG ENDS");
             
             this.Codigo = strBldr.ToString();
         }

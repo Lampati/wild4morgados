@@ -32,21 +32,12 @@ namespace Compilador.Semantico.Arbol.Nodos
         public enum TipoComparacion
         {
             //Entero
-            Greater,
-            GreaterOrEquals,            
-            Less,
-            LessOrEquals,
-            //Natural
-            Above,
-            AboveOrEquals,
-            Below,
-            BelowOrEquals,
-            Equals,
-            NotEquals,
-            EqualZero,
-            NotEqualZero,
-            LessThanZero,
-            GreaterThanZero,
+            Mayor,
+            MayorIgual,            
+            Menor,
+            MenorIgual,            
+            Igual,
+            Distinto,            
             None
         }
 

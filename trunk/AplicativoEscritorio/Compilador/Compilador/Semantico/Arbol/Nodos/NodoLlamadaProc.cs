@@ -97,33 +97,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strbldr = new StringBuilder("\t");
 
-            strbldr.Append(GeneracionCodigoHelpers.GenerarComentario("------COMIENZO LLAMADAPROC-----"));
-
-            List<string> nombresParametros = this.TablaSimbolos.ObtenerParametros(this.Lexema);
-
-            strbldr.Append(this.hijosNodo[3].Codigo);
-            
-            for (int i = 0; i<this.ListaFirma.Count; i++)
-            {
-                string nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(nombresParametros[i], this.ContextoActual, this.nombreContextoLocal);
-
-                if (this.ListaFirma[i].Lexema == null || this.ListaFirma[i].Lexema.Equals(string.Empty))
-                {
-                    strbldr.Append(GeneracionCodigoHelpers.GenerarMovHaciaAx(this.ListaFirma[i].Valor.ToString()));                    
-                    strbldr.Append(GeneracionCodigoHelpers.GenerarMovDesdeAx(nombreContexto + nombresParametros[i]));
-                    //strbldr.Append(GeneracionCodigoHelpers.GenerarMov(nombresParametros[i], this.ListaFirma[i].Valor.ToString()));
-                }
-                else
-                {
-                    //strbldr.Append(GeneracionCodigoHelpers.GenerarMov(nombresParametros[i], this.ListaFirma[i].Lexema));
-                    strbldr.Append(GeneracionCodigoHelpers.GenerarMovHaciaAx(this.ListaFirma[i].Lexema));
-                    strbldr.Append(GeneracionCodigoHelpers.GenerarMovDesdeAx(nombreContexto + nombresParametros[i]));
-                }
-            }
-
-            strbldr.Append(GeneracionCodigoHelpers.GenerarCall(this.Lexema));
-
-            strbldr.Append(GeneracionCodigoHelpers.GenerarComentario("------FINAL LLAMADAPROC-----"));
+         
 
             this.Codigo = strbldr.ToString().Replace("\r\n", "\r\n\t").ToString().TrimEnd('\t');
         }

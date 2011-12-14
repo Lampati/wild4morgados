@@ -594,10 +594,10 @@
 			<Izq>EXPRBOOLEXTRA</Izq>
 			<Ders>
 				<Der>
-					<Expresion>and EXPRBOOL</Expresion>
+					<Expresion>and EXPRBOOL EXPRBOOLEXTRA</Expresion>
 				</Der>
 				<Der>
-					<Expresion>or EXPRBOOL</Expresion>
+					<Expresion>or EXPRBOOL EXPRBOOLEXTRA</Expresion>
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
@@ -760,11 +760,11 @@
 				<Der>
 					<Expresion>-</Expresion>
 				</Der>
-				
+				<!--
 				<Der>
 					<Expresion>or</Expresion>
 				</Der>
-				
+				-->
 				<Der>
 					<Expresion>&amp;</Expresion>
 				</Der>
@@ -784,10 +784,11 @@
 					<Expresion>/</Expresion>
 				</Der>
 				
+				<!--
 				<Der>
 					<Expresion>and</Expresion>
 				</Der>
-				
+				-->
 			</Ders>
 		</Produccion>
 		<!---->

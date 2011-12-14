@@ -130,64 +130,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            StringBuilder strBldr = new StringBuilder("\t");
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------COMIENZO ASIGNACION-----"));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------COMIENZO PARTEIZQ-----"));
-            strBldr.Append(this.hijosNodo[0].Codigo);
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------FINAL PARTEIZQ-----"));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------COMIENZO PARTEDER-----"));
-            string codigoHijo2 = this.hijosNodo[2].Codigo;
-
-            if (!String.IsNullOrEmpty(codigoHijo2))
-            {
-                strBldr.Append(GeneracionCodigoHelpers.GenerarPush("AX"));
-                strBldr.Append(this.hijosNodo[2].Codigo);
-                strBldr.Append(GeneracionCodigoHelpers.GenerarPop("AX"));
-            }
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------FINAL PARTEDER-----"));
-
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPush("Ax"));
-
-            if (this.hijosNodo[2].Lugar == null || this.hijosNodo[2].Lugar.Equals(string.Empty))
-            {
-                if (this.hijosNodo[0].EsArreglo)
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.AssignArray(this.hijosNodo[0].Lugar,this.hijosNodo[2].Valor.ToString()));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarPop("AX"));
-                }
-                else
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarMovHaciaAx(this.hijosNodo[2].Valor.ToString()));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarMovDesdeAx(this.hijosNodo[0].Lugar));
-                }
-
-
-            }
-            else
-            {
-                if (this.hijosNodo[0].EsArreglo)
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.AssignArray(this.hijosNodo[0].Lugar, this.hijosNodo[2].Lugar));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarPop("AX"));
-                }
-                else
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarMovHaciaAx(this.hijosNodo[2].Lugar));
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarMovDesdeAx(this.hijosNodo[0].Lugar));
-                }
-            }
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPop("Ax"));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------FINAL ASIGNACION-----"));
-
-
-            this.Codigo = strBldr.ToString().Replace("\r\n", "\r\n\t").ToString().TrimEnd('\t');
+            
 
         }
 
