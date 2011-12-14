@@ -125,22 +125,22 @@ namespace Compilador.Semantico.Arbol.Nodos
             switch (this.Lexema)
             {
                 case "=":
-                    this.Comparacion = TipoComparacion.Equals;
+                    this.Comparacion = TipoComparacion.Igual;
                     break;
-                case "!=":
-                    this.Comparacion = TipoComparacion.NotEquals;
+                case "<>":
+                    this.Comparacion = TipoComparacion.Distinto;
                     break;
                 case "<=":
-                    this.Comparacion = TipoComparacion.LessOrEquals;
+                    this.Comparacion = TipoComparacion.MenorIgual;
                     break;
                 case "<":
-                    this.Comparacion = TipoComparacion.Less;
+                    this.Comparacion = TipoComparacion.Menor;
                     break;
                 case ">=":
-                    this.Comparacion = TipoComparacion.GreaterOrEquals;
+                    this.Comparacion = TipoComparacion.MayorIgual;
                     break;
                 case ">":
-                    this.Comparacion = TipoComparacion.Greater;
+                    this.Comparacion = TipoComparacion.Mayor;
                     break;
                 default:
                     this.Comparacion = TipoComparacion.None;

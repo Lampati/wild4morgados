@@ -73,6 +73,8 @@ namespace Compilador.Sintactico
 
             tabla = this.gramatica.ArmarTablaAnalisis();
 
+            
+
             this.CargarAnalizadorLexicografico();
             
             cantElementosCadenaEntrada = Convert.ToInt32(ConfigurationSettings.AppSettings["cantElementosCadenaEntrada"].ToString());

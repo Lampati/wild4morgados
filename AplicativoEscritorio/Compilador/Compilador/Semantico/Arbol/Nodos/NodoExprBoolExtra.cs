@@ -46,7 +46,18 @@ namespace Compilador.Semantico.Arbol.Nodos
                 if (this.Lugar == null || this.Lugar.Equals(string.Empty))
                 {
                     this.Lugar = string.Copy(this.hijosNodo[1].Valor.ToString());
-                }                
+                }
+
+                if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
+                {
+                    StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
+                    strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
+                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                }
+            }
+            else
+            {
+                this.Operacion = TipoOperatoria.Ninguna;
             }
             
             return this;
@@ -70,18 +81,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             StringBuilder strBldr = new StringBuilder();
 
-            switch (this.Comparacion)
-            {
-                case TipoComparacion.None:
-                    strBldr.Append(this.hijosNodo[2].Codigo);
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarEsPar(this.Lugar));
-                    break;
-                default:
-                    strBldr.Append(this.hijosNodo[0].Codigo);
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                    strBldr.Append(GeneracionCodigoHelpers.ExprBool(this.Lugar, parte2));
-                    break;
-            }
+          
 
             this.Codigo = strBldr.ToString();
         }

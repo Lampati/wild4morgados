@@ -34,14 +34,16 @@ namespace Compilador.Semantico.Arbol.Nodos
             //    this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Entero);
             //}
             string nombreContexto;
-            if (this.EsArreglo)
-            {
-                nombreContexto = "Global";
-            }
-            else
-            {
-                nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
-            }
+            //if (this.EsArreglo)
+            //{
+            //    nombreContexto = "Global";
+            //}
+            //else
+            //{
+            //    nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
+            //}
+
+            nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
 
             this.Lugar = new StringBuilder(nombreContexto).Append(this.Lexema).ToString();
             

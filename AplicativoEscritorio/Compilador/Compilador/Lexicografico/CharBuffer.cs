@@ -50,7 +50,7 @@ namespace Compilador.Lexicografico
         {
             this.path = path;
 
-            this.fila = 1;
+            this.fila = 0;
             this.columna = 0;
             this.offsetArchivo = 0;
             this.charBufferMaxSize = Convert.ToInt32(ConfigurationSettings.AppSettings["capacidadBuffer"].ToString());

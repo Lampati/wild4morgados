@@ -79,26 +79,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            if (this.hijosNodo.Count > 1)
-            {
-                strBldr.Append(this.hijosNodo[1].Codigo);
-
-                if (this.EsArreglo)
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarPush("Cx"));
-
-                    if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                    {
-                        //this.Codigo = "uso el valor " + this.Valor.ToString() + "\r\n";
-                        strBldr.Append(GeneracionCodigoHelpers.GenerarMov("Cx", this.Valor.ToString()));
-                    }
-                    else
-                    {
-                        //this.Codigo = "obtengo el valor del temp: " + this.Lugar + "\r\n";
-                        strBldr.Append(GeneracionCodigoHelpers.GenerarMov("Cx", this.Lugar));
-                    } 
-                }              
-            }
+          
 
             this.Codigo = strBldr.ToString();
         }

@@ -31,14 +31,24 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (hijosNodo.Count > 1)
             {
                 this.TipoDato = this.hijosNodo[1].TipoDato;
-
-                this.Comparacion = this.hijosNodo[0].Comparacion;
+                this.Comparacion = this.hijosNodo[0].Comparacion;               
 
                 this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
 
                 if (this.Lugar == null || this.Lugar.Equals(string.Empty))
                 {
                     this.Lugar = string.Copy(this.hijosNodo[1].Valor.ToString());
+                }
+
+                if (!(this.Comparacion == TipoComparacion.Igual || this.Comparacion == TipoComparacion.Distinto))
+                {
+                    if (this.TipoDato != NodoTablaSimbolos.TipoDeDato.Numero)
+                    {
+                        StringBuilder strbldr = new StringBuilder("Los comparadores mayor, mayor igual, menor y menor igual ");
+                        strbldr.Append("solo pueden ser usados con expresiones del tipo numericas");
+                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    }
+
                 }
 
             }

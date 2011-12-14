@@ -133,64 +133,11 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            //StringBuilder strBldr = new StringBuilder();
-
-            //if (this.hijosNodo.Count > 1)
-            //{
-            //    strBldr.Append(this.hijosNodo[1].Codigo);
-            //    strBldr.Append(this.hijosNodo[2].Codigo);
-
-
-            //    if (this.hijosNodo[2].Operacion != TipoOperatoria.Ninguna)
-            //    {
-            //        switch (this.hijosNodo[2].Operacion)
-            //        {
-            //            case TipoOperatoria.Suma:
-            //                strBldr.Append(GeneracionCodigoHelpers.GenerarSuma(this.Lugar, this.hijosNodo[1].Lugar, this.hijosNodo[2].Lugar));
-            //                break;
-
-            //            case TipoOperatoria.Resta:
-            //                strBldr.Append(GeneracionCodigoHelpers.GenerarResta(this.Lugar, this.hijosNodo[1].Lugar, this.hijosNodo[2].Lugar));
-            //                break;
-            //        }
-            //    }
-            //}
-
-            //this.Codigo = strBldr.ToString();
+            
 
             StringBuilder strBldr = new StringBuilder();
 
-            if (this.hijosNodo.Count > 1)
-            {
-
-
-                if (this.hijosNodo[2].Operacion != TipoOperatoria.Ninguna)
-                {
-                    strBldr.Append(this.hijosNodo[2].ObtenerHijo(1).Codigo);
-
-                    //Para que no se le asigne null, en caso que sea un numero nomas.
-                    if (this.hijosNodo[2].ObtenerHijo(1).LugarMul == null || this.hijosNodo[2].ObtenerHijo(1).LugarMul == string.Empty)
-                    {
-                        this.hijosNodo[2].ObtenerHijo(1).LugarMul = this.hijosNodo[2].ObtenerHijo(1).Lugar;
-                    }
-
-
-                    switch (this.hijosNodo[2].Operacion)
-                    {
-                        case TipoOperatoria.Suma:
-                            strBldr.Append(GeneracionCodigoHelpers.GenerarSuma(this.LugarExp, this.hijosNodo[2].LugarExp, this.hijosNodo[2].ObtenerHijo(1).LugarMul));
-                            break;
-
-                        case TipoOperatoria.Resta:
-                            strBldr.Append(GeneracionCodigoHelpers.GenerarResta(this.LugarExp, this.hijosNodo[2].LugarExp, this.hijosNodo[2].ObtenerHijo(1).LugarMul));
-                            break;
-                    }
-                }
-
-                
-                strBldr.Append(this.hijosNodo[2].Codigo);
-            }
-
+           
             
 
             this.Codigo = strBldr.ToString();

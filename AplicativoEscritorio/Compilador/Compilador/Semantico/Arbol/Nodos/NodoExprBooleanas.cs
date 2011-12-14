@@ -33,14 +33,8 @@ namespace Compilador.Semantico.Arbol.Nodos
         {           
 
             //Si el tipo de dato de ExprBoolExtra es booleano, es pq tiene un and, o un or. Por ende, este tambien sera booleano.
-            if (this.hijosNodo[1].TipoDato == NodoTablaSimbolos.TipoDeDato.Booleano)
-            {
-                this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;
-            }
-            else
-            {
-                this.TipoDato = this.hijosNodo[0].TipoDato;
-            }
+            //Tambien le pongo que es ninguna el tipo de operatoria. Cualquiera de los dos sirve.
+            
 
             this.Comparacion = this.hijosNodo[1].Comparacion;
             this.Operacion = this.hijosNodo[1].Operacion;
@@ -51,6 +45,24 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 this.Lugar = string.Copy(this.hijosNodo[0].Valor.ToString());
             }
+
+            if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
+            {
+                this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;
+
+                if (this.hijosNodo[0].TipoDato != NodoTablaSimbolos.TipoDeDato.Booleano || this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
+                {
+                    StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
+                    strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
+                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                }
+            }
+            else
+            {
+                this.TipoDato = this.hijosNodo[0].TipoDato;
+            }
+
+            
             
             return this;
         }
@@ -81,24 +93,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            string parte2 = this.hijosNodo[1].Lugar;
-
-            StringBuilder strBldr = new StringBuilder();
-
-            switch (this.Comparacion)
-            {
-                case TipoComparacion.None:
-                    strBldr.Append(this.hijosNodo[2].Codigo);
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarEsPar(this.Lugar));
-                    break;
-                default:
-                    strBldr.Append(this.hijosNodo[0].Codigo);
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                    strBldr.Append(GeneracionCodigoHelpers.ExprBool(this.Lugar, parte2));
-                    break;
-            }
-
-            this.Codigo = strBldr.ToString();
+           
         }
     }
 }

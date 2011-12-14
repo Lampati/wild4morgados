@@ -40,49 +40,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            StringBuilder strBldr = new StringBuilder("\t");
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("------COMIENZO BLOQUEMIENTRAS-----"));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPush("Ax"));
-            CodeLabel auxLabel = ManagerLabels.Instance.CrearNuevoLabel("MientrasRetorno");
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarLabel(auxLabel.Nombre));
-
-            strBldr.Append(this.hijosNodo[1].Codigo);
-
-            if (this.hijosNodo[1].Comparacion == TipoComparacion.None)
-            {
-                if (((NodoExprBool)this.hijosNodo[1]).EsPar)
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarJump(this.LabelVerdadero.Nombre, TipoComparacion.EqualZero));
-                }
-                else
-                {
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarJump(this.LabelVerdadero.Nombre, TipoComparacion.NotEqualZero));
-                }
-
-            }
-            else
-            {
-                strBldr.Append(GeneracionCodigoHelpers.GenerarJump(this.LabelVerdadero.Nombre, this.hijosNodo[1].Comparacion));                
-            }
-            strBldr.Append(GeneracionCodigoHelpers.GenerarJumpIncondicional(this.LabelFalso.Nombre));
-
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarLabel(LabelVerdadero.Nombre));            
-            strBldr.Append(this.hijosNodo[3].Codigo);
-
-
-            
-            //strBldr.Append(GeneracionCodigoHelpers.GenerarLabel(LabelFin.Nombre));
-            strBldr.Append(GeneracionCodigoHelpers.GenerarJumpIncondicional(auxLabel.Nombre));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarLabel(LabelFalso.Nombre));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarPop("Ax"));
-
-            strBldr.Append(GeneracionCodigoHelpers.GenerarComentario("-------FINAL BLOQUEMIENTRAS------"));
+            StringBuilder strBldr = new StringBuilder("\t");           
 
             this.Codigo = strBldr.ToString().Replace("\r\n", "\r\n\t").ToString().TrimEnd('\t');
         }

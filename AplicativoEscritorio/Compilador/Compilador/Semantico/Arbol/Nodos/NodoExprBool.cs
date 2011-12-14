@@ -52,27 +52,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 this.TipoDato = this.hijosNodo[0].TipoDato;
 
-                this.Comparacion = this.hijosNodo[1].Comparacion;
-
-                if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                {
-                    switch (this.Comparacion)
-                    {
-                        case TipoComparacion.Greater:
-                            this.Comparacion = TipoComparacion.Above;
-                            break;
-                        case TipoComparacion.GreaterOrEquals:
-                            this.Comparacion = TipoComparacion.AboveOrEquals;
-                            break;
-                        case TipoComparacion.Less:
-                            this.Comparacion = TipoComparacion.Below;
-                            break;
-                        case TipoComparacion.LessOrEquals:
-                            this.Comparacion = TipoComparacion.BelowOrEquals;
-                            break;
-                    }
-
-                }
+                this.Comparacion = this.hijosNodo[1].Comparacion;                
 
 
                 this.Lugar = string.Copy(this.hijosNodo[0].Lugar);
@@ -128,18 +108,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             StringBuilder strBldr = new StringBuilder();
 
-            switch (this.Comparacion)
-            {
-                case TipoComparacion.None:
-                    strBldr.Append(this.hijosNodo[2].Codigo);
-                    strBldr.Append(GeneracionCodigoHelpers.GenerarEsPar(this.Lugar));
-                    break;
-                default:
-                    strBldr.Append(this.hijosNodo[0].Codigo);
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                    strBldr.Append(GeneracionCodigoHelpers.ExprBool(this.Lugar, parte2));
-                    break;
-            }
+           
 
             this.Codigo = strBldr.ToString();
         }

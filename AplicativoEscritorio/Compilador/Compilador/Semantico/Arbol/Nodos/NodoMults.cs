@@ -115,88 +115,12 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            //StringBuilder strBldr = new StringBuilder();
-
-            //strBldr.Append(this.hijosNodo[0].Codigo);
-            //strBldr.Append(this.hijosNodo[1].Codigo);
-
-            //if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
-            //{
-            //    switch (this.hijosNodo[1].Operacion)
-            //    {
-            //        case TipoOperatoria.Multiplicacion:
-            //            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
-            //            {
-            //                strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacion(this.Lugar, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-            //            }
-            //            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
-            //            {
-            //                strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacionNatural(this.Lugar, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-            //            }
-            //            break;
-
-            //        case TipoOperatoria.Division:
-            //            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Entero)
-            //            {
-            //                strBldr.Append(GeneracionCodigoHelpers.GenerarDivision(this.Lugar, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-            //            }
-            //            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Natural)
-            //            {
-            //                strBldr.Append(GeneracionCodigoHelpers.GenerarDivisionNatural(this.Lugar, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-            //            }
-            //            break;
-            //    }
-            //}
-
-            //this.Codigo = strBldr.ToString();
+           
 
 
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.Append(this.hijosNodo[0].Codigo);
-
-            if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
-            {
-                if (this.hijosNodo[1].ObtenerHijo(1).EsOtraExpresion)
-                {
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                }
-
-                switch (this.hijosNodo[1].Operacion)
-                {
-                    case TipoOperatoria.Multiplicacion:
-                        if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                        {
-                            strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacion(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-                        }
-                        else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                        {
-                            strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacionNatural(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-                        }
-                        break;
-
-                    case TipoOperatoria.Division:
-                        if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                        {
-                            strBldr.Append(GeneracionCodigoHelpers.GenerarDivision(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-                        }
-                        else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                        {
-                            strBldr.Append(GeneracionCodigoHelpers.GenerarDivisionNatural(this.LugarMul, this.hijosNodo[0].Lugar, this.hijosNodo[1].Lugar));
-                        }
-                        break;
-                }
-
-                if (!this.hijosNodo[1].ObtenerHijo(1).EsOtraExpresion)
-                {
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                }
-            }
-            else
-            {
-                strBldr.Append(this.hijosNodo[1].Codigo);
-            }
-            
+           
 
             
 

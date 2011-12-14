@@ -11,6 +11,8 @@ namespace Compilador.Semantico
             : base(desc, f, c)
         {
             this.Tipo = "Semantico";
+
+           
         }
     }
 }

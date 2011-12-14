@@ -146,8 +146,8 @@ namespace Compilador.Semantico.TablaDeSimbolos
                 delegate(NodoTablaSimbolos _nodo)
                 {
                     return (_nodo.Nombre.Equals(nombre) &&
-                        ((_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable) || (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro)) &&
-                        (_nodo.EsArreglo == false) 
+                        ((_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable) || (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro)) 
+                        //&& (_nodo.EsArreglo == false) 
                         );
                 }
                 );

@@ -144,48 +144,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             StringBuilder strBldr = new StringBuilder();
 
-            if (this.hijosNodo.Count > 1)
-            {
-
-                if (this.hijosNodo[1].EsOtraExpresion)
-                {
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                }
-
-                if (this.hijosNodo[2].Operacion != TipoOperatoria.Ninguna)
-                {
-                    switch (this.hijosNodo[2].Operacion)
-                    {
-                        case TipoOperatoria.Multiplicacion:
-                            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                            {
-                                strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacion(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
-                            }
-                            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                            {
-                                strBldr.Append(GeneracionCodigoHelpers.GenerarMultiplicacionNatural(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
-                            }
-                            break;
-
-                        case TipoOperatoria.Division:
-                            if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                            {
-                                strBldr.Append(GeneracionCodigoHelpers.GenerarDivision(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
-                            }
-                            else if (this.TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
-                            {
-                                strBldr.Append(GeneracionCodigoHelpers.GenerarDivisionNatural(this.LugarMul, this.hijosNodo[2].LugarMul, this.hijosNodo[2].Lugar));
-                            }
-                            break;
-                    }
-                }
-
-                if (!this.hijosNodo[1].EsOtraExpresion)
-                {
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                }
-                strBldr.Append(this.hijosNodo[2].Codigo);
-            }
+            
 
             this.Codigo = strBldr.ToString();
         }
