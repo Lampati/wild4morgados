@@ -266,7 +266,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1028, 746);
+            this.tabControl1.Size = new System.Drawing.Size(1028, 853);
             this.tabControl1.TabIndex = 14;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -308,14 +308,14 @@
             this.tabPageSintactico.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageSintactico.Name = "tabPageSintactico";
             this.tabPageSintactico.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageSintactico.Size = new System.Drawing.Size(1020, 717);
+            this.tabPageSintactico.Size = new System.Drawing.Size(1020, 824);
             this.tabPageSintactico.TabIndex = 1;
             this.tabPageSintactico.Text = "Sintactico";
             this.tabPageSintactico.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(376, 518);
+            this.button3.Location = new System.Drawing.Point(365, 387);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(164, 29);
             this.button3.TabIndex = 4;
@@ -325,7 +325,7 @@
             // 
             // buttonAnalizadorSintacticoTODO
             // 
-            this.buttonAnalizadorSintacticoTODO.Location = new System.Drawing.Point(547, 519);
+            this.buttonAnalizadorSintacticoTODO.Location = new System.Drawing.Point(536, 388);
             this.buttonAnalizadorSintacticoTODO.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAnalizadorSintacticoTODO.Name = "buttonAnalizadorSintacticoTODO";
             this.buttonAnalizadorSintacticoTODO.Size = new System.Drawing.Size(152, 28);
@@ -336,7 +336,7 @@
             // 
             // buttonAnalizadorSintactico
             // 
-            this.buttonAnalizadorSintactico.Location = new System.Drawing.Point(217, 519);
+            this.buttonAnalizadorSintactico.Location = new System.Drawing.Point(206, 388);
             this.buttonAnalizadorSintactico.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAnalizadorSintactico.Name = "buttonAnalizadorSintactico";
             this.buttonAnalizadorSintactico.Size = new System.Drawing.Size(152, 28);
@@ -354,12 +354,12 @@
             this.TipoError,
             this.DescripcionError});
             this.dataGridViewErrores.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridViewErrores.Location = new System.Drawing.Point(4, 547);
+            this.dataGridViewErrores.Location = new System.Drawing.Point(4, 424);
             this.dataGridViewErrores.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewErrores.Name = "dataGridViewErrores";
             this.dataGridViewErrores.RowHeadersVisible = false;
             this.dataGridViewErrores.RowTemplate.Height = 24;
-            this.dataGridViewErrores.Size = new System.Drawing.Size(1012, 166);
+            this.dataGridViewErrores.Size = new System.Drawing.Size(1012, 396);
             this.dataGridViewErrores.TabIndex = 1;
             // 
             // FilaError
@@ -397,13 +397,13 @@
             this.dataGridViewSintactico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Pila,
             this.CadenaTexto});
-            this.dataGridViewSintactico.Location = new System.Drawing.Point(29, 21);
+            this.dataGridViewSintactico.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewSintactico.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewSintactico.Name = "dataGridViewSintactico";
             this.dataGridViewSintactico.ReadOnly = true;
             this.dataGridViewSintactico.RowHeadersVisible = false;
             this.dataGridViewSintactico.RowTemplate.Height = 24;
-            this.dataGridViewSintactico.Size = new System.Drawing.Size(837, 490);
+            this.dataGridViewSintactico.Size = new System.Drawing.Size(837, 380);
             this.dataGridViewSintactico.TabIndex = 0;
             // 
             // Pila
@@ -501,7 +501,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 746);
+            this.ClientSize = new System.Drawing.Size(1028, 853);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Compilador";

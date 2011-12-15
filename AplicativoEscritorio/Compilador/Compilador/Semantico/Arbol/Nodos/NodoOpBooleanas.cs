@@ -6,9 +6,9 @@ using Compilador.Sintactico.Gramatica;
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
-    class NodoOpSumRes : NodoArbolSemantico
+    class NodoOpBooleanas : NodoArbolSemantico
     {
-        public NodoOpSumRes(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
+        public NodoOpBooleanas(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
             
@@ -25,20 +25,13 @@ namespace Compilador.Semantico.Arbol.Nodos
             this.TipoDato = hijoASintetizar.TipoDato;
             switch (hijoASintetizar.Lexema)
             {
-                case "+":
-                case "++":
-                    this.Operacion = TipoOperatoria.Suma;
+                case "and":
+                    this.Operacion = TipoOperatoria.And;
                     break;
 
-                case "-":
-                case "--":
-                    this.Operacion = TipoOperatoria.Resta;
+                case "or":
+                    this.Operacion = TipoOperatoria.Or;
                     break;
-
-                case "&":
-                    this.Operacion = TipoOperatoria.Concatenacion;
-                    break;
-
             }
 
         }

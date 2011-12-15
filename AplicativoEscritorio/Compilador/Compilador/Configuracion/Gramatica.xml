@@ -65,6 +65,7 @@
 		<NoTerminal>BOOL</NoTerminal>
 		<NoTerminal>MAXARREGLODEC</NoTerminal>
 		<NoTerminal>VALORCONST</NoTerminal>
+		<NoTerminal>OPBOOLEANAS</NoTerminal>
 		
 	</NoTerminales>
 	
@@ -404,6 +405,9 @@
 				<Der>
 					<Expresion>LINEA BLQ</Expresion>
 				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
 			</Ders>
 		</Produccion>
 		<Produccion>
@@ -462,7 +466,7 @@
 			<Izq>IDASIGN</Izq>
 			<Ders>
 				<Der>
-					<Expresion>[ EXPR ]</Expresion>
+					<Expresion>[ EXPRBOOLEANAS ]</Expresion>
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
@@ -482,7 +486,7 @@
 			<Izq>EXPRPROCED</Izq>
 			<Ders>
 				<Der>
-					<Expresion>EXPR EXPRPROC</Expresion>
+					<Expresion>EXPRBOOLEANAS EXPRPROC</Expresion>
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
@@ -493,7 +497,7 @@
 			<Izq>EXPRPROC</Izq>
 			<Ders>
 				<Der>
-					<Expresion>, EXPR EXPRPROC</Expresion>
+					<Expresion>, EXPRBOOLEANAS EXPRPROC</Expresion>
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
@@ -544,7 +548,7 @@
 					<Expresion>literal</Expresion>
 				</Der>
 				<Der>
-					<Expresion>EXPR</Expresion>
+					<Expresion>EXPRBOOLEANAS</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>
@@ -594,10 +598,10 @@
 			<Izq>EXPRBOOLEXTRA</Izq>
 			<Ders>
 				<Der>
-					<Expresion>and EXPRBOOL EXPRBOOLEXTRA</Expresion>
+					<Expresion>OPBOOLEANAS EXPRBOOL EXPRBOOLEXTRA</Expresion>
 				</Der>
 				<Der>
-					<Expresion>or EXPRBOOL EXPRBOOLEXTRA</Expresion>
+					<Expresion>OPBOOLEANAS EXPRBOOL EXPRBOOLEXTRA</Expresion>
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
@@ -739,7 +743,7 @@
 			<Izq>Y</Izq>
 			<Ders>
 				<Der>
-					<Expresion>[ EXPR ]</Expresion>
+					<Expresion>[ EXPRBOOLEANAS ]</Expresion>
 				</Der>
 				<Der>
 					<Expresion>( EXPRPROCED )</Expresion>
@@ -782,6 +786,24 @@
 				
 				<Der>
 					<Expresion>/</Expresion>
+				</Der>
+				
+				<!--
+				<Der>
+					<Expresion>and</Expresion>
+				</Der>
+				-->
+			</Ders>
+		</Produccion>
+		<Produccion>
+			<Izq>OPBOOLEANAS</Izq>
+			<Ders>
+				<Der>
+					<Expresion>and</Expresion>
+				</Der>
+				
+				<Der>
+					<Expresion>or</Expresion>
 				</Der>
 				
 				<!--

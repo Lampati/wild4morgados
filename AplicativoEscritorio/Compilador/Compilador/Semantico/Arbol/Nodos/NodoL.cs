@@ -41,7 +41,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 else
                 {
                     this.Lugar = this.hijosNodo[0].Lugar;
-                }
+                }                
             }
 
             this.ListaElementosVisualizar.Add(string.Copy(this.Lugar));

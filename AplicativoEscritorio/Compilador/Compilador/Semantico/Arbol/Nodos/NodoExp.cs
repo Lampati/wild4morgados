@@ -27,9 +27,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             //Por defecto uso el tipo del primer hijo para asignar el tipo de este nodo.
 
             if (this.hijosNodo.Count > 1)
-            {
-                int valor1 = this.hijosNodo[1].Valor;
-                int valor2 = this.hijosNodo[2].Valor;
+            {             
                 TipoOperatoria operacion = this.hijosNodo[2].Operacion;
 
                 this.Operacion = this.hijosNodo[0].Operacion;
@@ -37,18 +35,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.TipoDato = this.hijosNodo[0].TipoDato;
 
                 if (operacion != TipoOperatoria.Ninguna)
-                {
-
-                    switch (operacion)
-                    {
-                        case TipoOperatoria.Suma:
-                            this.Valor = valor1 + valor2;
-                            break;
-
-                        case TipoOperatoria.Resta:
-                            this.Valor = valor1 - valor2;
-                            break;
-                    }
+                {                   
 
                     //this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
                     //this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, this.TipoDato);
@@ -59,7 +46,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    this.Valor = valor1;
+                    
 
                     this.Lexema = this.hijosNodo[0].Lexema;
                     this.Temporal = this.hijosNodo[0].Temporal;
