@@ -58,8 +58,8 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Numero)
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("El subindice del arreglo debe ser natural.").ToString(),
-                    t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(new StringBuilder("El indice del arreglo debe ser un numero.").ToString(),
+                      t.Componente.Fila, t.Componente.Columna);
                 }
             }
         }

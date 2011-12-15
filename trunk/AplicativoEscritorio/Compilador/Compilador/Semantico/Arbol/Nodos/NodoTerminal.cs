@@ -89,7 +89,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 case ComponenteLexico.TokenType.And:
                     return NodoTablaSimbolos.TipoDeDato.Booleano;
-
                 case ComponenteLexico.TokenType.Or:
                     return NodoTablaSimbolos.TipoDeDato.Booleano;
 

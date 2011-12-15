@@ -110,6 +110,7 @@
     <Compile Include="Semantico\Arbol\Labels\ManagerLabels.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoOpBooleanas.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoValorConst.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoMaxArregloDec.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoExprBooleanas.cs" />
