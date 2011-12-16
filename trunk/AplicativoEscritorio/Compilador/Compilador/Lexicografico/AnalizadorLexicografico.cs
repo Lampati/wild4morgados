@@ -88,6 +88,7 @@ namespace Compilador.Lexicografico
                                 {
                                     componente.Token = this.afd.EstadoActual.Token;
                                     componente.Fila = this.charBuffer.Fila;
+                                    //componente.Fila = this.charBuffer.FilaUltChar;
                                     componente.Columna = this.charBuffer.Columna - componente.Lexema.Length;
 
                                     this.afd.ResetearAFD();
@@ -110,6 +111,7 @@ namespace Compilador.Lexicografico
                                 //el lexema no pertenecia a ningun token si el afd no termino en un estado final.
                                 componente.Token = ComponenteLexico.TokenType.Error;
                                 componente.Fila = this.charBuffer.Fila;
+                                //componente.Fila = this.charBuffer.FilaUltChar;
                                 componente.Columna = this.charBuffer.Columna - componente.Lexema.Length;
                                 componente.Descripcion = "'"+componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
                                 this.afd.ResetearAFD();
@@ -135,6 +137,7 @@ namespace Compilador.Lexicografico
                             //El primer caracter leido no servia para formar ningun lexema
                             componente.Token = ComponenteLexico.TokenType.Error;
                             componente.Fila = this.charBuffer.Fila;
+                            //componente.Fila = this.charBuffer.FilaUltChar;
                             componente.Columna = this.charBuffer.Columna - componente.Lexema.Length;
                             componente.Descripcion = "'" + componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
                             this.afd.ResetearAFD();
@@ -146,6 +149,7 @@ namespace Compilador.Lexicografico
 
             //Se devuelve EOF si no se hizo retorno dentro del while.
             componente.Fila = this.charBuffer.Fila;
+            //componente.Fila = this.charBuffer.FilaUltChar;
             componente.Columna = this.charBuffer.Columna;
             componente.Token = ComponenteLexico.TokenType.EOF;
             componente.Lexema = "$";

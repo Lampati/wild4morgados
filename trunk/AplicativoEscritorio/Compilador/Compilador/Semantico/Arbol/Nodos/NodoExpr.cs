@@ -97,7 +97,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 if (tipo1 != tipo2)
                 {
                     StringBuilder strbldr = new StringBuilder("Se esta intentando operar con distintos tipos");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
         }

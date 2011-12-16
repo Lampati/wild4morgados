@@ -59,6 +59,7 @@
     <Compile Include="ErrorCompilacionException.cs" />
     <Compile Include="ErrorCompiladorEventArgs.cs" />
     <Compile Include="GeneracionCodigoHelpers.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicografico.cs" />
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\CharHelper.cs" />

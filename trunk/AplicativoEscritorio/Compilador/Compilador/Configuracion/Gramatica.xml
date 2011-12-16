@@ -60,7 +60,7 @@
 		<NoTerminal>IDSOLO</NoTerminal>		
 		<NoTerminal>IDPROC</NoTerminal>	
 		<NoTerminal>TIPODATOCONARREGLO</NoTerminal>	
-		<NoTerminal>PROCPRINCIPAL</NoTerminal>	
+		
 		<NoTerminal>TEXTO</NoTerminal>
 		<NoTerminal>BOOL</NoTerminal>
 		<NoTerminal>MAXARREGLODEC</NoTerminal>
@@ -100,6 +100,10 @@
 		<Produccion>
 			<Izq>CONSTANTES</Izq>
 			<Ders>
+				<Der>
+					<Expresion>var VARS ; CONSTANTES</Expresion>
+	
+				</Der>
 				<Der>
 					<Expresion>const CONSTS ; CONSTANTES</Expresion>
 					
@@ -146,6 +150,10 @@
 				<Der>
 					<Expresion>var VARS ; VARIABLES</Expresion>
 	
+				</Der>
+				<Der>
+					<Expresion>const CONSTS ; VARIABLES</Expresion>
+					
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
@@ -322,14 +330,6 @@
 				</Der>
 				<Der>
 					<Expresion>funcion IDSOLO ( FIRMA ) : TIPODATO DECLARACIONES comenzar BLOQUE finfunc EXPRBOOLEANAS ;</Expresion>
-				</Der>
-			</Ders>
-		</Produccion>
-		<Produccion>
-			<Izq>PROCPRINCIPAL</Izq>
-			<Ders>
-				<Der>
-					<Expresion>procedimiento principal ( ) ; DECLARACIONES comenzar BLOQUE finproc ;</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>

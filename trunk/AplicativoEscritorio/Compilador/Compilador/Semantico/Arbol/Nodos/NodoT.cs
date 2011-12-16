@@ -44,7 +44,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     if (this.hijosNodo[2].TipoDato != TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano)
                     {                       
-                        throw new ErrorSemanticoException("Unicamente se pueden negar expresiones booleanas", t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException("Unicamente se pueden negar expresiones booleanas");
                     }
                 }
                 else

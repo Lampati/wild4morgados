@@ -52,7 +52,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
                     strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
             else

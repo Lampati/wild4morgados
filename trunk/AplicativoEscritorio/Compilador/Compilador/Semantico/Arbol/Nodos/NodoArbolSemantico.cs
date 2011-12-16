@@ -41,6 +41,14 @@ namespace Compilador.Semantico.Arbol.Nodos
             None
         }
 
+        public enum TipoDeclaracionesPermitidas
+        {
+            //Entero
+            Variables,
+            Constantes,
+            Ninguno
+        }
+
     
 
         public TablaSimbolos TablaSimbolos { get; set; }
@@ -63,6 +71,9 @@ namespace Compilador.Semantico.Arbol.Nodos
         public TipoOperatoria Operacion { get; set; }
         public string TextoParaImprimirArbol { get; set; }
 
+        public bool EsProcSalida { get; set; }
+
+        public TipoDeclaracionesPermitidas DeclaracionesPermitidas { get; set; }
 
         //Entrega 4
 
@@ -181,6 +192,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             //Sintetizados
             this.Valor = int.MinValue;
             this.TipoDato = NodoTablaSimbolos.TipoDeDato.Ninguno;
+            this.Comparacion = TipoComparacion.None;
             
             this.EsFuncion = false;
             this.EsArreglo = false;
@@ -193,6 +205,8 @@ namespace Compilador.Semantico.Arbol.Nodos
             this.ListaElementosVisualizar = new List<string>();
 
             //Heredados
+            this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Ninguno;
+            this.EsProcSalida = false;
 
             if (nodoPadre != null)
             {
@@ -204,6 +218,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.ProcPrincipalCrearUnaVez = nodoPadre.ProcPrincipalCrearUnaVez;
                 this.ProcSalidaYaCreadoyCorrecto = nodoPadre.ProcSalidaYaCreadoyCorrecto;
                 this.ProcSalidaCrearUnaVez = nodoPadre.ProcSalidaCrearUnaVez;
+                this.DeclaracionesPermitidas = nodoPadre.DeclaracionesPermitidas;
+                this.EsProcSalida = nodoPadre.EsProcSalida;
             }
         }
 

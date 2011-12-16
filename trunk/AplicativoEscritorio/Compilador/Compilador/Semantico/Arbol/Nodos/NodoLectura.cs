@@ -55,7 +55,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     else
                     {
                         strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como una constante, no puede modificarse su valor.");
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
                     
                     //else
@@ -68,7 +68,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 else
                 {
                     strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
             else
@@ -107,7 +107,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 else
                 {
                     strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
 
