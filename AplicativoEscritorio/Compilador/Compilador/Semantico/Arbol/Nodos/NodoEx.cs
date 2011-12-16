@@ -46,7 +46,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {
                         StringBuilder strbldr = new StringBuilder("Los comparadores mayor, mayor igual, menor y menor igual ");
                         strbldr.Append("solo pueden ser usados con expresiones del tipo numericas");
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
 
                 }

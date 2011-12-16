@@ -20,29 +20,35 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             string nombre = this.hijosNodo[0].Lexema;
             NodoTablaSimbolos.TipoDeDato tipo = this.hijosNodo[2].TipoDato;
-            int valor = this.hijosNodo[4].Valor;                       
+            int valor = this.hijosNodo[4].Valor;
 
-            if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.nombreContextoLocal))
+            if (this.DeclaracionesPermitidas == TipoDeclaracionesPermitidas.Constantes)
             {
-                if (tipo != this.hijosNodo[4].TipoDato)
+
+                if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.nombreContextoLocal))
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("Se intento asignar un tipo invalido a ").Append(nombre).ToString(),
-                        t.Componente.Fila, t.Componente.Columna);
+                    if (tipo != this.hijosNodo[4].TipoDato)
+                    {
+                        throw new ErrorSemanticoException(new StringBuilder("Se intento asignar un tipo invalido a ").Append(nombre).ToString());
+                    }
+
+                    this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal, valor);
+
+                    StringBuilder textoParaArbol = new StringBuilder().Append("Declaracion de constante ").Append(nombre).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
+                    textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
+                    textoParaArbol.Append(" con valor ").Append(valor.ToString());
+
+                    this.TextoParaImprimirArbol = textoParaArbol.ToString();
+
                 }
-
-                this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal, valor);
-
-                StringBuilder textoParaArbol = new StringBuilder().Append("Declaracion de constante ").Append(nombre).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
-                textoParaArbol.Append(" con valor ").Append(valor.ToString());
-
-                this.TextoParaImprimirArbol = textoParaArbol.ToString();
-            
+                else
+                {
+                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(nombre).Append(" ya existia en ese contexto").ToString());
+                }
             }
             else
-            {                
-                throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(nombre).Append(" ya existia en ese contexto").ToString(),
-                    t.Componente.Fila,t.Componente.Columna);
+            {
+                throw new ErrorSemanticoException(new StringBuilder("No se permiten declarar constantes aqui. Las constantes deben ser creadas en el contexto global, al principio del programa").ToString());
             }
 
             return this;

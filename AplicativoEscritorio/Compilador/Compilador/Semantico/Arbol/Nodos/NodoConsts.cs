@@ -11,7 +11,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public NodoConsts(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
-
+            
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)

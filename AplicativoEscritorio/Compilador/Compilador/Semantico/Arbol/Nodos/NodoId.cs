@@ -96,20 +96,20 @@ namespace Compilador.Semantico.Arbol.Nodos
                             {
                                 strbldr = new StringBuilder("El parametro ").Append(listaFirmaComparar[i - 1].Lexema).Append(" pasado a la funcion ");
                                 strbldr.Append(nombre).Append(" es de tipo incorrecto.");
-                                throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                                throw new ErrorSemanticoException(strbldr.ToString());
                             }
                             
                         }
                         else
                         {
                             strbldr = new StringBuilder("La cantidad de parametros para la funcion ").Append(nombre).Append(" es incorrecta.");
-                            throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                            throw new ErrorSemanticoException(strbldr.ToString());
                         }
                     }
                     else
                     {
                         strbldr = new StringBuilder("La funcion ").Append(nombre).Append(" no esta declarada.");
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
 
                 }
@@ -136,7 +136,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     else
                     {
                         strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
                 }
                 else
@@ -161,7 +161,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     else
                     {
                         strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
                 }
             }

@@ -23,44 +23,48 @@ namespace Compilador.Semantico.Arbol.Nodos
             NodoTablaSimbolos.TipoDeDato tipo = this.hijosNodo[2].TipoDato;
 
             StringBuilder textoParaArbol = new StringBuilder();
-         
-          
-            foreach(Variable v in variables)
+
+            if (DeclaracionesPermitidas == TipoDeclaracionesPermitidas.Variables)
             {
-                if (!this.hijosNodo[2].EsArreglo)
-                //if (!v.EsArreglo)
-                {
-                    if (!this.TablaSimbolos.ExisteVariable(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
-                    {
-                        this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal);
-                        textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                        textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
 
+                foreach (Variable v in variables)
+                {
+                    if (!this.hijosNodo[2].EsArreglo)
+                    //if (!v.EsArreglo)
+                    {
+                        if (!this.TablaSimbolos.ExisteVariable(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
+                        {
+                            this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal);
+                            textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
+                            textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
+
+                        }
+                        else
+                        {
+                            throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(v.Lexema).Append(" ya existia en ese contexto").ToString());
+                        }
                     }
                     else
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(v.Lexema).Append(" ya existia en ese contexto").ToString(),
-                            t.Componente.Fila, t.Componente.Columna);
-                    }
-                }
-                else
-                {
 
-                    if (!this.TablaSimbolos.ExisteArreglo(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
-                    {
-                        this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.nombreContextoLocal, v.IndiceArreglo, false);
-                        textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                        textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
-                        textoParaArbol.Append(" de ").Append(v.IndiceArreglo.ToString()).Append(" posiciones.");
+                        if (!this.TablaSimbolos.ExisteArreglo(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
+                        {
+                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.nombreContextoLocal, v.IndiceArreglo, false);
+                            textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
+                            textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
+                            textoParaArbol.Append(" de ").Append(v.IndiceArreglo.ToString()).Append(" posiciones.");
+                        }
+                        else
+                        {
+                            throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString());
+                        }
                     }
-                    else
-                    {
-                        throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString(),
-                            t.Componente.Fila, t.Componente.Columna);
-                    }          
                 }
             }
-
+            else
+            {
+                throw new ErrorSemanticoException(new StringBuilder("No se permiten declarar variables aqui. Las variables deben ser creadas en el contexto global al principio del programa o en la zona de declaraciones de un procedimiento o funcion").ToString());
+            }
             this.TextoParaImprimirArbol = textoParaArbol.ToString();
 
             return this;

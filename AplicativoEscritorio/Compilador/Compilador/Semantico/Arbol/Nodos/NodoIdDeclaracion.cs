@@ -36,13 +36,11 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             if (this.TablaSimbolos.ExisteVariable(this.VariablesACrear[0].Lexema, this.ContextoActual, this.nombreContextoLocal))
             {
-                throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(this.VariablesACrear[0].Lexema).Append(" ya existia en ese contexto").ToString(),
-                    t.Componente.Fila, t.Componente.Columna);
+                throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(this.VariablesACrear[0].Lexema).Append(" ya existia en ese contexto").ToString());
             }
             if (this.VariablesACrear[0].EsArreglo && this.ContextoActual != NodoTablaSimbolos.TipoContexto.Global)
             {
-                throw new ErrorSemanticoException(new StringBuilder("No se pueden crear arreglos fuera del contexto global.").ToString(),
-                        t.Componente.Fila, t.Componente.Columna);
+                throw new ErrorSemanticoException(new StringBuilder("No se pueden crear arreglos fuera del contexto global.").ToString());
             }  
         }
 

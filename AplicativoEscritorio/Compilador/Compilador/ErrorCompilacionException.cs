@@ -18,5 +18,10 @@ namespace Compilador
             this.Columna = c;
             this.Descripcion = desc;
         }
+
+        public ErrorCompilacionException(string desc)
+        {          
+            this.Descripcion = desc;
+        }
     }
 }

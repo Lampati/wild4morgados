@@ -4,6 +4,7 @@ const constanteTexto : texto = 'hola';
 const constanteBooleana : booleano = verdadero;
 const MaxArreglo : numero = 10;
 
+
 variables
 
 var vNumero,vNumero2 : numero;
@@ -58,7 +59,7 @@ finfunc A[1] > 10 and A[2] < 20 or C[1] ;
 
 {intento declarar 2 veces la misma variable}
 {intento declarar 2 veces la misma variable pero distinto tipo}
-{
+
 procedimiento ASIGNACIONES_INCORRECTAS_LOCALES()
 
 var A,A : numero;
@@ -99,8 +100,8 @@ comenzar
   
 finproc;
 
-}
 
+{
 procedimiento ASIGNACIONES_CORRECTAS_GLOBALES()
 
 
@@ -448,6 +449,8 @@ finsi;
 
 finproc;
 
+
+}
 procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
 var I : numero;
 comenzar

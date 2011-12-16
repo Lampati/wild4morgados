@@ -22,8 +22,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (listaFirmas.Count != new List<Firma>(listaFirmas.Distinct()).Count)
             {
-                throw new ErrorSemanticoException(new StringBuilder("Existen parametros con el mismo nombre").ToString(),
-                    t.Componente.Fila, t.Componente.Columna);
+                throw new ErrorSemanticoException(new StringBuilder("Existen parametros con el mismo nombre").ToString());
             }
 
             foreach (Firma f in listaFirmas)

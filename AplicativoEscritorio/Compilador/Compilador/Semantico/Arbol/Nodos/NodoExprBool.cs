@@ -82,7 +82,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {
                         strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
                         strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
                     else
                     {

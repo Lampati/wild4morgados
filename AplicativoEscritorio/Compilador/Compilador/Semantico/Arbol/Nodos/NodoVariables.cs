@@ -12,6 +12,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             : base(nodoPadre,elem)
         {
             this.EsConstante = false;
+            this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Variables;
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)

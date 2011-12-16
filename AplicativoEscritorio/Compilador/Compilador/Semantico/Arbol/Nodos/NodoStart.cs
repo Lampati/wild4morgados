@@ -34,13 +34,13 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (!this.ProcPrincipalYaCreadoyCorrecto)
             {
                 StringBuilder strbldr = new StringBuilder("Error en el procedimiento principal: Debe haber unicamente un procedimiento principal y debe ser el ultimo.");
-                throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                throw new ErrorSemanticoException(strbldr.ToString());
             }
 
             if (!this.ProcSalidaYaCreadoyCorrecto)
             {
                 StringBuilder strbldr = new StringBuilder("Error en el procedimiento salida: Debe haber unicamente un procedimiento salida");
-                throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                throw new ErrorSemanticoException(strbldr.ToString());
             }
         }
 

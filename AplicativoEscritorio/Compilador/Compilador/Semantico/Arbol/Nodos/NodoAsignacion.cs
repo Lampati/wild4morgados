@@ -55,20 +55,20 @@ namespace Compilador.Semantico.Arbol.Nodos
                         else
                         {
                             strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como una constante, no puede modificarse su valor.");
-                            throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                            throw new ErrorSemanticoException(strbldr.ToString());
                         }
                     }
                     else
                     {
                         strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
                         strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoExp));
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
                 }
                 else
                 {
                     strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
             else
@@ -92,7 +92,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                         {
                             strbldr = new StringBuilder("El arreglo ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
                             strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoExp));
-                            throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                            throw new ErrorSemanticoException(strbldr.ToString());
                         }
                     //}
                     //else
@@ -105,7 +105,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 else
                 {
                     strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
 

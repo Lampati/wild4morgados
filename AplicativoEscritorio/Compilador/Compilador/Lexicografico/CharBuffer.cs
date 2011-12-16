@@ -15,6 +15,12 @@ namespace Compilador.Lexicografico
             get { return fila; }            
         }
 
+        private int filaUltChar;
+        public int FilaUltChar
+        {
+            get { return filaUltChar; }
+        }
+
         private int columna;
         public int Columna
         {
@@ -50,7 +56,7 @@ namespace Compilador.Lexicografico
         {
             this.path = path;
 
-            this.fila = 0;
+            this.fila = 1;
             this.columna = 0;
             this.offsetArchivo = 0;
             this.charBufferMaxSize = Convert.ToInt32(ConfigurationSettings.AppSettings["capacidadBuffer"].ToString());
@@ -114,6 +120,8 @@ namespace Compilador.Lexicografico
 
             this.habiaEspacio = false;
 
+            int cantFilasSalteadas = 0;
+
             x = this.ObtenerProximoChar();
 
             while (CharHelper.esCaracterSalteable(x))
@@ -126,12 +134,14 @@ namespace Compilador.Lexicografico
 
                     if (CharHelper.esNuevaLinea(x))
                     {
+                        cantFilasSalteadas++;
                         fila++;
                         columna = 0;
                     }
                 }
                 x = this.ObtenerProximoChar();
             }
+            filaUltChar = fila - cantFilasSalteadas;
 
             return x;
         }

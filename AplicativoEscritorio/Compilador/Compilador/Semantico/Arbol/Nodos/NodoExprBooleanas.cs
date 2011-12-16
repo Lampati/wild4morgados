@@ -54,7 +54,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
                     strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
-                    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
             else
@@ -80,7 +80,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {
                         strbldr = new StringBuilder("Se esta intentando comparar una expresion del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[0].TipoDato));
                         strbldr.Append(" con una del tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[1].TipoDato));
-                        throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorSemanticoException(strbldr.ToString());
                     }
                 }
             }

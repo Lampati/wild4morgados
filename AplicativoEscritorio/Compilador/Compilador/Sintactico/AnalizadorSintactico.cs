@@ -275,6 +275,9 @@ namespace Compilador.Sintactico
                         }
 
                         this.pila.DescartarTope();
+
+                        Global.UltFila = this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Fila;
+                        Global.UltCol = this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Columna;
                         
                         this.cadenaEntrada.EliminarPrimerTerminal();
                     }
