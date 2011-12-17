@@ -14,6 +14,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             : base(nodoPadre,elem)
         {
             this.ListaFirma = new List<Firma>();
+            this.LlamaProcs = true;
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
@@ -52,6 +53,11 @@ namespace Compilador.Semantico.Arbol.Nodos
                         //this.Valor = 1;
                         strbldr = new StringBuilder("Llamada a procedimiento ").Append(nombre);
                         this.TextoParaImprimirArbol = strbldr.ToString();
+
+                        if (nombre.ToLower().Trim().Equals(Global.NOMBRE_PROC_SALIDA))
+                        {
+                            this.LlamaProcSalida = true;
+                        }
                     }
                     else
                     {

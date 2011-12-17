@@ -14,7 +14,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public NodoLectura(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre, elem)
         {
-
+            this.TieneLecturas = true;
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)

@@ -77,7 +77,7 @@ namespace Compilador.Sintactico
 
             this.CargarAnalizadorLexicografico();
             
-            cantElementosCadenaEntrada = Convert.ToInt32(ConfigurationSettings.AppSettings["cantElementosCadenaEntrada"].ToString());
+            cantElementosCadenaEntrada = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["cantElementosCadenaEntrada"].ToString());
             finArch = false;
 
             this.pila = new PilaGramatica(this.gramatica.SimboloInicial);
@@ -93,7 +93,7 @@ namespace Compilador.Sintactico
         
         private void CargarAnalizadorLexicografico()
         {
-            string pathArchEntrada = ConfigurationSettings.AppSettings["archEntrada"].ToString();
+            string pathArchEntrada = System.Configuration.ConfigurationManager.AppSettings["archEntrada"].ToString();
 
             analizadorLexico = new AnalizadorLexicografico(pathArchEntrada);
         }

@@ -59,12 +59,12 @@ namespace Compilador.Lexicografico
             this.fila = 1;
             this.columna = 0;
             this.offsetArchivo = 0;
-            this.charBufferMaxSize = Convert.ToInt32(ConfigurationSettings.AppSettings["capacidadBuffer"].ToString());
+            this.charBufferMaxSize = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["capacidadBuffer"].ToString());
             ultimoBuffer = false;
             finArchivo = false;
 
             //es para que el look ahead en la ultima posicion del buffer no se pierda al cambiar el buffer
-            this.extraEspaciosEnBuffer = Convert.ToInt32(ConfigurationSettings.AppSettings["extraEspaciosEnBuffer"].ToString());
+            this.extraEspaciosEnBuffer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["extraEspaciosEnBuffer"].ToString());
 
             this.indiceBuffer = 0;
             this.LlenarBuffer();

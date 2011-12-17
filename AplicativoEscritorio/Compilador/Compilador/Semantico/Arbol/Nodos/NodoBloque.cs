@@ -24,6 +24,22 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         }
 
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            if (this.hijosNodo.Count > 1)
+            {
+                this.LlamaProcSalida = this.hijosNodo[0].LlamaProcSalida || this.hijosNodo[1].LlamaProcSalida;
+                this.TieneLecturas = this.hijosNodo[0].TieneLecturas || this.hijosNodo[1].TieneLecturas;
+                this.LlamaProcs = this.hijosNodo[0].LlamaProcs || this.hijosNodo[1].LlamaProcs;
+                this.ModificaParametros = this.hijosNodo[0].ModificaParametros || this.hijosNodo[1].ModificaParametros;
+                this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+
+                
+            }
+
+            return this;
+        }
+
         public override void ChequearAtributos(Terminal t)
         {
             

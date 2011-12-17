@@ -329,7 +329,7 @@
 					<Expresion>procedimiento IDPROC ( FIRMA ) DECLARACIONES comenzar BLOQUE finproc ;</Expresion>
 				</Der>
 				<Der>
-					<Expresion>funcion IDSOLO ( FIRMA ) : TIPODATO DECLARACIONES comenzar BLOQUE finfunc EXPRBOOLEANAS ;</Expresion>
+					<Expresion>funcion IDPROC ( FIRMA ) : TIPODATO DECLARACIONES comenzar BLOQUE finfunc EXPRBOOLEANAS ;</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>

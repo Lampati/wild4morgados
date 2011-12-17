@@ -23,7 +23,7 @@ namespace Compilador
 
         private bool errorSemantico = false;
 
-        private String pathArchEntrada;
+     
 
         private AnalizadorSintactico analizadorSintactico;
 
@@ -112,7 +112,7 @@ namespace Compilador
         {
             try
             {
-                string pathArchGramatica = Path.Combine(directorioActual, System.Configuration.ConfigurationSettings.AppSettings["archGramatica"].ToString());
+                string pathArchGramatica = Path.Combine(directorioActual,System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
                analizadorSintactico = new AnalizadorSintactico(pathArchGramatica);
                analizadorSintactico.HabilitarSemantico = true;
             }
@@ -127,7 +127,7 @@ namespace Compilador
         {
             try
             {
-                StreamReader strReader = new StreamReader(Path.Combine(directorioActual, System.Configuration.ConfigurationSettings.AppSettings["archEntrada"].ToString()));
+                StreamReader strReader = new StreamReader(Path.Combine(directorioActual,System.Configuration.ConfigurationManager.AppSettings["archEntrada"].ToString()));
 
                 this.textBoxArchivoFuente.Text = strReader.ReadToEnd();
 
