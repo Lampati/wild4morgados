@@ -88,9 +88,7 @@ comenzar
   mientras (I <= MaxArreglo) hacer
     Mostrar(A[I]);
   finmientras;
-  leer I;
-  llamar PROC1();
-  A[1] := I + 6;
+
 
 finproc;
 
