@@ -16,7 +16,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void HeredarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
         {
-            int i = 1;
+       
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)

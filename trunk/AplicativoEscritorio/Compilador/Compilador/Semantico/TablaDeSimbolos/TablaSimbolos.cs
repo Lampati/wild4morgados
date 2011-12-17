@@ -542,6 +542,22 @@ namespace Compilador.Semantico.TablaDeSimbolos
 
 
 
-      
+
+
+        internal bool EsParametroDeEsteProc(string nombre, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreCont)
+        {
+            return this.listaNodos.Exists(
+
+                delegate(NodoTablaSimbolos _nodo)
+                {
+                    return (_nodo.Nombre.Equals(nombre) &&
+                        ( (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro)
+                        && _nodo.Contexto == tipoContexto
+                        && _nodo.NombreContextoLocal == nombreCont)
+                        //&& (_nodo.EsArreglo == false) 
+                        );
+                }
+                );
+        }
     }
 }

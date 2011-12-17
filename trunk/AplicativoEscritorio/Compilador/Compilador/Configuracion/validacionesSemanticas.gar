@@ -98,6 +98,8 @@ comenzar
   vBooleana := vTexto;
   vBooleana := vNumero;
   
+
+  
 finproc;
 
 
@@ -451,6 +453,8 @@ finproc;
 
 
 }
+
+
 procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
 var I : numero;
 comenzar
@@ -458,10 +462,11 @@ comenzar
   mientras (I <= MaxArreglo) hacer
     Mostrar(A[I]);
   finmientras;
-
+  
+  leer I;
+  llamar ASIGNACIONES_INCORRECTAS_LOCALES();
+  A[1] := I + 6;
 finproc;
-
-
 
 procedimiento PRINCIPAL()
 var X: numero;

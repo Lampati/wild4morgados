@@ -50,12 +50,20 @@ namespace Compilador.Semantico.Arbol
                     NodoArbolSemantico nodo = this.nodoActual;
                     try
                     {
-                        nodo = this.nodoActual.CalcularAtributos(t);                    
+                        nodo = this.nodoActual.CalcularAtributos(t);
                         nodo.ChequearAtributos(t);
                     }
-                    catch(ErrorSemanticoException ex)
+                    catch (ErrorSemanticoException ex)
                     {
                         this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
+                        nodo = nodo.SalvarAtributosParaContinuar();
+                    }
+                    catch (AggregateException exs)
+                    {
+                        foreach (ErrorSemanticoException ex in exs.InnerExceptions)
+                        {
+                            this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));                            
+                        }
                         nodo = nodo.SalvarAtributosParaContinuar();
                     }
 

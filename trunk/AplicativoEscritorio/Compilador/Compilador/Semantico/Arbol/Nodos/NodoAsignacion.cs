@@ -44,7 +44,14 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {
                         if (this.TablaSimbolos.EsModificableValorVarible(nombre, this.ContextoActual, this.nombreContextoLocal))
                         {
-                            //this.TablaSimbolos.ModificarValorVarible(nombre, valorExp);
+
+                            //esto es para agarrar que no se haga nada raro en el procedimiento salida
+                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.nombreContextoLocal))
+                            {
+                                this.ModificaParametros = true;
+                            }
+                            this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
+                            
 
                             strbldr = new StringBuilder().Append("ASIGNACION: Uso en parte izquierda de variable ");
                             strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre,this.ContextoActual,this.nombreContextoLocal)));
@@ -82,6 +89,14 @@ namespace Compilador.Semantico.Arbol.Nodos
                         if (tipo == tipoExp)
                         {
                             //this.TablaSimbolos.ModificarValorPosicionArreglo(nombre, indice, valorExp);
+
+                            //esto es para agarrar que no se haga nada raro en el procedimiento salida
+                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.nombreContextoLocal))
+                            {
+                                this.ModificaParametros = true;
+                            }
+                            this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
+                            
 
                             strbldr = new StringBuilder().Append("ASIGNACION: Uso en parte izquierda de arreglo Global");
                             strbldr.Append(" ").Append(nombre);

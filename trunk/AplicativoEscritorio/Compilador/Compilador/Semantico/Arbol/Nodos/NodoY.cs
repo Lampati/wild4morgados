@@ -23,7 +23,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {            
-            StringBuilder strbldr;
+      
 
             this.EsFuncion = false;
             this.EsArreglo = false;

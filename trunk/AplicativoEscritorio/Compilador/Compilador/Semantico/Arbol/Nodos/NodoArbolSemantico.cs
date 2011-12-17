@@ -72,6 +72,13 @@ namespace Compilador.Semantico.Arbol.Nodos
         public string TextoParaImprimirArbol { get; set; }
 
         public bool EsProcSalida { get; set; }
+        public bool LlamaProcSalida { get; set; }
+        public bool ModificaParametros { get; set; }
+        public bool AsignaParametros { get; set; }
+        public bool LlamaProcs { get; set; }
+        public bool TieneLecturas { get; set; }
+        
+        
 
         public TipoDeclaracionesPermitidas DeclaracionesPermitidas { get; set; }
 
@@ -203,6 +210,12 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             this.ListaLabel = new List<CodeLabel>();
             this.ListaElementosVisualizar = new List<string>();
+
+            this.LlamaProcSalida = false;
+            this.LlamaProcs = false;
+            this.ModificaParametros = false;
+            this.TieneLecturas = false;
+            this.AsignaParametros = false;
 
             //Heredados
             this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Ninguno;
