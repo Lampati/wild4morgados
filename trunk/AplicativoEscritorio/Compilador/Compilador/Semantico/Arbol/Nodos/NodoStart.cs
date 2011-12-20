@@ -18,7 +18,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             : base(nodoPadre,elem)
         {
             this.ContextoActual = NodoTablaSimbolos.TipoContexto.Global;
-            this.nombreContextoLocal = EnumUtils.stringValueOf(NodoTablaSimbolos.TipoContexto.Global);
+            this.NombreContextoLocal = EnumUtils.stringValueOf(NodoTablaSimbolos.TipoContexto.Global);
             this.ProcPrincipalYaCreadoyCorrecto = false;
             this.ProcPrincipalCrearUnaVez = true;
 
@@ -72,7 +72,14 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
+
+            strBldr.AppendLine("program temporal;");
+            strBldr.AppendLine("uses crt;");
+            strBldr.AppendLine("");
+
+            strBldr.AppendLine(this.hijosNodo[0].Codigo);
             
+            strBldr.AppendLine(this.hijosNodo[1].Codigo);
             
             this.Codigo = strBldr.ToString();
         }

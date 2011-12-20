@@ -54,9 +54,11 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.Append(this.hijosNodo[0].Codigo);
-            strBldr.Append(this.hijosNodo[1].Codigo);
-
+            if (this.hijosNodo.Count > 1)
+            {
+                strBldr.Append(this.hijosNodo[0].Codigo);
+                strBldr.Append(this.hijosNodo[1].Codigo);
+            }
             this.Codigo = strBldr.ToString();
         }
     }

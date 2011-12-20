@@ -43,10 +43,10 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.ProcPrincipalYaCreadoyCorrecto = false;
             }
 
-            if (!this.ProcSalidaCrearUnaVez)
-            {
-                this.ProcSalidaYaCreadoyCorrecto = false;
-            }
+            //if (!this.ProcSalidaCrearUnaVez)
+            //{
+            //    this.ProcSalidaYaCreadoyCorrecto = false;
+            //}
             
 
             if (esFuncion)
@@ -188,7 +188,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             hijoAHeredar.ProcPrincipalCrearUnaVez = this.ProcPrincipalCrearUnaVez;
             hijoAHeredar.ProcSalidaYaCreadoyCorrecto = this.ProcSalidaYaCreadoyCorrecto;
             hijoAHeredar.ProcSalidaCrearUnaVez = this.ProcSalidaCrearUnaVez;
-            hijoAHeredar.nombreContextoLocal = this.nombreContextoLocal;
+            hijoAHeredar.NombreContextoLocal = this.NombreContextoLocal;
 
             
         }

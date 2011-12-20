@@ -46,6 +46,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.Lugar = string.Copy(this.hijosNodo[0].Valor.ToString());
             }
 
+            this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+
             if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
             {
                 this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;

@@ -291,7 +291,7 @@
             this.tabPageLexicografico.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageLexicografico.Name = "tabPageLexicografico";
             this.tabPageLexicografico.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageLexicografico.Size = new System.Drawing.Size(1020, 717);
+            this.tabPageLexicografico.Size = new System.Drawing.Size(1020, 824);
             this.tabPageLexicografico.TabIndex = 0;
             this.tabPageLexicografico.Text = "Lexicografico";
             this.tabPageLexicografico.UseVisualStyleBackColor = true;
@@ -427,7 +427,7 @@
             this.tabPageTablaAnalisis.Location = new System.Drawing.Point(4, 25);
             this.tabPageTablaAnalisis.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageTablaAnalisis.Name = "tabPageTablaAnalisis";
-            this.tabPageTablaAnalisis.Size = new System.Drawing.Size(1020, 717);
+            this.tabPageTablaAnalisis.Size = new System.Drawing.Size(1020, 824);
             this.tabPageTablaAnalisis.TabIndex = 2;
             this.tabPageTablaAnalisis.Text = "TablaAnalisis";
             this.tabPageTablaAnalisis.UseVisualStyleBackColor = true;
@@ -444,7 +444,7 @@
             this.dataGridViewTablaAnalisis.ReadOnly = true;
             this.dataGridViewTablaAnalisis.RowHeadersWidth = 100;
             this.dataGridViewTablaAnalisis.RowTemplate.Height = 24;
-            this.dataGridViewTablaAnalisis.Size = new System.Drawing.Size(1020, 717);
+            this.dataGridViewTablaAnalisis.Size = new System.Drawing.Size(1020, 824);
             this.dataGridViewTablaAnalisis.TabIndex = 0;
             // 
             // tabPageArbolSemantico
@@ -452,7 +452,7 @@
             this.tabPageArbolSemantico.Controls.Add(this.treeView1);
             this.tabPageArbolSemantico.Location = new System.Drawing.Point(4, 25);
             this.tabPageArbolSemantico.Name = "tabPageArbolSemantico";
-            this.tabPageArbolSemantico.Size = new System.Drawing.Size(1020, 717);
+            this.tabPageArbolSemantico.Size = new System.Drawing.Size(1020, 824);
             this.tabPageArbolSemantico.TabIndex = 3;
             this.tabPageArbolSemantico.Text = "ArbolSalida";
             this.tabPageArbolSemantico.UseVisualStyleBackColor = true;
@@ -462,7 +462,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(1020, 717);
+            this.treeView1.Size = new System.Drawing.Size(1020, 824);
             this.treeView1.TabIndex = 1;
             // 
             // tabPageArmadorCodigo
@@ -471,7 +471,7 @@
             this.tabPageArmadorCodigo.Controls.Add(this.buttonGenerarCodigo);
             this.tabPageArmadorCodigo.Location = new System.Drawing.Point(4, 25);
             this.tabPageArmadorCodigo.Name = "tabPageArmadorCodigo";
-            this.tabPageArmadorCodigo.Size = new System.Drawing.Size(1020, 717);
+            this.tabPageArmadorCodigo.Size = new System.Drawing.Size(1020, 824);
             this.tabPageArmadorCodigo.TabIndex = 4;
             this.tabPageArmadorCodigo.Text = "Codigo";
             this.tabPageArmadorCodigo.UseVisualStyleBackColor = true;

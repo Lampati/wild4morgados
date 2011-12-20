@@ -34,6 +34,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 this.TipoDato = this.hijosNodo[0].TipoDato;
 
+                this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
+
                 if (operacion != TipoOperatoria.Ninguna)
                 {                   
 

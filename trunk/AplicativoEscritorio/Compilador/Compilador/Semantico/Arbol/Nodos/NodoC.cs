@@ -25,14 +25,14 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (this.DeclaracionesPermitidas == TipoDeclaracionesPermitidas.Constantes)
             {
 
-                if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.nombreContextoLocal))
+                if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     if (tipo != this.hijosNodo[4].TipoDato)
                     {
                         throw new ErrorSemanticoException(new StringBuilder("Se intento asignar un tipo invalido a ").Append(nombre).ToString());
                     }
 
-                    this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal, valor);
+                    this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal, valor);
 
                     StringBuilder textoParaArbol = new StringBuilder().Append("Declaracion de constante ").Append(nombre).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
                     textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
@@ -75,12 +75,26 @@ namespace Compilador.Semantico.Arbol.Nodos
             NodoTablaSimbolos.TipoDeDato tipo = this.hijosNodo[2].TipoDato;
             int valor = this.hijosNodo[4].Valor;
 
-            if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.nombreContextoLocal))
+            if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
             {
-                this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal);
+                this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
             }
 
             return this;
         }
+
+        public override void CalcularCodigo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append(this.hijosNodo[0].Lexema).Append(" "); // id
+            strBldr.Append(":").Append(" "); // :
+            strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
+            strBldr.Append("=").Append(" "); // =
+            strBldr.Append(this.hijosNodo[4].Codigo).Append(" "); // valor
+
+            this.Codigo = strBldr.ToString();
+        }
+
     }
 }

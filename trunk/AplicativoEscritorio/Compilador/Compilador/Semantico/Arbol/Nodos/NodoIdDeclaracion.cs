@@ -34,7 +34,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void ChequearAtributos(Terminal t)
         {
-            if (this.TablaSimbolos.ExisteVariable(this.VariablesACrear[0].Lexema, this.ContextoActual, this.nombreContextoLocal))
+            if (this.TablaSimbolos.ExisteVariable(this.VariablesACrear[0].Lexema, this.ContextoActual, this.NombreContextoLocal))
             {
                 throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(this.VariablesACrear[0].Lexema).Append(" ya existia en ese contexto").ToString());
             }
@@ -48,6 +48,15 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             this.VariablesACrear = new List<Variable>();
             return this;
+        }
+
+        public override void CalcularCodigo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+           
+            strBldr.Append(this.hijosNodo[0].Lexema);          
+
+            this.Codigo = strBldr.ToString();
         }
     }
 }

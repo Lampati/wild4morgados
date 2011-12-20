@@ -59,7 +59,7 @@ finfunc A[1] > 10 and A[2] < 20 or C[1] ;
 
 {intento declarar 2 veces la misma variable}
 {intento declarar 2 veces la misma variable pero distinto tipo}
-
+{
 procedimiento ASIGNACIONES_INCORRECTAS_LOCALES()
 
 var A,A : numero;
@@ -102,8 +102,8 @@ comenzar
   
 finproc;
 
+}
 
-{
 procedimiento ASIGNACIONES_CORRECTAS_GLOBALES()
 
 
@@ -452,7 +452,7 @@ finsi;
 finproc;
 
 
-}
+
 
 
 procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
@@ -462,10 +462,6 @@ comenzar
   mientras (I <= MaxArreglo) hacer
     Mostrar(A[I]);
   finmientras;
-  
-  leer I;
-  llamar ASIGNACIONES_INCORRECTAS_LOCALES();
-  A[1] := I + 6;
 finproc;
 
 procedimiento PRINCIPAL()

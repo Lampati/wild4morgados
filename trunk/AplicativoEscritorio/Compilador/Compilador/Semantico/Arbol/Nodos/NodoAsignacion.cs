@@ -38,15 +38,15 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (this.TablaSimbolos.ExisteVariable(nombre))
                 {
-                    tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre,this.ContextoActual,this.nombreContextoLocal);
+                    tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre,this.ContextoActual,this.NombreContextoLocal);
 
                     if (tipo == tipoExp)
                     {
-                        if (this.TablaSimbolos.EsModificableValorVarible(nombre, this.ContextoActual, this.nombreContextoLocal))
+                        if (this.TablaSimbolos.EsModificableValorVarible(nombre, this.ContextoActual, this.NombreContextoLocal))
                         {
 
                             //esto es para agarrar que no se haga nada raro en el procedimiento salida
-                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.nombreContextoLocal))
+                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.NombreContextoLocal))
                             {
                                 this.ModificaParametros = true;
                             }
@@ -54,7 +54,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                             
 
                             strbldr = new StringBuilder().Append("ASIGNACION: Uso en parte izquierda de variable ");
-                            strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre,this.ContextoActual,this.nombreContextoLocal)));
+                            strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre,this.ContextoActual,this.NombreContextoLocal)));
                             strbldr.Append(" ").Append(nombre);
 
                             this.TextoParaImprimirArbol = strbldr.ToString();
@@ -80,7 +80,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             }
             else
             {
-                if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.nombreContextoLocal))
+                if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     //if (this.TablaSimbolos.ExisteArreglo(nombre, indice))
                     //{
@@ -91,7 +91,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                             //this.TablaSimbolos.ModificarValorPosicionArreglo(nombre, indice, valorExp);
 
                             //esto es para agarrar que no se haga nada raro en el procedimiento salida
-                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.nombreContextoLocal))
+                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.NombreContextoLocal))
                             {
                                 this.ModificaParametros = true;
                             }

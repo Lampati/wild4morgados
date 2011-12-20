@@ -33,5 +33,16 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             return this;
         }
+
+        public override void CalcularCodigo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.AppendLine("Const");
+            strBldr.AppendLine(this.hijosNodo[1].Codigo);
+            strBldr.AppendLine("Var");
+            strBldr.AppendLine(this.hijosNodo[3].Codigo);
+
+            this.Codigo = strBldr.ToString();
+        }
     }
 }

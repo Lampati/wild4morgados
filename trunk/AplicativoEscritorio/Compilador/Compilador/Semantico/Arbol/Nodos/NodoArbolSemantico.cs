@@ -62,7 +62,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public bool ProcSalidaCrearUnaVez { get; set; }
         public bool ProcSalidaYaCreadoyCorrecto { get; set; }
         public string Lexema { get; set; }
-        public string nombreContextoLocal { get; set; }
+        public string NombreContextoLocal { get; set; }
         public bool EsArreglo { get; set; }
         public bool EsFuncion { get; set; }
         public int IndiceArreglo { get; set; }
@@ -226,7 +226,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.EsConstante = nodoPadre.EsConstante;
                 this.ContextoActual = nodoPadre.ContextoActual;
                 this.TablaSimbolos = nodoPadre.TablaSimbolos;
-                this.nombreContextoLocal = nodoPadre.nombreContextoLocal;
+                this.NombreContextoLocal = nodoPadre.NombreContextoLocal;
                 this.ProcPrincipalYaCreadoyCorrecto = nodoPadre.ProcPrincipalYaCreadoyCorrecto;
                 this.ProcPrincipalCrearUnaVez = nodoPadre.ProcPrincipalCrearUnaVez;
                 this.ProcSalidaYaCreadoyCorrecto = nodoPadre.ProcSalidaYaCreadoyCorrecto;
@@ -314,7 +314,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         internal void ActualizarAtributos(NodoArbolSemantico nodo)
         {
             this.TablaSimbolos = nodo.TablaSimbolos;
-            this.nombreContextoLocal = nodo.nombreContextoLocal;
+            this.NombreContextoLocal = nodo.NombreContextoLocal;
             this.ProcPrincipalYaCreadoyCorrecto = nodo.ProcPrincipalYaCreadoyCorrecto;
             this.ProcPrincipalCrearUnaVez = nodo.ProcPrincipalCrearUnaVez;
             this.ProcSalidaYaCreadoyCorrecto = nodo.ProcSalidaYaCreadoyCorrecto;
