@@ -64,6 +64,7 @@ namespace Compilador.Sintactico.Gramatica
         {
             this.componente = new ComponenteLexico();
             this.componente.Token = (ComponenteLexico.TokenType)EnumUtils.enumValueOf(lexema, typeof(ComponenteLexico.TokenType));
+            this.componente.Lexema = lexema;
         }
 
 

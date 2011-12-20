@@ -19,9 +19,13 @@ namespace Compilador
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Compilador comp = new Compilador();
+                //Compilador comp = new Compilador();
                 
-                Application.Run(comp);
+                //Application.Run(comp);
+
+                SelectorModoPruebas sele = new SelectorModoPruebas();
+
+                Application.Run(sele);
             }
             catch (Exception ex)
             {

@@ -35,18 +35,18 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (this.TablaSimbolos.ExisteVariable(nombre))
                 {
-                    tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre, this.ContextoActual, this.nombreContextoLocal);
+                    tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre, this.ContextoActual, this.NombreContextoLocal);
 
                     
-                    if (this.TablaSimbolos.EsModificableValorVarible(nombre,this.ContextoActual,this.nombreContextoLocal))
+                    if (this.TablaSimbolos.EsModificableValorVarible(nombre,this.ContextoActual,this.NombreContextoLocal))
                     {
                         strbldr = new StringBuilder().Append("LECTURA: Uso en parte izquierda de variable ");
-                        strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre, this.ContextoActual, this.nombreContextoLocal)));
+                        strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre, this.ContextoActual, this.NombreContextoLocal)));
                         strbldr.Append(" ").Append(nombre);
 
                         this.TextoParaImprimirArbol = strbldr.ToString();
 
-                        string nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(nombre,this.ContextoActual,this.nombreContextoLocal);
+                        string nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(nombre,this.ContextoActual,this.NombreContextoLocal);
                             
                         this.Lugar = new StringBuilder(nombreContexto).Append(nombre).ToString();
                
@@ -73,7 +73,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             }
             else
             {
-                if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.nombreContextoLocal))
+                if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     //if (this.TablaSimbolos.ExisteArreglo(nombre, indice))
                     //{
@@ -86,7 +86,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                         this.TextoParaImprimirArbol = strbldr.ToString();
 
                         this.Lexema = nombre;
-                        this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
+                        this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString());
                         this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
 
                         this.Lugar = this.Temporal.Nombre;

@@ -23,7 +23,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             this.Lexema = hijoASintetizar.Lexema;
-            this.nombreContextoLocal = hijoASintetizar.Lexema;
+            this.NombreContextoLocal = hijoASintetizar.Lexema;
         }
 
         public override void ChequearAtributos(Terminal t)

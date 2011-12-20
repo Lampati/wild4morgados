@@ -32,39 +32,26 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
 
-            if (this.hijosNodo.Count > 2)
-            {
-                this.Comparacion = TipoComparacion.None;
-
-                this.Lugar = string.Copy(this.hijosNodo[2].Lugar);
-
-                if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                {
-                    this.Lugar = string.Copy(this.hijosNodo[2].Valor.ToString());
-                }
-
+         
+            
                 
-            }
-            else
-            {
-                
-                string parte2 = string.Copy(this.hijosNodo[1].Lugar);
+            string parte2 = string.Copy(this.hijosNodo[1].Lugar);
 
-                this.TipoDato = this.hijosNodo[0].TipoDato;
+            this.TipoDato = this.hijosNodo[0].TipoDato;
 
-                this.Comparacion = this.hijosNodo[1].Comparacion;                
+            this.Comparacion = this.hijosNodo[1].Comparacion;                
 
 
-                this.Lugar = string.Copy(this.hijosNodo[0].Lugar);
+            this.Lugar = string.Copy(this.hijosNodo[0].Lugar);
                
-                if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                {
-                    this.Lugar = string.Copy(this.hijosNodo[0].Valor.ToString());
-                }
-
-
-
+            if (this.Lugar == null || this.Lugar.Equals(string.Empty))
+            {
+                this.Lugar = string.Copy(this.hijosNodo[0].Valor.ToString());
             }
+
+
+            this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+            
             return this;
         }
 

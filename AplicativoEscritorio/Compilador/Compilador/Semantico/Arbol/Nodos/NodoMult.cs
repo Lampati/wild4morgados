@@ -36,6 +36,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 this.TipoDato = this.hijosNodo[0].TipoDato;
 
+                this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
+
                 if (this.Operacion != TipoOperatoria.Ninguna)
                 {
 
@@ -57,7 +59,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     this.Lugar = this.hijosNodo[1].Lugar;
 
-
+                    
                 
                 }
                 else

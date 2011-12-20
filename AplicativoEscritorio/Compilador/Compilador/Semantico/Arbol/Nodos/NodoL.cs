@@ -27,7 +27,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 this.Lexema = this.hijosNodo[0].Lexema.Replace("'", string.Empty);
 
-                this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString(), this.Lexema);
+                this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString(), this.Lexema);
                 this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.String, this.Temporal.Valor);
 
                 this.Lugar = this.Temporal.Nombre;

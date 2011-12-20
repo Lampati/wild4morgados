@@ -31,7 +31,9 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (hijosNodo.Count > 1)
             {
                 this.TipoDato = this.hijosNodo[1].TipoDato;
-                this.Comparacion = this.hijosNodo[0].Comparacion;               
+                this.Comparacion = this.hijosNodo[0].Comparacion;
+
+                this.AsignaParametros = this.hijosNodo[1].AsignaParametros;
 
                 this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
 
@@ -69,7 +71,10 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.Append(this.hijosNodo[1].Codigo);
+            if (this.hijosNodo.Count > 1)
+            {
+                strBldr.Append(this.hijosNodo[1].Codigo);
+            }
 
             this.Codigo = strBldr.ToString();
         }

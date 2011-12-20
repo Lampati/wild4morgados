@@ -32,9 +32,9 @@ namespace Compilador.Semantico.Arbol.Nodos
                     if (!this.hijosNodo[2].EsArreglo)
                     //if (!v.EsArreglo)
                     {
-                        if (!this.TablaSimbolos.ExisteVariable(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
+                        if (!this.TablaSimbolos.ExisteVariable(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
                         {
-                            this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.nombreContextoLocal);
+                            this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
                             textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
                             textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
 
@@ -47,9 +47,9 @@ namespace Compilador.Semantico.Arbol.Nodos
                     else
                     {
 
-                        if (!this.TablaSimbolos.ExisteArreglo(v.Lexema, this.ContextoActual, this.nombreContextoLocal))
+                        if (!this.TablaSimbolos.ExisteArreglo(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
                         {
-                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.nombreContextoLocal, v.IndiceArreglo, false);
+                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, v.IndiceArreglo, false);
                             textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
                             textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
                             textoParaArbol.Append(" de ").Append(v.IndiceArreglo.ToString()).Append(" posiciones.");
@@ -88,6 +88,21 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {
             return this;
+        }
+
+        public override void CalcularCodigo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+
+            strBldr.Append(this.hijosNodo[0].Codigo);
+            strBldr.Append(" ");
+            strBldr.Append(":");
+            strBldr.Append(" ");
+            strBldr.Append(this.hijosNodo[2].Codigo);
+            
+
+            this.Codigo = strBldr.ToString();
         }
     }
 }

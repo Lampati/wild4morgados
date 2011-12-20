@@ -67,13 +67,15 @@ namespace Compilador.Sintactico
             set { habilitarSemantico = value; }
         }
 
-        public AnalizadorSintactico(string path)
+        public string ArchEntrada { get; set; }
+
+        public AnalizadorSintactico(string path, string archEntrada)
         {
             gramatica = new Gramatica.Gramatica(path);
 
             tabla = this.gramatica.ArmarTablaAnalisis();
 
-            
+            this.ArchEntrada = archEntrada;
 
             this.CargarAnalizadorLexicografico();
             
@@ -90,12 +92,12 @@ namespace Compilador.Sintactico
 
         }
 
-        
+
         private void CargarAnalizadorLexicografico()
         {
-            string pathArchEntrada = System.Configuration.ConfigurationManager.AppSettings["archEntrada"].ToString();
 
-            analizadorLexico = new AnalizadorLexicografico(pathArchEntrada);
+
+            analizadorLexico = new AnalizadorLexicografico(ArchEntrada);
         }
 
         internal void ResetearAnalizadorLexicografico()

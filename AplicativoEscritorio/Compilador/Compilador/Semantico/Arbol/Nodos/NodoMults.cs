@@ -32,6 +32,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             this.TipoDato = this.hijosNodo[0].TipoDato;
 
+            this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+
             if (operacion != TipoOperatoria.Ninguna)
             {
    
@@ -46,7 +48,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                         break;
                 }
 
-                this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
+                this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString());
                 //this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, this.TipoDato);
                 this.Lugar = this.Temporal.Nombre;
             

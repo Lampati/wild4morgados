@@ -105,7 +105,7 @@
 	
 				</Der>
 				<Der>
-					<Expresion>const CONSTS ; CONSTANTES</Expresion>
+					<Expresion>const C ; CONSTANTES</Expresion>
 					
 				</Der>
 				<Der>
@@ -148,7 +148,7 @@
 			<Izq>VARIABLES</Izq>
 			<Ders>
 				<Der>
-					<Expresion>var VARS ; VARIABLES</Expresion>
+					<Expresion>var V ; VARIABLES</Expresion>
 	
 				</Der>
 				<Der>
@@ -597,9 +597,6 @@
 		<Produccion>
 			<Izq>EXPRBOOLEXTRA</Izq>
 			<Ders>
-				<Der>
-					<Expresion>OPBOOLEANAS EXPRBOOL EXPRBOOLEXTRA</Expresion>
-				</Der>
 				<Der>
 					<Expresion>OPBOOLEANAS EXPRBOOL EXPRBOOLEXTRA</Expresion>
 				</Der>

@@ -43,7 +43,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             //    nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
             //}
 
-            nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
+            nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.NombreContextoLocal);
 
             this.Lugar = new StringBuilder(nombreContexto).Append(this.Lexema).ToString();
             

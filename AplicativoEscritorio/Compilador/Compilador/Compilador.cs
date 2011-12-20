@@ -29,6 +29,9 @@ namespace Compilador
 
         private bool errores = false;
 
+        public string ArchivoEntrada { get; set; }
+   
+
         public Compilador()
         {
             InitializeComponent(); 
@@ -51,8 +54,9 @@ namespace Compilador
                     MessageBox.Show("Error al iniciar el log: " + ex.Message);
                 }
 
+                
 
-                this.CargarArchivoEnInterfaz();
+                this.CargarArchivoEnInterfaz(ArchivoEntrada);
 
                 this.CargarAnalizadorSintactico();
 
@@ -112,8 +116,8 @@ namespace Compilador
         {
             try
             {
-                string pathArchGramatica = Path.Combine(directorioActual,System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
-               analizadorSintactico = new AnalizadorSintactico(pathArchGramatica);
+               string pathArchGramatica = Path.Combine(directorioActual,System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
+               analizadorSintactico = new AnalizadorSintactico(pathArchGramatica, ArchivoEntrada);
                analizadorSintactico.HabilitarSemantico = true;
             }
             catch (Exception ex)
@@ -123,11 +127,11 @@ namespace Compilador
             }
         }
 
-        private void CargarArchivoEnInterfaz()
+        private void CargarArchivoEnInterfaz(string arch)
         {
             try
             {
-                StreamReader strReader = new StreamReader(Path.Combine(directorioActual,System.Configuration.ConfigurationManager.AppSettings["archEntrada"].ToString()));
+                StreamReader strReader = new StreamReader(Path.Combine(directorioActual,arch));
 
                 this.textBoxArchivoFuente.Text = strReader.ReadToEnd();
 

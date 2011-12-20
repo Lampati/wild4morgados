@@ -46,6 +46,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {                       
                         throw new ErrorSemanticoException("Unicamente se pueden negar expresiones booleanas");
                     }
+
+                    this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
                 }
                 else
                 {
@@ -65,6 +67,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     //Si es mayor a 0 es pq es (EXPR) entonces lo pongo
                     this.EsOtraExpresion = true;
+
+                    this.AsignaParametros = this.hijosNodo[1].AsignaParametros;
                 }
             }
             else
@@ -84,6 +88,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 //No es (EXPR) entonces lo pongo
                 this.EsOtraExpresion = false;
+
+                this.AsignaParametros = this.hijosNodo[0].AsignaParametros;
             }
 
             return this;

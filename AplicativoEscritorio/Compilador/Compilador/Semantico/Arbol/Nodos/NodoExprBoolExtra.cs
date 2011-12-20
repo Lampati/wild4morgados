@@ -54,6 +54,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                     strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
                     throw new ErrorSemanticoException(strbldr.ToString());
                 }
+
+                this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
             }
             else
             {
@@ -77,11 +79,18 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            string parte2 = this.hijosNodo[1].Lugar;
+            
 
             StringBuilder strBldr = new StringBuilder();
 
-          
+            if (this.hijosNodo.Count > 1)
+            {
+                strBldr.Append(this.hijosNodo[0].Codigo);
+                strBldr.Append(this.hijosNodo[1].Codigo);
+                strBldr.Append(this.hijosNodo[2].Codigo);
+
+                this.Codigo = strBldr.ToString();
+            }
 
             this.Codigo = strBldr.ToString();
         }
