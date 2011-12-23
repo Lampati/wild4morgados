@@ -52,6 +52,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1 )
             {
+                strBldr.Append(", ");
                 strBldr.Append(this.hijosNodo[1].Codigo);
                 strBldr.Append(this.hijosNodo[2].Codigo);
             }

@@ -38,7 +38,14 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.AppendLine(this.hijosNodo[0].Codigo);
+            
+
+            if (!(this.hijosNodo[0].Codigo == string.Empty))
+            {
+                strBldr.AppendLine("VAR");
+                strBldr.Append(this.hijosNodo[0].Codigo);
+            }
+            
 
             this.Codigo = strBldr.ToString();
         }

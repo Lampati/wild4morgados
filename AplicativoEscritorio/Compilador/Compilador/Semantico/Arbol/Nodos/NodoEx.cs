@@ -73,6 +73,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                strBldr.Append(this.hijosNodo[0].Lexema);
                 strBldr.Append(this.hijosNodo[1].Codigo);
             }
 

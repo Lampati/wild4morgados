@@ -88,8 +88,8 @@ namespace Compilador.Semantico.Arbol.Nodos
             StringBuilder strBldr = new StringBuilder();
 
             strBldr.Append(this.hijosNodo[0].Lexema).Append(" "); // id
-            strBldr.Append(":").Append(" "); // :
-            strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
+            //strBldr.Append(":").Append(" "); // :
+            //strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
             strBldr.Append("=").Append(" "); // =
             strBldr.Append(this.hijosNodo[4].Codigo).Append(" "); // valor
 

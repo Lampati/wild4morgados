@@ -7,14 +7,11 @@
 		<NoTerminal>PROCEDIMIENTOS</NoTerminal>
 		<NoTerminal>CONSTANTES</NoTerminal>
 		<NoTerminal>VARIABLES</NoTerminal>
-		<NoTerminal>CONSTS</NoTerminal>
 		<NoTerminal>C</NoTerminal>
-		<NoTerminal>CON</NoTerminal>
 		<NoTerminal>TIPODATO</NoTerminal>
 		<NoTerminal>NUMERO</NoTerminal>
 		<NoTerminal>VARS</NoTerminal>
 		<NoTerminal>V</NoTerminal>
-		<NoTerminal>VAR</NoTerminal>
 		<NoTerminal>IDENT</NoTerminal>
 		<NoTerminal>ID</NoTerminal>
 		<NoTerminal>IDS</NoTerminal>		
@@ -55,12 +52,9 @@
 		<NoTerminal>EX</NoTerminal>
 		<NoTerminal>IDASIGNACION</NoTerminal>
 		<NoTerminal>IDASIGN</NoTerminal>
-		<NoTerminal>IDDECLARACION</NoTerminal>
-		<NoTerminal>YDEC</NoTerminal>
-		<NoTerminal>IDSOLO</NoTerminal>		
+		<NoTerminal>IDDECLARACION</NoTerminal>	
 		<NoTerminal>IDPROC</NoTerminal>	
-		<NoTerminal>TIPODATOCONARREGLO</NoTerminal>	
-		
+		<NoTerminal>TIPODATOCONARREGLO</NoTerminal>			
 		<NoTerminal>TEXTO</NoTerminal>
 		<NoTerminal>BOOL</NoTerminal>
 		<NoTerminal>MAXARREGLODEC</NoTerminal>
@@ -101,7 +95,7 @@
 			<Izq>CONSTANTES</Izq>
 			<Ders>
 				<Der>
-					<Expresion>var VARS ; CONSTANTES</Expresion>
+					<Expresion>var V ; CONSTANTES</Expresion>
 	
 				</Der>
 				<Der>
@@ -113,26 +107,8 @@
 				</Der>
 			</Ders>
 		</Produccion>
-		<Produccion>
-			<Izq>CONSTS</Izq>
-			<Ders>
-				<Der>
-					<Expresion>C CON</Expresion>					
-				</Der>
-			</Ders>
-		</Produccion>
-		<Produccion>
-			<Izq>CON</Izq>
-			<Ders>
-				<Der>
-					<Expresion>, C CON</Expresion>
-							
-				</Der>
-				<Der>
-					<Expresion>lambda</Expresion>
-				</Der>
-			</Ders>
-		</Produccion>
+
+		
 		<Produccion>
 			<Izq>C</Izq>
 			<Ders>
@@ -152,35 +128,15 @@
 	
 				</Der>
 				<Der>
-					<Expresion>const CONSTS ; VARIABLES</Expresion>
+					<Expresion>const C ; VARIABLES</Expresion>
 					
 				</Der>
 				<Der>
 					<Expresion>lambda</Expresion>
 				</Der>
 			</Ders>
-		</Produccion>
-		<Produccion>
-			<Izq>VARS</Izq>
-			<Ders>
-				<Der>
-					<Expresion>V VAR</Expresion>
-
-				</Der>
-			</Ders>
-		</Produccion>
-		<Produccion>
-			<Izq>VAR</Izq>
-			<Ders>
-				<Der>
-					<Expresion>, V VAR</Expresion>
+		</Produccion>		
 		
-				</Der>
-				<Der>
-					<Expresion>lambda</Expresion>
-				</Der>
-			</Ders>
-		</Produccion>
 		<Produccion>
 			<Izq>V</Izq>
 			<Ders>
@@ -212,26 +168,11 @@
 			<Izq>IDDECLARACION</Izq>
 			<Ders>
 				<Der>
-					<Expresion>id YDEC</Expresion>
+					<Expresion>id</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>	
 	
-		<Produccion>
-			<Izq>YDEC</Izq>
-			<Ders>
-			<!--	
-				<Der>
-					<Expresion>[ NUMERO ]</Expresion>
-				</Der>
-			-->
-				<Der>
-					<Expresion>lambda</Expresion>
-				</Der>
-			</Ders>
-		</Produccion>
-		<!---->
-		
 		<Produccion>
 			<Izq>TIPODATOCONARREGLO</Izq>
 			<Ders>
@@ -347,17 +288,7 @@
 				</Der>
 			</Ders>
 		</Produccion>
-		<Produccion>
-			<Izq>IDSOLO</Izq>
-			<Ders>
-				<Der>
-					<Expresion>id</Expresion>
-				</Der>
-				<Der>
-					<Expresion>salida</Expresion>
-				</Der>
-			</Ders>
-		</Produccion>
+
 		
 		<!---->
 		<Produccion>
@@ -478,7 +409,7 @@
 			<Izq>LLAMADAPROC</Izq>
 			<Ders>
 				<Der>
-					<Expresion>llamar IDSOLO ( EXPRPROCED ) ;</Expresion>
+					<Expresion>llamar IDPROC ( EXPRPROCED ) ;</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>

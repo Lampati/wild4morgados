@@ -71,11 +71,16 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder strBldr = new StringBuilder();
 
-             
+            if (this.hijosNodo.Count > 1)
+            {
+                strBldr.Append("[");
+                strBldr.Append(this.hijosNodo[1].Codigo);
+                strBldr.Append("]");
+            }
 
-            this.Codigo = sb.ToString();
-        } 
+            this.Codigo = strBldr.ToString();
+        }
     }
 }

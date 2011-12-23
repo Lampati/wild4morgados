@@ -22,6 +22,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
+            //Falta hacer cosas con los arreglos aca.
             this.VariablesACrear.AddRange(hijoASintetizar.VariablesACrear);            
         }
 

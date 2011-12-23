@@ -54,12 +54,31 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            StringBuilder strBldr = new StringBuilder("\t");
+            StringBuilder strBldr = new StringBuilder();
 
-           
-            this.Codigo = strBldr.ToString().Replace("\r\n", "\r\n\t").ToString().TrimEnd('\t');
+            strBldr.Append("If ");
+            strBldr.Append("( ");
+            strBldr.Append(this.hijosNodo[2].Codigo);
+            strBldr.Append(") ");
+            strBldr.AppendLine("then");
+            strBldr.AppendLine("begin");
+            strBldr.Append("\t").AppendLine(this.hijosNodo[5].Codigo.Replace("\r\n", "\r\n\t"));
+            strBldr.Append("end");
+
+            if (this.hijosNodo[6].Codigo != string.Empty)
+            {
+                strBldr.AppendLine();
+                strBldr.Append(this.hijosNodo[6].Codigo);
+            }
+            else
+            {
+                strBldr.AppendLine(";");
+            }
+
 
             
+
+            this.Codigo = strBldr.ToString().ToString().TrimEnd();
         }
     }
 }

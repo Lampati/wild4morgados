@@ -113,15 +113,27 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            if (this.hijosNodo.Count > 1)
+            StringBuilder strBldr = new StringBuilder();
+
+            if (this.hijosNodo.Count > 3)
             {
-                this.Codigo = this.hijosNodo[1].Codigo;  
+                strBldr.Append("NOT ");
+                strBldr.Append(" ( ");
+                strBldr.Append(this.hijosNodo[2].Codigo);
+                strBldr.Append(" ) ");
+            }
+            else if (this.hijosNodo.Count > 1)
+            {
+                strBldr.Append(" ( ");
+                strBldr.Append(this.hijosNodo[1].Codigo);
+                strBldr.Append(" ) ");
             }
             else
-            {                
-                this.Codigo = this.hijosNodo[0].Codigo;                   
-                
+            {
+                strBldr.Append(" ").Append(this.hijosNodo[0].Codigo).Append(" ");
             }
+
+            this.Codigo = strBldr.ToString();
         }
     }
 }

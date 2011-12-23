@@ -73,6 +73,11 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 strBldr.Append(this.hijosNodo[0].Codigo);
             }
+            else
+            {
+                strBldr.Append(this.hijosNodo[0].Lexema);
+            }
+
 
             this.Codigo = strBldr.ToString();
         }

@@ -56,12 +56,18 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                
                 strBldr.Append("Array ");
-                strBldr.Append("[ ");
-                strBldr.Append("1..");
-                strBldr.Append(this.hijosNodo[2].Codigo);
+                if (!this.EsFirma)
+                {
+                    strBldr.Append("[ ");
+                    strBldr.Append("1..");
+                    strBldr.Append(this.hijosNodo[2].Codigo);
+                    strBldr.Append("] ");
+                }
                 strBldr.Append(" of ");
                 strBldr.Append(this.hijosNodo[5].Codigo);
+                
             }
             else
             {

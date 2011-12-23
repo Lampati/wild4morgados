@@ -95,7 +95,16 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-           
+            StringBuilder strBldr = new StringBuilder();
+
+
+            strBldr.Append(" ( ");
+            strBldr.Append(this.hijosNodo[0].Codigo);
+            strBldr.Append(" ) ");
+            strBldr.Append(this.hijosNodo[1].Codigo);
+            
+
+            this.Codigo = strBldr.ToString();
         }
     }
 }
