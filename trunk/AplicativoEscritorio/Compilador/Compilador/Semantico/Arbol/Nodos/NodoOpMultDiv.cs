@@ -49,7 +49,27 @@ namespace Compilador.Semantico.Arbol.Nodos
             
             return this;
         }
-    
+
+        public override void CalcularCodigo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            string tipoDato;
+            switch (this.hijosNodo[0].Lexema)
+            {
+                case "*":
+                    tipoDato = "*";
+                    break;
+                case @"/":
+                    tipoDato = "div";
+                    break;                
+                default:
+                    tipoDato = string.Empty;
+                    break;
+            }
+            strBldr.Append(" ").Append(tipoDato).Append(" ");
+            this.Codigo = strBldr.ToString();
+        }
     
     }
 }

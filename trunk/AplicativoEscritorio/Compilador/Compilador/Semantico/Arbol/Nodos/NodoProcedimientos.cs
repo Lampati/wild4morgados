@@ -53,6 +53,8 @@ namespace Compilador.Semantico.Arbol.Nodos
         
 
             this.Codigo = strBldr.ToString();
+
+            this.VariablesProcPrincipal = this.hijosNodo[0].VariablesProcPrincipal + this.hijosNodo[1].VariablesProcPrincipal;
         }
     }
 }

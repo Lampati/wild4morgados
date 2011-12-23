@@ -43,6 +43,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
+            this.VariablesProcPrincipal = this.hijosNodo[0].VariablesProcPrincipal;
             this.Codigo = this.hijosNodo[0].Codigo;
         }
     }

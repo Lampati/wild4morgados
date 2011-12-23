@@ -23,7 +23,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            this.VariablesACrear.Add(new Variable(this.hijosNodo[0].Lexema, this.hijosNodo[1].EsArreglo, this.hijosNodo[1].IndiceArreglo));
+            this.VariablesACrear.Add(new Variable(this.hijosNodo[0].Lexema, false, 0));
             return this;
         }
 

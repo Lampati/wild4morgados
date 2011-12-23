@@ -446,7 +446,7 @@ vNumero := FUNC4(arrNumero, arrTexto , arrBooleano);
 vTexto := FUNC5(arrNumero, arrTexto , arrBooleano);
 vBooleana := !(FUNC6(arrNumero, arrTexto , arrBooleano));
 sino
-arrTexto := '';
+arrTexto[1] := '';
 finsi;
 
 finproc;

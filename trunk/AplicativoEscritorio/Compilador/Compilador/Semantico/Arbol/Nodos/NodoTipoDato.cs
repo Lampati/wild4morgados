@@ -37,7 +37,23 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.Append(this.hijosNodo[0].Lexema);
+            string tipoDato;
+            switch (this.hijosNodo[0].Lexema)
+            {
+                case "numero":
+                    tipoDato =  "integer";
+                    break;
+                case "texto":
+                    tipoDato = "string";
+                    break;
+                case "booleano":
+                    tipoDato = "boolean";
+                    break;
+                default:
+                    tipoDato = string.Empty;
+                    break;
+            }
+            strBldr.Append(tipoDato);
             this.Codigo = strBldr.ToString();
         }
     }

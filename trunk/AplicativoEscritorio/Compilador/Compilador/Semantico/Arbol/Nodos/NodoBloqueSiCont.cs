@@ -55,10 +55,14 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            if (this.EsSino)
+            if (this.hijosNodo.Count > 2)
             {
-                strBldr.Append(this.hijosNodo[1].Codigo);
-            }
+                strBldr.AppendLine("else");
+                strBldr.AppendLine("begin");
+                strBldr.Append("\t").AppendLine(this.hijosNodo[1].Codigo.Replace("\r\n", "\r\n\t"));
+                strBldr.AppendLine("end;");
+            
+            }          
 
             this.Codigo = strBldr.ToString();
         }

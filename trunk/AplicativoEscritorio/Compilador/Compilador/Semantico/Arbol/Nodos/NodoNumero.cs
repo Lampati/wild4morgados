@@ -38,7 +38,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine(this.hijosNodo[0].Lexema);
+            strBldr.Append(this.hijosNodo[0].Lexema);
             this.Codigo = strBldr.ToString();
         }
     }

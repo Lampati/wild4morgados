@@ -86,10 +86,12 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (this.hijosNodo.Count > 1)
             {
                 strBldr.Append(this.hijosNodo[0].Codigo);
+                strBldr.Append(" ( ");
                 strBldr.Append(this.hijosNodo[1].Codigo);
+                strBldr.Append(" ) ");
                 strBldr.Append(this.hijosNodo[2].Codigo);
 
-                this.Codigo = strBldr.ToString();
+                
             }
 
             this.Codigo = strBldr.ToString();

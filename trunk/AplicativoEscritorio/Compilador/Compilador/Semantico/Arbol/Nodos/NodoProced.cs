@@ -46,6 +46,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                this.VariablesProcPrincipal = this.hijosNodo[0].VariablesProcPrincipal + this.hijosNodo[1].VariablesProcPrincipal;
+
                 strBldr.Append(this.hijosNodo[0].Codigo);
                 strBldr.Append(this.hijosNodo[1].Codigo);
             }

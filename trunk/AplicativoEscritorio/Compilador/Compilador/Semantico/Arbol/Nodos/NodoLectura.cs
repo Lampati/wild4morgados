@@ -132,10 +132,15 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            StringBuilder strBldr = new StringBuilder("\t");
- 
+            StringBuilder strBldr = new StringBuilder();
 
-            this.Codigo = strBldr.ToString().Replace("\r\n", "\r\n\t").ToString().TrimEnd('\t');
+            strBldr.Append("Readln ");
+            strBldr.Append("( ");
+            strBldr.Append(this.hijosNodo[1].Codigo);
+            strBldr.Append(") ");
+            strBldr.Append(";");
+
+            this.Codigo = strBldr.ToString();
         }
     }
 }

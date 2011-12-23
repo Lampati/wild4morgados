@@ -34,6 +34,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {
+            hijoAHeredar.EsFirma = true;
     
         }
 
@@ -52,6 +53,18 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
            
             return this;
+        }
+
+        public override void CalcularCodigo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append(this.hijosNodo[0].Lexema).Append(" "); // id
+            strBldr.Append(":").Append(" "); // :
+            strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
+            
+
+            this.Codigo = strBldr.ToString();
         }
     }
 }

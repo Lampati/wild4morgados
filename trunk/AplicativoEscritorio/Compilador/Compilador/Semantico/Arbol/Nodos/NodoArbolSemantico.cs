@@ -85,11 +85,18 @@ namespace Compilador.Semantico.Arbol.Nodos
         //Entrega 4
 
         //sintetizado
+        public bool EsFirma { get; set; }
+        public string VariablesProcPrincipal { get; set; }
+        public string VariablesGlobales { get; set; }
+        public string ConstantesGlobales { get; set; }
+        
         public bool NecesitaTemporal { get; set; }
 
         public List<string> ListaElementosVisualizar { get; set; }
         public TipoComparacion Comparacion { get; set; }
         public bool EsSino { get; set; }
+
+       
 
         public Temporal Temporal { get; set; }
 
@@ -220,6 +227,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             //Heredados
             this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Ninguno;
             this.EsProcSalida = false;
+            this.EsFirma = false;
 
             if (nodoPadre != null)
             {
@@ -233,6 +241,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.ProcSalidaCrearUnaVez = nodoPadre.ProcSalidaCrearUnaVez;
                 this.DeclaracionesPermitidas = nodoPadre.DeclaracionesPermitidas;
                 this.EsProcSalida = nodoPadre.EsProcSalida;
+                
             }
         }
 

@@ -77,8 +77,12 @@ namespace Compilador.Semantico.Arbol.Nodos
             strBldr.AppendLine("uses crt;");
             strBldr.AppendLine("");
 
-            strBldr.AppendLine(this.hijosNodo[0].Codigo);
-            
+            strBldr.AppendLine("Const");
+            strBldr.AppendLine(this.hijosNodo[0].ConstantesGlobales);
+            strBldr.AppendLine("Var");
+            strBldr.AppendLine(this.hijosNodo[0].VariablesGlobales);
+            strBldr.AppendLine(this.hijosNodo[1].VariablesProcPrincipal);
+            strBldr.AppendLine("");
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
             
             this.Codigo = strBldr.ToString();

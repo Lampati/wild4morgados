@@ -36,13 +36,13 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine("Const");
-            strBldr.AppendLine(this.hijosNodo[1].Codigo);
-            strBldr.AppendLine("Var");
-            strBldr.AppendLine(this.hijosNodo[3].Codigo);
+            // esto es asi pq las variables del proc, tienen que ser globales
+            this.ConstantesGlobales  = this.hijosNodo[1].Codigo;
+            this.VariablesGlobales = this.hijosNodo[3].Codigo;
 
-            this.Codigo = strBldr.ToString();
+           
+
+            
         }
     }
 }
