@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Labels;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -26,7 +26,6 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (hijosNodo.Count > 2)
             {
                 this.EsSino = true;
-                this.TextoParaImprimirArbol = "SINO";
             }
             else
             {

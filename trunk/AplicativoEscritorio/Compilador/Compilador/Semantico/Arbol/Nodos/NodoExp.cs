@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.TablaDeSimbolos;
-using Compilador.Semantico.Arbol.Temporales;
+using Compilador.Auxiliares;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -27,7 +28,9 @@ namespace Compilador.Semantico.Arbol.Nodos
             //Por defecto uso el tipo del primer hijo para asignar el tipo de este nodo.
 
             if (this.hijosNodo.Count > 1)
-            {             
+            {
+                this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
+
                 TipoOperatoria operacion = this.hijosNodo[2].Operacion;
 
                 this.Operacion = this.hijosNodo[0].Operacion;
@@ -37,25 +40,24 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
 
                 if (operacion != TipoOperatoria.Ninguna)
-                {                   
+                {
 
-                    //this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
-                    //this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, this.TipoDato);
+                    if (this.EsArregloEnParametro)
+                    {
+                        StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                        strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
 
-                    //this.Lugar = string.Copy(this.Temporal.Nombre);
-
-                    this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
                 }
                 else
                 {
                     
 
                     this.Lexema = this.hijosNodo[0].Lexema;
-                    this.Temporal = this.hijosNodo[0].Temporal;
-
                     
 
-                    this.Lugar = string.Copy(this.hijosNodo[1].Lugar);                    
+                            
                 }
             }
             else
@@ -115,7 +117,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo[2].Operacion != TipoOperatoria.Ninguna)
                 {
-                    this.hijosNodo[2].LugarExp = this.LugarExp;
+                    
                 }
             }
         }

@@ -26,21 +26,14 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo.Count > 3)
                 {
-                    this.Valor = this.hijosNodo[2].Valor;
                     this.TipoDato = this.hijosNodo[2].TipoDato;
                     this.Lexema = this.hijosNodo[2].Lexema;
-                    this.Temporal = this.hijosNodo[2].Temporal;
 
-                    this.Lugar = this.hijosNodo[2].Lugar;
 
-                    //Para ya poner directamente el numero aca si es el caso
-                    if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                    {
-                        this.Lugar = this.hijosNodo[2].Valor.ToString();
-                    }
+                    this.EsArregloEnParametro = this.hijosNodo[2].EsArregloEnParametro;
+                    //this.Lugar = this.hijosNodo[2].Lugar;
 
-                    //Si es mayor a 0 es pq es (EXPR) entonces lo pongo
-                    this.EsOtraExpresion = true;
+                    
 
                     if (this.hijosNodo[2].TipoDato != TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano)
                     {                       
@@ -52,43 +45,23 @@ namespace Compilador.Semantico.Arbol.Nodos
                 else
                 {
 
-                    this.Valor = this.hijosNodo[1].Valor;
                     this.TipoDato = this.hijosNodo[1].TipoDato;
                     this.Lexema = this.hijosNodo[1].Lexema;
-                    this.Temporal = this.hijosNodo[1].Temporal;
+                    this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
 
-                    this.Lugar = this.hijosNodo[1].Lugar;
-
-                    //Para ya poner directamente el numero aca si es el caso
-                    if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                    {
-                        this.Lugar = this.hijosNodo[1].Valor.ToString();
-                    }
-
-                    //Si es mayor a 0 es pq es (EXPR) entonces lo pongo
-                    this.EsOtraExpresion = true;
+                   
 
                     this.AsignaParametros = this.hijosNodo[1].AsignaParametros;
                 }
             }
             else
             {
-                this.Valor = this.hijosNodo[0].Valor;
                 this.TipoDato = this.hijosNodo[0].TipoDato;
                 this.Lexema = this.hijosNodo[0].Lexema;
-                this.Temporal = this.hijosNodo[0].Temporal;
 
-                this.Lugar = this.hijosNodo[0].Lugar;
+                this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
 
-                //Para ya poner directamente el numero aca si es el caso
-                if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                {
-                    this.Lugar = this.hijosNodo[0].Valor.ToString();
-                }
-
-                //No es (EXPR) entonces lo pongo
-                this.EsOtraExpresion = false;
-
+              
                 this.AsignaParametros = this.hijosNodo[0].AsignaParametros;
             }
 

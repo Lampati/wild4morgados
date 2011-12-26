@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.TablaDeSimbolos;
-using Compilador.Semantico.Arbol.Temporales;
+using Compilador.Auxiliares;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -28,9 +29,9 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
-                int valor1 = this.hijosNodo[1].Valor;
-                int valor2 = this.hijosNodo[2].Valor;
-                
+
+
+                this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
 
                 this.Operacion = this.hijosNodo[0].Operacion;
 
@@ -40,39 +41,28 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 if (this.Operacion != TipoOperatoria.Ninguna)
                 {
-
-                    switch (this.Operacion)
-                    {
-                        case TipoOperatoria.Multiplicacion:
-                            //this.Valor = valor1 * valor2;
-                            break;
-
-                        case TipoOperatoria.Division:
-                            //this.Valor = valor1 / valor2;
-                            break;
-                    }
-
                     //this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
                     //this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, this.TipoDato);
 
                     //this.Lugar = this.Temporal.Nombre;
 
-                    this.Lugar = this.hijosNodo[1].Lugar;
-
-                    
+                    if (this.EsArregloEnParametro)
+                    {
+                        StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                        strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
                 
                 }
                 else
-                {
-                    this.Valor = valor1;
+                {                   
 
                     this.Lexema = this.hijosNodo[0].Lexema;
-                    this.Temporal = this.hijosNodo[0].Temporal;
-
-                    this.Lugar = this.hijosNodo[1].Lugar;
                     
-
                     this.TipoDato = this.hijosNodo[0].TipoDato;
+
+                   
+                    
                 }
             }
             else
@@ -133,8 +123,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo[2].Operacion != TipoOperatoria.Ninguna)
                 {
-                    this.hijosNodo[2].LugarExp = this.LugarExp;
-                    this.hijosNodo[2].LugarMul = this.LugarMul;
+                    
                 }
             }
         }

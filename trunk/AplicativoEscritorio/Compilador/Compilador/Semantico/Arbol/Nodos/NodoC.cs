@@ -20,25 +20,21 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             string nombre = this.hijosNodo[0].Lexema;
             NodoTablaSimbolos.TipoDeDato tipo = this.hijosNodo[2].TipoDato;
-            int valor = this.hijosNodo[4].Valor;
+            
 
             if (this.DeclaracionesPermitidas == TipoDeclaracionesPermitidas.Constantes)
             {
 
-                if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
+                if (!this.TablaSimbolos.ExisteVariableEnEsteContexto(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     if (tipo != this.hijosNodo[4].TipoDato)
                     {
                         throw new ErrorSemanticoException(new StringBuilder("Se intento asignar un tipo invalido a ").Append(nombre).ToString());
                     }
 
-                    this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal, valor);
+                    this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
 
-                    StringBuilder textoParaArbol = new StringBuilder().Append("Declaracion de constante ").Append(nombre).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                    textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
-                    textoParaArbol.Append(" con valor ").Append(valor.ToString());
-
-                    this.TextoParaImprimirArbol = textoParaArbol.ToString();
+                   
 
                 }
                 else
@@ -73,9 +69,8 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             string nombre = this.hijosNodo[0].Lexema;
             NodoTablaSimbolos.TipoDeDato tipo = this.hijosNodo[2].TipoDato;
-            int valor = this.hijosNodo[4].Valor;
 
-            if (!this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
+            if (!this.TablaSimbolos.ExisteVariableEnEsteContexto(nombre, this.ContextoActual, this.NombreContextoLocal))
             {
                 this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
             }

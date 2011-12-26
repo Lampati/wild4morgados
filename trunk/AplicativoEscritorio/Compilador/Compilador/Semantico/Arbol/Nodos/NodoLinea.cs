@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Labels;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -12,12 +12,10 @@ namespace Compilador.Semantico.Arbol.Nodos
         public NodoLinea(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
-            this.LabelFin = ManagerLabels.Instance.CrearNuevoLabel("FinLinea");
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {
-            hijoAHeredar.LabelFin = this.LabelFin;
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)

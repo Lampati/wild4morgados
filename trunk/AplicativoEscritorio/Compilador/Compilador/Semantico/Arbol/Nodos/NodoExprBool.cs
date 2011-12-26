@@ -35,19 +35,23 @@ namespace Compilador.Semantico.Arbol.Nodos
          
             
                 
-            string parte2 = string.Copy(this.hijosNodo[1].Lugar);
+           
 
             this.TipoDato = this.hijosNodo[0].TipoDato;
 
-            this.Comparacion = this.hijosNodo[1].Comparacion;                
+            this.Comparacion = this.hijosNodo[1].Comparacion;
 
+            this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
 
-            this.Lugar = string.Copy(this.hijosNodo[0].Lugar);
-               
-            if (this.Lugar == null || this.Lugar.Equals(string.Empty))
+            
+
+            if ( this.Comparacion != TipoComparacion.None && this.EsArregloEnParametro)
             {
-                this.Lugar = string.Copy(this.hijosNodo[0].Valor.ToString());
+                StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
+                throw new ErrorSemanticoException(strbldr.ToString());
             }
+           
 
 
             this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;

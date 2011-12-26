@@ -38,14 +38,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             this.Comparacion = this.hijosNodo[1].Comparacion;
             this.Operacion = this.hijosNodo[1].Operacion;
-
-            this.Lugar = string.Copy(this.hijosNodo[0].Lugar);
-               
-            if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-            {
-                this.Lugar = string.Copy(this.hijosNodo[0].Valor.ToString());
-            }
-
+            this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
+           
             this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
 
             if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
@@ -56,6 +50,15 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     StringBuilder strbldr = new StringBuilder("Los operadores logicos and y or ");
                     strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
+                    throw new ErrorSemanticoException(strbldr.ToString());
+                }
+
+                
+
+                if ( this.EsArregloEnParametro)
+                {
+                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
                     throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }

@@ -5,7 +5,7 @@ using System.Text;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.TablaDeSimbolos;
 using Compilador.Auxiliares;
-using Compilador.Semantico.Arbol.Temporales;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -26,31 +26,28 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             string nombre = this.hijosNodo[1].Lexema;
             bool esArreglo = this.hijosNodo[1].EsArreglo;
-            int indice = this.hijosNodo[1].IndiceArreglo;
 
             NodoTablaSimbolos.TipoDeDato tipo;
             StringBuilder strbldr;
 
             if (!esArreglo)
             {
-                if (this.TablaSimbolos.ExisteVariable(nombre))
+                if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre, this.ContextoActual, this.NombreContextoLocal);
 
                     
                     if (this.TablaSimbolos.EsModificableValorVarible(nombre,this.ContextoActual,this.NombreContextoLocal))
-                    {
-                        strbldr = new StringBuilder().Append("LECTURA: Uso en parte izquierda de variable ");
-                        strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre, this.ContextoActual, this.NombreContextoLocal)));
-                        strbldr.Append(" ").Append(nombre);
+                    {                    
 
-                        this.TextoParaImprimirArbol = strbldr.ToString();
-
-                        string nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(nombre,this.ContextoActual,this.NombreContextoLocal);
                             
-                        this.Lugar = new StringBuilder(nombreContexto).Append(nombre).ToString();
+
+                        if (tipo == NodoTablaSimbolos.TipoDeDato.Booleano)
+                        {
+                            strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es booleana, no se le puede asignar un valor desde el teclado, porque sus unicos valores son verdadero y falso.");
+                            throw new ErrorSemanticoException(strbldr.ToString());
+                        }
                
-                        //this.TablaSimbolos.ModificarValorVarible(nombre, int.MinValue);
                     }
                     else
                     {
@@ -67,8 +64,17 @@ namespace Compilador.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es un arreglo. Debe usar un indice para asignarle el contenido");
+                        strbldr.Append(" a una de sus posiciones. No se puede asignar el contenido total de un arreglo a otro. ");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
+                    else
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
                 }
             }
             else
@@ -77,20 +83,18 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     //if (this.TablaSimbolos.ExisteArreglo(nombre, indice))
                     //{
-                        tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre);
+                    tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
 
-                        //this.TablaSimbolos.ModificarValorPosicionArreglo(nombre,indice,int.MinValue);
-                        strbldr = new StringBuilder().Append("LECTURA: Uso en parte izquierda de arreglo Global");
-                        strbldr.Append(" ").Append(nombre);
-
-                        this.TextoParaImprimirArbol = strbldr.ToString();
+                       
 
                         this.Lexema = nombre;
-                        this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString());
-                        this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
-
-                        this.Lugar = this.Temporal.Nombre;
                         
+
+                        if (tipo == NodoTablaSimbolos.TipoDeDato.Booleano)
+                        {
+                            strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es booleana, no se le puede asignar un valor desde el teclado, porque sus unicos valores son verdadero y falso.");
+                            throw new ErrorSemanticoException(strbldr.ToString());
+                        }
                         //else
                         //{
                         //    strbldr = new StringBuilder("El arreglo ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));

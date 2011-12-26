@@ -23,6 +23,7 @@ namespace Compilador
             comp.Text = "Test";
             comp.WindowState = System.Windows.Forms.FormWindowState.Normal;
             comp.Size = new Size(300, 600);
+            comp.ModoDebug = false;
             comp.Show();
         }
 
@@ -33,6 +34,7 @@ namespace Compilador
             comp.Text = "Validaciones Incorrectas";
             comp.WindowState = System.Windows.Forms.FormWindowState.Normal;
             comp.Size = new Size(300, 600);
+            comp.ModoDebug = false;
             comp.Show();
         }
 
@@ -43,6 +45,7 @@ namespace Compilador
             comp.Text = "Validaciones Correctas";
             comp.WindowState = System.Windows.Forms.FormWindowState.Normal;
             comp.Size = new Size(300, 600);
+            comp.ModoDebug = false;
             comp.Show();
         }
     }

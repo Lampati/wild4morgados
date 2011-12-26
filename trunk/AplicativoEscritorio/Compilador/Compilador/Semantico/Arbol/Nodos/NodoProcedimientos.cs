@@ -31,7 +31,6 @@ namespace Compilador.Semantico.Arbol.Nodos
             this.ProcSalidaCrearUnaVez = hijoASintetizar.ProcSalidaCrearUnaVez;
             this.TablaSimbolos = hijoASintetizar.TablaSimbolos;
 
-            this.TextoParaImprimirArbol = this.ToString();
         }
 
         public override void ChequearAtributos(Terminal t)

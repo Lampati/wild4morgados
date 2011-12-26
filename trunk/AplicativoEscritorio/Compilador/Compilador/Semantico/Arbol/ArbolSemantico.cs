@@ -13,10 +13,7 @@ namespace Compilador.Semantico.Arbol
     class ArbolSemantico
     {
 
-        public const string ERROR_NATURAL_MENOR_CERO = "'Se intento convertir un entero menor a 0 en natural. El programa abortara.'";
-        public const string ERROR_ARREGLO_FUERA_LIMITES = "'Se intento acceder a un indice del arreglo fuera del intervalo definido. El programa abortara.'";
-        public const string ERROR_DIVISION_POR_CERO = "'Se intento dividir por cero. El programa abortara.'";
-        
+      
         
 
         public event Compilador.ErrorCompiladorDelegate errorCompilacion;
@@ -88,73 +85,7 @@ namespace Compilador.Semantico.Arbol
             
         }
 
-        internal void CalcularMemoriaGlobal()
-        {
-            StringBuilder strBldr = new StringBuilder();
-
-            //errores
-            strBldr.Append("ErrorNaturalMenorCero").Append(" ");
-            strBldr.Append("dw ").Append(ERROR_NATURAL_MENOR_CERO).AppendLine();
-            strBldr.Append("ArregloFueraLimites").Append(" ");
-            strBldr.Append("dw ").Append(ERROR_ARREGLO_FUERA_LIMITES).AppendLine();
-            strBldr.Append("DivisionPorCero").Append(" ");
-            strBldr.Append("dw ").Append(ERROR_DIVISION_POR_CERO).AppendLine();
-
-
-            
-
-            strBldr.Append("divisorAuxiliar").Append(" ");
-            strBldr.Append("dw ?").AppendLine();
-
-            foreach (NodoTablaSimbolos nodo in this.nodoRaiz.TablaSimbolos.ListaNodos)
-            {
-                if (nodo.TipoEntrada != NodoTablaSimbolos.TipoDeEntrada.Funcion && nodo.TipoEntrada != NodoTablaSimbolos.TipoDeEntrada.Procedimiento)
-                {
-                    switch (nodo.TipoDato)
-                    {
-                        case NodoTablaSimbolos.TipoDeDato.Numero:                        
-                            if (nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Temporal)
-                            {
-                                strBldr.Append(nodo.Nombre).Append(" ");
-                                strBldr.Append("dw").Append(" ");
-                                strBldr.Append((nodo.Valor != int.MinValue) ? nodo.Valor.ToString() : "?").AppendLine();
-                            }
-                            else
-                            {
-                                strBldr.Append(nodo.NombreContextoLocal).Append(nodo.Nombre).Append(" ");
-                                //strBldr.Append(nodo.Tamanio / 2).Append(" ");
-                                strBldr.Append("dw ");
-
-                                if (nodo.Valor == int.MinValue)
-                                {
-                                    strBldr.Append("?");
-                                    for (int i = 2; i < nodo.Tamanio / 2; i++)
-                                    {
-                                        strBldr.Append(", ?");
-                                    }
-                                    strBldr.AppendLine();
-                                }
-                                else
-                                {
-                                    strBldr.Append(nodo.Valor.ToString()).AppendLine();
-                                }
-                            }
-                            break;
-
-                        case NodoTablaSimbolos.TipoDeDato.String:
-
-                            strBldr.Append(nodo.Nombre).Append(" ");
-                            strBldr.Append("dw").Append(" ");
-                            strBldr.Append("'").Append(nodo.ValorString).Append("'").AppendLine();
-
-                            break;
-                    }
-                }
-            }
-
-            ((NodoStart)nodoRaiz).MemoriaGlobal = strBldr.ToString();
-           
-        }
+        
 
 
         public void CalcularExpresiones()
@@ -226,84 +157,7 @@ namespace Compilador.Semantico.Arbol
 
 
 
-        internal TreeNode DibujarArbol()
-        {
-
-            PilaRecorredor pilaRecorredor = new PilaRecorredor();
-            pilaRecorredor.InsertarElemento(new NodoPilaRecorredor(this.nodoRaiz));
-
-            TreeNode treeNode = new TreeNode(this.nodoRaiz.ToString());
-            ColaIndices colaIndices = new ColaIndices();
-            
-
-            NodoArbolSemantico nodoActual = this.nodoRaiz;
-
-            TreeNode treeNodeActual = treeNode;
-
-            while (!pilaRecorredor.esVacia())
-            {
-                treeNodeActual = treeNode;
-                NodoPilaRecorredor nodoRecorredorActual = pilaRecorredor.ObtenerTope();
-
-                if (nodoRecorredorActual.Actual < nodoRecorredorActual.Nodo.ObtenerCantidadHijos())
-                {                                      
-                    int x = 0;
-
-                    while (x < colaIndices.Count)
-                    {
-                        int indice = colaIndices.ObtenerIndice(x);
-
-                        if (indice >= 0)
-                        {
-                            treeNodeActual = treeNodeActual.Nodes[indice];
-                        }
-                        x++;
-                    }
-
-                    //string texto = nodoRecorredorActual.Nodo.ObtenerHijo(nodoRecorredorActual.Actual).TextoParaImprimirArbol;
-                    string texto = nodoRecorredorActual.Nodo.ObtenerHijo(nodoRecorredorActual.Actual).Dibujar();
-
-                    if (!texto.Equals(string.Empty))
-                    {
-                        //treeNodeActual.Nodes.Add(new TreeNode(texto));
-                        //colaIndices.InsertarIndice(nodoRecorredorActual.Actual);
-
-                        //Mantengo el indice al nodo actual
-                        colaIndices.InsertarIndice(treeNodeActual.Nodes.Count);
-                        treeNodeActual.Nodes.Add(new TreeNode(texto));
-                        
-                    }
-                    else
-                    {
-                        //Inserto esto como si fuera un dummy
-                        colaIndices.InsertarIndice(-1);
-                    }
-                    
-
-                    pilaRecorredor.InsertarElemento(new NodoPilaRecorredor(nodoRecorredorActual.Nodo.ObtenerHijo(nodoRecorredorActual.Actual)));
-                    nodoRecorredorActual.Actual++;
-                                        
-                }
-                else
-                {
-                    if (!colaIndices.esVacia())
-                    {
-                        colaIndices.EliminarUltimoIndice();
-                    }
-
-                    if (!pilaRecorredor.esVacia())
-                    {
-                        pilaRecorredor.DescartarTope();
-                    }
-                }
-
-            }
-
-            return treeNode;
-            
-            //return this.nodoRaiz.RecorrerArbolYDibujar(nodoStart);
-
-        }
+        
 
         public void MostrarError(ErrorCompiladorEventArgs e)
         {

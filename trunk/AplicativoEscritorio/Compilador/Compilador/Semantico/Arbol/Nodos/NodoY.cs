@@ -32,7 +32,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 string tipoEntrada = this.hijosNodo[0].Lexema;
 
-                this.Lugar = this.hijosNodo[1].Lugar;
+                //this.Lugar = this.hijosNodo[1].Lugar;
 
                 switch (tipoEntrada)
                 {
@@ -43,7 +43,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     case "[":
                         this.EsArreglo = true;
-                        this.IndiceArreglo = this.hijosNodo[1].Valor;
                         this.TipoDato = this.hijosNodo[1].TipoDato;
                         break;
                 }

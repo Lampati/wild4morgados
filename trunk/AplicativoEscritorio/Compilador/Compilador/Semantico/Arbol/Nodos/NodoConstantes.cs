@@ -22,7 +22,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
-            this.TextoParaImprimirArbol = this.ToString();
         }
 
         public override void ChequearAtributos(Terminal t)

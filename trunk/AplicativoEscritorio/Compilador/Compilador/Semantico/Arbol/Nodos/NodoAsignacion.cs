@@ -25,9 +25,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             string nombre = this.hijosNodo[0].Lexema;
             bool esArreglo = this.hijosNodo[0].EsArreglo;
-            int indice = this.hijosNodo[0].IndiceArreglo;
 
-            int valorExp = this.hijosNodo[2].Valor;
             NodoTablaSimbolos.TipoDeDato tipoExp = this.hijosNodo[2].TipoDato;
 
             NodoTablaSimbolos.TipoDeDato tipo;
@@ -36,7 +34,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (!esArreglo)
             {
-                if (this.TablaSimbolos.ExisteVariable(nombre))
+                if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     tipo = this.TablaSimbolos.ObtenerTipoVariable(nombre,this.ContextoActual,this.NombreContextoLocal);
 
@@ -51,13 +49,9 @@ namespace Compilador.Semantico.Arbol.Nodos
                                 this.ModificaParametros = true;
                             }
                             this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
-                            
 
-                            strbldr = new StringBuilder().Append("ASIGNACION: Uso en parte izquierda de variable ");
-                            strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre,this.ContextoActual,this.NombreContextoLocal)));
-                            strbldr.Append(" ").Append(nombre);
 
-                            this.TextoParaImprimirArbol = strbldr.ToString();
+                          
                         }
                         else
                         {
@@ -71,11 +65,21 @@ namespace Compilador.Semantico.Arbol.Nodos
                         strbldr.Append(" pero se le intento asignar el tipo ").Append(EnumUtils.stringValueOf(tipoExp));
                         throw new ErrorSemanticoException(strbldr.ToString());
                     }
+                                      
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es un arreglo. Debe usar un indice para asignarle el contenido");
+                        strbldr.Append(" a una de sus posiciones. No se puede asignar el contenido total de un arreglo a otro. ");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
+                    else
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
                 }
             }
             else
@@ -84,7 +88,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     //if (this.TablaSimbolos.ExisteArreglo(nombre, indice))
                     //{
-                        tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre);
+                    tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
 
                         if (tipo == tipoExp)
                         {
@@ -95,13 +99,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                             {
                                 this.ModificaParametros = true;
                             }
-                            this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
-                            
-
-                            strbldr = new StringBuilder().Append("ASIGNACION: Uso en parte izquierda de arreglo Global");
-                            strbldr.Append(" ").Append(nombre);
-
-                            this.TextoParaImprimirArbol = strbldr.ToString();
+                            this.AsignaParametros = this.hijosNodo[2].AsignaParametros;                          
                         }
                         else
                         {

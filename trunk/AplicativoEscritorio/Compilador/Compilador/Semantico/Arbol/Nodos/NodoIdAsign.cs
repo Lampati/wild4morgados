@@ -24,25 +24,15 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             if (this.hijosNodo.Count > 1)
             {
-                this.IndiceArreglo = this.hijosNodo[1].Valor;
                 this.EsArreglo = true;
                 this.TipoDato = this.hijosNodo[1].TipoDato;
 
-                this.Temporal = this.hijosNodo[1].Temporal;
-                if (this.Temporal != null)
-                {
-                    this.Lugar = this.hijosNodo[1].Temporal.Nombre;
-                }
-                else
-                {
-                    this.Valor = this.hijosNodo[1].Valor;
-                }
+                
                 
                 
             }
             else
             {
-                this.IndiceArreglo = 0;
                 this.EsArreglo = false;
             }
             return this;

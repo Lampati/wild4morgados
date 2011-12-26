@@ -6,7 +6,7 @@ using Compilador.Semantico.Arbol.Nodos.Auxiliares;
 using Compilador.Semantico.TablaDeSimbolos;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Auxiliares;
-using Compilador.Semantico.Arbol.Temporales;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -38,7 +38,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                 if (this.TablaSimbolos.ExisteFuncion(nombre))
                 {
-                    List < NodoTablaSimbolos.TipoDeDato > firmaFuncion = this.TablaSimbolos.ObtenerFirma(nombre, NodoTablaSimbolos.TipoDeEntrada.Funcion);
+                    List < FirmaProc > firmaFuncion = this.TablaSimbolos.ObtenerFirma(nombre, NodoTablaSimbolos.TipoDeEntrada.Funcion);
 
                     if (firmaFuncion.Count == listaFirmaComparar.Count)
                     {
@@ -47,7 +47,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                         while (i < firmaFuncion.Count && igual)
                         {
-                            igual = firmaFuncion[i] == listaFirmaComparar[i].Tipo;
+                            igual = firmaFuncion[i].TipoDato == listaFirmaComparar[i].Tipo 
+                                && firmaFuncion[i].EsArreglo == listaFirmaComparar[i].EsArreglo;
                             i++;
                         }
 
@@ -59,20 +60,46 @@ namespace Compilador.Semantico.Arbol.Nodos
                             this.TipoDato = this.TablaSimbolos.ObtenerTipoFuncion(nombre);
                             //this.Valor = 1;
 
-                            strbldr = new StringBuilder("Uso de funcion ").Append(nombre).Append(" en parte derecha");
-                            this.TextoParaImprimirArbol = strbldr.ToString();
 
                             this.Lexema = nombre;
-                            this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString());
-                            this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
-
-                            this.Lugar = this.Temporal.Nombre;
+                            
                         }
                         else
                         {
-                            strbldr = new StringBuilder("El parametro ").Append(listaFirmaComparar[i - 1].Lexema).Append(" pasado a la funcion ");
-                            strbldr.Append(nombre).Append(" es de tipo incorrecto.");
-                            throw new ErrorSemanticoException(strbldr.ToString());
+                            List<ErrorSemanticoException> listaExcepciones = new List<ErrorSemanticoException>();
+
+                            strbldr = new StringBuilder();
+                            if (firmaFuncion[i - 1].TipoDato != listaFirmaComparar[i - 1].Tipo)
+                            {
+
+                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la funcion ");
+                                strbldr.Append(nombre).Append(" es de tipo incorrecto. Debe ser de tipo ").Append(EnumUtils.stringValueOf(firmaFuncion[i - 1].TipoDato));
+                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                
+                            }
+
+                             if (firmaFuncion[i - 1].EsArreglo != listaFirmaComparar[i - 1].EsArreglo)
+                            {
+                                if (firmaFuncion[i - 1].EsArreglo)
+                                {
+                                    strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la funcion ");
+                                    strbldr.Append(nombre).Append(" debe ser un arreglo, y se paso una variable.");
+                                    listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                                }
+                                else
+                                {
+                                    strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la funcion ");
+                                    strbldr.Append(nombre).Append(" debe ser una variable, y se paso una arreglo.");
+                                    listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+
+                                }
+                            }
+
+                             if (listaExcepciones.Count > 0)
+                             {
+
+                                 throw new AggregateException(listaExcepciones);
+                             }
                         }
                             
                     }
@@ -91,23 +118,18 @@ namespace Compilador.Semantico.Arbol.Nodos
             }
             else if (esArreglo)
             {
-                int indice = this.hijosNodo[1].IndiceArreglo;
+                
 
                 if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     this.EsArreglo = true;
-                    this.TipoDato = this.TablaSimbolos.ObtenerTipoArreglo(nombre);
+                    this.TipoDato = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
                     //this.Valor = this.TablaSimbolos.ObtenerValorPosicionArreglo(nombre, indice);
 
-                    strbldr = new StringBuilder("Uso de arreglo Global ");
-                    strbldr.Append(nombre).Append(" en parte derecha");
-                    this.TextoParaImprimirArbol = strbldr.ToString();
+              
 
                     this.Lexema = nombre;
-                    this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString());
-                    this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Numero);
-
-                    this.Lugar = this.Temporal.Nombre;
+                    
 
                     if (this.TablaSimbolos.EsParametroDeEsteProc(nombre,this.ContextoActual,this.NombreContextoLocal))
                     {
@@ -122,21 +144,12 @@ namespace Compilador.Semantico.Arbol.Nodos
             }
             else
             {
-                if (this.TablaSimbolos.ExisteVariable(nombre))
+                if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
                 {
                     this.TipoDato = this.TablaSimbolos.ObtenerTipoVariable(nombre,this.ContextoActual,this.NombreContextoLocal);
                     //this.Valor = this.TablaSimbolos.ObtenerValorVariable(nombre);          
-                    strbldr = new StringBuilder("Uso de variable ");
-                    strbldr.Append(EnumUtils.stringValueOf(this.TablaSimbolos.ObtenerContextoVariable(nombre, this.ContextoActual, this.NombreContextoLocal)));
-                    strbldr.Append(" ").Append(nombre).Append(" en parte derecha");
-                    this.TextoParaImprimirArbol = strbldr.ToString();
-
+                   
                     this.Lexema = nombre;
-                    this.Temporal = null;
-
-                    string nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.NombreContextoLocal);
-
-                    this.Lugar = new StringBuilder(nombreContexto).Append(this.Lexema).ToString();
                         
                     if (this.TablaSimbolos.EsParametroDeEsteProc(nombre,this.ContextoActual,this.NombreContextoLocal))
                     {
@@ -145,8 +158,33 @@ namespace Compilador.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    // Pq puede ser que haya puesto el arreglo sin el subindice
+                    if (this.TablaSimbolos.ExisteArreglo(nombre, this.ContextoActual, this.NombreContextoLocal))
+                    {
+                        if (this.EsPasajeParametrosAProcOFunc)
+                        {
+                            this.EsArregloEnParametro = true;
+                            this.TipoDato = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
+                            //this.Valor = this.TablaSimbolos.ObtenerValorPosicionArreglo(nombre, indice);
+                            this.Lexema = nombre;
+
+                            if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.NombreContextoLocal))
+                            {
+                                this.AsignaParametros = true;
+                            }
+                        }
+                        else
+                        {
+                            strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es un arreglo. Debe usar un indice para asignarle el contenido");
+                            strbldr.Append(" a una de sus posiciones. No se puede asignar el contenido total de un arreglo a otro. ");
+                            throw new ErrorSemanticoException(strbldr.ToString());
+                        }
+                    }
+                    else
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
                 }
             }
             
@@ -170,7 +208,6 @@ namespace Compilador.Semantico.Arbol.Nodos
         {            
             //Por defecto coloco entero y un 1 para no alterar demasiado
             this.TipoDato = NodoTablaSimbolos.TipoDeDato.Numero;
-            this.Valor = 1;
 
             return this;
         }

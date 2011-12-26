@@ -5,8 +5,8 @@ using System.Text;
 using Compilador.Semantico.TablaDeSimbolos;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Auxiliares;
-using Compilador.Semantico.Arbol.Temporales;
-using Compilador.Semantico.Arbol.Labels;
+
+
 using System.IO;
 using System.Configuration;
 
@@ -30,7 +30,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void ChequearAtributos(Terminal t)
         {
-            ManagerTemporales inst = ManagerTemporales.Instance;
+            
             if (!this.ProcPrincipalYaCreadoyCorrecto)
             {
                 StringBuilder strbldr = new StringBuilder("Error en el procedimiento principal: Debe haber unicamente un procedimiento principal y debe ser el ultimo.");
@@ -66,7 +66,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
         {
-            this.TextoParaImprimirArbol = this.ToString();
         }
 
         public override void CalcularCodigo()
@@ -83,7 +82,10 @@ namespace Compilador.Semantico.Arbol.Nodos
             strBldr.AppendLine(this.hijosNodo[0].VariablesGlobales);
             strBldr.AppendLine(this.hijosNodo[1].VariablesProcPrincipal);
             strBldr.AppendLine("");
+            strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesBasicas());
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
+
+            
             
             this.Codigo = strBldr.ToString();
         }

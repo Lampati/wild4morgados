@@ -9,8 +9,8 @@ using System.Collections;
 using Compilador.Semantico.Arbol.Nodos.Auxiliares;
 using System.Diagnostics;
 using System.Windows.Forms;
-using Compilador.Semantico.Arbol.Temporales;
-using Compilador.Semantico.Arbol.Labels;
+
+
 using System.ComponentModel;
 
 namespace Compilador.Semantico.Arbol.Nodos
@@ -52,7 +52,6 @@ namespace Compilador.Semantico.Arbol.Nodos
     
 
         public TablaSimbolos TablaSimbolos { get; set; }
-        public int Valor { get; set; }
         public NodoTablaSimbolos.TipoDeDato TipoDato { get; set; }
         public bool EsConstante { get; set; }
         public NodoTablaSimbolos.TipoContexto ContextoActual { get; set; }
@@ -65,11 +64,10 @@ namespace Compilador.Semantico.Arbol.Nodos
         public string NombreContextoLocal { get; set; }
         public bool EsArreglo { get; set; }
         public bool EsFuncion { get; set; }
-        public int IndiceArreglo { get; set; }
         public List<Variable> VariablesACrear { get; set; }
         public List<Firma> ListaFirma { get; set; }
         public TipoOperatoria Operacion { get; set; }
-        public string TextoParaImprimirArbol { get; set; }
+        
 
         public bool EsProcSalida { get; set; }
         public bool LlamaProcSalida { get; set; }
@@ -77,8 +75,8 @@ namespace Compilador.Semantico.Arbol.Nodos
         public bool AsignaParametros { get; set; }
         public bool LlamaProcs { get; set; }
         public bool TieneLecturas { get; set; }
-        
-        
+        public bool EsPasajeParametrosAProcOFunc { get; set; }
+        public bool EsArregloEnParametro { get; set; }
 
         public TipoDeclaracionesPermitidas DeclaracionesPermitidas { get; set; }
 
@@ -94,25 +92,10 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public List<string> ListaElementosVisualizar { get; set; }
         public TipoComparacion Comparacion { get; set; }
-        public bool EsSino { get; set; }
+        public bool EsSino { get; set; }       
 
        
-
-        public Temporal Temporal { get; set; }
-
-        public CodeLabel LabelFin { get; set; }
-        public CodeLabel LabelVerdadero { get; set; }
-        public CodeLabel LabelFalso { get; set; }
-        //Para labels auxiliares que tenga que crear el nodo
-        public List<CodeLabel> ListaLabel { get; set; }
-
         public string Codigo { get; set; }
-        public string Lugar { get; set; }
-
-        public string LugarExp { get; set; }
-        public string LugarMul { get; set; }
-
-        public bool EsOtraExpresion { get; set; }
 
 
         protected ElementoGramatica elemento;
@@ -204,18 +187,18 @@ namespace Compilador.Semantico.Arbol.Nodos
             inicializado = false;
 
             //Sintetizados
-            this.Valor = int.MinValue;
             this.TipoDato = NodoTablaSimbolos.TipoDeDato.Ninguno;
             this.Comparacion = TipoComparacion.None;
             
             this.EsFuncion = false;
             this.EsArreglo = false;
             this.Operacion = TipoOperatoria.Ninguna;
-            this.TextoParaImprimirArbol = string.Empty;
             this.Codigo = string.Empty;
-            this.Lugar = string.Empty;
 
-            this.ListaLabel = new List<CodeLabel>();
+            this.EsArregloEnParametro = false;
+            
+
+            
             this.ListaElementosVisualizar = new List<string>();
 
             this.LlamaProcSalida = false;
@@ -228,6 +211,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Ninguno;
             this.EsProcSalida = false;
             this.EsFirma = false;
+            this.EsPasajeParametrosAProcOFunc = false;
 
             if (nodoPadre != null)
             {
@@ -241,6 +225,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 this.ProcSalidaCrearUnaVez = nodoPadre.ProcSalidaCrearUnaVez;
                 this.DeclaracionesPermitidas = nodoPadre.DeclaracionesPermitidas;
                 this.EsProcSalida = nodoPadre.EsProcSalida;
+                this.EsPasajeParametrosAProcOFunc = nodoPadre.EsPasajeParametrosAProcOFunc;
                 
             }
         }
@@ -402,49 +387,9 @@ namespace Compilador.Semantico.Arbol.Nodos
             return this.elemento.ToString();
         }
 
-        public string RecorrerArbolYDibujar(int n)
-        {                       
-            StringBuilder strbldr = new StringBuilder();
+        
 
-
-
-            for (int t = 0; t < n; t++)
-            {
-                strbldr.Append("  ");
-            }
-
-            if (this.ToString().Equals("ASIGNACION"))
-            {
-                if (Debugger.IsAttached)
-                {
-                    Debugger.Break();
-                }
-            }
-
-            if (!this.TextoParaImprimirArbol.Equals(string.Empty))
-            {
-                for (int i = 0; i < this.hijosNodo.Count; i++)
-                {
-                    strbldr.AppendLine(this.hijosNodo[i].Dibujar());
-                    
-                    strbldr.Append(this.hijosNodo[i].RecorrerArbolYDibujar(n + 1));
-                }
-            }
-            else
-            {
-                for (int i = 0; i < this.hijosNodo.Count; i++)
-                {
-                    strbldr.Append(this.hijosNodo[i].RecorrerArbolYDibujar(n));
-                }
-            }
-
-            return strbldr.ToString();
-        }
-
-        public virtual string Dibujar()
-        {
-            return this.TextoParaImprimirArbol;
-        }
+     
 
 
 

@@ -6,8 +6,8 @@ using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.Arbol.Nodos.Auxiliares;
 using Compilador.Semantico.TablaDeSimbolos;
 using Compilador.Auxiliares;
-using Compilador.Semantico.Arbol.Temporales;
-using Compilador.Semantico.Arbol.Labels;
+
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -25,7 +25,7 @@ namespace Compilador.Semantico.Arbol.Nodos
             bool esFuncion = (this.hijosNodo[0].Lexema.ToUpper() == "FUNCION");
             string nombre = this.hijosNodo[1].Lexema;
             this.Lexema = nombre;
-            List<NodoTablaSimbolos.TipoDeDato> listaFirmas = new List<NodoTablaSimbolos.TipoDeDato>();
+            List<FirmaProc> listaFirmas = new List<FirmaProc>();
             NodoTablaSimbolos.TipoDeDato devolucion = NodoTablaSimbolos.TipoDeDato.Ninguno;
 
             if (esFuncion)
@@ -35,7 +35,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             foreach (Firma f in this.hijosNodo[3].ListaFirma)
             {
-                listaFirmas.Add(f.Tipo);
+                listaFirmas.Add(new FirmaProc(f.Lexema,f.Tipo, f.EsArreglo));
             }
 
             if (!this.ProcPrincipalCrearUnaVez)
@@ -61,8 +61,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                             if (devolucion == this.hijosNodo[11].TipoDato)
                             {
 
-                                this.TablaSimbolos.AgregarFuncion(nombre, listaFirmas, devolucion, ManagerTemporales.Instance.CantidadTemporalesParaProc(nombre));
-                                this.TextoParaImprimirArbol = nombre;
+                                this.TablaSimbolos.AgregarFuncion(nombre, listaFirmas, devolucion);
+                                
 
                                 if (this.hijosNodo[9].LlamaProcSalida)
                                 {
@@ -117,7 +117,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     List<ErrorSemanticoException> listaExcepciones = new List<ErrorSemanticoException>();
 
-                    this.TablaSimbolos.AgregarProcedimiento(nombre, listaFirmas, ManagerTemporales.Instance.CantidadTemporalesParaProc(nombre));
+                    this.TablaSimbolos.AgregarProcedimiento(nombre, listaFirmas );
 
                     //Chequeo de que no se llame a Salida donde no se debe, y que solo principal llame a salida
                     if (!this.hijosNodo[7].LlamaProcSalida && nombre.ToLower().Equals(Global.NOMBRE_PROC_PRINCIPAL.ToLower()))
@@ -165,7 +165,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     }
 
-                    this.TextoParaImprimirArbol = nombre;
                 }
                 else
                 {                   
@@ -240,7 +239,8 @@ namespace Compilador.Semantico.Arbol.Nodos
                     this.VariablesProcPrincipal = this.hijosNodo[5].Codigo;
 
                     strBldr.AppendLine("begin");
-                    strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));                    
+                    strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));
+                    strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
                     strBldr.AppendLine("end.");
                 }
                 else
