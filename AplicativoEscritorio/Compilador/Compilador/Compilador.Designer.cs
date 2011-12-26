@@ -63,8 +63,6 @@
             this.CadenaTexto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageTablaAnalisis = new System.Windows.Forms.TabPage();
             this.dataGridViewTablaAnalisis = new System.Windows.Forms.DataGridView();
-            this.tabPageArbolSemantico = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPageArmadorCodigo = new System.Windows.Forms.TabPage();
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.buttonGenerarCodigo = new System.Windows.Forms.Button();
@@ -76,7 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSintactico)).BeginInit();
             this.tabPageTablaAnalisis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTablaAnalisis)).BeginInit();
-            this.tabPageArbolSemantico.SuspendLayout();
             this.tabPageArmadorCodigo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -259,7 +256,6 @@
             this.tabControl1.Controls.Add(this.tabPageLexicografico);
             this.tabControl1.Controls.Add(this.tabPageSintactico);
             this.tabControl1.Controls.Add(this.tabPageTablaAnalisis);
-            this.tabControl1.Controls.Add(this.tabPageArbolSemantico);
             this.tabControl1.Controls.Add(this.tabPageArmadorCodigo);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -268,7 +264,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1028, 853);
             this.tabControl1.TabIndex = 14;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPageLexicografico
             // 
@@ -447,24 +442,6 @@
             this.dataGridViewTablaAnalisis.Size = new System.Drawing.Size(1020, 824);
             this.dataGridViewTablaAnalisis.TabIndex = 0;
             // 
-            // tabPageArbolSemantico
-            // 
-            this.tabPageArbolSemantico.Controls.Add(this.treeView1);
-            this.tabPageArbolSemantico.Location = new System.Drawing.Point(4, 25);
-            this.tabPageArbolSemantico.Name = "tabPageArbolSemantico";
-            this.tabPageArbolSemantico.Size = new System.Drawing.Size(1020, 824);
-            this.tabPageArbolSemantico.TabIndex = 3;
-            this.tabPageArbolSemantico.Text = "ArbolSalida";
-            this.tabPageArbolSemantico.UseVisualStyleBackColor = true;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(1020, 824);
-            this.treeView1.TabIndex = 1;
-            // 
             // tabPageArmadorCodigo
             // 
             this.tabPageArmadorCodigo.Controls.Add(this.textBoxCodigo);
@@ -517,7 +494,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSintactico)).EndInit();
             this.tabPageTablaAnalisis.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTablaAnalisis)).EndInit();
-            this.tabPageArbolSemantico.ResumeLayout(false);
             this.tabPageArmadorCodigo.ResumeLayout(false);
             this.tabPageArmadorCodigo.PerformLayout();
             this.ResumeLayout(false);
@@ -561,8 +537,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Pila;
         private System.Windows.Forms.DataGridViewTextBoxColumn CadenaTexto;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TabPage tabPageArbolSemantico;
-        public System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TabPage tabPageArmadorCodigo;
         private System.Windows.Forms.TextBox textBoxCodigo;
         private System.Windows.Forms.Button buttonGenerarCodigo;

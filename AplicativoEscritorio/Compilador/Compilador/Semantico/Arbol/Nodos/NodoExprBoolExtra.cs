@@ -41,12 +41,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 //this.TipoDato = this.hijosNodo[0].TipoDato;
                 this.TipoDato = NodoTablaSimbolos.TipoDeDato.Booleano;
 
-                this.Lugar = string.Copy(this.hijosNodo[1].Lugar);
-
-                if (this.Lugar == null || this.Lugar.Equals(string.Empty))
-                {
-                    this.Lugar = string.Copy(this.hijosNodo[1].Valor.ToString());
-                }
+                this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
 
                 if (this.hijosNodo[1].TipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
                 {
@@ -54,6 +49,15 @@ namespace Compilador.Semantico.Arbol.Nodos
                     strbldr.Append("solo pueden ser usados con expresiones del tipo booleanas");
                     throw new ErrorSemanticoException(strbldr.ToString());
                 }
+
+                if (this.Operacion != TipoOperatoria.Ninguna && this.EsArregloEnParametro)
+                {
+                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
+                    throw new ErrorSemanticoException(strbldr.ToString());
+                }
+           
+
 
                 this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
             }

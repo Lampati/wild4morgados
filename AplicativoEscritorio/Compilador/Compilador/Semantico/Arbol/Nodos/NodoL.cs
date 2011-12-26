@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Temporales;
+
 using Compilador.Semantico.TablaDeSimbolos;
 
 namespace Compilador.Semantico.Arbol.Nodos
@@ -27,24 +27,11 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 this.Lexema = this.hijosNodo[0].Lexema.Replace("'", string.Empty);
 
-                this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString(), this.Lexema);
-                this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.String, this.Temporal.Valor);
-
-                this.Lugar = this.Temporal.Nombre;
+               
             }
-            else
-            {
-                if (this.hijosNodo[0].Lugar == null || this.hijosNodo[0].Lugar.Equals(string.Empty))
-                {
-                    this.Lugar = this.hijosNodo[0].Valor.ToString();
-                }
-                else
-                {
-                    this.Lugar = this.hijosNodo[0].Lugar;
-                }                
-            }
+            
 
-            this.ListaElementosVisualizar.Add(string.Copy(this.Lugar));
+            //this.ListaElementosVisualizar.Add(string.Copy(this.Lugar));
 
             return this;
         }
@@ -71,7 +58,14 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo[0].GetType() != typeof(NodoTerminal))
             {
-                strBldr.Append(this.hijosNodo[0].Codigo);
+                if (this.hijosNodo[0].TipoDato == NodoTablaSimbolos.TipoDeDato.Booleano)
+                {
+                    strBldr.Append(GeneracionCodigoHelpers.EscribirValorBooleano(this.hijosNodo[0].Codigo));
+                }
+                else
+                {
+                    strBldr.Append(this.hijosNodo[0].Codigo);    
+                }
             }
             else
             {

@@ -5,7 +5,7 @@ using System.Text;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.TablaDeSimbolos;
 using Compilador.Auxiliares;
-using Compilador.Semantico.Arbol.Temporales;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -26,14 +26,12 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             this.Lexema = this.hijosNodo[0].Lexema;
             this.EsArreglo = this.hijosNodo[1].EsArreglo;
-            this.IndiceArreglo = this.hijosNodo[1].IndiceArreglo;
 
             //if (this.EsArreglo)
             //{
             //    this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
             //    this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, NodoTablaSimbolos.TipoDeDato.Entero);
             //}
-            string nombreContexto;
             //if (this.EsArreglo)
             //{
             //    nombreContexto = "Global";
@@ -43,9 +41,8 @@ namespace Compilador.Semantico.Arbol.Nodos
             //    nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
             //}
 
-            nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.NombreContextoLocal);
 
-            this.Lugar = new StringBuilder(nombreContexto).Append(this.Lexema).ToString();
+            
             
 
             return this;

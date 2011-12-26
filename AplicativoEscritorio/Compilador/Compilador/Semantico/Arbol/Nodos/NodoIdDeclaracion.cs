@@ -34,14 +34,14 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void ChequearAtributos(Terminal t)
         {
-            if (this.TablaSimbolos.ExisteVariable(this.VariablesACrear[0].Lexema, this.ContextoActual, this.NombreContextoLocal))
+            if (this.TablaSimbolos.ExisteVariableEnEsteContexto(this.VariablesACrear[0].Lexema, this.ContextoActual, this.NombreContextoLocal))
             {
                 throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(this.VariablesACrear[0].Lexema).Append(" ya existia en ese contexto").ToString());
             }
-            if (this.VariablesACrear[0].EsArreglo && this.ContextoActual != NodoTablaSimbolos.TipoContexto.Global)
-            {
-                throw new ErrorSemanticoException(new StringBuilder("No se pueden crear arreglos fuera del contexto global.").ToString());
-            }  
+            //if (this.VariablesACrear[0].EsArreglo && this.ContextoActual != NodoTablaSimbolos.TipoContexto.Global)
+            //{
+            //    throw new ErrorSemanticoException(new StringBuilder("No se pueden crear arreglos fuera del contexto global.").ToString());
+            //}  
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()

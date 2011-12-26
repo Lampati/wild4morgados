@@ -23,7 +23,6 @@ namespace Compilador.Semantico.Arbol.Nodos
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             this.ListaFirma.AddRange(hijoASintetizar.ListaFirma);
-            this.TextoParaImprimirArbol = "FIRMA";
         }
 
         public override void ChequearAtributos(Terminal t)

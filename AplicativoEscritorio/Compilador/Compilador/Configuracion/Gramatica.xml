@@ -54,12 +54,14 @@
 		<NoTerminal>IDASIGN</NoTerminal>
 		<NoTerminal>IDDECLARACION</NoTerminal>	
 		<NoTerminal>IDPROC</NoTerminal>	
-		<NoTerminal>TIPODATOCONARREGLO</NoTerminal>			
+		<NoTerminal>TIPODATOCONARREGLO</NoTerminal>	
+		<NoTerminal>TIPODATOCONARREGLOPARAM</NoTerminal>			
 		<NoTerminal>TEXTO</NoTerminal>
 		<NoTerminal>BOOL</NoTerminal>
 		<NoTerminal>MAXARREGLODEC</NoTerminal>
 		<NoTerminal>VALORCONST</NoTerminal>
 		<NoTerminal>OPBOOLEANAS</NoTerminal>
+		
 		
 	</NoTerminales>
 	
@@ -181,6 +183,18 @@
 				</Der>
 				<Der>
 					<Expresion>arreglo [ MAXARREGLODEC ] de TIPODATO</Expresion>
+				</Der>			
+			</Ders>
+		</Produccion>
+		
+		<Produccion>
+			<Izq>TIPODATOCONARREGLOPARAM</Izq>
+			<Ders>
+				<Der>
+					<Expresion>TIPODATO</Expresion>
+				</Der>
+				<Der>
+					<Expresion>arreglo de TIPODATO</Expresion>
 				</Der>			
 			</Ders>
 		</Produccion>
@@ -325,7 +339,7 @@
 			<Izq>F</Izq>
 			<Ders>
 				<Der>
-					<Expresion>id : TIPODATOCONARREGLO</Expresion>
+					<Expresion>id : TIPODATOCONARREGLOPARAM</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>

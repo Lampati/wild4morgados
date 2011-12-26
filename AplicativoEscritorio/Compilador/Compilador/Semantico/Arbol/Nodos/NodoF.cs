@@ -23,12 +23,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             this.ListaFirma.Add(f);
 
-            StringBuilder textoArbol = new StringBuilder();
-            textoArbol.Append("Declaracion de parámetro ").Append(this.hijosNodo[0].Lexema);
-            textoArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(this.hijosNodo[2].TipoDato));
-            this.TextoParaImprimirArbol = textoArbol.ToString();
-
-
             return this;
         }
 

@@ -25,13 +25,11 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             if (this.hijosNodo.Count > 1) //No es lambda en ese caso
             {
-                this.IndiceArreglo = this.hijosNodo[1].Valor;
                 this.EsArreglo = true;
                 this.TipoDato = this.hijosNodo[1].TipoDato;
             }
             else
             {
-                this.IndiceArreglo = 0;
                 this.EsArreglo = false;
             }
 

@@ -25,7 +25,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
-            this.Valor = hijoASintetizar.Valor;
             this.TipoDato = hijoASintetizar.TipoDato;
             
         }

@@ -23,11 +23,7 @@ namespace Compilador.Semantico.Arbol.Nodos
         }
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
-        {
-          
-
-            this.TextoParaImprimirArbol = this.ToString();
-
+        {                    
             this.ListaElementosVisualizar = this.hijosNodo[2].ListaElementosVisualizar;
 
             return this;

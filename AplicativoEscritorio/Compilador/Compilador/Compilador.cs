@@ -30,6 +30,8 @@ namespace Compilador
         private bool errores = false;
 
         public string ArchivoEntrada { get; set; }
+
+        public bool ModoDebug { get; set; }
    
 
         public Compilador()
@@ -66,9 +68,14 @@ namespace Compilador
 
                 this.analizadorSintactico.ArbolSemantico.errorCompilacion += new ErrorCompiladorDelegate(Compilador_errorCompilacion);
 
-                this.dataGridViewSintactico.Rows.Add(this.analizadorSintactico.Pila.ToString(), this.analizadorSintactico.CadenaEntrada.ToString());
+                if (ModoDebug)
+                {
+                    this.dataGridViewSintactico.Rows.Add(this.analizadorSintactico.Pila.ToString(), this.analizadorSintactico.CadenaEntrada.ToString());
+                    this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
 
-                this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+                    this.buttonAnalizadorSintactico.Enabled = false;
+                    this.button3.Enabled = false;
+                }
 
                 this.tabControl1.SelectedTab = tabPageSintactico;
                 //this.analizadorSintactico.AnalizarSintacticamente();
@@ -281,9 +288,11 @@ namespace Compilador
         {
             bool error = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
 
-            this.AgregarFilaSintactico(error);
-
-            this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+            if (ModoDebug)
+            {
+                this.AgregarFilaSintactico(error);            
+                this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+            }
 
             if (this.analizadorSintactico.esFinAnalisisSintactico() && !errores)
             {
@@ -298,15 +307,19 @@ namespace Compilador
             {
                 bool error= this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
 
-                this.AgregarFilaSintactico(error);
-
-                this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+                if (ModoDebug)
+                {
+                    this.AgregarFilaSintactico(error);                
+                    this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+                }
             }
 
             if (this.analizadorSintactico.esFinAnalisisSintactico()  &&  !errores)
             {
                 this.buttonGenerarCodigo.Enabled = true;
             }
+
+            MessageBox.Show("Finalizado");
 
         }
 
@@ -317,7 +330,10 @@ namespace Compilador
             {
                 bool error = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
 
-                this.AgregarFilaSintactico(error);
+                if (ModoDebug)
+                {
+                    this.AgregarFilaSintactico(error);
+                }
 
                 i++;
             }
@@ -349,16 +365,7 @@ namespace Compilador
         }
 
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab == this.tabPageArbolSemantico)
-            {
-                treeView1.Nodes.Clear();
-
-                treeView1.Nodes.Add(this.analizadorSintactico.ArbolSemantico.DibujarArbol());                
-                
-            }
-        }
+    
 
         private void buttonGenerarCodigo_Click(object sender, EventArgs e)
         {
@@ -366,8 +373,6 @@ namespace Compilador
 
             this.analizadorSintactico.ArbolSemantico.CalcularExpresiones();
 
-            this.analizadorSintactico.ArbolSemantico.CalcularMemoriaGlobal();
-            //this.analizadorSintactico.ArbolSemantico.CalcularLugar();
             textBoxCodigo.Text += this.analizadorSintactico.ArbolSemantico.CalcularCodigo();
         }
 

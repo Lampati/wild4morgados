@@ -12,13 +12,14 @@ var A : numero;
 var B : numero;
 comenzar
   B := M;
+  A := B / 2;
   mientras (B > 0) hacer
 
     si (B > A) entonces
       A := A + 1;
     finsi;
 
-    Mostrar ('Visualizacion ' , B , ' ' , A);
+    Mostrar ('Visualizacion ' , B , ' ' , A, verdadero );
     B := B - 1;
 
   finmientras;
@@ -69,24 +70,25 @@ comenzar
 
 finproc;
 
-funcion FUN1(T: numero) : numero
+funcion VALABSOLUTO(T: numero) : numero
 var N: numero;
 comenzar
   si (T > 0) entonces
-    N := 45;
+    N := T;
   sino
-    N := 70;
+    N := T * -1;
   finsi;
-finfunc N * 2;
+finfunc N;
 
 
-procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
+procedimiento SALIDA(A : arreglo de numero)
 var I : numero;
 comenzar
   I := 1;
 
   mientras (I <= MaxArreglo) hacer
     Mostrar(A[I]);
+	I := I + 1;
   finmientras;
 
 
@@ -98,15 +100,16 @@ procedimiento PRINCIPAL()
 var X: numero;
 var A: arreglo[MaxArreglo] de numero;
 comenzar
-
-	X := 6 + 10 - 10 - 10 - X - (X);
+	
+	X := 6 + 10 - 10 - 10 ;
+	X := 100 - X - (X);
   llamar PROC1();
-  S := M;
+  
 
-  llamar PROC2(S + 1);
-  A[1] := FUN1(5);
-  A[2] := FUN1(-2);
-  A[3] := FUN1(5);
+  
+  A[1] := VALABSOLUTO(5);
+  A[2] := VALABSOLUTO(-2);
+  A[3] := VALABSOLUTO(55 * -1);
   
   llamar SALIDA(A); 
 

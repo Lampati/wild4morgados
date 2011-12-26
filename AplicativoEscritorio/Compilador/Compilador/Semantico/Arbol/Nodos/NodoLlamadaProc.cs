@@ -5,6 +5,7 @@ using System.Text;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.Arbol.Nodos.Auxiliares;
 using Compilador.Semantico.TablaDeSimbolos;
+using Compilador.Auxiliares;
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -34,7 +35,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.TablaSimbolos.ExisteProcedimiento(nombre))
             {
-                List<NodoTablaSimbolos.TipoDeDato> firmaFuncion = this.TablaSimbolos.ObtenerFirma(nombre, NodoTablaSimbolos.TipoDeEntrada.Procedimiento);
+                List<FirmaProc> firmaFuncion = this.TablaSimbolos.ObtenerFirma(nombre, NodoTablaSimbolos.TipoDeEntrada.Procedimiento);
 
                 if (firmaFuncion.Count == listaFirmaComparar.Count)
                 {
@@ -43,7 +44,8 @@ namespace Compilador.Semantico.Arbol.Nodos
 
                     while (i < firmaFuncion.Count && igual)
                     {
-                        igual = firmaFuncion[i] == listaFirmaComparar[i].Tipo;
+                        igual = firmaFuncion[i].TipoDato == listaFirmaComparar[i].Tipo
+                            && firmaFuncion[i].EsArreglo == listaFirmaComparar[i].EsArreglo;
                         i++;
                     }
 
@@ -51,9 +53,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     {
                         this.TipoDato = this.TablaSimbolos.ObtenerTipoProcedimiento(nombre);
                         //this.Valor = 1;
-                        strbldr = new StringBuilder("Llamada a procedimiento ").Append(nombre);
-                        this.TextoParaImprimirArbol = strbldr.ToString();
-
+                       
                         if (nombre.ToLower().Trim().Equals(Global.NOMBRE_PROC_SALIDA))
                         {
                             this.LlamaProcSalida = true;
@@ -61,9 +61,40 @@ namespace Compilador.Semantico.Arbol.Nodos
                     }
                     else
                     {
-                        strbldr = new StringBuilder("El parametro ").Append(listaFirmaComparar[i - 1].Lexema).Append(" pasado a la funcion ");
-                        strbldr.Append(nombre).Append(" es de tipo incorrecto.");
-                        throw new ErrorSemanticoException(strbldr.ToString());
+                        List<ErrorSemanticoException> listaExcepciones = new List<ErrorSemanticoException>();
+
+                        strbldr = new StringBuilder();
+                        if (firmaFuncion[i - 1].TipoDato != listaFirmaComparar[i - 1].Tipo)
+                        {
+
+                            strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado al procedimiento ");
+                            strbldr.Append(nombre).Append(" es de tipo incorrecto. Debe ser de tipo ").Append(EnumUtils.stringValueOf(firmaFuncion[i - 1].TipoDato));
+                            listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                            
+
+                        }
+
+                        if (firmaFuncion[i - 1].EsArreglo != listaFirmaComparar[i - 1].EsArreglo)
+                        {
+                            if (firmaFuncion[i - 1].EsArreglo)
+                            {
+                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la procedimiento ");
+                                strbldr.Append(nombre).Append(" debe ser un arreglo, y se paso una variable.");
+                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+                            }
+                            else
+                            {
+                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la procedimiento ");
+                                strbldr.Append(nombre).Append(" debe ser una variable, y se paso una arreglo.");
+                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+
+                            }
+                        }
+
+                        if (listaExcepciones.Count > 0)
+                        {
+                            throw new AggregateException(listaExcepciones);
+                        }
                     }
 
                 }

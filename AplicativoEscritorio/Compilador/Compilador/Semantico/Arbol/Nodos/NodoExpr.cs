@@ -5,7 +5,8 @@ using System.Text;
 using Compilador.Sintactico.Gramatica;
 using Compilador.Semantico.TablaDeSimbolos;
 using System.Diagnostics;
-using Compilador.Semantico.Arbol.Temporales;
+using Compilador.Auxiliares;
+
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
@@ -26,10 +27,9 @@ namespace Compilador.Semantico.Arbol.Nodos
         {
             //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.
             //Por defecto uso el tipo1 para asignar el tipo de este nodo.
-           
 
-            int valor1 = this.hijosNodo[0].Valor;
-            int valor2 = this.hijosNodo[1].Valor;
+            this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
+            
             TipoOperatoria operacion = this.hijosNodo[1].Operacion;
 
             this.TipoDato = this.hijosNodo[0].TipoDato;
@@ -47,30 +47,23 @@ namespace Compilador.Semantico.Arbol.Nodos
             if (operacion != TipoOperatoria.Ninguna)
             {
                 this.TipoDato = this.hijosNodo[0].TipoDato;
-                switch (operacion)
+
+                if (this.EsArregloEnParametro)
                 {
-                    case TipoOperatoria.Suma:
-                        this.Valor = valor1 + valor2;
-                        break;
-
-                    case TipoOperatoria.Resta:
-                        this.Valor = valor1 - valor2;
-                        break;
+                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
+                    throw new ErrorSemanticoException(strbldr.ToString());
                 }
-
-                this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.NombreContextoLocal, this.ToString());
-                this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, this.TipoDato);
-                this.Lugar = string.Copy(this.Temporal.Nombre);
             
             }
             else
             {
-                this.Valor = valor1;
+              
 
                 this.Lexema = this.hijosNodo[0].Lexema;
                 //this.Temporal = this.hijosNodo[0].Temporal;
 
-                this.Lugar = string.Copy(this.hijosNodo[0].Lugar);
+                
             }
 
             
@@ -110,11 +103,7 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override void CalcularExpresiones()
         {            
-            //this.Temporal = ManagerTemporales.Instance.CrearNuevoTemporal(this.nombreContextoLocal, this.ToString());
-            //this.TablaSimbolos.AgregarTemporal(this.Temporal.Nombre, this.TipoDato);
-            this.LugarExp = this.Lugar;
-
-            this.hijosNodo[1].LugarExp = this.LugarExp;
+   
       
         }
 

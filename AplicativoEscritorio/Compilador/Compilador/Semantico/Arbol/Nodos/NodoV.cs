@@ -32,7 +32,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     if (!this.hijosNodo[2].EsArreglo)
                     //if (!v.EsArreglo)
                     {
-                        if (!this.TablaSimbolos.ExisteVariable(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
+                        if (!this.TablaSimbolos.ExisteVariableEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
                         {
                             this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
                             textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
@@ -47,7 +47,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                     else
                     {
 
-                        if (!this.TablaSimbolos.ExisteArreglo(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
+                        if (!this.TablaSimbolos.ExisteArregloEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
                         {
                             this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, v.IndiceArreglo, false);
                             textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
@@ -65,7 +65,6 @@ namespace Compilador.Semantico.Arbol.Nodos
             {
                 throw new ErrorSemanticoException(new StringBuilder("No se permiten declarar variables aqui. Las variables deben ser creadas en el contexto global al principio del programa o en la zona de declaraciones de un procedimiento o funcion").ToString());
             }
-            this.TextoParaImprimirArbol = textoParaArbol.ToString();
 
             return this;
         }

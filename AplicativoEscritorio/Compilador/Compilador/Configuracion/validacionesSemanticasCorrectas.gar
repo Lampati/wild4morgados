@@ -25,7 +25,7 @@ comenzar
 
 finproc;
 
-procedimiento PROC2(A : arreglo[MaxArreglo] de numero, B : arreglo[MaxArreglo] de texto , C : arreglo[MaxArreglo] de booleano)
+procedimiento PROC2(A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano)
 comenzar
 
 finproc;
@@ -42,15 +42,15 @@ funcion FUNC3( i : numero, j : texto, k: booleano) : booleano
 comenzar
 finfunc i > 10 and i < 20 or k;
 
-funcion FUNC4( A : arreglo[MaxArreglo] de numero, B : arreglo[MaxArreglo] de texto , C : arreglo[MaxArreglo] de booleano) : numero
+funcion FUNC4( A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano) : numero
 comenzar
 finfunc A[1] * 2;
 
-funcion FUNC5( A : arreglo[MaxArreglo] de numero, B : arreglo[MaxArreglo] de texto , C : arreglo[MaxArreglo] de booleano) : texto
+funcion FUNC5( A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano) : texto
 comenzar
 finfunc B[1] & '';
 
-funcion FUNC6( A : arreglo[MaxArreglo] de numero, B : arreglo[MaxArreglo] de texto , C : arreglo[MaxArreglo] de booleano) : booleano
+funcion FUNC6( A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano) : booleano
 comenzar
 finfunc A[1] > 10 and A[2] < 20 or C[1] ;
 
@@ -375,18 +375,15 @@ procedimiento USO_LEER_CORRECTAS()
 
 var vNumero,vNumero2 : numero;
 var vTexto,vTexto2 : texto;
-var vBooleana,vBooleana2 : booleano;
 var arrNumero : arreglo[MaxArreglo] de numero;
 var arrTexto : arreglo[MaxArreglo] de texto;
-var arrBooleano : arreglo[MaxArreglo] de booleano;
+
 comenzar
 
 leer vNumero;
 leer vTexto;
-leer vBooleana;
 leer arrNumero[1];
 leer arrTexto[2];
-leer arrBooleano[1];
 finproc;
 
 procedimiento USO_MIENTRAS_CORRECTAS()
@@ -451,11 +448,25 @@ finsi;
 
 finproc;
 
+procedimiento USO_MOSTRAR_CORRECTAS()
+
+var vNumero,vNumero2 : numero;
+var vTexto,vTexto2 : texto;
+var vBooleana,vBooleana2 : booleano;
+var arrNumero : arreglo[MaxArreglo] de numero;
+var arrTexto : arreglo[MaxArreglo] de texto;
+var arrBooleano : arreglo[MaxArreglo] de booleano;
+comenzar
+
+Mostrar( vNumero, vTexto, vBooleana);
+Mostrar( arrNumero[2], arrTexto[1], arrBooleano[vNumero]);
+Mostrar( 5, 'hola', verdadero);
+
+finproc;
 
 
 
-
-procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
+procedimiento SALIDA(A : arreglo de numero)
 var I : numero;
 comenzar
   I := 1;

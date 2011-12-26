@@ -3,44 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Nodos.Auxiliares;
 
 namespace Compilador.Semantico.Arbol.Nodos
 {
-    class NodoExprProced: NodoArbolSemantico
+    class NodoTipoDatoConArregloParam : NodoArbolSemantico
     {
-        public NodoExprProced(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
+        public NodoTipoDatoConArregloParam(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
-            this.ListaFirma = new List<Firma>();
-            this.EsPasajeParametrosAProcOFunc = true;
+            
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {
             
-    
+        }
+
+        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
+        {
+            this.TipoDato = hijoASintetizar.TipoDato;          
         }
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (this.hijosNodo.Count > 1)
             {
-                this.ListaFirma.Add(new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[0].TipoDato, this.hijosNodo[0].EsArregloEnParametro));
-                this.ListaFirma.AddRange(this.hijosNodo[1].ListaFirma);
+                this.TipoDato = this.hijosNodo[2].TipoDato;
+                this.EsArreglo = true;
             }
-            return this;
-        }
+            else
+            {
+                this.TipoDato = this.hijosNodo[0].TipoDato;
+                this.EsArreglo = false;
+            }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-            this.ListaFirma.AddRange(hijoASintetizar.ListaFirma);
-            
+            return this;
         }
 
         public override void ChequearAtributos(Terminal t)
         {
-            
+           
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
@@ -54,8 +56,16 @@ namespace Compilador.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                
+                strBldr.Append("Array ");
+                
+                strBldr.Append(" of ");
+                strBldr.Append(this.hijosNodo[2].Codigo);
+                
+            }
+            else
+            {
                 strBldr.Append(this.hijosNodo[0].Codigo);
-                strBldr.Append(this.hijosNodo[1].Codigo);
             }
 
             this.Codigo = strBldr.ToString();

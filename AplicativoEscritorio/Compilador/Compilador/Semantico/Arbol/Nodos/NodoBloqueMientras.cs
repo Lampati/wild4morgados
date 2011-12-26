@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Labels;
+
 using Compilador.Auxiliares;
 
 namespace Compilador.Semantico.Arbol.Nodos
@@ -13,19 +13,16 @@ namespace Compilador.Semantico.Arbol.Nodos
         public NodoBloqueMientras(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
-            this.LabelVerdadero = ManagerLabels.Instance.CrearNuevoLabel("MientrasVerdadero");
-            this.LabelFalso = nodoPadre.LabelFin;
-            this.LabelFin = ManagerLabels.Instance.CrearNuevoLabel("MientrasFin");
+       
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {
-            hijoAHeredar.LabelFin = this.LabelFin;
+          
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
-            this.TextoParaImprimirArbol = "MIENTRAS";
         }
 
         public override void ChequearAtributos(Terminal t)

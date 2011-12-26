@@ -20,11 +20,11 @@ namespace Compilador.Semantico.Arbol.Nodos.Auxiliares
             this.Tipo = tipo;
         }
 
-        public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo, int valor)
+        public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo, bool esArrglo)
         {
             this.Lexema = lexema;
             this.Tipo = tipo;
-            this.Valor = valor;
+            this.EsArreglo = esArrglo;
         }
 
         public override bool Equals(object obj)

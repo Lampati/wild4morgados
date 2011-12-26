@@ -35,7 +35,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 }
                  * */
 
-                this.ListaFirma.Add(new Firma(this.hijosNodo[1].Lugar, this.hijosNodo[1].TipoDato, this.hijosNodo[1].Valor));
+                this.ListaFirma.Add(new Firma(this.hijosNodo[1].Lexema, this.hijosNodo[1].TipoDato, this.hijosNodo[1].EsArregloEnParametro));
                 this.ListaFirma.AddRange(this.hijosNodo[2].ListaFirma);
             }
             return this;

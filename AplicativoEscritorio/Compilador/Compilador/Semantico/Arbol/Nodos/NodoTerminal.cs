@@ -115,9 +115,6 @@ namespace Compilador.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-
-
-            this.Valor = this.ObtenerValor(t);
             this.TipoDato = this.ObtenerTipo(t);
             this.Lexema = t.Componente.Lexema;
 
