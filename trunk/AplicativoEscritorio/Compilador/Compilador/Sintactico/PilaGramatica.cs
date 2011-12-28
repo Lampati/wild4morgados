@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Lexicografico;
-using Compilador.Semantico;
-using Compilador.Semantico.Arbol;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Lexicografico;
+using CompiladorGargar.Semantico;
+using CompiladorGargar.Semantico.Arbol;
 
-namespace Compilador.Sintactico
+namespace CompiladorGargar.Sintactico
 {
     class PilaGramatica
     {

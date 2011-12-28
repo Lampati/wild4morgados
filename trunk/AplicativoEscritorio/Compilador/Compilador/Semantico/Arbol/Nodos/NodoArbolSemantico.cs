@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Reflection;
 using System.Collections;
-using Compilador.Semantico.Arbol.Nodos.Auxiliares;
+using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using System.Diagnostics;
 using System.Windows.Forms;
 
 
 using System.ComponentModel;
 
-namespace Compilador.Semantico.Arbol.Nodos
+namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     abstract class NodoArbolSemantico
     {
@@ -249,7 +249,7 @@ namespace Compilador.Semantico.Arbol.Nodos
                 {
                     try
                     {
-                        Type t = Type.GetType("Compilador.Semantico.Arbol.Nodos.Nodo" + prod.Der[i].ToString(), true, true);
+                        Type t = Type.GetType("CompiladorGARGAR.Semantico.Arbol.Nodos.Nodo" + prod.Der[i].ToString(), true, true);
 
                         ConstructorInfo ci = t.GetConstructor(new Type[] { typeof(NodoArbolSemantico), typeof(ElementoGramatica) });
 

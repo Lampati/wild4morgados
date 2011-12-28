@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using Compilador.Lexicografico;
+using CompiladorGargar.Lexicografico;
 
-namespace Compilador.Sintactico.Gramatica
+namespace CompiladorGargar.Sintactico.Gramatica
 {
-    class Produccion
+    public class Produccion
     {
         private NoTerminal izq;
         public NoTerminal Izq

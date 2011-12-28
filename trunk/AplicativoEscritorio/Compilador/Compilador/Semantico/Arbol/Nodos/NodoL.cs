@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.Gramatica;
 
-using Compilador.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
-namespace Compilador.Semantico.Arbol.Nodos
+namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     class NodoL: NodoArbolSemantico
     {

@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Compilador.Auxiliares.AF;
+using CompiladorGargar.Auxiliares.AF;
 using System.Configuration;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 
-namespace Compilador.Lexicografico
+namespace CompiladorGargar.Lexicografico
 {
     class AnalizadorLexicografico
     {
 
-        private String path;
-        
-        private AFD afd;
+        protected String path;
 
-        private CharBuffer charBuffer;
+        protected AFD afd;
 
-        private bool dentroComentario;
+        protected CharBuffer charBuffer;
 
+        protected bool dentroComentario;
+
+        public AnalizadorLexicografico()
+        {
+
+        }
 
         //Inicializo lo estrictamente necesario. Creo el buffer a partir del archivo y el AFD a partir de otro archivo
         public AnalizadorLexicografico(String pathArch)
@@ -35,7 +39,7 @@ namespace Compilador.Lexicografico
                 
                 long timeStamp = Stopwatch.GetTimestamp();
                 
-                this.afd = new AFD(Path.Combine(Compilador.directorioActual, System.Configuration.ConfigurationManager.AppSettings["archAFD"].ToString()));
+                this.afd = new AFD(Path.Combine(CompiladorForm.directorioActual, System.Configuration.ConfigurationManager.AppSettings["archAFD"].ToString()));
 
                 float num = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
                 String hola = (String.Format("{0} segundos", num.ToString()));
@@ -55,43 +59,43 @@ namespace Compilador.Lexicografico
         public ComponenteLexico ObtenerProximoToken()
         {
             ComponenteLexico componente = new ComponenteLexico();
-            while (!this.charBuffer.FinArchivo)
+            while (!charBuffer.FinArchivo)
             {    
                 //Me va a devolver cualquier caracter menos un \r o \n... esos los saltea.                
-                char x = this.charBuffer.ObtenerProximoCaracterValido();
+                char x = charBuffer.ObtenerProximoCaracterValido();
 
                 componente.AntecedidoPorSeparador = this.charBuffer.HabiaEspacio;
                 //Puede haber sido el ultimo caracter del archivo un \r o \n, asi que chequeo
                 if (x != char.MinValue)
                 {
                     componente.Lexema += x;
-                    if (this.afd.TryAvanzar(x))
+                    if (afd.TryAvanzar(x))
                     {
-                        this.afd.Avanzar(x);
+                        afd.Avanzar(x);
 
                         //Mientras pueda avanzar (que el AFD lo permita), voy a seguir añadiendo caracteres al lexema.
-                        while (this.LookAhead())
+                        while (LookAhead())
                         {
-                            x = this.charBuffer.ObtenerProximoChar();
+                            x = charBuffer.ObtenerProximoChar();
                             componente.Lexema += x;
-                            this.afd.Avanzar(x);
+                            afd.Avanzar(x);
                         }
 
                         
                         if (!dentroComentario)
                         {
 
-                            if (this.afd.EstadoActual.EsFinal)
+                            if (afd.EstadoActual.EsFinal)
                             {
                                 
-                                if (!(this.afd.EstadoActual.Token == ComponenteLexico.TokenType.ComentarioApertura))
+                                if (!(afd.EstadoActual.Token == ComponenteLexico.TokenType.ComentarioApertura))
                                 {
-                                    componente.Token = this.afd.EstadoActual.Token;
-                                    componente.Fila = this.charBuffer.Fila;
-                                    //componente.Fila = this.charBuffer.FilaUltChar;
-                                    componente.Columna = this.charBuffer.Columna - componente.Lexema.Length;
+                                    componente.Token = afd.EstadoActual.Token;
+                                    componente.Fila = charBuffer.Fila;
+                                    //componente.Fila = charBuffer.FilaUltChar;
+                                    componente.Columna = charBuffer.Columna - componente.Lexema.Length;
 
-                                    this.afd.ResetearAFD();
+                                    afd.ResetearAFD();
 
                                     return componente;
                                 }
@@ -100,7 +104,7 @@ namespace Compilador.Lexicografico
                                     dentroComentario = true;
                                     componente = new ComponenteLexico();
 
-                                    this.afd.ResetearAFD();
+                                    afd.ResetearAFD();
                                 }
 
 
@@ -110,23 +114,23 @@ namespace Compilador.Lexicografico
                             {
                                 //el lexema no pertenecia a ningun token si el afd no termino en un estado final.
                                 componente.Token = ComponenteLexico.TokenType.Error;
-                                componente.Fila = this.charBuffer.Fila;
-                                //componente.Fila = this.charBuffer.FilaUltChar;
-                                componente.Columna = this.charBuffer.Columna - componente.Lexema.Length;
+                                componente.Fila = charBuffer.Fila;
+                                //componente.Fila = charBuffer.FilaUltChar;
+                                componente.Columna = charBuffer.Columna - componente.Lexema.Length;
                                 componente.Descripcion = "'"+componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
-                                this.afd.ResetearAFD();
+                                afd.ResetearAFD();
                                 return componente;
                             }
                         }
                         else
                         {
                             //Si estoy dentro de un comentario, me fijo si el token armado es el de salida.
-                            if ((this.afd.EstadoActual.Token == ComponenteLexico.TokenType.ComentarioClausura))
+                            if ((afd.EstadoActual.Token == ComponenteLexico.TokenType.ComentarioClausura))
                             {
                                 dentroComentario = false;
                                 componente = new ComponenteLexico();
                             }
-                            this.afd.ResetearAFD();
+                            afd.ResetearAFD();
                         }  
                     }
                     else
@@ -136,11 +140,11 @@ namespace Compilador.Lexicografico
                         {
                             //El primer caracter leido no servia para formar ningun lexema
                             componente.Token = ComponenteLexico.TokenType.Error;
-                            componente.Fila = this.charBuffer.Fila;
+                            componente.Fila = charBuffer.Fila;
                             //componente.Fila = this.charBuffer.FilaUltChar;
-                            componente.Columna = this.charBuffer.Columna - componente.Lexema.Length;
+                            componente.Columna = charBuffer.Columna - componente.Lexema.Length;
                             componente.Descripcion = "'" + componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
-                            this.afd.ResetearAFD();
+                            afd.ResetearAFD();
                             return componente;
                         }
                     }
@@ -148,12 +152,12 @@ namespace Compilador.Lexicografico
             }
 
             //Se devuelve EOF si no se hizo retorno dentro del while.
-            componente.Fila = this.charBuffer.Fila;
-            //componente.Fila = this.charBuffer.FilaUltChar;
-            componente.Columna = this.charBuffer.Columna;
+            componente.Fila = charBuffer.Fila;
+            //componente.Fila = charBuffer.FilaUltChar;
+            componente.Columna = charBuffer.Columna;
             componente.Token = ComponenteLexico.TokenType.EOF;
             componente.Lexema = "$";
-            this.afd.ResetearAFD();
+            afd.ResetearAFD();
             return componente;
             
         }

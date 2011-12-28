@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Interfases;
-using Compilador.Semantico.TablaDeSimbolos;
-using Compilador.Lexicografico;
-using Compilador.Semantico.Arbol.Nodos.Auxiliares;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Semantico.Arbol.Interfases;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Lexicografico;
+using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using System.Diagnostics;
 
-namespace Compilador.Semantico.Arbol.Nodos
+namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     class NodoTerminal : NodoArbolSemantico, IValorizable, ITipificable
     {

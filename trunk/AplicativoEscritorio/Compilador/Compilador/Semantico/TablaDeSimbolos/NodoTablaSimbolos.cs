@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-using Compilador.Auxiliares;
+using CompiladorGargar.Auxiliares;
 
-namespace Compilador.Semantico.TablaDeSimbolos
+namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
    
 

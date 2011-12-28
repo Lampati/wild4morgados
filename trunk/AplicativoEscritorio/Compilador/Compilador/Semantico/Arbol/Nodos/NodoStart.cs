@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Semantico.TablaDeSimbolos;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Auxiliares;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Auxiliares;
 
 
 using System.IO;
 using System.Configuration;
 
-namespace Compilador.Semantico.Arbol.Nodos
+namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     class NodoStart : NodoArbolSemantico 
     {

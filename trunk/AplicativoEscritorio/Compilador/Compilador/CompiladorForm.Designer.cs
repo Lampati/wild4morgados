@@ -1,6 +1,6 @@
-﻿namespace Compilador
+﻿namespace CompiladorGargar
 {
-    partial class Compilador
+    partial class CompiladorForm
     {
         /// <summary>
         /// Required designer variable.

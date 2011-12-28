@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
-using Compilador.Lexicografico;
+using CompiladorGargar.Lexicografico;
 
-namespace Compilador.Auxiliares.AF
+namespace CompiladorGargar.Auxiliares.AF
 {
     class AFD
     {

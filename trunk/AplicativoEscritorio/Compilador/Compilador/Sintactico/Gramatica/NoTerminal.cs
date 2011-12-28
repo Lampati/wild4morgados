@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using Compilador.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
-namespace Compilador.Sintactico.Gramatica
+namespace CompiladorGargar.Sintactico.Gramatica
 {
-    class NoTerminal : ElementoGramatica
+    public class NoTerminal : ElementoGramatica
     {
 
 

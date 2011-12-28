@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Semantico.Arbol.Nodos;
+using CompiladorGargar.Semantico.Arbol.Nodos;
 
-namespace Compilador
+namespace CompiladorGargar
 {
 
     class GeneracionCodigoHelpers

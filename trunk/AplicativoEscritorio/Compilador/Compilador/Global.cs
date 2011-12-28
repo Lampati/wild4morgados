@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Compilador
+namespace CompiladorGargar
 {
     public static class Global
     {
@@ -12,5 +12,12 @@ namespace Compilador
 
         public static int UltFila;
         public static int UltCol;
+
+        public enum TipoError
+        {
+            Sintactico,
+            Semantico,
+            Ninguno
+        }
     }
 }

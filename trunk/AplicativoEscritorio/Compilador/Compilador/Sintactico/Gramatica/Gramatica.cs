@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Lexicografico;
-using Compilador.Sintactico.TablaGramatica;
-using Compilador.Sintactico.TablaPrimerosSiguientes;
+using CompiladorGargar.Lexicografico;
+using CompiladorGargar.Sintactico.TablaGramatica;
+using CompiladorGargar.Sintactico.TablaPrimerosSiguientes;
 using System.Diagnostics;
 
-namespace Compilador.Sintactico.Gramatica
+namespace CompiladorGargar.Sintactico.Gramatica
 {
     class Gramatica
     {

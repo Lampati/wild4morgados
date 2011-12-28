@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Semantico.Arbol.Nodos.Auxiliares;
-using Compilador.Semantico.TablaDeSimbolos;
-using Compilador.Auxiliares;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Auxiliares;
 
-namespace Compilador.Semantico.Arbol.Nodos
+namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     class NodoLlamadaProc: NodoArbolSemantico
     {
