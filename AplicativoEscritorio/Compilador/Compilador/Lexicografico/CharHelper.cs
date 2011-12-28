@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Compilador.Lexicografico
+namespace CompiladorGargar.Lexicografico
 {
 
     //Clase que contiene metodos estaticos auxiliares para determinar que tipo de caracter es.

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Text;
 
-namespace Compilador
+namespace CompiladorGargar
 {
     static class Program
     {

@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Semantico.Arbol.Nodos;
-using Compilador.Sintactico.Gramatica;
+using CompiladorGargar.Semantico.Arbol.Nodos;
+using CompiladorGargar.Sintactico.Gramatica;
 using System.Windows.Forms;
-using Compilador.Semantico.RecorredorArbol;
-using Compilador.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Semantico.RecorredorArbol;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
-namespace Compilador.Semantico.Arbol
+namespace CompiladorGargar.Semantico.Arbol
 {
-    class ArbolSemantico
+    public class ArbolSemantico
     {
 
       
         
 
-        public event Compilador.ErrorCompiladorDelegate errorCompilacion;
+        public event CompiladorForm.ErrorCompiladorDelegate errorCompilacion;
 
 
         private NodoArbolSemantico nodoRaiz;
@@ -37,8 +37,58 @@ namespace Compilador.Semantico.Arbol
 
 
 
-        public void CalcularAtributos(Terminal t)
+        //public void CalcularAtributos(Terminal t)
+        //{
+        //    bool continuar = true;
+        //    while (this.nodoActual != null && continuar)
+        //    {
+        //        if (this.nodoActual.CalculadoAtributosHijos)
+        //        {
+        //            NodoArbolSemantico nodo = this.nodoActual;
+        //            try
+        //            {
+        //                nodo = this.nodoActual.CalcularAtributos(t);
+        //                nodo.ChequearAtributos(t);
+        //            }
+        //            catch (ErrorSemanticoException ex)
+        //            {
+        //                this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
+        //                nodo = nodo.SalvarAtributosParaContinuar();
+        //            }
+        //            catch (AggregateException exs)
+        //            {
+        //                foreach (ErrorSemanticoException ex in exs.InnerExceptions)
+        //                {
+        //                    this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));                            
+        //                }
+        //                nodo = nodo.SalvarAtributosParaContinuar();
+        //            }
+
+        //            if (this.nodoActual != this.nodoRaiz)
+        //            {
+        //                this.nodoActual = nodo.PadreNodo;
+        //                this.nodoActual.ActualizarAtributos(nodo);
+        //                this.nodoActual = this.nodoActual.ProximoNodoACalcular();
+        //            }
+        //            else
+        //            {
+        //                continuar = false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            continuar = false;
+        //        }
+
+        //    }
+
+            
+        //}
+
+        public List<PasoAnalizadorSintactico> CalcularAtributos(Terminal t)
         {
+            List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();       
+
             bool continuar = true;
             while (this.nodoActual != null && continuar)
             {
@@ -52,14 +102,20 @@ namespace Compilador.Semantico.Arbol
                     }
                     catch (ErrorSemanticoException ex)
                     {
-                        this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
+                       
+                        retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Semantico, ex.Fila, ex.Columna, false));
+
+                        //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
                         nodo = nodo.SalvarAtributosParaContinuar();
                     }
                     catch (AggregateException exs)
                     {
+                        
+
                         foreach (ErrorSemanticoException ex in exs.InnerExceptions)
                         {
-                            this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));                            
+                            retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Semantico, ex.Fila, ex.Columna, false));
+                            //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
                         }
                         nodo = nodo.SalvarAtributosParaContinuar();
                     }
@@ -82,7 +138,8 @@ namespace Compilador.Semantico.Arbol
 
             }
 
-            
+            return retorno;
+
         }
 
         
@@ -159,14 +216,14 @@ namespace Compilador.Semantico.Arbol
 
         
 
-        public void MostrarError(ErrorCompiladorEventArgs e)
-        {
-            if (errorCompilacion != null)
-            {
-                errorCompilacion(e.Tipo, e.Descripcion, e.Fila, e.Columna, e.PararAnalisis);
-            }
+        //public void MostrarError(ErrorCompiladorEventArgs e)
+        //{
+        //    if (errorCompilacion != null)
+        //    {
+        //        errorCompilacion(e.Tipo, e.Descripcion, e.Fila, e.Columna, e.PararAnalisis);
+        //    }
 
-        }
+        //}
 
         
     }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Lexicografico;
-using Compilador.Auxiliares;
+using CompiladorGargar.Lexicografico;
+using CompiladorGargar.Auxiliares;
 
-namespace Compilador.Sintactico.Gramatica
+namespace CompiladorGargar.Sintactico.Gramatica
 {
-    class Terminal : ElementoGramatica
+    public class Terminal : ElementoGramatica
     {
         #region estaticas EOF, lambda y ERROR
 

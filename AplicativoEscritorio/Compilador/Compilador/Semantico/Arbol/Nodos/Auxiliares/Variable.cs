@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Compilador.Semantico.Arbol.Nodos.Auxiliares
+namespace CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares
 {
     class Variable
     {

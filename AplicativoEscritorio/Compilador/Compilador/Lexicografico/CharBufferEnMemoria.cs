@@ -7,58 +7,14 @@ using System.Configuration;
 
 namespace CompiladorGargar.Lexicografico
 {
-    class CharBuffer
+    class CharBufferEnMemoria : CharBuffer
     {
-        protected int fila;
-        public int Fila
+
+        private string texto;
+
+        public CharBufferEnMemoria(string texto)
         {
-            get { return fila; }            
-        }
-
-        protected int filaUltChar;
-        public int FilaUltChar
-        {
-            get { return filaUltChar; }
-        }
-
-        protected int columna;
-        public int Columna
-        {
-            get { return columna; }            
-        }
-
-        protected bool finArchivo = false;
-        public bool FinArchivo
-        {
-            get { return finArchivo; }
-        }
-
-        protected bool habiaEspacio;
-        public bool HabiaEspacio
-        {
-            get { return habiaEspacio; }
-        }
-
-        protected int offsetArchivo;
-        protected char[] charBuffer;
-        protected int charBufferMaxSize;
-        protected int charBufferTope;
-
-        protected bool ultimoBuffer = false;
-
-        protected int indiceBuffer;
-
-        protected String path;
-
-        protected int extraEspaciosEnBuffer;
-
-        public CharBuffer()
-        {
-        }
-
-        public CharBuffer(String path)
-        {
-            this.path = path;
+            this.texto = texto;
 
             this.fila = 1;
             this.columna = 0;
@@ -74,36 +30,38 @@ namespace CompiladorGargar.Lexicografico
             this.LlenarBuffer();
         }
 
-        protected virtual void LlenarBuffer()
-        {
+        protected override void  LlenarBuffer()
+        { 	    
             try
             {
                 if (!ultimoBuffer)
                 {
-                    this.indiceBuffer = 0;
-
-                    StreamReader strReader = new StreamReader(path);
+                    bool auxUltBuffer = false;
+                    this.indiceBuffer = 0;                    
 
                     //Creo el buffer con la capacidad elegida y unos caracteres mas.
                     charBuffer = new char[this.charBufferMaxSize + this.extraEspaciosEnBuffer];
 
-                    strReader.BaseStream.Seek(offsetArchivo, SeekOrigin.Begin);
-
                     //Le resto la cantidad de espacios extras al tope, asi el offset del archivo 
                     // queda esa cantidad de caracteres retrasados, para volverlos a leer cuando haga el switch
                     // del buffer.
-                    this.charBufferTope = strReader.Read(charBuffer, 0, charBuffer.Length) - this.extraEspaciosEnBuffer;
+
+                    if (((offsetArchivo + charBuffer.Length) - this.extraEspaciosEnBuffer) > texto.Length)
+                    {
+                        charBufferTope = texto.Length - offsetArchivo  ;
+                        this.ultimoBuffer = true;
+
+                        charBuffer = this.texto.Substring(offsetArchivo, charBufferTope).ToCharArray().Concat(new char[charBufferMaxSize-charBufferTope]).ToArray();
+                    }
+                    else
+                    {
+                        charBufferTope = charBuffer.Length - this.extraEspaciosEnBuffer;
+                        charBuffer = this.texto.Substring(offsetArchivo, charBufferTope).ToCharArray();
+                    }                  
+
+                    
                     
                     offsetArchivo += this.charBufferTope;
-
-                    if (this.charBufferTope < charBuffer.Length - this.extraEspaciosEnBuffer)
-                    {
-                        this.ultimoBuffer = true;
-                    }
-
-                    //String aux = strReader.ReadToEnd();
-
-                    strReader.Close();
                 }
                 else
                 {
@@ -126,15 +84,15 @@ namespace CompiladorGargar.Lexicografico
 
             int cantFilasSalteadas = 0;
 
-            x = ObtenerProximoChar();
+            x = this.ObtenerProximoChar();
 
             while (CharHelper.esCaracterSalteable(x))
             {
-                habiaEspacio = true;
+                this.habiaEspacio = true;
 
                 if (CharHelper.esRetornoDeCarro(x))
                 {
-                    x = ObtenerProximoChar();
+                    x = this.ObtenerProximoChar();
 
                     if (CharHelper.esNuevaLinea(x))
                     {
@@ -143,7 +101,7 @@ namespace CompiladorGargar.Lexicografico
                         columna = 0;
                     }
                 }
-                x = ObtenerProximoChar();
+                x = this.ObtenerProximoChar();
             }
             filaUltChar = fila - cantFilasSalteadas;
 
@@ -152,7 +110,7 @@ namespace CompiladorGargar.Lexicografico
 
         public char ObtenerProximoChar()
         {
-            char x = PeekProximoChar();
+            char x = this.PeekProximoChar();
             indiceBuffer++;
             columna++;
             return x;
@@ -161,11 +119,11 @@ namespace CompiladorGargar.Lexicografico
         public char PeekProximoChar()
         {
 
-            if (indiceBuffer >= charBufferTope)
+            if (indiceBuffer >= this.charBufferTope)
             {
-                LlenarBuffer();
+                this.LlenarBuffer();
             }
-            char x = charBuffer[indiceBuffer];
+            char x = this.charBuffer[indiceBuffer];
             
             return x;
         }

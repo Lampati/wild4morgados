@@ -8,7 +8,7 @@
     <ProjectGuid>{4A889524-38EC-4DFB-8720-593422EC53DC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Compilador</RootNamespace>
+    <RootNamespace>CompiladorGargar</RootNamespace>
     <AssemblyName>Compilador</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -58,6 +58,7 @@
     <Compile Include="Auxiliares\AF\Estado.cs" />
     <Compile Include="Auxiliares\AF\FuncionTransicion.cs" />
     <Compile Include="Auxiliares\EnumUtils.cs" />
+    <Compile Include="Compilador.cs" />
     <Compile Include="ErrorCompilacionException.cs" />
     <Compile Include="ErrorCompiladorEventArgs.cs" />
     <Compile Include="GeneracionCodigoHelpers.cs" />
@@ -66,18 +67,20 @@
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\CharHelper.cs" />
     <Compile Include="Lexicografico\ComponenteLexico.cs" />
-    <Compile Include="Compilador.cs">
+    <Compile Include="CompiladorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compilador.Designer.cs">
-      <DependentUpon>Compilador.cs</DependentUpon>
+    <Compile Include="CompiladorForm.Designer.cs">
+      <DependentUpon>CompiladorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lexicografico\CharBufferEnMemoria.cs" />
+    <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoria.cs" />
     <Compile Include="Lexicografico\ErrorLexicoException.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Compilador.resx">
-      <DependentUpon>Compilador.cs</DependentUpon>
+    <EmbeddedResource Include="CompiladorForm.resx">
+      <DependentUpon>CompiladorForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -112,6 +115,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ResultadoCompilacion.cs" />
     <Compile Include="SelectorModoPruebas.cs">
       <SubType>Form</SubType>
     </Compile>

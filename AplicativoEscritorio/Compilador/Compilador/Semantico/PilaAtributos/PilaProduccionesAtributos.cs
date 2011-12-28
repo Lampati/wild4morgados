@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.Gramatica;
 
-namespace Compilador.Semantico
+namespace CompiladorGargar.Semantico
 {
     class PilaProduccionesAtributos
     {

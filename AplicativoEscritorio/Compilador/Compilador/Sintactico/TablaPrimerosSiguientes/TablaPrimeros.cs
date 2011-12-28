@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Lexicografico;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Lexicografico;
 using System.Diagnostics;
 
-namespace Compilador.Sintactico.TablaPrimerosSiguientes
+namespace CompiladorGargar.Sintactico.TablaPrimerosSiguientes
 {
     class TablaPrimeros
     {

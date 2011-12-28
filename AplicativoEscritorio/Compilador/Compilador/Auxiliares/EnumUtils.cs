@@ -5,7 +5,7 @@ using System.Text;
 using System.Reflection;
 using System.ComponentModel;
 
-namespace Compilador.Auxiliares
+namespace CompiladorGargar.Auxiliares
 {
     // Clase para permitir valores string de un enumerado, para poder vincular los 
     // estados finales del afd con un valor del enumerado

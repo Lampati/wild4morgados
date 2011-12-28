@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace Compilador.Lexicografico
+namespace CompiladorGargar.Lexicografico
 {
 
 
-    class ComponenteLexico
+    public class ComponenteLexico
     {
         //Enumerador que contiene todos los tipos de token aceptados por el lenguaje.
         public enum TokenType

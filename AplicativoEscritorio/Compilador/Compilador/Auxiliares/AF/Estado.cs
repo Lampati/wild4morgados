@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace Compilador.Auxiliares.AF
+namespace CompiladorGargar.Auxiliares.AF
 {
     class Estado
     {

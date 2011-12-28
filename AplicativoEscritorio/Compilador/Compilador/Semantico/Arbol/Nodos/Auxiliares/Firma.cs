@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
-namespace Compilador.Semantico.Arbol.Nodos.Auxiliares
+namespace CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares
 {
     class Firma
     {

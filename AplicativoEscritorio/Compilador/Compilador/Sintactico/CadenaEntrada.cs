@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Lexicografico;
-using Compilador.Sintactico.Gramatica;
-using Compilador.Auxiliares;
+using CompiladorGargar.Lexicografico;
+using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Auxiliares;
 
-namespace Compilador.Sintactico
+namespace CompiladorGargar.Sintactico
 {
     class CadenaEntrada
     {

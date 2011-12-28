@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilador.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Diagnostics;
-using Compilador.Auxiliares;
+using CompiladorGargar.Auxiliares;
 
-namespace Compilador.Semantico.TablaDeSimbolos
+namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
     class TablaSimbolos
     {
