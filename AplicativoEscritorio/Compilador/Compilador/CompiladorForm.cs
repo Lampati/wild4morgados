@@ -79,7 +79,9 @@ namespace CompiladorGargar
                     this.button3.Enabled = true;
                 }
 
-                this.tabControl1.SelectedTab = tabPageSintactico;
+                this.txtBxIDE.Text = ObtenerTodoElTexto();
+
+                this.tabControl1.SelectedTab = tabPageIDE;
                 //this.analizadorSintactico.AnalizarSintacticamente();
 
                 this.buttonGenerarCodigo.Enabled = false;
@@ -434,6 +436,81 @@ namespace CompiladorGargar
         //    this.analizadorSintactico.ArbolSemantico.CalcularExpresiones();
 
         //    textBoxCodigo.Text += this.analizadorSintactico.ArbolSemantico.CalcularCodigo();
+        }
+
+        private void buttonCompilarIde_Click(object sender, EventArgs e)
+        {
+            if (ModoDebug)
+            {
+                this.dataGridViewSintactico.Rows.Clear();
+            }
+
+            this.dataGridViewErroresIDE.Rows.Clear();
+
+            string programa = this.txtBxIDE.Text;
+
+            ResultadoCompilacion res = this.compilador.Compilar(programa);
+
+
+            foreach (var item in res.ListaDebugSintactico)
+            {
+                this.dataGridViewSintactico.Rows.Add(item.ContenidoPila, item.EstadoCadenaEntrada);
+
+                switch (item.TipoError)
+                {
+                    case Global.TipoError.Sintactico:
+                        this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
+                        break;
+                    case Global.TipoError.Semantico:
+                        this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                        break;
+                    case Global.TipoError.Ninguno:
+                        break;
+                    default:
+                        break;
+                }
+
+                this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+            }
+
+
+            if (res.CompilacionCorrecta)
+            {
+                this.buttonGenerarCodigo.Enabled = false;
+                this.textBoxCodigo.Text = res.CodigoPascal;
+            }
+            else
+            {
+                foreach (var item in res.ListaErrores)
+                {
+
+                    this.dataGridViewErroresIDE.Rows.Add(item.Fila, item.Columna, item.TipoError.ToString(), item.Descripcion);
+
+
+                    switch (item.TipoError)
+                    {
+                        case Global.TipoError.Sintactico:
+                            this.dataGridViewErroresIDE.Rows[this.dataGridViewErroresIDE.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Red;
+                            break;
+                        case Global.TipoError.Semantico:
+                            this.dataGridViewErroresIDE.Rows[this.dataGridViewErroresIDE.Rows.Count - 2].DefaultCellStyle.BackColor = Color.OrangeRed;
+                            break;
+                        case Global.TipoError.Ninguno:
+                            break;
+
+                    }
+                }
+
+                this.dataGridViewErroresIDE.CurrentCell = this.dataGridViewErroresIDE[0, this.dataGridViewErroresIDE.Rows.Count - 1];
+            }
+
+
+            if (!string.IsNullOrEmpty(res.Error))
+            {
+                MessageBox.Show(res.Error);
+            }
+
+            MessageBox.Show("Finalizado");
         }
 
 

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AplicativoEscritorio", "AplicativoEscritorio.csproj", "{0BCB7BC3-7615-4ECF-B5EB-CFE3A7611E12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compilador", "Compilador\Compilador\Compilador.csproj", "{4A889524-38EC-4DFB-8720-593422EC53DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompiladorGarGar", "Compilador\Compilador\CompiladorGarGar.csproj", "{4A889524-38EC-4DFB-8720-593422EC53DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmadorTransiciones", "ArmadorTransiciones\ArmadorTransiciones\ArmadorTransiciones.csproj", "{CBB82D5A-D54A-49A1-8344-3041929A1876}"
 EndProject
