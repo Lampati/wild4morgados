@@ -66,6 +66,14 @@
             this.tabPageArmadorCodigo = new System.Windows.Forms.TabPage();
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.buttonGenerarCodigo = new System.Windows.Forms.Button();
+            this.tabPageIDE = new System.Windows.Forms.TabPage();
+            this.txtBxIDE = new System.Windows.Forms.TextBox();
+            this.dataGridViewErroresIDE = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonCompilarIde = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageLexicografico.SuspendLayout();
@@ -75,6 +83,8 @@
             this.tabPageTablaAnalisis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTablaAnalisis)).BeginInit();
             this.tabPageArmadorCodigo.SuspendLayout();
+            this.tabPageIDE.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErroresIDE)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -257,6 +267,7 @@
             this.tabControl1.Controls.Add(this.tabPageSintactico);
             this.tabControl1.Controls.Add(this.tabPageTablaAnalisis);
             this.tabControl1.Controls.Add(this.tabPageArmadorCodigo);
+            this.tabControl1.Controls.Add(this.tabPageIDE);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
@@ -474,14 +485,90 @@
             this.buttonGenerarCodigo.UseVisualStyleBackColor = true;
             this.buttonGenerarCodigo.Click += new System.EventHandler(this.buttonGenerarCodigo_Click);
             // 
-            // Compilador
+            // tabPageIDE
+            // 
+            this.tabPageIDE.Controls.Add(this.buttonCompilarIde);
+            this.tabPageIDE.Controls.Add(this.dataGridViewErroresIDE);
+            this.tabPageIDE.Controls.Add(this.txtBxIDE);
+            this.tabPageIDE.Location = new System.Drawing.Point(4, 25);
+            this.tabPageIDE.Name = "tabPageIDE";
+            this.tabPageIDE.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageIDE.Size = new System.Drawing.Size(1020, 824);
+            this.tabPageIDE.TabIndex = 5;
+            this.tabPageIDE.Text = "IDE Texto";
+            this.tabPageIDE.UseVisualStyleBackColor = true;
+            // 
+            // txtBxIDE
+            // 
+            this.txtBxIDE.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBxIDE.Location = new System.Drawing.Point(3, 3);
+            this.txtBxIDE.Multiline = true;
+            this.txtBxIDE.Name = "txtBxIDE";
+            this.txtBxIDE.Size = new System.Drawing.Size(1014, 628);
+            this.txtBxIDE.TabIndex = 0;
+            // 
+            // dataGridViewErroresIDE
+            // 
+            this.dataGridViewErroresIDE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewErroresIDE.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dataGridViewErroresIDE.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridViewErroresIDE.Location = new System.Drawing.Point(3, 667);
+            this.dataGridViewErroresIDE.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewErroresIDE.Name = "dataGridViewErroresIDE";
+            this.dataGridViewErroresIDE.RowHeadersVisible = false;
+            this.dataGridViewErroresIDE.RowTemplate.Height = 24;
+            this.dataGridViewErroresIDE.Size = new System.Drawing.Size(1014, 154);
+            this.dataGridViewErroresIDE.TabIndex = 2;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Fila";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Columna";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Tipo";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Descripcion";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 1000;
+            // 
+            // buttonCompilarIde
+            // 
+            this.buttonCompilarIde.Location = new System.Drawing.Point(3, 637);
+            this.buttonCompilarIde.Name = "buttonCompilarIde";
+            this.buttonCompilarIde.Size = new System.Drawing.Size(145, 23);
+            this.buttonCompilarIde.TabIndex = 3;
+            this.buttonCompilarIde.Text = "Compilar";
+            this.buttonCompilarIde.UseVisualStyleBackColor = true;
+            this.buttonCompilarIde.Click += new System.EventHandler(this.buttonCompilarIde_Click);
+            // 
+            // CompiladorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 853);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Compilador";
+            this.Name = "CompiladorForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Compilador_Load);
@@ -496,6 +583,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTablaAnalisis)).EndInit();
             this.tabPageArmadorCodigo.ResumeLayout(false);
             this.tabPageArmadorCodigo.PerformLayout();
+            this.tabPageIDE.ResumeLayout(false);
+            this.tabPageIDE.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewErroresIDE)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -540,6 +630,14 @@
         private System.Windows.Forms.TabPage tabPageArmadorCodigo;
         private System.Windows.Forms.TextBox textBoxCodigo;
         private System.Windows.Forms.Button buttonGenerarCodigo;
+        private System.Windows.Forms.TabPage tabPageIDE;
+        private System.Windows.Forms.TextBox txtBxIDE;
+        private System.Windows.Forms.DataGridView dataGridViewErroresIDE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Button buttonCompilarIde;
     }
 }
 
