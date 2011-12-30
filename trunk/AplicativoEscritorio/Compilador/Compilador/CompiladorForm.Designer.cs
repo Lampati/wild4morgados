@@ -67,13 +67,14 @@
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.buttonGenerarCodigo = new System.Windows.Forms.Button();
             this.tabPageIDE = new System.Windows.Forms.TabPage();
-            this.txtBxIDE = new System.Windows.Forms.TextBox();
+            this.buttonCompilarIde = new System.Windows.Forms.Button();
             this.dataGridViewErroresIDE = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonCompilarIde = new System.Windows.Forms.Button();
+            this.txtBxIDE = new System.Windows.Forms.TextBox();
+            this.buttonEjecutar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageLexicografico.SuspendLayout();
@@ -487,6 +488,7 @@
             // 
             // tabPageIDE
             // 
+            this.tabPageIDE.Controls.Add(this.buttonEjecutar);
             this.tabPageIDE.Controls.Add(this.buttonCompilarIde);
             this.tabPageIDE.Controls.Add(this.dataGridViewErroresIDE);
             this.tabPageIDE.Controls.Add(this.txtBxIDE);
@@ -498,14 +500,15 @@
             this.tabPageIDE.Text = "IDE Texto";
             this.tabPageIDE.UseVisualStyleBackColor = true;
             // 
-            // txtBxIDE
+            // buttonCompilarIde
             // 
-            this.txtBxIDE.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtBxIDE.Location = new System.Drawing.Point(3, 3);
-            this.txtBxIDE.Multiline = true;
-            this.txtBxIDE.Name = "txtBxIDE";
-            this.txtBxIDE.Size = new System.Drawing.Size(1014, 628);
-            this.txtBxIDE.TabIndex = 0;
+            this.buttonCompilarIde.Location = new System.Drawing.Point(3, 637);
+            this.buttonCompilarIde.Name = "buttonCompilarIde";
+            this.buttonCompilarIde.Size = new System.Drawing.Size(145, 23);
+            this.buttonCompilarIde.TabIndex = 3;
+            this.buttonCompilarIde.Text = "Compilar";
+            this.buttonCompilarIde.UseVisualStyleBackColor = true;
+            this.buttonCompilarIde.Click += new System.EventHandler(this.buttonCompilarIde_Click);
             // 
             // dataGridViewErroresIDE
             // 
@@ -551,15 +554,26 @@
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Width = 1000;
             // 
-            // buttonCompilarIde
+            // txtBxIDE
             // 
-            this.buttonCompilarIde.Location = new System.Drawing.Point(3, 637);
-            this.buttonCompilarIde.Name = "buttonCompilarIde";
-            this.buttonCompilarIde.Size = new System.Drawing.Size(145, 23);
-            this.buttonCompilarIde.TabIndex = 3;
-            this.buttonCompilarIde.Text = "Compilar";
-            this.buttonCompilarIde.UseVisualStyleBackColor = true;
-            this.buttonCompilarIde.Click += new System.EventHandler(this.buttonCompilarIde_Click);
+            this.txtBxIDE.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBxIDE.Location = new System.Drawing.Point(3, 3);
+            this.txtBxIDE.Multiline = true;
+            this.txtBxIDE.Name = "txtBxIDE";
+            this.txtBxIDE.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtBxIDE.Size = new System.Drawing.Size(1014, 628);
+            this.txtBxIDE.TabIndex = 0;
+            this.txtBxIDE.WordWrap = false;
+            // 
+            // buttonEjecutar
+            // 
+            this.buttonEjecutar.Location = new System.Drawing.Point(154, 637);
+            this.buttonEjecutar.Name = "buttonEjecutar";
+            this.buttonEjecutar.Size = new System.Drawing.Size(145, 23);
+            this.buttonEjecutar.TabIndex = 4;
+            this.buttonEjecutar.Text = "Ejecutar";
+            this.buttonEjecutar.UseVisualStyleBackColor = true;
+            this.buttonEjecutar.Click += new System.EventHandler(this.buttonEjecutar_Click);
             // 
             // CompiladorForm
             // 
@@ -638,6 +652,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.Button buttonCompilarIde;
+        private System.Windows.Forms.Button buttonEjecutar;
     }
 }
 

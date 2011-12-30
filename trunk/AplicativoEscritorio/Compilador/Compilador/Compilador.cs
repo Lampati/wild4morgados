@@ -5,34 +5,29 @@ using System.Text;
 using CompiladorGargar.Sintactico;
 using System.IO;
 using System.Diagnostics;
+using Utilidades;
 
 namespace CompiladorGargar
 {
     public class Compilador
     {
-        public static string directorioActual;
-        public delegate void ErrorCompiladorDelegate(string tipo, string desc, int fila, int col, bool parar);
-
-        private bool errorSemantico = false;
-
         private AnalizadorSintactico analizadorSintactico;
 
-        private bool errores = false;
-
-        //public string ArchivoEntrada { get; set; }
         public string ArchivoGramatica { get; set; }
+
+        public string DirectorioTemporales { get; set; }
+        public string DirectorioEjecutables { get; set; }
 
         private bool modoDebug { get; set; }
 
-
-        public Compilador(string gramatica, bool modo)
+        public Compilador(string gramatica, bool modo, string dirTemp, string dirEjec)
         {
             this.modoDebug = modo;
             this.ArchivoGramatica = gramatica;
-            CargarAnalizadorSintactico();
+            this.DirectorioTemporales = dirTemp;
+            this.DirectorioEjecutables = dirEjec;
 
-            //analizadorSintactico.errorCompilacion += new ErrorCompiladorDelegate(Compilador_errorCompilacion);
-            //analizadorSintactico.ArbolSemantico.errorCompilacion += new ErrorCompiladorDelegate(Compilador_errorCompilacion);
+            CargarAnalizadorSintactico();
         }
 
         private void CargarAnalizadorSintactico()
@@ -47,6 +42,11 @@ namespace CompiladorGargar
                 throw new Exception("Error fatal al iniciar el analizador sintactico:" + "\r\n" + ex.Message);
 
             }
+        }
+
+        private void CargarAnalizadorLexico(string texto)
+        {
+            this.analizadorSintactico.CargarAnalizadorLexico(texto);
         }
 
         public ResultadoCompilacion Compilar(string texto)
@@ -64,7 +64,7 @@ namespace CompiladorGargar
             List<PasoDebugTiempos> tiempos = new List<PasoDebugTiempos>();
 
             ResultadoCompilacion res = new ResultadoCompilacion();
-            res.CompilacionCorrecta = false;
+            res.CompilacionGarGarCorrecta = false;
 
             int i = 1;
 
@@ -123,12 +123,12 @@ namespace CompiladorGargar
 
                 if (this.analizadorSintactico.esFinAnalisisSintactico() && res.ListaErrores.Count == 0)
                 {
-                    res.CompilacionCorrecta = true;                    
+                    res.CompilacionGarGarCorrecta = true;                    
                 }
             }
             catch (Exception ex)
             {
-                res.CompilacionCorrecta = false;
+                res.CompilacionGarGarCorrecta = false;
 
                 if (this.modoDebug)
                 {
@@ -142,7 +142,7 @@ namespace CompiladorGargar
 
             
 
-            if (res.CompilacionCorrecta)
+            if (res.CompilacionGarGarCorrecta)
             {
                 res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
 
@@ -150,8 +150,29 @@ namespace CompiladorGargar
                 res.ArbolSemanticoResultado.CalcularExpresiones();
                 res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
                 res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-            }
 
+                timeStampCod = Stopwatch.GetTimestamp();
+                res.ArchTemporalCodigoPascal =  CrearArchivoTemporal(res.CodigoPascal);
+                res.ArchTemporalCodigoPascalConRuta = Path.Combine(DirectorioTemporales, res.ArchTemporalCodigoPascal);
+                res.TiempoGeneracionTemporalCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                try
+                {
+                    timeStampCod = Stopwatch.GetTimestamp();
+                    res.ArchEjecutable = CompilarPascal(res.ArchTemporalCodigoPascalConRuta);
+                    res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
+                    res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                    res.GeneracionEjectuableCorrecto = true;
+                }
+                catch
+                {
+                    res.GeneracionEjectuableCorrecto = false;
+                }
+
+                BorrarTemporales();
+
+            }
 
             res.TiempoGeneracionAnalizadorLexico = tiempoCargarLexico;
             res.TiempoGeneracionAnalizadorSintactico = tiempoCargarSint;
@@ -160,9 +181,41 @@ namespace CompiladorGargar
             return res;
         }
 
-        private void CargarAnalizadorLexico(string texto)
+        private void BorrarTemporales()
         {
-            this.analizadorSintactico.CargarAnalizadorLexico(texto);
+            DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.pas");
+            DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.o");
         }
+
+       
+
+        private string CompilarPascal(string archTemporalPascal)
+        {
+            string exe = Path.Combine(DirectorioEjecutables,"blabla.exe");
+
+            string argumento = string.Format("-o{0}", exe);
+
+            EjecucionManager.EjecutarSinVentana(Globales.Global.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumento, archTemporalPascal });
+
+            return exe;
+        }
+
+        private string CrearArchivoTemporal(string cod)
+        {
+            string nombreArch = string.Format("{0}{1}",RandomManager.RandomStringConPrefijo("tempPas",20,true),".pas");
+
+            using (StreamWriter strWriter = new StreamWriter(Path.Combine(this.DirectorioTemporales, nombreArch), false))
+            {
+                strWriter.WriteLine(cod);
+
+                strWriter.Flush();
+
+                strWriter.Close();
+            }
+
+            return nombreArch;
+        }
+
+     
     }
 }

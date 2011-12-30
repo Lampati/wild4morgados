@@ -177,7 +177,7 @@ namespace CompiladorGargar.Sintactico
             catch (ErrorLexicoException ex)
             {
 
-                retorno.Add(new PasoAnalizadorSintactico(ex.Tipo, Global.TipoError.Sintactico, ex.Fila, ex.Columna, false));
+                retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Sintactico, ex.Fila, ex.Columna, false));
                 //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
             }
             catch (ErrorSintacticoException ex)
@@ -195,10 +195,10 @@ namespace CompiladorGargar.Sintactico
                     }
                     catch (ErrorLexicoException exx)
                     {
-                        retorno.Add(new PasoAnalizadorSintactico(exx.Tipo, Global.TipoError.Sintactico, exx.Fila, exx.Columna, false));
+                        retorno.Add(new PasoAnalizadorSintactico(exx.Descripcion, Global.TipoError.Sintactico, exx.Fila, exx.Columna, false));
                         //this.MostrarError(new ErrorCompiladorEventArgs(exx.Tipo, exx.Descripcion, exx.Fila, exx.Columna, false));
                     }
-                    retorno.Add(new PasoAnalizadorSintactico(ex.Tipo, Global.TipoError.Sintactico, ex.Fila, ex.Columna, ex.pararAnalisis));
+                    retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Sintactico, ex.Fila, ex.Columna, ex.pararAnalisis));
                     //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 }
 
@@ -208,7 +208,7 @@ namespace CompiladorGargar.Sintactico
                     {
                         this.Pila.DescartarTope();
                     }
-                    retorno.Add(new PasoAnalizadorSintactico(ex.Tipo, Global.TipoError.Sintactico, ex.Fila, ex.Columna, ex.pararAnalisis));
+                    retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Sintactico, ex.Fila, ex.Columna, ex.pararAnalisis));
                     //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 }
 
@@ -252,9 +252,9 @@ namespace CompiladorGargar.Sintactico
                         if (term.NoEsLambda())
                         {
                             StringBuilder strbldr = new StringBuilder(string.Empty);
-                            strbldr.Append("Se esperaba el token ");
+                            strbldr.Append("Se esperaba ");
                             strbldr.Append(EnumUtils.stringValueOf(term.Componente.Token));
-                            strbldr.Append(" pero se encontro el token ");
+                            strbldr.Append(" pero se encontro ");
                             strbldr.Append(EnumUtils.stringValueOf(this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Token));
                             strbldr.Append(".");
 
@@ -262,23 +262,15 @@ namespace CompiladorGargar.Sintactico
                             {
                                 strbldr.Append(" Se asume fin de sentencia para continuar con analisis.");
                                 //Descarto el ; de la pila pq asumo que simplemente se le olvido
-                                throw new ErrorSintacticoException(strbldr.ToString(),
+                                
+                            }
+              
+                            throw new ErrorSintacticoException(strbldr.ToString(),
                                     this.AnalizadorLexico.FilaActual(),
                                     this.AnalizadorLexico.ColumnaActual(),
                                     true,
                                     false,
                                     false);
-                            }
-                            else
-                            {
-
-                                throw new ErrorSintacticoException(strbldr.ToString(),
-                                    this.AnalizadorLexico.FilaActual(),
-                                    this.AnalizadorLexico.ColumnaActual(),
-                                    true,
-                                    false,
-                                    false);
-                            }
                         }
                         else
                         {
@@ -492,7 +484,7 @@ namespace CompiladorGargar.Sintactico
                     //Si hay error directamente me salteo el paso, no se inserta en la cadena, y no toco la pila.
                     if (t.Equals(Terminal.ElementoError()))
                     {
-                        throw new ErrorLexicoException(t.Componente.Descripcion, t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorLexicoException(string.Format("Error al intentar leer: {0}", t.Componente.Descripcion), t.Componente.Fila, t.Componente.Columna);
                     }
 
                     this.cadenaEntrada.InsertarTerminal(t);                       
