@@ -8,18 +8,27 @@ namespace CompiladorGargar
 {
     public class ResultadoCompilacion
     {
-        public bool CompilacionCorrecta { get; set; }
+        public bool CompilacionGarGarCorrecta { get; set; }
+        public bool GeneracionEjectuableCorrecto { get; set; }
         public string Error { get; set; }
         
         public List<PasoAnalizadorSintactico> ListaErrores { get; set; }
         public List<PasoCompilacion> ListaDebugSintactico { get; set; }
         public ArbolSemantico ArbolSemanticoResultado { get; set; }
+
         public string CodigoPascal { get; set; }
+        public string ArchTemporalCodigoPascal { get; set; }
+        public string ArchTemporalCodigoPascalConRuta { get; set; }
+
+        public string ArchEjecutable { get; set; }
+        public string ArchEjecutableConRuta { get; set; }
 
         public float TiempoCompilacionTotal { get; set; }
         public float TiempoGeneracionAnalizadorLexico { get; set; }
         public float TiempoGeneracionAnalizadorSintactico { get; set; }
         public float TiempoGeneracionCodigo { get; set; }
+        public float TiempoGeneracionTemporalCodigo { get; set; }
+        public float TiempoGeneracionEjecutable { get; set; }
 
         public ResultadoCompilacion()
         {

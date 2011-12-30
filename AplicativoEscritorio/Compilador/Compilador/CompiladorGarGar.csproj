@@ -222,12 +222,25 @@
     <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CompiladorPascal.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Configuracion\AFD_GARGAR.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Configuracion\Gramatica.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Globales\Globales.csproj">
+      <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
+      <Name>Globales</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilidades\Utilidades.csproj">
+      <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
+      <Name>Utilidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

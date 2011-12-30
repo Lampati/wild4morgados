@@ -127,7 +127,8 @@ namespace CompiladorGargar.Sintactico.TablaGramatica
             if (t.Equals(Terminal.ElementoEOF()))
             {
                 parar = true;
-                error = "La cadena de entrada termino y la pila no puede vaciarse. El analisis termina con error.";
+                //error = "La cadena de entrada termino y la pila no puede vaciarse. El analisis termina con error.";
+                error = "Error sintactico. El programa esta mal formado.";
                 //throw new ErrorSintacticoException("La cadena de entrada termino y la pila no puede vaciarse. El analisis termina con error.", fila, columna, false, true,true);
             }
             throw new ErrorSintacticoException(error, fila, columna, descartarPila, descartarCadena, parar);
