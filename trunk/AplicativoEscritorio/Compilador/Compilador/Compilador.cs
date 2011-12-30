@@ -195,7 +195,7 @@ namespace CompiladorGargar
 
             string argumento = string.Format("-o{0}", exe);
 
-            EjecucionManager.EjecutarSinVentana(Globales.Global.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumento, archTemporalPascal });
+            EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumento, archTemporalPascal });
 
             return exe;
         }
