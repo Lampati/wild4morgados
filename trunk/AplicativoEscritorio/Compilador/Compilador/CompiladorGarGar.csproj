@@ -67,10 +67,10 @@
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\CharHelper.cs" />
     <Compile Include="Lexicografico\ComponenteLexico.cs" />
-    <Compile Include="CompiladorForm.cs">
+    <Compile Include="Formularios\CompiladorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CompiladorForm.Designer.cs">
+    <Compile Include="Formularios\CompiladorForm.Designer.cs">
       <DependentUpon>CompiladorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Lexicografico\CharBufferEnMemoria.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CompiladorForm.resx">
+    <EmbeddedResource Include="Formularios\CompiladorForm.resx">
       <DependentUpon>CompiladorForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -93,7 +93,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SelectorModoPruebas.resx">
+    <EmbeddedResource Include="Formularios\SelectorModoPruebas.resx">
       <DependentUpon>SelectorModoPruebas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
@@ -119,10 +119,10 @@
     <Compile Include="Resultado\Auxiliares\PasoDebugTiempos.cs" />
     <Compile Include="Resultado\Auxiliares\PasoCompilacion.cs" />
     <Compile Include="Resultado\ResultadoCompilacion.cs" />
-    <Compile Include="SelectorModoPruebas.cs">
+    <Compile Include="Formularios\SelectorModoPruebas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectorModoPruebas.Designer.cs">
+    <Compile Include="Formularios\SelectorModoPruebas.Designer.cs">
       <DependentUpon>SelectorModoPruebas.cs</DependentUpon>
     </Compile>
     <Compile Include="Semantico\Arbol\ArbolSemantico.cs" />
@@ -225,7 +225,7 @@
     <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CompiladorPascal.exe">
+    <Content Include="Configuracion\CompiladorPascal.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Configuracion\AFD_GARGAR.txt">
