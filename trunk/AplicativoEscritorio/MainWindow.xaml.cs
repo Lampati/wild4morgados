@@ -23,8 +23,7 @@ namespace AplicativoEscritorio
         {
             InitializeComponent();
 
-            CompiladorGargar.Compilador comp = new CompiladorGargar.Compilador("",true,"","","");
-            CompiladorGargar.Resultado.ResultadoCompilacion res = comp.Compilar("");
+       
             
         }
     }
