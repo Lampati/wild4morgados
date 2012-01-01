@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CompiladorGargar
 {
-    internal partial class SelectorModoPruebas : Form
+    public partial class SelectorModoPruebas : Form
     {
         public SelectorModoPruebas()
         {
