@@ -54,7 +54,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         this.TipoDato = this.TablaSimbolos.ObtenerTipoProcedimiento(nombre);
                         //this.Valor = 1;
                        
-                        if (nombre.ToLower().Trim().Equals(Global.NOMBRE_PROC_SALIDA))
+                        if (nombre.ToLower().Trim().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA))
                         {
                             this.LlamaProcSalida = true;
                         }

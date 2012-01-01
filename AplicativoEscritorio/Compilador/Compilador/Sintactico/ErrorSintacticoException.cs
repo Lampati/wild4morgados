@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CompiladorGargar.Sintactico
 {
-    public class ErrorSintacticoException : ErrorCompilacionException 
+    internal class ErrorSintacticoException : ErrorCompilacionException 
     {
         public bool descartarTopePila { get; set; }
         public bool descartarTopeCadena { get; set; }

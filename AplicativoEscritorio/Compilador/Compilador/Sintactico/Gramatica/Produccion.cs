@@ -7,7 +7,7 @@ using CompiladorGargar.Lexicografico;
 
 namespace CompiladorGargar.Sintactico.Gramatica
 {
-    public class Produccion
+    internal class Produccion
     {
         private NoTerminal izq;
         public NoTerminal Izq

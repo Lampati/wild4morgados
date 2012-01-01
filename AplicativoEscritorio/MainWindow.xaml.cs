@@ -22,6 +22,10 @@ namespace AplicativoEscritorio
         public MainWindow()
         {
             InitializeComponent();
+
+            CompiladorGargar.Compilador comp = new CompiladorGargar.Compilador("",true,"","","");
+            CompiladorGargar.Resultado.ResultadoCompilacion res = comp.Compilar("");
+            
         }
     }
 }

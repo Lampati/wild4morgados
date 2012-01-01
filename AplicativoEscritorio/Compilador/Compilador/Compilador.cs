@@ -6,6 +6,8 @@ using CompiladorGargar.Sintactico;
 using System.IO;
 using System.Diagnostics;
 using Utilidades;
+using CompiladorGargar.Resultado.Auxiliares;
+using CompiladorGargar.Resultado;
 
 namespace CompiladorGargar
 {
@@ -18,14 +20,17 @@ namespace CompiladorGargar
         public string DirectorioTemporales { get; set; }
         public string DirectorioEjecutables { get; set; }
 
+        public string NombreEjecutable { get; set; }
+
         private bool modoDebug { get; set; }
 
-        public Compilador(string gramatica, bool modo, string dirTemp, string dirEjec)
+        public Compilador(string gramatica, bool modo, string dirTemp, string dirEjec, string nombre)
         {
             this.modoDebug = modo;
             this.ArchivoGramatica = gramatica;
             this.DirectorioTemporales = dirTemp;
             this.DirectorioEjecutables = dirEjec;
+            this.NombreEjecutable = nombre;
 
             CargarAnalizadorSintactico();
         }
@@ -71,7 +76,7 @@ namespace CompiladorGargar
             try
             {
                 bool pararComp = false;
-                Global.TipoError tipoError = Global.TipoError.Ninguno;
+                GlobalesCompilador.TipoError tipoError = GlobalesCompilador.TipoError.Ninguno;
 
                 while (!this.analizadorSintactico.esFinAnalisisSintactico() && !pararComp)
                 {                   
@@ -87,17 +92,17 @@ namespace CompiladorGargar
                         {
                             switch (item.TipoError)
                             {
-                                case Global.TipoError.Sintactico:
+                                case GlobalesCompilador.TipoError.Sintactico:
                                     tipoError = item.TipoError;
                                     res.ListaErrores.Add(item);
                                     pararComp = pararComp || item.PararCompilacion;
                                     break;
-                                case Global.TipoError.Semantico:
+                                case GlobalesCompilador.TipoError.Semantico:
                                     tipoError = item.TipoError;
                                     res.ListaErrores.Add(item);
                                     pararComp = pararComp || item.PararCompilacion;
                                     break;
-                                case Global.TipoError.Ninguno:
+                                case GlobalesCompilador.TipoError.Ninguno:
                                     tipoError = item.TipoError;
                                     break;
                
@@ -191,7 +196,14 @@ namespace CompiladorGargar
 
         private string CompilarPascal(string archTemporalPascal)
         {
-            string exe = Path.Combine(DirectorioEjecutables,"blabla.exe");
+            
+
+            string exe = Path.Combine(DirectorioEjecutables,NombreEjecutable);
+
+            if (!exe.Contains(".exe"))
+            {
+                exe = string.Concat(exe, ".exe");
+            }
 
             string argumento = string.Format("-o{0}", exe);
 

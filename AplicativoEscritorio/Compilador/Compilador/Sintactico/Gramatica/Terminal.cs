@@ -7,7 +7,7 @@ using CompiladorGargar.Auxiliares;
 
 namespace CompiladorGargar.Sintactico.Gramatica
 {
-    public class Terminal : ElementoGramatica
+    internal class Terminal : ElementoGramatica
     {
         #region estaticas EOF, lambda y ERROR
 

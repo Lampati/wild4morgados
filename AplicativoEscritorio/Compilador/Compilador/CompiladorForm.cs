@@ -14,10 +14,12 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Auxiliares;
 using CompiladorGargar.Sintactico.TablaGramatica;
 using Utilidades;
+using CompiladorGargar.Resultado.Auxiliares;
+using CompiladorGargar.Resultado;
 
 namespace CompiladorGargar
 {
-    public partial class CompiladorForm : Form
+    internal partial class CompiladorForm : Form
     {
         public static string directorioActual;
         public delegate void ErrorCompiladorDelegate(string tipo, string desc, int fila, int col, bool parar);
@@ -44,7 +46,7 @@ namespace CompiladorGargar
 
             string pathArchGramatica = Path.Combine(directorioActual, System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
 
-            this.compilador = new Compilador(pathArchGramatica, modo, directorioActual, directorioActual);
+            this.compilador = new Compilador(pathArchGramatica, modo, directorioActual, directorioActual, "prueba");
             
         }
 
@@ -311,13 +313,13 @@ namespace CompiladorGargar
 
                 switch (item.TipoError)
 	            {
-		            case Global.TipoError.Sintactico:
+		            case GlobalesCompilador.TipoError.Sintactico:
                         this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
                         break;
-                    case Global.TipoError.Semantico:
+                    case GlobalesCompilador.TipoError.Semantico:
                         this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
                         break;
-                    case Global.TipoError.Ninguno:
+                    case GlobalesCompilador.TipoError.Ninguno:
                         break;
                     default:
                         break;
@@ -342,13 +344,13 @@ namespace CompiladorGargar
 
                     switch (item.TipoError)
                     {
-                        case Global.TipoError.Sintactico:
+                        case GlobalesCompilador.TipoError.Sintactico:
                             this.dataGridViewErrores.Rows[this.dataGridViewErrores.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Red;
                             break;
-                        case Global.TipoError.Semantico:
+                        case GlobalesCompilador.TipoError.Semantico:
                             this.dataGridViewErrores.Rows[this.dataGridViewErrores.Rows.Count - 2].DefaultCellStyle.BackColor = Color.OrangeRed;
                             break;
-                        case Global.TipoError.Ninguno:
+                        case GlobalesCompilador.TipoError.Ninguno:
                             break;
 
                     }
@@ -513,13 +515,13 @@ namespace CompiladorGargar
 
                         switch (item.TipoError)
                         {
-                            case Global.TipoError.Sintactico:
+                            case GlobalesCompilador.TipoError.Sintactico:
                                 this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
                                 break;
-                            case Global.TipoError.Semantico:
+                            case GlobalesCompilador.TipoError.Semantico:
                                 this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
                                 break;
-                            case Global.TipoError.Ninguno:
+                            case GlobalesCompilador.TipoError.Ninguno:
                                 break;
                             default:
                                 break;
@@ -539,13 +541,13 @@ namespace CompiladorGargar
 
                 switch (item.TipoError)
                 {
-                    case Global.TipoError.Sintactico:
+                    case GlobalesCompilador.TipoError.Sintactico:
                         this.dataGridViewErroresIDE.Rows[this.dataGridViewErroresIDE.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Red;
                         break;
-                    case Global.TipoError.Semantico:
+                    case GlobalesCompilador.TipoError.Semantico:
                         this.dataGridViewErroresIDE.Rows[this.dataGridViewErroresIDE.Rows.Count - 2].DefaultCellStyle.BackColor = Color.OrangeRed;
                         break;
-                    case Global.TipoError.Ninguno:
+                    case GlobalesCompilador.TipoError.Ninguno:
                         break;
 
                 }

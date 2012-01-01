@@ -52,9 +52,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             if (esFuncion)
             {
 
-                if (!nombre.ToLower().Equals(Global.NOMBRE_PROC_PRINCIPAL.ToLower()))
+                if (!nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
                 {
-                    if (!nombre.ToLower().Equals(Global.NOMBRE_PROC_SALIDA.ToLower()))
+                    if (!nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA.ToLower()))
                     {
                         if (!this.TablaSimbolos.ExisteFuncion(nombre))
                         {
@@ -62,9 +62,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             {
 
                                 this.TablaSimbolos.AgregarFuncion(nombre, listaFirmas, devolucion);
-                                
 
-                                if (this.hijosNodo[9].LlamaProcSalida)
+
+                                if (this.hijosNodo[9].LlamaProcSalida.HasValue && this.hijosNodo[9].LlamaProcSalida.Value)
                                 {
                                     throw new ErrorSemanticoException(new StringBuilder("Solo el procedimiento principal puede tener una llamada al procedimiento salida ").ToString());
                                 }
@@ -93,7 +93,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
-                if (nombre.ToLower().Equals(Global.NOMBRE_PROC_PRINCIPAL.ToLower()))
+                if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
                 {
                     if (!this.ProcPrincipalYaCreadoyCorrecto && this.ProcPrincipalCrearUnaVez)
                     {
@@ -104,7 +104,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     
                 }
 
-                if (nombre.ToLower().Equals(Global.NOMBRE_PROC_SALIDA.ToLower()))
+                if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA.ToLower()))
                 {
                     if (!this.ProcSalidaYaCreadoyCorrecto && this.ProcSalidaCrearUnaVez)
                     {
@@ -119,20 +119,37 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                     this.TablaSimbolos.AgregarProcedimiento(nombre, listaFirmas );
 
-                    //Chequeo de que no se llame a Salida donde no se debe, y que solo principal llame a salida
-                    if (!this.hijosNodo[7].LlamaProcSalida && nombre.ToLower().Equals(Global.NOMBRE_PROC_PRINCIPAL.ToLower()))
+                    
+                   
+
+                    if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
                     {
-                        listaExcepciones.Add( new ErrorSemanticoException(new StringBuilder("El procedimiento principal debe tener una llamada al procedimiento salida ").ToString()));
+                        //Chequeo de que solo principal llame a SALIDA
+                        if (this.hijosNodo[7].LlamaProcSalida.HasValue && !this.hijosNodo[7].LlamaProcSalida.Value)
+                        {
+                            listaExcepciones.Add(new ErrorSemanticoException(new StringBuilder("El procedimiento principal debe tener una llamada al procedimiento salida ").ToString()));
+                        }
+
+                        if (this.hijosNodo[7].ProcSalidaLlamadoMasDeUnaVez)
+                        {
+                            listaExcepciones.Add(new ErrorSemanticoException(new StringBuilder("Solo se puede llamar una sola vez al procedimiento salida ").ToString()));
+                        }
+
+                        if (!this.hijosNodo[7].ProcSalidaUltimaLinea)
+                        {
+                            listaExcepciones.Add(new ErrorSemanticoException(new StringBuilder("La llamada al procedimiento salida debe ser la ultima linea del procedimiento principal ").ToString()));
+                        }
                     }
                     else
                     {
-                        if (this.hijosNodo[7].LlamaProcSalida && !nombre.ToLower().Equals(Global.NOMBRE_PROC_PRINCIPAL.ToLower()))
+                        //Chequeo de que no se llame a Salida donde no se debe
+                        if (this.hijosNodo[7].LlamaProcSalida.HasValue && this.hijosNodo[7].LlamaProcSalida.Value) 
                         {
-                            listaExcepciones.Add( new ErrorSemanticoException(new StringBuilder("Solo el procedimiento principal puede tener una llamada al procedimiento salida ").ToString()));
+                            listaExcepciones.Add(new ErrorSemanticoException(new StringBuilder("Solo el procedimiento principal puede tener una llamada al procedimiento salida ").ToString()));
                         }
                     }
 
-                    if (nombre.ToLower().Equals(Global.NOMBRE_PROC_SALIDA.ToLower()))
+                    if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA.ToLower()))
                     {
                         
 
@@ -159,7 +176,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     }
 
                     //Arrojo todas las excepciones juntas
-                    if (listaExcepciones.Count > 1)
+                    if (listaExcepciones.Count > 0)
                     {
                         throw new AggregateException(listaExcepciones);
 
@@ -234,7 +251,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
-                if (this.Lexema.ToLower().Equals(Global.NOMBRE_PROC_PRINCIPAL.ToLower()))
+                if (this.Lexema.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
                 {
                     this.VariablesProcPrincipal = this.hijosNodo[5].Codigo;
 

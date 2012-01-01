@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Utils
 {
-    public class Log
+    internal class Log
     {
         // Fields
         private static TextWriter fileLog;

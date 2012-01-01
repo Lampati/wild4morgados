@@ -70,7 +70,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         
 
         public bool EsProcSalida { get; set; }
-        public bool LlamaProcSalida { get; set; }
+        public bool ProcSalidaLlamadoMasDeUnaVez { get; set; }
+        public bool ProcSalidaUltimaLinea { get; set; }   
+        public bool? LlamaProcSalida { get; set; }
         public bool ModificaParametros { get; set; }
         public bool AsignaParametros { get; set; }
         public bool LlamaProcs { get; set; }
@@ -201,6 +203,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
             this.ListaElementosVisualizar = new List<string>();
 
+            this.ProcSalidaLlamadoMasDeUnaVez = false;
             this.LlamaProcSalida = false;
             this.LlamaProcs = false;
             this.ModificaParametros = false;
