@@ -7,9 +7,9 @@ using CompiladorGargar.Auxiliares;
 
 namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
-   
 
-    public class NodoTablaSimbolos
+
+    internal class NodoTablaSimbolos
     {
         public enum TipoDeDato
         {

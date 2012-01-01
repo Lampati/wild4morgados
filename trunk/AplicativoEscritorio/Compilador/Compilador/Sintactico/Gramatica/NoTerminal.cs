@@ -7,7 +7,7 @@ using CompiladorGargar.Semantico.TablaDeSimbolos;
 
 namespace CompiladorGargar.Sintactico.Gramatica
 {
-    public class NoTerminal : ElementoGramatica
+    internal class NoTerminal : ElementoGramatica
     {
 
 

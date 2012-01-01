@@ -19,8 +19,8 @@ namespace CompiladorGargar.Semantico
             this.Tipo = "Semantico";
 
             //Cambiado a partir de ahora, toma de global
-            this.Fila = Global.UltFila;
-            this.Columna = Global.UltCol;
+            this.Fila = GlobalesCompilador.UltFila;
+            this.Columna = GlobalesCompilador.UltCol;
 
 
         }

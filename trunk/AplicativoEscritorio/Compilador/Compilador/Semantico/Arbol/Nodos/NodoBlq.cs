@@ -28,11 +28,36 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             if (this.hijosNodo.Count > 1)
             {
-                this.LlamaProcSalida = this.hijosNodo[0].LlamaProcSalida || this.hijosNodo[1].LlamaProcSalida;
+                //Si no tiene valor, es pq es un lambda
+                if (this.hijosNodo[1].LlamaProcSalida.HasValue)
+                {
+                    this.LlamaProcSalida = this.hijosNodo[0].LlamaProcSalida.Value || this.hijosNodo[1].LlamaProcSalida.Value;
+
+                    if ((this.hijosNodo[0].LlamaProcSalida.Value && this.hijosNodo[1].LlamaProcSalida.Value)
+                        || this.hijosNodo[1].ProcSalidaLlamadoMasDeUnaVez)
+                    {
+                        this.ProcSalidaLlamadoMasDeUnaVez = true;
+                    }
+
+                  
+                    this.ProcSalidaUltimaLinea = this.hijosNodo[1].ProcSalidaUltimaLinea;
+                  
+                }
+                else
+                {
+                    this.LlamaProcSalida = this.hijosNodo[0].LlamaProcSalida.Value;
+                    this.ProcSalidaLlamadoMasDeUnaVez = false;
+                    this.ProcSalidaUltimaLinea = this.hijosNodo[0].LlamaProcSalida.Value;
+                }
+
                 this.TieneLecturas = this.hijosNodo[0].TieneLecturas || this.hijosNodo[1].TieneLecturas;
                 this.LlamaProcs = this.hijosNodo[0].LlamaProcs || this.hijosNodo[1].LlamaProcs;
                 this.ModificaParametros = this.hijosNodo[0].ModificaParametros || this.hijosNodo[1].ModificaParametros;
                 this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+            }
+            else
+            {
+                this.LlamaProcSalida = null;
             }
 
             return this;

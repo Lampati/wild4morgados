@@ -8,7 +8,7 @@ namespace CompiladorGargar.Lexicografico
 {
 
 
-    public class ComponenteLexico
+    internal class ComponenteLexico
     {
         //Enumerador que contiene todos los tipos de token aceptados por el lenguaje.
         public enum TokenType

@@ -92,6 +92,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Compilador\Compilador\CompiladorGarGar.csproj">
+      <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
+      <Name>CompiladorGarGar</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

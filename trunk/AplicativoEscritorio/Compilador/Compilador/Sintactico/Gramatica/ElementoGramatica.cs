@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CompiladorGargar.Sintactico.Gramatica
 {
-    public abstract class ElementoGramatica
+    internal abstract class ElementoGramatica
     {
 
         public abstract int ObtenerValor();

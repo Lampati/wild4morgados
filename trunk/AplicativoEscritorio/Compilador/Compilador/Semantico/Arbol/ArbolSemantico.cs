@@ -7,29 +7,30 @@ using CompiladorGargar.Sintactico.Gramatica;
 using System.Windows.Forms;
 using CompiladorGargar.Semantico.RecorredorArbol;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Resultado.Auxiliares;
 
 namespace CompiladorGargar.Semantico.Arbol
 {
-    public class ArbolSemantico
+    internal class ArbolSemantico
     {
 
       
         
 
-        public event CompiladorForm.ErrorCompiladorDelegate errorCompilacion;
+        
 
 
         private NodoArbolSemantico nodoRaiz;
         private NodoArbolSemantico nodoActual;
 
-        public ArbolSemantico(NoTerminal nt)
+        internal ArbolSemantico(NoTerminal nt)
         {
             nodoRaiz = new NodoStart(null, nt);
             nodoRaiz.CrearTablaSimbolos();
             nodoActual = nodoRaiz;
         }
 
-        public void AgregarHijosNodoActual(Produccion prod)
+        internal void AgregarHijosNodoActual(Produccion prod)
         {
             this.nodoActual.AgregarHijos(prod);
             this.nodoActual = this.nodoActual.ObtenerPrimerHijo(); 
@@ -85,7 +86,7 @@ namespace CompiladorGargar.Semantico.Arbol
             
         //}
 
-        public List<PasoAnalizadorSintactico> CalcularAtributos(Terminal t)
+        internal List<PasoAnalizadorSintactico> CalcularAtributos(Terminal t)
         {
             List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();       
 
@@ -103,7 +104,7 @@ namespace CompiladorGargar.Semantico.Arbol
                     catch (ErrorSemanticoException ex)
                     {
                        
-                        retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Semantico, ex.Fila, ex.Columna, false));
+                        retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Semantico, ex.Fila, ex.Columna, false));
 
                         //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
                         nodo = nodo.SalvarAtributosParaContinuar();
@@ -114,7 +115,7 @@ namespace CompiladorGargar.Semantico.Arbol
 
                         foreach (ErrorSemanticoException ex in exs.InnerExceptions)
                         {
-                            retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, Global.TipoError.Semantico, ex.Fila, ex.Columna, false));
+                            retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Semantico, ex.Fila, ex.Columna, false));
                             //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
                         }
                         nodo = nodo.SalvarAtributosParaContinuar();

@@ -9,7 +9,7 @@ namespace CompiladorGargar.Auxiliares
 {
     // Clase para permitir valores string de un enumerado, para poder vincular los 
     // estados finales del afd con un valor del enumerado
-    public class EnumUtils
+    internal class EnumUtils
     {
         public static string stringValueOf(Enum value)
         {

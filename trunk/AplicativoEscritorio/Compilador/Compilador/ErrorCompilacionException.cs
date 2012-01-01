@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CompiladorGargar
 {
-    public class ErrorCompilacionException : Exception
+    internal class ErrorCompilacionException : Exception
     {
         public string Tipo { get; set; }
         public string Descripcion { get; set; }

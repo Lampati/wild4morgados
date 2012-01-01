@@ -5,13 +5,13 @@ using System.Text;
 
 namespace CompiladorGargar
 {
-    public static class Global
+    public static class GlobalesCompilador
     {
-        public  const string NOMBRE_PROC_SALIDA = "salida";
-        public  const string NOMBRE_PROC_PRINCIPAL = "principal";
+        internal  const string NOMBRE_PROC_SALIDA = "salida";
+        internal const string NOMBRE_PROC_PRINCIPAL = "principal";
 
-        public static int UltFila;
-        public static int UltCol;
+        internal static int UltFila;
+        internal static int UltCol;
 
         public enum TipoError
         {

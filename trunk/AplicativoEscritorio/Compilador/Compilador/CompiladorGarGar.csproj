@@ -115,7 +115,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ResultadoCompilacion.cs" />
+    <Compile Include="Resultado\Auxiliares\PasoAnalizadorSintactico.cs" />
+    <Compile Include="Resultado\Auxiliares\PasoDebugTiempos.cs" />
+    <Compile Include="Resultado\Auxiliares\PasoCompilacion.cs" />
+    <Compile Include="Resultado\ResultadoCompilacion.cs" />
     <Compile Include="SelectorModoPruebas.cs">
       <SubType>Form</SubType>
     </Compile>
