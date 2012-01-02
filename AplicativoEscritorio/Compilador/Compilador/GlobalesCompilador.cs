@@ -10,13 +10,16 @@ namespace CompiladorGargar
         internal  const string NOMBRE_PROC_SALIDA = "salida";
         internal const string NOMBRE_PROC_PRINCIPAL = "principal";
 
+        
+
         internal static int UltFila;
         internal static int UltCol;
 
         public enum TipoError
         {
-            Sintactico,
+            Compilacion,
             Semantico,
+            Sintactico,            
             Ninguno
         }
     }

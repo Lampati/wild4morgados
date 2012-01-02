@@ -164,11 +164,14 @@ namespace CompiladorGargar
                 try
                 {
                     timeStampCod = Stopwatch.GetTimestamp();
-                    res.ArchEjecutable = CompilarPascal(res.ArchTemporalCodigoPascalConRuta);
+
+                    ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta);
+                    res.ResultadoCompPascal = resPas;
+                    res.ArchEjecutable = resPas.NombreEjecutable;
                     res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
                     res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-
-                    res.GeneracionEjectuableCorrecto = true;
+                    
+                    res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
                 }
                 catch
                 {
@@ -194,22 +197,34 @@ namespace CompiladorGargar
 
        
 
-        private string CompilarPascal(string archTemporalPascal)
+        private ResultadoCompilacionPascal CompilarPascal(string archTemporalPascal)
         {
-            
+            ResultadoCompilacionPascal res;
 
-            string exe = Path.Combine(DirectorioEjecutables,NombreEjecutable);
-
-            if (!exe.Contains(".exe"))
+            try
             {
-                exe = string.Concat(exe, ".exe");
+                string exe = Path.Combine(DirectorioEjecutables, NombreEjecutable);
+
+                if (!exe.Contains(".exe"))
+                {
+                    exe = string.Concat(exe, ".exe");
+                }
+
+                string argumento = string.Format("-o{0}", exe);
+
+                string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumento, archTemporalPascal });
+
+                res = new ResultadoCompilacionPascal(resultado);
+                res.NombreEjecutable = exe;
+            }
+            catch (Exception)
+            {
+                res = new ResultadoCompilacionPascal();
+                res.CompilacionPascalCorrecta = false;
+                res.ListaErrores.Add("Error fatal al intentar ejecutar el compilador de codigo intermedio.");
             }
 
-            string argumento = string.Format("-o{0}", exe);
-
-            EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumento, archTemporalPascal });
-
-            return exe;
+            return res;
         }
 
         private string CrearArchivoTemporal(string cod)

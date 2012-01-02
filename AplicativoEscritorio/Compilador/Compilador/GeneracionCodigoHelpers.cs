@@ -25,6 +25,7 @@ namespace CompiladorGargar
             strBldr.AppendLine("begin ");
             strBldr.AppendLine("\tretorno := 'falso'; ");
             strBldr.AppendLine("end; ");
+            strBldr.AppendLine("\tFrameworkProgramArProgramAr0000001EscribirBooleano := retorno; ");
             strBldr.AppendLine("end; ");
             strBldr.AppendLine();
 

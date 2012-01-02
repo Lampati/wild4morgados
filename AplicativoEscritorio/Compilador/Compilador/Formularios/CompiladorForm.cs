@@ -488,13 +488,32 @@ namespace CompiladorGargar
 
             if (res.CompilacionGarGarCorrecta)
             {
-                this.buttonGenerarCodigo.Enabled = false;
-                this.textBoxCodigo.Text = res.CodigoPascal;
+                if (res.GeneracionEjectuableCorrecto)
+                {
+                    this.buttonGenerarCodigo.Enabled = false;
+                    this.textBoxCodigo.Text = res.CodigoPascal;
+                }
+                else
+                {
+                    AgregarResCompilPascal(res.ResultadoCompPascal.ListaErrores);
+                }
             }
             else
             {
                 AgregarErrores(res.ListaErrores);
             }
+        }
+
+        private void AgregarResCompilPascal(List<string> list)
+        {
+            foreach (var item in list)
+            {
+
+                this.dataGridViewErroresIDE.Rows.Add(string.Empty, string.Empty, GlobalesCompilador.TipoError.Compilacion, item);               
+                this.dataGridViewErroresIDE.Rows[this.dataGridViewErroresIDE.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Red;
+            }
+
+            this.dataGridViewErroresIDE.CurrentCell = this.dataGridViewErroresIDE[0, this.dataGridViewErroresIDE.Rows.Count - 1];
         }
 
         private void ReiniciarIDEParaCompilacion()
@@ -510,25 +529,25 @@ namespace CompiladorGargar
         private void AgregarListaDebug(List<PasoCompilacion> list)
         {
  	        foreach (var item in list)
-                    {
-                        this.dataGridViewSintactico.Rows.Add(item.ContenidoPila, item.EstadoCadenaEntrada);
+            {
+                this.dataGridViewSintactico.Rows.Add(item.ContenidoPila, item.EstadoCadenaEntrada);
 
-                        switch (item.TipoError)
-                        {
-                            case GlobalesCompilador.TipoError.Sintactico:
-                                this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
-                                break;
-                            case GlobalesCompilador.TipoError.Semantico:
-                                this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
-                                break;
-                            case GlobalesCompilador.TipoError.Ninguno:
-                                break;
-                            default:
-                                break;
-                        }
+                switch (item.TipoError)
+                {
+                    case GlobalesCompilador.TipoError.Sintactico:
+                        this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
+                        break;
+                    case GlobalesCompilador.TipoError.Semantico:
+                        this.dataGridViewSintactico.Rows[this.dataGridViewSintactico.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
+                        break;
+                    case GlobalesCompilador.TipoError.Ninguno:
+                        break;
+                    default:
+                        break;
+                }
 
-                        this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
-                    }
+                this.dataGridViewSintactico.CurrentCell = this.dataGridViewSintactico[0, this.dataGridViewSintactico.Rows.Count - 1];
+            }
         }
 
         private void AgregarErrores(List<PasoAnalizadorSintactico> list)
