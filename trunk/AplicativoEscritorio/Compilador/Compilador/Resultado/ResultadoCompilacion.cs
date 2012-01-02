@@ -23,6 +23,7 @@ namespace CompiladorGargar.Resultado
 
         public string ArchEjecutable { get; set; }
         public string ArchEjecutableConRuta { get; set; }
+        public ResultadoCompilacionPascal ResultadoCompPascal { get; set; }
 
         public float TiempoCompilacionTotal { get; set; }
         public float TiempoGeneracionAnalizadorLexico { get; set; }

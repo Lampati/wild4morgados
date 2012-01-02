@@ -62,7 +62,7 @@
     <Compile Include="ErrorCompilacionException.cs" />
     <Compile Include="ErrorCompiladorEventArgs.cs" />
     <Compile Include="GeneracionCodigoHelpers.cs" />
-    <Compile Include="Global.cs" />
+    <Compile Include="GlobalesCompilador.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicografico.cs" />
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\CharHelper.cs" />
@@ -118,6 +118,7 @@
     <Compile Include="Resultado\Auxiliares\PasoAnalizadorSintactico.cs" />
     <Compile Include="Resultado\Auxiliares\PasoDebugTiempos.cs" />
     <Compile Include="Resultado\Auxiliares\PasoCompilacion.cs" />
+    <Compile Include="Resultado\Auxiliares\ResultadoCompilacionPascal.cs" />
     <Compile Include="Resultado\ResultadoCompilacion.cs" />
     <Compile Include="Formularios\SelectorModoPruebas.cs">
       <SubType>Form</SubType>
