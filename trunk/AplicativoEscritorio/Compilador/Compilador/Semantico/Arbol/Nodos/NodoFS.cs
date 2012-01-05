@@ -22,7 +22,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
-            this.ListaFirma.AddRange(hijoASintetizar.ListaFirma);
+            if (hijoASintetizar.ListaFirma != null)
+            {
+                this.ListaFirma.AddRange(hijoASintetizar.ListaFirma);
+            }
             
         }
 

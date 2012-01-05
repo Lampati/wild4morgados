@@ -50,9 +50,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         if (!this.TablaSimbolos.ExisteArregloEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
                         {
                             this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, v.IndiceArreglo, false);
-                            textoParaArbol.Append("Declaracion de arreglo ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                            textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
-                            textoParaArbol.Append(" de ").Append(v.IndiceArreglo.ToString()).Append(" posiciones.");
+
                         }
                         else
                         {

@@ -78,16 +78,56 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             strBldr.AppendLine("Const");
             strBldr.AppendLine(this.hijosNodo[0].ConstantesGlobales);
+            strBldr.AppendLine("Type");
+            strBldr.AppendLine(ArmarTiposDeArreglo(this.TablaSimbolos.ListaTiposArreglos));
             strBldr.AppendLine("Var");
             strBldr.AppendLine(this.hijosNodo[0].VariablesGlobales);
-            strBldr.AppendLine(this.hijosNodo[1].VariablesProcPrincipal);
+            //strBldr.AppendLine(this.hijosNodo[1].VariablesProcPrincipal);
             strBldr.AppendLine("");
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesBasicas());
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
+            strBldr.AppendLine("begin");
+            strBldr.Append("\t").AppendLine("PRINCIPAL();");
+            strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
+            strBldr.AppendLine("end.");
+            
+
             
             
             this.Codigo = strBldr.ToString();
+        }
+
+        private string ArmarTiposDeArreglo(List<NodoTipoArreglo> list)
+        {
+            StringBuilder strBlder = new StringBuilder();
+            foreach (NodoTipoArreglo item in list)
+            {
+                strBlder.Append(item.Nombre).Append(" = ").Append("Array [1..").Append(item.Rango).Append("] of ");
+
+                string tipo;
+                switch (item.TipoDato)
+                {
+                    case NodoTablaSimbolos.TipoDeDato.String:
+                        tipo = "string";
+                        break;
+                    case NodoTablaSimbolos.TipoDeDato.Numero:
+                        tipo = "integer";
+                        break;
+                    case NodoTablaSimbolos.TipoDeDato.Booleano:
+                        tipo = "boolean";
+                        break;
+                    case NodoTablaSimbolos.TipoDeDato.Ninguno:               
+                    default:
+                        tipo = string.Empty;
+                        break;
+                }
+
+                strBlder.Append(tipo).AppendLine(";");
+                
+            }
+
+            return strBlder.ToString();
         }
     }
 }

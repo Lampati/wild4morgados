@@ -30,6 +30,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 this.TipoDato = this.hijosNodo[5].TipoDato;
                 this.EsArreglo = true;
+                this.RangoArreglo = this.hijosNodo[2].RangoArreglo;
+
+                this.NombreTipoArreglo = this.TablaSimbolos.AgregarTipoArreglo(this.TipoDato, this.RangoArreglo);
             }
             else
             {
@@ -56,17 +59,16 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                strBldr.Append(this.NombreTipoArreglo);
+                //strBldr.Append("Array ");
                 
-                strBldr.Append("Array ");
-                if (!this.EsFirma)
-                {
-                    strBldr.Append("[ ");
-                    strBldr.Append("1..");
-                    strBldr.Append(this.hijosNodo[2].Codigo);
-                    strBldr.Append("] ");
-                }
-                strBldr.Append(" of ");
-                strBldr.Append(this.hijosNodo[5].Codigo);
+                //strBldr.Append("[ ");
+                //strBldr.Append("1..");
+                //strBldr.Append(this.hijosNodo[2].Codigo);
+                //strBldr.Append("] ");
+                
+                //strBldr.Append(" of ");
+                //strBldr.Append(this.hijosNodo[5].Codigo);
                 
             }
             else

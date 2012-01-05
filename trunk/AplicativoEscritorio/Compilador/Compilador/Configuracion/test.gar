@@ -81,7 +81,7 @@ comenzar
 finfunc N;
 
 
-procedimiento SALIDA(A : arreglo de numero)
+procedimiento SALIDA(A : arreglo[MaxArreglo]  de numero)
 var I : numero;
 comenzar
   I := 1;
