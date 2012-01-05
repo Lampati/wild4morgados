@@ -181,6 +181,8 @@ namespace CompiladorGargar.Semantico.Arbol
 
         public string CalcularCodigo()
         {
+            
+
             PilaRecorredor pilaRecorredor = new PilaRecorredor();
             pilaRecorredor.InsertarElemento(new NodoPilaRecorredor(this.nodoRaiz));
 

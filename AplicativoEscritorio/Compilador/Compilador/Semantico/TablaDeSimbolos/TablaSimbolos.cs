@@ -10,6 +10,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
     class TablaSimbolos
     {
+        private List<NodoTipoArreglo> listaTiposArreglos;
+        public List<NodoTipoArreglo> ListaTiposArreglos
+        {
+            get { return listaTiposArreglos; }
+        }
+
         private List<NodoTablaSimbolos> listaNodos;
         public List<NodoTablaSimbolos> ListaNodos
         {
@@ -20,14 +26,34 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         public TablaSimbolos()
         {
             this.listaNodos = new List<NodoTablaSimbolos>();
-        }
+            this.listaTiposArreglos = new List<NodoTipoArreglo>();
+        }  
 
-        public TablaSimbolos(TablaSimbolos tabla)
+        #region Tipos Arreglo
+
+        public string AgregarTipoArreglo(NodoTablaSimbolos.TipoDeDato tipo, string rango)
         {
-            this.listaNodos = new List<NodoTablaSimbolos>(tabla.listaNodos);
+            string nombreTipo;
+
+            if (!listaTiposArreglos.Exists(m => m.Rango == rango && m.TipoDato == tipo))
+            {
+                NodoTipoArreglo t = new NodoTipoArreglo(tipo, rango);
+                listaTiposArreglos.Add(t);
+                nombreTipo = t.Nombre;
+            }
+            else
+            {
+                NodoTipoArreglo t = listaTiposArreglos.Find(m => m.Rango == rango && m.TipoDato == tipo);                
+                nombreTipo = t.Nombre;
+            }
+
+            return nombreTipo;
         }
 
-      
+
+        #endregion
+
+
 
         #region Manejo Variables
 

@@ -25,7 +25,7 @@ comenzar
 
 finproc;
 
-procedimiento PROC2(A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano)
+procedimiento PROC2(A : arreglo[MaxArreglo]  de numero, B : arreglo[MaxArreglo]  de texto , C : arreglo[MaxArreglo]  de booleano)
 comenzar
 
 finproc;
@@ -42,15 +42,15 @@ funcion FUNC3( i : numero, j : texto, k: booleano) : booleano
 comenzar
 finfunc i > 10 and i < 20 or k;
 
-funcion FUNC4( A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano) : numero
+funcion FUNC4( A : arreglo[MaxArreglo]  de numero, B : arreglo[MaxArreglo]  de texto , C : arreglo[MaxArreglo]  de booleano) : numero
 comenzar
 finfunc A[1] * 2;
 
-funcion FUNC5( A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano) : texto
+funcion FUNC5( A : arreglo[MaxArreglo]  de numero, B : arreglo[MaxArreglo]  de texto , C : arreglo[MaxArreglo]  de booleano) : texto
 comenzar
 finfunc B[1] & '';
 
-funcion FUNC6( A : arreglo de numero, B : arreglo de texto , C : arreglo de booleano) : booleano
+funcion FUNC6( A : arreglo[MaxArreglo]  de numero, B : arreglo[MaxArreglo]  de texto , C : arreglo[MaxArreglo]  de booleano) : booleano
 comenzar
 finfunc A[1] > 10 and A[2] < 20 or C[1] ;
 
@@ -395,7 +395,7 @@ finproc;
 
 
 
-procedimiento SALIDA(A : arreglo de numero)
+procedimiento SALIDA(A : arreglo[MaxArreglo] de numero)
 var I : numero;
 comenzar
   I := 1;

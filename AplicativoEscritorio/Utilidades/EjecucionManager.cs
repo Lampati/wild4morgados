@@ -9,19 +9,19 @@ namespace Utilidades
     public class EjecucionManager
     {
 
-        public static void EjecutarConVentana(string archConRuta)
+        public static string EjecutarConVentana(string archConRuta)
         {
-            Ejecutar(archConRuta, new List<string>(), ProcessWindowStyle.Normal);   
+            return Ejecutar(archConRuta, new List<string>(), ProcessWindowStyle.Normal);   
         }
 
-        public static void EjecutarSinVentana(string archConRuta, List<string> argumentos)
+        public static string EjecutarSinVentana(string archConRuta, List<string> argumentos)
         {
-            Ejecutar(archConRuta, argumentos, ProcessWindowStyle.Hidden);   
+            return Ejecutar(archConRuta, argumentos, ProcessWindowStyle.Hidden);   
         }
 
 
 
-        private static void Ejecutar(string archConRuta, List<string> argumentos, ProcessWindowStyle ventana)
+        private static string Ejecutar(string archConRuta, List<string> argumentos, ProcessWindowStyle ventana)
         {
             ProcessStartInfo procInfo = new ProcessStartInfo();
             procInfo.CreateNoWindow = false;
@@ -29,14 +29,36 @@ namespace Utilidades
             procInfo.WindowStyle = ventana;
             procInfo.Arguments = string.Join(" ", argumentos.ToArray());
 
-            Process proc = new Process();
 
-            proc.StartInfo = procInfo;
 
+            if (ventana == ProcessWindowStyle.Hidden)
+            {
+                procInfo.UseShellExecute = false;
+                procInfo.RedirectStandardError = true;
+                procInfo.RedirectStandardOutput = true;
+                procInfo.CreateNoWindow = true;
+            }
+            else
+            {
+                procInfo.UseShellExecute = true;
+            }
 
             
+            Process proc = new Process();
+            proc.StartInfo = procInfo;
             proc.Start();
+
+            string output = string.Empty;
+            if (ventana == ProcessWindowStyle.Hidden)
+            {
+
+                //string error = proc.StandardError.ReadToEnd();
+                output = proc.StandardOutput.ReadToEnd();
+            }
+
             proc.WaitForExit();
+
+            return output;
         }
     }
 }

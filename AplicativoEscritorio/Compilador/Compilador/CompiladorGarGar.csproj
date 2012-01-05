@@ -131,7 +131,6 @@
     <Compile Include="Semantico\Arbol\Interfases\IValorizable.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Firma.cs" />
     <Compile Include="Semantico\Arbol\Nodos\Auxiliares\Variable.cs" />
-    <Compile Include="Semantico\Arbol\Nodos\NodoTipoDatoConArregloParam.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoOpBooleanas.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoValorConst.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoMaxArregloDec.cs" />
@@ -209,6 +208,7 @@
     <Compile Include="Semantico\TablaDeSimbolos\FirmaProc.cs" />
     <Compile Include="Semantico\TablaDeSimbolos\NodoTablaSimbolos.cs" />
     <Compile Include="Semantico\TablaDeSimbolos\TablaSimbolos.cs" />
+    <Compile Include="Semantico\TablaDeSimbolos\NodoTipoArreglo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Sintactico\AnalizadorSintactico.cs" />
     <Compile Include="Sintactico\CadenaEntrada.cs" />

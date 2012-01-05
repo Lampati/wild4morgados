@@ -251,17 +251,17 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
-                if (this.Lexema.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
-                {
-                    this.VariablesProcPrincipal = this.hijosNodo[5].Codigo;
+                //if (this.Lexema.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
+                //{
+                //    this.VariablesProcPrincipal = this.hijosNodo[5].Codigo;
 
-                    strBldr.AppendLine("begin");
-                    strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));
-                    strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
-                    strBldr.AppendLine("end.");
-                }
-                else
-                {
+                //    strBldr.AppendLine("begin");
+                //    strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));
+                //    strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
+                //    strBldr.AppendLine("end.");
+                //}
+                //else
+                //{
                     strBldr.Append("procedure ");
                     strBldr.Append(this.Lexema);
 
@@ -274,7 +274,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));
                     strBldr.AppendLine("end;");
                     strBldr.AppendLine();
-                }
+                //}
             }
             
             this.Codigo = strBldr.ToString();

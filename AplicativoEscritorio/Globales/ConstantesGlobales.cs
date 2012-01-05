@@ -7,6 +7,6 @@ namespace Globales
 {
     public class ConstantesGlobales
     {
-        public  const  string NOMBRE_ARCH_COMPILADOR_PASCAL = "CompiladorPascal.exe";
+        public  const  string NOMBRE_ARCH_COMPILADOR_PASCAL = @"Configuracion\CompiladorPascal.exe";
     }
 }
