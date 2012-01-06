@@ -1,0 +1,620 @@
+﻿@using PMI.CETools.Sitio.Utility;
+@model PMI.CETools.Sitio.Models.TouchPointCreateOrEditModel
+@{
+    /*List<PMI.CETools.Sitio.Models.TouchPointModeModel> listaModes = (List<PMI.CETools.Sitio.Models.TouchPointModeModel>)ViewBag.PossibleTouchPointModes;*/
+
+    //List<PMI.CETools.Sitio.Models.ProvinciaJsonModel> listaProvincias = (List<PMI.CETools.Sitio.Models.ProvinciaJsonModel>)ViewBag.PossibleProvincias;
+    //List<PMI.CETools.Sitio.Models.PartidoJsonModel> listaPartidosJson = (List<PMI.CETools.Sitio.Models.PartidoJsonModel>)ViewBag.PossiblePartidos;
+    //List<PMI.CETools.Sitio.Models.LocalidadJsonModel> listaLocalidadesJson = (List<PMI.CETools.Sitio.Models.LocalidadJsonModel>)ViewBag.PossibleLocalidades;
+    //List<PMI.CETools.Sitio.Models.CalleJsonModel> listaCallesJson = (List<PMI.CETools.Sitio.Models.CalleJsonModel>)ViewBag.PossibleCalles;
+
+    List<PMI.CETools.Sitio.Models.JsonGenericoModel> listaProvincias = (List<PMI.CETools.Sitio.Models.JsonGenericoModel>)ViewBag.PossibleProvincias;
+    List<PMI.CETools.Sitio.Models.JsonGenericoModel> listaPartidosJson = (List<PMI.CETools.Sitio.Models.JsonGenericoModel>)ViewBag.PossiblePartidos;
+    List<PMI.CETools.Sitio.Models.JsonGenericoModel> listaLocalidadesJson = (List<PMI.CETools.Sitio.Models.JsonGenericoModel>)ViewBag.PossibleLocalidades;
+    List<PMI.CETools.Sitio.Models.JsonGenericoModel> listaCallesJson = (List<PMI.CETools.Sitio.Models.JsonGenericoModel>)ViewBag.PossibleCalles;
+
+    var oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+    oSerializer.MaxJsonLength = int.MaxValue;
+    
+    string sJSONPartidos = oSerializer.Serialize(listaPartidosJson).Replace("'", "\"");
+    string sJSONLocalidades = oSerializer.Serialize(listaLocalidadesJson).Replace("'", "\"");
+    string sJSONCalles = oSerializer.Serialize(listaCallesJson).Replace("'", "\"");
+
+    string calleDesc = "";
+
+    if (Model != null && Model.TouchPoint != null && Model.TouchPoint.CodCalle != null)
+    {
+        PMI.CETools.Entidades.Calle oCalle = PMI.CETools.DataAccess.CalleDA.GetCalleById(Model.TouchPoint.CodCalle);
+        calleDesc = oCalle.DesCalle;
+    }
+    
+}
+
+<style>
+        input[type="text"].Numero
+        {
+            width: 20px;
+        }
+</style>
+
+<script type="text/javascript">
+    function DisplayErrors(errors) {
+        //var err = eval(errors);
+        //alert(errors.length);
+        //$('#dvWait2').hide();        
+        if (errors.length > 0) {
+            for (var i = 0; i < errors.length; i++) {
+                $("<label for='" + errors[i].Key + "' class='error'></label>").html(errors[i].Value[0]).appendTo($("[name='" + errors[i].Key + "']").parent());
+            }
+        }
+        else {
+            location.reload();
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        
+
+        CargarDatosIniciales();
+
+        $("#drpDwProvinciaId").change(function () {
+
+            $('#drpDwPartidoId').empty();
+            $('#drpDwLocalidadId').empty();
+
+            $("#hddnCalleId").val("");
+            $("#autoInput").val("");
+
+
+            ChequearDeshabilitarAutoComplete();
+            //            $("#perfilipad").css("display", "none");
+            //            $("#perfilweb").css("display", "none");
+
+            var idProvincia = $('#drpDwProvinciaId option:selected').val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetPartidos")',
+                data: " { codProvincia: '" + idProvincia + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var partidos = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    $("#drpDwPartidoId").get(0).options.length = 0;
+                    $("#drpDwPartidoId").get(0).options[0] = new Option("@PMI.CETools.Recursos.AppResources.Vistas.Seleccione", 0);
+                    for (var i = 0; i < partidos.length; i++) {
+                        var val = partidos[i].Value;
+                        var text = partidos[i].Description;
+                        $("#drpDwPartidoId").get(0).options[$("#drpDwPartidoId").get(0).options.length] = new Option(text, val);
+                    }
+                    $('#drpDwPartidoId').val(0);
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert("Error llenar" + response.d);
+                }
+            });
+        });
+
+
+        $("#drpDwPartidoId").change(function () {
+            $('#drpDwLocalidadId').empty();
+            $("#hddnCalleId").val("");
+            $("#autoInput").val("");
+            //            $("#ddlUserType").removeClass('erroresInput');
+
+
+            var idProvincia = $('#drpDwProvinciaId option:selected').val();
+            var idPartido = $('#drpDwPartidoId option:selected').val();   //.text();
+
+            ChequearDeshabilitarAutoComplete();
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetLocalidades")',
+                data: " { codProvincia: '" + idProvincia + "', codPartido: '" + idPartido + "' }",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var localidades = (typeof response) == 'string' ? eval('(' + response + ')') : response;
+                    $("#drpDwLocalidadId").get(0).options.length = 0;
+                    $("#drpDwLocalidadId").get(0).options[0] = new Option("@PMI.CETools.Recursos.AppResources.Vistas.Seleccione", 0);
+                    for (var i = 0; i < localidades.length; i++) {
+                        var val = localidades[i].Value;
+                        var text = localidades[i].Description;
+                        $("#drpDwLocalidadId").get(0).options[$("#drpDwLocalidadId").get(0).options.length] = new Option(text, val);
+                    }
+                    $('#drpDwLocalidadId').val(0);
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert("Error llenar" + response.d);
+                }
+            });
+        });
+
+
+
+        $("#drpDwLocalidadId").change(function () {
+
+            $("#hddnCalleId").val("");
+            $("#autoInput").val("");
+            //            $("#ddlUserType").removeClass('erroresInput');
+
+            ChequearDeshabilitarAutoComplete();
+
+            ChequearHabilitarAutoComplete();
+
+
+        });
+
+
+    });
+
+    function ChequearDeshabilitarAutoComplete() {
+
+        if ($('#autoInput').attr("disabled") == false) {
+            $('#autoInput').attr("disabled", "disabled");
+        }
+    }
+
+    function ChequearHabilitarAutoComplete() {
+        var idProvincia = $('#drpDwProvinciaId option:selected').val();
+        var idPartido = $('#drpDwPartidoId option:selected').val();   //.text();
+        var idLocalidad = $('#drpDwLocalidadId option:selected').val();
+
+        if ((idProvincia != "" && idProvincia != undefined)
+            && (idPartido != "" && idPartido != undefined)
+            && (idLocalidad != "" && idLocalidad != undefined)
+            ) {
+
+            if ($('#autoInput').attr("disabled") == true) {
+                $('#autoInput').removeAttr("disabled");
+            }
+        }
+    }
+
+    function CargarDatosIniciales() {
+
+        
+
+        ChequearHabilitarAutoComplete();
+
+        if ('@Model.TouchPoint' != null && '@Model.TouchPoint.CodCalle' != "") {
+            $("#hddnCalleId").val('@Model.TouchPoint.CodCalle');           
+                              
+        }
+    }
+
+</script>           
+
+<script language="javascript" type="text/javascript">
+
+
+    $('#btnCargarImagen').click(function (event) {
+        OpenSubDialog(event, null, '@Url.Action("FileUpload", "FileUpload")/', 300, 200);
+    });
+
+</script> 
+
+
+<script>
+
+    (function ($) {
+
+
+        $.widget("ui.combobox", {
+            _create: function () {
+                var self = this,
+					select = this.element.hide(),
+					selected = select.children(":selected"),
+					value = selected.val() ? selected.text() : "";
+
+
+                var deshabilitar= "";
+
+                if ('@calleDesc' != "") {
+                    value = '@calleDesc';
+                }
+                else{
+                    deshabilitar = 'disabled="disabled"';
+                }
+
+
+                var input = this.input = $('<input id="autoInput" '+ deshabilitar  +' >')
+					.insertAfter(select)
+					.val(value)
+					.autocomplete({
+					    delay: 0,
+					    minLength: 3,
+
+					    source: function (request, response) {
+					        //					        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+					        //					        response(select.children("option").map(function () {
+					        //					            var text = $(this).text();
+					        //					            if (this.value && (!request.term || matcher.test(text)))
+					        //					                return {
+					        //					                    label: text.replace(
+					        //											new RegExp(
+					        //												"(?![^&;]+;)(?!<[^<>]*)(" +
+					        //												$.ui.autocomplete.escapeRegex(request.term) +
+					        //												")(?![^<>]*>)(?![^&;]+;)", "gi"
+					        //											), "<strong>$1</strong>"),
+					        //					                    value: text,
+					        //					                    option: this
+					        //					                };
+					        //					        }));
+
+					        var idProvincia = $('#drpDwProvinciaId option:selected').val();
+					        var idPartido = $('#drpDwPartidoId option:selected').val();   //.text();
+					        var idLocalidad = $('#drpDwLocalidadId option:selected').val();
+
+					        $.ajax({
+					            type: "POST",
+					            url: '@Url.Action("GetCalles")',
+					            data: " { codProvincia: '" + idProvincia + "', codPartido: '" + idPartido + "', codLocalidad: '" + idLocalidad + "', desc: '" + request.term + "' }",
+					            contentType: "application/json; charset=utf-8",
+					            dataType: "json",
+					            success: function (data) {
+					                response($.map(data, function (el, index) {
+					                    return {
+					                        value: el.Text,
+					                        id: el.Value
+					                    };
+					                }));
+
+					                //					                response(data)		                
+					            },
+					            error: function (response) {
+					                response([]);
+					            }
+					        });
+					    },
+					    select: function (event, ui) {
+					        if (ui.item) {
+					            $("#hddnCalleId").val(ui.item.id);
+					            //					            $("#cboActivity").val(ui.item.id);
+					            //					            $("#Plan_StartDate").val(ui.item.startDate);
+					            //					            $("#Plan_EndDate").val(ui.item.endDate);
+					        }
+					    },
+					    change: function (event, ui) {
+					        if (!ui.item) {
+					            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex($(this).val()) + "$", "i"),
+									valid = false;
+					            select.children("option").each(function () {
+					                if ($(this).text().match(matcher)) {
+					                    this.selected = valid = true;
+					                    return false;
+					                }
+					            });
+					            if (!valid) {
+					                // remove invalid value, as it didn't match anything
+					                $(this).val("");
+					                select.val("");
+					                input.data("autocomplete").term = "";
+					                $("#hddnCalleId").val("");
+					                return false;
+					            }
+					        }
+					    }
+					})
+					.addClass("ui-widget ui-widget-content ui-corner-left");
+
+                input.data("autocomplete")._renderItem = function (ul, item) {
+                    return $("<li></li>")
+						.data("item.autocomplete", item)
+						.append("<a>" + item.label + "</a>")
+						.appendTo(ul);
+                };
+
+                //                this.button = $("<button type='button'>&nbsp;</button>")
+                //					.attr("tabIndex", -1)
+                //					.attr("title", "Show All Items")
+                //					.insertAfter(input)
+                //					.button({
+                //					    icons: {
+                //					        primary: "ui-icon-triangle-1-s"
+                //					    },
+                //					    text: false
+                //					})
+                //					.removeClass("ui-corner-all")
+                //					.addClass("ui-corner-right ui-button-icon")
+                //					.click(function () {
+                //					    // close if already visible
+                //					    if (input.autocomplete("widget").is(":visible")) {
+                //					        input.autocomplete("close");
+                //					        return;
+                //					    }
+
+                //					    // work around a bug (likely same cause as #5265)
+                //					    $(this).blur();
+
+                //					    // pass empty string as value to search for, displaying all results
+                //					    input.autocomplete("search", "");
+                //					    input.focus();
+                //					});
+            },
+
+            destroy: function () {
+                this.input.remove();
+                this.element.show();
+                $.Widget.prototype.destroy.call(this);
+            }
+        });
+    })(jQuery);
+
+
+
+    $(function () {
+        $("#drpDwCalleId").combobox();
+        $("#toggle").click(function () {
+            $("#drpDwCalleId").toggle();
+        });
+    });
+
+
+
+</script>    
+
+
+      
+<table>
+<tr>
+    <td>
+        <div class="editor-label">
+                @Html.LabelFor(model => model.TouchPoint.CommercialName)
+        </div>
+    </td>
+    <td style="width: 80px">
+    </td>
+    <td>
+        <div class="editor-label">
+            @PMI.CETools.Recursos.AppResources.Vistas.UniqueNumber
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TouchPoint.CommercialName)
+            @Html.ValidationMessageFor(model => model.TouchPoint.CommercialName)
+        </div>
+    </td>
+    <td style="width: 80px">
+    </td>
+    <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TouchPoint.UniqueNumber)
+            @Html.ValidationMessageFor(model => model.TouchPoint.UniqueNumber)
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TouchPoint.Contact)
+        </div>
+    </td>
+    <td style="width: 80px">
+    </td>
+    <td>
+        <div class="editor-label">
+            @PMI.CETools.Recursos.AppResources.Vistas.TouchPointType
+        </div>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TouchPoint.Contact)
+            @Html.ValidationMessageFor(model => model.TouchPoint.Contact)
+        </div>
+    </td>
+    <td style="width: 80px">
+    </td>
+    <td>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TouchPoint.TouchPointTypeId, ((IEnumerable<PMI.CETools.Entidades.TouchPointType>)ViewBag.PossibleTouchPointTypes).Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Description).ToString(),
+            Value = option.TouchPointTypeId.ToString(),
+        }), @PMI.CETools.Recursos.AppResources.Vistas.Seleccione, new { @class = "dropDownForFilter" })
+            @Html.ValidationMessageFor(model => model.TouchPoint.TouchPointTypeId)
+        </div>
+    </td>
+</tr>
+
+<tr></tr>
+<tr></tr>
+
+<tr>
+    <td>
+        <div class="editor-label">
+            
+        </div>
+    </td>
+    <td style="width: 80px">
+    </td>
+    <td>
+        <div class="editor-label">
+            @*@PMI.CETools.Recursos.AppResources.Vistas.Mode*@
+           
+        </div>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <div class="editor-field">
+
+        </div>
+    </td>
+    <td style="width: 80px">
+    </td>
+    <td>
+        <div class="editor-field">
+    @*Html.DropDownListWithValidationFor(model => model.Mode,
+                 listaModes.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Text).ToString(),
+            Value = option.ModeId.ToString(),
+            Selected = ((Model != null) && (option.ModeId == Model.Mode))
+        }), @PMI.CETools.Recursos.AppResources.Vistas.Seleccione, new { id = "drpDwModeId" })*@
+        </div>
+    </td>
+</tr>
+<tr></tr>
+<tr></tr>
+<tr>
+    <td>
+        <div class="editor-label">
+            @PMI.CETools.Recursos.AppResources.Vistas.Enabled
+            &nbsp;
+            @Html.EditorFor(model => model.TouchPoint.Status)
+            @Html.ValidationMessageFor(model => model.TouchPoint.Status)
+        </div>
+    </td>
+    <td></td>
+    <td>
+        <div class="columnaderecha">
+            <div class="display-field-delete">
+                <input type="button" id="btnCargarImagen" value="Imagen" class="boton" />
+            </div>
+        </div>
+    </td>
+    <td>
+        
+        <div class="editor-field">
+
+        </div>
+    </td>
+</tr>
+</table>
+<div class="display-field-delete" id="divImagenRespuesta"></div>
+<div id="touchPointPermanenteEdit">
+<table>
+    <tr>
+        <td>            
+            <div class="editor-label">
+                @*@Html.LabelFor(model => model.Direccion)*@
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-field">
+                @*@Html.TextBoxFor(model => model.Direccion@*, new { disabled = "disabled", @readonly = "readonly" })*@
+            </div>
+        </td>    
+    </tr>
+</table>
+<table>    
+    <tr>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TouchPoint.CodProvincia)
+            </div>
+        </td>
+        <td style="width: 40px"></td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TouchPoint.CodPartido)
+            </div>
+        </td>
+        <td style="width: 40px"></td>
+        <td>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TouchPoint.CodLocalidad)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.TouchPoint.CodProvincia,
+                                        listaProvincias.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Description).ToString(),
+                        Value = option.Value.ToString(),
+                        Selected = ((Model != null) && (Model != null) && (option.Value == Model.TouchPoint.CodProvincia))
+                    }), new { id = "drpDwProvinciaId" })
+                    @Html.ValidationMessageFor(model => model.TouchPoint.CodProvincia)
+            </div>
+        </td>
+        <td style="width: 40px"></td>
+        <td>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.TouchPoint.CodPartido,
+                        listaPartidosJson.Select(option => new SelectListItem
+                        {
+                            Text = Html.DisplayTextFor(_ => option.Description).ToString(),
+                            Value = option.Value.ToString(),
+                            Selected = ((Model != null) && (Model != null) && (option.Value == Model.TouchPoint.CodPartido))
+                        })
+                                , new { id = "drpDwPartidoId" })
+                @Html.ValidationMessageFor(model => model.TouchPoint.CodPartido)
+            </div>
+        </td>
+        <td style="width: 40px"></td>
+        <td>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.TouchPoint.CodLocalidad,
+                        listaLocalidadesJson.Select(option => new SelectListItem
+                        {
+                            Text = Html.DisplayTextFor(_ => option.Description).ToString(),
+                            Value = option.Value.ToString(),
+                            Selected = ((Model != null) && (Model != null) && (option.Value == Model.TouchPoint.CodLocalidad))
+                        })
+                                ,new { id = "drpDwLocalidadId" })
+                @Html.ValidationMessageFor(model => model.TouchPoint.CodLocalidad)
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-label">
+                    @Html.LabelFor(model => model.TouchPoint.CodCalle)
+            </div>
+        </td>
+        <td style="width: 40px">
+        </td>
+        <td>
+            <div class="editor-label">
+                @PMI.CETools.Recursos.AppResources.Vistas.Numero
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="editor-field">
+
+            <div class="ui-widget">	     
+                <select id= "drpDwCalleId"></select>          
+
+                @Html.HiddenFor(model => model.TouchPoint.CodCalle, new { id = "hddnCalleId" })
+                @Html.ValidationMessageFor(model => model.TouchPoint.CodCalle)
+            </div>
+
+           
+            </div>
+        </td>
+        <td style="width: 40px"></td>
+    <td>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.TouchPoint.Numero, new { style = "width:60px", maxlength = 15 })
+            @Html.ValidationMessageFor(model => model.TouchPoint.Numero)
+        </div>
+    </td>
+    </tr>
+</table>
+</div>
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               

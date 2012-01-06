@@ -97,11 +97,11 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<Curso> GetCursos(int idCurso, string apellido, WebProgramAREntities db)
+        private static IQueryable<Curso> GetCursos(int idCurso, string nom, WebProgramAREntities db)
         {
             IQueryable<Curso> query = from u in db.Cursos
-                                     //where u.Status == true &&
-                                     //(idCurso == 0 || u.CursoId == idCurso) && u.LastName.Contains(apellido)
+                                      where (idCurso == -1 || u.CursoId == idCurso)
+                                      && ( nom.Equals(string.Empty) ||u.Nombre.ToUpper().Contains(nom.ToUpper()))
                                      select u;
             return query;
         }

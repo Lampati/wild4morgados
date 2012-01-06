@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
+using PMI.CETools.Sitio.Models;
 
 namespace WebProgramAR.Controllers
 {
@@ -13,11 +14,39 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Curso/
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC",  int cursoId = -1, string nombre = "")
         {
-            List<Curso> cursos = CursoNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
+            //Pasar la cantidad por pagina a una constante mas copada.
+            int cantidadPorPaginaTPC = 10;
+            
+            var numUsuarios = CursoNegocio.ContarCantidad(cursoId, nombre);
 
-            return View();
+            sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
+
+            var validColumns = new[] { "Nombre"};
+
+            if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
+                sort = "Nombre";
+
+            var cursos = CursoNegocio.ObtenerPagina(
+                     page,
+                     cantidadPorPaginaTPC,
+                     sort + " " + sortDir,
+                     cursoId, 
+                     nombre
+            );
+
+            var datos = new CursoGrillaModel()
+            {
+                Cantidad = numUsuarios,
+                CantidadPorPagina = cantidadPorPaginaTPC,
+                Cursos = cursos,
+                PaginaActual = page
+            };
+
+            
+            return View(datos);
+
         }
 
         //

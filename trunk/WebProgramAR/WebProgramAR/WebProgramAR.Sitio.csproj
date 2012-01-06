@@ -70,9 +70,104 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ModelGrillaBase.cs" />
+    <Compile Include="Models\CursoGrillaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\bar_bottom.png" />
+    <Content Include="Content\images\borrar.gif" />
+    <Content Include="Content\images\btn_buscar.png" />
+    <Content Include="Content\images\btn_calendar.png" />
+    <Content Include="Content\images\btn_movebuttom.png" />
+    <Content Include="Content\images\btn_movetop.png" />
+    <Content Include="Content\images\btn_next.png" />
+    <Content Include="Content\images\btn_nuevo.png" />
+    <Content Include="Content\images\btn_plus.png" />
+    <Content Include="Content\images\btn_prev.png" />
+    <Content Include="Content\images\calendar.png" />
+    <Content Include="Content\images\cancel_delete-16.png" />
+    <Content Include="Content\images\columna_celeste_1x25.png" />
+    <Content Include="Content\images\columna_gris_1x25.png" />
+    <Content Include="Content\images\columna_gris_1x50.png" />
+    <Content Include="Content\images\columna_gris_1x70.png" />
+    <Content Include="Content\images\content_fondo blanco.png" />
+    <Content Include="Content\images\delete_caja.png" />
+    <Content Include="Content\images\delete_caja_hover.png" />
+    <Content Include="Content\images\editar.gif" />
+    <Content Include="Content\images\edit_caja.png" />
+    <Content Include="Content\images\edit_caja_hover.png" />
+    <Content Include="Content\images\edit_modify.png" />
+    <Content Include="Content\images\encabezado tabla.png" />
+    <Content Include="Content\images\encabezado tabla_1px.png" />
+    <Content Include="Content\images\encabezado.png" />
+    <Content Include="Content\images\flecha_abajo.png" />
+    <Content Include="Content\images\flecha_arriba.png" />
+    <Content Include="Content\images\fondo.png" />
+    <Content Include="Content\images\fondo_barprogess.png" />
+    <Content Include="Content\images\fondo_seccion1_top.png" />
+    <Content Include="Content\images\fondo_seccion1_top_1px.png" />
+    <Content Include="Content\images\fondo_seccion1_top_1x140.png" />
+    <Content Include="Content\images\fondo_seccion2_top.png" />
+    <Content Include="Content\images\fondo_seccion2_top_1px.png" />
+    <Content Include="Content\images\footer.png" />
+    <Content Include="Content\images\goma.gif" />
+    <Content Include="Content\images\header.png" />
+    <Content Include="Content\images\icons.gif" />
+    <Content Include="Content\images\list-add.png" />
+    <Content Include="Content\images\list-delete3.png" />
+    <Content Include="Content\images\list-edit.png" />
+    <Content Include="Content\images\list-information.png" />
+    <Content Include="Content\images\list_task-16.png" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\Logo_CETool.png" />
+    <Content Include="Content\images\modulo_actividades.png" />
+    <Content Include="Content\images\modulo_planificacion.png" />
+    <Content Include="Content\images\modulo_reportes.png" />
+    <Content Include="Content\images\modulo_seguridad.png" />
+    <Content Include="Content\images\modulo_touchpoint.png" />
+    <Content Include="Content\images\navegacion_14x30.png" />
+    <Content Include="Content\images\nav_bg.png" />
+    <Content Include="Content\images\nav_li_bg.png" />
+    <Content Include="Content\images\objetivos.png" />
+    <Content Include="Content\images\paginas_fondo.png" />
+    <Content Include="Content\images\paso1_complete.png" />
+    <Content Include="Content\images\paso1_on.png" />
+    <Content Include="Content\images\paso2_complete.png" />
+    <Content Include="Content\images\paso2_off.png" />
+    <Content Include="Content\images\paso2_on.png" />
+    <Content Include="Content\images\paso3_complete.png" />
+    <Content Include="Content\images\paso3_off.png" />
+    <Content Include="Content\images\paso3_on.png" />
+    <Content Include="Content\images\preview-16.png" />
+    <Content Include="Content\images\search-16.png" />
+    <Content Include="Content\images\secure_locked-16.png" />
+    <Content Include="Content\images\separadores_2x25.png" />
+    <Content Include="Content\images\SinFoto100.png" />
+    <Content Include="Content\images\TipoTarea_borde_der.png" />
+    <Content Include="Content\images\TipoTarea_borde_der_active.png" />
+    <Content Include="Content\images\TipoTarea_borde_izq.png" />
+    <Content Include="Content\images\TipoTarea_borde_izq_active.png" />
+    <Content Include="Content\images\TipoTarea_content.png" />
+    <Content Include="Content\images\TipoTarea_content_active.png" />
+    <Content Include="Content\images\transparente.gif" />
+    <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\images\vline.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -111,6 +206,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -156,6 +252,14 @@
       <Project>{C5640C30-872A-4E79-8168-54DA04824F7D}</Project>
       <Name>WebProgramAR.Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Curso\Create.cshtml" />
+    <Content Include="Views\Curso\Delete.cshtml" />
+    <Content Include="Views\Curso\Details.cshtml" />
+    <Content Include="Views\Curso\Edit.cshtml" />
+    <Content Include="Views\Curso\Index.cshtml" />
+    <Content Include="Views\Curso\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
