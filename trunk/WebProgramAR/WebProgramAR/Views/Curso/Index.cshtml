@@ -49,48 +49,38 @@
     
 
 </script>
-<div class="logocetool">
-</div>
-<br />
-<br />
-<br />
-<h2 class="tituloabm">Seleccion de cursos</h2>
+<div id="filtros" class="border_left_all">
+    <h2 class="tituloabm">Seleccion de cursos</h2>
 
-<div class="filtrosabm">
-    @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
-    {    
-        @Html.ValidationSummary(true)
-        <table>
-            <tr>
+    <div class="filtrosabm">
+        @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
+        {    
+            @Html.ValidationSummary(true)
+            <table>
+                <tr>
                 
-                <td valign="bottom">
-                    <div class="label">
-                        Nombre
-                    </div>
-                </td>
-               
-                <td>
-                </td>
-            </tr>
-            <tr>
-              
-                <td valign="top">
-                        @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
-                </td>
-                
-                <td valign="top">
-                    <input type="submit" id="btnBuscar" class="btn_buscar" value="Buscar" />
-                </td>
-            </tr>
-        </table>
-    }
+                    <td>
+                        <div class="label">
+                            Nombre
+                        </div>
+                    </td>
+                     <td valign="top">
+                            @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
+                    </td>
+                    <!--
+                    <td valign="top">
+                        <input type="submit" id="btnBuscar" class="btn_buscar boton" value="Buscar" />
+                    </td>-->
+                </tr>
+            </table>
+        }
+    </div>
 </div>
-
     
 <table>
     <tr>
         <td valign="middle">
-            <input type="button" id="btnNuevo" class="btn_nuevo" value="Nuevo" />
+            <input type="button" id="btnNuevo" class="btn_nuevo boton" value="Nuevo" />
         </td>
     </tr>
 </table>

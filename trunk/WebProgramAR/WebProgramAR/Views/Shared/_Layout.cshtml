@@ -10,16 +10,18 @@
 <body>
     <div class="page">
         <header>
-            <div id="title">
-                <h1>My MVC Application</h1>
-            </div>
+            <div id="logoProgramar">&nbsp;</div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
             <nav>
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Que es?", "Descripcion", "Home")</li>
+                    <li>@Html.ActionLink("Ejercicios", "About", "Ejercicio")</li>
+                    <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
+                    <li>@Html.ActionLink("Profesores", "Index", "Profesor")</li>
+                    <li>@Html.ActionLink("Contacto", "About", "Home")</li>
                 </ul>
             </nav>
         </header>
