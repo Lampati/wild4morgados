@@ -3,71 +3,86 @@ The base color for this template is #5c87b2. If you'd like
 to use a different color start by replacing all instances of
 #5c87b2 with your new color.
 ----------------------------------------------------------*/
-body {
-    background-color: #5c87b2;
-    font-size: .85em;
-    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+body
+{
+    background-color: #b6b7bc;
+    font-size: .8em;
+    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
-    padding: 0;
-    color: #696969;
+    padding: 0; /*color: #696969;*/
 }
 
-a:link {
+div
+{
+    z-index: 9999;
+    
+}
+
+a:link
+{
     color: #034af3;
     text-decoration: underline;
 }
 
-a:visited {
+a:visited
+{
     color: #505abc;
 }
 
-a:hover {
+a:hover
+{
     color: #1d60ff;
     text-decoration: none;
 }
 
-a:active {
+a:active
+{
     color: #12eb87;
 }
 
-p, ul {
+p, ul
+{
     margin-bottom: 20px;
     line-height: 1.6em;
 }
 
-header,
-footer,
-nav,
-section {
+header, footer, nav, section
+{
     display: block;
 }
 
 /* HEADINGS   
 ----------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6
+{
     font-size: 1.5em;
     color: #000;
 }
 
-h1 {
+h1
+{
     font-size: 2em;
     padding-bottom: 0;
     margin-bottom: 0;
 }
 
-h2 {
+h2
+{
     padding: 0 0 10px 0;
 }
 
-h3 {
+h3
+{
     font-size: 1.2em;
 }
 
-h4 {
+h4
+{
     font-size: 1.1em;
 }
 
-h5, h6 {
+h5, h6
+{
     font-size: 1em;
 }
 
@@ -76,20 +91,27 @@ h5, h6 {
 
 /* you can specify a greater or lesser percentage for the 
 page width. Or, you can specify an exact pixel width. */
-.page {
+.page
+{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
-header, #header {
+header, #header
+{
     position: relative;
     margin-bottom: 0px;
     color: #000;
     padding: 0;
+    background: url('images/header.png');
+    height: 95px;
 }
 
-header h1, #header h1 {
+
+
+header h1, #header h1
+{
     font-weight: bold;
     padding: 5px 0;
     margin: 0;
@@ -100,19 +122,21 @@ header h1, #header h1 {
     text-shadow: 1px 1px 2px #111;
 }
 
-#main {
+#main
+{
     padding: 30px 30px 15px 30px;
     background-color: #fff;
     border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px 0 0 0;
     -moz-border-radius: 4px 0 0 0;
+    background-image: url('images/fondo.png');
 }
 
-footer, 
-#footer {
+footer, #footer
+{
     background-color: #fff;
     color: #999;
-    padding: 10px 0;
+    padding: 40px 0;
     text-align: center;
     line-height: normal;
     margin: 0 0 30px 0;
@@ -120,24 +144,38 @@ footer,
     border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     -moz-border-radius: 0 0 4px 4px;
+    background-image: url('images/footer.png' );
+    background-repeat: no-repeat;
+    position: relative;
 }
+
+*{ margin:0; padding:0;}
 
 /* TAB MENU   
 ----------------------------------------------------------*/
-ul#menu {
+ul#menu
+{
     border-bottom: 1px #5C87B2 solid;
     padding: 0 0 2px;
     position: relative;
     margin: 0;
     text-align: right;
+    left:0;
 }
 
-ul#menu li {
+
+#menu > li{ position:relative;}
+#menu > li > ul{ left:0;}
+
+
+ul#menu li
+{
     display: inline;
     list-style: none;
 }
 
-ul#menu li#greeting {
+ul#menu li#greeting
+{
     padding: 10px 20px;
     font-weight: bold;
     text-decoration: none;
@@ -145,7 +183,8 @@ ul#menu li#greeting {
     color: #fff;
 }
 
-ul#menu li a {
+ul#menu li a
+{
     padding: 10px 20px;
     font-weight: bold;
     text-decoration: none;
@@ -157,17 +196,20 @@ ul#menu li a {
     -moz-border-radius: 4px 4px 0 0;
 }
 
-ul#menu li a:hover {
+ul#menu li a:hover
+{
     background-color: #fff;
     text-decoration: none;
 }
 
-ul#menu li a:active {
+ul#menu li a:active
+{
     background-color: #a6e2a6;
     text-decoration: none;
 }
 
-ul#menu li.selected a {
+ul#menu li.selected a
+{
     background-color: #fff;
     color: #000;
 }
@@ -175,53 +217,87 @@ ul#menu li.selected a {
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
-fieldset {
+fieldset
+{
     border: 1px solid #ddd;
     padding: 0 1.4em 1.4em 1.4em;
     margin: 0 0 1.5em 0;
 }
 
-legend {
+legend
+{
     font-size: 1.2em;
     font-weight: bold;
 }
 
-textarea {
+textarea
+{
     min-height: 75px;
 }
 
-input[type="text"], 
-input[type="password"] {
+input[type="text"], input[type="password"]
+{
     border: 1px solid #ccc;
     padding: 2px;
-    font-size: 1.2em;
+    font-size: 1em;
     color: #444;
     width: 200px;
+    height : 17px;
+    
 }
 
-select {
+select
+{
     border: 1px solid #ccc;
     padding: 2px;
     font-size: 1.2em;
     color: #444;
 }
 
-input[type="submit"] {
-    font-size: 1.2em;
-    padding: 5px;
+input[type="submit"]
+{
+    /*
+    font-size: 0.9em;
+    padding: 2px;*/
+    vertical-align: middle;
 }
 
 /* TABLE
 ----------------------------------------------------------*/
-
-table {
-    border: solid 1px #e8eef4;
-    border-collapse: collapse;
+.header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background: #4b6c9e;
+    width: 100%;
+    z-index: 90;
 }
 
+.header h1
+{
+    font-weight: 700;
+    margin: 0px;
+    color: #f9f9f9;
+    border: none;
+    line-height: 2em;
+    font-size: 2em;
+}
+
+.header table
+{
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    z-index: 90;
+}
+
+table
+{
+    border-collapse: collapse;
+}
+/*
 table td {
     padding: 5px;
-    border: solid 1px #e8eef4;
 }
 
 table th {
@@ -229,96 +305,922 @@ table th {
     text-align: left;
     background-color: #e8eef4;
     border: solid 1px #e8eef4;
-}
+}*/
 
 /* MISC  
 ----------------------------------------------------------*/
-.clear {
+.clear
+{
     clear: both;
 }
 
-.error {
+.error
+{
     color: Red;
 }
 
-nav, 
-#menucontainer {
+nav, #menucontainer
+{
     margin-top: 40px;
 }
 
-div#title {
+div#title
+{
     display: block;
     float: left;
     text-align: left;
 }
 
-#logindisplay {
+#logindisplay
+{
     font-size: 1.1em;
     display: block;
     text-align: right;
     margin: 10px;
-    color: White;
+    color: blue;
 }
 
-#logindisplay a:link {
-    color: white;
+#logindisplay a:link
+{
+    color: blue;
     text-decoration: underline;
 }
 
-#logindisplay a:visited {
-    color: white;
+#logindisplay a:visited
+{
+    color: blue;
     text-decoration: underline;
 }
 
-#logindisplay a:hover {
-    color: white;
+#logindisplay a:hover
+{
+    color: blue;
     text-decoration: none;
 }
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
-.field-validation-error {
+.field-validation-error
+{
     color: #ff0000;
 }
 
-.field-validation-valid {
+.field-validation-valid
+{
     display: none;
 }
 
-.input-validation-error {
+.input-validation-error
+{
     border: 1px solid #ff0000;
     background-color: #ffeeee;
 }
 
-.validation-summary-errors {
+.validation-summary-errors
+{
     font-weight: bold;
     color: #ff0000;
 }
 
-.validation-summary-valid {
+.validation-summary-valid
+{
     display: none;
 }
 
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
-.display-label, 
-.editor-label {
+.display-label, .editor-label
+{
     margin: 1em 0 0 0;
 }
 
-.display-field, 
-.editor-field {
+.display-field, .editor-field
+{
     margin: 0.5em 0 0 0;
 }
 
-.text-box {
+.display-label-delete
+{
+    float:left;
+    /*border-color: #F0E0A0;
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;*/
+    width: 150px; 
+    text-align:right;
+}
+
+.display-field-delete
+{
+    float:left;
+    /*border-color: #F0E0A0;
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;*/
+    text-align:left;
+    padding-left:5px; 
+    display:inline-block ;
+}
+
+div.fila
+{
+    clear: both;
+}
+
+.text-box
+{
     width: 30em;
 }
 
-.text-box.multi-line {
+.text-box.multi-line
+{
     height: 6.5em;
 }
 
-.tri-state {
+.tri-state
+{
     width: 6em;
 }
+
+div.menu ul li a:hover, .boton:hover
+{
+    background-color: #f5f8f9;
+    color: #e17009;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botonEditar:hover, .botonEliminar:hover
+{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*.boton
+{
+    background-color: #d8e7f3;
+    border: 1px #4e667d solid;
+    color: #2e6e9e;
+    font-weight: bold;
+    font-size: 10px;
+    display: block;
+    line-height: 1.15em;
+    padding: 2px 2px;
+    text-decoration: none;
+    white-space: nowrap;
+}*/
+
+.boton
+{
+    background-color: #3688C2;
+    border: 1px #4e667d solid;
+    color: white;
+    font-weight: bold;
+    font-size: 8px;
+    display: block;
+    /*line-height: 1.15em;
+    padding: 2px 2px;*/
+    text-decoration: none;
+    white-space: nowrap;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: hand;
+    cursor: pointer;
+    width: 120px;
+    height: 19px;
+    vertical-align : middle;
+}
+
+.btn_buscar
+{
+    background-color: #3688C2;
+    border: 1px #4e667d solid;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    display: block;
+    width: 120px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: hand;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 2px;
+}
+
+.btn_nuevo
+{
+    background-color: #3688C2;
+    border: 1px #4e667d solid;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    width: 120px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    height: 19px;
+    cursor: hand;
+    cursor: pointer;
+}
+
+
+
+
+.botonEliminar, .botonEditar
+{
+}
+
+.gridAlternatingRow
+{
+    background-color: white;
+    color: #333333;
+    
+}
+
+.controles-paginacion-grid
+{
+    background-color: #F2EFDE;
+    color: #333333;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.gridHeader
+{
+    background-image: url('images/columna_gris_1x25.png');
+    background-repeat: repeat;
+    font-weight: bold;
+    color: Black;
+    text-align: left;
+    margin-left: 0;
+    -ms-text-align-last: left;
+    height: 25px;
+}
+
+.gridHeaderNoSort
+{
+    background-image: url('images/columna_gris_1x25.png');
+    background-repeat: repeat;
+    font-weight: bold;
+    text-decoration: underline;
+    color: Blue;
+    text-align: left;
+    margin-left: 0;
+    -ms-text-align-last: left;
+    height: 25px;
+}
+
+.gridHeader a, .gridHeader a:link, .gridHeader a:hover, .gridHeader a:active, gridHeader a:visited
+{
+    text-align: left;
+    text-indent: inherit;
+}
+
+/*
+.gridHeader a:visited
+{
+    background-image : url('images/columna_celeste_1x25.png');
+    background-repeat : repeat ;
+}
+
+
+.gridHeader th
+{
+    background-image : url('images/flecha_abajo.png');
+    background-repeat :no-repeat ;
+    background-position:right;
+}
+*/
+
+.grid
+{
+    width: 100%;
+}
+
+.gridRow
+{
+    background-color: #EFF3FB;
+    color: #333333;
+}
+
+
+.gridRow:hover, .gridAlternatingRow:hover
+{
+    background-color: #3688C2;
+    color: white;
+}
+
+.gridPager, .gridPager a, .gridPager a:link, .gridPager a:visited, .gridPager a:hover, .gridPager a:active
+{
+    background-color: #4b6c9e;
+    color: White;
+    text-align: right;
+    font-size: 10px;
+}
+
+.gridFooter
+{
+    background-color: #507CD1;
+    font-weight: bold;
+    color: White;
+}
+
+.filtro .header
+{
+    font-size: 1.0em;
+    display: block;
+    text-align: left;
+    padding: 1px;
+    color: White;
+    border: 1px solid #496077;
+    z-index: 1;
+}
+
+.filtro .content
+{
+    font-size: 1.1em;
+    display: block;
+    text-align: center;
+    padding: 5px;
+    color: White;
+    background-color: #EFF3FB;
+    border: 1px solid #496077;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.label
+{
+    color: Black;
+    vertical-align: inherit;
+}
+
+*
+{
+    padding: 0px;
+    margin: 0px;
+}
+
+#menu
+{
+    /*background-image: url('images/nav_bg.png'); */
+    background-image: url('images/navegacion_14x30.png');
+    background-repeat: repeat-x;
+    height: 30px;
+    width: auto;
+    padding-left: 10px;
+}
+
+#nav
+{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    background: #2274B8;
+}
+
+#nav li
+{
+    float: left; /* background-image: url('images/nav_li_bg.png'); */
+    background-image: url('images/separadores_2x25.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    padding: 0px;
+    margin: 0px;
+    width: 120px;
+    text-align: center;
+}
+#nav li a
+{
+    display: block;
+    padding: 4px 10px;
+    text-decoration: none;
+    color: #CCCCCC;
+    font-weight: bold;
+}
+#nav li a:hover
+{
+    color: #FFFFFF;
+}
+/* Submenu */
+/*#nav ul.submenu { border:1px solid #000000; padding:3px; position:absolute; list-style:none; background-color:#333333; z-index: 999}*/
+#nav ul.submenu
+{
+    border: 1px solid #0033CC;
+    padding: 3px;
+    position: absolute;
+    list-style: none;
+    background-color: #1768AE;
+    z-index: 999;
+}
+#nav ul.submenu li
+{
+    float: none;
+    background-image: none;
+    border-bottom: 1px solid #999999;
+    width: 120px; 
+    text-align: left;
+}
+/* Subsubmenu */
+/*#nav ul.subsubmenu { border:1px solid #000000; padding:5px; position:absolute; list-style:none; background-color:#333333; margin-left:150px; margin-top:-30px;} */
+#nav ul.subsubmenu
+{
+    border: 1px solid #0033CC;
+    padding: 5px;
+    position: absolute;
+    list-style: none;
+    background-color: #1768AE;
+    margin-left: 150px;
+    margin-top: -30px;
+}
+#nav ul.subsubmenu li
+{
+    float: none;
+    background-image: none;
+    border-bottom: 1px solid #999999;
+    min-width: 200px;
+}
+
+
+
+
+.imgHome
+{
+    table-layout: inherit;
+    width: 350px;
+    height: 150px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.logocetool
+{
+    background-image: url('images/Logo_CETool.png');
+    float: left;
+    width: 179px;
+    height: 41px;
+    background-repeat: no-repeat;
+    padding: 0px 0px 0px 0px;
+}
+
+.tituloabm
+{
+    background-image: url('images/encabezado tabla_1px.png');
+    background-repeat: repeat-x;
+    font-weight: bold;
+    color: White;
+    text-align: left;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    background-repeat: repeat-x;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.filtrosabmBig
+{
+    background: #BEBEBE;
+    background-image: url('images/fondo_seccion1_top_1x140.png');
+    background-repeat: repeat;
+}
+
+.filtrosabmBig td
+{
+    padding-left: 10px;
+    height: 30px;
+}
+
+filtrosabmBig input
+{
+    border: 1px solid #ccc;
+}
+
+.filtrosabm
+{
+    background: #BEBEBE;
+    background-image: url('images/fondo_seccion1_top_1px.png');
+    background-repeat: repeat;
+}
+
+
+.filtrosabm td
+{
+    padding-left: 10px;
+    height: 30px;
+}
+
+filtrosamb input
+{
+    border: 1px solid #ccc;
+}
+
+.nuevo-paginacion-grid
+{
+    background-image: url('images/fondo_seccion2_top_1px.png');
+    background-repeat: repeat;
+    height: 50px;
+}
+
+.nuevo-paginacion-grid table tr td
+{
+    padding-top: 8px;
+    padding-left: 10px;
+}
+
+
+th.grid_sort_asc
+{
+    background-image: url('images/flecha_arriba.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #D4EAFC;
+}
+
+th.grid_sort_desc
+{
+    background-image: url('images/flecha_abajo.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #D4EAFC;
+}
+
+.btn_AtrasAct
+{
+    background-color: #EBEBEB;
+    border: 1px #BBBBBB solid;
+    color: Black;
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    width: 120px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    height: 30px;
+    cursor: hand;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    left: 60px;
+    vertical-align: middle;
+    top: 25%;
+}
+
+.btn_cancelarAct
+{
+    background-color: #EBEBEB;
+    border: 1px #BBBBBB solid;
+    color: Black;
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    width: 120px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    height: 30px;
+    cursor: hand;
+    cursor: pointer;
+    position: relative;
+    left: 360px;
+    vertical-align: middle;
+    top: 25%;
+}
+
+.btn_continuarAct
+{
+    background-color: #3688C2;
+    border: 1px #3485BD solid;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    width: 120px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    height: 30px;
+    cursor: hand;
+    cursor: pointer;
+    position: relative;
+    float: right;
+    right: 60px;
+    vertical-align: middle;
+    top: 25%;
+}
+
+div.footerAceptar
+{
+    background-image: url('images/bar_bottom.png');
+    height: 64px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.footerAceptarFino
+{
+    background-image: url('images/bar_bottom.png');
+    height: 32px;
+    text-align: center;    
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+.encabezadoActividad
+{
+    background-image: url('images/encabezado_1x25px.png');
+}
+
+.tabla-actividad
+{
+	width: 100%;
+}
+
+.tabla-actividad-col1
+{
+	width: 40%; 
+	text-align: right;
+}
+
+.tabla-actividad-col2
+{
+	width: 15px; 
+}
+
+.tabla-actividad-col3
+{
+	text-align: left;
+}
+
+.par-actividad
+{
+    background-color: #DAE4ED;
+    text-align: center;
+    width: auto;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    /*height: auto;*/
+}
+
+.impar-actividad
+{
+    background-color: #E6EBEF;
+    /*text-align: center;*/
+    width: auto;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    /*height: auto;*/
+}
+
+.editor-label-activity, .editor-field-activity, .editor-field-activity-listbox
+{
+    margin: 6px 2px 6px 2px;
+}
+
+.editor-label-activity
+{
+    display: inline-block;
+    width: 150px;
+    /*position: relative;*/
+    height: 100%;
+    text-align: right;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.editor-field-activity
+{
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    /*position: relative;*/
+    text-align: left;
+    vertical-align: middle;
+}
+
+.editor-field-activity-listbox
+{
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    /*position: relative;*/
+    text-align: left;
+    vertical-align: middle;
+}
+
+
+#barraNavegacionActividad
+{
+    background-image: url('images/fondo_barprogess.png');
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 778px;
+    left: 20%;
+}
+
+.multilineTextbox
+{
+    height: 5em;
+    width: 5em;
+}
+
+.dropDownForFilter
+{
+    height: 23px;
+    width: 120px;     
+    font-size: 1em;
+}
+
+.dropDownForFilterMedium
+{
+    height: 23px;
+    width: 130px;     
+    font-size: 1em;
+}
+
+
+
+
+input[type="text"].textBoxForFilter
+{
+    width: 150px;     
+    height: 17px;
+}
+
+#disablingDiv
+{
+    display: block; /* Display it on the layer with index 1001.        Make sure this is the highest z-index value        used by layers on that page */
+    z-index: 99999; /* make it cover the whole screen */
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 85%; /* make it white but fully transparent */
+    background-color: white;
+    opacity: .00;
+    filter: alpha(opacity=00);
+}
+
+input[type="radio"]
+{
+    color: Black;
+    vertical-align: inherit;
+}
+
+.tipoTarea, .tipoTareaActivo, .subjectNpd, .subjectNpdActivo
+{
+	height:103px;
+	border: 1px; 
+	color: Black;
+}
+
+.tipoTarea, .subjectNpd
+{
+	background-image: url('images/TipoTarea_content.png');
+    background-repeat: repeat;	
+}
+
+.tipoTareaActivo, .subjectNpdActivo
+{
+	background-image: url('images/TipoTarea_content_active.png');
+    background-repeat: repeat;	
+}
+
+.tipoTareaIzq, .tipoTareaIzqActivo, .tipoTareaDer, .tipoTareaDerActivo, .subjectNpdIzq, .subjectNpdIzqActivo, .subjectNpdDer, .subjectNpdDerActivo
+{
+	width: 19px;
+	height:103px;
+	text-align: right; 
+	background-repeat: no-repeat;
+}
+
+.tipoTareaIzq, .subjectNpdIzq
+{
+	background-image: url('images/TipoTarea_borde_izq.png');
+}
+
+.tipoTareaIzqActivo, .subjectNpdIzqActivo
+{
+	background-image: url('images/TipoTarea_borde_izq_active.png');
+}
+
+.tipoTareaDer, .subjectNpdDer
+{
+	background-image: url('images/TipoTarea_borde_der.png');
+}
+
+.tipoTareaDerActivo, .subjectNpdDerActivo
+{
+	background-image: url('images/TipoTarea_borde_der_active.png');
+}
+
+.textoTipoTarea, .textoSubjectNpd
+{
+	font-size: 20px;
+	color: Black;
+	text-align: left;
+	padding-left: 5px;
+	padding-top: 40px;
+	height: 50px;
+}
+
+.botonTipoTarea
+{
+	cursor: hand;
+    cursor: pointer;	
+}
+
+input[type="text"].txtObjetivosCumplidos
+{  
+    width:20px; 
+    color:Blue ;
+}
+
+input[type="text"].dateTimeTextBox
+{
+    width: 65px;
+    height: 17px;
+    vertical-align: middle;
+    float: left;
+}
+
+.headerGridObjetives
+{
+    
+    background-image : url('images/columna_gris_1x25.png'); 
+    background-repeat: repeat;
+    height : 25px;
+    color: Blue;
+    width:inherit;
+    text-align:center; 
+    /*
+    background-image: url('images/fondo_seccion2_top_1px.png');
+    */
+}
+
+
+.erroresInput 
+{
+    border-bottom-color : Red;
+    border-top-color : Red;
+    border-left-color : Red;
+    border-right-color : Red ;
+    
+    background-color : #FFEEEE; 
+}
+
+
+input[type="text"].datosExtraTextBox
+{
+    width: 130px;
+}
+
+.datosExtraColumna
+{
+    padding-left: 4px;
+}
+
+.tabla
+{
+   clear: none;
+   overflow: auto;
+}
+
+.fila
+{
+   clear: both;
+}
+
+.columnaizquierda
+{
+   text-align: right;
+   float: left;
+   padding: 5px;
+   padding-left : 10px;
+   width : 200px;
+   
+}
+
+.columnaderecha
+{
+    float: left;
+    padding: 5px;
+    padding-right : 10px;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

@@ -1,0 +1,137 @@
+﻿
+@model PMI.CETools.Sitio.Models.CursoGrillaModel
+
+@{
+    ViewBag.Title = "Cursos";
+
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+
+    grid.Bind(Model.Cursos, autoSortAndPage: false, rowCount: Model.Cantidad);
+
+    string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
+}
+
+
+
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnNuevo').click(function (event) {
+            OpenDialog(event, '', '@Url.Action("Create")/', 600, 540);
+        });
+
+        $('.botonEliminar').click(function (event)
+        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500 ,500 ); });
+
+        $('.botonEditar').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 600, 540);
+        });
+
+        $('.botonDetalles').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 550, 500);
+        });
+        var sortcol = '@grid.SortColumn';
+
+        if (sortcol != '')
+            $('thead > tr > th > a[href*="sort=@grid.SortColumn"]').parent().addClass('@(grid.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
+
+        //FuncionesAutorizadas('@funcionesAutorizadas');
+    });
+</script>
+
+<script type="text/javascript">
+    
+
+</script>
+<div class="logocetool">
+</div>
+<br />
+<br />
+<br />
+<h2 class="tituloabm">Seleccion de cursos</h2>
+
+<div class="filtrosabm">
+    @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
+    {    
+        @Html.ValidationSummary(true)
+        <table>
+            <tr>
+                
+                <td valign="bottom">
+                    <div class="label">
+                        Nombre
+                    </div>
+                </td>
+               
+                <td>
+                </td>
+            </tr>
+            <tr>
+              
+                <td valign="top">
+                        @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
+                </td>
+                
+                <td valign="top">
+                    <input type="submit" id="btnBuscar" class="btn_buscar" value="Buscar" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+    
+<table>
+    <tr>
+        <td valign="middle">
+            <input type="button" id="btnNuevo" class="btn_nuevo" value="Nuevo" />
+        </td>
+    </tr>
+</table>
+
+<div id="contenedor-grid" style="width: 100%">
+@grid.GetHtml(
+    tableStyle: "grid",
+    fillEmptyRows: false,
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAlternatingRow",
+    headerStyle: "gridHeader",
+    footerStyle: "gridPager",
+    mode: WebGridPagerModes.All,
+        firstText: "<<",
+        previousText: "<",
+    nextText: ">",
+        lastText: " >>",
+    columns: new[] {
+    grid.Column("Nombre", header: "Nombre"),
+   
+   
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                  </text>
+    ),        
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar"/>
+                  </text>
+    ),
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar"/>
+                    
+                  </text>
+    )
+})
+</div>
+<div id="dialog" class="dialogDiv" ></div>
+
