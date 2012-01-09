@@ -24,39 +24,41 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.
-            //Por defecto uso el tipo1 para asignar el tipo de este nodo.
 
-            this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
-           
-            TipoOperatoria operacion = this.hijosNodo[1].Operacion;
-
-            this.TipoDato = this.hijosNodo[0].TipoDato;
-
-            this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
-
-            if (operacion != TipoOperatoria.Ninguna)
+            if (this.hijosNodo.Count > 1)
             {
+                //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.
+                //Por defecto uso el tipo1 para asignar el tipo de este nodo.            
+                this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
 
-                if (this.EsArregloEnParametro)
-                {
-                    StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
-                    strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
-                    throw new ErrorSemanticoException(strbldr.ToString());
-                }
-               
-            
-            }
-            else
-            {
-              
+                TipoOperatoria operacion = this.hijosNodo[1].Operacion;
 
-                this.Lexema = this.hijosNodo[0].Lexema;
                 this.TipoDato = this.hijosNodo[0].TipoDato;
 
-            }
+                this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
 
-           
+                if (operacion != TipoOperatoria.Ninguna)
+                {
+
+                    if (this.EsArregloEnParametro)
+                    {
+                        StringBuilder strbldr = new StringBuilder("No se puede realizar operaciones logicas o aritmeticas con un ");
+                        strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
+
+
+                }
+                else
+                {
+
+
+                    this.Lexema = this.hijosNodo[0].Lexema;
+                    this.TipoDato = this.hijosNodo[0].TipoDato;
+
+                }
+
+            }
 
             return this;
         }
@@ -69,17 +71,20 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override void ChequearAtributos(Terminal t)
         {
-            TipoOperatoria operacion = this.hijosNodo[1].Operacion;
-
-            NodoTablaSimbolos.TipoDeDato tipo1 = this.hijosNodo[0].TipoDato;        
-            NodoTablaSimbolos.TipoDeDato tipo2 = this.hijosNodo[1].TipoDato;
-
-            if (operacion != TipoOperatoria.Ninguna)
+            if (this.hijosNodo.Count > 1)
             {
-                if (tipo1 != tipo2)
+                TipoOperatoria operacion = this.hijosNodo[1].Operacion;
+
+                NodoTablaSimbolos.TipoDeDato tipo1 = this.hijosNodo[0].TipoDato;
+                NodoTablaSimbolos.TipoDeDato tipo2 = this.hijosNodo[1].TipoDato;
+
+                if (operacion != TipoOperatoria.Ninguna)
                 {
-                    StringBuilder strbldr = new StringBuilder("Se esta intentando operar con distintos tipos");
-                    throw new ErrorSemanticoException(strbldr.ToString());
+                    if (tipo1 != tipo2)
+                    {
+                        StringBuilder strbldr = new StringBuilder("Se esta intentando operar con distintos tipos");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
                 }
             }
         }

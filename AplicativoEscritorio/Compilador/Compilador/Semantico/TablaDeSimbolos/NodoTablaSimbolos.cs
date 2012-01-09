@@ -94,6 +94,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             set { nombreContextoLocal = value; }
         }
 
+        private int valorInt;
+        public int ValorInt
+        {
+            get { return valorInt; }
+            set { valorInt = value; }
+        }
 
 
 
@@ -105,7 +111,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.firma = new List<FirmaProc>(firma);
             this.contexto = TipoContexto.Global;
             this.nombreContextoLocal = string.Empty;
-            
+            this.valorInt = 0;
         }
 
 
@@ -121,7 +127,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.esArreglo = esArreglo;
             this.esConstante = esConst;
             this.nombreContextoLocal = nombreProc;
-            
+            this.valorInt = 0;
             
         }
 
@@ -135,6 +141,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.esConstante = esConst;
             this.contexto = cont;
             this.nombreContextoLocal = nombreProc;
+            this.valorInt = 0;
         }
 
      

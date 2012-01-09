@@ -54,16 +54,61 @@ namespace CompiladorGargar.Sintactico
         }
 
 
-        internal bool esVacia()
+        internal bool EsVacia()
         {
             return this.cadena.Count == 0;
         }
 
-        internal bool esFinDeCadena()
+        internal bool EsFinDeCadena()
         {
-            if (!esVacia())
+            if (!EsVacia())
             {
                 return this.ObtenerPrimerTerminal().Componente.Token == ComponenteLexico.TokenType.EOF;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal bool TieneTerminalRepetidoEnPrimerLugarErroneo(int cantParentesisAbiertos)
+        {
+            if (!EsVacia())
+            {
+                if (this.ObtenerPrimerTerminal().Componente.Token != ComponenteLexico.TokenType.ParentesisApertura
+                    && this.ObtenerPrimerTerminal().Componente.Token != ComponenteLexico.TokenType.ParentesisClausura
+                    && this.ObtenerPrimerTerminal().Componente.Token != ComponenteLexico.TokenType.FinSentencia
+                    )
+                {
+                    if (this.cadena.Count > 1)
+                    {
+                        return this.cadena[0].Componente.Token == this.cadena[1].Componente.Token;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (this.ObtenerPrimerTerminal().Componente.Token == ComponenteLexico.TokenType.ParentesisClausura
+                        && cantParentesisAbiertos <= 0)
+                    {
+                        if (this.cadena.Count > 1)
+                        {
+                            return this.cadena[0].Componente.Token == this.cadena[1].Componente.Token;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    
+                }
             }
             else
             {

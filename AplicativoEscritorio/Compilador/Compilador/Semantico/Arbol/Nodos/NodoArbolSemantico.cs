@@ -69,7 +69,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public List<Variable> VariablesACrear { get; set; }
         public List<Firma> ListaFirma { get; set; }
         public TipoOperatoria Operacion { get; set; }
-        
+        public int ValorConstanteNumerica { get; set; }
 
         public bool EsProcSalida { get; set; }
         public bool ProcSalidaLlamadoMasDeUnaVez { get; set; }

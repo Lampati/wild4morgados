@@ -16,6 +16,14 @@ namespace CompiladorGargar.Sintactico
 
         public ArbolSemantico ArbolSemantico { get; set; }
 
+        public int Count
+        {
+            get
+            {
+                return this.elementosPila.Count;
+            }
+        }
+
         public PilaGramatica(NoTerminal simboloInicial)
         {
             this.elementosPila = new List<ElementoGramatica>();
@@ -27,9 +35,16 @@ namespace CompiladorGargar.Sintactico
             
         }
 
+
         public ElementoGramatica ObtenerTope()
         {
             return this.elementosPila.Last();
+        }
+      
+
+        public ElementoGramatica ObtenerPosicion(int i)
+        {
+            return this.elementosPila[elementosPila.Count-1-i];
         }
 
         public void InsertarElemento(ElementoGramatica elem)

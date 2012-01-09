@@ -194,7 +194,16 @@
 					<Expresion>id</Expresion>
 				</Der>
 				<Der>
-					<Expresion>numero</Expresion>
+					<Expresion>int</Expresion>
+				</Der>
+				<Der>
+					<Expresion>literal</Expresion>
+				</Der>
+				<Der>
+					<Expresion>verdadero</Expresion>
+				</Der>
+				<Der>
+					<Expresion>falso</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>				

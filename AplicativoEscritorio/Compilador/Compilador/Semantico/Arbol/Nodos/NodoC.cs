@@ -32,7 +32,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         throw new ErrorSemanticoException(new StringBuilder("Se intento asignar un tipo invalido a ").Append(nombre).ToString());
                     }
 
-                    this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
+                    this.ValorConstanteNumerica = this.hijosNodo[4].ValorConstanteNumerica;
+
+                    this.TablaSimbolos.AgregarConstante(nombre, tipo, this.ContextoActual, this.NombreContextoLocal, this.ValorConstanteNumerica);
+
+                    //this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
 
                    
 
