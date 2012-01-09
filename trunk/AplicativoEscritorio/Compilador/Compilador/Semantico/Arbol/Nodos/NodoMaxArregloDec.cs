@@ -31,10 +31,31 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero)
+            if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero ||
+                t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal ||
+                t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero ||
+                t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso                 
+                )
+
             {
-                int valor = t.ObtenerValor();
-                this.RangoArreglo = valor.ToString();
+                if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero)
+                {
+                    int valor = t.ObtenerValor();
+                    if (valor > 0)
+                    {
+
+                        this.RangoArreglo = valor.ToString();
+                    }
+                    else
+                    {
+                        throw new ErrorSemanticoException(new StringBuilder("El numero ").Append(valor.ToString()).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos. ").ToString());                        
+                    }
+                }
+                else
+                {
+                    throw new ErrorSemanticoException(new StringBuilder("").Append(t.Componente.Lexema).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos. ").ToString());
+                    
+                }
             }
             else
             {
@@ -45,7 +66,22 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     if (!this.TablaSimbolos.EsModificableValorVarible(lexema, this.ContextoActual, this.NombreContextoLocal))
                     {
-                        this.RangoArreglo = lexema;
+                        if (this.TablaSimbolos.ObtenerTipoVariable(lexema, this.ContextoActual, this.NombreContextoLocal) == NodoTablaSimbolos.TipoDeDato.Numero)
+                        {
+                            if (this.TablaSimbolos.RetornarValorConstante(lexema, this.ContextoActual, this.NombreContextoLocal) > 0)
+                            {
+
+                                this.RangoArreglo = lexema;
+                            }
+                            else
+                            {
+                                throw new ErrorSemanticoException(new StringBuilder("La constante numerica ").Append(lexema).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos. ").ToString());
+                            }
+                        }
+                        else
+                        {
+                            throw new ErrorSemanticoException(new StringBuilder("La constante ").Append(lexema).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos. ").ToString());
+                        }
                     }
                     else
                     {

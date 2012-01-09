@@ -25,7 +25,25 @@ namespace CompiladorGargar.Sintactico.Gramatica
             Terminal t = new Terminal();
             t.componente = new ComponenteLexico();
             t.componente.Token = ComponenteLexico.TokenType.FinSentencia;
+            t.componente.Lexema = ";";
+            return t;
+        }
 
+        internal static Terminal ElementoAsignacion()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.Asignacion;
+            t.componente.Lexema = ":=";
+            return t;
+        }
+
+        internal static Terminal ElementoParentesisClausura()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.ParentesisClausura;
+            t.componente.Lexema = ")";
             return t;
         }
 

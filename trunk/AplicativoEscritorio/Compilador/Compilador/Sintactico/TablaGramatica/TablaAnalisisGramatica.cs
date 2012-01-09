@@ -81,7 +81,7 @@ namespace CompiladorGargar.Sintactico.TablaGramatica
                 {
                     if (reportarErrores)
                     {
-                        this.ErrorSintactico(y.Componente.Fila, y.Componente.Columna,y, nodo.DescripcionError, false, true );
+                        this.ErrorSintacticoSinMostrar(y.Componente.Fila, y.Componente.Columna,y, nodo.DescripcionError, false, true );
                     }
                     return null;
                 }
@@ -123,7 +123,7 @@ namespace CompiladorGargar.Sintactico.TablaGramatica
 
         private void ErrorSintactico(int fila, int columna, Terminal t, string error, bool descartarCadena, bool descartarPila)
         {
-            bool parar = false;
+            bool parar = true;
             if (t.Equals(Terminal.ElementoEOF()))
             {
                 parar = true;
@@ -132,6 +132,19 @@ namespace CompiladorGargar.Sintactico.TablaGramatica
                 //throw new ErrorSintacticoException("La cadena de entrada termino y la pila no puede vaciarse. El analisis termina con error.", fila, columna, false, true,true);
             }
             throw new ErrorSintacticoException(error, fila, columna, descartarPila, descartarCadena, parar);
+        }
+
+        private void ErrorSintacticoSinMostrar(int fila, int columna, Terminal t, string error, bool descartarCadena, bool descartarPila)
+        {
+            bool parar = false;
+            if (t.Equals(Terminal.ElementoEOF()))
+            {
+                parar = true;
+                //error = "La cadena de entrada termino y la pila no puede vaciarse. El analisis termina con error.";
+                error = "Error sintactico. El programa esta mal formado.";
+                //throw new ErrorSintacticoException("La cadena de entrada termino y la pila no puede vaciarse. El analisis termina con error.", fila, columna, false, true,true);
+            }
+            throw new ErrorSintacticoException(error, fila, columna, descartarPila, descartarCadena, parar,true);
         }
 
         private NodoTablaAnalisisGramatica EncontrarNodo(NoTerminal x, Terminal y)

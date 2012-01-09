@@ -69,6 +69,11 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc));
         }
 
+        public void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc, int valorInt)
+        {
+
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { ValorInt = valorInt} );
+        }
         
         
         //public bool ExisteVariable(string nombre)
@@ -179,6 +184,19 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         {
             NodoTablaSimbolos nodo = this.ObtenerVariable(nombre,contexto,nombreContexto);
             return !nodo.EsConstante;
+        }
+
+        public int RetornarValorConstante(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        {
+            NodoTablaSimbolos nodo = this.ObtenerVariable(nombre, contexto, nombreContexto);
+            if (nodo.EsConstante)
+            {
+                return nodo.ValorInt;
+            }
+            else
+            {
+                return int.MinValue;
+            }
         }
 
                 
@@ -408,6 +426,11 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                 && nodo.Contexto == tipoContexto
                 && nodo.NombreContextoLocal == nombreCont;
             
+        }
+
+        internal void AgregarConstante(string nombre, NodoTablaSimbolos.TipoDeDato tipo, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, int valorInt)
+        {
+            AgregarVariable(nombre, tipo, true, tipoContexto, nombreProc, valorInt); 
         }
     }
 }
