@@ -49,8 +49,10 @@
     
 
 </script>
+<h2>Cursos</h2>
+
 <div id="filtros" class="border_left_all">
-    <h2 class="tituloabm">Seleccion de cursos</h2>
+    <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
         @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
@@ -80,7 +82,7 @@
 <table>
     <tr>
         <td valign="middle">
-            <input type="button" id="btnNuevo" class="btn_nuevo boton" value="Nuevo" />
+            <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
         </td>
     </tr>
 </table>
