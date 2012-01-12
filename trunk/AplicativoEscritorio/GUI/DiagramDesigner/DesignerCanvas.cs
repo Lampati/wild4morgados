@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace DiagramDesigner
 {
@@ -79,9 +80,16 @@ namespace DiagramDesigner
                 DesignerItem newItem = null;
                 Object content = XamlReader.Load(XmlReader.Create(new StringReader(dragObject.Xaml)));
 
+                Regex rg = new Regex("<Path ToolTip=\"([A-Za-z]+)\"");
+                Match mc = rg.Match(dragObject.Xaml, 0, 50);
+                string tp = String.Empty;
+                if (mc.Success)
+                    tp = mc.Groups[mc.Groups.Count - 1].Value;
+
                 if (content != null)
                 {
                     newItem = new DesignerItem();
+                    newItem.AsignarTipoElemento(tp);
                     newItem.Content = content;
 
                     Point position = e.GetPosition(this);

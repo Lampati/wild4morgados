@@ -8,8 +8,8 @@
     </ResourceDictionary.MergedDictionaries>
     
     <ToolBar x:Key="MyToolbar" Height="120">
-        <!--File-->
-        <GroupBox Header="File" Style="{StaticResource ToolbarGroup}" Margin="5,3,3,3">
+        <!--Archivo-->
+        <GroupBox Header="Archivo" Style="{StaticResource ToolbarGroup}" Margin="5,3,3,3">
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Margin="3" Width="55" Style="{StaticResource ToolBarButtonBaseStyle}"
                         HorizontalContentAlignment="Center"
@@ -22,7 +22,7 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Source="Images/GenericDocument.png" Width="45"/>
-                            <TextBlock Grid.Row="1" Text="New" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Text="Nuevo" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                         </Grid>
                     </Button.Content>
                 </Button>
@@ -38,7 +38,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/OpenFolder.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Open" VerticalAlignment="Center"  Grid.Column="1"/>
+                                <TextBlock Margin="3,0,3,0" Text="Abrir" VerticalAlignment="Center"  Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -53,7 +53,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Save.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Save" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3,0,3,0" Text="Guardar" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -68,7 +68,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Print.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Print" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3,0,3,0" Text="Imprimir" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -76,8 +76,8 @@
             </StackPanel>
         </GroupBox>
 
-        <!--Edit-->
-        <GroupBox Header="Edit" Style="{StaticResource ToolbarGroup}" Margin="3">
+        <!--Edición-->
+        <GroupBox Header="Edición" Style="{StaticResource ToolbarGroup}" Margin="3">
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Margin="3" Width="55"
                         Style="{StaticResource ToolBarButtonBaseStyle}"
@@ -90,7 +90,7 @@
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Image Source="Images/PasteBig.png" Width="45"/>
-                            <TextBlock Grid.Row="1" Text="Paste" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Text="Pegar" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                         </Grid>
                     </Button.Content>
                 </Button>
@@ -106,7 +106,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Cut.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Cut" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3,0,3,0" Text="Cortar" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -121,7 +121,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Copy.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Copy" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3,0,3,0" Text="Copiar" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -136,7 +136,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Delete.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Delete" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3,0,3,0" Text="Eliminar" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -144,8 +144,8 @@
             </StackPanel>
         </GroupBox>
 
-        <!--Alignment-->
-        <GroupBox Header="Alignment" Style="{StaticResource ToolbarGroup}" Margin="3">
+        <!--Alineación-->
+        <GroupBox Header="Alineación" Style="{StaticResource ToolbarGroup}" Margin="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -240,8 +240,8 @@
             </Grid>
         </GroupBox>
 
-        <!--Arrange-->
-        <GroupBox Header="Arrange" Style="{StaticResource ToolbarGroup}" Margin="3">
+        <!--Diagramación-->
+        <GroupBox Header="Diagramación" Style="{StaticResource ToolbarGroup}" Margin="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -260,7 +260,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Group.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Group" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3" Text="Agrupar" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -275,7 +275,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/Ungroup.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Ungroup" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3" Text="Desagrupar" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -292,7 +292,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/BringForward.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Forward" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3" Text="Frente" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -307,7 +307,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/BringToFront.png" Width="16"/>
-                                <TextBlock Margin="3" Text="To Front" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3" Text="Al Frente" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
@@ -328,7 +328,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/SendBackward.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Backward" VerticalAlignment="Center"  Grid.Column="1"/>
+                                <TextBlock Margin="3" Text="Fondo" VerticalAlignment="Center"  Grid.Column="1"/>
                              </Grid>
                         </Button.Content>
                     </Button>
@@ -343,12 +343,48 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="Images/SendToBack.png" Width="16"/>
-                                <TextBlock Margin="3" Text="To Back" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Margin="3" Text="Al Fondo" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
                     </Button>
                 </StackPanel>
             </Grid>
+        </GroupBox>
+
+        <!--WF/Gargar-->
+        <GroupBox Header="Visualización" Style="{StaticResource ToolbarGroup}" Margin="3">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+					Style="{StaticResource ToolBarButtonBaseStyle}"
+					Command="{x:Static s:DesignerCanvas.VisualizarFlujo}"
+					CommandTarget="{Binding ElementName=MyDesigner}">
+                    <Button.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Images/Workflow.png" Width="48"/>
+                            <TextBlock Grid.Row="1" Text="Flujo" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button Margin="7,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+					Style="{StaticResource ToolBarButtonBaseStyle}"
+					Command="{x:Static s:DesignerCanvas.VisualizarGargar}"
+					CommandTarget="{Binding ElementName=MyDesigner}">
+                    <Button.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Images/Gargar.png" Width="48"/>
+                            <TextBlock Grid.Row="1" Text="Gargar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
         </GroupBox>
     </ToolBar>
 </ResourceDictionary>

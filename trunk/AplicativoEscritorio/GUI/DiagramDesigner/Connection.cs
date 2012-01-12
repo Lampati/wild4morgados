@@ -33,6 +33,7 @@ namespace DiagramDesigner
                     {
                         source.PropertyChanged -= new PropertyChangedEventHandler(OnConnectorPositionChanged);
                         source.Connections.Remove(this);
+                        source.ParentDesignerItem.Connections.Remove(this);
                     }
 
                     source = value;
@@ -41,6 +42,7 @@ namespace DiagramDesigner
                     {
                         source.Connections.Add(this);
                         source.PropertyChanged += new PropertyChangedEventHandler(OnConnectorPositionChanged);
+                        source.ParentDesignerItem.Connections.Add(this);
                     }
 
                     UpdatePathGeometry();
@@ -234,14 +236,14 @@ namespace DiagramDesigner
         }
 
         #endregion
-
+        
         public Connection(Connector source, Connector sink)
         {
             this.ID = Guid.NewGuid();
             this.Source = source;
             this.Sink = sink;
             base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
-        }
+    }
 
 
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
