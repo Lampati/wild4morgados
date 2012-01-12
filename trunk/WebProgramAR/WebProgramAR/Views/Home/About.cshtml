@@ -1,8 +1,19 @@
 ﻿@{
     ViewBag.Title = "About Us";
 }
-
-<h2>About</h2>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "CONTACTO") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
+    });
+</script>
+<h2>Contacto</h2>
 <p>
      Put content here.
 </p>

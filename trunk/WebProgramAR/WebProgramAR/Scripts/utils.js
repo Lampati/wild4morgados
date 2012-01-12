@@ -24,6 +24,7 @@ function GetPosition() {
 }
 
 $(document).ready(function () {
+
     $('#dialog').dialog({
         autoOpen: false,
         draggable: true,
@@ -80,8 +81,6 @@ function OpenDialog(event, id, accion, ancho, alto) {
     else {
         $("#dialog").dialog("option", "height", 'auto');
     }
-
-    
 
     $("#dialog").unbind("dialogopen");
     $("#dialog").bind("dialogopen", function (event, ui) {

@@ -1,7 +1,10 @@
-﻿@if(Request.IsAuthenticated) {
+﻿
+@if(Request.IsAuthenticated) {
     <text>Welcome <strong>@User.Identity.Name</strong>!
      @Html.ActionLink("Log Off", "LogOff", "Account") </text>
 }
 else {
+    <img class="logOnCandado" src="../../Content/images/lock_icon_close.png" style="float:center" />
     @: @Html.ActionLink("Log On", "LogOn", "Account") 
+
 }
