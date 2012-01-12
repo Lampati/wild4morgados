@@ -49,6 +49,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         {
                             igual = firmaFuncion[i].TipoDato == listaFirmaComparar[i].Tipo 
                                 && firmaFuncion[i].EsArreglo == listaFirmaComparar[i].EsArreglo;
+
+                          
+
+
                             i++;
                         }
 
@@ -62,6 +66,18 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
 
                             this.Lexema = nombre;
+
+                            if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
+                            {
+                                this.UsaVariablesGlobales = true;
+                            }
+
+                            // flanzani 9/1/2012
+                            // Uso de variables globales
+                            // Me fijo si se esta usando una variable global como parametro.
+
+                            this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales;
+                            
                             
                         }
                         else
@@ -135,6 +151,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     {
                         this.AsignaParametros = true;
                     }
+
+                    if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
+                    {
+                        this.UsaVariablesGlobales = true;
+                    }
                 }
                 else
                 {
@@ -155,6 +176,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     {
                         this.AsignaParametros = true;
                     }
+
+                    if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
+                    {
+                        this.UsaVariablesGlobales = true;
+                    }
                 }
                 else
                 {
@@ -171,6 +197,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             if (this.TablaSimbolos.EsParametroDeEsteProc(nombre, this.ContextoActual, this.NombreContextoLocal))
                             {
                                 this.AsignaParametros = true;
+                            }
+
+                            if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
+                            {
+                                this.UsaVariablesGlobales = true;
                             }
                         }
                         else

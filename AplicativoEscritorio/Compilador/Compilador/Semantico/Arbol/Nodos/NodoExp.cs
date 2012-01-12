@@ -38,6 +38,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.TipoDato = this.hijosNodo[0].TipoDato;
 
                 this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
+                this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales || this.hijosNodo[2].UsaVariablesGlobales;
+
 
                 if (operacion != TipoOperatoria.Ninguna)
                 {

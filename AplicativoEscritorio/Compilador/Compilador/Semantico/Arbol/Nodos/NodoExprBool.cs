@@ -31,19 +31,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-
-         
-            
-                
-           
-
             this.TipoDato = this.hijosNodo[0].TipoDato;
 
             this.Comparacion = this.hijosNodo[1].Comparacion;
 
             this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
-
-            
 
             if ( this.Comparacion != TipoComparacion.None && this.EsArregloEnParametro)
             {
@@ -55,6 +47,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
 
             this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+            this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales || this.hijosNodo[1].UsaVariablesGlobales;
             
             return this;
         }

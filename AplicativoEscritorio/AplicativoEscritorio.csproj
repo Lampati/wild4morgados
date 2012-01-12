@@ -69,6 +69,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationReformatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +89,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModoTexto\Configuracion\Sintaxis\GarGar.xshd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -97,7 +101,12 @@
       <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
       <Name>CompiladorGarGar</Name>
     </ProjectReference>
+    <ProjectReference Include="ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

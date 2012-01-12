@@ -34,7 +34,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.TipoDato = this.hijosNodo[1].TipoDato;
                 this.Comparacion = this.hijosNodo[0].Comparacion;
 
-                this.AsignaParametros = this.hijosNodo[1].AsignaParametros;               
+                this.AsignaParametros = this.hijosNodo[1].AsignaParametros;
+                this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales;  
 
                 if (!(this.Comparacion == TipoComparacion.Igual || this.Comparacion == TipoComparacion.Distinto))
                 {

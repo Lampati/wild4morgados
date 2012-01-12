@@ -151,7 +151,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                     if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA.ToLower()))
                     {
-                        
+                        if (this.hijosNodo[7].UsaVariablesGlobales)
+                        {
+                            listaExcepciones.Add(new ErrorSemanticoException(new StringBuilder("El procedimiento salida no permite que se usen variables globales dentro de el").ToString()));
+                        }
 
                         if (this.hijosNodo[7].ModificaParametros)
                         {

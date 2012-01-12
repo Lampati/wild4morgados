@@ -28,6 +28,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 this.ListaFirma.Add(new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[0].TipoDato, this.hijosNodo[0].EsArregloEnParametro));
                 this.ListaFirma.AddRange(this.hijosNodo[1].ListaFirma);
+
+                this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales || this.hijosNodo[1].UsaVariablesGlobales;
             }
             return this;
         }

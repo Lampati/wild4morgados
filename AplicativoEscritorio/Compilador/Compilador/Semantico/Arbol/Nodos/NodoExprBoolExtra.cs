@@ -60,6 +60,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
 
                 this.AsignaParametros = this.hijosNodo[1].AsignaParametros || this.hijosNodo[2].AsignaParametros;
+                this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales || this.hijosNodo[2].UsaVariablesGlobales;
             }
             else
             {

@@ -39,6 +39,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     case "(":
                         this.EsFuncion = true;
                         this.ListaFirma = this.hijosNodo[1].ListaFirma;
+                        this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales;
                         break;
 
                     case "[":

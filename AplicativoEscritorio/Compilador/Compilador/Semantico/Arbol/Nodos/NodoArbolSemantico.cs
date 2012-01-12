@@ -79,6 +79,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public bool AsignaParametros { get; set; }
         public bool LlamaProcs { get; set; }
         public bool TieneLecturas { get; set; }
+        public bool UsaVariablesGlobales { get; set; }
         public bool EsPasajeParametrosAProcOFunc { get; set; }
         public bool EsArregloEnParametro { get; set; }
 
@@ -211,6 +212,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ModificaParametros = false;
             this.TieneLecturas = false;
             this.AsignaParametros = false;
+            this.UsaVariablesGlobales = false;
 
             //Heredados
             this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Ninguno;
