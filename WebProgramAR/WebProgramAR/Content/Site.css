@@ -45,6 +45,14 @@ border-bottom-right-radius:10px;
 -webkit-border-bottom-right-radius:10px;
 }
 
+.border_top_all{
+border-top-right-radius:10px;
+-moz-border-radius-topright:10px;
+-webkit-border-top-right-radius:10px;
+border-top-left-radius:10px;
+-moz-border-radius-topleft:10px;
+-webkit-border-top-left-radius:10px;
+}
 a:link
 {
     color: #034af3;
@@ -169,6 +177,7 @@ header h1, #header h1
     -webkit-border-radius: 4px 0 0 0;
     -moz-border-radius: 4px 0 0 0;
     background-image: url('images/fondo.png');
+    height:420px;
 }
 
 footer, #footer
@@ -190,15 +199,26 @@ footer, #footer
 
 /* TAB MENU   
 ----------------------------------------------------------*/
+.logOnCandado
+{
+    position:absolute;
+    top:10px;
+    right:120px;
+    z-index:1000;
+}
 ul#menu
 {
     position:absolute;
     top:40px;
     border-bottom: 1px #5C87B2 solid;
     padding: 2px 0 2px ;
-    text-align:right;
     text-transform:uppercase;
     font-family:Calibri;
+    background:#666;
+    height: 45px;
+    width: 100%;
+    margin-left:-100px;
+    padding-left:620px;
 }
 
 
@@ -252,8 +272,8 @@ ul#menu li a:active
 
 ul#menu li.selected a
 {
-    background-color: #19F;
-    color: #000;
+    background-color: #333;
+    color: #fff;
     border:1px solid #fff;
 }
 
@@ -592,6 +612,30 @@ div.menu ul li a:hover, .boton:hover
     font-size: 0.9em;
     padding: 2px;
 }
+.btn_filtros
+{
+    background-color: #3688C2;
+    border: 1px #333 solid;
+    color: white;
+    font-weight: bold;
+    text-transform:uppercase;
+    font-family:Calibri;
+    font-size: 1em;
+    display: block;
+    width: 120px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: hand;
+    cursor: pointer;
+    position:absolute;
+    right:220px;
+    top:135px;
+    height:20px;
+    width:80px;
+    padding-top:5px;
+    padding-left:30px;
+}
 
 .btn_nuevo
 {
@@ -688,17 +732,23 @@ div.menu ul li a:hover, .boton:hover
 }
 */
 
+#contenedor-grid
+{
+    padding:10px;
+}
 .grid
 {
     margin-top:10px;
     width: 100%;
     left:10px;
+    font-family:Calibri;
 }
 
 .gridRow
 {
     background-color: #EFF3FB;
     color: #333333;
+    font-family:Calibri;
 }
 
 
@@ -750,8 +800,9 @@ div.menu ul li a:hover, .boton:hover
 
 .label
 {
-    color: #fff;
+    color: #333;
     vertical-align: inherit;
+    font-family:Calibri;
 }
 
 *
@@ -861,14 +912,15 @@ div.menu ul li a:hover, .boton:hover
     padding-left: 10px;
     padding-bottom: 0px;
     background-repeat: repeat-x;
-    font-size:1.6em;
-    background:#19f;
+    font-size:1.3em;
+    background:#3688C2;
 }
 
 #filtros
 {
     text-transform:uppercase;
-    width:320px; 
+    padding:10px;
+    display:none;
 }
 .filtrosabmBig
 {
@@ -889,10 +941,9 @@ filtrosabmBig input
 
 .filtrosabm
 {
-    background: #333;
+    background: #EFF3FB;
     
 }
-
 
 .filtrosabm td
 {
