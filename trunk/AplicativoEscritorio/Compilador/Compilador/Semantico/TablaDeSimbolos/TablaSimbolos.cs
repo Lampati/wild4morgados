@@ -432,5 +432,16 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         {
             AgregarVariable(nombre, tipo, true, tipoContexto, nombreProc, valorInt); 
         }
+
+        internal bool EsVariableGlobal(string nombre, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreCont)
+        {
+            NodoTablaSimbolos nodo = ObtenerVariable(nombre, tipoContexto, nombreCont);
+
+            return nodo != null
+                && nodo.Nombre.Equals(nombre)
+                && nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable
+                && nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global;
+                
+        }
     }
 }

@@ -41,6 +41,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     }
 
                     this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
+                    this.UsaVariablesGlobales = this.hijosNodo[2].UsaVariablesGlobales;
                 }
                 else
                 {
@@ -52,6 +53,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                    
 
                     this.AsignaParametros = this.hijosNodo[1].AsignaParametros;
+                    this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales;
                 }
             }
             else
@@ -63,6 +65,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
               
                 this.AsignaParametros = this.hijosNodo[0].AsignaParametros;
+                this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales;
             }
 
             return this;

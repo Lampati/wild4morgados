@@ -41,6 +41,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
            
             this.AsignaParametros = this.hijosNodo[0].AsignaParametros || this.hijosNodo[1].AsignaParametros;
+            this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales || this.hijosNodo[1].UsaVariablesGlobales;
 
             if (this.hijosNodo[1].Operacion != TipoOperatoria.Ninguna)
             {

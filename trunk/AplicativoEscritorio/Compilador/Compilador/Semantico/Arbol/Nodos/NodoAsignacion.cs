@@ -48,9 +48,15 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             {
                                 this.ModificaParametros = true;
                             }
+
+                            if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
+                            {
+                                this.UsaVariablesGlobales = true;
+                            }
+
                             this.AsignaParametros = this.hijosNodo[2].AsignaParametros;
 
-
+                            this.UsaVariablesGlobales = this.UsaVariablesGlobales || this.hijosNodo[2].UsaVariablesGlobales;
                           
                         }
                         else
@@ -99,6 +105,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             {
                                 this.ModificaParametros = true;
                             }
+
+                            if (this.TablaSimbolos.EsVariableGlobal(nombre, this.ContextoActual, this.NombreContextoLocal))
+                            {
+                                this.UsaVariablesGlobales = true;
+                            }
+
                             this.AsignaParametros = this.hijosNodo[2].AsignaParametros;                          
                         }
                         else
