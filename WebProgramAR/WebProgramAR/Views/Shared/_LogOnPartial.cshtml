@@ -1,10 +1,21 @@
-﻿
+﻿<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
+<script language="javascript">
+
+$(document).ready(function () {
+    $("#logOn").live('click', function (event) {
+        OpenDialog(event, '', '@Url.Action("../Account/LogOn")/', 600, 540);
+    });
+   });
+</script>
+<div id="dialog" class="dialogDiv" ></div>
+            
 @if(Request.IsAuthenticated) {
     <text>Welcome <strong>@User.Identity.Name</strong>!
      @Html.ActionLink("Log Off", "LogOff", "Account") </text>
 }
 else {
     <img class="logOnCandado" src="../../Content/images/lock_icon_close.png" style="float:center" />
-    @: @Html.ActionLink("Log On", "LogOn", "Account") 
-
+    <div id="logOn">Log On </div>
 }
