@@ -70,6 +70,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\EjercicioGrillaModel.cs" />
     <Compile Include="Models\ModelGrillaBase.cs" />
     <Compile Include="Models\CursoGrillaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,6 +261,24 @@
     <Content Include="Views\Curso\Edit.cshtml" />
     <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\Curso\_CreateOrEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\_CreateOrEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
