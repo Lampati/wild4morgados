@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
+using System;
 
 namespace DiagramDesigner
 {
@@ -56,29 +57,62 @@ namespace DiagramDesigner
             this.Cursor = Cursors.Cross;
         }
 
+        private bool ValidarConexiones(Connector source)
+        {
+            bool ok = true;
+            if (source.ParentDesignerItem.Connections.Count > 0)
+            {
+                if (source.ParentDesignerItem.TipoElemento != Enums.TipoElemento.Condicional)
+                {
+                    MessageBox.Show("Un elemento no puede tener más de 1 conexión");
+                    ok = false;
+                }
+                else
+                {
+                    if (source.ParentDesignerItem.Connections.Count > 1)
+                    {
+                        MessageBox.Show("Un elemento condicional no puede tener más de 2 conexiones");
+                        ok = false;
+                    }
+                }
+            }
+
+            return ok;
+        }
+
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
-            if (HitConnector != null)
+            try
             {
-                Connector sourceConnector = this.sourceConnector;
-                Connector sinkConnector = this.HitConnector;
-                Connection newConnection = new Connection(sourceConnector, sinkConnector);
+                if (HitConnector != null)
+                {
+                    Connector sourceConnector = this.sourceConnector;
+                    Connector sinkConnector = this.HitConnector;
+                    if (ValidarConexiones(sourceConnector))
+                    {
+                        Connection newConnection = new Connection(sourceConnector, sinkConnector);
 
-                Canvas.SetZIndex(newConnection, designerCanvas.Children.Count);
-                this.designerCanvas.Children.Add(newConnection);
-                
+                        Canvas.SetZIndex(newConnection, designerCanvas.Children.Count);
+                        this.designerCanvas.Children.Add(newConnection);
+                    }
+
+                }
+                if (HitDesignerItem != null)
+                {
+                    this.HitDesignerItem.IsDragConnectionOver = false;
+                }
+
+                if (this.IsMouseCaptured) this.ReleaseMouseCapture();
+
+                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.designerCanvas);
+                if (adornerLayer != null)
+                {
+                    adornerLayer.Remove(this);
+                }
             }
-            if (HitDesignerItem != null)
+            catch (Exception ex)
             {
-                this.HitDesignerItem.IsDragConnectionOver = false;
-            }
-
-            if (this.IsMouseCaptured) this.ReleaseMouseCapture();
-
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.designerCanvas);
-            if (adornerLayer != null)
-            {
-                adornerLayer.Remove(this);
+                MessageBox.Show(ex.Message);
             }
         }
 

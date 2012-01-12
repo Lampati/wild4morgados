@@ -15,6 +15,12 @@ using Microsoft.Win32;
 
 namespace DiagramDesigner
 {
+    public enum VisualizacionActivada
+    {
+        VisualizacionFlujo,
+        VisualizacionGargar
+    }
+
     public partial class DesignerCanvas
     {
         public static RoutedCommand Group = new RoutedCommand();
@@ -32,6 +38,10 @@ namespace DiagramDesigner
         public static RoutedCommand DistributeHorizontal = new RoutedCommand();
         public static RoutedCommand DistributeVertical = new RoutedCommand();
         public static RoutedCommand SelectAll = new RoutedCommand();
+        public static RoutedCommand VisualizarFlujo = new RoutedCommand();
+        public static RoutedCommand VisualizarGargar = new RoutedCommand();
+
+        private VisualizacionActivada vis;
 
         public DesignerCanvas()
         {
@@ -58,6 +68,8 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeHorizontal, DistributeHorizontal_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeVertical, DistributeVertical_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.VisualizarFlujo, VisualizarFlujo_Executed, VisualizarFlujo_Enabled));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.VisualizarGargar, VisualizarGargar_Executed, VisualizarGargar_Enabled));
             SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
 
             this.AllowDrop = true;
@@ -744,6 +756,30 @@ namespace DiagramDesigner
             SelectionService.SelectAll();
         }
 
+        #endregion
+
+        #region VisualizarFlujo Command
+        private void VisualizarFlujo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.vis = VisualizacionActivada.VisualizacionFlujo;
+        }
+
+        private void VisualizarFlujo_Enabled(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.vis == VisualizacionActivada.VisualizacionGargar;
+        }
+        #endregion
+
+        #region VisualizarGargar Command
+        private void VisualizarGargar_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.vis = VisualizacionActivada.VisualizacionGargar;
+        }
+
+        private void VisualizarGargar_Enabled(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.vis == VisualizacionActivada.VisualizacionFlujo;
+        }
         #endregion
 
         #region Helper Methods

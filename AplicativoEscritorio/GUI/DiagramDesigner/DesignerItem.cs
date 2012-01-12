@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DiagramDesigner.Controls;
+using System.Collections.Generic;
 
 namespace DiagramDesigner
 {
@@ -14,6 +15,34 @@ namespace DiagramDesigner
     [TemplatePart(Name = "PART_ContentPresenter", Type = typeof(ContentPresenter))]
     public class DesignerItem : ContentControl, ISelectable, IGroupable
     {
+        private Enums.TipoElemento tipoElemento;
+
+        public Enums.TipoElemento TipoElemento
+        {
+            get { return this.tipoElemento; }
+        }
+
+        public void AsignarTipoElemento(string tipo)
+        {
+            Enums.TipoElemento te = Enums.TipoElemento.Asignacion;
+
+            switch (tipo)
+            {
+                case "Asignacion":
+                    te = Enums.TipoElemento.Asignacion; break;
+                case "Decision":
+                    te = Enums.TipoElemento.Condicional; break;
+                case "Lectura":
+                    te = Enums.TipoElemento.Lectura; break;
+                case "Mostrar":
+                    te = Enums.TipoElemento.Mostrar; break;
+                default:
+                    te = Enums.TipoElemento.Otro; break;
+            }
+
+            this.tipoElemento = te;
+        }
+
         #region ID
         private Guid id;
         public Guid ID
@@ -30,6 +59,8 @@ namespace DiagramDesigner
         }
         public static readonly DependencyProperty ParentIDProperty = DependencyProperty.Register("ParentID", typeof(Guid), typeof(DesignerItem));
         #endregion
+
+        public List<Connection> Connections { get; set; }
 
         #region IsGroup
         public bool IsGroup
@@ -119,6 +150,7 @@ namespace DiagramDesigner
 
         public DesignerItem(Guid id)
         {
+            this.Connections = new List<Connection>();
             this.id = id;
             this.Loaded += new RoutedEventHandler(DesignerItem_Loaded);
         }
