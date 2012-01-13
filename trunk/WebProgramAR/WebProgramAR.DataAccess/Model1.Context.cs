@@ -49,12 +49,6 @@ namespace WebProgramAR.DataAccess
         }
         private ObjectSet<Curso> _cursos;
     
-        public ObjectSet<Ejercicio> Ejercicios
-        {
-            get { return _ejercicios  ?? (_ejercicios = CreateObjectSet<Ejercicio>("Ejercicios")); }
-        }
-        private ObjectSet<Ejercicio> _ejercicios;
-    
         public ObjectSet<EstadoEjercicio> EstadoEjercicios
         {
             get { return _estadoEjercicios  ?? (_estadoEjercicios = CreateObjectSet<EstadoEjercicio>("EstadoEjercicios")); }
@@ -126,6 +120,12 @@ namespace WebProgramAR.DataAccess
             get { return _tipoes  ?? (_tipoes = CreateObjectSet<Tipo>("Tipoes")); }
         }
         private ObjectSet<Tipo> _tipoes;
+    
+        public ObjectSet<Ejercicio> Ejercicios
+        {
+            get { return _ejercicios  ?? (_ejercicios = CreateObjectSet<Ejercicio>("Ejercicios")); }
+        }
+        private ObjectSet<Ejercicio> _ejercicios;
 
         #endregion
     }

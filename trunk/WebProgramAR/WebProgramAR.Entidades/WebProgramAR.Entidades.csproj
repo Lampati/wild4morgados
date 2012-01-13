@@ -42,20 +42,30 @@
   <ItemGroup>
     <Compile Include="Columna.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
     </Compile>
     <Compile Include="Comparador.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
     </Compile>
     <Compile Include="CursoPartial.cs" />
     <Compile Include="ProvinciaPartial.cs" />
     <Compile Include="ReglasSeguridad.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
     </Compile>
     <Compile Include="Tabla.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
     </Compile>
     <Compile Include="Tipo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
     </Compile>
     <Compile Include="UsuarioPartial.cs" />
     <Compile Include="TipoUsuarioPartial.cs" />

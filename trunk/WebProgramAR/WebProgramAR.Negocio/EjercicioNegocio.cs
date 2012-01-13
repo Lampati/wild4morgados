@@ -30,14 +30,14 @@ namespace WebProgramAR.Negocio
             EjercicioDA.Eliminar(id);
         }
 
-        public static int ContarCantidad(int idEjercicio, string apellido)
+        public static int ContarCantidad(string nombre, int usuarioId , int cursoId , int estadoEjercicio, int nivelEjercicio, bool global )
         {
-            return EjercicioDA.ContarCantidad(idEjercicio, apellido);
+            return EjercicioDA.ContarCantidad(nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
         }
 
-        public static IEnumerable<Ejercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idEjercicio, string apellido)
+        public static IEnumerable<Ejercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
-            return EjercicioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idEjercicio, apellido);
+            return EjercicioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
         }
 
       
