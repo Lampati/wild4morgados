@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
+using PMI.CETools.Sitio.Models;
 
 namespace WebProgramAR.Controllers
 {
@@ -13,12 +14,50 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Ejercicio/
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+             int usuarioId = -1, int cursoId = -1, string nombre = "", 
+             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
         {
-            List<Ejercicio> ejercicios = EjercicioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
-            List<NivelEjercicio> nivelEjercicios = NivelEjercicioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
-            List<EstadoEjercicio> estadoEjercicios = EstadoEjercicioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
-            return View();
+            //Pasar la cantidad por pagina a una constante mas copada.
+            int cantidadPorPaginaTPC = 10;
+
+            var numUsuarios = EjercicioNegocio.ContarCantidad(nombre,
+                     usuarioId,
+                     cursoId,
+                     estadoEjercicio,
+                     nivelEjercicio,
+                     global);
+
+            sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
+
+            var validColumns = new[] { "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+
+            if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
+                sort = "Nombre";
+
+            var ejers = EjercicioNegocio.ObtenerPagina(
+                     page,
+                     cantidadPorPaginaTPC,
+                     sort + " " + sortDir,                     
+                     nombre, 
+                     usuarioId,
+                     cursoId,
+                     estadoEjercicio,
+                     nivelEjercicio,
+                     global
+            );
+
+            var datos = new EjercicioGrillaModel()
+            {
+                Cantidad = numUsuarios,
+                CantidadPorPagina = cantidadPorPaginaTPC,
+                Ejercicios = ejers,
+                PaginaActual = page
+            };
+
+
+            return View(datos);
+
         }
 
         //

@@ -86,23 +86,39 @@ namespace WebProgramAR.DataAccess
         }
 
         //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(int idUsuario, string apellido)
+        public static int ContarCantidad(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetUsuarios(idUsuario, apellido, db).Count();
+                return GetUsuarios(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, db).Count();
             }
         }
 
-        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idUsuario, string apellido)
+        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
                 if (paginaActual < 1) paginaActual = 1;
 
 
-                IQueryable<Usuario> query = GetUsuarios(idUsuario, apellido, db);
+                IQueryable<Usuario> query = GetUsuarios(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, db);
 
+                if (sortColumns.Contains("TipoUsuario"))
+                {
+                    sortColumns = sortColumns.Replace("TipoUsuario", "TipoUsuario.TipoUsuarioId");
+                }
+                if (sortColumns.Contains("Pais"))
+                {
+                    sortColumns = sortColumns.Replace("Pais", "Pais.PaisId");
+                }
+                if (sortColumns.Contains("Provincia"))
+                {
+                    sortColumns = sortColumns.Replace("Provincia", "Provincia.ProvinciaId");
+                }
+                if (sortColumns.Contains("Localidad"))
+                {
+                    sortColumns = sortColumns.Replace("Localidad", "Localidad.LocalidadId");
+                }
                
                 return query.OrderUsingSortExpression(sortColumns)
                             .Skip((paginaActual - 1) * personasPorPagina)
@@ -111,12 +127,18 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<Usuario> GetUsuarios(int idUsuario, string apellido, WebProgramAREntities db)
+        private static IQueryable<Usuario> GetUsuarios(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad, WebProgramAREntities db)
         {
-            IQueryable<Usuario> query = from u in db.Usuarios.Include("Market").Include("UsuarioType")
-                                     //where u.Status == true &&
-                                     //(idUsuario == 0 || u.UsuarioId == idUsuario) && u.LastName.Contains(apellido)
-                                     select u;
+            IQueryable<Usuario> query = from u in db.Usuarios.Include("TipoUsuario").Include("Pais").Include("Provincia").Include("Localidad")
+                                          where (nombre == "" || u.Nombre.Contains(nombre))
+                                          && (apellido == "" || u.Apellido.Contains(apellido))
+                                          && (usuarioNombre == "" || u.UsuarioNombre.Contains(usuarioNombre))                                          
+                                          && (tipoUsuarioId == -1 || u.TipoUsuarioId == tipoUsuarioId)
+                                          && (pais == "" || u.PaisId.Contains(pais))
+                                          && (provincia == "" || u.ProvinciaId.Contains(provincia))
+                                          && (localidad == "" || u.LocalidadId.Contains(localidad))                                         
+                                          
+                                          select u;
             return query;
         }
 

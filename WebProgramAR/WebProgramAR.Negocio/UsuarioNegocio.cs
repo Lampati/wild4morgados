@@ -30,14 +30,14 @@ namespace WebProgramAR.Negocio
             UsuarioDA.Eliminar(id);
         }
 
-        public static int ContarCantidad(int idUsuario, string apellido)
+        public static int ContarCantidad(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
         {
-            return UsuarioDA.ContarCantidad(idUsuario, apellido);
+            return UsuarioDA.ContarCantidad(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad);
         }
 
-        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idUsuario, string apellido)
+        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
         {
-            return UsuarioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idUsuario, apellido);
+            return UsuarioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns,  nombre,  apellido,  usuarioNombre,  tipoUsuarioId,  pais,  provincia,  localidad);
         }
 
         public static Usuario GetUsuarioByLoginUsuario(string loginUsuario)

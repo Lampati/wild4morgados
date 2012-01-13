@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
+using PMI.CETools.Sitio.Models;
 
 namespace WebProgramAR.Controllers
 {
@@ -13,15 +14,52 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Usuario/
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+              int tipoUsuarioId = -1,  string nombre = "", string apellido = "", string usuarioNombre = "",
+              string pais = "", string provincia = "", string localidad = "")
         {
-            List<Usuario> usuarios = UsuarioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
-            List<TipoUsuario> tiposUsuarios = TipoUsuarioNegocio.ObtenerPagina(1, 1, "", 0, "").ToList();
+            //Pasar la cantidad por pagina a una constante mas copada.
+            int cantidadPorPaginaTPC = 10;
 
-            List<Pais> paises = PaisNegocio.ObtenerPagina(1, 1, "", "1", "").ToList();
-            List<Provincia> provs = ProvinciaNegocio.ObtenerPagina(1, 1, "", "1", "").ToList();
-            List<Localidad> localidades = LocalidadNegocio.ObtenerPagina(1, 1, "", "1", "").ToList();
-            return View();
+            var numUsuarios = UsuarioNegocio.ContarCantidad(nombre,
+                     apellido,
+                     usuarioNombre,
+                     tipoUsuarioId,
+                     pais,
+                     provincia,
+                     localidad);
+
+            sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
+
+            var validColumns = new[] { "Nombre", "Apellido", "NombreUsuario", "TipoUsuario", "Pais", "Provincia" , "Localidad"};
+
+            if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
+                sort = "Nombre";
+
+            var ejers = UsuarioNegocio.ObtenerPagina(
+                     page,
+                     cantidadPorPaginaTPC,
+                     sort + " " + sortDir,
+                     nombre,
+                     apellido,
+                     usuarioNombre,
+                     tipoUsuarioId,
+                     pais,
+                     provincia,
+                     localidad
+            );
+
+            var datos = new UsuarioGrillaModel()
+            {
+                Cantidad = numUsuarios,
+                CantidadPorPagina = cantidadPorPaginaTPC,
+                Usuarios = ejers,
+                PaginaActual = page
+            };
+
+
+            return View(datos);
+
         }
 
         //

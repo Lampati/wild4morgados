@@ -105,6 +105,12 @@ namespace WebProgramAR.Entidades
             }
         }
         private int _estadoEjercicioId;
+    
+        public virtual string Nombre
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
