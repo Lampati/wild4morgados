@@ -4595,6 +4595,7 @@ $.widget( "ui.accordion", {
 				},
 				toShow = ( this.active = $( [] ) );
 			this._toggle( toShow, toHide, data );
+
 			return;
 		}
 
@@ -5201,9 +5202,10 @@ $.widget( "ui.autocomplete", {
 		if ( this.menu.element.is(":visible") ) {
 			this.menu.element.hide();
 			this.menu.deactivate();
-			this._trigger( "close", event );
+			this._trigger( "X", event );
 		}
 	},
+
 	
 	_change: function( event ) {
 		if ( this.previous !== this.element.val() ) {
@@ -5937,7 +5939,7 @@ $.widget("ui.dialog", {
 		autoOpen: true,
 		buttons: {},
 		closeOnEscape: true,
-		closeText: 'close',
+		closeText: 'X',
 		dialogClass: '',
 		draggable: true,
 		hide: null,
@@ -6045,7 +6047,7 @@ $.widget("ui.dialog", {
 				})
 				.click(function(event) {
 					self.close(event);
-					return false;
+                    return false;
 				})
 				.appendTo(uiDialogTitlebar),
 
@@ -6119,7 +6121,7 @@ $.widget("ui.dialog", {
 	},
 
 	close: function(event) {
-		var self = this,
+    	var self = this,
 			maxZ, thisZ;
 		
 		if (false === self._trigger('beforeClose', event)) {

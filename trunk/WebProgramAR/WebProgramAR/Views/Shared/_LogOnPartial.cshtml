@@ -8,14 +8,13 @@
 <script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
 <script language="javascript">
 
-$(document).ready(function () {
-    $("#logOn").live('click', function (event) {
-        OpenDialog(event, '', '@Url.Action("../Account/LogOn")/', 600, 540);
+    $(document).ready(function () {
+        $("#logOn").live('click', function (event) {
+            OpenDialog(event, '', '@Url.Action("../Account/LogOn")/', 500, 370);
+        });
     });
-   });
 </script>
-<div id="dialog" class="dialogDiv" ></div>
-            
+<div id="dialog" class="dialogDiv border_all" ></div>
 @if(Request.IsAuthenticated) {
     <text>Welcome <strong>@User.Identity.Name</strong>!
      @Html.ActionLink("Log Off", "LogOff", "Account") </text>
