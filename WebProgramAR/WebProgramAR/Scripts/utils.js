@@ -1,6 +1,4 @@
 ﻿$.ajaxSetup({ cache: false });
-
-
 var position = 'center';
 
 function SetFiltroOpenClose() {
@@ -53,7 +51,6 @@ $(document).ready(function () {
 });
 
 function OpenDialog(event, id, accion, ancho, alto) {
-
     if (event != null) {
         event.preventDefault();
     }
@@ -85,12 +82,16 @@ function OpenDialog(event, id, accion, ancho, alto) {
     $("#dialog").unbind("dialogopen");
     $("#dialog").bind("dialogopen", function (event, ui) {
         $(this).empty().html('<img src="../../Content/images/ajax-loader.gif" style="float:center" />');
-        alert(accion);
         $(this).load(accion + id, function () {
             //alert('Load was performed.');
 
         });
     });
+    $( "#dialog" ).dialog({
+       beforeClose: function(event, ui) { $("#disablingDiv").fadeOut("slow"); }
+    });
+    $("#disablingDiv").fadeIn("slow");
+    
     $('#dialog').dialog('open');
 }
 
@@ -315,7 +316,7 @@ function FuncionesAutorizadas(funciones) {
 					.click(function () {
 					    // close if already visible
 					    if (input.autocomplete("widget").is(":visible")) {
-					        input.autocomplete("close");
+					        input.autocomplete("X");
 					        return;
 					    }
 
@@ -333,6 +334,7 @@ function FuncionesAutorizadas(funciones) {
             this.button.remove();
             this.element.show();
             $.Widget.prototype.destroy.call(this);
+            $("#disablingDiv").fadeOut("slow");
         }
     });
 })(jQuery);
