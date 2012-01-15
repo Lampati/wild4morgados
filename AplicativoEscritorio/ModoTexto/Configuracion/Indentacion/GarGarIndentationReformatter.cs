@@ -250,6 +250,7 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
                 //    if (block.Bracket == '{')
                 //        block.Continuation = true;
                 //}
+                BloqueIdentacion b;
 
                 switch (wordBuilder.ToString().ToLower())
                 {
@@ -259,6 +260,11 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
                         block.StartLine = doc.LineNumber;
                 
                         block.Indent(set);
+
+                        //Le sumo 1 pq sino me va a tomar la primer linea como si tuviese un tab.
+                          b = new BloqueIdentacion(){ StartLine= block.StartLine+1, EndLine = int.MaxValue, TabsBeforeInnerBlock = block.OuterIndent.Length};
+                        GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Push(b);
+
                         
                         block.Comienzo = "comenzar";
                         break;
@@ -270,10 +276,21 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
                             block = blocks.Pop();
                         }
                         if (blocks.Count == 0) break;
+
+                        b = new BloqueIdentacion() { StartLine = block.StartLine + 1, EndLine = doc.LineNumber, TabsBeforeInnerBlock = block.OuterIndent.Length };
+                        GarGarIndentationStrategy.bloquesParaIdentacion.Push(b);
+                        if (GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Count > 0)
+                        {
+                            GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Pop();
+                        }
+
                         block = blocks.Pop();
                         block.Continuation = false;
                         finBloque = true;
-                        
+                        GarGarTextDocumentAccessor.quitarTabGlobal = true;
+
+        
+
 
                         break;
 
@@ -284,6 +301,10 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 
                         block.Indent(set);
 
+                        b = new BloqueIdentacion() { StartLine = block.StartLine + 1, EndLine = int.MaxValue, TabsBeforeInnerBlock = block.OuterIndent.Length };
+                        GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Push(b);
+
+
                         block.Comienzo = "hacer";
                         break;
                     case "finmientras":
@@ -293,10 +314,21 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
                             block = blocks.Pop();
                         }
                         if (blocks.Count == 0) break;
+
+                        b = new BloqueIdentacion(){ StartLine= block.StartLine+1, EndLine = doc.LineNumber, TabsBeforeInnerBlock = block.OuterIndent.Length};
+                        GarGarIndentationStrategy.bloquesParaIdentacion.Push(b);
+
+                        if (GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Count > 0)
+                        {
+                            GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Pop();
+                        }
+
                         block = blocks.Pop();
                         block.Continuation = false;
                         finBloque = true;
-                        doc.Text.TrimStart(new char[] { '\t' });
+                        GarGarTextDocumentAccessor.quitarTabGlobal = true;
+
+            
 
                         break;
 
@@ -307,6 +339,9 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 
                         block.Indent(set);
 
+                        b = new BloqueIdentacion() { StartLine = block.StartLine + 1, EndLine = int.MaxValue, TabsBeforeInnerBlock = block.OuterIndent.Length };
+                        GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Push(b);
+
                         block.Comienzo = "entonces";
                         break;
                     case "finsi":
@@ -316,11 +351,22 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
                             block = blocks.Pop();
                         }
                         if (blocks.Count == 0) break;
+
+
+                        b = new BloqueIdentacion() { StartLine = block.StartLine + 1, EndLine = doc.LineNumber, TabsBeforeInnerBlock = block.OuterIndent.Length };
+                        GarGarIndentationStrategy.bloquesParaIdentacion.Push(b);
+
+                        if (GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Count > 0)
+                        {
+                            GarGarIndentationStrategy.bloquesAbiertosParaIdentacion.Pop();
+                        }
+
                         block = blocks.Pop();
                         block.Continuation = false;
                         finBloque = true;
 
-                        doc.Text = new StringBuilder("blabla").ToString();
+                        GarGarTextDocumentAccessor.quitarTabGlobal = true;
+
                         
                         break;
 

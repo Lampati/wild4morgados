@@ -60,6 +60,11 @@ namespace ICSharpCode.AvalonEdit
 			
 			SetCurrentValue(OptionsProperty, textArea.Options);
 			SetCurrentValue(DocumentProperty, new TextDocument());
+
+            //flanzani 14/01/2012
+            //Click derecho
+            //Agrego el event handler
+            this.MouseRightButtonDown += new MouseButtonEventHandler(textEditor_MouseRightButtonDown);
 		}
 		
 		#if !DOTNET4
@@ -1068,8 +1073,25 @@ namespace ICSharpCode.AvalonEdit
 			set { SetValue(VerticalScrollBarVisibilityProperty, value); }
 		}
 		#endregion
-		
-		object IServiceProvider.GetService(Type serviceType)
+
+        #region MouseClickEvents
+
+
+        //flanzani 14/01/2012
+        //Click derecho
+        //Que vaya al texto si es que hay
+        void textEditor_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var position = this.GetPositionFromPoint(e.GetPosition(this));
+            if (position.HasValue)
+            {
+                this.TextArea.Caret.Position = position.Value;
+            }
+        }
+
+        #endregion
+
+        object IServiceProvider.GetService(Type serviceType)
 		{
 			return textArea.GetService(serviceType);
 		}

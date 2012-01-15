@@ -6,6 +6,8 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 {
@@ -14,6 +16,9 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 	/// </summary>
 	public class GarGarIndentationStrategy : DefaultIndentationStrategy
 	{
+
+        public static Stack<BloqueIdentacion> bloquesParaIdentacion = new Stack<BloqueIdentacion>();
+        public static Stack<BloqueIdentacion> bloquesAbiertosParaIdentacion = new Stack<BloqueIdentacion>();
 		/// <summary>
 		/// Creates a new CSharpIndentationStrategy.
 		/// </summary>
@@ -50,6 +55,8 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 		/// <param name="keepEmptyLines">Specifies whether empty lines should be kept</param>
 		public void Indent(IDocumentAccessor document, bool keepEmptyLines)
 		{
+            bloquesParaIdentacion = new Stack<BloqueIdentacion>();
+            bloquesAbiertosParaIdentacion = new Stack<BloqueIdentacion>();
 			if (document == null)
 				throw new ArgumentNullException("document");
 			
@@ -59,11 +66,14 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 			
 			GarGarIndentationReformatter r = new GarGarIndentationReformatter();
 			r.Reformat(document, settings);
+
+            
 		}
 		
 		/// <inheritdoc cref="IIndentationStrategy.IndentLine"/>
 		public override void IndentLine(TextDocument document, DocumentLine line)
 		{
+            bloquesParaIdentacion = new Stack<BloqueIdentacion>();
 			int lineNr = line.LineNumber;
             GarGarTextDocumentAccessor acc = new GarGarTextDocumentAccessor(document, lineNr, lineNr);
 			Indent(acc, false);
@@ -73,6 +83,53 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 				// use AutoIndentation for new lines in comments / verbatim strings.
 				base.IndentLine(document, line);
 			}
+
+
+            List<int> tabsPorLinea = new List<int>(document.LineCount);
+            for (int i = 0; i < document.LineCount - 1; i++)
+            {
+                tabsPorLinea.Add(0);
+            }
+
+            BloqueIdentacion bloq;
+
+            while (bloquesParaIdentacion.Count > 0)
+            {
+                bloq = bloquesParaIdentacion.Pop();
+
+                for (int j = bloq.StartLine - 1; j < bloq.EndLine - 1; j++)
+                {
+                    tabsPorLinea[j]++;
+                }
+            }
+
+            while (bloquesAbiertosParaIdentacion.Count > 0)
+            {
+                bloq = bloquesAbiertosParaIdentacion.Pop();
+
+                for (int j = bloq.StartLine - 1; j < document.LineCount - 1; j++)
+                {
+                   tabsPorLinea[j]++;
+                }
+            }
+
+            for (int num = 1; num < document.LineCount; num++)
+            {
+                
+                line = document.GetLineByNumber(num);
+                string aux = document.GetText(line);
+                aux = aux.TrimStart('\t');
+                StringBuilder strBlder = new StringBuilder();
+                for (int i = 0; i < tabsPorLinea[num - 1]; i++)
+                {
+                    strBlder.Append('\t');
+                }
+                strBlder.Append(aux);
+                document.Replace(line, strBlder.ToString());
+                
+            }
+
+
 		}
 		
 		/// <inheritdoc cref="IIndentationStrategy.IndentLines"/>
@@ -81,4 +138,16 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
             Indent(new GarGarTextDocumentAccessor(document, beginLine, endLine), true);
 		}
 	}
+
+    public class BloqueIdentacion
+    {
+        public int StartLine;
+        public int EndLine;
+        public int TabsBeforeInnerBlock;
+
+        public override string ToString()
+        {
+            return string.Format("Comienzo:{0};Fin:{1};CantTabs:{2}",StartLine,EndLine,TabsBeforeInnerBlock);
+        }
+    }
 }
