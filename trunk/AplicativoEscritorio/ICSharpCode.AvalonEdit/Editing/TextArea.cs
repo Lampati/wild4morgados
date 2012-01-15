@@ -72,6 +72,8 @@ namespace ICSharpCode.AvalonEdit.Editing
 			this.DefaultInputHandler = new TextAreaDefaultInputHandler(this);
 			this.ActiveInputHandler = this.DefaultInputHandler;
 		}
+
+       
 		#endregion
 		
 		#region InputHandler management
@@ -953,6 +955,8 @@ namespace ICSharpCode.AvalonEdit.Editing
 			TextView.InvalidateCursor();
 		}
 		#endregion
+
+       
 		
 		/// <inheritdoc/>
 		protected override HitTestResult HitTestCore(PointHitTestParameters hitTestParameters)

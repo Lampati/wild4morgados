@@ -20,6 +20,10 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
         readonly TextDocument doc;
 		readonly int minLine;
 		readonly int maxLine;
+
+        public static bool quitarTabGlobal = false;
+
+       
 		
 		/// <summary>
 		/// Creates a new TextDocumentAccessor.
@@ -31,6 +35,7 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 			doc = document;
 			this.minLine = 1;
 			this.maxLine = doc.LineCount;
+            
 		}
 		
 		/// <summary>
@@ -79,6 +84,17 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 		public bool MoveNext()
 		{
 			if (lineDirty) {
+                //if (quitarTabGlobal)
+                //{
+                //    if (text.Length > 0)
+                //    {
+                //        if (text[0] == '\t')
+                //        {
+                //            text = text.Remove(0, 1);
+                //        }
+                //    }
+                //    quitarTabGlobal = false;
+                //}
 				doc.Replace(line, text);
 				lineDirty = false;
 			}
@@ -89,5 +105,7 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
 			return true;
 		}
 	}
+
+   
 	
 }

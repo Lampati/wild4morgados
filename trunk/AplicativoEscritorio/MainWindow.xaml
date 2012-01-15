@@ -10,7 +10,20 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-            <avalonedit:TextEditor HorizontalAlignment="Left" Margin="0,23,0,0" Name="textEditor" VerticalAlignment="Top" Height="231" Width="403" />
+            <avalonedit:TextEditor HorizontalAlignment="Left" Margin="0,23,0,0" Name="textEditor" VerticalAlignment="Top" Height="231" Width="403" >
+                <avalonedit:TextEditor.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="Undo" Header="Deshacer" />
+                        <Separator />
+                        <MenuItem Command="Cut" Header="Cortar"/>
+                        <MenuItem Command="Copy" Header="Copiar"/>
+                        <MenuItem Command="Paste" Header="Pegar"/>
+                        <MenuItem Command="Delete" Header="Eliminar"/>
+                        <Separator />
+                        <MenuItem Command="SelectAll" Header="Seleccionar todo"/>
+                    </ContextMenu>
+                </avalonedit:TextEditor.ContextMenu>
+            </avalonedit:TextEditor>
         </Grid>
         </DockPanel>
     </Window>

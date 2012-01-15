@@ -18,6 +18,8 @@ using System.Xml;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit.Folding;
 using AplicativoEscritorio.ModoTexto.Configuracion.Indentacion;
+using FindReplace;
+using AplicativoEscritorio.ModoTexto.Configuracion;
 
 namespace AplicativoEscritorio
 {
@@ -26,41 +28,38 @@ namespace AplicativoEscritorio
     /// </summary>
     public partial class MainWindow : Window
     {
+        FindReplaceMgr findAndReplaceManager = new FindReplaceMgr();
+
         public MainWindow()
         {
-            
-
-            // Load our custom highlighting definition
-            IHighlightingDefinition customHighlighting;
-            using (Stream s = typeof(MainWindow).Assembly.GetManifestResourceStream("AplicativoEscritorio.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
-            {
-                if (s == null)
-                    throw new InvalidOperationException("Could not find embedded resource");
-                using (XmlReader reader = new XmlTextReader(s))
-                {
-                    customHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
-                        HighlightingLoader.Load(reader, HighlightingManager.Instance);
-                }
-            }
-            // and register it in the HighlightingManager
-            HighlightingManager.Instance.RegisterHighlighting("GarGar", new string[] { ".gar" }, customHighlighting);
-
             InitializeComponent();
 
-            textEditor.ShowLineNumbers = true;
-            textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("GarGar");
-            textEditor.TextArea.IndentationStrategy = textEditor.TextArea.IndentationStrategy = new GarGarIndentationStrategy(textEditor.Options);
-            textEditor.IsReadOnly = false;
-        
-
-
-            //DispatcherTimer foldingUpdateTimer = new DispatcherTimer();
-            //foldingUpdateTimer.Interval = TimeSpan.FromSeconds(2);
-            //foldingUpdateTimer.Tick += foldingUpdateTimer_Tick;
-            //foldingUpdateTimer.Start();
-            
+            ConfigurarModoTexto();            
         }
 
+        private void ConfigurarModoTexto()
+        {
+            ModoTextoConfiguracion.ConfigurarAvalonEdit(textEditor);
+            ConfigurarBuscarYReemplazarModoTexto();
+        }
+
+        private void ConfigurarBuscarYReemplazarModoTexto()
+        {
+            findAndReplaceManager.CurrentEditor = new FindReplace.TextEditorAdapter(textEditor);
+            findAndReplaceManager.ShowSearchIn = false;
+            findAndReplaceManager.OwnerWindow = this;
+
+
+            CommandBindings.Add(findAndReplaceManager.FindBinding);
+            CommandBindings.Add(findAndReplaceManager.ReplaceBinding);
+            CommandBindings.Add(findAndReplaceManager.FindNextBinding);
+
+         
+        }
+
+       
+
+    
 
         #region Folding
         FoldingManager foldingManager;
