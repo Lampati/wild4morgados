@@ -29,7 +29,9 @@ namespace WebProgramAR.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
+                    
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    SimpleSessionPersister.UserName = model.UserName;
                     model.isAuthenticated = true;
                     
                     return Json(new { success = true });

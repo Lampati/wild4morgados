@@ -31,7 +31,7 @@ $(document).ready(function () {
         title: '',
         modal: true,
         overlay: { opacity: 1.5, background: "black" },
-        show: "blind",
+        show: "slide",
         hide: "blind"
             , error: function (msg) { alert(msg); }
     });

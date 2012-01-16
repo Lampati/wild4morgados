@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web;
 
 namespace WebProgramAR.Models
 {
@@ -65,5 +66,25 @@ namespace WebProgramAR.Models
         [Display(Name = "Confirm password")]
         [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
         public string ConfirmPassword { get; set; }
+    }
+    public static class SimpleSessionPersister
+    {
+        static string UserNameSessionVar = "username";
+        public static string UserName
+        {
+            get
+            {
+                if (HttpContext.Current == null) return string.Empty;
+                var sessionvar = HttpContext.Current.Session[UserNameSessionVar];
+                if (sessionvar != null)
+                    return sessionvar as string;
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[UserNameSessionVar] = value;
+            }
+        }
+
     }
 }
