@@ -8,4 +8,5 @@ namespace WebProgramAR.Globales
     class Globals
     {
     }
+    
 }

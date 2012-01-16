@@ -219,9 +219,10 @@ ul#menu
     background:#666;
     height: 45px;
     width: 61%;
-    margin-left:-100px;
+    margin-left:0px;
     padding-left:620px;
 }
+
 
 
 #menu > li{ position:relative;}
@@ -1239,6 +1240,7 @@ input[type="text"].textBoxForFilter
  background:#ccc;
  border:4px solid #fff;   
  font-family:Calibri;Font-size:1em;
+ overflow:hidden;
 }
 /*DIV QUE SE MUESTRA PARA EL FONDO CUANDO SE ABRE UN POPUP*/
 #disablingDiv
