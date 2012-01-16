@@ -19,10 +19,35 @@ namespace WebProgramAR.Controllers
         {
             return View();
         }
-
         //
         // POST: /Account/LogOn
 
+        [HttpPost]
+        public ActionResult LogOn(LogOnModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Membership.ValidateUser(model.UserName, model.Password))
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    model.isAuthenticated = true;
+                    
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    model.isAuthenticated = false;
+                    return Json(new { success = false });
+                }
+            }
+            
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        //
+        // POST: /Account/LogOn
+        /*
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
@@ -52,6 +77,7 @@ namespace WebProgramAR.Controllers
             return View(model);
         }
 
+       */
         //
         // GET: /Account/LogOff
 

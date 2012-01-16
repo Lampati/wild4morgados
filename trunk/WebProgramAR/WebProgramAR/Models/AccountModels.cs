@@ -40,6 +40,8 @@ namespace WebProgramAR.Models
 
         [Display(Name = "Recordarme?")]
         public bool RememberMe { get; set; }
+
+        public bool isAuthenticated { get; set; }
     }
 
     public class RegisterModel
