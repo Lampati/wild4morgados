@@ -15,16 +15,18 @@
 
 @Html.ValidationSummary(true, "Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.")
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "frmLogIn" }))
+{
     <div>
         <fieldset>
             <legend>Informacion de Cuenta</legend>
-
+            <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.</div>
+            <div id="result"></div>
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName,new {Class="required"})
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
 
@@ -32,17 +34,16 @@
                 @Html.LabelFor(m => m.Password)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password,new {Class="required"})
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 
             <div class="editor-label">
-                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe,"chkRememberMe")
                 @Html.LabelFor(m => m.RememberMe)
             </div>
-
             <p>
-                <input type="submit" value="Log On" />
+                <input type="submit" id="logonButton" value="Log On" />
             </p>
         </fieldset>
     </div>
