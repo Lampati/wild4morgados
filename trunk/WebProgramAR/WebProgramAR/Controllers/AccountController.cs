@@ -95,9 +95,16 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Register()
         {
+            initilization();
             return View();
         }
-
+        /// <summary>
+        /// Cargar Paises. Las provincias y localidades se cargan por ajax, deben traer resultados de acuerdo a la eleccion
+        /// </summary>
+        public void initilization()
+        {
+            ViewBag.Paises = new SelectList(Negocio.PaisNegocio.GetPaises(), "PaisId", "Descripcion"); 
+        }
         //
         // POST: /Account/Register
 

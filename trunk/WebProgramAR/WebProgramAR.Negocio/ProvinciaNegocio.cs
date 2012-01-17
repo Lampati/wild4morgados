@@ -13,7 +13,10 @@ namespace WebProgramAR.Negocio
         {
             return ProvinciaDA.GetProvinciaById(id);
         }
-
+        public static IQueryable<Provincia> GetProvinciasByPais(string PaisId)
+        {
+            return ProvinciaDA.GetProvinciasByPais(PaisId);
+        }
         public static void Alta(Provincia Provincia)
         {
             ProvinciaDA.Alta(Provincia);

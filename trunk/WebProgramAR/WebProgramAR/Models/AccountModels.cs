@@ -47,7 +47,8 @@ namespace WebProgramAR.Models
 
     public class RegisterModel
     {
-        [Required]
+
+          [Required]
         [Display(Name = "Usuario")]
         public string UserName { get; set; }
 
@@ -66,6 +67,33 @@ namespace WebProgramAR.Models
         [Display(Name = "Confirm password")]
         [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido")]
+        public string Apellido { get; set; }
+
+        [Required]
+        [Display(Name = "Fecha Nacimiento")]
+        [DataType(DataType.Date)]
+        public string FechaNac { get; set; }
+
+        [Required]
+        [Display(Name = "Pais")]
+        public string Pais{get;set;}
+        
+        
+        [Required]
+        [Display(Name = "Provincia")]
+        public string Provincia{get;set;}
+        
+        [Required]
+        [Display(Name = "Localidad")]
+        public string Localidad { get; set; }
+
     }
     public static class SimpleSessionPersister
     {

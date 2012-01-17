@@ -97,13 +97,23 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<Localidad> GetLocalidades(string idLocalidad, string apellido, WebProgramAREntities db)
+        private static IQueryable<Localidad> GetLocalidades(string idLocalidad, string descripcion, WebProgramAREntities db)
         {
             IQueryable<Localidad> query = from u in db.Localidades
-                                     //where u.Status == true &&
-                                     //(idLocalidad == 0 || u.LocalidadId == idLocalidad) && u.LastName.Contains(apellido)
+                                     where (idLocalidad == "" || u.LocalidadId == idLocalidad) && u.Descripcion.Contains(descripcion)
                                      select u;
             return query;
+        }
+        public static IQueryable<Localidad> GetLocalidadesByProvincia(string IdProvincia)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Localidad> query = from u in db.Localidades
+                                              where (u.ProvinciaId == IdProvincia)
+                                              select u;
+                return query;
+            }
         }
 
 

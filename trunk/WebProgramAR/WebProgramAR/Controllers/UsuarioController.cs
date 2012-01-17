@@ -82,12 +82,11 @@ namespace WebProgramAR.Controllers
         // POST: /Usuario/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Usuario usuario)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                UsuarioNegocio.Alta(usuario);
                 return RedirectToAction("Index");
             }
             catch
