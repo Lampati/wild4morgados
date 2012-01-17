@@ -955,7 +955,11 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			p.fontRenderingEmSize = FontSize;
 			p.foregroundBrush = (Brush)GetValue(Control.ForegroundProperty);
 			ExtensionMethods.CheckIsFrozen(p.foregroundBrush);
-			p.cultureInfo = CultureInfo.CurrentCulture;
+			p.cultureInfo = CultureInfo.CurrentCulture;         
+            
+
+         
+            
 			return p;
 		}
 		

@@ -20,6 +20,10 @@ using ICSharpCode.AvalonEdit.Folding;
 using AplicativoEscritorio.ModoTexto.Configuracion.Indentacion;
 using FindReplace;
 using AplicativoEscritorio.ModoTexto.Configuracion;
+using ICSharpCode.AvalonEdit.Document;
+using System.Windows.Media.TextFormatting;
+using ICSharpCode.AvalonEdit.Rendering;
+using WpfApplicationHotKey.WinApi;
 
 namespace AplicativoEscritorio
 {
@@ -28,13 +32,71 @@ namespace AplicativoEscritorio
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Hotkeys Definicion
+
+        HotKey hotKeyCompilar;
+        HotKey hotKeyEjecutar;
+
+        #endregion
+
+
         FindReplaceMgr findAndReplaceManager = new FindReplaceMgr();
+
 
         public MainWindow()
         {
             InitializeComponent();
 
-            ConfigurarModoTexto();            
+            ConfigurarModoTexto();
+
+            hotKeyCompilar = new HotKey(ModifierKeys.None, Keys.F5, this);
+            hotKeyEjecutar = new HotKey(ModifierKeys.None, Keys.F6, this);
+
+            hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
+            hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
+
+            //DocumentLine linea = textEditor.Document.GetLineByNumber(1);
+            //string t = textEditor.Document.GetText(linea);
+            //VisualLine visualLine = new VisualLine(textEditor.TextArea.TextView, linea);
+
+
+            //VisualLineTextSource textSource = new VisualLineTextSource(visualLine)
+            //{
+            //    Document = textEditor.Document,                
+            //    TextView = textEditor.TextArea.TextView
+            //};
+
+            //TextRun ttt = textSource.GetTextRun(linea.Offset);
+
+
+			
+            //visualLine.ConstructVisualElements(textSource, elementGeneratorsArray);
+
+            //textEditor.TextRunProperties.SetForegroundBrush(Brushes.Blue);
+            //this.TextRunProperties.SetTextDecorations(TextDecorations.Underline);
+
+            //VisualLineTextSource
+
+            //TextDecoration t = new TextDecoration();
+            //t.Location = TextDecorationLocation.Underline;
+            
+            
+        }
+
+        void hotKeyCompilar_HotKeyPressed(HotKey obj)
+        {
+            switch (obj.Key)
+            {             
+                case Keys.F5:
+                    int i = 1;
+                    break;
+                case Keys.F6:
+                    break;
+                
+                default:
+                    break;
+            }
+            
         }
 
         private void ConfigurarModoTexto()
@@ -56,65 +118,5 @@ namespace AplicativoEscritorio
 
          
         }
-
-       
-
-    
-
-        #region Folding
-        FoldingManager foldingManager;
-        AbstractFoldingStrategy foldingStrategy;
-
-        void HighlightingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (textEditor.SyntaxHighlighting == null)
-            {
-                foldingStrategy = null;
-            }
-            else
-            {
-                switch (textEditor.SyntaxHighlighting.Name)
-                {
-                    case "XML":
-                        foldingStrategy = new XmlFoldingStrategy();
-                        textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy();
-                        break;
-                    case "C#":
-                    case "C++":
-                    case "PHP":
-                    case "Java":
-                        textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(textEditor.Options);
-                        //foldingStrategy = new BraceFoldingStrategy();
-                        break;
-                    default:
-                        textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy();
-                        foldingStrategy = null;
-                        break;
-                }
-            }
-            if (foldingStrategy != null)
-            {
-                if (foldingManager == null)
-                    foldingManager = FoldingManager.Install(textEditor.TextArea);
-                foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
-            }
-            else
-            {
-                if (foldingManager != null)
-                {
-                    FoldingManager.Uninstall(foldingManager);
-                    foldingManager = null;
-                }
-            }
-        }
-
-        void foldingUpdateTimer_Tick(object sender, EventArgs e)
-        {
-            if (foldingStrategy != null)
-            {
-                foldingStrategy.UpdateFoldings(foldingManager, textEditor.Document);
-            }
-        }
-        #endregion
     }
 }

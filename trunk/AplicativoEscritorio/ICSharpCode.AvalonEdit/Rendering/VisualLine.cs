@@ -75,7 +75,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public double VisualTop { get; internal set; }
 		
-		internal VisualLine(TextView textView, DocumentLine firstDocumentLine)
+		public VisualLine(TextView textView, DocumentLine firstDocumentLine)
 		{
 			Debug.Assert(textView != null);
 			Debug.Assert(firstDocumentLine != null);
