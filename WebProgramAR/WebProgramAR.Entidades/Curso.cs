@@ -72,37 +72,37 @@ namespace WebProgramAR.Entidades
         }
         private Usuario _usuario;
     
-        public virtual ICollection<Ejercicio> Ejercicio
+        public virtual ICollection<Ejercicio> Ejercicios
         {
             get
             {
-                if (_ejercicio == null)
+                if (_ejercicios == null)
                 {
                     var newCollection = new FixupCollection<Ejercicio>();
-                    newCollection.CollectionChanged += FixupEjercicio;
-                    _ejercicio = newCollection;
+                    newCollection.CollectionChanged += FixupEjercicios;
+                    _ejercicios = newCollection;
                 }
-                return _ejercicio;
+                return _ejercicios;
             }
             set
             {
-                if (!ReferenceEquals(_ejercicio, value))
+                if (!ReferenceEquals(_ejercicios, value))
                 {
-                    var previousValue = _ejercicio as FixupCollection<Ejercicio>;
+                    var previousValue = _ejercicios as FixupCollection<Ejercicio>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupEjercicio;
+                        previousValue.CollectionChanged -= FixupEjercicios;
                     }
-                    _ejercicio = value;
+                    _ejercicios = value;
                     var newValue = value as FixupCollection<Ejercicio>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupEjercicio;
+                        newValue.CollectionChanged += FixupEjercicios;
                     }
                 }
             }
         }
-        private ICollection<Ejercicio> _ejercicio;
+        private ICollection<Ejercicio> _ejercicios;
 
         #endregion
         #region Association Fixup
@@ -127,15 +127,15 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupEjercicio(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupEjercicios(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
                 foreach (Ejercicio item in e.NewItems)
                 {
-                    if (!item.Curso.Contains(this))
+                    if (!item.Cursoes.Contains(this))
                     {
-                        item.Curso.Add(this);
+                        item.Cursoes.Add(this);
                     }
                 }
             }
@@ -144,9 +144,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (Ejercicio item in e.OldItems)
                 {
-                    if (item.Curso.Contains(this))
+                    if (item.Cursoes.Contains(this))
                     {
-                        item.Curso.Remove(this);
+                        item.Cursoes.Remove(this);
                     }
                 }
             }
