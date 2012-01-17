@@ -24,6 +24,9 @@ using ICSharpCode.AvalonEdit.Document;
 using System.Windows.Media.TextFormatting;
 using ICSharpCode.AvalonEdit.Rendering;
 using WpfApplicationHotKey.WinApi;
+using CompiladorGargar.Resultado;
+using CompiladorGargar;
+using Utilidades;
 
 namespace AplicativoEscritorio
 {
@@ -36,9 +39,11 @@ namespace AplicativoEscritorio
 
         HotKey hotKeyCompilar;
         HotKey hotKeyEjecutar;
+        
 
         #endregion
 
+        Compilador compilador ;
 
         FindReplaceMgr findAndReplaceManager = new FindReplaceMgr();
 
@@ -48,6 +53,8 @@ namespace AplicativoEscritorio
             InitializeComponent();
 
             ConfigurarModoTexto();
+
+            ConfigurarCompilador();
 
             hotKeyCompilar = new HotKey(ModifierKeys.None, Keys.F5, this);
             hotKeyEjecutar = new HotKey(ModifierKeys.None, Keys.F6, this);
@@ -83,14 +90,24 @@ namespace AplicativoEscritorio
             
         }
 
+        private void ConfigurarCompilador()
+        {
+            bool modoDebug = false;
+
+            string directorioActual = ""; // Application.StartupPath;
+            string pathArchGramatica = ""; // System.IO.Path.Combine(directorioActual, System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
+            compilador = new Compilador(pathArchGramatica, modoDebug, directorioActual, directorioActual, "prueba");
+        }
+
         void hotKeyCompilar_HotKeyPressed(HotKey obj)
         {
             switch (obj.Key)
             {             
                 case Keys.F5:
-                    int i = 1;
+                    Compilar();
                     break;
                 case Keys.F6:
+                    Ejecutar();
                     break;
                 
                 default:
@@ -117,6 +134,53 @@ namespace AplicativoEscritorio
             CommandBindings.Add(findAndReplaceManager.FindNextBinding);
 
          
+        }
+
+
+        private void Compilar()
+        {
+            ReiniciarIDEParaCompilacion();
+
+            string programa = this.textEditor.Text;
+            ResultadoCompilacion res = this.compilador.Compilar(programa);
+
+            MostrarResultadosCompilacion(res);
+
+            if (!string.IsNullOrEmpty(res.Error))
+            {
+                MessageBox.Show(res.Error);
+            }
+
+        }
+
+        private void Ejecutar()
+        {
+            ReiniciarIDEParaCompilacion();
+
+            string programa = this.textEditor.Text;
+            ResultadoCompilacion res = this.compilador.Compilar(programa);
+
+            MostrarResultadosCompilacion(res);
+
+            if (!string.IsNullOrEmpty(res.Error))
+            {
+                MessageBox.Show(res.Error);
+            }
+
+            if (res.CompilacionGarGarCorrecta && res.GeneracionEjectuableCorrecto)
+            {
+                EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
+            }
+        }
+
+        private void ReiniciarIDEParaCompilacion()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MostrarResultadosCompilacion(ResultadoCompilacion res)
+        {
+            
         }
     }
 }
