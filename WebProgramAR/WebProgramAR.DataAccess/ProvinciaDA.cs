@@ -97,15 +97,23 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<Provincia> GetProvincias(string idProvincia, string apellido, WebProgramAREntities db)
+        private static IQueryable<Provincia> GetProvincias(string idProvincia, string descripcion, WebProgramAREntities db)
         {
             IQueryable<Provincia> query = from u in db.Provincias
-                                     //where u.Status == true &&
-                                     //(idProvincia == 0 || u.ProvinciaId == idProvincia) && u.LastName.Contains(apellido)
+                                     where (idProvincia == "" || u.ProvinciaId == idProvincia) && u.Descripcion.Contains(descripcion)
                                      select u;
             return query;
         }
-
+        public static IQueryable<Provincia> GetProvinciasByPais(string idPais)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Provincia> query = from u in db.Provincias
+                                              where (u.PaisId == idPais)
+                                              select u;
+                return query;
+            }
+        }
 
 
         #region IFiltrablePorSeguridadPorValor Members

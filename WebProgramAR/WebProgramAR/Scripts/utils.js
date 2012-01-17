@@ -81,7 +81,7 @@ function OpenDialog(event, id, accion, ancho, alto) {
 
     $("#dialog").unbind("dialogopen");
     $("#dialog").bind("dialogopen", function (event, ui) {
-        $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="float:center" />');
+        $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
         $(this).load(accion + id, function () {
             //alert('Load was performed.');
 

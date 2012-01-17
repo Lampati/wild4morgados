@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WebProgramAR.Entidades;
 using System.Data;
+using System.Linq;
 using WebProgramAR.DataAccess.Interfases;
+using WebProgramAR.Entidades;
 
 namespace WebProgramAR.DataAccess
 {
@@ -97,15 +96,24 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<Pais> GetPaises(string idPais, string apellido, WebProgramAREntities db)
+        private static IQueryable<Pais> GetPaises(string idPais, string descripcion, WebProgramAREntities db)
         {
             IQueryable<Pais> query = from u in db.Paises
-                                     //where u.Status == true &&
-                                     //(idPais == 0 || u.PaisId == idPais) && u.LastName.Contains(apellido)
+                                     where (idPais == "" || u.PaisId == idPais) && u.Descripcion.Contains(descripcion)
                                      select u;
             return query;
         }
-
+        public static IQueryable<Pais> GetPaises()
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Pais> query = from u in db.Paises
+                                         //where u.Status == true &&
+                                         //(idPais == 0 || u.PaisId == idPais) && u.LastName.Contains(apellido)
+                                         select u;
+                return query;
+            }
+        }
 
 
         #region IFiltrablePorSeguridadPorValor Members

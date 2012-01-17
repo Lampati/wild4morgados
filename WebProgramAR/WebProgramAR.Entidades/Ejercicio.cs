@@ -160,28 +160,28 @@ namespace WebProgramAR.Entidades
         }
         private Usuario _usuario;
     
-        public virtual ICollection<Curso> Cursoes
+        public virtual ICollection<Curso> Cursos
         {
             get
             {
-                if (_cursoes == null)
+                if (_cursos == null)
                 {
                     var newCollection = new FixupCollection<Curso>();
                     newCollection.CollectionChanged += FixupCursoes;
-                    _cursoes = newCollection;
+                    _cursos = newCollection;
                 }
-                return _cursoes;
+                return _cursos;
             }
             set
             {
-                if (!ReferenceEquals(_cursoes, value))
+                if (!ReferenceEquals(_cursos, value))
                 {
-                    var previousValue = _cursoes as FixupCollection<Curso>;
+                    var previousValue = _cursos as FixupCollection<Curso>;
                     if (previousValue != null)
                     {
                         previousValue.CollectionChanged -= FixupCursoes;
                     }
-                    _cursoes = value;
+                    _cursos = value;
                     var newValue = value as FixupCollection<Curso>;
                     if (newValue != null)
                     {
@@ -190,7 +190,7 @@ namespace WebProgramAR.Entidades
                 }
             }
         }
-        private ICollection<Curso> _cursoes;
+        private ICollection<Curso> _cursos;
 
         #endregion
         #region Association Fixup

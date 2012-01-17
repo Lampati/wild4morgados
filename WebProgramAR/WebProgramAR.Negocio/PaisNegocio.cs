@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using WebProgramAR.Entidades;
 using WebProgramAR.DataAccess;
+using WebProgramAR.Entidades;
 
 namespace WebProgramAR.Negocio
 {
@@ -12,6 +11,10 @@ namespace WebProgramAR.Negocio
         public static Pais GetPaisById(string id)
         {
             return PaisDA.GetPaisById(id);
+        }
+        public static IEnumerable<Pais> GetPaises()
+        {
+            return PaisDA.GetPaises();
         }
 
         public static void Alta(Pais Pais)
