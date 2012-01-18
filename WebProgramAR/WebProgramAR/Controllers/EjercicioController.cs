@@ -55,6 +55,7 @@ namespace WebProgramAR.Controllers
                 PaginaActual = page
             };
 
+            ViewBag.NivelesEjercicio = new SelectList(Negocio.NivelEjercicioNegocio.GetNiveles(), "NivelEjercicioId", "Descripcion"); 
 
             return View(datos);
 
