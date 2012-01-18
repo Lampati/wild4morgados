@@ -109,7 +109,7 @@ namespace WebProgramAR.Controllers
         // POST: /Account/Register
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(UserModel model)
         {
             if (ModelState.IsValid)
             {
@@ -184,6 +184,22 @@ namespace WebProgramAR.Controllers
         public ActionResult ChangePasswordSuccess()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Cargar Provincias de acuerdo al pais.
+        /// </summary>
+        public void SetProvinciasByPais(string PaisId)
+        {
+            ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvinciasByPais(PaisId), "ProvinciaId", "Descripcion");
+        }
+
+        /// <summary>
+        /// Cargar Localidades de acuerdo a la provincia.
+        /// </summary>
+        public void SetLocalidadesByProvincia(string ProvinciaId)
+        {
+            ViewBag.Provincias = new SelectList(Negocio.LocalidadNegocio.GetLocalidadesByProvincia(ProvinciaId), "LocalidadId", "Descripcion");
         }
 
         #region Status Codes

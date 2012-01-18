@@ -70,6 +70,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\UsuarioGrillaModel.cs" />
     <Compile Include="Models\EjercicioGrillaModel.cs" />
     <Compile Include="Models\ModelGrillaBase.cs" />
