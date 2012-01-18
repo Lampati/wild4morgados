@@ -104,7 +104,7 @@ namespace WebProgramAR.DataAccess
                                      select u;
             return query;
         }
-        public static IQueryable<Provincia> GetProvinciasByPais(string idPais)
+        public static IEnumerable<Provincia> GetProvinciasByPais(string idPais)
         {
            try
            {
@@ -113,7 +113,7 @@ namespace WebProgramAR.DataAccess
                     IQueryable<Provincia> query = from u in db.Provincias
                                                   where (u.PaisId == idPais)
                                                   select u;
-                    return query;
+                    return query.ToList();
                 }
             }
            catch (Exception ex)
@@ -121,7 +121,22 @@ namespace WebProgramAR.DataAccess
                throw new Exception(ex.Message.ToString());
            }
         }
-
+        public static IEnumerable<Provincia> GetProvincias()
+        {
+            try
+            {
+                using (WebProgramAREntities db = new WebProgramAREntities())
+                {
+                    IQueryable<Provincia> query = from u in db.Provincias
+                                                  select u;
+                    return query.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+        }
 
         #region IFiltrablePorSeguridadPorValor Members
 

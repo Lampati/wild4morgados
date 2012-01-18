@@ -13,9 +13,13 @@ namespace WebProgramAR.Negocio
         {
             return LocalidadDA.GetLocalidadById(id);
         }
-        public static IQueryable<Localidad> GetLocalidadesByProvincia(string ProvinciaId)
+        public static IEnumerable<Localidad> GetLocalidadesByProvincia(string ProvinciaId)
         {
             return LocalidadDA.GetLocalidadesByProvincia(ProvinciaId);
+        }
+        public static IEnumerable<Localidad> GetLocalidades()
+        {
+            return LocalidadDA.GetLocalidades();
         }
         public static void Alta(Localidad Localidad)
         {

@@ -3,24 +3,6 @@
 @{
     ViewBag.Title = "Register";
 }
-<script language="javascript" type="text/javascript">
-    $(document).ready(function () {
-        $("#Pais").change(function () {
-            $.ajax({
-                url: '@Url.Action("SetProvinciasByPais")',
-                data: { "PaisId": $("#PaisId").val() },
-                success: function (data) {}
-            });
-        });
-        $("#Provincia").change(function () {
-            $.ajax({
-                url: '@Url.Action("SetLocalidadesByProvincia")',
-                data: { "LocalidadId": $("#Localidad").val() },
-                success: function (data) { }
-            });
-        });
-    });
-</script>
 
 <h2>Crear una Cuenta Nueva</h2>
 <p>
@@ -32,6 +14,7 @@
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/funciones.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm())
 {
@@ -76,6 +59,7 @@
         </fieldset>
     </div>
     <div class="sectionSpace">
+        <div class="SameSectionSpace">
         <fieldset>
             <legend>Informacion del Usuario</legend>
 
@@ -102,34 +86,47 @@
                 @Html.TextBoxFor(model => model.FechaNac, new { @class = "date-picker-needed" })
                 @Html.ValidationMessageFor(m => m.FechaNac)
             </div>
-
+        </fieldset>
+        </div>
+        <div class="SameSectionSpace">
+        <fieldset>
             <div class="editor-label">
                 @Html.LabelFor(m => m.Pais)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(m => m.Pais,new SelectList(ViewBag.Paises,"PaisId","Descripcion"),string.Empty)
+                @Html.DropDownListFor(m => m.Pais,(SelectList)ViewBag.Paises)
                 @Html.ValidationMessageFor(m => m.Pais)
             </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Provincia)
+             <div id="listProvincias" style="display:none">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Provincia)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Provincia, (SelectList)ViewBag.Provincias)
+                    @Html.ValidationMessageFor(m => m.Provincia)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(m => m.Provincia, (SelectList)ViewBag.Provincias)
-                @Html.ValidationMessageFor(m => m.Provincia)
+            <div  id="listLocalidades"  style="display:none">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Localidad)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Localidad, (SelectList)ViewBag.Localidades)
+                    @Html.ValidationMessageFor(m => m.Localidad)
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Localidad)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(m => m.Localidad, (SelectList)ViewBag.Localidades)
-                @Html.ValidationMessageFor(m => m.Localidad)
-            </div>
-            
 
         </fieldset>
+        </div>
     </div>
     <p>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Registrar" class="saveButton"/>
     </p>
 }
+<script type="text/javascript">
+    convertSelect("Pais");
+    convertSelect("Provincia");
+    convertSelect("Localidad");
+    $("#FechaNac").datepicker();
+    
+</script>

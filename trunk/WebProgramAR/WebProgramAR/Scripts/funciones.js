@@ -40,88 +40,100 @@
             });
         }
     });
-
+});
 
     /********para el manejo de select tags********/
     // The select element to be replaced:
-    var select = $('select');
-
-    var selectBoxContainer = $('<div>', {
-        width: select.outerWidth(),
-        className: 'tzSelect',
-        html: '<div class="selectBox"></div>'
-    });
-
-    var dropDown = $('<ul>', { className: 'dropDown' });
-    var selectBox = selectBoxContainer.find('.selectBox');
-
-    // Looping though the options of the original select element
-
-    select.find('option').each(function (i) {
-        var option = $(this);
-        if ((i + 1) == select.attr('selectedIndex')) {
-            selectBox.html(option.text());
-        }
-
-        // As of jQuery 1.4.3 we can access HTML5 
-        // data attributes with the data() method.
-
-        if (option.data('skip')) {
-            return true;
-        }
-
-        // Creating a dropdown item according to the
-        // data-icon and data-html-text HTML5 attributes:
-
-        var li = $('<li rel="' + option.val() + '">' + option.html() + '</li>');
-
-        li.click(function () {
-
-            selectBox.html(option.html());
-            dropDown.trigger('hide');
-
-            // When a click occurs, we are also reflecting
-            // the change on the original select element:
-            select.val(option.val());
-            return false;
+    function convertSelect(id) {
+        var select = $('#' + id);
+        var selectBoxContainer = $('<div>', {
+            width: select.outerWidth(),
+            className: 'tzSelect',
+            html: '<div id="selectBox_'+id+'" class="selectBox" rel=""></div>'
         });
 
-        dropDown.append(li);
-    });
+        var dropDown = $('<ul>', { className: 'dropDown' });
+        var selectBox = selectBoxContainer.find('.selectBox');
+        
+        if (select.find('option').size() > 5) {
+            dropDown.css("height", "150px");
+        } else {
+            dropDown.css("height", "30px" * select.find('option').size());
+        }
+        select.find('option').each(function (i) {
+            var option = $(this);
+            if ((i + 1) == select.attr('selectedIndex')) {
+                selectBox.html(option.text());
+            }
+            if (option.data('skip')) {
+                return true;
+            }
+            var li = $('<li rel="' + option.val() + '">' + option.html() + '</li>');
+            li.click(function () {
+                selectBox.html(option.html());
+                dropDown.trigger('hide');
+                selectBox.attr("rel", $(this).val());
+                select.val($(this).val());
+                OnChangeDo(select);
+            });
 
-    selectBoxContainer.append(dropDown.hide());
-    select.hide().after(selectBoxContainer);
+            dropDown.append(li);
+        });
 
-    // Binding custom show and hide events on the dropDown:
+        selectBoxContainer.append(dropDown.hide());
+        select.hide().after(selectBoxContainer);
 
-    dropDown.bind('show', function () {
-
-        if (dropDown.is(':animated')) {
+        dropDown.bind('show', function () {
+            if (dropDown.is(':animated')) {
+                return false;
+            }
+            selectBox.addClass('expanded');
+            dropDown.slideDown();
+        }).bind('hide', function () {
+            if (dropDown.is(':animated')) {
+                return false;
+            }
+            selectBox.removeClass('expanded');
+            dropDown.slideUp();
+        }).bind('toggle', function () {
+            if (selectBox.hasClass('expanded')) {
+                dropDown.trigger('hide');
+            }
+            else dropDown.trigger('show');
+        });
+        selectBox.click(function () {
+            dropDown.trigger('toggle');
             return false;
+        });
+    }
+    function OnChangeDo(div) {
+        if (div.attr('id') == "Pais") {
+            $.ajax({
+                url: '@Url.Action("SetProvinciasByPais","AccountController")',
+                data: JSON.stringify($("#Pais").val()),
+                type: 'POST',
+                cache: 'false',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (response) {
+                    alert(response);
+                }
+            });
+            $("#listProvincias").show();
+            return;
+        }
+        if (div.attr('id') == "Provincia") {
+            $.ajax({
+                url: '@Url.Action("SetLocalidadesByProvincia","AccountController")',
+                data: $("#Provincia").val(),
+                type: 'POST',
+                cache: 'false',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                }
+            });
+            $("#listLocalidades").show();
+            return;
         }
 
-        selectBox.addClass('expanded');
-        dropDown.slideDown();
-
-    }).bind('hide', function () {
-
-        if (dropDown.is(':animated')) {
-            return false;
-        }
-
-        selectBox.removeClass('expanded');
-        dropDown.slideUp();
-
-    }).bind('toggle', function () {
-        if (selectBox.hasClass('expanded')) {
-            dropDown.trigger('hide');
-        }
-        else dropDown.trigger('show');
-    });
-
-    selectBox.click(function () {
-        dropDown.trigger('toggle');
-        return false;
-    });
-
-});
+    }

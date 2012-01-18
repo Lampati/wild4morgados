@@ -104,7 +104,7 @@ namespace WebProgramAR.DataAccess
                                      select u;
             return query;
         }
-        public static IQueryable<Localidad> GetLocalidadesByProvincia(string IdProvincia)
+        public static IEnumerable<Localidad> GetLocalidadesByProvincia(string IdProvincia)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -112,10 +112,19 @@ namespace WebProgramAR.DataAccess
                 IQueryable<Localidad> query = from u in db.Localidades
                                               where (u.ProvinciaId == IdProvincia)
                                               select u;
-                return query;
+                return query.ToList();
             }
         }
+        public static IEnumerable<Localidad> GetLocalidades()
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
 
+                IQueryable<Localidad> query = from u in db.Localidades
+                                              select u;
+                return query.ToList();
+            }
+        }
 
 
         #region IFiltrablePorSeguridadPorValor Members
