@@ -18,7 +18,7 @@ namespace WebProgramAR.Sitio.Models
         public int CantidadPorPagina { get; set; }
         public int PaginaActual { get; set; }
         public int Estado { get; set; }
-
+        
         protected int GetCantidadPorPagina()
         {
             try

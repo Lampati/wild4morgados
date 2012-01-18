@@ -9,6 +9,9 @@ namespace WebProgramAR.Sitio.Models
 {
     public class EjercicioGrillaModel : ModelGrillaBase
     {
+        public string Nombre { get; set; }
+        public int Nivel { get; set; }
+
         public IEnumerable<Ejercicio> Ejercicios { get; set; }
     }
 }

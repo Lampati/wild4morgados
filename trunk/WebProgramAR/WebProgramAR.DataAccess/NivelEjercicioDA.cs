@@ -105,7 +105,22 @@ namespace WebProgramAR.DataAccess
                                      select u;
             return query;
         }
-
+        public static IEnumerable<NivelEjercicio> getNiveles()
+        {
+            try
+            {
+                using (WebProgramAREntities db = new WebProgramAREntities())
+                {
+                    IQueryable<NivelEjercicio> query = from u in db.NivelEjercicios
+                                                       select u;
+                    return query.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+        }
 
 
         #region IFiltrablePorSeguridadPorValor Members
@@ -116,5 +131,7 @@ namespace WebProgramAR.DataAccess
         }
 
         #endregion
+
+       
     }
 }

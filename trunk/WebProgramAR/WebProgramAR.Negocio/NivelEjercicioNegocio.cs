@@ -14,6 +14,10 @@ namespace WebProgramAR.Negocio
             return NivelEjercicioDA.GetNivelEjercicioById(id);
         }
 
+        public static IEnumerable<NivelEjercicio> GetNiveles()
+        {
+            return NivelEjercicioDA.getNiveles();
+        }
         public static void Alta(NivelEjercicio NivelEjercicio)
         {
             NivelEjercicioDA.Alta(NivelEjercicio);
