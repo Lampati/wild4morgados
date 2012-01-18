@@ -69,7 +69,7 @@ namespace WebProgramAR.DataAccess
     
         public ObjectSet<Pais> Paises
         {
-            get { return _paises  ?? (_paises = CreateObjectSet<Pais>("Paises")); }
+            get { return _paises  ?? (_paises = CreateObjectSet<Pais>("Paises"));}
         }
         private ObjectSet<Pais> _paises;
     

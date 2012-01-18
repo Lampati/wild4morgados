@@ -106,13 +106,20 @@ namespace WebProgramAR.DataAccess
         }
         public static IQueryable<Provincia> GetProvinciasByPais(string idPais)
         {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                IQueryable<Provincia> query = from u in db.Provincias
-                                              where (u.PaisId == idPais)
-                                              select u;
-                return query;
+           try
+           {
+               using (WebProgramAREntities db = new WebProgramAREntities())
+                {
+                    IQueryable<Provincia> query = from u in db.Provincias
+                                                  where (u.PaisId == idPais)
+                                                  select u;
+                    return query;
+                }
             }
+           catch (Exception ex)
+           {
+               throw new Exception(ex.Message.ToString());
+           }
         }
 
 
