@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Models.RegisterModel
+﻿@model WebProgramAR.Models.UserModel
 
 @{
     ViewBag.Title = "Register";
@@ -6,7 +6,18 @@
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         $("#Pais").change(function () {
-            
+            $.ajax({
+                url: '@Url.Action("SetProvinciasByPais")',
+                data: { "PaisId": $("#PaisId").val() },
+                success: function (data) {}
+            });
+        });
+        $("#Provincia").change(function () {
+            $.ajax({
+                url: '@Url.Action("SetLocalidadesByProvincia")',
+                data: { "LocalidadId": $("#Localidad").val() },
+                success: function (data) { }
+            });
         });
     });
 </script>
@@ -96,7 +107,7 @@
                 @Html.LabelFor(m => m.Pais)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(m => m.Pais, (SelectList)ViewBag.Paises)
+                @Html.DropDownListFor(m => m.Pais,new SelectList(ViewBag.Paises,"PaisId","Descripcion"),string.Empty)
                 @Html.ValidationMessageFor(m => m.Pais)
             </div>
 

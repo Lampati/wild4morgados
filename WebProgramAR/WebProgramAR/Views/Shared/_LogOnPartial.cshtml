@@ -9,7 +9,7 @@
 <script language="javascript">
 
     $(document).ready(function () {
-        $("#logOn").live('click', function (event) {
+        $("#logindisplay").live('click', function (event) {
             OpenDialog(event, '', '@Url.Action("../Account/LogOn")/', 500, 340);
         });
     });
@@ -22,4 +22,5 @@
 else {
     <img class="logOnCandado" src="../../Content/images/lock_icon_close.png" style="float:center" />
     <div id="logOn">Log On </div>
+    
 }
