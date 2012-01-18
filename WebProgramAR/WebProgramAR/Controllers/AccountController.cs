@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using WebProgramAR.Models;
+using WebProgramAR.Entidades;
 
 namespace WebProgramAR.Controllers
 {
@@ -191,23 +192,21 @@ namespace WebProgramAR.Controllers
         /// <summary>
         /// Cargar Provincias de acuerdo al pais.
         /// </summary>
-        [HttpPost]
-        public JsonResult SetProvinciasByPais(string PaisId)
+       [HttpPost]
+        public JsonResult GetProvinciasByPais(string PaisId)
         {
-            ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvinciasByPais(PaisId), "ProvinciaId", "Descripcion");
-            String sView = "Cargado";
-            return Json(sView, JsonRequestBehavior.AllowGet);
+            List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(PaisId).ToList();
+            return Json(listaProvincias, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// Cargar Localidades de acuerdo a la provincia.
         /// </summary>
-        [HttpPost]
-        public JsonResult SetLocalidadesByProvincia(string ProvinciaId)
+       [HttpPost]
+        public JsonResult GetLocalidadesByProvincia(string ProvinciaId)
         {
-            ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidadesByProvincia(ProvinciaId), "LocalidadId", "Descripcion");
-            String sView = "Cargado";
-            return Json(sView, JsonRequestBehavior.AllowGet);
+            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByProvincia(ProvinciaId).ToList();
+            return Json(listaLocalidades, JsonRequestBehavior.AllowGet);
         }
 
         #region Status Codes
