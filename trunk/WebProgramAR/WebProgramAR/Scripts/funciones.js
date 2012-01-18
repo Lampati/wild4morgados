@@ -108,31 +108,27 @@
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "Pais") {
+
             $.ajax({
-                url: '@Url.Action("SetProvinciasByPais","AccountController")',
-                data: JSON.stringify($("#Pais").val()),
-                type: 'POST',
-                cache: 'false',
-                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetProvinciasByPais")',
+                data: $("#Pais").val(),
+                contentType: 'application/json',
+                type:'POST',
                 dataType: 'json',
-                success: function (response) {
-                    alert(response);
-                }
+                success: function (data) { alert(data); }
             });
-            $("#listProvincias").show();
+            //$("#listProvincias").show();
             return;
         }
         if (div.attr('id') == "Provincia") {
             $.ajax({
-                url: '@Url.Action("SetLocalidadesByProvincia","AccountController")',
-                data: $("#Provincia").val(),
-                type: 'POST',
-                cache: 'false',
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                }
+                url: '@Url.Action("GetLocalidadesByProvincia")',
+                data: $("#Pais").val(),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) { alert(data); }
             });
-            $("#listLocalidades").show();
+            //$("#listLocalidades").show();
             return;
         }
 
