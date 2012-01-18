@@ -133,9 +133,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (Ejercicio item in e.NewItems)
                 {
-                    if (!item.Cursos.Contains(this))
+                    if (!item.Cursoes.Contains(this))
                     {
-                        item.Cursos.Add(this);
+                        item.Cursoes.Add(this);
                     }
                 }
             }
@@ -144,9 +144,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (Ejercicio item in e.OldItems)
                 {
-                    if (item.Cursos.Contains(this))
+                    if (item.Cursoes.Contains(this))
                     {
-                        item.Cursos.Remove(this);
+                        item.Cursoes.Remove(this);
                     }
                 }
             }
