@@ -111,17 +111,11 @@ namespace WebProgramAR.DataAccess
         {
             try
             {
-
                 using (WebProgramAREntities db = new WebProgramAREntities())
                 {
-
-                    foreach (Pais result in db.Paises)
-                        Console.WriteLine("Product Name: {0}", result.PaisId);
-                        
-                    IEnumerable<Pais> query = from u in db.Paises
-                                             select u;
-                    
-                    return query;
+                    IQueryable<Pais> query = from u in db.Paises
+                                                       select u;
+                    return query.ToList();
                 }
             }
             catch (Exception ex)

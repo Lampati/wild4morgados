@@ -103,7 +103,9 @@ namespace WebProgramAR.Controllers
         /// </summary>
         public void initilization()
         {
-            ViewBag.Paises = new SelectList(Negocio.PaisNegocio.GetPaises(), "PaisId", "Descripcion"); 
+            ViewBag.Paises = new SelectList(Negocio.PaisNegocio.GetPaises(), "PaisId", "Descripcion");
+            ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
+            ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
         }
         //
         // POST: /Account/Register
@@ -189,17 +191,23 @@ namespace WebProgramAR.Controllers
         /// <summary>
         /// Cargar Provincias de acuerdo al pais.
         /// </summary>
-        public void SetProvinciasByPais(string PaisId)
+        [HttpPost]
+        public JsonResult SetProvinciasByPais(string PaisId)
         {
             ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvinciasByPais(PaisId), "ProvinciaId", "Descripcion");
+            String sView = "Cargado";
+            return Json(sView, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// Cargar Localidades de acuerdo a la provincia.
         /// </summary>
-        public void SetLocalidadesByProvincia(string ProvinciaId)
+        [HttpPost]
+        public JsonResult SetLocalidadesByProvincia(string ProvinciaId)
         {
-            ViewBag.Provincias = new SelectList(Negocio.LocalidadNegocio.GetLocalidadesByProvincia(ProvinciaId), "LocalidadId", "Descripcion");
+            ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidadesByProvincia(ProvinciaId), "LocalidadId", "Descripcion");
+            String sView = "Cargado";
+            return Json(sView, JsonRequestBehavior.AllowGet);
         }
 
         #region Status Codes
