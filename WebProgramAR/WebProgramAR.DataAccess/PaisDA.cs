@@ -98,20 +98,35 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<Pais> GetPaises(string idPais, string descripcion, WebProgramAREntities db)
         {
-            IQueryable<Pais> query = from u in db.Paises
-                                     where (idPais == "" || u.PaisId == idPais) && u.Descripcion.Contains(descripcion)
-                                     select u;
-            return query;
-        }
-        public static IQueryable<Pais> GetPaises()
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
+            using (db = new WebProgramAREntities())
             {
                 IQueryable<Pais> query = from u in db.Paises
-                                         //where u.Status == true &&
-                                         //(idPais == 0 || u.PaisId == idPais) && u.LastName.Contains(apellido)
+                                         where (idPais == "" || u.PaisId == idPais) && u.Descripcion.Contains(descripcion)
                                          select u;
                 return query;
+            }
+            
+        }
+        public static IEnumerable<Pais> GetPaises()
+        {
+            try
+            {
+
+                using (WebProgramAREntities db = new WebProgramAREntities())
+                {
+
+                    foreach (Pais result in db.Paises)
+                        Console.WriteLine("Product Name: {0}", result.PaisId);
+                        
+                    IEnumerable<Pais> query = from u in db.Paises
+                                             select u;
+                    
+                    return query;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
             }
         }
 
