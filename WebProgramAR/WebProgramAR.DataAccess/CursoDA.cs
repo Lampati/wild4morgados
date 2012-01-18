@@ -46,11 +46,13 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static void Modificar(Curso Curso, WebProgramAREntities db)
+        private static void Modificar(Curso cursoModif, WebProgramAREntities db)
         {
-            Curso CursoOrig = db.Cursos.Single(u => u.CursoId == Curso.CursoId);
+            Curso cursoOrig = db.Cursos.Single(u => u.CursoId == cursoModif.CursoId);
 
-            db.ObjectStateManager.ChangeObjectState(CursoOrig, EntityState.Modified);
+            cursoOrig.Nombre = cursoModif.Nombre;
+
+            db.ObjectStateManager.ChangeObjectState(cursoOrig, EntityState.Modified);
             db.SaveChanges();
         }
 

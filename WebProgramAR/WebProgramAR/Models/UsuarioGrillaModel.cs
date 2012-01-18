@@ -5,7 +5,7 @@ using System.Web;
 using WebProgramAR.Entidades;
 
 
-namespace PMI.CETools.Sitio.Models
+namespace WebProgramAR.Sitio.Models
 {
     public class UsuarioGrillaModel : ModelGrillaBase
     {

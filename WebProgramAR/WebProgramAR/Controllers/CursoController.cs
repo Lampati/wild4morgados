@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
-using PMI.CETools.Sitio.Models;
+using WebProgramAR.Sitio.Models;
 
 namespace WebProgramAR.Controllers
 {
@@ -69,11 +69,20 @@ namespace WebProgramAR.Controllers
         // POST: /Curso/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Curso curso)
         {
             try
             {
                 // TODO: Add insert logic here
+
+                if (ModelState.IsValid)
+                {
+                    curso.FechaAlta = DateTime.Now;
+                    //curso.UsuarioId = usuarioLogueado;
+
+                    CursoNegocio.Alta(curso);
+
+                }
 
                 return RedirectToAction("Index");
             }
@@ -88,18 +97,23 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            Curso c = CursoNegocio.GetCursoById(id);
+            return View("Edit",c);
         }
 
         //
         // POST: /Curso/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Curso curso)
         {
             try
             {
                 // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    CursoNegocio.Modificar(curso);
+                }
  
                 return RedirectToAction("Index");
             }
