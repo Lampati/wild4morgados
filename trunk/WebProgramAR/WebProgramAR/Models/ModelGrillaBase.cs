@@ -6,7 +6,7 @@ using System.Collections;
 
 using System.Configuration;
 
-namespace PMI.CETools.Sitio.Models
+namespace WebProgramAR.Sitio.Models
 {
     public class ModelGrillaBase
     {
