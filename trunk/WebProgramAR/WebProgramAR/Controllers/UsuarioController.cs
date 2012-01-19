@@ -57,7 +57,7 @@ namespace WebProgramAR.Controllers
                 PaginaActual = page
             };
 
-
+            ViewBag.TipoUsuarios = new SelectList(Negocio.TipoUsuarioNegocio.GetTiposUsuario(), "TipoUsuarioId", "Descripcion"); 
             return View(datos);
 
         }
@@ -67,7 +67,8 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            Usuario u = UsuarioNegocio.GetUsuarioById(id);
+            return View(u);
         }
 
         //
@@ -75,8 +76,27 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Create()
         {
+            Initilization();
             return View();
-        } 
+        }
+        /// <summary>
+        /// Cargar Paises. Las provincias y localidades se cargan por ajax, deben traer resultados de acuerdo a la eleccion
+        /// </summary>
+        public void Initilization()
+        {
+            List<Pais> listaPaises = new List<Pais>();
+            List<Provincia> listaProvincias = new List<Provincia>();
+            List<Localidad> listaLocalidades = new List<Localidad>();
+            List<TipoUsuario> listaTipoUsuarios = new List<TipoUsuario>();
+            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises().ToList());
+            listaTipoUsuarios.AddRange(Negocio.TipoUsuarioNegocio.GetTiposUsuario().ToList());
+            ViewBag.Paises = listaPaises;
+            ViewBag.Provincias = listaProvincias;
+            ViewBag.Localidades = listaLocalidades;
+            ViewBag.TipoUsuarios = listaTipoUsuarios;
+            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
+            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
+        }
 
         //
         // POST: /Usuario/Create
@@ -100,20 +120,25 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            Usuario u = UsuarioNegocio.GetUsuarioById(id);
+            return View("Edit", u);
         }
 
         //
         // POST: /Usuario/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Usuario usuario)
         {
             try
             {
                 // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    UsuarioNegocio.Modificar(usuario);
+                }
+                return Json(new { success = true });
+                //return RedirectToAction("Index");
             }
             catch
             {
@@ -126,19 +151,19 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View();
+            Usuario u = UsuarioNegocio.GetUsuarioById(id);
+            return View(u);
         }
 
         //
         // POST: /Usuario/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Usuario u)
         {
             try
             {
-                // TODO: Add delete logic here
- 
+                UsuarioNegocio.Eliminar(u.UsuarioId);
                 return RedirectToAction("Index");
             }
             catch
