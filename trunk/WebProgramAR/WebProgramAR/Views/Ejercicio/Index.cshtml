@@ -1,0 +1,140 @@
+﻿@model WebProgramAR.Sitio.Models.EjercicioGrillaModel
+
+@{
+    ViewBag.Title = "Ejercicio";
+
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+
+    grid.Bind(Model.Ejercicios, autoSortAndPage: true, rowCount: Model.Cantidad);
+
+    string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
+}
+
+
+
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/funciones.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "CURSOS") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
+        $('#btnFiltros').live('click', function (event) {
+            if ($('#filtros').css('display') == 'block') {
+                $('#filtros').fadeOut('slow');
+            } else {
+                $('#filtros').fadeIn('slow');
+            }
+        });
+        $('#btnNuevo').click(function (event) {
+            OpenDialog(event, '', '@Url.Action("Create")/', 600, 540);
+        });
+
+        $('.botonEliminar').click(function (event)
+        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 500); });
+
+        $('.botonEditar').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 600, 540);
+        });
+
+        $('.botonDetalles').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 550, 500);
+        });
+        var sortcol = '@grid.SortColumn';
+
+        if (sortcol != '')
+            $('thead > tr > th > a[href*="sort=@grid.SortColumn"]').parent().addClass('@(grid.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
+
+        //FuncionesAutorizadas('@funcionesAutorizadas');
+    });
+</script>
+
+
+<!--<h2>Ejercicios</h2>-->
+
+<div id="filtros">
+    <div class="tituloabm">Seleccion de cursos</div>
+
+    <div class="filtrosabm">
+        @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
+        {    
+            @Html.ValidationSummary(true)
+            <table>
+                <tr>
+                    <td><div class="label">Identificador</div></td>
+                    <td valign="top">@Html.TextBox("Identificador", null, new { maxlength = 50, autocomplete = "off" })</td>
+                </tr>
+                <tr>
+                    <td><div class="label">Nivel</div></td>
+                    <td valign="top">
+                        @Html.DropDownListFor(m => m.Nivel, (SelectList)ViewBag.NivelesEjercicio)
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+    
+<table>
+    <tr>
+        <td valign="middle">
+            <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+            <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+        </td>
+    </tr>
+</table>
+
+<div id="contenedor-grid">
+@grid.GetHtml(
+    tableStyle: "grid",
+    fillEmptyRows: false,
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAlternatingRow",
+    headerStyle: "gridHeader",
+    footerStyle: "gridPager",
+    mode: WebGridPagerModes.All,
+        firstText: "<<",
+        previousText: "<",
+    nextText: ">",
+        lastText: " >>",
+    columns: new[] {
+    grid.Column("Identificador", header: "Identificador"),
+    grid.Column("Enunciado", header: "Enunciado"),
+    grid.Column("Nivel", header: "Nivel"),
+    grid.Column("Usuario", header: "Usuario"),
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                  </text>
+    ),        
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar"/>
+                  </text>
+    ),
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar"/>
+                    
+                  </text>
+    )
+})
+</div>
+<div id="dialog" class="dialogDiv" ></div>
+<script type="text/javascript">
+    convertSelect("Nivel");
+</script>
