@@ -108,8 +108,6 @@ namespace WebProgramAR.Controllers
             List<Provincia> listaProvincias = new List<Provincia>();
             List<Localidad> listaLocalidades = new List<Localidad>();
 
-            listaPaises.Add(new Pais(){ PaisId= string.Empty, Descripcion = "Seleccione..."});
-
             listaPaises.AddRange(Negocio.PaisNegocio.GetPaises().ToList());
 
             ViewBag.Paises = listaPaises;
@@ -206,7 +204,14 @@ namespace WebProgramAR.Controllers
         public JsonResult GetProvinciasByPais(string paisId)
         {
             List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(paisId).ToList();
-            return Json(listaProvincias, JsonRequestBehavior.AllowGet);
+
+            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            foreach (Provincia item in listaProvincias)
+            {
+                listaRetorno.Add(new GenericJsonModel() { Id = item.ProvinciaId, Value = item.Descripcion });
+            }
+
+            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -217,7 +222,15 @@ namespace WebProgramAR.Controllers
         {
             paisId = "AR";
             List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByProvinciaByPais(provinciaId, paisId).ToList();
-            return Json(listaLocalidades, JsonRequestBehavior.AllowGet);
+
+            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            foreach (Localidad item in listaLocalidades)
+            {
+                listaRetorno.Add(new GenericJsonModel() { Id = item.LocalidadId, Value = item.Descripcion });
+            }
+
+            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
+
         }
 
         #region Status Codes

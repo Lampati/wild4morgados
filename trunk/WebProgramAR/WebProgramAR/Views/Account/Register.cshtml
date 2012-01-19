@@ -166,33 +166,46 @@
 
     function OnChangeDo(div) {
 
-        debugger;
+    
         if (div.attr('id') == "Pais") {
 
-
-            var i = $("#Pais").attr("rel");
-            var jsonData = $.toJSON();
+            var pais = $("#selectBox_Pais").attr("rel");
 
 
             $.ajax({
                 url: '@Url.Action("GetProvinciasByPais")',
-                data: jsonData,
+                data: " { paisId: '" + pais + "'}",
                 contentType: 'application/json',
                 type: 'POST',
                 dataType: 'json',
-                success: function (data) {  }
+                success: function (data) {
+                    alert(data);
+
+                    var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+
+                    for (var i = 0; i < provincias.length; i++) {
+                        var val = provincias[i].Id;
+                        var text = provincias[i].Value;
+                        $("#drpDwProvinciaId").get(0).options[$("#drpDwProvinciaId").get(0).options.length] = new Option(text, val);
+                    }
+
+
+                }
             });
             $("#listProvincias").show();
             return;
         }
         if (div.attr('id') == "Provincia") {
-            var obj = new Object();
+            var obj = [];
             obj.provinciaId = $("#Provincia").val();
             obj.paisId = $("#Pais").val();
 
+            var pais = $("#selectBox_Pais").attr("rel");
+            var prov = $("#selectBox_Provincia").attr("rel");
+
             $.ajax({
                 url: '@Url.Action("GetLocalidadesByProvinciaByPais")',
-                data: $.toJSON(obj),
+                data: " { paisId: '" + pais + "', provinciaId: '" + prov + "' }",
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (data) {  }
