@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Usuarios.Include("TipoUsuario").Include("Cursos").Single(u => u.UsuarioId  == id);
+                return db.Usuarios.Single(u => u.UsuarioId  == id);
             }
         }
         public static Usuario GetUsuarioByUsrPwd(string usrName,string usrPwd)
