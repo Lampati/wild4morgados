@@ -22,6 +22,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $("#filterSearchButton").live('click', function () {
+            $("#filterForm").submit();
+        });
         //para el manejo del menu
         $("#menu li").each(function (index) {
             if ($(this).children().html().toUpperCase() == "EJERCICIOS") {
@@ -38,18 +42,18 @@
             }
         });
         $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 600, 540);
+            OpenDialog(event, '', '@Url.Action("Create")/', 500, 400);
         });
 
         $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 500); });
+        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 300); });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 600, 540);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 500, 400);
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 550, 500);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 250);
         });
         var sortcol = '@grid.SortColumn';
 
@@ -67,21 +71,18 @@
     <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
+        @using (Html.BeginForm("Index", "Curso", FormMethod.Post, new { id = "filterForm" }))
         {    
             @Html.ValidationSummary(true)
             <table>
                 <tr>
                     <td><div class="label">Identificador</div></td>
                     <td valign="top">@Html.TextBox("Identificador", null, new { maxlength = 50, autocomplete = "off" })</td>
-                </tr>
-                <tr>
                     <td><div class="label">Nivel</div></td>
-                    <td valign="top">
-                        @Html.DropDownListFor(m => m.Nivel, (SelectList)ViewBag.NivelesEjercicio)
-                    </td>
+                    <td valign="top">@Html.DropDownListFor(m => m.Nivel, (SelectList)ViewBag.NivelesEjercicio)</td>
                 </tr>
             </table>
+            <div id="filterSearchButton" class="filterButton"></div>
         }
     </div>
 </div>

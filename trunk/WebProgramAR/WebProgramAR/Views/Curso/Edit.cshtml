@@ -1,49 +1,47 @@
 ﻿@model WebProgramAR.Entidades.Curso
            
-<link href="@Url.Content("~/Content/common.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/ui.multiselect.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-<script src="@Url.Content("~/Scripts/jquery.cascade.js")" type="text/javascript"></script>
+<!--<script src="@Url.Content("~/Scripts/jquery.cascade.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.cascade.ext.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.templating.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.templating.js")" type="text/javascript"></script>-->
 
 @{
     Layout = null;  
     ViewBag.Title = "Editar";
-    
 }
 
 
 
-<h2>Editar</h2>
 <script type="text/javascript">
     $("#btnCancelar").click(function (event) {
         CerrarDialog();
     });
 
 </script>
+<h2>Editar</h2>
+<legend>Curso</legend>
 
 @using (Html.BeginForm("Edit", "Curso", FormMethod.Post, new { enctype = "multipart/form-data" }))
 { 
     @Html.ValidationSummary(true)
+    
     <fieldset>
-         <legend>Curso</legend>
-
+         
         <br style="height:5px" />
         @Html.Partial("_CreateOrEdit", Model)
         <br style="height: 5px" />
 
          <div style="width:100%">
             <div style="display:inline;float:left;left:15%;">
-                <input type="submit" value="Guardar" class="boton" id="btnAceptar"/> 
+                <input type="submit" value="Guardar" id="btnAceptar"/> 
             </div>
             <div style="display:inline;float:right;right:15%;">
-                 <input type="button" value="Cancelar" class="boton" id="btnCancelar" />
+                 <input type="button" value="Cancelar" class="submit" id="btnCancelar" />
             </div>
         </div>
 

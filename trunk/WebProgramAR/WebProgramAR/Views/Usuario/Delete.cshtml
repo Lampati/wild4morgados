@@ -1,0 +1,78 @@
+﻿@model WebProgramAR.Entidades.Usuario
+@{
+
+    Layout = null;
+}
+<script type="text/javascript">
+    $("#btnCancelar").click(function (event) {
+        CerrarDialog();
+    });
+</script>
+<h2>Eliminar</h2>
+<legend>Curso</legend>
+    <h3>Confirmacion</h3>
+
+    
+<div class="SameSectionSpace">
+    <div class="fieldsElements">
+        <div class="fila">
+            <div class="display-label-delete">Nombre Usuario:</div>
+            <div class="display-field-delete">@Model.UsuarioNombre</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Contraseña:</div>
+            <div class="display-field-delete">@Model.Contrasena</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Nombre:</div>
+            <div class="display-field-delete">@Model.Nombre</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Apellido:</div>
+            <div class="display-field-delete">@Model.Apellido</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Email:</div>
+            <div class="display-field-delete">@Model.Email</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Fecha Nacimiento:</div>
+            <div class="display-field-delete">@Model.FechaNacimiento</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Tipo Usuario:</div>
+            <div class="display-field-delete">@Model.TipoUsuarioId</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Pais:</div>
+            <div class="display-field-delete">@Model.PaisId</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Provincia:</div>
+            <div class="display-field-delete">@Model.ProvinciaId</div>
+        </div>
+        <div class="fila">
+            <div class="display-label-delete">Localidad:</div>
+            <div class="display-field-delete">@Model.LocalidadId</div>
+        </div>
+    </div>
+</div>
+
+
+    
+@using (Html.BeginForm())
+{
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+                <input type="submit" value="Eliminar"  />
+            </td>
+            <td style="width: 10px">
+            </td>
+            <td align="center">
+                <input type="button" value="Cancelar" class="submit" id="btnCancelar" />
+            </td>
+        </tr>
+    </table>
+
+}

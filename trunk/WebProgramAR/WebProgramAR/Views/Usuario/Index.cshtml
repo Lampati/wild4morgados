@@ -1,12 +1,12 @@
 ﻿
-@model WebProgramAR.Sitio.Models.CursoGrillaModel
+@model WebProgramAR.Sitio.Models.UsuarioGrillaModel
 
 @{
-    ViewBag.Title = "Cursos";
+    ViewBag.Title = "Usuarios";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
 
-    grid.Bind(Model.Cursos, autoSortAndPage: true, rowCount: Model.Cantidad);
+    grid.Bind(Model.Usuarios, autoSortAndPage: true, rowCount: Model.Cantidad);
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 }
@@ -28,7 +28,7 @@
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "CURSOS") {
+            if ($(this).children().html().toUpperCase() == "UsuarioS") {
                 $(this).addClass("selected");
             } else {
                 $(this).removeClass("selected");
@@ -42,18 +42,18 @@
             }
         });
         $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 500, 300);
+            OpenDialog(event, '', '@Url.Action("Create")/', 900, 480);
         });
 
         $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 300); });
+        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 700, 500); });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 500, 300);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 900, 500);
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 250);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 500);
         });
         var sortcol = '@grid.SortColumn';
 
@@ -64,13 +64,17 @@
     });
 </script>
 
-<!--<h2>Cursos</h2>-->
+<script type="text/javascript">
+    
+
+</script>
+<!--<h2>Usuarios</h2>-->
 
 <div id="filtros">
-    <div class="tituloabm">Seleccion de cursos</div>
+    <div class="tituloabm">Seleccion de Usuarios</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("Index", "Curso", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("Index", "Usuario", FormMethod.Post, new { id = "filterForm" }))
         {    
             @Html.ValidationSummary(true)
             <table>
@@ -83,6 +87,16 @@
                      <td valign="top">
                             @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
                     </td>
+                    <td>
+                        <div class="label">
+                            Apellido
+                        </div>
+                    </td>
+                     <td valign="top">
+                            @Html.TextBox("Apellido", null, new { maxlength = 50, autocomplete = "off" })
+                    </td>
+                    <td><div class="label">Tipo Usuario</div></td>
+                    <td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios)</td>
                 </tr>
                 
             </table>
@@ -115,28 +129,32 @@
         lastText: " >>",
     columns: new[] {
     grid.Column("Nombre", header: "Nombre"),
-   
+    grid.Column("Apellido", header: "Apellido"),
+    grid.Column("Email", header: "Email"),
+    grid.Column("TipoUsuarioId", header: "TipoUsuarioId"),
    
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles"/>
                   </text>
     ),        
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar"/>
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.UsuarioId)" class="botonEditar"/>
                   </text>
     ),
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar"/>
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.UsuarioId)" class="botonEliminar"/>
                     
                   </text>
     )
 })
 </div>
 <div id="dialog" class="dialogDiv" ></div>
-
+<script type="text/javascript">
+    convertSelect("TipoUsuario");
+</script>

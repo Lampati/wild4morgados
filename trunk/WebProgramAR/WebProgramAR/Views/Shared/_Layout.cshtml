@@ -24,7 +24,8 @@
                         <li>@Html.ActionLink("Que es?", "Descripcion", "Home")</li>
                         <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
                         <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
-                        <li>@Html.ActionLink("Profesores", "Index", "Profesor")</li>
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                        <li>@Html.ActionLink("Pendientes", "Index", "Pendientes")</li>
                         @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("admin")|| HttpContext.Current.User.IsInRole("moderador")))
                         {
                             <li>@Html.ActionLink("Pendientes", "Index", "Pendientes")</li>
@@ -33,6 +34,7 @@
                         {
                             <li>@Html.ActionLink("Configuracion", "Index", "Configuracion")</li>
                         }
+                        <li>@Html.ActionLink("Configuracion", "Index", "Configuracion")</li>
                         <li>@Html.ActionLink("Contacto", "About", "Home")</li>
                     
                 </ul>
