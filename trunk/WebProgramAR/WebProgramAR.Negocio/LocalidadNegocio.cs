@@ -13,38 +13,19 @@ namespace WebProgramAR.Negocio
         {
             return LocalidadDA.GetLocalidadById(id);
         }
-        public static IEnumerable<Localidad> GetLocalidadesByProvincia(string ProvinciaId)
+
+        public static IEnumerable<Localidad> GetLocalidadesByProvinciaByPais(string provinciaId, string paisId)
         {
-            return LocalidadDA.GetLocalidadesByProvincia(ProvinciaId);
+            return LocalidadDA.GetLocalidadesByProvinciaByPais(provinciaId,paisId);
         }
+
         public static IEnumerable<Localidad> GetLocalidades()
         {
             return LocalidadDA.GetLocalidades();
         }
-        public static void Alta(Localidad Localidad)
-        {
-            LocalidadDA.Alta(Localidad);
-        }
+        
 
-        public static void Modificar(Localidad Localidad)
-        {
-            LocalidadDA.Modificar(Localidad);
-        }
-
-        public static void Eliminar(string id)
-        {
-            LocalidadDA.Eliminar(id);
-        }
-
-        public static int ContarCantidad(string idLocalidad, string apellido)
-        {
-            return LocalidadDA.ContarCantidad(idLocalidad, apellido);
-        }
-
-        public static IEnumerable<Localidad> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string idLocalidad, string apellido)
-        {
-            return LocalidadDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idLocalidad, apellido);
-        }
+     
 
       
     }

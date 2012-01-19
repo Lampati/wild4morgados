@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Register";
+
+    List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
+    List<WebProgramAR.Entidades.Provincia> listaProvincias = (List<WebProgramAR.Entidades.Provincia>) ViewBag.Provincias;
+    List<WebProgramAR.Entidades.Localidad> listaLocalidades = (List<WebProgramAR.Entidades.Localidad>)ViewBag.Localidades;
 }
 
 <h2>Crear una Cuenta Nueva</h2>
@@ -94,7 +98,19 @@
                 @Html.LabelFor(m => m.Pais)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(m => m.Pais,(SelectList)ViewBag.Paises)
+                
+
+                 @Html.DropDownListFor(model => model.Pais,
+                                listaPaises.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.PaisId.ToString(),
+                        Selected = ((Model != null) && (option.PaisId == Model.Pais))
+                    }), new { id = "drpDwPaisId" })
+
+                    @Html.ValidationMessageFor(m => m.Localidad)
+
+
                 @Html.ValidationMessageFor(m => m.Pais)
             </div>
              <div id="listProvincias" style="display:none">
@@ -102,7 +118,16 @@
                     @Html.LabelFor(m => m.Provincia)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(m => m.Provincia, (SelectList)ViewBag.Provincias)
+                    
+
+                    @Html.DropDownListFor(model => model.Provincia,
+                                        listaProvincias.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.ProvinciaId.ToString(),
+                        Selected = ((Model != null) && (option.ProvinciaId == Model.Provincia))
+                    }), new { id = "drpDwProvinciaId" })
+
                     @Html.ValidationMessageFor(m => m.Provincia)
                 </div>
             </div>
@@ -110,8 +135,17 @@
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Localidad)
                 </div>
-                <div class="editor-field">
-                    @Html.DropDownListFor(m => m.Localidad, (SelectList)ViewBag.Localidades)
+                <div class="editor-field">                  
+
+                    
+                    @Html.DropDownListFor(model => model.Localidad,
+                                        listaLocalidades.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.LocalidadId.ToString(),
+                        Selected = ((Model != null) && (option.LocalidadId == Model.Localidad))
+                    }), new { id = "drpDwLocalidadId" })
+
                     @Html.ValidationMessageFor(m => m.Localidad)
                 </div>
             </div>
