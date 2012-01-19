@@ -220,7 +220,6 @@ namespace WebProgramAR.Controllers
        [HttpPost]
         public JsonResult GetLocalidadesByProvincia(string provinciaId, string paisId)
         {
-            paisId = "AR";
             List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByProvinciaByPais(provinciaId, paisId).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();

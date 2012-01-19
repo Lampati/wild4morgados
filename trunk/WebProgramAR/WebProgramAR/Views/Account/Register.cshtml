@@ -168,10 +168,7 @@
 
     
         if (div.attr('id') == "Pais") {
-
             var pais = $("#selectBox_Pais").attr("rel");
-
-
             $.ajax({
                 url: '@Url.Action("GetProvinciasByPais")',
                 data: " { paisId: '" + pais + "'}",
@@ -179,17 +176,16 @@
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
-                    alert(data);
-
+                    $("#listProvincias .tzSelect").remove();
+                    $("#Provincia").children().remove();
                     var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
-
                     for (var i = 0; i < provincias.length; i++) {
                         var val = provincias[i].Id;
                         var text = provincias[i].Value;
-                        $("#drpDwProvinciaId").get(0).options[$("#drpDwProvinciaId").get(0).options.length] = new Option(text, val);
+                        $("#Provincia").get(0).options[$("#Provincia").get(0).options.length] = new Option(text, val);
                     }
 
-
+                    convertSelect("Provincia");
                 }
             });
             $("#listProvincias").show();
@@ -207,8 +203,22 @@
                 url: '@Url.Action("GetLocalidadesByProvinciaByPais")',
                 data: " { paisId: '" + pais + "', provinciaId: '" + prov + "' }",
                 contentType: 'application/json',
+                type: 'POST',
                 dataType: 'json',
-                success: function (data) {  }
+                success: function (data) {
+                    alert(data);
+                    $("#listLocalidades .tzSelect").remove();
+                    $("#Localidad").children().remove();
+                    var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                    for (var i = 0; i < provincias.length; i++) {
+                        var val = provincias[i].Id;
+                        var text = provincias[i].Value;
+                        $("#Localidad").get(0).options[$("#Localidad").get(0).options.length] = new Option(text, val);
+                    }
+
+                    convertSelect("Localidad");
+
+                }
             });
             $("#listLocalidades").show();
             return;
