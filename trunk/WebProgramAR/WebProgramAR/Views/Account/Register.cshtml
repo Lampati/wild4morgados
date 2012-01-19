@@ -169,7 +169,8 @@
         debugger;
         if (div.attr('id') == "Pais") {
 
-            var i = $("#Pais").val();
+
+            var i = $("#Pais").attr("rel");
             var jsonData = $.toJSON();
 
 
@@ -179,9 +180,9 @@
                 contentType: 'application/json',
                 type: 'POST',
                 dataType: 'json',
-                success: function (data) { alert(data); }
+                success: function (data) {  }
             });
-            //$("#listProvincias").show();
+            $("#listProvincias").show();
             return;
         }
         if (div.attr('id') == "Provincia") {
@@ -194,9 +195,9 @@
                 data: $.toJSON(obj),
                 contentType: 'application/json',
                 dataType: 'json',
-                success: function (data) { alert(data); }
+                success: function (data) {  }
             });
-            //$("#listLocalidades").show();
+            $("#listLocalidades").show();
             return;
         }
 
