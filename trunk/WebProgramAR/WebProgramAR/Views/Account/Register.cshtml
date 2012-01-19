@@ -135,19 +135,10 @@
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Localidad)
                 </div>
-                <div class="editor-field">                  
-
-                    
-                    @Html.DropDownListFor(model => model.Localidad,
-                                        listaLocalidades.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.LocalidadId.ToString(),
-                        Selected = ((Model != null) && (option.LocalidadId == Model.Localidad))
-                    }))
-
+                 <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Localidad, new { @Value = "a" }))
                     @Html.ValidationMessageFor(m => m.Localidad)
-                </div>
+            </div>
             </div>
 
         </fieldset>
@@ -160,13 +151,9 @@
 <script type="text/javascript">
     convertSelect("Pais");
     convertSelect("Provincia");
-    convertSelect("Localidad");
     $("#FechaNac").datepicker();
 
-
     function OnChangeDo(div) {
-
-    
         if (div.attr('id') == "Pais") {
             var pais = $("#selectBox_Pais").attr("rel");
             $.ajax({
@@ -192,39 +179,42 @@
             return;
         }
         if (div.attr('id') == "Provincia") {
+            $("#listLocalidades").show();
+            return;
+        }
+    }
 
-            var obj = [];
-            obj.provinciaId = $("#Provincia").val();
-            obj.paisId = $("#Pais").val();
-
-            var pais = $("#selectBox_Pais").attr("rel");
-            var prov = $("#selectBox_Provincia").attr("rel");
-
+    $("#Localidad").autocomplete({
+        source: function (request, response) {
             $.ajax({
-                url: '@Url.Action("GetLocalidadesByProvinciaByPais")',
-                data: " { paisId: '" + pais + "', provinciaId: '" + prov + "' }",
+                url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
+                data: " { paisId: '" + $("#selectBox_Pais").attr("rel") + "', provinciaId: '" + $("#selectBox_Provincia").attr("rel") + "', Localidad: '" + request.term + "' }",
                 contentType: 'application/json',
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
-                    
-                    $("#listLocalidades .tzSelect").remove();
-                    $("#Localidad").children().remove();
-                    var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
-                    for (var i = 0; i < provincias.length; i++) {
-                        var val = provincias[i].Id;
-                        var text = provincias[i].Value;
-                        $("#Localidad").get(0).options[$("#Localidad").get(0).options.length] = new Option(text, val);
-                    }
-
-                    convertSelect("Localidad");
-
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Value,
+                            value: item.Id
+                        }
+                    }));
                 }
-            });
-            $("#listLocalidades").show();
-            return;
+            })
+
+        },
+        scrollHeight: 30,
+        minChars: 3,
+        delay:100,
+        type: 'POST',
+        selectFirst: false,
+        select: function (event, ui) {
+            $("#Localidad").text(ui.item.label);
+            $("#Localidad").attr("value",ui.item.label);
+        },
+        change: function (event,ui) {
+            $("#Localidad").val(ui.item.label);
         }
-
-    }
-
+    });
+            
 </script>

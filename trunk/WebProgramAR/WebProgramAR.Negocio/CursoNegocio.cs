@@ -40,6 +40,5 @@ namespace WebProgramAR.Negocio
             return CursoDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idCurso, apellido);
         }
 
-      
     }
 }

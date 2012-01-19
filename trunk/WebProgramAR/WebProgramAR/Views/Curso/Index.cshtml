@@ -22,6 +22,11 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $("#filterSearchButton").live('click', function () {
+            $("#filterForm").submit();
+
+        });
         //para el manejo del menu
         $("#menu li").each(function (index) {
             if ($(this).children().html().toUpperCase() == "CURSOS") {
@@ -38,7 +43,7 @@
             }
         });
         $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 600, 540);
+            OpenDialog(event, '', '@Url.Action("Create")/', 500, 300);
         });
 
         $('.botonEliminar').click(function (event)
@@ -70,12 +75,11 @@
     <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("Index", "Curso", FormMethod.Get))
+        @using (Html.BeginForm("Index", "Curso", FormMethod.Post, new { id = "filterForm" }))
         {    
             @Html.ValidationSummary(true)
             <table>
                 <tr>
-                
                     <td>
                         <div class="label">
                             Nombre
@@ -84,12 +88,11 @@
                      <td valign="top">
                             @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
                     </td>
-                    <!--
-                    <td valign="top">
-                        <input type="submit" id="btnBuscar" class="btn_buscar boton" value="Buscar" />
-                    </td>-->
                 </tr>
+                
             </table>
+            <div id="filterSearchButton" class="filterButton">
+            </div>
         }
     </div>
 </div>

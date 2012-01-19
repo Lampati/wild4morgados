@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
+using WebProgramAR.Models;
 
 namespace WebProgramAR.Controllers
 {
@@ -85,10 +86,10 @@ namespace WebProgramAR.Controllers
                     //curso.UsuarioId = usuarioLogueado;
 
                     CursoNegocio.Alta(curso);
-
-                }
-
-                return RedirectToAction("Index");
+                    return Json(new { success = true });
+                }else
+                return Json(new { success = false });
+                //return RedirectToAction("Index");
             }
             catch
             {
@@ -154,5 +155,7 @@ namespace WebProgramAR.Controllers
                 return View();
             }
         }
+
+        
     }
 }

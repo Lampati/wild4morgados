@@ -19,7 +19,7 @@ namespace WebProgramAR.DataAccess
                 return db.Cursos.Single(u => u.CursoId  == id);
             }
         }
-
+        
         public static void Alta(Curso Curso)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
@@ -96,8 +96,7 @@ namespace WebProgramAR.DataAccess
             return query;
         }
 
-
-
+        
         #region IFiltrarPorSeguridadXValor Members
 
         public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
