@@ -11,7 +11,6 @@ namespace WebProgramAR.Models
 
     public class UserModel
     {
-        
         [Required]
         [Display(Name = "Usuario")]
         public string UserName { get; set; }
@@ -58,6 +57,9 @@ namespace WebProgramAR.Models
         [Display(Name = "Localidad")]
         public string Localidad { get; set; }
 
+        [Required]
+        [Display(Name = "Tipo Usuario")]
+        public int TipoUsuario{ get; set; }
     }
    
 }

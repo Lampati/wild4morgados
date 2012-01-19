@@ -74,20 +74,39 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Create()
         {
+            Initilization();
             return View();
-        } 
-
-        //
-        // POST: /Ejercicio/Create
+        }
+        public void Initilization()
+        {
+            List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
+            listaNivelesEjercicio.AddRange(Negocio.NivelEjercicioNegocio.GetNiveles().ToList());
+            ViewBag.NivelesEjercicio = listaNivelesEjercicio;
+            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
+            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
+        }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Ejercicio ejercicio)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+
+                    //flanzani
+                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                    ejercicio.UsuarioId = 1;
+                    //curso.UsuarioId = usuarioLogueado;
+
+                    EjercicioNegocio.Alta(ejercicio);
+                    return Json(new { success = true });
+                }
+                else
+                    return Json(new { success = false });
+                //return RedirectToAction("Index");
             }
             catch
             {
@@ -100,20 +119,25 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+            return View("Edit", e);
         }
 
         //
         // POST: /Ejercicio/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Ejercicio ejercicio)
         {
             try
             {
                 // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    EjercicioNegocio.Modificar(ejercicio);
+                }
+                return Json(new { success = true });
+                //return RedirectToAction("Index");
             }
             catch
             {
@@ -126,19 +150,21 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View();
+            Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+            return View(e);
         }
 
         //
         // POST: /Ejercicio/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Ejercicio ejercicio)
         {
             try
             {
                 // TODO: Add delete logic here
- 
+                EjercicioNegocio.Eliminar(ejercicio.EjercicioId);
+
                 return RedirectToAction("Index");
             }
             catch

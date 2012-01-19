@@ -119,8 +119,8 @@ namespace WebProgramAR.Controllers
                 {
                     CursoNegocio.Modificar(curso);
                 }
- 
-                return RedirectToAction("Index");
+                return Json(new { success = true });
+                //return RedirectToAction("Index");
             }
             catch
             {
