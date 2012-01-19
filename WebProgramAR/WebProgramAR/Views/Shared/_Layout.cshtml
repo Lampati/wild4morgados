@@ -23,7 +23,7 @@
                         <li class="selected">@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Que es?", "Descripcion", "Home")</li>
                         <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
-                            <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
+                        <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
                         <li>@Html.ActionLink("Profesores", "Index", "Profesor")</li>
                         @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("admin")|| HttpContext.Current.User.IsInRole("moderador")))
                         {

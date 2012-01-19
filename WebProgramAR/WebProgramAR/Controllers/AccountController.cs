@@ -218,9 +218,9 @@ namespace WebProgramAR.Controllers
         /// Cargar Localidades de acuerdo a la provincia.
         /// </summary>
        [HttpPost]
-       public JsonResult GetLocalidadesByProvinciaByPais(string provinciaId, string paisId)
+       public JsonResult GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string provinciaId, string paisId)
         {
-            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByProvinciaByPais(provinciaId, paisId).ToList();
+            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByLocalidadByProvinciaByPais(Localidad, provinciaId, paisId).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
             foreach (Localidad item in listaLocalidades)

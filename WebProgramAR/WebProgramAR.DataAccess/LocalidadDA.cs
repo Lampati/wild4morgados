@@ -33,6 +33,19 @@ namespace WebProgramAR.DataAccess
                 return query.ToList();
             }
         }
+        public static IEnumerable<Localidad> GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string idProvincia, string idPais)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Localidad> query = from u in db.Localidades
+                                              where (u.ProvinciaId == idProvincia)
+                                              && (u.PaisId == idPais)
+                                              && (u.Descripcion.Contains(Localidad))
+                                              select u;
+                return query.ToList();
+            }
+        }
         public static IEnumerable<Localidad> GetLocalidades()
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
