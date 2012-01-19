@@ -106,7 +106,7 @@
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.PaisId.ToString(),
                         Selected = ((Model != null) && (option.PaisId == Model.Pais))
-                    }), new { id = "drpDwPaisId" })
+                    }))
 
                     @Html.ValidationMessageFor(m => m.Localidad)
 
@@ -126,7 +126,7 @@
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.ProvinciaId.ToString(),
                         Selected = ((Model != null) && (option.ProvinciaId == Model.Provincia))
-                    }), new { id = "drpDwProvinciaId" })
+                    }))
 
                     @Html.ValidationMessageFor(m => m.Provincia)
                 </div>
@@ -144,7 +144,7 @@
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.LocalidadId.ToString(),
                         Selected = ((Model != null) && (option.LocalidadId == Model.Localidad))
-                    }), new { id = "drpDwLocalidadId" })
+                    }))
 
                     @Html.ValidationMessageFor(m => m.Localidad)
                 </div>
@@ -162,5 +162,44 @@
     convertSelect("Provincia");
     convertSelect("Localidad");
     $("#FechaNac").datepicker();
-    
+
+
+    function OnChangeDo(div) {
+
+        debugger;
+        if (div.attr('id') == "Pais") {
+
+            var i = $("#Pais").val();
+            var jsonData = $.toJSON();
+
+
+            $.ajax({
+                url: '@Url.Action("GetProvinciasByPais")',
+                data: jsonData,
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) { alert(data); }
+            });
+            //$("#listProvincias").show();
+            return;
+        }
+        if (div.attr('id') == "Provincia") {
+            var obj = new Object();
+            obj.provinciaId = $("#Provincia").val();
+            obj.paisId = $("#Pais").val();
+
+            $.ajax({
+                url: '@Url.Action("GetLocalidadesByProvinciaByPais")',
+                data: $.toJSON(obj),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) { alert(data); }
+            });
+            //$("#listLocalidades").show();
+            return;
+        }
+
+    }
+
 </script>

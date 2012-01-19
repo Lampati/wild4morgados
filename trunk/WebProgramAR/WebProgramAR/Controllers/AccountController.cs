@@ -104,9 +104,13 @@ namespace WebProgramAR.Controllers
         /// </summary>
         public void Initilization()
         {
-            List<Pais> listaPaises = Negocio.PaisNegocio.GetPaises().ToList();
+            List<Pais> listaPaises = new List<Pais>();
             List<Provincia> listaProvincias = new List<Provincia>();
             List<Localidad> listaLocalidades = new List<Localidad>();
+
+            listaPaises.Add(new Pais(){ PaisId= string.Empty, Descripcion = "Seleccione..."});
+
+            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises().ToList());
 
             ViewBag.Paises = listaPaises;
             ViewBag.Provincias = listaProvincias;
