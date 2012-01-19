@@ -44,7 +44,8 @@
 
     /********para el manejo de select tags********/
     // The select element to be replaced:
-    function convertSelect(id) {
+function convertSelect(id) {
+  
         var select = $('#' + id);
         var selectBoxContainer = $('<div>', {
             width: select.outerWidth(),
@@ -106,34 +107,4 @@
             return false;
         });
     }
-    function OnChangeDo(div) {
-        if (div.attr('id') == "Pais") {
-
-            $.ajax({
-                url: '@Url.Action("GetProvinciasByPais")',
-                data: $("#Pais").val(),
-                contentType: 'application/json',
-                type:'POST',
-                dataType: 'json',
-                success: function (data) { alert(data); }
-            });
-            //$("#listProvincias").show();
-            return;
-        }
-        if (div.attr('id') == "Provincia") {
-            var obj = new Object();
-            obj.provinciaId = $("#Provincia").val();
-            obj.paisId = $("#Pais").val();
-
-            $.ajax({
-                url: '@Url.Action("GetLocalidadesByProvinciaByPais")',
-                data: $.toJSON(obj),
-                contentType: 'application/json',
-                dataType: 'json',
-                success: function (data) { alert(data); }
-            });
-            //$("#listLocalidades").show();
-            return;
-        }
-
-    }
+    
