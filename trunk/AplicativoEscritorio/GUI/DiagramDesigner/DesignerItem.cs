@@ -30,7 +30,7 @@ namespace DiagramDesigner
             {
                 case "Asignacion":
                     te = Enums.TipoElemento.Asignacion; break;
-                case "Decision":
+                case "Condicional":
                     te = Enums.TipoElemento.Condicional; break;
                 case "Lectura":
                     te = Enums.TipoElemento.Lectura; break;

@@ -762,6 +762,10 @@ namespace DiagramDesigner
         private void VisualizarFlujo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.vis = VisualizacionActivada.VisualizacionFlujo;
+            ((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Header = "Diagrama";
+            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[0].Width = new GridLength(80);
+            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
+            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[2].Width = new GridLength(160);
         }
 
         private void VisualizarFlujo_Enabled(object sender, CanExecuteRoutedEventArgs e)
@@ -774,6 +778,10 @@ namespace DiagramDesigner
         private void VisualizarGargar_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.vis = VisualizacionActivada.VisualizacionGargar;
+            ((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Header = "Código Gargar";
+            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[0].Width = new GridLength(0);
+            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
+            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[2].Width = new GridLength(0);
         }
 
         private void VisualizarGargar_Enabled(object sender, CanExecuteRoutedEventArgs e)
@@ -856,7 +864,8 @@ namespace DiagramDesigner
                                                   new XElement("zIndex", Canvas.GetZIndex(item)),
                                                   new XElement("IsGroup", item.IsGroup),
                                                   new XElement("ParentID", item.ParentID),
-                                                  new XElement("Content", contentXaml)
+                                                  new XElement("Content", contentXaml),
+                                                  new XElement("Tipo", item.TipoElemento.ToString())
                                               )
                                    );
 
@@ -893,6 +902,7 @@ namespace DiagramDesigner
             Canvas.SetZIndex(item, Int32.Parse(itemXML.Element("zIndex").Value));
             Object content = XamlReader.Load(XmlReader.Create(new StringReader(itemXML.Element("Content").Value)));
             item.Content = content;
+            item.AsignarTipoElemento(itemXML.Element("Tipo").Value);
             return item;
         }
 
