@@ -38,7 +38,10 @@ namespace WebProgramAR.Negocio
         {
             return TipoUsuarioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idTipoUsuario, apellido);
         }
-
+        public static IEnumerable<TipoUsuario> GetTiposUsuario()
+        {
+            return TipoUsuarioDA.GetTiposUsuario();
+        }
       
     }
 }

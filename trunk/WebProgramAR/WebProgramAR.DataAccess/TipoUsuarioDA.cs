@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.TipoUsuarios.Include("TipoTipoUsuario").Include("TipoUsuarios").Single(u => u.TipoUsuarioId  == id);
+                return db.TipoUsuarios.Single(u => u.TipoUsuarioId  == id);
             }
         }
 
@@ -104,6 +104,15 @@ namespace WebProgramAR.DataAccess
                                      //(idTipoUsuario == 0 || u.TipoUsuarioId == idTipoUsuario) && u.LastName.Contains(apellido)
                                      select u;
             return query;
+        }
+        public static IEnumerable<TipoUsuario> GetTiposUsuario()
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<TipoUsuario> query = from u in db.TipoUsuarios
+                                                select u;
+                return query.ToList();
+            }
         }
 
 
