@@ -192,6 +192,7 @@
             return;
         }
         if (div.attr('id') == "Provincia") {
+
             var obj = [];
             obj.provinciaId = $("#Provincia").val();
             obj.paisId = $("#Pais").val();
@@ -206,7 +207,7 @@
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
-                    alert(data);
+                    
                     $("#listLocalidades .tzSelect").remove();
                     $("#Localidad").children().remove();
                     var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
