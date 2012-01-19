@@ -1,97 +1,30 @@
-﻿@model PMI.CETools.Entidades.TouchPoint
+﻿@model WebProgramAR.Entidades.Ejercicio
 @{
-    ViewBag.Title = PMI.CETools.Recursos.AppResources.Vistas.Editar;
-
-    string partidoDesc = "";
-    if(Model.CodPartido != null)
-    {    
-        PMI.CETools.Entidades.Partido oPartido = PMI.CETools.DataAccess.PartidoDA.GetPartidoById(Model.CodPartido);
-        partidoDesc = oPartido.DesPartido;
-    }
-    
-    string localidadDesc = "";
-    if(Model.CodLocalidad != null)
-    {    
-        PMI.CETools.Entidades.Localidad oLocalidad = PMI.CETools.DataAccess.LocalidadDA.GetLocalidadById(Model.CodLocalidad);
-        localidadDesc = oLocalidad.DesLocalidad;
-    }        
-    
-    string calleDesc = "";
-    if(Model.CodCalle != null)
-    {
-        PMI.CETools.Entidades.Calle oCalle = PMI.CETools.DataAccess.CalleDA.GetCalleById(Model.CodCalle);
-        calleDesc = oCalle.DesCalle;
-    }
+    Layout = null;
 }
 <script type="text/javascript">
     $("#btnCancelar").click(function (event) {
         CerrarDialog();
     });
 </script>
-<h2>@PMI.CETools.Recursos.AppResources.Vistas.Details</h2>
+<h2>Detalles</h2>
+<legend>Ejercicio</legend>
+
 <fieldset>
-    <legend>@PMI.CETools.Recursos.AppResources.Vistas.TouchPoint</legend>
-    <div>
-        <img width="50" alt="Imagen" src='@Url.Action("ShowImage", new
-                            {
-                                TouchPointId = Model.TouchPointId
-                            })' />
-    </div>
-    <br style="height: 5px" />
+    
     <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.CommercialName:</div>
-        <div class="display-field-delete">@Model.CommercialName</div>
+        <div class="display-label-delete">Nombre:</div>
+        <div class="display-field-delete">@Model.Nombre</div>
     </div>
     <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.TouchPointType:</div>
-        <div class="display-field-delete">@Model.TouchPointType.Description</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.UniqueNumber:</div>
-        <div class="display-field-delete">@Model.UniqueNumber</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Contact:</div>
-        <div class="display-field-delete">@Model.Contact</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Status:</div>
-        <div class="display-field-delete">
-            @if (Model.Status == true)
-            {
-                @PMI.CETools.Recursos.AppResources.Vistas.Enabled
-            }
-            else
-            {
-                @PMI.CETools.Recursos.AppResources.Vistas.Disabled
-            }
-        </div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Provincia:</div>
-        <div class="display-field-delete">@Model.Provincia.DesProvincia</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Partido:</div>
-        <div class="display-field-delete">@partidoDesc</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Localidad:</div>
-        <div class="display-field-delete">@localidadDesc</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Calle:</div>
-        <div class="display-field-delete">@calleDesc</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">@PMI.CETools.Recursos.AppResources.Vistas.Numero:</div>
-        <div class="display-field-delete">@Model.Numero</div>
+        <div class="display-label-delete">Nivel Ejercicio:</div>
+        <div class="display-field-delete">@Model.NivelEjercicio</div>
     </div>
 </fieldset>
 <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
         <td align="center">
-            <input type="button" value="@PMI.CETools.Recursos.AppResources.Vistas.OK" class="boton" id="btnCancelar" />
+            <input type="button" value="OK" class="submit" id="btnCancelar" />
         </td>
     </tr>
 </table>

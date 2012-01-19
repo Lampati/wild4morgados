@@ -1,29 +1,12 @@
 ﻿@model WebProgramAR.Models.UserModel
-
 @{
-    ViewBag.Title = "Register";
-
+    
     List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
-    List<WebProgramAR.Entidades.Provincia> listaProvincias = (List<WebProgramAR.Entidades.Provincia>) ViewBag.Provincias;
+    List<WebProgramAR.Entidades.Provincia> listaProvincias = (List<WebProgramAR.Entidades.Provincia>)ViewBag.Provincias;
     List<WebProgramAR.Entidades.Localidad> listaLocalidades = (List<WebProgramAR.Entidades.Localidad>)ViewBag.Localidades;
+    List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
 }
-
-<h1>Crear una Cuenta Nueva</h1>
-<p>
-    Use el siguiente formulario para crear una nueva cuenta. 
-</p>
-<p>
-    La contraseña requiere como minimo de @Membership.MinRequiredPasswordLength caracteres.
-</p>
-
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/funciones.js")" type="text/javascript"></script>
-
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true, "Creacion de cuenta insatisfactoria. Verifique los datos ingresados e intente nuevamente.")
-    <div class="sectionSpace">
+<div class="sectionSpace">
         <fieldset>
             <h3>Informacion de la Cuenta</h3>
 
@@ -95,9 +78,24 @@
         <div class="SameSectionSpace">
         <fieldset>
             <div class="editor-label">
+                @Html.LabelFor(m => m.TipoUsuario)
+            </div>
+            <div class="editor-field">
+                 @Html.DropDownListFor(model => model.TipoUsuario, listaTipoUsuario.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.TipoUsuarioId.ToString(),
+                        Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuario))
+                    }), new { @id = "TipoUsuarioCreate" })
+
+                    @Html.ValidationMessageFor(m => m.TipoUsuario)
+            </div>
+            <div class="editor-label">
                 @Html.LabelFor(m => m.Pais)
             </div>
             <div class="editor-field">
+                
+
                  @Html.DropDownListFor(model => model.Pais,
                                 listaPaises.Select(option => new SelectListItem
                     {
@@ -139,12 +137,9 @@
         </fieldset>
         </div>
     </div>
-    <p>
-        <input type="submit" value="Registrar" class="saveButton"/>
-    </p>
-}
 <script type="text/javascript">
     convertSelect("Pais");
+    convertSelect("TipoUsuarioCreate");
     convertSelect("Provincia");
     $("#FechaNac").datepicker();
 
@@ -200,14 +195,14 @@
         },
         scrollHeight: 30,
         minChars: 3,
-        delay:100,
+        delay: 100,
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
             $("#Localidad").text(ui.item.label);
-            $("#Localidad").attr("value",ui.item.label);
+            $("#Localidad").attr("value", ui.item.label);
         },
-        change: function (event,ui) {
+        change: function (event, ui) {
             $("#Localidad").val(ui.item.label);
         }
     });
