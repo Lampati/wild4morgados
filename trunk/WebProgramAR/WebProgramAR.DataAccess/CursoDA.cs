@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Cursos.Include("TipoCurso").Include("Cursos").Single(u => u.CursoId  == id);
+                return db.Cursos.Single(u => u.CursoId  == id);
             }
         }
 
@@ -37,14 +37,7 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static void ModificarUltimoLogin(Curso Curso)
-        {
-            using (WebProgramAREntities ce = new WebProgramAREntities())
-            {
-                Curso CursoOrig = ce.Cursos.Single(o => o.CursoId == Curso.CursoId);
-                ce.SaveChanges();
-            }
-        }
+   
 
         private static void Modificar(Curso cursoModif, WebProgramAREntities db)
         {
@@ -86,12 +79,7 @@ namespace WebProgramAR.DataAccess
 
                 IQueryable<Curso> query = GetCursos(idCurso, apellido, db);
 
-                if (sortColumns.Contains("TipoCurso"))
-                {
-                    sortColumns = sortColumns.Replace("TipoCurso", "TipoCurso.Description");
-                }
-
-
+           
                 return query.OrderUsingSortExpression(sortColumns)
                             .Skip((paginaActual - 1) * personasPorPagina)
                             .Take(personasPorPagina)

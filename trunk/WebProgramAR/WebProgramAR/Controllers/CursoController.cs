@@ -54,7 +54,8 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            Curso c = CursoNegocio.GetCursoById(id);
+            return View(c);
         }
 
         //
@@ -77,7 +78,10 @@ namespace WebProgramAR.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    curso.FechaAlta = DateTime.Now;
+
+                    //flanzani
+                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                    curso.UsuarioId = 1;
                     //curso.UsuarioId = usuarioLogueado;
 
                     CursoNegocio.Alta(curso);
@@ -128,18 +132,20 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View();
+            Curso c = CursoNegocio.GetCursoById(id);
+            return View(c);
         }
 
         //
         // POST: /Curso/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Curso c)
         {
             try
             {
                 // TODO: Add delete logic here
+                CursoNegocio.Eliminar(c.CursoId);
  
                 return RedirectToAction("Index");
             }
