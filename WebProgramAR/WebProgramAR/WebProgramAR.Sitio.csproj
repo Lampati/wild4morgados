@@ -70,6 +70,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\GenericJsonModel.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\UsuarioGrillaModel.cs" />
     <Compile Include="Models\EjercicioGrillaModel.cs" />
@@ -208,6 +209,7 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\json.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\utils.js" />
