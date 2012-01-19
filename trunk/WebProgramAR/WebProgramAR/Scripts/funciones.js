@@ -73,7 +73,7 @@ function convertSelect(id) {
             li.click(function () {
                 selectBox.html(option.html());
                 dropDown.trigger('hide');
-                selectBox.attr("rel", $(this).val());
+                selectBox.attr("rel", $(this).attr("rel"));
                 select.val($(this).val());
                 OnChangeDo(select);
             });
