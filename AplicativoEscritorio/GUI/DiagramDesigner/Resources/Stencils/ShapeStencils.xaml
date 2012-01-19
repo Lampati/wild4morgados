@@ -3,20 +3,22 @@
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
 
-  <RadialGradientBrush x:Key="RadialBrushOrange" Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
+  <!--<RadialGradientBrush x:Key="RadialBrushOrange" Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
     <GradientStop Color="White" Offset="0"/>
     <GradientStop Color="Orange" Offset="0.9"/>
   </RadialGradientBrush>
 
-  <RadialGradientBrush x:Key="RadialBrushGreen" Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
+    <RadialGradientBrush x:Key="RadialBrushBlue" Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="Blue" Offset="0.9"/>
+    </RadialGradientBrush>-->
+
+    <RadialGradientBrush x:Key="RadialBrushGreen" Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
     <GradientStop Color="White" Offset="0"/>
     <GradientStop Color="Green" Offset="0.9"/>
   </RadialGradientBrush>
 
-  <RadialGradientBrush x:Key="RadialBrushBlue" Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
-    <GradientStop Color="White" Offset="0"/>
-    <GradientStop Color="Blue" Offset="0.9"/>
-  </RadialGradientBrush>
+  
 
   <LinearGradientBrush x:Key="BrushStar" StartPoint="0,0" EndPoint="0,1" Opacity="1">
     <LinearGradientBrush.GradientStops>
@@ -28,8 +30,8 @@
   <s:Toolbox x:Key="ShapeStencils" ItemSize="60,60">
     <ItemsControl.Items>
 
-      <Ellipse Fill="{StaticResource RadialBrushOrange}" ToolTip="Ellipse" IsHitTestVisible="false"/>
-      <Ellipse Fill="{StaticResource RadialBrushBlue}" ToolTip="Ellipse" IsHitTestVisible="false"/>
+      <!--<Ellipse Fill="{StaticResource RadialBrushOrange}" ToolTip="Ellipse" IsHitTestVisible="false"/>
+      <Ellipse Fill="{StaticResource RadialBrushBlue}" ToolTip="Ellipse" IsHitTestVisible="false"/>-->
       <Ellipse Fill="{StaticResource RadialBrushGreen}" ToolTip="Ellipse" IsHitTestVisible="false"/>
 
       <Path Stretch="Fill" IsHitTestVisible="false"

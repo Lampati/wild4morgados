@@ -282,7 +282,7 @@
         </s:DesignerItem.DragThumbTemplate>
       </Path>
 
-      <Path Style="{StaticResource Decision}" ToolTip="Decision">
+      <Path Style="{StaticResource Decision}" ToolTip="Condicional">
         <s:DesignerItem.DragThumbTemplate>
           <ControlTemplate>
             <Path Style="{StaticResource Decision_DragThumb}"/>
@@ -316,7 +316,7 @@
         </s:DesignerItem.DragThumbTemplate>
     </Path>
 
-     <Path Style="{StaticResource Data}" ToolTip="Data">
+   <!--  <Path Style="{StaticResource Data}" ToolTip="Data">
         <s:DesignerItem.DragThumbTemplate>
           <ControlTemplate>
             <Path Style="{StaticResource Data_DragThumb}"/>
@@ -492,7 +492,7 @@
             <Path Style="{StaticResource OffPageReference_DragThumb}"/>
           </ControlTemplate>
         </s:DesignerItem.DragThumbTemplate>
-      </Path>
+      </Path> -->
 
     </ItemsControl.Items>
   </s:Toolbox>

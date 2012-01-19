@@ -4,6 +4,7 @@
         xmlns:s="clr-namespace:DiagramDesigner"
         xmlns:c="clr-namespace:DiagramDesigner.Controls"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Title="Diagram Designer">
 
     <Window.Resources>
@@ -21,6 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
         <ContentControl Content="{StaticResource MyToolbar}"/>
@@ -28,19 +30,19 @@
         <Grid Grid.Row="1" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="720"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="160"/>
             </Grid.ColumnDefinitions>
             <!-- Toolbox -->
-            <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                <Expander Header="Flow Chart" Width="70" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
-                <Expander Header="Shapes" Width="70" Content="{StaticResource ShapeStencils}" IsExpanded="True"/>
+            <StackPanel Grid.Column="0" Margin="0,0,0,0">
+                <Expander Header="Flujo" Width="80" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
+                <Expander Header="Figuras" Width="80" Content="{StaticResource ShapeStencils}" IsExpanded="True"/>
             </StackPanel>
             <!-- GridSplitter -->
-            <GridSplitter Focusable="False" Width="2" Background="LightGray"
-                    VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+            <!--<GridSplitter Focusable="False" Width="2" Background="LightGray"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Right"/>-->
             <!-- Designer -->
-            <GroupBox Header="Diagram" Grid.Column="1" Margin="3,0,0,0">
+            <GroupBox Header="Diagrama" Grid.Column="1" Margin="3,0,0,0">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto">
                     <s:DesignerCanvas Focusable="true" x:Name="MyDesigner"
@@ -50,12 +52,24 @@
                 </ScrollViewer>
             </GroupBox>
             <!-- GridSplitter -->
-            <GridSplitter Focusable="False" Width="2" Background="LightGray"
-                    VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+            <!--<GridSplitter Focusable="False" Width="2" Background="LightGray"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Right"/>-->
             <!-- Propiedades -->
             <GroupBox Header="Propiedades" Grid.Column="2" Margin="3,0,0,0">
                 <TextBox Name="txt"></TextBox>
             </GroupBox>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <ListView>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Linea" Width="40"></GridViewColumn>
+                        <GridViewColumn Header="Columna" Width="50"></GridViewColumn>
+                        <GridViewColumn Header="Mensaje" Width="800"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Window>
