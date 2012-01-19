@@ -16,101 +16,19 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Localidades.Include("TipoLocalidad").Include("Localidades").Single(u => u.LocalidadId  == id);
-            }
+                return db.Localidades.Single(u => u.LocalidadId  == id);
+            } 
         }
 
-        public static void Alta(Localidad Localidad)
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                db.Localidades.AddObject(Localidad);
-                db.SaveChanges();
-            }
-        }
-
-        public static void Modificar(Localidad Localidad)
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                Modificar(Localidad, db);
-            }
-        }
-
-        public static void ModificarUltimoLogin(Localidad Localidad)
-        {
-            using (WebProgramAREntities ce = new WebProgramAREntities())
-            {
-                Localidad LocalidadOrig = ce.Localidades.Single(o => o.LocalidadId == Localidad.LocalidadId);
-                ce.SaveChanges();
-            }
-        }
-
-        private static void Modificar(Localidad Localidad, WebProgramAREntities db)
-        {
-            Localidad LocalidadOrig = db.Localidades.Single(u => u.LocalidadId == Localidad.LocalidadId);
-
-            db.ObjectStateManager.ChangeObjectState(LocalidadOrig, EntityState.Modified);
-            db.SaveChanges();
-        }
-
-        public static void Eliminar(string id)
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                Localidad Localidad = db.Localidades.Single(u => u.LocalidadId == id);
-                //Localidad.Status = false; //baja lógica
-
-                db.Localidades.DeleteObject(Localidad);
-                db.SaveChanges();
-            }
-        }
-
-        //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(string idLocalidad, string apellido)
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                return GetLocalidades(idLocalidad, apellido, db).Count();
-            }
-        }
-
-        public static IEnumerable<Localidad> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string idLocalidad, string apellido)
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                if (paginaActual < 1) paginaActual = 1;
-
-
-                IQueryable<Localidad> query = GetLocalidades(idLocalidad, apellido, db);
-
-                if (sortColumns.Contains("TipoLocalidad"))
-                {
-                    sortColumns = sortColumns.Replace("TipoLocalidad", "TipoLocalidad.Description");
-                }
-
-
-                return query.OrderUsingSortExpression(sortColumns)
-                            .Skip((paginaActual - 1) * personasPorPagina)
-                            .Take(personasPorPagina)
-                            .ToList();
-            }
-        }
-
-        private static IQueryable<Localidad> GetLocalidades(string idLocalidad, string descripcion, WebProgramAREntities db)
-        {
-            IQueryable<Localidad> query = from u in db.Localidades
-                                     where (idLocalidad == "" || u.LocalidadId == idLocalidad) && u.Descripcion.Contains(descripcion)
-                                     select u;
-            return query;
-        }
-        public static IEnumerable<Localidad> GetLocalidadesByProvincia(string IdProvincia)
+     
+        public static IEnumerable<Localidad> GetLocalidadesByProvinciaByPais(string idProvincia, string idPais)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
                 IQueryable<Localidad> query = from u in db.Localidades
-                                              where (u.ProvinciaId == IdProvincia)
+                                              where (u.ProvinciaId == idProvincia)
+                                              && (u.PaisId == idPais)
                                               select u;
                 return query.ToList();
             }

@@ -96,17 +96,23 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Register()
         {
-            initilization();
+            Initilization();
             return View();
         }
         /// <summary>
         /// Cargar Paises. Las provincias y localidades se cargan por ajax, deben traer resultados de acuerdo a la eleccion
         /// </summary>
-        public void initilization()
+        public void Initilization()
         {
-            ViewBag.Paises = new SelectList(Negocio.PaisNegocio.GetPaises(), "PaisId", "Descripcion");
-            ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
-            ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
+            List<Pais> listaPaises = Negocio.PaisNegocio.GetPaises().ToList();
+            List<Provincia> listaProvincias = new List<Provincia>();
+            List<Localidad> listaLocalidades = new List<Localidad>();
+
+            ViewBag.Paises = listaPaises;
+            ViewBag.Provincias = listaProvincias;
+            ViewBag.Localidades = listaLocalidades;
+            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
+            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
         }
         //
         // POST: /Account/Register
@@ -193,9 +199,9 @@ namespace WebProgramAR.Controllers
         /// Cargar Provincias de acuerdo al pais.
         /// </summary>
        [HttpPost]
-        public JsonResult GetProvinciasByPais(string PaisId)
+        public JsonResult GetProvinciasByPais(string paisId)
         {
-            List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(PaisId).ToList();
+            List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(paisId).ToList();
             return Json(listaProvincias, JsonRequestBehavior.AllowGet);
         }
 
@@ -203,9 +209,10 @@ namespace WebProgramAR.Controllers
         /// Cargar Localidades de acuerdo a la provincia.
         /// </summary>
        [HttpPost]
-        public JsonResult GetLocalidadesByProvincia(string ProvinciaId)
+        public JsonResult GetLocalidadesByProvincia(string provinciaId, string paisId)
         {
-            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByProvincia(ProvinciaId).ToList();
+            paisId = "AR";
+            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByProvinciaByPais(provinciaId, paisId).ToList();
             return Json(listaLocalidades, JsonRequestBehavior.AllowGet);
         }
 

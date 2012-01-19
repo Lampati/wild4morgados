@@ -121,9 +121,13 @@
             return;
         }
         if (div.attr('id') == "Provincia") {
+            var obj = new Object();
+            obj.provinciaId = $("#Provincia").val();
+            obj.paisId = $("#Pais").val();
+
             $.ajax({
-                url: '@Url.Action("GetLocalidadesByProvincia")',
-                data: $("#Pais").val(),
+                url: '@Url.Action("GetLocalidadesByProvinciaByPais")',
+                data: $.toJSON(obj),
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (data) { alert(data); }
