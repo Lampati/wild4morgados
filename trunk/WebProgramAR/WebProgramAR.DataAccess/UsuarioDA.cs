@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Usuarios.Single(u => u.UsuarioId  == id);
+                return db.Usuarios.Include("TipoUsuario").Include("Pais").Include("Provincia").Include("Localidad").Single(u => u.UsuarioId == id);
             }
         }
         public static Usuario GetUsuarioByUsrPwd(string usrName,string usrPwd)
@@ -24,7 +24,7 @@ namespace WebProgramAR.DataAccess
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
                 Usuario usuario =  db.Usuarios
-                        .Where(u =>u.UsuarioNombre == usrName)
+                        .Where(u => u.UsuarioNombre == usrName)
                         .Where(u=>u.Contrasena == usrPwd)
                         .SingleOrDefault();
                 if (usuario == null)
