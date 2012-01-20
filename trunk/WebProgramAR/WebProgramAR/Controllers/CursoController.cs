@@ -73,25 +73,18 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Create(Curso curso)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
 
-                if (ModelState.IsValid)
-                {
+                //flanzani
+                //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                curso.UsuarioId = 1;
+                //curso.UsuarioId = usuarioLogueado;
 
-                    //flanzani
-                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                    curso.UsuarioId = 1;
-                    //curso.UsuarioId = usuarioLogueado;
-
-                    CursoNegocio.Alta(curso);
-                    return Json(new { success = true });
-                }else
-                return Json(new { success = false });
-                //return RedirectToAction("Index");
-            }
-            catch
+                CursoNegocio.Alta(curso);
+                return RedirectToAction("Index");
+                
+            }else
             {
                 return View();
             }
@@ -112,20 +105,17 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Edit(Curso curso)
         {
-            try
-            {
                 // TODO: Add update logic here
                 if (ModelState.IsValid)
                 {
                     CursoNegocio.Modificar(curso);
+                    return Content(Boolean.TrueString);
                 }
-                return Json(new { success = true });
-                //return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                else
+                {
+                    return View();
+                }
+            
         }
 
         //
@@ -147,8 +137,8 @@ namespace WebProgramAR.Controllers
             {
                 // TODO: Add delete logic here
                 CursoNegocio.Eliminar(c.CursoId);
- 
-                return RedirectToAction("Index");
+
+                return Content(Boolean.TrueString);
             }
             catch
             {

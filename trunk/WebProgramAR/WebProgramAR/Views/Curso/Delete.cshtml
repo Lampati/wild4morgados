@@ -12,10 +12,9 @@
 <legend>Curso</legend>
     <h3>Confirmacion</h3>
 
-    
 <fieldset>
     
-      
+      @Html.HiddenFor(model => model.CursoId)
     <br style="height: 5px" />
     <div class="fila">
         <div class="display-label-delete">Nombre:</div>
@@ -24,11 +23,8 @@
  
     
 </fieldset>
-
-
-
     
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("Delete", "Curso", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
     <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
@@ -44,3 +40,23 @@
     </table>
 
 }
+<div id="update-message" class"error" style="display:none;"></div>
+<div id="divOperacionExitosa">Operacion Exitosa</div>
+<script language="javascript">
+
+    function updateWindow() {
+        alert("dihjas");
+        CerrarDialog();
+        window.location.reload();
+    }
+    function updateSuccess() {
+        if ($("#update-message").html() == "True") {
+            $("#divOperacionExitosa").fadeIn(300).delay(800).fadeOut(500);
+            setTimeout("updateWindow", 1000);
+        } else {
+            $("#update-message").show();
+        }
+
+    }
+    
+</script>

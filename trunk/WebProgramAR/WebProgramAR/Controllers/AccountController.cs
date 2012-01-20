@@ -137,10 +137,14 @@ namespace WebProgramAR.Controllers
                 {
                     ModelState.AddModelError("", ErrorCodeToString(createStatus));
                 }
+                return RedirectToAction("Index");
             }
+            else
+            {
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
         }
 
         //
@@ -183,10 +187,13 @@ namespace WebProgramAR.Controllers
                 {
                     ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
                 }
+                return RedirectToAction("Index");
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            else
+            {
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
         }
 
         //

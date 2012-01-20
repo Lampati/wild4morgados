@@ -89,26 +89,18 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Create(Ejercicio ejercicio)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
 
-                if (ModelState.IsValid)
-                {
+                //flanzani
+                //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                ejercicio.UsuarioId = 1;
+                //curso.UsuarioId = usuarioLogueado;
 
-                    //flanzani
-                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                    ejercicio.UsuarioId = 1;
-                    //curso.UsuarioId = usuarioLogueado;
-
-                    EjercicioNegocio.Alta(ejercicio);
-                    return Json(new { success = true });
-                }
-                else
-                    return Json(new { success = false });
-                //return RedirectToAction("Index");
+                EjercicioNegocio.Alta(ejercicio);
+                return RedirectToAction("Index");
             }
-            catch
+            else
             {
                 return View();
             }
