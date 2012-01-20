@@ -762,10 +762,13 @@ namespace DiagramDesigner
         private void VisualizarFlujo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.vis = VisualizacionActivada.VisualizacionFlujo;
+            ((DiagramDesigner.EsquemaCentral)(((StackPanel)(((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).Parent).Parent)).Modo = Enums.ModoVisual.Flujo;
+            /*
             ((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Header = "Diagrama";
             (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[0].Width = new GridLength(80);
             (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
             (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[2].Width = new GridLength(160);
+            */
         }
 
         private void VisualizarFlujo_Enabled(object sender, CanExecuteRoutedEventArgs e)
@@ -778,10 +781,13 @@ namespace DiagramDesigner
         private void VisualizarGargar_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.vis = VisualizacionActivada.VisualizacionGargar;
+            ((DiagramDesigner.EsquemaCentral)(((StackPanel)(((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).Parent).Parent)).Modo = Enums.ModoVisual.Texto;
+            /*
             ((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Header = "Código Gargar";
             (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[0].Width = new GridLength(0);
             (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
             (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[2].Width = new GridLength(0);
+            */
         }
 
         private void VisualizarGargar_Enabled(object sender, CanExecuteRoutedEventArgs e)

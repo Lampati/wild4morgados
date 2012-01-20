@@ -7,6 +7,7 @@ namespace DiagramDesigner
         public Window1()
         {
             InitializeComponent();
+            this.BarraMsgs.AgregarMensaje("Mensaje para mostrar aquí en la barrica de herramienticas!!");
         }
     }
 }
