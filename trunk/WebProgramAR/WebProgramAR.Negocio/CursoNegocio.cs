@@ -17,6 +17,7 @@ namespace WebProgramAR.Negocio
         public static void Alta(Curso Curso)
         {
             Curso.FechaAlta = DateTime.Now;
+            
             CursoDA.Alta(Curso);
         }
 

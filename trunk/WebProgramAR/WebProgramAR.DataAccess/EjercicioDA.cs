@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Ejercicios.Include("TipoEjercicio").Include("Cursos").Single(u => u.EjercicioId  == id);
+                return db.Ejercicios.Include("EstadoEjercicio").Include("Usuario").Include("NivelEjercicio").Single(u => u.EjercicioId  == id);
             }
         }
 
@@ -37,15 +37,7 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static void ModificarUltimoLogin(Ejercicio Ejercicio)
-        {
-            using (WebProgramAREntities ce = new WebProgramAREntities())
-            {
-                Ejercicio EjercicioOrig = ce.Ejercicios.Single(o => o.EjercicioId == Ejercicio.EjercicioId);
-                ce.SaveChanges();
-            }
-        }
-
+   
         private static void Modificar(Ejercicio Ejercicio, WebProgramAREntities db)
         {
             Ejercicio EjercicioOrig = db.Ejercicios.Single(u => u.EjercicioId == Ejercicio.EjercicioId);

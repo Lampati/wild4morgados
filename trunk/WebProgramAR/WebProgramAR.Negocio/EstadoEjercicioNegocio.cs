@@ -14,31 +14,11 @@ namespace WebProgramAR.Negocio
             return EstadoEjercicioDA.GetEstadoEjercicioById(id);
         }
 
-        public static void Alta(EstadoEjercicio EstadoEjercicio)
-        {
-            EstadoEjercicioDA.Alta(EstadoEjercicio);
-        }
 
-        public static void Modificar(EstadoEjercicio EstadoEjercicio)
+        public static IEnumerable<EstadoEjercicio> GetEstadoEjercicios()
         {
-            EstadoEjercicioDA.Modificar(EstadoEjercicio);
+            return EstadoEjercicioDA.GetEstadoEjercicios();
         }
-
-        public static void Eliminar(int id)
-        {
-            EstadoEjercicioDA.Eliminar(id);
-        }
-
-        public static int ContarCantidad(int idEstadoEjercicio, string apellido)
-        {
-            return EstadoEjercicioDA.ContarCantidad(idEstadoEjercicio, apellido);
-        }
-
-        public static IEnumerable<EstadoEjercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idEstadoEjercicio, string apellido)
-        {
-            return EstadoEjercicioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idEstadoEjercicio, apellido);
-        }
-
       
     }
 }
