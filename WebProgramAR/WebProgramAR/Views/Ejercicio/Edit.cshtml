@@ -1,128 +1,78 @@
-﻿@using PMI.CETools.Sitio.Utility;
-@model PMI.CETools.Sitio.Models.TouchPointCreateOrEditModel
-<link href="@Url.Content("~/Content/common.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/ui.multiselect.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
+﻿@model WebProgramAR.Entidades.Ejercicio
+           
+@{
+    Layout = null;
+    ViewBag.Title = "Ejercicios";
+}
+
+<h2>Editar</h2>
+<legend>Ejercicio</legend>
+        
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/utils.js")" type="text/javascript"></script>
 
-<script src="@Url.Content("~/Scripts/jquery.cascade.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.cascade.ext.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.templating.js")" type="text/javascript"></script>
-
-<style>
-	.ui-autocomplete {
-		max-height: 100px;
-		overflow-y: auto;
-		/* prevent horizontal scrollbar */
-		overflow-x: hidden;
-		/* add padding to account for vertical scrollbar */
-		padding-right: 20px;
-	}
-</style>
-
-
-@{
-    ViewBag.Title = PMI.CETools.Recursos.AppResources.Vistas.Editar;
-    
-}
-
-@{
-    System.Globalization.CultureInfo cultureInfo = (System.Globalization.CultureInfo)ViewBag.CurrentCulture;  
-}
-
-@if (cultureInfo.ToString() == "es-AR")
-{
-    <script src="@Url.Content("~/Scripts/jquery.ui.datepicker-es.js")" type="text/javascript"></script>   
-}
-
-<h2>@PMI.CETools.Recursos.AppResources.Vistas.Editar</h2>
 <script type="text/javascript">
-    $("#btnCancelar").click(function (event) {
+    $("#btnCancelar").live('click', function () {
         CerrarDialog();
     });
+    //para el saveEjercicio
+    $('#btnAceptar').live('click', function (event) {
 
-</script>
-<script type="text/javascript">
+        var validator = $("#frmSaveEjercicio").validate({ rules: {
+            Nombre: { required: true, maxlength: 64 }
+        }
+        });
+        if (validator.form() == true) {
 
-    $("#btnAceptar").click(function (event) {
-        //alert($('#Budget').toString);
-        $('#FileName').val($('#file').val());
+            var ai = {
+                Nombre: $("#Nombre").val(),
+                Nombre: $("#NivelEjercicioCreate").val()
+            };
 
-        $(".error").remove();
-        event.preventDefault();
 
-        var form = $("form");
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            //enctype: 'multipart/form-data',
-            //contentType: "application/json; charset=utf-8",
-            data: form.serialize(),
-            url: '@Url.Action("ValidarDescripcion")',
-            success: function (data) {
-                tratarError(data);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
-            }
-        })
+            $.ajax({
+                url: '@Url.Action("Edit")',
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(ai),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data, textStatus) {
+                    return false;
+                    if (data.success == "true") {
+                        $("#dialog").hide();
+                        $("#disablingDiv").fadeOut("slow");
+                    } else {
+                        $("#logonerror").fadeIn("slow");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    debugger;
+                    var verr = xhr.status + "\r\n" + status + "\r\n" + error;
+                    alert(verr);
+                }
+
+            });
+        }
     });
-
-
-    function tratarError(result) {
-        //alert(result);
-        if (result != null) {
-            $(".error").remove();
-            DisplayErrors(result);
-        }
-        else {
-            $('form').submit();
-            //alert('After Submit');
-        }
-
-
-    }
-
-
-
-    function Error(response, status, error) {
-        debugger;
-        alert("Oops! " + response.statusText + " " + error.D);
-    }
 </script>
-@using (Html.BeginForm("Edit", "TouchPoint", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{ 
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>@PMI.CETools.Recursos.AppResources.Vistas.TouchPoint</legend>
-        @Html.HiddenFor(model => model.TouchPoint.TouchPointId)
-        
-        @Html.HiddenFor(model => model.TouchPoint.Mode)
-        <br style="height: 5px" />
-        <div>
-            <img width="50" alt="Imagen" src='@Url.Action("ShowImage", new
-                              {
-                                  TouchPointId = Model.TouchPoint.TouchPointId
-                              })' />
-        </div>
-        <br style="height: 5px" />
-        @Html.Partial("_CreateOrEdit", Model)
-        <br style="height: 5px" />
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-                <td align="center">
-                    <input type="submit" value="@PMI.CETools.Recursos.AppResources.Vistas.Guardar" class="boton" id="btnAceptar"/>
-                </td>
-                <td style="width: 10px">
-                </td>
-                <td align="center">
-                    <input type="button" value="@PMI.CETools.Recursos.AppResources.Vistas.Cancelar" class="boton" id="btnCancelar" />
-                </td>
-            </tr>
-        </table>
 
+
+   
+@using (Html.BeginForm("Edit", "Ejercicio", FormMethod.Post, new { id="frmSaveEjercicio",enctype = "multipart/form-data" }))
+{ 
+    <fieldset>
+        @Html.ValidationSummary(true)
+
+        @Html.Partial("_CreateOrEdit", Model)
+         
+        <div style="position:absolute;width:100%;bottom:30px;">
+            <div style="display:inline;float:left;left:15%;">
+                <input type="submit" value="Guardar"  id="btnAceptar"/> 
+            </div>
+            <div style="display:inline;float:left;margin-left:20px;">
+                 <input type="button" value="Cancelar" class="submit" id="btnCancelar" />
+            </div>
+        </div>
     </fieldset>
 }

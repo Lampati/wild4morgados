@@ -123,7 +123,7 @@
           <Key>
             <PropertyRef Name="CursoId" />
           </Key>
-          <Property Name="CursoId" Type="int" Nullable="false" />
+          <Property Name="CursoId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
           <Property Name="UsuarioId" Type="int" Nullable="false" />
@@ -132,7 +132,7 @@
           <Key>
             <PropertyRef Name="EjercicioId" />
           </Key>
-          <Property Name="EjercicioId" Type="int" Nullable="false" />
+          <Property Name="EjercicioId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Enunciado" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="SolucionTexto" Type="varchar" Nullable="false" MaxLength="500" />
@@ -197,7 +197,7 @@
           <Key>
             <PropertyRef Name="ReglaId" />
           </Key>
-          <Property Name="ReglaId" Type="int" Nullable="false" />
+          <Property Name="ReglaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Valor" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="TablaId" Type="int" Nullable="false" />
           <Property Name="TipoUsuarioId" Type="int" />
@@ -229,7 +229,7 @@
           <Key>
             <PropertyRef Name="UsuarioId" />
           </Key>
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="Apellido" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="40" />
