@@ -1592,5 +1592,46 @@ input[type="text"].datosExtraTextBox
 .tzSelect li span:hover{
 	color:#19F;
 }
-
+#divOperacionExitosa
+{
+    position:absolute;
+    background:#000;   
+    left:30%;
+    top:30%;
+    color:#fff;
+    display:none;
+    opacity: .60;
+    filter: alpha(opacity=60%);   
+    padding:30px;
+    font-size:1.5em;
+    font-family:Calibri;
+    text-transform:uppercase;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	width:200px;
+	height:100px;
+	display:none;
+	z-index:1000;
+}
+.divError
+{
+    position:absolute;
+    background:#000;   
+    color:red;
+    display:none;
+    opacity: .70;
+    filter: alpha(opacity=70%);   
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	width:200px;
+	height:100px;
+	left:47%;
+    top:47%;
+    padding:20px;
+    font-size:1.5em;
+    font-family:Calibri;
+    text-transform:uppercase;
+}
 

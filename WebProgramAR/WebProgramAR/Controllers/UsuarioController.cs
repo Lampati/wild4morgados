@@ -130,17 +130,11 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Edit(Usuario usuario)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-                if (ModelState.IsValid)
-                {
-                    UsuarioNegocio.Modificar(usuario);
-                }
-                return Json(new { success = true });
-                //return RedirectToAction("Index");
-            }
-            catch
+                UsuarioNegocio.Modificar(usuario);
+                return RedirectToAction("Index");
+            }else
             {
                 return View();
             }

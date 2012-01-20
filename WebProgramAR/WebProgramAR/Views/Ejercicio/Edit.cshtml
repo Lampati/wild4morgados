@@ -16,50 +16,10 @@
     $("#btnCancelar").live('click', function () {
         CerrarDialog();
     });
-    //para el saveEjercicio
-    $('#btnAceptar').live('click', function (event) {
-
-        var validator = $("#frmSaveEjercicio").validate({ rules: {
-            Nombre: { required: true, maxlength: 64 }
-        }
-        });
-        if (validator.form() == true) {
-
-            var ai = {
-                Nombre: $("#Nombre").val(),
-                Nombre: $("#NivelEjercicioCreate").val()
-            };
-
-
-            $.ajax({
-                url: '@Url.Action("Edit")',
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(ai),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data, textStatus) {
-                    return false;
-                    if (data.success == "true") {
-                        $("#dialog").hide();
-                        $("#disablingDiv").fadeOut("slow");
-                    } else {
-                        $("#logonerror").fadeIn("slow");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    debugger;
-                    var verr = xhr.status + "\r\n" + status + "\r\n" + error;
-                    alert(verr);
-                }
-
-            });
-        }
-    });
+    
 </script>
-
-
    
-@using (Html.BeginForm("Edit", "Ejercicio", FormMethod.Post, new { id="frmSaveEjercicio",enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Ejercicio", FormMethod.Post, new { id="target",enctype = "multipart/form-data" }))
 { 
     <fieldset>
         @Html.ValidationSummary(true)
