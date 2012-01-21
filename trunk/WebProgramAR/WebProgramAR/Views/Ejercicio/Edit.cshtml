@@ -23,7 +23,7 @@
 { 
     <fieldset>
         @Html.ValidationSummary(true)
-
+        @Html.HiddenFor(model => model.EjercicioId)
         @Html.Partial("_CreateOrEdit", Model)
          
         <div style="position:absolute;width:100%;bottom:30px;">
