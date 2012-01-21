@@ -1,12 +1,12 @@
 ﻿@model WebProgramAR.Entidades.Curso
 
 <div class="editor-label">
-     @Html.LabelFor(model => model.Nombre)
+     @Html.LabelFor(m => m.Nombre)
 </div>
 
-<div class="editor-label">
-    @Html.EditorFor(model => model.Nombre)
-    @Html.ValidationMessageFor(model => model.Nombre)
+<div class="editor-field">
+    @Html.EditorFor(m => m.Nombre)
+    @Html.ValidationMessageFor(m=> m.Nombre)
 </div>
 
 

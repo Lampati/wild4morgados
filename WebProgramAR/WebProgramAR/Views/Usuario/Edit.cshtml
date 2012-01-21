@@ -11,21 +11,43 @@
 <h2>Editar</h2>
 <legend>Usuario</legend>
 
-@using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new { id = "target", enctype = "multipart/form-data" }))
+@using (Ajax.BeginForm("Edit", "Usuario", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 { 
     @Html.ValidationSummary(true)
     
-         
-        <br style="height:5px" />
-        @Html.Partial("_CreateOrEdit", Model)
-        
-        <div style="position:absolute;width:100%;bottom:30px;">
-            <div style="display:inline;float:left;left:15%;">
-                <input type="submit" value="Guardar"  id="btnAceptar"/> 
-            </div>
-            <div style="display:inline;float:left;margin-left:20px;">
-                 <input type="button" value="Cancelar" class="submit" id="btnCancelar" />
-            </div>
-        </div>
+        <fieldset> 
+            <br style="height:5px" />
+            @Html.HiddenFor(model => model.UsuarioId)
+            @Html.Partial("_CreateOrEdit", Model)
+            <br style="height: 15px" />
 
+             <div style="width:100%">
+                <div style="display:inline;float:left;left:15%;">
+                    <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
+                </div>
+                <div style="float:left;margin-left:20px;">
+                     <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
+                </div>
+            </div>
+
+        </fieldset>
 }
+<div id="update-message" class"error" style="display:none;"></div>
+<div id="divOperacionExitosa">Operacion Exitosa</div>
+<script language="javascript">
+
+    function updateWindow() {
+        CerrarDialog();
+        window.location.reload();
+    }
+    function updateSuccess() {
+        if ($("#update-message").html() == "True") {
+            $("#divOperacionExitosa").fadeIn(300).delay(800).fadeOut(500);
+            setTimeout("updateWindow", 1000);
+        } else {
+            $("#update-message").show();
+        }
+
+    }
+    
+</script>
