@@ -82,7 +82,7 @@ namespace WebProgramAR.Controllers
                 //curso.UsuarioId = usuarioLogueado;
 
                 CursoNegocio.Alta(curso);
-                return RedirectToAction("Index");
+                return Content(Boolean.TrueString);
                 
             }else
             {
@@ -124,26 +124,18 @@ namespace WebProgramAR.Controllers
         public ActionResult Delete(int id)
         {
             Curso c = CursoNegocio.GetCursoById(id);
-            return View(c);
+            return View("Delete",c);
         }
 
         //
         // POST: /Curso/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(Curso c)
+        public ActionResult Delete(Curso curso)
         {
-            try
-            {
-                // TODO: Add delete logic here
-                CursoNegocio.Eliminar(c.CursoId);
-
-                return Content(Boolean.TrueString);
-            }
-            catch
-            {
-                return View();
-            }
+            CursoNegocio.Eliminar(curso.CursoId);
+            return Content(Boolean.TrueString);
+            
         }
 
         

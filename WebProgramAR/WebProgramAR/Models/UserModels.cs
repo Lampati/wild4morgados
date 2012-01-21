@@ -8,7 +8,6 @@ using System.Web;
 
 namespace WebProgramAR.Models
 {
-
     public class UserModel
     {
         [Required]

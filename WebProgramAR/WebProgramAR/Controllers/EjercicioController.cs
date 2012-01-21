@@ -100,7 +100,7 @@ namespace WebProgramAR.Controllers
                 //curso.UsuarioId = usuarioLogueado;
 
                 EjercicioNegocio.Alta(ejercicio);
-                return RedirectToAction("Index");
+                return Content(Boolean.TrueString);
             }
             else
             {
@@ -123,17 +123,12 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Edit(Ejercicio ejercicio)
         {
-            try
+            // TODO: Add update logic here
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-                if (ModelState.IsValid)
-                {
-                    EjercicioNegocio.Modificar(ejercicio);
-                }
-                return Json(new { success = true });
-                //return RedirectToAction("Index");
-            }
-            catch
+                EjercicioNegocio.Modificar(ejercicio);
+                return Content(Boolean.TrueString);
+            }else
             {
                 return View();
             }
@@ -159,7 +154,7 @@ namespace WebProgramAR.Controllers
                 // TODO: Add delete logic here
                 EjercicioNegocio.Eliminar(ejercicio.EjercicioId);
 
-                return RedirectToAction("Index");
+                return Content(Boolean.TrueString);
             }
             catch
             {
