@@ -8,22 +8,15 @@
     ViewBag.Title = "Editar";
 }
 
-<script type="text/javascript">
-    $("#btnCancelar").click(function (event) {
-        CerrarDialog();
-    });
-
-</script>
 <h2>Editar</h2>
 <legend>Curso</legend>
 
-@using (Ajax.BeginForm("Edit", "Curso", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
+@using (Ajax.BeginForm("Edit", "Curso", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" },new {autocomplete="off"}))
 { 
     @Html.ValidationSummary(true)
     
     <fieldset>
          
-        <br style="height:5px" />
         @Html.HiddenFor(model => model.CursoId)
         @Html.Partial("_CreateOrEdit", Model)
         <br style="height: 15px" />
@@ -42,16 +35,22 @@
 <div id="update-message" class"error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
 <script language="javascript">
-
-    function updateWindow() {
-        alert("dihjas");
+    $("#btnCancelar").click(function (event) {
         CerrarDialog();
+    });
+    function updateWindow() {
+        $("#divOperacionExitosa").delay(300).fadeOut(500);
+        setTimeout("updateWin()", 3000);
+    }
+    function updateWin() {
         window.location.reload();
     }
+    
     function updateSuccess() {
         if ($("#update-message").html() == "True") {
-            $("#divOperacionExitosa").fadeIn(300).delay(800).fadeOut(500);
-            setTimeout("updateWindow", 1000);
+            $("#divOperacionExitosa").fadeIn(300);
+            updateWindow();
+             
         } else {
             $("#update-message").show();
         }

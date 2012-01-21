@@ -33,7 +33,6 @@
                     }
                 },
                 error: function (xhr, status, error) {
-                    debugger;
                     var verr = xhr.status + "\r\n" + status + "\r\n" + error;
                     alert(verr);
                 }

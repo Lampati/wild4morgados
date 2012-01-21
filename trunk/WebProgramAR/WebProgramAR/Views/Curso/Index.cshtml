@@ -42,18 +42,18 @@
             }
         });
         $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 500, 300);
+            OpenDialog(event, '', '@Url.Action("Create")/', 470, 250);
         });
 
         $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 300); });
+        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 470, 250); });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 500, 300);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 470, 250);
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 250);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 250);
         });
         var sortcol = '@grid.SortColumn';
 

@@ -3,60 +3,58 @@
 
     Layout = null;
 }
-<script type="text/javascript">
-    $("#btnCancelar").click(function (event) {
-        CerrarDialog();
-    });
-</script>
+
 <h2>Eliminar</h2>
 <legend>Curso</legend>
     <h3>Confirmacion</h3>
-
 <fieldset>
-    
-      @Html.HiddenFor(model => model.CursoId)
     <br style="height: 5px" />
+    @Html.HiddenFor(model => model.CursoId)
     <div class="fila">
         <div class="display-label-delete">Nombre:</div>
         <div class="display-field-delete">@Model.Nombre</div>
     </div>
- 
     
-</fieldset>
-    
+</fieldset>    
 @using (Ajax.BeginForm("Delete", "Curso", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
-    <table width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-            <td align="center">
-                <input type="submit" value="Eliminar"  />
-            </td>
-            <td style="width: 10px">
-            </td>
-            <td align="center">
-                <input type="button" value="Cancelar" class="submit" id="btnCancelar" />
-            </td>
-        </tr>
-    </table>
+    
+    
+     <div style="width:100%">
+            <div style="display:inline;float:left;left:15%;">
+                <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
+            </div>
+            <div style="float:left;margin-left:20px;">
+                 <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
+            </div>
+        </div>
+
 
 }
 <div id="update-message" class"error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
 <script language="javascript">
-
-    function updateWindow() {
-        alert("dihjas");
+    $("#btnCancelar").live('click',function (event) {
         CerrarDialog();
+    });
+    function updateWindow() {
+        $("#divOperacionExitosa").delay(300).fadeOut(500);
+        setTimeout("updateWin()", 3000);
+    }
+    function updateWin() {
         window.location.reload();
     }
+
     function updateSuccess() {
         if ($("#update-message").html() == "True") {
-            $("#divOperacionExitosa").fadeIn(300).delay(800).fadeOut(500);
-            setTimeout("updateWindow", 1000);
+            $("#divOperacionExitosa").fadeIn(300);
+            updateWindow();
+
         } else {
             $("#update-message").show();
         }
 
     }
+    
     
 </script>

@@ -1595,23 +1595,21 @@ input[type="text"].datosExtraTextBox
 {
     position:absolute;
     background:#000;   
-    left:30%;
-    top:30%;
+    right:20px;
+    bottom:10px;
     color:#fff;
     display:none;
     opacity: .60;
     filter: alpha(opacity=60%);   
-    padding:30px;
+    padding:20px;
     font-size:1.5em;
     font-family:Calibri;
     text-transform:uppercase;
     -moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
-	width:200px;
-	height:100px;
-	display:none;
-	z-index:1000;
+	height:20px;
+	z-index:1100;
 }
 .divError
 {
