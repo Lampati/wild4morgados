@@ -47,6 +47,8 @@ namespace WebProgramAR.Controllers
                      global
             );
 
+            
+
             var datos = new EjercicioGrillaModel()
             {
                 Cantidad = numUsuarios,

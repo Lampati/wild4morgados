@@ -110,26 +110,26 @@
     nextText: ">",
         lastText: " >>",
     columns: new[] {
-    grid.Column("Identificador", header: "Identificador"),
+    grid.Column("EjercicioId", header: "Identificador"),
     grid.Column("Enunciado", header: "Enunciado"),
-    grid.Column("Nivel", header: "Nivel"),
-    grid.Column("Usuario", header: "Usuario"),
+    grid.Column("NivelEjercicio.Descripcion", header: "Nivel"),
+    grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles"/>
                   </text>
     ),        
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar"/>
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.EjercicioId)" class="botonEditar"/>
                   </text>
     ),
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar"/>
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.EjercicioId)" class="botonEliminar"/>
                     
                   </text>
     )
