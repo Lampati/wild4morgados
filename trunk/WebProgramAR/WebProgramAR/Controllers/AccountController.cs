@@ -94,58 +94,7 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Account/Register
 
-        public ActionResult Register()
-        {
-            Initilization();
-            return View();
-        }
-        /// <summary>
-        /// Cargar Paises. Las provincias y localidades se cargan por ajax, deben traer resultados de acuerdo a la eleccion
-        /// </summary>
-        public void Initilization()
-        {
-            List<Pais> listaPaises = new List<Pais>();
-            List<Provincia> listaProvincias = new List<Provincia>();
-            List<Localidad> listaLocalidades = new List<Localidad>();
-
-            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises().ToList());
-
-            ViewBag.Paises = listaPaises;
-            ViewBag.Provincias = listaProvincias;
-            ViewBag.Localidades = listaLocalidades;
-            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
-            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
-        }
-        //
-        // POST: /Account/Register
-
-        [HttpPost]
-        public ActionResult Register(UserModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
-                return RedirectToAction("Index");
-            }
-            else
-            {
-
-                // If we got this far, something failed, redisplay form
-                return View(model);
-            }
-        }
+        
 
         //
         // GET: /Account/ChangePassword
@@ -204,40 +153,7 @@ namespace WebProgramAR.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Cargar Provincias de acuerdo al pais.
-        /// </summary>
-       [HttpPost]
-        public JsonResult GetProvinciasByPais(string paisId)
-        {
-            List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(paisId).ToList();
-
-            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
-            foreach (Provincia item in listaProvincias)
-            {
-                listaRetorno.Add(new GenericJsonModel() { Id = item.ProvinciaId, Value = item.Descripcion });
-            }
-
-            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
-        }
-
-        /// <summary>
-        /// Cargar Localidades de acuerdo a la provincia.
-        /// </summary>
-       [HttpPost]
-       public JsonResult GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string provinciaId, string paisId)
-        {
-            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByLocalidadByProvinciaByPais(Localidad, provinciaId, paisId).ToList();
-
-            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
-            foreach (Localidad item in listaLocalidades)
-            {
-                listaRetorno.Add(new GenericJsonModel() { Id = item.LocalidadId, Value = item.Descripcion });
-            }
-
-            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
-
-        }
+       
 
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

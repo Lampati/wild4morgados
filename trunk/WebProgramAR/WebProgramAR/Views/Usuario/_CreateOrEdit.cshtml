@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Models.UserModel
+﻿@model WebProgramAR.Entidades.Usuario
 @{
     
     List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
@@ -7,15 +7,17 @@
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
 }
 <div class="sectionSpace">
+    @Html.HiddenFor(model => model.UsuarioId)
+
         <fieldset>
             <h3>Informacion de la Cuenta</h3>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.UserName)
+                @Html.LabelFor(m => m.UsuarioNombre)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UsuarioNombre)
+                @Html.ValidationMessageFor(m => m.UsuarioNombre)
             </div>
 
             <div class="editor-label">
@@ -27,19 +29,19 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.Password)
+                @Html.LabelFor(m => m.Contrasena)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
+                @Html.PasswordFor(m => m.Contrasena)
+                @Html.ValidationMessageFor(m => m.Contrasena)
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.LabelFor(m => m.ConfirmarContrasena)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(m => m.ConfirmPassword)
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmarContrasena)
+                @Html.ValidationMessageFor(m => m.ConfirmarContrasena)
             </div>
 
             
@@ -67,11 +69,11 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.FechaNac)
+                @Html.LabelFor(m => m.FechaNacimiento)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.FechaNac, new { @class = "date-picker-needed" })
-                @Html.ValidationMessageFor(m => m.FechaNac)
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "date-picker-needed" })
+                @Html.ValidationMessageFor(m => m.FechaNacimiento)
             </div>
         </fieldset>
         </div>
@@ -81,14 +83,14 @@
                 @Html.LabelFor(m => m.TipoUsuario)
             </div>
             <div class="editor-field">
-                 @Html.DropDownListFor(model => model.TipoUsuario, listaTipoUsuario.Select(option => new SelectListItem
+                 @Html.DropDownListFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.TipoUsuarioId.ToString(),
-                        Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuario))
+                        Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
                     }), new { @id = "TipoUsuarioCreate" })
 
-                    @Html.ValidationMessageFor(m => m.TipoUsuario)
+                    @Html.ValidationMessageFor(m => m.TipoUsuarioId)
             </div>
             <div class="editor-label">
                 @Html.LabelFor(m => m.Pais)
@@ -96,15 +98,15 @@
             <div class="editor-field">
                 
 
-                 @Html.DropDownListFor(model => model.Pais,
+                 @Html.DropDownListFor(model => model.PaisId,
                                 listaPaises.Select(option => new SelectListItem
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.PaisId.ToString(),
-                        Selected = ((Model != null) && (option.PaisId == Model.Pais))
+                        Selected = ((Model != null) && (option.PaisId == Model.PaisId))
                     }))
 
-                @Html.ValidationMessageFor(m => m.Pais)
+                @Html.ValidationMessageFor(m => m.PaisId)
             </div>
              <div id="listProvincias" style="display:none">
                 <div class="editor-label">
@@ -113,15 +115,15 @@
                 <div class="editor-field">
                     
 
-                    @Html.DropDownListFor(model => model.Provincia,
+                    @Html.DropDownListFor(model => model.ProvinciaId,
                                         listaProvincias.Select(option => new SelectListItem
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.ProvinciaId.ToString(),
-                        Selected = ((Model != null) && (option.ProvinciaId == Model.Provincia))
+                        Selected = ((Model != null) && (option.ProvinciaId == Model.PaisId))
                     }))
 
-                    @Html.ValidationMessageFor(m => m.Provincia)
+                    @Html.ValidationMessageFor(m => m.ProvinciaId)
                 </div>
             </div>
             <div  id="listLocalidades"  style="display:none">
@@ -129,8 +131,8 @@
                     @Html.LabelFor(m => m.Localidad)
                 </div>
                  <div class="editor-field">
-                    @Html.TextBoxFor(model => model.Localidad, new { @Value = " " })
-                    @Html.ValidationMessageFor(m => m.Localidad)
+                    @Html.TextBoxFor(model => model.LocalidadId, new { @Value = " " })
+                    @Html.ValidationMessageFor(m => m.LocalidadId)
                 </div>
             </div>
 

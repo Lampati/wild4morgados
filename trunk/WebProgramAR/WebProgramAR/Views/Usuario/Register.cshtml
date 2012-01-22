@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Models.UserModel
+﻿@model WebProgramAR.Entidades.Usuario
 
 @{
     ViewBag.Title = "Register";
@@ -16,10 +16,18 @@
     La contraseña requiere como minimo de @Membership.MinRequiredPasswordLength caracteres.
 </p>
 
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/funciones.js")" type="text/javascript"></script>
+@using (Html.BeginForm("Register", "Usuario", FormMethod.Post, new { id="frmSaveUsuario",enctype = "multipart/form-data" }))
+{ 
+        @Html.ValidationSummary(true)
 
+        <br style="height:5px" />
+        @Html.Partial("_CreateOrEdit", Model)
+        <div>    
+            <input type="submit" value="Registrar"  id="btnAceptar"/> 
+        </div>
+
+}
+@*
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Creacion de cuenta insatisfactoria. Verifique los datos ingresados e intente nuevamente.")
@@ -212,4 +220,4 @@
         }
     });
             
-</script>
+</script>*@

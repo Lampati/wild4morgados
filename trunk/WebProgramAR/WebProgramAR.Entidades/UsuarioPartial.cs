@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using WebProgramAR.Globales;
+using System.Web.Mvc;
 
 namespace WebProgramAR.Entidades
 {
@@ -11,6 +12,8 @@ namespace WebProgramAR.Entidades
     [MetadataType(typeof(UsuarioValidation))]
     public partial class Usuario : EntidadProgramARBase
     {
+
+        public string ConfirmarContrasena { get; set; }
     }
 
 
@@ -41,10 +44,17 @@ namespace WebProgramAR.Entidades
         [StringLength(20, ErrorMessage = "El nombre de usuario debe tener como maximo 20 caracteres")]
         public string UsuarioNombre { get; set; }
 
+        [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "Requerido")]
         [StringLength(20, ErrorMessage = "La contraseña debe tener como maximo 20 caracteres")]
         public string Contrasena { get; set; }
+
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Contrasena", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
+        public string ConfirmarContrasena { get; set; }
 
         
         [Display(Name = "Pais")]
