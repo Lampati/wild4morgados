@@ -4,21 +4,22 @@
     Layout = null;
 }
 
-<h2>Eliminar</h2>
-<legend>Curso</legend>
-    <h3>Confirmacion</h3>
-<fieldset>
-    <br style="height: 5px" />
-    @Html.HiddenFor(model => model.CursoId)
-    <div class="fila">
-        <div class="display-label-delete">Nombre:</div>
-        <div class="display-field-delete">@Model.Nombre</div>
-    </div>
-    
-</fieldset>    
+  
 @using (Ajax.BeginForm("Delete", "Curso", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
+    <h2>Eliminar</h2>
+    <legend>Curso</legend>
+    <h3>Confirmacion</h3>
     
+    <fieldset>
+        <br style="height: 5px" />
+        @Html.HiddenFor(model => model.CursoId)
+        <div class="fila">
+            <div class="display-label-delete">Nombre:</div>
+            <div class="display-field-delete">@Model.Nombre</div>
+        </div>
+    
+    </fieldset>  
     
      <div style="width:100%">
             <div style="display:inline;float:left;left:15%;">
@@ -31,9 +32,9 @@
 
 
 }
-<div id="update-message" class"error" style="display:none;"></div>
+<div id="update-message" class="error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
-<script language="javascript">
+<script type="text/javascript" language="javascript">
     $("#btnCancelar").live('click',function (event) {
         CerrarDialog();
     });

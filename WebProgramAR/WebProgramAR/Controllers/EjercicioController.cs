@@ -18,6 +18,37 @@ namespace WebProgramAR.Controllers
              int usuarioId = -1, int cursoId = -1, string nombre = "", 
              int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
         {
+
+            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+
+            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
+
+            return View(datos);
+
+        }
+
+
+        public ActionResult PendientesAprobacion(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false)
+        {
+
+            EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Pendiente");
+            int estadoEjercicio = estado.EstadoEjercicioId;
+
+            //Pasar la cantidad por pagina a una constante mas copada.
+            
+
+            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+
+            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+
+            return View("PendientesAprobacion", datos);
+
+        }
+
+        private object ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
+        {
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
 
@@ -38,16 +69,14 @@ namespace WebProgramAR.Controllers
             var ejers = EjercicioNegocio.ObtenerPagina(
                      page,
                      cantidadPorPaginaTPC,
-                     sort + " " + sortDir,                     
-                     nombre, 
+                     sort + " " + sortDir,
+                     nombre,
                      usuarioId,
                      cursoId,
                      estadoEjercicio,
                      nivelEjercicio,
                      global
             );
-
-            
 
             var datos = new EjercicioGrillaModel()
             {
@@ -57,10 +86,16 @@ namespace WebProgramAR.Controllers
                 PaginaActual = page
             };
 
-            ViewBag.NivelesEjercicio = new SelectList(Negocio.NivelEjercicioNegocio.GetNiveles(), "NivelEjercicioId", "Descripcion"); 
+            return datos;
+        }
 
-            return View(datos);
-
+        private void Initilization()
+        {
+            List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
+            listaNivelesEjercicio.AddRange(Negocio.NivelEjercicioNegocio.GetNiveles().ToList());
+            ViewBag.NivelesEjercicio = listaNivelesEjercicio;
+            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
+            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
         }
 
         //
@@ -68,7 +103,8 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+            return View(e);
         }
 
         //
@@ -79,14 +115,7 @@ namespace WebProgramAR.Controllers
             Initilization();
             return View();
         }
-        public void Initilization()
-        {
-            List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
-            listaNivelesEjercicio.AddRange(Negocio.NivelEjercicioNegocio.GetNiveles().ToList());
-            ViewBag.NivelesEjercicio = listaNivelesEjercicio;
-            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
-            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
-        }
+      
 
         [HttpPost]
         public ActionResult Create(Ejercicio ejercicio)
@@ -113,6 +142,7 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Edit(int id)
         {
+            Initilization();
             Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
             return View("Edit", e);
         }
@@ -161,5 +191,8 @@ namespace WebProgramAR.Controllers
                 return View();
             }
         }
+
+
+
     }
 }

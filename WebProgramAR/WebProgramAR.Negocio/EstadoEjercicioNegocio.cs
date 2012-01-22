@@ -14,6 +14,11 @@ namespace WebProgramAR.Negocio
             return EstadoEjercicioDA.GetEstadoEjercicioById(id);
         }
 
+        public static EstadoEjercicio GetEstadoEjercicioByName(string name)
+        {
+            return EstadoEjercicioDA.GetEstadoEjercicioByName(name);
+        }
+
 
         public static IEnumerable<EstadoEjercicio> GetEstadoEjercicios()
         {

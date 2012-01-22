@@ -28,8 +28,14 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-       
 
+        public static EstadoEjercicio GetEstadoEjercicioByName(string name)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                return db.EstadoEjercicios.Single(u => u.Descripcion.ToUpper() == name.ToUpper());
+            }
+        }
       
 
      
@@ -46,5 +52,7 @@ namespace WebProgramAR.DataAccess
         }
 
         #endregion
+
+       
     }
 }

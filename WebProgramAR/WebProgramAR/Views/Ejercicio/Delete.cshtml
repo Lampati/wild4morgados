@@ -8,12 +8,15 @@
         CerrarDialog();
     });
 </script>
-<h2>Eliminar</h2>
-<legend>Ejercicio</legend>
-    <h3>Confirmacion</h3>
 
     
-<fieldset>
+@using (Ajax.BeginForm("Delete", "Ejercicio", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
+{
+    <h2>Eliminar</h2>
+    <legend>Ejercicio</legend>
+    <h3>Confirmacion</h3>
+    <fieldset>
+    @Html.HiddenFor(m => m.EjercicioId)
     <br style="height: 5px" />
     <div class="fila">
         <div class="display-label-delete">Nombre:</div>
@@ -24,13 +27,7 @@
         <div class="display-field-delete">@Model.NivelEjercicio</div>
     </div>
     
-</fieldset>
-
-
-
-    
-@using (Ajax.BeginForm("Delete", "Ejercicio", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
-{
+    </fieldset>
     <div style="width:100%">
             <div style="display:inline;float:left;left:15%;">
                 <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
