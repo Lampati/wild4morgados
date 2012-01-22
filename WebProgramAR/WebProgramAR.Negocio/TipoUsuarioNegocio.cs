@@ -19,6 +19,11 @@ namespace WebProgramAR.Negocio
         {
             return TipoUsuarioDA.GetTiposUsuario();
         }
-      
+
+
+        public static TipoUsuario GetTipoUsuarioByName(string p)
+        {
+            return TipoUsuarioDA.GetTipoUsuarioByName(p);
+        }
     }
 }

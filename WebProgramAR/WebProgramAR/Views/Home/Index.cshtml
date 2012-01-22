@@ -2,6 +2,19 @@
     ViewBag.Title = "Home Page";
 }
 
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var resultado = @ViewBag.LoginRequired;
+
+        if ( resultado == 1)
+        {
+            LoginPopUp(null);
+        }
+    });   
+
+</script>
+
 <h1>@ViewBag.Message</h1>
 <p>
     To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.

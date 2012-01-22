@@ -9,7 +9,7 @@ using WebProgramAR.Sitio.Models;
 
 namespace WebProgramAR.Controllers
 {
-    public class EjercicioController : Controller
+    public class EjercicioController : ControllerBase
     {
         //
         // GET: /Ejercicio/
@@ -28,24 +28,7 @@ namespace WebProgramAR.Controllers
 
         }
 
-
-        public ActionResult PendientesAprobacion(int page = 1, string sort = "Nombre", string sortDir = "ASC",
-             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false)
-        {
-
-            EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Pendiente");
-            int estadoEjercicio = estado.EstadoEjercicioId;
-
-            //Pasar la cantidad por pagina a una constante mas copada.
-            
-
-            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
-
-            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
-
-            return View("PendientesAprobacion", datos);
-
-        }
+        
 
         private object ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
@@ -138,8 +121,7 @@ namespace WebProgramAR.Controllers
         }
         
         //
-        // GET: /Ejercicio/Edit/5
- 
+        // GET: /Ejercicio/Edit/5 
         public ActionResult Edit(int id)
         {
             Initilization();
@@ -192,6 +174,27 @@ namespace WebProgramAR.Controllers
             }
         }
 
+
+        [Authorize(Roles = "administrador, moderador")]
+        public ActionResult PendientesAprobacion(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false)
+        {
+
+            EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Pendiente");
+            int estadoEjercicio = estado.EstadoEjercicioId;
+
+            //Pasar la cantidad por pagina a una constante mas copada.
+
+
+            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+
+            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+
+            return View("PendientesAprobacion", datos);
+
+        }
+
+      
 
 
     }

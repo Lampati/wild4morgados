@@ -89,12 +89,19 @@
     <tr>
         <td valign="middle">
             <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
-            <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+            @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+            {
+                <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+            }
         </td>
     </tr>
 </table>
 
 <div id="contenedor-grid">
+
+@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+{
+
 @grid.GetHtml(
     tableStyle: "grid",
     fillEmptyRows: false,
@@ -131,6 +138,34 @@
                   </text>
     )
 })
+
+}
+else
+{
+    @grid.GetHtml(
+    tableStyle: "grid",
+    fillEmptyRows: false,
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAlternatingRow",
+    headerStyle: "gridHeader",
+    footerStyle: "gridPager",
+    mode: WebGridPagerModes.All,
+        firstText: "<<",
+        previousText: "<",
+    nextText: ">",
+        lastText: " >>",
+    columns: new[] {
+    grid.Column("Nombre", header: "Nombre"),
+   
+   
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                  </text>
+    )
+    })
+}
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 

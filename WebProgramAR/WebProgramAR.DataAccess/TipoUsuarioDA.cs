@@ -31,6 +31,13 @@ namespace WebProgramAR.DataAccess
             }
         }
 
+        public static TipoUsuario GetTipoUsuarioByName(string p)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                return db.TipoUsuarios.Single(u => u.Descripcion.ToUpper() == p.ToUpper());
+            }
+        }
 
 
         #region IFiltrablePorSeguridadPorValor Members
@@ -41,5 +48,7 @@ namespace WebProgramAR.DataAccess
         }
 
         #endregion
+
+      
     }
 }

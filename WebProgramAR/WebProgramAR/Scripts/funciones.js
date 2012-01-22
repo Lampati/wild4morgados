@@ -1,45 +1,46 @@
 ﻿$(document).ready(function () {
     //para el logon
-    $('#logonButton').live('click', function (event) {
+//    $('#logonButton').live('click', function (event) {
 
-        var validator = $("#frmLogIn").validate({ rules: {
-            UserName: { required: true, maxlength: 64 },
-            Password: { required: true, maxlength: 64 }
-        }
-        });
-        if (validator.form() == true) {
+//        var validator = $("#frmLogIn").validate({ rules: {
+//            UserName: { required: true, maxlength: 64 },
+//            Password: { required: true, maxlength: 64 }
+//        }
+//        });
+//        if (validator.form() == true) {
 
-            var ai = {
-                UserName: $("#UserName").val(),
-                Password: $("#Password").val(),
-                RememberMe: $("#RememberMe").val()
-            };
+//            var ai = {
+//                UserName: $("#UserName").val(),
+//                Password: $("#Password").val(),
+//                RememberMe: $("#RememberMe").val()
+//            };
 
 
-            $.ajax({
-                url: '/Account/LogOn',
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(ai),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data, textStatus) {
-                    if (data.success == "true") {
-                        $("#logonerror").hide();
-                        getUserInformation();
-                        $("#dialog").hide();
-                        $("#disablingDiv").fadeOut("slow");
-                    } else {
-                        $("#logonerror").fadeIn("slow");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    var verr = xhr.status + "\r\n" + status + "\r\n" + error;
-                    alert(verr);
-                }
+//            $.ajax({
+//                url: '/Account/LogOn',
+//                type: "POST",
+//                dataType: "json",
+//                //data: JSON.stringify(ai),
+//                data: $.toJSON(ai),
+//                contentType: 'application/json; charset=utf-8',
+//                success: function (data, textStatus) {
+//                    if (data.success == "true") {
+//                        $("#logonerror").hide();
+//                        getUserInformation();
+//                        $("#dialog").hide();
+//                        $("#disablingDiv").fadeOut("slow");
+//                    } else {
+//                        $("#logonerror").fadeIn("slow");
+//                    }
+//                },
+//                error: function (xhr, status, error) {
+//                    var verr = xhr.status + "\r\n" + status + "\r\n" + error;
+//                    alert(verr);
+//                }
 
-            });
-        }
-    });
+//            });
+//        }
+//    });
     
 
 });
