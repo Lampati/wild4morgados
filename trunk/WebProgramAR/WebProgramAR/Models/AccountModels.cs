@@ -28,6 +28,12 @@ namespace WebProgramAR.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class RedirectionModel
+    {
+        public string ControllerRedirect { get; set; }
+        public string ActionRedirect { get; set; }
+    }
+
     public class LogOnModel
     {
         [Required]

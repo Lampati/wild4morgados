@@ -11,7 +11,7 @@ using WebProgramAR.Models;
 
 namespace WebProgramAR.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : ControllerBase
     {
         //
         // GET: /Usuario/
@@ -118,8 +118,7 @@ namespace WebProgramAR.Controllers
         }
         
         //
-        // GET: /Usuario/Edit/5
- 
+        // GET: /Usuario/Edit/5 
         public ActionResult Edit(int id)
         {
             Usuario u = UsuarioNegocio.GetUsuarioById(id);
@@ -128,8 +127,21 @@ namespace WebProgramAR.Controllers
         }
 
         //
-        // POST: /Usuario/Edit/5
+        // GET: /Usuario/MiPerfil/ 
+        [Authorize]
+        public ActionResult MiPerfil()
+        {
+            string usuario = SimpleSessionPersister.UserName;
 
+            Usuario u = UsuarioNegocio.GetUsuarioByLoginUsuario(usuario);
+            
+
+            Initilization();
+            return View("MiPerfil", u);
+        }
+
+        //
+        // POST: /Usuario/Edit/5
         [HttpPost]
         public ActionResult Edit(Usuario usuario)
         {
@@ -185,10 +197,19 @@ namespace WebProgramAR.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
+                //Aca lo creo en la tabla para la autenticacion
                 Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email, null, null, true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    //Aca le agrego el rol en la tabla para autenticacion
+                    Roles.AddUserToRole(model.UsuarioNombre, "Profesor");
+
+                    //Aca creo mi parte, en mis tablas
+                    TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName("Profesor");
+                    model.TipoUsuarioId = tipo.TipoUsuarioId;
+                    UsuarioNegocio.Alta(model);
+
                     FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }

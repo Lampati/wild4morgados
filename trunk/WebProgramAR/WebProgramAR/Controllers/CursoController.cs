@@ -10,7 +10,7 @@ using WebProgramAR.Models;
 
 namespace WebProgramAR.Controllers
 {
-    public class CursoController : Controller
+    public class CursoController : ControllerBase
     {
         //
         // GET: /Curso/
@@ -95,8 +95,15 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Edit(int id)
         {
-            Curso c = CursoNegocio.GetCursoById(id);
-            return View("Edit",c);
+            if (Request.IsAjaxRequest())
+            {
+                Curso c = CursoNegocio.GetCursoById(id);
+                return View("Edit", c);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //
@@ -123,8 +130,15 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Delete(int id)
         {
-            Curso c = CursoNegocio.GetCursoById(id);
-            return View("Delete",c);
+            if (Request.IsAjaxRequest())
+            {
+                Curso c = CursoNegocio.GetCursoById(id);
+                return View("Delete", c);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //

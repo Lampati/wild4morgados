@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
     Layout = null;
     
 }
@@ -9,18 +11,28 @@
 <script language="javascript">
 
     $(document).ready(function () {
-        $("#logindisplay").live('click', function (event) {
-            OpenDialog(event, '', '@Url.Action("../Account/LogOn")/', 500, 370);
+        $("#loginClickMe").click(function (event) {
+
+            LoginPopUp(event);
         });
     });
+
+    function LoginPopUp(event) {
+        OpenDialogLogin(event, '', '@Url.Action("../Account/LogOn")/', 500, 370);
+    }
 </script>
-<div id="dialog" class="dialogDiv border_all" ></div>
+
 @if(Request.IsAuthenticated) {
     <text>Welcome <strong>@User.Identity.Name</strong>!
-     @Html.ActionLink("Log Off", "LogOff", "Account") </text>
+     </text> @Html.ActionLink("Log Off", "LogOff", "Account") 
 }
-else {
-    <img class="logOnCandado" src="../../Content/images/lock_icon_close.png" style="float:center" />
-    <div id="logOn">Log On </div>
-    
+else
+{
+    <div id="loginClickMe">
+        <img class="logOnCandado" src="../../Content/images/lock_icon_close.png" style="float:center" />
+        <div id="logOn">Log On </div>
+    </div>
 }
+
+
+<div id="dialogLogin" class="dialogDiv border_all" ></div>

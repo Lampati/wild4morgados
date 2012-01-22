@@ -5,12 +5,74 @@
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <title>@ViewBag.Title</title>
 
-    @Html.Partial("~/Views/Shared/_IncludeScripts.cshtml");
+    @Html.Partial("~/Views/Shared/_IncludeScripts.cshtml")
 
    
 
 </head>
 <body>
+
+@{
+    
+    string query = Request.QueryString["ReturnUrl"];
+    string controllerRedirect = string.Empty;
+    string actionRedirect = string.Empty;
+
+
+    if (!string.IsNullOrEmpty(query))
+    {
+        string[] valores = query.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (valores.Length > 0)
+        {
+            if (valores.Length > 1)
+            {
+                if (valores.Length > 2)
+                {
+                    //Era un edit, un details,  un delete o simil. Redirecciono al index.
+                    controllerRedirect = valores[0];
+                    actionRedirect = "Index";
+                }
+                else
+                {
+                    //Es una accion de un controler que no es el index                                      
+                    
+                    controllerRedirect = valores[0];
+                    
+                    //Si es create lo mando al index
+                    if (valores[1] == "Create")
+                    {
+                        actionRedirect = "Index";
+                    }
+                    else
+                    {
+                        actionRedirect = valores[1];    
+                    }
+                    
+                }
+            }
+            else
+            {
+                //Es el el index de algun controller
+                controllerRedirect = valores[0];
+                actionRedirect = "Index";
+            }
+
+        }
+        else
+        {
+            //Es que es el HomeController al Index
+            controllerRedirect = "Home";
+            actionRedirect = "Index";
+         }
+
+    }
+}
+
+@Html.Hidden("actionRedirect", actionRedirect, new { id = "actionRedirect" })
+@Html.Hidden("controllerRedirect", controllerRedirect, new { id = "controllerRedirect" })
+
+
     <div class="page">
         <header>
             <div id="logoProgramar">&nbsp;</div>
@@ -20,20 +82,24 @@
             <nav>
                 <ul id="menu">
                         <li class="selected">@Html.ActionLink("Home", "Index", "Home")</li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Mi Perfil", "Mi Perfil", "Usuario")</li>
+                        }
                         <li>@Html.ActionLink("Que es?", "Descripcion", "Home")</li>
                         <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
                         <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
                         <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-                        <li>@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
-                        @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("admin")|| HttpContext.Current.User.IsInRole("moderador")))
+                        
+                        @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador") || HttpContext.Current.User.IsInRole("moderador")))
                         {
-                            <li>@Html.ActionLink("Pendientes", "Index", "Pendientes")</li>
+                            <li>@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
                         }
-                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
+                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("administrador"))
                         {
                             <li>@Html.ActionLink("Configuracion", "Index", "Configuracion")</li>
                         }
-                        <li>@Html.ActionLink("Configuracion", "Index", "Configuracion")</li>
+                        
                         <li>@Html.ActionLink("Contacto", "About", "Home")</li>
                     
                 </ul>

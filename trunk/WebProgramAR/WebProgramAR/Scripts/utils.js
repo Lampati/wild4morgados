@@ -21,6 +21,79 @@ function GetPosition() {
     return position;
 }
 
+
+//Dialogo login
+
+
+$(document).ready(function () {
+
+    $('#dialogLogin').dialog({
+        autoOpen: false,
+        draggable: true,
+        resizable: false,
+        position: GetPosition(),
+        title: '',
+        modal: true,
+        overlay: { opacity: 1.5, background: "black" },
+        show: "slide",
+        hide: "blind"
+            , error: function (msg) { alert(msg); }
+    });
+
+
+});
+
+function OpenDialogLogin(event, id, accion, ancho, alto) {
+    if (event != null) {
+        event.preventDefault();
+    }
+
+    // obtenemos ancho y alto de la ventana del explorer
+    var wscr = $(window).width();
+    var hscr = $(window).height();
+
+    if (alto > 400) {
+        position = 'top';
+    } else {
+        position = 'center';
+    }
+
+    if (alto > 0) {
+        $("#dialogLogin").dialog("option", "height", alto);
+    }
+    else {
+        $("#dialogLogin").dialog("option", "height", 'auto');
+    }
+
+    if (ancho > 0) {
+        $("#dialogLogin").dialog("option", "width", ancho);
+    }
+    else {
+        $("#dialogLogin").dialog("option", "height", 'auto');
+    }
+
+    $("#dialogLogin").unbind("dialogopen");
+    $("#dialogLogin").bind("dialogopen", function (event, ui) {
+        $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
+        $(this).load(accion + id, function () {
+            //alert('Load was performed.');
+
+        });
+    });
+    $("#dialogLogin").dialog({
+        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); }
+    });
+    $("#disablingDiv").fadeIn("slow");
+
+    $('#dialogLogin').dialog('open');
+}
+
+function CerrarDialogLogin() {
+    $('#dialogLogin').dialog("close");
+}
+
+
+
 $(document).ready(function () {
 
     $('#dialog').dialog({
@@ -36,18 +109,7 @@ $(document).ready(function () {
             , error: function (msg) { alert(msg); }
     });
 
-    $('#subDialog').dialog({
-        autoOpen: false,
-        draggable: true,
-        resizable: false,
-        position: 'top',
-        title: '',
-        modal: true,
-        overlay: { opacity: 1.5, background: "black" },
-        show: "blind",
-        hide: "blind"
-            , error: function (msg) { alert(msg); }
-    });
+  
 });
 
 function OpenDialog(event, id, accion, ancho, alto) {

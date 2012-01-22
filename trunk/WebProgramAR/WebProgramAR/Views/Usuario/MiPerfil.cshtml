@@ -2,7 +2,7 @@
 @model WebProgramAR.Sitio.Models.UsuarioGrillaModel
 
 @{
-    ViewBag.Title = "Usuarios";
+    ViewBag.Title = "Mi Perfil";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
 
@@ -24,7 +24,7 @@
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "UsuarioS") {
+            if ($(this).children().html().toUpperCase() == "Mi Perfil") {
                 $(this).addClass("selected");
             } else {
                 $(this).removeClass("selected");
@@ -105,18 +105,12 @@
     <tr>
         <td valign="middle">
             <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
-            @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-            {
-                <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-            }
+            <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
         </td>
     </tr>
 </table>
 
 <div id="contenedor-grid">
-
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-{
 
     @grid.GetHtml(
         tableStyle: "grid",
@@ -157,39 +151,6 @@
         )
     })
 
-}
-else
-{
-    @grid.GetHtml(
-        tableStyle: "grid",
-        fillEmptyRows: false,
-        rowStyle: "gridRow",
-        alternatingRowStyle: "gridAlternatingRow",
-        headerStyle: "gridHeader",
-        footerStyle: "gridPager",
-        mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
-        columns: new[] {
-        grid.Column("Nombre", header: "Nombre"),
-        grid.Column("Apellido", header: "Apellido"),
-        grid.Column("Email", header: "Email"),
-        grid.Column("TipoUsuario.Descripcion", header: "TipoUsuarioId"),
-   
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles"/>
-                      </text>
-        )
-    
-    })
-    
-
-
-}
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">

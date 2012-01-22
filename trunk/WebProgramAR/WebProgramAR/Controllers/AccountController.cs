@@ -10,9 +10,9 @@ using WebProgramAR.Entidades;
 
 namespace WebProgramAR.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
-
+        
         //
         // GET: /Account/LogOn
 
@@ -31,22 +31,25 @@ namespace WebProgramAR.Controllers
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
                     SimpleSessionPersister.UserName = model.UserName;
                     model.isAuthenticated = true;
-                    
-                    return Json(new { success = true });
+
+                    //RedirectToAction("Index", "Home");
+                    return Content(Boolean.TrueString);
                 }
                 else
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                     model.isAuthenticated = false;
-                    return Json(new { success = false });
+                    return Content(Boolean.FalseString);
+                    //RedirectToAction("Index", "Home");
                 }
             }
             
             // If we got this far, something failed, redisplay form
-            return View(model);
+            //return View(model);
+            return Content(Boolean.FalseString);
         }
         //
         // POST: /Account/LogOn
@@ -82,11 +85,11 @@ namespace WebProgramAR.Controllers
 
        */
         //
-        // GET: /Account/LogOff
-
+        // GET: /Account/LogOff        
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            
 
             return RedirectToAction("Index", "Home");
         }
