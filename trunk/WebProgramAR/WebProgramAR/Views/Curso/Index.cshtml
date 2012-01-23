@@ -49,6 +49,9 @@
         $('.botonDetalles').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 250);
         });
+        $('.botonAsociar').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("../Ejercicio/AsociarCursoEjercicio")/', 570, 550);
+        });
         var sortcol = '@grid.SortColumn';
 
         if (sortcol != '')
@@ -59,11 +62,9 @@
 </script>
 
 <!--<h2>Cursos</h2>-->
-<div id="buttonSection">
-      @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-      {
+<div id="buttonSection" class="buttonSection">
         <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-      }
+      
     <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
 </div>    
 <div id="filtros">
@@ -116,20 +117,26 @@
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles hoverRel"/>
                   </text>
     ),        
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar"/>
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar hoverRel"/>
                   </text>
     ),
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar"/>
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar hoverRel"/>
                     
+                  </text>
+    ),
+    grid.Column("", 
+          header: "AsociarCursoEjercicio",
+          format: @<text>
+                    <input type="image" alt="Asociaciones" src="@Url.Content("~/Content/images/list_task-16.png")" data="@(item.CursoId)" class="botonAsociar hoverRel"/>
                   </text>
     )
 })
@@ -156,7 +163,13 @@ else
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles"/>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles hoverRel"/>
+                  </text>
+    ),
+    grid.Column("", 
+          header: "",
+          format: @<text>
+                    <input type="image" alt="Asociaciones" src="@Url.Content("~/Content/images/list_task-16.png")" data="@(item.CursoId)" class="botonAsociar hoverRel"/>
                   </text>
     )
     })

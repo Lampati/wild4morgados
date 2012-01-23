@@ -1,7 +1,8 @@
 ﻿@model WebProgramAR.Sitio.Models.EjercicioGrillaModel
 
 @{
-    ViewBag.Title = "Ejercicio";
+    Layout = null;
+    ViewBag.Title = "Asociaciones";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
 
@@ -19,35 +20,20 @@
         $("#filterSearchButton").live('click', function () {
             $("#filterForm").submit();
         });
-        //para el manejo del menu
-        $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "EJERCICIOS") {
-                $(this).addClass("selected");
+        $('#btnFiltrosAsociar').live('click', function (event) {
+            if ($('#filtrosAsociar').css('display') == 'block') {
+                $('#filtrosAsociar').fadeOut('slow');
             } else {
-                $(this).removeClass("selected");
+                $('#filtrosAsociar').fadeIn('slow');
             }
         });
-        $('#btnFiltros').live('click', function (event) {
-            if ($('#filtros').css('display') == 'block') {
-                $('#filtros').fadeOut('slow');
-            } else {
-                $('#filtros').fadeIn('slow');
-            }
-        });
-        $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 500, 550);
-        });
+        
+        $('.botonAsociar').click(function (event)
+        { return false;});
 
-        $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 350); });
+        $('.botonDesasociar').click(function (event) { return false; });
 
-        $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 500, 550);
-        });
-
-        $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 350);
-        });
+        
         var sortcol = '@grid.SortColumn';
 
         if (sortcol != '')
@@ -57,21 +43,19 @@
     });
 </script>
 
-
+<h2>Asociar Ejercicios</h2>
+<legend>Curso</legend>
 <!--<h2>Ejercicios</h2>-->
+<br style="height:10px;"/>
 <div id="buttonSection" class="buttonSection">
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-{
-    <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-}
-    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+    <div id="btnFiltrosAsociar" class="btn_filtros boton" >Filtros </div>
 </div>
 
-<div id="filtros">
+<div id="filtrosAsociar" class="filtros">
     <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("Index", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("AsociarCursoEjercicio", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
         {    
             @Html.ValidationSummary(true)
             <table>
@@ -86,7 +70,8 @@
                         Value = option.EstadoEjercicioId.ToString()
                     }))
                     </td>
-
+                </tr>
+                <tr>
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
                          @Html.DropDownList("nivelEjercicio", listaNivelesEjercicio.Select(option => new SelectListItem
@@ -105,8 +90,6 @@
 
 <div id="contenedor-grid">
 
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-{
     @grid.GetHtml(
         tableStyle: "grid",
         fillEmptyRows: false,
@@ -127,52 +110,17 @@
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/ok_icon.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
                       </text>
         ),        
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.EjercicioId)" class="botonEditar hoverRel"/>
-                      </text>
-        ),
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.EjercicioId)" class="botonEliminar hoverRel"/>
-                    
+                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/no_icon.png")" data="@(item.EjercicioId)" class="botonAsociar hoverRel"/>
                       </text>
         )
     })
 
-}
-else
-{
-        @grid.GetHtml(
-        tableStyle: "grid",
-        fillEmptyRows: false,
-        rowStyle: "gridRow",
-        alternatingRowStyle: "gridAlternatingRow",
-        headerStyle: "gridHeader",
-        footerStyle: "gridPager",
-        mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
-        columns: new[] {
-        grid.Column("EjercicioId", header: "Identificador"),
-        grid.Column("Enunciado", header: "Enunciado"),
-        grid.Column("NivelEjercicio.Descripcion", header: "Nivel"),
-        grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel" />
-                      </text>
-        )
-    })
-}
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
@@ -180,5 +128,5 @@ else
     $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicio");
     convertSelect("nivelEjercicio");
     convertSelect("estadoEjercicio");
-    function OnChangeDo(){return false;}
+    function OnChangeDo() { return false; }
 </script>

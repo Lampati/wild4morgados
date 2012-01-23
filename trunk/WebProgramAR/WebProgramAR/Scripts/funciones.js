@@ -1,7 +1,7 @@
 ﻿
 /*para muestra de operacion satisfactoria u operacion no satisfactoria*/
 function disableButtons() {
-    $("#buttonSectionOptions").hide();
+    $(".buttonSectionOptions").hide();
 }
 function updateWindow() {
     $("#divOperacionExitosa").delay(300).fadeOut(500);
@@ -14,7 +14,7 @@ function updateWin() {
 function updateSuccess() {
     if ($("#update-message").html() == "True") {
         $("#divOperacionExitosa").fadeIn(300);
-        $("#buttonSectionOptions").show();
+        $(".buttonSectionOptions").show();
         updateWindow();
 
     } else {

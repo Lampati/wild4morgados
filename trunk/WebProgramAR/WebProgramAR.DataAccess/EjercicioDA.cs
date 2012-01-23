@@ -115,7 +115,32 @@ namespace WebProgramAR.DataAccess
             return query;
         }
 
-
+        public static IEnumerable<Ejercicio> GetEjerciciosByCursoByUsuarioByNivelByEstado(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+                                              where (usuarioId == -1 || u.UsuarioId == usuarioId)
+                                              && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
+                                              && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
+                                              && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
+                                              select u;
+                return query.ToList();
+            }
+        }
+        public static IEnumerable<Ejercicio> GetEjercicioNotUsuario(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+                                              where (u.UsuarioId != usuarioId)
+                                              && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
+                                              && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
+                                              && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
+                                              select u;
+                return query.ToList();
+            }
+        }
 
         #region IFiltrablePorSeguridadPorValor Members
 

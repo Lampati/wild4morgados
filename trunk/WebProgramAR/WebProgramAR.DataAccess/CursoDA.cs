@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Cursos.Include("Usuario").Single(u => u.CursoId  == id);
+                return db.Cursos.Include("Usuario").Include("Ejercicios").Single(u => u.CursoId  == id);
             }
         }
         

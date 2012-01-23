@@ -42,6 +42,13 @@ $(document).ready(function () {
         hide: "blind"
             , error: function (msg) { alert(msg); }
     });
+    $(".hoverRel").mouseenter(function (event) {
+        $("#overDiv").html($(this).attr("alt"));
+        $("#overDiv").css({ 'top': event.pageY, 'left': event.pageX });
+        $("#overDiv").show();
+    }).mouseleave(function () {
+        $("#overDiv").hide();
+    });
 });
 
 function OpenDialogLogin(event, id, accion, ancho, alto) {
