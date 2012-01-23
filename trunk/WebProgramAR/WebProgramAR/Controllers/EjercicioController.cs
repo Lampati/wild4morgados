@@ -110,7 +110,9 @@ namespace WebProgramAR.Controllers
                 //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
                 ejercicio.UsuarioId = 1;
                 //curso.UsuarioId = usuarioLogueado;
-
+                ejercicio.Enunciado = "";
+                ejercicio.EstadoEjercicio.EstadoEjercicioId = 1;
+                ejercicio.SolucionTexto = "";
                 EjercicioNegocio.Alta(ejercicio);
                 return Content(Boolean.TrueString);
             }

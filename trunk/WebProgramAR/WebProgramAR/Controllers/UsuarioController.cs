@@ -96,13 +96,10 @@ namespace WebProgramAR.Controllers
             ViewBag.Provincias = listaProvincias;
             ViewBag.Localidades = listaLocalidades;
             ViewBag.TipoUsuarios = listaTipoUsuarios;
-            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
-            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
         }
 
         //
         // POST: /Usuario/Create
-
         [HttpPost]
         public ActionResult Create(Usuario usuario)
         {
@@ -132,10 +129,7 @@ namespace WebProgramAR.Controllers
         public ActionResult MiPerfil()
         {
             string usuario = SimpleSessionPersister.UserName;
-
             Usuario u = UsuarioNegocio.GetUsuarioByLoginUsuario(usuario);
-            
-
             Initilization();
             return View("MiPerfil", u);
         }
@@ -198,18 +192,16 @@ namespace WebProgramAR.Controllers
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
                 //Aca lo creo en la tabla para la autenticacion
-                Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email, null, null, true, null, out createStatus);
+                Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email,null, null, true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     //Aca le agrego el rol en la tabla para autenticacion
                     Roles.AddUserToRole(model.UsuarioNombre, "Profesor");
-
                     //Aca creo mi parte, en mis tablas
                     TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName("Profesor");
                     model.TipoUsuarioId = tipo.TipoUsuarioId;
                     UsuarioNegocio.Alta(model);
-
                     FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
@@ -221,7 +213,6 @@ namespace WebProgramAR.Controllers
             }
             else
             {
-
                 // If we got this far, something failed, redisplay form
                 return View(model);
             }

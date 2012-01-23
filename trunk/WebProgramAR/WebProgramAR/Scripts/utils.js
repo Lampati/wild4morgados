@@ -26,6 +26,9 @@ function GetPosition() {
 
 
 $(document).ready(function () {
+    $("#btnCancelar").live('click', function () {
+        CerrarDialog();
+    });
 
     $('#dialogLogin').dialog({
         autoOpen: false,
@@ -39,8 +42,6 @@ $(document).ready(function () {
         hide: "blind"
             , error: function (msg) { alert(msg); }
     });
-
-
 });
 
 function OpenDialogLogin(event, id, accion, ancho, alto) {

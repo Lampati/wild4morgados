@@ -59,7 +59,13 @@
 </script>
 
 <!--<h2>Cursos</h2>-->
-
+<div id="buttonSection">
+      @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+      {
+        <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+      }
+    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+</div>    
 <div id="filtros">
     <div class="tituloabm">Seleccion de cursos</div>
 
@@ -84,18 +90,7 @@
         }
     </div>
 </div>
-    
-<table>
-    <tr>
-        <td valign="middle">
-            <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
-            @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-            {
-                <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-            }
-        </td>
-    </tr>
-</table>
+
 
 <div id="contenedor-grid">
 
@@ -168,4 +163,6 @@ else
 }
 </div>
 <div id="dialog" class="dialogDiv" ></div>
-
+<script type="text/javascript">
+    function OnChangeDo() { return false; }
+</script>

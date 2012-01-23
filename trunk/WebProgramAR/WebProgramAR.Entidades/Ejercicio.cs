@@ -160,37 +160,37 @@ namespace WebProgramAR.Entidades
         }
         private Usuario _usuario;
     
-        public virtual ICollection<Curso> Cursoes
+        public virtual ICollection<Curso> Cursos
         {
             get
             {
-                if (_cursoes == null)
+                if (_Cursos == null)
                 {
                     var newCollection = new FixupCollection<Curso>();
-                    newCollection.CollectionChanged += FixupCursoes;
-                    _cursoes = newCollection;
+                    newCollection.CollectionChanged += FixupCursos;
+                    _Cursos = newCollection;
                 }
-                return _cursoes;
+                return _Cursos;
             }
             set
             {
-                if (!ReferenceEquals(_cursoes, value))
+                if (!ReferenceEquals(_Cursos, value))
                 {
-                    var previousValue = _cursoes as FixupCollection<Curso>;
+                    var previousValue = _Cursos as FixupCollection<Curso>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupCursoes;
+                        previousValue.CollectionChanged -= FixupCursos;
                     }
-                    _cursoes = value;
+                    _Cursos = value;
                     var newValue = value as FixupCollection<Curso>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupCursoes;
+                        newValue.CollectionChanged += FixupCursos;
                     }
                 }
             }
         }
-        private ICollection<Curso> _cursoes;
+        private ICollection<Curso> _Cursos;
 
         #endregion
         #region Association Fixup
@@ -255,7 +255,7 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupCursoes(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupCursos(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {

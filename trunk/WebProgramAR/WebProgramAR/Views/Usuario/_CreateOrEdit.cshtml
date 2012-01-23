@@ -140,14 +140,14 @@
         </div>
     </div>
 <script type="text/javascript">
-    convertSelect("Pais");
+    convertSelect("PaisId");
     convertSelect("TipoUsuarioCreate");
-    convertSelect("Provincia");
-    $("#FechaNac").datepicker();
+    convertSelect("ProvinciaId");
+    $("#FechaNacimiento").datepicker();
 
     function OnChangeDo(div) {
-        if (div.attr('id') == "Pais") {
-            var pais = $("#selectBox_Pais").attr("rel");
+        if (div.attr('id') == "PaisId") {
+            var pais = $("#selectBox_PaisId").attr("rel");
             $.ajax({
                 url: '@Url.Action("GetProvinciasByPais")',
                 data: " { paisId: '" + pais + "'}",
@@ -156,31 +156,31 @@
                 dataType: 'json',
                 success: function (data) {
                     $("#listProvincias .tzSelect").remove();
-                    $("#Provincia").children().remove();
+                    $("#ProvinciaId").children().remove();
                     var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
                     for (var i = 0; i < provincias.length; i++) {
                         var val = provincias[i].Id;
                         var text = provincias[i].Value;
-                        $("#Provincia").get(0).options[$("#Provincia").get(0).options.length] = new Option(text, val);
+                        $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
                     }
 
-                    convertSelect("Provincia");
+                    convertSelect("ProvinciaId");
                 }
             });
             $("#listProvincias").show();
             return;
         }
-        if (div.attr('id') == "Provincia") {
+        if (div.attr('id') == "ProvinciaId") {
             $("#listLocalidades").show();
             return;
         }
     }
 
-    $("#Localidad").autocomplete({
+    $("#LocalidadId").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
-                data: " { paisId: '" + $("#selectBox_Pais").attr("rel") + "', provinciaId: '" + $("#selectBox_Provincia").attr("rel") + "', Localidad: '" + request.term + "' }",
+                data: " { paisId: '" + $("#selectBox_PaisId").attr("rel") + "', provinciaId: '" + $("#selectBox_ProvinciaId").attr("rel") + "', Localidad: '" + request.term + "' }",
                 contentType: 'application/json',
                 type: 'POST',
                 dataType: 'json',
@@ -201,11 +201,11 @@
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#Localidad").text(ui.item.label);
-            $("#Localidad").attr("value", ui.item.label);
+            $("#LocalidadId").text(ui.item.label);
+            $("#LocalidadId").attr("value", ui.item.label);
         },
         change: function (event, ui) {
-            $("#Localidad").val(ui.item.label);
+            $("#LocalidadId").val(ui.item.label);
         }
     });
             

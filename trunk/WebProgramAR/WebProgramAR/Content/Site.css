@@ -240,8 +240,8 @@ footer, #footer
 
 *{ margin:0; padding:0;}
 
-/* TAB MENU   
-----------------------------------------------------------*/
+/* LogOn Button */
+
 .logOnCandado
 {
     position:absolute;
@@ -249,6 +249,7 @@ footer, #footer
     right:110px;
     z-index:100;
 }
+/* TAB MENU   */
 ul#menu
 {
     position:absolute;
@@ -339,7 +340,14 @@ fieldset
     font-family:Calibri;
     width:220px;
 }
-
+fieldset.details
+{
+    border: 0px solid #ddd;
+    padding: 0 1em 1.4em 1.4em;
+    margin: 0 0 1em 0;
+    font-family:Calibri;
+    width:100%;
+}
 legend
 {
     text-transform:uppercase;
@@ -414,6 +422,18 @@ input[type="text"].textBoxForFilter
     height: 17px;
     color:#333;
     background:#ccc;
+}
+#buttonSectionOptions
+{   
+    position:relative;
+    float:right;
+    width:60%;
+    margin-top:10px;
+}
+#buttonSectionOptions div
+{
+    float:left;   
+    margin-left:10px;
 }
 input[type="submit"], .submit
 {
@@ -628,7 +648,6 @@ div#title
 {
     color: #ff0000;
     float:left;
-    margin-top:-45px;
     position:relative;
     display:block;
     width:100%;
@@ -664,12 +683,14 @@ div#title
 .display-label, .editor-label
 {
     position:relative;
-    margin: 0.7em 0.7em 0 0;
+    margin-top: 5px;
+    height:10px;
 }
 
 .display-field, .editor-field
 {
     margin: 0.5em 0.5em 0 0;
+    height:40px;
 }
 
 .display-label-delete
@@ -704,7 +725,23 @@ div#title
     padding-left:5px; 
     display:inline-block ;
 }
-
+.display-label-delete-group
+{
+    float:left;
+    font-size:1.3em;
+    width:100%;
+    background:#666;
+    color:#fff;
+    text-transform:uppercase;
+    font-family:Calibri;
+    border-color: #F0E0A0;
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    
+}
 div.fila
 {
     clear: both;
@@ -751,7 +788,7 @@ div.menu ul li a:hover, .boton:hover
     font-weight: bold;
     text-transform:uppercase;
     font-family:Calibri;
-    font-size: 8px;
+    font-size: 1em;
     display: block;
     margin-top:2px;
     text-decoration: none;
@@ -761,8 +798,10 @@ div.menu ul li a:hover, .boton:hover
     border-radius: 5px;
     cursor: hand;
     cursor: pointer;
-    width: 120px;
-    height: 25px;
+    height:20px;
+    width:80px;
+    padding-top:5px;
+    padding-left:30px;
     vertical-align : middle;
 }
 
@@ -774,65 +813,39 @@ div.menu ul li a:hover, .boton:hover
     font-weight: bold;
     text-transform:uppercase;
     font-family:Calibri;
-    font-size: 10px;
     display: block;
-    width: 120px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     cursor: hand;
     cursor: pointer;
     font-size: 0.9em;
-    padding: 2px;
-}
-.btn_filtros
-{
-    background-color: #4d90fe;
-    border: 1px #4d90fe solid;
-    color: white;
-    font-weight: bold;
-    text-transform:uppercase;
-    font-family:Calibri;
-    font-size: 1em;
-    display: block;
-    width: 120px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    cursor: hand;
-    cursor: pointer;
-    position:absolute;
-    right:220px;
-    top:135px;
-    height:20px;
+     height:20px;
     width:80px;
     padding-top:5px;
     padding-left:30px;
+}
+#buttonSection
+{   
+    position:relative;
+    float:right;
+    width:40%;
+    margin-top:-30px;
+}
+.btn_filtros
+{
+    float:right;
+    background-color: #4d90fe;
+    border: 1px #4d90fe solid;
+    
 }
 
 .btn_nuevo
 {
+    margin-left:10px;
+    float:right;
     background-color: #333;
     border: 1px #333 solid;
-    color: white;
-    font-weight: bold;
-    text-transform:uppercase;
-    font-family:Calibri;
-    font-size: 1em;
-    display: block;
-    width: 120px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    cursor: hand;
-    cursor: pointer;
-    position:absolute;
-    right:100px;
-    top:135px;
-    height:20px;
-    width:80px;
-    padding-top:5px;
-    padding-left:30px;
 }
 .botonEliminar, .botonEditar
 {
@@ -1485,12 +1498,20 @@ input[type="text"].datosExtraTextBox
 }
 #logonerror
 {
-    width:100%;
-    background:red;
-    color:#fff;
-    font-family:Calibri;
-    font-size:1em;
     display:none;
+    background:#000;   
+    color:red;
+    display:none;
+    opacity: .70;
+    filter: alpha(opacity=70%);   
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	width:90%;
+	padding:10px;
+    font-size:1em;
+    font-family:Calibri;
+    text-transform:uppercase;
     
 }
 /*para el manejo de selectbox convertidos*/
@@ -1512,7 +1533,7 @@ input[type="text"].datosExtraTextBox
 	
 	height:100%;
 	width:100%;
-	
+	margin-top:5px;
 	/* Font settings */
 	
 	font:13px/34px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -1551,11 +1572,10 @@ input[type="text"].datosExtraTextBox
 	border:1px solid #32333b;
 	border-width:0 1px 1px;
 	list-style:none;
-	z-index:1000;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
-	
+	z-index:1103;
 	-moz-box-shadow:0 0 4px #111;
 	-webkit-box-shadow:0 0 4px #111;
 	box-shadow:0 0 4px #111;
@@ -1575,6 +1595,7 @@ input[type="text"].datosExtraTextBox
 	background-repeat: no-repeat, no-repeat, repeat-x;
 	color:#fff;
 	padding-left:50px;
+	z-index:1103;
 }
 
 .tzSelect li:hover{
@@ -1630,5 +1651,88 @@ input[type="text"].datosExtraTextBox
     font-size:1.5em;
     font-family:Calibri;
     text-transform:uppercase;
+}
+#btnAceptar
+{
+    position:absolute;
+    right:120px;
+    bottom:120px;
+}
+/*div manejo archivos*/
+div.upload {
+   position: relative;
+   width: 80px;
+   height: 24px;
+   overflow:hidden;
+   background:url(btn_upload.png) left top no-repeat;
+   clip:rect(0px, 80px, 24px, 0px );
+}  
+
+div.upload input {
+   position: absolute;
+   left: auto;
+   right: 0px;
+   top: 0px;
+   margin:0;
+   padding:0;
+   filter: Alpha(Opacity=0);
+   -moz-opacity: 0;
+   opacity: 0;
+}
+/*para el manejo del input file*/
+input[type="file"]
+{
+    font-size: 50px; 
+    width: 120px; 
+    opacity: 0; 
+    filter:alpha(opacity: 0);  
+    position: relative; 
+    top: -40px;
+    left: -20px;
+}
+.likeText
+{
+    float:left;
+ width:200px;
+ border:1px solid #666;
+ background:#333;
+ color:#fff;
+ height:25px;
+}
+.buttonInputFile
+{
+    float:left;
+    background-color: #333;
+    border: 1px #4e667d solid;
+    color: white;
+    font-weight: bold;
+    text-transform:uppercase;
+    font-family:Calibri;
+    font-size: 1em;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: hand;
+    cursor: pointer;
+    height:20px;
+    width:140px;
+    padding-top:5px;
+    margin-left:10px;
+    padding-left:5px;
+    vertical-align : middle;
+}
+.buttonInputFile:hover
+{
+    background-color: #f5f8ff;
+    color: #333;
+    border:1px solid #ecf0fa;
+    text-decoration: none;
+    cursor: pointer;
+    -moz-box-shadow: 0px 0px 5px #333;
+    -webkit-box-shadow: 0px 0px 5px #333;
+    box-shadow: 0px 0px 5px #000;
 }
 

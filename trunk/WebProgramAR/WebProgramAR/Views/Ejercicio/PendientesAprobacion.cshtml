@@ -10,10 +10,6 @@
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
     List<WebProgramAR.Entidades.NivelEjercicio> listaNivelesEjercicio = (List<WebProgramAR.Entidades.NivelEjercicio>)ViewBag.NivelesEjercicio;
 }
-
-
-
-
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -59,8 +55,10 @@
 </script>
 
 
-<!--<h2>Ejercicios</h2>-->
-
+<!--<h2>Pendientes de Aprobacion</h2>-->
+<div id="buttonSection">
+    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+</div>    
 <div id="filtros">
     <div class="tituloabm">Seleccion de cursos</div>
 
@@ -87,13 +85,7 @@
     </div>
 </div>
     
-<table>
-    <tr>
-        <td valign="middle">
-            <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>            
-        </td>
-    </tr>
-</table>
+
 
 <div id="contenedor-grid">
 @grid.GetHtml(
@@ -129,5 +121,5 @@
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    convertSelect("nivelEjercicio");
+    convertSelect("nivelEjercicio",1);
 </script>

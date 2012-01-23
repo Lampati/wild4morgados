@@ -892,7 +892,7 @@
           <NavigationProperty Name="EstadoEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" FromRole="Ejercicio" ToRole="EstadoEjercicio" />
           <NavigationProperty Name="NivelEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_NivelEjercicio" FromRole="Ejercicio" ToRole="NivelEjercicio" />
           <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Ejercicio" ToRole="Usuario" />
-          <NavigationProperty Name="Cursoes" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Ejercicio" ToRole="Curso" />
+          <NavigationProperty Name="Cursos" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Ejercicio" ToRole="Curso" />
         </EntityType>
         <Association Name="FK_Ejercicio_EstadoEjercicio">
           <End Type="WebProgramARModel.EstadoEjercicio" Role="EstadoEjercicio" Multiplicity="1" />

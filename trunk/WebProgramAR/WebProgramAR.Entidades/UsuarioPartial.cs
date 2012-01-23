@@ -32,7 +32,7 @@ namespace WebProgramAR.Entidades
 
         [Display(Name = "E-mail")]
         [Required(ErrorMessage = "Requerido")]     
-        [RegularExpression(Globals.MATCH_EMAIL_PATTERN, ErrorMessage = "El formato del email ingresado es incorrecto")]
+        [RegularExpression(Globals.MATCH_EMAIL_PATTERN, ErrorMessage = "Formato de email incorrecto")]
         public string Email { get; set; }
 
         [Display(Name = "Fecha de nacimiento")]
@@ -41,19 +41,19 @@ namespace WebProgramAR.Entidades
 
         [Display(Name = "Nombre de Usuario")]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El nombre de usuario debe tener como maximo 20 caracteres")]
+        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
         public string UsuarioNombre { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "La contraseña debe tener como maximo 20 caracteres")]
+        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
         public string Contrasena { get; set; }
 
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Contrasena", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("Contrasena", ErrorMessage = "Contraseña y confirmacion son distintas.")]
         public string ConfirmarContrasena { get; set; }
 
         

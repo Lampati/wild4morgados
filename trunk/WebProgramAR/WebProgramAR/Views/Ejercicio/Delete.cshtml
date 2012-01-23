@@ -3,14 +3,9 @@
 
     Layout = null;
 }
-<script type="text/javascript">
-    $("#btnCancelar").click(function (event) {
-        CerrarDialog();
-    });
-</script>
 
     
-@using (Ajax.BeginForm("Delete", "Ejercicio", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
+@using (Ajax.BeginForm("Delete", "Ejercicio", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
     <h2>Eliminar</h2>
     <legend>Ejercicio</legend>
@@ -22,17 +17,37 @@
         <div class="display-label-delete">Nombre:</div>
         <div class="display-field-delete">@Model.Nombre</div>
     </div>
-     <div class="fila">
+    <div class="fila">
         <div class="display-label-delete">Nivel Ejercicio:</div>
-        <div class="display-field-delete">@Model.NivelEjercicio</div>
+        <div class="display-field-delete">@Model.NivelEjercicio.Descripcion</div>
+    </div>
+    <div class="fila">
+        <div class="display-label-delete">Enunciado:</div>
+        <div class="display-field-delete">@Model.Enunciado</div>
+    </div>
+    <div class="fila">
+        <div class="display-label-delete">Solucion:</div>
+        <div class="display-field-delete">@Model.Solucion</div>
+    </div>
+    <div class="fila">
+        <div class="display-label-delete">Solucion Modo Texto:</div>
+        <div class="display-field-delete">@Model.SolucionTexto</div>
+    </div>
+    <div class="fila">
+        <div class="display-label-delete">Usuario</div>
+        <div class="display-field-delete">@Model.Usuario.UsuarioNombre</div>
+    </div>
+    <div class="fila">
+        <div class="display-label-delete">Estado</div>
+        <div class="display-field-delete">@Model.EstadoEjercicio.Descripcion</div>
     </div>
     
     </fieldset>
-    <div style="width:100%">
-            <div style="display:inline;float:left;left:15%;">
+     <div id="buttonSectionOptions">
+            <div>
                 <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
             </div>
-            <div style="float:left;margin-left:20px;">
+            <div >
                  <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
             </div>
         </div>
@@ -41,28 +56,3 @@
 
 <div id="update-message" class"error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
-<script language="javascript">
-    $("#btnCancelar").live('click', function (event) {
-        CerrarDialog();
-    });
-    function updateWindow() {
-        $("#divOperacionExitosa").delay(300).fadeOut(500);
-        setTimeout("updateWin()", 3000);
-    }
-    function updateWin() {
-        window.location.reload();
-    }
-
-    function updateSuccess() {
-        if ($("#update-message").html() == "True") {
-            $("#divOperacionExitosa").fadeIn(300);
-            updateWindow();
-
-        } else {
-            $("#update-message").show();
-        }
-
-    }
-    
-    
-</script>

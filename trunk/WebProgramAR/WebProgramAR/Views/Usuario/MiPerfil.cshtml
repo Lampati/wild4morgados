@@ -1,158 +1,149 @@
 ﻿
-@model WebProgramAR.Sitio.Models.UsuarioGrillaModel
+@model WebProgramAR.Entidades.Usuario
 
 @{
+    List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
+    List<WebProgramAR.Entidades.Provincia> listaProvincias = (List<WebProgramAR.Entidades.Provincia>)ViewBag.Provincias;
+    List<WebProgramAR.Entidades.Localidad> listaLocalidades = (List<WebProgramAR.Entidades.Localidad>)ViewBag.Localidades;
+    List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
     ViewBag.Title = "Mi Perfil";
-
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
-
-    grid.Bind(Model.Usuarios, autoSortAndPage: true, rowCount: Model.Cantidad);
-
-    string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 }
 
 
 
+<h1>Mi Perfil</h1>
+<div class="sectionSpace">
+    @Html.HiddenFor(model => model.UsuarioId)
 
+        <fieldset>
+            <h3>Informacion de la Cuenta</h3>
 
+            <div class="editor-label">
+                @Html.LabelFor(m => m.UsuarioNombre)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.UsuarioNombre)
+                @Html.ValidationMessageFor(m => m.UsuarioNombre)
+            </div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Email)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
 
-        $("#filterSearchButton").live('click', function () {
-            $("#filterForm").submit();
-        });
-        //para el manejo del menu
-        $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "Mi Perfil") {
-                $(this).addClass("selected");
-            } else {
-                $(this).removeClass("selected");
-            }
-        });
-        $('#btnFiltros').live('click', function (event) {
-            if ($('#filtros').css('display') == 'block') {
-                $('#filtros').fadeOut('slow');
-            } else {
-                $('#filtros').fadeIn('slow');
-            }
-        });
-        $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 900, 480);
-        });
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Contrasena)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(m => m.Contrasena)
+                @Html.ValidationMessageFor(m => m.Contrasena)
+            </div>
 
-        $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 700, 500); });
+            <div class="editor-label">
+                @Html.LabelFor(m => m.ConfirmarContrasena)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(m => m.ConfirmarContrasena)
+                @Html.ValidationMessageFor(m => m.ConfirmarContrasena)
+            </div>
 
-        $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 900, 500);
-        });
-
-        $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 500);
-        });
-        var sortcol = '@grid.SortColumn';
-
-        if (sortcol != '')
-            $('thead > tr > th > a[href*="sort=@grid.SortColumn"]').parent().addClass('@(grid.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
-
-        //FuncionesAutorizadas('@funcionesAutorizadas');
-    });
-</script>
-
-<script type="text/javascript">
-    
-
-</script>
-<!--<h2>Usuarios</h2>-->
-
-<div id="filtros">
-    <div class="tituloabm">Seleccion de Usuarios</div>
-
-    <div class="filtrosabm">
-        @using (Html.BeginForm("Index", "Usuario", FormMethod.Post, new { id = "filterForm" }))
-        {    
-            @Html.ValidationSummary(true)
-            <table>
-                <tr>
-                    <td>
-                        <div class="label">
-                            Nombre
-                        </div>
-                    </td>
-                     <td valign="top">
-                            @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
-                    </td>
-                    <td>
-                        <div class="label">
-                            Apellido
-                        </div>
-                    </td>
-                     <td valign="top">
-                            @Html.TextBox("Apellido", null, new { maxlength = 50, autocomplete = "off" })
-                    </td>
-                    <td><div class="label">Tipo Usuario</div></td>
-                    <td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios)</td>
-                </tr>
-                
-            </table>
-            <div id="filterSearchButton" class="filterButton"></div>
-        }
+            
+        </fieldset>
     </div>
-</div>
-    
-<table>
-    <tr>
-        <td valign="middle">
-            <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
-            <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-        </td>
-    </tr>
-</table>
+    <div class="sectionSpace">
+        <div class="SameSectionSpace">
+        <fieldset>
+            <h3>Informacion del Usuario</h3>
 
-<div id="contenedor-grid">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Nombre)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Nombre)
+                @Html.ValidationMessageFor(m => m.Nombre)
+            </div>
 
-    @grid.GetHtml(
-        tableStyle: "grid",
-        fillEmptyRows: false,
-        rowStyle: "gridRow",
-        alternatingRowStyle: "gridAlternatingRow",
-        headerStyle: "gridHeader",
-        footerStyle: "gridPager",
-        mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
-        columns: new[] {
-        grid.Column("Nombre", header: "Nombre"),
-        grid.Column("Apellido", header: "Apellido"),
-        grid.Column("Email", header: "Email"),
-        grid.Column("TipoUsuario.Descripcion", header: "TipoUsuarioId"),
-   
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles"/>
-                      </text>
-        ),        
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.UsuarioId)" class="botonEditar"/>
-                      </text>
-        ),
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.UsuarioId)" class="botonEliminar"/>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Apellido)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Apellido)
+                @Html.ValidationMessageFor(m => m.Apellido)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.FechaNacimiento)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "date-picker-needed" })
+                @Html.ValidationMessageFor(m => m.FechaNacimiento)
+            </div>
+        </fieldset>
+        </div>
+        <div class="SameSectionSpace">
+        <fieldset>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.TipoUsuario)
+            </div>
+            <div class="editor-field">
+                 @Html.DropDownListFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.TipoUsuarioId.ToString(),
+                        Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+                    }), new { @id = "TipoUsuarioCreate" })
+
+                    @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Pais)
+            </div>
+            <div class="editor-field">
+                
+
+                 @Html.DropDownListFor(model => model.PaisId,
+                                listaPaises.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.PaisId.ToString(),
+                        Selected = ((Model != null) && (option.PaisId == Model.PaisId))
+                    }))
+
+                @Html.ValidationMessageFor(m => m.PaisId)
+            </div>
+             <div id="listProvincias" style="display:none">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Provincia)
+                </div>
+                <div class="editor-field">
                     
-                      </text>
-        )
-    })
 
-</div>
+                    @Html.DropDownListFor(model => model.ProvinciaId,
+                                        listaProvincias.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.ProvinciaId.ToString(),
+                        Selected = ((Model != null) && (option.ProvinciaId == Model.PaisId))
+                    }))
+
+                    @Html.ValidationMessageFor(m => m.ProvinciaId)
+                </div>
+            </div>
+            <div  id="listLocalidades"  style="display:none">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Localidad)
+                </div>
+                 <div class="editor-field">
+                    @Html.TextBoxFor(model => model.LocalidadId, new { @Value = " " })
+                    @Html.ValidationMessageFor(m => m.LocalidadId)
+                </div>
+            </div>
+
+        </fieldset>
+        </div>
+    </div>
+
 <div id="dialog" class="dialogDiv" ></div>
-<script type="text/javascript">
-    convertSelect("TipoUsuario");
-</script>

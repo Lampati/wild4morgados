@@ -7,7 +7,7 @@
      @Html.LabelFor(model => model.Nombre)
 </div>
 
-<div class="editor-label">
+<div class="editor-field">
     @Html.EditorFor(model => model.Nombre)
     @Html.ValidationMessageFor(model => model.Nombre)
 </div>
@@ -15,7 +15,7 @@
     @Html.LabelFor(m => m.NivelEjercicio)
 </div>
 <div class="editor-field">
-        @Html.DropDownListFor(model => model.NivelEjercicio, listaNiveles.Select(option => new SelectListItem
+        @Html.DropDownListFor(model => model.NivelEjercicioId, listaNiveles.Select(option => new SelectListItem
         {
             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
             Value = option.NivelEjercicioId.ToString(),
@@ -23,6 +23,37 @@
         }), new { @id = "NivelEjercicioCreate" })
 
         @Html.ValidationMessageFor(m => m.NivelEjercicio)
+</div>
+
+<div id="fieldsOnDemand">
+    <div class="editor-label">
+         @Html.LabelFor(model => model.Solucion)
+    </div>
+    <div class="editor-field">
+        <div class="likeText" id="solucion"></div>
+        <div class="buttonInputFile" rel="solucion">Seleccionar Archivo</div>
+    </div>
+    <div class="editor-label">
+         @Html.LabelFor(model => model.Enunciado)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Enunciado)
+    </div>
+    
+    <div class="editor-label">
+         @Html.LabelFor(model => model.SolucionTexto)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.SolucionTexto)
+    </div>
+     <div class="editor-label">
+         @Html.LabelFor(model => model.Usuario)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Usuario.UsuarioNombre)
+    </div>
+
+
 </div>
 <script type="text/javascript">
     convertSelect("NivelEjercicioCreate");

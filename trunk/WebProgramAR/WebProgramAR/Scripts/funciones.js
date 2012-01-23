@@ -1,49 +1,26 @@
-﻿$(document).ready(function () {
-    //para el logon
-//    $('#logonButton').live('click', function (event) {
+﻿
+/*para muestra de operacion satisfactoria u operacion no satisfactoria*/
+function disableButtons() {
+    $("#buttonSectionOptions").hide();
 
-//        var validator = $("#frmLogIn").validate({ rules: {
-//            UserName: { required: true, maxlength: 64 },
-//            Password: { required: true, maxlength: 64 }
-//        }
-//        });
-//        if (validator.form() == true) {
+}
+function updateWindow() {
+    $("#divOperacionExitosa").delay(300).fadeOut(500);
+    setTimeout("updateWin()", 3000);
+}
+function updateWin() {
+    window.location.reload();
+}
 
-//            var ai = {
-//                UserName: $("#UserName").val(),
-//                Password: $("#Password").val(),
-//                RememberMe: $("#RememberMe").val()
-//            };
+function updateSuccess() {
+    if ($("#update-message").html() == "True") {
+        $("#divOperacionExitosa").fadeIn(300);
+        updateWindow();
 
-
-//            $.ajax({
-//                url: '/Account/LogOn',
-//                type: "POST",
-//                dataType: "json",
-//                //data: JSON.stringify(ai),
-//                data: $.toJSON(ai),
-//                contentType: 'application/json; charset=utf-8',
-//                success: function (data, textStatus) {
-//                    if (data.success == "true") {
-//                        $("#logonerror").hide();
-//                        getUserInformation();
-//                        $("#dialog").hide();
-//                        $("#disablingDiv").fadeOut("slow");
-//                    } else {
-//                        $("#logonerror").fadeIn("slow");
-//                    }
-//                },
-//                error: function (xhr, status, error) {
-//                    var verr = xhr.status + "\r\n" + status + "\r\n" + error;
-//                    alert(verr);
-//                }
-
-//            });
-//        }
-//    });
-    
-
-});
+    } else {
+        $("#update-message").show();
+    }
+}
 
     /********para el manejo de select tags********/
     // The select element to be replaced:
@@ -61,9 +38,10 @@ function convertSelect(id) {
         } else {
             dropDown.css("height", "30px" * select.find('option').size());
         }
+
         select.find('option').each(function (i) {
             var option = $(this);
-            if ((i + 1) == select.attr('selectedIndex')) {
+            if ((i) == select.attr('selectedIndex')) {
                 selectBox.html(option.text());
             }
             if (option.data('skip')) {
@@ -74,7 +52,8 @@ function convertSelect(id) {
                 selectBox.html(option.html());
                 dropDown.trigger('hide');
                 selectBox.attr("rel", $(this).attr("rel"));
-                select.val($(this).attr("rel"));
+                select.attr("rel", $(this).attr("rel"));
+                select.val(option.html());
                 OnChangeDo(select);
             });
 
