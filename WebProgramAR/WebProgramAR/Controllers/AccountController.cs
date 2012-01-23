@@ -89,15 +89,8 @@ namespace WebProgramAR.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            
-
             return RedirectToAction("Index", "Home");
         }
-
-        //
-        // GET: /Account/Register
-
-        
 
         //
         // GET: /Account/ChangePassword

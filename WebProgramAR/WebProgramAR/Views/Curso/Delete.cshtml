@@ -5,7 +5,7 @@
 }
 
   
-@using (Ajax.BeginForm("Delete", "Curso", FormMethod.Post, new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
+@using (Ajax.BeginForm("Delete", "Curso", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
     <h2>Eliminar</h2>
     <legend>Curso</legend>
@@ -21,11 +21,11 @@
     
     </fieldset>  
     
-     <div style="width:100%">
-            <div style="display:inline;float:left;left:15%;">
+        <div id="buttonSectionOptions">
+            <div>
                 <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
             </div>
-            <div style="float:left;margin-left:20px;">
+            <div >
                  <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
             </div>
         </div>
@@ -34,28 +34,3 @@
 }
 <div id="update-message" class="error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
-<script type="text/javascript" language="javascript">
-    $("#btnCancelar").live('click',function (event) {
-        CerrarDialog();
-    });
-    function updateWindow() {
-        $("#divOperacionExitosa").delay(300).fadeOut(500);
-        setTimeout("updateWin()", 3000);
-    }
-    function updateWin() {
-        window.location.reload();
-    }
-
-    function updateSuccess() {
-        if ($("#update-message").html() == "True") {
-            $("#divOperacionExitosa").fadeIn(300);
-            updateWindow();
-
-        } else {
-            $("#update-message").show();
-        }
-
-    }
-    
-    
-</script>

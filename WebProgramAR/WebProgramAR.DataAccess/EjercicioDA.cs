@@ -104,10 +104,10 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<Ejercicio> GetEjercicios(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, WebProgramAREntities db)
         {
-            IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+            IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
                                      where u.Global == global
                                      && (usuarioId == -1 || u.UsuarioId == usuarioId)                                     
-                                     && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
+                                     && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
                                      && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
                                      && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
                                      && (nombre == "" || u.Nombre.Contains(nombre))

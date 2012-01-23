@@ -24,18 +24,11 @@
         var action = $('#actionRedirect').val();
         var url = window.location.href;
 
-//        alert(controller);
-//        alert(action);
-
         if (controller != '' && action != '')
         {
             var url = window.location.protocol + '//' + window.location.host + '/' + controller + '/' + action; 
         }
-//        alert(url);
         window.location.href = url;
-
-        //window.location.href = '@Url.Action("Index","Home")/';
-        //window.location.reload(true);
     }
 
     function updateSuccess() {
@@ -45,7 +38,7 @@
             updateWindow();
 
         } else {
-            $("#update-message").show();
+            $("#logonerror").show();
         }
 
     }
@@ -58,8 +51,8 @@
 {
     @Html.ValidationSummary(true, "Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.")
     <div>
+        <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.</div>
         <fieldset>
-            <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.</div>
             <div id="result"></div>
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)

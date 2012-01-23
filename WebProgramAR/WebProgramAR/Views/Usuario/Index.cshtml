@@ -10,12 +10,6 @@
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 }
-
-
-
-
-
-
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -49,7 +43,7 @@
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 500);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 400);
         });
         var sortcol = '@grid.SortColumn';
 
@@ -60,11 +54,14 @@
     });
 </script>
 
-<script type="text/javascript">
-    
-
-</script>
 <!--<h2>Usuarios</h2>-->
+<div id="buttonSection">
+     @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+     {
+        <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+     }
+    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+</div>
 
 <div id="filtros">
     <div class="tituloabm">Seleccion de Usuarios</div>
@@ -101,17 +98,6 @@
     </div>
 </div>
     
-<table>
-    <tr>
-        <td valign="middle">
-            <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
-            @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
-            {
-                <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-            }
-        </td>
-    </tr>
-</table>
 
 <div id="contenedor-grid">
 
@@ -193,5 +179,7 @@ else
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
+    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#TipoUsuario");
     convertSelect("TipoUsuario");
+    function OnChangeDo() { return false; }
 </script>

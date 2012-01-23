@@ -8,54 +8,6 @@
 
 <h2>Nuevo</h2>
 <legend>Usuario</legend>
-        
-
-
-<script type="text/javascript">
-    $("#btnCancelar").live('click',function () {
-        CerrarDialog();
-    });
-    /*
-    //para el saveCurso
-    $('#btnAceptar').live('click', function (event) {
-
-        var validator = $("#frmSaveCurso").validate({ rules: {
-            Nombre: { required: true, maxlength: 64 }
-        }
-        });
-        if (validator.form() == true) {
-
-            var ai = {
-                Nombre: $("#Nombre").val()
-            };
-
-
-            $.ajax({
-                url: '@Url.Action("Create")',
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(ai),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data, textStatus) {
-                    return false;
-                    if (data.success == "true") {
-                        $("#dialog").hide();
-                        $("#disablingDiv").fadeOut("slow");
-                    } else {
-                        $("#logonerror").fadeIn("slow");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    debugger;
-                    var verr = xhr.status + "\r\n" + status + "\r\n" + error;
-                    alert(verr);
-                }
-
-            });
-        }
-    });*/
-</script>
-
 
    
 @using (Html.BeginForm("Create", "Usuario", FormMethod.Post, new { id="frmSaveUsuario",enctype = "multipart/form-data" }))
@@ -65,12 +17,12 @@
         <br style="height:5px" />
         @Html.Partial("_CreateOrEdit", Model)
          
-        <div style="position:absolute;width:100%;bottom:30px;">
-            <div style="display:inline;float:left;left:15%;">
-                <input type="submit" value="Guardar"  id="btnAceptar"/> 
+        <div id="buttonSectionOptions">
+            <div>
+                <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
             </div>
-            <div style="display:inline;float:left;margin-left:20px;">
-                 <input type="button" value="Cancelar" class="submit" id="btnCancelar" />
+            <div >
+                 <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
             </div>
         </div>
 }
