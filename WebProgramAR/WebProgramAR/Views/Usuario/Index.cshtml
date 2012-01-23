@@ -55,7 +55,7 @@
 </script>
 
 <!--<h2>Usuarios</h2>-->
-<div id="buttonSection">
+<div id="buttonSection" class="buttonSection">
      @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
      {
         <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
@@ -125,19 +125,19 @@
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles"/>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles hoverRel"/>
                       </text>
         ),        
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.UsuarioId)" class="botonEditar"/>
+                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.UsuarioId)" class="botonEditar hoverRel"/>
                       </text>
         ),
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.UsuarioId)" class="botonEliminar"/>
+                        <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.UsuarioId)" class="botonEliminar hoverRel"/>
                     
                       </text>
         )
@@ -167,7 +167,7 @@ else
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles"/>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.UsuarioId)" class="botonDetalles hoverRel"/>
                       </text>
         )
     

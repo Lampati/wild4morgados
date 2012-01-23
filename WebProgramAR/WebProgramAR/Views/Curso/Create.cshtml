@@ -13,12 +13,12 @@
    
 @using (Ajax.BeginForm("Create", "Curso", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { 
-    <fieldset>
+    <fieldset class="details">
         @Html.ValidationSummary(true)
 
         @Html.Partial("_CreateOrEdit", Model)
         
-       <div id="buttonSectionOptions">
+       <div id="buttonSectionOptions" class="buttonSectionOptions">
             <div>
                 <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
             </div>

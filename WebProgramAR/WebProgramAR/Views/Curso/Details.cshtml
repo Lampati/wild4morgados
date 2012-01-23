@@ -2,15 +2,10 @@
 @{
     Layout = null;
 }
-<script type="text/javascript">
-    $("#btnCancelar").click(function (event) {
-        CerrarDialog();
-    });
-</script>
 <h2>Detalles</h2>
 <legend>Curso</legend>
 
-<fieldset>
+<fieldset class="details">
     
     <div class="fila">
         <div class="display-label-delete">Nombre:</div>
@@ -18,7 +13,19 @@
     </div>
     <div class="fila">
         <div class="display-label-delete-group">Ejercicios</div>
-        <div class="display-field-delete">Ejercicios</div>
+        @if (Model.Ejercicios.Count > 0)
+        {
+            foreach (var Ejercicio in Model.Ejercicios)
+            {
+                <div class="display-field-delete">
+                @Html.DisplayFor(m => Ejercicio.Nombre)
+                </div>
+            }
+        }
+        else
+        {
+            <div class="display-field-delete">No se han encontrado Resultados</div>
+        }
      </div>    
 </fieldset>
 <table width="100%" cellpadding="0" cellspacing="0">

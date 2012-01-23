@@ -423,14 +423,14 @@ input[type="text"].textBoxForFilter
     color:#333;
     background:#ccc;
 }
-#buttonSectionOptions
+.buttonSectionOptions
 {   
     position:relative;
     float:right;
     width:60%;
     margin-top:10px;
 }
-#buttonSectionOptions div
+.buttonSectionOptions div
 {
     float:left;   
     margin-left:10px;
@@ -474,9 +474,8 @@ input[type="submit"]:hover, .submit:hover,input[type="submit"]:active, .submit:a
 }
 .filterButton
 {
-    position:absolute;
     z-index:100;
-    margin-top:-40px;
+    margin-top:-30px;
     top:190px;
     right:160px;
     height:15px;
@@ -484,8 +483,7 @@ input[type="submit"]:hover, .submit:hover,input[type="submit"]:active, .submit:a
 	-webkit-border-radius:7px;
 	border-radius:7px;
 	color:#fff;
-	margin-top:10px;
-    font-size: 1em;
+	font-size: 1em;
     padding: 10px;
     vertical-align: middle;
     text-transform:uppercase;
@@ -496,7 +494,7 @@ input[type="submit"]:hover, .submit:hover,input[type="submit"]:active, .submit:a
     color: #fff;
     background: url(images/search.png) no-repeat #4d90fe center;
     border: 1px solid #3079ED;
-    
+    float:right;
 }
 .filterButton:hover
 {
@@ -729,17 +727,12 @@ div#title
 {
     float:left;
     font-size:1.3em;
-    width:100%;
+    width:80%;
     background:#666;
     color:#fff;
     text-transform:uppercase;
     font-family:Calibri;
-    border-color: #F0E0A0;
-    border-style: solid;
-    border-right-width: 1px;
-    border-left-width: 1px;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
+    border:1px solid #ccc;
     
 }
 div.fila
@@ -825,7 +818,7 @@ div.menu ul li a:hover, .boton:hover
     padding-top:5px;
     padding-left:30px;
 }
-#buttonSection
+.buttonSection
 {   
     position:relative;
     float:right;
@@ -1052,7 +1045,7 @@ div.menu ul li a:hover, .boton:hover
     background:#4d90fe;
 }
 
-#filtros
+#filtros,.filtros
 {
     text-transform:uppercase;
     display:none;
@@ -1736,3 +1729,44 @@ input[type="file"]
     box-shadow: 0px 0px 5px #000;
 }
 
+#botonAgregarEjercicio
+{
+    width:40px;
+    height:40px;
+    background-color: #4d90fe;
+    border: 1px #4e667d solid;
+    color: white;
+    float:right;
+}
+#botonAgregarEjercicio:hover
+{
+    width:40px;
+    height:40px;
+    background-color: #fff;
+    border: 1px #4e667d solid;
+    color: #4d90fe;
+}
+#overDiv
+{
+    background:#666;
+    color:#fff;
+    -moz-box-shadow: 0px 0px 5px #333;
+    -webkit-box-shadow: 0px 0px 5px #333;
+    box-shadow: 0px 0px 5px #000;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor:pointer;
+    cursor:hand;
+    position:absolute;
+    display:block;
+    float:left;
+    opacity: .70;
+    filter: alpha(opacity=70%);
+    z-index:100;
+    padding-left:10px;
+    padding-top:5px;
+    margin-left:10px;
+    width:80px;
+    height:25px;
+}

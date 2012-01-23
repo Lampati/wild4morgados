@@ -58,7 +58,7 @@ namespace WebProgramAR.Controllers
             Curso c = CursoNegocio.GetCursoById(id);
             return View(c);
         }
-
+        
         //
         // GET: /Curso/Create
 
@@ -152,6 +152,25 @@ namespace WebProgramAR.Controllers
             
         }
 
+        
+        /// <summary>
+        /// Cargar Provincias de acuerdo al pais.
+        /// </summary>
+        [HttpPost]
+        public JsonResult GetEjerciciosNotByUser(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio)
+        {
+            List<Ejercicio> listaEjercicios = Negocio.EjercicioNegocio.GetEjercicioNotUsuario(usuarioId, cursoId, nivelEjercicio, estadoEjercicio).ToList();
+
+            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            foreach (Ejercicio item in listaEjercicios)
+            {
+                listaRetorno.Add(new GenericJsonModel() { Id = item.EjercicioId.ToString(), Value = item.Nombre });
+            }
+
+            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
+        }
+
+        
         
     }
 }

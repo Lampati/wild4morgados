@@ -196,7 +196,39 @@ namespace WebProgramAR.Controllers
 
         }
 
-      
+        //
+        // GET: /Curso/Details/5
+
+        public ActionResult AsociarCursoEjercicio(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+             int usuarioId = -1, int cursoId = -1, string nombre = "",
+             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
+        {
+            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+
+            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
+
+            return View(datos);
+        }
+
+        //
+        // POST: /Curso/Edit/5
+
+        [HttpPost]
+        public ActionResult AsociarCursoEjercicio(Curso curso)
+        {
+            // TODO: Add update logic here
+            if (ModelState.IsValid)
+            {
+                CursoNegocio.AsociarCursoEjercicio(curso);
+                return Content(Boolean.TrueString);
+            }
+            else
+            {
+                return View();
+            }
+
+        }
 
 
     }

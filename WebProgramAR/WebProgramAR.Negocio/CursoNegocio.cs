@@ -41,5 +41,10 @@ namespace WebProgramAR.Negocio
             return CursoDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, idCurso, apellido);
         }
 
+
+        public static void AsociarCursoEjercicio(Curso curso)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

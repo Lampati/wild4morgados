@@ -13,7 +13,14 @@ namespace WebProgramAR.Negocio
         {
             return EjercicioDA.GetEjercicioById(id);
         }
-
+        public static IEnumerable<Ejercicio> GetEjerciciosByCursoByUsuarioByNivelByEstado(int usuarioId, int cursoId, int nivelEjercicio,int estadoEjercicio)
+        {
+            return EjercicioDA.GetEjerciciosByCursoByUsuarioByNivelByEstado(usuarioId, cursoId, estadoEjercicio, nivelEjercicio);
+        }
+        public static IEnumerable<Ejercicio> GetEjercicioNotUsuario(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio)
+        {
+            return EjercicioDA.GetEjercicioNotUsuario(usuarioId, cursoId, estadoEjercicio, nivelEjercicio);
+        }
         public static void Alta(Ejercicio Ejercicio)
         {
             Ejercicio.FechaAlta = DateTime.Now;
