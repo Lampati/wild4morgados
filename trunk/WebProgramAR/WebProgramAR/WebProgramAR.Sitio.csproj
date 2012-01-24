@@ -14,6 +14,7 @@
     <AssemblyName>WebProgramAR</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +82,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CursoAsociarModel.cs" />
     <Compile Include="Models\CursoModels.cs" />
     <Compile Include="Models\GenericJsonModel.cs" />
     <Compile Include="Models\UserModels.cs" />

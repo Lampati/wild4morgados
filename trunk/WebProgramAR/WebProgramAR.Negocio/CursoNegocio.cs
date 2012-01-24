@@ -23,7 +23,7 @@ namespace WebProgramAR.Negocio
 
         public static void Modificar(Curso Curso)
         {
-            CursoDA.Modificar(Curso);
+            CursoDA.Modificar(Curso,false);
         }
 
         public static void Eliminar(int id)
@@ -45,6 +45,15 @@ namespace WebProgramAR.Negocio
         public static void AsociarCursoEjercicio(Curso curso)
         {
             throw new NotImplementedException();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curso">Curso a modificar</param>
+        /// <param name="p">Indica si hay que asignarle los ejercicios</param>
+        public static void Modificar(Curso curso, bool p)
+        {
+            CursoDA.Modificar(curso, p);
         }
     }
 }

@@ -92,7 +92,6 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Curso/Edit/5
- 
         public ActionResult Edit(int id)
         {
             if (Request.IsAjaxRequest())
@@ -108,7 +107,6 @@ namespace WebProgramAR.Controllers
 
         //
         // POST: /Curso/Edit/5
-
         [HttpPost]
         public ActionResult Edit(Curso curso)
         {
@@ -123,6 +121,65 @@ namespace WebProgramAR.Controllers
                     return View();
                 }
             
+        }
+
+
+        //
+        // GET: /Curso/Edit/5
+        public ActionResult AsociarEjercicios(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                Curso c = CursoNegocio.GetCursoById(id);
+
+                CursoAsociarModel model = new CursoAsociarModel();
+                model.Curso = c;
+
+                List<int> listaEjerciciosId = new List<int>();
+                
+                foreach (Ejercicio item in c.Ejercicios)
+	            {
+                    listaEjerciciosId.Add(item.EjercicioId);		 
+	            }
+
+                model.Curso.Ejercicios.Clear();
+                model.EjerciciosId = listaEjerciciosId.ToArray();
+
+                return View("AsociarEjercicios", model);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
+        }
+
+        //
+        // POST: /Curso/Edit/5
+        [HttpPost]
+        public ActionResult AsociarEjercicios(CursoAsociarModel model)
+        {
+            // TODO: Add update logic here
+            if (ModelState.IsValid)
+            {
+                AgregarAsociacionesEjercicioACurso(model.Curso, model.EjerciciosId);
+
+                CursoNegocio.Modificar(model.Curso, true);
+                
+                return Content(Boolean.TrueString);
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
+        private void AgregarAsociacionesEjercicioACurso(Curso curso, int[] ejercicios)
+        {
+            foreach (int id in ejercicios.ToList())
+            {
+                curso.Ejercicios.Add(EjercicioNegocio.GetEjercicioById(id));
+            }
         }
 
         //
