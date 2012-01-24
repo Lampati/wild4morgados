@@ -78,7 +78,20 @@
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.NivelEjercicioId.ToString()
-                    }))
+                    })
+                    )
+                    </td>
+                    <td><div class="label">Relacionado</div></td>
+                    <td valign="top">               
+                    @Html.DropDownList("Asociado_NoAsociado", new SelectList(
+                              new List<Object>{ 
+                                   new { value = 0 , text = "TODOS"  },
+                                   new { value = 1 , text = "ASOCIADO" },
+                                   new { value = 2 , text = "NO ASOCIADO"}
+                                },
+                              "value",
+                              "text"
+                       ))
                     </td>
                 </tr>
             </table>
@@ -128,5 +141,6 @@
     $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicio");
     convertSelect("nivelEjercicio");
     convertSelect("estadoEjercicio");
+    convertSelect("Asociado_NoAsociado");
     function OnChangeDo() { return false; }
 </script>
