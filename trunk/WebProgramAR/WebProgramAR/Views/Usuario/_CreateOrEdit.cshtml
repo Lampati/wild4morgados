@@ -205,6 +205,7 @@
             $("#LocalidadId").attr("value", ui.item.label);
         },
         change: function (event, ui) {
+        if (ui.item!=undefined)
             $("#LocalidadId").val(ui.item.label);
         }
     });
