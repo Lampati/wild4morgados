@@ -28,25 +28,49 @@ namespace WebProgramAR.DataAccess
                 db.SaveChanges();
             }
         }
-
-        public static void Modificar(Curso Curso)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Curso"></param>
+        /// <param name="asignarEjercicios">Indica si tengo que reemplazar los ejercicios del curso</param>
+        public static void Modificar(Curso Curso, bool asignarEjercicios)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Modificar(Curso, db);
+                Modificar(Curso, asignarEjercicios, db);
             }
         }
 
    
 
-        private static void Modificar(Curso cursoModif, WebProgramAREntities db)
+        private static void Modificar(Curso cursoModif, bool asignarEjercicios, WebProgramAREntities db)
         {
             Curso cursoOrig = db.Cursos.Single(u => u.CursoId == cursoModif.CursoId);
 
             cursoOrig.Nombre = cursoModif.Nombre;
 
+            if (asignarEjercicios)
+            {
+                AsignarEjerciciosQueCorrespondan(cursoOrig, cursoModif,db);
+            }
+
+           
+
             db.ObjectStateManager.ChangeObjectState(cursoOrig, EntityState.Modified);
             db.SaveChanges();
+        }
+
+        private static void AsignarEjerciciosQueCorrespondan(Curso cursoOrig, Curso cursoModif, WebProgramAREntities db)
+        {
+            cursoOrig.Ejercicios.Clear();
+
+            foreach (var ejer in cursoModif.Ejercicios.ToList())
+            {
+                if (!cursoOrig.Ejercicios.ToList().Exists(o => o.EjercicioId == ejer.EjercicioId))
+                {
+                    cursoOrig.Ejercicios.Add(ejer);
+                }
+            }       
         }
 
         public static void Eliminar(int id)
@@ -105,5 +129,7 @@ namespace WebProgramAR.DataAccess
         }
 
         #endregion
+
+        
     }
 }
