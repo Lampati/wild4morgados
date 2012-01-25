@@ -7,6 +7,7 @@
     List<WebProgramAR.Entidades.Localidad> listaLocalidades = (List<WebProgramAR.Entidades.Localidad>)ViewBag.Localidades;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
     ViewBag.Title = "Mi Perfil";
+    Layout = null;
 }
 
 
@@ -141,9 +142,90 @@
                     @Html.ValidationMessageFor(m => m.LocalidadId)
                 </div>
             </div>
-
+            
         </fieldset>
         </div>
-    </div>
+        <br style="height: 15px" />
 
-<div id="dialog" class="dialogDiv" ></div>
+             <div id="buttonSectionOptions" class="buttonSectionOptions">
+            <div>
+                <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
+            </div>
+            <div >
+                 <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
+            </div>
+    </div>
+<div id="update-message" class"error" style="display:none;"></div>
+<div id="divOperacionExitosa">Operacion Exitosa</div>
+<script type="text/javascript">
+    convertSelect("PaisId");
+    convertSelect("TipoUsuarioCreate");
+    convertSelect("ProvinciaId");
+    $("#FechaNacimiento").datepicker();
+
+    function OnChangeDo(div) {
+        if (div.attr('id') == "PaisId") {
+            var pais = $("#selectBox_PaisId").attr("rel");
+            $.ajax({
+                url: '@Url.Action("GetProvinciasByPais")',
+                data: " { paisId: '" + pais + "'}",
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $("#listProvincias .tzSelect").remove();
+                    $("#ProvinciaId").children().remove();
+                    var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                    for (var i = 0; i < provincias.length; i++) {
+                        var val = provincias[i].Id;
+                        var text = provincias[i].Value;
+                        $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
+                    }
+
+                    convertSelect("ProvinciaId");
+                }
+            });
+            $("#listProvincias").show();
+            return;
+        }
+        if (div.attr('id') == "ProvinciaId") {
+            $("#listLocalidades").show();
+            return;
+        }
+    }
+
+    $("#LocalidadId").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
+                data: " { paisId: '" + $("#selectBox_PaisId").attr("rel") + "', provinciaId: '" + $("#selectBox_ProvinciaId").attr("rel") + "', Localidad: '" + request.term + "' }",
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Value,
+                            value: item.Id
+                        }
+                    }));
+                }
+            })
+
+        },
+        scrollHeight: 30,
+        minChars: 1,
+        delay: 100,
+        type: 'POST',
+        selectFirst: false,
+        select: function (event, ui) {
+            $("#LocalidadId").text(ui.item.label);
+            $("#LocalidadId").attr("value", ui.item.label);
+        },
+        change: function (event, ui) {
+            if (ui.item != undefined)
+                $("#LocalidadId").val(ui.item.label);
+        }
+    });
+            
+</script>
