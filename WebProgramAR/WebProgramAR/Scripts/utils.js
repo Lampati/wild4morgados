@@ -20,8 +20,6 @@ SetFiltroOpenClose();
 function GetPosition() {
     return position;
 }
-
-
 //Dialogo login
 
 
@@ -42,15 +40,23 @@ $(document).ready(function () {
         hide: "blind"
             , error: function (msg) { alert(msg); }
     });
-    $(".hoverRel").mouseenter(function (event) {
-        $("#overDiv").html($(this).attr("alt"));
+    $(".hoverRel").mousemove(function (event) {
         $("#overDiv").css({ 'top': event.pageY, 'left': event.pageX });
-        $("#overDiv").show();
-    }).mouseleave(function () {
-        $("#overDiv").hide();
+    });
+    $(".hoverRel").mouseover(function (event) {
+        $("#overDiv").html($(this).attr("alt"));
+        activeDiv();
+    }).mouseout(function () {
+        nActiveDiv();
     });
 });
 
+function activeDiv() {
+    $("#overDiv").show();
+}
+function nActiveDiv() {
+    $("#overDiv").hide();
+}
 function OpenDialogLogin(event, id, accion, ancho, alto) {
     if (event != null) {
         event.preventDefault();

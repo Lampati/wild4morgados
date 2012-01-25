@@ -79,10 +79,6 @@
             <nav>
                 <ul id="menu">
                         <li class="selected">@Html.ActionLink("Home", "Index", "Home")</li>
-                        @if (Request.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Mi Perfil", "Mi Perfil", "Usuario")</li>
-                        }
                         <li>@Html.ActionLink("Que es?", "Descripcion", "Home")</li>
                         <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
                         <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>

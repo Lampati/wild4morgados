@@ -242,13 +242,14 @@ footer, #footer
 
 /* LogOn Button */
 
-.logOnCandado
+.logOnCandado,.logOutCandado
 {
     position:absolute;
     top:3px;
     right:110px;
     z-index:100;
 }
+
 /* TAB MENU   */
 ul#menu
 {
@@ -634,8 +635,6 @@ div#title
 }
 #logindisplay a:hover
 {
-    background: #16f;
-    border:1px solid #ecf0fa;
     color: #ecf0fa;
     text-decoration: none;
 }
@@ -1485,9 +1484,9 @@ input[type="text"].datosExtraTextBox
     padding: 5px;
     padding-right : 10px;
 }
-.loadingGif
+#miPerfil
 {
-    
+    margin-left:40px;
 }
 #logonerror
 {

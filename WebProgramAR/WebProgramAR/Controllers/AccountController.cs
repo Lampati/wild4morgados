@@ -89,7 +89,7 @@ namespace WebProgramAR.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return Content(Boolean.TrueString);
         }
 
         //
