@@ -192,6 +192,7 @@ namespace WebProgramAR.Controllers
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
                 //Aca lo creo en la tabla para la autenticacion
+                
                 Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email,null, null, true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)

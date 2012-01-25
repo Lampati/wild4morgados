@@ -19,7 +19,7 @@
 <div class="editor-field">
     <div class="display-label-delete-group">Ejercicios</div>    
         
-        @if (Model.Ejercicios!=null && Model.Ejercicios.Count > 0)
+        @if (Model != null && Model.Ejercicios!=null && Model.Ejercicios.Count > 0)
         {
             foreach (var Ejercicio in Model.Ejercicios)
             {

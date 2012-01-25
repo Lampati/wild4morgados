@@ -63,8 +63,10 @@
 
 <!--<h2>Cursos</h2>-->
 <div id="buttonSection" class="buttonSection">
+@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+{
         <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-      
+}
     <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
 </div>    
 <div id="filtros">
