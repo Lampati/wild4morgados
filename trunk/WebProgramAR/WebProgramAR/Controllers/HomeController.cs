@@ -13,10 +13,15 @@ namespace WebProgramAR.Controllers
         public ActionResult Index(bool LoginRequiered = false)
         {
             //MembershipCreateStatus createStatus;
-            //Membership.CreateUser("admin", "admin123", "admin@mail.com", null, null, true, null, out createStatus);           
-            //Roles.AddUserToRole("admin", "Administrador");
+            //Membership.CreateUser("sa", "morgado", "morgado@mail.com", null, null, true, null, out createStatus);           
+            //Roles.AddUserToRole("sa", "Administrador");
 
-            string usuario = SimpleSessionPersister.UserName;
+            //Membership.CreateUser("profe", "morgado", "morgado@gmail.com", null, null, true, null, out createStatus);
+            //Roles.AddUserToRole("profe", "Profesor");
+
+            //Membership.CreateUser("moderador", "morgado", "morgado@gmail.com", null, null, true, null, out createStatus);
+            //Roles.AddUserToRole("moderador", "Moderador");
+
 
 
             ViewBag.Message = "Welcome to ASP.NET MVC!";

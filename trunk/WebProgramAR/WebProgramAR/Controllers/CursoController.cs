@@ -145,6 +145,8 @@ namespace WebProgramAR.Controllers
                 model.Curso.Ejercicios.Clear();
                 model.EjerciciosId = listaEjerciciosId.ToArray();
 
+                
+
                 return View("AsociarEjercicios", model);
             }
             else
