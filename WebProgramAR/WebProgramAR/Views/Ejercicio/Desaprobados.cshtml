@@ -18,7 +18,7 @@
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "DESAPROBADOS") {
+            if ($(this).children().html().toUpperCase() == "EJERCICIOS") {
                 $(this).addClass("selected");
             } else {
                 $(this).removeClass("selected");
@@ -46,12 +46,12 @@
 </script>
 
 
-<!--<h2>Pendientes de Aprobacion</h2>-->
+<h1>Ejercicios Aprobados</h1>
 <div id="buttonSection" class="buttonSection">
     <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
 </div>    
 <div id="filtros">
-    <div class="tituloabm">Ejercicios Desaprobacion</div>
+    <div class="tituloabm">Seleccion de Ejercicios</div>
 
     <div class="filtrosabm">
         @using (Html.BeginForm("Desaprobados", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))

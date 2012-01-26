@@ -58,7 +58,7 @@
 </script>
 
 
-<!--<h2>Ejercicios</h2>-->
+<h1>Ejercicios Aprobados</h1>
 <div id="buttonSection" class="buttonSection">
 @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
 {
@@ -68,7 +68,7 @@
 </div>
 
 <div id="filtros">
-    <div class="tituloabm">Seleccion de cursos</div>
+    <div class="tituloabm">Seleccion de Ejercicios</div>
 
     <div class="filtrosabm">
         @using (Html.BeginForm("Index", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))

@@ -130,8 +130,7 @@ h1
     border-bottom-right-radius:10px;
     -moz-border-radius-bottomright:10px;
     -webkit-border-bottom-right-radius:10px;
-    background:#EE4000;
-    color:#fff;
+    color:#EE4000;
     margin-bottom:10px;
     width:100%;
     z-index:151;
@@ -154,7 +153,7 @@ h2
     padding-top:5px;
     color:#fff;
     margin-bottom:10px;
-    width:60%;
+    width:80%;
     z-index:151;
 }
 
@@ -285,60 +284,74 @@ ul#menu li#greeting
     color: #fff;
 }
 
-ul#menu li a,.subMenu li a
+ul#menu li a,.subMenu li a,.subMenu li.selected a
 {
     padding: 8px 20px;
     text-decoration: none;
     line-height: 3.5em;
-    background-color: #ccc;
-    color: #fff;
+    background-color: #ccc !important;
+    color: #fff !important;
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border:1px solid  #fff;
     cursor:pointer;
     cursor:hand;
+    
 }
 
-ul#menu li a:hover,.subMenu li a:hover
+ul#menu li a:hover,ul.subMenu li a:hover,ul.subMenu li.selected a:hover
 {
-    background-color: #EE4000;
-    color:#fff;
+    
+    background-color: #EE4000 !important;
+    color:#fff !important;
     text-decoration: none;
     border:1px solid #EE4400;
     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px #888;
     box-shadow: 0 0 5px #888;
+    
 }
 
-ul#menu li a:active, .subMenu li a:active
+ul#menu li a:active
 {
     background-color: #19F;
     text-decoration: none;
     border:1px solid #fff;
 }
 
-ul#menu li.selected a, .subMenu li.selected a
+ul#menu li.selected a
 {
     background-color: #333;
     color: #fff;
     border:1px solid #fff;
 }
+
 .submenu
 {
     width:180px;
     padding-left:10px;
+    line-height:70%;
+    margin-top:-5px;
+    margin-left:40px;
+    padding-top:10px;
     position:fixed;
     float:left;
     text-align:left;
     display:none;
-    background:#333;
+    background:#666;
     height:auto;
-    -moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-	opacity: .90;
-    filter: alpha(opacity=90%);
+    border-bottom-right-radius:10px;
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+    -moz-border-radius-bottomleft:10px;
+    -webkit-border-bottom-left-radius:10px;
+	z-index:1100;
+}
+.submenu li
+{
+ margin:0;   
 }
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
@@ -838,7 +851,8 @@ div.menu ul li a:hover, .boton:hover
     position:relative;
     float:right;
     width:40%;
-    margin-top:-30px;
+    margin-top:-42px;
+    margin-right:10px;
 }
 .btn_filtros
 {
@@ -1819,7 +1833,7 @@ ul.tabs
     border:3px solid  #ccc;
     cursor:pointer;
     cursor:hand;
-    margin-left:10px;
+    margin-left:0px;
 }
 .tabs li:hover
 {
