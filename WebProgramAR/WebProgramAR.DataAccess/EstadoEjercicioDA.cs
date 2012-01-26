@@ -33,7 +33,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.EstadoEjercicios.Single(u => u.Descripcion.ToUpper() == name.ToUpper());
+                return (from u in db.EstadoEjercicios where u.Descripcion.ToUpper() == name.ToUpper() select u).ToArray()[0];
             }
         }
       

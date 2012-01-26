@@ -85,13 +85,20 @@ namespace WebProgramAR.Controllers
 
        */
         //
-        // GET: /Account/LogOff        
+        //// GET: /Account/LogOff        
+        //public ActionResult LogOff()
+        //{
+        //    FormsAuthentication.SignOut();
+        //    return Content(Boolean.TrueString);
+        //}
+
+        [Authorize]
+        [HttpPost]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            return Content(Boolean.TrueString);
+            return Json(Boolean.TrueString,JsonRequestBehavior.AllowGet);
         }
-
         //
         // GET: /Account/ChangePassword
 

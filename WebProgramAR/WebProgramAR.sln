@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.Globales", "We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.WebService", "WebProgramAR.WebService\WebProgramAR.WebService.csproj", "{3E759CF1-2986-473F-85D3-7E5667F6F8B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAr.MailSender", "WebProgramAr.MailSender\WebProgramAr.MailSender.csproj", "{E136186B-89AE-49D3-B49E-27BED3BA263C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E759CF1-2986-473F-85D3-7E5667F6F8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E136186B-89AE-49D3-B49E-27BED3BA263C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E136186B-89AE-49D3-B49E-27BED3BA263C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E136186B-89AE-49D3-B49E-27BED3BA263C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E136186B-89AE-49D3-B49E-27BED3BA263C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

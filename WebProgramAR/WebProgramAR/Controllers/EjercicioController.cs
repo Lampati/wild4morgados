@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
+using System.Web.Security;
+using WebProgramAr.MailSender;
 
 namespace WebProgramAR.Controllers
 {
@@ -18,6 +20,9 @@ namespace WebProgramAR.Controllers
              int usuarioId = -1, int cursoId = -1, string nombre = "", 
              int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
         {
+
+            EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
+            estadoEjercicio = estado.EstadoEjercicioId;
 
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
 
@@ -196,6 +201,25 @@ namespace WebProgramAR.Controllers
 
         }
 
+        [Authorize(Roles = "administrador, moderador")]
+        public ActionResult Desaprobados(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false)
+        {
+
+            EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Desaprobado");
+            int estadoEjercicio = estado.EstadoEjercicioId;
+
+            //Pasar la cantidad por pagina a una constante mas copada.
+
+
+            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+
+            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+
+            return View("Desaprobados", datos);
+
+        }
+
         //
         // GET: /Curso/Details/5
 
@@ -230,6 +254,66 @@ namespace WebProgramAR.Controllers
 
         }
 
+   
+        [Authorize(Roles = "administrador, moderador")]
+        public ActionResult Moderar(int id)
+        {
+            ModerarEjercicioModel model = new ModerarEjercicioModel();
+            model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
+            model.Aceptado = false;
+            model.MensajeMail = string.Empty;
 
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "administrador, moderador")]
+        public ActionResult Moderar(ModerarEjercicioModel model)
+        {
+            bool resultado = false;
+
+            try
+            {
+                Ejercicio ejercicio = EjercicioNegocio.GetEjercicioByIdOnlyUser(model.Ejercicio.EjercicioId);
+
+
+                
+                
+
+                MembershipUser membUsuario = Membership.GetUser(ejercicio.Usuario.UsuarioNombre);
+                Ejercicio ejercicioFunca = new Ejercicio();
+
+                ejercicioFunca.EjercicioId = ejercicio.EjercicioId;
+                ejercicioFunca.EstadoEjercicioId = ejercicio.EstadoEjercicioId;
+                ejercicioFunca.Enunciado = ejercicio.Enunciado;
+                ejercicioFunca.SolucionTexto = ejercicio.SolucionTexto;
+                ejercicioFunca.Global = ejercicio.Global;
+
+                EstadoEjercicio estado;
+
+                if (model.Aceptado)
+                {
+                    //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Aprobado"), "Aprobado");
+                    estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
+                    
+                }
+                else
+                {
+                    //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Desaprobado"), "Desaprobado");
+                    estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Desaprobado");
+                }
+
+                ejercicioFunca.EstadoEjercicioId = estado.EstadoEjercicioId;
+                EjercicioNegocio.Modificar(ejercicioFunca);
+            }
+            catch (Exception)
+            {
+                return Content(Boolean.FalseString);
+            }
+
+            return Content(Boolean.TrueString);
+        }
     }
 }

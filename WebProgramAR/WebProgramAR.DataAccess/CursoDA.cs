@@ -130,6 +130,23 @@ namespace WebProgramAR.DataAccess
 
         #endregion
 
-        
+
+
+        public static void EliminarCursosDeUsuario(int idUsuario)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Curso> cursos = from u in db.Cursos where u.UsuarioId == idUsuario select u;
+                //Curso.Status = false; //baja lógica
+
+                foreach (var item in cursos.ToList())
+	            {
+                    db.Cursos.DeleteObject(item);		 
+	            } 
+
+                
+                db.SaveChanges();
+            }
+        }
     }
 }
