@@ -1,6 +1,4 @@
-﻿
-@model WebProgramAR.Entidades.Usuario
-
+﻿@model WebProgramAR.Entidades.Usuario
 @{
     List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
     List<WebProgramAR.Entidades.Provincia> listaProvincias = (List<WebProgramAR.Entidades.Provincia>)ViewBag.Provincias;
@@ -11,21 +9,38 @@
 
 
 <script language="javascript">
+    OpenTab(null, $("#UsuarioId").val() , '@Url.Action("Edit")/', "content");
     $(document).ready(function () {
-        $(".tabs li").click(function () {
+        $(".tabs li").click(function (event) {
             var actual = $(this).attr("id");
-            $(".tabs li").each(function () {
+            $(".tabs li").each(function (e) {
                 if ($(this).attr("id") == actual) {
                     $("#" + actual).fadeIn("slow");
                     $(this).addClass("selected");
-                    $("#" + actual + "Content").fadeIn("slow");
+                    
                 }
                 else {
                     $(this).removeClass("selected");
-                    $("#" + $(this).attr("id") + "Content").fadeOut("slow");
                 }
-
+                
             });
+            switch ($(this).attr("id")) {
+                    case "Perfil":
+                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("Edit")/', "content");
+                        break;
+                    case "Cursos":
+                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
+                        break;
+                    case "Aprobados":
+                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
+                        break;
+                    case "Pendientes":
+                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Pendientes/Aprobacion")/', "content");
+                        break;
+                    case "Desaprobados":
+                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Desaprobados")/', "content");
+                        break;
+                }
         });
     });
 </script>
@@ -37,27 +52,12 @@
     <li id="Pendientes">Pendientes</li>
     <li id="Desaprobados">Desaprobados</li>
 </ul>
+@Html.HiddenFor(model => model.UsuarioId)
 <div id="tabContent" class="contentInformation">
-    <div id="PerfilContent">
-       @using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new { id = "frmSaveUsuario", enctype = "multipart/form-data" }))
-       { 
-            @Html.ValidationSummary(true)
-             @Html.Partial("_CreateOrEdit", Model)
-         
-            <div id="buttonSectionOptions" class="buttonSectionOptions">
-                <div>
-                    <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
-                </div>
-                <div >
-                     <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
-                </div>
-            </div>
-       }
+    <div id="content">
+      
     </div>
-    <div id="CursosContent"></div>
-    <div id="AprobadosContent"></div>
-    <div id="PendientesContent"></div>
-    <div id="DesaprobadosContent"></div>
+    
 </div>
 <div id="update-message" class"error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>

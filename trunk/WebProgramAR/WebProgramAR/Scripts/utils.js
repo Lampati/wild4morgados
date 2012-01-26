@@ -25,15 +25,15 @@ function GetPosition() {
 
 $(document).ready(function () {
     /*PARA EL MANEJO DE MENU/SUBMENU*/
-    $(".hasSubMenu").mouseover(function () {
+    $(".hasSubMenu").click(function () {
         var divId = $(this).attr("id");
         var left = ($(this).position().left) - 30;
         $("#sub" + divId).css("left", left);
-        $("#sub" + divId).fadeIn("slow");
+        $("#sub" + divId).stop(true,true).fadeIn("slow");
     });
 
-    $(".submenu").mouseout(function () {
-        $(this).fadeOut("slow");
+    $("ul .submenu").mouseout(function () {
+        $(this).stop(true, true).fadeOut("slow");
     });
 
     /*^FIN MANEJO MENU SUBMENU*/
@@ -138,7 +138,19 @@ $(document).ready(function () {
 
   
 });
-
+function OpenTab(event, id, accion,idTab) {
+    if (event != null) {
+        event.preventDefault();
+    }
+    /*$("#"+idTab).unbind("tabOpen");
+    $("#" + idTab).bind("dialogopen", function (event, ui) {*/
+    alert(id);
+        $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
+        $(this).load(accion + id, function () {
+            //alert('Load was performed.');
+        });/*
+    });*/
+}
 function OpenDialog(event, id, accion, ancho, alto) {
     if (event != null) {
         event.preventDefault();

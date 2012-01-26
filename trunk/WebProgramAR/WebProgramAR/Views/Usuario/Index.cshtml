@@ -36,10 +36,10 @@
         });
 
         $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 700, 500); });
+        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 400); });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 900, 500);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 900, 480);
         });
 
         $('.botonDetalles').click(function (event) {
@@ -54,7 +54,7 @@
     });
 </script>
 
-<!--<h2>Usuarios</h2>-->
+<h1>Usuarios</h1>
 <div id="buttonSection" class="buttonSection">
      @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
      {
