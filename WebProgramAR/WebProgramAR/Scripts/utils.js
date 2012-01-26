@@ -24,6 +24,19 @@ function GetPosition() {
 
 
 $(document).ready(function () {
+    /*PARA EL MANEJO DE MENU/SUBMENU*/
+    $(".hasSubMenu").mouseover(function () {
+        var divId = $(this).attr("id");
+        var left = ($(this).position().left) - 30;
+        $("#sub" + divId).css("left", left);
+        $("#sub" + divId).fadeIn("slow");
+    });
+
+    $(".submenu").mouseout(function () {
+        $(this).fadeOut("slow");
+    });
+
+    /*^FIN MANEJO MENU SUBMENU*/
     $("#btnCancelar").live('click', function () {
         CerrarDialog();
     });

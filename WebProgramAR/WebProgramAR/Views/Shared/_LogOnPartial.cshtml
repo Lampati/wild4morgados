@@ -35,7 +35,7 @@
 @if(Request.IsAuthenticated) {
     <div id="logoutClickMe">
         <img class="logOutCandado hoverRel" src="../../Content/images/logout.png" style="float:center" alt="LogOff" />
-        <div id="miPerfil" class="hoverRel" alt="Mi Perfil">@User.Identity.Name</div>
+        <div id="miPerfil" class="miPerfilButton hoverRel" alt="Mi Perfil">@Html.ActionLink(User.Identity.Name, "MiPerfil", "Usuario")</div>
     </div>
 }
 else
