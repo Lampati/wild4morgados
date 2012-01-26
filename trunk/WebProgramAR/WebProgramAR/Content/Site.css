@@ -219,7 +219,7 @@ header h1, #header h1
     -webkit-border-radius: 4px 0 0 0;
     -moz-border-radius: 4px 0 0 0;
     background-image: url('images/fondo.png');
-    height:370px;
+    height:390px;
 }
 
 footer, #footer
@@ -285,7 +285,7 @@ ul#menu li#greeting
     color: #fff;
 }
 
-ul#menu li a
+ul#menu li a,.subMenu li a
 {
     padding: 8px 20px;
     text-decoration: none;
@@ -296,9 +296,11 @@ ul#menu li a
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border:1px solid  #fff;
+    cursor:pointer;
+    cursor:hand;
 }
 
-ul#menu li a:hover
+ul#menu li a:hover,.subMenu li a:hover
 {
     background-color: #EE4000;
     color:#fff;
@@ -309,20 +311,35 @@ ul#menu li a:hover
     box-shadow: 0 0 5px #888;
 }
 
-ul#menu li a:active
+ul#menu li a:active, .subMenu li a:active
 {
     background-color: #19F;
     text-decoration: none;
     border:1px solid #fff;
 }
 
-ul#menu li.selected a
+ul#menu li.selected a, .subMenu li.selected a
 {
     background-color: #333;
     color: #fff;
     border:1px solid #fff;
 }
-
+.submenu
+{
+    width:180px;
+    padding-left:10px;
+    position:fixed;
+    float:left;
+    text-align:left;
+    display:none;
+    background:#333;
+    height:auto;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	opacity: .90;
+    filter: alpha(opacity=90%);
+}
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 .fieldsElements
@@ -428,8 +445,7 @@ input[type="text"].textBoxForFilter
 {   
     position:relative;
     float:right;
-    width:60%;
-    margin-top:10px;
+    bottom:10px;
 }
 .buttonSectionOptions div
 {
@@ -636,7 +652,7 @@ div#title
 #logindisplay a:hover
 {
     color: #ecf0fa;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /* Styles for validation helpers
@@ -1484,10 +1500,14 @@ input[type="text"].datosExtraTextBox
     padding: 5px;
     padding-right : 10px;
 }
-#miPerfil
+.miPerfilButton
 {
+    float:center;
     margin-left:40px;
+    width:100%;
+    text-align:center;
 }
+
 #logonerror
 {
     display:none;
@@ -1768,4 +1788,55 @@ input[type="file"]
     margin-left:10px;
     width:80px;
     height:25px;
+}
+/*PARA EL MANEJO DE TABS*/
+ul.tabs
+{
+  position:relative;
+  width:100%;     
+  height:30px;
+  line-height: 1em;
+  margin-top:-10px;
+  margin-left:10px;
+    
+}
+.tabs li
+{
+    display:inline;
+    list-style:none;
+    border:1px solid #000;
+    padding: 8px 20px;
+    text-decoration: none;
+    line-height: 3.5em;
+    background-color: #ccc;
+    color: #fff;
+    border-top-right-radius:10px;
+    -moz-border-radius-topright:10px;
+    -webkit-border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    -moz-border-radius-topleft:10px;
+    -webkit-border-top-left-radius:10px;
+    border:3px solid  #ccc;
+    cursor:pointer;
+    cursor:hand;
+    margin-left:10px;
+}
+.tabs li:hover
+{
+    border:3px solid #19F;
+}
+.tabs .selected
+{
+    background:#333;
+    border:3px solid  #333;
+}
+.contentInformation
+{
+    border:3px solid #333;
+    width:100%;
+    height:100%;
+    margin-top:11px;
+ 	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
 }

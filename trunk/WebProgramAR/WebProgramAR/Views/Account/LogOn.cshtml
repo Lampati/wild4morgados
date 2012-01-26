@@ -26,7 +26,7 @@
 
         if (controller != '' && action != '')
         {
-            var url = window.location.protocol + '//' + window.location.host + '/' + controller + '/' + action; 
+                var url = window.location.protocol + '//' + window.location.host + '/' + controller + '/' + action; 
         }
         window.location.href = url;
     }
@@ -51,7 +51,8 @@
 {
     @Html.ValidationSummary(true, "Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.")
     <div>
-        <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.</div>
+        <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.
+        </div>  
         <fieldset>
             <div id="result"></div>
             <div class="editor-label">
@@ -69,11 +70,10 @@
                 @Html.PasswordFor(m => m.Password, new { Class = "required" })
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
-          
-            <p>
-                <input type="submit" id="logonButton" value="Log On" />
-            </p>
+            <p><input type="submit" id="logonButton" value="Log On" /></p>
         </fieldset>
+        <p>En caso de no recordar su contraseña,  @Html.ActionLink("Click Aqui", "Register","Usuario") .</p>
+            
     </div>
 }
 

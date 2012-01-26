@@ -79,23 +79,23 @@
             <nav>
                 <ul id="menu">
                         <li class="selected">@Html.ActionLink("Home", "Index", "Home")</li>
-                        @if (Request.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Mi Perfil", "Mi Perfil", "Usuario")</li>
-                        }
                         <li>@Html.ActionLink("Que es?", "Descripcion", "Home")</li>
                         <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
                         <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
                         
-                       <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
-
                         @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador") || HttpContext.Current.User.IsInRole("moderador")))
                         {
-                            <li>@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
+                            <li id="SeccionEjercicios" class="hasSubMenu"><a>EJERCICIOS</a>
+                                <ul id="subSeccionEjercicios" class="submenu">
+                                    <li>@Html.ActionLink("Aprobados", "Index", "Ejercicio")</li>
+                                    <li>@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
+                                    <li>@Html.ActionLink("Desaprobados", "Desaprobados", "Ejercicio")</li>
+                                </ul>
+                            </li>
                         }
-                        @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador") || HttpContext.Current.User.IsInRole("moderador")))
+                        else
                         {
-                            <li>@Html.ActionLink("Desaprobados", "Desaprobados", "Ejercicio")</li>
+                        <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
                         }
                         @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("administrador"))
                         {
