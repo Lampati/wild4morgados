@@ -47,6 +47,11 @@ namespace WebProgramAR.Negocio
             return EjercicioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global).ToList();
         }
 
-      
+
+
+        public static Ejercicio GetEjercicioByIdOnlyUser(int id)
+        {
+            return EjercicioDA.GetEjercicioByIdOnlyUser(id);
+        }
     }
 }

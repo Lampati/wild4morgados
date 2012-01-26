@@ -12,11 +12,19 @@
             LoginPopUp(event);
         });
         $(".logOutCandado").click(function (event) {
-            alert("Desloguarse");
+
+            $.ajax({
+                url: '@Url.Action("LogOff","Account")',
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            })
+
         });
-        $("#miPerfil").click(function (event) {
-            OpenDialog(event,"", '@Url.Action("../Usuario/MiPerfil")/', 800, 400);
-        });
+    
     });
     
     function LoginPopUp(event) {
@@ -38,4 +46,3 @@ else
     </div>
 }
 <div id="dialogLogin" class="dialogDiv border_all" ></div>
-<div id="dialog" class="dialogDiv border_all" ></div>

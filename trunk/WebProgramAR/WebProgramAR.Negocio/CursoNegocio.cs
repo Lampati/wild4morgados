@@ -55,5 +55,10 @@ namespace WebProgramAR.Negocio
         {
             CursoDA.Modificar(curso, p);
         }
+
+        internal static void EliminarCursosDeUsuario(int idUsuario)
+        {
+            CursoDA.EliminarCursosDeUsuario(idUsuario);
+        }
     }
 }

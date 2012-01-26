@@ -18,7 +18,7 @@
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "PENDIENTES") {
+            if ($(this).children().html().toUpperCase() == "DESAPROBADOS") {
                 $(this).addClass("selected");
             } else {
                 $(this).removeClass("selected");
@@ -31,15 +31,11 @@
                 $('#filtros').fadeIn('slow');
             }
         });
-
-        $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Moderar")/', 500, 700);
-        });
+     
 
         $('.botonDetalles').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 250);
         });
-
         var sortcol = '@grid.SortColumn';
 
         if (sortcol != '')
@@ -55,10 +51,10 @@
     <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
 </div>    
 <div id="filtros">
-    <div class="tituloabm">Ejercicios Pendientes de Aprobacion</div>
+    <div class="tituloabm">Ejercicios Desaprobacion</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("PendientesAprobacion", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("Desaprobados", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
         {    
             @Html.ValidationSummary(true)
             <table>
@@ -104,12 +100,6 @@
           header: "",
           format: @<text>
                     <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles"/>
-                  </text>
-    ),        
-    grid.Column("", 
-          header: "",
-          format: @<text>
-                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.EjercicioId)" class="botonEditar"/>
                   </text>
     )
 })

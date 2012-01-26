@@ -16,7 +16,22 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Ejercicios.Include("EstadoEjercicio").Include("Usuario").Include("NivelEjercicio").Single(u => u.EjercicioId  == id);
+
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("EstadoEjercicio").Include("Usuario").Include("NivelEjercicio")
+                                                where u.EjercicioId  == id select u;
+                return query.ToArray()[0];
+            }
+        }
+
+        public static Ejercicio GetEjercicioByIdOnlyUser(int id)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Usuario")
+                                              where u.EjercicioId == id
+                                              select u;
+                return query.ToList()[0];
             }
         }
 
@@ -38,11 +53,18 @@ namespace WebProgramAR.DataAccess
         }
 
    
-        private static void Modificar(Ejercicio Ejercicio, WebProgramAREntities db)
+        private static void Modificar(Ejercicio ejercicio, WebProgramAREntities db)
         {
-            Ejercicio EjercicioOrig = db.Ejercicios.Single(u => u.EjercicioId == Ejercicio.EjercicioId);
+            Ejercicio ejercicioOrig = db.Ejercicios.Single(u => u.EjercicioId == ejercicio.EjercicioId);
 
-            db.ObjectStateManager.ChangeObjectState(EjercicioOrig, EntityState.Modified);
+            ejercicioOrig.EstadoEjercicioId = ejercicio.EstadoEjercicioId;
+            ejercicioOrig.Enunciado = ejercicio.Enunciado;
+            ejercicioOrig.SolucionTexto = ejercicio.SolucionTexto;
+            ejercicioOrig.Global = ejercicio.Global;
+            
+
+
+            db.ObjectStateManager.ChangeObjectState(ejercicioOrig, EntityState.Modified);
             db.SaveChanges();
         }
 
@@ -105,8 +127,7 @@ namespace WebProgramAR.DataAccess
         private static IQueryable<Ejercicio> GetEjercicios(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, WebProgramAREntities db)
         {
             IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
-                                     where u.Global == global
-                                     && (usuarioId == -1 || u.UsuarioId == usuarioId)                                     
+                                     where (usuarioId == -1 || u.UsuarioId == usuarioId)                                     
                                      && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
                                      && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
                                      && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)

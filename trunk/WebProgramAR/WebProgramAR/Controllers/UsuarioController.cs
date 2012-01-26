@@ -105,7 +105,11 @@ namespace WebProgramAR.Controllers
         {
             try
             {
+
+                
                 UsuarioNegocio.Alta(usuario);
+
+
                 return RedirectToAction("Index");
             }
             catch
@@ -141,12 +145,32 @@ namespace WebProgramAR.Controllers
         {
             if (ModelState.IsValid)
             {
+                ActualizarRolesSiCorresponde(usuario);
+
+               
+
                 UsuarioNegocio.Modificar(usuario);
                 return RedirectToAction("Index");
             }else
             {
                 return View();
             }
+        }
+
+        private void ActualizarRolesSiCorresponde(Usuario usuario)
+        {
+            Usuario userActual = UsuarioNegocio.GetUsuarioById(usuario.UsuarioId);
+
+            MembershipUser us = Membership.GetUser(usuario.UsuarioNombre);
+            string[] roles = Roles.GetRolesForUser(usuario.UsuarioNombre);
+
+            if (userActual.TipoUsuarioId != usuario.TipoUsuarioId)
+            {
+                UsuarioNegocio.QuitarRolesUsuario(userActual);
+
+                UsuarioNegocio.AgregarRolAUsuario(usuario);               
+            }
+            
         }
 
         //
@@ -166,7 +190,9 @@ namespace WebProgramAR.Controllers
         {
             try
             {
-                UsuarioNegocio.Eliminar(u.UsuarioId);
+                
+
+                UsuarioNegocio.Eliminar(u);
                 return RedirectToAction("Index");
             }
             catch
@@ -187,6 +213,8 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Register(Usuario model)
         {
+            ModelState.Remove("TipoUsuario");
+
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
