@@ -27,9 +27,20 @@ $(document).ready(function () {
     /*PARA EL MANEJO DE MENU/SUBMENU*/
     $(".hasSubMenu").click(function () {
         var divId = $(this).attr("id");
+        $(this).addClass("subMenuSelected");
         var left = ($(this).position().left) - 30;
+        var top = ($(this).position().top) + 120;
         $("#sub" + divId).css("left", left);
-        $("#sub" + divId).stop(true,true).fadeIn("slow");
+        $("#sub" + divId).css("top", top);
+        $("#sub" + divId).stop(true, true).fadeIn("slow");
+    });
+    $("#menu li").mouseover(function () {
+        $(".submenu").each(function () {
+            $(this).hide();
+        });
+        $("#menu li").each(function () {
+            $(this).removeClass("subMenuSelected");
+        });
     });
 
     $("ul .submenu").mouseout(function () {
