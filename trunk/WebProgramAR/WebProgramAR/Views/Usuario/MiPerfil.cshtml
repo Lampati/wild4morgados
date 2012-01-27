@@ -8,42 +8,7 @@
 }
 
 
-<script language="javascript">
-    OpenTab(null, $("#UsuarioId").val() , '@Url.Action("Edit")/', "content");
-    $(document).ready(function () {
-        $(".tabs li").click(function (event) {
-            var actual = $(this).attr("id");
-            $(".tabs li").each(function (e) {
-                if ($(this).attr("id") == actual) {
-                    $("#" + actual).fadeIn("slow");
-                    $(this).addClass("selected");
-                    
-                }
-                else {
-                    $(this).removeClass("selected");
-                }
-                
-            });
-            switch ($(this).attr("id")) {
-                    case "Perfil":
-                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("Edit")/', "content");
-                        break;
-                    case "Cursos":
-                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
-                        break;
-                    case "Aprobados":
-                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
-                        break;
-                    case "Pendientes":
-                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Pendientes/Aprobacion")/', "content");
-                        break;
-                    case "Desaprobados":
-                        OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Desaprobados")/', "content");
-                        break;
-                }
-        });
-    });
-</script>
+
 <h1>Mi Perfil</h1>
 <ul class="tabs">
     <li id="Perfil" class="selected">Perfil</li>
@@ -61,3 +26,39 @@
 </div>
 <div id="update-message" class"error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
+<script language="javascript">
+    OpenTab(null, $("#UsuarioId").val(), '@Url.Action("Edit")/', "content");
+    $(document).ready(function () {
+        $(".tabs li").click(function (event) {
+            var actual = $(this).attr("id");
+            $(".tabs li").each(function (e) {
+                if ($(this).attr("id") == actual) {
+                    $("#" + actual).fadeIn("slow");
+                    $(this).addClass("selected");
+
+                }
+                else {
+                    $(this).removeClass("selected");
+                }
+
+            });
+            switch ($(this).attr("id")) {
+                case "Perfil":
+                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("/Edit")/', "content");
+                    break;
+                case "Cursos":
+                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
+                    break;
+                case "Aprobados":
+                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
+                    break;
+                case "Pendientes":
+                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Pendientes/Aprobacion")/', "content");
+                    break;
+                case "Desaprobados":
+                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Desaprobados")/', "content");
+                    break;
+            }
+        });
+    });
+</script>

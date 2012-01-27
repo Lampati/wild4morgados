@@ -86,11 +86,7 @@
                         @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador") || HttpContext.Current.User.IsInRole("moderador")))
                         {
                             <li id="SeccionEjercicios" class="hasSubMenu"><a>EJERCICIOS</a>
-                                <ul id="subSeccionEjercicios" class="submenu">
-                                    <li>@Html.ActionLink("Aprobados", "Index", "Ejercicio")</li>
-                                    <li>@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
-                                    <li>@Html.ActionLink("Desaprobados", "Desaprobados", "Ejercicio")</li>
-                                </ul>
+                                
                             </li>
                         }
                         else
@@ -113,6 +109,11 @@
         <footer>
         </footer>
     </div>
+    <ul id="subSeccionEjercicios" class="submenu">
+        <li class="submenuLi">@Html.ActionLink("Aprobados", "Index", "Ejercicio")</li>
+        <li class="submenuLi">@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
+        <li class="submenuLi">@Html.ActionLink("Desaprobados", "Desaprobados", "Ejercicio")</li>
+    </ul>
     <div id="disablingDiv"></div>    
     <div id="overDiv"></div>        
 </body>

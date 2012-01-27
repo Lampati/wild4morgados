@@ -289,7 +289,7 @@ ul#menu li a,.subMenu li a,.subMenu li.selected a
     padding: 8px 20px;
     text-decoration: none;
     line-height: 3.5em;
-    background-color: #ccc !important;
+    background-color: #ccc ;
     color: #fff !important;
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -303,7 +303,7 @@ ul#menu li a,.subMenu li a,.subMenu li.selected a
 ul#menu li a:hover,ul.subMenu li a:hover,ul.subMenu li.selected a:hover
 {
     
-    background-color: #EE4000 !important;
+    background-color: #EE4000 ;
     color:#fff !important;
     text-decoration: none;
     border:1px solid #EE4400;
@@ -326,33 +326,74 @@ ul#menu li.selected a
     color: #fff;
     border:1px solid #fff;
 }
-
-.submenu
+.subMenuSelected a
+{
+    background-color: #EE4000 !important;
+    color: #fff !important;
+    -moz-border-radius:10px 10px 0px 0px !important;
+	-webkit-border-radius:10px 10px 0px 0px !important;
+	border-radius:10px 10px 0px 0px !important;
+    cursor:pointer !important;
+    cursor:hand !important;
+    padding-bottom:40px !important;
+    -moz-box-shadow: 0 0 5px #888 !important;
+    -webkit-box-shadow: 0 0 5px #888 !important;
+    box-shadow: 0 0 5px #888 !important; 
+}
+ul.submenu
 {
     width:180px;
     padding-left:10px;
     line-height:70%;
-    margin-top:-5px;
+    margin-top:3px;
     margin-left:40px;
     padding-top:10px;
-    position:fixed;
+    position:absolute;
     float:left;
     text-align:left;
     display:none;
-    background:#666;
+    background:#EE4000;
     height:auto;
-    border-bottom-right-radius:10px;
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-bottom-right-radius:10px;
-    border-bottom-left-radius:10px;
-    -moz-border-radius-bottomleft:10px;
-    -webkit-border-bottom-left-radius:10px;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
 	z-index:1100;
+	
 }
-.submenu li
+.submenuLi a
 {
- margin:0;   
+    cursor:pointer !important;
+    cursor:hand !important;
+    margin:0;   
+    padding-right:10px;
+    padding: 8px 20px !important;
+    text-decoration: none !important;
+    line-height: 3.5em  !important;
+    background-color: #fff  !important;
+    color: #666 ;
+    border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    border:1px solid  #666 !important;
 }
+.submenuLi a:hover
+{
+    -moz-box-shadow: 0 0 5px #888 !important;
+    -webkit-box-shadow: 0 0 5px #888 !important;
+    box-shadow: 0 0 5px #888 !important;
+    background-color: #19f  !important;
+    color: #fff !important;
+}
+.submenuLi
+{
+    margin-top:-5px;   
+    list-style: none;
+    padding-right:10px;
+    
+}
+
+
+
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 .fieldsElements
