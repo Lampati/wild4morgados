@@ -78,6 +78,7 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.EsRegister = false;
             Initilization();
             return View();
         }
@@ -101,20 +102,18 @@ namespace WebProgramAR.Controllers
         //
         // POST: /Usuario/Create
         [HttpPost]
-        public ActionResult Create(Usuario usuario)
+        public ActionResult Create(Usuario model)
         {
-            try
+            if (ModelState.IsValid)
             {
+                CrearUsuario(model, model.TipoUsuarioId);
 
-                
-                UsuarioNegocio.Alta(usuario);
-
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-            catch
+            else
             {
-                return View();
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
         }
         
@@ -146,8 +145,6 @@ namespace WebProgramAR.Controllers
             if (ModelState.IsValid)
             {
                 ActualizarRolesSiCorresponde(usuario);
-
-               
 
                 UsuarioNegocio.Modificar(usuario);
                 return RedirectToAction("Index");
@@ -204,6 +201,7 @@ namespace WebProgramAR.Controllers
         public ActionResult Register()
         {
             Initilization();
+            ViewBag.EsRegister = true;
             return View();
         }
         
@@ -217,34 +215,49 @@ namespace WebProgramAR.Controllers
 
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                //Aca lo creo en la tabla para la autenticacion
-                
-                Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email,null, null, true, null, out createStatus);
+                CrearUsuario(model);
 
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    //Aca le agrego el rol en la tabla para autenticacion
-                    Roles.AddUserToRole(model.UsuarioNombre, "Profesor");
-                    //Aca creo mi parte, en mis tablas
-                    TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName("Profesor");
-                    model.TipoUsuarioId = tipo.TipoUsuarioId;
-                    UsuarioNegocio.Alta(model);
-                    FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    //ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
+                ViewBag.EsRegister = true;
                 // If we got this far, something failed, redisplay form
                 return View(model);
             }
+        }
+
+        private void CrearUsuario(Usuario model)
+        {            
+            CrearUsuario(model, "profesor");
+        }
+
+        private void CrearUsuario(Usuario model, int idTipo)
+        {
+            TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioById(idTipo);
+            CrearUsuario(model, tipo.Descripcion.ToLower());
+        }
+
+        private void CrearUsuario(Usuario model, string rolParaBd)
+        {
+            // Attempt to register the user
+            MembershipCreateStatus createStatus;
+            //Aca lo creo en la tabla para la autenticacion
+
+            Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email, null, null, true, null, out createStatus);
+
+            if (createStatus == MembershipCreateStatus.Success)
+            {
+                //Aca le agrego el rol en la tabla para autenticacion
+                Roles.AddUserToRole(model.UsuarioNombre, rolParaBd);
+
+                TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName(rolParaBd);
+                model.TipoUsuarioId = tipo.TipoUsuarioId;
+                UsuarioNegocio.Alta(model);
+                FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
+                
+            }
+           
         }
 
         /// <summary>
