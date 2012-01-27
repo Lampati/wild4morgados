@@ -79,19 +79,33 @@
         </div>
         <div class="SameSectionSpace">
         <fieldset>
-            <div class="editor-label">
-                @Html.LabelFor(m => m.TipoUsuario)
-            </div>
-            <div class="editor-field">
-                 @Html.DropDownListFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.TipoUsuarioId.ToString(),
-                        Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-                    }), new { @id = "TipoUsuarioCreate" })
+            @if (ViewBag.EsRegister == null || ViewBag.EsRegister == false)
+            {
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.TipoUsuario)
+                </div>
+                <div class="editor-field">
+                     @Html.DropDownListFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+                        {
+                            Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                            Value = option.TipoUsuarioId.ToString(),
+                            Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+                        }), new { @id = "TipoUsuarioCreate" })
 
-                    @Html.ValidationMessageFor(m => m.TipoUsuarioId)
-            </div>
+                        @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+                </div>
+            }
+            else
+            {
+                if (Model != null)
+                {
+                    @Html.HiddenFor(model => model.TipoUsuarioId)
+                }
+                else
+                {
+                    @Html.Hidden("TipoUsuarioId",-1))
+                }
+            }
             <div class="editor-label">
                 @Html.LabelFor(m => m.Pais)
             </div>
@@ -100,11 +114,11 @@
 
                  @Html.DropDownListFor(model => model.PaisId,
                                 listaPaises.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.PaisId.ToString(),
-                        Selected = ((Model != null) && (option.PaisId == Model.PaisId))
-                    }))
+                                {
+                                    Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                                    Value = option.PaisId.ToString(),
+                                    Selected = ((Model != null) && (option.PaisId == Model.PaisId))
+                                }))
 
                 @Html.ValidationMessageFor(m => m.PaisId)
             </div>
@@ -117,11 +131,11 @@
 
                     @Html.DropDownListFor(model => model.ProvinciaId,
                                         listaProvincias.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.ProvinciaId.ToString(),
-                        Selected = ((Model != null) && (option.ProvinciaId == Model.PaisId))
-                    }))
+                                        {
+                                            Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                                            Value = option.ProvinciaId.ToString(),
+                                            Selected = ((Model != null) && (option.ProvinciaId == Model.PaisId))
+                                        }))
 
                     @Html.ValidationMessageFor(m => m.ProvinciaId)
                 </div>

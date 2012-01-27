@@ -67,20 +67,12 @@ namespace WebProgramAR.DataAccess
             //db.Usuarios.Attach(usuario);
             Usuario usuarioOrig = db.Usuarios.Single(u => u.UsuarioId == usuario.UsuarioId);
 
-            //usuarioOrig.LastName = usuario.LastName;
-            //usuarioOrig.LoginUsuario = usuario.LoginUsuario;
-            //usuarioOrig.MarketId = usuario.MarketId;
-            //usuarioOrig.Name = usuario.Name;
-            //usuarioOrig.Status = usuario.Status;
-            //usuarioOrig.UsuarioTypeId = usuario.UsuarioTypeId;
+            usuario.Nombre = usuario.Nombre;
+            usuario.Apellido = usuario.Apellido;            
 
-            //usuarioOrig.ProfileUsuarios.Clear();
-
-            //foreach (ProfileUsuario prof in usuario.ProfileUsuarios)
-            //{
-            //    usuarioOrig.ProfileUsuarios.Add(prof);
-            //}
-
+            usuarioOrig.PaisId = usuario.PaisId;
+            usuarioOrig.ProvinciaId = usuario.ProvinciaId;
+            usuarioOrig.LocalidadId = usuario.LocalidadId;
 
             db.ObjectStateManager.ChangeObjectState(usuarioOrig, EntityState.Modified);
             db.SaveChanges();
