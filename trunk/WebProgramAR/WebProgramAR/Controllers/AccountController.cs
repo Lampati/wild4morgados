@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using WebProgramAR.Models;
 using WebProgramAR.Entidades;
+using WebProgramAr.MailSender;
+using WebProgramAR.Negocio;
 
 namespace WebProgramAR.Controllers
 {
@@ -105,7 +107,25 @@ namespace WebProgramAR.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            return View();
+            ChangePasswordModel model = new ChangePasswordModel();
+            model.EsResetPassword = false;
+            model.UserName = User.Identity.Name;
+
+            return View("ChangePassword", model);
+        }
+
+        [Authorize]
+        public ActionResult ResetPassword(int id)
+        {
+            Usuario usuario = UsuarioNegocio.GetUsuarioById(id);
+            
+
+            ChangePasswordModel model = new ChangePasswordModel();
+            model.EsResetPassword = true;
+            model.OldPassword = "noValueInserted";
+            model.UserName = usuario.UsuarioNombre;
+
+            return View("ChangePassword",model);
         }
 
         //
@@ -123,8 +143,18 @@ namespace WebProgramAR.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
-                    changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
+                    if (model.EsResetPassword)
+                    {
+                        MembershipUser usuarioAResetar = Membership.GetUser(model.UserName);
+                        string passActual = usuarioAResetar.GetPassword();
+                        changePasswordSucceeded = usuarioAResetar.ChangePassword(passActual, model.NewPassword);
+                    }
+                    else
+                    {
+                        MembershipUser currentUser = Membership.GetUser(model.UserName, true /* userIsOnline */);
+                        changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
+                    }
+                    
                 }
                 catch (Exception)
                 {
@@ -133,18 +163,22 @@ namespace WebProgramAR.Controllers
 
                 if (changePasswordSucceeded)
                 {
-                    return RedirectToAction("ChangePasswordSuccess");
+                    return Content(Boolean.TrueString);
+                    //return RedirectToAction("ChangePasswordSuccess");
                 }
                 else
                 {
                     ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    return Content(Boolean.FalseString);
                 }
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return Content(Boolean.FalseString);
             }
             else
             {
                 // If we got this far, something failed, redisplay form
-                return View(model);
+                //return View(model);
+                return Content(Boolean.FalseString);
             }
         }
 
@@ -154,6 +188,49 @@ namespace WebProgramAR.Controllers
         public ActionResult ChangePasswordSuccess()
         {
             return View();
+        }
+
+
+        
+        [HttpPost]
+        public ActionResult RecoverPassword(RecoverPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                MembershipUserCollection usuarios = Membership.FindUsersByEmail(model.Email);
+
+                if (usuarios.Count > 0)
+                {
+                    
+                    if (usuarios.Count > 1)
+                    {
+                        //Hay mas de un usuario por mail, y eso no esta permitido.
+
+                        //DEVOLVER ERROR
+                    }
+                    else
+                    {
+                        string username = Membership.GetUserNameByEmail(model.Email);
+                        MembershipUser usuarioARecuperar = usuarios[username];
+
+                        string nuevaPassword = usuarioARecuperar.ResetPassword();
+
+                        //MailManager.Enviar("programar", model.Email, "Cambio de Password", string.Format("La nueva contraseña es: {0}", nuevaPassword));
+                    }
+                }
+                else
+                {
+                    //No existe usuario con ese mail. Abortamos todo
+                }
+
+                return Content(Boolean.TrueString);
+            }
+            else
+            {
+                // If we got this far, something failed, redisplay form
+                return Content(Boolean.FalseString);
+            }
         }
 
        

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web;
+using WebProgramAR.Globales;
 
 namespace WebProgramAR.Models
 {
@@ -26,6 +27,9 @@ namespace WebProgramAR.Models
         [Display(Name = "Confirmar Contraseña")]
         [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
         public string ConfirmPassword { get; set; }
+
+        public bool EsResetPassword { get; set; }
+        public string UserName { get; set; }
     }
 
     public class RedirectionModel
@@ -45,10 +49,17 @@ namespace WebProgramAR.Models
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [Display(Name = "Recordarme?")]
-        public bool RememberMe { get; set; }
+      
 
         public bool isAuthenticated { get; set; }
+    }
+
+    public class RecoverPasswordModel
+    {
+        [Display(Name = "E-mail")]
+        [Required(ErrorMessage = "Requerido")]
+        [RegularExpression(Globals.MATCH_EMAIL_PATTERN, ErrorMessage = "Formato de email incorrecto")]
+        public string Email { get; set; }
     }
 
    
