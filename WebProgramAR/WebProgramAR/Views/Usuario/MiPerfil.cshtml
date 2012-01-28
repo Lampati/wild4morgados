@@ -44,19 +44,19 @@
             });
             switch ($(this).attr("id")) {
                 case "Perfil":
-                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("/Edit")/', "content");
+                    OpenTab(event, "userId="+$("#UsuarioId").val(), '@Url.Action("/Edit")/', "content");
                     break;
                 case "Cursos":
-                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
+                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
                     break;
                 case "Aprobados":
-                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
+                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
                     break;
                 case "Pendientes":
-                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/PendientesAprobacion")/', "content");
+                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/PendientesAprobacion")/', "content");
                     break;
                 case "Desaprobados":
-                    OpenTab(event, $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Desaprobados")/', "content");
+                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Desaprobados")/', "content");
                     break;
             }
         });
