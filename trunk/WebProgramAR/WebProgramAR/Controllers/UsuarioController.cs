@@ -106,9 +106,17 @@ namespace WebProgramAR.Controllers
         {
             if (ModelState.IsValid)
             {
-                CrearUsuario(model, model.TipoUsuarioId);
+                MembershipCreateStatus estado = CrearUsuario(model, model.TipoUsuarioId);
 
-                return RedirectToAction("Index", "Home");
+                if (estado != MembershipCreateStatus.Success)
+                {
+                    string errorDevolver = ObtenerErrorCreacionOModificacionUsuario(estado);
+                    return Content(Boolean.FalseString);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }            
             }
             else
             {
@@ -146,7 +154,34 @@ namespace WebProgramAR.Controllers
             {
                 ActualizarRolesSiCorresponde(usuario);
 
-                UsuarioNegocio.Modificar(usuario);
+                MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
+
+                bool error = false;
+                string errorMensaje;
+                if  ( string.Compare( usuario.Email, membUser.Email, true) != 0)
+                {
+                    
+                    
+                    membUser.Email = usuario.Email;
+                    try
+                    {
+                        Membership.UpdateUser(membUser);
+                    }
+                    catch (Exception)
+                    {
+                        errorMensaje = "Error al intentar modificar el mail. Ese mail ya estaba tomado";
+                    }
+                    
+                }
+
+                if (!error)
+                {
+                    UsuarioNegocio.Modificar(usuario);
+                }
+                else
+                {
+                    return Content(Boolean.FalseString);
+                }
                 return RedirectToAction("Index");
             }else
             {
@@ -215,9 +250,20 @@ namespace WebProgramAR.Controllers
 
             if (ModelState.IsValid)
             {
-                CrearUsuario(model);
 
-                return RedirectToAction("Index", "Home");
+                MembershipCreateStatus estado = CrearUsuario(model);
+
+                if (estado != MembershipCreateStatus.Success)
+                {
+                    string errorDevolver = ObtenerErrorCreacionOModificacionUsuario(estado);
+                    return Content(Boolean.FalseString);
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
+                    return RedirectToAction("Index", "Home");
+                }            
+
             }
             else
             {
@@ -227,18 +273,18 @@ namespace WebProgramAR.Controllers
             }
         }
 
-        private void CrearUsuario(Usuario model)
+        private MembershipCreateStatus CrearUsuario(Usuario model)
         {            
-            CrearUsuario(model, "profesor");
+            return CrearUsuario(model, "profesor");
         }
 
-        private void CrearUsuario(Usuario model, int idTipo)
+        private MembershipCreateStatus CrearUsuario(Usuario model, int idTipo)
         {
             TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioById(idTipo);
-            CrearUsuario(model, tipo.Descripcion.ToLower());
+            return CrearUsuario(model, tipo.Descripcion.ToLower());
         }
 
-        private void CrearUsuario(Usuario model, string rolParaBd)
+        private MembershipCreateStatus CrearUsuario(Usuario model, string rolParaBd)
         {
             // Attempt to register the user
             MembershipCreateStatus createStatus;
@@ -254,9 +300,11 @@ namespace WebProgramAR.Controllers
                 TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName(rolParaBd);
                 model.TipoUsuarioId = tipo.TipoUsuarioId;
                 UsuarioNegocio.Alta(model);
-                FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
+                
                 
             }
+
+            return createStatus;
            
         }
 
@@ -293,6 +341,36 @@ namespace WebProgramAR.Controllers
 
             return Json(listaRetorno, JsonRequestBehavior.AllowGet);
 
+        }
+
+
+        private string ObtenerErrorCreacionOModificacionUsuario(MembershipCreateStatus estado)
+        {
+            string mensaje = string.Empty;
+            switch (estado)
+            {
+                case MembershipCreateStatus.Success:
+                    break;
+                case MembershipCreateStatus.DuplicateEmail:
+                    break;
+                case MembershipCreateStatus.DuplicateUserName:
+                    break;
+                case MembershipCreateStatus.InvalidEmail:
+                    break;
+                case MembershipCreateStatus.InvalidPassword:
+                    break;
+                case MembershipCreateStatus.InvalidUserName:
+                    break;
+                case MembershipCreateStatus.InvalidProviderUserKey:
+                case MembershipCreateStatus.ProviderError:
+                case MembershipCreateStatus.DuplicateProviderUserKey:
+                case MembershipCreateStatus.UserRejected:
+                    break;
+                default:
+                    break;
+            }
+
+            return mensaje;
         }
     }
 }
