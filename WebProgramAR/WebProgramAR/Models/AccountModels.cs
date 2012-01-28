@@ -12,20 +12,21 @@ namespace WebProgramAR.Models
 
     public class ChangePasswordModel
     {
-        [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Contraseña actual")]
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "Requerido")]
+        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "La {0} debe tener como minimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Requerido")]
+        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
         [Display(Name = "Nueva Contraseña")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar Contraseña")]
-        [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
+        [Compare("NewPassword", ErrorMessage = "Contraseña y confirmacion son distintas.")]
         public string ConfirmPassword { get; set; }
 
         public bool EsResetPassword { get; set; }

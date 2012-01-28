@@ -123,7 +123,6 @@
         columns: new[] {
         grid.Column("Nombre", header: "Nombre"),
         grid.Column("Apellido", header: "Apellido"),
-        grid.Column("Email", header: "Email"),
         grid.Column("TipoUsuario.Descripcion", header: "TipoUsuarioId"),
    
         grid.Column("", 
@@ -141,7 +140,7 @@
         grid.Column("", 
                 header: "",
                 format: @<text>
-                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/secure_locked-16.png")" data="@(item.UsuarioId)" class="botonResetearPass hoverRel"/>
+                        <input type="image" alt="Resetear contraseña" src="@Url.Content("~/Content/images/secure_locked-16.png")" data="@(item.UsuarioId)" class="botonResetearPass hoverRel"/>
                         </text>
         ),
         
@@ -173,7 +172,6 @@ else
         columns: new[] {
         grid.Column("Nombre", header: "Nombre"),
         grid.Column("Apellido", header: "Apellido"),
-        grid.Column("Email", header: "Email"),
         grid.Column("TipoUsuario.Descripcion", header: "TipoUsuarioId"),
    
         grid.Column("", 

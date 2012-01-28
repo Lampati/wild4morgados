@@ -19,21 +19,7 @@ namespace WebProgramAR.DataAccess
                 return db.Usuarios.Include("TipoUsuario").Include("Pais").Include("Provincia").Include("Localidad").Single(u => u.UsuarioId == id);
             }
         }
-        public static Usuario GetUsuarioByUsrPwd(string usrName,string usrPwd)
-        {
-            using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                Usuario usuario =  db.Usuarios
-                        .Where(u => u.UsuarioNombre == usrName)
-                        .Where(u=>u.Contrasena == usrPwd)
-                        .SingleOrDefault();
-                if (usuario == null)
-                    return null;
-                else
-                    return usuario;
-                //return db.Usuarios.Include("TipoUsuario").Include("Cursos").Single(u => u.UsuarioId == id);
-            }
-        }
+     
         public static void Alta(Usuario usuario)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())

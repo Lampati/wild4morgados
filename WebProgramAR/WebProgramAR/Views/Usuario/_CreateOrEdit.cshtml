@@ -7,19 +7,27 @@
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
 }
 <div class="sectionSpace">
-    @Html.HiddenFor(model => model.UsuarioId)
+ @*   @Html.HiddenFor(model => model.UsuarioId)*@
 
         <fieldset>
             <h3>Informacion de la Cuenta</h3>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.UsuarioNombre)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.UsuarioNombre)
-                @Html.ValidationMessageFor(m => m.UsuarioNombre)
-            </div>
-
+         
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.UsuarioNombre)
+                </div>
+                <div class="editor-field">
+                    @if (Model == null)
+                    {
+                        @Html.TextBoxFor(m => m.UsuarioNombre)
+                        @Html.ValidationMessageFor(m => m.UsuarioNombre)
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(m => m.UsuarioNombre)
+                        @Html.TextBox("TextBoxNombreUsuarioAux",Model.UsuarioNombre,new { disabled = "disabled" })
+                    }
+                </div>
+        
             <div class="editor-label">
                 @Html.LabelFor(m => m.Email)
             </div>
@@ -86,11 +94,11 @@
                 </div>
                 <div class="editor-field">
                      @Html.DropDownListFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
-                        {
-                            Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                            Value = option.TipoUsuarioId.ToString(),
-                            Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-                        }), new { @id = "TipoUsuarioCreate" })
+                {
+                    Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                    Value = option.TipoUsuarioId.ToString(),
+                    Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+                }), new { @id = "TipoUsuarioCreate" })
 
                         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
                 </div>
@@ -103,7 +111,7 @@
                 }
                 else
                 {
-                    @Html.Hidden("TipoUsuarioId",-1))
+                    @Html.Hidden("TipoUsuarioId", -1)
                 }
             }
             <div class="editor-label">

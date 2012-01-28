@@ -145,6 +145,53 @@ namespace WebProgramAR.Entidades
         }
         private NivelEjercicio _nivelEjercicio;
     
+        public virtual ICollection<Curso> Cursos
+        {
+            get
+            {
+                if (_cursos == null)
+                {
+                    var newCollection = new FixupCollection<Curso>();
+                    newCollection.CollectionChanged += FixupCursos;
+                    _cursos = newCollection;
+                }
+                return _cursos;
+            }
+            set
+            {
+                if (!ReferenceEquals(_cursos, value))
+                {
+                    var previousValue = _cursos as FixupCollection<Curso>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupCursos;
+                    }
+                    _cursos = value;
+                    var newValue = value as FixupCollection<Curso>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupCursos;
+                    }
+                }
+            }
+        }
+        private ICollection<Curso> _cursos;
+    
+        public virtual MensajeModeracion MensajeModeracion
+        {
+            get { return _mensajeModeracion; }
+            set
+            {
+                if (!ReferenceEquals(_mensajeModeracion, value))
+                {
+                    var previousValue = _mensajeModeracion;
+                    _mensajeModeracion = value;
+                    FixupMensajeModeracion(previousValue);
+                }
+            }
+        }
+        private MensajeModeracion _mensajeModeracion;
+    
         public virtual Usuario Usuario
         {
             get { return _usuario; }
@@ -159,38 +206,6 @@ namespace WebProgramAR.Entidades
             }
         }
         private Usuario _usuario;
-    
-        public virtual ICollection<Curso> Cursos
-        {
-            get
-            {
-                if (_Cursos == null)
-                {
-                    var newCollection = new FixupCollection<Curso>();
-                    newCollection.CollectionChanged += FixupCursos;
-                    _Cursos = newCollection;
-                }
-                return _Cursos;
-            }
-            set
-            {
-                if (!ReferenceEquals(_Cursos, value))
-                {
-                    var previousValue = _Cursos as FixupCollection<Curso>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupCursos;
-                    }
-                    _Cursos = value;
-                    var newValue = value as FixupCollection<Curso>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupCursos;
-                    }
-                }
-            }
-        }
-        private ICollection<Curso> _Cursos;
 
         #endregion
         #region Association Fixup
@@ -232,6 +247,19 @@ namespace WebProgramAR.Entidades
                 {
                     NivelEjercicioId = NivelEjercicio.NivelEjercicioId;
                 }
+            }
+        }
+    
+        private void FixupMensajeModeracion(MensajeModeracion previousValue)
+        {
+            if (previousValue != null && ReferenceEquals(previousValue.Ejercicio, this))
+            {
+                previousValue.Ejercicio = null;
+            }
+    
+            if (MensajeModeracion != null)
+            {
+                MensajeModeracion.Ejercicio = this;
             }
         }
     

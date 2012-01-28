@@ -34,38 +34,6 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Navigation Properties
     
-        public virtual ICollection<Usuario> Usuario
-        {
-            get
-            {
-                if (_usuario == null)
-                {
-                    var newCollection = new FixupCollection<Usuario>();
-                    newCollection.CollectionChanged += FixupUsuario;
-                    _usuario = newCollection;
-                }
-                return _usuario;
-            }
-            set
-            {
-                if (!ReferenceEquals(_usuario, value))
-                {
-                    var previousValue = _usuario as FixupCollection<Usuario>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupUsuario;
-                    }
-                    _usuario = value;
-                    var newValue = value as FixupCollection<Usuario>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupUsuario;
-                    }
-                }
-            }
-        }
-        private ICollection<Usuario> _usuario;
-    
         public virtual ICollection<Localidad> Localidad
         {
             get
@@ -129,31 +97,41 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Provincia> _provincia;
-
-        #endregion
-        #region Association Fixup
     
-        private void FixupUsuario(object sender, NotifyCollectionChangedEventArgs e)
+        public virtual ICollection<Usuario> Usuarios
         {
-            if (e.NewItems != null)
+            get
             {
-                foreach (Usuario item in e.NewItems)
+                if (_usuarios == null)
                 {
-                    item.Pais = this;
+                    var newCollection = new FixupCollection<Usuario>();
+                    newCollection.CollectionChanged += FixupUsuarios;
+                    _usuarios = newCollection;
                 }
+                return _usuarios;
             }
-    
-            if (e.OldItems != null)
+            set
             {
-                foreach (Usuario item in e.OldItems)
+                if (!ReferenceEquals(_usuarios, value))
                 {
-                    if (ReferenceEquals(item.Pais, this))
+                    var previousValue = _usuarios as FixupCollection<Usuario>;
+                    if (previousValue != null)
                     {
-                        item.Pais = null;
+                        previousValue.CollectionChanged -= FixupUsuarios;
+                    }
+                    _usuarios = value;
+                    var newValue = value as FixupCollection<Usuario>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupUsuarios;
                     }
                 }
             }
         }
+        private ICollection<Usuario> _usuarios;
+
+        #endregion
+        #region Association Fixup
     
         private void FixupLocalidad(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -190,6 +168,28 @@ namespace WebProgramAR.Entidades
             if (e.OldItems != null)
             {
                 foreach (Provincia item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Pais, this))
+                    {
+                        item.Pais = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupUsuarios(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Usuario item in e.NewItems)
+                {
+                    item.Pais = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Usuario item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Pais, this))
                     {

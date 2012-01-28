@@ -12,7 +12,8 @@ namespace WebProgramAR.Entidades
     [MetadataType(typeof(UsuarioValidation))]
     public partial class Usuario : EntidadProgramARBase
     {
-
+        public string Email { get; set; }
+        public string Contrasena { get; set; }
         public string ConfirmarContrasena { get; set; }
     }
 

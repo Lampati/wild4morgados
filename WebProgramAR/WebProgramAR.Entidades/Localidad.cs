@@ -104,37 +104,37 @@ namespace WebProgramAR.Entidades
         }
         private Provincia _provincia;
     
-        public virtual ICollection<Usuario> Usuario
+        public virtual ICollection<Usuario> Usuarios
         {
             get
             {
-                if (_usuario == null)
+                if (_usuarios == null)
                 {
                     var newCollection = new FixupCollection<Usuario>();
-                    newCollection.CollectionChanged += FixupUsuario;
-                    _usuario = newCollection;
+                    newCollection.CollectionChanged += FixupUsuarios;
+                    _usuarios = newCollection;
                 }
-                return _usuario;
+                return _usuarios;
             }
             set
             {
-                if (!ReferenceEquals(_usuario, value))
+                if (!ReferenceEquals(_usuarios, value))
                 {
-                    var previousValue = _usuario as FixupCollection<Usuario>;
+                    var previousValue = _usuarios as FixupCollection<Usuario>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupUsuario;
+                        previousValue.CollectionChanged -= FixupUsuarios;
                     }
-                    _usuario = value;
+                    _usuarios = value;
                     var newValue = value as FixupCollection<Usuario>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupUsuario;
+                        newValue.CollectionChanged += FixupUsuarios;
                     }
                 }
             }
         }
-        private ICollection<Usuario> _usuario;
+        private ICollection<Usuario> _usuarios;
 
         #endregion
         #region Association Fixup
@@ -179,7 +179,7 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupUsuario(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupUsuarios(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {

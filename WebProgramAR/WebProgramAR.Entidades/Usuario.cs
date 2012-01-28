@@ -37,12 +37,6 @@ namespace WebProgramAR.Entidades
             set;
         }
     
-        public virtual string Email
-        {
-            get;
-            set;
-        }
-    
         public virtual System.DateTime FechaNacimiento
         {
             get;
@@ -56,12 +50,6 @@ namespace WebProgramAR.Entidades
         }
     
         public virtual string UsuarioNombre
-        {
-            get;
-            set;
-        }
-    
-        public virtual string Contrasena
         {
             get;
             set;
@@ -138,67 +126,69 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Navigation Properties
     
-        public virtual ICollection<Curso> Curso
+        public virtual ICollection<Curso> Cursoes
         {
             get
             {
-                if (_curso == null)
+                if (_cursoes == null)
                 {
                     var newCollection = new FixupCollection<Curso>();
-                    newCollection.CollectionChanged += FixupCurso;
-                    _curso = newCollection;
+                    newCollection.CollectionChanged += FixupCursoes;
+                    _cursoes = newCollection;
                 }
-                return _curso;
+                return _cursoes;
             }
             set
             {
-                if (!ReferenceEquals(_curso, value))
+                if (!ReferenceEquals(_cursoes, value))
                 {
-                    var previousValue = _curso as FixupCollection<Curso>;
+                    var previousValue = _cursoes as FixupCollection<Curso>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupCurso;
+                        previousValue.CollectionChanged -= FixupCursoes;
                     }
-                    _curso = value;
+                    _cursoes = value;
                     var newValue = value as FixupCollection<Curso>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupCurso;
+                        newValue.CollectionChanged += FixupCursoes;
                     }
                 }
             }
         }
-        private ICollection<Curso> _curso;
+        private ICollection<Curso> _cursoes;
     
-        public virtual Pais Pais
+        public virtual ICollection<Ejercicio> Ejercicios
         {
-            get { return _pais; }
+            get
+            {
+                if (_ejercicios == null)
+                {
+                    var newCollection = new FixupCollection<Ejercicio>();
+                    newCollection.CollectionChanged += FixupEjercicios;
+                    _ejercicios = newCollection;
+                }
+                return _ejercicios;
+            }
             set
             {
-                if (!ReferenceEquals(_pais, value))
+                if (!ReferenceEquals(_ejercicios, value))
                 {
-                    var previousValue = _pais;
-                    _pais = value;
-                    FixupPais(previousValue);
+                    var previousValue = _ejercicios as FixupCollection<Ejercicio>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupEjercicios;
+                    }
+                    _ejercicios = value;
+                    var newValue = value as FixupCollection<Ejercicio>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupEjercicios;
+                    }
                 }
             }
         }
-        private Pais _pais;
-    
-        public virtual TipoUsuario TipoUsuario
-        {
-            get { return _tipoUsuario; }
-            set
-            {
-                if (!ReferenceEquals(_tipoUsuario, value))
-                {
-                    var previousValue = _tipoUsuario;
-                    _tipoUsuario = value;
-                    FixupTipoUsuario(previousValue);
-                }
-            }
-        }
-        private TipoUsuario _tipoUsuario;
+        private ICollection<Ejercicio> _ejercicios;
     
         public virtual Localidad Localidad
         {
@@ -214,6 +204,53 @@ namespace WebProgramAR.Entidades
             }
         }
         private Localidad _localidad;
+    
+        public virtual ICollection<MensajeModeracion> MensajeModeracions
+        {
+            get
+            {
+                if (_mensajeModeracions == null)
+                {
+                    var newCollection = new FixupCollection<MensajeModeracion>();
+                    newCollection.CollectionChanged += FixupMensajeModeracions;
+                    _mensajeModeracions = newCollection;
+                }
+                return _mensajeModeracions;
+            }
+            set
+            {
+                if (!ReferenceEquals(_mensajeModeracions, value))
+                {
+                    var previousValue = _mensajeModeracions as FixupCollection<MensajeModeracion>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupMensajeModeracions;
+                    }
+                    _mensajeModeracions = value;
+                    var newValue = value as FixupCollection<MensajeModeracion>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupMensajeModeracions;
+                    }
+                }
+            }
+        }
+        private ICollection<MensajeModeracion> _mensajeModeracions;
+    
+        public virtual Pais Pais
+        {
+            get { return _pais; }
+            set
+            {
+                if (!ReferenceEquals(_pais, value))
+                {
+                    var previousValue = _pais;
+                    _pais = value;
+                    FixupPais(previousValue);
+                }
+            }
+        }
+        private Pais _pais;
     
         public virtual Provincia Provincia
         {
@@ -262,93 +299,36 @@ namespace WebProgramAR.Entidades
         }
         private ICollection<ReglasSeguridad> _reglasSeguridads;
     
-        public virtual ICollection<Ejercicio> Ejercicios
+        public virtual TipoUsuario TipoUsuario
         {
-            get
-            {
-                if (_ejercicios == null)
-                {
-                    var newCollection = new FixupCollection<Ejercicio>();
-                    newCollection.CollectionChanged += FixupEjercicios;
-                    _ejercicios = newCollection;
-                }
-                return _ejercicios;
-            }
+            get { return _tipoUsuario; }
             set
             {
-                if (!ReferenceEquals(_ejercicios, value))
+                if (!ReferenceEquals(_tipoUsuario, value))
                 {
-                    var previousValue = _ejercicios as FixupCollection<Ejercicio>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupEjercicios;
-                    }
-                    _ejercicios = value;
-                    var newValue = value as FixupCollection<Ejercicio>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupEjercicios;
-                    }
+                    var previousValue = _tipoUsuario;
+                    _tipoUsuario = value;
+                    FixupTipoUsuario(previousValue);
                 }
             }
         }
-        private ICollection<Ejercicio> _ejercicios;
+        private TipoUsuario _tipoUsuario;
 
         #endregion
         #region Association Fixup
     
-        private void FixupPais(Pais previousValue)
-        {
-            if (previousValue != null && previousValue.Usuario.Contains(this))
-            {
-                previousValue.Usuario.Remove(this);
-            }
-    
-            if (Pais != null)
-            {
-                if (!Pais.Usuario.Contains(this))
-                {
-                    Pais.Usuario.Add(this);
-                }
-                if (PaisId != Pais.PaisId)
-                {
-                    PaisId = Pais.PaisId;
-                }
-            }
-        }
-    
-        private void FixupTipoUsuario(TipoUsuario previousValue)
-        {
-            if (previousValue != null && previousValue.Usuario.Contains(this))
-            {
-                previousValue.Usuario.Remove(this);
-            }
-    
-            if (TipoUsuario != null)
-            {
-                if (!TipoUsuario.Usuario.Contains(this))
-                {
-                    TipoUsuario.Usuario.Add(this);
-                }
-                if (TipoUsuarioId != TipoUsuario.TipoUsuarioId)
-                {
-                    TipoUsuarioId = TipoUsuario.TipoUsuarioId;
-                }
-            }
-        }
-    
         private void FixupLocalidad(Localidad previousValue)
         {
-            if (previousValue != null && previousValue.Usuario.Contains(this))
+            if (previousValue != null && previousValue.Usuarios.Contains(this))
             {
-                previousValue.Usuario.Remove(this);
+                previousValue.Usuarios.Remove(this);
             }
     
             if (Localidad != null)
             {
-                if (!Localidad.Usuario.Contains(this))
+                if (!Localidad.Usuarios.Contains(this))
                 {
-                    Localidad.Usuario.Add(this);
+                    Localidad.Usuarios.Add(this);
                 }
                 if (LocalidadId != Localidad.LocalidadId)
                 {
@@ -357,18 +337,38 @@ namespace WebProgramAR.Entidades
             }
         }
     
+        private void FixupPais(Pais previousValue)
+        {
+            if (previousValue != null && previousValue.Usuarios.Contains(this))
+            {
+                previousValue.Usuarios.Remove(this);
+            }
+    
+            if (Pais != null)
+            {
+                if (!Pais.Usuarios.Contains(this))
+                {
+                    Pais.Usuarios.Add(this);
+                }
+                if (PaisId != Pais.PaisId)
+                {
+                    PaisId = Pais.PaisId;
+                }
+            }
+        }
+    
         private void FixupProvincia(Provincia previousValue)
         {
-            if (previousValue != null && previousValue.Usuario.Contains(this))
+            if (previousValue != null && previousValue.Usuarios.Contains(this))
             {
-                previousValue.Usuario.Remove(this);
+                previousValue.Usuarios.Remove(this);
             }
     
             if (Provincia != null)
             {
-                if (!Provincia.Usuario.Contains(this))
+                if (!Provincia.Usuarios.Contains(this))
                 {
-                    Provincia.Usuario.Add(this);
+                    Provincia.Usuarios.Add(this);
                 }
                 if (ProvinciaId != Provincia.ProvinciaId)
                 {
@@ -377,7 +377,27 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupCurso(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupTipoUsuario(TipoUsuario previousValue)
+        {
+            if (previousValue != null && previousValue.Usuarios.Contains(this))
+            {
+                previousValue.Usuarios.Remove(this);
+            }
+    
+            if (TipoUsuario != null)
+            {
+                if (!TipoUsuario.Usuarios.Contains(this))
+                {
+                    TipoUsuario.Usuarios.Add(this);
+                }
+                if (TipoUsuarioId != TipoUsuario.TipoUsuarioId)
+                {
+                    TipoUsuarioId = TipoUsuario.TipoUsuarioId;
+                }
+            }
+        }
+    
+        private void FixupCursoes(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
@@ -390,28 +410,6 @@ namespace WebProgramAR.Entidades
             if (e.OldItems != null)
             {
                 foreach (Curso item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Usuario, this))
-                    {
-                        item.Usuario = null;
-                    }
-                }
-            }
-        }
-    
-        private void FixupReglasSeguridads(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (ReglasSeguridad item in e.NewItems)
-                {
-                    item.Usuario = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (ReglasSeguridad item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Usuario, this))
                     {
@@ -434,6 +432,50 @@ namespace WebProgramAR.Entidades
             if (e.OldItems != null)
             {
                 foreach (Ejercicio item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Usuario, this))
+                    {
+                        item.Usuario = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupMensajeModeracions(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (MensajeModeracion item in e.NewItems)
+                {
+                    item.Usuario = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (MensajeModeracion item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Usuario, this))
+                    {
+                        item.Usuario = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupReglasSeguridads(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (ReglasSeguridad item in e.NewItems)
+                {
+                    item.Usuario = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (ReglasSeguridad item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Usuario, this))
                     {
