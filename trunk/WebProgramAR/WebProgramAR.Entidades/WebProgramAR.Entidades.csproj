@@ -53,6 +53,11 @@
       </SubType>
     </Compile>
     <Compile Include="CursoPartial.cs" />
+    <Compile Include="MensajeModeracion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
+    </Compile>
     <Compile Include="ProvinciaPartial.cs" />
     <Compile Include="ReglasSeguridad.cs">
       <DependentUpon>Model1.tt</DependentUpon>

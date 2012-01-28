@@ -18,13 +18,13 @@
             foreach (var Ejercicio in Model.Ejercicios)
             {
                 <div class="display-field-delete">
-                @Html.DisplayFor(m => Ejercicio.Nombre)
+                    @Html.DisplayFor(m => Ejercicio.Nombre)
                 </div>
             }
         }
         else
         {
-            <div class="display-field-delete">No se han encontrado Resultados</div>
+            <div class="display-field-delete">Este curso no tiene ejercicios asociados.</div>
         }
      </div>    
 </fieldset>

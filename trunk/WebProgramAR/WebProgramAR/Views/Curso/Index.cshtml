@@ -167,12 +167,6 @@ else
           format: @<text>
                     <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles hoverRel"/>
                   </text>
-    ),
-    grid.Column("", 
-          header: "",
-          format: @<text>
-                    <input type="image" alt="Asociaciones" src="@Url.Content("~/Content/images/list_task-16.png")" data="@(item.CursoId)" class="botonAsociar hoverRel"/>
-                  </text>
     )
     })
 }

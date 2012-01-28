@@ -57,21 +57,6 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Navigation Properties
     
-        public virtual Usuario Usuario
-        {
-            get { return _usuario; }
-            set
-            {
-                if (!ReferenceEquals(_usuario, value))
-                {
-                    var previousValue = _usuario;
-                    _usuario = value;
-                    FixupUsuario(previousValue);
-                }
-            }
-        }
-        private Usuario _usuario;
-    
         public virtual ICollection<Ejercicio> Ejercicios
         {
             get
@@ -103,22 +88,37 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Ejercicio> _ejercicios;
+    
+        public virtual Usuario Usuario
+        {
+            get { return _usuario; }
+            set
+            {
+                if (!ReferenceEquals(_usuario, value))
+                {
+                    var previousValue = _usuario;
+                    _usuario = value;
+                    FixupUsuario(previousValue);
+                }
+            }
+        }
+        private Usuario _usuario;
 
         #endregion
         #region Association Fixup
     
         private void FixupUsuario(Usuario previousValue)
         {
-            if (previousValue != null && previousValue.Curso.Contains(this))
+            if (previousValue != null && previousValue.Cursoes.Contains(this))
             {
-                previousValue.Curso.Remove(this);
+                previousValue.Cursoes.Remove(this);
             }
     
             if (Usuario != null)
             {
-                if (!Usuario.Curso.Contains(this))
+                if (!Usuario.Cursoes.Contains(this))
                 {
-                    Usuario.Curso.Add(this);
+                    Usuario.Cursoes.Add(this);
                 }
                 if (UsuarioId != Usuario.UsuarioId)
                 {

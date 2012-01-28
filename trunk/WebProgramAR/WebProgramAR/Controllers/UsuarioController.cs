@@ -70,6 +70,10 @@ namespace WebProgramAR.Controllers
         public ActionResult Details(int id)
         {
             Usuario u = UsuarioNegocio.GetUsuarioById(id);
+
+            MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+            u.Email = membUser.Email;
+
             return View(u);
         }
 
@@ -130,6 +134,10 @@ namespace WebProgramAR.Controllers
         public ActionResult Edit(int id)
         {
             Usuario u = UsuarioNegocio.GetUsuarioById(id);
+
+            MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+            u.Email = membUser.Email;
+
             Initilization();
             return View("Edit", u);
         }
@@ -141,6 +149,11 @@ namespace WebProgramAR.Controllers
         {
             string usuario = SimpleSessionPersister.UserName;
             Usuario u = UsuarioNegocio.GetUsuarioByLoginUsuario(usuario);
+            
+            MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+            u.Email = membUser.Email;
+
+
             Initilization();
             return View("MiPerfil", u);
         }
