@@ -82,8 +82,6 @@ namespace WebProgramAR.Controllers
             List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
             listaNivelesEjercicio.AddRange(Negocio.NivelEjercicioNegocio.GetNiveles().ToList());
             ViewBag.NivelesEjercicio = listaNivelesEjercicio;
-            //ViewBag.Provincias = new SelectList(Negocio.ProvinciaNegocio.GetProvincias(),"ProvinciaId","Descripcion");
-            //ViewBag.Localidades = new SelectList(Negocio.LocalidadNegocio.GetLocalidades(), "LocalidadId", "Descripcion");
         }
 
         //
