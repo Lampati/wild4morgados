@@ -892,7 +892,8 @@ div.menu ul li a:hover, .boton:hover
     position:relative;
     float:right;
     width:40%;
-    margin-top:-42px;
+    height:10px;
+    margin-top:-53px;
     margin-right:10px;
 }
 .btn_filtros
