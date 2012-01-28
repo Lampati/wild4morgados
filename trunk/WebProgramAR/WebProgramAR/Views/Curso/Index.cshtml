@@ -3,7 +3,6 @@
 @{
     if (!string.IsNullOrEmpty(Request.QueryString["userId"]))
     {
-        Response.Write("<script>alert('"+Request.QueryString["userId"]+"');</script>");
         Layout = null;
     }
     ViewBag.Title = "Cursos";
