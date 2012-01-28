@@ -42,6 +42,10 @@
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 900, 480);
         });
 
+        $('.botonResetearPass').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("ResetPassword","Account")/', 900, 480);
+        });
+
         $('.botonDetalles').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 400);
         });
@@ -134,6 +138,14 @@
                         <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.UsuarioId)" class="botonEditar hoverRel"/>
                       </text>
         ),
+        grid.Column("", 
+                header: "",
+                format: @<text>
+                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/secure_locked-16.png")" data="@(item.UsuarioId)" class="botonResetearPass hoverRel"/>
+                        </text>
+        ),
+        
+        
         grid.Column("", 
               header: "",
               format: @<text>

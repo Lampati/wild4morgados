@@ -114,7 +114,8 @@ namespace WebProgramAR.Controllers
             return View("ChangePassword", model);
         }
 
-        [Authorize]
+        
+        [Authorize(Roles = "administrador")]
         public ActionResult ResetPassword(int id)
         {
             Usuario usuario = UsuarioNegocio.GetUsuarioById(id);
@@ -131,6 +132,7 @@ namespace WebProgramAR.Controllers
         //
         // POST: /Account/ChangePassword
 
+        
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
