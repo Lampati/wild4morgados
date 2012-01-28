@@ -3,7 +3,7 @@ The base color for this template is #5c87b2. If you'd like
 to use a different color start by replacing all instances of
 #5c87b2 with your new color.
 ----------------------------------------------------------*/
-body
+body,html
 {
     background-image: -webkit-gradient(
     linear,
@@ -17,13 +17,13 @@ body
 		rgb(1,45,202) ,
 		rgb(255,255,255) 
 	);
-    font-size: .8em;
+    font-size: 0.9em;
     font-family: Calibri,"Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0; /*color: #696969;*/
     overflow:hidden;
     width:100%;
-    height:100%;
+    height:120%;
 }
 form
 {
@@ -212,13 +212,13 @@ header h1, #header h1
 
 #main
 {
-    padding: 30px 30px 15px 30px;
+    padding: 10px 30px 15px 30px;
     background-color: #fff;
     border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px 0 0 0;
     -moz-border-radius: 4px 0 0 0;
     background-image: url('images/fondo.png');
-    height:390px;
+    height:440px;
 }
 
 footer, #footer
@@ -226,7 +226,7 @@ footer, #footer
     background-color: #ccc;
     color: #999;
     padding: 0px 0;
-    height:80px;
+    height:60px;
     text-align: center;
     line-height: normal;
     margin: 0 0 50px 0;
@@ -1833,7 +1833,7 @@ input[type="file"]
     cursor:pointer;
     cursor:hand;
     position:absolute;
-    display:block;
+    display:none;
     float:left;
     opacity: .70;
     filter: alpha(opacity=70%);
@@ -1851,8 +1851,8 @@ ul.tabs
   width:100%;     
   height:30px;
   line-height: 1em;
-  margin-top:-10px;
-  margin-left:10px;
+  margin-top:-15px;
+  margin-left:50px;
     
 }
 .tabs li
@@ -1888,9 +1888,10 @@ ul.tabs
 .contentInformation
 {
     border:3px solid #333;
-    width:100%;
-    height:100%;
+    width:90%;
+    height:85%;
     margin-top:11px;
+    margin-left:30px;
  	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;

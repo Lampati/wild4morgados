@@ -35,40 +35,4 @@
     @Html.ValidationMessageFor(m => m.Nombre)
 </div>
 
-<script type="text/javascript">
-   
-    $("#Ejercicios").click(function(){
-            $.ajax({
-                url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
-                data: " { paisId: '" + $("#selectBox_PaisId").attr("rel") + "', provinciaId: '" + $("#selectBox_ProvinciaId").attr("rel") + "', Localidad: '" + request.term + "' }",
-                contentType: 'application/json',
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return {
-                            label: item.Value,
-                            value: item.Id
-                        }
-                    }));
-                }
-            })
-
-        },
-        scrollHeight: 30,
-        minChars: 3,
-        delay: 100,
-        type: 'POST',
-        selectFirst: false,
-        select: function (event, ui) {
-            $("#LocalidadId").text(ui.item.label);
-            $("#LocalidadId").attr("value", ui.item.label);
-        },
-        change: function (event, ui) {
-            $("#LocalidadId").val(ui.item.label);
-        }
-    });
-            
-</script>
-
 

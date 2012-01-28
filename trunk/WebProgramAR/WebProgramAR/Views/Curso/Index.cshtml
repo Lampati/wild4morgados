@@ -1,7 +1,11 @@
 ﻿
 @model WebProgramAR.Sitio.Models.CursoGrillaModel
-
 @{
+    if (!string.IsNullOrEmpty(Request.QueryString["userId"]))
+    {
+        Response.Write("<script>alert('"+Request.QueryString["userId"]+"');</script>");
+        Layout = null;
+    }
     ViewBag.Title = "Cursos";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
