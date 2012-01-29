@@ -7,6 +7,7 @@ using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
 using WebProgramAR.Models;
+using System.Web.Security;
 
 namespace WebProgramAR.Controllers
 {
@@ -15,12 +16,13 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Curso/
 
-        public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC",  int cursoId = -1, string nombre = "")
+        public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC", int cursoId = -1, string nombre = "",
+            bool conLayout = true, bool aplicarPermisos = true, int usuarioId = -1)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
-            
-            var numUsuarios = CursoNegocio.ContarCantidad(cursoId, nombre);
+
+            var numUsuarios = CursoNegocio.ContarCantidad(cursoId, nombre, usuarioId);
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
@@ -34,7 +36,8 @@ namespace WebProgramAR.Controllers
                      cantidadPorPaginaTPC,
                      sort + " " + sortDir,
                      cursoId, 
-                     nombre
+                     nombre,
+                     usuarioId
             );
 
             var datos = new CursoGrillaModel()
@@ -44,7 +47,8 @@ namespace WebProgramAR.Controllers
                 Cursos = cursos,
                 PaginaActual = page
             };
-
+            datos.ConLayout = conLayout;
+            datos.AplicarPermisos = aplicarPermisos;
             
             return View(datos);
 
@@ -78,7 +82,9 @@ namespace WebProgramAR.Controllers
 
                 //flanzani
                 //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                curso.UsuarioId = 1;
+                Usuario userBd = UsuarioNegocio.GetUsuarioByLoginUsuario(SimpleSessionPersister.UserName);
+
+                curso.UsuarioId = userBd.UsuarioId;
                 //curso.UsuarioId = usuarioLogueado;
 
                 CursoNegocio.Alta(curso);

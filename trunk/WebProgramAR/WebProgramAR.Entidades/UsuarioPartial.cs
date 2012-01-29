@@ -13,8 +13,7 @@ namespace WebProgramAR.Entidades
     public partial class Usuario : EntidadProgramARBase
     {
         public string Email { get; set; }
-        public string Contrasena { get; set; }
-        public string ConfirmarContrasena { get; set; }
+
     }
 
 
@@ -45,17 +44,7 @@ namespace WebProgramAR.Entidades
         [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
         public string UsuarioNombre { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
-        [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
-        public string Contrasena { get; set; }
-
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmar Contraseña")]
-        [Compare("Contrasena", ErrorMessage = "Contraseña y confirmacion son distintas.")]
-        public string ConfirmarContrasena { get; set; }
+     
 
         
         [Display(Name = "Pais")]

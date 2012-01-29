@@ -13,18 +13,23 @@ namespace WebProgramAR.Controllers
 {
     public class EjercicioController : ControllerBase
     {
+
+
+        
         //
         // GET: /Ejercicio/
 
         public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC",
              int usuarioId = -1, int cursoId = -1, string nombre = "", 
-             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
+             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false, bool conLayout = true, bool aplicarPermisos = true)
         {
 
             EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
             estadoEjercicio = estado.EstadoEjercicioId;
 
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+            datos.ConLayout = conLayout;
+            datos.AplicarPermisos = aplicarPermisos;
 
             ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
@@ -33,9 +38,27 @@ namespace WebProgramAR.Controllers
 
         }
 
-        
 
-        private object ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
+        public ActionResult ListarEjerciciosGrillaSinPermisos(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+            int usuarioId = -1, int cursoId = -1, string nombre = "",
+            int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false, bool conLayout = true, bool aplicarPermisos = true)
+        {
+
+            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+            datos.ConLayout = conLayout;
+            datos.AplicarPermisos = aplicarPermisos;
+
+            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
+
+            return View("Desaprobados",datos);
+
+        }
+
+
+
+
+        private EjercicioGrillaModel ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
@@ -182,7 +205,8 @@ namespace WebProgramAR.Controllers
 
         [Authorize(Roles = "administrador, moderador")]
         public ActionResult PendientesAprobacion(int page = 1, string sort = "Nombre", string sortDir = "ASC",
-             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false)
+             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false,
+            bool conLayout = true, bool aplicarPermisos = true)
         {
 
             EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Pendiente");
@@ -192,6 +216,8 @@ namespace WebProgramAR.Controllers
 
 
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+            datos.ConLayout = conLayout;
+            datos.AplicarPermisos = aplicarPermisos;
 
             ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
 
@@ -201,7 +227,8 @@ namespace WebProgramAR.Controllers
 
         [Authorize(Roles = "administrador, moderador")]
         public ActionResult Desaprobados(int page = 1, string sort = "Nombre", string sortDir = "ASC",
-             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false)
+             int usuarioId = -1, int cursoId = -1, string nombre = "", int nivelEjercicio = -1, bool global = false,
+             bool conLayout = true, bool aplicarPermisos = true)
         {
 
             EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Desaprobado");
@@ -211,6 +238,8 @@ namespace WebProgramAR.Controllers
 
 
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+            datos.ConLayout = conLayout;
+            datos.AplicarPermisos = aplicarPermisos;
 
             ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
 

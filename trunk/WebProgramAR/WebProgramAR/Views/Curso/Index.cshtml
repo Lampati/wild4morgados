@@ -1,10 +1,11 @@
 ﻿
 @model WebProgramAR.Sitio.Models.CursoGrillaModel
 @{
-    if (!string.IsNullOrEmpty(Request.QueryString["userId"]))
+    if (!Model.ConLayout)
     {
         Layout = null;
     }
+    
     ViewBag.Title = "Cursos";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
@@ -66,7 +67,7 @@
 
 <h1>Cursos</h1>
 <div id="buttonSection" class="buttonSection">
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+@if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
 {
         <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
 }
@@ -100,7 +101,7 @@
 
 <div id="contenedor-grid">
 
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+@if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
 {
 
 @grid.GetHtml(

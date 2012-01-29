@@ -272,7 +272,6 @@ $(document).ready(function () {
 });
 
 function OpenSubDialog(event, id, accion, ancho, alto) {
-
     event.preventDefault();
 
     if (alto > 0) {

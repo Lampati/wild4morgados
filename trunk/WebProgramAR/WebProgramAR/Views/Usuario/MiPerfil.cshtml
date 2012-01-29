@@ -5,6 +5,11 @@
     List<WebProgramAR.Entidades.Localidad> listaLocalidades = (List<WebProgramAR.Entidades.Localidad>)ViewBag.Localidades;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
     ViewBag.Title = "Mi Perfil";
+
+    int valorAprobado = Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Aprobado);
+    int valorDesprobado = Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Desaprobado);
+    int valorPendiente = Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Pendiente);
+        
 }
 
 
@@ -24,10 +29,11 @@
     </div>
     
 </div>
-<div id="update-message" class"error" style="display:none;"></div>
+<div id="update-message" class="error" style="display:none;"></div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
+   <div id="subDialog" class="dialogDiv"></div>
 <script language="javascript">
-    OpenTab(null, $("#UsuarioId").val(), '@Url.Action("Edit")/', "content");
+    OpenTab(null, $("#UsuarioId").val() + '?esMiPerfil=true', '@Url.Action("Edit")/', "content");
     $(document).ready(function () {
         $(".tabs li").click(function (event) {
             var actual = $(this).attr("id");
@@ -44,19 +50,19 @@
             });
             switch ($(this).attr("id")) {
                 case "Perfil":
-                    OpenTab(event, "userId="+$("#UsuarioId").val(), '@Url.Action("/Edit")/', "content");
+                    OpenTab(event, $("#UsuarioId").val() + '?esMiPerfil=true', '@Url.Action("Edit")/', "content");
                     break;
                 case "Cursos":
-                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
+                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
                     break;
                 case "Aprobados":
-                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
+                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
                     break;
                 case "Pendientes":
-                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/PendientesAprobacion")/', "content");
+                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorPendiente&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
                     break;
                 case "Desaprobados":
-                    OpenTab(event, "userId=" + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Desaprobados")/', "content");
+                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorDesprobado&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
                     break;
             }
         });
