@@ -17,7 +17,7 @@ namespace WebProgramAR.Negocio
 
         public static void Alta(Usuario usuario)
         {
-            AgregarRolAUsuario(usuario);
+            //AgregarRolAUsuario(usuario);
             usuario.FechaAlta = DateTime.Now;
             UsuarioDA.Alta(usuario);
         }

@@ -9,7 +9,7 @@ namespace WebProgramAR.Controllers
     [System.Web.Mvc.OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class ControllerBase : Controller
     {
-    
+     
 
     }
 }

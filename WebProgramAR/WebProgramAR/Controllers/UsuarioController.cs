@@ -106,11 +106,11 @@ namespace WebProgramAR.Controllers
         //
         // POST: /Usuario/Create
         [HttpPost]
-        public ActionResult Create(Usuario model)
+        public ActionResult Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                MembershipCreateStatus estado = CrearUsuario(model, model.TipoUsuarioId);
+                MembershipCreateStatus estado = CrearUsuario(model.Usuario, model.Contrasena, model.Usuario.TipoUsuarioId);
 
                 if (estado != MembershipCreateStatus.Success)
                 {
@@ -131,12 +131,15 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Usuario/Edit/5 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, bool esMiPerfil = false)
         {
             Usuario u = UsuarioNegocio.GetUsuarioById(id);
 
             MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
             u.Email = membUser.Email;
+
+
+            ViewBag.EsMiPerfil = esMiPerfil;
 
             Initilization();
             return View("Edit", u);
@@ -153,6 +156,7 @@ namespace WebProgramAR.Controllers
             MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
             u.Email = membUser.Email;
 
+            ViewBag.EsMiPerfil = false;
 
             Initilization();
             return View("MiPerfil", u);
@@ -257,14 +261,14 @@ namespace WebProgramAR.Controllers
         // POST: /Account/Register
 
         [HttpPost]
-        public ActionResult Register(Usuario model)
+        public ActionResult Register(RegisterViewModel model)
         {
             ModelState.Remove("TipoUsuario");
 
             if (ModelState.IsValid)
             {
 
-                MembershipCreateStatus estado = CrearUsuario(model);
+                MembershipCreateStatus estado = CrearUsuario(model.Usuario, model.Contrasena);
 
                 if (estado != MembershipCreateStatus.Success)
                 {
@@ -273,7 +277,7 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(model.UsuarioNombre, false /* createPersistentCookie */);
+                    FormsAuthentication.SetAuthCookie(model.Usuario.UsuarioNombre, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }            
 
@@ -286,35 +290,49 @@ namespace WebProgramAR.Controllers
             }
         }
 
-        private MembershipCreateStatus CrearUsuario(Usuario model)
+        private MembershipCreateStatus CrearUsuario(Usuario model, string pass)
         {            
-            return CrearUsuario(model, "profesor");
+            return CrearUsuario(model, pass, "profesor");
         }
 
-        private MembershipCreateStatus CrearUsuario(Usuario model, int idTipo)
+        private MembershipCreateStatus CrearUsuario(Usuario model, string pass, int idTipo)
         {
             TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioById(idTipo);
-            return CrearUsuario(model, tipo.Descripcion.ToLower());
+            return CrearUsuario(model, pass, tipo.Descripcion.ToLower());
         }
 
-        private MembershipCreateStatus CrearUsuario(Usuario model, string rolParaBd)
+        private MembershipCreateStatus CrearUsuario(Usuario model, string pass, string rolParaBd)
         {
             // Attempt to register the user
             MembershipCreateStatus createStatus;
             //Aca lo creo en la tabla para la autenticacion
 
-            Membership.CreateUser(model.UsuarioNombre, model.Contrasena, model.Email, null, null, true, null, out createStatus);
+            Membership.CreateUser(model.UsuarioNombre, pass, model.Email, null, null, true, null, out createStatus);
 
             if (createStatus == MembershipCreateStatus.Success)
             {
-                //Aca le agrego el rol en la tabla para autenticacion
-                Roles.AddUserToRole(model.UsuarioNombre, rolParaBd);
+                try
+                {
+                    //Aca le agrego el rol en la tabla para autenticacion
+                    Roles.AddUserToRole(model.UsuarioNombre, rolParaBd);
 
-                TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName(rolParaBd);
-                model.TipoUsuarioId = tipo.TipoUsuarioId;
-                UsuarioNegocio.Alta(model);
-                
-                
+                    try
+                    {
+                        TipoUsuario tipo = TipoUsuarioNegocio.GetTipoUsuarioByName(rolParaBd);
+                        model.TipoUsuarioId = tipo.TipoUsuarioId;
+                        UsuarioNegocio.Alta(model);
+                    }
+                    catch (Exception)
+                    {
+                        Roles.RemoveUserFromRole(model.UsuarioNombre, rolParaBd);
+                        throw;
+                    }
+                }
+                catch
+                {
+                    Membership.DeleteUser(model.UsuarioNombre);
+                    createStatus = MembershipCreateStatus.UserRejected;
+                }
             }
 
             return createStatus;

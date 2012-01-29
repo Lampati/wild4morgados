@@ -1,6 +1,11 @@
 ﻿@model WebProgramAR.Sitio.Models.EjercicioGrillaModel
 
 @{
+    if (!Model.ConLayout)
+    {
+        Layout = null;
+    }
+    
     ViewBag.Title = "Ejercicios pendientes de aprobacion";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);

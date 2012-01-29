@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Entidades.Usuario
+﻿@model WebProgramAR.Sitio.Models.RegisterViewModel
 
 @{
     ViewBag.Title = "Register";
@@ -20,7 +20,7 @@
 { 
         @Html.ValidationSummary(true)
 
-        @Html.Partial("_CreateOrEdit", Model)
+        @Html.Partial("_Create", Model)
         <div>    
             <input type="submit" value="Registrar" class="submit"  id="btnAceptar"/> 
         </div>

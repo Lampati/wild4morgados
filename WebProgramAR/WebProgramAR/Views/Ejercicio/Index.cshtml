@@ -1,6 +1,11 @@
 ﻿@model WebProgramAR.Sitio.Models.EjercicioGrillaModel
 
 @{
+    if (!Model.ConLayout)
+    {
+        Layout = null;
+    }
+    
     ViewBag.Title = "Ejercicio";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
@@ -38,8 +43,9 @@
             OpenDialog(event, '', '@Url.Action("Create")/', 500, 550);
         });
 
-        $('.botonEliminar').click(function (event)
-        { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 350); });
+        $('.botonEliminar').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 350); 
+        });
 
         $('.botonEditar').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 500, 550);
@@ -60,7 +66,7 @@
 
 <h1>Ejercicios Aprobados</h1>
 <div id="buttonSection" class="buttonSection">
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+@if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
 {
     <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
 }
@@ -105,7 +111,7 @@
 
 <div id="contenedor-grid">
 
-@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")) )
 {
     @grid.GetHtml(
         tableStyle: "grid",

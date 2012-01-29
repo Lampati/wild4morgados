@@ -86,22 +86,22 @@ namespace WebProgramAR.DataAccess
         }
 
         //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(int idCurso, string apellido)
+        public static int ContarCantidad(int idCurso, string apellido, int usuarioId)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetCursos(idCurso, apellido, db).Count();
+                return GetCursos(idCurso, apellido, usuarioId, db).Count();
             }
         }
 
-        public static IEnumerable<Curso> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idCurso, string apellido)
+        public static IEnumerable<Curso> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idCurso, string apellido, int usuarioId)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
                 if (paginaActual < 1) paginaActual = 1;
 
 
-                IQueryable<Curso> query = GetCursos(idCurso, apellido, db);
+                IQueryable<Curso> query = GetCursos(idCurso, apellido, usuarioId, db);
 
            
                 return query.OrderUsingSortExpression(sortColumns)
@@ -111,10 +111,11 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<Curso> GetCursos(int idCurso, string nom, WebProgramAREntities db)
+        private static IQueryable<Curso> GetCursos(int idCurso, string nom, int usuarioId , WebProgramAREntities db)
         {
             IQueryable<Curso> query = from u in db.Cursos
                                       where (idCurso == -1 || u.CursoId == idCurso)
+                                      && (usuarioId == -1 || u.UsuarioId == usuarioId)
                                       && ( nom.Equals(string.Empty) ||u.Nombre.ToUpper().Contains(nom.ToUpper()))
                                      select u;
             return query;
