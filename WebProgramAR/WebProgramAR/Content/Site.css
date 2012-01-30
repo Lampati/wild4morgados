@@ -490,7 +490,7 @@ input[type="text"].textBoxForFilter
 {   
     position:relative;
     float:right;
-    bottom:10px;
+    bottom:20px;
 }
 .buttonSectionOptions div
 {
@@ -621,9 +621,38 @@ table th {
     clear: both;
 }
 
+.update-message-box
+{   
+    opacity: .70;
+    filter: alpha(opacity=70%);   
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+    background: Red;
+    font-size:2em;
+    color:#fff;
+    width:200px;
+    height:60px;
+    display:none;
+    position:absolute;
+    right:120px;
+    z-index:1111;
+}
+.pointerBox
+{
+    font-size: 0px; 
+    line-height: 0%; 
+    width: 0px;
+    border-top: 10px solid red;
+    border-left: 5px solid #fff;
+    border-right: 5px solid #fff;
+    margin-left:20px;
+    margin-top:28px;
+    position:relative;
+}
 .error
 {
-    color: Red;
+    margin-left:50px;
 }
 
 nav, #menucontainer
@@ -656,13 +685,26 @@ div#title
 -----------------------------------------------------------*/
 .field-validation-error
 {
-    color: #ff0000;
+    background: #ec3e3e;
+    color:#fff;
     float:left;
     position:relative;
     display:block;
-    width:100%;
+    width:87%;
+    margin-left:5px;
+    height:20px;
+    border-bottom-right-radius:10px;
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+    -moz-border-radius-bottomleft:10px;
+    -webkit-border-bottom-left-radius:10px;
 }
-
+.field-validation-error span
+{
+    padding-left:30px;   
+    margin-top:3px;
+}
 .field-validation-valid
 {
     display: none;
@@ -694,7 +736,7 @@ div#title
 {
     position:relative;
     margin-top: 5px;
-    height:10px;
+    height:15px;
 }
 
 .display-field, .editor-field
@@ -1636,26 +1678,6 @@ input[type="text"].datosExtraTextBox
 	height:20px;
 	z-index:1100;
 }
-.divError
-{
-    position:absolute;
-    background:#000;   
-    color:red;
-    display:none;
-    opacity: .70;
-    filter: alpha(opacity=70%);   
-    -moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-	width:200px;
-	height:100px;
-	left:47%;
-    top:47%;
-    padding:20px;
-    font-size:1.5em;
-    font-family:Calibri;
-    text-transform:uppercase;
-}
 #btnAceptar
 {
     position:absolute;
@@ -1826,9 +1848,10 @@ ul.tabs
 {
     border:3px solid #333;
     width:90%;
-    height:85%;
+    height:80%;
     margin-top:11px;
     margin-left:30px;
+    padding:10px;
  	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
@@ -1854,7 +1877,7 @@ ul.tabs
     margin: 10px;
     padding-right:50px;
     padding-top:10px;
-    color: #ccc;
+    color: #fff;
     text-decoration: none;
 }
 #logindisplay:hover
@@ -1893,10 +1916,13 @@ ul.tabs
     right:110px;
     z-index:100;
 }
+#logoutClickMe
+{
+ width:100px;
+ height:30px;   
+}
 .logOutCandado
 {
-    position:absolute;
-    top:3px;
     z-index:100;
 }
 .userOptions
@@ -1904,9 +1930,10 @@ ul.tabs
     width:200px;
     height:auto;
     line-height:70%;
-    margin-top:3px;
+    margin-top:16px;
     margin-left:40px;
     padding-top:10px;
+    padding-bottom:10px;
     position:absolute;
     float:left;
     text-align:left;
@@ -1923,10 +1950,15 @@ ul.tabs
 {
     list-style: none;
     float:left;
-    width:90%;
+    width:76%;
     left:0px;
     height:30px;
     margin-left:10px;
+    font-family:Calibri;
+    font-size:0.8em;
+    line-height:30px;
+    padding-left:30px;
+    border-bottom:1px dotted #fff;
 }
 .userOptions li:hover
 {

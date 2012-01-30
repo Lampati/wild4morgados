@@ -16,9 +16,9 @@ function updateSuccess() {
         $("#divOperacionExitosa").fadeIn(300);
         $(".buttonSectionOptions").show();
         updateWindow();
-
     } else {
-        $("#update-message").show();
+        $(".update-message-box").show();
+        $(".buttonSectionOptions").show();
     }
 }
 
@@ -46,8 +46,9 @@ function convertSelect(id,selectFirstElement) {
                 selectBox.attr("rel", option.val());
             }
             if ((i) == select.attr('selectedIndex')) {
-                if (i == 0 && selectFirstElement != undefined)
-                { selectBox.html(option.text()); }
+                if (i == 0 && selectFirstElement != undefined) {
+                    selectBox.html(option.text());
+                }
             }
             if (option.data('skip')) {
                 return true;
