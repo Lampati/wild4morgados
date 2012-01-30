@@ -175,6 +175,9 @@ namespace WebProgramAR.Controllers
 
                 bool error = false;
                 string errorMensaje;
+                string mailViejo = membUser.Email;
+                bool mailCambiado = false;
+
                 if  ( string.Compare( usuario.Email, membUser.Email, true) != 0)
                 {
                     
@@ -183,9 +186,11 @@ namespace WebProgramAR.Controllers
                     try
                     {
                         Membership.UpdateUser(membUser);
+                        mailCambiado = true;
                     }
                     catch (Exception)
                     {
+                        error = true;
                         errorMensaje = "Error al intentar modificar el mail. Ese mail ya estaba tomado";
                     }
                     
@@ -193,14 +198,30 @@ namespace WebProgramAR.Controllers
 
                 if (!error)
                 {
-                    UsuarioNegocio.Modificar(usuario);
+                    try
+                    {
+                        UsuarioNegocio.Modificar(usuario);
+                    }
+                    catch (Exception)
+                    {
+                        if (mailCambiado)
+                        {
+                            membUser.Email = mailViejo;
+                            Membership.UpdateUser(membUser);
+                        }
+
+                        return Content(Boolean.FalseString);
+                    }
+                    
                 }
                 else
                 {
                     return Content(Boolean.FalseString);
                 }
+
                 return RedirectToAction("Index");
-            }else
+            }
+            else
             {
                 return View();
             }
@@ -383,21 +404,28 @@ namespace WebProgramAR.Controllers
                 case MembershipCreateStatus.Success:
                     break;
                 case MembershipCreateStatus.DuplicateEmail:
+                    mensaje = "Ese mail ya se encuentra vinculado a otro usuario. Por favor, utilice otro.";
                     break;
                 case MembershipCreateStatus.DuplicateUserName:
+                    mensaje = "Ese nombre de usuario ya se encuentra vinculado a otro usuario. Por favor, utilice otro.";
                     break;
                 case MembershipCreateStatus.InvalidEmail:
+                    mensaje = "El mail ingresado es invalido. Por favor, utilice otro.";
                     break;
                 case MembershipCreateStatus.InvalidPassword:
+                    mensaje = "La contraseña ingresada es invalida. Por favor, utilice otra.";
                     break;
                 case MembershipCreateStatus.InvalidUserName:
+                    mensaje = "El mombre de usuario ingresado es invalido. Por favor, utilice otro.";
                     break;
                 case MembershipCreateStatus.InvalidProviderUserKey:
                 case MembershipCreateStatus.ProviderError:
                 case MembershipCreateStatus.DuplicateProviderUserKey:
                 case MembershipCreateStatus.UserRejected:
+                    mensaje = "Error al crear el nuevo usuario. Por favor intentelo de nuevo.";
                     break;
                 default:
+                    mensaje = "Error al crear el nuevo usuario. Por favor intentelo de nuevo.";
                     break;
             }
 

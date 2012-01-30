@@ -71,10 +71,6 @@
             <End Role="Ejercicio" EntitySet="Ejercicio" />
             <End Role="MensajeModeracion" EntitySet="MensajeModeracion" />
           </AssociationSet>
-          <AssociationSet Name="FK_MensajeModeracion_Usuario" Association="WebProgramARModel.Store.FK_MensajeModeracion_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="MensajeModeracion" EntitySet="MensajeModeracion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Provincia_Pais" Association="WebProgramARModel.Store.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
@@ -149,7 +145,7 @@
           <Property Name="Global" Type="bit" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
           <Property Name="NivelEjercicioId" Type="int" Nullable="false" />
-          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" />
           <Property Name="EstadoEjercicioId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -182,10 +178,8 @@
         </EntityType>
         <EntityType Name="MensajeModeracion">
           <Key>
-            <PropertyRef Name="MensajeModeracionId" />
+            <PropertyRef Name="EjercicioId" />
           </Key>
-          <Property Name="MensajeModeracionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UsuarioModeradorId" Type="int" Nullable="false" />
           <Property Name="EjercicioId" Type="int" Nullable="false" />
           <Property Name="Mensaje" Type="varchar" Nullable="false" MaxLength="500" />
         </EntityType>
@@ -319,7 +313,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ejercicio_Usuario">
-          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="0..1" />
           <End Role="Ejercicio" Type="WebProgramARModel.Store.Ejercicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -386,19 +380,7 @@
               <PropertyRef Name="EjercicioId" />
             </Principal>
             <Dependent Role="MensajeModeracion">
-              <PropertyRef Name="MensajeModeracionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MensajeModeracion_Usuario">
-          <End Role="Usuario" Type="WebProgramARModel.Store.Usuario" Multiplicity="1" />
-          <End Role="MensajeModeracion" Type="WebProgramARModel.Store.MensajeModeracion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="MensajeModeracion">
-              <PropertyRef Name="UsuarioModeradorId" />
+              <PropertyRef Name="EjercicioId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -559,40 +541,14 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
             <End Role="ReglasSeguridad" EntitySet="ReglasSeguridads" />
           </AssociationSet>
-          <EntitySet Name="Ejercicios" EntityType="WebProgramARModel.Ejercicio" />
-          <AssociationSet Name="FK_Ejercicio_EstadoEjercicio" Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio">
-            <End Role="EstadoEjercicio" EntitySet="EstadoEjercicios" />
-            <End Role="Ejercicio" EntitySet="Ejercicios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ejercicio_NivelEjercicio" Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio">
-            <End Role="NivelEjercicio" EntitySet="NivelEjercicios" />
-            <End Role="Ejercicio" EntitySet="Ejercicios" />
-          </AssociationSet>
-          <AssociationSet Name="EjercicioCurso" Association="WebProgramARModel.EjercicioCurso">
-            <End Role="Curso" EntitySet="Cursos" />
-            <End Role="Ejercicio" EntitySet="Ejercicios" />
-          </AssociationSet>
-          <EntitySet Name="MensajeModeracions" EntityType="WebProgramARModel.MensajeModeracion" />
-          <AssociationSet Name="FK_MensajeModeracion_Ejercicio" Association="WebProgramARModel.FK_MensajeModeracion_Ejercicio">
-            <End Role="Ejercicio" EntitySet="Ejercicios" />
-            <End Role="MensajeModeracion" EntitySet="MensajeModeracions" />
-          </AssociationSet>
           <EntitySet Name="Usuarios" EntityType="WebProgramARModel.Usuario" />
           <AssociationSet Name="FK_Curso_Usuario" Association="WebProgramARModel.FK_Curso_Usuario">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Curso" EntitySet="Cursos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ejercicio_Usuario" Association="WebProgramARModel.FK_Ejercicio_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Ejercicio" EntitySet="Ejercicios" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Localidad" Association="WebProgramARModel.FK_Usuario_Localidad">
             <End Role="Localidad" EntitySet="Localidades" />
             <End Role="Usuario" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MensajeModeracion_Usuario" Association="WebProgramARModel.FK_MensajeModeracion_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="MensajeModeracion" EntitySet="MensajeModeracions" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Pais" Association="WebProgramARModel.FK_Usuario_Pais">
             <End Role="Pais" EntitySet="Paises" />
@@ -610,7 +566,29 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuarios" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Ejercicios" EntityType="WebProgramARModel.Ejercicio" />
+          <AssociationSet Name="FK_Ejercicio_EstadoEjercicio" Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio">
+            <End Role="EstadoEjercicio" EntitySet="EstadoEjercicios" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_NivelEjercicio" Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio">
+            <End Role="NivelEjercicio" EntitySet="NivelEjercicios" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ejercicio_Usuario" Association="WebProgramARModel.FK_Ejercicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <AssociationSet Name="EjercicioCurso" Association="WebProgramARModel.EjercicioCurso">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+          </AssociationSet>
+          <EntitySet Name="MensajeModeracions" EntityType="WebProgramARModel.MensajeModeracion" />
+          <AssociationSet Name="FK_MensajeModeracion_Ejercicio" Association="WebProgramARModel.FK_MensajeModeracion_Ejercicio">
+            <End Role="Ejercicio" EntitySet="Ejercicios" />
+            <End Role="MensajeModeracion" EntitySet="MensajeModeracions" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Curso">
           <Key>
             <PropertyRef Name="CursoId" />
@@ -619,8 +597,8 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <Property Name="FechaAlta" Type="DateTime" Nullable="false" />
           <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ejercicios" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Curso" ToRole="Ejercicio" />
           <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Curso_Usuario" FromRole="Curso" ToRole="Usuario" />
+          <NavigationProperty Name="Ejercicios" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Curso" ToRole="Ejercicio" />
         </EntityType>
         <EntityType Name="EstadoEjercicio">
           <Key>
@@ -828,77 +806,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Ejercicio">
-          <Key>
-            <PropertyRef Name="EjercicioId" />
-          </Key>
-          <Property Type="Int32" Name="EjercicioId" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Enunciado" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SolucionTexto" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="Binary" Name="Solucion" MaxLength="Max" FixedLength="false" />
-          <Property Type="Boolean" Name="Global" Nullable="false" />
-          <Property Type="DateTime" Name="FechaAlta" Nullable="false" />
-          <Property Type="Int32" Name="NivelEjercicioId" Nullable="false" />
-          <Property Type="Int32" Name="UsuarioId" Nullable="false" />
-          <Property Type="Int32" Name="EstadoEjercicioId" Nullable="false" />
-          <NavigationProperty Name="EstadoEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" FromRole="Ejercicio" ToRole="EstadoEjercicio" />
-          <NavigationProperty Name="NivelEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_NivelEjercicio" FromRole="Ejercicio" ToRole="NivelEjercicio" />
-          <NavigationProperty Name="Cursos" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Ejercicio" ToRole="Curso" />
-          <NavigationProperty Name="MensajeModeracion" Relationship="WebProgramARModel.FK_MensajeModeracion_Ejercicio" FromRole="Ejercicio" ToRole="MensajeModeracion" />
-          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Ejercicio" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Ejercicio_EstadoEjercicio">
-          <End Type="WebProgramARModel.EstadoEjercicio" Role="EstadoEjercicio" Multiplicity="1" />
-          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstadoEjercicio">
-              <PropertyRef Name="EstadoEjercicioId" />
-            </Principal>
-            <Dependent Role="Ejercicio">
-              <PropertyRef Name="EstadoEjercicioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ejercicio_NivelEjercicio">
-          <End Type="WebProgramARModel.NivelEjercicio" Role="NivelEjercicio" Multiplicity="1" />
-          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NivelEjercicio">
-              <PropertyRef Name="NivelEjercicioId" />
-            </Principal>
-            <Dependent Role="Ejercicio">
-              <PropertyRef Name="NivelEjercicioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EjercicioCurso">
-          <End Type="WebProgramARModel.Curso" Role="Curso" Multiplicity="*" />
-          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
-        </Association>
-        <EntityType Name="MensajeModeracion">
-          <Key>
-            <PropertyRef Name="MensajeModeracionId" />
-          </Key>
-          <Property Type="Int32" Name="MensajeModeracionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UsuarioModeradorId" Nullable="false" />
-          <Property Type="Int32" Name="EjercicioId" Nullable="false" />
-          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Ejercicio" Relationship="WebProgramARModel.FK_MensajeModeracion_Ejercicio" FromRole="MensajeModeracion" ToRole="Ejercicio" />
-          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_MensajeModeracion_Usuario" FromRole="MensajeModeracion" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_MensajeModeracion_Ejercicio">
-          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="1" />
-          <End Type="WebProgramARModel.MensajeModeracion" Role="MensajeModeracion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Ejercicio">
-              <PropertyRef Name="EjercicioId" />
-            </Principal>
-            <Dependent Role="MensajeModeracion">
-              <PropertyRef Name="MensajeModeracionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="UsuarioId" />
@@ -914,13 +821,12 @@
           <Property Type="String" Name="ProvinciaId" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="LocalidadId" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cursoes" Relationship="WebProgramARModel.FK_Curso_Usuario" FromRole="Usuario" ToRole="Curso" />
-          <NavigationProperty Name="Ejercicios" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Usuario" ToRole="Ejercicio" />
           <NavigationProperty Name="Localidad" Relationship="WebProgramARModel.FK_Usuario_Localidad" FromRole="Usuario" ToRole="Localidad" />
-          <NavigationProperty Name="MensajeModeracions" Relationship="WebProgramARModel.FK_MensajeModeracion_Usuario" FromRole="Usuario" ToRole="MensajeModeracion" />
           <NavigationProperty Name="Pais" Relationship="WebProgramARModel.FK_Usuario_Pais" FromRole="Usuario" ToRole="Pais" />
           <NavigationProperty Name="Provincia" Relationship="WebProgramARModel.FK_Usuario_Provincia" FromRole="Usuario" ToRole="Provincia" />
           <NavigationProperty Name="ReglasSeguridads" Relationship="WebProgramARModel.FK_ReglasSeguridad_Usuario" FromRole="Usuario" ToRole="ReglasSeguridad" />
           <NavigationProperty Name="TipoUsuario" Relationship="WebProgramARModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Ejercicios" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Usuario" ToRole="Ejercicio" />
         </EntityType>
         <Association Name="FK_Curso_Usuario">
           <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="1" />
@@ -934,18 +840,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ejercicio_Usuario">
-          <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Ejercicio">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Localidad">
           <End Type="WebProgramARModel.Localidad" Role="Localidad" Multiplicity="1" />
           <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="*" />
@@ -955,18 +849,6 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="LocalidadId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MensajeModeracion_Usuario">
-          <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="WebProgramARModel.MensajeModeracion" Role="MensajeModeracion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="MensajeModeracion">
-              <PropertyRef Name="UsuarioModeradorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1018,7 +900,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Ejercicio">
+          <Key>
+            <PropertyRef Name="EjercicioId" />
+          </Key>
+          <Property Type="Int32" Name="EjercicioId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Enunciado" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SolucionTexto" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Solucion" MaxLength="Max" FixedLength="false" />
+          <Property Type="Boolean" Name="Global" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAlta" Nullable="false" />
+          <Property Type="Int32" Name="NivelEjercicioId" Nullable="false" />
+          <Property Type="Int32" Name="UsuarioId" />
+          <Property Type="Int32" Name="EstadoEjercicioId" Nullable="false" />
+          <NavigationProperty Name="EstadoEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" FromRole="Ejercicio" ToRole="EstadoEjercicio" />
+          <NavigationProperty Name="NivelEjercicio" Relationship="WebProgramARModel.FK_Ejercicio_NivelEjercicio" FromRole="Ejercicio" ToRole="NivelEjercicio" />
+          <NavigationProperty Name="Usuario" Relationship="WebProgramARModel.FK_Ejercicio_Usuario" FromRole="Ejercicio" ToRole="Usuario" />
+          <NavigationProperty Name="Cursoes" Relationship="WebProgramARModel.EjercicioCurso" FromRole="Ejercicio" ToRole="Curso" />
+          <NavigationProperty Name="MensajeModeracion" Relationship="WebProgramARModel.FK_MensajeModeracion_Ejercicio" FromRole="Ejercicio" ToRole="MensajeModeracion" />
+        </EntityType>
+        <Association Name="FK_Ejercicio_EstadoEjercicio">
+          <End Type="WebProgramARModel.EstadoEjercicio" Role="EstadoEjercicio" Multiplicity="1" />
+          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEjercicio">
+              <PropertyRef Name="EstadoEjercicioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="EstadoEjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_NivelEjercicio">
+          <End Type="WebProgramARModel.NivelEjercicio" Role="NivelEjercicio" Multiplicity="1" />
+          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelEjercicio">
+              <PropertyRef Name="NivelEjercicioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="NivelEjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ejercicio_Usuario">
+          <End Type="WebProgramARModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Ejercicio">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EjercicioCurso">
+          <End Type="WebProgramARModel.Curso" Role="Curso" Multiplicity="*" />
+          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MensajeModeracion">
+          <Key>
+            <PropertyRef Name="EjercicioId" />
+          </Key>
+          <Property Type="Int32" Name="EjercicioId" Nullable="false" />
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ejercicio" Relationship="WebProgramARModel.FK_MensajeModeracion_Ejercicio" FromRole="MensajeModeracion" ToRole="Ejercicio" />
+        </EntityType>
+        <Association Name="FK_MensajeModeracion_Ejercicio">
+          <End Type="WebProgramARModel.Ejercicio" Role="Ejercicio" Multiplicity="1" />
+          <End Type="WebProgramARModel.MensajeModeracion" Role="MensajeModeracion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ejercicio">
+              <PropertyRef Name="EjercicioId" />
+            </Principal>
+            <Dependent Role="MensajeModeracion">
+              <PropertyRef Name="EjercicioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1104,6 +1066,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="WebProgramARModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
+                <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
+                <ScalarProperty Name="UsuarioNombre" ColumnName="UsuarioNombre" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Ejercicios">
             <EntityTypeMapping TypeName="WebProgramARModel.Ejercicio">
               <MappingFragment StoreEntitySet="Ejercicio">
@@ -1133,24 +1111,6 @@
               <MappingFragment StoreEntitySet="MensajeModeracion">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
                 <ScalarProperty Name="EjercicioId" ColumnName="EjercicioId" />
-                <ScalarProperty Name="UsuarioModeradorId" ColumnName="UsuarioModeradorId" />
-                <ScalarProperty Name="MensajeModeracionId" ColumnName="MensajeModeracionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="WebProgramARModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="LocalidadId" ColumnName="LocalidadId" />
-                <ScalarProperty Name="ProvinciaId" ColumnName="ProvinciaId" />
-                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
-                <ScalarProperty Name="TipoUsuarioId" ColumnName="TipoUsuarioId" />
-                <ScalarProperty Name="UsuarioNombre" ColumnName="UsuarioNombre" />
-                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1175,7 +1135,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model" ZoomLevel="97">
+      <Diagram Name="Model" ZoomLevel="82">
         <EntityTypeShape EntityType="WebProgramARModel.Curso" Width="1.5" PointX="5.25" PointY="3.625" Height="2.1246875268220897" IsExpanded="true" />
         <EntityTypeShape EntityType="WebProgramARModel.EstadoEjercicio" Width="1.5" PointX="5.25" PointY="0.75" Height="1.563750017881393" IsExpanded="true" />
         <EntityTypeShape EntityType="WebProgramARModel.Localidad" Width="1.5" PointX="0.75" PointY="8.25" Height="1.9377083571751914" IsExpanded="true" />
@@ -1184,8 +1144,8 @@
         <EntityTypeShape EntityType="WebProgramARModel.Provincia" Width="1.5" PointX="7.75" PointY="8.25" Height="1.563750017881393" IsExpanded="true" />
         <EntityTypeShape EntityType="WebProgramARModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="0.875" Height="1.563750017881393" IsExpanded="true" />
         <AssociationConnector Association="WebProgramARModel.FK_Localidad_Pais" >
-          <ConnectorPoint PointX="1.7031212500000001" PointY="5.8127083571751905" />
-          <ConnectorPoint PointX="1.7031212500000001" PointY="8.25" />
+          <ConnectorPoint PointX="1.7665966406250007" PointY="5.8127083571751905" />
+          <ConnectorPoint PointX="1.7665966406250007" PointY="8.25" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Localidad_Provincia" >
           <ConnectorPoint PointX="7.75" PointY="9.8790884866972757" />
@@ -1194,8 +1154,10 @@
         <AssociationConnector Association="WebProgramARModel.FK_Provincia_Pais" >
           <ConnectorPoint PointX="2.2500000000000009" PointY="5.8127083571751905" />
           <ConnectorPoint PointX="2.625" PointY="6.18770835717519" />
-          <ConnectorPoint PointX="2.625" PointY="9.2972524931544243" />
-          <ConnectorPoint PointX="7.75" PointY="9.2972524931544243" />
+          <ConnectorPoint PointX="2.625" PointY="9.30332104974639" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="9.30332104974639" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="9.30332104974639" />
+          <ConnectorPoint PointX="7.75" PointY="9.30332104974639" />
         </AssociationConnector>
         <EntityTypeShape EntityType="WebProgramARModel.Columna" Width="1.5" PointX="9.75" PointY="16" Height="2.1246875268220897" />
         <EntityTypeShape EntityType="WebProgramARModel.Comparador" Width="1.5" PointX="7.5" PointY="13.875" Height="1.5637500178813966" />
@@ -1212,20 +1174,16 @@
           <ConnectorPoint PointX="10.5" PointY="18.12468752682209" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Comparador" >
-          <ConnectorPoint PointX="9" PointY="14.656875008940698" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="14.656875008940698" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="14.656875008940698" />
-          <ConnectorPoint PointX="10.156250499999999" PointY="14.656875008940698" />
-          <ConnectorPoint PointX="10.156250499999999" PointY="3.4976042054096936" />
+          <ConnectorPoint PointX="7.59375" PointY="13.875" />
+          <ConnectorPoint PointX="7.59375" PointY="1.8753232846169075" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="1.8753232846169068" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="1.8753232846169075" />
+          <ConnectorPoint PointX="9.75" PointY="1.8753232846169075" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Tabla" >
           <ConnectorPoint PointX="9" PointY="17.125364593764147" />
           <ConnectorPoint PointX="9.5" PointY="17.125364593764147" />
           <ConnectorPoint PointX="9.5" PointY="3.8726042054096936" />
-          <ConnectorPoint PointX="9.8385394166666646" PointY="3.8726042054096932" />
-          <ConnectorPoint PointX="10.005206083333333" PointY="3.8726042054096936" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="3.8726042054096932" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="3.8726042054096936" />
           <ConnectorPoint PointX="10.5" PointY="3.8726042054096936" />
           <ConnectorPoint PointX="10.5" PointY="3.4976042054096936" />
         </AssociationConnector>
@@ -1233,132 +1191,128 @@
           <ConnectorPoint PointX="2.25" PointY="2.407500017881393" />
           <ConnectorPoint PointX="4.916666666666667" PointY="2.4075000178813926" />
           <ConnectorPoint PointX="5.083333333333333" PointY="2.407500017881393" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="2.4075000178813926" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="2.407500017881393" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="2.4075000178813926" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="2.407500017881393" />
+          <ConnectorPoint PointX="9.2916666666666661" PointY="2.4075000178813926" />
+          <ConnectorPoint PointX="9.4583333333333339" PointY="2.407500017881393" />
           <ConnectorPoint PointX="9.75" PointY="2.407500017881393" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="WebProgramARModel.Ejercicio" Width="1.5" PointX="7.5" PointY="2.875" Height="3.6205208839972869" />
-        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" >
-          <ConnectorPoint PointX="6.75" PointY="1.5318750089406965" />
-          <ConnectorPoint PointX="8.25" PointY="1.5318750089406965" />
-          <ConnectorPoint PointX="8.25" PointY="2.875" />
-        </AssociationConnector>
-        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio" >
-          <ConnectorPoint PointX="6.75" PointY="7.65625" />
-          <ConnectorPoint PointX="7.59375" PointY="7.65625" />
-          <ConnectorPoint PointX="7.59375" PointY="6.68250005364418" />
-        </AssociationConnector>
-        <AssociationConnector Association="WebProgramARModel.EjercicioCurso" >
-          <ConnectorPoint PointX="6.75" PointY="4.6873437634110449" />
-          <ConnectorPoint PointX="7.5" PointY="4.6873437634110449" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="WebProgramARModel.MensajeModeracion" Width="1.5" PointX="10.625" PointY="4.375" Height="2.1246875268220862" />
-        <AssociationConnector Association="WebProgramARModel.FK_MensajeModeracion_Ejercicio" >
-          <ConnectorPoint PointX="9" PointY="5.4373437634110431" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="5.4373437634110422" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="5.4373437634110431" />
-          <ConnectorPoint PointX="9.8385394166666646" PointY="5.4373437634110422" />
-          <ConnectorPoint PointX="10.005206083333333" PointY="5.4373437634110431" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="5.4373437634110422" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="5.4373437634110431" />
-          <ConnectorPoint PointX="10.625" PointY="5.4373437634110431" />
         </AssociationConnector>
         <EntityTypeShape EntityType="WebProgramARModel.Usuario" Width="2.25" PointX="13" PointY="3.625" Height="4.368437562584873" />
         <AssociationConnector Association="WebProgramARModel.FK_Curso_Usuario" >
-          <ConnectorPoint PointX="13" PointY="5.9341797221451991" />
-          <ConnectorPoint PointX="12.375" PointY="5.9341797221451991" />
-          <ConnectorPoint PointX="12.375" PointY="6.93250005364418" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="6.932500053644179" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="6.93250005364418" />
-          <ConnectorPoint PointX="10.005206083333333" PointY="6.932500053644179" />
-          <ConnectorPoint PointX="9.8385394166666646" PointY="6.93250005364418" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="6.932500053644179" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="6.93250005364418" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="6.932500053644179" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="6.93250005364418" />
-          <ConnectorPoint PointX="6" PointY="6.93250005364418" />
-          <ConnectorPoint PointX="6" PointY="5.74968752682209" />
-        </AssociationConnector>
-        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_Usuario" >
-          <ConnectorPoint PointX="13" PointY="4.1550521027048468" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="4.1550521027048459" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="4.1550521027048468" />
-          <ConnectorPoint PointX="10.005206083333333" PointY="4.1550521027048459" />
-          <ConnectorPoint PointX="9.8385394166666646" PointY="4.1550521027048468" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="4.1550521027048459" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="4.1550521027048468" />
-          <ConnectorPoint PointX="9" PointY="4.1550521027048468" />
+          <ConnectorPoint PointX="13" PointY="5.1752458249579147" />
+          <ConnectorPoint PointX="10.989585833333335" PointY="5.1752458249579139" />
+          <ConnectorPoint PointX="10.822919166666667" PointY="5.1752458249579147" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="5.1752458249579139" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="5.1752458249579147" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="5.1752458249579139" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="5.1752458249579147" />
+          <ConnectorPoint PointX="6.75" PointY="5.1752458249579147" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Localidad" >
           <ConnectorPoint PointX="2.25" PointY="10.592916696468988" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="10.592916696468988" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="10.592916696468988" />
           <ConnectorPoint PointX="9.4166666666666661" PointY="10.592916696468988" />
           <ConnectorPoint PointX="9.5833333333333339" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="14.3476553125" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="14.3476553125" PointY="7.993437562584873" />
-        </AssociationConnector>
-        <AssociationConnector Association="WebProgramARModel.FK_MensajeModeracion_Usuario" >
-          <ConnectorPoint PointX="13" PointY="5.0920898610725995" />
-          <ConnectorPoint PointX="12.125" PointY="5.0920898610725995" />
+          <ConnectorPoint PointX="14.512525264054537" PointY="10.592916696468988" />
+          <ConnectorPoint PointX="14.512525264054537" PointY="7.8064583929379765" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Pais" >
-          <ConnectorPoint PointX="1.195308125" PointY="5.8127083571751905" />
-          <ConnectorPoint PointX="1.195308125" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="1.6197879166666669" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="1.7864545833333334" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="5.916666666666667" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="6.083333333333333" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="9.8385394166666646" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="10.005206083333333" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="6.838750053644179" />
-          <ConnectorPoint PointX="12.458333333333334" PointY="6.83875005364418" />
-          <ConnectorPoint PointX="13" PointY="6.83875005364418" />
+          <ConnectorPoint PointX="1.2270458203125003" PointY="5.8127083571751905" />
+          <ConnectorPoint PointX="1.2270458203125003" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="1.6832633072916674" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="1.8499299739583339" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="10.822919166666667" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="10.989585833333335" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="13" PointY="6.4688566785875956" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Provincia" >
           <ConnectorPoint PointX="9.25" PointY="9.3123437634110449" />
           <ConnectorPoint PointX="9.4166666666666661" PointY="9.3123437634110449" />
           <ConnectorPoint PointX="9.5833333333333339" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="13.64257515625" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="13.64257515625" PointY="7.993437562584873" />
+          <ConnectorPoint PointX="13.725010132027268" PointY="9.3123437634110449" />
+          <ConnectorPoint PointX="13.725010132027268" PointY="7.8064583929379765" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Usuario" >
-          <ConnectorPoint PointX="13" PointY="7.4629688081145265" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="7.4629688081145256" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="7.4629688081145265" />
-          <ConnectorPoint PointX="9.9218727499999986" PointY="7.4629688081145265" />
-          <ConnectorPoint PointX="9.9218727499999986" PointY="3.4976042054096936" />
+          <ConnectorPoint PointX="13" PointY="7.16891003576278" />
+          <ConnectorPoint PointX="10.9062525" PointY="7.16891003576278" />
+          <ConnectorPoint PointX="10.9062525" PointY="3.4976042054096936" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_TipoUsuario" >
           <ConnectorPoint PointX="2.25" PointY="1.6099980089406958" />
           <ConnectorPoint PointX="5" PointY="1.6099980089406958" />
           <ConnectorPoint PointX="5" PointY="2.563750017881393" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="2.5637500178813926" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="2.563750017881393" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="2.5637500178813926" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="2.563750017881393" />
           <ConnectorPoint PointX="9.4375" PointY="2.563750017881393" />
           <ConnectorPoint PointX="9.4375" PointY="3.7476042054096936" />
-          <ConnectorPoint PointX="9.8385394166666646" PointY="3.7476042054096932" />
-          <ConnectorPoint PointX="10.005206083333333" PointY="3.7476042054096936" />
-          <ConnectorPoint PointX="10.072917166666665" PointY="3.7476042054096932" />
-          <ConnectorPoint PointX="10.239583833333333" PointY="3.7476042054096936" />
           <ConnectorPoint PointX="10.416666666666666" PointY="3.7476042054096932" />
           <ConnectorPoint PointX="10.583333333333334" PointY="3.7476042054096936" />
+          <ConnectorPoint PointX="10.822919166666667" PointY="3.7476042054096932" />
+          <ConnectorPoint PointX="10.989585833333335" PointY="3.7476042054096936" />
           <ConnectorPoint PointX="12.75" PointY="3.7476042054096936" />
           <ConnectorPoint PointX="12.75" PointY="3.375" />
+          <ConnectorPoint PointX="12.791666666666666" PointY="3.3749999999999996" />
+          <ConnectorPoint PointX="12.958333333333334" PointY="3.375" />
           <ConnectorPoint PointX="14.125" PointY="3.375" />
           <ConnectorPoint PointX="14.125" PointY="3.625" />
         </AssociationConnector>
-      </Diagram>
+        <EntityTypeShape EntityType="WebProgramARModel.Ejercicio" Width="1.5" PointX="16" PointY="2.875" Height="3.8075000536441763" />
+        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" >
+          <ConnectorPoint PointX="6.75" PointY="1.3126621423084539" />
+          <ConnectorPoint PointX="9.375" PointY="1.3126621423084539" />
+          <ConnectorPoint PointX="9.375" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="10.416666666666666" PointY="3.7788542054096932" />
+          <ConnectorPoint PointX="10.583333333333334" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="10.822919166666667" PointY="3.7788542054096932" />
+          <ConnectorPoint PointX="10.989585833333335" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="12.5" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="12.5" PointY="2.625" />
+          <ConnectorPoint PointX="17.012268734375" PointY="2.625" />
+          <ConnectorPoint PointX="17.012268734375" PointY="2.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio" >
+          <ConnectorPoint PointX="6.75" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="13.641676798693935" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="13.808343465360602" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="14.429191930721203" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="14.595858597387871" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="16.75" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="16.75" PointY="6.68250005364418" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_Usuario" >
+          <ConnectorPoint PointX="15.25" PointY="5.15375002682209" />
+          <ConnectorPoint PointX="16" PointY="5.15375002682209" />
+        </AssociationConnector>
+        <AssociationConnector Association="WebProgramARModel.EjercicioCurso" >
+          <ConnectorPoint PointX="6.75" PointY="4.4968896132063207" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="4.49688961320632" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="4.4968896132063207" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="4.49688961320632" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="4.4968896132063207" />
+          <ConnectorPoint PointX="10.822919166666667" PointY="4.49688961320632" />
+          <ConnectorPoint PointX="10.989585833333335" PointY="4.4968896132063207" />
+          <ConnectorPoint PointX="12.875" PointY="4.4968896132063207" />
+          <ConnectorPoint PointX="12.875" PointY="2.59375" />
+          <ConnectorPoint PointX="16.474882367187497" PointY="2.59375" />
+          <ConnectorPoint PointX="16.474882367187497" PointY="2.875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="WebProgramARModel.MensajeModeracion" Width="1.5" PointX="18.25" PointY="4" Height="1.5637500178813966" />
+        <AssociationConnector Association="WebProgramARModel.FK_MensajeModeracion_Ejercicio" >
+          <ConnectorPoint PointX="17.5" PointY="4.7818750089406983" />
+          <ConnectorPoint PointX="18.25" PointY="4.7818750089406983" />
+        </AssociationConnector>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

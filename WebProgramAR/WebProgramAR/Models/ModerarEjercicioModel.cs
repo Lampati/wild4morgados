@@ -12,7 +12,7 @@ namespace WebProgramAR.Sitio.Models
     public class ModerarEjercicioModel
     {
         public Ejercicio Ejercicio { get; set; }
-        public string MensajeMail { get; set; }
+        public string MensajeModeracion { get; set; }
         public bool Aceptado { get; set; }
     }
     

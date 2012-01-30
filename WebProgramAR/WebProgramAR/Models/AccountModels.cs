@@ -15,12 +15,12 @@ namespace WebProgramAR.Models
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
+        [StringLength(20, ErrorMessage = "La contraseña debe tener entre 6 y 20 caracteres", MinimumLength = 6)]
         public string OldPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
+        [StringLength(20, ErrorMessage = "La contraseña debe tener entre 6 y 20 caracteres", MinimumLength=6)]
         [Display(Name = "Nueva Contraseña")]
         public string NewPassword { get; set; }
 
@@ -48,6 +48,7 @@ namespace WebProgramAR.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
+        [StringLength(20, ErrorMessage = "La contraseña debe tener entre 6 y 20 caracteres", MinimumLength = 6)]
         public string Password { get; set; }
 
       
