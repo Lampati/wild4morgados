@@ -19,45 +19,22 @@ namespace WebProgramAR.Entidades
     {
         #region Primitive Properties
     
-        public virtual int MensajeModeracionId
+        public virtual int EjercicioId
         {
-            get { return _mensajeModeracionId; }
+            get { return _ejercicioId; }
             set
             {
-                if (_mensajeModeracionId != value)
+                if (_ejercicioId != value)
                 {
                     if (Ejercicio != null && Ejercicio.EjercicioId != value)
                     {
                         Ejercicio = null;
                     }
-                    _mensajeModeracionId = value;
+                    _ejercicioId = value;
                 }
             }
         }
-        private int _mensajeModeracionId;
-    
-        public virtual int UsuarioModeradorId
-        {
-            get { return _usuarioModeradorId; }
-            set
-            {
-                if (_usuarioModeradorId != value)
-                {
-                    if (Usuario != null && Usuario.UsuarioId != value)
-                    {
-                        Usuario = null;
-                    }
-                    _usuarioModeradorId = value;
-                }
-            }
-        }
-        private int _usuarioModeradorId;
-    
-        public virtual int EjercicioId
-        {
-            get;
-            set;
-        }
+        private int _ejercicioId;
     
         public virtual string Mensaje
         {
@@ -82,21 +59,6 @@ namespace WebProgramAR.Entidades
             }
         }
         private Ejercicio _ejercicio;
-    
-        public virtual Usuario Usuario
-        {
-            get { return _usuario; }
-            set
-            {
-                if (!ReferenceEquals(_usuario, value))
-                {
-                    var previousValue = _usuario;
-                    _usuario = value;
-                    FixupUsuario(previousValue);
-                }
-            }
-        }
-        private Usuario _usuario;
 
         #endregion
         #region Association Fixup
@@ -111,29 +73,9 @@ namespace WebProgramAR.Entidades
             if (Ejercicio != null)
             {
                 Ejercicio.MensajeModeracion = this;
-                if (MensajeModeracionId != Ejercicio.EjercicioId)
+                if (EjercicioId != Ejercicio.EjercicioId)
                 {
-                    MensajeModeracionId = Ejercicio.EjercicioId;
-                }
-            }
-        }
-    
-        private void FixupUsuario(Usuario previousValue)
-        {
-            if (previousValue != null && previousValue.MensajeModeracions.Contains(this))
-            {
-                previousValue.MensajeModeracions.Remove(this);
-            }
-    
-            if (Usuario != null)
-            {
-                if (!Usuario.MensajeModeracions.Contains(this))
-                {
-                    Usuario.MensajeModeracions.Add(this);
-                }
-                if (UsuarioModeradorId != Usuario.UsuarioId)
-                {
-                    UsuarioModeradorId = Usuario.UsuarioId;
+                    EjercicioId = Ejercicio.EjercicioId;
                 }
             }
         }

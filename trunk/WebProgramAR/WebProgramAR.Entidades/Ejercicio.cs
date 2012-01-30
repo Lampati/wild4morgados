@@ -66,47 +66,71 @@ namespace WebProgramAR.Entidades
             get { return _nivelEjercicioId; }
             set
             {
-                if (_nivelEjercicioId != value)
+                try
                 {
-                    if (NivelEjercicio != null && NivelEjercicio.NivelEjercicioId != value)
+                    _settingFK = true;
+                    if (_nivelEjercicioId != value)
                     {
-                        NivelEjercicio = null;
+                        if (NivelEjercicio != null && NivelEjercicio.NivelEjercicioId != value)
+                        {
+                            NivelEjercicio = null;
+                        }
+                        _nivelEjercicioId = value;
                     }
-                    _nivelEjercicioId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
         private int _nivelEjercicioId;
     
-        public virtual int UsuarioId
+        public virtual Nullable<int> UsuarioId
         {
             get { return _usuarioId; }
             set
             {
-                if (_usuarioId != value)
+                try
                 {
-                    if (Usuario != null && Usuario.UsuarioId != value)
+                    _settingFK = true;
+                    if (_usuarioId != value)
                     {
-                        Usuario = null;
+                        if (Usuario != null && Usuario.UsuarioId != value)
+                        {
+                            Usuario = null;
+                        }
+                        _usuarioId = value;
                     }
-                    _usuarioId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
-        private int _usuarioId;
+        private Nullable<int> _usuarioId;
     
         public virtual int EstadoEjercicioId
         {
             get { return _estadoEjercicioId; }
             set
             {
-                if (_estadoEjercicioId != value)
+                try
                 {
-                    if (EstadoEjercicio != null && EstadoEjercicio.EstadoEjercicioId != value)
+                    _settingFK = true;
+                    if (_estadoEjercicioId != value)
                     {
-                        EstadoEjercicio = null;
+                        if (EstadoEjercicio != null && EstadoEjercicio.EstadoEjercicioId != value)
+                        {
+                            EstadoEjercicio = null;
+                        }
+                        _estadoEjercicioId = value;
                     }
-                    _estadoEjercicioId = value;
+                }
+                finally
+                {
+                    _settingFK = false;
                 }
             }
         }
@@ -145,37 +169,52 @@ namespace WebProgramAR.Entidades
         }
         private NivelEjercicio _nivelEjercicio;
     
-        public virtual ICollection<Curso> Cursos
+        public virtual Usuario Usuario
+        {
+            get { return _usuario; }
+            set
+            {
+                if (!ReferenceEquals(_usuario, value))
+                {
+                    var previousValue = _usuario;
+                    _usuario = value;
+                    FixupUsuario(previousValue);
+                }
+            }
+        }
+        private Usuario _usuario;
+    
+        public virtual ICollection<Curso> Cursoes
         {
             get
             {
-                if (_cursos == null)
+                if (_cursoes == null)
                 {
                     var newCollection = new FixupCollection<Curso>();
-                    newCollection.CollectionChanged += FixupCursos;
-                    _cursos = newCollection;
+                    newCollection.CollectionChanged += FixupCursoes;
+                    _cursoes = newCollection;
                 }
-                return _cursos;
+                return _cursoes;
             }
             set
             {
-                if (!ReferenceEquals(_cursos, value))
+                if (!ReferenceEquals(_cursoes, value))
                 {
-                    var previousValue = _cursos as FixupCollection<Curso>;
+                    var previousValue = _cursoes as FixupCollection<Curso>;
                     if (previousValue != null)
                     {
-                        previousValue.CollectionChanged -= FixupCursos;
+                        previousValue.CollectionChanged -= FixupCursoes;
                     }
-                    _cursos = value;
+                    _cursoes = value;
                     var newValue = value as FixupCollection<Curso>;
                     if (newValue != null)
                     {
-                        newValue.CollectionChanged += FixupCursos;
+                        newValue.CollectionChanged += FixupCursoes;
                     }
                 }
             }
         }
-        private ICollection<Curso> _cursos;
+        private ICollection<Curso> _cursoes;
     
         public virtual MensajeModeracion MensajeModeracion
         {
@@ -191,24 +230,11 @@ namespace WebProgramAR.Entidades
             }
         }
         private MensajeModeracion _mensajeModeracion;
-    
-        public virtual Usuario Usuario
-        {
-            get { return _usuario; }
-            set
-            {
-                if (!ReferenceEquals(_usuario, value))
-                {
-                    var previousValue = _usuario;
-                    _usuario = value;
-                    FixupUsuario(previousValue);
-                }
-            }
-        }
-        private Usuario _usuario;
 
         #endregion
         #region Association Fixup
+    
+        private bool _settingFK = false;
     
         private void FixupEstadoEjercicio(EstadoEjercicio previousValue)
         {
@@ -250,19 +276,6 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupMensajeModeracion(MensajeModeracion previousValue)
-        {
-            if (previousValue != null && ReferenceEquals(previousValue.Ejercicio, this))
-            {
-                previousValue.Ejercicio = null;
-            }
-    
-            if (MensajeModeracion != null)
-            {
-                MensajeModeracion.Ejercicio = this;
-            }
-        }
-    
         private void FixupUsuario(Usuario previousValue)
         {
             if (previousValue != null && previousValue.Ejercicios.Contains(this))
@@ -281,9 +294,26 @@ namespace WebProgramAR.Entidades
                     UsuarioId = Usuario.UsuarioId;
                 }
             }
+            else if (!_settingFK)
+            {
+                UsuarioId = null;
+            }
         }
     
-        private void FixupCursos(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupMensajeModeracion(MensajeModeracion previousValue)
+        {
+            if (previousValue != null && ReferenceEquals(previousValue.Ejercicio, this))
+            {
+                previousValue.Ejercicio = null;
+            }
+    
+            if (MensajeModeracion != null)
+            {
+                MensajeModeracion.Ejercicio = this;
+            }
+        }
+    
+        private void FixupCursoes(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {

@@ -57,6 +57,21 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Navigation Properties
     
+        public virtual Usuario Usuario
+        {
+            get { return _usuario; }
+            set
+            {
+                if (!ReferenceEquals(_usuario, value))
+                {
+                    var previousValue = _usuario;
+                    _usuario = value;
+                    FixupUsuario(previousValue);
+                }
+            }
+        }
+        private Usuario _usuario;
+    
         public virtual ICollection<Ejercicio> Ejercicios
         {
             get
@@ -88,21 +103,6 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Ejercicio> _ejercicios;
-    
-        public virtual Usuario Usuario
-        {
-            get { return _usuario; }
-            set
-            {
-                if (!ReferenceEquals(_usuario, value))
-                {
-                    var previousValue = _usuario;
-                    _usuario = value;
-                    FixupUsuario(previousValue);
-                }
-            }
-        }
-        private Usuario _usuario;
 
         #endregion
         #region Association Fixup
@@ -133,9 +133,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (Ejercicio item in e.NewItems)
                 {
-                    if (!item.Cursos.Contains(this))
+                    if (!item.Cursoes.Contains(this))
                     {
-                        item.Cursos.Add(this);
+                        item.Cursoes.Add(this);
                     }
                 }
             }
@@ -144,9 +144,9 @@ namespace WebProgramAR.Entidades
             {
                 foreach (Ejercicio item in e.OldItems)
                 {
-                    if (item.Cursos.Contains(this))
+                    if (item.Cursoes.Contains(this))
                     {
-                        item.Cursos.Remove(this);
+                        item.Cursoes.Remove(this);
                     }
                 }
             }

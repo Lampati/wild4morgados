@@ -17,7 +17,7 @@ namespace WebProgramAR.DataAccess
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("EstadoEjercicio").Include("Usuario").Include("NivelEjercicio")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("MensajeModeracion").Include("EstadoEjercicio").Include("Usuario").Include("NivelEjercicio")
                                                 where u.EjercicioId  == id select u;
                 return query.ToArray()[0];
             }
@@ -126,9 +126,9 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<Ejercicio> GetEjercicios(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, WebProgramAREntities db)
         {
-            IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+            IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
                                      where (usuarioId == -1 || u.UsuarioId == usuarioId)                                     
-                                     && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
+                                     && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
                                      && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
                                      && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
                                      && (nombre == "" || u.Nombre.Contains(nombre))
@@ -140,9 +140,9 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
                                               where (usuarioId == -1 || u.UsuarioId == usuarioId)
-                                              && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
+                                              && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
                                               && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
                                               && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
                                               select u;
@@ -153,9 +153,9 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursos").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
                                               where (u.UsuarioId != usuarioId)
-                                              && (cursoId == -1 || u.Cursos.Count(m => m.CursoId == cursoId) > 0)
+                                              && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
                                               && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
                                               && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
                                               select u;
@@ -171,5 +171,27 @@ namespace WebProgramAR.DataAccess
         }
 
         #endregion
+
+        public static void ModificarEstado(Ejercicio ejercicio)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                Ejercicio ejercicioOrig = db.Ejercicios.Single(u => u.EjercicioId == ejercicio.EjercicioId);
+
+                ejercicioOrig.EstadoEjercicioId = ejercicio.EstadoEjercicioId;
+                ejercicioOrig.MensajeModeracion = ejercicio.MensajeModeracion;
+
+                //MensajeModeracion mensajeModeracion = new MensajeModeracion();
+
+                //mensajeModeracion.EjercicioId = ejercicio.MensajeModeracion.EjercicioId;
+                //mensajeModeracion.UsuarioModeradorId = ejercicio.MensajeModeracion.UsuarioModeradorId;
+                //mensajeModeracion.Mensaje = ejercicio.MensajeModeracion.Mensaje;
+
+                //db.MensajeModeracions.AddObject(mensajeModeracion);
+
+                db.ObjectStateManager.ChangeObjectState(ejercicioOrig, EntityState.Modified);
+                db.SaveChanges();
+            }
+        }
     }
 }

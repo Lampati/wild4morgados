@@ -30,23 +30,47 @@ namespace WebProgramAR.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                
+                if (Membership.GetUser(model.UserName) != null)
                 {
-                    
-                    FormsAuthentication.SetAuthCookie(model.UserName, false);
-                    SimpleSessionPersister.UserName = model.UserName;
-                    model.isAuthenticated = true;
+                    //Check to see if the user is currently locked out
+                    if (Membership.GetUser(model.UserName).IsLockedOut)
+                    {
+                        //Get the last lockout  date from the user
+                        DateTime lastLockout = Membership.GetUser(model.UserName).LastLockoutDate;
+                        //Calculate the time the user should be unlocked
+                        DateTime unlockDate = lastLockout.AddMinutes(Membership.PasswordAttemptWindow);
+ 
+                        //Check to see if it is time to unlock the user
+                        if (DateTime.Now > unlockDate)
+                        {
+                            Membership.GetUser(model.UserName).UnlockUser();
+                        }
+                    }               
 
-                    //RedirectToAction("Index", "Home");
-                    return Content(Boolean.TrueString);
+                    if (Membership.ValidateUser(model.UserName, model.Password))
+                    {
+                    
+                        FormsAuthentication.SetAuthCookie(model.UserName, false);
+                        SimpleSessionPersister.UserName = model.UserName;
+                        model.isAuthenticated = true;
+
+                        //RedirectToAction("Index", "Home");
+                        return Content(Boolean.TrueString);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                        model.isAuthenticated = false;
+
+                        return Content(Boolean.FalseString);
+                        //RedirectToAction("Index", "Home");
+                    }
                 }
                 else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                    model.isAuthenticated = false;
+	            {
                     return Content(Boolean.FalseString);
-                    //RedirectToAction("Index", "Home");
-                }
+	            }
             }
             
             // If we got this far, something failed, redisplay form
@@ -216,9 +240,9 @@ namespace WebProgramAR.Controllers
                         string username = Membership.GetUserNameByEmail(model.Email);
                         MembershipUser usuarioARecuperar = usuarios[username];
 
-                        string nuevaPassword = usuarioARecuperar.ResetPassword();
+                        string actualPassword = usuarioARecuperar.GetPassword();
 
-                        //MailManager.Enviar("programar", model.Email, "Cambio de Password", string.Format("La nueva contraseña es: {0}", nuevaPassword));
+                        //MailManager.Enviar("programar", model.Email, "Su contraseña", string.Format("Su contraseña es: {0}", actualPassword));
                     }
                 }
                 else

@@ -53,5 +53,10 @@ namespace WebProgramAR.Negocio
         {
             return EjercicioDA.GetEjercicioByIdOnlyUser(id);
         }
+
+        public static void ModificarEstado(Ejercicio ejercicio)
+        {
+            EjercicioDA.ModificarEstado(ejercicio);
+        }
     }
 }

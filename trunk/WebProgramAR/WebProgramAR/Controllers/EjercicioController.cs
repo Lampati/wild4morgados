@@ -288,7 +288,7 @@ namespace WebProgramAR.Controllers
             ModerarEjercicioModel model = new ModerarEjercicioModel();
             model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
             model.Aceptado = false;
-            model.MensajeMail = string.Empty;
+            model.MensajeModeracion = string.Empty;
 
 
             return View(model);
@@ -318,6 +318,11 @@ namespace WebProgramAR.Controllers
                 ejercicioFunca.SolucionTexto = ejercicio.SolucionTexto;
                 ejercicioFunca.Global = ejercicio.Global;
 
+                ejercicioFunca.MensajeModeracion = new MensajeModeracion();
+                //ejercicioFunca.MensajeModeracion.MensajeModeracionId = null;
+                ejercicioFunca.MensajeModeracion.EjercicioId = ejercicio.EjercicioId;
+                ejercicioFunca.MensajeModeracion.Mensaje = model.MensajeModeracion;
+
                 EstadoEjercicio estado;
 
                 if (model.Aceptado)
@@ -333,7 +338,7 @@ namespace WebProgramAR.Controllers
                 }
 
                 ejercicioFunca.EstadoEjercicioId = estado.EstadoEjercicioId;
-                EjercicioNegocio.Modificar(ejercicioFunca);
+                EjercicioNegocio.ModificarEstado(ejercicioFunca);
             }
             catch (Exception)
             {
