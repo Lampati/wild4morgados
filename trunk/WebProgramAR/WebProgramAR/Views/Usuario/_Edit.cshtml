@@ -167,9 +167,16 @@
 <script type="text/javascript">
     convertSelect("PaisId");
     convertSelect("TipoUsuarioCreate");
-    convertSelect("ProvinciaId");
-    $("#FechaNacimiento").datepicker();
-
+    $("#Usuario_FechaNacimiento").datepicker();
+    $("#Usuario_FechaNacimiento").keypress(function (event) {
+        var charCode = (event.which) ? event.which : event.keyCode
+        if (charCode == 8) return false; //  backspace
+        if (charCode == 46) return false; // delete
+    });
+    function reInitLocalidad() {
+        $("#LocalidadId").val("");
+        $("#LocalidadId").attr("rel", "");
+    }
     function OnChangeDo(div) {
         if (div.attr('id') == "PaisId") {
             var pais = $("#selectBox_PaisId").attr("rel");
@@ -190,6 +197,7 @@
                     }
 
                     convertSelect("ProvinciaId");
+                    reInitLocalidad();
                 }
             });
             $("#listProvincias").show();
@@ -197,6 +205,7 @@
         }
         if (div.attr('id') == "ProvinciaId") {
             $("#listLocalidades").show();
+            reInitLocalidad();
             return;
         }
     }
@@ -226,12 +235,14 @@
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#LocalidadId").text(ui.item.label);
-            $("#LocalidadId").attr("value", ui.item.label);
+            $("#LocalidadId").val(ui.item.label);
+            $("#LocalidadId").attr("rel", ui.item.value);
         },
         change: function (event, ui) {
-        if (ui.item!=undefined)
-            $("#LocalidadId").val(ui.item.label);
+            if (ui.item != undefined) {
+                $("#LocalidadId").val(ui.item.label);
+                $("#LocalidadId").attr("rel", ui.item.value);
+            }
         }
     });
             
