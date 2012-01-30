@@ -24,7 +24,7 @@ function updateSuccess() {
 
     /********para el manejo de select tags********/
     // The select element to be replaced:
-function convertSelect(id) {
+function convertSelect(id,selectFirstElement) {
         var select = $('#' + id);
         var selectBoxContainer = $('<div>', {
             width: select.outerWidth(),
@@ -42,7 +42,8 @@ function convertSelect(id) {
         select.find('option').each(function (i) {
             var option = $(this);
             if ((i) == select.attr('selectedIndex')) {
-                selectBox.html(option.text());
+                if (i == 0 && selectFirstElement != undefined)
+                { selectBox.html(option.text()); }
             }
             if (option.data('skip')) {
                 return true;
