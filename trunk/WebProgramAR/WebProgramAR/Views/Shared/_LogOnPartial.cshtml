@@ -12,7 +12,6 @@
             LoginPopUp(event);
         });
         $(".logOutCandado").click(function (event) {
-
             $.ajax({
                 url: '@Url.Action("LogOff","Account")',
                 contentType: 'application/json',
@@ -24,8 +23,11 @@
             })
 
         });
+        $(".miPerfil").click(function (event) {
+            window.location.href='@Url.Action("MiPerfil", "Usuario")';
+        });
         /*PARA EL MANEJO DE MENU/SUBMENU*/
-        $(".seeMoreOptions").click(function () {
+        $("#logoutClickMe").click(function () {
             var divId = $(this).attr("id");
             var left = ($(this).position().left) - 70;
             var top = ($(this).position().top) + 5;
@@ -33,16 +35,10 @@
             $(".userOptions").css("top", top);
             $(".userOptions").stop(true, true).fadeIn("slow");
         });
-        $(".userOptions li").mouseover(function () {
-            $("#userOptions li").each(function () {
-                $(this).removeClass("subMenuSelected");
-            });
+        $(".userOptions").mouseleave(function () {
+            $(this).fadeOut("slow");
         });
-
-        
-
     });
-    
     function LoginPopUp(event) {
         OpenDialogLogin(event, '', '@Url.Action("../Account/LogOn")/', 500, 370);
     }
@@ -50,20 +46,22 @@
 
 @if(Request.IsAuthenticated) {
     <div id="logoutClickMe">
-        <div id="miPerfil" class="miPerfilButton hoverRel" alt="Mi Perfil">@User.Identity.Name</div>
+        <div id="miPerfil" class="miPerfilButton">@User.Identity.Name</div>
         <div id="seeMoreOptionsUser" class="seeMoreOptions"></div>
     </div>
     <ul id="userOptions" class="userOptions">
-        <li id="userOption">
-            <div>
-                <img class="logOutCandado hoverRel" src="../../Content/images/logout.png" style="float:center" alt="LogOff" />
-            </div>
-            <div>
-                LogOut
+       
+        <li id="userOption" class="miPerfil">
+            <div style="width:100%;float:left;display:inline;">
+                <div style="float:left"><img src="../../Content/images/perfil.png" /></div>
+                <div style="float:left"><div id="miPerfil" class="miPerfilButton" >Mi Perfil</div></div>
             </div>
         </li>
-        <li id="userOption">
-            <div id="miPerfil" class="miPerfilButton hoverRel" alt="Mi Perfil">@Html.ActionLink("Mi Perfil", "MiPerfil", "Usuario")</div>
+         <li id="userOption" class="logOutCandado">
+            <div style="width:100%;float:left;display:inline;">
+                <div style="float:left"><img  src="../../Content/images/logout.png" alt="LogOff" /></div>
+                <div style="float:left">Salir</div>
+            </div>
         </li>
     </ul>
 }

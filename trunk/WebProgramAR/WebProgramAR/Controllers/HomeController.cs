@@ -33,6 +33,7 @@ namespace WebProgramAR.Controllers
 
         public ActionResult About()
         {
+            ViewBag.Message = "Contacto";
             return View();
         }
     }
