@@ -24,7 +24,23 @@
             })
 
         });
-    
+        /*PARA EL MANEJO DE MENU/SUBMENU*/
+        $(".seeMoreOptions").click(function () {
+            var divId = $(this).attr("id");
+            var left = ($(this).position().left) - 70;
+            var top = ($(this).position().top) + 5;
+            $(".userOptions").css("left", left);
+            $(".userOptions").css("top", top);
+            $(".userOptions").stop(true, true).fadeIn("slow");
+        });
+        $(".userOptions li").mouseover(function () {
+            $("#userOptions li").each(function () {
+                $(this).removeClass("subMenuSelected");
+            });
+        });
+
+        
+
     });
     
     function LoginPopUp(event) {
@@ -34,9 +50,22 @@
 
 @if(Request.IsAuthenticated) {
     <div id="logoutClickMe">
-        <img class="logOutCandado hoverRel" src="../../Content/images/logout.png" style="float:center" alt="LogOff" />
-        <div id="miPerfil" class="miPerfilButton hoverRel" alt="Mi Perfil">@Html.ActionLink(User.Identity.Name, "MiPerfil", "Usuario")</div>
+        <div id="miPerfil" class="miPerfilButton hoverRel" alt="Mi Perfil">@User.Identity.Name</div>
+        <div id="seeMoreOptionsUser" class="seeMoreOptions"></div>
     </div>
+    <ul id="userOptions" class="userOptions">
+        <li id="userOption">
+            <div>
+                <img class="logOutCandado hoverRel" src="../../Content/images/logout.png" style="float:center" alt="LogOff" />
+            </div>
+            <div>
+                LogOut
+            </div>
+        </li>
+        <li id="userOption">
+            <div id="miPerfil" class="miPerfilButton hoverRel" alt="Mi Perfil">@Html.ActionLink("Mi Perfil", "MiPerfil", "Usuario")</div>
+        </li>
+    </ul>
 }
 else
 {

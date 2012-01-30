@@ -51,6 +51,9 @@ $(document).ready(function () {
     $("#btnCancelar").live('click', function () {
         CerrarDialog();
     });
+    $("#btnCancelarSubDialog").live('click', function () {
+        CerrarSubDialog();
+    });
 
     $('#dialogLogin').dialog({
         autoOpen: false,
@@ -261,7 +264,7 @@ $(document).ready(function () {
         autoOpen: false,
         draggable: true,
         resizable: false,
-        position: 'top',
+        position: 'center',
         title: '',
         modal: true,
         overlay: { opacity: 1.5, background: "black" },
@@ -273,7 +276,7 @@ $(document).ready(function () {
 
 function OpenSubDialog(event, id, accion, ancho, alto) {
     event.preventDefault();
-
+    
     if (alto > 0) {
         $("#subDialog").dialog("option", "height", alto);
     }
