@@ -151,7 +151,8 @@
                     @Html.LabelFor(m => m.Usuario.Localidad)
                 </div>
                  <div class="editor-field">
-                    @Html.TextBoxFor(model => model.Usuario.LocalidadId, new { @Value = " ", @id = "LocalidadId" })
+                    @Html.TextBoxFor(model => model.Usuario.LocalidadId, new { @Value = " ", @id = "LocalidadIdAutoComplete" })
+                    @Html.HiddenFor(model => model.Usuario.LocalidadId)
                     @Html.ValidationMessageFor(m => m.Usuario.LocalidadId)
                 </div>
             </div>
@@ -169,8 +170,8 @@
         if (charCode == 46) return false; // delete
     });
     function reInitLocalidad() {
-        $("#LocalidadId").val("");
-        $("#LocalidadId").attr("rel", "");
+        $("#LocalidadIdAutoComplete").val("");
+        $("#LocalidadIdAutoComplete").attr("rel", "");
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "PaisId") {
@@ -204,7 +205,7 @@
         }
     }
 
-    $("#LocalidadId").autocomplete({
+    $("#LocalidadIdAutoComplete").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
@@ -229,13 +230,15 @@
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#LocalidadId").val(ui.item.label);
-            $("#LocalidadId").attr("rel", ui.item.value);
+            $("#LocalidadIdAutoComplete").val(ui.item.label);
+            $("#LocalidadId").val(ui.item.value);
+            $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
-                $("#LocalidadId").val(ui.item.label);
-                $("#LocalidadId").attr("rel", ui.item.value);
+                $("#LocalidadIdAutoComplete").val(ui.item.label);
+                $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+                $("#LocalidadId").val(ui.item.value);
             }
         }
     });

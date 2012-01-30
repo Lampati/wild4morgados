@@ -115,7 +115,7 @@ namespace WebProgramAR.Controllers
                 if (estado != MembershipCreateStatus.Success)
                 {
                     string errorDevolver = ObtenerErrorCreacionOModificacionUsuario(estado);
-                    return Content(Boolean.FalseString);
+                    return Content(errorDevolver);
                 }
                 else
                 {
@@ -138,9 +138,8 @@ namespace WebProgramAR.Controllers
             MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
             u.Email = membUser.Email;
 
-
             ViewBag.EsMiPerfil = esMiPerfil;
-
+            ViewBag.descripcionLocalidad = Negocio.LocalidadNegocio.GetLocalidadById(u.LocalidadId).Descripcion;
             Initilization();
             return View("Edit", u);
         }
@@ -174,7 +173,7 @@ namespace WebProgramAR.Controllers
                 MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
 
                 bool error = false;
-                string errorMensaje;
+                string errorMensaje="";
                 string mailViejo = membUser.Email;
                 bool mailCambiado = false;
 
@@ -216,7 +215,7 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
-                    return Content(Boolean.FalseString);
+                    return Content(errorMensaje);
                 }
 
                 return RedirectToAction("Index");
@@ -260,8 +259,6 @@ namespace WebProgramAR.Controllers
         {
             try
             {
-                
-
                 UsuarioNegocio.Eliminar(u);
                 return RedirectToAction("Index");
             }
@@ -294,7 +291,7 @@ namespace WebProgramAR.Controllers
                 if (estado != MembershipCreateStatus.Success)
                 {
                     string errorDevolver = ObtenerErrorCreacionOModificacionUsuario(estado);
-                    return Content(Boolean.FalseString);
+                    return Content(errorDevolver);
                 }
                 else
                 {

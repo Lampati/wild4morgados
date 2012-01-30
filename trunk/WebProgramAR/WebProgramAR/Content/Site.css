@@ -239,15 +239,6 @@ footer, #footer
 
 *{ margin:0; padding:0;}
 
-/* LogOn Button */
-
-.logOnCandado,.logOutCandado
-{
-    position:absolute;
-    top:3px;
-    right:110px;
-    z-index:100;
-}
 
 /* TAB MENU   */
 ul#menu
@@ -659,55 +650,7 @@ div#title
     top:0px;
     z-index:10;
 }
-#logindisplay
-{
-    background:#19f;
-    border:3px solid #fff;
-	width:100px;
-	position:absolute;
-	right:0px;
-	top:-5px;
-	height:30px;
-    font-size: 1.1em;
-    text-transform:uppercase;
-    font-family:Calibri;
-    -moz-border-radius:10px;
-	border-radius:10px;
-    display: block;
-    text-align: right;
-    margin: 10px;
-    padding-right:50px;
-    padding-top:10px;
-    color: #ccc;
-    text-decoration: none;
-}
-#logindisplay:hover
-{
-    cursor:pointer;
-    color:#fff;
-    -moz-box-shadow: 0px 0px 5px #333;
-    -webkit-box-shadow: 0px 0px 5px #333;
-    box-shadow: 0px 0px 5px #000;
-}
-#logindisplay a
-{
-    font-size: 1.1em;
-    text-transform:uppercase;
-    font-family:Calibri;
-    color: #fff;
-    text-decoration: none;
-}
 
-#logindisplay a:link, #logindisplay a:visited
-{
-    color: #fff;
-    text-decoration: none;
-}
-#logindisplay a:hover
-{
-    color: #ecf0fa;
-    text-decoration: underline;
-}
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -1556,13 +1499,6 @@ input[type="text"].datosExtraTextBox
     padding: 5px;
     padding-right : 10px;
 }
-.miPerfilButton
-{
-    float:center;
-    margin-left:40px;
-    width:100%;
-    text-align:center;
-}
 
 #logonerror
 {
@@ -1896,4 +1832,122 @@ ul.tabs
  	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
+}
+
+/*para las opciones del login*/
+#logindisplay
+{
+    background:#19f;
+    border:3px solid #fff;
+	width:100px;
+	position:absolute;
+	right:0px;
+	top:-5px;
+	height:30px;
+    font-size: 1.1em;
+    text-transform:uppercase;
+    font-family:Calibri;
+    -moz-border-radius:10px;
+	border-radius:10px;
+    display: block;
+    text-align: right;
+    margin: 10px;
+    padding-right:50px;
+    padding-top:10px;
+    color: #ccc;
+    text-decoration: none;
+}
+#logindisplay:hover
+{
+    cursor:pointer;
+    color:#fff;
+    -moz-box-shadow: 0px 0px 5px #333;
+    -webkit-box-shadow: 0px 0px 5px #333;
+    box-shadow: 0px 0px 5px #000;
+}
+#logindisplay a
+{
+    font-size: 1.1em;
+    text-transform:uppercase;
+    font-family:Calibri;
+    color: #fff;
+    text-decoration: none;
+}
+
+#logindisplay a:link, #logindisplay a:visited
+{
+    color: #fff;
+    text-decoration: none;
+}
+#logindisplay a:hover
+{
+    color: #ecf0fa;
+    text-decoration: underline;
+}
+/* LogOn Button */
+
+.logOnCandado
+{
+    position:absolute;
+    top:3px;
+    right:110px;
+    z-index:100;
+}
+.logOutCandado
+{
+    position:absolute;
+    top:3px;
+    z-index:100;
+}
+.userOptions
+{
+    width:200px;
+    height:auto;
+    line-height:70%;
+    margin-top:3px;
+    margin-left:40px;
+    padding-top:10px;
+    position:absolute;
+    float:left;
+    text-align:left;
+    display:none;
+    background:#19F;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	z-index:1100;  
+	opacity: .90;
+    filter: alpha(opacity=90%);
+}
+.userOptions li
+{
+    list-style: none;
+    float:left;
+    width:90%;
+    left:0px;
+    height:30px;
+    margin-left:10px;
+}
+.userOptions li:hover
+{
+    background:#666;
+}
+.miPerfilButton
+{
+    float:center;
+    margin-left:0px;
+    width:100%;
+    text-align:center;
+}
+
+.seeMoreOptions
+{
+    font-size: 0px; line-height: 0%; width: 0px;
+    border-top: 10px solid #fff;
+    border-left: 5px solid #19f;
+    border-right: 5px solid #19f;
+    margin-left:120px;
+    margin-top:-13px;
+    position:relative;
+    
 }
