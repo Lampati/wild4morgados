@@ -7,7 +7,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using WebProgramAR.Models;
 using WebProgramAR.Entidades;
-using WebProgramAr.MailSender;
+using WebProgramAR.MailSender;
 using WebProgramAR.Negocio;
 
 namespace WebProgramAR.Controllers

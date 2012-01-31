@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 
-namespace WebProgramAr.MailSender
+namespace WebProgramAR.MailSender
 {
     public static class MailManager
     {
@@ -17,80 +17,116 @@ namespace WebProgramAr.MailSender
 
         public static bool Enviar(string from, string to, string subject, string body)
         {
-            string domainName = GetDomainName(to);
-            IPAddress[] servers = GetMailExchangeServer(domainName);
-            foreach (IPAddress server in servers)
+            //string domainName = GetDomainName(to);
+            //IPAddress[] servers = GetMailExchangeServer(domainName);
+           
+
+            //foreach (IPAddress server in servers)
+            //{
+            //    try
+            //    {
+            //        SmtpClient client = new SmtpClient(server.ToString(), SmtpPort);
+            //        client.Send(from, to, subject, body);
+            //        return true;
+            //    }
+            //    catch
+            //    {
+            //        continue;
+            //    }
+            //}
+            //return false;
+
+            
+            SmtpClient smtpClient = new SmtpClient();
+            NetworkCredential basicCredential =
+                new NetworkCredential("fede@program-ar.com.ar", "Pr0gr4m4r");
+            MailMessage message = new MailMessage();
+            MailAddress fromAddress = new MailAddress(from);
+
+
+            smtpClient.Host = "216.59.32.145";
+            //smtpClient.Host = "smtp.program-ar.com.ar";
+            smtpClient.UseDefaultCredentials = true;
+            smtpClient.Credentials = basicCredential;
+           
+
+            message.From = fromAddress;
+            message.Subject = subject;
+            //Set IsBodyHtml to true means you can send HTML email.
+            message.IsBodyHtml = true;
+            message.Body = body;
+            message.To.Add(to);
+
+            try
             {
-                try
-                {
-                    SmtpClient client = new SmtpClient(server.ToString(), SmtpPort);
-                    client.Send(from, to, subject, body);
-                    return true;
-                }
-                catch
-                {
-                    continue;
-                }
+                smtpClient.Send(message);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //Error, could not send the message
+                
             }
             return false;
+            
         }
 
-        public static bool Enviar(MailMessage mailMessage)
-        {
-            string domainName = GetDomainName(mailMessage.To[0].Address);
-            IPAddress[] servers = GetMailExchangeServer(domainName);
-            foreach (IPAddress server in servers)
-            {
-                try
-                {
-                    SmtpClient client = new SmtpClient(server.ToString(), SmtpPort);
-                    client.Send(mailMessage);
-                    return true;
-                }
-                catch
-                {
-                    continue;
-                }
-            }
-            return false;
-        }
+        //public static bool Enviar(MailMessage mailMessage)
+        //{
+        //    string domainName = GetDomainName(mailMessage.To[0].Address);
+        //    IPAddress[] servers = GetMailExchangeServer(domainName);
+        //    foreach (IPAddress server in servers)
+        //    {
+        //        try
+        //        {
+        //            SmtpClient client = new SmtpClient(server.ToString(), SmtpPort);
+        //            client.Send(mailMessage);
+        //            return true;
+        //        }
+        //        catch
+        //        {
+        //            continue;
+        //        }
+        //    }
+        //    return false;
+        //}
 
-        public static string GetDomainName(string emailAddress)
-        {
-            int atIndex = emailAddress.IndexOf('@');
-            if (atIndex == -1)
-            {
-                throw new ArgumentException("Not a valid email address",
-                                            "emailAddress");
-            }
-            if (emailAddress.IndexOf('<') > -1 &&
-                emailAddress.IndexOf('>') > -1)
-            {
-                return emailAddress.Substring(atIndex + 1,
-                       emailAddress.IndexOf('>') - atIndex);
-            }
-            else
-            {
-                return emailAddress.Substring(atIndex + 1);
-            }
-        }
+        //public static string GetDomainName(string emailAddress)
+        //{
+        //    int atIndex = emailAddress.IndexOf('@');
+        //    if (atIndex == -1)
+        //    {
+        //        throw new ArgumentException("Not a valid email address",
+        //                                    "emailAddress");
+        //    }
+        //    if (emailAddress.IndexOf('<') > -1 &&
+        //        emailAddress.IndexOf('>') > -1)
+        //    {
+        //        return emailAddress.Substring(atIndex + 1,
+        //               emailAddress.IndexOf('>') - atIndex);
+        //    }
+        //    else
+        //    {
+        //        return emailAddress.Substring(atIndex + 1);
+        //    }
+        //}
 
-        public static IPAddress[] GetMailExchangeServer(string domainName)
-        {
-            IPHostEntry hostEntry =
-              DomainNameUtil.GetIPHostEntryForMailExchange(domainName);
-            if (hostEntry.AddressList.Length > 0)
-            {
-                return hostEntry.AddressList;
-            }
-            else if (hostEntry.Aliases.Length > 0)
-            {
-                return System.Net.Dns.GetHostAddresses(hostEntry.Aliases[0]);
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //public static IPAddress[] GetMailExchangeServer(string domainName)
+        //{
+        //    IPHostEntry hostEntry =
+        //      DomainNameUtil.GetIPHostEntryForMailExchange(domainName);
+        //    if (hostEntry.AddressList.Length > 0)
+        //    {
+        //        return hostEntry.AddressList;
+        //    }
+        //    else if (hostEntry.Aliases.Length > 0)
+        //    {
+        //        return System.Net.Dns.GetHostAddresses(hostEntry.Aliases[0]);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
     }
 }

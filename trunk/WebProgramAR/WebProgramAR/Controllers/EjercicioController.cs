@@ -7,7 +7,7 @@ using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
 using System.Web.Security;
-using WebProgramAr.MailSender;
+using WebProgramAR.MailSender;
 
 namespace WebProgramAR.Controllers
 {

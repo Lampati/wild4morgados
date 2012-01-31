@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace WebProgramAr.MailSender.Dns
+namespace WebProgramAR.MailSender.Dns
 {
     public enum MessageType { Query = 0, Response = 1 }
 
