@@ -41,13 +41,15 @@ function convertSelect(id,selectFirstElement) {
 
         select.find('option').each(function (i) {
             var option = $(this);
-            if (option.attr('selected') == true) {
+            //alert(option.attr('selected'));
+            if (option.attr("selected") == true) {
                 selectBox.html(option.html());
                 selectBox.attr("rel", option.val());
             }
             if ((i) == select.attr('selectedIndex')) {
                 if (i == 0 && selectFirstElement != undefined) {
-                    selectBox.html(option.text());
+                    selectBox.html(option.html());
+                    selectBox.attr("rel", option.val());
                 }
             }
             if (option.data('skip')) {

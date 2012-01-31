@@ -140,7 +140,7 @@
                                         {
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                             Value = option.ProvinciaId.ToString(),
-                                            Selected = ((Model != null) && (option.ProvinciaId == Model.Usuario.PaisId))
+                                            Selected = ((Model != null) && (option.ProvinciaId == Model.Usuario.ProvinciaId))
                                         }), new { @id = "ProvinciaId" })
 
                     @Html.ValidationMessageFor(m => m.Usuario.ProvinciaId)
@@ -152,7 +152,7 @@
                 </div>
                  <div class="editor-field">
                     @Html.TextBoxFor(model => model.Usuario.LocalidadId, new { @Value = " ", @id = "LocalidadIdAutoComplete" })
-                    @Html.HiddenFor(model => model.Usuario.LocalidadId)
+                    @Html.HiddenFor(model => model.Usuario.LocalidadId, new { @Value = " ", @id = "LocalidadId" })
                     @Html.ValidationMessageFor(m => m.Usuario.LocalidadId)
                 </div>
             </div>
