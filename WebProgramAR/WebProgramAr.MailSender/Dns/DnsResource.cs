@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebProgramAr.MailSender.Dns
+namespace WebProgramAR.MailSender.Dns
 {
     /// <summary>
     /// The answer, authority, and additional sections all share the same format: a variable number of resource records.

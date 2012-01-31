@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace WebProgramAr.MailSender.Dns
+namespace WebProgramAR.MailSender.Dns
 {
     internal class DnsMessageCoder
     {

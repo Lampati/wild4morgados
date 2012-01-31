@@ -1,4 +1,5 @@
 ﻿@model WebProgramAR.Entidades.Usuario
+@using WebProgramAR.Helpers
 @{
     
     List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
@@ -92,7 +93,7 @@
                     @Html.LabelFor(m => m.TipoUsuario)
                 </div>
                 <div class="editor-field">
-                     @Html.DropDownListFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+                     @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
                 {
                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                     Value = option.TipoUsuarioId.ToString(),
@@ -119,7 +120,7 @@
             <div class="editor-field">
                 
 
-                 @Html.DropDownListFor(model => model.PaisId,
+                 @Html.DropDownListWithValidationFor(model => model.PaisId,
                                 listaPaises.Select(option => new SelectListItem
                                 {
                                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
@@ -134,7 +135,7 @@
                     @Html.LabelFor(m => m.Provincia)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.ProvinciaId,
+                    @Html.DropDownListWithValidationFor(model => model.ProvinciaId,
                                         listaProvincias.Select(option => new SelectListItem
                                         {
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),

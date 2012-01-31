@@ -1,4 +1,6 @@
 ﻿@model WebProgramAR.Sitio.Models.RegisterViewModel
+@using WebProgramAR.Helpers           
+
 @{
     
     List<WebProgramAR.Entidades.Pais> listaPaises = (List<WebProgramAR.Entidades.Pais>)ViewBag.Paises;
@@ -93,7 +95,7 @@
                     @Html.LabelFor(m => m.Usuario.TipoUsuario)
                 </div>
                 <div class="editor-field">
-                     @Html.DropDownListFor(model => model.Usuario.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+                     @Html.DropDownListWithValidationFor(model => model.Usuario.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
                 {
                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                     Value = option.TipoUsuarioId.ToString(),
@@ -118,7 +120,7 @@
                 @Html.LabelFor(m => m.Usuario.Pais)
             </div>
             <div class="editor-field">
-                 @Html.DropDownListFor(model => model.Usuario.PaisId,
+                 @Html.DropDownListWithValidationFor(model => model.Usuario.PaisId,
                                 listaPaises.Select(option => new SelectListItem
                                 {
                                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
@@ -135,7 +137,7 @@
                 <div class="editor-field">
                     
 
-                    @Html.DropDownListFor(model => model.Usuario.ProvinciaId,
+                    @Html.DropDownListWithValidationFor(model => model.Usuario.ProvinciaId,
                                         listaProvincias.Select(option => new SelectListItem
                                         {
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),

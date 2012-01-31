@@ -142,12 +142,11 @@ else
             grid.Column("Enunciado", header: "Enunciado"),
             grid.Column("NivelEjercicio.Descripcion", header: "Nivel"),
             grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
-                grid.Column("", 
-                      header: "",
-                      format: @<text>
-                                <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.EjercicioId)" class="botonEliminar hoverRel"/>
-                    
-                              </text>
+            grid.Column("", 
+                  header: "",
+                  format: @<text>
+                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles"/>
+                          </text>
             )
         })
     </div>

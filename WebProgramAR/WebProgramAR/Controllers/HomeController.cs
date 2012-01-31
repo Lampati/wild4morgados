@@ -26,7 +26,8 @@ namespace WebProgramAR.Controllers
 
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             ViewBag.LoginRequired = LoginRequiered ? 1 : 0;
-       
+
+            ////////MailSender.MailManager.Enviar("fede@program-ar.com.ar", "fed_lanza@hotmail.com", "prueba", "hola! probando");
 
             return View();
         }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using WebProgramAr.MailSender.Dns;
+using WebProgramAR.MailSender.Dns;
 using Microsoft.Win32;
-using WebProgramAr.MailSender.Dns;
+using WebProgramAR.MailSender.Dns;
 
-namespace WebProgramAr.MailSender
+namespace WebProgramAR.MailSender
 {
     public class DomainNameUtil
     {

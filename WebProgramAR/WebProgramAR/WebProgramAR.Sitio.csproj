@@ -81,6 +81,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ModerarEjercicioModel.cs" />
@@ -276,9 +277,9 @@
       <Project>{127A017E-C2D2-4E3E-9FE9-6D4E31682570}</Project>
       <Name>WebProgramAR.Globales</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebProgramAr.MailSender\WebProgramAr.MailSender.csproj">
+    <ProjectReference Include="..\WebProgramAr.MailSender\WebProgramAR.MailSender.csproj">
       <Project>{E136186B-89AE-49D3-B49E-27BED3BA263C}</Project>
-      <Name>WebProgramAr.MailSender</Name>
+      <Name>WebProgramAR.MailSender</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebProgramAR.Negocio\WebProgramAR.Negocio.csproj">
       <Project>{C5640C30-872A-4E79-8168-54DA04824F7D}</Project>

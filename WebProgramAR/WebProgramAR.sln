@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.Globales", "We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.WebService", "WebProgramAR.WebService\WebProgramAR.WebService.csproj", "{3E759CF1-2986-473F-85D3-7E5667F6F8B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAr.MailSender", "WebProgramAr.MailSender\WebProgramAr.MailSender.csproj", "{E136186B-89AE-49D3-B49E-27BED3BA263C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProgramAR.MailSender", "WebProgramAr.MailSender\WebProgramAR.MailSender.csproj", "{E136186B-89AE-49D3-B49E-27BED3BA263C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
