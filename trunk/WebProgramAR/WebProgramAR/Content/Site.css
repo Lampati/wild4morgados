@@ -442,7 +442,6 @@ textarea
 
 input[type="text"], input[type="password"]
 {
-    
     margin-top:4px;
     -moz-border-radius:3px;
 	-webkit-border-radius:3px;
@@ -629,10 +628,10 @@ table th {
 	-webkit-border-radius:10px;
 	border-radius:10px;
     background: Red;
-    font-size:2em;
+    font-size:1.5em;
     color:#fff;
     width:200px;
-    height:60px;
+    height:140px;
     display:none;
     position:absolute;
     right:120px;
@@ -647,12 +646,13 @@ table th {
     border-left: 5px solid #fff;
     border-right: 5px solid #fff;
     margin-left:20px;
-    margin-top:28px;
+    margin-top:25px;
     position:relative;
 }
 .error
 {
-    margin-left:50px;
+    margin-left:10px;
+    height:140px;
 }
 
 nav, #menucontainer

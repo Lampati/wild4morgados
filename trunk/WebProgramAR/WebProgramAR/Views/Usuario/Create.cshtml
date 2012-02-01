@@ -11,7 +11,7 @@
 <legend>Usuario</legend>
 
    
-@using (Html.BeginForm("Create", "Usuario", FormMethod.Post, new { id = "frmSaveUsuario", enctype = "multipart/form-data" }))
+@using (Ajax.BeginForm("Create", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
 

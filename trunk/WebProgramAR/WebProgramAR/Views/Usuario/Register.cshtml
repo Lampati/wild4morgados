@@ -16,7 +16,7 @@
     La contraseña requiere como minimo de @Membership.MinRequiredPasswordLength caracteres.
 </p>
 
-@using (Html.BeginForm("Register", "Usuario", FormMethod.Post, new { id="frmSaveUsuario",enctype = "multipart/form-data" }))
+@using (Ajax.BeginForm("Register", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
 
