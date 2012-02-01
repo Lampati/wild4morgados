@@ -24,7 +24,12 @@ function updateSuccess() {
 
     /********para el manejo de select tags********/
     // The select element to be replaced:
-function convertSelect(id,selectFirstElement) {
+function convertSelect(id, selectFirstElement) {
+/*
+selectFirstElement
+1: si debe aparecer como seleccionado el primer elemento(ej: Todos como value al iniciar)
+undefined: no darle importancia
+*/
         var select = $('#' + id);
         var selectBoxContainer = $('<div>', {
             width: select.outerWidth(),
@@ -68,7 +73,7 @@ function convertSelect(id,selectFirstElement) {
             dropDown.append(li);
         });
         selectBoxContainer.append(dropDown.hide());
-        select.hide().after(selectBoxContainer);
+        select.after(selectBoxContainer);
         dropDown.bind('show', function () {
             if (dropDown.is(':animated')) {
                 return false;

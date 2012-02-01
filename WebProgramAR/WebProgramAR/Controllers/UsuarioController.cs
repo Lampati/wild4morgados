@@ -119,7 +119,7 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return Content(Boolean.TrueString);
                 }            
             }
             else

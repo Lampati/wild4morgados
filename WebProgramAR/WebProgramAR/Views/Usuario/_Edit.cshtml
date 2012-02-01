@@ -98,7 +98,7 @@
                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                     Value = option.TipoUsuarioId.ToString(),
                     Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-                }), new { @id = "TipoUsuarioCreate" })
+                }), new { @id = "TipoUsuarioCreate", @style = "display:none" })
 
                         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
                 </div>
@@ -118,15 +118,13 @@
                 @Html.LabelFor(m => m.Pais)
             </div>
             <div class="editor-field">
-                
-
                  @Html.DropDownListWithValidationFor(model => model.PaisId,
                                 listaPaises.Select(option => new SelectListItem
                                 {
                                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                     Value = option.PaisId.ToString(),
                                     Selected = ((Model != null) && (option.PaisId == Model.PaisId))
-                                }))
+                                }), new { @id = "PaisId", @style = "display:none" })
 
                 @Html.ValidationMessageFor(m => m.PaisId)
             </div>
@@ -141,7 +139,7 @@
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                             Value = option.ProvinciaId.ToString(),
                                             Selected = ((Model != null) && (option.ProvinciaId == Model.ProvinciaId))
-                                        }))
+                                        }), new { @id = "ProvinciaId", @style = "display:none" })
 
                     @Html.ValidationMessageFor(m => m.ProvinciaId)
                 </div>
@@ -166,6 +164,7 @@
 
 
 <script type="text/javascript">
+    $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#PaisId");
     convertSelect("PaisId");
     convertSelect("TipoUsuarioCreate");
     //para la carga de provincias inicial de acuerdo al pais y seleccionar la provincia indicada
@@ -184,6 +183,7 @@
                 var text = provincias[i].Value;
                 $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
             }
+            $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#ProvinciaId");
             convertSelect("ProvinciaId");
         }
     });
@@ -216,7 +216,7 @@
                         var text = provincias[i].Value;
                         $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
                     }
-
+                    $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#ProvinciaId");
                     convertSelect("ProvinciaId");
                     reInitLocalidad();
                 }

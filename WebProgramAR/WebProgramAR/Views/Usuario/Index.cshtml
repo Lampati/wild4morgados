@@ -93,7 +93,7 @@
                             @Html.TextBox("Apellido", null, new { maxlength = 50, autocomplete = "off" })
                     </td>
                     <td><div class="label">Tipo Usuario</div></td>
-                    <td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios)</td>
+                    <td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios,new {@style = "display:none" })</td>
                 </tr>
                 
             </table>
