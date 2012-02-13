@@ -4,6 +4,7 @@
              xmlns:s="clr-namespace:DiagramDesigner"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d" >
     
     <UserControl.Resources>    
@@ -56,7 +57,22 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Gargar" Grid.Column="0" Margin="0,0,0,0"></GroupBox>
+            <GroupBox Header="Gargar" Grid.Column="0" Margin="0,0,0,0">
+                <avalonedit:TextEditor HorizontalAlignment="Left" Margin="0,23,0,0" Name="textEditor" VerticalAlignment="Top" Width="800">
+                    <avalonedit:TextEditor.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="Undo" Header="Deshacer" />
+                            <Separator />
+                            <MenuItem Command="Cut" Header="Cortar"/>
+                            <MenuItem Command="Copy" Header="Copiar"/>
+                            <MenuItem Command="Paste" Header="Pegar"/>
+                            <MenuItem Command="Delete" Header="Eliminar"/>
+                            <Separator />
+                            <MenuItem Command="SelectAll" Header="Seleccionar todo"/>
+                        </ContextMenu>
+                    </avalonedit:TextEditor.ContextMenu>
+                </avalonedit:TextEditor>
+            </GroupBox>
         </Grid>
     </StackPanel>
 </UserControl>
