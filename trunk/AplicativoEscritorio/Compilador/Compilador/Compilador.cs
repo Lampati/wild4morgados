@@ -24,6 +24,18 @@ namespace CompiladorGargar
 
         private bool modoDebug { get; set; }
 
+        public Compilador(bool modo, string dirTemp, string dirEjec, string nombre)
+        {
+            this.modoDebug = modo;
+            //this.ArchivoGramatica = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
+            this.ArchivoGramatica = "Gramatica.xml";
+            this.DirectorioTemporales = dirTemp;
+            this.DirectorioEjecutables = dirEjec;
+            this.NombreEjecutable = nombre;
+
+            CargarAnalizadorSintactico();
+        }
+
         public Compilador(string gramatica, bool modo, string dirTemp, string dirEjec, string nombre)
         {
             this.modoDebug = modo;

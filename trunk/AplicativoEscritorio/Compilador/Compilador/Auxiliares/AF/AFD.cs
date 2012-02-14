@@ -22,7 +22,9 @@ namespace CompiladorGargar.Auxiliares.AF
             get { return estadoActual; }
         }
 
-        public AFD(String path)
+        
+
+        public AFD(String path = null)
         {
             this.pathArchAFD = path;
 
@@ -68,7 +70,18 @@ namespace CompiladorGargar.Auxiliares.AF
         {
             try
             {
-                StreamReader arch = new StreamReader(pathArchAFD);
+                StreamReader arch;
+                if (pathArchAFD == null)
+                {
+                    byte[] a = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(CompiladorGargar.Properties.Resources.AFD_GARGAR);
+                    System.IO.MemoryStream m = new System.IO.MemoryStream(a);
+                    arch = new StreamReader(m);
+                    
+                }
+                else
+                {
+                    arch = new StreamReader(pathArchAFD);
+                }
 
                 try
                 {

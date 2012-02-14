@@ -6,6 +6,7 @@ using CompiladorGargar.Lexicografico;
 using CompiladorGargar.Sintactico.TablaGramatica;
 using CompiladorGargar.Sintactico.TablaPrimerosSiguientes;
 using System.Diagnostics;
+using System.IO;
 
 namespace CompiladorGargar.Sintactico.Gramatica
 {
@@ -178,16 +179,15 @@ namespace CompiladorGargar.Sintactico.Gramatica
 
         private void ParsearXML(string filePath)
         {
-            if (!System.IO.File.Exists(filePath))
-                throw new System.IO.FileNotFoundException(String.Format("El archivo \"{0}\" no existe!", filePath));
-
+            //if (!System.IO.File.Exists(filePath))
+            //    throw new System.IO.FileNotFoundException(String.Format("El archivo \"{0}\" no existe!", filePath));
 
             try
             {
-
-           
             //List<Produccion> prods = new List<Produccion>();
-                using (System.Xml.XmlTextReader reader = new System.Xml.XmlTextReader(filePath))
+                //using (System.Xml.XmlTextReader reader = new System.Xml.XmlTextReader(filePath))
+                using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(new StringReader(CompiladorGargar.Properties.Resources.Gramatica)))
+                
                 {
                     while (reader.Read())
                     {

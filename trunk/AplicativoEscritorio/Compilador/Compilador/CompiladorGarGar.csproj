@@ -100,9 +100,7 @@
     <None Include="Configuracion\test.gar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Configuracion\validacionesSemanticasCorrectas.gar">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Configuracion\validacionesSemanticasCorrectas.gar" />
     <None Include="Configuracion\validacionesSemanticasIncorrectas.gar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

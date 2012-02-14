@@ -20,12 +20,37 @@ namespace DiagramDesigner
     /// </summary>
     public partial class BarraMensajes : UserControl
     {
+        public delegate void DobleClickEnBarraMensajesEventHandler(object o, DoubleClickEventArgs e);
+
+        public event DobleClickEnBarraMensajesEventHandler DoubleClickEvent;
+
+
         private List<Mensaje> mensajes;
 
         public BarraMensajes()
         {
             InitializeComponent();
             this.mensajes = new List<Mensaje>();
+
+            lstVwMensajes.MouseDoubleClick += new MouseButtonEventHandler(lstVwMensajes_MouseDoubleClick);
+        }
+
+        void lstVwMensajes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int i = 0;
+            ListView listViewSender = (ListView)sender;
+            int indice = listViewSender.SelectedIndex;
+            Mensaje mens = mensajes[indice];
+            DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna));
+
+        }
+
+        private void DoubleClickEventFire(DoubleClickEventArgs e)
+        {
+            if (DoubleClickEvent != null)
+            {
+                DoubleClickEvent(this, e);
+            }
         }
 
         public void AgregarMensaje(string msg)
@@ -36,6 +61,65 @@ namespace DiagramDesigner
                 this.mensajes.Add(m);
                 this.lstVwMensajes.Items.Add(m);
             }
+        }
+
+        public void AgregarError(string msg, int fila, int columna)
+        {
+            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Error) { Linea = fila, Columna = columna };
+            AgregarLinea(m);               
+        }
+
+        public void AgregarAdvertencia(string msg, int fila, int columna)
+        {
+            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Advertencia) { Linea = fila, Columna = columna };
+            AgregarLinea(m);
+        }
+
+        public void AgregarInformacion(string msg, int fila, int columna)
+        {
+            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Informacion) { Linea = fila, Columna = columna };
+            AgregarLinea(m);
+        }
+
+        private void AgregarLinea(Mensaje men)
+        {
+            this.mensajes.Add(men);
+            this.lstVwMensajes.Items.Add(men);
+        }
+
+        public void BorrarTodosMensajes()
+        {
+           
+            this.mensajes.Clear();
+            this.lstVwMensajes.Items.Clear();
+            
+        }
+    }
+
+    public class DoubleClickEventArgs
+    {
+        private int fila;
+        public int Fila
+        {
+            get
+            {
+                return fila;
+            }
+        }
+
+        private int columna;
+        public int Columna
+        {
+            get
+            {
+                return columna;
+            }
+        }
+
+        public DoubleClickEventArgs(int f, int c)
+        {
+            fila = f;
+            columna = c;
         }
     }
 }

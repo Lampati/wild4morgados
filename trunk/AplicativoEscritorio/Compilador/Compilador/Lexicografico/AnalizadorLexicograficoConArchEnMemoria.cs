@@ -31,7 +31,9 @@ namespace CompiladorGargar.Lexicografico
                 
                 long timeStamp = Stopwatch.GetTimestamp();
                 
-                base.afd = new AFD(Path.Combine(CompiladorForm.directorioActual, System.Configuration.ConfigurationManager.AppSettings["archAFD"].ToString()));
+                //base.afd = new AFD(Path.Combine(CompiladorForm.directorioActual, System.Configuration.ConfigurationManager.AppSettings["archAFD"].ToString()));
+                base.afd = new AFD();
+
 
                 float num = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
                 String hola = (String.Format("{0} segundos", num.ToString()));
