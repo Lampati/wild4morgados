@@ -1,0 +1,28 @@
+﻿<Window x:Class="DiagramDesigner.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="clr-namespace:DiagramDesigner;assembly=DiagramDesigner"
+        xmlns:c="clr-namespace:DiagramDesigner.Controls;assembly=DiagramDesigner"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="Diagram Designer">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <ContentControl ></ContentControl>
+        <!--<ContentControl Content="{StaticResource MyToolbar}"/>-->
+
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <s:EsquemaCentral x:Name="Esquema"></s:EsquemaCentral>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <s:BarraMensajes x:Name="BarraMsgs"></s:BarraMensajes>
+        </Grid>
+    </Grid>
+</Window>

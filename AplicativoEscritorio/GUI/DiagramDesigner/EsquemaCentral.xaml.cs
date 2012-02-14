@@ -26,19 +26,31 @@ namespace DiagramDesigner
     /// </summary>
     public partial class EsquemaCentral : UserControl
     {
-        #region Hotkeys Definicion
-        HotKey hotKeyCompilar;
-        HotKey hotKeyEjecutar;
-        #endregion
+       
 
         private ModoVisual modo;
-        Compilador compilador;
+        
         FindReplaceMgr findAndReplaceManager = new FindReplaceMgr();
 
         public EsquemaCentral()
         {
             InitializeComponent();
             this.Modo = ModoVisual.Flujo;
+        }
+
+        public string GarGarACompilar
+        {
+            get
+            {
+                if (Modo == ModoVisual.Texto)
+                {
+                    return this.textEditor.Text;
+                }
+                else
+                {
+                    return this.textEditor.Text;
+                }
+            }
         }
 
         public ModoVisual Modo
@@ -68,41 +80,12 @@ namespace DiagramDesigner
 
             ConfigurarModoTexto();
 
-            //NO TENGO EL XML!!!
-            //ConfigurarCompilador();
-
-            hotKeyCompilar = new HotKey(ModifierKeys.None, Keys.F5, Window.GetWindow(this));
-            hotKeyEjecutar = new HotKey(ModifierKeys.None, Keys.F6, Window.GetWindow(this));
-
-            hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
-            hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
+         
         }
 
-        private void ConfigurarCompilador()
-        {
-            bool modoDebug = false;
+     
 
-            string directorioActual = ""; // Application.StartupPath;
-            string pathArchGramatica = ""; // System.IO.Path.Combine(directorioActual, System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
-            compilador = new Compilador(pathArchGramatica, modoDebug, directorioActual, directorioActual, "prueba");
-        }
-
-        void hotKeyCompilar_HotKeyPressed(HotKey obj)
-        {
-            switch (obj.Key)
-            {
-                case Keys.F5:
-                    Compilar();
-                    break;
-                case Keys.F6:
-                    Ejecutar();
-                    break;
-
-                default:
-                    break;
-            }
-
-        }
+     
 
         private void ConfigurarModoTexto()
         {
@@ -122,50 +105,17 @@ namespace DiagramDesigner
             CommandBindings.Add(findAndReplaceManager.FindNextBinding);
         }
 
-        private void Compilar()
+
+
+        internal void PosicionarseEn(int fila, int col)
         {
-            ReiniciarIDEParaCompilacion();
-
-            string programa = this.textEditor.Text;
-            ResultadoCompilacion res = this.compilador.Compilar(programa);
-
-            MostrarResultadosCompilacion(res);
-
-            if (!string.IsNullOrEmpty(res.Error))
+            if (Modo == ModoVisual.Texto)
             {
-                MessageBox.Show(res.Error);
+                this.textEditor.TextArea.Caret.Line = fila;
+                this.textEditor.TextArea.Caret.Column = col;
+                this.textEditor.TextArea.Caret.Show();
+                this.textEditor.TextArea.Caret.BringCaretToView();
             }
-
-        }
-
-        private void Ejecutar()
-        {
-            ReiniciarIDEParaCompilacion();
-
-            string programa = this.textEditor.Text;
-            ResultadoCompilacion res = this.compilador.Compilar(programa);
-
-            MostrarResultadosCompilacion(res);
-
-            if (!string.IsNullOrEmpty(res.Error))
-            {
-                MessageBox.Show(res.Error);
-            }
-
-            if (res.CompilacionGarGarCorrecta && res.GeneracionEjectuableCorrecto)
-            {
-                EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
-            }
-        }
-
-        private void ReiniciarIDEParaCompilacion()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void MostrarResultadosCompilacion(ResultadoCompilacion res)
-        {
-
         }
     }
 }

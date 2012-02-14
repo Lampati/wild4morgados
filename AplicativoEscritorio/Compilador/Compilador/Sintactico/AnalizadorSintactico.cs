@@ -81,8 +81,8 @@ namespace CompiladorGargar.Sintactico
             //this.ArchEntrada = archEntrada;
 
             //this.CargarAnalizadorLexicografico();
-            
-            cantElementosCadenaEntrada = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["cantElementosCadenaEntrada"].ToString());
+
+            cantElementosCadenaEntrada = Convert.ToInt32(CompiladorGargar.Properties.Resources.CantElementosCadenaEntrada);
             finArch = false;
 
             cantErroresSintacticos = 0;
