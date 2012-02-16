@@ -8,18 +8,19 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using System.IO;
 using System.Xml;
 using System.Windows.Input;
+using DiagramDesigner;
 
-namespace AplicativoEscritorio.ModoTexto.Configuracion
+namespace DiagramDesigner.ModoTexto.Configuracion
 {
     public static class ModoTextoConfiguracion
     {
-        
 
-        public static void ConfigurarAvalonEdit(TextEditor textEditor )
+
+        public static void ConfigurarAvalonEdit(TextEditor textEditor)
         {
             // Load our custom highlighting definition
             IHighlightingDefinition customHighlighting;
-            using (Stream s = typeof(MainWindow).Assembly.GetManifestResourceStream("AplicativoEscritorio.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
+            using (Stream s = typeof(EsquemaCentral).Assembly.GetManifestResourceStream("DiagramDesigner.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
             {
                 if (s == null)
                     throw new InvalidOperationException("Could not find embedded resource");
@@ -38,7 +39,7 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion
             textEditor.Options.EnableEmailHyperlinks = false;
             textEditor.Options.EnableHyperlinks = false;
 
-            
+
 
             //textEditor.TextArea.IndentationStrategy = textEditor.TextArea.IndentationStrategy = new GarGarIndentationStrategy(textEditor.Options);
 
@@ -47,7 +48,7 @@ namespace AplicativoEscritorio.ModoTexto.Configuracion
             //foldingUpdateTimer.Interval = TimeSpan.FromSeconds(2);
             //foldingUpdateTimer.Tick += foldingUpdateTimer_Tick;
             //foldingUpdateTimer.Start();
-          
+
 
         }
 

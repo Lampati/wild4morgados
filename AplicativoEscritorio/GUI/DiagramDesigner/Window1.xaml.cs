@@ -117,9 +117,18 @@ namespace DiagramDesigner
 
         private void MostrarResultadosCompilacion(ResultadoCompilacion res)
         {
-            foreach (var item in res.ListaErrores)
+            if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);                
+                BarraEstado.Estado = "Compilación Correcta";
+            }
+            else
+            {
+                BarraEstado.Estado = "Error en compilación";
+
+                foreach (var item in res.ListaErrores)
+                {
+                    this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
+                }
             }
         }
     }

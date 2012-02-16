@@ -20,6 +20,21 @@ namespace DiagramDesigner
     /// </summary>
     public partial class BarraEstado : UserControl
     {
+
+        private string estado;
+        public string Estado
+        {
+            get
+            {
+                return EstadoActual.Text;
+            }
+
+            set
+            {
+                EstadoActual.Text = value;
+            }
+        }
+
         public BarraEstado()
         {
             InitializeComponent();
@@ -33,6 +48,8 @@ namespace DiagramDesigner
             this.ColumnaBarraEstado.Text = string.Format("Columna {0}", c);
 
         }
+
+       
 
     }
 }
