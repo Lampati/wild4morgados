@@ -10,8 +10,9 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="100" />
+            <RowDefinition Height="25" /> 
         </Grid.RowDefinitions>
 
         <ContentControl Content="{StaticResource MyToolbar}"/>
@@ -22,6 +23,9 @@
         
         <Grid Grid.Row="2">
             <s:BarraMensajes x:Name="BarraMsgs"></s:BarraMensajes>
+        </Grid>
+        <Grid Grid.Row="3">
+            <s:BarraEstado x:Name="BarraEstado"></s:BarraEstado>
         </Grid>
     </Grid>
 </Window>

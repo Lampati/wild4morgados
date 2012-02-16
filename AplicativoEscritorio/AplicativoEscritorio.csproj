@@ -111,7 +111,7 @@
       <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
       <Name>CompiladorGarGar</Name>
     </ProjectReference>
-    <ProjectReference Include="DiagramDesigner\DiagramDesigner.csproj">
+    <ProjectReference Include="GUI\DiagramDesigner\DiagramDesigner.csproj">
       <Project>{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}</Project>
       <Name>DiagramDesigner</Name>
     </ProjectReference>
