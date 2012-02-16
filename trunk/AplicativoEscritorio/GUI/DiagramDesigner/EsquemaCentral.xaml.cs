@@ -26,7 +26,8 @@ namespace DiagramDesigner
     /// </summary>
     public partial class EsquemaCentral : UserControl
     {
-       
+        public delegate void ModoTextoCambiarPosicionEventHandler(object o, ModoTextoCambiarPosicionEventArgs e);
+        public event ModoTextoCambiarPosicionEventHandler ModoTextoCambiarPosicionEvent;
 
         private ModoVisual modo;
         
@@ -36,6 +37,28 @@ namespace DiagramDesigner
         {
             InitializeComponent();
             this.Modo = ModoVisual.Flujo;
+
+            this.textEditor.TextArea.Caret.PositionChanged += new EventHandler(Caret_PositionChanged);
+        }
+
+        void Caret_PositionChanged(object sender, EventArgs e)
+        {
+            if (this.textEditor.TextArea.Caret != null)
+            {
+                ModoTextoCambiarPosicionEventFire(
+                    new ModoTextoCambiarPosicionEventArgs(
+                        this.textEditor.TextArea.Caret.Line, 
+                        this.textEditor.TextArea.Caret.Column)
+                        );
+            }
+        }
+
+        private void ModoTextoCambiarPosicionEventFire(ModoTextoCambiarPosicionEventArgs e)
+        {
+            if (ModoTextoCambiarPosicionEvent != null)
+            {
+                ModoTextoCambiarPosicionEvent(this, e);
+            }
         }
 
         public string GarGarACompilar
@@ -116,6 +139,33 @@ namespace DiagramDesigner
                 this.textEditor.TextArea.Caret.Show();
                 this.textEditor.TextArea.Caret.BringCaretToView();
             }
+        }
+    }
+
+    public class ModoTextoCambiarPosicionEventArgs
+    {
+        private int fila;
+        public int Fila
+        {
+            get
+            {
+                return fila;
+            }
+        }
+
+        private int columna;
+        public int Columna
+        {
+            get
+            {
+                return columna;
+            }
+        }
+
+        public ModoTextoCambiarPosicionEventArgs(int f, int c)
+        {
+            fila = f;
+            columna = c;
         }
     }
 }

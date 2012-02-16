@@ -37,11 +37,16 @@ namespace DiagramDesigner
 
         void lstVwMensajes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
             int i = 0;
             ListView listViewSender = (ListView)sender;
             int indice = listViewSender.SelectedIndex;
-            Mensaje mens = mensajes[indice];
-            DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna));
+
+            if (indice != -1)
+            {
+                Mensaje mens = mensajes[indice];
+                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna));
+            }
 
         }
 

@@ -24,6 +24,8 @@ namespace DiagramDesigner
 
 
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
+            this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
+
             //NO TENGO EL XML!!!
             ConfigurarCompilador();
 
@@ -32,6 +34,11 @@ namespace DiagramDesigner
 
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
+        }
+
+        void Esquema_ModoTextoCambiarPosicionEvent(object o, ModoTextoCambiarPosicionEventArgs e)
+        {
+            this.BarraEstado.ModificarPosicionModoTexto(e.Fila, e.Columna);
         }
 
         void BarraMsgs_DoubleClickEvent(object o, DoubleClickEventArgs e)

@@ -51,14 +51,14 @@
                 <TextBox Name="txt"></TextBox>
             </GroupBox>
         </Grid>
-        
-        <Grid Name="grdTexto" Visibility="Hidden" Height="450">
+
+        <Grid Name="grdTexto" Visibility="Hidden" Height="450" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Gargar" Grid.Column="0" Margin="0,0,0,0">
-                <avalonedit:TextEditor HorizontalAlignment="Left" Margin="0,23,0,0" Name="textEditor" VerticalAlignment="Top" Width="800">
+            <GroupBox Header="Gargar" Grid.Column="0" Margin="0,0,0,0" >
+                <avalonedit:TextEditor HorizontalAlignment="Stretch" Margin="0,23,0,0" Name="textEditor" VerticalAlignment="Top" >
                     <avalonedit:TextEditor.ContextMenu>
                         <ContextMenu>
                             <MenuItem Command="Undo" Header="Deshacer" />

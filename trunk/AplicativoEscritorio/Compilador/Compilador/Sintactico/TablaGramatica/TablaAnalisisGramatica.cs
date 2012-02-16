@@ -115,9 +115,11 @@ namespace CompiladorGargar.Sintactico.TablaGramatica
 
         private void ErrorSintactico(int fila, int columna, Terminal t, bool descartarCadena, bool descartarPila)
         {
-            StringBuilder bldr = new StringBuilder("Error Sintactico en el token ");
-            bldr.Append(EnumUtils.stringValueOf( t.Componente.Token));
-            bldr.Append(".");
+            //StringBuilder bldr = new StringBuilder("Error Sintactico en el token ");
+            //bldr.Append(EnumUtils.stringValueOf( t.Componente.Token));
+            //bldr.Append(".");
+
+            StringBuilder bldr = new StringBuilder("Error Sintactico. La linea no esta correctamente formada."); 
             this.ErrorSintactico(fila,columna,t, bldr.ToString(),descartarCadena,descartarPila);
         }
 
