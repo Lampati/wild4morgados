@@ -13,9 +13,14 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="100" />
             <RowDefinition Height="25" /> 
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>        
+        
 
-        <ContentControl Content="{StaticResource MyToolbar}"/>
+        <Grid Grid.Row="0" Margin="0,10,0,0">
+            <s:BarraToolbar x:Name="ToolbarAplicacion"></s:BarraToolbar>
+        </Grid>
+
+        <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->
 
         <Grid Grid.Row="1" Margin="0,10,0,0">
             <s:EsquemaCentral x:Name="Esquema"></s:EsquemaCentral>

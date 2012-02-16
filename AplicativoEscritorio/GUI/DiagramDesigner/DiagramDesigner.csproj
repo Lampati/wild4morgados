@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="BarraToolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EsquemaCentral.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +165,9 @@
     </Compile>
     <Compile Include="BarraEstado.xaml.cs">
       <DependentUpon>BarraEstado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BarraToolbar.xaml.cs">
+      <DependentUpon>BarraToolbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="DTO\Mensaje.cs" />
     <Compile Include="Enums\ModoVisual.cs" />

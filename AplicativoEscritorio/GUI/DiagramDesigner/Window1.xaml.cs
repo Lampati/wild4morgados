@@ -5,6 +5,7 @@ using CompiladorGargar;
 using System.Windows.Input;
 using System;
 using Utilidades;
+using System.Windows.Controls;
 
 namespace DiagramDesigner
 {
@@ -16,15 +17,21 @@ namespace DiagramDesigner
         #endregion
 
         Compilador compilador;
+        
 
         public Window1()
         {
             InitializeComponent();
             //this.BarraMsgs.AgregarMensaje("Mensaje para mostrar aquí en la barrica de herramienticas!!");
 
+            
+            
 
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
             this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
+
+            this.ToolbarAplicacion.CompilacionEvent += new BarraToolbar.CompilacionEventHandler(ToolbarAplicacion_CompilacionEvent);
+            this.ToolbarAplicacion.CambioModoEvent += new BarraToolbar.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent); 
 
             //NO TENGO EL XML!!!
             ConfigurarCompilador();
@@ -34,6 +41,28 @@ namespace DiagramDesigner
 
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
+        }
+
+        void ToolbarAplicacion_CambioModoEvent(object o, CambioModoEventArgs e)
+        {
+            Button botonPresionado = (Button)o;
+
+            
+
+            this.Esquema.Modo = e.ModoSeleccionado;
+
+        }
+
+        void ToolbarAplicacion_CompilacionEvent(object o, CompilacionEventArgs e)
+        {
+            if (e.EsEjecucion)
+            {
+                Ejecutar();
+            }
+            else
+            {
+                Compilar();
+            }
         }
 
         void Esquema_ModoTextoCambiarPosicionEvent(object o, ModoTextoCambiarPosicionEventArgs e)
