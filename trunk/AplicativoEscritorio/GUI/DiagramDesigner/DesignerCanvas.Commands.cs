@@ -38,8 +38,13 @@ namespace DiagramDesigner
         public static RoutedCommand DistributeHorizontal = new RoutedCommand();
         public static RoutedCommand DistributeVertical = new RoutedCommand();
         public static RoutedCommand SelectAll = new RoutedCommand();
+        
         public static RoutedCommand VisualizarFlujo = new RoutedCommand();
         public static RoutedCommand VisualizarGargar = new RoutedCommand();
+
+        public static RoutedCommand Compilar = new RoutedCommand();
+        public static RoutedCommand Ejecutar = new RoutedCommand();
+
 
         private VisualizacionActivada vis;
 
@@ -70,6 +75,8 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.VisualizarFlujo, VisualizarFlujo_Executed, VisualizarFlujo_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.VisualizarGargar, VisualizarGargar_Executed, VisualizarGargar_Enabled));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Compilar, Save_Executed));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Ejecutar, Print_Executed));
             SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
 
             this.AllowDrop = true;
@@ -794,6 +801,26 @@ namespace DiagramDesigner
         {
             e.CanExecute = this.vis == VisualizacionActivada.VisualizacionFlujo;
         }
+        #endregion
+
+        #region Compilar Command
+        private void Compilar_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+       
+        }
+
+      
+        #endregion
+
+        #region Ejecutar Command
+        private void Ejecutar_Executed(object sender, ExecutedRoutedEventArgs e)
+        {           
+            
+          
+        }
+
+    
         #endregion
 
         #region Helper Methods
