@@ -58,16 +58,8 @@
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Window1.xaml">
@@ -76,10 +68,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
-    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
-    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationReformatter.cs" />
-    <Compile Include="ModoTexto\Configuracion\ModoTextoConfiguracion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,9 +85,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModoTexto\Configuracion\Sintaxis\GarGar.xshd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,10 +95,6 @@
     <ProjectReference Include="Compilador\Compilador\CompiladorGarGar.csproj">
       <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
       <Name>CompiladorGarGar</Name>
-    </ProjectReference>
-    <ProjectReference Include="GUI\DiagramDesigner\DiagramDesigner.csproj">
-      <Project>{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}</Project>
-      <Name>DiagramDesigner</Name>
     </ProjectReference>
     <ProjectReference Include="FindReplace\FindReplace.csproj">
       <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>

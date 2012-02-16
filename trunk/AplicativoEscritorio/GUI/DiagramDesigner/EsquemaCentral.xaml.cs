@@ -13,11 +13,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.Enums;
 using FindReplace;
-using AplicativoEscritorio.ModoTexto.Configuracion;
+using DiagramDesigner.ModoTexto.Configuracion;
 using CompiladorGargar.Resultado;
 using Utilidades;
 using CompiladorGargar;
 using WpfApplicationHotKey.WinApi;
+
 
 namespace DiagramDesigner
 {

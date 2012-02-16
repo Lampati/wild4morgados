@@ -169,6 +169,10 @@
     <Compile Include="EsquemaCentral.xaml.cs">
       <DependentUpon>EsquemaCentral.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationReformatter.cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
+    <Compile Include="ModoTexto\Configuracion\ModoTextoConfiguracion.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -208,6 +212,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModoTexto\Configuracion\Sintaxis\GarGar.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

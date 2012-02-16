@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Text;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
 
-namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
+namespace DiagramDesigner.ModoTexto.Configuracion.Indentacion
 {
 	sealed class IndentationSettings
 	{

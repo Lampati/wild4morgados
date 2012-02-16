@@ -9,7 +9,7 @@ using ICSharpCode.AvalonEdit.Indentation.CSharp;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AplicativoEscritorio.ModoTexto.Configuracion.Indentacion
+namespace DiagramDesigner.ModoTexto.Configuracion.Indentacion
 {
 	/// <summary>
 	/// Smart indentation for GarGar.
