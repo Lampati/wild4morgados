@@ -31,13 +31,14 @@ namespace DiagramDesigner
         public event ModoTextoCambiarPosicionEventHandler ModoTextoCambiarPosicionEvent;
 
         private ModoVisual modo;
-        
-        FindReplaceMgr findAndReplaceManager = new FindReplaceMgr();
+
+        FindReplaceMgr findAndReplaceManager;
 
         public EsquemaCentral()
         {
             InitializeComponent();
-            this.Modo = ModoVisual.Flujo;
+
+            this.InicializarAvalon();
 
             this.textEditor.TextArea.Caret.PositionChanged += new EventHandler(Caret_PositionChanged);
         }
@@ -88,11 +89,12 @@ namespace DiagramDesigner
                     case ModoVisual.Flujo:
                         this.grdVisual.Visibility = System.Windows.Visibility.Visible;
                         this.grdTexto.Visibility = System.Windows.Visibility.Collapsed;
+                        DesconfigurarBuscarYReemplazarModoTexto();
                         break;
                     case ModoVisual.Texto:
                         this.grdVisual.Visibility = System.Windows.Visibility.Collapsed;
                         this.grdTexto.Visibility = System.Windows.Visibility.Visible;
-                        this.InicializarAvalon();
+                        ConfigurarBuscarYReemplazarModoTexto();
                         break;
                 }
             }
@@ -117,18 +119,29 @@ namespace DiagramDesigner
             ConfigurarBuscarYReemplazarModoTexto();
         }
 
-        private void ConfigurarBuscarYReemplazarModoTexto()
+        public void ConfigurarBuscarYReemplazarModoTexto()
         {
+            findAndReplaceManager = new FindReplaceMgr();
+
             findAndReplaceManager.CurrentEditor = new FindReplace.TextEditorAdapter(textEditor);
             findAndReplaceManager.ShowSearchIn = false;
             findAndReplaceManager.OwnerWindow = Window.GetWindow(this);
-
 
             CommandBindings.Add(findAndReplaceManager.FindBinding);
             CommandBindings.Add(findAndReplaceManager.ReplaceBinding);
             CommandBindings.Add(findAndReplaceManager.FindNextBinding);
         }
 
+        public void DesconfigurarBuscarYReemplazarModoTexto()
+        {
+            findAndReplaceManager.CurrentEditor = null;
+            findAndReplaceManager.ShowSearchIn = false;
+            findAndReplaceManager.OwnerWindow = null;
+
+            CommandBindings.Clear();    
+                        
+            findAndReplaceManager = null;
+        }
 
 
         internal void PosicionarseEn(int fila, int col)
@@ -139,6 +152,18 @@ namespace DiagramDesigner
                 this.textEditor.TextArea.Caret.Column = col;
                 this.textEditor.TextArea.Caret.Show();
                 this.textEditor.TextArea.Caret.BringCaretToView();
+            }
+        }
+
+        internal void MostrarBuscar(bool esBusqYReemp)
+        {
+            if (esBusqYReemp)
+            {
+                findAndReplaceManager.ShowAsReplace();
+            }
+            else
+            {
+                findAndReplaceManager.ShowAsFind();
             }
         }
     }

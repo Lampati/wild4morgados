@@ -22,10 +22,32 @@ namespace DiagramDesigner
     {
         public delegate void CompilacionEventHandler(object o, CompilacionEventArgs e);
         public delegate void CambioModoEventHandler(object o, CambioModoEventArgs e);
+        public delegate void AbrirBusquedaEventHandler(object o, AbrirBusquedaEventArgs e);
 
         public event CompilacionEventHandler CompilacionEvent;
         public event CambioModoEventHandler CambioModoEvent;
+        public event AbrirBusquedaEventHandler AbrirBusquedaEvent;
 
+        private ModoVisual modo;
+        public ModoVisual Modo
+        {
+            get { return this.modo; }
+            set
+            {
+                this.modo = value;
+                switch (this.modo)
+                {
+                    case ModoVisual.Flujo:
+                        this.GrupoDiagramacion.Visibility = System.Windows.Visibility.Visible;
+                        this.GrupoAlineacion.Visibility = System.Windows.Visibility.Visible;
+                        break;
+                    case ModoVisual.Texto:
+                        this.GrupoDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
+                        this.GrupoAlineacion.Visibility = System.Windows.Visibility.Collapsed;
+                        break;
+                }
+            }
+        }
 
         public BarraToolbar()
         {
@@ -34,38 +56,59 @@ namespace DiagramDesigner
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)
         {
-            CompilacionEventFire(this, new CompilacionEventArgs(false));
+            CompilacionEventFire(sender, new CompilacionEventArgs(false));
         }
 
         private void ButtonEjecucion_Click(object sender, RoutedEventArgs e)
         {
-            CompilacionEventFire(this, new CompilacionEventArgs(true));
+            CompilacionEventFire(sender, new CompilacionEventArgs(true));
         }
 
-        private void CompilacionEventFire(object o, CompilacionEventArgs e)
+        private void CompilacionEventFire(object sender, CompilacionEventArgs e)
         {
             if (CompilacionEvent != null)
             {
-                CompilacionEvent(this, e);
+                CompilacionEvent(sender, e);
             }
 
         }
 
         private void ButtonTexto_Click(object sender, RoutedEventArgs e)
         {
-            CambioModoEventFire(this, new CambioModoEventArgs(ModoVisual.Texto));
+            CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Texto));
         }
 
         private void ButtonFlujo_Click(object sender, RoutedEventArgs e)
         {
-            CambioModoEventFire(this, new CambioModoEventArgs(ModoVisual.Flujo));
+            CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Flujo));
         }
 
-        private void CambioModoEventFire(object o, CambioModoEventArgs e)
+        private void CambioModoEventFire(object sender, CambioModoEventArgs e)
         {
             if (CambioModoEvent != null)
             {
-                CambioModoEvent(this, e);
+                CambioModoEvent(sender, e);
+            }
+
+        }
+
+        private void ButtonBuscar_Click(object sender, RoutedEventArgs e)
+        {
+            AbrirBusquedaEventFire(sender, new AbrirBusquedaEventArgs(false));
+        }
+
+        private void ButtonBuscarYReemplazar_Click(object sender, RoutedEventArgs e)
+        {
+            AbrirBusquedaEventFire(sender, new AbrirBusquedaEventArgs(true));
+        }
+
+        
+
+        private void AbrirBusquedaEventFire(object sender, AbrirBusquedaEventArgs e)
+        {
+            if (CambioModoEvent != null)
+            {
+                AbrirBusquedaEvent(sender, e);
             }
 
         }
@@ -102,6 +145,23 @@ namespace DiagramDesigner
         public CambioModoEventArgs(ModoVisual modo)
         {
             modoSeleccionado = modo;
+        }
+    }
+
+    public class AbrirBusquedaEventArgs
+    {
+        private bool esBuscarYReemplazar;
+        public bool EsBuscarYReemplazar
+        {
+            get
+            {
+                return esBuscarYReemplazar;
+            }
+        }
+
+        public AbrirBusquedaEventArgs(bool esReemp)
+        {
+            esBuscarYReemplazar = esReemp;
         }
     }
 }

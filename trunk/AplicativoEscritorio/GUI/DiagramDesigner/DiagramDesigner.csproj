@@ -169,6 +169,7 @@
     <Compile Include="BarraToolbar.xaml.cs">
       <DependentUpon>BarraToolbar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CambioDeModo.cs" />
     <Compile Include="DTO\Mensaje.cs" />
     <Compile Include="Enums\ModoVisual.cs" />
     <Compile Include="Enums\TipoElemento.cs" />
