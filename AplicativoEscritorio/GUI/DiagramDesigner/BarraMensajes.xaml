@@ -5,14 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
     
+    
     <Grid>
 
-        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed">
+        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed" >
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+
             <ListView.View>                
-                <GridView>
+                <GridView>                   
                     <GridViewColumn Header="Linea" Width="40" DisplayMemberBinding="{Binding Path=Linea}"></GridViewColumn>
                     <GridViewColumn Header="Columna" Width="50" DisplayMemberBinding="{Binding Path=Columna}"></GridViewColumn>
-                    <GridViewColumn Header="Mensaje" Width="Auto" DisplayMemberBinding="{Binding Path=Contenido}" ></GridViewColumn>
+                    <GridViewColumn Header="Mensaje" Width="600" DisplayMemberBinding="{Binding Path=Contenido}" > </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -20,8 +25,8 @@
         <ListView Name="lstVwMensajesModoGrafico" Visibility="Collapsed">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Figura" Width="60" DisplayMemberBinding="{Binding Path=Figura}"></GridViewColumn>
-                    <GridViewColumn Header="Mensaje" Width="Auto" DisplayMemberBinding="{Binding Path=Contenido}" ></GridViewColumn>
+                    <GridViewColumn Header="Figura" Width="90" DisplayMemberBinding="{Binding Path=Figura}"></GridViewColumn>
+                    <GridViewColumn Header="Mensaje" Width="600" DisplayMemberBinding="{Binding Path=Contenido}" ></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
