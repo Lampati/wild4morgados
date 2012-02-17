@@ -50,6 +50,7 @@ namespace DiagramDesigner
 
         public BarraMensajes()
         {
+            
             InitializeComponent();
             this.mensajes = new List<Mensaje>();
 

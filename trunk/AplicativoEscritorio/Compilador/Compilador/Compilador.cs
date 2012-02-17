@@ -8,6 +8,7 @@ using System.Diagnostics;
 using Utilidades;
 using CompiladorGargar.Resultado.Auxiliares;
 using CompiladorGargar.Resultado;
+using CompiladorGargar.Lexicografico;
 
 namespace CompiladorGargar
 {
@@ -74,10 +75,6 @@ namespace CompiladorGargar
             this.analizadorSintactico.ReiniciarAnalizadorSintactico();
             float tiempoCargarSint = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
 
-            long timeStampLex = Stopwatch.GetTimestamp();
-            CargarAnalizadorLexico(texto);
-            float tiempoCargarLexico = ((float)(Stopwatch.GetTimestamp() - timeStampLex)) / ((float)Stopwatch.Frequency);
-
             List<PasoDebugTiempos> tiempos = new List<PasoDebugTiempos>();
 
             ResultadoCompilacion res = new ResultadoCompilacion();
@@ -87,61 +84,131 @@ namespace CompiladorGargar
 
             try
             {
-                bool pararComp = false;
-                GlobalesCompilador.TipoError tipoError = GlobalesCompilador.TipoError.Ninguno;
-
-                while (!this.analizadorSintactico.esFinAnalisisSintactico() && !pararComp)
-                {                   
-
-                    timeStampPaso = Stopwatch.GetTimestamp();
-                    List<PasoAnalizadorSintactico> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
-                    float tiempoAnalizSint = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
+                long timeStampLex = Stopwatch.GetTimestamp();
+                CargarAnalizadorLexico(texto);
+                float tiempoCargarLexico = ((float)(Stopwatch.GetTimestamp() - timeStampLex)) / ((float)Stopwatch.Frequency);
 
 
-                    if (retorno.Count > 0)
-                    {                        
-                        foreach (var item in retorno)
+
+                try
+                {
+                    bool pararComp = false;
+                    GlobalesCompilador.TipoError tipoError = GlobalesCompilador.TipoError.Ninguno;
+
+                    while (!this.analizadorSintactico.esFinAnalisisSintactico() && !pararComp)
+                    {
+
+                        timeStampPaso = Stopwatch.GetTimestamp();
+                        List<PasoAnalizadorSintactico> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
+                        float tiempoAnalizSint = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
+
+
+                        if (retorno.Count > 0)
                         {
-                            switch (item.TipoError)
+                            foreach (var item in retorno)
                             {
-                                case GlobalesCompilador.TipoError.Sintactico:
-                                    tipoError = item.TipoError;
-                                    res.ListaErrores.Add(item);
-                                    pararComp = pararComp || item.PararCompilacion;
-                                    break;
-                                case GlobalesCompilador.TipoError.Semantico:
-                                    tipoError = item.TipoError;
-                                    res.ListaErrores.Add(item);
-                                    pararComp = pararComp || item.PararCompilacion;
-                                    break;
-                                case GlobalesCompilador.TipoError.Ninguno:
-                                    tipoError = item.TipoError;
-                                    break;
-               
+                                switch (item.TipoError)
+                                {
+                                    case GlobalesCompilador.TipoError.Sintactico:
+                                        tipoError = item.TipoError;
+                                        res.ListaErrores.Add(item);
+                                        pararComp = pararComp || item.PararCompilacion;
+                                        break;
+                                    case GlobalesCompilador.TipoError.Semantico:
+                                        tipoError = item.TipoError;
+                                        res.ListaErrores.Add(item);
+                                        pararComp = pararComp || item.PararCompilacion;
+                                        break;
+                                    case GlobalesCompilador.TipoError.Ninguno:
+                                        tipoError = item.TipoError;
+                                        break;
+
+                                }
                             }
                         }
+
+                        if (modoDebug)
+                        {
+
+                            PasoCompilacion paso = new PasoCompilacion(this.analizadorSintactico.Pila.ToString(),
+                                this.analizadorSintactico.CadenaEntrada.ToString(),
+                                tipoError);
+
+                            res.ListaDebugSintactico.Add(paso);
+                        }
+
+                        float numPaso = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
+
+                        tiempos.Add(new PasoDebugTiempos() { NumPaso = i, TiempoAnalizadorSint = tiempoAnalizSint, TiempoAnalizadorTot = numPaso }); ;
+                        i++;
                     }
 
-                    if (modoDebug)
-                    {                       
-
-                        PasoCompilacion paso = new PasoCompilacion(this.analizadorSintactico.Pila.ToString(),
-                            this.analizadorSintactico.CadenaEntrada.ToString(),
-                            tipoError);
-
-                        res.ListaDebugSintactico.Add(paso);                         
+                    if (this.analizadorSintactico.esFinAnalisisSintactico() && res.ListaErrores.Count == 0)
+                    {
+                        res.CompilacionGarGarCorrecta = true;
                     }
-
-                    float numPaso = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
-
-                    tiempos.Add(new PasoDebugTiempos() { NumPaso = i, TiempoAnalizadorSint = tiempoAnalizSint, TiempoAnalizadorTot = numPaso }); ;
-                    i++;
                 }
-
-                if (this.analizadorSintactico.esFinAnalisisSintactico() && res.ListaErrores.Count == 0)
+                catch (Exception ex)
                 {
-                    res.CompilacionGarGarCorrecta = true;                    
+                    res.CompilacionGarGarCorrecta = false;
+
+                    if (this.modoDebug)
+                    {
+                        res.Error = ex.Message;
+                    }
+                    else
+                    {
+                        res.Error = "Ha habido un error en la compilacion. Por favor reporte el problema";
+                    }
                 }
+
+
+
+
+                if (res.CompilacionGarGarCorrecta)
+                {
+                    res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
+
+                    long timeStampCod = Stopwatch.GetTimestamp();
+                    res.ArbolSemanticoResultado.CalcularExpresiones();
+                    res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
+                    res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                    timeStampCod = Stopwatch.GetTimestamp();
+                    res.ArchTemporalCodigoPascal = CrearArchivoTemporal(res.CodigoPascal);
+                    res.ArchTemporalCodigoPascalConRuta = Path.Combine(DirectorioTemporales, res.ArchTemporalCodigoPascal);
+                    res.TiempoGeneracionTemporalCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                    try
+                    {
+                        timeStampCod = Stopwatch.GetTimestamp();
+
+                        ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta);
+                        res.ResultadoCompPascal = resPas;
+                        res.ArchEjecutable = resPas.NombreEjecutable;
+                        res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
+                        res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                        res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
+                    }
+                    catch
+                    {
+                        res.GeneracionEjectuableCorrecto = false;
+                    }
+
+                    BorrarTemporales();
+
+                }
+
+                res.TiempoGeneracionAnalizadorLexico = tiempoCargarLexico;
+            }
+            catch (ErrorLexicoException ex)
+            {
+                res.ListaErrores.Add(new PasoAnalizadorSintactico(
+                    ex.Descripcion,
+                    GlobalesCompilador.TipoError.Sintactico,
+                    ex.Fila,
+                    ex.Columna));
             }
             catch (Exception ex)
             {
@@ -154,47 +221,9 @@ namespace CompiladorGargar
                 else
                 {
                     res.Error = "Ha habido un error en la compilacion. Por favor reporte el problema";
-                }                
+                }
             }
-
             
-
-            if (res.CompilacionGarGarCorrecta)
-            {
-                res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
-
-                long timeStampCod = Stopwatch.GetTimestamp();
-                res.ArbolSemanticoResultado.CalcularExpresiones();
-                res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
-                res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-
-                timeStampCod = Stopwatch.GetTimestamp();
-                res.ArchTemporalCodigoPascal =  CrearArchivoTemporal(res.CodigoPascal);
-                res.ArchTemporalCodigoPascalConRuta = Path.Combine(DirectorioTemporales, res.ArchTemporalCodigoPascal);
-                res.TiempoGeneracionTemporalCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-
-                try
-                {
-                    timeStampCod = Stopwatch.GetTimestamp();
-
-                    ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta);
-                    res.ResultadoCompPascal = resPas;
-                    res.ArchEjecutable = resPas.NombreEjecutable;
-                    res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
-                    res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-                    
-                    res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
-                }
-                catch
-                {
-                    res.GeneracionEjectuableCorrecto = false;
-                }
-
-                BorrarTemporales();
-
-            }
-
-            res.TiempoGeneracionAnalizadorLexico = tiempoCargarLexico;
             res.TiempoGeneracionAnalizadorSintactico = tiempoCargarSint;
             res.TiempoCompilacionTotal = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
             

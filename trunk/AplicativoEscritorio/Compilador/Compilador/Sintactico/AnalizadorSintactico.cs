@@ -583,7 +583,7 @@ namespace CompiladorGargar.Sintactico
                     //Si hay error directamente me salteo el paso, no se inserta en la cadena, y no toco la pila.
                     if (t.Equals(Terminal.ElementoError()))
                     {
-                        throw new ErrorLexicoException(string.Format("Error al intentar leer: {0}", t.Componente.Descripcion), t.Componente.Fila, t.Componente.Columna);
+                        throw new ErrorLexicoException(string.Format("El caracter {0} no es reconocido por el lenguaje GarGar", t.Componente.Lexema), t.Componente.Fila, t.Componente.Columna);
                     }
 
                     this.cadenaEntrada.InsertarTerminal(t);                       
