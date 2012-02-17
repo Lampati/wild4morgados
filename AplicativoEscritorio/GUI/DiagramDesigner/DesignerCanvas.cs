@@ -15,6 +15,7 @@ namespace DiagramDesigner
     public partial class DesignerCanvas : Canvas
     {
         private Point? rubberbandSelectionStartPoint = null;
+        private List<object> objetosIntersecados;
 
         private SelectionService selectionService;
         internal SelectionService SelectionService
@@ -72,7 +73,7 @@ namespace DiagramDesigner
         }
 
         protected override void OnDrop(DragEventArgs e)
-        {
+        {            
             base.OnDrop(e);
             DragObject dragObject = e.Data.GetData(typeof(DragObject)) as DragObject;
             if (dragObject != null && !String.IsNullOrEmpty(dragObject.Xaml))
@@ -116,12 +117,65 @@ namespace DiagramDesigner
                     //update selection
                     this.SelectionService.SelectItem(newItem);
                     newItem.Focus();
+
+                    this.ElementoActual = newItem;
+
+                    double escala = ((System.Windows.Media.ScaleTransform)(this.LayoutTransform)).ScaleX;
+
+                    double x = DesignerCanvas.GetLeft(newItem) * escala;
+                    double y = DesignerCanvas.GetTop(newItem) * escala;
+                    System.Windows.Rect r = new System.Windows.Rect(new Point(x+(20 * escala), y+(20 * escala)),
+                        new Size(newItem.Width * escala, newItem.Height * escala));
+
+                    this.objetosIntersecados = new List<object>();
+                    System.Windows.Media.RectangleGeometry eGeo = new System.Windows.Media.RectangleGeometry(r);
+                    System.Windows.Media.VisualTreeHelper.HitTest(((ScrollViewer)this.Parent), null, new System.Windows.Media.HitTestResultCallback(HitTestCallback),
+                        new System.Windows.Media.GeometryHitTestParameters(eGeo));                          
                 }
 
                 e.Handled = true;
+
+                //MessageBox.Show("Conexiones Intersecadas: " + objetosIntersecados.Count.ToString());
+                if (objetosIntersecados.Count > 0)
+                    ReasignarConexion((Connection)objetosIntersecados[0]);
             }
         }
 
+        private DesignerItem ElementoActual;
+
+        private System.Windows.Media.HitTestResultBehavior HitTestCallback(System.Windows.Media.HitTestResult htrResult)
+        {
+            System.Windows.Media.IntersectionDetail idDetail = ((System.Windows.Media.GeometryHitTestResult)htrResult).IntersectionDetail;
+            switch (idDetail)
+            {
+                case System.Windows.Media.IntersectionDetail.FullyContains:
+                    return System.Windows.Media.HitTestResultBehavior.Continue;
+                case System.Windows.Media.IntersectionDetail.Intersects:
+                    object obj = ((System.Windows.FrameworkElement)(((System.Windows.Media.GeometryHitTestResult)(htrResult)).VisualHit)).DataContext;
+                    if (obj != null)
+                        if (obj is Connection)
+                            if (!this.objetosIntersecados.Contains(obj))
+                                this.objetosIntersecados.Add(obj);
+                    return System.Windows.Media.HitTestResultBehavior.Continue;
+                case System.Windows.Media.IntersectionDetail.FullyInside:
+                    return System.Windows.Media.HitTestResultBehavior.Continue;
+                default:
+                    return System.Windows.Media.HitTestResultBehavior.Stop;
+            }
+        }
+
+        private void ReasignarConexion(Connection conn)
+        {
+            DesignerItem origen = conn.Source.ParentDesignerItem;
+            DesignerItem destino = conn.Sink.ParentDesignerItem;
+            Connector c = new Connector();
+            c.ParentDesignerItem = this.ElementoActual;
+            c.Position = new Point(DesignerCanvas.GetLeft(this.ElementoActual), DesignerCanvas.GetTop(this.ElementoActual));
+            c.Orientation = ConnectorOrientation.Left;
+
+            conn.Sink = c;
+        }
+        
         protected override Size MeasureOverride(Size constraint)
         {
             Size size = new Size();

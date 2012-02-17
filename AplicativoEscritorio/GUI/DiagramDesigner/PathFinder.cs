@@ -542,7 +542,9 @@ namespace DiagramDesigner
                     n1 = rect.BottomLeft; n2 = rect.BottomRight;
                     break;
                 default:
-                    throw new Exception("No neighour corners found!");
+                    //throw new Exception("No neighour corners found!");
+                    n1 = rect.TopLeft; n2 = rect.BottomLeft;
+                    break;
             }
         }
 
@@ -582,6 +584,7 @@ namespace DiagramDesigner
                     offsetPoint = new Point(connector.Position.X, rect.Bottom);
                     break;
                 default:
+                    offsetPoint = new Point(rect.Left, connector.Position.Y);
                     break;
             }
 
