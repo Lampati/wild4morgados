@@ -5,6 +5,7 @@ using CompiladorGargar;
 using System.Windows.Input;
 using System;
 using Utilidades;
+using DiagramDesigner.Enums;
 using System.Windows.Controls;
 
 namespace DiagramDesigner
@@ -19,11 +20,30 @@ namespace DiagramDesigner
         Compilador compilador;
         
 
+
+        private ModoVisual modo;
+        public ModoVisual Modo
+        {
+            get { return this.modo; }
+            set
+            {
+                this.modo = value;
+
+                Esquema.Modo = value;
+                BarraMsgs.Modo = value;
+                BarraEstado.Modo = value;
+                ToolbarAplicacion.Modo = value;
+
+
+            }
+        }
+
         public Window1()
         {
             InitializeComponent();
             //this.BarraMsgs.AgregarMensaje("Mensaje para mostrar aquí en la barrica de herramienticas!!");
 
+             
             
             
 
@@ -31,7 +51,8 @@ namespace DiagramDesigner
             this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
 
             this.ToolbarAplicacion.CompilacionEvent += new BarraToolbar.CompilacionEventHandler(ToolbarAplicacion_CompilacionEvent);
-            this.ToolbarAplicacion.CambioModoEvent += new BarraToolbar.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent); 
+            this.ToolbarAplicacion.CambioModoEvent += new BarraToolbar.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent);
+            this.ToolbarAplicacion.AbrirBusquedaEvent += new BarraToolbar.AbrirBusquedaEventHandler(ToolbarAplicacion_AbrirBusquedaEvent);
 
             //NO TENGO EL XML!!!
             ConfigurarCompilador();
@@ -41,15 +62,26 @@ namespace DiagramDesigner
 
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
+
+            Modo = ModoVisual.Flujo;
+        }
+
+        void ToolbarAplicacion_AbrirBusquedaEvent(object o, AbrirBusquedaEventArgs e)
+        {
+            if (this.Modo == ModoVisual.Texto)
+            {
+                Esquema.MostrarBuscar(e.EsBuscarYReemplazar);                  
+                
+            }
         }
 
         void ToolbarAplicacion_CambioModoEvent(object o, CambioModoEventArgs e)
         {
             Button botonPresionado = (Button)o;
 
-            
 
-            this.Esquema.Modo = e.ModoSeleccionado;
+            Modo = e.ModoSeleccionado;
+            
 
         }
 

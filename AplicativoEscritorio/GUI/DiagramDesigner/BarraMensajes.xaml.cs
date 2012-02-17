@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.DTO;
+using DiagramDesigner.Enums;
 
 namespace DiagramDesigner
 {
@@ -24,16 +25,39 @@ namespace DiagramDesigner
 
         public event DobleClickEnBarraMensajesEventHandler DoubleClickEvent;
 
-
         private List<Mensaje> mensajes;
+
+        private ModoVisual modo;
+        public ModoVisual Modo
+        {
+            get { return this.modo; }
+            set
+            {
+                this.modo = value;
+                switch (this.modo)
+                {
+                    case ModoVisual.Flujo:
+                        this.lstVwMensajesModoTexto.Visibility = System.Windows.Visibility.Collapsed;
+                        this.lstVwMensajesModoGrafico.Visibility = System.Windows.Visibility.Visible;
+                        break;
+                    case ModoVisual.Texto:
+                        this.lstVwMensajesModoTexto.Visibility = System.Windows.Visibility.Visible;
+                        this.lstVwMensajesModoGrafico.Visibility = System.Windows.Visibility.Collapsed;
+                        break;
+                }
+            }
+        }
 
         public BarraMensajes()
         {
             InitializeComponent();
             this.mensajes = new List<Mensaje>();
 
-            lstVwMensajes.MouseDoubleClick += new MouseButtonEventHandler(lstVwMensajes_MouseDoubleClick);
+            lstVwMensajesModoTexto.MouseDoubleClick += new MouseButtonEventHandler(lstVwMensajes_MouseDoubleClick);
+            lstVwMensajesModoGrafico.MouseDoubleClick += new MouseButtonEventHandler(lstVwMensajes_MouseDoubleClick);
         }
+
+      
 
         void lstVwMensajes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -45,7 +69,7 @@ namespace DiagramDesigner
             if (indice != -1)
             {
                 Mensaje mens = mensajes[indice];
-                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna));
+                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna, mens.Figura));
             }
 
         }
@@ -58,15 +82,7 @@ namespace DiagramDesigner
             }
         }
 
-        public void AgregarMensaje(string msg)
-        {
-            if (!String.IsNullOrEmpty(msg))
-            {
-                Mensaje m = new Mensaje(msg);
-                this.mensajes.Add(m);
-                this.lstVwMensajes.Items.Add(m);
-            }
-        }
+       
 
         public void AgregarError(string msg, int fila, int columna)
         {
@@ -89,14 +105,23 @@ namespace DiagramDesigner
         private void AgregarLinea(Mensaje men)
         {
             this.mensajes.Add(men);
-            this.lstVwMensajes.Items.Add(men);
+            if (modo == ModoVisual.Texto)
+            {
+                this.lstVwMensajesModoTexto.Items.Add(men);
+            }
+            else
+            {
+                men.Figura = "prueba";
+                this.lstVwMensajesModoGrafico.Items.Add(men);
+            }
         }
 
         public void BorrarTodosMensajes()
         {
            
             this.mensajes.Clear();
-            this.lstVwMensajes.Items.Clear();
+            this.lstVwMensajesModoTexto.Items.Clear();
+            this.lstVwMensajesModoGrafico.Items.Clear();
             
         }
     }
@@ -121,10 +146,20 @@ namespace DiagramDesigner
             }
         }
 
-        public DoubleClickEventArgs(int f, int c)
+        private string figura;
+        public string Figura
+        {
+            get
+            {
+                return figura;
+            }
+        }
+
+        public DoubleClickEventArgs(int f, int c, string fig)
         {
             fila = f;
             columna = c;
+            figura = fig;
         }
     }
 }

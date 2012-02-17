@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.DTO;
+using DiagramDesigner.Enums;
 
 namespace DiagramDesigner
 {
@@ -20,6 +21,27 @@ namespace DiagramDesigner
     /// </summary>
     public partial class BarraEstado : UserControl
     {
+
+        private ModoVisual modo;
+        public ModoVisual Modo
+        {
+            get { return this.modo; }
+            set
+            {
+                this.modo = value;
+                switch (this.modo)
+                {
+                    case ModoVisual.Flujo:
+                        this.LineaBarraEstado.Visibility = System.Windows.Visibility.Hidden;
+                        this.ColumnaBarraEstado.Visibility = System.Windows.Visibility.Hidden;
+                        break;
+                    case ModoVisual.Texto:
+                        this.LineaBarraEstado.Visibility = System.Windows.Visibility.Visible;
+                        this.ColumnaBarraEstado.Visibility = System.Windows.Visibility.Visible;                        
+                        break;
+                }
+            }
+        }
 
         private string estado;
         public string Estado

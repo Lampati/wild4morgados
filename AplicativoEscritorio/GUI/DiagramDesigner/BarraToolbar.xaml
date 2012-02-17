@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:s="clr-namespace:DiagramDesigner"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" >
    
    
     <Grid>
@@ -144,6 +143,45 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
+            </GroupBox>
+            
+            <!-- Buscar -->
+            <GroupBox Header="Busqueda" Style="{StaticResource ToolbarGroup}" Margin="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Click="ButtonBuscar_Click">
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="Resources/Images/Copy.png" Width="16"/>
+                                    <TextBlock Margin="3" Text="Buscar" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                        <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+                            Style="{StaticResource ToolBarButtonBaseStyle}"
+                            Click="ButtonBuscarYReemplazar_Click">
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="Resources/Images/Copy.png" Width="16"/>
+                                    <TextBlock Margin="3" Text="Buscar/Reemplazar" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>                    
+                </Grid>
             </GroupBox>
 
             <!--Compilar/Ejecutar-->

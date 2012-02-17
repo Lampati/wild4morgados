@@ -12,6 +12,7 @@ namespace DiagramDesigner.DTO
         private int columna;
         private TipoMensaje tipo;
         private string contenido;
+        private string figura;
 
         public int Linea
         {
@@ -35,6 +36,12 @@ namespace DiagramDesigner.DTO
         {
             get { return this.contenido; }
             set { this.contenido = value; }
+        }
+
+        public string Figura
+        {
+            get { return this.figura; }
+            set { this.figura = value; }
         }
 
         public Mensaje(string msg) : this(msg, TipoMensaje.Informacion)
