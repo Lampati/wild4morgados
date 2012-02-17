@@ -44,6 +44,7 @@ namespace DiagramDesigner
 
                 return parentDesignerItem;
             }
+            set { parentDesignerItem = value; }
         }
 
         // keep track of connections that link to this connector
