@@ -56,9 +56,65 @@ namespace DiagramDesigner
 
             lstVwMensajesModoTexto.MouseDoubleClick += new MouseButtonEventHandler(lstVwMensajes_MouseDoubleClick);
             lstVwMensajesModoGrafico.MouseDoubleClick += new MouseButtonEventHandler(lstVwMensajes_MouseDoubleClick);
+
+            GridView gridView = (GridView)lstVwMensajesModoTexto.View;
+            gridView.AllowsColumnReorder = false;
+
+            gridView = (GridView)lstVwMensajesModoGrafico.View;
+            gridView.AllowsColumnReorder = false;
         }
 
-      
+        
+
+
+        public void AjustarSize()
+        {
+
+            double width;
+
+            //if (listview.Width == Double.NaN)
+            //{
+            //    width = ((DiagramDesigner.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
+            //}
+            //else
+            //{            
+            //    width = listview.Width;
+            //}
+
+            width = this.ActualWidth;
+
+            GridView gv = lstVwMensajesModoTexto.View as GridView;
+            for (int i = 0; i < gv.Columns.Count -1 ; i++)
+            {
+                
+                    width -= gv.Columns[i].ActualWidth;
+            }
+
+            if (width < 100)
+            {
+                width = 100;
+            }
+
+            gv.Columns[2].Width = width - 15;
+
+            width = this.ActualWidth;
+
+            gv = lstVwMensajesModoGrafico.View as GridView;
+            for (int i = 0; i < gv.Columns.Count-1; i++)
+            {
+                    width -= gv.Columns[i].ActualWidth;
+            }
+
+            if (width < 100)
+            {
+                width = 100;
+            }
+
+            gv.Columns[1].Width = width - 15;
+        }
+
+   
+
 
         void lstVwMensajes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

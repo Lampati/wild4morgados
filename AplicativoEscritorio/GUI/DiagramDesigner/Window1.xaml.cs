@@ -54,6 +54,7 @@ namespace DiagramDesigner
             this.ToolbarAplicacion.CambioModoEvent += new BarraToolbar.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent);
             this.ToolbarAplicacion.AbrirBusquedaEvent += new BarraToolbar.AbrirBusquedaEventHandler(ToolbarAplicacion_AbrirBusquedaEvent);
 
+            this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
             //NO TENGO EL XML!!!
             ConfigurarCompilador();
 
@@ -64,6 +65,11 @@ namespace DiagramDesigner
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
 
             Modo = ModoVisual.Flujo;
+        }
+
+        void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            BarraMsgs.AjustarSize();
         }
 
         void ToolbarAplicacion_AbrirBusquedaEvent(object o, AbrirBusquedaEventArgs e)
