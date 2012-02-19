@@ -7,6 +7,7 @@ using System;
 using Utilidades;
 using DiagramDesigner.Enums;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace DiagramDesigner
 {
@@ -83,8 +84,9 @@ namespace DiagramDesigner
 
         void ToolbarAplicacion_CambioModoEvent(object o, CambioModoEventArgs e)
         {
-            Button botonPresionado = (Button)o;
-
+            //ToggleButton botonPresionado = (ToggleButton)o;
+            
+            
 
             Modo = e.ModoSeleccionado;
             
