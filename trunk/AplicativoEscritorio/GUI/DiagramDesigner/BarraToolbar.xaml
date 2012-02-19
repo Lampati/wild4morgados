@@ -152,7 +152,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel>
-                        <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+                        <Button Margin="0,1,0,1" Padding="5" HorizontalContentAlignment="Left"
                             Style="{StaticResource ToolBarButtonBaseStyle}"
                             Click="ButtonBuscar_Click">
                             <Button.Content>
@@ -161,12 +161,12 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="Resources/Images/Copy.png" Width="16"/>
+                                    <Image Source="Resources/Images/find3.png" Width="24"/>
                                     <TextBlock Margin="3" Text="Buscar" VerticalAlignment="Center" Grid.Column="1"/>
                                 </Grid>
                             </Button.Content>
                         </Button>
-                        <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+                        <Button Margin="0,1,0,1" Padding="5" HorizontalContentAlignment="Left"
                             Style="{StaticResource ToolBarButtonBaseStyle}"
                             Click="ButtonBuscarYReemplazar_Click">
                             <Button.Content>
@@ -175,7 +175,7 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="Resources/Images/Copy.png" Width="16"/>
+                                    <Image Source="Resources/Images/findreplace2.png" Width="24"/>
                                     <TextBlock Margin="3" Text="Buscar/Reemplazar" VerticalAlignment="Center" Grid.Column="1"/>
                                 </Grid>
                             </Button.Content>
@@ -196,7 +196,7 @@
                                     <RowDefinition Height="4*"/>
                                     <RowDefinition Height="1*"/>
                                 </Grid.RowDefinitions>
-                                <Image Source="Resources/Images/Workflow.png" Width="48"/>
+                                <Image Source="Resources/Images/Compile1.png" Width="48"/>
                                 <TextBlock Grid.Row="1" Text="Compilar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
@@ -210,7 +210,7 @@
                                     <RowDefinition Height="4*"/>
                                     <RowDefinition Height="1*"/>
                                 </Grid.RowDefinitions>
-                                <Image Source="Resources/Images/Gargar.png" Width="48"/>
+                                <Image Source="Resources/Images/Ejecutar1.png" Width="48"/>
                                 <TextBlock Grid.Row="1" Text="Ejecutar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
