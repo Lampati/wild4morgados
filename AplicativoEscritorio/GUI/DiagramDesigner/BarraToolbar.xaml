@@ -221,10 +221,10 @@
             <!--WF/Gargar-->
             <GroupBox Header="Visualización" Style="{StaticResource ToolbarGroup}" Margin="3">
                 <StackPanel Orientation="Horizontal">
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+                    <ToggleButton Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
 					Style="{StaticResource ToolBarButtonBaseStyle}"
                     Name="ButtonFlujo" Click="ButtonFlujo_Click">
-                        <Button.Content>
+                        <ToggleButton.Content>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="4*"/>
@@ -233,12 +233,12 @@
                                 <Image Source="Resources/Images/Workflow.png" Width="48"/>
                                 <TextBlock Grid.Row="1" Text="Flujo" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1"/>
                             </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="7,3,0,3" Padding="5" HorizontalContentAlignment="Left"
+                        </ToggleButton.Content>
+                    </ToggleButton>
+                    <ToggleButton Margin="7,3,0,3" Padding="5" HorizontalContentAlignment="Left"
 					Style="{StaticResource ToolBarButtonBaseStyle}"
 					Name="ButtonTexto" Click="ButtonTexto_Click">
-                        <Button.Content>
+                        <ToggleButton.Content>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="4*"/>
@@ -247,8 +247,8 @@
                                 <Image Source="Resources/Images/Gargar.png" Width="48"/>
                                 <TextBlock Grid.Row="1" Text="Gargar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1"/>
                             </Grid>
-                        </Button.Content>
-                    </Button>
+                        </ToggleButton.Content>
+                    </ToggleButton>
                 </StackPanel>
             </GroupBox>
             
