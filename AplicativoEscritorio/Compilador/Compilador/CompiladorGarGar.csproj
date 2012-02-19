@@ -97,10 +97,820 @@
       <DependentUpon>SelectorModoPruebas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ginstall.exe.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\patch.exe.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorct.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errord.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorda.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errordu.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errore.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errores.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorf.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorfi.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorhe.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorheu.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorid.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorn.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorpl.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorpli.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorptd.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorptw.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorr.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorrw.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorues.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\a52\a52.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\a52\a52.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\a52\libimpa52.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\a52\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fastcgi\fastcgi.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fastcgi\fastcgi.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fastcgi\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fftw\fftw_s.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fftw\fftw_s.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fftw\libimpfftw_s.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fftw\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fpmkunit\fpmkunit.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fpmkunit\fpmkunit.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fpmkunit\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\buildfppkg.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\buildfppkg.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\fprepos.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\fprepos.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\fpxmlrep.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\fpxmlrep.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgcommands.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgcommands.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgdownload.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgdownload.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgfpmake.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgfpmake.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgglobals.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgglobals.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkghandler.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkghandler.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkglnet.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkglnet.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgmessages.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgmessages.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgmkconv.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgmkconv.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgoptions.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgoptions.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgrepos.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgrepos.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgwget.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\fppkg\pkgwget.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\gdbint\gdbcon.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\gdbint\gdbcon.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\gdbint\gdbint.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\gdbint\gdbint.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\gdbint\libimpgdbint.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\gdbint\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\lexyacc\lexlib.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\lexyacc\lexlib.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\lexyacc\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\lexyacc\yacclib.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\lexyacc\yacclib.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pcap\libimppcap.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pcap\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pcap\pcap.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pcap\pcap.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pxlib\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pxlib\pxlib.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\pxlib\pxlib.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rsvg\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rsvg\rsvg.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rsvg\rsvg.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\buildrtl.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\buildrtl.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\charset.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\charset.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\classes.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\classes.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\cmem.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\cmem.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\convutils.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\convutils.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\cpu.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\cpu.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\crt.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\crt.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\ctypes.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\ctypes.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\dateutils.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\dateutils.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\dos.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\dos.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\dynlibs.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\dynlibs.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\exeinfo.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\exeinfo.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\fgl.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\fgl.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\fmtbcd.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\fmtbcd.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\fpintres.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\fpintres.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\getopts.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\getopts.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\heaptrc.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\heaptrc.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\initc.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\initc.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\keyboard.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\keyboard.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpcmem.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpdos.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpfpintres.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpheaptrc.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpinitc.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsharemem.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsignals.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsysinitcyg.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsysinitgprof.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsysinitpas.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsystem.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpsysutils.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpvarutils.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpwindows.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpwinsock.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\libimpwinsock2.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\lineinfo.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\lineinfo.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\lnfodwrf.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\lnfodwrf.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\macpas.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\macpas.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\math.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\math.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\matrix.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\matrix.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\messages.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\messages.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\mmx.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\mmx.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\mouse.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\mouse.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\objects.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\objects.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\objpas.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\objpas.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\printer.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\printer.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\rtlconsts.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\rtlconsts.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sharemem.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sharemem.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\signals.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\signals.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sockets.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sockets.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\stdconvs.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\stdconvs.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\strings.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\strings.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\strutils.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\strutils.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysconst.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysconst.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysinitcyg.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysinitcyg.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysinitgprof.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysinitgprof.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysinitpas.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysinitpas.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\system.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\system.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysutils.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\sysutils.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\types.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\types.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\typinfo.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\typinfo.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\ucomplex.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\ucomplex.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\variants.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\variants.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\varutils.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\varutils.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\video.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\video.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\windows.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\windows.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winevent.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winevent.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winsock.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winsock.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winsock2.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winsock2.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winsysut.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\rtl\winsysut.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\tcl\libimptcl80.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\tcl\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\tcl\tcl80.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\tcl\tcl80.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\activex.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\activex.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\comconst.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\comconst.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\commctrl.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\commctrl.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\commdlg.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\commdlg.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\comobj.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\comobj.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\comserv.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\comserv.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\dwmapi.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\dwmapi.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\flatsb.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\flatsb.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\htmlhelp.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\htmlhelp.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\imagehlp.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\imagehlp.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpactivex.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpcommctrl.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpcommdlg.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimphtmlhelp.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpimagehlp.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpmmsystem.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpshellapi.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpshfolder.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpshlobj.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\libimpwininet.a">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\mmsystem.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\mmsystem.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\multimon.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\multimon.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\ole2.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\ole2.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\oleserver.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\oleserver.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\Package.fpc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\richedit.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\richedit.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\shellapi.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\shellapi.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\shfolder.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\shfolder.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\shlobj.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\shlobj.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\uxtheme.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\uxtheme.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\wininet.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\wininet.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\winutils.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\winutils.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\winver.o">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuracion\CompiladorPascal\Compilador\units\i386-win32\winunits-base\winver.ppu">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Configuracion\test.gar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="Configuracion\validacionesSemanticasCorrectas.gar" />
+    <None Include="Configuracion\testEjecucion.gar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Configuracion\validacionesSemanticasIncorrectas.gar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -224,11 +1034,206 @@
     <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuracion\CompiladorPascal.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Configuracion\AFD_GARGAR.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ar.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\as.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\bin2obj.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\chmcmd.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\chmls.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cmp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cpp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cygiconv-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cygncurses-8.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\cygwin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\data2inc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\delp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\diff.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\dlltool.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fp32.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpclasschart.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcmake.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcmkcfg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcres.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpcsubst.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpdoc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fpmc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fppkg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\fprcp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gcc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gdate.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gecho.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ginstall.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\gmkdir.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\GoRC.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\grep.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\h2pas.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\h2paspp.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ld.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\make.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\makeskel.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\mkarmins.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\mkx86ins.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\mv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\objdump.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\patch.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\plex.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\postw32.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppc386.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppdep.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppudump.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppufiles.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ppumove.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ptop.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\pwd.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\pyacc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\rm.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\rmcvsdir.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\rstconv.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\strip.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\unblockchm.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\unitdiff.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\unzip.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\upx.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\windres.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\windres.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\yylex.cod">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\yyparse.cod">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\zip.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Configuracion\Gramatica.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
