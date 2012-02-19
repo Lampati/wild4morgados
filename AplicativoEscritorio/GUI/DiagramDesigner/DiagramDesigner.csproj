@@ -286,6 +286,23 @@
       <Name>WpfApplicationHotKey</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Compile1.png" />
+    <Resource Include="Resources\Images\Compile2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ejecutar1.png" />
+    <Resource Include="Resources\Images\Ejecutar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\findreplace1.png" />
+    <Resource Include="Resources\Images\find2.png" />
+    <Resource Include="Resources\Images\find1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\find3.png" />
+    <Resource Include="Resources\Images\findreplace2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
