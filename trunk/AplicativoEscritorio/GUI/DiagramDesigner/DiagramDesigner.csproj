@@ -269,9 +269,17 @@
       <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
       <Name>CompiladorGarGar</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\DataAccess.csproj">
+      <Project>{7F9DD2FC-B1FB-4CCE-AE6A-9F72DD296BC2}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\FindReplace\FindReplace.csproj">
       <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>
       <Name>FindReplace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Globales\Globales.csproj">
+      <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
+      <Name>Globales</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>

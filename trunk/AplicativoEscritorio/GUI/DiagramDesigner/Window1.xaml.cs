@@ -8,6 +8,8 @@ using Utilidades;
 using DiagramDesigner.Enums;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using DataAccess;
+using System.IO;
 
 namespace DiagramDesigner
 {
@@ -19,8 +21,8 @@ namespace DiagramDesigner
         #endregion
 
         Compilador compilador;
-        
 
+        ConfiguracionAplicacion configApp;
 
         private ModoVisual modo;
         public ModoVisual Modo
@@ -42,11 +44,6 @@ namespace DiagramDesigner
         public Window1()
         {
             InitializeComponent();
-            //this.BarraMsgs.AgregarMensaje("Mensaje para mostrar aquí en la barrica de herramienticas!!");
-
-             
-            
-            
 
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
             this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
@@ -66,6 +63,18 @@ namespace DiagramDesigner
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
 
             Modo = ModoVisual.Flujo;
+
+            configApp = new ConfiguracionAplicacion();
+            configApp.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+
+            //configApp.DirectorioTemporal = "bla";
+            //configApp.DirectorioEjerciciosCreados = "bla43";
+            //configApp.DirectorioEjerciciosDescargados = "bla1";
+            //configApp.DirectorioResolucionesEjercicios = "bla2";
+
+            //configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+            //                               Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
         }
 
         void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -85,8 +94,8 @@ namespace DiagramDesigner
         void ToolbarAplicacion_CambioModoEvent(object o, CambioModoEventArgs e)
         {
             //ToggleButton botonPresionado = (ToggleButton)o;
-            
-            
+
+            ReiniciarIDEParaCompilacion();
 
             Modo = e.ModoSeleccionado;
             
@@ -119,7 +128,7 @@ namespace DiagramDesigner
         {
             bool modoDebug = false;
 
-            string directorioActual = AppDomain.CurrentDomain.BaseDirectory;
+            string directorioActual = Globales.ConstantesGlobales.PathEjecucionAplicacion;
 
             compilador = new Compilador(modoDebug, directorioActual, directorioActual, "prueba");
         }
