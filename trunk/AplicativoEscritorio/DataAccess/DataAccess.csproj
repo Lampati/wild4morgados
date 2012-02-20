@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfiguracionAplicacion.cs" />
-    <Compile Include="Interfases\Accedible.cs" />
+    <Compile Include="Interfases\Accesible.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
