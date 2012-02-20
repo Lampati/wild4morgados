@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interfases
 {
-    interface Accedible
+    interface Accesible
     {
         void Abrir(string path);
         void Guardar(string path);
