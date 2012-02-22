@@ -97,7 +97,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public List<string> ListaElementosVisualizar { get; set; }
         public TipoComparacion Comparacion { get; set; }
-        public bool EsSino { get; set; }       
+        public bool EsSino { get; set; }
+
+        public int LineaCorrespondiente { get; set; }
 
        
         public string Codigo { get; set; }

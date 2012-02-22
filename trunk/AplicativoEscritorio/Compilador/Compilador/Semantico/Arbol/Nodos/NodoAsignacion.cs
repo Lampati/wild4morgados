@@ -31,6 +31,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             NodoTablaSimbolos.TipoDeDato tipo;
             StringBuilder strbldr;
 
+            LineaCorrespondiente = GlobalesCompilador.UltFila;
+
 
             if (!esArreglo)
             {
@@ -156,6 +158,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
+
+            strBldr.AppendLine(GeneracionCodigoHelpers.AsignarLinea(LineaCorrespondiente));
 
             strBldr.Append(this.hijosNodo[0].Codigo);
             strBldr.Append(" := ");

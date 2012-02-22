@@ -39,6 +39,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
+            strBldr.AppendLine(GeneracionCodigoHelpers.AsignarLinea(this.hijosNodo[2].LineaCorrespondiente));
+
             strBldr.Append("While ");
             strBldr.Append("( ");
             strBldr.Append(this.hijosNodo[2].Codigo);

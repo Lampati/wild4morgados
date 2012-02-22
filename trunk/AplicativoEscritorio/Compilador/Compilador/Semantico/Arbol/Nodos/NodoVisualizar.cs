@@ -23,7 +23,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         }
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
-        {                    
+        {
+            LineaCorrespondiente = GlobalesCompilador.UltFila;
+
             this.ListaElementosVisualizar = this.hijosNodo[2].ListaElementosVisualizar;
 
             return this;
@@ -48,6 +50,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
+
+            strBldr.AppendLine(GeneracionCodigoHelpers.AsignarLinea(LineaCorrespondiente));
 
             strBldr.Append("WriteLn ");
             strBldr.Append("( ");

@@ -9,6 +9,16 @@ namespace CompiladorGargar
 
     class GeneracionCodigoHelpers
     {
+        private static string variableContadoraLineas;
+        public static string VariableContadoraLineas
+        {
+            get
+            {
+                return variableContadoraLineas;
+            }
+        }
+
+
         public static string DefinirFuncionesBasicas()
         {
             StringBuilder strBldr = new StringBuilder();
@@ -57,8 +67,16 @@ namespace CompiladorGargar
             return strBldr.ToString();
         }
 
+        public static string AsignarLinea(int linea)
+        {
+            return string.Format("{0} := {1};",VariableContadoraLineas,linea);
+        }
 
-        
+
+        internal static void ReiniciarValoresVariablesAleatorias()
+        {
+            variableContadoraLineas = Utilidades.RandomManager.RandomStringConPrefijo("ProgramAr_ContLineas",20,true);
+        }
     }
 
 

@@ -31,6 +31,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             string nombre = this.hijosNodo[1].Lexema;
             this.Lexema = nombre;
 
+            LineaCorrespondiente = GlobalesCompilador.UltFila;
+
             StringBuilder strbldr;
 
             if (this.TablaSimbolos.ExisteProcedimiento(nombre))
@@ -100,7 +102,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La cantidad de parametros para la funcion ").Append(nombre).Append(" es incorrecta.");
+                    strbldr = new StringBuilder("La cantidad de parametros para el procedimiento ").Append(nombre).Append(" es incorrecta.");
                     throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
@@ -133,6 +135,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
+
+            strBldr.AppendLine(GeneracionCodigoHelpers.AsignarLinea(LineaCorrespondiente));
 
             strBldr.Append(this.hijosNodo[1].Codigo);
             strBldr.Append("(");
