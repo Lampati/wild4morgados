@@ -34,7 +34,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             //Si el tipo de dato de ExprBoolExtra es booleano, es pq tiene un and, o un or. Por ende, este tambien sera booleano.
             //Tambien le pongo que es ninguna el tipo de operatoria. Cualquiera de los dos sirve.
-            
+
+            LineaCorrespondiente = GlobalesCompilador.UltFila;
 
             this.Comparacion = this.hijosNodo[1].Comparacion;
             this.Operacion = this.hijosNodo[1].Operacion;

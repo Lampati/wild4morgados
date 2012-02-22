@@ -30,6 +30,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             NodoTablaSimbolos.TipoDeDato tipo;
             StringBuilder strbldr;
 
+            LineaCorrespondiente = GlobalesCompilador.UltFila;
+
             if (!esArreglo)
             {
                 if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
@@ -137,6 +139,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
+
+            strBldr.AppendLine(GeneracionCodigoHelpers.AsignarLinea(LineaCorrespondiente));
 
             strBldr.Append("Readln ");
             strBldr.Append("( ");

@@ -73,7 +73,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             StringBuilder strBldr = new StringBuilder();
 
             strBldr.AppendLine("program temporal;");
-            strBldr.AppendLine("uses crt;");
+            strBldr.AppendLine("uses crt, ArchResultadoManager;");
             strBldr.AppendLine("");
 
             strBldr.AppendLine("Const");
@@ -81,13 +81,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("Type");
             strBldr.AppendLine(ArmarTiposDeArreglo(this.TablaSimbolos.ListaTiposArreglos));
             strBldr.AppendLine("Var");
+            strBldr.AppendLine(string.Format("{0} : integer;",GeneracionCodigoHelpers.VariableContadoraLineas));
             strBldr.AppendLine(this.hijosNodo[0].VariablesGlobales);
             //strBldr.AppendLine(this.hijosNodo[1].VariablesProcPrincipal);
             strBldr.AppendLine("");
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesBasicas());
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
-            strBldr.AppendLine("begin");
+            strBldr.AppendLine("begin");            
             strBldr.Append("\t").AppendLine("PRINCIPAL();");
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
             strBldr.AppendLine("end.");

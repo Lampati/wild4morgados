@@ -72,6 +72,8 @@ namespace CompiladorGargar
             long timeStamp = Stopwatch.GetTimestamp();
             long timeStampPaso;
 
+            GeneracionCodigoHelpers.ReiniciarValoresVariablesAleatorias();
+
             this.analizadorSintactico.ReiniciarAnalizadorSintactico();
             float tiempoCargarSint = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
 
@@ -189,7 +191,8 @@ namespace CompiladorGargar
                         res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
                         res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
 
-                        res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
+                        res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;                        
+
                     }
                     catch
                     {
@@ -251,9 +254,10 @@ namespace CompiladorGargar
                     exe = string.Concat(exe, ".exe");
                 }
 
-                string argumento = string.Format("-o{0}", exe);
+                string argumentoInclude = string.Format("-Fu{0}", Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion, Globales.ConstantesGlobales.NOMBRE_DIR_UNITS_PASCAL));
+                string argumentoNombreExe = string.Format("-o{0}", exe);
 
-                string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumento, archTemporalPascal });
+                string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumentoInclude, argumentoNombreExe, archTemporalPascal });
 
                 res = new ResultadoCompilacionPascal(resultado);
                 res.NombreEjecutable = exe;
