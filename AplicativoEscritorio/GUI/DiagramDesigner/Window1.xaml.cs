@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using DataAccess;
 using System.IO;
+using Microsoft.Windows.Controls.Ribbon;
 
 namespace DiagramDesigner
 {
@@ -48,9 +49,10 @@ namespace DiagramDesigner
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
             this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
 
-            this.ToolbarAplicacion.CompilacionEvent += new BarraToolbar.CompilacionEventHandler(ToolbarAplicacion_CompilacionEvent);
-            this.ToolbarAplicacion.CambioModoEvent += new BarraToolbar.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent);
-            this.ToolbarAplicacion.AbrirBusquedaEvent += new BarraToolbar.AbrirBusquedaEventHandler(ToolbarAplicacion_AbrirBusquedaEvent);
+            this.ToolbarAplicacion.CompilacionEvent += new BarraToolbarRibbon.CompilacionEventHandler(ToolbarAplicacion_CompilacionEvent);
+            this.ToolbarAplicacion.CambioModoEvent += new BarraToolbarRibbon.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent);
+            this.ToolbarAplicacion.AbrirBusquedaEvent += new BarraToolbarRibbon.AbrirBusquedaEventHandler(ToolbarAplicacion_AbrirBusquedaEvent);
+            this.ToolbarAplicacion.SalvarConfiguracionEvent += new BarraToolbarRibbon.SalvarConfiguracionEventHandler(ToolbarAplicacion_SalvarConfiguracionEvent);
 
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
             //NO TENGO EL XML!!!
@@ -68,6 +70,11 @@ namespace DiagramDesigner
             configApp.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
 
+            ToolbarAplicacion.DirEjCreados = configApp.DirectorioEjerciciosCreados;
+            ToolbarAplicacion.DirEjDescargados = configApp.DirectorioEjerciciosDescargados;
+            ToolbarAplicacion.DirResoluciones = configApp.DirectorioResolucionesEjercicios;
+            ToolbarAplicacion.DirTemporales = configApp.DirectorioTemporal;
+
             //configApp.DirectorioTemporal = "bla";
             //configApp.DirectorioEjerciciosCreados = "bla43";
             //configApp.DirectorioEjerciciosDescargados = "bla1";
@@ -75,6 +82,17 @@ namespace DiagramDesigner
 
             //configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
             //                               Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+        }
+
+        void ToolbarAplicacion_SalvarConfiguracionEvent(object o, SalvarConfiguracionEventArgs e)
+        {
+            configApp.DirectorioEjerciciosCreados = ToolbarAplicacion.DirEjCreados;
+            configApp.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
+            configApp.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
+            configApp.DirectorioTemporal = ToolbarAplicacion.DirTemporales;   
+
+            configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
         }
 
         void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -190,7 +208,7 @@ namespace DiagramDesigner
         {
             //Aca reinicar la IDE
             this.BarraMsgs.BorrarTodosMensajes();
-
+            
         }
 
         private void MostrarResultadosCompilacion(ResultadoCompilacion res)

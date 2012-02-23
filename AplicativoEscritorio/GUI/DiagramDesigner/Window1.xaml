@@ -9,15 +9,18 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="160"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="100" />
             <RowDefinition Height="25" /> 
         </Grid.RowDefinitions>        
         
 
-        <Grid Grid.Row="0" Margin="0,10,0,0">
+        <!--<Grid Grid.Row="0" Margin="0,10,0,0">
             <s:BarraToolbar x:Name="ToolbarAplicacion"></s:BarraToolbar>
+        </Grid>-->
+        <Grid Grid.Row="0" Margin="0,10,0,0">
+            <s:BarraToolbarRibbon x:Name="ToolbarAplicacion"></s:BarraToolbarRibbon>
         </Grid>
 
         <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->

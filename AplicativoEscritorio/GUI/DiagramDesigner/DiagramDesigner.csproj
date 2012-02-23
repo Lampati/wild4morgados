@@ -18,7 +18,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RibbonDLL\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RibbonDLL\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,7 +81,11 @@
     </Page>
     <Page Include="BarraToolbar.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
+    </Page>
+    <Page Include="BarraToolbarRibbon.xaml">
+      <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="EsquemaCentral.xaml">
       <SubType>Designer</SubType>
@@ -169,6 +182,9 @@
     <Compile Include="BarraToolbar.xaml.cs">
       <DependentUpon>BarraToolbar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BarraToolbarRibbon.xaml.cs">
+      <DependentUpon>BarraToolbarRibbon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Mensaje.cs" />
     <Compile Include="Enums\ModoVisual.cs" />
     <Compile Include="Enums\TipoElemento.cs" />
@@ -176,6 +192,8 @@
     <Compile Include="EsquemaCentral.xaml.cs">
       <DependentUpon>EsquemaCentral.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RibbonTextFixedWidth.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Helpers\StarWidthConverter .cs" />
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationReformatter.cs" />
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
@@ -225,6 +243,7 @@
     <EmbeddedResource Include="ModoTexto\Configuracion\Sintaxis\GarGar.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -289,6 +308,10 @@
       <Project>{F32BAA9E-D765-4328-8031-1CDBB7A1BD72}</Project>
       <Name>WpfApplicationHotKey</Name>
     </ProjectReference>
+    <ProjectReference Include="FolderBrowser\FolderBrowser.csproj">
+      <Project>{0B8C3B19-940D-408D-9F6B-4AFEE7246642}</Project>
+      <Name>FolderBrowser</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Compile1.png" />
@@ -306,6 +329,12 @@
   <ItemGroup>
     <Resource Include="Resources\Images\find3.png" />
     <Resource Include="Resources\Images\findreplace2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
+    <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
+    <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
+    <Resource Include="RibbonDLL\RibbonControlsLibrary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
