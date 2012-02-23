@@ -118,54 +118,54 @@ namespace DiagramDesigner
         }
     }
 
-    public class CompilacionEventArgs
-    {
-        private bool esEjecucion;
-        public bool EsEjecucion
-        {
-            get
-            {
-                return esEjecucion;
-            }
-        }
+    //public class CompilacionEventArgs
+    //{
+    //    private bool esEjecucion;
+    //    public bool EsEjecucion
+    //    {
+    //        get
+    //        {
+    //            return esEjecucion;
+    //        }
+    //    }
 
-        public CompilacionEventArgs(bool esEjec)
-        {
-            esEjecucion = esEjec;
-        }
-    }
+    //    public CompilacionEventArgs(bool esEjec)
+    //    {
+    //        esEjecucion = esEjec;
+    //    }
+    //}
 
-    public class CambioModoEventArgs
-    {
-        private ModoVisual modoSeleccionado;
-        public ModoVisual ModoSeleccionado
-        {
-            get
-            {
-                return modoSeleccionado;
-            }
-        }
+    //public class CambioModoEventArgs
+    //{
+    //    private ModoVisual modoSeleccionado;
+    //    public ModoVisual ModoSeleccionado
+    //    {
+    //        get
+    //        {
+    //            return modoSeleccionado;
+    //        }
+    //    }
 
-        public CambioModoEventArgs(ModoVisual modo)
-        {
-            modoSeleccionado = modo;
-        }
-    }
+    //    public CambioModoEventArgs(ModoVisual modo)
+    //    {
+    //        modoSeleccionado = modo;
+    //    }
+    //}
 
-    public class AbrirBusquedaEventArgs
-    {
-        private bool esBuscarYReemplazar;
-        public bool EsBuscarYReemplazar
-        {
-            get
-            {
-                return esBuscarYReemplazar;
-            }
-        }
+    //public class AbrirBusquedaEventArgs
+    //{
+    //    private bool esBuscarYReemplazar;
+    //    public bool EsBuscarYReemplazar
+    //    {
+    //        get
+    //        {
+    //            return esBuscarYReemplazar;
+    //        }
+    //    }
 
-        public AbrirBusquedaEventArgs(bool esReemp)
-        {
-            esBuscarYReemplazar = esReemp;
-        }
-    }
+    //    public AbrirBusquedaEventArgs(bool esReemp)
+    //    {
+    //        esBuscarYReemplazar = esReemp;
+    //    }
+    //}
 }
