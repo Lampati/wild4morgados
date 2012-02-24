@@ -313,8 +313,8 @@
     </UserControl.Resources>
 
 
-    <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False"  >
-        
+    <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False" ContextMenu="{Binding null}" >
+
         <ribbon:Ribbon.ApplicationMenu>
             <ribbon:RibbonApplicationMenu SmallImageSource="Resources\Images\Copy.png">
                 <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="Resources\Images\GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0"  >
@@ -336,7 +336,7 @@
             </ribbon:RibbonApplicationMenu>
         </ribbon:Ribbon.ApplicationMenu>
 
-        <ribbon:RibbonTab Name="General" Header="General" RenderOptions.ClearTypeHint="Enabled">
+        <ribbon:RibbonTab Name="TabGeneral" Header="General" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
 
 
 
@@ -372,29 +372,29 @@
 
             </ribbon:RibbonGroup>-->
 
-            <ribbon:RibbonGroup Header="Edicion"  >
-                <ribbon:RibbonButton 
+            <ribbon:RibbonGroup Header="Edicion"   Name="ribbonGroupEdicion" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Paste}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         LargeImageSource="Resources/Images/PasteBig.png"
                         Label="Pegar" />
 
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Cut}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/Cut.png"
                         Label="Cortar" />
 
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Copy}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/Copy.png"
                         Label="Copiar" />
 
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Delete}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
@@ -406,16 +406,16 @@
 
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Busqueda"  >
-                
+            <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
 
-                <ribbon:RibbonButton 
+
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         SmallImageSource="Resources/Images/find3.png"
                         Label="Buscar"
                         Click="ButtonBuscar_Click"/>
 
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         SmallImageSource="Resources/Images/findreplace2.png"
                         Label="Buscar/Reemplazar" 
@@ -423,52 +423,52 @@
 
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Compilación"  RenderOptions.ClearTypeHint="Enabled" >
-                <ribbon:RibbonButton 
+            <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonCompilacion_Click"
                         LargeImageSource="Resources/Images/Compile1.png"
                         Label="Compilar" RenderOptions.ClearTypeHint="Enabled"/>
 
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonEjecucion_Click"
                         LargeImageSource="Resources/Images/Ejecutar1.png"
                         Label="Ejecutar" />
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Visualización"  >
-                <ribbon:RibbonToggleButton Name="ButtonFlujo"
+            <ribbon:RibbonGroup Header="Visualización"  Name="ribbonGroupVisualizacion" ContextMenu="{Binding null}">
+                <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonFlujo_Click"
                         LargeImageSource="Resources/Images/Workflow.png"
                         Label="Flujo" />
 
-                <ribbon:RibbonToggleButton Name="ButtonTexto"
+                <ribbon:RibbonToggleButton Name="ButtonTexto" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonTexto_Click"
                         LargeImageSource="Resources/Images/Gargar.png"
                         Label="Gargar" />
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Alineación" Name="GrupoAlineacion" >
+            <ribbon:RibbonGroup Header="Alineación" Name="ribbonGroupAlineacion" ContextMenu="{Binding null}">
                 <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
                     <StackPanel Orientation="Horizontal">
-                        <ribbon:RibbonButton 
+                        <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.AlignLeft}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         HorizontalContentAlignment="Center"                        
                         SmallImageSource="Resources/Images/AlignObjectsLeft.png"
                         />
 
-                        <ribbon:RibbonButton 
+                        <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.AlignHorizontalCenters}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         HorizontalContentAlignment="Center"                        
                         SmallImageSource="Resources/Images/AlignObjectsCenteredHorizontal.png"
                         />
 
-                        <ribbon:RibbonButton 
+                        <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.AlignRight}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         HorizontalContentAlignment="Center"                        
@@ -478,21 +478,21 @@
                 </Border>
                 <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
                     <StackPanel Orientation="Horizontal">
-                        <ribbon:RibbonButton 
+                        <ribbon:RibbonButton ContextMenu="{Binding null}"
                             Command="{x:Static s:DesignerCanvas.AlignTop}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
                             SmallImageSource="Resources/Images/AlignObjectsTop.png"
                             />
 
-                        <ribbon:RibbonButton 
+                        <ribbon:RibbonButton ContextMenu="{Binding null}"
                             Command="{x:Static s:DesignerCanvas.AlignVerticalCenters}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
                             SmallImageSource="Resources/Images/AlignObjectsCenteredVertical.png"
                             />
 
-                        <ribbon:RibbonButton 
+                        <ribbon:RibbonButton ContextMenu="{Binding null}"
                             Command="{x:Static s:DesignerCanvas.AlignBottom}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
@@ -501,7 +501,7 @@
                     </StackPanel>
                 </Border>
                 <StackPanel Grid.Column="1" Orientation="Vertical" >
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                             Command="{x:Static s:DesignerCanvas.DistributeHorizontal}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
@@ -509,7 +509,7 @@
                             Label="Horizontal"
                             />
 
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                             Command="{x:Static s:DesignerCanvas.DistributeVertical}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
@@ -519,15 +519,15 @@
                 </StackPanel>
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Diagramación" Name="GrupoDiagramacion" >
+            <ribbon:RibbonGroup Header="Diagramación" Name="ribbonGroupDiagramacion" ContextMenu="{Binding null}">
                 <StackPanel>
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.Group}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/Group.png"
                         Label="Agrupar" />
 
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.Ungroup}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/Ungroup.png"
@@ -535,26 +535,26 @@
                 </StackPanel>
 
                 <StackPanel>
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.BringForward}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/BringForward.png"
                         Label="Frente" />
 
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.BringToFront}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/BringToFront.png"
                         Label="Al Frente" />
                 </StackPanel>
                 <StackPanel>
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.SendBackward}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/SendBackward.png"
                         Label="Fondo" />
 
-                    <ribbon:RibbonButton 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.SendToBack}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/SendToBack.png"
@@ -564,15 +564,15 @@
 
 
         </ribbon:RibbonTab>
-        
-        <ribbon:RibbonTab Name="DetallesEjercicio" Header="Detalles Ejercicio" RenderOptions.ClearTypeHint="Enabled">
-            
 
-            <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga">
+        <ribbon:RibbonTab Name="TabDetallesEjercicio" Header="Detalles Ejercicio" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+
+
+            <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal" >
-                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Enunciado"></ribbon:RibbonButton>                    
-                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Solución"></ribbon:RibbonButton>
-                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center">
+                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Enunciado" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Solución" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}">
                         <ribbon:RibbonComboBox.Items>                            
                             Aprendiz,
                             Facil,
@@ -585,9 +585,9 @@
                 
             </ribbon:RibbonGroup>
 
-            
 
-            <ribbon:RibbonGroup Header="Detalles Adicionales" Name="ribbonGroupDetallesDescarga">
+
+            <ribbon:RibbonGroup Header="Detalles Adicionales" Name="ribbonGroupDetallesDescarga" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Profesor:</TextBlock>
                     <TextBlock Name="txtProfesor"></TextBlock>
@@ -602,50 +602,50 @@
                 </StackPanel>
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests">
-                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Crear Test..." Name="bttnCrearTestPrueba"></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Ejecutar Test..." Name="bttnEjecutarTestPrueba"></ribbon:RibbonButton>
+            <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Crear Test..." Name="bttnCrearTestPrueba" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Ejecutar Test..." Name="bttnEjecutarTestPrueba" ContextMenu="{Binding null}"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
 
 
 
         </ribbon:RibbonTab>
 
-        <ribbon:RibbonTab Name="Sincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled">
-            <ribbon:RibbonGroup Header="Sincronizador">
-                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro General" ></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro por Curso" ></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ></ribbon:RibbonButton>                
+        <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Sincronizador" Name="ribbonGroupSincro" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro General" ContextMenu="{Binding null}" ></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro por Curso" ContextMenu="{Binding null}" ></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ContextMenu="{Binding null}"></ribbon:RibbonButton>                
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Configuracion">
-                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Propiedades" ></ribbon:RibbonButton>
+            <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Propiedades" ContextMenu="{Binding null}"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
 
 
         </ribbon:RibbonTab>
 
-        <ribbon:RibbonTab Name="Configuración" Header="Configuración" RenderOptions.ClearTypeHint="Enabled">
-            <ribbon:RibbonGroup Header="Directorios Ejercicios">
+        <ribbon:RibbonTab Name="TabConfiguración" Header="Configuración" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Directorios Ejercicios" Name="ribbonGroupDirEjercicios" ContextMenu="{Binding null}">
                 
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Ejercicios Creados" Name="textBoxDirEjCreados"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirEjCreados" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirEjCreados_Click" HorizontalAlignment="Left"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Ejercicios Creados" Name="textBoxDirEjCreados" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirEjCreados" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirEjCreados_Click" HorizontalAlignment="Left" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Resoluciones" Name="textBoxDirResoluciones"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirRes" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirRes_Click"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Resoluciones" Name="textBoxDirResoluciones" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirRes" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirRes_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Ejercicios Descargados" Name="textBoxDirEjDescargados"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirEjDescargados" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirEjDescargados_Click"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Ejercicios Descargados" Name="textBoxDirEjDescargados" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirEjDescargados" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirEjDescargados_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                 </StackPanel>
             </ribbon:RibbonGroup>
-          
-            <ribbon:RibbonGroup Header="Directorios Aplicación">
+
+            <ribbon:RibbonGroup Header="Directorios Aplicación" Name="ribbonGroupDirAplicacion" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Temporales" Name="textBoxDirTemp"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirTemporales" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirTemporales_Click"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Temporales" Name="textBoxDirTemp" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirTemporales" SmallImageSource="Resources/Images/OpenFolder.png" Click="bttnDirTemporales_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                 </StackPanel>
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>
