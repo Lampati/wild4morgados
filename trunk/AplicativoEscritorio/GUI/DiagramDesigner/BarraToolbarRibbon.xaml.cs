@@ -43,14 +43,14 @@ namespace DiagramDesigner
                 switch (this.modo)
                 {
                     case ModoVisual.Flujo:
-                        this.GrupoDiagramacion.Visibility = System.Windows.Visibility.Visible;
-                        this.GrupoAlineacion.Visibility = System.Windows.Visibility.Visible;
+                        this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Visible;
+                        this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
                         ButtonFlujo.IsChecked = true;
                         ButtonTexto.IsChecked = false;
                         break;
                     case ModoVisual.Texto:
-                        this.GrupoDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
-                        this.GrupoAlineacion.Visibility = System.Windows.Visibility.Collapsed;
+                        this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
+                        this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;
                         ButtonFlujo.IsChecked = false;
                         ButtonTexto.IsChecked = true;
                         break;
@@ -115,7 +115,8 @@ namespace DiagramDesigner
         {
             InitializeComponent();
 
-           
+
+            
 
         }
 
