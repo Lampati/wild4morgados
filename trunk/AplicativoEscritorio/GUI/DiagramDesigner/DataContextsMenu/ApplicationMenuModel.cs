@@ -34,7 +34,7 @@ namespace DiagramDesigner.DataContextsMenu
                         MenuItemData menuItemData = new MenuItemData()
                         {
                             Label = Str,
-                            LargeImage = new Uri("/DiagramDesigner;Resources/Images/GenericDocument.png", UriKind.Relative),
+                            SmallImage = new Uri("/DiagramDesigner;Resources/Images/GenericDocument.png", UriKind.Relative),
                             ToolTipTitle = TooTipTitle,
                             Command = System.Windows.Input.ApplicationCommands.Save,
                             KeyTip = "S",

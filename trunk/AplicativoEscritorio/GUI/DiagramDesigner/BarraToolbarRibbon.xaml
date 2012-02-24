@@ -246,9 +246,7 @@
     </UserControl.Resources>
 
 
-        <ribbon:Ribbon Name="ToolbarAplicacion" >
-        
-        
+    <ribbon:Ribbon Name="ToolbarAplicacion" >
         
         <ribbon:Ribbon.ApplicationMenu>
             <ribbon:RibbonApplicationMenu SmallImageSource="Resources\Images\Copy.png">
@@ -271,9 +269,9 @@
             </ribbon:RibbonApplicationMenu>
         </ribbon:Ribbon.ApplicationMenu>
 
-        <ribbon:RibbonTab Name="General" Header="General">
-            
-            
+        <ribbon:RibbonTab Name="General" Header="General" RenderOptions.ClearTypeHint="Enabled">
+
+
 
             <ribbon:RibbonGroup Header="Archivo"  >
                 <ribbon:RibbonButton 
@@ -281,7 +279,7 @@
                         Command="{x:Static ApplicationCommands.New}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         LargeImageSource="Resources/Images/GenericDocument.png"
-                        Label="Nuevo" />
+                        Label="Nuevo" RenderOptions.ClearTypeHint="Enabled" />
 
                 <ribbon:RibbonButton 
                         HorizontalContentAlignment="Center"
@@ -358,12 +356,12 @@
 
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Compilación"  >
+            <ribbon:RibbonGroup Header="Compilación"  RenderOptions.ClearTypeHint="Enabled" >
                 <ribbon:RibbonButton 
                         HorizontalContentAlignment="Center"
                         Click="ButtonCompilacion_Click"
                         LargeImageSource="Resources/Images/Compile1.png"
-                        Label="Compilar" />
+                        Label="Compilar" RenderOptions.ClearTypeHint="Enabled"/>
 
                 <ribbon:RibbonButton 
                         HorizontalContentAlignment="Center"
@@ -499,7 +497,8 @@
 
 
         </ribbon:RibbonTab>
-        <ribbon:RibbonTab Name="DetallesEjercicio" Header="Detalles Ejercicio">
+        
+        <ribbon:RibbonTab Name="DetallesEjercicio" Header="Detalles Ejercicio" RenderOptions.ClearTypeHint="Enabled">
             
 
             <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga">
@@ -545,9 +544,7 @@
 
         </ribbon:RibbonTab>
 
-     
-
-        <ribbon:RibbonTab Name="Sincronización" Header="Sincronización">
+        <ribbon:RibbonTab Name="Sincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled">
             <ribbon:RibbonGroup Header="Sincronizador">
                 <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro General" ></ribbon:RibbonButton>
                 <ribbon:RibbonButton LargeImageSource="Resources/Images/Workflow.png" Label="Sincro por Curso" ></ribbon:RibbonButton>
@@ -561,7 +558,7 @@
 
         </ribbon:RibbonTab>
 
-        <ribbon:RibbonTab Name="Configuración" Header="Configuración">
+        <ribbon:RibbonTab Name="Configuración" Header="Configuración" RenderOptions.ClearTypeHint="Enabled">
             <ribbon:RibbonGroup Header="Directorios Ejercicios">
                 
                 <StackPanel Orientation="Horizontal">
