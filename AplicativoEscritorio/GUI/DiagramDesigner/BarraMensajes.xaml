@@ -162,7 +162,7 @@
 
         <Grid>
 
-        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed" >
+        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed"  RenderOptions.ClearTypeHint="Enabled">
             <!--<Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             </Style>-->
