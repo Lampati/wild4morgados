@@ -9,7 +9,7 @@
 
     <Grid Margin="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="174"/>
+            <RowDefinition Height="160"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="100" />
             <RowDefinition Height="25" /> 
@@ -21,7 +21,7 @@
         </Grid>-->
         <Grid Grid.Row="0" >
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="1.25" ScaleY="1.25"/>
+                <ScaleTransform ScaleX="1.15" ScaleY="1.15"/>
             </Grid.LayoutTransform>
             <s:BarraToolbarRibbon x:Name="ToolbarAplicacion"></s:BarraToolbarRibbon>
         </Grid>

@@ -31,6 +31,8 @@ namespace DiagramDesigner
         public event AbrirBusquedaEventHandler AbrirBusquedaEvent;
         public event SalvarConfiguracionEventHandler SalvarConfiguracionEvent;
 
+        
+
         private ModoVisual modo;
         public ModoVisual Modo
         {
@@ -113,7 +115,13 @@ namespace DiagramDesigner
         {
             InitializeComponent();
 
+           
+
         }
+
+      
+
+
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)
         {

@@ -82,6 +82,83 @@ namespace DiagramDesigner
 
             //configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
             //                               Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+
+            
+
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.New, New_Executed));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Open, Open_Executed));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Save, Save_Executed));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs, SaveAs_Executed));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Print, Print_Executed));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
+        }
+
+        private void New_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
+            if (e.OriginalSource.GetType() != typeof(RibbonButton))
+            {
+                int i = 0;  
+            }
+        }
+
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
+            if (e.OriginalSource.GetType() != typeof(RibbonButton))
+            {
+                int i = 0;
+            }
+        }
+
+        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
+            if (e.OriginalSource.GetType() != typeof(RibbonButton))
+            {
+                int i = 0;
+            }
+        }
+
+        private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
+            if (e.OriginalSource.GetType() != typeof(RibbonButton))
+            {
+                int i = 0;
+            }
+        }
+
+        private void Print_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            PrintDialog printDialog = new PrintDialog();
+
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(this, "WPF Diagram");
+            }
+        }
+
+        private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            int i = 0;
+
+            MessageBoxResult result = MessageBox.Show("¿Desea guardar los cambios efectuados?", "ProgramAR", MessageBoxButton.YesNoCancel);
+
+            switch (result)
+            {
+                case MessageBoxResult.Cancel:
+                    break;
+                case MessageBoxResult.No:
+                    Close();
+                    break;
+                case MessageBoxResult.Yes:
+                    Close();
+                    break;
+                default:
+                    break;
+            }
         }
 
         void ToolbarAplicacion_SalvarConfiguracionEvent(object o, SalvarConfiguracionEventArgs e)

@@ -211,7 +211,9 @@
             </Style.Triggers>
         </Style>
 
-        <!-- RibbonApplicationSplitMenuItem -->
+   
+
+            <!-- RibbonApplicationSplitMenuItem -->
         <Style TargetType="{x:Type ribbon:RibbonApplicationSplitMenuItem}" BasedOn="{StaticResource {x:Type ribbon:RibbonSplitMenuItem}}" />
 
         <!-- RibbonContextMenu -->
@@ -243,28 +245,93 @@
             <Setter Property="IsSelected" Value="{Binding IsSelected}" />
         </Style>
 
+        <DataTemplate x:Key="DataTemplateNuevoEjercicio">
+            <DataTemplate.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="11"/>
+                </Style>
+            </DataTemplate.Resources>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <AccessText Grid.Row="0" FontWeight="Bold" Text="Crear un nuevo ejercicio" />
+                <TextBlock Grid.Row="1" Text="Crear un nuevo ejercicio propio tanto en modo Gargar o modo gráfico" TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplateNuevaResolucion">
+            <DataTemplate.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="11"/>
+                </Style>
+            </DataTemplate.Resources>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <AccessText Grid.Row="0" FontWeight="Bold" Text="Crear una nueva resolución" />
+                <TextBlock Grid.Row="1" Text="Comenzar a resolver un ejercicio a partir de un ejercicio ya creado" TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>        
+
+        <DataTemplate x:Key="DataTemplateFormatoAplicacion">
+            <DataTemplate.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="11"/>
+                </Style>
+            </DataTemplate.Resources>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <AccessText Grid.Row="0" FontWeight="Bold" Text="Formato Aplicación" />
+                <TextBlock Grid.Row="1" Text="Guardar en formato compatible para subir a la web programAR" TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="DataTemplateFormatoWeb">
+            <DataTemplate.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="11"/>
+                </Style>
+            </DataTemplate.Resources>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <AccessText Grid.Row="0" FontWeight="Bold" Text="Formato Web" />
+                <TextBlock Grid.Row="1" Text="Guardar en formato compatible con la aplicación ProgramAR" TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>
+
     </UserControl.Resources>
 
 
-    <ribbon:Ribbon Name="ToolbarAplicacion" >
+    <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False"  >
         
         <ribbon:Ribbon.ApplicationMenu>
             <ribbon:RibbonApplicationMenu SmallImageSource="Resources\Images\Copy.png">
-                <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="Resources\Images\GenericDocument.png" >
-                    <ribbon:RibbonApplicationMenuItem Header="Nuevo Ejercicio" x:Name="menuBttnNuevoEjercicio" ImageSource="Resources\Images\GenericDocument.png" >
-                        
-                    </ribbon:RibbonApplicationMenuItem>
-                    
-                    <ribbon:RibbonApplicationMenuItem Header="Nueva Resolución de Ejercicio" x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="Resources\Images\GenericDocument.png" />
-                    <ribbon:RibbonApplicationMenuItem Header="Nueva Resolución de Ejercicio" x:Name="menuBttnNuevaResolucionEjercicio22" DataContext="{x:Static data:ApplicationMenuModel.Save}" />
+                <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="Resources\Images\GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0"  >
+                    <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" />
+                    <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2"/>
                 </ribbon:RibbonApplicationSplitMenuItem>
-                <ribbon:RibbonApplicationMenuItem  Header="Abrir" x:Name="menuBttnAbrir" ImageSource="Resources\Images\GenericDocument.png" Command="Open"/>
-                <ribbon:RibbonApplicationMenuItem Header="Guardar" x:Name="menuBttnGuardar" DataContext="{x:Static data:ApplicationMenuModel.Save}"/>
-                <ribbon:RibbonApplicationMenuItem Header="Guardar como..." x:Name="menuBttnGuardarComo" ImageSource="Resources\Images\GenericDocument.png" Command="SaveAs"/>
+                <ribbon:RibbonApplicationMenuItem  Header="Abrir" x:Name="menuBttnAbrir" ImageSource="Resources\Images\GenericDocument.png" Command="Open" CommandTarget="{Binding ElementName=Window1}" />
+                <ribbon:RibbonApplicationMenuItem Header="Guardar" x:Name="menuBttnGuardar" ImageSource="Resources\Images\GenericDocument.png" Command="Save" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1"/>
+                <ribbon:RibbonApplicationSplitMenuItem Header="Guardar como..." x:Name="menuBttnGuardarComo" ImageSource="Resources\Images\GenericDocument.png" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" >
+                    <ribbon:RibbonApplicationMenuItem Header="Formato Aplicación" x:Name="menuBttnGuardarComoAplicacion" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoAplicacion}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1"/>
+                    <ribbon:RibbonApplicationMenuItem Header="Formato Web" x:Name="menuBttnGuardarComoWeb" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoWeb}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2"/>
+                </ribbon:RibbonApplicationSplitMenuItem>
+                
                 <ribbon:RibbonSeparator />
-                <ribbon:RibbonApplicationMenuItem Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="Resources\Images\GenericDocument.png" Command="Print"/>
+                <ribbon:RibbonApplicationMenuItem Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="Resources\Images\GenericDocument.png" Command="Print" CommandTarget="{Binding ElementName=Window1}"/>
                 <ribbon:RibbonSeparator />
-                <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="Resources\Images\GenericDocument.png" Command="Close"/>
+                <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="Resources\Images\GenericDocument.png" Command="Close" CommandTarget="{Binding ElementName=Window1}"/>
                 
             </ribbon:RibbonApplicationMenu>
         </ribbon:Ribbon.ApplicationMenu>
@@ -273,7 +340,7 @@
 
 
 
-            <ribbon:RibbonGroup Header="Archivo"  >
+            <!--<ribbon:RibbonGroup Header="Archivo"  >
                 <ribbon:RibbonButton 
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.New}"
@@ -303,7 +370,7 @@
                         Label="Imprimir" />
 
 
-            </ribbon:RibbonGroup>
+            </ribbon:RibbonGroup>-->
 
             <ribbon:RibbonGroup Header="Edicion"  >
                 <ribbon:RibbonButton 
