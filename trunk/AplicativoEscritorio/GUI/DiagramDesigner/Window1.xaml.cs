@@ -14,7 +14,7 @@ using Microsoft.Windows.Controls.Ribbon;
 
 namespace DiagramDesigner
 {
-    public partial class Window1 : Window
+    public partial class Window1 : RibbonWindow
     {
         #region Hotkeys Definicion
         HotKey hotKeyCompilar;

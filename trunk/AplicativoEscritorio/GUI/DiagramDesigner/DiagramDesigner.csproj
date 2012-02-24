@@ -185,6 +185,36 @@
     <Compile Include="BarraToolbarRibbon.xaml.cs">
       <DependentUpon>BarraToolbarRibbon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataContextsMenu\ApplicationMenuItemData.cs" />
+    <Compile Include="DataContextsMenu\ApplicationMenuModel.cs" />
+    <Compile Include="DataContextsMenu\ApplicationSplitMenuItemData.cs" />
+    <Compile Include="DataContextsMenu\ButtonData.cs" />
+    <Compile Include="DataContextsMenu\CheckBoxData.cs" />
+    <Compile Include="DataContextsMenu\ComboBoxData.cs" />
+    <Compile Include="DataContextsMenu\ContextualTabGroupData.cs" />
+    <Compile Include="DataContextsMenu\ControlData.cs" />
+    <Compile Include="DataContextsMenu\DelegateCommand.cs" />
+    <Compile Include="DataContextsMenu\GalleryCategoryData.cs" />
+    <Compile Include="DataContextsMenu\GalleryData.cs" />
+    <Compile Include="DataContextsMenu\GalleryItemData.cs" />
+    <Compile Include="DataContextsMenu\GroupData.cs" />
+    <Compile Include="DataContextsMenu\MenuButtonData.cs" />
+    <Compile Include="DataContextsMenu\MenuItemData.cs" />
+    <Compile Include="DataContextsMenu\QatItem.cs" />
+    <Compile Include="DataContextsMenu\QatItems.cs" />
+    <Compile Include="DataContextsMenu\RadioButtonData.cs" />
+    <Compile Include="DataContextsMenu\RecentDocumentData.cs" />
+    <Compile Include="DataContextsMenu\RibbonData.cs" />
+    <Compile Include="DataContextsMenu\RowColumnCount.cs" />
+    <Compile Include="DataContextsMenu\SeparatorData.cs" />
+    <Compile Include="DataContextsMenu\SplitButtonData.cs" />
+    <Compile Include="DataContextsMenu\SplitMenuItemData.cs" />
+    <Compile Include="DataContextsMenu\StylesSet.cs" />
+    <Compile Include="DataContextsMenu\TabData.cs" />
+    <Compile Include="DataContextsMenu\TextBoxData.cs" />
+    <Compile Include="DataContextsMenu\ThemeFonts.cs" />
+    <Compile Include="DataContextsMenu\ToggleButtonData.cs" />
+    <Compile Include="DataContextsMenu\ViewModel.cs" />
     <Compile Include="DTO\Mensaje.cs" />
     <Compile Include="Enums\ModoVisual.cs" />
     <Compile Include="Enums\TipoElemento.cs" />
