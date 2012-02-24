@@ -35,9 +35,10 @@ namespace DiagramDesigner.DataContextsMenu
                         {
                             Label = Str,
                             LargeImage = new Uri("/DiagramDesigner;Resources/Images/GenericDocument.png", UriKind.Relative),
-                            ToolTipTitle = "Esto guarda re loco",
+                            ToolTipTitle = TooTipTitle,
                             Command = System.Windows.Input.ApplicationCommands.Save,
                             KeyTip = "S",
+                            
                         };
                         _dataCollection[Str] = menuItemData;
                     }
