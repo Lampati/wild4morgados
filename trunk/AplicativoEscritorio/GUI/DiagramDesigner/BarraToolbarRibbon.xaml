@@ -500,8 +500,8 @@
                             />
                     </StackPanel>
                 </Border>
-                <StackPanel Grid.Column="1" Orientation="Vertical" >
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" VerticalAlignment="Center"
                             Command="{x:Static s:DesignerCanvas.DistributeHorizontal}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
@@ -509,7 +509,7 @@
                             Label="Horizontal"
                             />
 
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" VerticalAlignment="Center"
                             Command="{x:Static s:DesignerCanvas.DistributeVertical}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
