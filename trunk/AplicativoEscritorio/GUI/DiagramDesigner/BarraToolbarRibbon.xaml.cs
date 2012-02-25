@@ -236,6 +236,11 @@ namespace DiagramDesigner
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
+
+        private void galleryDificultad_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
     }
 
     public class CompilacionEventArgs

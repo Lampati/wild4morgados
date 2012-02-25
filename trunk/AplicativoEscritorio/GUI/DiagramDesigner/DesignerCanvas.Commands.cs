@@ -58,6 +58,8 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, Copy_Executed, Copy_Enabled));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, Paste_Executed, Paste_Enabled));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Delete, Delete_Executed, Delete_Enabled));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo, Undo_Executed, Undo_Enabled));
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo, Redo_Executed, Redo_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Group, Group_Executed, Group_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Ungroup, Ungroup_Executed, Ungroup_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.BringForward, BringForward_Executed, Order_Enabled));
@@ -73,10 +75,6 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeHorizontal, DistributeHorizontal_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeVertical, DistributeVertical_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
-            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.VisualizarFlujo, VisualizarFlujo_Executed, VisualizarFlujo_Enabled));
-            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.VisualizarGargar, VisualizarGargar_Executed, VisualizarGargar_Enabled));
-            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Compilar, Save_Executed));
-            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Ejecutar, Print_Executed));
             SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
 
             this.AllowDrop = true;
@@ -295,6 +293,36 @@ namespace DiagramDesigner
         }
 
         private void Cut_Enabled(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.SelectionService.CurrentSelection.Count() > 0;
+        }
+
+        #endregion
+
+        #region Undo Command
+
+        private void Undo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CopyCurrentSelection();
+            DeleteCurrentSelection();
+        }
+
+        private void Undo_Enabled(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.SelectionService.CurrentSelection.Count() > 0;
+        }
+
+        #endregion
+
+        #region Redo Command
+
+        private void Redo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CopyCurrentSelection();
+            DeleteCurrentSelection();
+        }
+
+        private void Redo_Enabled(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.SelectionService.CurrentSelection.Count() > 0;
         }
@@ -765,63 +793,7 @@ namespace DiagramDesigner
 
         #endregion
 
-        #region VisualizarFlujo Command
-        private void VisualizarFlujo_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.vis = VisualizacionActivada.VisualizacionFlujo;
-            ((DiagramDesigner.EsquemaCentral)(((StackPanel)(((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).Parent).Parent)).Modo = Enums.ModoVisual.Flujo;
-            /*
-            ((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Header = "Diagrama";
-            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[0].Width = new GridLength(80);
-            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
-            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[2].Width = new GridLength(160);
-            */
-        }
-
-        private void VisualizarFlujo_Enabled(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.vis == VisualizacionActivada.VisualizacionGargar;
-        }
-        #endregion
-
-        #region VisualizarGargar Command
-        private void VisualizarGargar_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            this.vis = VisualizacionActivada.VisualizacionGargar;
-            ((DiagramDesigner.EsquemaCentral)(((StackPanel)(((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).Parent).Parent)).Modo = Enums.ModoVisual.Texto;
-            /*
-            ((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Header = "Código Gargar";
-            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[0].Width = new GridLength(0);
-            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
-            (((Grid)((GroupBox)((ScrollViewer)((DesignerCanvas)sender).Parent).Parent).Parent)).ColumnDefinitions[2].Width = new GridLength(0);
-            */
-        }
-
-        private void VisualizarGargar_Enabled(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.vis == VisualizacionActivada.VisualizacionFlujo;
-        }
-        #endregion
-
-        #region Compilar Command
-        private void Compilar_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-
-       
-        }
-
       
-        #endregion
-
-        #region Ejecutar Command
-        private void Ejecutar_Executed(object sender, ExecutedRoutedEventArgs e)
-        {           
-            
-          
-        }
-
-    
-        #endregion
 
         #region Helper Methods
 

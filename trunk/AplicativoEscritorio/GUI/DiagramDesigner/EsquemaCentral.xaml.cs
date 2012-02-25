@@ -134,13 +134,16 @@ namespace DiagramDesigner
 
         public void DesconfigurarBuscarYReemplazarModoTexto()
         {
-            findAndReplaceManager.CurrentEditor = null;
-            findAndReplaceManager.ShowSearchIn = false;
-            findAndReplaceManager.OwnerWindow = null;
+            if (findAndReplaceManager != null)
+            {
+                findAndReplaceManager.CurrentEditor = null;
+                findAndReplaceManager.ShowSearchIn = false;
+                findAndReplaceManager.OwnerWindow = null;
 
-            CommandBindings.Clear();    
-                        
-            findAndReplaceManager = null;
+                CommandBindings.Clear();
+
+                findAndReplaceManager = null;
+            }
         }
 
 

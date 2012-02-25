@@ -366,6 +366,7 @@
     <Resource Include="Resources\Images\GarGar128.png" />
     <Resource Include="Resources\Images\Search128.png" />
     <Resource Include="Resources\Images\SearchRep128.png" />
+    <SplashScreen Include="Resources\Images\LogoEjemplo.jpg" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />

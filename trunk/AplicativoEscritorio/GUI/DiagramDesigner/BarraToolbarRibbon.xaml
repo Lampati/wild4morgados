@@ -31,7 +31,7 @@
                 <DataTrigger Binding="{Binding ToolTipImage}" Value="{x:Null}">
                     <Setter Property="ribbon:RibbonControlService.ToolTipImageSource" Value="{x:Null}" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ToolTipFooterImage}" Value="{x:Null}">
+                <DataTrigger Binding="{Binding ToolTipFooterImage}" Value="{x:Null}" >
                     <Setter Property="ribbon:RibbonControlService.ToolTipFooterImageSource" Value="{x:Null}" />
                 </DataTrigger>
                 <Trigger Property="ribbon:RibbonControlService.IsInQuickAccessToolBar" Value="False">
@@ -317,21 +317,21 @@
 
         <ribbon:Ribbon.ApplicationMenu>
             <ribbon:RibbonApplicationMenu SmallImageSource="Resources\Images\Copy.png">
-                <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="Resources\Images\GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0"  >
-                    <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" />
-                    <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2"/>
+                <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="Resources\Images\GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" ContextMenu="{Binding null}" >
+                    <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}"/>
+                    <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}"/>
                 </ribbon:RibbonApplicationSplitMenuItem>
-                <ribbon:RibbonApplicationMenuItem  Header="Abrir" x:Name="menuBttnAbrir" ImageSource="Resources\Images\GenericDocument.png" Command="Open" CommandTarget="{Binding ElementName=Window1}" />
-                <ribbon:RibbonApplicationMenuItem Header="Guardar" x:Name="menuBttnGuardar" ImageSource="Resources\Images\GenericDocument.png" Command="Save" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1"/>
-                <ribbon:RibbonApplicationSplitMenuItem Header="Guardar como..." x:Name="menuBttnGuardarComo" ImageSource="Resources\Images\GenericDocument.png" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" >
-                    <ribbon:RibbonApplicationMenuItem Header="Formato Aplicación" x:Name="menuBttnGuardarComoAplicacion" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoAplicacion}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1"/>
-                    <ribbon:RibbonApplicationMenuItem Header="Formato Web" x:Name="menuBttnGuardarComoWeb" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoWeb}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2"/>
+                <ribbon:RibbonApplicationMenuItem  Header="Abrir" x:Name="menuBttnAbrir" ImageSource="Resources\Images\GenericDocument.png" Command="Open" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}" />
+                <ribbon:RibbonApplicationMenuItem Header="Guardar" x:Name="menuBttnGuardar" ImageSource="Resources\Images\GenericDocument.png" Command="Save" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}" />
+                <ribbon:RibbonApplicationSplitMenuItem Header="Guardar como..." x:Name="menuBttnGuardarComo" ImageSource="Resources\Images\GenericDocument.png" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" ContextMenu="{Binding null}" >
+                    <ribbon:RibbonApplicationMenuItem Header="Formato Aplicación" x:Name="menuBttnGuardarComoAplicacion" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoAplicacion}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}" />
+                    <ribbon:RibbonApplicationMenuItem Header="Formato Web" x:Name="menuBttnGuardarComoWeb" ImageSource="Resources\Images\GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoWeb}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}" />
                 </ribbon:RibbonApplicationSplitMenuItem>
                 
                 <ribbon:RibbonSeparator />
-                <ribbon:RibbonApplicationMenuItem Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="Resources\Images\GenericDocument.png" Command="Print" CommandTarget="{Binding ElementName=Window1}"/>
+                <ribbon:RibbonApplicationMenuItem Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="Resources\Images\GenericDocument.png" Command="Print" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
                 <ribbon:RibbonSeparator />
-                <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="Resources\Images\GenericDocument.png" Command="Close" CommandTarget="{Binding ElementName=Window1}"/>
+                <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="Resources\Images\GenericDocument.png" Command="Close" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
                 
             </ribbon:RibbonApplicationMenu>
         </ribbon:Ribbon.ApplicationMenu>
@@ -375,9 +375,9 @@
             <ribbon:RibbonGroup Header="Edicion"   Name="ribbonGroupEdicion" ContextMenu="{Binding null}">
                 <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
-                        Command="{x:Static ApplicationCommands.Paste}"
+                        Command="{x:Static ApplicationCommands.Paste}" 
                         CommandTarget="{Binding ElementName=MyDesigner}"
-                        LargeImageSource="Resources/Images/PasteBig.png"
+                        LargeImageSource="Resources/Images/PasteBig.png" 
                         Label="Pegar" />
 
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
@@ -400,6 +400,18 @@
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="Resources/Images/Delete.png"
                         Label="Eliminar" />
+                
+                <StackPanel Orientation="Horizontal">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                        Command="{x:Static ApplicationCommands.Undo}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        SmallImageSource="Resources/Images/Delete.png"/>
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                        Command="{x:Static ApplicationCommands.Redo}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        SmallImageSource="Resources/Images/Delete.png"/>
+
+                </StackPanel>
 
                
 
@@ -439,7 +451,7 @@
 
             <ribbon:RibbonGroup Header="Visualización"  Name="ribbonGroupVisualizacion" ContextMenu="{Binding null}">
                 <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
-                        HorizontalContentAlignment="Center"
+                        HorizontalContentAlignment="Center" 
                         Click="ButtonFlujo_Click"
                         LargeImageSource="Resources/Images/Workflow.png"
                         Label="Flujo" />
@@ -573,13 +585,16 @@
                     <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Enunciado" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                     <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Solución" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                     <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}">
-                        <ribbon:RibbonComboBox.Items>                            
-                            Aprendiz,
-                            Facil,
-                            Media,
-                            Dificil,
-                            Experto
-                        </ribbon:RibbonComboBox.Items>
+                        <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}">
+                            <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}">
+                                <ribbon:RibbonGalleryItem Tag="1" ContextMenu="{Binding null}">Aprendiz</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="2" ContextMenu="{Binding null}">Facil</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="3" ContextMenu="{Binding null}">Media</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="4" ContextMenu="{Binding null}">Dificil</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="5" ContextMenu="{Binding null}">Experto</ribbon:RibbonGalleryItem>
+                            </ribbon:RibbonGalleryCategory>                            
+                        </ribbon:RibbonGallery>
+                        
                     </ribbon:RibbonComboBox>
                 </StackPanel>
                 
