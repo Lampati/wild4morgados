@@ -64,7 +64,7 @@ namespace DiagramDesigner
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
 
-            Modo = ModoVisual.Flujo;
+            
 
             configApp = new ConfiguracionAplicacion();
             configApp.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
@@ -91,6 +91,9 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.SaveAs, SaveAs_Executed));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Print, Print_Executed));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
+
+
+            Modo = ModoVisual.Flujo;
         }
 
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)

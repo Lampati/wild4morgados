@@ -5,7 +5,8 @@
         xmlns:w="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         xmlns:c="clr-namespace:DiagramDesigner.Controls"
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized">
+        WindowState="Maximized"
+                >
 
     <Grid Margin="0">
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
         </Grid>-->
         <Grid Grid.Row="0" >
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="1.15" ScaleY="1.15"/>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Grid.LayoutTransform>
             <s:BarraToolbarRibbon x:Name="ToolbarAplicacion"></s:BarraToolbarRibbon>
         </Grid>
