@@ -87,6 +87,10 @@
       <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DialogWindows\TextEditionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EsquemaCentral.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +219,9 @@
     <Compile Include="DataContextsMenu\ThemeFonts.cs" />
     <Compile Include="DataContextsMenu\ToggleButtonData.cs" />
     <Compile Include="DataContextsMenu\ViewModel.cs" />
+    <Compile Include="DialogWindows\TextEditionWindow.xaml.cs">
+      <DependentUpon>TextEditionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Mensaje.cs" />
     <Compile Include="Enums\ModoVisual.cs" />
     <Compile Include="Enums\TipoElemento.cs" />
@@ -371,6 +378,9 @@
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
     <Resource Include="RibbonDLL\RibbonControlsLibrary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

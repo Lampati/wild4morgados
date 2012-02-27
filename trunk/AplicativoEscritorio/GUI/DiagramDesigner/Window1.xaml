@@ -6,6 +6,7 @@
         xmlns:c="clr-namespace:DiagramDesigner.Controls"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
+        Title="ProgramAR - Minerva"
                 >
 
     <Grid Margin="0">

@@ -582,8 +582,9 @@
 
             <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal" >
-                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Enunciado" ContextMenu="{Binding null}"></ribbon:RibbonButton>
-                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" Label="Solución" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click"></ribbon:RibbonButton>
+                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click"></ribbon:RibbonButton>
+                    <ribbon:RibbonButton LargeImageSource="Resources/Images/Gargar.png" x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click"></ribbon:RibbonButton>
                     <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}">
                         <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}">
                             <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}">
