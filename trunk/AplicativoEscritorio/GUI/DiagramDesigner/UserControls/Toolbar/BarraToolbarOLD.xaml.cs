@@ -12,8 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.Enums;
+using DiagramDesigner.EventArgsClasses;
 
-namespace DiagramDesigner
+namespace DiagramDesigner.UserControls.Toolbar
 {
     /// <summary>
     /// Lógica de interacción para BarraToolbar.xaml

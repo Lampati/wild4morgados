@@ -13,17 +13,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
+using DiagramDesigner.EventArgsClasses;
 
-namespace DiagramDesigner
+namespace DiagramDesigner.UserControls.Mensajes
 {
     /// <summary>
     /// Interaction logic for BarraMensajes.xaml
     /// </summary>
     public partial class BarraMensajes : UserControl
     {
-        public delegate void DobleClickEnBarraMensajesEventHandler(object o, DoubleClickEventArgs e);
-
-        public event DobleClickEnBarraMensajesEventHandler DoubleClickEvent;
+       
 
         private List<Mensaje> mensajes;
 
@@ -131,13 +130,7 @@ namespace DiagramDesigner
 
         }
 
-        private void DoubleClickEventFire(DoubleClickEventArgs e)
-        {
-            if (DoubleClickEvent != null)
-            {
-                DoubleClickEvent(this, e);
-            }
-        }
+       
 
        
 
@@ -183,40 +176,5 @@ namespace DiagramDesigner
         }
     }
 
-    public class DoubleClickEventArgs
-    {
-        private int fila;
-        public int Fila
-        {
-            get
-            {
-                return fila;
-            }
-        }
-
-        private int columna;
-        public int Columna
-        {
-            get
-            {
-                return columna;
-            }
-        }
-
-        private string figura;
-        public string Figura
-        {
-            get
-            {
-                return figura;
-            }
-        }
-
-        public DoubleClickEventArgs(int f, int c, string fig)
-        {
-            fila = f;
-            columna = c;
-            figura = fig;
-        }
-    }
+    
 }

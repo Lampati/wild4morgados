@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
 
-namespace DiagramDesigner
+namespace DiagramDesigner.UserControls.Estado
 {
     /// <summary>
     /// Interaction logic for BarraMensajes.xaml

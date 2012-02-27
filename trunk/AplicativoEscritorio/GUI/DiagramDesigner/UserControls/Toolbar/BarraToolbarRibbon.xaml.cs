@@ -14,23 +14,16 @@ using System.Windows.Shapes;
 using DiagramDesigner.Enums;
 using FolderBrowser;
 using DiagramDesigner.DialogWindows;
+using DiagramDesigner.EventArgsClasses;
 
-namespace DiagramDesigner
+namespace DiagramDesigner.UserControls.Toolbar
 {
     /// <summary>
     /// Lógica de interacción para BarraToolbar.xaml
     /// </summary>
     public partial class BarraToolbarRibbon : UserControl
     {
-        public delegate void CompilacionEventHandler(object o, CompilacionEventArgs e);
-        public delegate void CambioModoEventHandler(object o, CambioModoEventArgs e);
-        public delegate void AbrirBusquedaEventHandler(object o, AbrirBusquedaEventArgs e);
-        public delegate void SalvarConfiguracionEventHandler(object o, SalvarConfiguracionEventArgs e);
-
-        public event CompilacionEventHandler CompilacionEvent;
-        public event CambioModoEventHandler CambioModoEvent;
-        public event AbrirBusquedaEventHandler AbrirBusquedaEvent;
-        public event SalvarConfiguracionEventHandler SalvarConfiguracionEvent;
+       
 
         
 
@@ -135,14 +128,7 @@ namespace DiagramDesigner
             CompilacionEventFire(sender, new CompilacionEventArgs(true));
         }
 
-        private void CompilacionEventFire(object sender, CompilacionEventArgs e)
-        {
-            if (CompilacionEvent != null)
-            {
-                CompilacionEvent(sender, e);
-            }
-
-        }
+    
 
         private void ButtonTexto_Click(object sender, RoutedEventArgs e)
         {
@@ -154,14 +140,7 @@ namespace DiagramDesigner
             CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Flujo));
         }
 
-        private void CambioModoEventFire(object sender, CambioModoEventArgs e)
-        {
-            if (CambioModoEvent != null)
-            {
-                CambioModoEvent(sender, e);
-            }
-
-        }
+        
 
         private void ButtonBuscar_Click(object sender, RoutedEventArgs e)
         {
@@ -175,23 +154,7 @@ namespace DiagramDesigner
 
         
 
-        private void AbrirBusquedaEventFire(object sender, AbrirBusquedaEventArgs e)
-        {
-            if (CambioModoEvent != null)
-            {
-                AbrirBusquedaEvent(sender, e);
-            }
-
-        }
-
-        private void SalvarConfiguracionEventFire(object sender, SalvarConfiguracionEventArgs e)
-        {
-            if (SalvarConfiguracionEvent != null)
-            {
-                SalvarConfiguracionEvent(sender, e);
-            }
-
-        }
+     
 
         private void bttnDirEjCreados_Click(object sender, RoutedEventArgs e)
         {
@@ -284,61 +247,5 @@ namespace DiagramDesigner
         {
 
         }
-    }
-
-    public class CompilacionEventArgs
-    {
-        private bool esEjecucion;
-        public bool EsEjecucion
-        {
-            get
-            {
-                return esEjecucion;
-            }
-        }
-
-        public CompilacionEventArgs(bool esEjec)
-        {
-            esEjecucion = esEjec;
-        }
-    }
-
-    public class CambioModoEventArgs
-    {
-        private ModoVisual modoSeleccionado;
-        public ModoVisual ModoSeleccionado
-        {
-            get
-            {
-                return modoSeleccionado;
-            }
-        }
-
-        public CambioModoEventArgs(ModoVisual modo)
-        {
-            modoSeleccionado = modo;
-        }
-    }
-
-    public class AbrirBusquedaEventArgs
-    {
-        private bool esBuscarYReemplazar;
-        public bool EsBuscarYReemplazar
-        {
-            get
-            {
-                return esBuscarYReemplazar;
-            }
-        }
-
-        public AbrirBusquedaEventArgs(bool esReemp)
-        {
-            esBuscarYReemplazar = esReemp;
-        }
-    }
-
-    public class SalvarConfiguracionEventArgs
-    {
-
     }
 }
