@@ -24,7 +24,7 @@ namespace DiagramDesigner.Helpers
             //    width = listview.Width;
             //}
 
-            width = ((DiagramDesigner.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
+            width = ((DiagramDesigner.UserControls.Mensajes.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
             
             GridView gv = listview.View as GridView;
             for (int i = 0; i < gv.Columns.Count-1; i++)

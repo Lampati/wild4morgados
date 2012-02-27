@@ -18,17 +18,17 @@ using CompiladorGargar.Resultado;
 using Utilidades;
 using CompiladorGargar;
 using WpfApplicationHotKey.WinApi;
+using DiagramDesigner.EventArgsClasses;
 
 
-namespace DiagramDesigner
+namespace DiagramDesigner.UserControls.Entorno
 {
     /// <summary>
     /// Interaction logic for EsquemaCentral.xaml
     /// </summary>
     public partial class EsquemaCentral : UserControl
     {
-        public delegate void ModoTextoCambiarPosicionEventHandler(object o, ModoTextoCambiarPosicionEventArgs e);
-        public event ModoTextoCambiarPosicionEventHandler ModoTextoCambiarPosicionEvent;
+        
 
         private ModoVisual modo;
 
@@ -55,13 +55,7 @@ namespace DiagramDesigner
             }
         }
 
-        private void ModoTextoCambiarPosicionEventFire(ModoTextoCambiarPosicionEventArgs e)
-        {
-            if (ModoTextoCambiarPosicionEvent != null)
-            {
-                ModoTextoCambiarPosicionEvent(this, e);
-            }
-        }
+      
 
         public string GarGarACompilar
         {
@@ -171,30 +165,5 @@ namespace DiagramDesigner
         }
     }
 
-    public class ModoTextoCambiarPosicionEventArgs
-    {
-        private int fila;
-        public int Fila
-        {
-            get
-            {
-                return fila;
-            }
-        }
-
-        private int columna;
-        public int Columna
-        {
-            get
-            {
-                return columna;
-            }
-        }
-
-        public ModoTextoCambiarPosicionEventArgs(int f, int c)
-        {
-            fila = f;
-            columna = c;
-        }
-    }
+    
 }

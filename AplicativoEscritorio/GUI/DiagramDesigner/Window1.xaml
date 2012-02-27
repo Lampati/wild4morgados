@@ -4,6 +4,10 @@
         xmlns:s="clr-namespace:DiagramDesigner"
         xmlns:w="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         xmlns:c="clr-namespace:DiagramDesigner.Controls"
+        xmlns:mensajes="clr-namespace:DiagramDesigner.UserControls.Mensajes"
+        xmlns:estado="clr-namespace:DiagramDesigner.UserControls.Estado"                
+        xmlns:toolbar="clr-namespace:DiagramDesigner.UserControls.Toolbar"  
+        xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Title="ProgramAR - Minerva"
@@ -25,20 +29,20 @@
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Grid.LayoutTransform>
-            <s:BarraToolbarRibbon x:Name="ToolbarAplicacion"></s:BarraToolbarRibbon>
+            <toolbar:BarraToolbarRibbon x:Name="ToolbarAplicacion"></toolbar:BarraToolbarRibbon>
         </Grid>
 
         <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->
 
         <Grid Grid.Row="1" >
-            <s:EsquemaCentral x:Name="Esquema" VerticalAlignment="Stretch"></s:EsquemaCentral>
+            <entorno:EsquemaCentral x:Name="Esquema" VerticalAlignment="Stretch"></entorno:EsquemaCentral>
         </Grid>
         
         <Grid Grid.Row="2">
-            <s:BarraMensajes x:Name="BarraMsgs"></s:BarraMensajes>
+            <mensajes:BarraMensajes x:Name="BarraMsgs"></mensajes:BarraMensajes>
         </Grid>
         <Grid Grid.Row="3">
-            <s:BarraEstado x:Name="BarraEstado"></s:BarraEstado>
+            <estado:BarraEstado x:Name="BarraEstado"></estado:BarraEstado>
         </Grid>
     </Grid>
 </w:RibbonWindow>

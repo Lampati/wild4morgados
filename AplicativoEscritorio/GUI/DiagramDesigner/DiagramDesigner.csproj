@@ -71,19 +71,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="BarraMensajes.xaml">
+    <Page Include="UserControls\Mensajes\BarraMensajes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BarraEstado.xaml">
+    <Page Include="UserControls\Estado\BarraEstado.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BarraToolbar.xaml">
+    <Page Include="UserControls\Toolbar\BarraToolbarOLD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
     </Page>
-    <Page Include="BarraToolbarRibbon.xaml">
+    <Page Include="UserControls\Toolbar\BarraToolbarRibbon.xaml">
       <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -91,7 +91,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EsquemaCentral.xaml">
+    <Page Include="UserControls\Entorno\EsquemaCentral.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,16 +177,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BarraMensajes.xaml.cs">
+    <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
+    <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
+    <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
+    <Compile Include="EventArgsClasses\DoubleClickEventArgs.cs" />
+    <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
+    <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
+    <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
+    <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
+    <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">
       <DependentUpon>BarraMensajes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BarraEstado.xaml.cs">
+    <Compile Include="UserControls\Estado\BarraEstado.xaml.cs">
       <DependentUpon>BarraEstado.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BarraToolbar.xaml.cs">
-      <DependentUpon>BarraToolbar.xaml</DependentUpon>
+    <Compile Include="UserControls\Toolbar\BarraToolbarOLD.xaml.cs">
+      <DependentUpon>BarraToolbarOLD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BarraToolbarRibbon.xaml.cs">
+    <Compile Include="UserControls\Toolbar\BarraToolbarRibbon.Eventos.cs" />
+    <Compile Include="UserControls\Toolbar\BarraToolbarRibbon.xaml.cs">
       <DependentUpon>BarraToolbarRibbon.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataContextsMenu\ApplicationMenuItemData.cs" />
@@ -226,7 +235,7 @@
     <Compile Include="Enums\ModoVisual.cs" />
     <Compile Include="Enums\TipoElemento.cs" />
     <Compile Include="Enums\TipoMensaje.cs" />
-    <Compile Include="EsquemaCentral.xaml.cs">
+    <Compile Include="UserControls\Entorno\EsquemaCentral.xaml.cs">
       <DependentUpon>EsquemaCentral.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RibbonTextFixedWidth.cs" />
@@ -379,9 +388,7 @@
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
     <Resource Include="RibbonDLL\RibbonControlsLibrary.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

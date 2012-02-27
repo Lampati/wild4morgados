@@ -11,6 +11,10 @@ using System.Windows.Controls.Primitives;
 using DataAccess;
 using System.IO;
 using Microsoft.Windows.Controls.Ribbon;
+using DiagramDesigner.EventArgsClasses;
+using DiagramDesigner.UserControls.Mensajes;
+using DiagramDesigner.UserControls.Toolbar;
+using DiagramDesigner.UserControls.Entorno;
 
 namespace DiagramDesigner
 {

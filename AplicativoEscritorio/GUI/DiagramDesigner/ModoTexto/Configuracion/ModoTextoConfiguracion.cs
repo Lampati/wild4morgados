@@ -20,7 +20,7 @@ namespace DiagramDesigner.ModoTexto.Configuracion
         {
             // Load our custom highlighting definition
             IHighlightingDefinition customHighlighting;
-            using (Stream s = typeof(EsquemaCentral).Assembly.GetManifestResourceStream("DiagramDesigner.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
+            using (Stream s = typeof(DiagramDesigner.UserControls.Entorno.EsquemaCentral).Assembly.GetManifestResourceStream("DiagramDesigner.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
             {
                 if (s == null)
                     throw new InvalidOperationException("Could not find embedded resource");
