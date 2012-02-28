@@ -53,6 +53,16 @@ namespace DiagramDesigner.DialogWindows
             set
             {
                 esEditable = value;
+
+                if (esEditable)
+                {
+                    bttnCancelar.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    bttnCancelar.Visibility = System.Windows.Visibility.Collapsed;
+                }
+
                 textEditor.IsReadOnly = !esEditable;
             }
         }

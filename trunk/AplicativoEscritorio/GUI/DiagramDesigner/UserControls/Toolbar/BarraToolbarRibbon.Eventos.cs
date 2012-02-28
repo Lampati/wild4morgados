@@ -13,11 +13,14 @@ namespace DiagramDesigner.UserControls.Toolbar
         public delegate void CambioModoEventHandler(object o, CambioModoEventArgs e);
         public delegate void AbrirBusquedaEventHandler(object o, AbrirBusquedaEventArgs e);
         public delegate void SalvarConfiguracionEventHandler(object o, SalvarConfiguracionEventArgs e);
+        public delegate void ModificarPropiedadesEjercicioHandler(object o, ModificarPropiedadesEjercicioEventArgs e);
 
         public event CompilacionEventHandler CompilacionEvent;
         public event CambioModoEventHandler CambioModoEvent;
         public event AbrirBusquedaEventHandler AbrirBusquedaEvent;
         public event SalvarConfiguracionEventHandler SalvarConfiguracionEvent;
+        public event ModificarPropiedadesEjercicioHandler ModificarPropiedadesEjercicioEvent;
+
 
         private void CompilacionEventFire(object sender, CompilacionEventArgs e)
         {
@@ -39,7 +42,7 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void AbrirBusquedaEventFire(object sender, AbrirBusquedaEventArgs e)
         {
-            if (CambioModoEvent != null)
+            if (AbrirBusquedaEvent != null)
             {
                 AbrirBusquedaEvent(sender, e);
             }
@@ -51,6 +54,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             if (SalvarConfiguracionEvent != null)
             {
                 SalvarConfiguracionEvent(sender, e);
+            }
+
+        }
+
+        private void ModificarPropiedadesEjercicioEventFire(object sender, ModificarPropiedadesEjercicioEventArgs e)
+        {
+            if (ModificarPropiedadesEjercicioEvent != null)
+            {
+                ModificarPropiedadesEjercicioEvent(sender, e);
             }
 
         }

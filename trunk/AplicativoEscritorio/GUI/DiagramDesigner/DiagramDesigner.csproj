@@ -71,6 +71,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Resources\ApplicationMenuResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\RibbonStylesResouceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Mensajes\BarraMensajes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +189,7 @@
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
     <Compile Include="EventArgsClasses\DoubleClickEventArgs.cs" />
+    <Compile Include="EventArgsClasses\ModificarPropiedadesEjercicioEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
