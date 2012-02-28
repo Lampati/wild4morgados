@@ -84,11 +84,13 @@ namespace DiagramDesigner.UserControls.Entorno
                         this.grdVisual.Visibility = System.Windows.Visibility.Visible;
                         this.grdTexto.Visibility = System.Windows.Visibility.Collapsed;
                         DesconfigurarBuscarYReemplazarModoTexto();
+                        MyDesigner.Focus();                        
                         break;
                     case ModoVisual.Texto:
                         this.grdVisual.Visibility = System.Windows.Visibility.Collapsed;
                         this.grdTexto.Visibility = System.Windows.Visibility.Visible;
                         ConfigurarBuscarYReemplazarModoTexto();
+                        textEditor.TextArea.Focus();
                         break;
                 }
             }

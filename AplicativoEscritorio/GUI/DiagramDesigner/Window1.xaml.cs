@@ -57,6 +57,9 @@ namespace DiagramDesigner
             this.ToolbarAplicacion.CambioModoEvent += new BarraToolbarRibbon.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent);
             this.ToolbarAplicacion.AbrirBusquedaEvent += new BarraToolbarRibbon.AbrirBusquedaEventHandler(ToolbarAplicacion_AbrirBusquedaEvent);
             this.ToolbarAplicacion.SalvarConfiguracionEvent += new BarraToolbarRibbon.SalvarConfiguracionEventHandler(ToolbarAplicacion_SalvarConfiguracionEvent);
+            this.ToolbarAplicacion.ModificarPropiedadesEjercicioEvent += new BarraToolbarRibbon.ModificarPropiedadesEjercicioHandler(ToolbarAplicacion_ModificarPropiedadesEjercicioEvent);
+
+            this.Loaded += new RoutedEventHandler(Window1_Loaded);
 
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
             //NO TENGO EL XML!!!
@@ -97,8 +100,15 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
 
 
+            
+        }
+
+        void Window1_Loaded(object sender, RoutedEventArgs e)
+        {
             Modo = ModoVisual.Flujo;
         }
+
+       
 
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -224,6 +234,26 @@ namespace DiagramDesigner
         void BarraMsgs_DoubleClickEvent(object o, DoubleClickEventArgs e)
         {
             this.Esquema.PosicionarseEn(e.Fila, e.Columna);
+        }
+
+        void ToolbarAplicacion_ModificarPropiedadesEjercicioEvent(object o, ModificarPropiedadesEjercicioEventArgs e)
+        {
+            if (e.Enunciado != null)
+            {
+
+            }
+
+            if (e.NivelEjercicio != null)
+            {
+                
+            }
+
+            if (e.SolucionTexto != null)
+            {
+
+            }
+
+            
         }
 
         private void ConfigurarCompilador()
