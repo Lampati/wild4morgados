@@ -43,12 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReglasSeguridadDA.cs" />
     <Compile Include="Interfases\IFiltrablePorSeguridadPorValor.cs" />
     <Compile Include="LocalidadDA.cs" />
     <Compile Include="PaisDA.cs" />
     <Compile Include="ProvinciaDA.cs" />
     <Compile Include="EstadoEjercicioDA.cs" />
     <Compile Include="NivelEjercicioDA.cs" />
+    <Compile Include="Seguridad\ConstantesSeguridad.cs" />
+    <Compile Include="Seguridad\SeguridadXValorManager.cs" />
     <Compile Include="TipoUsuarioDA.cs" />
     <Compile Include="CursoDA.cs" />
     <Compile Include="EjercicioDA.cs" />

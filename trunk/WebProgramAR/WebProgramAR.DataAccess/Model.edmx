@@ -1159,19 +1159,19 @@
           <ConnectorPoint PointX="7.677083333333333" PointY="9.30332104974639" />
           <ConnectorPoint PointX="7.75" PointY="9.30332104974639" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WebProgramARModel.Columna" Width="1.5" PointX="9.75" PointY="16" Height="2.1246875268220897" />
+        <EntityTypeShape EntityType="WebProgramARModel.Columna" Width="1.5" PointX="11.125" PointY="16" Height="2.1246875268220897" />
         <EntityTypeShape EntityType="WebProgramARModel.Comparador" Width="1.5" PointX="7.5" PointY="13.875" Height="1.5637500178813966" />
         <EntityTypeShape EntityType="WebProgramARModel.ReglasSeguridad" Width="1.5" PointX="9.75" PointY="0.625" Height="2.8726042054096936" />
         <EntityTypeShape EntityType="WebProgramARModel.Tabla" Width="1.5" PointX="7.5" PointY="16.25" Height="1.7507291875282931" />
         <EntityTypeShape EntityType="WebProgramARModel.Tipo" Width="1.5" PointX="7.5" PointY="19.375" Height="1.5637500178813966" />
         <AssociationConnector Association="WebProgramARModel.FK_Columna_Tabla" >
           <ConnectorPoint PointX="9" PointY="17.125364593764147" />
-          <ConnectorPoint PointX="9.75" PointY="17.125364593764147" />
+          <ConnectorPoint PointX="11.125" PointY="17.125364593764147" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Columna_Tipo" >
           <ConnectorPoint PointX="9" PointY="20.1568750089407" />
-          <ConnectorPoint PointX="10.5" PointY="20.1568750089407" />
-          <ConnectorPoint PointX="10.5" PointY="18.12468752682209" />
+          <ConnectorPoint PointX="11.875" PointY="20.1568750089407" />
+          <ConnectorPoint PointX="11.875" PointY="18.12468752682209" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Comparador" >
           <ConnectorPoint PointX="7.59375" PointY="13.875" />
@@ -1181,11 +1181,10 @@
           <ConnectorPoint PointX="9.75" PointY="1.8753232846169075" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Tabla" >
-          <ConnectorPoint PointX="9" PointY="17.125364593764147" />
-          <ConnectorPoint PointX="9.5" PointY="17.125364593764147" />
-          <ConnectorPoint PointX="9.5" PointY="3.8726042054096936" />
-          <ConnectorPoint PointX="10.5" PointY="3.8726042054096936" />
-          <ConnectorPoint PointX="10.5" PointY="3.4976042054096936" />
+          <ConnectorPoint PointX="9" PointY="16.25" />
+          <ConnectorPoint PointX="9.375" PointY="15.875" />
+          <ConnectorPoint PointX="10.246092812499999" PointY="15.875" />
+          <ConnectorPoint PointX="10.246092812499999" PointY="3.4976042054096936" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_TipoUsuario" >
           <ConnectorPoint PointX="2.25" PointY="2.407500017881393" />
@@ -1199,45 +1198,43 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="WebProgramARModel.Usuario" Width="2.25" PointX="13" PointY="3.625" Height="4.368437562584873" />
         <AssociationConnector Association="WebProgramARModel.FK_Curso_Usuario" >
-          <ConnectorPoint PointX="13" PointY="5.1752458249579147" />
-          <ConnectorPoint PointX="10.989585833333335" PointY="5.1752458249579139" />
-          <ConnectorPoint PointX="10.822919166666667" PointY="5.1752458249579147" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="5.1752458249579139" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="5.1752458249579147" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="5.1752458249579139" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="5.1752458249579147" />
-          <ConnectorPoint PointX="6.75" PointY="5.1752458249579147" />
+          <ConnectorPoint PointX="13" PointY="4.8111458661158917" />
+          <ConnectorPoint PointX="10.888022958333334" PointY="4.8111458661158908" />
+          <ConnectorPoint PointX="10.721356291666666" PointY="4.8111458661158917" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="4.8111458661158908" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="4.8111458661158917" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="4.8111458661158908" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="4.8111458661158917" />
+          <ConnectorPoint PointX="6.75" PointY="4.8111458661158917" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Localidad" >
           <ConnectorPoint PointX="2.25" PointY="10.592916696468988" />
           <ConnectorPoint PointX="7.510416666666667" PointY="10.592916696468988" />
           <ConnectorPoint PointX="7.677083333333333" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="14.512525264054537" PointY="10.592916696468988" />
-          <ConnectorPoint PointX="14.512525264054537" PointY="7.8064583929379765" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="10.592916696468988" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="10.592916696468988" />
+          <ConnectorPoint PointX="14.487505066013634" PointY="10.592916696468988" />
+          <ConnectorPoint PointX="14.487505066013634" PointY="7.8064583929379765" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Pais" >
-          <ConnectorPoint PointX="1.2270458203125003" PointY="5.8127083571751905" />
-          <ConnectorPoint PointX="1.2270458203125003" PointY="6.4688566785875956" />
-          <ConnectorPoint PointX="1.6832633072916674" PointY="6.4688566785875947" />
-          <ConnectorPoint PointX="1.8499299739583339" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="1.2286327050781254" PointY="5.8127083571751905" />
+          <ConnectorPoint PointX="1.2286327050781254" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="1.6864370768229173" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="1.8531037434895838" PointY="6.4688566785875956" />
           <ConnectorPoint PointX="2.5416666666666665" PointY="6.4688566785875947" />
           <ConnectorPoint PointX="2.7083333333333335" PointY="6.4688566785875956" />
           <ConnectorPoint PointX="7.510416666666667" PointY="6.4688566785875947" />
           <ConnectorPoint PointX="7.677083333333333" PointY="6.4688566785875956" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="6.4688566785875947" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="6.4688566785875956" />
-          <ConnectorPoint PointX="10.822919166666667" PointY="6.4688566785875947" />
-          <ConnectorPoint PointX="10.989585833333335" PointY="6.4688566785875956" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="6.4688566785875947" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="6.4688566785875956" />
           <ConnectorPoint PointX="13" PointY="6.4688566785875956" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Provincia" >
           <ConnectorPoint PointX="9.25" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="13.725010132027268" PointY="9.3123437634110449" />
-          <ConnectorPoint PointX="13.725010132027268" PointY="7.8064583929379765" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="9.3123437634110449" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="9.3123437634110449" />
+          <ConnectorPoint PointX="13.712500033006817" PointY="9.3123437634110449" />
+          <ConnectorPoint PointX="13.712500033006817" PointY="7.8064583929379765" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Usuario" >
           <ConnectorPoint PointX="13" PointY="7.16891003576278" />
@@ -1250,12 +1247,12 @@
           <ConnectorPoint PointX="5" PointY="2.563750017881393" />
           <ConnectorPoint PointX="7.510416666666667" PointY="2.5637500178813926" />
           <ConnectorPoint PointX="7.677083333333333" PointY="2.563750017881393" />
-          <ConnectorPoint PointX="9.4375" PointY="2.563750017881393" />
-          <ConnectorPoint PointX="9.4375" PointY="3.7476042054096936" />
-          <ConnectorPoint PointX="10.416666666666666" PointY="3.7476042054096932" />
-          <ConnectorPoint PointX="10.583333333333334" PointY="3.7476042054096936" />
-          <ConnectorPoint PointX="10.822919166666667" PointY="3.7476042054096932" />
-          <ConnectorPoint PointX="10.989585833333335" PointY="3.7476042054096936" />
+          <ConnectorPoint PointX="9.5" PointY="2.563750017881393" />
+          <ConnectorPoint PointX="9.5" PointY="3.7476042054096936" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="3.7476042054096932" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="3.7476042054096936" />
+          <ConnectorPoint PointX="10.721356291666666" PointY="3.7476042054096932" />
+          <ConnectorPoint PointX="10.888022958333334" PointY="3.7476042054096936" />
           <ConnectorPoint PointX="12.75" PointY="3.7476042054096936" />
           <ConnectorPoint PointX="12.75" PointY="3.375" />
           <ConnectorPoint PointX="12.791666666666666" PointY="3.3749999999999996" />
@@ -1265,47 +1262,49 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="WebProgramARModel.Ejercicio" Width="1.5" PointX="16" PointY="2.875" Height="3.8075000536441763" />
         <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_EstadoEjercicio" >
-          <ConnectorPoint PointX="6.75" PointY="1.3126621423084539" />
-          <ConnectorPoint PointX="9.375" PointY="1.3126621423084539" />
-          <ConnectorPoint PointX="9.375" PointY="3.7788542054096936" />
-          <ConnectorPoint PointX="10.416666666666666" PointY="3.7788542054096932" />
-          <ConnectorPoint PointX="10.583333333333334" PointY="3.7788542054096936" />
-          <ConnectorPoint PointX="10.822919166666667" PointY="3.7788542054096932" />
-          <ConnectorPoint PointX="10.989585833333335" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="6.75" PointY="1.8993732634110443" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="1.8993732634110436" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="1.8993732634110443" />
+          <ConnectorPoint PointX="9.4375" PointY="1.8993732634110443" />
+          <ConnectorPoint PointX="9.4375" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="3.7788542054096932" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="3.7788542054096936" />
+          <ConnectorPoint PointX="10.721356291666666" PointY="3.7788542054096932" />
+          <ConnectorPoint PointX="10.888022958333334" PointY="3.7788542054096936" />
           <ConnectorPoint PointX="12.5" PointY="3.7788542054096936" />
           <ConnectorPoint PointX="12.5" PointY="2.625" />
-          <ConnectorPoint PointX="17.012268734375" PointY="2.625" />
-          <ConnectorPoint PointX="17.012268734375" PointY="2.875" />
+          <ConnectorPoint PointX="16.75" PointY="2.625" />
+          <ConnectorPoint PointX="16.75" PointY="2.875" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_NivelEjercicio" >
           <ConnectorPoint PointX="6.75" PointY="8.0282291964689882" />
           <ConnectorPoint PointX="7.510416666666667" PointY="8.0282291964689882" />
           <ConnectorPoint PointX="7.677083333333333" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="13.641676798693935" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="13.808343465360602" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="14.429191930721203" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="14.595858597387871" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="13.629166699673483" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="13.795833366340151" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="14.4041717326803" PointY="8.0282291964689882" />
+          <ConnectorPoint PointX="14.570838399346968" PointY="8.0282291964689882" />
           <ConnectorPoint PointX="16.75" PointY="8.0282291964689882" />
-          <ConnectorPoint PointX="16.75" PointY="6.68250005364418" />
+          <ConnectorPoint PointX="16.75" PointY="6.6825000536441763" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Ejercicio_Usuario" >
           <ConnectorPoint PointX="15.25" PointY="5.15375002682209" />
           <ConnectorPoint PointX="16" PointY="5.15375002682209" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.EjercicioCurso" >
-          <ConnectorPoint PointX="6.75" PointY="4.4968896132063207" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="4.49688961320632" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="4.4968896132063207" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="4.49688961320632" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="4.4968896132063207" />
-          <ConnectorPoint PointX="10.822919166666667" PointY="4.49688961320632" />
-          <ConnectorPoint PointX="10.989585833333335" PointY="4.4968896132063207" />
-          <ConnectorPoint PointX="12.875" PointY="4.4968896132063207" />
+          <ConnectorPoint PointX="6.75" PointY="4.2637475357627928" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="4.2637475357627919" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="4.2637475357627928" />
+          <ConnectorPoint PointX="10.162759479166665" PointY="4.2637475357627919" />
+          <ConnectorPoint PointX="10.329426145833333" PointY="4.2637475357627928" />
+          <ConnectorPoint PointX="10.721356291666666" PointY="4.2637475357627919" />
+          <ConnectorPoint PointX="10.888022958333334" PointY="4.2637475357627928" />
+          <ConnectorPoint PointX="12.875" PointY="4.2637475357627928" />
           <ConnectorPoint PointX="12.875" PointY="2.59375" />
-          <ConnectorPoint PointX="16.474882367187497" PointY="2.59375" />
-          <ConnectorPoint PointX="16.474882367187497" PointY="2.875" />
+          <ConnectorPoint PointX="16.343747999999998" PointY="2.59375" />
+          <ConnectorPoint PointX="16.343747999999998" PointY="2.875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="WebProgramARModel.MensajeModeracion" Width="1.5" PointX="18.25" PointY="4" Height="1.5637500178813966" />
         <AssociationConnector Association="WebProgramARModel.FK_MensajeModeracion_Ejercicio" >
