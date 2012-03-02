@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.Enums;
 using DiagramDesigner.EventArgsClasses;
+using Globales.Enums;
 
 namespace DiagramDesigner.UserControls.Toolbar
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DiagramDesigner.Enums;
+using Globales.Enums;
 
 namespace DiagramDesigner.EventArgsClasses
 {

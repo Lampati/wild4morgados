@@ -7,50 +7,73 @@ using System.Text;
 using Utilidades.Criptografia;
 using System.IO;
 using DataAccess.Excepciones;
+using Globales.Enums;
 
 namespace DataAccess.Entidades
 {
-    public class Ejercicio : IPersistible
+    public class Ejercicio : EntidadBase
     {
         #region Atributos
-        private ModoEjercicio ultimoModoGuardado;
+        private ModoVisual ultimoModoGuardado;
+        private ModoEjercicio modo;
         private string enunciado;
         private NivelDificultad nivelDificultad;
         private string solucionTexto;
         private string solucionGargar;
+        private string gargar;
         private List<TestPrueba> testsPrueba;
         #endregion
 
         #region Propiedades
-        public ModoEjercicio UltimoModoGuardado
+        public override ModoVisual UltimoModoGuardado
         {
             get { return this.ultimoModoGuardado; }
             set { this.ultimoModoGuardado = value; }
         }
 
-        public string Enunciado
+        public override ModoEjercicio Modo
+        {
+            get { return this.modo; }
+            set { this.modo = value; }
+        }
+
+        public override string Enunciado
         {
             get { return this.enunciado; }
             set { this.enunciado = value; }
         }
 
-        public NivelDificultad NivelDificultad
+        public override NivelDificultad NivelDificultad
         {
             get { return this.nivelDificultad; }
             set { this.nivelDificultad = value; }
         }
 
-        public string SolucionTexto
+        public override string SolucionTexto
         {
             get { return this.solucionTexto; }
             set { this.solucionTexto = value; }
         }
 
-        public string SolucionGargar
+        public override string SolucionGargar
         {
             get { return this.solucionGargar; }
             set { this.solucionGargar = value; }
         }
+
+        public override List<TestPrueba> TestsPrueba
+        {
+            get { return this.testsPrueba; }
+            
+        }
+
+        public override string Gargar
+        {
+            get { return this.gargar; }
+            set { this.gargar = value; }
+        }
+
+
         #endregion
 
         #region Constructores
@@ -92,6 +115,10 @@ namespace DataAccess.Entidades
             xml.AddElement();
             xml.SetTitle("UltimoModoGuardado");
             xml.SetValue(((int)this.ultimoModoGuardado).ToString());
+            xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("Modo");
+            xml.SetValue(((int)this.modo).ToString());
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("Enunciado");
@@ -138,7 +165,8 @@ namespace DataAccess.Entidades
             this.NivelDificultad = (NivelDificultad)int.Parse(xmlElem.FindFirst("NivelDificultad").value);
             this.SolucionGargar = xmlElem.FindFirst("SolucionGargar").value;
             this.SolucionTexto = xmlElem.FindFirst("SolucionTexto").value;
-            this.UltimoModoGuardado = (ModoEjercicio)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
+            this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
+            this.Modo = (ModoEjercicio)int.Parse(xmlElem.FindFirst("Modo").value);
             XMLElement xmlTests = xmlElem.FindFirst("TestsPrueba");
             if (!Object.Equals(xmlTests, null))
             {

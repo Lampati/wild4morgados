@@ -295,7 +295,7 @@
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click"></ribbon:RibbonButton>
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click"></ribbon:RibbonButton>
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click"></ribbon:RibbonButton>
-                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}">
+                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}" >
                         <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}">
                             <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}">
                                 <ribbon:RibbonGalleryItem Tag="1" ContextMenu="{Binding null}">Aprendiz</ribbon:RibbonGalleryItem>
@@ -304,8 +304,7 @@
                                 <ribbon:RibbonGalleryItem Tag="4" ContextMenu="{Binding null}">Dificil</ribbon:RibbonGalleryItem>
                                 <ribbon:RibbonGalleryItem Tag="5" ContextMenu="{Binding null}">Experto</ribbon:RibbonGalleryItem>
                             </ribbon:RibbonGalleryCategory>                            
-                        </ribbon:RibbonGallery>
-                        
+                        </ribbon:RibbonGallery>                        
                     </ribbon:RibbonComboBox>
                 </StackPanel>
                 

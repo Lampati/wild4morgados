@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
+using Globales.Enums;
 
 namespace DiagramDesigner.UserControls.Estado
 {

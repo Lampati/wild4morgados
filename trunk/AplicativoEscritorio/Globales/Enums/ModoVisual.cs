@@ -1,4 +1,4 @@
-﻿namespace DiagramDesigner.Enums
+﻿namespace Globales.Enums
 {
     public enum ModoVisual
     {

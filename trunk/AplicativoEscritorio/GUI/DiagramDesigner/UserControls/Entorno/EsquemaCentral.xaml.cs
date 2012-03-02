@@ -19,6 +19,9 @@ using Utilidades;
 using CompiladorGargar;
 using WpfApplicationHotKey.WinApi;
 using DiagramDesigner.EventArgsClasses;
+using DataAccess.Interfases;
+using DataAccess.Entidades;
+using Globales.Enums;
 
 
 namespace DiagramDesigner.UserControls.Entorno
@@ -29,6 +32,7 @@ namespace DiagramDesigner.UserControls.Entorno
     public partial class EsquemaCentral : UserControl
     {
         
+
 
         private ModoVisual modo;
 
@@ -92,6 +96,27 @@ namespace DiagramDesigner.UserControls.Entorno
                         ConfigurarBuscarYReemplazarModoTexto();
                         textEditor.TextArea.Focus();
                         break;
+                }
+            }
+        }
+
+        private EntidadBase archCargado = null;
+        public EntidadBase ArchCargado
+        {
+            get { return archCargado; }
+            set
+            {
+                archCargado = value;
+
+                if (archCargado == null)
+                {
+                    this.grdVisual.Visibility = System.Windows.Visibility.Hidden;
+                    this.grdTexto.Visibility = System.Windows.Visibility.Collapsed;
+                    DesconfigurarBuscarYReemplazarModoTexto();
+                }
+                else
+                {
+                    textEditor.Text = archCargado.Gargar;
                 }
             }
         }

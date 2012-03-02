@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
 using DiagramDesigner.EventArgsClasses;
+using Globales.Enums;
 
 namespace DiagramDesigner.UserControls.Mensajes
 {
