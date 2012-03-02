@@ -41,7 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfiguracionAplicacion.cs" />
+    <Compile Include="Entidades\Ejercicio.cs" />
+    <Compile Include="Entidades\TestPrueba.cs" />
+    <Compile Include="Enums\ModoEjercicio.cs" />
+    <Compile Include="Enums\NivelDificultad.cs" />
+    <Compile Include="Excepciones\ExcepcionHashNoConcuerda.cs" />
     <Compile Include="Interfases\Accesible.cs" />
+    <Compile Include="Interfases\IPersistible.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -49,7 +55,12 @@
       <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
       <Name>Globales</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
+      <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
+      <Name>Utilidades</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
