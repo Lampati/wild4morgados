@@ -130,14 +130,20 @@ namespace DiagramDesigner.UserControls.Entorno
          
         }
 
-     
-
-     
-
         private void ConfigurarModoTexto()
         {
             ModoTextoConfiguracion.ConfigurarAvalonEdit(textEditor);
+            textEditor.TextChanged += new EventHandler(textEditor_TextChanged);
             ConfigurarBuscarYReemplazarModoTexto();
+        }
+
+        void textEditor_TextChanged(object sender, EventArgs e)
+        {
+            if (ArchCargado != null)
+            {
+                ArchCargado.ModificadoDesdeUltimoGuardado = true;
+                ArchCargado.Gargar = textEditor.Text;
+            }
         }
 
         public void ConfigurarBuscarYReemplazarModoTexto()

@@ -12,8 +12,7 @@ namespace DataAccess.Entidades
     {
 
         #region Atributos
-        private ModoVisual ultimoModoGuardado;
-        private string gargar;
+        
         
         #endregion
 
@@ -24,12 +23,12 @@ namespace DataAccess.Entidades
 
 
 
-        public void Guardar(string path)
+        public override void Guardar(string path)
         {
             
         }
 
-        public void Abrir(string path)
+        public override void Abrir(string path)
         {
             
         }
@@ -39,6 +38,24 @@ namespace DataAccess.Entidades
         private Ejercicio ejercicio;
 
         #region IPropiedadesEjercicios Members
+
+        public override bool ModificadoDesdeUltimoGuardado
+        {
+            get
+            {
+                return modificadoDesdeUltimoGuardado;
+            }
+            set
+            {
+                modificadoDesdeUltimoGuardado = value;
+            }
+        }
+
+        public override string PathGuardadoActual
+        {
+            get { return this.pathGuardadoActual; }
+            set { this.pathGuardadoActual = value; }
+        }
 
         public override string Enunciado
         {

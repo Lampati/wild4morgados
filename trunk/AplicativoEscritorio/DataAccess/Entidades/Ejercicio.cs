@@ -14,17 +14,35 @@ namespace DataAccess.Entidades
     public class Ejercicio : EntidadBase
     {
         #region Atributos
-        private ModoVisual ultimoModoGuardado;
         private ModoEjercicio modo;
         private string enunciado;
         private NivelDificultad nivelDificultad;
         private string solucionTexto;
         private string solucionGargar;
-        private string gargar;
         private List<TestPrueba> testsPrueba;
         #endregion
 
         #region Propiedades
+
+        public override bool ModificadoDesdeUltimoGuardado
+        {
+            get
+            {
+                return modificadoDesdeUltimoGuardado;
+            }
+            set
+            {
+                modificadoDesdeUltimoGuardado = value;
+            }
+        }
+
+        public override string PathGuardadoActual
+        {
+            get { return this.pathGuardadoActual; }
+            set { this.pathGuardadoActual = value; }
+        }
+
+
         public override ModoVisual UltimoModoGuardado
         {
             get { return this.ultimoModoGuardado; }
@@ -136,6 +154,10 @@ namespace DataAccess.Entidades
             xml.SetTitle("SolucionGargar");
             xml.SetValue(this.solucionGargar);
             xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("Gargar");
+            xml.SetValue(this.gargar);
+            xml.LevelUp();
             if (!Object.Equals(this.testsPrueba, null))
             {
                 xml.AddElement();
@@ -164,6 +186,7 @@ namespace DataAccess.Entidades
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = (NivelDificultad)int.Parse(xmlElem.FindFirst("NivelDificultad").value);
             this.SolucionGargar = xmlElem.FindFirst("SolucionGargar").value;
+            this.Gargar = xmlElem.FindFirst("Gargar").value;
             this.SolucionTexto = xmlElem.FindFirst("SolucionTexto").value;
             this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             this.Modo = (ModoEjercicio)int.Parse(xmlElem.FindFirst("Modo").value);
@@ -195,7 +218,7 @@ namespace DataAccess.Entidades
         #endregion
 
         #region IPersistible
-        public void Guardar(string path)
+        public override void Guardar(string path)
         {
             string xml = this.ToXML();
             string xmlEncriptado = Crypto.Encriptar(xml);
@@ -203,7 +226,7 @@ namespace DataAccess.Entidades
             File.WriteAllText(path, xmlEncriptado);
         }
 
-        public void Abrir(string path)
+        public override void Abrir(string path)
         {
             string xmlEncriptado = File.ReadAllText(path);
             string xmlDesencriptado = Crypto.Desencriptar(xmlEncriptado);

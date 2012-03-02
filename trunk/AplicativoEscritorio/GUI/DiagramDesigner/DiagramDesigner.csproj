@@ -192,6 +192,7 @@
     <Compile Include="EventArgsClasses\ModificarPropiedadesEjercicioEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
+    <Compile Include="Helpers\FileDialogManager.cs" />
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">
