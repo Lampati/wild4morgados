@@ -18,6 +18,8 @@ using DiagramDesigner.UserControls.Entorno;
 using DataAccess.Interfases;
 using DataAccess.Entidades;
 using Globales.Enums;
+using Microsoft.Win32;
+using DiagramDesigner.Helpers;
 
 namespace DiagramDesigner
 {
@@ -146,33 +148,59 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                int i = 0;
-                switch (Convert.ToInt32(e.Parameter))
+                bool continuar = SalvarSiUsuarioQuiere();
+
+                if (continuar)
                 {
-                    case 1:
-                        Ejercicio ej = new Ejercicio();
-                        ej.UltimoModoGuardado = ModoVisual.Texto;
-                        ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                    switch (Convert.ToInt32(e.Parameter))
+                    {
+                        case 1:
 
-                        ArchCargado = ej;
-                        break;
-                    case 2:
-                        ResolucionEjercicio res = new ResolucionEjercicio();
-                        res.UltimoModoGuardado = ModoVisual.Texto;
-                        res.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                            string path = FileDialogManager.ElegirUbicacionNuevoArchivo(this, "Elegir nombre y ubicación para el nuevo ejercicio", configApp.DirectorioEjerciciosCreados);
 
-                        ArchCargado = res;
-                        break;
+                            Ejercicio ej = new Ejercicio();
+                            ej.UltimoModoGuardado = ModoVisual.Texto;
+                            ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                            ej.ModificadoDesdeUltimoGuardado = false;
+                            ej.PathGuardadoActual = path;
+                            ej.Guardar(ej.PathGuardadoActual);
+                            ArchCargado = ej;
+                            break;
+                        case 2:
+                            ResolucionEjercicio res = new ResolucionEjercicio();
+                            res.UltimoModoGuardado = ModoVisual.Texto;
+                            res.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                            res.ModificadoDesdeUltimoGuardado = false;
+                            ArchCargado = res;
+                            break;
+                    }
                 }
             }
         }
+
+        
 
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                int i = 0;
+                bool continuar = SalvarSiUsuarioQuiere();
+
+                if (continuar)
+                {
+                    string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", configApp.DirectorioResolucionesEjercicios);
+
+                    //chequeo de tipo de archivo
+
+                    Ejercicio ej = new Ejercicio();
+                    ej.UltimoModoGuardado = ModoVisual.Texto;
+                    ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                    ej.ModificadoDesdeUltimoGuardado = false;
+                    ej.PathGuardadoActual = path;
+                    ej.Abrir(ej.PathGuardadoActual);
+                    ArchCargado = ej;
+                }
             }
         }
 
@@ -181,9 +209,11 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                int i = 0;
+                GuardarADisco();
             }
         }
+
+        
 
         private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -209,21 +239,44 @@ namespace DiagramDesigner
         {
             int i = 0;
 
-            MessageBoxResult result = MessageBox.Show("¿Desea guardar los cambios efectuados?", "ProgramAR", MessageBoxButton.YesNoCancel);
+            bool continuar = SalvarSiUsuarioQuiere();
 
-            switch (result)
+            if (continuar)
             {
-                case MessageBoxResult.Cancel:
-                    break;
-                case MessageBoxResult.No:
-                    Close();
-                    break;
-                case MessageBoxResult.Yes:
-                    Close();
-                    break;
-                default:
-                    break;
+                Close();
             }
+        }
+
+        private bool SalvarSiUsuarioQuiere()
+        {
+            bool retorno = true;
+
+            if (ArchCargado != null && ArchCargado.ModificadoDesdeUltimoGuardado)
+            {
+                MessageBoxResult result = MessageBox.Show("¿Desea guardar los cambios efectuados?", "ProgramAR", MessageBoxButton.YesNoCancel);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Cancel:
+                        retorno = false;
+                        break;
+
+                    case MessageBoxResult.No:
+                        break;
+
+                    case MessageBoxResult.Yes:
+                        GuardarADisco();
+                        break;
+                }
+            }
+
+            return retorno;
+        }
+
+        private void GuardarADisco()
+        {
+            ArchCargado.Guardar(ArchCargado.PathGuardadoActual);
+            ArchCargado.ModificadoDesdeUltimoGuardado = false;
         }
 
         void ToolbarAplicacion_SalvarConfiguracionEvent(object o, SalvarConfiguracionEventArgs e)

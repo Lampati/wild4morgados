@@ -9,25 +9,34 @@ namespace DataAccess.Entidades
 {
     public abstract class EntidadBase : IPersistible, IPropiedadesEjercicios
     {
-
+        protected ModoVisual ultimoModoGuardado;
+        protected string gargar;
+        protected bool modificadoDesdeUltimoGuardado;
+        protected string pathGuardadoActual;
 
         #region IPersistible Members
 
-        public void Guardar(string path)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Guardar(string path);    
 
-        public void Abrir(string path)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Abrir(string path);  
 
         #endregion
 
         #region IPropiedadesEjercicios Members
 
+        public abstract bool ModificadoDesdeUltimoGuardado
+        {
+            get;
+            set;
+        }
+
         public abstract string Enunciado
+        {
+            get;
+            set;
+        }
+
+        public abstract string PathGuardadoActual
         {
             get;
             set;
