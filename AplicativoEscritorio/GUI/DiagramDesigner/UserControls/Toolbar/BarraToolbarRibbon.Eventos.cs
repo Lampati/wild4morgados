@@ -66,5 +66,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             }
 
         }
+
+        internal void PrepararIDEEjercicio()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void PrepararIDEResolucionEjercicio()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

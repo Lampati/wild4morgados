@@ -241,7 +241,6 @@
       <DependentUpon>TextEditionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DTO\Mensaje.cs" />
-    <Compile Include="Enums\ModoVisual.cs" />
     <Compile Include="Enums\TipoElemento.cs" />
     <Compile Include="Enums\TipoMensaje.cs" />
     <Compile Include="UserControls\Entorno\EsquemaCentral.xaml.cs">

@@ -15,6 +15,9 @@ using DiagramDesigner.EventArgsClasses;
 using DiagramDesigner.UserControls.Mensajes;
 using DiagramDesigner.UserControls.Toolbar;
 using DiagramDesigner.UserControls.Entorno;
+using DataAccess.Interfases;
+using DataAccess.Entidades;
+using Globales.Enums;
 
 namespace DiagramDesigner
 {
@@ -28,6 +31,32 @@ namespace DiagramDesigner
         Compilador compilador;
 
         ConfiguracionAplicacion configApp;
+
+
+        private EntidadBase archCargado = null;
+        public EntidadBase ArchCargado
+        {
+            get { return archCargado; }
+            set
+            {
+                archCargado = value;
+
+                ToolbarAplicacion.ArchCargado = archCargado;
+                Esquema.ArchCargado = archCargado;
+
+                if (archCargado != null)
+                {
+                    BarraMsgs.Visibility = System.Windows.Visibility.Visible;                    
+                    Modo = archCargado.UltimoModoGuardado;
+                    
+                }
+                else
+                {
+                    BarraMsgs.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
+        }
+
 
         private ModoVisual modo;
         public ModoVisual Modo
@@ -99,13 +128,15 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Print, Print_Executed));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
 
-
+            ToolbarAplicacion.Owner = this;
             
         }
 
         void Window1_Loaded(object sender, RoutedEventArgs e)
         {
             Modo = ModoVisual.Flujo;
+
+            ArchCargado = null;
         }
 
        
@@ -115,7 +146,24 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                int i = 0;  
+                int i = 0;
+                switch (Convert.ToInt32(e.Parameter))
+                {
+                    case 1:
+                        Ejercicio ej = new Ejercicio();
+                        ej.UltimoModoGuardado = ModoVisual.Texto;
+                        ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+
+                        ArchCargado = ej;
+                        break;
+                    case 2:
+                        ResolucionEjercicio res = new ResolucionEjercicio();
+                        res.UltimoModoGuardado = ModoVisual.Texto;
+                        res.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+
+                        ArchCargado = res;
+                        break;
+                }
             }
         }
 
@@ -240,17 +288,17 @@ namespace DiagramDesigner
         {
             if (e.Enunciado != null)
             {
-
+                archCargado.Enunciado = e.Enunciado;
             }
 
             if (e.NivelEjercicio != null)
             {
-                
+                //archCargado.NivelEjercicio = e.NivelEjercicio;
             }
 
             if (e.SolucionTexto != null)
             {
-
+                archCargado.SolucionTexto = e.SolucionTexto;
             }
 
             

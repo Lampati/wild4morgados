@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="ConfiguracionAplicacion.cs" />
     <Compile Include="Entidades\Ejercicio.cs" />
+    <Compile Include="Entidades\EntidadBase.cs" />
+    <Compile Include="Interfases\IPropiedadesEjercicios.cs" />
+    <Compile Include="Entidades\ResolucionEjercicio.cs" />
     <Compile Include="Entidades\TestPrueba.cs" />
     <Compile Include="Enums\ModoEjercicio.cs" />
     <Compile Include="Enums\NivelDificultad.cs" />
