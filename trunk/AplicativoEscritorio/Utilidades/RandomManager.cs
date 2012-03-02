@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Utilidades
 {
     public static class RandomManager
     {
+        /*Inicializamos el random acá y no cada vez que se invocan los métodos, porque ganamos aleatoriedad.
+         Si lo inicializamos cada vez que invocamos el método, no sólo perdemos eficiencia, sino que aumentamos
+         la posibilidad de generar una secuencia previsible de números.*/
+        private static FastRandom random = new FastRandom();
 
         public static string RandomStringConPrefijo(string prefijo, int size, bool lowerCase)
         {
             StringBuilder builder = new StringBuilder(prefijo);
-            Random random = new Random();
             char ch;
             for (int i = 0; i < size; i++)
             {
@@ -23,7 +24,8 @@ namespace Utilidades
             return builder.ToString();
         }
 
-        public static string RandomString(int size, bool lowerCase)
+        /*Por más que no tenga prefijo, es más elegante hacer una sobrecarga que un método nuevo.*/
+        public static string RandomStringConPrefijo(int size, bool lowerCase)
         {
             return RandomStringConPrefijo(string.Empty, size, lowerCase);
         }
