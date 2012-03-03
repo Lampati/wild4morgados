@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DataAccess.Interfases;
 using Globales.Enums;
+using Utilidades.Criptografia;
+using System.IO;
 
 namespace DataAccess.Entidades
 {
@@ -16,9 +18,27 @@ namespace DataAccess.Entidades
 
         #region IPersistible Members
 
-        public abstract void Guardar(string path);    
+        public virtual void Guardar(string path)
+        {
+            string xml = this.ToXML();
+            string xmlEncriptado = Crypto.Encriptar(xml);
 
-        public abstract void Abrir(string path);  
+            File.WriteAllText(path, xmlEncriptado);
+        }
+
+        public virtual void Abrir(string path)
+        {
+            string xmlEncriptado = File.ReadAllText(path);
+            string xmlDesencriptado = Crypto.Desencriptar(xmlEncriptado);
+
+            this.FromXML(xmlDesencriptado);
+        }
+
+        protected abstract string ToXML();
+
+        protected abstract void FromXML(string plainXml);
+
+        protected abstract string Hash { get; }
 
         #endregion
 
