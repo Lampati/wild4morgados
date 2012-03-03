@@ -99,7 +99,7 @@ namespace DataAccess.Entidades
         #endregion
 
         #region Métodos
-        private string Hash
+        protected override string Hash
         {
             get
             {
@@ -125,7 +125,7 @@ namespace DataAccess.Entidades
         /// aquí.
         /// </summary>
         /// <returns></returns>
-        private string ToXML()
+        protected override string ToXML()
         {
             XMLCreator xml = new XMLCreator();
             xml.AddElement();
@@ -178,10 +178,11 @@ namespace DataAccess.Entidades
             return xml.Get();
         }
 
-        private void FromXML(string xml)
+        protected override void FromXML(string plainXml)
         {
             XMLReader xmlReader = new XMLReader();
-            XMLElement xmlElem = xmlReader.Read(xml);
+            XMLElement xmlElem = xmlReader.Read(plainXml);
+            xmlElem = xmlElem.FindFirst("EjercicioProgramAr");
 
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = (NivelDificultad)int.Parse(xmlElem.FindFirst("NivelDificultad").value);
@@ -214,24 +215,6 @@ namespace DataAccess.Entidades
 
             if (!this.testsPrueba.Contains(tPrueba))
                 this.testsPrueba.Add(tPrueba);
-        }
-        #endregion
-
-        #region IPersistible
-        public override void Guardar(string path)
-        {
-            string xml = this.ToXML();
-            string xmlEncriptado = Crypto.Encriptar(xml);
-
-            File.WriteAllText(path, xmlEncriptado);
-        }
-
-        public override void Abrir(string path)
-        {
-            string xmlEncriptado = File.ReadAllText(path);
-            string xmlDesencriptado = Crypto.Desencriptar(xmlEncriptado);
-            
-            this.FromXML(xmlDesencriptado);
         }
         #endregion
     }
