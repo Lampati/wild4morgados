@@ -392,6 +392,15 @@
     <Resource Include="Resources\Images\Search128.png" />
     <Resource Include="Resources\Images\SearchRep128.png" />
     <SplashScreen Include="Resources\Images\LogoEjemplo.jpg" />
+    <Resource Include="Resources\Images\Oxygen_new.png" />
+    <Resource Include="Resources\Images\Oxygen_open1.png" />
+    <Resource Include="Resources\Images\Oxygen_open2.png" />
+    <Resource Include="Resources\Images\Oxygen_print.png" />
+    <Resource Include="Resources\Images\Oxygen_save.png" />
+    <Resource Include="Resources\Images\Oxygen_saveAs.png" />
+    <Resource Include="Resources\Images\Exit-32.png" />
+    <Resource Include="Resources\Images\redo.png" />
+    <Resource Include="Resources\Images\undo.png" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />

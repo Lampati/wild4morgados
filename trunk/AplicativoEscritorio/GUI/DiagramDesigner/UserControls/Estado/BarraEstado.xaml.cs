@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
 using Globales.Enums;
+using DataAccess.Entidades;
 
 namespace DiagramDesigner.UserControls.Estado
 {
@@ -22,6 +23,21 @@ namespace DiagramDesigner.UserControls.Estado
     /// </summary>
     public partial class BarraEstado : UserControl
     {
+
+        private EntidadBase archCargado = null;
+        public EntidadBase ArchCargado
+        {
+            get { return archCargado; }
+            set
+            {
+                archCargado = value;
+
+                if (archCargado != null)
+                {
+                    Archivo.Text = archCargado.PathGuardadoActual;
+                }
+            }
+        }
 
         private ModoVisual modo;
         public ModoVisual Modo

@@ -39,12 +39,18 @@ namespace DiagramDesigner.UserControls.Toolbar
                 switch (this.modo)
                 {
                     case ModoVisual.Flujo:
+                        this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Collapsed;
+                        this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Visible;
+
                         this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Visible;
                         this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
                         ButtonFlujo.IsChecked = true;
                         ButtonTexto.IsChecked = false;                        
                         break;
                     case ModoVisual.Texto:
+                        this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Visible;
+                        this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Collapsed;
+
                         this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
                         this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;
                         ButtonFlujo.IsChecked = false;
@@ -78,12 +84,16 @@ namespace DiagramDesigner.UserControls.Toolbar
                     {
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Collapsed;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Visible;
+                        bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Visible;
+
                         esEjercicio = true;
                     }
                     else
                     {
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Visible;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Collapsed;
+                        bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Collapsed;
+
                         esEjercicio = false;
                     }
                 }
@@ -155,6 +165,8 @@ namespace DiagramDesigner.UserControls.Toolbar
         public BarraToolbarRibbon()
         {
             InitializeComponent();
+
+            
         }
 
       
