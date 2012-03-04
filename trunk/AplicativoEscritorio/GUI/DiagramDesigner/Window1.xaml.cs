@@ -20,6 +20,7 @@ using DataAccess.Entidades;
 using Globales.Enums;
 using Microsoft.Win32;
 using DiagramDesigner.Helpers;
+using System.Windows.Documents;
 
 namespace DiagramDesigner
 {
@@ -55,6 +56,7 @@ namespace DiagramDesigner
                 else
                 {
                     BarraMsgs.Visibility = System.Windows.Visibility.Hidden;
+
                 }
             }
         }
@@ -157,14 +159,17 @@ namespace DiagramDesigner
                         case 1:
 
                             string path = FileDialogManager.ElegirUbicacionNuevoArchivo(this, "Elegir nombre y ubicación para el nuevo ejercicio", configApp.DirectorioEjerciciosCreados);
+                            if (!string.IsNullOrWhiteSpace(path))
+                            {
 
-                            Ejercicio ej = new Ejercicio();
-                            ej.UltimoModoGuardado = ModoVisual.Texto;
-                            ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
-                            ej.ModificadoDesdeUltimoGuardado = false;
-                            ej.PathGuardadoActual = path;
-                            ej.Guardar(ej.PathGuardadoActual);
-                            ArchCargado = ej;
+                                Ejercicio ej = new Ejercicio();
+                                ej.UltimoModoGuardado = ModoVisual.Texto;
+                                ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                                ej.ModificadoDesdeUltimoGuardado = false;
+                                ej.PathGuardadoActual = path;
+                                ej.Guardar(ej.PathGuardadoActual);
+                                ArchCargado = ej;
+                            }
                             break;
                         case 2:
                             ResolucionEjercicio res = new ResolucionEjercicio();
@@ -191,15 +196,18 @@ namespace DiagramDesigner
                 {
                     string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", configApp.DirectorioResolucionesEjercicios);
 
-                    //chequeo de tipo de archivo
+                    if (!string.IsNullOrWhiteSpace(path))
+                    {
+                        //chequeo de tipo de archivo
 
-                    Ejercicio ej = new Ejercicio();
-                    ej.UltimoModoGuardado = ModoVisual.Texto;
-                    ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
-                    ej.ModificadoDesdeUltimoGuardado = false;
-                    ej.PathGuardadoActual = path;
-                    ej.Abrir(ej.PathGuardadoActual);
-                    ArchCargado = ej;
+                        Ejercicio ej = new Ejercicio();
+                        ej.UltimoModoGuardado = ModoVisual.Texto;
+                        ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                        ej.ModificadoDesdeUltimoGuardado = false;
+                        ej.PathGuardadoActual = path;
+                        ej.Abrir(ej.PathGuardadoActual);
+                        ArchCargado = ej;
+                    }
                 }
             }
         }
@@ -231,7 +239,26 @@ namespace DiagramDesigner
 
             if (printDialog.ShowDialog() == true)
             {
-                printDialog.PrintVisual(this, "WPF Diagram");
+                if (Modo == ModoVisual.Texto)
+                {
+
+                    FlowDocument doc = new FlowDocument(new Paragraph(new Run(Esquema.textEditor.Text)));
+                    doc.Name = "GarGar";
+
+                    doc.ColumnWidth = printDialog.PrintableAreaWidth;
+                    doc.PagePadding = new Thickness(25);
+
+                    // Create IDocumentPaginatorSource from FlowDocument
+                    IDocumentPaginatorSource idpSource = doc;
+
+                    // Call PrintDocument method to send document to printer
+
+                    printDialog.PrintDocument(idpSource.DocumentPaginator, "Documento Gargar");    
+                }
+                else
+                {
+                    printDialog.PrintVisual(Esquema.MyDesigner, "WPF Diagram");
+                }
             }
         }
 

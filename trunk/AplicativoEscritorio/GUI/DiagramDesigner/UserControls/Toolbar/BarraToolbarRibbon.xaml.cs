@@ -70,14 +70,20 @@ namespace DiagramDesigner.UserControls.Toolbar
                     TabGeneral.Visibility = System.Windows.Visibility.Visible;
                     TabGeneral.IsSelected = true;
 
+                    menuBttnGuardar.IsEnabled = true;
+                    menuBttnGuardarComo.IsEnabled = true;
+                    menuBttnImprimir.IsEnabled = true;
+
                     if (archCargado.GetType() == typeof(Ejercicio))
                     {
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Collapsed;
+                        menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Visible;
                         esEjercicio = true;
                     }
                     else
                     {
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Visible;
+                        menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Collapsed;
                         esEjercicio = false;
                     }
                 }
@@ -85,6 +91,10 @@ namespace DiagramDesigner.UserControls.Toolbar
                 {
                     TabDetallesEjercicio.Visibility = System.Windows.Visibility.Collapsed;
                     TabGeneral.Visibility = System.Windows.Visibility.Collapsed;
+
+                    menuBttnGuardar.IsEnabled = false;
+                    menuBttnGuardarComo.IsEnabled = false;
+                    menuBttnImprimir.IsEnabled = false;
                 }
             }
         }
