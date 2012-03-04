@@ -9,8 +9,7 @@
         xmlns:toolbar="clr-namespace:DiagramDesigner.UserControls.Toolbar"  
         xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"
-        Title="ProgramAR - Minerva"
+        WindowState="Maximized"        
                 >
 
     <Grid Margin="0">

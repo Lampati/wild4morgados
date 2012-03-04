@@ -21,6 +21,7 @@ using Globales.Enums;
 using Microsoft.Win32;
 using DiagramDesigner.Helpers;
 using System.Windows.Documents;
+using Globales;
 
 namespace DiagramDesigner
 {
@@ -46,11 +47,14 @@ namespace DiagramDesigner
 
                 ToolbarAplicacion.ArchCargado = archCargado;
                 Esquema.ArchCargado = archCargado;
+                BarraEstado.ArchCargado = archCargado;
 
                 if (archCargado != null)
                 {
                     BarraMsgs.Visibility = System.Windows.Visibility.Visible;                    
                     Modo = archCargado.UltimoModoGuardado;
+
+                    Title = string.Format("{0} -- {1}", ConstantesGlobales.NOMBRE_APLICACION, archCargado.Nombre);
                     
                 }
                 else
@@ -58,6 +62,8 @@ namespace DiagramDesigner
                     BarraMsgs.Visibility = System.Windows.Visibility.Hidden;
 
                 }
+
+                
             }
         }
 
@@ -83,6 +89,8 @@ namespace DiagramDesigner
         {
             InitializeComponent();
 
+            Title = ConstantesGlobales.NOMBRE_APLICACION;
+
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
             this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
 
@@ -95,7 +103,7 @@ namespace DiagramDesigner
             this.Loaded += new RoutedEventHandler(Window1_Loaded);
 
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
-            //NO TENGO EL XML!!!
+            
             ConfigurarCompilador();
 
             hotKeyCompilar = new HotKey(ModifierKeys.None, Keys.F3, Window.GetWindow(this));
@@ -104,6 +112,8 @@ namespace DiagramDesigner
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
 
+
+            
             
 
             configApp = new ConfiguracionAplicacion();
@@ -167,8 +177,12 @@ namespace DiagramDesigner
                                 ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
                                 ej.ModificadoDesdeUltimoGuardado = false;
                                 ej.PathGuardadoActual = path;
+                                string[] auxPath = path.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries);
+                                ej.Nombre = auxPath[auxPath.Length - 1];
                                 ej.Guardar(ej.PathGuardadoActual);
                                 ArchCargado = ej;
+                                //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                ej.ModificadoDesdeUltimoGuardado = false;
                             }
                             break;
                         case 2:
@@ -202,11 +216,14 @@ namespace DiagramDesigner
 
                         Ejercicio ej = new Ejercicio();
                         ej.UltimoModoGuardado = ModoVisual.Texto;
-                        ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
-                        ej.ModificadoDesdeUltimoGuardado = false;
+                        ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;                        
                         ej.PathGuardadoActual = path;
+                        string[] auxPath = path.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries);
+                        ej.Nombre = auxPath[auxPath.Length - 1];
                         ej.Abrir(ej.PathGuardadoActual);
                         ArchCargado = ej;
+                        //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                        ej.ModificadoDesdeUltimoGuardado = false;
                     }
                 }
             }

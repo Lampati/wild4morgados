@@ -12,23 +12,43 @@
     <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False" ContextMenu="{Binding null}" >
 
         <ribbon:Ribbon.ApplicationMenu>
+
+            
+
+
             <ribbon:RibbonApplicationMenu SmallImageSource="/Resources/Images/Copy.png">
                 <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="/Resources/Images/GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" ContextMenu="{Binding null}" >
-                    <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="/Resources/Images/GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}"/>
-                    <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="/Resources/Images/GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}"/>
+                    <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="/Resources/Images/Oxygen_new.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}"/>
+                    <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="/Resources/Images/Oxygen_new.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}"/>
                 </ribbon:RibbonApplicationSplitMenuItem>
-                <ribbon:RibbonApplicationMenuItem  Header="Abrir" x:Name="menuBttnAbrir" ImageSource="/Resources/Images/GenericDocument.png" Command="Open" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}" />
-                <ribbon:RibbonApplicationMenuItem Header="Guardar" x:Name="menuBttnGuardar" ImageSource="/Resources/Images/GenericDocument.png" Command="Save" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}" />
-                <ribbon:RibbonApplicationSplitMenuItem Header="Guardar como..." x:Name="menuBttnGuardarComo" ImageSource="/Resources/Images/GenericDocument.png" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" ContextMenu="{Binding null}" >
-                    <ribbon:RibbonApplicationMenuItem Header="Formato Aplicación" x:Name="menuBttnGuardarComoAplicacion" ImageSource="/Resources/Images/GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoAplicacion}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}" />
-                    <ribbon:RibbonApplicationMenuItem Header="Formato Web" x:Name="menuBttnGuardarComoWeb" ImageSource="/Resources/Images/GenericDocument.png" HeaderTemplate="{StaticResource DataTemplateFormatoWeb}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}" />
+                <ribbon:RibbonApplicationMenuItem  Header="Abrir" x:Name="menuBttnAbrir" ImageSource="/Resources/Images/Oxygen_open1.png" Command="Open" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}" />
+                <ribbon:RibbonApplicationMenuItem Header="Guardar" x:Name="menuBttnGuardar" ImageSource="/Resources/Images/Oxygen_save.png" Command="Save" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}" />
+                <ribbon:RibbonApplicationSplitMenuItem Header="Guardar como..." x:Name="menuBttnGuardarComo" ImageSource="/Resources/Images/Oxygen_saveas.png" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" ContextMenu="{Binding null}" >
+                    <ribbon:RibbonApplicationMenuItem Header="Formato Aplicación" x:Name="menuBttnGuardarComoAplicacion" ImageSource="/Resources/Images/Oxygen_saveas.png" HeaderTemplate="{StaticResource DataTemplateFormatoAplicacion}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}" />
+                    <ribbon:RibbonApplicationMenuItem Header="Formato Web" x:Name="menuBttnGuardarComoWeb" ImageSource="/Resources/Images/Oxygen_saveas.png" HeaderTemplate="{StaticResource DataTemplateFormatoWeb}" Command="SaveAs" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}" />
                 </ribbon:RibbonApplicationSplitMenuItem>
                 
                 <ribbon:RibbonSeparator />
-                <ribbon:RibbonApplicationMenuItem Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="/Resources/Images/GenericDocument.png" Command="Print" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
+                <ribbon:RibbonApplicationMenuItem Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="/Resources/Images/Oxygen_print.png" Command="Print" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
                 <ribbon:RibbonSeparator />
-                <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="/Resources/Images/GenericDocument.png" Command="Close" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
-                
+                <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="/Resources/Images/Exit-32.png" Command="Close" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
+
+
+                <!--<ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>
+                    <ribbon:RibbonGallery CanUserFilter="False"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ribbon:RibbonGalleryCategory Header="Recent Documents" 
+                                      Background="Transparent" 
+                                      ItemsSource="{DynamicResource MostRecentFiles}">
+                            <ribbon:RibbonGalleryCategory.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ribbon:RibbonGalleryCategory.ItemsPanel>
+                        </ribbon:RibbonGalleryCategory>
+                    </ribbon:RibbonGallery>
+                </ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>-->
+
             </ribbon:RibbonApplicationMenu>
         </ribbon:Ribbon.ApplicationMenu>
 
@@ -87,7 +107,7 @@
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Copy}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
-                        SmallImageSource="/Resources/Images/Copy.png"
+                        SmallImageSource="/Resources/Images/Copy.png"                                     
                         Label="Copiar" />
 
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
@@ -97,52 +117,64 @@
                         SmallImageSource="/Resources/Images/Delete.png"
                         Label="Eliminar" />
                 
-                <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        Command="{x:Static ApplicationCommands.Undo}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
-                        SmallImageSource="/Resources/Images/Delete.png"/>
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        Command="{x:Static ApplicationCommands.Redo}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
-                        SmallImageSource="/Resources/Images/Delete.png"/>
-
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        Command="{x:Static ApplicationCommands.Undo}"
-                        CommandTarget="{Binding ElementName=TextEditor}"
-                        SmallImageSource="/Resources/Images/Delete.png"/>
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        Command="{x:Static ApplicationCommands.Redo}"
-                        CommandTarget="{Binding ElementName=TextEditor}"
-                        SmallImageSource="/Resources/Images/Delete.png"/>
-
-                </StackPanel>
-                </StackPanel>
+                
 
 
 
 
             </ribbon:RibbonGroup>
 
+            <ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoGargar" ContextMenu="{Binding null}">
+                <StackPanel Orientation="Vertical" Margin="0,12,0,0">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
+                    Command="{x:Static ApplicationCommands.Undo}"
+                    CommandTarget="{Binding ElementName=TextEditor}"
+                    SmallImageSource="/Resources/Images/undo.png"
+                    Label="Deshacer"/>
+                <ribbon:RibbonButton ContextMenu="{Binding null}"
+                    Command="{x:Static ApplicationCommands.Redo}"
+                    CommandTarget="{Binding ElementName=TextEditor}"
+                    SmallImageSource="/Resources/Images/redo.png"
+                    Label="Rehacer"/>
+
+                </StackPanel>
+
+            </ribbon:RibbonGroup>
+
+            <ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoDesigner" ContextMenu="{Binding null}">
+
+                <StackPanel Orientation="Vertical" Margin="0,12,0,0">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
+                        Command="{x:Static ApplicationCommands.Undo}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        SmallImageSource="/Resources/Images/undo.png"
+                        Label="Deshacer"/>
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                        Command="{x:Static ApplicationCommands.Redo}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        SmallImageSource="/Resources/Images/redo.png"
+                        Label="Rehacer"/>
+
+                    </StackPanel>
+              
+
+            </ribbon:RibbonGroup>
+
             <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
+                <StackPanel Margin="0,12,0,0">
 
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
+                            HorizontalContentAlignment="Center"
+                            SmallImageSource="/Resources/Images/find3.png"
+                            Label="Buscar"
+                            Click="ButtonBuscar_Click"/>
 
-                <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        HorizontalContentAlignment="Center"
-                        SmallImageSource="/Resources/Images/find3.png"
-                        Label="Buscar"
-                        Click="ButtonBuscar_Click"/>
-
-                <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        HorizontalContentAlignment="Center"
-                        SmallImageSource="/Resources/Images/findreplace2.png"
-                        Label="Buscar/Reemplazar" 
-                        Click="ButtonBuscarYReemplazar_Click"/>
-
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                            HorizontalContentAlignment="Center"
+                            SmallImageSource="/Resources/Images/findreplace2.png"
+                            Label="Buscar/Reemplazar" 
+                            Click="ButtonBuscarYReemplazar_Click"/>
+                </StackPanel>
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
@@ -222,8 +254,8 @@
                             />
                     </StackPanel>
                 </Border>
-                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                    <ribbon:RibbonButton ContextMenu="{Binding null}" VerticalAlignment="Center"
+                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0,12,0,0">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" VerticalAlignment="Center" 
                             Command="{x:Static s:DesignerCanvas.DistributeHorizontal}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                             HorizontalContentAlignment="Center"                        
@@ -242,8 +274,8 @@
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Diagramación" Name="ribbonGroupDiagramacion" ContextMenu="{Binding null}">
-                <StackPanel>
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                <StackPanel Margin="0,12,0,0">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
                         Command="{x:Static s:DesignerCanvas.Group}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Group.png"
@@ -256,8 +288,8 @@
                         Label="Desagrupar" />
                 </StackPanel>
 
-                <StackPanel>
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                <StackPanel Margin="0,12,0,0">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
                         Command="{x:Static s:DesignerCanvas.BringForward}"
                             CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/BringForward.png"
@@ -269,7 +301,7 @@
                         SmallImageSource="/Resources/Images/BringToFront.png"
                         Label="Al Frente" />
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Margin="0,12,0,0">
                     <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static s:DesignerCanvas.SendBackward}"
                             CommandTarget="{Binding ElementName=MyDesigner}"

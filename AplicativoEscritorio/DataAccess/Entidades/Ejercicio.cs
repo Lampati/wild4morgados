@@ -42,6 +42,12 @@ namespace DataAccess.Entidades
             set { this.pathGuardadoActual = value; }
         }
 
+        public override string Nombre
+        {
+            get { return this.nombre; }
+            set { this.nombre = value; }
+        }
+
 
         public override ModoVisual UltimoModoGuardado
         {

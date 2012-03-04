@@ -15,6 +15,7 @@ namespace DataAccess.Entidades
         protected string gargar;
         protected bool modificadoDesdeUltimoGuardado;
         protected string pathGuardadoActual;
+        protected string nombre;
 
         #region IPersistible Members
 
@@ -57,6 +58,12 @@ namespace DataAccess.Entidades
         }
 
         public abstract string PathGuardadoActual
+        {
+            get;
+            set;
+        }
+
+        public abstract string Nombre
         {
             get;
             set;
