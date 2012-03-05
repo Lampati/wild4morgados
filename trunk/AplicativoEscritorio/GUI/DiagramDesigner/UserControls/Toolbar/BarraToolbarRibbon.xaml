@@ -165,13 +165,13 @@
 
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                             HorizontalContentAlignment="Center"
-                            SmallImageSource="/Resources/Images/find3.png"
+                            SmallImageSource="/Resources/Images/Search128.png"
                             Label="Buscar"
                             Click="ButtonBuscar_Click"/>
 
                     <ribbon:RibbonButton ContextMenu="{Binding null}"
                             HorizontalContentAlignment="Center"
-                            SmallImageSource="/Resources/Images/findreplace2.png"
+                            SmallImageSource="/Resources/Images/SearchRep128.png"
                             Label="Buscar/Reemplazar" 
                             Click="ButtonBuscarYReemplazar_Click"/>
                 </StackPanel>
@@ -195,13 +195,13 @@
                 <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
                         Click="ButtonFlujo_Click"
-                        LargeImageSource="/Resources/Images/Workflow.png"
+                        LargeImageSource="/Resources/Images/Flow128.png"
                         Label="Flujo" />
 
                 <ribbon:RibbonToggleButton Name="ButtonTexto" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonTexto_Click"
-                        LargeImageSource="/Resources/Images/Gargar.png"
+                        LargeImageSource="/Resources/Images/Gargar128.png"
                         Label="Gargar" />
             </ribbon:RibbonGroup>
 
@@ -318,6 +318,8 @@
 
 
         </ribbon:RibbonTab>
+
+       
 
         <ribbon:RibbonTab Name="TabDetallesEjercicio" Header="Detalles Ejercicio" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
 
