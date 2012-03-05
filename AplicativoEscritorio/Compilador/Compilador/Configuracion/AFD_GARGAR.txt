@@ -1,4 +1,4 @@
-564
+565
 20
 pp0
 a1..a2..af3..a4..a5..a6..a7..a8..af9
@@ -22,7 +22,7 @@ varf1
 numf1
 1
 abcdefghijklmnopqrstuvwxyz0123456789-+*/<>=,;:()[]{} °!"#$%&?¡¨_|'¿´¬\~^`@
-351
+352
 pp0..a..a1
 a1..n..a2
 a2..d..af3
@@ -211,8 +211,9 @@ numf1..0..numf1%%numf1..1..numf1%%numf1..2..numf1%%numf1..3..numf1%%numf1..4..nu
 simbf2..0..numf1%%simbf2..1..numf1%%simbf2..2..numf1%%simbf2..3..numf1%%simbf2..4..numf1%%simbf2..5..numf1%%simbf2..6..numf1%%simbf2..7..numf1%%simbf2..8..numf1%%simbf2..9..numf1
 pp0..'..lit1
 lit1..'..litf1
+litf1..'..lit1
 lit1..a..lit1%%lit1..b..lit1%%lit1..c..lit1%%lit1..d..lit1%%lit1..e..lit1%%lit1..f..lit1%%lit1..g..lit1%%lit1..h..lit1%%lit1..i..lit1%%lit1..j..lit1%%lit1..k..lit1%%lit1..l..lit1%%lit1..m..lit1%%lit1..n..lit1%%lit1..o..lit1%%lit1..p..lit1%%lit1..q..lit1%%lit1..r..lit1%%lit1..s..lit1%%lit1..t..lit1%%lit1..u..lit1%%lit1..v..lit1%%lit1..w..lit1%%lit1..x..lit1%%lit1..y..lit1%%lit1..z..lit1%%lit1..0..lit1%%lit1..1..lit1%%lit1..2..lit1%%lit1..3..lit1%%lit1..4..lit1%%lit1..5..lit1%%lit1..6..lit1%%lit1..7..lit1%%lit1..8..lit1%%lit1..9..lit1
-lit1.. ..lit1%%lit1..-..lit1%%lit1..+..lit1%%lit1..*..lit1%%lit1../..lit1%%lit1..<..lit1%%lit1..>..lit1%%lit1..=..lit1%%lit1..,..lit1%%lit1..;..lit1%%lit1..:..lit1%%lit1..(..lit1%%lit1..)..lit1%%lit1..[..lit1%%lit1..]..lit1%%lit1..{..lit1%%lit1..}..lit1%%lit1..°..lit1%%lit1..!..lit1%%lit1.."..lit1%%lit1..#..lit1%%lit1..$..lit1%%lit1..%..lit1%%lit1..&..lit1%%lit1..?..lit1%%lit1..¡..lit1%%lit1..¨..lit1%%lit1.._..lit1%%lit1..|..lit1%%lit1..¿..lit1%%lit1..´..lit1%%lit1..¬..lit1%%lit1..\..lit1%%lit1..~..lit1%%lit1..^..lit1%%lit1..`..lit1%%lit1..@..lit1
+lit1.. ..lit1%%lit1..-..lit1%%lit1..+..lit1%%lit1..*..lit1%%lit1../..lit1%%lit1..<..lit1%%lit1..>..lit1%%lit1..=..lit1%%lit1..,..lit1%%lit1..;..lit1%%lit1..:..lit1%%lit1..(..lit1%%lit1..)..lit1%%lit1..[..lit1%%lit1..]..lit1%%lit1..{..lit1%%lit1..}..lit1%%lit1..°..lit1%%lit1..!..lit1%%lit1.."..lit1%%lit1..#..lit1%%lit1..$..lit1%%lit1..%..lit1%%lit1..&..lit1%%lit1..?..lit1%%lit1..¡..lit1%%lit1..¨..lit1%%lit1.._..lit1%%lit1..|..lit1%%lit1..¿..lit1%%lit1..´..lit1%%lit1..¬..lit1%%lit1..~..lit1%%lit1..^..lit1%%lit1..`..lit1%%lit1..@..lit1
 pp0..g..varf1%%pp0..i..varf1%%pp0..j..varf1%%pp0..k..varf1%%pp0..q..varf1%%pp0..r..varf1%%pp0..u..varf1%%pp0..w..varf1%%pp0..x..varf1%%pp0..y..varf1%%pp0..z..varf1
 varf1..a..varf1%%varf1..b..varf1%%varf1..c..varf1%%varf1..d..varf1%%varf1..e..varf1%%varf1..f..varf1%%varf1..g..varf1%%varf1..h..varf1%%varf1..i..varf1%%varf1..j..varf1%%varf1..k..varf1%%varf1..l..varf1%%varf1..m..varf1%%varf1..n..varf1%%varf1..o..varf1%%varf1..p..varf1%%varf1..q..varf1%%varf1..r..varf1%%varf1..s..varf1%%varf1..t..varf1%%varf1..u..varf1%%varf1..v..varf1%%varf1..w..varf1%%varf1..x..varf1%%varf1..y..varf1%%varf1..z..varf1%%varf1..0..varf1%%varf1..1..varf1%%varf1..2..varf1%%varf1..3..varf1%%varf1..4..varf1%%varf1..5..varf1%%varf1..6..varf1%%varf1..7..varf1%%varf1..8..varf1%%varf1..9..varf1%%varf1..°..varf1%%varf1..#..varf1%%varf1..$..varf1%%varf1..%..varf1%%varf1..?..varf1%%varf1..¡..varf1%%varf1..¨..varf1%%varf1.._..varf1%%varf1..|..varf1%%varf1..¿..varf1%%varf1..´..varf1%%varf1..¬..varf1%%varf1..\..varf1%%varf1..~..varf1%%varf1..^..varf1%%varf1..`..varf1%%varf1..@..varf1
 a1..a..varf1%%a1..b..varf1%%a1..c..varf1%%a1..d..varf1%%a1..e..varf1%%a1..f..varf1%%a1..g..varf1%%a1..h..varf1%%a1..i..varf1%%a1..j..varf1%%a1..k..varf1%%a1..l..varf1%%a1..m..varf1%%a1..o..varf1%%a1..p..varf1%%a1..q..varf1%%a1..s..varf1%%a1..t..varf1%%a1..u..varf1%%a1..v..varf1%%a1..w..varf1%%a1..x..varf1%%a1..y..varf1%%a1..z..varf1%%a1..0..varf1%%a1..1..varf1%%a1..2..varf1%%a1..3..varf1%%a1..4..varf1%%a1..5..varf1%%a1..6..varf1%%a1..7..varf1%%a1..8..varf1%%a1..9..varf1

@@ -401,6 +401,9 @@
     <Resource Include="Resources\Images\Exit-32.png" />
     <Resource Include="Resources\Images\redo.png" />
     <Resource Include="Resources\Images\undo.png" />
+    <Resource Include="Resources\Images\Search24.png" />
+    <Resource Include="Resources\Images\SearchRep24.png" />
+    <Resource Include="Resources\Images\Flow48.png" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
