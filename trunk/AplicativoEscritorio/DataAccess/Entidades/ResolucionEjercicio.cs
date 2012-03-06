@@ -7,6 +7,7 @@ using DataAccess.Enums;
 using Globales.Enums;
 using Utilidades.XML;
 using Utilidades.Criptografia;
+using DataAccess.Excepciones;
 
 namespace DataAccess.Entidades
 {
@@ -16,9 +17,6 @@ namespace DataAccess.Entidades
         #region Atributos
         private Ejercicio ejercicio;        
         #endregion
-
-
-
 
         #region IPersistible Members
         protected override string Hash
@@ -34,7 +32,7 @@ namespace DataAccess.Entidades
             }
         }
 
-        protected override string ToXML()
+        public override string ToXML()
         {
             XMLCreator xml = new XMLCreator();
             xml.AddElement();
@@ -52,6 +50,10 @@ namespace DataAccess.Entidades
             xml.SetValue(this.Gargar);
             xml.LevelUp();
             xml.AddElement();
+            xml.SetTitle("EjercicioCorrespondiente");
+            xml.SetValue(this.ejercicio.ToXML());
+            xml.LevelUp();
+            xml.AddElement();
             xml.SetTitle("HashResolucionEjercicio");
             xml.SetValue(this.Hash);
 
@@ -59,7 +61,7 @@ namespace DataAccess.Entidades
         }
 
 
-        protected override void FromXML(string plainXml)
+        public override void FromXML(string plainXml)
         {
             XMLReader xmlReader = new XMLReader();
             XMLElement xmlElem = xmlReader.Read(plainXml);
@@ -68,38 +70,16 @@ namespace DataAccess.Entidades
             this.ModificadoDesdeUltimoGuardado = bool.Parse(xmlElem.FindFirst("ModificadoDesdeUltimoGuardado").value);
             this.PathGuardadoActual = this.Enunciado = xmlElem.FindFirst("PathGuardadoActual").value;
             this.Gargar = xmlElem.FindFirst("Gargar").value;
+
+            this.ejercicio = new Ejercicio();
+            this.ejercicio.FromXML(xmlElem.FindFirst("EjercicioCorrespondiente").value);
         }
 
-        #endregion
-
-        
+        #endregion        
 
         #region IPropiedadesEjercicios Members
 
-        public override bool ModificadoDesdeUltimoGuardado
-        {
-            get
-            {
-                return modificadoDesdeUltimoGuardado;
-            }
-            set
-            {
-                modificadoDesdeUltimoGuardado = value;
-            }
-        }
-
-        public override string PathGuardadoActual
-        {
-            get { return this.pathGuardadoActual; }
-            set { this.pathGuardadoActual = value; }
-        }
-
-        public override string Nombre
-        {
-            get { return this.nombre; }
-            set { this.nombre = value; }
-        }
-
+       
 
         public override string Enunciado
         {
@@ -144,11 +124,6 @@ namespace DataAccess.Entidades
             {
                 return ejercicio.SolucionGargar;
             }
-            set
-            {
-            }
-
-            
         }
 
         public override string SolucionTexto
@@ -168,11 +143,7 @@ namespace DataAccess.Entidades
             
         }
 
-        public override ModoVisual UltimoModoGuardado
-        {
-            get { return this.ultimoModoGuardado; }
-            set { this.ultimoModoGuardado = value; }
-        }
+       
 
         public override ModoEjercicio Modo
         {
@@ -181,5 +152,18 @@ namespace DataAccess.Entidades
         }
 
         #endregion
+
+        public ResolucionEjercicio()
+        {
+
+        }
+
+        public ResolucionEjercicio(Ejercicio ej)
+        {
+            extension = Globales.ConstantesGlobales.EXTENSION_RESOLUCION;
+            ejercicio = ej;
+        }
+
+       
     }
 }

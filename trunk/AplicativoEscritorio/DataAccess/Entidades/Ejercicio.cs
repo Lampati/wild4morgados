@@ -24,36 +24,7 @@ namespace DataAccess.Entidades
 
         #region Propiedades
 
-        public override bool ModificadoDesdeUltimoGuardado
-        {
-            get
-            {
-                return modificadoDesdeUltimoGuardado;
-            }
-            set
-            {
-                modificadoDesdeUltimoGuardado = value;
-            }
-        }
-
-        public override string PathGuardadoActual
-        {
-            get { return this.pathGuardadoActual; }
-            set { this.pathGuardadoActual = value; }
-        }
-
-        public override string Nombre
-        {
-            get { return this.nombre; }
-            set { this.nombre = value; }
-        }
-
-
-        public override ModoVisual UltimoModoGuardado
-        {
-            get { return this.ultimoModoGuardado; }
-            set { this.ultimoModoGuardado = value; }
-        }
+        
 
         public override ModoEjercicio Modo
         {
@@ -82,7 +53,6 @@ namespace DataAccess.Entidades
         public override string SolucionGargar
         {
             get { return this.solucionGargar; }
-            set { this.solucionGargar = value; }
         }
 
         public override List<TestPrueba> TestsPrueba
@@ -94,14 +64,22 @@ namespace DataAccess.Entidades
         public override string Gargar
         {
             get { return this.gargar; }
-            set { this.gargar = value; }
+            set 
+            { 
+                this.gargar = value;
+                this.solucionGargar = value;
+            }
         }
 
 
         #endregion
 
         #region Constructores
-        public Ejercicio() { }
+        public Ejercicio() 
+        {
+            extension = Globales.ConstantesGlobales.EXTENSION_EJERCICIO;        
+        }
+
         #endregion
 
         #region Métodos
@@ -131,7 +109,7 @@ namespace DataAccess.Entidades
         /// aquí.
         /// </summary>
         /// <returns></returns>
-        protected override string ToXML()
+        public override string ToXML()
         {
             XMLCreator xml = new XMLCreator();
             xml.AddElement();
@@ -184,7 +162,7 @@ namespace DataAccess.Entidades
             return xml.Get();
         }
 
-        protected override void FromXML(string plainXml)
+        public override void FromXML(string plainXml)
         {
             XMLReader xmlReader = new XMLReader();
             XMLElement xmlElem = xmlReader.Read(plainXml);
@@ -192,8 +170,8 @@ namespace DataAccess.Entidades
 
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = (NivelDificultad)int.Parse(xmlElem.FindFirst("NivelDificultad").value);
-            this.SolucionGargar = xmlElem.FindFirst("SolucionGargar").value;
-            this.Gargar = xmlElem.FindFirst("Gargar").value;
+            this.solucionGargar = xmlElem.FindFirst("SolucionGargar").value;
+            this.gargar = xmlElem.FindFirst("Gargar").value;
             this.SolucionTexto = xmlElem.FindFirst("SolucionTexto").value;
             this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             this.Modo = (ModoEjercicio)int.Parse(xmlElem.FindFirst("Modo").value);

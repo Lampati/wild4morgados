@@ -13,6 +13,9 @@ namespace Globales
 
         public const string NOMBRE_APLICACION = @"ProgramAR - Ragnarok";
 
+        public const string EXTENSION_EJERCICIO = @"gej";
+        public const string EXTENSION_RESOLUCION = @"gres";
+
         private static string pathEjecucionAplicacion = null;
         public static string PathEjecucionAplicacion
         {

@@ -142,7 +142,6 @@
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoDesigner" ContextMenu="{Binding null}">
-
                 <StackPanel Orientation="Vertical" Margin="0,12,0,0">
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                         Command="{x:Static ApplicationCommands.Undo}"
@@ -154,15 +153,11 @@
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/redo.png"
                         Label="Rehacer"/>
-
-                    </StackPanel>
-              
-
+                    </StackPanel>             
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
                 <StackPanel Margin="0,12,0,0">
-
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                             HorizontalContentAlignment="Center"
                             SmallImageSource="/Resources/Images/Search128.png"
