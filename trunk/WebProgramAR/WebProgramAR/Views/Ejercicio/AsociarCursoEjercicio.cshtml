@@ -67,7 +67,7 @@
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.EstadoEjercicioId.ToString()
-                    }))
+                    }), new { @style = "display:none" })
                     </td>
                 </tr>
                 <tr>
@@ -77,7 +77,7 @@
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.NivelEjercicioId.ToString()
-                    })
+                    }), new { @style = "display:none" }
                     )
                     </td>
                     <td><div class="label">Relacionado</div></td>
@@ -90,7 +90,7 @@
                                 },
                               "value",
                               "text"
-                       ))
+                    ), new { @style = "display:none" })
                     </td>
                 </tr>
             </table>
