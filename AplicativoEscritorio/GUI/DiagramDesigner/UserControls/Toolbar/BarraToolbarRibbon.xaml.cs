@@ -85,6 +85,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Collapsed;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Visible;
                         bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Visible;
+                        ribbonGroupDetallesDescarga.Visibility = System.Windows.Visibility.Collapsed;
 
                         esEjercicio = true;
                     }
@@ -93,6 +94,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Visible;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Collapsed;
                         bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Collapsed;
+                        ribbonGroupDetallesDescarga.Visibility = System.Windows.Visibility.Visible;
 
                         esEjercicio = false;
                     }

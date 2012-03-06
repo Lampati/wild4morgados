@@ -16,6 +16,7 @@ namespace DataAccess.Entidades
         protected bool modificadoDesdeUltimoGuardado;
         protected string pathGuardadoActual;
         protected string nombre;
+        protected string extension;
 
         #region IPersistible Members
 
@@ -23,6 +24,8 @@ namespace DataAccess.Entidades
         {
             string xml = this.ToXML();
             string xmlEncriptado = Crypto.Encriptar(xml);
+
+           
 
             File.WriteAllText(path, xmlEncriptado);
         }
@@ -35,9 +38,9 @@ namespace DataAccess.Entidades
             this.FromXML(xmlDesencriptado);
         }
 
-        protected abstract string ToXML();
+        public abstract string ToXML();
 
-        protected abstract void FromXML(string plainXml);
+        public abstract void FromXML(string plainXml);
 
         protected abstract string Hash { get; }
 
@@ -45,29 +48,63 @@ namespace DataAccess.Entidades
 
         #region IPropiedadesEjercicios Members
 
-        public abstract bool ModificadoDesdeUltimoGuardado
+
+        public bool ModificadoDesdeUltimoGuardado
         {
-            get;
-            set;
+            get
+            {
+                return modificadoDesdeUltimoGuardado;
+            }
+            set
+            {
+                modificadoDesdeUltimoGuardado = value;
+            }
         }
+
+        public string PathGuardadoActual
+        {
+            get { return this.pathGuardadoActual; }
+            set
+            {
+                string path = value;
+                if (!path.ToLower().EndsWith(string.Format(".{0}", extension)))
+                {
+                    path = string.Format("{0}.{1}", path, extension);
+                }                
+                this.pathGuardadoActual = path;
+
+                string[] auxPath = path.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries);
+                nombre = auxPath[auxPath.Length - 1];
+            }
+        }
+
+        public  string Nombre
+        {
+            get { return this.nombre; }
+        }
+
+        public  string Extension
+        {
+            get { return this.extension; }
+            set { this.extension = value; }
+        }
+
+        public  ModoVisual UltimoModoGuardado
+        {
+            get { return this.ultimoModoGuardado; }
+            set { this.ultimoModoGuardado = value; }
+        }
+
+
+
+        
 
         public abstract string Enunciado
         {
             get;
             set;
-        }
+        }       
 
-        public abstract string PathGuardadoActual
-        {
-            get;
-            set;
-        }
-
-        public abstract string Nombre
-        {
-            get;
-            set;
-        }
 
         public abstract string Gargar
         {
@@ -84,7 +121,6 @@ namespace DataAccess.Entidades
         public abstract string SolucionGargar
         {
             get;
-            set;
         }
 
         public abstract string SolucionTexto
@@ -93,11 +129,7 @@ namespace DataAccess.Entidades
             set;
         }
 
-        public abstract ModoVisual UltimoModoGuardado
-        {
-            get;
-            set;
-        }
+       
 
         public abstract Enums.ModoEjercicio Modo
         {

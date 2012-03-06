@@ -164,11 +164,13 @@ namespace DiagramDesigner
 
                 if (continuar)
                 {
+                    string path;
                     switch (Convert.ToInt32(e.Parameter))
                     {
                         case 1:
 
-                            string path = FileDialogManager.ElegirUbicacionNuevoArchivo(this, "Elegir nombre y ubicación para el nuevo ejercicio", configApp.DirectorioEjerciciosCreados);
+                            path = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir nombre y ubicación para el nuevo ejercicio", configApp.DirectorioEjerciciosCreados);                            
+
                             if (!string.IsNullOrWhiteSpace(path))
                             {
 
@@ -177,8 +179,7 @@ namespace DiagramDesigner
                                 ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
                                 ej.ModificadoDesdeUltimoGuardado = false;
                                 ej.PathGuardadoActual = path;
-                                string[] auxPath = path.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries);
-                                ej.Nombre = auxPath[auxPath.Length - 1];
+                                
                                 ej.Guardar(ej.PathGuardadoActual);
                                 ArchCargado = ej;
                                 //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
@@ -186,11 +187,52 @@ namespace DiagramDesigner
                             }
                             break;
                         case 2:
-                            ResolucionEjercicio res = new ResolucionEjercicio();
-                            res.UltimoModoGuardado = ModoVisual.Texto;
-                            res.Modo = DataAccess.Enums.ModoEjercicio.Normal;
-                            res.ModificadoDesdeUltimoGuardado = false;
-                            ArchCargado = res;
+
+                            string pathEj = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir ejercicio a resolver", configApp.DirectorioEjerciciosDescargados);
+
+                            if (!string.IsNullOrWhiteSpace(pathEj))
+                            {
+
+                                //chequeo de tipo de archivo
+                                if (pathEj.ToLower().EndsWith(string.Format(".{0}", Globales.ConstantesGlobales.EXTENSION_EJERCICIO)))
+                                {
+
+                                    Ejercicio ej = new Ejercicio();
+                                    ej.PathGuardadoActual = pathEj;
+                                    ej.Abrir(ej.PathGuardadoActual);
+                                    //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                    ej.ModificadoDesdeUltimoGuardado = false;
+
+                                    path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}",ej.Nombre), configApp.DirectorioResolucionesEjercicios);
+
+                                    if (!string.IsNullOrWhiteSpace(path))
+                                    {
+
+                                        ResolucionEjercicio res = new ResolucionEjercicio(ej);
+                                        
+                                        res.UltimoModoGuardado = ModoVisual.Texto;
+                                        res.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                                        res.ModificadoDesdeUltimoGuardado = false;
+                                        res.PathGuardadoActual = path;                                        
+                                        res.Guardar(res.PathGuardadoActual);
+                                        ArchCargado = res;
+                                        //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                        res.ModificadoDesdeUltimoGuardado = false;
+
+                                        
+                                    }
+
+                                    
+
+
+                                }
+                                else
+                                {
+                                    //Error formato no soportado
+                                }
+
+                               
+                            }
                             break;
                     }
                 }
@@ -213,17 +255,28 @@ namespace DiagramDesigner
                     if (!string.IsNullOrWhiteSpace(path))
                     {
                         //chequeo de tipo de archivo
-
-                        Ejercicio ej = new Ejercicio();
-                        ej.UltimoModoGuardado = ModoVisual.Texto;
-                        ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;                        
-                        ej.PathGuardadoActual = path;
-                        string[] auxPath = path.Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries);
-                        ej.Nombre = auxPath[auxPath.Length - 1];
-                        ej.Abrir(ej.PathGuardadoActual);
-                        ArchCargado = ej;
-                        //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                        ej.ModificadoDesdeUltimoGuardado = false;
+                        if (path.ToLower().EndsWith(string.Format(".{0}",Globales.ConstantesGlobales.EXTENSION_EJERCICIO)))
+                        {
+                            Ejercicio ej = new Ejercicio();
+                            ej.PathGuardadoActual = path;
+                            ej.Abrir(ej.PathGuardadoActual);
+                            ArchCargado = ej;
+                            //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                            ej.ModificadoDesdeUltimoGuardado = false;
+                        }
+                        else if (path.ToLower().EndsWith(string.Format(".{0}", Globales.ConstantesGlobales.EXTENSION_RESOLUCION)))
+                        {
+                            ResolucionEjercicio res = new ResolucionEjercicio();
+                            res.PathGuardadoActual = path;
+                            res.Abrir(res.PathGuardadoActual);
+                            ArchCargado = res;
+                            //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                            res.ModificadoDesdeUltimoGuardado = false;
+                        }
+                        else
+                        {
+                            //Error formato no soportado
+                        }                        
                     }
                 }
             }
@@ -245,7 +298,7 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                int i = 0;
+                
             }
         }
 
