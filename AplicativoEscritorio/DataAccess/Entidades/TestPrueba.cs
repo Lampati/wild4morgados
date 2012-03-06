@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utilidades.XML;
 
 namespace DataAccess.Entidades
 {
@@ -12,22 +13,44 @@ namespace DataAccess.Entidades
         #endregion
 
         #region Propiedades
+        public string PropiedadA
+        {
+            get { return this.propiedadA; }
+            set { this.propiedadA = value; }
+        }
         #endregion
 
         #region Constructores
         public TestPrueba() { }
-
-        public TestPrueba(string propiedadA)
-        {
-            this.propiedadA = propiedadA;
-        }
         #endregion
 
         #region Métodos
+        public void ToXml(XMLCreator xml)
+        {
+            xml.AddElement();
+            xml.SetTitle("TestPrueba");
+            xml.AddElement();
+            xml.SetTitle("PropiedadA");
+            xml.SetValue(this.propiedadA);
+            xml.LevelUp();
+            xml.LevelUp();
+        }
+
+        public void FromXml(Utilidades.XML.XMLElement xmlElem)
+        {
+            if (Object.Equals(xmlElem, null))
+                throw new NullReferenceException("El XML para el Test de Prueba se encuentra nulo.");
+
+            this.propiedadA = xmlElem.FindFirst("PropiedadA").value;
+        }
+        #endregion
+
+        #region Object Members
         public override string ToString()
         {
-            /*Acá concatenar todas las propiedades para luego hacer el hash (por ahora es sólo 1 propiedad "propiedadA")*/
-            return this.propiedadA;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.propiedadA);
+            return sb.ToString();
         }
         #endregion
     }

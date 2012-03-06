@@ -23,9 +23,6 @@ namespace DataAccess.Entidades
         #endregion
 
         #region Propiedades
-
-        
-
         public override ModoEjercicio Modo
         {
             get { return this.modo; }
@@ -71,47 +68,25 @@ namespace DataAccess.Entidades
             }
         }
 
-
+        public override string Extension
+        {
+            get { return Globales.ConstantesGlobales.EXTENSION_EJERCICIO; }
+        }
         #endregion
 
         #region Constructores
-        public Ejercicio() 
-        {
-            extension = Globales.ConstantesGlobales.EXTENSION_EJERCICIO;        
-        }
+        public Ejercicio() { }
 
         #endregion
 
         #region Métodos
-        protected override string Hash
-        {
-            get
-            {
-                string ultimoModo = ((int)this.ultimoModoGuardado).ToString();
-                string nivelDificultad = ((int)this.nivelDificultad).ToString();
-
-                StringBuilder sb = new StringBuilder();
-                sb.Append(ultimoModo);
-                sb.Append(this.enunciado);
-                sb.Append(nivelDificultad);
-                sb.Append(this.solucionTexto);
-                sb.Append(this.solucionGargar);
-                if (!Object.Equals(this.testsPrueba, null))
-                    foreach (TestPrueba test in this.testsPrueba)
-                        sb.Append(test.ToString());
-
-                return Crypto.ComputarHash(sb.ToString());
-            }
-        }
-
         /// <summary>
         /// Genera el XML del ejercicio con todas sus propiedades. Si se agregan atributos a la clase, deben ser colocados
         /// aquí.
         /// </summary>
         /// <returns></returns>
-        public override string ToXML()
+        public override void ToXML(XMLCreator xml)
         {
-            XMLCreator xml = new XMLCreator();
             xml.AddElement();
             xml.SetTitle("EjercicioProgramAr");
             xml.AddElement();
@@ -147,26 +122,23 @@ namespace DataAccess.Entidades
                 xml.AddElement();
                 xml.SetTitle("TestsPrueba");
                 foreach (TestPrueba test in this.testsPrueba)
-                {
-                    xml.AddElement();
-                    xml.SetTitle("TestPrueba");
-                    xml.SetValue(test.ToString());
-                    xml.LevelUp();
-                }
+                    test.ToXml(xml);
                 xml.LevelUp();
             }
             xml.AddElement();
             xml.SetTitle("HashEjercicio");
             xml.SetValue(this.Hash);
-
-            return xml.Get();
+            xml.LevelUp();
         }
 
-        public override void FromXML(string plainXml)
+        public override void FromXML(XMLElement xmlElem)
         {
-            XMLReader xmlReader = new XMLReader();
-            XMLElement xmlElem = xmlReader.Read(plainXml);
+            if (Object.Equals(xmlElem, null))
+                throw new NullReferenceException("El XML para el Ejercicio se encuentra nulo.");
+
             xmlElem = xmlElem.FindFirst("EjercicioProgramAr");
+            if (Object.Equals(xmlElem, null))
+                throw new NullReferenceException("El XML no contiene el tag <EjercicioProgramAr>");
 
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = (NivelDificultad)int.Parse(xmlElem.FindFirst("NivelDificultad").value);
@@ -180,7 +152,11 @@ namespace DataAccess.Entidades
             {
                 List<TestPrueba> pruebas = new List<TestPrueba>();
                 foreach (XMLElement xmlTest in xmlTests.childs)
-                    pruebas.Add(new TestPrueba(xmlTest.value));
+                {
+                    TestPrueba tp = new TestPrueba();
+                    tp.FromXml(xmlTest);
+                    pruebas.Add(tp);
+                }
 
                 this.testsPrueba = pruebas;
             }
@@ -199,6 +175,26 @@ namespace DataAccess.Entidades
 
             if (!this.testsPrueba.Contains(tPrueba))
                 this.testsPrueba.Add(tPrueba);
+        }
+        #endregion
+
+        #region Object Members
+        public override string ToString()
+        {
+            string ultimoModo = ((int)this.ultimoModoGuardado).ToString();
+            string nivelDificultad = ((int)this.nivelDificultad).ToString();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(ultimoModo);
+            sb.Append(this.enunciado);
+            sb.Append(nivelDificultad);
+            sb.Append(this.solucionTexto);
+            sb.Append(this.solucionGargar);
+            if (!Object.Equals(this.testsPrueba, null))
+                foreach (TestPrueba test in this.testsPrueba)
+                    sb.Append(test.ToString());
+
+            return sb.ToString();
         }
         #endregion
     }
