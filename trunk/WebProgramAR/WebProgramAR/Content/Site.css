@@ -182,8 +182,12 @@ page width. Or, you can specify an exact pixel width. */
 .page
 {
     width: 90%;
+    margin-top:-30px;
     margin-left: auto;
     margin-right: auto;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
 }
 
 header, #header
@@ -195,7 +199,9 @@ header, #header
     padding: 0;
     height: 95px;
     background:#fff;
-    border-radius:4px 4px 0 0;
+    -moz-border-radius:4px 4p 0 0;
+	-webkit-border-radius:4px 4p 0 0;
+	border-radius:4px 4p 0 0;
 }
 
 header h1, #header h1
@@ -226,7 +232,7 @@ footer, #footer
     background-color: #ccc;
     color: #999;
     padding: 0px 0;
-    height:60px;
+    height:80px;
     text-align: center;
     line-height: normal;
     margin: 0 0 50px 0;
@@ -235,8 +241,17 @@ footer, #footer
     -webkit-border-radius: 0 0 4px 4px;
     -moz-border-radius: 0 0 4px 4px;
     position: relative;
+    padding-left:40px;
 }
-
+footer .content
+{
+    float:left;
+    width:120px;
+    margin-top:10px;
+    color:#fff;
+    height:80%;
+    border-right:1px dotted #fff;
+}
 *{ margin:0; padding:0;}
 
 
@@ -336,7 +351,7 @@ ul.submenu
     width:180px;
     padding-left:10px;
     line-height:70%;
-    margin-top:3px;
+    margin-top:-20px;
     margin-left:40px;
     padding-top:10px;
     position:absolute;
@@ -365,15 +380,13 @@ ul.submenu
     border-radius: 8px !important;
     -webkit-border-radius: 8px !important;
     -moz-border-radius: 8px !important;
-    border:1px solid  #666 !important;
+    border:1px solid  #666;
 }
 .submenuLi a:hover
 {
-    -moz-box-shadow: 0 0 5px #888 !important;
-    -webkit-box-shadow: 0 0 5px #888 !important;
-    box-shadow: 0 0 5px #888 !important;
     background-color: #19f  !important;
     color: #fff !important;
+    border:1px solid #fff;
 }
 .submenuLi
 {
@@ -737,6 +750,10 @@ div#title
     position:relative;
     margin-top: 5px;
     height:15px;
+    color:#333;
+    font-size:1em;
+    font-weight:bold;
+    text-transform:uppercase;
 }
 
 .display-field, .editor-field
@@ -878,7 +895,7 @@ div.menu ul li a:hover, .boton:hover
     float:right;
     width:40%;
     height:10px;
-    margin-top:-53px;
+    margin-top:-43px;
     margin-right:10px;
 }
 .btn_filtros
@@ -886,7 +903,7 @@ div.menu ul li a:hover, .boton:hover
     float:right;
     background-color: #4d90fe;
     border: 1px #4d90fe solid;
-    
+    margin-right:5px;
 }
 
 .btn_nuevo
@@ -1982,4 +1999,140 @@ ul.tabs
     margin-top:-13px;
     position:relative;
     
+}
+/*INDEXELEMENTS*/
+#contentIndex
+{
+    margin-top:20px;   
+}
+.contentBox
+{
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+    border:3px solid #fff;   
+    width:120px;
+    height:120px;
+    color:#fff;
+    padding:30px;
+    margin:10px;
+}
+.contentBox:hover
+{
+    color:#19F;
+    text-transform:uppercase;
+    background:#fff;
+    border:3px solid #19f;   
+    cursor:pointer;
+}
+.divLine
+{
+    float:left;
+}
+.orange
+{
+    background-color: #EE4000 ;
+}
+.skyblue
+{
+    background-color: #19f ;
+}
+.green
+{
+    background-color: #50e492;
+}
+.purple
+{
+    background-color: #7f68de;
+}
+.contentDetailsIndex
+{
+    width:600px;
+    height:365px;
+    padding:5px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+    border:3px solid #fff;   
+    position:relative;
+    top:10px;
+    right:30px;
+    float:right;
+    background:#fff;
+    color:#fff;
+}
+.contentDetailsIndex .content
+{
+    position:absolute;   
+    background:#fff;
+}
+.titleContent
+{
+    font-size:1.5em;
+    bottom:20px;
+    margin-left:-26px;
+    padding:7px;
+    width:130%;
+	height:20px;
+	text-transform:uppercase;
+	opacity: .70;
+    filter: alpha(opacity=70%);   
+}
+.textContent
+{
+    font-size:1em;
+    margin-left:-26px;
+    margin-top:-10px;
+    height:120px;
+}
+.imageContent
+{
+    z-index:100;
+    margin-top:0px;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+
+.detailsContent
+{
+    z-index:101;
+    opacity: .70;
+    filter: alpha(opacity=70%);  
+    background:#000;
+    color:#fff;
+    height:120px;
+    width:150px;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	position:absolute;
+	bottom:30px;
+	right:20px;
+	padding:10px;
+}
+.queesSectionSpace
+{
+    border-left:2px dotted #333;
+    height:90%;
+    float:left;   
+}
+.queesContent
+{
+    font-size:1em;
+    color:#333;   
+    width:220px;
+}
+important
+{
+    font-size:1.2em;
+    color:#19F;
+    text-transform:uppercase;
+}
+enfasis
+{
+    font-size:1.1em;
+    color:#EE4400;
+    font-style:italic;
+    text-transform:uppercase;
 }

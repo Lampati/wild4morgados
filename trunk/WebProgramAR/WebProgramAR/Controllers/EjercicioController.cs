@@ -13,9 +13,6 @@ namespace WebProgramAR.Controllers
 {
     public class EjercicioController : ControllerBase
     {
-
-
-        
         //
         // GET: /Ejercicio/
 
@@ -54,9 +51,6 @@ namespace WebProgramAR.Controllers
             return View("Desaprobados",datos);
 
         }
-
-
-
 
         private EjercicioGrillaModel ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
