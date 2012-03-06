@@ -37,5 +37,10 @@ namespace WebProgramAR.Controllers
             ViewBag.Message = "Contacto";
             return View();
         }
+        public ActionResult Descripcion()
+        {
+            ViewBag.Message = "Que Es?";
+            return View();
+        }
     }
 }

@@ -15,7 +15,73 @@
 
 </script>
 
-<h1>@ViewBag.Message</h1>
-<p>
-    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-</p>
+<!--<h1>@ViewBag.Message</h1>-->
+<div id="contentIndex">
+    <div class="border_all contentDetailsIndex">
+        <div id="info1" class="content visible">
+            <div class="imageContent"><input type="image" src="@Url.Content("~/Content/images/index/novedades.jpg")" width="600px" height="365px" alt=""/></div>
+            <div class="detailsContent">Detalle</div>
+        </div>
+        <div id="info2" class="content hidden">
+            <div class="imageContent"><input type="image" src="@Url.Content("~/Content/images/index/tecnologia.jpg")"  width="600px" height="365px"  alt=""/></div>
+            <div class="detailsContent">Detalle</div>
+        </div>
+        <div id="info3" class="content hidden">
+            <div class="imageContent"><input type="image" src="@Url.Content("~/Content/images/index/jovenes.jpg")"  width="600px" height="365px"  alt=""/></div>
+            <div class="detailsContent">Detalle</div>
+        </div>
+        <div id="info4" class="content hidden">
+            <div class="imageContent"><input type="image" src="@Url.Content("~/Content/images/index/noticias.jpg")"  width="600px" height="365px"  alt=""/></div>
+            <div class="detailsContent">Detalle</div>
+        </div>
+    </div>
+    <div class="divLine">
+        <div class="border_all contentBox orange" rel="info1">
+            <div class="textContent"></div>
+            <div class="titleContent">NOVEDADES</div>
+            
+        </div>
+        <div class="border_all contentBox skyblue" rel="info2">
+            <div class="textContent"></div>
+            <div class="titleContent">PROGRAMACION</div>
+        </div>
+    </div>
+    <div class="divLine">
+        <div class="border_all contentBox green"  rel="info3">
+            <div class="textContent"></div>
+            <div class="titleContent">EDUCACION</div>
+        </div>
+        <div class="border_all contentBox purple" rel="info4">
+            <div class="textContent"></div>
+            <div class="titleContent">NOTICIAS</div>
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    jQuery(document).ready(function ($) {
+        $(".contentDetailsIndex .content").each(function () {
+            if (!($(this).hasClass("visible"))) {
+                $(this).fadeOut("fast");
+            }
+        });
+        $(".contentBox").click(function () {
+            var auxId = $(this).attr("rel");
+            $(".contentDetailsIndex .content").each(function () {
+                if ($(this).hasClass("visible")) {
+                    $(this).removeClass("visible");
+                    $(this).addClass("hidden");
+                    $(this).fadeOut("fast");
+                }
+            });
+            $(".contentDetailsIndex .content").each(function () {
+                if ($(this).attr("id") == auxId) {
+                    $(this).removeClass("hidden");
+                    $(this).addClass("visible");
+                    $(this).fadeIn("slow");
+                }
+            });
+        });
+
+
+    });
+</script>

@@ -17,17 +17,26 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#filterSearchButton").live('click', function () {
-            $("#filterForm").submit();
+        $("#filterSearchButtonA").live('click', function () {
+            $("#filterFormA").submit();
         });
-        $('#btnFiltrosAsociar').live('click', function (event) {
-            if ($('#filtrosAsociar').css('display') == 'block') {
-                $('#filtrosAsociar').fadeOut('slow');
+        $("#filterSearchButtonNA").live('click', function () {
+            $("#filterFormNA").submit();
+        });
+        $('#btnFiltrosAsociarA').live('click', function (event) {
+            if ($('#filtrosAsociarA').css('display') == 'block') {
+                $('#filtrosAsociarA').fadeOut('slow');
             } else {
-                $('#filtrosAsociar').fadeIn('slow');
+                $('#filtrosAsociarA').fadeIn('slow');
             }
         });
-        
+        $('#btnFiltrosAsociarNA').live('click', function (event) {
+            if ($('#filtrosAsociarNA').css('display') == 'block') {
+                $('#filtrosAsociarNA').fadeOut('slow');
+            } else {
+                $('#filtrosAsociarNA').fadeIn('slow');
+            }
+        });
         $('.botonAsociar').click(function (event)
         { return false;});
 
@@ -45,62 +54,49 @@
 
 <h2>Asociar Ejercicios</h2>
 <legend>Curso</legend>
-<!--<h2>Ejercicios</h2>-->
-<div id="buttonSection" class="buttonSection">
-    <div id="btnFiltrosAsociar" class="btn_filtros boton" >Filtros </div>
+<!--*******************EJERCICIOS ASOCIADOS************************-->
+<h1>Ejercicios Asociados</h1>
+<div id="buttonSectionA" class="buttonSection">
+    <div id="btnFiltrosAsociarA" class="btn_filtros boton" >Filtros </div>
 </div>
 
-<div id="filtrosAsociar" class="filtros">
+<div id="filtrosAsociarA" class="filtros">
     <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("AsociarCursoEjercicio", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("AsociarCursoEjercicio", "Ejercicio", FormMethod.Post, new { id = "filterFormA" }))
         {    
             @Html.ValidationSummary(true)
             <table>
                 <tr>
                     <td><div class="label">Nombre</div></td>
-                    <td valign="top">@Html.TextBox("nombre", null, new { maxlength = 50, autocomplete = "off" })</td>
+                    <td valign="top">@Html.TextBox("nombreA", null, new { maxlength = 50, autocomplete = "off" })</td>
                     <td><div class="label">Estado</div></td>
                     <td valign="top">               
-                         @Html.DropDownList("estadoEjercicio", listaEstadosEjercicio.Select(option => new SelectListItem
+                         @Html.DropDownList("estadoEjercicioA", listaEstadosEjercicio.Select(option => new SelectListItem
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.EstadoEjercicioId.ToString()
                     }), new { @style = "display:none" })
                     </td>
-                </tr>
-                <tr>
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
-                         @Html.DropDownList("nivelEjercicio", listaNivelesEjercicio.Select(option => new SelectListItem
+                         @Html.DropDownList("nivelEjercicioA", listaNivelesEjercicio.Select(option => new SelectListItem
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                         Value = option.NivelEjercicioId.ToString()
                     }), new { @style = "display:none" }
                     )
                     </td>
-                    <td><div class="label">Relacionado</div></td>
-                    <td valign="top">               
-                    @Html.DropDownList("Asociado_NoAsociado", new SelectList(
-                              new List<Object>{ 
-                                   new { value = 0 , text = "TODOS"  },
-                                   new { value = 1 , text = "ASOCIADO" },
-                                   new { value = 2 , text = "NO ASOCIADO"}
-                                },
-                              "value",
-                              "text"
-                    ), new { @style = "display:none" })
-                    </td>
                 </tr>
             </table>
-            <div id="filterSearchButton" class="filterButton"></div>
+            <div id="filterSearchButtonA" class="filterButton"></div>
         }
     </div>
 </div>
     
 
-<div id="contenedor-grid">
+<div id="contenedor-gridA">
 
     @grid.GetHtml(
         tableStyle: "grid",
@@ -122,13 +118,7 @@
         grid.Column("", 
               header: "",
               format: @<text>
-                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/ok_icon.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
-                      </text>
-        ),        
-        grid.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Editar" src="@Url.Content("~/Content/images/no_icon.png")" data="@(item.EjercicioId)" class="botonAsociar hoverRel"/>
+                        <input type="image" alt="Desasociar" src="@Url.Content("~/Content/images/remove.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
                       </text>
         )
     })
@@ -136,10 +126,88 @@
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#nivelEjercicio");
-    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicio");
-    convertSelect("nivelEjercicio",1);
-    convertSelect("estadoEjercicio",1);
-    convertSelect("Asociado_NoAsociado",1);
+    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#nivelEjercicioA");
+    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicioA");
+    convertSelect("nivelEjercicioA",1);
+    convertSelect("estadoEjercicioA",1);
     function OnChangeDo() { return false; }
 </script>
+
+<!--*******************EJERCICIOS NO ASOCIADOS************************-->
+<h1>Ejercicios No Asociados</h1>
+<div id="buttonSectionNA" class="buttonSection">
+    <div id="btnFiltrosAsociarNA" class="btn_filtros boton" >Filtros </div>
+</div>
+
+<div id="filtrosAsociarNA" class="filtros">
+    <div class="tituloabm">Seleccion de cursos</div>
+
+    <div class="filtrosabm">
+        @using (Html.BeginForm("AsociarCursoEjercicio", "Ejercicio", FormMethod.Post, new { id = "filterFormNA" }))
+        {    
+            @Html.ValidationSummary(true)
+            <table>
+                <tr>
+                    <td><div class="label">Nombre</div></td>
+                    <td valign="top">@Html.TextBox("nombreNA", null, new { maxlength = 50, autocomplete = "off" })</td>
+                    <td><div class="label">Estado</div></td>
+                    <td valign="top">               
+                         @Html.DropDownList("estadoEjercicioNA", listaEstadosEjercicio.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.EstadoEjercicioId.ToString()
+                    }), new { @style = "display:none" })
+                    </td>
+                    <td><div class="label">Nivel</div></td>
+                    <td valign="top">               
+                         @Html.DropDownList("nivelEjercicioNA", listaNivelesEjercicio.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                        Value = option.NivelEjercicioId.ToString()
+                    }), new { @style = "display:none" }
+                    )
+                    </td>
+                </tr>
+            </table>
+            <div id="filterSearchButtonNA" class="filterButton"></div>
+        }
+    </div>
+</div>
+    
+
+<div id="contenedor-gridNA">
+
+    @grid.GetHtml(
+        tableStyle: "grid",
+        fillEmptyRows: false,
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAlternatingRow",
+        headerStyle: "gridHeader",
+        footerStyle: "gridPager",
+        mode: WebGridPagerModes.All,
+            firstText: "<<",
+            previousText: "<",
+        nextText: ">",
+            lastText: " >>",
+        columns: new[] {
+        grid.Column("EjercicioId", header: "Identificador"),
+        grid.Column("Enunciado", header: "Enunciado"),
+        grid.Column("NivelEjercicio.Descripcion", header: "Nivel"),
+        grid.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+        grid.Column("", 
+              header: "",
+              format: @<text>
+                        <input type="image" alt="Asociar" src="@Url.Content("~/Content/images/append.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
+                      </text>
+        )
+    })
+
+</div>
+<div id="dialog" class="dialogDiv" ></div>
+<script type="text/javascript">
+    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#nivelEjercicioNA");
+    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicioNA");
+    convertSelect("nivelEjercicioNA", 1);
+    convertSelect("estadoEjercicioNA", 1);
+</script>
+

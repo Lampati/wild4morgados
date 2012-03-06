@@ -20,7 +20,7 @@
             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
             Value = option.NivelEjercicioId.ToString(),
             Selected = ((Model != null) && (option.NivelEjercicioId == Model.NivelEjercicioId))
-        }), new { @id = "NivelEjercicioCreate" })
+        }), new { @id = "NivelEjercicioCreate" ,@style="display:none"})
 
         @Html.ValidationMessageFor(m => m.NivelEjercicio)
 </div>
