@@ -16,6 +16,6 @@ namespace DataAccess.Entidades
         bool ModificadoDesdeUltimoGuardado { get; set; }
         string PathGuardadoActual { get; set; }
         string Nombre { get; }
-        string Extension { get; set; }
+        string Extension { get; }
     }
 }

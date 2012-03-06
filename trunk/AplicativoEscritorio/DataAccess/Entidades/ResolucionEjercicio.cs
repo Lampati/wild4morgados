@@ -13,28 +13,29 @@ namespace DataAccess.Entidades
 {
     public class ResolucionEjercicio : EntidadBase
     {
-
         #region Atributos
         private Ejercicio ejercicio;        
         #endregion
 
-        #region IPersistible Members
-        protected override string Hash
+        #region Propiedades
+        public override string Extension
         {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(this.ModificadoDesdeUltimoGuardado.ToString());
-                sb.Append(this.PathGuardadoActual);
-                sb.Append(this.Gargar);
-
-                return Crypto.ComputarHash(sb.ToString());
-            }
+            get { return Globales.ConstantesGlobales.EXTENSION_RESOLUCION; }
         }
+        #endregion
 
-        public override string ToXML()
+        #region Constructores
+        public ResolucionEjercicio() { }
+
+        public ResolucionEjercicio(Ejercicio ej)
         {
-            XMLCreator xml = new XMLCreator();
+            ejercicio = ej;
+        }
+        #endregion
+
+        #region IPersistible Members
+        public override void ToXML(XMLCreator xml)
+        {
             xml.AddElement();
             xml.SetTitle("ResolucionEjercicioProgramAr");
             xml.AddElement();
@@ -51,28 +52,31 @@ namespace DataAccess.Entidades
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("EjercicioCorrespondiente");
-            xml.SetValue(this.ejercicio.ToXML());
+            this.ejercicio.ToXML(xml);
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("HashResolucionEjercicio");
             xml.SetValue(this.Hash);
-
-            return xml.Get();
+            xml.LevelUp();
         }
 
 
-        public override void FromXML(string plainXml)
+        public override void FromXML(XMLElement xmlElem)
         {
-            XMLReader xmlReader = new XMLReader();
-            XMLElement xmlElem = xmlReader.Read(plainXml);
+            if (Object.Equals(xmlElem, null))
+                throw new NullReferenceException("El XML para la Resolución de Ejercicio se encuentra nulo.");
+
             xmlElem = xmlElem.FindFirst("ResolucionEjercicioProgramAr");
+
+            if (Object.Equals(xmlElem, null))
+                throw new NullReferenceException("El XML no contiene el tag <ResolucionEjercicioProgramAr>");
 
             this.ModificadoDesdeUltimoGuardado = bool.Parse(xmlElem.FindFirst("ModificadoDesdeUltimoGuardado").value);
             this.PathGuardadoActual = this.Enunciado = xmlElem.FindFirst("PathGuardadoActual").value;
             this.Gargar = xmlElem.FindFirst("Gargar").value;
 
             this.ejercicio = new Ejercicio();
-            this.ejercicio.FromXML(xmlElem.FindFirst("EjercicioCorrespondiente").value);
+            this.ejercicio.FromXML(xmlElem.FindFirst("EjercicioCorrespondiente"));
         }
 
         #endregion        
@@ -153,17 +157,16 @@ namespace DataAccess.Entidades
 
         #endregion
 
-        public ResolucionEjercicio()
+        #region Object Members
+        public override string ToString()
         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.ModificadoDesdeUltimoGuardado.ToString());
+            sb.Append(this.PathGuardadoActual);
+            sb.Append(this.Gargar);
 
+            return sb.ToString();
         }
-
-        public ResolucionEjercicio(Ejercicio ej)
-        {
-            extension = Globales.ConstantesGlobales.EXTENSION_RESOLUCION;
-            ejercicio = ej;
-        }
-
-       
+        #endregion
     }
 }

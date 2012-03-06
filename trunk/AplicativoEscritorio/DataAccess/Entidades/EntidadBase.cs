@@ -6,6 +6,7 @@ using DataAccess.Interfases;
 using Globales.Enums;
 using Utilidades.Criptografia;
 using System.IO;
+using Utilidades.XML;
 
 namespace DataAccess.Entidades
 {
@@ -16,16 +17,14 @@ namespace DataAccess.Entidades
         protected bool modificadoDesdeUltimoGuardado;
         protected string pathGuardadoActual;
         protected string nombre;
-        protected string extension;
 
         #region IPersistible Members
 
         public virtual void Guardar(string path)
         {
-            string xml = this.ToXML();
-            string xmlEncriptado = Crypto.Encriptar(xml);
-
-           
+            XMLCreator xml = new XMLCreator();
+            this.ToXML(xml);
+            string xmlEncriptado = Crypto.Encriptar(xml.Get());           
 
             File.WriteAllText(path, xmlEncriptado);
         }
@@ -35,20 +34,23 @@ namespace DataAccess.Entidades
             string xmlEncriptado = File.ReadAllText(path);
             string xmlDesencriptado = Crypto.Desencriptar(xmlEncriptado);
 
-            this.FromXML(xmlDesencriptado);
+            XMLReader xmlReader = new XMLReader();
+            XMLElement xmlElem = xmlReader.Read(xmlDesencriptado);
+
+            this.FromXML(xmlElem);
         }
 
-        public abstract string ToXML();
+        public abstract void ToXML(Utilidades.XML.XMLCreator xml);
 
-        public abstract void FromXML(string plainXml);
+        public abstract void FromXML(Utilidades.XML.XMLElement xmlElem);
 
-        protected abstract string Hash { get; }
-
+        protected string Hash
+        {
+            get { return Crypto.ComputarHash(this.ToString()); }
+        }
         #endregion
 
         #region IPropiedadesEjercicios Members
-
-
         public bool ModificadoDesdeUltimoGuardado
         {
             get
@@ -67,9 +69,9 @@ namespace DataAccess.Entidades
             set
             {
                 string path = value;
-                if (!path.ToLower().EndsWith(string.Format(".{0}", extension)))
+                if (!path.ToLower().EndsWith(string.Format(".{0}", this.Extension)))
                 {
-                    path = string.Format("{0}.{1}", path, extension);
+                    path = string.Format("{0}.{1}", path, this.Extension);
                 }                
                 this.pathGuardadoActual = path;
 
@@ -83,11 +85,7 @@ namespace DataAccess.Entidades
             get { return this.nombre; }
         }
 
-        public  string Extension
-        {
-            get { return this.extension; }
-            set { this.extension = value; }
-        }
+        public abstract string Extension { get; }
 
         public  ModoVisual UltimoModoGuardado
         {
