@@ -17,5 +17,7 @@ namespace DataAccess.Entidades
         string PathGuardadoActual { get; set; }
         string Nombre { get; }
         string Extension { get; }
+        bool CompilacionCorrecta { get; set; }
+        bool EjecucionCorrecta { get; set; }
     }
 }
