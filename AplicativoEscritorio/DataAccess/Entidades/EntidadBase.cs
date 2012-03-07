@@ -17,6 +17,8 @@ namespace DataAccess.Entidades
         protected bool modificadoDesdeUltimoGuardado;
         protected string pathGuardadoActual;
         protected string nombre;
+        protected bool compilacionCorrecta;
+        protected bool ejecucionCorrecta;
 
         #region IPersistible Members
 
@@ -51,6 +53,31 @@ namespace DataAccess.Entidades
         #endregion
 
         #region IPropiedadesEjercicios Members
+
+        public bool CompilacionCorrecta
+        {
+            get
+            {
+                return compilacionCorrecta;
+            }
+            set
+            {
+                compilacionCorrecta = value;
+            }
+        }
+
+        public bool EjecucionCorrecta
+        {
+            get
+            {
+                return ejecucionCorrecta;
+            }
+            set
+            {
+                ejecucionCorrecta = value;
+            }
+        }
+
         public bool ModificadoDesdeUltimoGuardado
         {
             get
