@@ -6,7 +6,7 @@ namespace DataAccess.Entidades
     {
         string Enunciado { get;  }
         string Gargar { get; set; }
-        DataAccess.Enums.NivelDificultad NivelDificultad { get;  }
+        short NivelDificultad { get;  }
         string SolucionGargar { get;  }
         string SolucionTexto { get;  }
         Globales.Enums.ModoVisual UltimoModoGuardado { get; set; }

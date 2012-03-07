@@ -11,6 +11,19 @@ namespace DataAccess
     [XmlRootAttribute("Configuracion", Namespace = "", IsNullable = false)]
     public class ConfiguracionAplicacion 
     {
+        private string directorioAbrirDefault;
+        public string DirectorioAbrirDefault
+        {
+            get
+            {
+                return directorioAbrirDefault;
+            }
+            set
+            {
+                directorioAbrirDefault = value;
+            }
+        }
+
         private string directorioTemporal;
         public string DirectorioTemporal 
         {
@@ -83,6 +96,7 @@ namespace DataAccess
                 this.directorioEjerciciosDescargados = config.DirectorioEjerciciosDescargados;
                 this.directorioResolucionesEjercicios = config.DirectorioResolucionesEjercicios;
                 this.directorioTemporal = config.DirectorioTemporal;
+                this.directorioAbrirDefault = config.DirectorioAbrirDefault;
             }
             else
             {

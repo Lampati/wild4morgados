@@ -16,7 +16,7 @@ namespace DataAccess.Entidades
         #region Atributos
         private ModoEjercicio modo;
         private string enunciado;
-        private NivelDificultad nivelDificultad;
+        private short nivelDificultad;
         private string solucionTexto;
         private string solucionGargar;
         private List<TestPrueba> testsPrueba;
@@ -35,7 +35,7 @@ namespace DataAccess.Entidades
             set { this.enunciado = value; }
         }
 
-        public override NivelDificultad NivelDificultad
+        public override short NivelDificultad
         {
             get { return this.nivelDificultad; }
             set { this.nivelDificultad = value; }
@@ -141,7 +141,7 @@ namespace DataAccess.Entidades
                 throw new NullReferenceException("El XML no contiene el tag <EjercicioProgramAr>");
 
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
-            this.NivelDificultad = (NivelDificultad)int.Parse(xmlElem.FindFirst("NivelDificultad").value);
+            this.NivelDificultad = short.Parse(xmlElem.FindFirst("NivelDificultad").value);
             this.solucionGargar = xmlElem.FindFirst("SolucionGargar").value;
             this.gargar = xmlElem.FindFirst("Gargar").value;
             this.SolucionTexto = xmlElem.FindFirst("SolucionTexto").value;

@@ -110,7 +110,7 @@ namespace DataAccess.Entidades
             set;
         }
 
-        public abstract Enums.NivelDificultad NivelDificultad
+        public abstract short NivelDificultad
         {
             get;
             set;

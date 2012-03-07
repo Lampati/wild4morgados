@@ -9,7 +9,7 @@ namespace DiagramDesigner.EventArgsClasses
     {
         public string Enunciado { get; set; }
         public string SolucionTexto { get; set; }
-        public int? NivelEjercicio { get; set; }
+        public short? NivelEjercicio { get; set; }
 
         public ModificarPropiedadesEjercicioEventArgs()
         {

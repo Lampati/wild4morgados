@@ -109,7 +109,7 @@ namespace DataAccess.Entidades
             }
         }
 
-        public override Enums.NivelDificultad NivelDificultad
+        public override short NivelDificultad
         {
             get
             {
