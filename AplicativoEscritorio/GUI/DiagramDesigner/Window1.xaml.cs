@@ -81,7 +81,10 @@ namespace DiagramDesigner
                 BarraEstado.Modo = value;
                 ToolbarAplicacion.Modo = value;
 
-
+                if (ArchCargado != null)
+                {
+                    ArchCargado.UltimoModoGuardado = modo;
+                }
             }
         }
 
@@ -124,7 +127,7 @@ namespace DiagramDesigner
             ToolbarAplicacion.DirEjDescargados = configApp.DirectorioEjerciciosDescargados;
             ToolbarAplicacion.DirResoluciones = configApp.DirectorioResolucionesEjercicios;
             ToolbarAplicacion.DirTemporales = configApp.DirectorioTemporal;
-
+            ToolbarAplicacion.DirDefaultAbrir = configApp.DirectorioAbrirDefault; 
             //configApp.DirectorioTemporal = "bla";
             //configApp.DirectorioEjerciciosCreados = "bla43";
             //configApp.DirectorioEjerciciosDescargados = "bla1";
@@ -218,20 +221,12 @@ namespace DiagramDesigner
                                         ArchCargado = res;
                                         //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                         res.ModificadoDesdeUltimoGuardado = false;
-
-                                        
                                     }
-
-                                    
-
-
                                 }
                                 else
                                 {
                                     //Error formato no soportado
                                 }
-
-                               
                             }
                             break;
                     }
@@ -250,7 +245,7 @@ namespace DiagramDesigner
 
                 if (continuar)
                 {
-                    string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", configApp.DirectorioResolucionesEjercicios);
+                    string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", configApp.DirectorioAbrirDefault);
 
                     if (!string.IsNullOrWhiteSpace(path))
                     {
@@ -381,7 +376,10 @@ namespace DiagramDesigner
             configApp.DirectorioEjerciciosCreados = ToolbarAplicacion.DirEjCreados;
             configApp.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
             configApp.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
-            configApp.DirectorioTemporal = ToolbarAplicacion.DirTemporales;   
+            configApp.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
+            configApp.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;   
+            
+
 
             configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
@@ -443,7 +441,7 @@ namespace DiagramDesigner
 
             if (e.NivelEjercicio != null)
             {
-                //archCargado.NivelEjercicio = e.NivelEjercicio;
+                archCargado.NivelDificultad = e.NivelEjercicio.Value;
             }
 
             if (e.SolucionTexto != null)

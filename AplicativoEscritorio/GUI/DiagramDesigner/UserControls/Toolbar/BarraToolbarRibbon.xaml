@@ -324,14 +324,19 @@
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click"></ribbon:RibbonButton>
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click"></ribbon:RibbonButton>
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click"></ribbon:RibbonButton>
-                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}" >
-                        <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}">
-                            <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}">
-                                <ribbon:RibbonGalleryItem Tag="1" ContextMenu="{Binding null}">Aprendiz</ribbon:RibbonGalleryItem>
-                                <ribbon:RibbonGalleryItem Tag="2" ContextMenu="{Binding null}">Facil</ribbon:RibbonGalleryItem>
-                                <ribbon:RibbonGalleryItem Tag="3" ContextMenu="{Binding null}">Media</ribbon:RibbonGalleryItem>
-                                <ribbon:RibbonGalleryItem Tag="4" ContextMenu="{Binding null}">Dificil</ribbon:RibbonGalleryItem>
-                                <ribbon:RibbonGalleryItem Tag="5" ContextMenu="{Binding null}">Experto</ribbon:RibbonGalleryItem>
+                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}" SelectionBoxWidth="35">
+                        <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}" ColumnsStretchToFill="True" MaxColumnCount="1" SelectedValuePath="Content">
+                            <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}" VerticalContentAlignment="Center">
+                                <ribbon:RibbonGalleryItem Tag="10" ContextMenu="{Binding null}">10</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="9" ContextMenu="{Binding null}">9</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="8" ContextMenu="{Binding null}">8</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="7" ContextMenu="{Binding null}">7</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="6" ContextMenu="{Binding null}">6</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="5" ContextMenu="{Binding null}">5</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="4" ContextMenu="{Binding null}">4</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="3" ContextMenu="{Binding null}">3</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="2" ContextMenu="{Binding null}">2</ribbon:RibbonGalleryItem>
+                                <ribbon:RibbonGalleryItem Tag="1" ContextMenu="{Binding null}">1</ribbon:RibbonGalleryItem>
                             </ribbon:RibbonGalleryCategory>                            
                         </ribbon:RibbonGallery>                        
                     </ribbon:RibbonComboBox>
@@ -342,18 +347,23 @@
 
 
             <ribbon:RibbonGroup Header="Detalles Adicionales" Name="ribbonGroupDetallesDescarga" ContextMenu="{Binding null}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Profesor:</TextBlock>
-                    <TextBlock Name="txtProfesor"></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Curso:</TextBlock>
-                    <TextBlock Name="txtCurso"></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>ID Ejercicio:</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                    <TextBlock Margin="0,0,5,0">ID Ejercicio:</TextBlock>
                     <TextBlock Name="txtEjercicioId"></TextBlock>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0,2,0,0" Name="fieldReadOnlyDificultad">
+                    <TextBlock Margin="0,0,5,0">Dificultad:</TextBlock>
+                    <TextBlock x:Name="txtBlockDificultad">Dificultad:</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                    <TextBlock Margin="0,0,5,0">Profesor:</TextBlock>
+                    <TextBlock Name="txtProfesor"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                    <TextBlock Margin="0,0,5,0">Curso:</TextBlock>
+                    <TextBlock Name="txtCurso"></TextBlock>
+                </StackPanel>
+                
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests" ContextMenu="{Binding null}">
@@ -400,6 +410,10 @@
                 <StackPanel Orientation="Horizontal">
                     <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Temporales" Name="textBoxDirTemp" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
                     <ribbon:RibbonButton Name="bttnDirTemporales" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirTemporales_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Default Abrir" Name="textBoxDirAbrirDefault" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirAbrirDefault" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirAbrirDefault_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                 </StackPanel>
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>

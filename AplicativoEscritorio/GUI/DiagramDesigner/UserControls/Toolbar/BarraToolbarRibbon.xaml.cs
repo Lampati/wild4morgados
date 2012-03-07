@@ -18,6 +18,7 @@ using DiagramDesigner.EventArgsClasses;
 using DataAccess.Interfases;
 using DataAccess.Entidades;
 using Globales.Enums;
+using Microsoft.Windows.Controls.Ribbon;
 
 namespace DiagramDesigner.UserControls.Toolbar
 {
@@ -47,6 +48,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                         ButtonFlujo.IsChecked = true;
                         ButtonTexto.IsChecked = false;                        
                         break;
+
                     case ModoVisual.Texto:
                         this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Visible;
                         this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Collapsed;
@@ -82,6 +84,10 @@ namespace DiagramDesigner.UserControls.Toolbar
 
                     if (archCargado.GetType() == typeof(Ejercicio))
                     {
+                        galleryDificultad.SelectedValue = archCargado.NivelDificultad.ToString();
+
+                        cboBoxDificultad.Visibility = System.Windows.Visibility.Visible;    
+
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Collapsed;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Visible;
                         bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Visible;
@@ -90,14 +96,18 @@ namespace DiagramDesigner.UserControls.Toolbar
                         esEjercicio = true;
                     }
                     else
-                    {
+                    {              
+                        txtBlockDificultad.Text = archCargado.NivelDificultad.ToString();
+
+                        cboBoxDificultad.Visibility = System.Windows.Visibility.Collapsed;
+
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Visible;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Collapsed;
                         bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Collapsed;
                         ribbonGroupDetallesDescarga.Visibility = System.Windows.Visibility.Visible;
-
+                        
                         esEjercicio = false;
-                    }
+                    }                    
                 }
                 else
                 {
@@ -108,6 +118,34 @@ namespace DiagramDesigner.UserControls.Toolbar
                     menuBttnGuardarComo.IsEnabled = false;
                     menuBttnImprimir.IsEnabled = false;
                 }
+            }
+        }
+
+        private void VaciarYLlenarComboDificultad()
+        {
+            galleryDificultad.Items.Clear();
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 10, ContextMenu = null, Tag = 10 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 9, ContextMenu = null, Tag = 9 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 8, ContextMenu = null, Tag = 8 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 7, ContextMenu = null, Tag = 7 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 6, ContextMenu = null, Tag = 6 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 5, ContextMenu = null, Tag = 5 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 4, ContextMenu = null, Tag = 4 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 3, ContextMenu = null, Tag = 3 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 2, ContextMenu = null, Tag = 2 });
+            galleryDificultad.Items.Add(new RibbonGalleryItem() { Content = 1, ContextMenu = null, Tag = 1 });
+        }
+
+        public string DirDefaultAbrir
+        {
+            get
+            {
+                return textBoxDirAbrirDefault.Text;
+            }
+
+            set
+            {
+                textBoxDirAbrirDefault.Text = value;
             }
         }
 
@@ -167,13 +205,7 @@ namespace DiagramDesigner.UserControls.Toolbar
         public BarraToolbarRibbon()
         {
             InitializeComponent();
-
-            
         }
-
-      
-
-
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)
         {
@@ -185,8 +217,6 @@ namespace DiagramDesigner.UserControls.Toolbar
             CompilacionEventFire(sender, new CompilacionEventArgs(true));
         }
 
-    
-
         private void ButtonTexto_Click(object sender, RoutedEventArgs e)
         {
             CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Texto));
@@ -196,8 +226,6 @@ namespace DiagramDesigner.UserControls.Toolbar
         {
             CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Flujo));
         }
-
-        
 
         private void ButtonBuscar_Click(object sender, RoutedEventArgs e)
         {
@@ -209,10 +237,6 @@ namespace DiagramDesigner.UserControls.Toolbar
             AbrirBusquedaEventFire(sender, new AbrirBusquedaEventArgs(true));
         }
 
-        
-
-     
-
         private void bttnDirEjCreados_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog fd = new FolderBrowserDialog();
@@ -222,7 +246,6 @@ namespace DiagramDesigner.UserControls.Toolbar
             }
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
-
         }
 
         private void bttnDirEjDescargados_Click(object sender, RoutedEventArgs e)
@@ -258,10 +281,22 @@ namespace DiagramDesigner.UserControls.Toolbar
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
 
+        private void bttnDirAbrirDefault_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fd = new FolderBrowserDialog();
+
+            if (fd.ShowDialog().Value == true)
+            {
+                textBoxDirAbrirDefault.Text = fd.SelectedFolder;
+            }
+
+            SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
+        }
+
         private void galleryDificultad_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             ModificarPropiedadesEjercicioEventArgs eventArgs = new ModificarPropiedadesEjercicioEventArgs();
-            eventArgs.NivelEjercicio = Convert.ToInt32(((Microsoft.Windows.Controls.Ribbon.RibbonGalleryItem)e.NewValue).Tag);
+            eventArgs.NivelEjercicio = Convert.ToInt16(((Microsoft.Windows.Controls.Ribbon.RibbonGalleryItem)e.NewValue).Content.ToString());
             ModificarPropiedadesEjercicioEventFire(sender, eventArgs);
         }
 
