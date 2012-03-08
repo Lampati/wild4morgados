@@ -10,9 +10,9 @@ namespace WebProgramAR.DataAccess.Seguridad
     public static class SeguridadXValorManager
     {
 
-        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, string tabla, int? userId, int? tipoUserId)
+        public static List<T> Filtrar<T>(List<T> lista, string tabla, int? userId, int? tipoUserId)
         {
-            List<EntidadProgramARBase> retorno = new List<EntidadProgramARBase>();
+            List<T> retorno = new List<T>();
 
             List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();
 
