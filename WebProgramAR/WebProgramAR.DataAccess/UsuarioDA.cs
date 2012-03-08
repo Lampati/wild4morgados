@@ -121,7 +121,7 @@ namespace WebProgramAR.DataAccess
                 //            .Take(personasPorPagina)
                 //            .ToList();
 
-                //return Filtrar(aux, null, null);
+                //return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla,null, null);
             }
         }
 
