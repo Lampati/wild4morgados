@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiagramDesigner.Enums;
-using FolderBrowser;
 using DiagramDesigner.DialogWindows;
 using DiagramDesigner.EventArgsClasses;
 using DataAccess.Interfases;
