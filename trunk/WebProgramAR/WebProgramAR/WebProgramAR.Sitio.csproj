@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ContactModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ModerarEjercicioModel.cs" />
     <Compile Include="Models\CursoAsociarModel.cs" />
