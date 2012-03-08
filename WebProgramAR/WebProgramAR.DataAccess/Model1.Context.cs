@@ -61,12 +61,6 @@ namespace WebProgramAR.DataAccess
         }
         private ObjectSet<Localidad> _localidades;
     
-        public ObjectSet<NivelEjercicio> NivelEjercicios
-        {
-            get { return _nivelEjercicios  ?? (_nivelEjercicios = CreateObjectSet<NivelEjercicio>("NivelEjercicios")); }
-        }
-        private ObjectSet<NivelEjercicio> _nivelEjercicios;
-    
         public ObjectSet<Pais> Paises
         {
             get { return _paises  ?? (_paises = CreateObjectSet<Pais>("Paises")); }

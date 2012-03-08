@@ -44,12 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReglasSeguridadDA.cs" />
-    <Compile Include="Interfases\IFiltrablePorSeguridadPorValor.cs" />
     <Compile Include="LocalidadDA.cs" />
     <Compile Include="PaisDA.cs" />
     <Compile Include="ProvinciaDA.cs" />
     <Compile Include="EstadoEjercicioDA.cs" />
-    <Compile Include="NivelEjercicioDA.cs" />
     <Compile Include="Seguridad\ConstantesSeguridad.cs" />
     <Compile Include="Seguridad\SeguridadXValorManager.cs" />
     <Compile Include="TipoUsuarioDA.cs" />
@@ -91,6 +89,9 @@
       <Project>{EFAE4217-3F3A-42D6-AD00-583A5D72073A}</Project>
       <Name>WebProgramAR.Entidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfases\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

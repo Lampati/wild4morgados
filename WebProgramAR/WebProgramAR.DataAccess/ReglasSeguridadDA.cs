@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
-using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
@@ -16,7 +15,7 @@ namespace WebProgramAR.DataAccess
            {
                using (WebProgramAREntities db = new WebProgramAREntities())
                 {
-                    IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador")
+                    IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo")
                                                         where (   
                                                             u.Tabla.Nombre.ToUpper() == tablaNombre.ToUpper() && 
                                                             u.UsuarioId == userId &&  

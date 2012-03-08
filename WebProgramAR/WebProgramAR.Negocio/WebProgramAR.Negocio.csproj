@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CursoNegocio.cs" />
-    <Compile Include="NivelEjercicioNegocio.cs" />
     <Compile Include="EstadoEjercicioNegocio.cs" />
     <Compile Include="ProvinciaNegocio.cs" />
     <Compile Include="LocalidadNegocio.cs" />

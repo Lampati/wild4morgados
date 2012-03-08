@@ -97,6 +97,38 @@ namespace WebProgramAR.Entidades
             }
         }
         private Tipo _tipo;
+    
+        public virtual ICollection<ReglasSeguridad> ReglasSeguridads
+        {
+            get
+            {
+                if (_reglasSeguridads == null)
+                {
+                    var newCollection = new FixupCollection<ReglasSeguridad>();
+                    newCollection.CollectionChanged += FixupReglasSeguridads;
+                    _reglasSeguridads = newCollection;
+                }
+                return _reglasSeguridads;
+            }
+            set
+            {
+                if (!ReferenceEquals(_reglasSeguridads, value))
+                {
+                    var previousValue = _reglasSeguridads as FixupCollection<ReglasSeguridad>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupReglasSeguridads;
+                    }
+                    _reglasSeguridads = value;
+                    var newValue = value as FixupCollection<ReglasSeguridad>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupReglasSeguridads;
+                    }
+                }
+            }
+        }
+        private ICollection<ReglasSeguridad> _reglasSeguridads;
 
         #endregion
         #region Association Fixup
@@ -137,6 +169,28 @@ namespace WebProgramAR.Entidades
                 if (TipoId != Tipo.TipoId)
                 {
                     TipoId = Tipo.TipoId;
+                }
+            }
+        }
+    
+        private void FixupReglasSeguridads(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (ReglasSeguridad item in e.NewItems)
+                {
+                    item.Columna = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (ReglasSeguridad item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Columna, this))
+                    {
+                        item.Columna = null;
+                    }
                 }
             }
         }

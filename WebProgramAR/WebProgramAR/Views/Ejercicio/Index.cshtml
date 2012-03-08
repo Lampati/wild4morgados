@@ -14,7 +14,7 @@
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 
-    List<WebProgramAR.Entidades.NivelEjercicio> listaNivelesEjercicio = (List<WebProgramAR.Entidades.NivelEjercicio>)ViewBag.NivelesEjercicio;
+    List<short> listaNivelesEjercicio = (List<short>)ViewBag.NivelesEjercicio;
     List<WebProgramAR.Entidades.EstadoEjercicio> listaEstadosEjercicio = (List<WebProgramAR.Entidades.EstadoEjercicio>)ViewBag.EstadosEjercicio;
 }
 
@@ -97,8 +97,8 @@
                     <td valign="top">               
                          @Html.DropDownList("nivelEjercicio", listaNivelesEjercicio.Select(option => new SelectListItem
                     {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.NivelEjercicioId.ToString()
+                        Text = Html.DisplayTextFor(_ => option).ToString(),
+                        Value = option.ToString()
                     }), new { @style = "display:none" })
                     </td>
                 </tr>
@@ -128,7 +128,7 @@
         columns: new[] {
         grid.Column("EjercicioId", header: "Identificador"),
         grid.Column("Enunciado", header: "Enunciado"),
-        grid.Column("NivelEjercicio.Descripcion", header: "Nivel"),
+        grid.Column("NivelEjercicio", header: "Nivel"),
         grid.Column("Usuario.UsuarioNombre", header: "Usuario"),        
         grid.Column("", 
               header: "",
@@ -169,7 +169,7 @@ else
         columns: new[] {
         grid.Column("EjercicioId", header: "Identificador"),
         grid.Column("Enunciado", header: "Enunciado"),
-        grid.Column("NivelEjercicio.Descripcion", header: "Nivel"),
+        grid.Column("NivelEjercicio", header: "Nivel"),
         grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
         grid.Column("", 
               header: "",

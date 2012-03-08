@@ -28,7 +28,8 @@ namespace WebProgramAR.Controllers
             datos.ConLayout = conLayout;
             datos.AplicarPermisos = aplicarPermisos;
 
-            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });  
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
             return View(datos);
@@ -45,7 +46,8 @@ namespace WebProgramAR.Controllers
             datos.ConLayout = conLayout;
             datos.AplicarPermisos = aplicarPermisos;
 
-            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });  
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
             return View("Desaprobados",datos);
@@ -96,8 +98,10 @@ namespace WebProgramAR.Controllers
 
         private void Initilization()
         {
-            List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
-            listaNivelesEjercicio.AddRange(Negocio.NivelEjercicioNegocio.GetNiveles().ToList());
+            //List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
+            //listaNivelesEjercicio.AddRange(Negocio.NivelEjercicioNegocio.GetNiveles().ToList());
+
+            List<short> listaNivelesEjercicio = new List<short>(new short[]{1,2,3,4,5,6,7,8,9,10});            
             ViewBag.NivelesEjercicio = listaNivelesEjercicio;
         }
 
@@ -213,7 +217,8 @@ namespace WebProgramAR.Controllers
             datos.ConLayout = conLayout;
             datos.AplicarPermisos = aplicarPermisos;
 
-            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }); 
 
             return View("PendientesAprobacion", datos);
 
@@ -235,7 +240,8 @@ namespace WebProgramAR.Controllers
             datos.ConLayout = conLayout;
             datos.AplicarPermisos = aplicarPermisos;
 
-            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }); 
 
             return View("Desaprobados", datos);
 
@@ -250,7 +256,9 @@ namespace WebProgramAR.Controllers
         {
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
 
-            ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }); 
+
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
             return View(datos);
