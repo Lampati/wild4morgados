@@ -239,21 +239,41 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void bttnDirEjCreados_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fd = new FolderBrowserDialog();
+            FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
+            fd.InitialPath = textBoxDirEjCreados.Text;
+            fd.Title = "Elija la carpeta por defecto para los ejercicios creados";
+
             if (fd.ShowDialog().Value == true)
             {
-                textBoxDirEjCreados.Text = fd.SelectedFolder;
+                textBoxDirEjCreados.Text = fd.SelectedPath;
             }
+
+            //FolderBrowserDialog fd = new FolderBrowserDialog();
+            //if (fd.ShowDialog().Value == true)
+            //{
+            //    textBoxDirEjCreados.Text = fd.SelectedFolder;
+            //}
+
+
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
 
         private void bttnDirEjDescargados_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fd = new FolderBrowserDialog();
+            //FolderBrowserDialog fd = new FolderBrowserDialog();
+            //if (fd.ShowDialog().Value == true)
+            //{
+            //    textBoxDirEjDescargados.Text = fd.SelectedFolder;
+            //}
+
+            FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
+            fd.InitialPath = textBoxDirEjDescargados.Text;
+            fd.Title = "Elija la carpeta por defecto para los ejercicios descargados";
+
             if (fd.ShowDialog().Value == true)
             {
-                textBoxDirEjDescargados.Text = fd.SelectedFolder;
+                textBoxDirEjDescargados.Text = fd.SelectedPath;
             }
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
@@ -261,10 +281,19 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void bttnDirRes_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fd = new FolderBrowserDialog();
+            //FolderBrowserDialog fd = new FolderBrowserDialog();
+            //if (fd.ShowDialog().Value == true)
+            //{
+            //    textBoxDirResoluciones.Text = fd.SelectedFolder;
+            //}
+
+            FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
+            fd.InitialPath = textBoxDirResoluciones.Text;
+            fd.Title = "Elija la carpeta por defecto para las resoluciones";
+
             if (fd.ShowDialog().Value == true)
             {
-                textBoxDirResoluciones.Text = fd.SelectedFolder;
+                textBoxDirResoluciones.Text = fd.SelectedPath;
             }
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
@@ -272,10 +301,19 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void bttnDirTemporales_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fd = new FolderBrowserDialog();
+            //FolderBrowserDialog fd = new FolderBrowserDialog();
+            //if (fd.ShowDialog().Value == true)
+            //{
+            //    textBoxDirTemp.Text = fd.SelectedFolder;
+            //}
+
+            FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
+            fd.InitialPath = textBoxDirTemp.Text;
+            fd.Title = "Elija la carpeta donde se almacenaran los temporales de la aplicación";
+
             if (fd.ShowDialog().Value == true)
             {
-                textBoxDirTemp.Text = fd.SelectedFolder;
+                textBoxDirTemp.Text = fd.SelectedPath;
             }
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
@@ -283,11 +321,20 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void bttnDirAbrirDefault_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fd = new FolderBrowserDialog();
+            //FolderBrowserDialog fd = new FolderBrowserDialog();
+
+            //if (fd.ShowDialog().Value == true)
+            //{
+            //    textBoxDirAbrirDefault.Text = fd.SelectedFolder;
+            //}
+
+            FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
+            fd.InitialPath = textBoxDirAbrirDefault.Text;
+            fd.Title = "Elija la carpeta que se visualizara por defecto al elegir Abrir";
 
             if (fd.ShowDialog().Value == true)
             {
-                textBoxDirAbrirDefault.Text = fd.SelectedFolder;
+                textBoxDirAbrirDefault.Text = fd.SelectedPath;
             }
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
