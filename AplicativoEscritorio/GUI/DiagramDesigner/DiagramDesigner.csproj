@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FolderPickerLib, Version=1.0.4163.42504, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FolderBrowseLib\FolderPickerLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>RibbonDLL\Microsoft.Windows.Shell.dll</HintPath>
@@ -254,6 +258,7 @@
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
     <Compile Include="ModoTexto\Configuracion\ModoTextoConfiguracion.cs" />
+    <Compile Include="Window1.MenuCommands.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -363,10 +368,6 @@
       <Project>{F32BAA9E-D765-4328-8031-1CDBB7A1BD72}</Project>
       <Name>WpfApplicationHotKey</Name>
     </ProjectReference>
-    <ProjectReference Include="FolderBrowser\FolderBrowser.csproj">
-      <Project>{0B8C3B19-940D-408D-9F6B-4AFEE7246642}</Project>
-      <Name>FolderBrowser</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Compile1.png" />
@@ -404,6 +405,7 @@
     <Resource Include="Resources\Images\Search24.png" />
     <Resource Include="Resources\Images\SearchRep24.png" />
     <Resource Include="Resources\Images\Flow48.png" />
+    <Content Include="FolderBrowseLib\FolderPickerLib.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
