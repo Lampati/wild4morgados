@@ -61,31 +61,6 @@ namespace WebProgramAR.Entidades
             set;
         }
     
-        public virtual int NivelEjercicioId
-        {
-            get { return _nivelEjercicioId; }
-            set
-            {
-                try
-                {
-                    _settingFK = true;
-                    if (_nivelEjercicioId != value)
-                    {
-                        if (NivelEjercicio != null && NivelEjercicio.NivelEjercicioId != value)
-                        {
-                            NivelEjercicio = null;
-                        }
-                        _nivelEjercicioId = value;
-                    }
-                }
-                finally
-                {
-                    _settingFK = false;
-                }
-            }
-        }
-        private int _nivelEjercicioId;
-    
         public virtual Nullable<int> UsuarioId
         {
             get { return _usuarioId; }
@@ -135,6 +110,12 @@ namespace WebProgramAR.Entidades
             }
         }
         private int _estadoEjercicioId;
+    
+        public virtual int NivelEjercicio
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
@@ -153,21 +134,6 @@ namespace WebProgramAR.Entidades
             }
         }
         private EstadoEjercicio _estadoEjercicio;
-    
-        public virtual NivelEjercicio NivelEjercicio
-        {
-            get { return _nivelEjercicio; }
-            set
-            {
-                if (!ReferenceEquals(_nivelEjercicio, value))
-                {
-                    var previousValue = _nivelEjercicio;
-                    _nivelEjercicio = value;
-                    FixupNivelEjercicio(previousValue);
-                }
-            }
-        }
-        private NivelEjercicio _nivelEjercicio;
     
         public virtual Usuario Usuario
         {
@@ -252,26 +218,6 @@ namespace WebProgramAR.Entidades
                 if (EstadoEjercicioId != EstadoEjercicio.EstadoEjercicioId)
                 {
                     EstadoEjercicioId = EstadoEjercicio.EstadoEjercicioId;
-                }
-            }
-        }
-    
-        private void FixupNivelEjercicio(NivelEjercicio previousValue)
-        {
-            if (previousValue != null && previousValue.Ejercicios.Contains(this))
-            {
-                previousValue.Ejercicios.Remove(this);
-            }
-    
-            if (NivelEjercicio != null)
-            {
-                if (!NivelEjercicio.Ejercicios.Contains(this))
-                {
-                    NivelEjercicio.Ejercicios.Add(this);
-                }
-                if (NivelEjercicioId != NivelEjercicio.NivelEjercicioId)
-                {
-                    NivelEjercicioId = NivelEjercicio.NivelEjercicioId;
                 }
             }
         }

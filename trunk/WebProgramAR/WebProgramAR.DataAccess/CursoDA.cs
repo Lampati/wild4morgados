@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
-using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
-    public class CursoDA : IFiltrablePorSeguridadPorValor
+    public class CursoDA 
     {
         public static string _nombreTabla = "Curso";
 
@@ -124,7 +123,7 @@ namespace WebProgramAR.DataAccess
         
         #region IFiltrarPorSeguridadXValor Members
 
-        public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
+        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
         {
             throw new NotImplementedException();
         }

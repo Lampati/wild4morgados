@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
-using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
-    public class EjercicioDA : IFiltrablePorSeguridadPorValor
+    public class EjercicioDA 
     {
         public static string _nombreTabla = "Ejercicio";
 
@@ -17,7 +16,7 @@ namespace WebProgramAR.DataAccess
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("MensajeModeracion").Include("EstadoEjercicio").Include("Usuario").Include("NivelEjercicio")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("MensajeModeracion").Include("EstadoEjercicio").Include("Usuario")
                                                 where u.EjercicioId  == id select u;
                 return query.ToArray()[0];
             }
@@ -110,10 +109,7 @@ namespace WebProgramAR.DataAccess
                 {
                     sortColumns = sortColumns.Replace("EstadoEjercicio", "EstadoEjercicio.EstadoEjercicioId");
                 }
-                if (sortColumns.Contains("NivelEjercicio"))
-                {
-                    sortColumns = sortColumns.Replace("NivelEjercicio", "NivelEjercicio.NivelEjercicioId");
-                }
+               
 
 
 
@@ -126,11 +122,11 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<Ejercicio> GetEjercicios(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, WebProgramAREntities db)
         {
-            IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+            IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
                                      where (usuarioId == -1 || u.UsuarioId == usuarioId)                                     
                                      && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
                                      && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
-                                     && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
+                                     && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
                                      && (nombre == "" || u.Nombre.Contains(nombre))
                                      select u;
             return query;
@@ -140,11 +136,11 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
                                               where (usuarioId == -1 || u.UsuarioId == usuarioId)
                                               && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
                                               && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
-                                              && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
+                                              && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
                                               select u;
                 return query.ToList();
             }
@@ -153,11 +149,11 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("NivelEjercicio").Include("Usuario")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
                                               where (u.UsuarioId != usuarioId)
                                               && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
                                               && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
-                                              && (nivelEjercicio == -1 || u.NivelEjercicioId == nivelEjercicio)
+                                              && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
                                               select u;
                 return query.ToList();
             }
@@ -165,7 +161,7 @@ namespace WebProgramAR.DataAccess
 
         #region IFiltrablePorSeguridadPorValor Members
 
-        public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
+        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
         {
             throw new NotImplementedException();
         }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Data;
-using WebProgramAR.DataAccess.Interfases;
 
 namespace WebProgramAR.DataAccess
 {
-    public class ProvinciaDA : IFiltrablePorSeguridadPorValor
+    public class ProvinciaDA 
     {
         public static string _nombreTabla = "Provincia";
 
@@ -57,7 +56,7 @@ namespace WebProgramAR.DataAccess
 
         #region IFiltrablePorSeguridadPorValor Members
 
-        public List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
+        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
         {
             throw new NotImplementedException();
         }

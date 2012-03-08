@@ -130,6 +130,31 @@ namespace WebProgramAR.Entidades
             }
         }
         private int _comparadorId;
+    
+        public virtual int ColumnaId
+        {
+            get { return _columnaId; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_columnaId != value)
+                    {
+                        if (Columna != null && Columna.ColumnaId != value)
+                        {
+                            Columna = null;
+                        }
+                        _columnaId = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
+        }
+        private int _columnaId;
 
         #endregion
         #region Navigation Properties
@@ -193,6 +218,21 @@ namespace WebProgramAR.Entidades
             }
         }
         private Usuario _usuario;
+    
+        public virtual Columna Columna
+        {
+            get { return _columna; }
+            set
+            {
+                if (!ReferenceEquals(_columna, value))
+                {
+                    var previousValue = _columna;
+                    _columna = value;
+                    FixupColumna(previousValue);
+                }
+            }
+        }
+        private Columna _columna;
 
         #endregion
         #region Association Fixup
@@ -284,6 +324,26 @@ namespace WebProgramAR.Entidades
             else if (!_settingFK)
             {
                 UsuarioId = null;
+            }
+        }
+    
+        private void FixupColumna(Columna previousValue)
+        {
+            if (previousValue != null && previousValue.ReglasSeguridads.Contains(this))
+            {
+                previousValue.ReglasSeguridads.Remove(this);
+            }
+    
+            if (Columna != null)
+            {
+                if (!Columna.ReglasSeguridads.Contains(this))
+                {
+                    Columna.ReglasSeguridads.Add(this);
+                }
+                if (ColumnaId != Columna.ColumnaId)
+                {
+                    ColumnaId = Columna.ColumnaId;
+                }
             }
         }
 
