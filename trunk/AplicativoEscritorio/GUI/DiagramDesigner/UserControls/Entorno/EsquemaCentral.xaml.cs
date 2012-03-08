@@ -142,6 +142,8 @@ namespace DiagramDesigner.UserControls.Entorno
             if (ArchCargado != null)
             {
                 ArchCargado.ModificadoDesdeUltimoGuardado = true;
+                ArchCargado.CompilacionCorrecta = false;
+                ArchCargado.EjecucionCorrecta = false;
                 ArchCargado.Gargar = textEditor.Text;
             }
         }

@@ -276,6 +276,13 @@ namespace DiagramDesigner
 
             MostrarResultadosCompilacion(res);
 
+            if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+            {
+                if (ArchCargado != null){
+                    ArchCargado.CompilacionCorrecta = true;
+                }
+            }
+
             if (!string.IsNullOrEmpty(res.Error))
             {
                 MessageBox.Show(res.Error);
@@ -299,6 +306,11 @@ namespace DiagramDesigner
 
             if (res.CompilacionGarGarCorrecta && res.GeneracionEjectuableCorrecto)
             {
+                if (ArchCargado != null)
+                {
+                    ArchCargado.CompilacionCorrecta = true;
+                }
+
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
             }
         }
@@ -314,7 +326,7 @@ namespace DiagramDesigner
         {
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                BarraEstado.Estado = "Compilación Correcta";
+                BarraEstado.Estado = "Compilación Correcta";                
             }
             else
             {
