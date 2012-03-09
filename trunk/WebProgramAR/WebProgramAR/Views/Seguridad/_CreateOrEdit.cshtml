@@ -1,38 +1,176 @@
-﻿@model WebProgramAR.Entidades.Curso
+﻿@model WebProgramAR.Entidades.ReglasSeguridad
+           
+@using WebProgramAR.Helpers           
+
 @{
-    List<WebProgramAR.Entidades.Ejercicio> listaEjercicio = (List<WebProgramAR.Entidades.Ejercicio>)ViewBag.Ejercicios;
+    List<WebProgramAR.Entidades.Tabla> listaTabla = (List<WebProgramAR.Entidades.Tabla>)ViewBag.Tablas;
+    List<WebProgramAR.Entidades.Columna> listaColumna = (List<WebProgramAR.Entidades.Columna>)ViewBag.Columnas;
+    List<WebProgramAR.Entidades.Comparador> listaComparador = (List<WebProgramAR.Entidades.Comparador>)ViewBag.Comparadores;
+    List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
 }
-<div class="editor-label">
-     @Html.LabelFor(m => m.Nombre)
-</div>
 
-<div class="editor-field">
-    @Html.EditorFor(m => m.Nombre)
-    @Html.ValidationMessageFor(m => m.Nombre)
-</div>
-
-<div class="display-label-delete-group">
-    @Html.EditorFor(m => m.Ejercicios)
-    @Html.LabelFor(m => m.Ejercicios)
-</div>
-
-<div class="editor-field">
-    <!--<div class="display-label-delete-group">Ejercicios</div>    -->
-        
-        @if (Model != null && Model.Ejercicios!=null && Model.Ejercicios.Count > 0)
-        {
-            foreach (var Ejercicio in Model.Ejercicios)
-            {
-                <div class="display-field-delete">
-                @Html.DisplayFor(m => Ejercicio.Nombre)
-                </div>
+<script type="text/javascript">
+    $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#PaisId");
+    convertSelect("PaisId");
+    convertSelect("TipoUsuarioCreate");
+    $("#Usuario_FechaNacimiento").datepicker();
+    $("#Usuario_FechaNacimiento").keypress(function (event) {
+        var charCode = (event.which) ? event.which : event.keyCode
+        if (charCode == 8) return false; //  backspace
+        if (charCode == 46) return false; // delete
+    });
+    function reInitLocalidad() {
+        $("#LocalidadIdAutoComplete").val("");
+        $("#LocalidadIdAutoComplete").attr("rel", "");
+    }
+    function OnChangeDo(div) {
+        if ($(div).attr("rel") != "-1") {
+            if (div.attr('id') == "PaisId") {
+                var pais = $("#selectBox_PaisId").attr("rel");
+                $.ajax({
+                    url: '@Url.Action("GetProvinciasByPais")',
+                    data: " { paisId: '" + pais + "'}",
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#listProvincias .tzSelect").remove();
+                        $("#ProvinciaId").children().remove();
+                        var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                        for (var i = 0; i < provincias.length; i++) {
+                            var val = provincias[i].Id;
+                            var text = provincias[i].Value;
+                            $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
+                        }
+                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#ProvinciaId");
+                        convertSelect("ProvinciaId", 2);
+                        reInitLocalidad();
+                    }
+                });
+                $("#listProvincias").show();
+                return;
+            }
+            if (div.attr('id') == "ProvinciaId") {
+                $("#listLocalidades").show();
+                reInitLocalidad();
+                return;
             }
         }
-        else
-        {
-            <div class="display-field-delete">No se han encontrado Resultados</div>
+    }
+
+    $("#LocalidadIdAutoComplete").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
+                data: " { paisId: '" + $("#selectBox_PaisId").attr("rel") + "', provinciaId: '" + $("#selectBox_ProvinciaId").attr("rel") + "', Localidad: '" + request.term + "' }",
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Value,
+                            value: item.Id
+                        }
+                    }));
+                }
+            })
+
+        },
+        scrollHeight: 10,
+        minChars: 1,
+        delay: 100,
+        type: 'POST',
+        selectFirst: false,
+        select: function (event, ui) {
+            $("#LocalidadIdAutoComplete").val(ui.item.label);
+            $("#LocalidadId").val(ui.item.value);
+            $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+        },
+        change: function (event, ui) {
+            if (ui.item != undefined) {
+                $("#LocalidadIdAutoComplete").val(ui.item.label);
+                $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+                $("#LocalidadId").val(ui.item.value);
+            }
         }
-    @Html.ValidationMessageFor(m => m.Nombre)
+    });
+            
+</script>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.TablaId)
 </div>
+<div class="editor-field">
+
+        @Html.DropDownListWithValidationFor(model => model.TablaId, listaTabla.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+            Value = option.TablaId.ToString(),
+            Selected = ((Model != null) && (option.TablaId == Model.TablaId))
+        }), new { @id = "TablaCreate", @style = "display:none" })
+
+        @Html.ValidationMessageFor(m => m.TablaId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.ColumnaId)
+</div>
+<div class="editor-field">
+     @Html.DropDownListWithValidationFor(model => model.ComparadorId, listaComparador.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+            Value = option.ComparadorId.ToString(),
+            Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
+        }), new { @id = "ComparadorCreate", @style = "display:none" })
+
+    @Html.ValidationMessageFor(m => m.ColumnaId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.ComparadorId)
+</div>
+<div class="editor-field">
+     @Html.DropDownListWithValidationFor(model => model.ComparadorId, listaComparador.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+            Value = option.ComparadorId.ToString(),
+            Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
+        }), new { @id = "ComparadorCreate", @style = "display:none" })
+
+    @Html.ValidationMessageFor(m => m.ComparadorId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.TipoUsuario)
+</div>
+<div class="editor-field">
+    @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+            Value = option.TipoUsuarioId.ToString(),
+            Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+        }), new { @id = "TipoUsuarioCreate", @style = "display:none" })
+
+        @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.Valor)
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor(m => m.Valor)
+    @Html.ValidationMessageFor(m => m.Valor)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.Activa)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(m => m.Activa)
+</div>
+
+
+
 
 

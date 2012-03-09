@@ -39,5 +39,21 @@ namespace WebProgramAR.Negocio
             return ReglasSeguridadDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa);
         }
 
+        public static IEnumerable<Tabla> GetTablas()
+        {
+            return TablaDA.GetTablas();
+        }
+
+        public static IEnumerable<Columna> GetColumnasByTabla(int tablaId)
+        {
+            return ColumnaDA.GetColumnasByTabla(tablaId);
+        }
+
+        public static IEnumerable<Comparador> GetComparadorByColumna(int colId)
+        {
+            Columna col = ColumnaDA.GetColumnaById(colId);
+
+            return ComparadorDA.GetComparadoresByTipo(col.TipoId);
+        }
     }
 }

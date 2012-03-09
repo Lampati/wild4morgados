@@ -1,18 +1,19 @@
 ﻿
-@model WebProgramAR.Sitio.Models.CursoGrillaModel
+@model WebProgramAR.Sitio.Models.SeguridadGrillaModel
 @{
     if (!Model.ConLayout)
     {
         Layout = null;
     }
     
-    ViewBag.Title = "Cursos";
+    ViewBag.Title = "Configuración";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
 
-    grid.Bind(Model.Cursos, autoSortAndPage: true, rowCount: Model.Cantidad);
+    grid.Bind(Model.ReglasSeguridad, autoSortAndPage: true, rowCount: Model.Cantidad);
 
-    string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
+    
+    
 }
 
 
@@ -53,31 +54,28 @@
         $('.botonDetalles').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 250);
         });
-        $('.botonAsociar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("../Ejercicio/AsociarCursoEjercicio")/', 950, 600);
-        });
+        
         var sortcol = '@grid.SortColumn';
 
         if (sortcol != '')
             $('thead > tr > th > a[href*="sort=@grid.SortColumn"]').parent().addClass('@(grid.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
 
-        //FuncionesAutorizadas('@funcionesAutorizadas');
+        
     });
 </script>
 
 <h1>Cursos</h1>
 <div id="buttonSection" class="buttonSection">
-@if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
-{
-        <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
-}
+
+    <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+
     <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
 </div>    
 <div id="filtros">
     <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("Index", "Curso", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("Index", "Seguridad", FormMethod.Post, new { id = "filterForm" }))
         {    
             @Html.ValidationSummary(true)
             <table>
@@ -101,8 +99,7 @@
 
 <div id="contenedor-grid">
 
-@if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
-{
+
 
 @grid.GetHtml(
     tableStyle: "grid",
@@ -117,63 +114,37 @@
     nextText: ">",
         lastText: " >>",
     columns: new[] {
-    grid.Column("Nombre", header: "Nombre"),
+    grid.Column("Tabla.Nombre", header: "Tabla"),
+    grid.Column("Columna.Nombre", header: "Columna"),
+    grid.Column("Comparador.Nombre", header: "Comparador"),
+    grid.Column("Usuario", header: "Usuario", format: x => x.Usuario != null ? x.Usuario.UsuarioNombre : "" ),
+    grid.Column("TipoUsuario", header: "Tipo Usuario", format: x => x.TipoUsuario != null ? x.TipoUsuario.Descripcion : ""),
+    grid.Column("Valor", header: "Valor"),
+    grid.Column("Activa", header: "Habilitada", format: x => x.Activa ? "Si" : "No"),
    
    
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles hoverRel"/>
+                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.ReglaId)" class="botonDetalles hoverRel"/>
                   </text>
     ),        
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar hoverRel"/>
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.ReglaId)" class="botonEditar hoverRel"/>
                   </text>
     ),
     grid.Column("", 
           header: "",
           format: @<text>
-                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar hoverRel"/>
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.ReglaId)" class="botonEliminar hoverRel"/>
                     
-                  </text>
-    ),
-    grid.Column("", 
-          header: "",
-          format: @<text>
-                    <input type="image" alt="Asociaciones" src="@Url.Content("~/Content/images/list_task-16.png")" data="@(item.CursoId)" class="botonAsociar hoverRel"/>
-                  </text>
+                  </text>   
     )
 })
 
-}
-else
-{
-    @grid.GetHtml(
-    tableStyle: "grid",
-    fillEmptyRows: false,
-    rowStyle: "gridRow",
-    alternatingRowStyle: "gridAlternatingRow",
-    headerStyle: "gridHeader",
-    footerStyle: "gridPager",
-    mode: WebGridPagerModes.All,
-        firstText: "<<",
-        previousText: "<",
-    nextText: ">",
-        lastText: " >>",
-    columns: new[] {
-    grid.Column("Nombre", header: "Nombre"),
-   
-   
-    grid.Column("", 
-          header: "",
-          format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles hoverRel"/>
-                  </text>
-    )
-    })
-}
+
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
