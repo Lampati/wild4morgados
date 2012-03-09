@@ -1,0 +1,37 @@
+﻿@model WebProgramAR.Entidades.Curso
+@{
+    Layout = null;
+}
+<h2>Detalles</h2>
+<legend>Curso</legend>
+
+<fieldset class="details">
+    
+    <div class="fila">
+        <div class="display-label-delete">Nombre:</div>
+        <div class="display-field-delete">@Model.Nombre</div>
+    </div>
+    <div class="fila">
+        <!--<div class="display-label-delete-group">Ejercicios</div>-->
+        @if (Model.Ejercicios.Count > 0)
+        {
+            foreach (var Ejercicio in Model.Ejercicios)
+            {
+                <div class="display-field-delete">
+                    @Html.DisplayFor(m => Ejercicio.Nombre)
+                </div>
+            }
+        }
+        else
+        {
+            <div class="display-field-delete">Este curso no tiene ejercicios asociados.</div>
+        }
+     </div>    
+</fieldset>
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="center">
+            <input type="button" value="OK" class="submit" id="btnCancelar" />
+        </td>
+    </tr>
+</table>

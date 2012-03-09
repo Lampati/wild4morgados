@@ -15,7 +15,7 @@ using System.Collections.Specialized;
 
 namespace WebProgramAR.Entidades
 {
-    public partial class Usuario : EntidadProgramARBase
+    public partial class Usuario
     {
         #region Primitive Properties
     

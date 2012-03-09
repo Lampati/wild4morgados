@@ -65,6 +65,38 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Columna> _columnas;
+    
+        public virtual ICollection<Comparador> Comparadors
+        {
+            get
+            {
+                if (_comparadors == null)
+                {
+                    var newCollection = new FixupCollection<Comparador>();
+                    newCollection.CollectionChanged += FixupComparadors;
+                    _comparadors = newCollection;
+                }
+                return _comparadors;
+            }
+            set
+            {
+                if (!ReferenceEquals(_comparadors, value))
+                {
+                    var previousValue = _comparadors as FixupCollection<Comparador>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupComparadors;
+                    }
+                    _comparadors = value;
+                    var newValue = value as FixupCollection<Comparador>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupComparadors;
+                    }
+                }
+            }
+        }
+        private ICollection<Comparador> _comparadors;
 
         #endregion
         #region Association Fixup
@@ -86,6 +118,31 @@ namespace WebProgramAR.Entidades
                     if (ReferenceEquals(item.Tipo, this))
                     {
                         item.Tipo = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupComparadors(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Comparador item in e.NewItems)
+                {
+                    if (!item.Tipoes.Contains(this))
+                    {
+                        item.Tipoes.Add(this);
+                    }
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Comparador item in e.OldItems)
+                {
+                    if (item.Tipoes.Contains(this))
+                    {
+                        item.Tipoes.Remove(this);
                     }
                 }
             }

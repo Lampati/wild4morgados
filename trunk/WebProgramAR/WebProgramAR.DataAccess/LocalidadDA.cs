@@ -42,7 +42,13 @@ namespace WebProgramAR.DataAccess
                                               && (u.PaisId == idPais)
                                               && (u.Descripcion.Contains(Localidad))
                                               select u;
-                return query.ToList();
+                //return query.ToList();
+
+                List<Localidad> aux = query.ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Localidad>(aux, _nombreTabla, null, null, out tiempo);
             }
         }
         public static IEnumerable<Localidad> GetLocalidades()
@@ -57,13 +63,6 @@ namespace WebProgramAR.DataAccess
         }
 
 
-        #region IFiltrablePorSeguridadPorValor Members
-
-        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
+        
     }
 }

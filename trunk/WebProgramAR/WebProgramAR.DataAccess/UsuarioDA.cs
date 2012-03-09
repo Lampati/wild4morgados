@@ -81,7 +81,11 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetUsuarios(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, db).Count();
+                List<Usuario> aux = GetUsuarios(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, db).ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null, null, out tiempo).Count();
             }
         }
 
@@ -111,17 +115,19 @@ namespace WebProgramAR.DataAccess
                     sortColumns = sortColumns.Replace("Localidad", "Localidad.LocalidadId");
                 }
 
-                return query.OrderUsingSortExpression(sortColumns)
-                            .Skip((paginaActual - 1) * personasPorPagina)
-                            .Take(personasPorPagina)
-                            .ToList();
-
-                //List<Usuario> aux = query.OrderUsingSortExpression(sortColumns)
+                //return query.OrderUsingSortExpression(sortColumns)
                 //            .Skip((paginaActual - 1) * personasPorPagina)
                 //            .Take(personasPorPagina)
                 //            .ToList();
 
-                //return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla,null, null);
+                List<Usuario> aux = query.OrderUsingSortExpression(sortColumns)
+                            .Skip((paginaActual - 1) * personasPorPagina)
+                            .Take(personasPorPagina)
+                            .ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null, null, out tiempo);
             }
         }
 

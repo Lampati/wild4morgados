@@ -14,14 +14,13 @@ namespace WebProgramAR.Negocio
             return LocalidadDA.GetLocalidadById(id);
         }
 
-        public static IEnumerable<Localidad> GetLocalidadesByProvinciaByPais(string provinciaId, string paisId)
-        {
-            return LocalidadDA.GetLocalidadesByProvinciaByPais(provinciaId,paisId);
-        }
+        
         public static IEnumerable<Localidad> GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string provinciaId, string paisId)
         {
             return LocalidadDA.GetLocalidadesByLocalidadByProvinciaByPais(Localidad, provinciaId, paisId);
         }
+
+        //no se usa
         public static IEnumerable<Localidad> GetLocalidades()
         {
             return LocalidadDA.GetLocalidades();
