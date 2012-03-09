@@ -1,11 +1,12 @@
-﻿@model WebProgramAR.Entidades.Curso
+﻿@model WebProgramAR.Entidades.ReglasSeguridad
+
 @{
 
     Layout = null;
 }
 
   
-@using (Ajax.BeginForm("Delete", "Curso", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
+@using (Ajax.BeginForm("Delete", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
     <h2>Eliminar</h2>
     <legend>Curso</legend>
@@ -13,11 +14,42 @@
     
     <fieldset>
         <br style="height: 5px" />
-        @Html.HiddenFor(model => model.CursoId)
+        @Html.HiddenFor(model => model.ReglaId)
+        
         <div class="fila">
-            <div class="display-label-delete">Nombre:</div>
-            <div class="display-field-delete">@Model.Nombre</div>
+            <div class="display-label-delete">Tabla:</div>
+            <div class="display-field-delete">@Model.Tabla.Nombre</div>
         </div>
+
+        <div class="fila">
+            <div class="display-label-delete">Columna:</div>
+            <div class="display-field-delete">@Model.Columna.Nombre</div>
+        </div>
+
+        <div class="fila">
+            <div class="display-label-delete">Comparador:</div>
+            <div class="display-field-delete">@Model.Comparador.Nombre</div>
+        </div>
+
+        <div class="fila">
+            <div class="display-label-delete">Usuario:</div>
+            <div class="display-field-delete">@(Model.Usuario != null ? Model.Usuario.UsuarioNombre : "")</div>
+        </div>
+
+        <div class="fila">
+            <div class="display-label-delete">TipoUsuario:</div>
+            <div class="display-field-delete">@(Model.TipoUsuario != null ? Model.TipoUsuario.Descripcion : "")</div>
+        </div>
+
+        <div class="fila">
+        <div class="display-label-delete">Valor:</div>
+        <div class="display-field-delete">@Model.Valor</div>
+    </div>
+
+      <div class="fila">
+        <div class="display-label-delete">Habilitada:</div>
+        <div class="display-field-delete">@(Model.Activa ? "Si" : "No")</div>
+    </div>
     
     </fieldset>  
     

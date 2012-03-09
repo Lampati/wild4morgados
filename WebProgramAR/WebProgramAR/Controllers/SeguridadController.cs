@@ -50,6 +50,8 @@ namespace WebProgramAR.Controllers
                 ReglasSeguridad = reglas,
                 PaginaActual = page
             };
+
+            
             
             return View(datos);
 
@@ -69,6 +71,7 @@ namespace WebProgramAR.Controllers
         [Authorize(Roles = "administrador")]
         public ActionResult Create()
         {
+            ArmarViewBags();
             return View();
         } 
 
@@ -98,6 +101,7 @@ namespace WebProgramAR.Controllers
             if (Request.IsAjaxRequest())
             {
                 ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
+                ArmarViewBags();
                 return View("Edit", c);
             }
             else
@@ -156,6 +160,49 @@ namespace WebProgramAR.Controllers
             SeguridadNegocio.Eliminar(regla.ReglaId);
             return Content(Boolean.TrueString);
             
+        }
+
+
+        /// <summary>
+        /// Cargar Columnas de acuerdo a la tabla.
+        /// </summary>
+        [HttpPost]
+        public JsonResult GetColumnasByTabla(int tablaId)
+        {
+            List<Columna> listaCols = Negocio.SeguridadNegocio.GetColumnasByTabla(tablaId).ToList();
+
+            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            foreach (Columna item in listaCols)
+            {
+                listaRetorno.Add(new GenericJsonModel() { Id = item.ColumnaId.ToString(), Value = item.Nombre });
+            }
+
+            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// Cargar Comparadores de acuerdo a la columna
+        /// .
+        /// </summary>
+        [HttpPost]
+        public JsonResult GetComparadoresByColumna(int colId)
+        {
+            List<Comparador> listaCols = Negocio.SeguridadNegocio.GetComparadorByColumna(colId).ToList();
+
+            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            foreach (Comparador item in listaCols)
+            {
+                listaRetorno.Add(new GenericJsonModel() { Id = item.ComparadorId.ToString(), Value = item.Nombre });
+            }
+
+            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
+        }
+
+
+        private void ArmarViewBags()
+        {
+            ViewBag.ListaTablas = SeguridadNegocio.GetTablas();
         }
     }
 }

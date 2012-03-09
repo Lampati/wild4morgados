@@ -1,14 +1,14 @@
-﻿@model WebProgramAR.Entidades.Curso
+﻿@model WebProgramAR.Entidades.ReglasSeguridad
 
 @{
     Layout = null;
-    ViewBag.Title = "Cursos";
+    ViewBag.Title = "Crear";
 }
 
 <h2>Nuevo</h2>
-<legend>Curso</legend>
+<legend>Seguridad</legend>
    
-@using (Ajax.BeginForm("Create", "Curso", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+@using (Ajax.BeginForm("Create", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { @Html.ValidationSummary(true)
 
         

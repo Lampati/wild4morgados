@@ -1,32 +1,47 @@
-﻿@model WebProgramAR.Entidades.Curso
+﻿@model WebProgramAR.Entidades.ReglasSeguridad
 @{
     Layout = null;
 }
 <h2>Detalles</h2>
-<legend>Curso</legend>
+<legend>Regla de Seguridad</legend>
 
 <fieldset class="details">
     
     <div class="fila">
-        <div class="display-label-delete">Nombre:</div>
-        <div class="display-field-delete">@Model.Nombre</div>
+        <div class="display-label-delete">Tabla:</div>
+        <div class="display-field-delete">@Model.Tabla.Nombre</div>
     </div>
+
     <div class="fila">
-        <!--<div class="display-label-delete-group">Ejercicios</div>-->
-        @if (Model.Ejercicios.Count > 0)
-        {
-            foreach (var Ejercicio in Model.Ejercicios)
-            {
-                <div class="display-field-delete">
-                    @Html.DisplayFor(m => Ejercicio.Nombre)
-                </div>
-            }
-        }
-        else
-        {
-            <div class="display-field-delete">Este curso no tiene ejercicios asociados.</div>
-        }
-     </div>    
+        <div class="display-label-delete">Columna:</div>
+        <div class="display-field-delete">@Model.Columna.Nombre</div>
+    </div>
+
+    <div class="fila">
+        <div class="display-label-delete">Comparador:</div>
+        <div class="display-field-delete">@Model.Comparador.Nombre</div>
+    </div>
+
+    <div class="fila">
+        <div class="display-label-delete">Usuario:</div>
+        <div class="display-field-delete">@(Model.Usuario != null ? Model.Usuario.UsuarioNombre : "")</div>
+    </div>
+
+    <div class="fila">
+        <div class="display-label-delete">TipoUsuario:</div>
+        <div class="display-field-delete">@(Model.TipoUsuario != null ? Model.TipoUsuario.Descripcion : "")</div>
+    </div>
+
+    <div class="fila">
+        <div class="display-label-delete">Valor:</div>
+        <div class="display-field-delete">@Model.Valor</div>
+    </div>
+
+      <div class="fila">
+        <div class="display-label-delete">Habilitada:</div>
+        <div class="display-field-delete">@(Model.Activa ? "Si" : "No")</div>
+    </div>
+   
 </fieldset>
 <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
