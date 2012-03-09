@@ -95,7 +95,7 @@
                         }
                         @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("administrador"))
                         {
-                            <li>@Html.ActionLink("Configuracion", "Index", "Configuracion")</li>
+                            <li>@Html.ActionLink("Configuracion", "Index", "Seguridad")</li>
                         }
                         
                         <li>@Html.ActionLink("Contacto", "About", "Home")</li>

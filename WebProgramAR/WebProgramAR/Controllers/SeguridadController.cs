@@ -15,7 +15,7 @@ namespace WebProgramAR.Controllers
     {
         //
         // GET: /Seguridad/
-
+        [Authorize(Roles = "administrador")]
         public ActionResult Index(int page = 1, string sort = "Tabla", string sortDir = "ASC", int tablaId = -1, int? tipoUsuarioId = -1,
             int? usuarioId = -1, int comparadorId = -1, int columnaId = -1, bool? activa = null)
         {
@@ -57,7 +57,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Seguridad/Details/5
-
+        [Authorize(Roles = "administrador")]
         public ActionResult Details(int id)
         {
             ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
@@ -66,7 +66,7 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Seguridad/Create
-
+        [Authorize(Roles = "administrador")]
         public ActionResult Create()
         {
             return View();
@@ -76,6 +76,7 @@ namespace WebProgramAR.Controllers
         // POST: /Seguridad/Create
 
         [HttpPost]
+        [Authorize(Roles = "administrador")]
         public ActionResult Create(ReglasSeguridad regla)
         {
             if (ModelState.IsValid)
@@ -91,6 +92,7 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Seguridad/Edit/5
+        [Authorize(Roles = "administrador")]
         public ActionResult Edit(int id)
         {
             if (Request.IsAjaxRequest())
@@ -107,6 +109,7 @@ namespace WebProgramAR.Controllers
         //
         // POST: /Seguridad/Edit/5
         [HttpPost]
+        [Authorize(Roles = "administrador")]
         public ActionResult Edit(ReglasSeguridad regla)
         {
             // TODO: Add update logic here
@@ -129,7 +132,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Seguridad/Delete/5
- 
+        [Authorize(Roles = "administrador")] 
         public ActionResult Delete(int id)
         {
             if (Request.IsAjaxRequest())
@@ -147,6 +150,7 @@ namespace WebProgramAR.Controllers
         // POST: /Seguridad/Delete/5
 
         [HttpPost]
+        [Authorize(Roles = "administrador")]
         public ActionResult Delete(ReglasSeguridad regla)
         {
             SeguridadNegocio.Eliminar(regla.ReglaId);
