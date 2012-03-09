@@ -50,6 +50,11 @@ namespace WebProgramAR.Negocio
             return UsuarioDA.GetUsuarioByLoginUsuario(loginUsuario);
         }
 
+        public static IEnumerable<Usuario> GetUsuarioByLoginUsuarioAutocomplete(string loginUsuario)
+        {
+            return UsuarioDA.GetUsuarioByLoginUsuarioAutocomplete(loginUsuario);
+        }
+
         public static void ModificarUltimoLogin(Usuario usuario)
         {
             UsuarioDA.ModificarUltimoLogin(usuario);

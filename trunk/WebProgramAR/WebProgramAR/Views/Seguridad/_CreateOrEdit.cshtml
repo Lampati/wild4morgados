@@ -3,15 +3,15 @@
 @using WebProgramAR.Helpers           
 
 @{
-    List<WebProgramAR.Entidades.Tabla> listaTabla = (List<WebProgramAR.Entidades.Tabla>)ViewBag.Tablas;
+    List<WebProgramAR.Entidades.Tabla> listaTabla = (List<WebProgramAR.Entidades.Tabla>)ViewBag.ListaTablas;
     List<WebProgramAR.Entidades.Columna> listaColumna = (List<WebProgramAR.Entidades.Columna>)ViewBag.Columnas;
     List<WebProgramAR.Entidades.Comparador> listaComparador = (List<WebProgramAR.Entidades.Comparador>)ViewBag.Comparadores;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
 }
 
 <script type="text/javascript">
-    $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#PaisId");
-    convertSelect("PaisId");
+    $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#TablaId");
+    convertSelect("TablaId");
     convertSelect("TipoUsuarioCreate");
     $("#Usuario_FechaNacimiento").datepicker();
     $("#Usuario_FechaNacimiento").keypress(function (event) {
@@ -19,50 +19,74 @@
         if (charCode == 8) return false; //  backspace
         if (charCode == 46) return false; // delete
     });
-    function reInitLocalidad() {
-        $("#LocalidadIdAutoComplete").val("");
-        $("#LocalidadIdAutoComplete").attr("rel", "");
+    function reInitColumnas() {
+        $("#ColumnaId").val("");
+        $("#ColumnaId").attr("rel", "");
+    }
+    function reInitComparadores() {
+        $("#ComparadorId").val("");
+        $("#ComparadorId").attr("rel", "");
     }
     function OnChangeDo(div) {
         if ($(div).attr("rel") != "-1") {
-            if (div.attr('id') == "PaisId") {
-                var pais = $("#selectBox_PaisId").attr("rel");
+            if (div.attr('id') == "TablaId") {
+                var tabla = $("#selectBox_TablaId").attr("rel");
                 $.ajax({
-                    url: '@Url.Action("GetProvinciasByPais")',
-                    data: " { paisId: '" + pais + "'}",
+                    url: '@Url.Action("GetColumnasByTabla")',
+                    data: " { tablaId: '" + tabla + "'}",
                     contentType: 'application/json',
                     type: 'POST',
                     dataType: 'json',
                     success: function (data) {
-                        $("#listProvincias .tzSelect").remove();
-                        $("#ProvinciaId").children().remove();
-                        var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
-                        for (var i = 0; i < provincias.length; i++) {
-                            var val = provincias[i].Id;
-                            var text = provincias[i].Value;
-                            $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
+                        $("#listColumnas .tzSelect").remove();
+                        $("#ColumnaId").children().remove();
+                        var columnas = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                        for (var i = 0; i < columnas.length; i++) {
+                            var val = columnas[i].Id;
+                            var text = columnas[i].Value;
+                            $("#ColumnaId").get(0).options[$("#ColumnaId").get(0).options.length] = new Option(text, val);
                         }
-                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#ProvinciaId");
-                        convertSelect("ProvinciaId", 2);
+                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#ColumnaId");
+                        convertSelect("ColumnaId", 2);
                         reInitLocalidad();
                     }
                 });
-                $("#listProvincias").show();
+                $("#listColumnas").show();
                 return;
             }
-            if (div.attr('id') == "ProvinciaId") {
-                $("#listLocalidades").show();
-                reInitLocalidad();
+            if (div.attr('id') == "ColumnaId") {
+                var col = $("#selectBox_ColumnaId").attr("rel");
+                $.ajax({
+                    url: '@Url.Action("GetComparadoresByColumna")',
+                    data: " { colId: '" + col + "'}",
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#listComparadores .tzSelect").remove();
+                        $("#ComparadorId").children().remove();
+                        var comparadores = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                        for (var i = 0; i < comparadores.length; i++) {
+                            var val = comparadores[i].Id;
+                            var text = comparadores[i].Value;
+                            $("#ComparadorId").get(0).options[$("#ComparadorId").get(0).options.length] = new Option(text, val);
+                        }
+                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#ComparadorId");
+                        convertSelect("ComparadorId", 2);
+                        reInitLocalidad();
+                    }
+                });
+                $("#listComparadores").show();
                 return;
-            }
+            }           
         }
     }
 
-    $("#LocalidadIdAutoComplete").autocomplete({
+    $("#UsuarioIdAutoComplete").autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: '@Url.Action("GetLocalidadesByLocalidadByProvinciaByPais")',
-                data: " { paisId: '" + $("#selectBox_PaisId").attr("rel") + "', provinciaId: '" + $("#selectBox_ProvinciaId").attr("rel") + "', Localidad: '" + request.term + "' }",
+                url: '@Url.Action("GetUsuariosByNombreUsuario")',
+                data: " {user: '" + request.term + "' }",
                 contentType: 'application/json',
                 type: 'POST',
                 dataType: 'json',
@@ -83,15 +107,15 @@
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#LocalidadIdAutoComplete").val(ui.item.label);
-            $("#LocalidadId").val(ui.item.value);
-            $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+            $("#UsuarioIdAutoComplete").val(ui.item.label);
+            $("#UsuarioId").val(ui.item.value);
+            $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
-                $("#LocalidadIdAutoComplete").val(ui.item.label);
-                $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-                $("#LocalidadId").val(ui.item.value);
+                $("#UsuarioIdAutoComplete").val(ui.item.label);
+                $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+                $("#UsuarioId").val(ui.item.value);
             }
         }
     });
@@ -108,11 +132,12 @@
             Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
             Value = option.TablaId.ToString(),
             Selected = ((Model != null) && (option.TablaId == Model.TablaId))
-        }), new { @id = "TablaCreate", @style = "display:none" })
+        }), new { @id = "TablaId", @style = "display:none" })
 
         @Html.ValidationMessageFor(m => m.TablaId)
 </div>
 
+<div id="listColumnas" style="display:none">
 <div class="editor-label">
     @Html.LabelFor(m => m.ColumnaId)
 </div>
@@ -122,11 +147,13 @@
             Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
             Value = option.ComparadorId.ToString(),
             Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
-        }), new { @id = "ComparadorCreate", @style = "display:none" })
+        }), new { @id = "ColumnaId", @style = "display:none" })
 
     @Html.ValidationMessageFor(m => m.ColumnaId)
 </div>
+</div>
 
+<div  id="listComparadores"  style="display:none">
 <div class="editor-label">
     @Html.LabelFor(m => m.ComparadorId)
 </div>
@@ -136,9 +163,18 @@
             Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
             Value = option.ComparadorId.ToString(),
             Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
-        }), new { @id = "ComparadorCreate", @style = "display:none" })
+        }), new { @id = "ComparadorId", @style = "display:none" })
 
     @Html.ValidationMessageFor(m => m.ComparadorId)
+</div>
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.UsuarioId)
+</div>
+    <div class="editor-field">
+    @Html.TextBoxFor(model => model.UsuarioId, new { @rel=" ", @Value = " ", @id = "UsuarioIdAutoComplete" })
+    @Html.HiddenFor(model => model.UsuarioId, new { @rel=" ",@Value = " ", @id = "UsuarioId" })
 </div>
 
 <div class="editor-label">
