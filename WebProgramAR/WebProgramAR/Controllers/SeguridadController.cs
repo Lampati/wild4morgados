@@ -188,7 +188,7 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public JsonResult GetComparadoresByColumna(int colId)
         {
-            List<Comparador> listaCols = Negocio.SeguridadNegocio.GetComparadorByColumna(colId).ToList();
+            List<Comparador> listaCols = SeguridadNegocio.GetComparadorByColumna(colId).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
             foreach (Comparador item in listaCols)
@@ -199,10 +199,30 @@ namespace WebProgramAR.Controllers
             return Json(listaRetorno, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GetUsuariosByNombreUsuario(string user)
+        {
+            List<Usuario> listaCols = UsuarioNegocio.GetUsuarioByLoginUsuarioAutocomplete(user).ToList();
+
+            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            foreach (Usuario item in listaCols)
+            {
+                listaRetorno.Add(new GenericJsonModel() { Id = item.UsuarioId.ToString(),
+                    Value = string.Format("{0} ({1}, {2})",item.UsuarioNombre,item.Apellido,item.Nombre) });
+            }
+
+            return Json(listaRetorno, JsonRequestBehavior.AllowGet);
+        }
+
 
         private void ArmarViewBags()
         {
             ViewBag.ListaTablas = SeguridadNegocio.GetTablas();
+            ViewBag.Columnas =null;
+            ViewBag.Comparadores = null;
+            ViewBag.ListaTipoUsuarios = TipoUsuarioNegocio.GetTiposUsuario();
         }
+
+
     }
 }

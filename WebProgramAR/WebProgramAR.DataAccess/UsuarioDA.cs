@@ -146,6 +146,10 @@ namespace WebProgramAR.DataAccess
             return query;
         }
 
+
+
+        
+
         //public static ChangePassword VerifyLoginUsuarioAndPassword(int Usuarioid)
         //{
         //    using (WebProgramAREntities ce = new WebProgramAREntities())
@@ -224,6 +228,20 @@ namespace WebProgramAR.DataAccess
         //        ce.SaveChanges();
         //    }
         //}
+
+
+        public static IEnumerable<Usuario> GetUsuarioByLoginUsuarioAutocomplete(string desc)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Usuario> query = from u in db.Usuarios
+                                            where u.UsuarioNombre.Contains(desc)
+
+                                            select u;
+                return query.ToList();
+            }
+        }
 
         #region IFiltrablePorSeguridadPorValor Members
 
