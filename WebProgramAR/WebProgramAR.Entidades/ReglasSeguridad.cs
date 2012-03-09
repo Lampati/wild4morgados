@@ -155,6 +155,12 @@ namespace WebProgramAR.Entidades
             }
         }
         private int _columnaId;
+    
+        public virtual bool Activa
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties

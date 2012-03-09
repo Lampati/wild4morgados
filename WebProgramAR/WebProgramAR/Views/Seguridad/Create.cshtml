@@ -1,0 +1,30 @@
+﻿@model WebProgramAR.Entidades.Curso
+
+@{
+    Layout = null;
+    ViewBag.Title = "Cursos";
+}
+
+<h2>Nuevo</h2>
+<legend>Curso</legend>
+   
+@using (Ajax.BeginForm("Create", "Curso", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+{ @Html.ValidationSummary(true)
+
+        
+        @Html.Partial("_CreateOrEdit", Model)
+        
+       <div id="buttonSectionOptions" class="buttonSectionOptions">
+            <div>
+                <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
+            </div>
+            <div >
+                 <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
+            </div>
+        </div>
+}
+<div class="update-message-box">
+    <div id="update-message" class="error" ></div>
+    <div class="pointerBox"></div>
+</div>
+<div id="divOperacionExitosa">Operacion Exitosa</div>

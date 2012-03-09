@@ -4,64 +4,82 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace WebProgramAR.DataAccess.Seguridad
 {
     public static class SeguridadXValorManager
     {
 
+        public static List<T> Filtrar<T>(List<T> lista, string tabla, int? userId, int? tipoUserId, out float timestamp)
+        {
+            long timeStampLex = Stopwatch.GetTimestamp();
+
+            List<T> retorno = Filtrar<T>(lista, tabla, userId, tipoUserId);
+
+            timestamp = ((float)(Stopwatch.GetTimestamp() - timeStampLex)) / ((float)Stopwatch.Frequency);
+
+            return retorno;
+
+        }
+
         public static List<T> Filtrar<T>(List<T> lista, string tabla, int? userId, int? tipoUserId)
         {
             List<T> retorno = new List<T>();
 
-            List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();
+            List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();            
 
-            if (lista.Count > 0)
+            if (lista.Count > 0 && reglas.Count > 0)
             {
                 PropertyInfo[] props = lista[0].GetType().GetProperties();
 
                 foreach (var entidad in lista)
                 {
-                    bool resGlobalTodasReglas = true;
+                    bool filtroAplicadosHastaAhora = false;
 
                     foreach (ReglasSeguridad regla in reglas)
                     {
                         PropertyInfo prop = props.Single(x => x.Name == regla.Columna.Nombre); //aca va la columna
 
-                        bool resLocal = false;
+                        bool resFiltro = false;
 
                         object obj = prop.GetValue(entidad, null);
 
                         switch (regla.Columna.Tipo.Nombre.ToUpper()) //Aca va el tipo de la col
                         {
                             case ConstantesSeguridad.TIPO_STRING:
-                                resLocal = Comparar((string)obj, regla.Comparador.Nombre, regla.Valor);
+                                resFiltro = Comparar((string)obj, regla.Comparador.Nombre, regla.Valor);
                                 break;
                             case ConstantesSeguridad.TIPO_INT:
-                                resLocal = Comparar((int)obj, regla.Comparador.Nombre, Convert.ToInt32(regla.Valor));
+                                resFiltro = Comparar((int)obj, regla.Comparador.Nombre, Convert.ToInt32(regla.Valor));
                                 break;
                             case ConstantesSeguridad.TIPO_BOOL:
-                                resLocal = Comparar((bool)obj, regla.Comparador.Nombre, Convert.ToBoolean(regla.Valor));
+                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Convert.ToBoolean(regla.Valor));
                                 break;
                             case ConstantesSeguridad.TIPO_DATETIME:
-                                resLocal = Comparar((DateTime)obj, regla.Comparador.Nombre, Convert.ToDateTime(regla.Valor));
+                                resFiltro = Comparar((DateTime)obj, regla.Comparador.Nombre, Convert.ToDateTime(regla.Valor));
                                 break;
-                        }                        
+                        }
 
-                        
-                        resGlobalTodasReglas &= resLocal;
 
-                        if (!resGlobalTodasReglas)
+                        filtroAplicadosHastaAhora |= resFiltro;
+
+                        if (filtroAplicadosHastaAhora)
                         {
                             break;
                         }
                     }
 
-                    if (resGlobalTodasReglas)
+                    if (!filtroAplicadosHastaAhora)
                     {
                         retorno.Add(entidad);
                     }
                 }
+               
+            }
+            else
+            {
+                retorno = lista;
             }
 
             return retorno;
@@ -88,7 +106,7 @@ namespace WebProgramAR.DataAccess.Seguridad
                 default:
                     break;
             }
-            return true;
+            return false;
         }
 
         private static bool Comparar(int valEntidad, string comp, int valRef)

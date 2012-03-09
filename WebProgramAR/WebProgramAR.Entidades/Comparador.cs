@@ -30,6 +30,12 @@ namespace WebProgramAR.Entidades
             get;
             set;
         }
+    
+        public virtual Nullable<int> TipoId
+        {
+            get;
+            set;
+        }
 
         #endregion
         #region Navigation Properties
@@ -65,6 +71,38 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<ReglasSeguridad> _reglasSeguridads;
+    
+        public virtual ICollection<Tipo> Tipoes
+        {
+            get
+            {
+                if (_tipoes == null)
+                {
+                    var newCollection = new FixupCollection<Tipo>();
+                    newCollection.CollectionChanged += FixupTipoes;
+                    _tipoes = newCollection;
+                }
+                return _tipoes;
+            }
+            set
+            {
+                if (!ReferenceEquals(_tipoes, value))
+                {
+                    var previousValue = _tipoes as FixupCollection<Tipo>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupTipoes;
+                    }
+                    _tipoes = value;
+                    var newValue = value as FixupCollection<Tipo>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupTipoes;
+                    }
+                }
+            }
+        }
+        private ICollection<Tipo> _tipoes;
 
         #endregion
         #region Association Fixup
@@ -86,6 +124,31 @@ namespace WebProgramAR.Entidades
                     if (ReferenceEquals(item.Comparador, this))
                     {
                         item.Comparador = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupTipoes(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Tipo item in e.NewItems)
+                {
+                    if (!item.Comparadors.Contains(this))
+                    {
+                        item.Comparadors.Add(this);
+                    }
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Tipo item in e.OldItems)
+                {
+                    if (item.Comparadors.Contains(this))
+                    {
+                        item.Comparadors.Remove(this);
                     }
                 }
             }
