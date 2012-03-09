@@ -25,6 +25,9 @@ namespace WebProgramAR.DataAccess.Seguridad
 
         public static List<T> Filtrar<T>(List<T> lista, string tabla, int? userId, int? tipoUserId)
         {
+            //http://msmvps.com/blogs/jon_skeet/archive/2008/08/09/making-reflection-fly-and-exploring-delegates.aspx
+
+
             List<T> retorno = new List<T>();
 
             List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();            
@@ -42,7 +45,7 @@ namespace WebProgramAR.DataAccess.Seguridad
                         PropertyInfo prop = props.Single(x => x.Name == regla.Columna.Nombre); //aca va la columna
 
                         bool resFiltro = false;
-
+                        
                         object obj = prop.GetValue(entidad, null);
 
                         switch (regla.Columna.Tipo.Nombre.ToUpper()) //Aca va el tipo de la col
