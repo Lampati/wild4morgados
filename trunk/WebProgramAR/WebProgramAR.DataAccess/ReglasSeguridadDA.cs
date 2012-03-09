@@ -37,7 +37,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipo").Single(u => u.ReglaId == id);
+                return db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipoes").Single(u => u.ReglaId == id);
             }
         }
 
@@ -101,7 +101,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetReglasSeguridads(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa, db).Count();
+                return GetReglasSeguridads(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa, db).ToList().Count;
             }
         }
 
@@ -114,6 +114,10 @@ namespace WebProgramAR.DataAccess
 
                 IQueryable<ReglasSeguridad> query = GetReglasSeguridads(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa, db);
 
+                if (sortColumns.Contains("Tabla"))
+                {
+                    sortColumns = sortColumns.Replace("Tabla", "Tabla.Nombre");
+                }
 
                 return query.OrderUsingSortExpression(sortColumns)
                             .Skip((paginaActual - 1) * personasPorPagina)
@@ -124,12 +128,12 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<ReglasSeguridad> GetReglasSeguridads(int tablaId, int columnaId, int comparadorId, int? usuarioId, int? tipoUsuarioId, bool? activa, WebProgramAREntities db)
         {
-            IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipo")
+            IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipoes")
                                                 where (tablaId == -1 || u.TablaId == tablaId)
                                                 && (columnaId == -1 || u.ColumnaId == columnaId)
                                                 && (comparadorId == -1 || u.ComparadorId == comparadorId)
-                                                && (usuarioId == -1 || u.UsuarioId.Equals(usuarioId))
-                                                && (tipoUsuarioId == -1 || u.TipoUsuarioId.Equals(tipoUsuarioId))
+                                                //&& (usuarioId == -1 || u.UsuarioId.Equals(usuarioId))
+                                                //&& (tipoUsuarioId == -1 || u.TipoUsuarioId.Equals(tipoUsuarioId))
                                                 && (activa == null || u.Activa.Equals(activa))
                                                 select u;
             return query;

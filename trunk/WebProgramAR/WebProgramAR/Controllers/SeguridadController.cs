@@ -218,8 +218,8 @@ namespace WebProgramAR.Controllers
         private void ArmarViewBags()
         {
             ViewBag.ListaTablas = SeguridadNegocio.GetTablas();
-            ViewBag.Columnas =null;
-            ViewBag.Comparadores = null;
+            ViewBag.Columnas = new List<Columna>();
+            ViewBag.Comparadores = new List<Comparador>();
             ViewBag.ListaTipoUsuarios = TipoUsuarioNegocio.GetTiposUsuario();
         }
 
