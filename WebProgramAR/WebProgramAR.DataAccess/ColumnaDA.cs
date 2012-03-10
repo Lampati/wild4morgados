@@ -15,7 +15,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Columnas.Single(u => u.ColumnaId  == id);
+                return db.Columnas.Include("Tipo").Single(u => u.ColumnaId  == id);
             } 
         }      
 

@@ -53,7 +53,7 @@ namespace WebProgramAR.Negocio
         {
             Columna col = ColumnaDA.GetColumnaById(colId);
 
-            return ComparadorDA.GetComparadoresByTipo(col.TipoId);
+            return ComparadorDA.GetComparadoresByTipo(col.Tipo);
         }
     }
 }

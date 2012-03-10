@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="ColumnaDA.cs" />
     <Compile Include="ComparadorDA.cs" />
+    <Compile Include="Seguridad\Helpers\MemberComparer.cs" />
+    <Compile Include="Seguridad\Helpers\TypeUtility.cs" />
     <Compile Include="TablaDA.cs" />
     <Compile Include="ReglasSeguridadDA.cs" />
     <Compile Include="LocalidadDA.cs" />
