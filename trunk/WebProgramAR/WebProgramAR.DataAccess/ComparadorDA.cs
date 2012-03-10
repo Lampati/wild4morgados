@@ -19,15 +19,14 @@ namespace WebProgramAR.DataAccess
             } 
         }      
 
-        public static IEnumerable<Comparador> GetComparadoresByTipo(int tipoId)
+        public static IEnumerable<Comparador> GetComparadoresByTipo(Tipo tipo)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
-                IQueryable<Comparador> query = from u in db.Comparadors
-                                              where (u.TipoId == tipoId)
+                IQueryable<Comparador> query = from u in db.Comparadors.Include("Tipoes")
                                               select u;
-                return query.ToList();
+                return query.ToList().FindAll(x => x.Tipoes.Contains(tipo, new MyTipoComparer()));
             }
         }
 
@@ -44,5 +43,18 @@ namespace WebProgramAR.DataAccess
 
 
         
+    }
+
+    public class MyTipoComparer : IEqualityComparer<Tipo>
+    {
+        public bool Equals(Tipo x, Tipo y)
+        {
+            return (x.TipoId == y.TipoId);
+        }
+
+        public int GetHashCode(Tipo obj)
+        {
+            return obj.TipoId.ToString().GetHashCode();
+        }
     }
 }

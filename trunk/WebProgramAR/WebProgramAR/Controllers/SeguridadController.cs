@@ -220,7 +220,10 @@ namespace WebProgramAR.Controllers
             ViewBag.ListaTablas = SeguridadNegocio.GetTablas();
             ViewBag.Columnas = new List<Columna>();
             ViewBag.Comparadores = new List<Comparador>();
-            ViewBag.ListaTipoUsuarios = TipoUsuarioNegocio.GetTiposUsuario();
+            List<TipoUsuario> listaTipo = new List<TipoUsuario>();
+            listaTipo.Add(new TipoUsuario() { TipoUsuarioId = -1, Descripcion = "Todos" });
+            listaTipo.AddRange(TipoUsuarioNegocio.GetTiposUsuario());
+            ViewBag.ListaTipoUsuarios = listaTipo;
         }
 
 
