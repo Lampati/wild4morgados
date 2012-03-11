@@ -9,7 +9,8 @@
 <legend>Seguridad</legend>
    
 @using (Ajax.BeginForm("Create", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
-{ @Html.ValidationSummary(true)
+{ 
+    @Html.ValidationSummary(true)
 
         
         @Html.Partial("_CreateOrEdit", Model)

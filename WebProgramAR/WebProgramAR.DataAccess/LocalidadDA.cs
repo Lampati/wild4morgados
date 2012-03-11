@@ -48,7 +48,7 @@ namespace WebProgramAR.DataAccess
 
                 float tiempo;
 
-                return Seguridad.SeguridadXValorManager.Filtrar<Localidad>(aux, _nombreTabla, null, null, out tiempo);
+                return Seguridad.SeguridadXValorManager.Filtrar<Localidad>(aux, _nombreTabla, null,  out tiempo);
             }
         }
         public static IEnumerable<Localidad> GetLocalidades()

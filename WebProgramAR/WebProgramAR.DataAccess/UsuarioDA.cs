@@ -85,7 +85,7 @@ namespace WebProgramAR.DataAccess
 
                 float tiempo;
 
-                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null, null, out tiempo).Count();
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null,  out tiempo).Count();
             }
         }
 
@@ -127,7 +127,7 @@ namespace WebProgramAR.DataAccess
 
                 float tiempo;
 
-                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null, null, out tiempo);
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null,  out tiempo);
             }
         }
 
@@ -245,10 +245,7 @@ namespace WebProgramAR.DataAccess
 
         #region IFiltrablePorSeguridadPorValor Members
 
-        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
-        {
-            return Seguridad.SeguridadXValorManager.Filtrar(lista, _nombreTabla, null, null);
-        }
+        
 
         #endregion
     }

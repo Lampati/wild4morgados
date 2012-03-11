@@ -13,23 +13,23 @@ namespace WebProgramAR.DataAccess.Seguridad
     public static class SeguridadXValorManager
     {
 
-        public static List<T> Filtrar<T>(List<T> lista, string tabla, int? userId, int? tipoUserId, out float timestamp) where T : EntidadProgramARBase
+        public static List<T> Filtrar<T>(List<T> lista, string tabla, Usuario usuarioLogueado, out float timestamp) where T : EntidadProgramARBase
         {
             long timestampNormal = Stopwatch.GetTimestamp();
 
-            List<T> retorno = Filtrar<T>(lista, tabla, userId, tipoUserId);
+            List<T> retorno = Filtrar<T>(lista, tabla, usuarioLogueado);
 
             float timestampNormalRes = ((float)(Stopwatch.GetTimestamp() - timestampNormal)) / ((float)Stopwatch.Frequency);
 
             long timestampDelegate = Stopwatch.GetTimestamp();
 
-            List<T> retorno2 = FiltrarOptmizado<T>(lista, tabla, userId, tipoUserId);
+            List<T> retorno2 = FiltrarOptmizado<T>(lista, tabla, usuarioLogueado);
 
             float timestampDelegateRes = ((float)(Stopwatch.GetTimestamp() - timestampDelegate)) / ((float)Stopwatch.Frequency);
 
             long timestampFastPrpertyAccessor = Stopwatch.GetTimestamp();
 
-            List<T> retorno3 = FiltrarFastPropertyAccessor<T>(lista, tabla, userId, tipoUserId);
+            List<T> retorno3 = FiltrarFastPropertyAccessor<T>(lista, tabla, usuarioLogueado);
 
             float timestampFastPrpertyAccessorRes = ((float)(Stopwatch.GetTimestamp() - timestampFastPrpertyAccessor)) / ((float)Stopwatch.Frequency);
 
@@ -40,12 +40,21 @@ namespace WebProgramAR.DataAccess.Seguridad
         }
 
 
-        public static List<T> Filtrar<T>(List<T> lista, string tabla, int? userId, int? tipoUserId) where T : EntidadProgramARBase
+        public static List<T> Filtrar<T>(List<T> lista, string tabla, Usuario usuarioLogueado) where T : EntidadProgramARBase
         {
             //http://msmvps.com/blogs/jon_skeet/archive/2008/08/09/making-reflection-fly-and-exploring-delegates.aspx
 
 
             List<T> retorno = new List<T>();
+
+            int? userId = null;
+            int? tipoUserId = null;
+
+            if (usuarioLogueado != null)
+            {
+                userId = usuarioLogueado.UsuarioId;
+                tipoUserId = usuarioLogueado.TipoUsuarioId;
+            }
 
             List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();
 
@@ -107,13 +116,22 @@ namespace WebProgramAR.DataAccess.Seguridad
             return retorno;
         }
 
-        public static List<T> FiltrarOptmizado<T>(List<T> lista, string tabla, int? userId, int? tipoUserId) where T : EntidadProgramARBase
+        public static List<T> FiltrarOptmizado<T>(List<T> lista, string tabla, Usuario usuarioLogueado) where T : EntidadProgramARBase
         {
             //http://msmvps.com/blogs/jon_skeet/archive/2008/08/09/making-reflection-fly-and-exploring-delegates.aspx
 
             //http://www.codeproject.com/Articles/14560/Fast-Dynamic-Property-Field-Accessors
 
             List<T> retorno = new List<T>();
+
+            int? userId = null;
+            int? tipoUserId = null;
+
+            if (usuarioLogueado != null)
+            {
+                userId = usuarioLogueado.UsuarioId;
+                tipoUserId = usuarioLogueado.TipoUsuarioId;
+            }
 
             List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();
 
@@ -188,13 +206,22 @@ namespace WebProgramAR.DataAccess.Seguridad
             return retorno;
         }
 
-        public static List<T> FiltrarFastPropertyAccessor<T>(List<T> lista, string tabla, int? userId, int? tipoUserId) where T : EntidadProgramARBase
+        public static List<T> FiltrarFastPropertyAccessor<T>(List<T> lista, string tabla, Usuario usuarioLogueado) where T : EntidadProgramARBase
         {
             //http://msmvps.com/blogs/jon_skeet/archive/2008/08/09/making-reflection-fly-and-exploring-delegates.aspx
 
             //http://www.codeproject.com/Articles/14560/Fast-Dynamic-Property-Field-Accessors
 
             List<T> retorno = new List<T>();
+
+            int? userId = null;
+            int? tipoUserId = null;
+
+            if (usuarioLogueado != null)
+            {
+                userId = usuarioLogueado.UsuarioId;
+                tipoUserId = usuarioLogueado.TipoUsuarioId;
+            }
 
             List<ReglasSeguridad> reglas = ReglasSeguridadDA.GetReglasByTablaByUsuarioByTipoUsuario(tabla, userId, tipoUserId).ToList();
 

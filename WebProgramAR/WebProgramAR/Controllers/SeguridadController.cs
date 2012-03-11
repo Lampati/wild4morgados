@@ -17,12 +17,23 @@ namespace WebProgramAR.Controllers
         // GET: /Seguridad/
         [Authorize(Roles = "administrador")]
         public ActionResult Index(int page = 1, string sort = "Tabla", string sortDir = "ASC", int tablaId = -1, int? tipoUsuarioId = -1,
-            int? usuarioId = -1, int comparadorId = -1, int columnaId = -1, bool? activa = null)
+            string usuario = null, int comparadorId = -1, int columnaId = -1, int activa = -1)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
 
-            var numReglas = SeguridadNegocio.ContarCantidad(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa);
+            bool? habilitado = null;
+
+            if (activa == 0)
+            {
+                habilitado = false;
+            } 
+            else if (activa == 1)
+            {
+                habilitado = true;
+            }
+
+            var numReglas = SeguridadNegocio.ContarCantidad(tablaId, columnaId, comparadorId, usuario, tipoUsuarioId, habilitado);
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
@@ -38,9 +49,9 @@ namespace WebProgramAR.Controllers
                      tablaId, 
                      columnaId, 
                      comparadorId, 
-                     usuarioId, 
+                     usuario, 
                      tipoUsuarioId,
-                     activa
+                     habilitado
             );
 
             var datos = new SeguridadGrillaModel()
@@ -51,8 +62,15 @@ namespace WebProgramAR.Controllers
                 PaginaActual = page
             };
 
-            
-            
+            List<Tabla> listaTabla = new List<Tabla>();
+            listaTabla.Add(new Tabla() { TablaId = -1, Nombre = "Todos" });
+            listaTabla.AddRange(SeguridadNegocio.GetTablas());
+            ViewBag.ListaTablas = listaTabla;     
+            List<TipoUsuario> listaTipo = new List<TipoUsuario>();
+            listaTipo.Add(new TipoUsuario() { TipoUsuarioId = -1, Descripcion = "Todos" });
+            listaTipo.AddRange(TipoUsuarioNegocio.GetTiposUsuario());
+            ViewBag.ListaTipoUsuarios = listaTipo;
+
             return View(datos);
 
         }
