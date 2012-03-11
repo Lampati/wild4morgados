@@ -18,8 +18,8 @@ namespace WebProgramAR.DataAccess
                     IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo")
                                                         where (   
                                                             u.Tabla.Nombre.ToUpper() == tablaNombre.ToUpper() 
-                                                            && (u.UsuarioId.Equals(userId))
-                                                            && (u.TipoUsuarioId.Equals(tipoUserId))
+                                                            && (u.UsuarioId.Equals(userId) || u.UsuarioId == null)
+                                                            && (u.TipoUsuarioId.Equals(tipoUserId) || u.TipoUsuarioId == null)
                                                             && u.Activa
                                                         )
                                                         select u;
@@ -97,22 +97,22 @@ namespace WebProgramAR.DataAccess
         }
 
         //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(int tablaId, int columnaId, int comparadorId, int? usuarioId, int? tipoUsuarioId, bool? activa)
+        public static int ContarCantidad(int tablaId, int columnaId, int comparadorId, string usuario, int? tipoUsuarioId, bool? activa)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetReglasSeguridads(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa, db).ToList().Count;
+                return GetReglasSeguridads(tablaId, columnaId, comparadorId, usuario, tipoUsuarioId, activa, db).ToList().Count;
             }
         }
 
-        public static IEnumerable<ReglasSeguridad> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int tablaId, int columnaId, int comparadorId, int? usuarioId, int? tipoUsuarioId, bool? activa)
+        public static IEnumerable<ReglasSeguridad> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int tablaId, int columnaId, int comparadorId, string usuario, int? tipoUsuarioId, bool? activa)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
                 if (paginaActual < 1) paginaActual = 1;
 
 
-                IQueryable<ReglasSeguridad> query = GetReglasSeguridads(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa, db);
+                IQueryable<ReglasSeguridad> query = GetReglasSeguridads(tablaId, columnaId, comparadorId, usuario, tipoUsuarioId, activa, db);
 
                 if (sortColumns.Contains("Tabla"))
                 {
@@ -126,17 +126,17 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        private static IQueryable<ReglasSeguridad> GetReglasSeguridads(int tablaId, int columnaId, int comparadorId, int? usuarioId, int? tipoUsuarioId, bool? activa, WebProgramAREntities db)
+        private static IQueryable<ReglasSeguridad> GetReglasSeguridads(int tablaId, int columnaId, int comparadorId, string usuario, int? tipoUsuarioId, bool? activa, WebProgramAREntities db)
         {
+            bool esVacioUsuario = string.IsNullOrWhiteSpace(usuario);
 
-
-            IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipoes")
+            IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipoes").Include("Usuario").Include("TipoUsuario")
                                                 where (tablaId == -1 || u.TablaId == tablaId)
                                                 && (columnaId == -1 || u.ColumnaId == columnaId)
                                                 && (comparadorId == -1 || u.ComparadorId == comparadorId)
-                                                //&& (usuarioId == -1 || u.UsuarioId.Equals(usuarioId))
+                                                && (esVacioUsuario || (u.Usuario != null && u.Usuario.UsuarioNombre.Contains(usuario)))
                                                 //&& (tipoUsuarioId == -1 || u.TipoUsuarioId.Equals(tipoUsuarioId))
-                                                && (activa == null || u.Activa.Equals(activa))
+                                                && (activa == null || u.Activa == activa.Value)
                                                 select u;
             return query;
         }

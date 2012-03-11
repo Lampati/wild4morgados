@@ -8,7 +8,8 @@
 
     grid.Bind(Model.ReglasSeguridad, autoSortAndPage: true, rowCount: Model.Cantidad);
 
-    
+    List<WebProgramAR.Entidades.Tabla> listaTabla = (List<WebProgramAR.Entidades.Tabla>)ViewBag.ListaTablas;
+    List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.ListaTipoUsuarios;
     
 }
 
@@ -60,6 +61,11 @@
     });
 </script>
 
+<script type="text/javascript">
+    convertSelect("tablaId");
+    convertSelect("tipoUsuarioId");
+</script>
+
 <h1>Seguridad</h1>
 <div id="buttonSection" class="buttonSection">
 
@@ -78,12 +84,48 @@
                 <tr>
                     <td>
                         <div class="label">
-                            Nombre
+                            Entidad
                         </div>
                     </td>
                      <td valign="top">
-                            @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
+                            @Html.DropDownList("tablaId", listaTabla.Select(option => new SelectListItem
+                           {
+                               Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+                               Value = option.TablaId.ToString()
+                           }))
                     </td>
+                    <td>
+                        <div class="label">
+                            Tipo de Usuario
+                        </div>
+                    </td>
+                     <td valign="top">
+                            @Html.DropDownList("tipoUsuarioId", listaTipoUsuario.Select(option => new SelectListItem
+                            {
+                                Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                                Value = option.TipoUsuarioId.ToString()
+                            }))
+                    </td>
+                    <td>
+                        <div class="label">
+                            Usuario
+                        </div>
+                    </td>
+                     <td valign="top">
+                            @Html.TextBox("usuario", null, new { maxlength = 50, autocomplete = "off" })
+                    </td>
+
+                    <td>
+                        <div class="label">
+                            Habilitado
+                        </div>
+                    </td>
+                     <td valign="top">
+                            Si @Html.RadioButton("activa", 1, false)
+                            No @Html.RadioButton("activa", 0, false)
+                            Todos @Html.RadioButton("activa", -1, true)
+                    </td>
+
                 </tr>
                 
             </table>
@@ -110,12 +152,12 @@
     nextText: ">",
         lastText: " >>",
     columns: new[] {
-    grid.Column("Tabla.Nombre", header: "Tabla"),
-    grid.Column("Columna.Nombre", header: "Columna"),
+    grid.Column("Tabla.Nombre", header: "Entidad"),
+    grid.Column("Columna.Nombre", header: "Campo"),
     grid.Column("Comparador.Nombre", header: "Comparador"),
-    grid.Column("Usuario", header: "Usuario", format: x => x.Usuario != null ? x.Usuario.UsuarioNombre : "" ),
-    grid.Column("TipoUsuario", header: "Tipo Usuario", format: x => x.TipoUsuario != null ? x.TipoUsuario.Descripcion : ""),
     grid.Column("Valor", header: "Valor"),
+    grid.Column("Usuario", header: "Usuario", format: x => x.Usuario != null ? x.Usuario.UsuarioNombre : "Todos" ),
+    grid.Column("TipoUsuario", header: "Tipo Usuario", format: x => x.TipoUsuario != null ? x.TipoUsuario.Descripcion : "Todos"),    
     grid.Column("Activa", header: "Habilitada", format: x => x.Activa ? "Si" : "No"),
    
    

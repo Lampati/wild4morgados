@@ -29,14 +29,14 @@ namespace WebProgramAR.Negocio
             ReglasSeguridadDA.Eliminar(id);
         }
 
-        public static int ContarCantidad(int tablaId, int columnaId, int comparadorId, int? usuarioId, int? tipoUsuarioId,bool? activa)
+        public static int ContarCantidad(int tablaId, int columnaId, int comparadorId, string usuario, int? tipoUsuarioId,bool? activa)
         {
-            return ReglasSeguridadDA.ContarCantidad(tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa);
+            return ReglasSeguridadDA.ContarCantidad(tablaId, columnaId, comparadorId, usuario, tipoUsuarioId, activa);
         }
 
-        public static IEnumerable<ReglasSeguridad> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int tablaId, int columnaId, int comparadorId, int? usuarioId, int? tipoUsuarioId, bool? activa)
+        public static IEnumerable<ReglasSeguridad> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int tablaId, int columnaId, int comparadorId, string usuario, int? tipoUsuarioId, bool? activa)
         {
-            return ReglasSeguridadDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, tablaId, columnaId, comparadorId, usuarioId, tipoUsuarioId, activa);
+            return ReglasSeguridadDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, tablaId, columnaId, comparadorId, usuario, tipoUsuarioId, activa);
         }
 
         public static IEnumerable<Tabla> GetTablas()
