@@ -184,6 +184,7 @@ namespace DiagramDesigner.UserControls.Entorno
                 this.textEditor.TextArea.Caret.Column = col;
                 this.textEditor.TextArea.Caret.Show();
                 this.textEditor.TextArea.Caret.BringCaretToView();
+                this.textEditor.TextArea.Focus();
             }
         }
 
