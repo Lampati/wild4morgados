@@ -35,14 +35,14 @@ namespace WebProgramAR.Negocio
             UsuarioDA.Eliminar(u.UsuarioId);
         }
 
-        public static int ContarCantidad(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
+        public static int ContarCantidad(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad, Usuario userLogueado)
         {
-            return UsuarioDA.ContarCantidad(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad);
+            return UsuarioDA.ContarCantidad(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, userLogueado);
         }
 
-        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
+        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad, Usuario userLogueado)
         {
-            return UsuarioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns,  nombre,  apellido,  usuarioNombre,  tipoUsuarioId,  pais,  provincia,  localidad);
+            return UsuarioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, userLogueado);
         }
 
         public static Usuario GetUsuarioByLoginUsuario(string loginUsuario)
@@ -50,9 +50,9 @@ namespace WebProgramAR.Negocio
             return UsuarioDA.GetUsuarioByLoginUsuario(loginUsuario);
         }
 
-        public static IEnumerable<Usuario> GetUsuarioByLoginUsuarioAutocomplete(string loginUsuario)
+        public static IEnumerable<Usuario> GetUsuarioByLoginUsuarioAutocomplete(string loginUsuario, Usuario userLogueado)
         {
-            return UsuarioDA.GetUsuarioByLoginUsuarioAutocomplete(loginUsuario);
+            return UsuarioDA.GetUsuarioByLoginUsuarioAutocomplete(loginUsuario, userLogueado);
         }
 
         public static void ModificarUltimoLogin(Usuario usuario)

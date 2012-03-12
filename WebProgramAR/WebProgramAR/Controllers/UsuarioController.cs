@@ -23,13 +23,16 @@ namespace WebProgramAR.Controllers
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
 
+            Usuario usuarioLogueado = GetUsuarioLogueado();
+
             var numUsuarios = UsuarioNegocio.ContarCantidad(nombre,
                      apellido,
                      usuarioNombre,
                      tipoUsuarioId,
                      pais,
                      provincia,
-                     localidad);
+                     localidad,
+                     usuarioLogueado);
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
@@ -48,7 +51,8 @@ namespace WebProgramAR.Controllers
                      tipoUsuarioId,
                      pais,
                      provincia,
-                     localidad
+                     localidad,
+                     usuarioLogueado
             );
 
             var datos = new UsuarioGrillaModel()
@@ -59,7 +63,7 @@ namespace WebProgramAR.Controllers
                 PaginaActual = page
             };
 
-            ViewBag.TipoUsuarios = new SelectList(Negocio.TipoUsuarioNegocio.GetTiposUsuario(), "TipoUsuarioId", "Descripcion"); 
+            ViewBag.TipoUsuarios = new SelectList(Negocio.TipoUsuarioNegocio.GetTiposUsuarioSinGuest(), "TipoUsuarioId", "Descripcion"); 
             return View(datos);
 
         }
@@ -69,12 +73,19 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Details(int id)
         {
-            Usuario u = UsuarioNegocio.GetUsuarioById(id);
+            if (Request.IsAjaxRequest())
+            {
+                Usuario u = UsuarioNegocio.GetUsuarioById(id);
 
-            MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
-            u.Email = membUser.Email;
+                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                u.Email = membUser.Email;
 
-            return View(u);
+                return View(u);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //
@@ -82,21 +93,30 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.EsRegister = false;
-            Initilization();
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                ViewBag.EsRegister = false;
+                Initilization();
+                return View();
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
         /// <summary>
         /// Cargar Paises. Las provincias y localidades se cargan por ajax, deben traer resultados de acuerdo a la eleccion
         /// </summary>
         private void Initilization()
         {
+            Usuario usuarioLogueado = GetUsuarioLogueado(); 
+
             List<Pais> listaPaises = new List<Pais>();
             List<Provincia> listaProvincias = new List<Provincia>();
             List<Localidad> listaLocalidades = new List<Localidad>();
             List<TipoUsuario> listaTipoUsuarios = new List<TipoUsuario>();
-            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises().ToList());
-            listaTipoUsuarios.AddRange(Negocio.TipoUsuarioNegocio.GetTiposUsuario().ToList());
+            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises(usuarioLogueado).ToList());
+            listaTipoUsuarios.AddRange(Negocio.TipoUsuarioNegocio.GetTiposUsuarioSinGuest().ToList());
             ViewBag.Paises = listaPaises;
             ViewBag.Provincias = listaProvincias;
             ViewBag.Localidades = listaLocalidades;
@@ -133,15 +153,22 @@ namespace WebProgramAR.Controllers
         // GET: /Usuario/Edit/5 
         public ActionResult Edit(int id, bool esMiPerfil = false)
         {
-            Usuario u = UsuarioNegocio.GetUsuarioById(id);
+            if (Request.IsAjaxRequest())
+            {
+                Usuario u = UsuarioNegocio.GetUsuarioById(id);
 
-            MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
-            u.Email = membUser.Email;
+                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                u.Email = membUser.Email;
 
-            ViewBag.EsMiPerfil = esMiPerfil;
-            ViewBag.descripcionLocalidad = Negocio.LocalidadNegocio.GetLocalidadById(u.LocalidadId).Descripcion;
-            Initilization();
-            return View("Edit", u);
+                ViewBag.EsMiPerfil = esMiPerfil;
+                ViewBag.descripcionLocalidad = Negocio.LocalidadNegocio.GetLocalidadById(u.LocalidadId).Descripcion;
+                Initilization();
+                return View("Edit", u);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //
@@ -247,8 +274,16 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Delete(int id)
         {
-            Usuario u = UsuarioNegocio.GetUsuarioById(id);
-            return View(u);
+            if (Request.IsAjaxRequest())
+            {
+                Usuario u = UsuarioNegocio.GetUsuarioById(id);
+                return View(u);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
+
         }
 
         //
@@ -257,15 +292,18 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Delete(Usuario u)
         {
-            try
-            {
-                UsuarioNegocio.Eliminar(u);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            
+                try
+                {
+                    UsuarioNegocio.Eliminar(u);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
+           
+            
         }
 
         public ActionResult Register()
@@ -363,7 +401,9 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public JsonResult GetProvinciasByPais(string paisId)
         {
-            List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(paisId).ToList();
+            Usuario userLogueado = GetUsuarioLogueado();
+
+            List<Provincia> listaProvincias = Negocio.ProvinciaNegocio.GetProvinciasByPais(paisId,userLogueado).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
             foreach (Provincia item in listaProvincias)
@@ -380,7 +420,9 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public JsonResult GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string provinciaId, string paisId)
         {
-            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByLocalidadByProvinciaByPais(Localidad, provinciaId, paisId).ToList();
+            Usuario userLogueado = GetUsuarioLogueado();
+
+            List<Localidad> listaLocalidades = Negocio.LocalidadNegocio.GetLocalidadesByLocalidadByProvinciaByPais(Localidad, provinciaId, paisId, userLogueado).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
             foreach (Localidad item in listaLocalidades)

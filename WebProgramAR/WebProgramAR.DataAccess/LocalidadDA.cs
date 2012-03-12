@@ -32,7 +32,7 @@ namespace WebProgramAR.DataAccess
                 return query.ToList();
             }
         }
-        public static IEnumerable<Localidad> GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string idProvincia, string idPais)
+        public static IEnumerable<Localidad> GetLocalidadesByLocalidadByProvinciaByPais(string Localidad, string idProvincia, string idPais, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -48,17 +48,22 @@ namespace WebProgramAR.DataAccess
 
                 float tiempo;
 
-                return Seguridad.SeguridadXValorManager.Filtrar<Localidad>(aux, _nombreTabla, null,  out tiempo);
+                return Seguridad.SeguridadXValorManager.Filtrar<Localidad>(aux, _nombreTabla, userLogueado,  out tiempo);
             }
         }
-        public static IEnumerable<Localidad> GetLocalidades()
+        public static IEnumerable<Localidad> GetLocalidades(Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
                 IQueryable<Localidad> query = from u in db.Localidades
                                               select u;
-                return query.ToList();
+
+                List<Localidad> aux = query.ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Localidad>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
 

@@ -17,9 +17,9 @@ namespace WebProgramAR.DataAccess
                 {
                     IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo")
                                                         where (   
-                                                            u.Tabla.Nombre.ToUpper() == tablaNombre.ToUpper() 
-                                                            && (u.UsuarioId.Equals(userId) || u.UsuarioId == null)
-                                                            && (u.TipoUsuarioId.Equals(tipoUserId) || u.TipoUsuarioId == null)
+                                                            u.Tabla.Nombre.ToUpper() == tablaNombre.ToUpper()
+                                                            && ((u.UsuarioId == -1 || u.UsuarioId == null) || u.UsuarioId == userId )
+                                                            && (u.TipoUsuarioId == null || u.TipoUsuarioId == tipoUserId)
                                                             && u.Activa
                                                         )
                                                         select u;

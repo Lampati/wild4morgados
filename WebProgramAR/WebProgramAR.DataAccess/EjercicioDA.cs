@@ -80,15 +80,20 @@ namespace WebProgramAR.DataAccess
         }
 
         //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
+        public static int ContarCantidad(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetEjercicios(nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global, db).Count();
+                List<Ejercicio> aux = GetEjercicios(nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global, db).ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo).Count();
+
             }
         }
 
-        public static IEnumerable<Ejercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
+        public static IEnumerable<Ejercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -110,13 +115,16 @@ namespace WebProgramAR.DataAccess
                     sortColumns = sortColumns.Replace("EstadoEjercicio", "EstadoEjercicio.EstadoEjercicioId");
                 }
                
+                           
 
-
-
-                return query.OrderUsingSortExpression(sortColumns)
+                List<Ejercicio> aux = query.OrderUsingSortExpression(sortColumns)
                             .Skip((paginaActual - 1) * personasPorPagina)
                             .Take(personasPorPagina)
                             .ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
 
@@ -145,17 +153,22 @@ namespace WebProgramAR.DataAccess
                 return query.ToList();
             }
         }
-        public static IEnumerable<Ejercicio> GetEjercicioNotUsuario(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio)
+        public static IEnumerable<Ejercicio> GetEjercicioNotUsuario(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
-            {
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
-                                              where (u.UsuarioId != usuarioId)
-                                              && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
-                                              && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
-                                              && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
-                                              select u;
-                return query.ToList();
+            {            
+
+
+                List<Ejercicio> aux = (from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
+                                      where (u.UsuarioId != usuarioId)
+                                      && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
+                                      && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
+                                      && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
+                                      select u).ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
 
