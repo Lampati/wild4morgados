@@ -166,7 +166,7 @@
     $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#PaisId");
     convertSelect("PaisId");
     convertSelect("TipoUsuarioCreate");
-    $("#Usuario_FechaNacimiento").datepicker();
+    $("#Usuario_FechaNacimiento").datepicker({minDate:new Date(1920,01,01), maxDate : new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
     $("#Usuario_FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
         if (charCode == 8) return false; //  backspace
@@ -238,6 +238,7 @@
         select: function (event, ui) {
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadId").val(ui.item.value);
+            $("#LocalidadId").attr("rel",ui.item.label);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
         },
         change: function (event, ui) {
@@ -245,6 +246,7 @@
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
                 $("#LocalidadId").val(ui.item.value);
+                $("#LocalidadId").attr("rel", ui.item.label);
             }
         }
     });
