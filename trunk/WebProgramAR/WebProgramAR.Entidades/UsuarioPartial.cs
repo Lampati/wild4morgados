@@ -22,12 +22,12 @@ namespace WebProgramAR.Entidades
     {
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El nombre debe tener como maximo 20 caracteres")]
+        [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
         public string Nombre { get; set; }
 
         [Display(Name = "Apellido")]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El apellido debe tener como maximo 20 caracteres")]
+        [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
         public string Apellido { get; set; }
 
         [Display(Name = "E-mail")]
@@ -41,7 +41,7 @@ namespace WebProgramAR.Entidades
 
         [Display(Name = "Nombre de Usuario")]
         [Required(ErrorMessage = "Requerido")]
-        [StringLength(20, ErrorMessage = "El Maximo permitido es 20 caracteres")]
+        [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
         public string UsuarioNombre { get; set; }
 
      
