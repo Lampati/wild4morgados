@@ -17,7 +17,12 @@ namespace WebProgramAR.Negocio
        
         public static IEnumerable<TipoUsuario> GetTiposUsuario()
         {
-            return TipoUsuarioDA.GetTiposUsuario();
+            return TipoUsuarioDA.GetTiposUsuario(true);
+        }
+
+        public static IEnumerable<TipoUsuario> GetTiposUsuarioSinGuest()
+        {
+            return TipoUsuarioDA.GetTiposUsuario(false);
         }
 
 

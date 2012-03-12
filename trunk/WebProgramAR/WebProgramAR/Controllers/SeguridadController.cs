@@ -22,6 +22,8 @@ namespace WebProgramAR.Controllers
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
 
+            Usuario usuarioLogueado = GetUsuarioLogueado();
+
             bool? habilitado = null;
 
             if (activa == 0)
@@ -220,7 +222,9 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public JsonResult GetUsuariosByNombreUsuario(string user)
         {
-            List<Usuario> listaCols = UsuarioNegocio.GetUsuarioByLoginUsuarioAutocomplete(user).ToList();
+            Usuario usuarioLogueado = GetUsuarioLogueado();
+
+            List<Usuario> listaCols = UsuarioNegocio.GetUsuarioByLoginUsuarioAutocomplete(user,usuarioLogueado).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
             foreach (Usuario item in listaCols)
@@ -235,6 +239,8 @@ namespace WebProgramAR.Controllers
 
         private void ArmarViewBags()
         {
+            Usuario usuarioLogueado = GetUsuarioLogueado();
+
             ViewBag.ListaTablas = SeguridadNegocio.GetTablas();
             ViewBag.Columnas = new List<Columna>();
             ViewBag.Comparadores = new List<Comparador>();

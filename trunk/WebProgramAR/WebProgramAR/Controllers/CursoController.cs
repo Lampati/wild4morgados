@@ -22,7 +22,9 @@ namespace WebProgramAR.Controllers
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
 
-            var numUsuarios = CursoNegocio.ContarCantidad(cursoId, nombre, usuarioId);
+            Usuario usuarioLogueado = GetUsuarioLogueado();
+
+            var numUsuarios = CursoNegocio.ContarCantidad(cursoId, nombre, usuarioId, usuarioLogueado);
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
@@ -37,7 +39,8 @@ namespace WebProgramAR.Controllers
                      sort + " " + sortDir,
                      cursoId, 
                      nombre,
-                     usuarioId
+                     usuarioId,
+                     usuarioLogueado
             );
 
             var datos = new CursoGrillaModel()
@@ -59,8 +62,15 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Details(int id)
         {
-            Curso c = CursoNegocio.GetCursoById(id);
-            return View(c);
+            if (Request.IsAjaxRequest())
+            {
+                Curso c = CursoNegocio.GetCursoById(id);
+                return View(c);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
         
         //
@@ -68,7 +78,14 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         } 
 
         //
@@ -151,8 +168,6 @@ namespace WebProgramAR.Controllers
                 model.Curso.Ejercicios.Clear();
                 model.EjerciciosId = listaEjerciciosId.ToArray();
 
-                
-
                 return View("AsociarEjercicios", model);
             }
             else
@@ -224,7 +239,9 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public JsonResult GetEjerciciosNotByUser(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio)
         {
-            List<Ejercicio> listaEjercicios = Negocio.EjercicioNegocio.GetEjercicioNotUsuario(usuarioId, cursoId, nivelEjercicio, estadoEjercicio).ToList();
+            Usuario userLogueado = GetUsuarioLogueado();
+
+            List<Ejercicio> listaEjercicios = Negocio.EjercicioNegocio.GetEjercicioNotUsuario(usuarioId, cursoId, nivelEjercicio, estadoEjercicio,userLogueado).ToList();
 
             List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
             foreach (Ejercicio item in listaEjercicios)

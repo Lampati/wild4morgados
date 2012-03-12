@@ -20,13 +20,21 @@ namespace WebProgramAR.DataAccess
         }
 
     
-        public static IEnumerable<TipoUsuario> GetTiposUsuario()
+        public static IEnumerable<TipoUsuario> GetTiposUsuario(bool incluirGuest)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<TipoUsuario> query = from u in db.TipoUsuarios
+                IQueryable<TipoUsuario> query = from u in db.TipoUsuarios                                                 
                                                 select u;
-                return query.ToList();
+
+                List<TipoUsuario> aux = query.ToList();
+
+                if (!incluirGuest)
+                {
+                    aux.RemoveAll(x => x.Descripcion.ToUpper().Equals("GUEST"));
+                }
+
+                return aux;
             }
         }
 
@@ -37,17 +45,6 @@ namespace WebProgramAR.DataAccess
                 return db.TipoUsuarios.Single(u => u.Descripcion.ToUpper() == p.ToUpper());
             }
         }
-
-
-        #region IFiltrablePorSeguridadPorValor Members
-
-        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-      
+            
     }
 }

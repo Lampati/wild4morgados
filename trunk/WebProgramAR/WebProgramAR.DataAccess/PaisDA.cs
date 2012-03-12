@@ -31,7 +31,7 @@ namespace WebProgramAR.DataAccess
             }
             
         }
-        public static IEnumerable<Pais> GetPaises()
+        public static IEnumerable<Pais> GetPaises(Usuario userLogueado)
         {
             try
             {
@@ -39,7 +39,13 @@ namespace WebProgramAR.DataAccess
                 {
                     IQueryable<Pais> query = from u in db.Paises
                                                        select u;
-                    return query.ToList();
+                    
+
+                    List<Pais> aux = query.ToList();
+
+                    float tiempo;
+
+                    return Seguridad.SeguridadXValorManager.Filtrar<Pais>(aux, _nombreTabla, userLogueado, out tiempo);
                 }
             }
             catch (Exception ex)
@@ -47,15 +53,6 @@ namespace WebProgramAR.DataAccess
                 throw new Exception(ex.Message.ToString());
             }
         }
-
-
-        #region IFiltrablePorSeguridadPorValor Members
-
-        public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
+     
     }
 }

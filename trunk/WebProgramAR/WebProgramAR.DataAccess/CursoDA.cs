@@ -85,15 +85,19 @@ namespace WebProgramAR.DataAccess
         }
 
         //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(int idCurso, string apellido, int usuarioId)
+        public static int ContarCantidad(int idCurso, string apellido, int usuarioId, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return GetCursos(idCurso, apellido, usuarioId, db).Count();
+                List<Curso> aux = GetCursos(idCurso, apellido, usuarioId, db).ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Curso>(aux, _nombreTabla, userLogueado, out tiempo).Count();
             }
         }
 
-        public static IEnumerable<Curso> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idCurso, string apellido, int usuarioId)
+        public static IEnumerable<Curso> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idCurso, string apellido, int usuarioId, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -102,11 +106,15 @@ namespace WebProgramAR.DataAccess
 
                 IQueryable<Curso> query = GetCursos(idCurso, apellido, usuarioId, db);
 
-           
-                return query.OrderUsingSortExpression(sortColumns)
-                            .Skip((paginaActual - 1) * personasPorPagina)
-                            .Take(personasPorPagina)
-                            .ToList();
+
+                List<Curso> aux = query.OrderUsingSortExpression(sortColumns)
+                                    .Skip((paginaActual - 1) * personasPorPagina)
+                                    .Take(personasPorPagina)
+                                    .ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Curso>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
 

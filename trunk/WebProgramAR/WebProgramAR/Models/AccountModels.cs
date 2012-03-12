@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web;
 using WebProgramAR.Globales;
+using WebProgramAR.Entidades;
 
 namespace WebProgramAR.Models
 {
@@ -84,5 +85,22 @@ namespace WebProgramAR.Models
             }
         }
 
+
+        static string UserSessionVar = "user";
+        public static Usuario User
+        {
+            get
+            {
+                if (HttpContext.Current == null) return null;
+                var sessionvar = HttpContext.Current.Session[UserSessionVar];
+                if (sessionvar != null)
+                    return sessionvar as Usuario;
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[UserSessionVar] = value;
+            }
+        }
     }
 }

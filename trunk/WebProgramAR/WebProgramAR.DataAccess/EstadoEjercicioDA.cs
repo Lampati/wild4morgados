@@ -23,7 +23,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.EstadoEjercicios.ToList();
+                return db.EstadoEjercicios.ToList();                
             }
         }
 

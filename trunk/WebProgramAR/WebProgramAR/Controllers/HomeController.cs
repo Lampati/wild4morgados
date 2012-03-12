@@ -38,11 +38,13 @@ namespace WebProgramAR.Controllers
 
         public ActionResult About()
         {
+            Usuario userLogueado = GetUsuarioLogueado();
+
             ViewBag.Message = "Contacto";
             List<Pais> listaPaises = new List<Pais>();
             List<Provincia> listaProvincias = new List<Provincia>();
             List<Localidad> listaLocalidades = new List<Localidad>();
-            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises().ToList());
+            listaPaises.AddRange(Negocio.PaisNegocio.GetPaises(userLogueado).ToList());
             ViewBag.Paises = listaPaises;
             ViewBag.Provincias = listaProvincias;
             ViewBag.Localidades = listaLocalidades;

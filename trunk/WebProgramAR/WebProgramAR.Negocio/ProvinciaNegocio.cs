@@ -14,14 +14,14 @@ namespace WebProgramAR.Negocio
             return ProvinciaDA.GetProvinciaById(id);
         }
 
-        public static IEnumerable<Provincia> GetProvinciasByPais(string PaisId)
+        public static IEnumerable<Provincia> GetProvinciasByPais(string PaisId, Usuario userLogueado)
         {
-            return ProvinciaDA.GetProvinciasByPais(PaisId);
+            return ProvinciaDA.GetProvinciasByPais(PaisId, userLogueado);
         }
 
-        public static IEnumerable<Provincia> GetProvincias()
+        public static IEnumerable<Provincia> GetProvincias(Usuario userLogueado)
         {
-            return ProvinciaDA.GetProvincias();
+            return ProvinciaDA.GetProvincias(userLogueado);
         }
       
       

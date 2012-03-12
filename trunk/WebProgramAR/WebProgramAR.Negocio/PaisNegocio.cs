@@ -12,9 +12,9 @@ namespace WebProgramAR.Negocio
         {
             return PaisDA.GetPaisById(id);
         }
-        public static IEnumerable<Pais> GetPaises()
+        public static IEnumerable<Pais> GetPaises(Usuario userLogueado)
         {
-            return PaisDA.GetPaises();
+            return PaisDA.GetPaises(userLogueado);
         }
 
    

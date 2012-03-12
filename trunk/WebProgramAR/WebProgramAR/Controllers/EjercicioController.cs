@@ -20,6 +20,7 @@ namespace WebProgramAR.Controllers
              int usuarioId = -1, int cursoId = -1, string nombre = "", 
              int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false, bool conLayout = true, bool aplicarPermisos = true)
         {
+            Usuario userLogueado = GetUsuarioLogueado();
 
             EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
             estadoEjercicio = estado.EstadoEjercicioId;
@@ -41,6 +42,7 @@ namespace WebProgramAR.Controllers
             int usuarioId = -1, int cursoId = -1, string nombre = "",
             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false, bool conLayout = true, bool aplicarPermisos = true)
         {
+            Usuario userLogueado = GetUsuarioLogueado();
 
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
             datos.ConLayout = conLayout;
@@ -59,12 +61,15 @@ namespace WebProgramAR.Controllers
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
 
+            Usuario userLogueado = GetUsuarioLogueado();
+
             var numUsuarios = EjercicioNegocio.ContarCantidad(nombre,
                      usuarioId,
                      cursoId,
                      estadoEjercicio,
                      nivelEjercicio,
-                     global);
+                     global,
+                     userLogueado);
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
@@ -82,7 +87,8 @@ namespace WebProgramAR.Controllers
                      cursoId,
                      estadoEjercicio,
                      nivelEjercicio,
-                     global
+                     global,
+                     userLogueado
             );
 
             var datos = new EjercicioGrillaModel()
@@ -110,8 +116,15 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Details(int id)
         {
-            Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
-            return View(e);
+            if (Request.IsAjaxRequest())
+            {
+                Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                return View(e);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //
@@ -119,8 +132,15 @@ namespace WebProgramAR.Controllers
 
         public ActionResult Create()
         {
-            Initilization();
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                Initilization();
+                return View();
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
       
 
@@ -150,9 +170,16 @@ namespace WebProgramAR.Controllers
         // GET: /Ejercicio/Edit/5 
         public ActionResult Edit(int id)
         {
-            Initilization();
-            Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
-            return View("Edit", e);
+            if (Request.IsAjaxRequest())
+            {
+                Initilization();
+                Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                return View("Edit", e);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //
@@ -177,8 +204,15 @@ namespace WebProgramAR.Controllers
  
         public ActionResult Delete(int id)
         {
-            Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
-            return View(e);
+            if (Request.IsAjaxRequest())
+            {
+                Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                return View(e);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //
@@ -254,10 +288,12 @@ namespace WebProgramAR.Controllers
              int usuarioId = -1, int cursoId = -1, string nombre = "",
              int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
         {
+            Usuario userLogueado = GetUsuarioLogueado();
+
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
 
             //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
-            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }); 
+            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
@@ -287,13 +323,20 @@ namespace WebProgramAR.Controllers
         [Authorize(Roles = "administrador, moderador")]
         public ActionResult Moderar(int id)
         {
-            ModerarEjercicioModel model = new ModerarEjercicioModel();
-            model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
-            model.Aceptado = false;
-            model.MensajeModeracion = string.Empty;
+            if (Request.IsAjaxRequest())
+            {
+                ModerarEjercicioModel model = new ModerarEjercicioModel();
+                model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
+                model.Aceptado = false;
+                model.MensajeModeracion = string.Empty;
 
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
 

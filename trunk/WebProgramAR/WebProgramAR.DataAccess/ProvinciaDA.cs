@@ -18,8 +18,8 @@ namespace WebProgramAR.DataAccess
                 return db.Provincias.Single(u => u.ProvinciaId  == id);
             }
         }
-     
-        public static IEnumerable<Provincia> GetProvinciasByPais(string idPais)
+
+        public static IEnumerable<Provincia> GetProvinciasByPais(string idPais, Usuario userLogueado)
         {
            try
            {
@@ -28,7 +28,12 @@ namespace WebProgramAR.DataAccess
                     IQueryable<Provincia> query = from u in db.Provincias
                                                   where (u.PaisId == idPais)
                                                   select u;
-                    return query.ToList();
+                    
+                    List<Provincia> aux = query.ToList();
+
+                    float tiempo;
+
+                    return Seguridad.SeguridadXValorManager.Filtrar<Provincia>(aux, _nombreTabla, userLogueado, out tiempo);
                 }
             }
            catch (Exception ex)
@@ -37,7 +42,7 @@ namespace WebProgramAR.DataAccess
            }
         }
 
-        public static IEnumerable<Provincia> GetProvincias()
+        public static IEnumerable<Provincia> GetProvincias(Usuario userLogueado)
         {
             try
             {
@@ -45,7 +50,12 @@ namespace WebProgramAR.DataAccess
                 {
                     IQueryable<Provincia> query = from u in db.Provincias
                                                   select u;
-                    return query.ToList();
+
+                    List<Provincia> aux = query.ToList();
+
+                    float tiempo;
+
+                    return Seguridad.SeguridadXValorManager.Filtrar<Provincia>(aux, _nombreTabla, userLogueado, out tiempo);
                 }
             }
             catch (Exception ex)

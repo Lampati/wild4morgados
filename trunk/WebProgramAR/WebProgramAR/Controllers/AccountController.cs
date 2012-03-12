@@ -53,6 +53,7 @@ namespace WebProgramAR.Controllers
                     
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
                         SimpleSessionPersister.UserName = model.UserName;
+
                         model.isAuthenticated = true;
 
                         //RedirectToAction("Index", "Home");
@@ -131,26 +132,40 @@ namespace WebProgramAR.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ChangePasswordModel model = new ChangePasswordModel();
-            model.EsResetPassword = false;
-            model.UserName = User.Identity.Name;
+            if (Request.IsAjaxRequest())
+            {
+                ChangePasswordModel model = new ChangePasswordModel();
+                model.EsResetPassword = false;
+                model.UserName = User.Identity.Name;
 
-            return View("ChangePassword", model);
+                return View("ChangePassword", model);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         
         [Authorize(Roles = "administrador")]
         public ActionResult ResetPassword(int id)
         {
-            Usuario usuario = UsuarioNegocio.GetUsuarioById(id);
-            
+            if (Request.IsAjaxRequest())
+            {
+                Usuario usuario = UsuarioNegocio.GetUsuarioById(id);
 
-            ChangePasswordModel model = new ChangePasswordModel();
-            model.EsResetPassword = true;
-            model.OldPassword = "noValueInserted";
-            model.UserName = usuario.UsuarioNombre;
 
-            return View("ChangePassword",model);
+                ChangePasswordModel model = new ChangePasswordModel();
+                model.EsResetPassword = true;
+                model.OldPassword = "noValueInserted";
+                model.UserName = usuario.UsuarioNombre;
+
+                return View("ChangePassword", model);
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         }
 
         //

@@ -15,7 +15,8 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Usuarios.Include("TipoUsuario").Include("Pais").Include("Provincia").Include("Localidad").Single(u => u.UsuarioId == id);
+                return  db.Usuarios.Include("TipoUsuario").Include("Pais").Include("Provincia").Include("Localidad").Single(u => u.UsuarioId == id);
+
             }
         }
      
@@ -77,7 +78,7 @@ namespace WebProgramAR.DataAccess
         }
 
         //static WebProgramAREntities db = new WebProgramAREntities();
-        public static int ContarCantidad(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
+        public static int ContarCantidad(string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -85,11 +86,11 @@ namespace WebProgramAR.DataAccess
 
                 float tiempo;
 
-                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null,  out tiempo).Count();
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, userLogueado, out tiempo).Count();
             }
         }
 
-        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad)
+        public static IEnumerable<Usuario> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, string apellido, string usuarioNombre, int tipoUsuarioId, string pais, string provincia, string localidad, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -127,7 +128,7 @@ namespace WebProgramAR.DataAccess
 
                 float tiempo;
 
-                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, null,  out tiempo);
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
 
@@ -207,6 +208,21 @@ namespace WebProgramAR.DataAccess
             }
         }
 
+        public static Usuario GetUsuarioByLoginUsuario(string loginUsuario, Usuario userLogueado)
+        {
+            try
+            {
+                using (WebProgramAREntities ce = new WebProgramAREntities())
+                {
+                    return ce.Usuarios.Single(o => o.UsuarioNombre.Equals(loginUsuario));
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         //public static void IntentosNoValidos(int idUsuario)
         //{
         //    using (WebProgramAREntities ce = new WebProgramAREntities())
@@ -230,7 +246,7 @@ namespace WebProgramAR.DataAccess
         //}
 
 
-        public static IEnumerable<Usuario> GetUsuarioByLoginUsuarioAutocomplete(string desc)
+        public static IEnumerable<Usuario> GetUsuarioByLoginUsuarioAutocomplete(string desc, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -239,7 +255,11 @@ namespace WebProgramAR.DataAccess
                                             where u.UsuarioNombre.Contains(desc)
 
                                             select u;
-                return query.ToList();
+                List<Usuario> aux =  query.ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Usuario>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
 
