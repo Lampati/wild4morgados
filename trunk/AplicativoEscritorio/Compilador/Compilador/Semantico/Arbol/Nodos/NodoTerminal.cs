@@ -116,6 +116,16 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             this.TipoDato = this.ObtenerTipo(t);
+
+            //if (t.Componente.Token == ComponenteLexico.TokenType.Identificador)
+            //{
+            //    this.Lexema = string.Format("{0}{1}",GlobalesCompilador.PREFIJO_VARIABLES,t.Componente.Lexema);
+            //}
+            //else
+            //{
+            //    this.Lexema = t.Componente.Lexema;
+            //}
+
             this.Lexema = t.Componente.Lexema;
 
             switch (this.Lexema)

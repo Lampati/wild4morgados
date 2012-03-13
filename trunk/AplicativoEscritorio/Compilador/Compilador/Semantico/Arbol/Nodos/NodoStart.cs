@@ -89,7 +89,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
             strBldr.AppendLine("begin");            
-            strBldr.Append("\t").AppendLine("PRINCIPAL();");
+            strBldr.Append("\t").AppendLine(string.Format("{0}PRINCIPAL();",GlobalesCompilador.PREFIJO_VARIABLES));
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
             strBldr.AppendLine("end.");
             

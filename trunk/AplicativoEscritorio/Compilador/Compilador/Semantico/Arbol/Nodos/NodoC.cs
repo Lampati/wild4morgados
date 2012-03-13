@@ -86,7 +86,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.Append(this.hijosNodo[0].Lexema).Append(" "); // id
+            strBldr.Append(this.hijosNodo[0].LexemaVariable).Append(" "); // id
             //strBldr.Append(":").Append(" "); // :
             //strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
             strBldr.Append("=").Append(" "); // =

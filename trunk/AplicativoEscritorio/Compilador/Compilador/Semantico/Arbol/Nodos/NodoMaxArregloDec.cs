@@ -29,6 +29,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
         }
 
+        private bool esID;
+
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero ||
@@ -38,6 +40,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 )
 
             {
+                esID = false;
+
                 if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero)
                 {
                     int valor = t.ObtenerValor();
@@ -59,38 +63,40 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
+                esID = true;
 
-                string lexema = t.Componente.Lexema;
+                Lexema = t.Componente.Lexema;
 
-                if (this.TablaSimbolos.ExisteVariable(lexema, this.ContextoActual, this.NombreContextoLocal))
+                if (this.TablaSimbolos.ExisteVariable(Lexema, this.ContextoActual, this.NombreContextoLocal))
                 {
-                    if (!this.TablaSimbolos.EsModificableValorVarible(lexema, this.ContextoActual, this.NombreContextoLocal))
+                    if (!this.TablaSimbolos.EsModificableValorVarible(Lexema, this.ContextoActual, this.NombreContextoLocal))
                     {
-                        if (this.TablaSimbolos.ObtenerTipoVariable(lexema, this.ContextoActual, this.NombreContextoLocal) == NodoTablaSimbolos.TipoDeDato.Numero)
+                        if (this.TablaSimbolos.ObtenerTipoVariable(Lexema, this.ContextoActual, this.NombreContextoLocal) == NodoTablaSimbolos.TipoDeDato.Numero)
                         {
-                            if (this.TablaSimbolos.RetornarValorConstante(lexema, this.ContextoActual, this.NombreContextoLocal) > 0)
+                            if (this.TablaSimbolos.RetornarValorConstante(Lexema, this.ContextoActual, this.NombreContextoLocal) > 0)
                             {
 
-                                this.RangoArreglo = lexema;
+                                this.RangoArreglo = LexemaVariable;
+
                             }
                             else
                             {
-                                throw new ErrorSemanticoException(new StringBuilder("La constante numerica ").Append(lexema).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos. ").ToString());
+                                throw new ErrorSemanticoException(new StringBuilder("La constante numerica ").Append(Lexema).Append(" no es mayor a 0. Solo se pueden usar constantes o numeros mayores a 0 al especificar el rango de los arreglos. ").ToString());
                             }
                         }
                         else
                         {
-                            throw new ErrorSemanticoException(new StringBuilder("La constante ").Append(lexema).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos. ").ToString());
+                            throw new ErrorSemanticoException(new StringBuilder("La constante ").Append(Lexema).Append(" no es del tipo numero. Solo se pueden usar constantes numericas o numeros al especificar el rango de los arreglos. ").ToString());
                         }
                     }
                     else
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(lexema).Append(" no es una constante. Solo se pueden usar constantes o numeros al especificar el rango de los arreglos. ").ToString());
+                        throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(Lexema).Append(" no es una constante. Solo se pueden usar constantes o numeros al especificar el rango de los arreglos. ").ToString());
                     }
                 }
                 else
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(lexema).Append(" no ya existia ").ToString());
+                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(Lexema).Append(" no ya existia ").ToString());
                 }
             }
 
@@ -111,7 +117,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.Append(this.hijosNodo[0].Lexema);   
+            if (esID)
+            {
+                strBldr.Append(this.hijosNodo[0].LexemaVariable);
+            }
+            else
+            {
+                strBldr.Append(this.hijosNodo[0].Lexema);
+            }
 
             this.Codigo = strBldr.ToString();
         }

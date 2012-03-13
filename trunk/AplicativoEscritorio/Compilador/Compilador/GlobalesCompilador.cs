@@ -10,6 +10,8 @@ namespace CompiladorGargar
         internal  const string NOMBRE_PROC_SALIDA = "salida";
         internal const string NOMBRE_PROC_PRINCIPAL = "principal";
 
+        internal const string PREFIJO_VARIABLES = "ProgramArVariable__00__";
+
         internal const short CANT_MAX_ERRORES_SINTACTICOS = 5;
 
         internal static int UltFila;

@@ -54,7 +54,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
            
-            strBldr.Append(this.hijosNodo[0].Lexema);          
+            strBldr.Append(this.hijosNodo[0].LexemaVariable);          
 
             this.Codigo = strBldr.ToString();
         }
