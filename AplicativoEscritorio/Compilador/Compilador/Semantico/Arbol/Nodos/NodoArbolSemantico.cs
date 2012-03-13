@@ -60,6 +60,15 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public bool ProcSalidaCrearUnaVez { get; set; }
         public bool ProcSalidaYaCreadoyCorrecto { get; set; }
+        public string LexemaVariable
+        {
+            get
+            {
+                return string.Format("{0}{1}", GlobalesCompilador.PREFIJO_VARIABLES, Lexema);
+            }   
+        }
+
+
         public string Lexema { get; set; }
         public string NombreContextoLocal { get; set; }
         public bool EsArreglo { get; set; }

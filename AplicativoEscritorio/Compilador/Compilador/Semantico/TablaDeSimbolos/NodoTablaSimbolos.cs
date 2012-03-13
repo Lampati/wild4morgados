@@ -49,6 +49,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             get { return nombre; }
         }
 
+        
+        public string NombreParaCodigo
+        {
+            get { return string.Format("ProgramArVariable__00__{0}",nombre); }
+        }
+
         private TipoContexto contexto;
         public TipoContexto Contexto
         {

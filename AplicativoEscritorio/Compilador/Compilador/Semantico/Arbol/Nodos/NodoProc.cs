@@ -237,7 +237,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             if (esFuncion)
             {
                 strBldr.Append("function ");
-                strBldr.Append(this.Lexema);
+                strBldr.Append(this.LexemaVariable);
                 
                 strBldr.Append(" ( ");
                 strBldr.Append(this.hijosNodo[3].Codigo);
@@ -248,7 +248,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 strBldr.Append(this.hijosNodo[7].Codigo);
                 strBldr.AppendLine("begin");
                 strBldr.Append("\t").AppendLine(this.hijosNodo[9].Codigo.Replace("\r\n", "\r\n\t"));
-                strBldr.Append("\t").Append(this.Lexema).Append(" := ").Append(this.hijosNodo[11].Codigo).AppendLine(";");
+                strBldr.Append("\t").Append(this.LexemaVariable).Append(" := ").Append(this.hijosNodo[11].Codigo).AppendLine(";");
                 strBldr.AppendLine("end;");
                 strBldr.AppendLine();
             }
@@ -266,7 +266,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 //else
                 //{
                     strBldr.Append("procedure ");
-                    strBldr.Append(this.Lexema);
+                    strBldr.Append(this.LexemaVariable);
 
                     strBldr.Append(" ( ");
                     strBldr.Append(this.hijosNodo[3].Codigo);

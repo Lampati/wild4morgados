@@ -39,7 +39,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.Append(this.hijosNodo[0].Lexema);
+            
+            strBldr.Append(this.hijosNodo[0].LexemaVariable);
             strBldr.Append(" ");
 
 
