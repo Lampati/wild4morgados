@@ -40,9 +40,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return metodoValidacion.Invoke(lista);
         }
 
-        internal void ArrojarExcepcionSintactica()
+        internal void ArrojarExcepcion()
         {
-            //throw new ErrorSintacticoException(
+            throw new ValidacionException() { Mensaje = mensajeError };
         }
     }
 }
