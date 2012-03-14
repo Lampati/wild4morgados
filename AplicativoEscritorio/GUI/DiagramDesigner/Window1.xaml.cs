@@ -338,5 +338,15 @@ namespace DiagramDesigner
                 }
             }
         }
+
+        private void RibbonWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool continuar = SalvarSiUsuarioQuiere();
+
+            if (!continuar)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

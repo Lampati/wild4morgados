@@ -186,8 +186,11 @@ namespace DiagramDesigner
 
         private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            int i = 0;
+            Salir();
+        }
 
+        public void Salir()
+        {
             bool continuar = SalvarSiUsuarioQuiere();
 
             if (continuar)

@@ -1287,7 +1287,13 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Sintactico\AnalizadorSintactico.cs" />
     <Compile Include="Sintactico\CadenaEntrada.cs" />
+    <Compile Include="Sintactico\ErroresManager\AnalizadorErroresSintacticos.cs" />
+    <Compile Include="Sintactico\ErroresManager\TipoFactory.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Mientras.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\TipoBase.cs" />
     <Compile Include="Sintactico\ErrorSintacticoException.cs" />
+    <Compile Include="Sintactico\EstadoSintactico.cs" />
     <Compile Include="Sintactico\Gramatica\ElementoGramatica.cs" />
     <Compile Include="Sintactico\Gramatica\Gramatica.cs" />
     <Compile Include="Sintactico\Gramatica\NoTerminal.cs" />
