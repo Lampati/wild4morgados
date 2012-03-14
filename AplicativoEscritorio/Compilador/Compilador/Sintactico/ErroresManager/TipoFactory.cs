@@ -9,13 +9,72 @@ namespace CompiladorGargar.Sintactico.ErroresManager
     internal static class TipoFactory
     {
 
-        internal static Tipos.TipoBase CrearTipo(List<Terminal> linea, ContextoLinea tipo)
+        internal static Tipos.TipoBase CrearTipo(List<Terminal> linea, ContextoLinea tipo, List<Terminal> cadenaEntradaFaltante)
+        {
+            
+            List<Terminal> lineaEntera = new List<Terminal>(linea);
+
+            List<Terminal> terminalesQueTerminanLinea = new List<Terminal>();
+            switch (tipo)
+            {
+                case ContextoLinea.Asignacion:
+                case ContextoLinea.Leer:
+                case ContextoLinea.LlamadaProc:
+                case ContextoLinea.DeclaracionConstante:
+                case ContextoLinea.DeclaracionVariable:
+                case ContextoLinea.Mostrar:
+                case ContextoLinea.FinProc:
+                case ContextoLinea.FinFuncion:
+                case ContextoLinea.FinSi:
+                case ContextoLinea.FinMientras:
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoFinSentencia());
+                    break;
+                case ContextoLinea.Mientras:
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoHacer());
+                    break;
+                case ContextoLinea.Si:
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoEntonces());
+                    break;
+                case ContextoLinea.DeclaracionFuncion:
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoTipoBooleano());
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoTipoNumero());
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoTipoTexto());
+                    break;
+                case ContextoLinea.DeclaracionProc:
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoParentesisClausura());
+                    break;
+
+            }
+
+            int i = 0;
+            while (i < cadenaEntradaFaltante.Count && !terminalesQueTerminanLinea.Contains(cadenaEntradaFaltante[i]))
+            {
+                lineaEntera.Add(cadenaEntradaFaltante[i]);
+                i++;
+            }
+
+            if (i < cadenaEntradaFaltante.Count)
+            {
+                //salida normal, agarre la linea entera
+
+                lineaEntera.Add(cadenaEntradaFaltante[i]);
+                return Crear(lineaEntera, tipo);
+            }
+            else
+            {
+                //no agarre la linea entera. Error x default??
+                return null;
+            }
+        }
+
+        private static Tipos.TipoBase Crear(List<Terminal> linea, ContextoLinea tipo)
         {
             Tipos.TipoBase retorno = null;
 
             switch (tipo)
             {
                 case ContextoLinea.Asignacion:
+                    retorno = new Tipos.Asignacion(linea);
                     break;
                 case ContextoLinea.Leer:
                     break;
@@ -51,8 +110,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 default:
                     break;
             }
-
-
 
             return retorno;
         }
