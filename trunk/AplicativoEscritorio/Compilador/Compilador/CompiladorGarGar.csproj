@@ -1292,6 +1292,7 @@
     <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\Mientras.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\TipoBase.cs" />
+    <Compile Include="Sintactico\ErroresManager\Validacion.cs" />
     <Compile Include="Sintactico\ErrorSintacticoException.cs" />
     <Compile Include="Sintactico\EstadoSintactico.cs" />
     <Compile Include="Sintactico\Gramatica\ElementoGramatica.cs" />
