@@ -149,12 +149,21 @@ namespace CompiladorGargar.Sintactico
                     cantErroresSintacticos++;
                 }
 
+                
+
                 ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
                                                                                     EstadoSintactico.ListaLineaActual,
                                                                                     EstadoSintactico.ContextoLinea,
                                                                                     this.CadenaEntrada.CadenaEntera);
 
-                analizador.Validar();
+                try
+                {
+                    analizador.Validar();
+                }
+                catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
+                {
+
+                }
 
                 if (ex.DescartarTopeCadena)
                 {

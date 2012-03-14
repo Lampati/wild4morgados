@@ -27,7 +27,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         }
 
 
-        public bool ValidacionAsignacionRepetido(List<Terminal> lista)
+        private bool ValidacionAsignacionRepetido(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
 
@@ -44,7 +44,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-        public bool ValidacionAsignacionFaltante(List<Terminal> lista)
+        private bool ValidacionAsignacionFaltante(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
 
