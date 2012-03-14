@@ -61,7 +61,7 @@ namespace CompiladorGargar.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 564
+        ///   Looks up a localized string similar to 565
         ///20
         ///pp0
         ///a1..a2..af3..a4..a5..a6..a7..a8..af9
@@ -84,7 +84,7 @@ namespace CompiladorGargar.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 4.
+        ///   Looks up a localized string similar to 20.
         /// </summary>
         internal static string CantElementosCadenaEntrada {
             get {

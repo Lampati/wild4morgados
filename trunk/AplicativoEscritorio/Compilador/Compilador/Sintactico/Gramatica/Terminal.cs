@@ -20,6 +20,51 @@ namespace CompiladorGargar.Sintactico.Gramatica
             return t;
         }
 
+        internal static Terminal ElementoEntonces()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.SiEntonces;
+            t.componente.Lexema = "entonces";
+            return t;
+        }
+
+        internal static Terminal ElementoHacer()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.MientrasHacer;
+            t.componente.Lexema = "hacer";
+            return t;
+        }
+
+        internal static Terminal ElementoTipoNumero()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.TipoNumero;
+            t.componente.Lexema = "numero";
+            return t;
+        }
+
+        internal static Terminal ElementoTipoTexto()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.TipoTexto;
+            t.componente.Lexema = "texto";
+            return t;
+        }
+
+        internal static Terminal ElementoTipoBooleano()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.TipoBooleano;
+            t.componente.Lexema = "booleano";
+            return t;
+        }
+
         internal static Terminal ElementoFinSentencia()
         {
             Terminal t = new Terminal();

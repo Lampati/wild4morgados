@@ -20,6 +20,14 @@ namespace CompiladorGargar.Sintactico
             }
         }
 
+        public List<Terminal> CadenaEntera
+        {
+            get
+            {
+                return cadena;
+            }
+        }
+
         public CadenaEntrada()
         {
             this.cadena = new List<Terminal>();

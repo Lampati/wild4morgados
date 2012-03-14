@@ -149,6 +149,13 @@ namespace CompiladorGargar.Sintactico
                     cantErroresSintacticos++;
                 }
 
+                ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
+                                                                                    EstadoSintactico.ListaLineaActual,
+                                                                                    EstadoSintactico.ContextoLinea,
+                                                                                    this.CadenaEntrada.CadenaEntera);
+
+                analizador.Validar();
+
                 if (ex.DescartarTopeCadena)
                 {
                     if (!this.CadenaEntrada.EsFinDeCadena())
@@ -258,6 +265,8 @@ namespace CompiladorGargar.Sintactico
 
                         GlobalesCompilador.UltFila = this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Fila;
                         GlobalesCompilador.UltCol = this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Columna;
+
+                        EstadoSintactico.AgregarTerminal(term);
 
                         this.cadenaEntrada.EliminarPrimerTerminal();
                     }

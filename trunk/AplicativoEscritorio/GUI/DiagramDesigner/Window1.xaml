@@ -9,7 +9,8 @@
         xmlns:toolbar="clr-namespace:DiagramDesigner.UserControls.Toolbar"  
         xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
-        WindowState="Maximized"        
+        WindowState="Maximized"    
+                Closing="RibbonWindow_Closing"  
                 >
 
     <Grid Margin="0">
