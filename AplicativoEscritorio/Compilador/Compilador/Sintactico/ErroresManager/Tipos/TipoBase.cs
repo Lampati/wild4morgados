@@ -36,7 +36,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 if (i < listaValidaciones.Count)
                 {
                     //significa que una validacion dio mal
-                    listaValidaciones[i].ArrojarExcepcionSintactica();
+                    listaValidaciones[i].ArrojarExcepcion();
                 }
             }           
         }
