@@ -19,6 +19,27 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             }            
         }
 
+        protected int filaDelError;
+        public int FilaDelError
+        {
+            get { return filaDelError; }
+            set { filaDelError = value; }
+        }
+
+        protected int columnaDelError;
+        public int ColumnaDelError
+        {
+            get { return columnaDelError; }
+            set { columnaDelError = value; }
+        }
+
+        public TipoBase(int f, int c)
+        {
+            filaDelError = f;
+            columnaDelError = c;
+
+        }
+
         public void Validar()
         {
             if (listaValidaciones.Count > 0)
