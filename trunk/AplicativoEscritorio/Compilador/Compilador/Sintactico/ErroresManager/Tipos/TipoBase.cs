@@ -28,7 +28,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
                 int i = 0;
 
-                while (i < listaValidaciones.Count && listaValidaciones[i].Validar())
+                while (i < listaValidaciones.Count && listaValidaciones[i].EsValido)
                 {
                     i++;
                 }

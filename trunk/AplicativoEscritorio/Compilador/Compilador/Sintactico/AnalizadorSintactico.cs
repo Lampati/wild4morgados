@@ -162,7 +162,7 @@ namespace CompiladorGargar.Sintactico
                 }
                 catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
                 {
-
+                    string err = excepVal.Message;
                 }
 
                 if (ex.DescartarTopeCadena)
