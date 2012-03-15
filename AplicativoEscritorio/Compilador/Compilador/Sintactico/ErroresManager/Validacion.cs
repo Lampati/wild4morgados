@@ -15,6 +15,18 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         private string mensajeError;
         private short importancia;
 
+        private int filaDelError;
+        public int FilaDelError
+        {
+            get { return filaDelError; }
+        }
+
+        private int columnaDelError;
+        public int ColumnaDelError
+        {
+            get { return columnaDelError; }
+        }
+
         public short Importancia
         {
             get { return importancia; }
@@ -34,12 +46,15 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         /// <param name="mens">Mensaje de Error a mostrar si la validacion no se cumple</param>
         /// <param name="importancia">Importancia de la validacion</param>
         /// <param name="metodoVal">Metodo que contiene el codigo a ejecutar de la validacion</param>
-        internal Validacion(List<Terminal> terminalesAValidar, string mens, short p, ValidacionDelegate metodoVal)
+        internal Validacion(List<Terminal> terminalesAValidar, string mens, short p, ValidacionDelegate metodoVal, int f, int c)
         {
             lista = terminalesAValidar;
             mensajeError = mens;
             importancia = p;
             metodoValidacion = metodoVal;
+
+            filaDelError = f;
+            columnaDelError = c;
         }
 
         private bool Validar()
@@ -49,7 +64,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal void ArrojarExcepcion()
         {
-            throw new ValidacionException(mensajeError);
+            throw new ValidacionException(mensajeError) { Fila = filaDelError, Columna = columnaDelError };
         }
     }
 }

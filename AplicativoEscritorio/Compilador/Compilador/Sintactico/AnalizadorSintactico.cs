@@ -149,7 +149,9 @@ namespace CompiladorGargar.Sintactico
                     cantErroresSintacticos++;
                 }
 
-                
+                string mensajeAMostrar = ex.Descripcion;
+                int filaAMostrar = ex.Fila;
+                int colAMostrar = ex.Columna;
 
                 ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
                                                                                     EstadoSintactico.ListaLineaActual,
@@ -162,7 +164,9 @@ namespace CompiladorGargar.Sintactico
                 }
                 catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
                 {
-                    string err = excepVal.Message;
+                    mensajeAMostrar = excepVal.Message;
+                    filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
+                    colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
                 }
 
                 if (ex.DescartarTopeCadena)
@@ -182,7 +186,7 @@ namespace CompiladorGargar.Sintactico
                     }
                     if (ex.Mostrar)
                     {
-                        retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, ex.PararAnalisis));
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, ex.PararAnalisis));
                     }
                     //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 }
@@ -219,7 +223,7 @@ namespace CompiladorGargar.Sintactico
 
                     if (ex.Mostrar)
                     {
-                        retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, ex.PararAnalisis));
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, ex.PararAnalisis));
                     }
                     //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 }

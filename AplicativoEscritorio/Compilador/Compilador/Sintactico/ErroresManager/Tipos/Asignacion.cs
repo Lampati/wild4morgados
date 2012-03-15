@@ -8,7 +8,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class Asignacion : TipoBase
     {
-        public Asignacion(List<Terminal> lista)
+        public Asignacion(List<Terminal> lista, int fila, int col) 
+            : base(fila,col)
         {
             listaLineaEntera = lista;
 
@@ -27,7 +28,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "El := esta especificado mas de una vez en la asignacion";
             short importancia = 10;
 
-            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.AsignacionRepetido);
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.AsignacionRepetido, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
@@ -40,7 +41,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = ":= faltante en la asignacion";
             short importancia = 9;
 
-            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.AsignacionFaltante);
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.AsignacionFaltante, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
@@ -65,7 +66,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 parteDer = listaLineaEntera;
             }
 
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.AsignacionTerminaCorrectamente);
+            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.AsignacionTerminaCorrectamente, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
@@ -88,7 +89,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 parteIzq = listaLineaEntera;
             }
 
-            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.AsignacionParteIzqCorrecta);
+            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.AsignacionParteIzqCorrecta, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
@@ -111,7 +112,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 parteIzq = listaLineaEntera;
             }
 
-            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados);           
+            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);            
         }
 
@@ -133,7 +134,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 parteDer = listaLineaEntera;
             }
 
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados);
+            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
         }
 
@@ -156,7 +157,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 parteIzq = listaLineaEntera;
             }
 
-            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados);
+            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
         }
 
@@ -178,7 +179,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 parteDer = listaLineaEntera;
             }
 
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados);
+            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
         }
     }

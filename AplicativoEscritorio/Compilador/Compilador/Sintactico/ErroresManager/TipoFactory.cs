@@ -11,6 +11,26 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static Tipos.TipoBase CrearTipo(List<Terminal> linea, ContextoLinea tipo, List<Terminal> cadenaEntradaFaltante)
         {
+            int fila, col;
+
+            if (cadenaEntradaFaltante.Count > 0)
+            {
+                fila = cadenaEntradaFaltante[0].Componente.Fila;
+                col = cadenaEntradaFaltante[0].Componente.Columna;
+            }
+            else
+            {
+                if (linea.Count > 0)
+                {
+                    fila = linea[linea.Count - 1].Componente.Fila;
+                    col = linea[linea.Count - 1].Componente.Columna;
+                }
+                else
+                {
+                    fila = -1;
+                    col = -1;
+                }
+            }
             
             List<Terminal> lineaEntera = new List<Terminal>(linea);
 
@@ -58,7 +78,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 //salida normal, agarre la linea entera
 
                 lineaEntera.Add(cadenaEntradaFaltante[i]);
-                return Crear(lineaEntera, tipo);
+                return Crear(lineaEntera, tipo, fila, col);
             }
             else
             {
@@ -67,21 +87,21 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             }
         }
 
-        private static Tipos.TipoBase Crear(List<Terminal> linea, ContextoLinea tipo)
+        private static Tipos.TipoBase Crear(List<Terminal> linea, ContextoLinea tipo, int fila, int col)
         {
             Tipos.TipoBase retorno = null;
 
             switch (tipo)
             {
                 case ContextoLinea.Asignacion:
-                    retorno = new Tipos.Asignacion(linea);
+                    retorno = new Tipos.Asignacion(linea,fila,col);
                     break;
                 case ContextoLinea.Leer:
                     break;
                 case ContextoLinea.LlamadaProc:
                     break;
                 case ContextoLinea.Mientras:
-                    retorno = new Tipos.Mientras(linea);
+                    retorno = new Tipos.Mientras(linea, fila,col );
                     break;
                 case ContextoLinea.Si:
                     break;
