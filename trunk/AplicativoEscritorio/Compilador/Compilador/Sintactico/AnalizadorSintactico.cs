@@ -155,6 +155,7 @@ namespace CompiladorGargar.Sintactico
 
                 ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
                                                                                     EstadoSintactico.ListaLineaActual,
+                                                                                    EstadoSintactico.ContextoGlobal,
                                                                                     EstadoSintactico.ContextoLinea,
                                                                                     this.CadenaEntrada.CadenaEntera);
 

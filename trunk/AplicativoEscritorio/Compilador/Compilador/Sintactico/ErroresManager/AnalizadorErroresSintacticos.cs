@@ -11,10 +11,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         private Tipos.TipoBase tipoError;
 
-        public AnalizadorErroresSintacticos(List<Terminal> lineaHastaAhora, ContextoLinea contextoLinea, List<Terminal> cadenaEntradaFaltante)
+        public AnalizadorErroresSintacticos(List<Terminal> lineaHastaAhora, ContextoGlobal contextoGlobal, ContextoLinea contextoLinea, List<Terminal> cadenaEntradaFaltante)
         {
 
-            tipoError = TipoFactory.CrearTipo(lineaHastaAhora, contextoLinea, cadenaEntradaFaltante);
+            tipoError = TipoFactory.CrearTipo(lineaHastaAhora, contextoGlobal, contextoLinea, cadenaEntradaFaltante);
            
         
         }

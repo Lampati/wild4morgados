@@ -8,7 +8,10 @@ namespace CompiladorGargar.Sintactico
 {
     internal enum ContextoGlobal
     {
-
+        Global,
+        GlobalDeclaraciones,
+        DeclaracionLocal,
+        Cuerpo
     }
 
 
@@ -52,8 +55,16 @@ namespace CompiladorGargar.Sintactico
 
         private static List<Terminal> listaLineaActual = new List<Terminal>();
 
-        private static ContextoLinea contextoLinea = ContextoLinea.Ninguno;
+        
 
+        private static ContextoGlobal contextoGlobal = Sintactico.ContextoGlobal.Global;
+        internal static ContextoGlobal ContextoGlobal
+        {
+            get { return contextoGlobal; }
+            set { contextoGlobal = value; }
+        }
+
+        private static ContextoLinea contextoLinea = ContextoLinea.Ninguno;
         internal static ContextoLinea ContextoLinea
         {
             get { return contextoLinea; }
@@ -177,26 +188,33 @@ namespace CompiladorGargar.Sintactico
                     
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoComienzo:
+                    contextoGlobal = Sintactico.ContextoGlobal.DeclaracionLocal;
                     contextoLinea = ContextoLinea.DeclaracionProc;
                     pila.Push(ElementoPila.Proc);
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin:
+                    contextoGlobal = Sintactico.ContextoGlobal.Global;
                     contextoLinea = ContextoLinea.FinProc;
                     pila.Pop();
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionComienzo:
+                    contextoGlobal = Sintactico.ContextoGlobal.DeclaracionLocal;
                     contextoLinea = ContextoLinea.DeclaracionFuncion;
                     pila.Push(ElementoPila.Func);
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionFin:
+                    contextoGlobal = Sintactico.ContextoGlobal.Global;
                     contextoLinea = ContextoLinea.FinFuncion;
                     pila.Pop();
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Comenzar:
+                    contextoGlobal = ContextoGlobal.Cuerpo;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Constantes:
+                    contextoGlobal = Sintactico.ContextoGlobal.GlobalDeclaraciones;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Variables:
+                    contextoGlobal = Sintactico.ContextoGlobal.GlobalDeclaraciones;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Const:
                     contextoLinea = ContextoLinea.DeclaracionConstante;

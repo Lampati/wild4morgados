@@ -9,7 +9,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
     internal static class TipoFactory
     {
 
-        internal static Tipos.TipoBase CrearTipo(List<Terminal> linea, ContextoLinea tipo, List<Terminal> cadenaEntradaFaltante)
+        internal static Tipos.TipoBase CrearTipo(List<Terminal> linea, ContextoGlobal contextoGlobal, ContextoLinea tipo, List<Terminal> cadenaEntradaFaltante)
         {
             int fila, col;
 
@@ -78,7 +78,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 //salida normal, agarre la linea entera
 
                 lineaEntera.Add(cadenaEntradaFaltante[i]);
-                return Crear(lineaEntera, tipo, fila, col);
+                return Crear(lineaEntera, contextoGlobal, tipo, fila, col);
             }
             else
             {
@@ -87,7 +87,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             }
         }
 
-        private static Tipos.TipoBase Crear(List<Terminal> linea, ContextoLinea tipo, int fila, int col)
+        private static Tipos.TipoBase Crear(List<Terminal> linea, ContextoGlobal contextoGlobal, ContextoLinea tipo, int fila, int col)
         {
             Tipos.TipoBase retorno = null;
 
