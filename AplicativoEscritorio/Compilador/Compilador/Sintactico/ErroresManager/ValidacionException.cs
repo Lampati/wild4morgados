@@ -7,6 +7,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 {
     internal class ValidacionException : Exception
     {
-        public string Mensaje { get; set; }
+        public ValidacionException(string m) : base(m)
+        {
+          
+        }
     }
 }

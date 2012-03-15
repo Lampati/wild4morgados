@@ -19,6 +19,13 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         {
             get { return importancia; }
         }
+               
+
+        public bool EsValido
+        {
+            get { return Validar(); }
+        }
+        
 
         /// <summary>
         /// Crear una nueva validacion
@@ -35,14 +42,14 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             metodoValidacion = metodoVal;
         }
 
-        public bool Validar()
+        private bool Validar()
         {
             return metodoValidacion.Invoke(lista);
         }
 
         internal void ArrojarExcepcion()
         {
-            throw new ValidacionException() { Mensaje = mensajeError };
+            throw new ValidacionException(mensajeError);
         }
     }
 }
