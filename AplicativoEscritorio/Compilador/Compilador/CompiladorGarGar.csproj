@@ -1290,6 +1290,11 @@
     <Compile Include="Sintactico\ErroresManager\AnalizadorErroresSintacticos.cs" />
     <Compile Include="Sintactico\ErroresManager\TipoFactory.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinProc.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinSi.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinMientras.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Leer.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\LlamadoProc.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\Mientras.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\TipoBase.cs" />
     <Compile Include="Sintactico\ErroresManager\Validacion.cs" />

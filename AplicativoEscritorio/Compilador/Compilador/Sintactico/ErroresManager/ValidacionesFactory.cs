@@ -11,6 +11,34 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         private delegate bool ChequeosTerminalesDelegate(Terminal x);
 
+        internal static bool ValidarFinMientras(List<Terminal> lista)
+        {
+            bool retorno = lista.Count == 2 
+                && lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.MientrasFin
+                && lista[1].Componente.Token == Lexicografico.ComponenteLexico.TokenType.FinSentencia;        
+
+            return retorno;
+        }
+
+        internal static bool ValidarFinSi(List<Terminal> lista)
+        {
+            bool retorno = lista.Count == 2
+                && lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiFin
+                && lista[1].Componente.Token == Lexicografico.ComponenteLexico.TokenType.FinSentencia;
+
+            return retorno;
+        }
+
+
+        internal static bool ValidarFinProc(List<Terminal> lista)
+        {
+            bool retorno = lista.Count == 2
+                && lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin
+                && lista[1].Componente.Token == Lexicografico.ComponenteLexico.TokenType.FinSentencia;
+
+            return retorno;
+        }
+
         internal static bool AsignacionRepetido(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
@@ -177,5 +205,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                  || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador
                  );
         }
+
+        
     }
 }

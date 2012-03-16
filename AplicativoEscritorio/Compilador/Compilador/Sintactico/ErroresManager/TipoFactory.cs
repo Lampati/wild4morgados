@@ -97,8 +97,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     retorno = new Tipos.Asignacion(linea,fila,col);
                     break;
                 case ContextoLinea.Leer:
+                    retorno = new Tipos.Leer(linea, fila, col);
                     break;
                 case ContextoLinea.LlamadaProc:
+                    retorno = new Tipos.LlamadoProc(linea, fila, col);
                     break;
                 case ContextoLinea.Mientras:
                     retorno = new Tipos.Mientras(linea, fila,col );
@@ -118,10 +120,13 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 case ContextoLinea.FinFuncion:
                     break;
                 case ContextoLinea.FinProc:
+                    retorno = new Tipos.FinProc(linea, fila, col);  //terminada 16/3/2012
                     break;
                 case ContextoLinea.FinMientras:
+                    retorno = new Tipos.FinMientras(linea, fila, col);  //terminada 16/3/2012
                     break;
                 case ContextoLinea.FinSi:
+                    retorno = new Tipos.FinSi(linea, fila, col); //terminada 16/3/2012
                     break;
                 case ContextoLinea.Mostrar:
                     break;
