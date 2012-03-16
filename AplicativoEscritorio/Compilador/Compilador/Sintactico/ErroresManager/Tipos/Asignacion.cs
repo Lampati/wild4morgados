@@ -21,6 +21,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             AgregarValidacionParentesisBalanceadosParteIzq();
             //AgregarValidacionParteIzqCorrecta();
             AgregarValidacionTerminaCorrectamente();
+
+            AgregarValidacionElementosConValorNoContiguosParteIzq();
+            AgregarValidacionElementosConValorNoContiguosParteDer();
         }
 
         private void AgregarValidacionAsignacionRepetido()
@@ -59,7 +62,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
             if (i > 0)
             {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i);
+                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i + 1);
             }
             else
             {
@@ -116,6 +119,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);            
         }
 
+       
+
         private void AgregarValidacionParentesisBalanceadosParteDer()
         {
             string mensajeError = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
@@ -127,7 +132,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
             if (i > 0)
             {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i);
+                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i + 1);
             }
             else
             {
@@ -137,7 +142,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
         }
-
 
         private void AgregarValidacionCorchetesBalanceadosParteIzq()
         {
@@ -172,7 +176,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
             if (i > 0)
             {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i);
+                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i +1);
             }
             else
             {
@@ -182,5 +186,51 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
         }
+
+        private void AgregarValidacionElementosConValorNoContiguosParteIzq()
+        {
+            string mensajeError = "La asignacion contiene una expresión mal formada en su parte izquierda.";
+            short importancia = 4;
+
+            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
+
+            List<Terminal> parteIzq;
+
+            if (i > 0)
+            {
+                parteIzq = listaLineaEntera.GetRange(0, i);
+            }
+            else
+            {
+                parteIzq = listaLineaEntera;
+            }
+
+            Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
+            listaValidaciones.Add(valRep);
+        }
+
+        private void AgregarValidacionElementosConValorNoContiguosParteDer()
+        {
+            string mensajeError = "La asignacion contiene una expresión mal formada en su parte derecha.";
+            short importancia = 4;
+
+            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
+
+            List<Terminal> parteDer;
+
+            if (i > 0)
+            {
+                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i +1);
+            }
+            else
+            {
+                parteDer = listaLineaEntera;
+            }
+
+            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
+            listaValidaciones.Add(valRep);
+        }
+
+       
     }
 }

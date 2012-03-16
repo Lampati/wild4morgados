@@ -9,6 +9,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager
     internal static class ValidacionesFactory
     {
 
+        private delegate bool ChequeosTerminalesDelegate(Terminal x);
+
         internal static bool AsignacionRepetido(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
@@ -54,6 +56,126 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             int cantidadCerrados = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.CorcheteClausura).Count;
 
             return cantidadAbiertos == cantidadCerrados;
+        }
+
+        internal static bool ElementosConValorNoContiguos(List<Terminal> lista)
+        {           
+            List<Terminal> listaElementosConValorContiguos = lista.FindAll(x => EsTerminalConValor(x));
+
+            return ChequeoContiguosIguales(lista, listaElementosConValorContiguos, EsTerminalConValor);
+        }
+
+        internal static bool ElementosOperadoresNoContiguos(List<Terminal> lista)
+        {
+            List<Terminal> listaElementosOperadoresContiguos = lista.FindAll(x => EsOperador(x));
+
+            return ChequeoContiguosIguales(lista, listaElementosOperadoresContiguos, EsOperador);
+        }
+
+        internal static bool NegacionesCorrectas(List<Terminal> lista)
+        {
+            bool retorno = true;
+
+            List<Terminal> listaElementos = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Negacion);
+
+            foreach (Terminal item in listaElementos)
+            {
+                int indice = lista.IndexOf(item);
+                if (indice < lista.Count - 1)
+                {
+                    retorno = !(lista[indice + 1].Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisApertura);
+                }
+                else
+                {
+                    //es el ultimo elemento. esta mal.
+                    retorno = false;
+                }
+
+                if (!retorno)
+                {
+                    break;
+                }
+            }
+            return retorno;
+        }
+
+
+
+
+        private static bool ChequeoContiguosIguales(List<Terminal> lista, List<Terminal> listaElementosConValorContiguos, ChequeosTerminalesDelegate del)
+        {
+            bool retorno = true;
+
+            foreach (Terminal item in listaElementosConValorContiguos)
+            {
+                int indice = lista.IndexOf(item);
+                if (indice > 0 && indice < lista.Count - 1)
+                {
+                    retorno = !(del.Invoke(lista[indice - 1]) || del.Invoke(lista[indice + 1]));
+                }
+                else
+                {
+                    if (indice > 0)
+                    {
+                        retorno = !(del.Invoke(lista[indice - 1]));
+                    }
+                    else
+                    {
+                        if (indice < lista.Count - 1)
+                        {
+                            retorno = !(del.Invoke(lista[indice + 1]));
+                        }
+                        else
+                        {
+                            //Tiene un solo elemento. Cumple la validacion
+                            retorno = true;
+                        }
+                    }
+                }
+
+                if (!retorno)
+                {
+                    break;
+                }
+            }
+            return retorno;
+        }
+
+        private static bool EsParentesis(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisApertura
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisClausura
+                 );
+        }
+
+
+        private static bool EsOperador(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SumaEntero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.RestaEntero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MultiplicacionEntero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.DivisionEntero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.And
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Or
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Concatenacion
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Menor
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MenorIgual
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Distinto
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Mayor
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MayorIgual
+                 );
+        }
+
+
+        private static bool EsTerminalConValor(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador
+                 );
         }
     }
 }
