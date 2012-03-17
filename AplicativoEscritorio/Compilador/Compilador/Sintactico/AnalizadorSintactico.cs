@@ -95,6 +95,8 @@ namespace CompiladorGargar.Sintactico
 
         public void ReiniciarAnalizadorSintactico()
         {
+            EstadoSintactico.Reiniciar();
+
             this.pila = new PilaGramatica(this.gramatica.SimboloInicial);
             this.cadenaEntrada = new CadenaEntrada();
 
