@@ -8,8 +8,77 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 {
     internal static class ValidacionesFactory
     {
-
         private delegate bool ChequeosTerminalesDelegate(Terminal x);
+
+
+        #region Declaraciones de constantes y variables
+        internal static bool ValidarDefTipoDatoFaltante(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool ValidarDefTipoDatoRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
+
+            return cantidad < 2;
+        }
+
+        internal static bool ValidarTipoDatoFaltante(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => EsTipoDeDato(x)).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool ValidarTipoDatoRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => EsTipoDeDato(x)).Count;
+
+            return cantidad < 2;
+        }
+
+        internal static bool ValidarAsignacionValorConstanteFaltante(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool ValidarAsignacionValorConstanteRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
+
+            return cantidad < 2;
+        }
+
+        internal static bool ValidarDefTipoDatoSinArreglo(List<Terminal> lista)
+        {
+            bool retorno = true;
+
+            if (lista.Count > 0)
+            {
+                retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo;
+            }
+
+            return retorno;
+        }
+
+        internal static bool ValidarEstarDefiniendoSoloUnID(List<Terminal> lista)
+        {
+
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
+
+            return cantidad < 2;
+
+        }
+
+
+        #endregion
+
+
 
         internal static bool ValidarFinMientras(List<Terminal> lista)
         {
@@ -206,6 +275,22 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                  );
         }
 
+        private static bool EsTerminalConValorConstante(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso
+                 );
+        }
+
+        private static bool EsTipoDeDato(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
+                 );
+        }
         
     }
 }

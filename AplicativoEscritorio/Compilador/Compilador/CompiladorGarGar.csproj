@@ -1290,6 +1290,7 @@
     <Compile Include="Sintactico\ErroresManager\AnalizadorErroresSintacticos.cs" />
     <Compile Include="Sintactico\ErroresManager\TipoFactory.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionConstante.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\FinProc.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\FinSi.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\FinMientras.cs" />
