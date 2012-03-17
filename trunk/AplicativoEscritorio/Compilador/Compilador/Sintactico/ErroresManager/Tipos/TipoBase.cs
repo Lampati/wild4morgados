@@ -97,5 +97,47 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 }
             }
         }
+
+        protected List<Terminal> ArmarSubListaIzquierdaDe(List<Terminal> lista, CompiladorGargar.Lexicografico.ComponenteLexico.TokenType tokenDivisor)
+        {
+            return ArmarSubLista(lista, tokenDivisor, false);
+        }
+
+        protected List<Terminal> ArmarSubListaDerechaDe(List<Terminal> lista, CompiladorGargar.Lexicografico.ComponenteLexico.TokenType tokenDivisor)
+        {
+            return ArmarSubLista(lista, tokenDivisor, true);
+        }
+
+        private List<Terminal> ArmarSubLista(List<Terminal> lista, Lexicografico.ComponenteLexico.TokenType tokenDivisor, bool haciaDer)
+        {
+            try
+            {
+                int i = lista.FindIndex(x => x.Componente.Token == tokenDivisor);
+
+                List<Terminal> parte;
+
+                if (i > 0)
+                {
+                    if (haciaDer)
+                    {
+                        parte = lista.GetRange(i, lista.Count - i + 1);
+                    }
+                    else
+                    {
+                        parte = lista.GetRange(0, i);
+                    }
+                }
+                else
+                {
+                    parte = lista;
+                }
+
+                return parte;
+            }
+            catch
+            {
+                return lista;
+            }
+        }
     }
 }

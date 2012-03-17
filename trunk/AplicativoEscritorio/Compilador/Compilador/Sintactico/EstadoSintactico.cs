@@ -94,7 +94,14 @@ namespace CompiladorGargar.Sintactico
             }
         }
 
-
+        internal static void Reiniciar()
+        {
+            listaLeidoHastaAhora.Clear();
+            listaLineaActual.Clear();
+            contextoGlobal = Sintactico.ContextoGlobal.Global;
+            contextoLinea = Sintactico.ContextoLinea.Ninguno;
+        }
+            
 
         internal static void AgregarTerminal(Terminal t)
         {

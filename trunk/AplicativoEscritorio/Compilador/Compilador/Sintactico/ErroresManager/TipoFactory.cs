@@ -114,6 +114,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 case ContextoLinea.DeclaracionProc:
                     break;
                 case ContextoLinea.DeclaracionConstante:
+                    retorno = new Tipos.DeclaracionConstante(linea, fila, col);
                     break;
                 case ContextoLinea.DeclaracionVariable:
                     break;

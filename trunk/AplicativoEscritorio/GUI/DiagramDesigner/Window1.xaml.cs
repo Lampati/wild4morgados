@@ -22,6 +22,7 @@ using Microsoft.Win32;
 using DiagramDesigner.Helpers;
 using System.Windows.Documents;
 using Globales;
+using System.Diagnostics;
 
 namespace DiagramDesigner
 {
@@ -243,7 +244,8 @@ namespace DiagramDesigner
 
         private void ConfigurarCompilador()
         {
-            bool modoDebug = false;
+            
+            bool modoDebug = Debugger.IsAttached;
 
             string directorioActual = Globales.ConstantesGlobales.PathEjecucionAplicacion;
 

@@ -40,16 +40,30 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return cantidad < 2;
         }
 
-        internal static bool ValidarAsignacionValorConstanteFaltante(List<Terminal> lista)
+        internal static bool ValidarAsignacionConstanteFaltante(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
             return cantidad > 0;
         }
 
-        internal static bool ValidarAsignacionValorConstanteRepetido(List<Terminal> lista)
+        internal static bool ValidarAsignacionConstanteRepetido(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
+
+            return cantidad < 2;
+        }
+
+        internal static bool ValidarAsignacionValorConstanteFaltante(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => EsTerminalConValorConstante(x)).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool ValidarAsignacionValorConstanteRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => EsTerminalConValorConstante(x)).Count;
 
             return cantidad < 2;
         }
@@ -60,7 +74,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
             if (lista.Count > 0)
             {
-                retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo;
+                retorno = !(lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo);
             }
 
             return retorno;
@@ -68,13 +82,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static bool ValidarEstarDefiniendoSoloUnID(List<Terminal> lista)
         {
-
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoDato).Count;
 
             return cantidad < 2;
-
         }
-
 
         #endregion
 
@@ -197,7 +208,15 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         }
 
 
+        internal static bool ForzarFalso(List<Terminal> lista)
+        {
+            return false;
+        }
 
+        internal static bool ForzarVerdadero(List<Terminal> lista)
+        {
+            return true;
+        }
 
         private static bool ChequeoContiguosIguales(List<Terminal> lista, List<Terminal> listaElementosConValorContiguos, ChequeosTerminalesDelegate del)
         {
