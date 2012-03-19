@@ -137,19 +137,24 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     retorno = new Tipos.Mientras(linea, fila,col );
                     break;
                 case ContextoLinea.Si:
+                    retorno = new Tipos.Si(linea, fila, col);
                     break;
                 case ContextoLinea.Sino:
                     break;
                 case ContextoLinea.DeclaracionFuncion:
+                    retorno = new Tipos.DeclaracionFuncion(linea, fila, col);
                     break;
                 case ContextoLinea.DeclaracionProc:
+                    retorno = new Tipos.DeclaracionProc(linea, fila, col);
                     break;
                 case ContextoLinea.DeclaracionConstante:
                     retorno = new Tipos.DeclaracionConstante(linea, fila, col);
                     break;
                 case ContextoLinea.DeclaracionVariable:
+                    retorno = new Tipos.DeclaracionVariable(linea, fila, col);
                     break;
                 case ContextoLinea.FinFuncion:
+                    retorno = new Tipos.FinFuncion(linea, fila, col);
                     break;
                 case ContextoLinea.FinProc:
                     retorno = new Tipos.FinProc(linea, fila, col);  //terminada 16/3/2012
@@ -161,6 +166,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     retorno = new Tipos.FinSi(linea, fila, col); //terminada 16/3/2012
                     break;
                 case ContextoLinea.Mostrar:
+                    retorno = new Tipos.Mostrar(linea, fila, col);
                     break;
                 case ContextoLinea.Ninguno:
                     break;

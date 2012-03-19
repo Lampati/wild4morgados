@@ -1291,6 +1291,12 @@
     <Compile Include="Sintactico\ErroresManager\AnalizadorErroresException.cs" />
     <Compile Include="Sintactico\ErroresManager\TipoFactory.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Si.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionFuncion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionProc.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\Mostrar.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\FinFuncion.cs" />
+    <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionVariable.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionConstante.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\FinProc.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\FinSi.cs" />

@@ -6,9 +6,9 @@ using CompiladorGargar.Sintactico.Gramatica;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
-    class Leer : TipoBase
+    class Mostrar : TipoBase
     {
-        public Leer(List<Terminal> lista, int fila, int col) 
+        public Mostrar(List<Terminal> lista, int fila, int col) 
             : base(fila,col)
         {
             listaLineaEntera = lista;
