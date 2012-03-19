@@ -1288,6 +1288,7 @@
     <Compile Include="Sintactico\AnalizadorSintactico.cs" />
     <Compile Include="Sintactico\CadenaEntrada.cs" />
     <Compile Include="Sintactico\ErroresManager\AnalizadorErroresSintacticos.cs" />
+    <Compile Include="Sintactico\ErroresManager\AnalizadorErroresException.cs" />
     <Compile Include="Sintactico\ErroresManager\TipoFactory.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\Asignacion.cs" />
     <Compile Include="Sintactico\ErroresManager\Tipos\DeclaracionConstante.cs" />
