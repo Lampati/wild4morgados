@@ -32,6 +32,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 }
             }
             
+            bool errorLineaFueraContextoGlobal = false; 
+
             List<Terminal> lineaEntera = new List<Terminal>(linea);
 
             List<Terminal> terminalesQueTerminanLinea = new List<Terminal>();
@@ -64,26 +66,55 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     terminalesQueTerminanLinea.Add(Terminal.ElementoParentesisClausura());
                     break;
 
+                case ContextoLinea.Ninguno:
+                    //Es el primer terminal se una linea fuera de contexto
+                    errorLineaFueraContextoGlobal = ChequeoLineasFueraContexto(linea, contextoGlobal, cadenaEntradaFaltante);
+                    break;
             }
 
-            int i = 0;
-            while (i < cadenaEntradaFaltante.Count && !terminalesQueTerminanLinea.Contains(cadenaEntradaFaltante[i]))
+            if (!errorLineaFueraContextoGlobal)
             {
-                lineaEntera.Add(cadenaEntradaFaltante[i]);
-                i++;
-            }
 
-            if (i < cadenaEntradaFaltante.Count)
-            {
-                //salida normal, agarre la linea entera
+                int i = 0;
+                while (i < cadenaEntradaFaltante.Count && !terminalesQueTerminanLinea.Contains(cadenaEntradaFaltante[i]))
+                {
+                    lineaEntera.Add(cadenaEntradaFaltante[i]);
+                    i++;
+                }
 
-                lineaEntera.Add(cadenaEntradaFaltante[i]);
-                return Crear(lineaEntera, contextoGlobal, tipo, fila, col);
+                if (i < cadenaEntradaFaltante.Count)
+                {
+                    //salida normal, agarre la linea entera
+
+                    lineaEntera.Add(cadenaEntradaFaltante[i]);
+                    return Crear(lineaEntera, contextoGlobal, tipo, fila, col);
+                }
+                else
+                {
+                    //no agarre la linea entera. Error x default??
+                    return null;
+                }
             }
             else
             {
-                //no agarre la linea entera. Error x default??
                 return null;
+            }
+        }
+
+       
+
+        private static bool ChequeoLineasFueraContexto(List<Terminal> linea, ContextoGlobal contextoGlobal, List<Terminal> cadenaEntradaFaltante)
+        {
+            if (linea.Count == 0)
+            {
+                ContextoLinea cont = EstadoSintactico.ContextoPerteneceTerminal(cadenaEntradaFaltante[0]);
+
+                return EstadoSintactico.EsContextoLineaCorrectoParaGlobal(cont, contextoGlobal, cadenaEntradaFaltante[0]);
+
+            }
+            else
+            {
+                return false;
             }
         }
 

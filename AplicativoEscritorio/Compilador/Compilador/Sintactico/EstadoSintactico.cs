@@ -9,7 +9,8 @@ namespace CompiladorGargar.Sintactico
     internal enum ContextoGlobal
     {
         Global,
-        GlobalDeclaraciones,
+        GlobalDeclaracionesConstantes,
+        GlobalDeclaracionesVariables,
         DeclaracionLocal,
         Cuerpo
     }
@@ -218,10 +219,10 @@ namespace CompiladorGargar.Sintactico
                     contextoGlobal = ContextoGlobal.Cuerpo;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Constantes:
-                    contextoGlobal = Sintactico.ContextoGlobal.GlobalDeclaraciones;
+                    contextoGlobal = Sintactico.ContextoGlobal.GlobalDeclaracionesConstantes;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Variables:
-                    contextoGlobal = Sintactico.ContextoGlobal.GlobalDeclaraciones;
+                    contextoGlobal = Sintactico.ContextoGlobal.GlobalDeclaracionesVariables;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Const:
                     contextoLinea = ContextoLinea.DeclaracionConstante;
@@ -295,7 +296,107 @@ namespace CompiladorGargar.Sintactico
             contextoLinea = ContextoLinea.Ninguno;
             listaLineaActual.Clear();
         }
-        
+
+
+
+
+        internal static ContextoLinea ContextoPerteneceTerminal(Terminal t)
+        {
+            //ojo con el sino!
+            ContextoLinea contextoLinea = Sintactico.ContextoLinea.Ninguno;
+
+            switch (t.Componente.Token)
+            {
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Mostrar:
+                    return  ContextoLinea.Mostrar;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MientrasComienzo:
+                    return  ContextoLinea.Mientras;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MientrasFin:
+                    return  ContextoLinea.FinMientras;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiComienzo:
+                    return  ContextoLinea.Si;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiSino:
+                    return ContextoLinea.Sino;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiFin:
+                    return  ContextoLinea.FinSi;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoComienzo:
+                    return  ContextoLinea.DeclaracionProc;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin:
+                    return  ContextoLinea.FinProc;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionComienzo:
+                    return  ContextoLinea.DeclaracionFuncion;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionFin:
+                    return  ContextoLinea.FinFuncion;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Const:
+                    return  ContextoLinea.DeclaracionConstante;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Var:
+                    return  ContextoLinea.DeclaracionVariable;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Llamar:
+                    return  ContextoLinea.LlamadaProc;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Leer:
+                    return  ContextoLinea.Leer;
+                    
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Identificador:
+                    return  ContextoLinea.Asignacion;
+                    
+            }
+
+            return contextoLinea;
+        }   
+
+
+        internal static bool EsContextoLineaCorrectoParaGlobal(ContextoLinea linea, ContextoGlobal global, Terminal t)
+        {
+            switch (global)
+            {
+                case ContextoGlobal.Global:
+                    return linea == Sintactico.ContextoLinea.DeclaracionFuncion
+                        || linea == Sintactico.ContextoLinea.DeclaracionProc
+                        || (linea == Sintactico.ContextoLinea.Ninguno && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Variables)
+                        || (linea == Sintactico.ContextoLinea.Ninguno && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Constantes);
+                case ContextoGlobal.GlobalDeclaracionesConstantes:
+                    return linea == Sintactico.ContextoLinea.DeclaracionFuncion
+                        || linea == Sintactico.ContextoLinea.DeclaracionProc
+                        || linea == Sintactico.ContextoLinea.DeclaracionConstante
+                        || linea == Sintactico.ContextoLinea.DeclaracionVariable
+                        || (linea == Sintactico.ContextoLinea.Ninguno && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Variables);
+                case ContextoGlobal.GlobalDeclaracionesVariables:
+                    return linea == Sintactico.ContextoLinea.DeclaracionFuncion
+                        || linea == Sintactico.ContextoLinea.DeclaracionProc
+                        || linea == Sintactico.ContextoLinea.DeclaracionConstante
+                        || linea == Sintactico.ContextoLinea.DeclaracionVariable;                        
+                case ContextoGlobal.DeclaracionLocal:
+                    return linea == Sintactico.ContextoLinea.DeclaracionConstante
+                        || linea == Sintactico.ContextoLinea.DeclaracionVariable
+                        || (linea == Sintactico.ContextoLinea.Ninguno && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Comenzar);
+                case ContextoGlobal.Cuerpo:
+                    return linea == Sintactico.ContextoLinea.Mientras
+                        || linea == Sintactico.ContextoLinea.FinMientras
+                        || linea == Sintactico.ContextoLinea.Si
+                        || linea == Sintactico.ContextoLinea.Sino
+                        || linea == Sintactico.ContextoLinea.FinSi
+                        || linea == Sintactico.ContextoLinea.Leer
+                        || linea == Sintactico.ContextoLinea.LlamadaProc
+                        || linea == Sintactico.ContextoLinea.Mostrar;
+                default:
+                    return false;
+            }
+
+        }
+
     }
 
     

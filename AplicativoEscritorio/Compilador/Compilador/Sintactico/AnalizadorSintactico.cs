@@ -155,22 +155,35 @@ namespace CompiladorGargar.Sintactico
                 int filaAMostrar = ex.Fila;
                 int colAMostrar = ex.Columna;
 
-                ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
-                                                                                    EstadoSintactico.ListaLineaActual,
-                                                                                    EstadoSintactico.ContextoGlobal,
-                                                                                    EstadoSintactico.ContextoLinea,
-                                                                                    this.CadenaEntrada.CadenaEntera);
+                bool pararCompilacion = ex.PararAnalisis;
 
                 try
                 {
-                    analizador.Validar();
+                    ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
+                                                                                   EstadoSintactico.ListaLineaActual,
+                                                                                   EstadoSintactico.ContextoGlobal,
+                                                                                   EstadoSintactico.ContextoLinea,
+                                                                                   this.CadenaEntrada.CadenaEntera);
+
+                    try
+                    {
+                        analizador.Validar();
+                    }
+                    catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
+                    {
+                        mensajeAMostrar = excepVal.Message;
+                        filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
+                        colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
+                    }
                 }
-                catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
+                catch (ErroresManager.AnalizadorErroresException exAnaliz)
                 {
-                    mensajeAMostrar = excepVal.Message;
-                    filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
-                    colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
+                    mensajeAMostrar = exAnaliz.Message;
+                    filaAMostrar = exAnaliz.Fila != -1 ? exAnaliz.Fila : filaAMostrar;
+                    colAMostrar = exAnaliz.Columna != -1 ? exAnaliz.Columna : colAMostrar;
+                    pararCompilacion = exAnaliz.Parar;
                 }
+                
 
                 if (ex.DescartarTopeCadena)
                 {
@@ -189,7 +202,7 @@ namespace CompiladorGargar.Sintactico
                     }
                     if (ex.Mostrar)
                     {
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, ex.PararAnalisis));
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
                     }
                     //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 }
@@ -226,7 +239,7 @@ namespace CompiladorGargar.Sintactico
 
                     if (ex.Mostrar)
                     {
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, ex.PararAnalisis));
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
                     }
                     //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 }
