@@ -18,6 +18,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             AgregarValidacionTipoDatoFaltante();
             AgregarValidacionTipoDatoRepetido();
             AgregarValidacionParteIzquierdaCorrecta();
+            AgregarValidacionCantArregloNoRepetido();
+            AgregarValidacionElementoQueSobraErroneo();
+
 
         }
 
@@ -68,7 +71,6 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-
         private void AgregarValidacionParteIzquierdaCorrecta()
         {
             string mensajeError = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
@@ -82,20 +84,31 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-        private void AgregarArregloDefinidoCorrectamente()
+        private void AgregarValidacionCantArregloNoRepetido()
         {
-            string mensajeError = "El arreglo esta definido incorrectamente";
-            short importancia = 8;
+            string mensajeError = "El arreglo esta especificado mas de una vez en la declaración";
+            short importancia = 7;
 
-            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Var);
-            List<Terminal> final = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.TipoDato);
-
-            Validacion valRep = new Validacion(final, mensajeError, importancia, ValidacionesFactory.CantidadIdsCorrectaYOrdenadosPorComas, FilaDelError, ColumnaDelError);
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ArregloRepetido, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
 
-       
+        private void AgregarValidacionCorchetesBalanceadosParteIzq()
+        {
+            string mensajeError = "Los corchetes no estan balanceados en la declaracion del arreglo";
+            short importancia = 6;
+
+            int cantArreglos = listaLineaEntera.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo).Count;
+
+            if (cantArreglos > 0)
+            {
+                List<Terminal> parteDefArreglo = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
+
+                Validacion valRep = new Validacion(parteDefArreglo, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
+                listaValidaciones.Add(valRep);
+            }
+        }
 
         private void AgregarValidacionElementoQueSobraErroneo()
         {
@@ -105,93 +118,79 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             int i = 0;
             Terminal terminalErroneo = null;
 
-            while (i < listaLineaEntera.Count && terminalErroneo == null)
+            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
+            List<Terminal> parteDefArreglo = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.FinSentencia);
+
+            int cantArreglos = parteDefArreglo.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo).Count;
+
+            if (cantArreglos > 0)
             {
-                switch (i)
+
+                while (i < parteDefArreglo.Count && terminalErroneo == null)
                 {
-                    case 0:
-                        if (listaLineaEntera[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.Const)
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    case 1:
-                        if (listaLineaEntera[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.Identificador)
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    case 2:
-                        if (listaLineaEntera[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.TipoDato)
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    case 3:
-                        if   ( ! EsTipoDeDato(listaLineaEntera[i]))
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    case 4:
-                        if (listaLineaEntera[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.Igual)
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    case 5:
-                        if (!EsTerminalConValorConstante(listaLineaEntera[i]))
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    case 6:
-                        if (listaLineaEntera[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.FinSentencia)
-                        {
-                            terminalErroneo = listaLineaEntera[i];
-                        }
-                        break;
-                    default:
-                        terminalErroneo = listaLineaEntera[i];
-                        break;
+                    switch (i)
+                    {
+                        case 0:
+                            if (parteDefArreglo[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.Arreglo)
+                            {
+                                terminalErroneo = parteDefArreglo[i];
+                            }
+                            break;
+                        case 1:
+                            if (parteDefArreglo[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.CorcheteApertura)
+                            {
+                                terminalErroneo = parteDefArreglo[i];
+                            }
+                            break;
+                        case 2:
+                            if (!TerminalesHelpers.EsTerminalConValor(parteDefArreglo[i]))
+                            {
+                                terminalErroneo = parteDefArreglo[i];
+                            }
+                            break;
+                        case 3:
+                            if (parteDefArreglo[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.CorcheteClausura)
+                            {
+                                terminalErroneo = parteDefArreglo[i];
+                            }
+                            break;
+                        case 4:
+                            if (parteDefArreglo[i].Componente.Token != Lexicografico.ComponenteLexico.TokenType.De)
+                            {
+                                terminalErroneo = parteDefArreglo[i];
+                            }
+                            break;
+                        case 5:
+                            if (!TerminalesHelpers.EsTipoDeDato(parteDefArreglo[i]))
+                            {
+                                terminalErroneo = parteDefArreglo[i];
+                            }
+                            break;
+                        default:
+                            terminalErroneo = parteDefArreglo[i];
+                            break;
+                    }
+
+                    i++;
                 }
 
-                i++;
-            }
+                string mensajeError = "Error sintactico: {0} es incorrecto en la declaración de una variable arreglo. La forma correcta es arreglo [MAX] de TIPO";
+                Validacion valRep;
 
-            string mensajeError = "{0} no tiene lugar en una declaración de constante";
-            Validacion valRep;
+                if (i < listaLineaEntera.Count)
+                {
+                    mensajeError = string.Format(mensajeError, terminalErroneo.Componente.Lexema);
+                    valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
+                }
+                else
+                {
+                    valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarVerdadero, FilaDelError, ColumnaDelError);
+                }
 
-            if (i < listaLineaEntera.Count)
-            {
-                mensajeError = string.Format(mensajeError, terminalErroneo.Componente.Lexema);
-                valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
+                listaValidaciones.Add(valRep);
             }
-            else
-            {
-                valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarVerdadero, FilaDelError, ColumnaDelError);
-            }
-
-            listaValidaciones.Add(valRep);
         }
 
-
-        private static bool EsTerminalConValorConstante(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso
-                 );
-        }
-
-        private static bool EsTipoDeDato(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
-                 );
-        }
 
     }
 }

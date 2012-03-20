@@ -169,7 +169,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                         }
                         break;
                     case 3:
-                        if   ( ! EsTipoDeDato(listaLineaEntera[i]))
+                        if (!TerminalesHelpers.EsTipoDeDato(listaLineaEntera[i]))
                         {
                             terminalErroneo = listaLineaEntera[i];
                         }
@@ -181,7 +181,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                         }
                         break;
                     case 5:
-                        if (!EsTerminalConValorConstante(listaLineaEntera[i]))
+                        if (!TerminalesHelpers.EsTerminalConValorConstante(listaLineaEntera[i]))
                         {
                             terminalErroneo = listaLineaEntera[i];
                         }
@@ -217,22 +217,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         }
 
 
-        private static bool EsTerminalConValorConstante(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso
-                 );
-        }
-
-        private static bool EsTipoDeDato(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
-                 );
-        }
+    
 
     }
 }
