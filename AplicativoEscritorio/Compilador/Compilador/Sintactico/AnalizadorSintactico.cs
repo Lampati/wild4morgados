@@ -174,6 +174,7 @@ namespace CompiladorGargar.Sintactico
                         mensajeAMostrar = excepVal.Message;
                         filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
                         colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
+                        this.habilitarSemantico = false;
                     }
                 }
                 catch (ErroresManager.AnalizadorErroresException exAnaliz)
