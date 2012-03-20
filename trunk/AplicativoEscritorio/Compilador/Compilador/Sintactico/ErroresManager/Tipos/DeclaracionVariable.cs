@@ -174,7 +174,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                     i++;
                 }
 
-                string mensajeError = "Error sintactico: {0} es incorrecto en la declaración de una variable arreglo. La forma correcta es arreglo [MAX] de TIPO";
+                string mensajeError = "Error sintactico: {0} es incorrecto en la declaración de un arreglo. La forma correcta es arreglo [MAX] de TIPO";
                 Validacion valRep;
 
                 if (i < listaLineaEntera.Count)

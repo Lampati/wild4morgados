@@ -52,7 +52,7 @@ namespace DiagramDesigner.Helpers
         internal static string ElegirArchivoParaAbrir(Window padre, string titulo, string dirInicial)
         {
             return ElegirArchivo (padre, titulo, dirInicial,
-                string.Format("Archivos de Resolución (*.{1})|*.{1}|Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
+                string.Format("Archivos de Ragnarok (*.{1} o *.{0})|*.{1};*.{0}|Archivos de Resolución (*.{1})|*.{1}|Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
                 Globales.ConstantesGlobales.EXTENSION_EJERCICIO,
                 Globales.ConstantesGlobales.EXTENSION_RESOLUCION)
                 );
