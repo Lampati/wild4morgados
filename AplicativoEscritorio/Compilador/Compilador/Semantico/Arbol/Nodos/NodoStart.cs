@@ -73,7 +73,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             StringBuilder strBldr = new StringBuilder();
 
             strBldr.AppendLine("program temporal;");
-            strBldr.AppendLine("uses crt, ArchResultadoManager;");
+            strBldr.AppendLine("uses crt, Sysutils, ArchResultadoManager;");
             strBldr.AppendLine("");
 
             strBldr.AppendLine("Const");
@@ -88,8 +88,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesBasicas());
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
-            strBldr.AppendLine("begin");            
-            strBldr.Append("\t").AppendLine(string.Format("{0}PRINCIPAL();",GlobalesCompilador.PREFIJO_VARIABLES));
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("try");       
+            strBldr.Append("\t").AppendLine(string.Format("{0}PRINCIPAL();",GlobalesCompilador.PREFIJO_VARIABLES));            
+            strBldr.AppendLine("except");
+            strBldr.AppendLine("on E: SysUtils.EDivByZero do");
+            strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Se intento dividir por cero en la linea ',{0});",GeneracionCodigoHelpers.VariableContadoraLineas));
+            strBldr.AppendLine("on ETotal: Exception do");
+            strBldr.AppendLine("end;");
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
             strBldr.AppendLine("end.");
             
