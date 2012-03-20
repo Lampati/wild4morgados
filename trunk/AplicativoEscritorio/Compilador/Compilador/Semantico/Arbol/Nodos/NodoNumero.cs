@@ -22,8 +22,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             this.TipoDato = hijoASintetizar.TipoDato;
+
+            this.ValorConstanteNumerica = Convert.ToInt32(hijoASintetizar.Lexema);
+            this.Lexema = hijoASintetizar.Lexema;
         }
 
+       
         public override void ChequearAtributos(Terminal t)
         {
             
