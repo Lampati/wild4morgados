@@ -53,17 +53,22 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         strbldr.Append(" arreglo. Las operaciones logicas y aritmenticas se pueden realizar únicamente con las posiciones de un arreglo");
                         throw new ErrorSemanticoException(strbldr.ToString());
                     }
+
+                    if (this.Operacion == TipoOperatoria.Division)
+                    {
+                        if (this.hijosNodo[1].Lexema.Trim() == "0")
+                        {
+                            StringBuilder strbldr = new StringBuilder("No se puede dividir por cero.");
+                            throw new ErrorSemanticoException(strbldr.ToString());
+                        }
+                    }
                 
                 }
                 else
                 {                   
-
                     this.Lexema = this.hijosNodo[0].Lexema;
                     
                     this.TipoDato = this.hijosNodo[0].TipoDato;
-
-                   
-                    
                 }
             }
             else

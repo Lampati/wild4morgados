@@ -60,6 +60,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 this.TipoDato = this.hijosNodo[0].TipoDato;
                 this.Lexema = this.hijosNodo[0].Lexema;
+                this.ValorConstanteNumerica = this.hijosNodo[0].ValorConstanteNumerica;
 
                 this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
 

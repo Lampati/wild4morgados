@@ -212,8 +212,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.Codigo = string.Empty;
 
             this.EsArregloEnParametro = false;
-            
 
+            this.ValorConstanteNumerica = int.MinValue;
             
             this.ListaElementosVisualizar = new List<string>();
 
