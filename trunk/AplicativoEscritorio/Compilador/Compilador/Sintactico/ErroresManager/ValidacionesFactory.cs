@@ -133,6 +133,38 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return cantidad > 0;
         }
 
+        internal static bool IdRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool IdFaltante(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool CantidadIdsCorrectaYOrdenadosPorComas(List<Terminal> lista)
+        {
+            bool retorno = true;
+
+            if (lista.Count > 1)
+            {
+
+                List<Terminal> listaComas = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Coma);
+
+                return ChequeoContiguosIguales(lista, listaComas, EsId);
+            }
+            else
+            {
+                retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador;
+            }
+            return retorno;
+        }
+
         internal static bool AsignacionTerminaCorrectamente(List<Terminal> lista)
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
@@ -309,6 +341,11 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                  || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
                  || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
                  );
+        }
+
+        private static bool EsId(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador);
         }
         
     }

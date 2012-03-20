@@ -13,8 +13,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         {
             listaLineaEntera = lista;
 
-            AgregarValidacionAsignacionFaltante();
-            AgregarValidacionAsignacionRepetido();
+            AgregarValidacionAsignarValorRepetido();
+            AgregarValidacionTipoDatoDefRepetido();
             AgregarValidacionAsignarValorFaltante();
             AgregarValidacionAsignarValorRepetido();
             AgregarValidacionTipoDatoFaltante();
@@ -27,7 +27,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         }
 
 
-        private void AgregarValidacionAsignacionRepetido()
+        private void AgregarValidacionTipoDatoDefRepetido()
         {
             string mensajeError = "El : esta especificado mas de una vez en la declaración";
             short importancia = 10;
@@ -37,7 +37,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-        private void AgregarValidacionAsignacionFaltante()
+        private void AgregarValidacionTipoDatoDefFaltante()
         {
             string mensajeError = ": faltante en la declaración";
             short importancia = 10;

@@ -13,21 +13,16 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         {
             listaLineaEntera = lista;
 
-            AgregarValidacionAsignacionFaltante();
-            AgregarValidacionAsignacionRepetido();
-            AgregarValidacionAsignarValorFaltante();
-            AgregarValidacionAsignarValorRepetido();
+            AgregarValidacionTipoDatoDefFaltante();
+            AgregarValidacionTipoDatoDefRepetido();
             AgregarValidacionTipoDatoFaltante();
             AgregarValidacionTipoDatoRepetido();
-            AgregarValidacionTipoDatoSinArreglo();
-            AgregarValidacionValorFaltante();
-            AgregarValidacionValorRepetido();
-            AgregarValidacionElementoQueSobraErroneo();
+            AgregarValidacionParteIzquierdaCorrecta();
 
         }
 
 
-        private void AgregarValidacionAsignacionRepetido()
+        private void AgregarValidacionTipoDatoDefRepetido()
         {
             string mensajeError = "El : esta especificado mas de una vez en la declaración";
             short importancia = 10;
@@ -37,7 +32,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-        private void AgregarValidacionAsignacionFaltante()
+        private void AgregarValidacionTipoDatoDefFaltante()
         {
             string mensajeError = ": faltante en la declaración";
             short importancia = 10;
@@ -47,49 +42,10 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-
-
-        private void AgregarValidacionAsignarValorRepetido()
-        {
-            string mensajeError = "El = esta especificado mas de una vez en la declaración";
-            short importancia = 9;
-
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
-
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ValidarAsignacionConstanteRepetido, FilaDelError, ColumnaDelError);
-
-            listaValidaciones.Add(valRep);
-        }
-
-        private void AgregarValidacionAsignarValorFaltante()
-        {
-            string mensajeError = "= faltante en la declaración";
-            short importancia = 9;
-
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera,Lexicografico.ComponenteLexico.TokenType.TipoDato);
-
-            Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ValidarAsignacionConstanteFaltante, FilaDelError, ColumnaDelError);
-
-            listaValidaciones.Add(valRep);
-        }
-
-        private void AgregarValidacionTipoDatoSinArreglo()
-        {
-            string mensajeError = "Las constantes no pueden ser arreglos";
-            short importancia = 7;
-
-            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
-            List<Terminal> final = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.Igual);
-
-            Validacion valRep = new Validacion(final, mensajeError, importancia, ValidacionesFactory.ValidarDefTipoDatoSinArreglo, FilaDelError, ColumnaDelError);
-
-            listaValidaciones.Add(valRep);
-        }
-
         private void AgregarValidacionTipoDatoRepetido()
         {
             string mensajeError = "El tipo de dato esta especificado mas de una vez en la declaración";
-            short importancia = 7;
+            short importancia = 9;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
             List<Terminal> final = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.Igual);
@@ -102,7 +58,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
         private void AgregarValidacionTipoDatoFaltante()
         {
             string mensajeError = "Tipo de dato faltante en la declaración";
-            short importancia = 7;
+            short importancia = 9;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
             List<Terminal> final = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.Igual);
@@ -112,31 +68,34 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             listaValidaciones.Add(valRep);
         }
 
-        private void AgregarValidacionValorRepetido()
+
+        private void AgregarValidacionParteIzquierdaCorrecta()
         {
-            string mensajeError = "El valor de constante esta especificado mas de una vez en la declaración";
-            short importancia = 6;
+            string mensajeError = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
+            short importancia = 8;
 
-            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
-            List<Terminal> final = ArmarSubListaDerechaDe(aux, Lexicografico.ComponenteLexico.TokenType.Igual);
+            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Var);
+            List<Terminal> final = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.TipoDato);
 
-            Validacion valRep = new Validacion(final, mensajeError, importancia, ValidacionesFactory.ValidarAsignacionValorConstanteRepetido, FilaDelError, ColumnaDelError);
+            Validacion valRep = new Validacion(final, mensajeError, importancia, ValidacionesFactory.CantidadIdsCorrectaYOrdenadosPorComas, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
 
-        private void AgregarValidacionValorFaltante()
+        private void AgregarArregloDefinidoCorrectamente()
         {
-            string mensajeError = "Valor de constante faltante en la declaración";
-            short importancia = 6;
+            string mensajeError = "El arreglo esta definido incorrectamente";
+            short importancia = 8;
 
-            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
-            List<Terminal> final = ArmarSubListaDerechaDe(aux, Lexicografico.ComponenteLexico.TokenType.Igual);
+            List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Var);
+            List<Terminal> final = ArmarSubListaIzquierdaDe(aux, Lexicografico.ComponenteLexico.TokenType.TipoDato);
 
-            Validacion valRep = new Validacion(final, mensajeError, importancia, ValidacionesFactory.ValidarAsignacionValorConstanteFaltante, FilaDelError, ColumnaDelError);
+            Validacion valRep = new Validacion(final, mensajeError, importancia, ValidacionesFactory.CantidadIdsCorrectaYOrdenadosPorComas, FilaDelError, ColumnaDelError);
 
             listaValidaciones.Add(valRep);
         }
+
+       
 
         private void AgregarValidacionElementoQueSobraErroneo()
         {
