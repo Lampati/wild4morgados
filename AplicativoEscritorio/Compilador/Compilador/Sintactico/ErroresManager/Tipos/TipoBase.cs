@@ -120,7 +120,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 {
                     if (haciaDer)
                     {
-                        parte = lista.GetRange(i+1, lista.Count - i + 1);
+                        parte = lista.GetRange(i+1, lista.Count - i - 1);
                     }
                     else
                     {

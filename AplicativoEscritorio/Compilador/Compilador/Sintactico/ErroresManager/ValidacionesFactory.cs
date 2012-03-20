@@ -28,14 +28,14 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static bool ValidarTipoDatoFaltante(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => EsTipoDeDato(x)).Count;
+            int cantidad = lista.FindAll(x => TerminalesHelpers.EsTipoDeDato(x)).Count;
 
             return cantidad > 0;
         }
 
         internal static bool ValidarTipoDatoRepetido(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => EsTipoDeDato(x)).Count;
+            int cantidad = lista.FindAll(x => TerminalesHelpers.EsTipoDeDato(x)).Count;
 
             return cantidad < 2;
         }
@@ -56,14 +56,14 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static bool ValidarAsignacionValorConstanteFaltante(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => EsTerminalConValorConstante(x)).Count;
+            int cantidad = lista.FindAll(x => TerminalesHelpers.EsTerminalConValorConstante(x)).Count;
 
             return cantidad > 0;
         }
 
         internal static bool ValidarAsignacionValorConstanteRepetido(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => EsTerminalConValorConstante(x)).Count;
+            int cantidad = lista.FindAll(x => TerminalesHelpers.EsTerminalConValorConstante(x)).Count;
 
             return cantidad < 2;
         }
@@ -86,6 +86,47 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
             return cantidad < 2;
         }
+
+        internal static bool IdRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool IdFaltante(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
+
+            return cantidad > 0;
+        }
+
+        internal static bool CantidadIdsCorrectaYOrdenadosPorComas(List<Terminal> lista)
+        {
+            bool retorno = true;
+
+            if (lista.Count > 1)
+            {
+
+                List<Terminal> listaComas = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Coma);
+
+                return ChequeoContiguosIguales(lista, listaComas, TerminalesHelpers.EsId);
+            }
+            else
+            {
+                retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador;
+            }
+            return retorno;
+        }
+
+        internal static bool ArregloRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo).Count;
+
+            return cantidad > 0;
+        }
+
+        
 
         #endregion
 
@@ -133,37 +174,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return cantidad > 0;
         }
 
-        internal static bool IdRepetido(List<Terminal> lista)
-        {
-            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
-
-            return cantidad > 0;
-        }
-
-        internal static bool IdFaltante(List<Terminal> lista)
-        {
-            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador).Count;
-
-            return cantidad > 0;
-        }
-
-        internal static bool CantidadIdsCorrectaYOrdenadosPorComas(List<Terminal> lista)
-        {
-            bool retorno = true;
-
-            if (lista.Count > 1)
-            {
-
-                List<Terminal> listaComas = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Coma);
-
-                return ChequeoContiguosIguales(lista, listaComas, EsId);
-            }
-            else
-            {
-                retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador;
-            }
-            return retorno;
-        }
+        
 
         internal static bool AsignacionTerminaCorrectamente(List<Terminal> lista)
         {
@@ -199,17 +210,17 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         }
 
         internal static bool ElementosConValorNoContiguos(List<Terminal> lista)
-        {           
-            List<Terminal> listaElementosConValorContiguos = lista.FindAll(x => EsTerminalConValor(x));
+        {
+            List<Terminal> listaElementosConValorContiguos = lista.FindAll(x => TerminalesHelpers.EsTerminalConValor(x));
 
-            return ChequeoContiguosIguales(lista, listaElementosConValorContiguos, EsTerminalConValor);
+            return ChequeoContiguosIguales(lista, listaElementosConValorContiguos, TerminalesHelpers.EsTerminalConValor);
         }
 
         internal static bool ElementosOperadoresNoContiguos(List<Terminal> lista)
         {
-            List<Terminal> listaElementosOperadoresContiguos = lista.FindAll(x => EsOperador(x));
+            List<Terminal> listaElementosOperadoresContiguos = lista.FindAll(x => TerminalesHelpers.EsOperador(x));
 
-            return ChequeoContiguosIguales(lista, listaElementosOperadoresContiguos, EsOperador);
+            return ChequeoContiguosIguales(lista, listaElementosOperadoresContiguos, TerminalesHelpers.EsOperador);
         }
 
         internal static bool NegacionesCorrectas(List<Terminal> lista)
@@ -289,64 +300,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        private static bool EsParentesis(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisApertura
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ParentesisClausura
-                 );
-        }
-
-
-        private static bool EsOperador(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SumaEntero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.RestaEntero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MultiplicacionEntero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.DivisionEntero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.And
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Or
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Concatenacion
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Menor
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MenorIgual
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Distinto
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Mayor
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MayorIgual
-                 );
-        }
-
-
-        private static bool EsTerminalConValor(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador
-                 );
-        }
-
-        private static bool EsTerminalConValorConstante(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Literal
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Verdadero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Falso
-                 );
-        }
-
-        private static bool EsTipoDeDato(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
-                 );
-        }
-
-        private static bool EsId(Terminal t)
-        {
-            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador);
-        }
+        
         
     }
 }
