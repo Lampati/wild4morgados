@@ -54,6 +54,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         #endregion
 
 
+        public void AgregarAuxiliarParaCodIntermedio(string nombre, NodoTablaSimbolos.TipoDeDato tdato)
+        {
+
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.AuxiliarCodigoIntermedio, tdato,false,NodoTablaSimbolos.TipoContexto.Global,null));
+        }
+
+        
 
         #region Manejo Variables
 
@@ -91,7 +98,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             }
             
         }
-        
+
+
+        internal List<NodoTablaSimbolos> ObtenerAuxilairesParaCodIntermedio()
+        {
+            return this.listaNodos.FindAll(x => x.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.AuxiliarCodigoIntermedio);
+        }
         
         //public bool ExisteVariable(string nombre)
         //{
@@ -467,5 +479,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                 && nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global;
                 
         }
+
+        
     }
 }
