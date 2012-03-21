@@ -21,6 +21,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             List<Variable> variables = this.hijosNodo[0].VariablesACrear;
             NodoTablaSimbolos.TipoDeDato tipo = this.hijosNodo[2].TipoDato;
+            this.RangoArregloSinPrefijo = this.hijosNodo[2].RangoArregloSinPrefijo;
 
             StringBuilder textoParaArbol = new StringBuilder();
 
@@ -49,7 +50,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                         if (!this.TablaSimbolos.ExisteArregloEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
                         {
-                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, v.IndiceArreglo, false);
+
+
+                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, this.RangoArregloSinPrefijo, false);
 
                         }
                         else

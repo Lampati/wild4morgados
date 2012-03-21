@@ -89,6 +89,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
             strBldr.AppendLine("begin");
+            strBldr.Append(GeneracionCodigoHelpers.InicializarVariablesGlobales(this.TablaSimbolos));
             strBldr.AppendLine("try");       
             strBldr.Append("\t").AppendLine(string.Format("{0}PRINCIPAL();",GlobalesCompilador.PREFIJO_VARIABLES));            
             strBldr.AppendLine("except");

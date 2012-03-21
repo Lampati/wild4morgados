@@ -77,6 +77,86 @@ namespace CompiladorGargar
         {
             variableContadoraLineas = Utilidades.RandomManager.RandomStringConPrefijo("ProgramAr_ContLineas",20,true);
         }
+
+        internal static string InicializarVariablesGlobales(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
+        {
+            return InicializarVariables(tablaSimbolos, Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto.Global, string.Empty);
+        }
+
+        internal static string InicializarVariablesProc(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos, string nombreProc)
+        {
+            return InicializarVariables(tablaSimbolos, Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto.Local, nombreProc);
+        }
+
+        private static string InicializarVariables(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos, Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto cont, string nombreProc)
+        {
+            StringBuilder strBldr = new StringBuilder();            
+
+            List<CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos> listaVars = tablaSimbolos.ObtenerVariablesDeclaradasEnProcedimiento(cont, nombreProc);
+
+            foreach (CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos item in listaVars)
+            {
+        
+                switch (item.TipoDato)
+                {
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.String:
+                        if (item.EsArreglo)
+                        {
+                            for (int i = 1; i <= item.ValorInt; i++)
+                            {
+                                strBldr.AppendLine(string.Format("{0}[{1}] := '';", item.NombreParaCodigo,i));
+                            }
+                        }
+                        else
+                        {
+                            if (!item.EsConstante)
+                            {
+                                strBldr.AppendLine(string.Format("{0} := '';", item.NombreParaCodigo));
+                            }
+                        }
+                        break;
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero:
+                        if (item.EsArreglo)
+                        {
+                            for (int i = 1; i <= item.ValorInt; i++)
+                            {
+                                strBldr.AppendLine(string.Format("{0}[{1}] := 0;", item.NombreParaCodigo,i));
+                            }
+                        }
+                        else
+                        {
+                            if (!item.EsConstante)
+                            {
+                                strBldr.AppendLine(string.Format("{0} := 0;", item.NombreParaCodigo));
+                            }
+                        }
+                        break;
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano:
+                        if (item.EsArreglo)
+                        {
+                            for (int i = 1; i <= item.ValorInt; i++)
+                            {
+                                strBldr.AppendLine(string.Format("{0}[{1}] := true;", item.NombreParaCodigo,i));
+                            }
+                        }
+                        else
+                        {
+                            if (!item.EsConstante)
+                            {
+                                strBldr.AppendLine(string.Format("{0} := true;", item.NombreParaCodigo));
+                            }
+                        }
+                        break;
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Ninguno:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return strBldr.ToString();
+        }
     }
 
 
