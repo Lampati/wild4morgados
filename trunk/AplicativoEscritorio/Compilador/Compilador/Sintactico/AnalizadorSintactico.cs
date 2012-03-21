@@ -106,6 +106,8 @@ namespace CompiladorGargar.Sintactico
             this.finArch = false;
             cantErroresSintacticos = 0;
             cantParentesisAbiertos = 0;
+
+            habilitarSemantico = true;
         }
 
 

@@ -74,6 +74,23 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { ValorInt = valorInt} );
         }
+
+
+        public List<NodoTablaSimbolos> ObtenerVariablesDeclaradasEnProcedimiento(Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto cont,string nombreProc)
+        {
+            if (cont == NodoTablaSimbolos.TipoContexto.Global)
+            {
+                return this.listaNodos.FindAll(x => x.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable
+                                    && x.Contexto == NodoTablaSimbolos.TipoContexto.Global);
+            }
+            else
+            {
+                return this.listaNodos.FindAll(x => x.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable
+                                    && x.Contexto == NodoTablaSimbolos.TipoContexto.Local
+                                    && x.NombreContextoLocal.ToUpper().Equals(nombreProc.ToUpper()));
+            }
+            
+        }
         
         
         //public bool ExisteVariable(string nombre)
@@ -206,15 +223,22 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         #region Manejo Arreglos
 
-        public void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, int indice, bool esConst)
-        {     
-            
+        public void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, string rango, bool esConst)
+        {
+            int rangoNum;
+            if (!int.TryParse(rango, out rangoNum))
+            {
+                NodoTablaSimbolos nodoConstante = this.listaNodos.Find(x => x.Nombre.ToUpper().Equals(rango) && x.EsConstante);
+
+                rangoNum = nodoConstante.ValorInt;
+            }
+
             this.listaNodos.Add(
-                
+
                     new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable,
-                   tdato,  true,  esConst, contexto,
-                   nombreContexto )
-                   
+                   tdato, true, esConst, contexto,
+                   nombreContexto) { ValorInt = rangoNum }
+
                    );
         }
 

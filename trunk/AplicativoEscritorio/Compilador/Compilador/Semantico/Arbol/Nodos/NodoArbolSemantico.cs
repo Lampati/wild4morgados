@@ -73,6 +73,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public string NombreContextoLocal { get; set; }
         public bool EsArreglo { get; set; }
         public string RangoArreglo { get; set; }
+        public string RangoArregloSinPrefijo { get; set; }
         public string NombreTipoArreglo { get; set; }
         public bool EsFuncion { get; set; }
         public List<Variable> VariablesACrear { get; set; }

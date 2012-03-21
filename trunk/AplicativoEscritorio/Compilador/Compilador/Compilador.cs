@@ -72,6 +72,8 @@ namespace CompiladorGargar
             long timeStamp = Stopwatch.GetTimestamp();
             long timeStampPaso;
 
+            
+
             GeneracionCodigoHelpers.ReiniciarValoresVariablesAleatorias();
 
             this.analizadorSintactico.ReiniciarAnalizadorSintactico();

@@ -31,6 +31,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.TipoDato = this.hijosNodo[5].TipoDato;
                 this.EsArreglo = true;
                 this.RangoArreglo = this.hijosNodo[2].RangoArreglo;
+                this.RangoArregloSinPrefijo = this.hijosNodo[2].RangoArregloSinPrefijo;
 
                 this.NombreTipoArreglo = this.TablaSimbolos.AgregarTipoArreglo(this.TipoDato, this.RangoArreglo);
             }

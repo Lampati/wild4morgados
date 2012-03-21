@@ -247,6 +247,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 strBldr.AppendLine(" ;");
                 strBldr.Append(this.hijosNodo[7].Codigo);
                 strBldr.AppendLine("begin");
+                strBldr.Append(GeneracionCodigoHelpers.InicializarVariablesProc(this.TablaSimbolos,this.Lexema));
                 strBldr.Append("\t").AppendLine(this.hijosNodo[9].Codigo.Replace("\r\n", "\r\n\t"));
                 strBldr.Append("\t").Append(this.LexemaVariable).Append(" := ").Append(this.hijosNodo[11].Codigo).AppendLine(";");
                 strBldr.AppendLine("end;");
@@ -274,6 +275,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     strBldr.AppendLine(" ;");
                     strBldr.Append(this.hijosNodo[5].Codigo);
                     strBldr.AppendLine("begin");
+                    strBldr.Append(GeneracionCodigoHelpers.InicializarVariablesProc(this.TablaSimbolos, this.Lexema));
                     strBldr.Append("\t").AppendLine(this.hijosNodo[7].Codigo.Replace("\r\n", "\r\n\t"));
                     strBldr.AppendLine("end;");
                     strBldr.AppendLine();

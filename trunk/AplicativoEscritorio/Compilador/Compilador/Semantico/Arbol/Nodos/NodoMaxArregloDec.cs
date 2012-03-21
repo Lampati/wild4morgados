@@ -49,6 +49,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     {
 
                         this.RangoArreglo = valor.ToString();
+                        this.RangoArregloSinPrefijo = valor.ToString();
                     }
                     else
                     {
@@ -77,7 +78,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             {
 
                                 this.RangoArreglo = LexemaVariable;
-
+                                this.RangoArregloSinPrefijo = Lexema;
                             }
                             else
                             {
