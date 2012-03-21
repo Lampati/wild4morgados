@@ -32,7 +32,9 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             [DescriptionAttribute("Funcion")]
             Funcion,
             [DescriptionAttribute("Procedimiento")]
-            Procedimiento
+            Procedimiento,
+            [DescriptionAttribute("AuxiliarCodigoIntermedio")]
+            AuxiliarCodigoIntermedio
         }
 
         public enum TipoContexto

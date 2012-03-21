@@ -38,10 +38,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             // esto es asi pq las variables del proc, tienen que ser globales
             this.ConstantesGlobales  = this.hijosNodo[1].Codigo;
             this.VariablesGlobales = this.hijosNodo[3].Codigo;
-
-           
-
-            
         }
     }
 }

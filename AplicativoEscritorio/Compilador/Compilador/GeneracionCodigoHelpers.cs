@@ -157,6 +157,53 @@ namespace CompiladorGargar
 
             return strBldr.ToString();
         }
+
+        internal static string DefinirVariablesAuxiliares(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            List<CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos> listaVars = tablaSimbolos.ObtenerAuxilairesParaCodIntermedio();
+
+            foreach (CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos item in listaVars)
+            {
+
+                switch (item.TipoDato)
+                {
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.String:
+                       
+                        if (!item.EsConstante)
+                        {
+                            strBldr.AppendLine(string.Format("var {0} : string;", item.Nombre));
+                        }
+                        
+                        break;
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero:
+                       
+                        if (!item.EsConstante)
+                        {
+                            strBldr.AppendLine(string.Format("var {0} : integer;", item.Nombre));
+                        }
+                        
+                        break;
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano:
+                      
+                        
+                        if (!item.EsConstante)
+                        {
+                            strBldr.AppendLine(string.Format("var {0} : boolean;", item.Nombre));
+                        }
+                        
+                        break;
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Ninguno:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return strBldr.ToString();
+        }
     }
 
 
