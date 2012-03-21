@@ -27,7 +27,7 @@ namespace CompiladorGargar.Resultado.Auxiliares
          
         }
 
-        public ResultadoCompilacionPascal(string output)
+        public ResultadoCompilacionPascal(string output, Dictionary<int, int> bindeoLineas)
         {
             ListaErrores = new List<string>();
             ListaWarnings = new List<string>();

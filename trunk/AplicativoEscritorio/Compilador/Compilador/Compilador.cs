@@ -176,6 +176,8 @@ namespace CompiladorGargar
                     long timeStampCod = Stopwatch.GetTimestamp();
                     res.ArbolSemanticoResultado.CalcularExpresiones();
                     res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
+
+                    
                     res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
 
                     timeStampCod = Stopwatch.GetTimestamp();
@@ -187,7 +189,11 @@ namespace CompiladorGargar
                     {
                         timeStampCod = Stopwatch.GetTimestamp();
 
-                        ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta);
+                        Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+                        ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta, bindeoLineasEntrePascalYGarGar);
+
+                        
+
                         res.ResultadoCompPascal = resPas;
                         res.ArchEjecutable = resPas.NombreEjecutable;
                         res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
@@ -235,15 +241,45 @@ namespace CompiladorGargar
             return res;
         }
 
+        private Dictionary<int, int> BindearLineas(string[] lineas)
+        {
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+
+            int numLineaGargar = 0;
+
+            for (int i = 0; i < lineas.Length; i++)
+            {
+                int numLineaPascal = i + 1;
+
+                string linea = lineas[i].Trim('\t');
+
+                dict.Add(numLineaPascal, numLineaGargar);
+
+                if (linea.Contains(GeneracionCodigoHelpers.VariableContadoraLineas))
+                {
+                    string[] res = linea.Split(new string[] { ":=" }, StringSplitOptions.None);
+
+                    if (res.Length > 1)
+                    {
+                        string num = res[1].TrimStart().TrimEnd().TrimEnd(';');
+                        numLineaGargar = Convert.ToInt32(num);
+                    }
+                }
+                         
+            }
+
+            return dict;
+        }
+
         private void BorrarTemporales()
         {
             DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.pas");
             DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.o");
         }
 
-       
 
-        private ResultadoCompilacionPascal CompilarPascal(string archTemporalPascal)
+
+        private ResultadoCompilacionPascal CompilarPascal(string archTemporalPascal, Dictionary<int, int> bindeoLineas)
         {
             ResultadoCompilacionPascal res;
 
@@ -263,7 +299,7 @@ namespace CompiladorGargar
 
                 string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumentoInclude, argumentoModoCompilacion, argumentoChequearIndicesDeArreglos, argumentoNombreExe, archTemporalPascal });
 
-                res = new ResultadoCompilacionPascal(resultado);
+                res = new ResultadoCompilacionPascal(resultado, bindeoLineas);
                 res.NombreEjecutable = exe;
             }
             catch (Exception)
