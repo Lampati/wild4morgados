@@ -28,6 +28,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.
             //Por defecto uso el tipo1 para asignar el tipo de este nodo.
 
+          
+
             this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
             
             TipoOperatoria operacion = this.hijosNodo[1].Operacion;

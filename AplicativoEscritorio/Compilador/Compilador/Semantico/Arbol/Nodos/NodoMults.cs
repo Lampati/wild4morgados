@@ -24,9 +24,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
+            
 
             if (this.hijosNodo.Count > 1)
             {
+               
+
+
                 //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.
                 //Por defecto uso el tipo1 para asignar el tipo de este nodo.            
                 this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;

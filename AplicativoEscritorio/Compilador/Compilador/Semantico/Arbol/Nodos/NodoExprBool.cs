@@ -31,6 +31,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
+         
+
             this.TipoDato = this.hijosNodo[0].TipoDato;
 
             this.Comparacion = this.hijosNodo[1].Comparacion;

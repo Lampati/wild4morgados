@@ -29,7 +29,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
-
+                
 
                 this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
 

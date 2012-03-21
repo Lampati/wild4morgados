@@ -103,6 +103,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("begin");
             strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Iteracion infinita posible encontrada en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
             strBldr.AppendLine("end;");
+            strBldr.AppendLine("on ERango: SysUtils.ERangeError do");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Se intento acceder a una posicion invalida de un arreglo en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
+            strBldr.AppendLine("end;");
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine("end;");
