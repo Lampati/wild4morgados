@@ -32,6 +32,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             string nombre = this.hijosNodo[0].Lexema;
 
+
+
             if (esFuncion)
             {
                 List<Firma> listaFirmaComparar = this.hijosNodo[1].ListaFirma;
@@ -142,7 +144,27 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     this.TipoDato = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
                     //this.Valor = this.TablaSimbolos.ObtenerValorPosicionArreglo(nombre, indice);
 
+                    //flanzani 21/03/2012
+                    //Muy dificil de lograr... es neceario evaluar expresionaes en tiempo de ejecucion.
+
+                    //string indice = this.hijosNodo[1].RangoArregloSinPrefijo;
+                    //int indiceEntero;
+
+                    //if (int.TryParse(indice, out indiceEntero))
+                    //{
+                    //    int tope = this.TablaSimbolos.ObtenerTopeArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
+
+                    //    if (indiceEntero < 1 || indiceEntero > tope)
+                    //    {
+                    //        strbldr = new StringBuilder("Se esta intentando acceder a una posicion invalida del arreglo ").Append(nombre);                            
+                    //        throw new ErrorSemanticoException(strbldr.ToString());
+                    //    }
+                    //}
+
+                    
               
+                    
+
 
                     this.Lexema = nombre;
                     

@@ -260,8 +260,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tipoDeDato,  true,  false, tipoContexto, nombreProc));
         }
 
-       
 
+        internal int ObtenerTopeArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        {
+
+            NodoTablaSimbolos arr = ObtenerArreglo(nombre, contexto, nombreContexto);
+            return arr.ValorInt;
+        }
         
 
         //public bool ExisteArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)

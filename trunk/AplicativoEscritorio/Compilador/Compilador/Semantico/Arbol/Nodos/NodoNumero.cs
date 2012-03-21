@@ -25,6 +25,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             this.ValorConstanteNumerica = Convert.ToInt32(hijoASintetizar.Lexema);
             this.Lexema = hijoASintetizar.Lexema;
+            
         }
 
        

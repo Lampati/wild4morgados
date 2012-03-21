@@ -61,11 +61,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("do");
             strBldr.AppendLine("begin");
 
-            strBldr.AppendLine(string.Format("if ( {0} = {1} ) then", nombreVarControladora, GlobalesCompilador.CANT_MAX_ITERACIONES));
-            strBldr.AppendLine("begin");
-            strBldr.Append("\t").AppendLine("raise EIteracionInfinitaException.Create('')");
-            strBldr.AppendLine("end;");
-            strBldr.AppendLine(string.Format("WriteLn({0},' / ', {1});", nombreVarControladora, GlobalesCompilador.CANT_MAX_ITERACIONES));
+            strBldr.Append("\t").AppendLine(string.Format("if ( {0} = {1} ) then", nombreVarControladora, GlobalesCompilador.CANT_MAX_ITERACIONES));
+            strBldr.Append("\t").AppendLine("begin");
+            strBldr.Append("\t").Append("\t").AppendLine("raise EIteracionInfinitaException.Create('')");
+            strBldr.Append("\t").AppendLine("end;");
+            //strBldr.AppendLine(string.Format("WriteLn({0},' / ', {1});", nombreVarControladora, GlobalesCompilador.CANT_MAX_ITERACIONES));
             strBldr.AppendLine(string.Format("{0} := {0} + 1;", nombreVarControladora));
 
 

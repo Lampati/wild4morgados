@@ -26,6 +26,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo.Count > 3)
                 {
+                   
                     this.TipoDato = this.hijosNodo[2].TipoDato;
                     this.Lexema = this.hijosNodo[2].Lexema;
 
@@ -45,6 +46,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
+                   
 
                     this.TipoDato = this.hijosNodo[1].TipoDato;
                     this.Lexema = this.hijosNodo[1].Lexema;
@@ -58,6 +60,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
+              
+
                 this.TipoDato = this.hijosNodo[0].TipoDato;
                 this.Lexema = this.hijosNodo[0].Lexema;
                 this.ValorConstanteNumerica = this.hijosNodo[0].ValorConstanteNumerica;

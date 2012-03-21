@@ -34,6 +34,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+               
+
                 this.Comparacion = TipoComparacion.None;
                 this.Operacion = this.hijosNodo[0].Operacion;
 
