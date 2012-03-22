@@ -504,12 +504,12 @@ namespace CompiladorGargar
             }
         }
 
-        private void AgregarResCompilPascal(List<string> list)
+        private void AgregarResCompilPascal(List<ResultadoCompilacionPascalLinea> list)
         {
             foreach (var item in list)
             {
 
-                this.dataGridViewErroresIDE.Rows.Add(string.Empty, string.Empty, GlobalesCompilador.TipoError.Compilacion, item);               
+                this.dataGridViewErroresIDE.Rows.Add(string.Empty, string.Empty, GlobalesCompilador.TipoError.Compilacion, item.ErrorNativo);               
                 this.dataGridViewErroresIDE.Rows[this.dataGridViewErroresIDE.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Red;
             }
 

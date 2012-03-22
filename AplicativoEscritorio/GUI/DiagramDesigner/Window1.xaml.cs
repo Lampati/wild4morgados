@@ -23,6 +23,7 @@ using DiagramDesigner.Helpers;
 using System.Windows.Documents;
 using Globales;
 using System.Diagnostics;
+using CompiladorGargar.Resultado.Auxiliares;
 
 namespace DiagramDesigner
 {
@@ -337,6 +338,14 @@ namespace DiagramDesigner
                 foreach (var item in res.ListaErrores)
                 {
                     this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
+                }
+
+                foreach (ResultadoCompilacionPascalLinea item in res.ResultadoCompPascal.ListaErrores)
+                {
+                    if (item.Mostrar)
+                    {
+                        this.BarraMsgs.AgregarError(item.ErrorTraducido, item.Fila, 0);
+                    }                    
                 }
             }
         }
