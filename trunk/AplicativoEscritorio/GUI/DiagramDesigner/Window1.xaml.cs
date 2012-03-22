@@ -329,7 +329,7 @@ namespace DiagramDesigner
         {
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                BarraEstado.Estado = "Compilación Correcta";                
+                BarraEstado.Estado = "Compilación Correcta";
             }
             else
             {
@@ -340,12 +340,15 @@ namespace DiagramDesigner
                     this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
                 }
 
-                foreach (ResultadoCompilacionPascalLinea item in res.ResultadoCompPascal.ListaErrores)
+                if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
                 {
-                    if (item.Mostrar)
+                    foreach (ResultadoCompilacionPascalLinea item in res.ResultadoCompPascal.ListaErrores)
                     {
-                        this.BarraMsgs.AgregarError(item.ErrorTraducido, item.Fila, 0);
-                    }                    
+                        if (item.Mostrar)
+                        {
+                            this.BarraMsgs.AgregarError(item.ErrorTraducido, item.Fila, 0);
+                        }
+                    }
                 }
             }
         }

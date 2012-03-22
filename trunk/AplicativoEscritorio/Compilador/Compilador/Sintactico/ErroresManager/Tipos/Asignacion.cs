@@ -56,18 +56,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "La asignacion termina incorrectamente";
             short importancia = 8;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteDer;
-
-            if (i > 0)
-            {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i + 1);
-            }
-            else
-            {
-                parteDer = listaLineaEntera;
-            }
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.AsignacionTerminaCorrectamente, FilaDelError, ColumnaDelError);
 
@@ -79,18 +68,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "Error sintactico en la parte izq";
             short importancia = 7;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteIzq;
-
-            if (i > 0)
-            {
-                parteIzq = listaLineaEntera.GetRange(0, i);
-            }
-            else
-            {
-                parteIzq = listaLineaEntera;
-            }
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.AsignacionParteIzqCorrecta, FilaDelError, ColumnaDelError);
 
@@ -102,18 +80,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "Los parentesis no estan balanceados en la parte izquierda de la asignacion";
             short importancia = 6;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteIzq;
-
-            if (i > 0)
-            {
-                parteIzq = listaLineaEntera.GetRange(0, i);
-            }
-            else
-            {
-                parteIzq = listaLineaEntera;
-            }
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);            
@@ -126,18 +93,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
             short importancia = 6;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteDer;
-
-            if (i > 0)
-            {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i + 1);
-            }
-            else
-            {
-                parteDer = listaLineaEntera;
-            }
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -148,18 +104,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "Los corchetes no estan balanceados en la parte izquierda de la asignacion";
             short importancia = 5;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteIzq;
-
-            if (i > 0)
-            {                
-                parteIzq = listaLineaEntera.GetRange(0, i);
-            }
-            else
-            {
-                parteIzq = listaLineaEntera;
-            }
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -170,18 +115,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "Los corchetes no estan balanceados en la parte derecha de la asignacion";
             short importancia = 5;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteDer;
-
-            if (i > 0)
-            {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i +1);
-            }
-            else
-            {
-                parteDer = listaLineaEntera;
-            }
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -192,18 +126,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "La asignacion contiene una expresión mal formada en su parte izquierda.";
             short importancia = 4;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteIzq;
-
-            if (i > 0)
-            {
-                parteIzq = listaLineaEntera.GetRange(0, i);
-            }
-            else
-            {
-                parteIzq = listaLineaEntera;
-            }
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -214,18 +137,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             string mensajeError = "La asignacion contiene una expresión mal formada en su parte derecha.";
             short importancia = 4;
 
-            int i = listaLineaEntera.FindIndex(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion);
-
-            List<Terminal> parteDer;
-
-            if (i > 0)
-            {
-                parteDer = listaLineaEntera.GetRange(i, listaLineaEntera.Count - i +1);
-            }
-            else
-            {
-                parteDer = listaLineaEntera;
-            }
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);

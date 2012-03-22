@@ -67,6 +67,8 @@ namespace CompiladorGargar.Sintactico
             set { habilitarSemantico = value; }
         }
 
+      
+
         private short cantErroresSintacticos;
         private short cantParentesisAbiertos;
 
@@ -626,6 +628,36 @@ namespace CompiladorGargar.Sintactico
                     {
                         throw new ErrorLexicoException(string.Format("El caracter {0} no es reconocido por el lenguaje GarGar", t.Componente.Lexema), t.Componente.Fila, t.Componente.Columna);
                     }
+
+                    if (t.Componente.Token == ComponenteLexico.TokenType.Numero)
+                    {
+                        if (t.Componente.Lexema.TrimStart()[0] == '-')
+                        {
+
+                            Terminal ultimoTerminal = CadenaEntrada.UltimoTerminalInsertado;
+
+                            if (ultimoTerminal != null && TerminalesHelpers.EsTerminalConValor(ultimoTerminal))
+                            {
+                                //Para que no de error Sintactico, creo este otro token para que parezca que es una operacion negativa -
+
+                                ComponenteLexico comp = new ComponenteLexico();
+                                comp.Fila = t.Componente.Fila;
+                                comp.Columna = t.Componente.Columna;
+                                comp.Lexema = "-";
+                                comp.Token = ComponenteLexico.TokenType.RestaEntero;
+
+                                this.cadenaEntrada.InsertarTerminal(new Terminal() { Componente = comp });
+
+                                //Le sumo uno pq el menos ya no pertenece mas.
+                                t.Componente.Columna++;
+
+                                //Le saco el - del lexema
+                                t.Componente.Lexema = t.Componente.Lexema.Remove(0, 1);
+                            }
+                        }
+                    }
+
+                   
 
                     this.cadenaEntrada.InsertarTerminal(t);                       
                     
