@@ -28,6 +28,21 @@ namespace CompiladorGargar.Sintactico
             }
         }
 
+        public Terminal UltimoTerminalInsertado
+        {
+            get 
+            {
+                if (cadena.Count > 0)
+                {
+                    return cadena.Last();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public CadenaEntrada()
         {
             this.cadena = new List<Terminal>();
