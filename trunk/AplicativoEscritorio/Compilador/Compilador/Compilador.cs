@@ -306,7 +306,7 @@ namespace CompiladorGargar
             {
                 res = new ResultadoCompilacionPascal();
                 res.CompilacionPascalCorrecta = false;
-                res.ListaErrores.Add("Error fatal al intentar ejecutar el compilador de codigo intermedio.");
+                //res.ListaErrores.Add("Error fatal al intentar ejecutar el compilador de codigo intermedio.");
             }
 
             return res;
