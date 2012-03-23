@@ -383,7 +383,7 @@
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Propiedades" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Propiedades" ContextMenu="{Binding null}" Click="btnPropiedadesSincro_Click"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
 
 

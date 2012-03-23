@@ -367,6 +367,40 @@ namespace DiagramDesigner.UserControls.Toolbar
             
         }
 
+        private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
+        {
+            PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
+            propertyEditorWindow.Titulo = "Propiedades de Sincronización";
+            propertyEditorWindow.Owner = this.Owner;
+
+            propertyEditorWindow.AgregarSeparador();
+
+            TextBox txtIP = new TextBox();
+            txtIP.Height = 80;
+            txtIP.Width = 300;
+            txtIP.TextWrapping = TextWrapping.Wrap;
+            txtIP.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            txtIP.AcceptsReturn = true;
+            txtIP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;            
+            propertyEditorWindow.AgregarPropiedad("IP/Host Servidor (ingresar cada valor en una nueva línea)", txtIP);
+
+            propertyEditorWindow.AgregarSeparador(false);
+            
+            TextBox txtTimeout = new TextBox();
+            txtTimeout.Height = 20;
+            txtTimeout.Width = 30;
+            txtTimeout.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            propertyEditorWindow.AgregarPropiedad("Timeout (segs)", txtTimeout);
+
+            propertyEditorWindow.AgregarSeparador();
+            propertyEditorWindow.AgregarBotonera();
+
+            if (propertyEditorWindow.ShowDialog() == true)
+            {
+            
+            }
+        }
+
         private void bttnSolGarGar_Click(object sender, RoutedEventArgs e)
         {
 
@@ -397,6 +431,11 @@ namespace DiagramDesigner.UserControls.Toolbar
                 }
             }
           
+        }
+
+        private void RibbonButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
