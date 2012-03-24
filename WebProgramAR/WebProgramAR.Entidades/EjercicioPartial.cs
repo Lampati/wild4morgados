@@ -30,6 +30,6 @@ namespace WebProgramAR.Entidades
 
         [Display(Name = "Nivel")]
         [Required(ErrorMessage = "Requerido")]
-        public int NivelEjercicioId { get; set; }
+        public int NivelEjercicio { get; set; }
     }
 }
