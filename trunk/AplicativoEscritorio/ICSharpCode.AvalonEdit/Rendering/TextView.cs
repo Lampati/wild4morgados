@@ -787,8 +787,12 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		public void EnsureVisualLines()
 		{
 			Dispatcher.VerifyAccess();
-			if (inMeasure)
-				throw new InvalidOperationException("The visual line build process is already running! Cannot EnsureVisualLines() during Measure!");
+            while (inMeasure) { }
+            /* COMENTADO POR GENERAR ERROR AL HACER SCROLL. 
+             * //24/03/12->CASA UCI
+            * SOLUCION: WHILE->CAMBIA EL ESTADO INTERNO EN SINCRONIZACION 
+              //if(inMeasure) throw new InvalidOperationException("The visual line build process is already running! Cannot EnsureVisualLines() during Measure!");
+             */
 			if (!VisualLinesValid) {
 				// increase priority for re-measure
 				InvalidateMeasure(DispatcherPriority.Normal);
@@ -889,7 +893,10 @@ namespace ICSharpCode.AvalonEdit.Rendering
 			
 			// number of pixels clipped from the first visual line(s)
 			clippedPixelsOnTop = scrollOffset.Y - heightTree.GetVisualPosition(firstLineInView);
-			Debug.Assert(clippedPixelsOnTop >= 0);
+            while(clippedPixelsOnTop < 0)
+                clippedPixelsOnTop =Math.Abs( scrollOffset.Y - heightTree.GetVisualPosition(firstLineInView));
+            
+                Debug.Assert(clippedPixelsOnTop >= 0);
 			
 			newVisualLines = new List<VisualLine>();
 			
