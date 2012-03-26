@@ -356,6 +356,10 @@
       <Project>{7F9DD2FC-B1FB-4CCE-AE6A-9F72DD296BC2}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\EJEKOR\EJEKOR.csproj">
+      <Project>{A9F69EB3-5235-4B36-ADC6-D99FBEB7A512}</Project>
+      <Name>EJEKOR</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\FindReplace\FindReplace.csproj">
       <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>
       <Name>FindReplace</Name>

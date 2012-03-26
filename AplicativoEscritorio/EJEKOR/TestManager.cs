@@ -5,7 +5,15 @@ using System.Text;
 
 namespace EJEKOR
 {
-    class TestManager
+    public static class TestManager
     {
+        public static ResultadoTest EjecutarTest()
+        {
+            return new ResultadoTest();
+        }
+
+
+
+
     }
 }

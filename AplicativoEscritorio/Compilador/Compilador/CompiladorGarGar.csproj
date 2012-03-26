@@ -1532,6 +1532,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EJEKOR\EJEKOR.csproj">
+      <Project>{A9F69EB3-5235-4B36-ADC6-D99FBEB7A512}</Project>
+      <Name>EJEKOR</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Globales\Globales.csproj">
       <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
       <Name>Globales</Name>

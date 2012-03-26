@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Criptografia\Crypto.cs" />
     <Compile Include="DirectoriosManager.cs" />
-    <Compile Include="EjecucionManager.cs" />
     <Compile Include="FastRandom.cs" />
     <Compile Include="RandomManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
