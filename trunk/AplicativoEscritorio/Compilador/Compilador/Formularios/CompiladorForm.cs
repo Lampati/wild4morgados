@@ -16,6 +16,7 @@ using CompiladorGargar.Sintactico.TablaGramatica;
 using Utilidades;
 using CompiladorGargar.Resultado.Auxiliares;
 using CompiladorGargar.Resultado;
+using EJEKOR;
 
 namespace CompiladorGargar
 {
