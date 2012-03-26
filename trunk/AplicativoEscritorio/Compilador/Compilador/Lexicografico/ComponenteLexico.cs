@@ -85,6 +85,8 @@ namespace CompiladorGargar.Lexicografico
             [DescriptionAttribute(":")]
             TipoDato, // :
 
+            [DescriptionAttribute("ref")]
+            Referencia, // :
             
             [DescriptionAttribute("numero")]
             TipoNumero, //entero
@@ -99,6 +101,9 @@ namespace CompiladorGargar.Lexicografico
 
             [DescriptionAttribute("mostrar")]
             Mostrar,
+
+            [DescriptionAttribute("mostrarp")]
+            MostrarConPausa,
          
 
             [DescriptionAttribute(":=")]

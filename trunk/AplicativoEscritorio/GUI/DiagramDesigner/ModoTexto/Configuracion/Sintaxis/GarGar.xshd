@@ -18,7 +18,7 @@
       </RuleSet>
     </Span>
 
-    <Keywords fontWeight="bold" foreground="Blue">
+    <Keywords fontWeight="bold" foreground="Blue" >
       <Word>si</Word>
       <Word>sino</Word>
       <Word>and</Word>
@@ -33,20 +33,27 @@
       <Word>finsi</Word>
       <Word>funcion</Word>
       <Word>hacer</Word>
-      <Word>leer</Word>
-      <Word>llamar</Word>
+
       <Word>mientras</Word>
-      <Word>mostrar</Word>
+
       <Word>or</Word>
       <Word>principal</Word>
       <Word>procedimiento</Word>
       <Word>salida</Word>
       <Word>var</Word>
       <Word>variables</Word>
-
+      <Word>ref</Word>
+      <Word>llamar</Word>
 
 
       <!-- ... -->
+    </Keywords>
+
+    <Keywords fontWeight="bold" foreground="LightSlateGray" >
+      <Word>mostrarp</Word>
+      <Word>mostrar</Word>
+      <Word>leer</Word>
+      
     </Keywords>
 
     <Keywords fontWeight="bold" foreground="Firebrick">

@@ -9,6 +9,7 @@ using Utilidades;
 using CompiladorGargar.Resultado.Auxiliares;
 using CompiladorGargar.Resultado;
 using CompiladorGargar.Lexicografico;
+using EJEKOR;
 
 namespace CompiladorGargar
 {

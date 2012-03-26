@@ -24,6 +24,7 @@ using System.Windows.Documents;
 using Globales;
 using System.Diagnostics;
 using CompiladorGargar.Resultado.Auxiliares;
+using EJEKOR;
 
 namespace DiagramDesigner
 {
