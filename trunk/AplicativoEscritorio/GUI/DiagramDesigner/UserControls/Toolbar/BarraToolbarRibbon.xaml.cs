@@ -362,9 +362,75 @@ namespace DiagramDesigner.UserControls.Toolbar
                     eventArgs.Enunciado = textEditorWindow.Texto;
                     ModificarPropiedadesEjercicioEventFire(sender, eventArgs);
                 }
-            }         
+            }        
+        }
 
-            
+        private void btnSincroGeneral_Click(object sender, RoutedEventArgs e)
+        {
+            PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
+            propertyEditorWindow.Titulo = "Sincronización General (Ejercicios Globales)";
+            propertyEditorWindow.Owner = this.Owner;
+
+            propertyEditorWindow.AgregarSeparador();
+
+            propertyEditorWindow.AgregarPropiedad("Los ejercicios a descargar son los ejercicios globales (disponibles para todos) sin importar curso/ejercicio.");
+
+            propertyEditorWindow.AgregarBotonera(
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));            
+
+            if (propertyEditorWindow.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void btnSincroCurso_Click(object sender, RoutedEventArgs e)
+        {
+            PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
+            propertyEditorWindow.Titulo = "Sincronización por Curso";
+            propertyEditorWindow.Owner = this.Owner;
+
+            propertyEditorWindow.AgregarSeparador();
+
+            TextBox txtCurso = new TextBox();
+            txtCurso.Height = 20;
+            txtCurso.Width = 300;
+            txtCurso.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            propertyEditorWindow.AgregarPropiedad("ID Curso", txtCurso);
+
+            propertyEditorWindow.AgregarBotonera(
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
+
+            if (propertyEditorWindow.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void btnSincroEjercicio_Click(object sender, RoutedEventArgs e)
+        {
+            PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
+            propertyEditorWindow.Titulo = "Sincronización por Ejercicio";
+            propertyEditorWindow.Owner = this.Owner;
+
+            propertyEditorWindow.AgregarSeparador();
+
+            TextBox txtEjercicio = new TextBox();
+            txtEjercicio.Height = 20;
+            txtEjercicio.Width = 300;
+            txtEjercicio.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            propertyEditorWindow.AgregarPropiedad("ID Ejercicio", txtEjercicio);
+
+            propertyEditorWindow.AgregarBotonera(
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
+
+            if (propertyEditorWindow.ShowDialog() == true)
+            {
+
+            }
         }
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
@@ -393,7 +459,10 @@ namespace DiagramDesigner.UserControls.Toolbar
             propertyEditorWindow.AgregarPropiedad("Timeout (segs)", txtTimeout);
 
             propertyEditorWindow.AgregarSeparador();
-            propertyEditorWindow.AgregarBotonera();
+
+            propertyEditorWindow.AgregarBotonera(
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
 
             if (propertyEditorWindow.ShowDialog() == true)
             {
