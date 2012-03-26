@@ -126,8 +126,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             //    this.Lexema = t.Componente.Lexema;
             //}
 
-            this.Lexema = t.Componente.Lexema;
-
+            if (t.Componente.Token != ComponenteLexico.TokenType.Referencia)
+            {
+                this.Lexema = t.Componente.Lexema;
+            }
             switch (this.Lexema)
             {
                 case "=":

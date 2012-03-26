@@ -62,6 +62,10 @@
 		<NoTerminal>VALORCONST</NoTerminal>
 		<NoTerminal>OPBOOLEANAS</NoTerminal>
 		
+		<NoTerminal>MOSTRAROP</NoTerminal>
+		<NoTerminal>REFERENCIA</NoTerminal>
+		<NoTerminal>IDSOLO</NoTerminal>
+		
 		
 	</NoTerminales>
 	
@@ -337,10 +341,34 @@
 			<Izq>F</Izq>
 			<Ders>
 				<Der>
+					<Expresion>ref IDSOLO : TIPODATOCONARREGLO</Expresion>
+				</Der>
+				<Der>
 					<Expresion>id : TIPODATOCONARREGLO</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>
+		
+		<Produccion>
+			<Izq>REFERENCIA</Izq>
+			<Ders>
+				<Der>
+					<Expresion>ref</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		
+		<Produccion>
+			<Izq>IDSOLO</Izq>
+			<Ders>
+				<Der>
+					<Expresion>id</Expresion>
+				</Der>				
+			</Ders>
+		</Produccion>
+		
+		
+		
 		<!---->
 		<Produccion>
 			<Izq>BLOQUE</Izq>
@@ -461,10 +489,23 @@
 			<Izq>VISUALIZAR</Izq>
 			<Ders>
 				<Der>
-					<Expresion>mostrar ( LITERALES ) ;</Expresion>
+					<Expresion>MOSTRAROP ( LITERALES ) ;</Expresion>
 				</Der>
 			</Ders>
-		</Produccion>		
+		</Produccion>	
+
+		<Produccion>
+			<Izq>MOSTRAROP</Izq>
+			<Ders>
+				<Der>
+					<Expresion>mostrar</Expresion>
+				</Der>
+				<Der>
+					<Expresion>mostrarp</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>	
+
 		<Produccion>
 			<Izq>LITERALES</Izq>
 			<Ders>

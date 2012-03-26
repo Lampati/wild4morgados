@@ -14,6 +14,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         public AnalizadorErroresSintacticos(List<Terminal> lineaHastaAhora, ContextoGlobal contextoGlobal, ContextoLinea contextoLinea, List<Terminal> cadenaEntradaFaltante)
         {
 
+            if (TerminalesHelpers.EsTerminalFinBloque(cadenaEntradaFaltante[0]) && lineaHastaAhora.Count == 0)
+            {
+                ChequearErrorCierreBloqueIncorrecta(cadenaEntradaFaltante[0], contextoGlobal);
+            }
+
+
             tipoError = TipoFactory.CrearTipo(lineaHastaAhora, contextoGlobal, contextoLinea, cadenaEntradaFaltante);
 
             if (tipoError == null)
@@ -21,8 +27,59 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 //significa que
                 ConstruirYArrojarExcepcion(cadenaEntradaFaltante[0], contextoGlobal);
             }
+            
 
         
+        }
+
+        private void ChequearErrorCierreBloqueIncorrecta(Terminal terminal, ContextoGlobal contextoGlobal)
+        {
+            string mensajeError = null;
+
+            if (contextoGlobal == ContextoGlobal.Cuerpo)
+            {
+                switch (terminal.Componente.Token)
+                {
+                    case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MientrasFin:
+                        if (EstadoSintactico.TopePilaLlamados != ElementoPila.Mientras)
+                        {
+                            mensajeError = string.Format("Se intento cerrar un bloque MIENTRAS pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                        }
+                        break;
+                    case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiSino:
+                        if (EstadoSintactico.TopePilaLlamados != ElementoPila.Si)
+                        {
+                            mensajeError = string.Format("Se intento realizar un SINO pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                        }
+                        break;
+                    case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiFin:
+                        if (EstadoSintactico.TopePilaLlamados != ElementoPila.Si && EstadoSintactico.TopePilaLlamados != ElementoPila.Sino)
+                        {
+                            mensajeError = string.Format("Se intento cerrar un bloque SI pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                        }
+                        break;
+                    case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin:
+                        if (EstadoSintactico.TopePilaLlamados != ElementoPila.Procedimiento)
+                        {
+                            mensajeError = string.Format("Se intento cerrar un PROCEDIMIENTO pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                        }
+                        break;
+                    case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionFin:
+                        if (EstadoSintactico.TopePilaLlamados != ElementoPila.Funcion)
+                        {
+                            mensajeError = string.Format("Se intento cerrar una FUNCION pero el ultimo bloque abierto fue un un {0} ", EstadoSintactico.TopePilaLlamados);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                if (mensajeError != null)
+                {
+                    throw new AnalizadorErroresException(mensajeError) 
+                        { Fila = terminal.Componente.Fila, Columna = terminal.Componente.Columna, Parar = true };
+                }
+            }
         }
 
         private void ConstruirYArrojarExcepcion(Terminal terminal, ContextoGlobal contextoGlobal)

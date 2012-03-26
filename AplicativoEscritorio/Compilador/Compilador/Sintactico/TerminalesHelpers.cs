@@ -68,5 +68,15 @@ namespace CompiladorGargar.Sintactico
             return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador);
         }
 
+
+        internal static bool EsTerminalFinBloque(Terminal t)
+        {
+            return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.MientrasFin
+               || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiFin
+               || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.SiSino
+               || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin
+               || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.FuncionFin
+               );
+        }
     }
 }

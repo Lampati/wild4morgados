@@ -10,6 +10,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
     class NodoF : NodoArbolSemantico
     {
+        public bool EsConRef { get; set; }
+
         public NodoF(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
@@ -18,8 +20,19 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
-            Firma f = new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[2].TipoDato);
-            f.EsArreglo = this.hijosNodo[2].EsArreglo;
+            Firma f;
+            if (this.hijosNodo.Count > 3)
+            {
+                f = new Firma(this.hijosNodo[1].Lexema, this.hijosNodo[3].TipoDato);
+                f.EsArreglo = this.hijosNodo[3].EsArreglo;
+
+                EsConRef = true;
+            }
+            else
+            {
+                f = new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[2].TipoDato);
+                f.EsArreglo = this.hijosNodo[2].EsArreglo;    
+            }
 
             this.ListaFirma.Add(f);
 
@@ -53,9 +66,19 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
-            strBldr.Append(this.hijosNodo[0].LexemaVariable).Append(" "); // id
-            strBldr.Append(":").Append(" "); // :
-            strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
+            if (this.hijosNodo.Count > 3)
+            {
+                strBldr.Append("var").Append(" ");
+                strBldr.Append(this.hijosNodo[1].LexemaVariable).Append(" "); // id
+                strBldr.Append(":").Append(" "); // :
+                strBldr.Append(this.hijosNodo[3].Codigo).Append(" "); // tipo
+            }
+            else
+            {
+                strBldr.Append(this.hijosNodo[0].LexemaVariable).Append(" "); // id
+                strBldr.Append(":").Append(" "); // :
+                strBldr.Append(this.hijosNodo[2].Codigo).Append(" "); // tipo
+            }
             
 
             this.Codigo = strBldr.ToString();

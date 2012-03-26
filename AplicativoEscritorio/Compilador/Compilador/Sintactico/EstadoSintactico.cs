@@ -44,8 +44,8 @@ namespace CompiladorGargar.Sintactico
         Mientras,
         Si,
         Sino,
-        Proc,
-        Func
+        Procedimiento,
+        Funcion
     }
 
     internal static class EstadoSintactico
@@ -92,6 +92,14 @@ namespace CompiladorGargar.Sintactico
             get
             {
                 return listaLineaActual;
+            }
+        }
+
+        public static ElementoPila TopePilaLlamados
+        {
+            get
+            {
+                return pila.Peek() ;
             }
         }
 
@@ -198,7 +206,7 @@ namespace CompiladorGargar.Sintactico
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoComienzo:
                     contextoGlobal = Sintactico.ContextoGlobal.DeclaracionLocal;
                     contextoLinea = ContextoLinea.DeclaracionProc;
-                    pila.Push(ElementoPila.Proc);
+                    pila.Push(ElementoPila.Procedimiento);
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin:
                     contextoGlobal = Sintactico.ContextoGlobal.Global;
@@ -208,7 +216,7 @@ namespace CompiladorGargar.Sintactico
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionComienzo:
                     contextoGlobal = Sintactico.ContextoGlobal.DeclaracionLocal;
                     contextoLinea = ContextoLinea.DeclaracionFuncion;
-                    pila.Push(ElementoPila.Func);
+                    pila.Push(ElementoPila.Funcion);
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.FuncionFin:
                     contextoGlobal = Sintactico.ContextoGlobal.Global;
