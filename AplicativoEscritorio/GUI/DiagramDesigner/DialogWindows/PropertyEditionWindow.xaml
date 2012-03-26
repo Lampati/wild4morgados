@@ -8,6 +8,7 @@
         ShowInTaskbar="False"   
         WindowStartupLocation="CenterScreen"
         Topmost="True"
+        Loaded="Window_Loaded"
         >
    
 

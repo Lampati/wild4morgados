@@ -377,9 +377,9 @@
 
         <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
             <ribbon:RibbonGroup Header="Sincronizador" Name="ribbonGroupSincro" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro General" ContextMenu="{Binding null}" ></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Curso" ContextMenu="{Binding null}" ></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ContextMenu="{Binding null}"></ribbon:RibbonButton>                
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro General" ContextMenu="{Binding null}" Click="btnSincroGeneral_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Curso" ContextMenu="{Binding null}" Click="btnSincroCurso_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ContextMenu="{Binding null}" Click="btnSincroEjercicio_Click"></ribbon:RibbonButton>                
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro" ContextMenu="{Binding null}">

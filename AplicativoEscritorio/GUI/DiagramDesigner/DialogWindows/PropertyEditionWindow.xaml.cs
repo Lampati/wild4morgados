@@ -53,10 +53,10 @@ namespace DiagramDesigner.DialogWindows
                 Grid.SetColumnSpan(sep, 2);
                 this.grdObjetos.Children.Add(sep);            
             }
-            this.Height += 10;
+            //this.Height += 10;
         }
 
-        public void AgregarBotonera()
+        public void AgregarBotonera(RoutedEventHandler accionAceptar, RoutedEventHandler accionCancelar)
         {
             StackPanel sp = new StackPanel();
             sp.Orientation = Orientation.Horizontal;
@@ -65,14 +65,14 @@ namespace DiagramDesigner.DialogWindows
 
             Button btnAceptar = new Button();
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Click += new RoutedEventHandler(btnAceptar_Click);
+            btnAceptar.Click += accionAceptar;
             btnAceptar.Margin = new Thickness(20, 0, 0, 0);
             btnAceptar.Width = 75;
             btnAceptar.Content = "Aceptar";
 
             Button btnCancelar = new Button();
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Click += new RoutedEventHandler(btnCancelar_Click);
+            btnCancelar.Click += accionCancelar;
             btnCancelar.Margin = new Thickness(0, 0, 20, 0);
             btnCancelar.Width = 75;
             btnCancelar.Content = "Cancelar";
@@ -89,13 +89,30 @@ namespace DiagramDesigner.DialogWindows
             Grid.SetColumnSpan(sp, 2);
 
             this.grdObjetos.Children.Add(sp);
-            this.Height += 50;
+            this.Height += 30;
+        }
+
+        public void AgregarPropiedad(string titulo)
+        {
+            RowDefinition rd = new RowDefinition();
+            rd.Height = GridLength.Auto;
+            this.grdObjetos.RowDefinitions.Add(rd);
+
+            TextBlock txtBlock = new TextBlock();
+            txtBlock.Text = titulo;
+            txtBlock.TextWrapping = TextWrapping.Wrap;
+
+            this.objetos.Add(new ObjetoVentana(txtBlock));
+
+            Grid.SetRow(txtBlock, this.objetos.Count);
+            Grid.SetColumnSpan(txtBlock, 2);
+
+            this.grdObjetos.Children.Add(txtBlock);
+            //this.Height += txtBlock.ActualHeight;
         }
 
         public void AgregarPropiedad(string titulo, Control ctrl)
         {
-            this.objetos.Add(new ObjetoVentana(titulo, ctrl));
-
             RowDefinition rd = new RowDefinition();
             rd.Height = GridLength.Auto;
             this.grdObjetos.RowDefinitions.Add(rd);
@@ -103,6 +120,7 @@ namespace DiagramDesigner.DialogWindows
             TextBlock txtBlock = new TextBlock();
             txtBlock.Text = String.Concat(titulo, ":");
             txtBlock.TextWrapping = TextWrapping.Wrap;
+            this.objetos.Add(new ObjetoVentana(txtBlock, ctrl));
             Grid.SetRow(txtBlock, this.objetos.Count);
             Grid.SetRow(ctrl, this.objetos.Count);
             Grid.SetColumn(txtBlock, 0);
@@ -110,24 +128,36 @@ namespace DiagramDesigner.DialogWindows
 
             this.grdObjetos.Children.Add(txtBlock);
             this.grdObjetos.Children.Add(ctrl);
-            this.Height += ctrl.Height;
+            //this.Height += ctrl.Height;
         }
 
         public PropertyEditionWindow()
         {
             InitializeComponent();
             this.objetos = new List<ObjetoVentana>();
-            this.Height = 40;
+            this.Height = 60;
         }
 
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            foreach (ObjetoVentana ov in this.objetos)
+                if (ov.SeCompleto)
+                {
+                    if (ov.Controls != null)
+                    {
+                        double max = 0;
+                        foreach (Control ctrl in ov.Controls)
+                        {
+                            if (ctrl.ActualHeight > max)
+                                max = ctrl.ActualHeight;
+                        }
+                        this.Height += max;
+                    }
+                    else
+                        this.Height += ov.Texto.ActualHeight;
+                }
+                else //Es un separador
+                    this.Height += 10;
         }
-
-        private void btnAceptar_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-        }        
     }
 }
