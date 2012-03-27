@@ -36,7 +36,13 @@ namespace CompiladorGargar.Semantico.Arbol
             this.nodoActual = this.nodoActual.ObtenerPrimerHijo(); 
         }
 
-
+        public TablaSimbolos TablaDeSimbolos 
+        {
+            get
+            {
+                return nodoRaiz.TablaSimbolos;
+            }
+        }
 
         //public void CalcularAtributos(Terminal t)
         //{
@@ -227,6 +233,8 @@ namespace CompiladorGargar.Semantico.Arbol
         //    }
 
         //}
+
+
 
         
     }

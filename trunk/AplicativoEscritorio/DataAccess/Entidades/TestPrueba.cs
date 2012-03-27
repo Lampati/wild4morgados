@@ -12,6 +12,7 @@ namespace DataAccess.Entidades
         private List<VariableTest> variablesEntrada;
         private List<VariableTest> variablesSalida;
         private string codigoGarGarProcSalida;
+        private string descripcion;
 
         #endregion
 
@@ -32,6 +33,12 @@ namespace DataAccess.Entidades
         {
             get { return codigoGarGarProcSalida; }
             set { codigoGarGarProcSalida = value; }
+        }
+
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set { descripcion = value; }
         }
         #endregion
 
