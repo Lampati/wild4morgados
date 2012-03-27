@@ -173,6 +173,7 @@ namespace CompiladorGargar
                 if (res.CompilacionGarGarCorrecta)
                 {
                     res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
+                    res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
 
                     long timeStampCod = Stopwatch.GetTimestamp();
                     res.ArbolSemanticoResultado.CalcularExpresiones();

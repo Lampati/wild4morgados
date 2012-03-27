@@ -25,6 +25,9 @@ using Globales;
 using System.Diagnostics;
 using CompiladorGargar.Resultado.Auxiliares;
 using EJEKOR;
+using DiagramDesigner.TestsPruebas;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
+using System.Collections.Generic;
 
 namespace DiagramDesigner
 {
@@ -105,6 +108,8 @@ namespace DiagramDesigner
             this.ToolbarAplicacion.AbrirBusquedaEvent += new BarraToolbarRibbon.AbrirBusquedaEventHandler(ToolbarAplicacion_AbrirBusquedaEvent);
             this.ToolbarAplicacion.SalvarConfiguracionEvent += new BarraToolbarRibbon.SalvarConfiguracionEventHandler(ToolbarAplicacion_SalvarConfiguracionEvent);
             this.ToolbarAplicacion.ModificarPropiedadesEjercicioEvent += new BarraToolbarRibbon.ModificarPropiedadesEjercicioHandler(ToolbarAplicacion_ModificarPropiedadesEjercicioEvent);
+            this.ToolbarAplicacion.TestPruebaEvent += new BarraToolbarRibbon.TestPruebaHandler(ToolbarAplicacion_TestPruebaEvent);
+
 
             this.Loaded += new RoutedEventHandler(Window1_Loaded);
 
@@ -151,6 +156,8 @@ namespace DiagramDesigner
             ToolbarAplicacion.Owner = this;
             
         }
+
+        
 
         void Window1_Loaded(object sender, RoutedEventArgs e)
         {
@@ -199,6 +206,29 @@ namespace DiagramDesigner
 
             Modo = e.ModoSeleccionado;
             
+
+        }
+
+        void ToolbarAplicacion_TestPruebaEvent(object o, TestPruebaEventArgs e)
+        {
+
+            ResultadoCompilacion res = Compilar();
+
+            if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+            {
+                 
+
+                List<NodoTablaSimbolos> listaVariablesEntrada = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                listaVariablesEntrada.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
+
+                List<NodoTablaSimbolos> listaVariablesSalida = res.TablaSimbolos.ObtenerParametrosDelProcSalida();
+
+                WindowCreacionTest testWindow = new WindowCreacionTest();
+                testWindow.VariablesEntrada = listaVariablesEntrada;
+                testWindow.VariablesSalida = listaVariablesSalida;
+
+                testWindow.ShowDialog();
+            }
 
         }
 
@@ -271,7 +301,7 @@ namespace DiagramDesigner
 
         }
 
-        private void Compilar()
+        private ResultadoCompilacion Compilar()
         {
             ReiniciarIDEParaCompilacion();
 
@@ -282,7 +312,8 @@ namespace DiagramDesigner
 
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                if (ArchCargado != null){
+                if (ArchCargado != null)
+                {
                     ArchCargado.CompilacionCorrecta = true;
                 }
             }
@@ -292,6 +323,7 @@ namespace DiagramDesigner
                 MessageBox.Show(res.Error);
             }
 
+            return res;
         }
 
         private void Ejecutar()
@@ -307,6 +339,8 @@ namespace DiagramDesigner
             {
                 MessageBox.Show(res.Error);
             }
+            
+            
 
             if (res.CompilacionGarGarCorrecta && res.GeneracionEjectuableCorrecto)
             {

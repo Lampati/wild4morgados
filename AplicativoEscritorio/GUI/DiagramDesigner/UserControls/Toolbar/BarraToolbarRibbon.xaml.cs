@@ -506,5 +506,15 @@ namespace DiagramDesigner.UserControls.Toolbar
         {
 
         }
+
+        private void bttnCrearTestPrueba_Click(object sender, RoutedEventArgs e)
+        {
+            TestPruebaEventFire(this, new TestPruebaEventArgs(true));
+        }
+
+        private void bttnEjecutarTestPrueba_Click(object sender, RoutedEventArgs e)
+        {
+            TestPruebaEventFire(this, new TestPruebaEventArgs(false));
+        }
     }
 }

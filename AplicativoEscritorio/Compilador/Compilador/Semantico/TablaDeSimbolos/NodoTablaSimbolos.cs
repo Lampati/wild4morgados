@@ -9,7 +9,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
 
 
-    internal class NodoTablaSimbolos
+    public class NodoTablaSimbolos
     {
         public enum TipoDeDato
         {
@@ -111,7 +111,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
 
 
-        public NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato, List<FirmaProc> firma)
+        internal NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato, List<FirmaProc> firma)
         {
             this.nombre = nom;
             this.tipoEntrada = entrada;
@@ -124,7 +124,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
 
 
-        public NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato,
+        internal NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato,
              bool esArreglo,  bool esConst, TipoContexto cont, string nombreProc)
         {
             this.nombre = nom;
@@ -139,7 +139,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             
         }
 
-        public NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato, 
+        internal NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato, 
             bool esConst, TipoContexto cont, string nombreProc)
         {
             this.nombre = nom;

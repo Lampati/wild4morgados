@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
-    internal class FirmaProc
+    public class FirmaProc
     {
 
         public NodoTablaSimbolos.TipoDeDato TipoDato { get; set; }

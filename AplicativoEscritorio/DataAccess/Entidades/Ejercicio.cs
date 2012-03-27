@@ -20,9 +20,17 @@ namespace DataAccess.Entidades
         private string solucionTexto;
         private string solucionGargar;
         private List<TestPrueba> testsPrueba;
+        private bool esValidoSubirWeb;
         #endregion
 
         #region Propiedades
+
+        public bool EsValidoSubirWeb
+        {
+            get { return this.esValidoSubirWeb; }
+            set { this.esValidoSubirWeb = value; }
+        }
+
         public override ModoEjercicio Modo
         {
             get { return this.modo; }
@@ -94,6 +102,10 @@ namespace DataAccess.Entidades
             xml.SetValue(((int)this.ultimoModoGuardado).ToString());
             xml.LevelUp();
             xml.AddElement();
+            xml.SetTitle("EsValidoSubirWeb");
+            xml.SetValue(((bool)this.esValidoSubirWeb).ToString());
+            xml.LevelUp();
+            xml.AddElement();
             xml.SetTitle("Modo");
             xml.SetValue(((int)this.modo).ToString());
             xml.LevelUp();
@@ -140,6 +152,7 @@ namespace DataAccess.Entidades
             if (Object.Equals(xmlElem, null))
                 throw new NullReferenceException("El XML no contiene el tag <EjercicioProgramAr>");
 
+            this.EsValidoSubirWeb = bool.Parse(xmlElem.FindFirst("EsValidoSubirWeb").value);
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = short.Parse(xmlElem.FindFirst("NivelDificultad").value);
             this.solucionGargar = xmlElem.FindFirst("SolucionGargar").value;

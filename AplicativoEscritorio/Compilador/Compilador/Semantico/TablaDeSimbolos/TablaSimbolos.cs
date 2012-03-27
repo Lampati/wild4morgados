@@ -8,22 +8,22 @@ using CompiladorGargar.Auxiliares;
 
 namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
-    class TablaSimbolos
+    public class TablaSimbolos
     {
         private List<NodoTipoArreglo> listaTiposArreglos;
-        public List<NodoTipoArreglo> ListaTiposArreglos
+        internal List<NodoTipoArreglo> ListaTiposArreglos
         {
             get { return listaTiposArreglos; }
         }
 
         private List<NodoTablaSimbolos> listaNodos;
-        public List<NodoTablaSimbolos> ListaNodos
+        internal List<NodoTablaSimbolos> ListaNodos
         {
             get { return listaNodos; }
         }
 
 
-        public TablaSimbolos()
+        internal TablaSimbolos()
         {
             this.listaNodos = new List<NodoTablaSimbolos>();
             this.listaTiposArreglos = new List<NodoTipoArreglo>();
@@ -31,7 +31,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         #region Tipos Arreglo
 
-        public string AgregarTipoArreglo(NodoTablaSimbolos.TipoDeDato tipo, string rango)
+        internal string AgregarTipoArreglo(NodoTablaSimbolos.TipoDeDato tipo, string rango)
         {
             string nombreTipo;
 
@@ -54,7 +54,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         #endregion
 
 
-        public void AgregarAuxiliarParaCodIntermedio(string nombre, NodoTablaSimbolos.TipoDeDato tdato)
+        internal void AgregarAuxiliarParaCodIntermedio(string nombre, NodoTablaSimbolos.TipoDeDato tdato)
         {
 
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.AuxiliarCodigoIntermedio, tdato,false,NodoTablaSimbolos.TipoContexto.Global,null));
@@ -64,26 +64,26 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         #region Manejo Variables
 
-        public void AgregarParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreProc)
+        internal void AgregarParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreProc)
         {
 
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tdato,  false, contexto, nombreProc));
         }
 
-        public void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc)
+        internal void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc)
         {
 
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc));
         }
 
-        public void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc, int valorInt)
+        internal void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc, int valorInt)
         {
 
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { ValorInt = valorInt} );
         }
 
 
-        public List<NodoTablaSimbolos> ObtenerVariablesDeclaradasEnProcedimiento(Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto cont,string nombreProc)
+        internal List<NodoTablaSimbolos> ObtenerVariablesDeclaradasEnProcedimiento(Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto cont, string nombreProc)
         {
             if (cont == NodoTablaSimbolos.TipoContexto.Global)
             {
@@ -136,12 +136,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         //        );
         //}
 
-        public bool ExisteVariable(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal bool ExisteVariable(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             return ObtenerVariable(nombre, contexto, nombreContexto) != null;
         }
 
-        public bool ExisteVariableEnEsteContexto(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal bool ExisteVariableEnEsteContexto(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = ObtenerVariable(nombre, contexto, nombreContexto);            
 
@@ -187,9 +187,9 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             //Debug.Assert(nodo != null, new StringBuilder("La variable ").Append(nombre).Append(" no estaba declarada.").ToString());
 
             return nodo;
-        }       
+        }
 
-        public NodoTablaSimbolos.TipoDeDato ObtenerTipoVariable(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal NodoTablaSimbolos.TipoDeDato ObtenerTipoVariable(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = this.ObtenerVariable(nombre,contexto,nombreContexto);
             return nodo.TipoDato;
@@ -209,13 +209,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         //    return nodo.NombreContextoLocal;
         //}
 
-        public bool EsModificableValorVarible(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal bool EsModificableValorVarible(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = this.ObtenerVariable(nombre,contexto,nombreContexto);
             return !nodo.EsConstante;
         }
 
-        public int RetornarValorConstante(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal int RetornarValorConstante(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = this.ObtenerVariable(nombre, contexto, nombreContexto);
             if (nodo.EsConstante)
@@ -235,7 +235,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         #region Manejo Arreglos
 
-        public void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, string rango, bool esConst)
+        internal void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, string rango, bool esConst)
         {
             int rangoNum;
             if (!int.TryParse(rango, out rangoNum))
@@ -286,13 +286,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         //        );
         //}
 
-        public bool ExisteArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal bool ExisteArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             return ObtenerArreglo(nombre, contexto, nombreContexto) != null;
 
         }
 
-        public bool ExisteArregloEnEsteContexto(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal bool ExisteArregloEnEsteContexto(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = ObtenerArreglo(nombre, contexto, nombreContexto);
 
@@ -340,7 +340,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         }
 
 
-        public NodoTablaSimbolos.TipoDeDato ObtenerTipoArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal NodoTablaSimbolos.TipoDeDato ObtenerTipoArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = this.ObtenerArreglo(nombre, contexto, nombreContexto);
             return nodo.TipoDato;
@@ -356,19 +356,19 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         #region Manejo Procedimientos/Funciones
 
-        public void AgregarProcedimiento(string nombre, List<FirmaProc> firma)
+        internal void AgregarProcedimiento(string nombre, List<FirmaProc> firma)
         {
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Procedimiento,
                 NodoTablaSimbolos.TipoDeDato.Ninguno, firma));
         }
 
-        public void AgregarFuncion(string nombre, List<FirmaProc> firma, 
+        internal void AgregarFuncion(string nombre, List<FirmaProc> firma, 
             NodoTablaSimbolos.TipoDeDato tdato)
         {
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Funcion, tdato, firma));
         }
 
-        public bool ExisteProcedimiento(string nombre)
+        internal bool ExisteProcedimiento(string nombre)
         {
             return this.listaNodos.Exists(
 
@@ -379,7 +379,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                 );
         }
 
-        public bool ExisteFuncion(string nombre)
+        internal bool ExisteFuncion(string nombre)
         {
             return this.listaNodos.Exists(
 
@@ -408,14 +408,14 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             return nodo;
         }
 
-        public List<FirmaProc> ObtenerFirma(string nombre, NodoTablaSimbolos.TipoDeEntrada tipo)
+        internal List<FirmaProc> ObtenerFirma(string nombre, NodoTablaSimbolos.TipoDeEntrada tipo)
         {
             NodoTablaSimbolos nodo = this.ObtenerRutina(nombre, tipo);
 
             return nodo.Firma;
         }
 
-        public List<string> ObtenerParametros(string nombre)
+        internal List<string> ObtenerParametros(string nombre)
         {
             List<NodoTablaSimbolos> nodos = this.listaNodos.FindAll(
                 delegate(NodoTablaSimbolos _nodo) 
@@ -434,14 +434,14 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             return retorno;
         }
 
-        public NodoTablaSimbolos.TipoDeDato ObtenerTipoFuncion(string nombre)
+        internal NodoTablaSimbolos.TipoDeDato ObtenerTipoFuncion(string nombre)
         {
             NodoTablaSimbolos nodo = this.ObtenerRutina(nombre, NodoTablaSimbolos.TipoDeEntrada.Funcion);
 
             return nodo.TipoDato;
         }
 
-        public NodoTablaSimbolos.TipoDeDato ObtenerTipoProcedimiento(string nombre)
+        internal NodoTablaSimbolos.TipoDeDato ObtenerTipoProcedimiento(string nombre)
         {
             NodoTablaSimbolos nodo = this.ObtenerRutina(nombre, NodoTablaSimbolos.TipoDeEntrada.Procedimiento);
 
@@ -482,9 +482,38 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                 && nodo.Nombre.Equals(nombre)
                 && nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable
                 && nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global;
-                
+
         }
 
-        
+
+        #region Metodos para obtener desde afuera el contenido 
+
+        public List<NodoTablaSimbolos> ObtenerVariablesGlobales()
+        {
+            return listaNodos.FindAll(x => x.Contexto == NodoTablaSimbolos.TipoContexto.Global
+                                      && !x.EsConstante
+                                      && x.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable
+                    );
+        }
+
+        public List<NodoTablaSimbolos> ObtenerVariablesDelProcPrincipal()
+        {
+            return listaNodos.FindAll(x => x.Contexto == NodoTablaSimbolos.TipoContexto.Local
+                                      && !x.EsConstante
+                                      && x.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable
+                                      && x.NombreContextoLocal.ToUpper().Equals("PRINCIPAL")
+                    );
+        }
+
+        public List<NodoTablaSimbolos> ObtenerParametrosDelProcSalida()
+        {
+            return listaNodos.FindAll(x => x.Contexto == NodoTablaSimbolos.TipoContexto.Local
+                                      && !x.EsConstante
+                                      && x.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro
+                                      && x.NombreContextoLocal.ToUpper().Equals("SALIDA")
+                    );
+        }
+
+        #endregion
     }
 }

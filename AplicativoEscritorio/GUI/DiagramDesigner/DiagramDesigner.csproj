@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AvalonWizard, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>WizardDLL\AvalonWizard.dll</HintPath>
+    </Reference>
     <Reference Include="FolderPickerLib, Version=1.0.4163.42504, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>FolderBrowseLib\FolderPickerLib.dll</HintPath>
@@ -84,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\RibbonStylesResouceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestsPruebas\WindowCreacionTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,11 +208,15 @@
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
+    <Compile Include="EventArgsClasses\TestPruebaEventArgs.cs" />
     <Compile Include="EventArgsClasses\DoubleClickEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModificarPropiedadesEjercicioEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
+    <Compile Include="TestsPruebas\WindowCreacionTest.xaml.cs">
+      <DependentUpon>WindowCreacionTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">

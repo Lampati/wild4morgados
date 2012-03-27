@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Semantico.Arbol;
 using CompiladorGargar.Resultado.Auxiliares;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
 namespace CompiladorGargar.Resultado
 {
@@ -16,6 +17,7 @@ namespace CompiladorGargar.Resultado
         public List<PasoAnalizadorSintactico> ListaErrores { get; set; }
         public List<PasoCompilacion> ListaDebugSintactico { get; set; }
         internal ArbolSemantico ArbolSemanticoResultado { get; set; }
+        public TablaSimbolos TablaSimbolos { get; set; }
 
         public string CodigoPascal { get; set; }
         public string ArchTemporalCodigoPascal { get; set; }
