@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataAccess.Interfases
+namespace AplicativoEscritorio.DataAccess.Interfases
 {
     interface Accesible
     {

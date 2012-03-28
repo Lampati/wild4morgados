@@ -43,6 +43,7 @@
     <Compile Include="ConfiguracionAplicacion.cs" />
     <Compile Include="Entidades\Ejercicio.cs" />
     <Compile Include="Entidades\EntidadBase.cs" />
+    <Compile Include="Excepciones\ExcepcionCriptografia.cs" />
     <Compile Include="Interfases\IPropiedadesEjercicios.cs" />
     <Compile Include="Entidades\ResolucionEjercicio.cs" />
     <Compile Include="Entidades\TestPrueba.cs" />

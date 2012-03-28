@@ -22,6 +22,30 @@ namespace WebProgramAR.DataAccess
             }
         }
 
+        public static string GetEjercicioByGlobal()
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("EstadoEjercicio").Include("Usuario")
+                                              where u.Global
+                                              select u;
+
+                StringBuilder sb = new StringBuilder();
+                Utilidades.XML.XMLCreator xml = new Utilidades.XML.XMLCreator();
+
+                xml.AddElement();
+                xml.SetTitle("EjerciciosProgramAr");
+                foreach (Ejercicio ej in query)
+                {
+                    /*Aca voy a cargar el XML que me viene de la base*/
+                }
+                xml.LevelUp();
+                sb.Append(xml.Get());
+                return sb.ToString();
+            }
+        }
+
         public static Ejercicio GetEjercicioByIdOnlyUser(int id)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())

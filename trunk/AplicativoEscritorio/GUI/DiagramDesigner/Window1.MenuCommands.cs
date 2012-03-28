@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Documents;
 using System.Windows.Controls;
 using Globales.Enums;
-using DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Entidades;
 using DiagramDesigner.Helpers;
 
 namespace DiagramDesigner
@@ -36,7 +36,7 @@ namespace DiagramDesigner
 
                                 Ejercicio ej = new Ejercicio();
                                 ej.UltimoModoGuardado = ModoVisual.Texto;
-                                ej.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                                ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                 ej.ModificadoDesdeUltimoGuardado = false;
                                 ej.PathGuardadoActual = path;
 
@@ -71,7 +71,7 @@ namespace DiagramDesigner
                                         ResolucionEjercicio res = new ResolucionEjercicio(ej);
 
                                         res.UltimoModoGuardado = ModoVisual.Texto;
-                                        res.Modo = DataAccess.Enums.ModoEjercicio.Normal;
+                                        res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                         res.ModificadoDesdeUltimoGuardado = false;
                                         res.PathGuardadoActual = path;
                                         res.Guardar(res.PathGuardadoActual);

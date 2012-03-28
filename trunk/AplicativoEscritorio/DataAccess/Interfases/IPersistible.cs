@@ -1,7 +1,7 @@
 ﻿using System;
-using DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Entidades;
 
-namespace DataAccess.Interfases
+namespace AplicativoEscritorio.DataAccess.Interfases
 {
     public interface IPersistible
     {

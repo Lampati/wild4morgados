@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DataAccess.Interfases;
+using AplicativoEscritorio.DataAccess.Interfases;
 using Globales.Enums;
 using Utilidades.Criptografia;
 using System.IO;
 using Utilidades.XML;
 
-namespace DataAccess.Entidades
+namespace AplicativoEscritorio.DataAccess.Entidades
 {
     public abstract class EntidadBase : IPersistible, IPropiedadesEjercicios
     {
@@ -34,7 +34,15 @@ namespace DataAccess.Entidades
         public virtual void Abrir(string path)
         {
             string xmlEncriptado = File.ReadAllText(path);
-            string xmlDesencriptado = Crypto.Desencriptar(xmlEncriptado);
+            string xmlDesencriptado;
+            try
+            {
+                xmlDesencriptado = Crypto.Desencriptar(xmlEncriptado);
+            }
+            catch (Exception ex)
+            {
+                throw new Excepciones.ExcepcionCriptografia(String.Format("Error al abrir el archivo {0}", path), ex);
+            }
 
             XMLReader xmlReader = new XMLReader();
             XMLElement xmlElem = xmlReader.Read(xmlDesencriptado);

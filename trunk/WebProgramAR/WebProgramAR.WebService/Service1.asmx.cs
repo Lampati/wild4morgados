@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using WebProgramAR.DataAccess;
 
 namespace WebProgramAR.WebService
 {
@@ -16,11 +17,10 @@ namespace WebProgramAR.WebService
     // [System.Web.Script.Services.ScriptService]
     public class Service1 : System.Web.Services.WebService
     {
-
         [WebMethod]
-        public string HelloWorld()
+        public string EjerciciosGlobales()
         {
-            return "Hello World";
+            return EjercicioDA.GetEjercicioByGlobal();
         }
     }
 }
