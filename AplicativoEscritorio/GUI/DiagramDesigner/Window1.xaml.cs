@@ -99,7 +99,7 @@ namespace DiagramDesigner
         {
             Ejercicio ej = new Ejercicio();
             ej.Enunciado = "Enunciado del ejercicio";
-            ej.EsValidoSubirWeb = false;
+            ej.EsValidoSubirWeb = true;
             ej.Gargar = "GqarGar";
             ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
             ej.NivelDificultad = 3;
