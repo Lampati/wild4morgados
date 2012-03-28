@@ -28,13 +28,17 @@
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="9" />
+                        <RowDefinition Height="4" />
+                        <RowDefinition Height="13" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="131*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</Label>
+                    <Label Width="430" HorizontalAlignment="Left" Grid.RowSpan="3">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</Label>
                     <!--<DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="dataGridVarsEntrada" >
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="" x:Name="columnSeleccion" ></DataGridCheckBoxColumn>
@@ -43,7 +47,7 @@
                         </DataGrid.Columns>
                     </DataGrid>-->
 
-                    <ListView Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="lstVarsEntrada" ItemsSource="{Binding VariablesEntrada}">
+                    <ListView Grid.Row="3" Width="430" HorizontalAlignment="Left" Name="lstVarsEntrada" ItemsSource="{Binding VariablesEntrada}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 <GridView.Columns>
@@ -67,6 +71,15 @@
             </aw:WizardPage>
             <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Valores Iniciales de variables" 
                            AllowNext="False" >
+
+                <Grid>
+                    <TextBlock>
+                        Para que el test de prueba tenga sentido, es necesario que informe a partir de que linea tomamos como valores de entrada.
+                        Por favor escriba/elija el numero de linea de las posibles.
+                    </TextBlock>
+                    
+
+                </Grid>
 
             </aw:WizardPage>
 
