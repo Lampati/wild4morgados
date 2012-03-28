@@ -28,6 +28,7 @@ using EJEKOR;
 using DiagramDesigner.TestsPruebas;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace DiagramDesigner
 {
@@ -216,20 +217,37 @@ namespace DiagramDesigner
 
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                 
 
-                List<NodoTablaSimbolos> listaVariablesEntrada = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
-                listaVariablesEntrada.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
 
-                List<NodoTablaSimbolos> listaVariablesSalida = res.TablaSimbolos.ObtenerParametrosDelProcSalida();
+                List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
+
+                ObservableCollection<Variables> listaVariablesEntrada = TransformarAVariables(aux);
+                ObservableCollection<Variables> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
 
                 WindowCreacionTest testWindow = new WindowCreacionTest();
                 testWindow.VariablesEntrada = listaVariablesEntrada;
                 testWindow.VariablesSalida = listaVariablesSalida;
 
+                testWindow.Name = "Tests de Prueba - Crear";
+
                 testWindow.ShowDialog();
+
+
             }
 
+        }
+
+        private ObservableCollection<Variables> TransformarAVariables(List<NodoTablaSimbolos> list)
+        {
+            ObservableCollection<Variables> listaRetorno = new ObservableCollection<Variables>();
+
+            foreach (var item in list)
+            {
+                listaRetorno.Add(new Variables(item));
+            }
+
+            return listaRetorno;
         }
 
         void ToolbarAplicacion_CompilacionEvent(object o, CompilacionEventArgs e)
