@@ -22,5 +22,11 @@ namespace WebProgramAR.WebService
         {
             return EjercicioDA.GetEjercicioByGlobal();
         }
+
+        [WebMethod]
+        public int EjerciciosGlobalesCount()
+        {
+            return EjercicioDA.GetEjercicioByGlobalCount();
+        }
     }
 }
