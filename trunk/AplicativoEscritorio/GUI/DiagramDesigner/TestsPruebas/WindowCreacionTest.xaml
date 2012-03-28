@@ -11,7 +11,8 @@
                     <Setter Property="Padding" Value="14" />
                 </Style>
             </aw:Wizard.Resources>
-            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Elija las variables de entrada de la lista" >
+            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Elija las variables de entrada de la lista" 
+                           AllowNext="False" >
                 
                 <Grid>
                     <Grid.Resources>
@@ -29,23 +30,46 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="350" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</TextBlock>
-                    <DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="dataGridVarsEntrada" ItemsSource="{Binding}">
-                        <DataGridCheckBoxColumn Header="" x:Name="columnSeleccion" ></DataGridCheckBoxColumn>
-                        <DataGridTextColumn Header="Nombre" x:Name="columnNombre" Binding="{Binding Path=NodoTablaSimbolos.Nombre}" IsReadOnly="True" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Tipo" x:Name="columnTipo" Binding="{Binding Path=NodoTablaSimbolos.TipoDato}" IsReadOnly="True" ></DataGridTextColumn>
+                    <Label Grid.Row="0" Grid.Column="0">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</Label>
+                    <!--<DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="dataGridVarsEntrada" >
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="" x:Name="columnSeleccion" ></DataGridCheckBoxColumn>
+                            <DataGridTextColumn Header="Nombre" x:Name="columnNombre" Binding="{Binding Path=Nombre}" IsReadOnly="True" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tipo" x:Name="columnTipo" Binding="{Binding Path=TipoDato}" IsReadOnly="True" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>-->
 
-                    </DataGrid>
+                    <ListView Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="lstVarsEntrada" ItemsSource="{Binding VariablesEntrada}">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
+                                <GridView.Columns>
+                                    <GridViewColumn Header="">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EsSeleccionada, Mode=TwoWay}"  Click="CheckBox_Click" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                    <GridViewColumn Header="Contexto" Width="70" DisplayMemberBinding="{Binding Path=Contexto}" />
+                                    <GridViewColumn Header="Tipo de Variable" Width="100" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
+                                    <GridViewColumn Header="Tipo de Dato" Width="60" DisplayMemberBinding="{Binding Path=TipoDato}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
                 </Grid>
             </aw:WizardPage>
-            
+            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Valores Iniciales de variables" 
+                           AllowNext="False" >
+
+            </aw:WizardPage>
+
         </aw:Wizard>
     </Grid>
 </Window>

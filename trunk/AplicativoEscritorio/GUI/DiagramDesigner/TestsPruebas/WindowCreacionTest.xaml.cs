@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
+using System.Collections.ObjectModel;
 
 namespace DiagramDesigner.TestsPruebas
 {
@@ -19,8 +20,10 @@ namespace DiagramDesigner.TestsPruebas
     /// </summary>
     public partial class WindowCreacionTest : Window
     {
-        private List<NodoTablaSimbolos> variablesEntrada;
-        public List<NodoTablaSimbolos> VariablesEntrada
+
+
+        private ObservableCollection<Variables> variablesEntrada;
+        public ObservableCollection<Variables> VariablesEntrada
         {
             get
             {
@@ -30,18 +33,43 @@ namespace DiagramDesigner.TestsPruebas
             set
             {
                 variablesEntrada = value;
-                
+
+                //dataGridVarsEntrada.ItemsSource = variablesEntrada;
+                //dataGridVarsEntrada.Items.Refresh();
+
+                lstVarsEntrada.ItemsSource = variablesEntrada;
+                lstVarsEntrada.Items.Refresh();
             }
         }
-        
-        public List<NodoTablaSimbolos> VariablesSalida { get; set; }
+
+
+        public ObservableCollection<Variables> VariablesSalida { get; set; }
 
         public WindowCreacionTest()
         {
             InitializeComponent();
 
-            dataGridVarsEntrada.DataContext = variablesEntrada;
+
+            wizard.Cancelled += new RoutedEventHandler(wizard_Cancelled);
+            //dataGridVarsEntrada.DataContext = variablesEntrada;
+
+            lstVarsEntrada.DataContext = variablesEntrada;
 
         }
+
+        void wizard_Cancelled(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            int i = variablesEntrada.Where(x => x.EsSeleccionada).Count();
+
+            this.wizard.CurrentPage.AllowNext = i > 0;
+        }
+
+  
     }
 }
