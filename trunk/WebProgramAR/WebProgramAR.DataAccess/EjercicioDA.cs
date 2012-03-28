@@ -46,6 +46,19 @@ namespace WebProgramAR.DataAccess
             }
         }
 
+        public static int GetEjercicioByGlobalCount()
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Ejercicio> query = from u in db.Ejercicios
+                                              where u.Global
+                                              select u;
+
+                return query.Count();
+            }
+        }
+
         public static Ejercicio GetEjercicioByIdOnlyUser(int id)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
