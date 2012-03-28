@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Enums
+﻿namespace AplicativoEscritorio.DataAccess.Enums
 {
     public enum NivelDificultad
     {

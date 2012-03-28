@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccess.Enums;
-using DataAccess.Interfases;
+using AplicativoEscritorio.DataAccess.Enums;
+using AplicativoEscritorio.DataAccess.Interfases;
 using Utilidades.XML;
 using System.Text;
 using Utilidades.Criptografia;
 using System.IO;
-using DataAccess.Excepciones;
+using AplicativoEscritorio.DataAccess.Excepciones;
 using Globales.Enums;
 
-namespace DataAccess.Entidades
+namespace AplicativoEscritorio.DataAccess.Entidades
 {
     public class Ejercicio : EntidadBase
     {
@@ -134,12 +134,13 @@ namespace DataAccess.Entidades
                 xml.AddElement();
                 xml.SetTitle("TestsPrueba");
                 foreach (TestPrueba test in this.testsPrueba)
-                    test.ToXml(xml);
+                    test.ToXML(xml);
                 xml.LevelUp();
             }
             xml.AddElement();
             xml.SetTitle("HashEjercicio");
             xml.SetValue(this.Hash);
+            xml.LevelUp();
             xml.LevelUp();
         }
 
@@ -167,7 +168,7 @@ namespace DataAccess.Entidades
                 foreach (XMLElement xmlTest in xmlTests.childs)
                 {
                     TestPrueba tp = new TestPrueba();
-                    tp.FromXml(xmlTest);
+                    tp.FromXML(xmlTest);
                     pruebas.Add(tp);
                 }
 
@@ -188,6 +189,20 @@ namespace DataAccess.Entidades
 
             if (!this.testsPrueba.Contains(tPrueba))
                 this.testsPrueba.Add(tPrueba);
+        }
+
+        public static Ejercicio EjercicioProxy(string enunciado, short nivelDificultad, string solucionTexto,
+            string solucionGargar, List<TestPrueba> testsPrueba, bool esValidoSubirWeb)
+        {
+            Ejercicio ej = new Ejercicio();
+            ej.Modo = ModoEjercicio.Normal;
+            ej.Enunciado = enunciado;
+            ej.NivelDificultad = nivelDificultad;
+            ej.SolucionTexto = solucionTexto;
+            ej.solucionGargar = solucionGargar;
+            ej.testsPrueba = testsPrueba;
+            ej.EsValidoSubirWeb = esValidoSubirWeb;
+            return ej;
         }
         #endregion
 

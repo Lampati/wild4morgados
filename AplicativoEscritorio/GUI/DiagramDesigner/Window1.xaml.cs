@@ -8,15 +8,15 @@ using Utilidades;
 using DiagramDesigner.Enums;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using DataAccess;
+using AplicativoEscritorio.DataAccess;
 using System.IO;
 using Microsoft.Windows.Controls.Ribbon;
 using DiagramDesigner.EventArgsClasses;
 using DiagramDesigner.UserControls.Mensajes;
 using DiagramDesigner.UserControls.Toolbar;
 using DiagramDesigner.UserControls.Entorno;
-using DataAccess.Interfases;
-using DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Interfases;
+using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
 using Microsoft.Win32;
 using DiagramDesigner.Helpers;
@@ -93,6 +93,42 @@ namespace DiagramDesigner
                     ArchCargado.UltimoModoGuardado = modo;
                 }
             }
+        }
+
+        private void ProbarCarga()
+        {
+            Ejercicio ej = new Ejercicio();
+            ej.Enunciado = "Enunciado del ejercicio";
+            ej.EsValidoSubirWeb = false;
+            ej.Gargar = "GqarGar";
+            ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
+            ej.NivelDificultad = 3;
+            ej.SolucionTexto = "Tendrías que haber puesto estoo!!";
+
+            TestPrueba tp = new TestPrueba();
+            tp.CodigoGarGarProcSalida = "Codigo GarGar de salida";
+            tp.Descripcion = "Descripcion de test de prueba";
+            tp.VariablesEntrada = new List<VariableTest>();
+            VariableTest vt = new VariableTest();
+            vt.Descripcion = "Descripcion de variable de test de entrada";
+            vt.Nombre = "Nombre de variable de test de entrada";
+            vt.ValorEsperado = "Valor esperado 4";
+            vt.VariableMapeada = "var Pepiono";
+            tp.VariablesEntrada.Add(vt);
+
+            VariableTest vt2 = new VariableTest();
+            vt2.Descripcion = "Descripcion de variable de test de salida";
+            vt2.Nombre = "Nombre de variable de test de salida";
+            vt2.ValorEsperado = "Valor esperado 4";
+            vt2.VariableMapeada = "var Pepiono";
+            tp.VariablesSalida = new List<VariableTest>();
+            tp.VariablesSalida.Add(vt2);
+
+            ej.AgregarTestPrueba(tp);
+            ej.Guardar(@"C:\Pruebita.gej");
+
+            ej = new Ejercicio();
+            ej.Abrir(@"C:\Pruebita.gej");
         }
 
         public Window1()
@@ -177,12 +213,9 @@ namespace DiagramDesigner
             configApp.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
             configApp.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
             configApp.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
-            configApp.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;   
-            
+            configApp.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;  
 
-
-            configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
-                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+            configApp.Guardar();
         }
 
         void Window1_SizeChanged(object sender, SizeChangedEventArgs e)

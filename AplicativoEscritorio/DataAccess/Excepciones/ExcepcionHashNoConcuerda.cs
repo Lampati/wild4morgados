@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataAccess.Excepciones
+namespace AplicativoEscritorio.DataAccess.Excepciones
 {
     public class ExcepcionHashNoConcuerda : Exception
     {

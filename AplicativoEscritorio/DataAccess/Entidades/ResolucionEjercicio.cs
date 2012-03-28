@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DataAccess.Interfases;
-using DataAccess.Enums;
+using AplicativoEscritorio.DataAccess.Interfases;
+using AplicativoEscritorio.DataAccess.Enums;
 using Globales.Enums;
 using Utilidades.XML;
 using Utilidades.Criptografia;
-using DataAccess.Excepciones;
+using AplicativoEscritorio.DataAccess.Excepciones;
 
-namespace DataAccess.Entidades
+namespace AplicativoEscritorio.DataAccess.Entidades
 {
     public class ResolucionEjercicio : EntidadBase
     {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace DataAccess.Entidades
+using AplicativoEscritorio.DataAccess.Entidades;
+
+namespace AplicativoEscritorio.DataAccess.Interfases
 {
     interface IPropiedadesEjercicios
     {

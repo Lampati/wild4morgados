@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
 using Globales.Enums;
-using DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Entidades;
 
 namespace DiagramDesigner.UserControls.Estado
 {

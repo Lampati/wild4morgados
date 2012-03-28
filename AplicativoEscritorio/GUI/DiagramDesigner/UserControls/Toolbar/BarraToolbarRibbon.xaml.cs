@@ -14,8 +14,8 @@ using System.Windows.Shapes;
 using DiagramDesigner.Enums;
 using DiagramDesigner.DialogWindows;
 using DiagramDesigner.EventArgsClasses;
-using DataAccess.Interfases;
-using DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Interfases;
+using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
 using Microsoft.Windows.Controls.Ribbon;
 

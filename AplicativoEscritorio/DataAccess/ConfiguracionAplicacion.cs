@@ -4,84 +4,58 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
-using DataAccess.Interfases;
+using AplicativoEscritorio.DataAccess.Interfases;
 
-namespace DataAccess
+namespace AplicativoEscritorio.DataAccess
 {
     [XmlRootAttribute("Configuracion", Namespace = "", IsNullable = false)]
-    public class ConfiguracionAplicacion 
+    public class ConfiguracionAplicacion
     {
+        #region Atributos
         private string directorioAbrirDefault;
+        private string directorioTemporal;
+        private string directorioEjerciciosDescargados;
+        private string directorioEjerciciosCreados;
+        private string directorioResolucionesEjercicios;
+        #endregion
+
+        #region Propiedades
         public string DirectorioAbrirDefault
         {
-            get
-            {
-                return directorioAbrirDefault;
-            }
-            set
-            {
-                directorioAbrirDefault = value;
-            }
+            get { return directorioAbrirDefault; }
+            set { directorioAbrirDefault = value; }
         }
-
-        private string directorioTemporal;
+        
         public string DirectorioTemporal 
         {
-            get
-            {
-                return directorioTemporal;
-            }
-            set
-            {
-                directorioTemporal = value;
-            }
+            get { return directorioTemporal; }
+            set { directorioTemporal = value; }
         }
-
-        private string directorioEjerciciosDescargados;
+        
         public string DirectorioEjerciciosDescargados
         {
-            get
-            {
-                return directorioEjerciciosDescargados;
-            }
-            set
-            {
-                directorioEjerciciosDescargados = value;
-            }
+            get { return directorioEjerciciosDescargados; }
+            set { directorioEjerciciosDescargados = value; }
         }
-
-        private string directorioEjerciciosCreados;
+        
         public string DirectorioEjerciciosCreados
         {
-            get
-            {
-                return directorioEjerciciosCreados;
-            }
-            set
-            {
-                directorioEjerciciosCreados = value;
-            }
+            get { return directorioEjerciciosCreados; }
+            set { directorioEjerciciosCreados = value; }
         }
-
-        private string directorioResolucionesEjercicios;
+        
         public string DirectorioResolucionesEjercicios
         {
-            get
-            {
-                return directorioResolucionesEjercicios;
-            }
-            set
-            {
-                directorioResolucionesEjercicios = value;
-            }
+            get { return directorioResolucionesEjercicios; }
+            set { directorioResolucionesEjercicios = value; }
         }
+        #endregion
 
+        #region Constructores
+        public ConfiguracionAplicacion() { }
+        #endregion
 
-        public ConfiguracionAplicacion()
-        {
-            
-        }
-
+        #region Métodos
         public void Abrir(string pathCompleto)
         {           
             if (File.Exists(pathCompleto))
@@ -104,21 +78,17 @@ namespace DataAccess
             }
         }
 
-     
-
-        public void Guardar(string path)
+        public void Guardar()
         {
+            string path = Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION);
             XmlSerializer serializer = new XmlSerializer(typeof(ConfiguracionAplicacion));
             TextWriter textWriter = new StreamWriter(path,false);
             serializer.Serialize(textWriter, this);
             textWriter.Close(); 
         }
 
-        private void CargarDefaults()
-        {
-
-        }
-
-        
+        private void CargarDefaults() { }
+        #endregion
     }
 }
