@@ -190,20 +190,6 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             if (!this.testsPrueba.Contains(tPrueba))
                 this.testsPrueba.Add(tPrueba);
         }
-
-        public static Ejercicio EjercicioProxy(string enunciado, short nivelDificultad, string solucionTexto,
-            string solucionGargar, List<TestPrueba> testsPrueba, bool esValidoSubirWeb)
-        {
-            Ejercicio ej = new Ejercicio();
-            ej.Modo = ModoEjercicio.Normal;
-            ej.Enunciado = enunciado;
-            ej.NivelDificultad = nivelDificultad;
-            ej.SolucionTexto = solucionTexto;
-            ej.solucionGargar = solucionGargar;
-            ej.testsPrueba = testsPrueba;
-            ej.EsValidoSubirWeb = esValidoSubirWeb;
-            return ej;
-        }
         #endregion
 
         #region Object Members
