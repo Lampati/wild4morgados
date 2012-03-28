@@ -216,6 +216,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             sb.Append(ultimoModo);
             sb.Append(this.enunciado);
             sb.Append(nivelDificultad);
+            sb.Append(esValidoSubirWeb);
             sb.Append(this.solucionTexto);
             sb.Append(this.solucionGargar);
             if (!Object.Equals(this.testsPrueba, null))
