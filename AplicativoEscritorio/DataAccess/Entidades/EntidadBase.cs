@@ -54,7 +54,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
         public abstract void FromXML(Utilidades.XML.XMLElement xmlElem);
 
-        protected string Hash
+        public string Hash
         {
             get { return Crypto.ComputarHash(this.ToString()); }
         }

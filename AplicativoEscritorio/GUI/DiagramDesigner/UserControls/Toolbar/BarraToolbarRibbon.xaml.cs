@@ -381,7 +381,8 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             if (propertyEditorWindow.ShowDialog() == true)
             {
-
+                Sincronizacion.Servicio sv = new Sincronizacion.Servicio();
+                string s = sv.EjerciciosGlobales();
             }
         }
 

@@ -125,7 +125,7 @@ namespace DiagramDesigner
             tp.VariablesSalida.Add(vt2);
 
             ej.AgregarTestPrueba(tp);
-            ej.Guardar(@"C:\Pruebita.gej");
+            ej.Guardar(@"D:\Acustico\Pruebita.gej");
 
             ej = new Ejercicio();
             ej.Abrir(@"C:\Pruebita.gej");
