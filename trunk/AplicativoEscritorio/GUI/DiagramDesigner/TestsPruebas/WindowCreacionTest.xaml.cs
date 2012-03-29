@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using DataAccess.Entidades;
 
 namespace DiagramDesigner.TestsPruebas
 {
@@ -20,7 +22,53 @@ namespace DiagramDesigner.TestsPruebas
     /// </summary>
     public partial class WindowCreacionTest : Window
     {
+        #region Properties
 
+        public TestPrueba TestGenerado { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+
+        private string codigo;
+        public string Codigo
+        {
+            get { return codigo; }
+            set 
+            { 
+                codigo = value;
+                Lineas = ArmarLineas(codigo.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+            }
+        }
+
+        private ObservableCollection<Linea> ArmarLineas(string[] arr)
+        {
+            ObservableCollection<Linea> aux = new ObservableCollection<Linea>();
+            foreach (string item in arr)
+            {
+                aux.Add(new Linea() { Codigo = item, EsHabilitada = true });
+            }
+
+            return aux;
+        }
+
+        private ObservableCollection<Linea> lineas;
+        public ObservableCollection<Linea> Lineas
+        {
+            get
+            {
+                return lineas;
+            }
+
+            set
+            {
+                lineas = value;
+
+                //dataGridVarsEntrada.ItemsSource = variablesEntrada;
+                //dataGridVarsEntrada.Items.Refresh();
+
+                lstLineas.ItemsSource = lineas;
+                lstLineas.Items.Refresh();
+            }
+        }
 
         private ObservableCollection<Variables> variablesEntrada;
         public ObservableCollection<Variables> VariablesEntrada
@@ -42,34 +90,172 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
+        private ObservableCollection<Variables> variablesEntradaSeleccionadas;
+        public ObservableCollection<Variables> VariablesEntradaSeleccionadas
+        {
+            get
+            {
 
-        public ObservableCollection<Variables> VariablesSalida { get; set; }
+                return variablesEntradaSeleccionadas;
+            }
+
+            set
+            {
+                variablesEntradaSeleccionadas = value;
+
+                //dataGridVarsEntrada.ItemsSource = variablesEntrada;
+                //dataGridVarsEntrada.Items.Refresh();
+
+                dataGridVariablesEntradaElegidas.ItemsSource = variablesEntradaSeleccionadas;
+                dataGridVariablesEntradaElegidas.Items.Refresh();
+
+                lstVarsEntradaFinal.ItemsSource = variablesEntradaSeleccionadas;
+                lstVarsEntradaFinal.Items.Refresh();
+               
+            }
+        }
+
+        private ObservableCollection<Variables> variablesSalida;
+        public ObservableCollection<Variables> VariablesSalida
+        {
+            get
+            {
+                return variablesSalida;
+            }
+
+            set
+            {
+                variablesSalida = value;
+
+                //dataGridVarsEntrada.ItemsSource = variablesEntrada;
+                //dataGridVarsEntrada.Items.Refresh();
+
+                lstVarsSalida.ItemsSource = variablesSalida;
+                lstVarsSalida.Items.Refresh();
+
+                
+            }
+        }
+
+
+        private ObservableCollection<Variables> variablesSalidaSeleccionadas;
+        public ObservableCollection<Variables> VariablesSalidaSeleccionadas
+        {
+            get
+            {
+
+                return variablesSalidaSeleccionadas;
+            }
+
+            set
+            {
+                variablesSalidaSeleccionadas = value;
+
+                //dataGridVarsEntrada.ItemsSource = variablesEntrada;
+                //dataGridVarsEntrada.Items.Refresh();
+
+                dataGridVariablesSalidaElegidas.ItemsSource = variablesSalidaSeleccionadas;
+                dataGridVariablesSalidaElegidas.Items.Refresh();
+
+                lstVarsSalidaFinal.ItemsSource = variablesSalidaSeleccionadas;
+                lstVarsSalidaFinal.Items.Refresh();
+            }
+        }
+
+        #endregion
 
         public WindowCreacionTest()
         {
             InitializeComponent();
-
-
-            wizard.Cancelled += new RoutedEventHandler(wizard_Cancelled);
-            //dataGridVarsEntrada.DataContext = variablesEntrada;
-
-            lstVarsEntrada.DataContext = variablesEntrada;
-
-        }
+        }  
 
         void wizard_Cancelled(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        private void wizard_Finished(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+
+            TestGenerado = new TestPrueba();
+
+            TestGenerado.Descripcion = Descripcion;
+
+            foreach (var item in variablesEntradaSeleccionadas)
+            {
+                TestGenerado.VariablesEntrada.Add(new VariableTest()
+                {
+                    Descripcion = item.Descripcion,
+                    Nombre = item.Nombre,
+                    ValorEsperado = item.Valor
+                   
+                });
+            }
+
+            Close();
+        }
+
         
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            int i = variablesEntrada.Where(x => x.EsSeleccionada).Count();
+            VariablesEntradaSeleccionadas = new ObservableCollection<Variables>(variablesEntrada.Where(x => x.EsSeleccionada));
+            int i = VariablesEntradaSeleccionadas.Count;
 
             this.wizard.CurrentPage.AllowNext = i > 0;
         }
 
-  
+
+
+        private void CheckBoxSalida_Click(object sender, RoutedEventArgs e)
+        {
+            VariablesSalidaSeleccionadas = new ObservableCollection<Variables>(VariablesSalida.Where(x => x.EsSeleccionada));
+            int i = VariablesSalidaSeleccionadas.Count;
+
+            this.wizard.CurrentPage.AllowNext = i > 0;
+        }
+
+        private void CheckBoxLinea_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox chequeada = (CheckBox)sender;            
+
+            if (chequeada.IsChecked == true)
+            {
+                foreach (var item in lineas)
+                {
+                    item.EsSeleccionada = false;
+                }
+
+                chequeada.IsChecked = true;
+            }
+
+            this.wizard.CurrentPage.AllowNext = chequeada.IsChecked == true;
+        }
+
+        private void ButtonEjecutar_Click(object sender, RoutedEventArgs e)
+        {
+            bttnEjecutar.IsEnabled = false;
+            stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
+            this.wizard.CurrentPage.AllowBack = false;
+            this.wizard.CurrentPage.AllowNext =  true;
+        }
+
+        private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Nombre = txtNombre.Text;
+
+            this.wizard.CurrentPage.AllowFinish = txtNombre.Text != string.Empty && txtDescripcion.Text != string.Empty;
+
+        }
+
+        private void txtDescripcion_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Descripcion = txtDescripcion.Text;
+
+            this.wizard.CurrentPage.AllowFinish = txtNombre.Text != string.Empty && txtDescripcion.Text != string.Empty;
+        }
     }
+
+
+   
 }
