@@ -261,8 +261,9 @@ namespace DiagramDesigner
                 WindowCreacionTest testWindow = new WindowCreacionTest();
                 testWindow.VariablesEntrada = listaVariablesEntrada;
                 testWindow.VariablesSalida = listaVariablesSalida;
+                testWindow.Codigo = res.CodigoGarGar;
 
-                testWindow.Name = "Tests de Prueba - Crear";
+                //testWindow.Name = "Tests de Prueba - Crear";
 
                 testWindow.ShowDialog();
 
@@ -358,6 +359,7 @@ namespace DiagramDesigner
 
             string programa = this.Esquema.GarGarACompilar;
             ResultadoCompilacion res = this.compilador.Compilar(programa);
+            res.CodigoGarGar = programa;
 
             MostrarResultadosCompilacion(res);
 
