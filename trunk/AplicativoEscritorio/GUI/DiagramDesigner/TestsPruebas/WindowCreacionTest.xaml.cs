@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Entidades;
 
 namespace DiagramDesigner.TestsPruebas
 {

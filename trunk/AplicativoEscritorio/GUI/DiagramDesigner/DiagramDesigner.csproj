@@ -386,6 +386,10 @@
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Sincronizacion\Sincronizacion.csproj">
+      <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
+      <Name>Sincronizacion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utilidades\Utilidades.csproj">
       <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
       <Name>Utilidades</Name>
