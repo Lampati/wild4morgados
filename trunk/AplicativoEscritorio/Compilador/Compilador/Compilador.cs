@@ -159,7 +159,7 @@ namespace CompiladorGargar
 
                     if (this.modoDebug)
                     {
-                        res.Error = ex.Message;
+                        res.Error = string.Format("{0}: \r\n {1}", ex.Message, ex.StackTrace);
                     }
                     else
                     {
