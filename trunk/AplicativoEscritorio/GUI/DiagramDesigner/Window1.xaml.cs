@@ -128,7 +128,7 @@ namespace DiagramDesigner
             ej.Guardar(@"D:\Acustico\4.gej");
 
             ej = new Ejercicio();
-            ej.Abrir(@"D:\Acustico\3.gej");
+            ej.Abrir(new FileInfo(@"D:\Acustico\3.gej"));
         }
 
         public Window1()

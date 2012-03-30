@@ -59,7 +59,7 @@ namespace DiagramDesigner
 
                                     Ejercicio ej = new Ejercicio();
                                     ej.PathGuardadoActual = pathEj;
-                                    ej.Abrir(ej.PathGuardadoActual);
+                                    ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
                                     //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                     ej.ModificadoDesdeUltimoGuardado = false;
 
@@ -111,7 +111,7 @@ namespace DiagramDesigner
                         {
                             Ejercicio ej = new Ejercicio();
                             ej.PathGuardadoActual = path;
-                            ej.Abrir(ej.PathGuardadoActual);
+                            ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
                             ArchCargado = ej;
                             //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                             ej.ModificadoDesdeUltimoGuardado = false;
@@ -120,7 +120,7 @@ namespace DiagramDesigner
                         {
                             ResolucionEjercicio res = new ResolucionEjercicio();
                             res.PathGuardadoActual = path;
-                            res.Abrir(res.PathGuardadoActual);
+                            res.Abrir(new System.IO.FileInfo(res.PathGuardadoActual));
                             ArchCargado = res;
                             //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                             res.ModificadoDesdeUltimoGuardado = false;

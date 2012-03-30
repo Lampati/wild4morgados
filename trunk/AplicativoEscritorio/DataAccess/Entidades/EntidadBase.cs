@@ -31,9 +31,14 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             File.WriteAllText(path, xmlEncriptado);
         }
 
-        public virtual void Abrir(string path)
+        public virtual void Abrir(FileInfo fi)
         {
-            string xmlEncriptado = File.ReadAllText(path);
+            this.Abrir(File.ReadAllText(fi.FullName));
+        }
+
+        public virtual void Abrir(string textoEncriptado)
+        {
+            string xmlEncriptado = textoEncriptado;
             string xmlDesencriptado;
             try
             {
@@ -41,7 +46,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             }
             catch (Exception ex)
             {
-                throw new Excepciones.ExcepcionCriptografia(String.Format("Error al abrir el archivo {0}", path), ex);
+                throw new Excepciones.ExcepcionCriptografia("Error al abrir el archivo", ex);
             }
 
             XMLReader xmlReader = new XMLReader();
