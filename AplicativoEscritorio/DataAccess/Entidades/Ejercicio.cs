@@ -14,6 +14,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
     public class Ejercicio : EntidadBase
     {
         #region Atributos
+        private int ejercicioId;
         private ModoEjercicio modo;
         private string enunciado;
         private short nivelDificultad;
@@ -24,6 +25,13 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         #endregion
 
         #region Propiedades
+        /// <summary>
+        /// El ejercicio id lo asigna la web cuando se sube un ejercicio (será el id de la BD)
+        /// </summary>
+        public int EjercicioId
+        {
+            get { return this.ejercicioId; }
+        }
 
         public bool EsValidoSubirWeb
         {
@@ -80,11 +88,21 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         {
             get { return Globales.ConstantesGlobales.EXTENSION_EJERCICIO; }
         }
+
+        public bool TieneId
+        {
+            get { return !this.ejercicioId.Equals(0); }
+        }
         #endregion
 
         #region Constructores
         public Ejercicio() { }
 
+        /// <summary>
+        /// Sólo para desarrollo, borrar una vez productivo!!
+        /// </summary>
+        /// <param name="id"></param>
+        public Ejercicio(int id) { this.ejercicioId = id; }
         #endregion
 
         #region Métodos
@@ -97,6 +115,10 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         {
             xml.AddElement();
             xml.SetTitle("EjercicioProgramAr");
+            xml.AddElement();
+            xml.SetTitle("EjercicioId");
+            xml.SetValue(this.ejercicioId.ToString());
+            xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("UltimoModoGuardado");
             xml.SetValue(((int)this.ultimoModoGuardado).ToString());
@@ -153,6 +175,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             if (Object.Equals(xmlElem, null))
                 throw new NullReferenceException("El XML no contiene el tag <EjercicioProgramAr>");
 
+            this.ejercicioId = int.Parse(xmlElem.FindFirst("EjercicioId").value);
             this.EsValidoSubirWeb = bool.Parse(xmlElem.FindFirst("EsValidoSubirWeb").value);
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = short.Parse(xmlElem.FindFirst("NivelDificultad").value);
@@ -197,8 +220,10 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         {
             string ultimoModo = ((int)this.ultimoModoGuardado).ToString();
             string nivelDificultad = ((int)this.nivelDificultad).ToString();
+            string ejercicioId = this.ejercicioId.ToString();
 
             StringBuilder sb = new StringBuilder();
+            sb.Append(ejercicioId);
             sb.Append(ultimoModo);
             sb.Append(this.enunciado);
             sb.Append(nivelDificultad);

@@ -17,16 +17,56 @@ namespace WebProgramAR.WebService
     // [System.Web.Script.Services.ScriptService]
     public class Service1 : System.Web.Services.WebService
     {
-        [WebMethod]
-        public string EjerciciosGlobales()
+        private List<int> Ids(string idsConcatenados)
         {
-            return EjercicioDA.GetEjercicioByGlobal();
+            List<int> ids = new List<int>();
+            if (!String.IsNullOrEmpty(idsConcatenados))
+            {
+                string[] s = idsConcatenados.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                int aux = 0;
+                foreach (string id in s)
+                {
+                    if (int.TryParse(id, out aux))
+                        ids.Add(aux);
+                }
+            }
+            return ids;
         }
 
         [WebMethod]
-        public int EjerciciosGlobalesCount()
+        public string EjerciciosGlobales(string cursosLocales)
         {
-            return EjercicioDA.GetEjercicioByGlobalCount();
+            return EjercicioDA.GetEjercicioByGlobal(this.Ids(cursosLocales));
+        }
+
+        [WebMethod]
+        public int EjerciciosGlobalesCount(string cursosLocales)
+        {
+            return EjercicioDA.GetEjercicioByGlobalCount(this.Ids(cursosLocales));
+        }
+
+        [WebMethod]
+        public string EjerciciosXCurso(int cursoId, string cursosLocales)
+        {
+            return String.Empty;
+        }
+
+        [WebMethod]
+        public int EjerciciosXCursoCount(int cursoId, string cursosLocales)
+        {
+            return 0;
+        }
+
+        [WebMethod]
+        public string EjerciciosXProfesor(int profesorId, string cursosLocales)
+        {
+            return String.Empty;
+        }
+
+        [WebMethod]
+        public int EjerciciosXProfesorCount(int profesorId, string cursosLocales)
+        {
+            return 0;
         }
     }
 }
