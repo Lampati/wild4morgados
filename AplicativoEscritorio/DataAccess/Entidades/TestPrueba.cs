@@ -44,7 +44,9 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
         #region Constructores
         public TestPrueba() 
-        { 
+        {
+            VariablesEntrada = new List<VariableTest>();
+            variablesSalida = new List<VariableTest>();
         
         }
         #endregion

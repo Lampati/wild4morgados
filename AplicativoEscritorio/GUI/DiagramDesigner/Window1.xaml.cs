@@ -263,7 +263,7 @@ namespace DiagramDesigner
                 testWindow.VariablesSalida = listaVariablesSalida;
                 testWindow.Codigo = res.CodigoGarGar;
 
-                //testWindow.Name = "Tests de Prueba - Crear";
+                testWindow.Title = "Tests de Prueba - Crear";
 
                 testWindow.ShowDialog();
 

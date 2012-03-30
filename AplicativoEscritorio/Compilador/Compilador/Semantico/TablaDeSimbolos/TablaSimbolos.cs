@@ -240,7 +240,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             int rangoNum;
             if (!int.TryParse(rango, out rangoNum))
             {
-                NodoTablaSimbolos nodoConstante = this.listaNodos.Find(x => x.Nombre.ToUpper().Equals(rango) && x.EsConstante);
+                NodoTablaSimbolos nodoConstante = this.listaNodos.Find(x => x.Nombre.ToUpper().Equals(rango.ToUpper()) && x.EsConstante);
 
                 rangoNum = nodoConstante.ValorInt;
             }
