@@ -5,6 +5,7 @@ using System.Text;
 using AplicativoEscritorio.DataAccess.Entidades;
 using System.IO;
 using Utilidades.XML;
+using AplicativoEscritorio.DataAccess.Excepciones;
 
 namespace Sincronizacion
 {
@@ -23,14 +24,12 @@ namespace Sincronizacion
             this.proxy = new Proxy.ProxyDinamico(wsdl);    
         }
 
-        public string EjerciciosGlobales()
+        public void EjerciciosGlobales()
         {
             string ids = this.ListadoIds;
             object o = proxy.InvocarMetodo("EjerciciosGlobales", new object[] { ids });
             if (!Object.Equals(o, null))
-                return o.ToString();
-
-            return null;
+                this.GuardarEjercicios(o.ToString());
         }
 
         public int EjerciciosGlobalesCount()
@@ -50,17 +49,39 @@ namespace Sincronizacion
                 foreach (string archivo in Directory.GetFiles(@"D:\Acustico", "*.gej"))
                 {
                     Ejercicio ej = new Ejercicio();
-                    ej.Abrir(archivo);
-                    if (ej.TieneId)
+                    bool errorApertura = false;
+                    try
+                    {
+                        ej.Abrir(new FileInfo(archivo));
+                    }
+                    catch (ExcepcionCriptografia) { errorApertura = true; }
+                    if (!errorApertura && ej.TieneId)
                     {
                         sb.Append(ej.EjercicioId.ToString());
                         sb.Append(",");
                     }
                 }
+
                 if (sb.Length > 0)
                     sb = sb.Remove(sb.Length - 1, 1); //Sacamos la última ","
 
                 return sb.ToString();
+            }
+        }
+
+        private void GuardarEjercicios(string respuestaWS)
+        {
+            //Si la respuesta del WS es vacía no hay nada que hacer...
+            if (String.IsNullOrEmpty(respuestaWS))
+                return;
+
+            //La respuesta del WS es el XML de cada ejercicio separado por una ",". Además viene encriptado.
+            string[] ejerciciosEncriptadosStr = respuestaWS.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string ejercicioEncriptadoStr in ejerciciosEncriptadosStr)
+            {
+                Ejercicio ej = new Ejercicio();
+                ej.Abrir(ejercicioEncriptadoStr);
+                ej.Guardar(Path.Combine(@"D:\Acustico", ej.EjercicioId.ToString() + ".gej"));
             }
         }
     }
