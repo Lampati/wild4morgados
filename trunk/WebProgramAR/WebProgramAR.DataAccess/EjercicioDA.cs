@@ -22,7 +22,7 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static string GetEjercicioByGlobal()
+        public static string GetEjercicioByGlobal(List<int> cursosAFiltrar)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -32,21 +32,21 @@ namespace WebProgramAR.DataAccess
                                               select u;
 
                 StringBuilder sb = new StringBuilder();
-                Utilidades.XML.XMLCreator xml = new Utilidades.XML.XMLCreator();
-
-                xml.AddElement();
-                xml.SetTitle("EjerciciosProgramAr");
                 foreach (Ejercicio ej in query)
-                {
-                    /*Aca voy a cargar el XML que me viene de la base*/
-                }
-                xml.LevelUp();
-                sb.Append(xml.Get());
+                    if (!cursosAFiltrar.Contains(ej.EjercicioId)) //Horrible!! Pasarselo al query!! (cómo pasarle la lista "cursosAFiltrar" para que lo resuelva la BD??)
+                    {
+                        sb.Append(ej.XML);
+                        sb.Append(",");
+                    }
+
+                if (sb.Length > 0)
+                    sb = sb.Remove(sb.Length - 1, 1);
+
                 return sb.ToString();
             }
         }
 
-        public static int GetEjercicioByGlobalCount()
+        public static int GetEjercicioByGlobalCount(List<int> cursosAFiltrar)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
@@ -55,7 +55,12 @@ namespace WebProgramAR.DataAccess
                                               where u.Global
                                               select u;
 
-                return query.Count();
+                int cant = 0;
+                foreach (Ejercicio ej in query)
+                    if (!cursosAFiltrar.Contains(ej.EjercicioId)) //Horrible!! Pasarselo al query!! (cómo pasarle la lista "cursosAFiltrar" para que lo resuelva la BD??)
+                        cant++;
+
+                return cant;
             }
         }
 

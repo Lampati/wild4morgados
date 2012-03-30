@@ -43,7 +43,7 @@ namespace WebProgramAR.Entidades
             set;
         }
     
-        public virtual byte[] Solucion
+        public virtual string XML
         {
             get;
             set;

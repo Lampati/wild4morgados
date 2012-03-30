@@ -97,7 +97,7 @@ namespace DiagramDesigner
 
         private void ProbarCarga()
         {
-            Ejercicio ej = new Ejercicio();
+            Ejercicio ej = new Ejercicio(4);
             ej.Enunciado = "Enunciado del ejercicio";
             ej.EsValidoSubirWeb = true;
             ej.Gargar = "GqarGar";
@@ -125,10 +125,10 @@ namespace DiagramDesigner
             tp.VariablesSalida.Add(vt2);
 
             ej.AgregarTestPrueba(tp);
-            ej.Guardar(@"D:\Acustico\Pruebita.gej");
+            ej.Guardar(@"D:\Acustico\4.gej");
 
             ej = new Ejercicio();
-            ej.Abrir(@"C:\Pruebita.gej");
+            ej.Abrir(@"D:\Acustico\3.gej");
         }
 
         public Window1()

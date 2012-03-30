@@ -25,8 +25,8 @@ namespace Sincronizacion
 
         public string EjerciciosGlobales()
         {
-            string hashes = this.ListadoHashGlobales;
-            object o = proxy.InvocarMetodo("EjerciciosGlobales");
+            string ids = this.ListadoIds;
+            object o = proxy.InvocarMetodo("EjerciciosGlobales", new object[] { ids });
             if (!Object.Equals(o, null))
                 return o.ToString();
 
@@ -42,7 +42,7 @@ namespace Sincronizacion
             return 0;
         }
 
-        private string ListadoHashGlobales
+        private string ListadoIds
         {
             get
             {
@@ -51,9 +51,11 @@ namespace Sincronizacion
                 {
                     Ejercicio ej = new Ejercicio();
                     ej.Abrir(archivo);
-                    //Falta acá preguntar si es global!!
-                    sb.Append(ej.Hash);
-                    sb.Append(",");
+                    if (ej.TieneId)
+                    {
+                        sb.Append(ej.EjercicioId.ToString());
+                        sb.Append(",");
+                    }
                 }
                 if (sb.Length > 0)
                     sb = sb.Remove(sb.Length - 1, 1); //Sacamos la última ","
