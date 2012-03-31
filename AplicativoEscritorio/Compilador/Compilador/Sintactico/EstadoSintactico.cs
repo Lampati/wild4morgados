@@ -56,7 +56,12 @@ namespace CompiladorGargar.Sintactico
 
         private static List<Terminal> listaLineaActual = new List<Terminal>();
 
-        
+        private static List<int> listaLineasValidasParaInsertarCodigo = new List<int>();
+        internal static List<int> ListaLineasValidasParaInsertarCodigo
+        {
+            get { return listaLineasValidasParaInsertarCodigo; }
+            set { listaLineasValidasParaInsertarCodigo = value; }
+        }
 
         private static ContextoGlobal contextoGlobal = Sintactico.ContextoGlobal.Global;
         internal static ContextoGlobal ContextoGlobal
@@ -295,6 +300,14 @@ namespace CompiladorGargar.Sintactico
             if (contextoLinea != Sintactico.ContextoLinea.Ninguno)
             {
                 AgregarALinea(t);
+            }
+
+            if (contextoGlobal == Sintactico.ContextoGlobal.Cuerpo)
+            {
+                if (!ListaLineasValidasParaInsertarCodigo.Contains(GlobalesCompilador.UltFila))
+                {
+                    ListaLineasValidasParaInsertarCodigo.Add(GlobalesCompilador.UltFila);
+                }
             }
         }
 

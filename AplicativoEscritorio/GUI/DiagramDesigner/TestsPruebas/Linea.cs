@@ -27,7 +27,24 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
-        public bool EsHabilitada { get; set; }
+        private bool esHabilitada;
+        public bool EsHabilitada
+        {
+            get
+            {
+                return esHabilitada;
+            }
+            set
+            {
+                if (esHabilitada != value)
+                {
+                    esHabilitada = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("EsHabilitada"));
+                }
+
+            }
+        }
+
         public string Codigo { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

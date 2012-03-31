@@ -21,17 +21,20 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             Firma f;
+
             if (this.hijosNodo.Count > 3)
             {
                 f = new Firma(this.hijosNodo[1].Lexema, this.hijosNodo[3].TipoDato);
                 f.EsArreglo = this.hijosNodo[3].EsArreglo;
+                f.RangoArregloSinPrefijo = this.hijosNodo[3].RangoArregloSinPrefijo;
 
                 EsConRef = true;
             }
             else
             {
                 f = new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[2].TipoDato);
-                f.EsArreglo = this.hijosNodo[2].EsArreglo;    
+                f.EsArreglo = this.hijosNodo[2].EsArreglo;
+                f.RangoArregloSinPrefijo = this.hijosNodo[2].RangoArregloSinPrefijo;
             }
 
             this.ListaFirma.Add(f);

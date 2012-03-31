@@ -18,6 +18,7 @@ namespace CompiladorGargar.Resultado
         public List<PasoCompilacion> ListaDebugSintactico { get; set; }
         internal ArbolSemantico ArbolSemanticoResultado { get; set; }
         public TablaSimbolos TablaSimbolos { get; set; }
+        public List<int> ListaLineasValidas { get; set; }
 
         public string CodigoGarGar { get; set; }
         public string CodigoPascal { get; set; }

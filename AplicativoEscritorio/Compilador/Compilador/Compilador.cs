@@ -175,6 +175,8 @@ namespace CompiladorGargar
                     res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
                     res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
 
+                    res.ListaLineasValidas = EstadoSintactico.ListaLineasValidasParaInsertarCodigo;
+
                     long timeStampCod = Stopwatch.GetTimestamp();
                     res.ArbolSemanticoResultado.CalcularExpresiones();
                     res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
