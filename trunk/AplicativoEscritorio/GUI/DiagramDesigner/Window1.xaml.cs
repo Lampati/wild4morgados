@@ -146,7 +146,7 @@ namespace DiagramDesigner
             this.ToolbarAplicacion.SalvarConfiguracionEvent += new BarraToolbarRibbon.SalvarConfiguracionEventHandler(ToolbarAplicacion_SalvarConfiguracionEvent);
             this.ToolbarAplicacion.ModificarPropiedadesEjercicioEvent += new BarraToolbarRibbon.ModificarPropiedadesEjercicioHandler(ToolbarAplicacion_ModificarPropiedadesEjercicioEvent);
             this.ToolbarAplicacion.TestPruebaEvent += new BarraToolbarRibbon.TestPruebaHandler(ToolbarAplicacion_TestPruebaEvent);
-
+            this.ToolbarAplicacion.IdentarEvent += new BarraToolbarRibbon.IdentarEventHandler(ToolbarAplicacion_IdentarEvent);
 
             this.Loaded += new RoutedEventHandler(Window1_Loaded);
 
@@ -191,6 +191,15 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
 
             ToolbarAplicacion.Owner = this;
+            
+        }
+
+        void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
+        {
+            Identador ident = new Identador(this.Esquema.GarGarACompilar);
+            string codigoIdentado = ident.Identar();
+
+            this.Esquema.GarGarACompilar = codigoIdentado;
             
         }
 
@@ -250,7 +259,7 @@ namespace DiagramDesigner
 
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-
+                
 
                 List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                 aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());

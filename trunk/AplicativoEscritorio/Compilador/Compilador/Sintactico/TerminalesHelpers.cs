@@ -78,5 +78,7 @@ namespace CompiladorGargar.Sintactico
                || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.FuncionFin
                );
         }
+
+        
     }
 }

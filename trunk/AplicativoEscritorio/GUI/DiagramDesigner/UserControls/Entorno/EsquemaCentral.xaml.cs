@@ -74,6 +74,17 @@ namespace DiagramDesigner.UserControls.Entorno
                     return this.textEditor.Text;
                 }
             }
+            set
+            {
+                if (Modo == ModoVisual.Texto)
+                {
+                    this.textEditor.Text = value;
+                }
+                else
+                {
+                    this.textEditor.Text = value;
+                } 
+            }
         }
 
         public ModoVisual Modo

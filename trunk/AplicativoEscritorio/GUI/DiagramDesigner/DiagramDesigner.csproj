@@ -280,6 +280,7 @@
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
     <Compile Include="ModoTexto\Configuracion\ModoTextoConfiguracion.cs" />
+    <Compile Include="EventArgsClasses\IdentarEventArgs.cs" />
     <Compile Include="Window1.MenuCommands.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
