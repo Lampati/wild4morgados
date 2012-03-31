@@ -254,10 +254,17 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                    );
         }
 
-        internal void AgregarArregloParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tipoDeDato, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc)
+        internal void AgregarArregloParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tipoDeDato, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, string rango)
         {
+            int rangoNum;
+            if (!int.TryParse(rango, out rangoNum))
+            {
+                NodoTablaSimbolos nodoConstante = this.listaNodos.Find(x => x.Nombre.ToUpper().Equals(rango.ToUpper()) && x.EsConstante);
 
-            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tipoDeDato,  true,  false, tipoContexto, nombreProc));
+                rangoNum = nodoConstante.ValorInt;
+            }
+
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tipoDeDato, true, false, tipoContexto, nombreProc) { ValorInt = rangoNum });
         }
 
 

@@ -12,6 +12,19 @@
                     <Setter Property="Padding" Value="14" />
                 </Style>
             </aw:Wizard.Resources>
+            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 0: Como funcionan los test" 
+                           AllowNext="True" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                    <TextBlock Height="93" Name="textBlock1" Grid.Row="0"
+                           Text="Para que el test funcione recomendamos tener correctamente identado el programa, y todas las sentencias en lineas diferentes. Lineas dejadas en blanco no influyen."
+                           TextWrapping="Wrap"   />
+                </Grid>
+            </aw:WizardPage>
+
             <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 1: Elija las variables de entrada de la lista" 
                            AllowNext="False" >
                 
@@ -36,8 +49,11 @@
                         <ColumnDefinition Width="430" />
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
-                    <Label Width="430" HorizontalAlignment="Left" Grid.Row="0">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</Label>
-         
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal"
+                           TextWrapping="Wrap"  />
+
                     <ListView Grid.Row="1" Width="430" HorizontalAlignment="Left" Name="lstVarsEntrada" ItemsSource="{Binding VariablesEntrada}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
@@ -84,8 +100,13 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Label Width="430" HorizontalAlignment="Left" Grid.Row="0">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</Label>
                     
+                    <Label Width="430" HorizontalAlignment="Left" Grid.Row="0"></Label>
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Puede ingresar una descripción para cada una de las variables. Dicha descripcion servira luego para quien use el test entienda que proposito cumple la variable."
+                           TextWrapping="Wrap"  />
+
                     <DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesEntradaElegidas" AutoGenerateColumns="False" ItemsSource="{Binding VariablesEntradaSeleccionadas}" RowHeight="20">
                         
                         <DataGrid.Columns>
@@ -121,13 +142,18 @@
                         <ColumnDefinition Width="430" />
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock Width="430" HorizontalAlignment="Left" Grid.Row="0">
+
+                    <StackPanel  Grid.Row="0">
+                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
                         Para que el test de prueba tenga sentido, es necesario que informe a partir de que linea tomamos como valores de entrada.
-                        Por favor escriba/elija el numero de linea de las posibles.
-                    </TextBlock>
-                   
-                    <ListView  Width="430" Height="400" HorizontalAlignment="Left" Name="lstLineas" ItemsSource="{Binding Lineas}">
+                        Por favor escriba/elija el numero de linea de las posibles.                      
+                        </TextBlock>
+                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                        NOTA: Se tomara el valor HASTA la linea que elija, SIN incluirla.
+                        </TextBlock>
+
+                    </StackPanel>
+                    <ListView  Width="430" Height="300" HorizontalAlignment="Left" Name="lstLineas" ItemsSource="{Binding Lineas}" Grid.Row="1">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 
@@ -135,7 +161,7 @@
                                     <GridViewColumn Header="">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <CheckBox HorizontalAlignment="Center"  IsChecked="{Binding Path=EsSeleccionada, Mode=TwoWay}" IsEnabled="{Binding Path=EsHabilitada, Mode=Default}" Click="CheckBoxLinea_Click" />
+                                                <CheckBox HorizontalAlignment="Center"  IsChecked="{Binding Path=EsSeleccionada, Mode=TwoWay}" IsEnabled="{Binding Path=EsHabilitada, Mode=TwoWay}" Click="CheckBoxLinea_Click" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -174,6 +200,10 @@
                         <ColumnDefinition Width="430" />
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Las variables de salida deben ser parametros del procedmiento Salida."
+                           TextWrapping="Wrap"  />
 
                     <ListView Grid.Row="1" Width="430" HorizontalAlignment="Left" Name="lstVarsSalida" ItemsSource="{Binding VariablesEntrada}">
                         <ListView.View>
@@ -220,8 +250,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="430" />
                     </Grid.ColumnDefinitions>
-                    <Label Width="430" HorizontalAlignment="Left" Grid.Row="0">Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal</Label>
 
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Puede ingresar una descripción para cada una de las variables. Dicha descripcion servira luego para quien use el test entienda que proposito cumple la variable."
+                           TextWrapping="Wrap"  />
 
                     <DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaElegidas" AutoGenerateColumns="False" ItemsSource="{Binding VariablesEntradaSeleccionadas}" RowHeight="20">
 
@@ -261,28 +294,28 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0">
-                        <TextBlock Width="430" HorizontalAlignment="Left" >
+                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Deberá ejecutar la aplicacion para concluir el test de prueba.
                         </TextBlock>
-                        <TextBlock >
+                        <TextBlock TextWrapping="Wrap" >
                             Atención: Una vez ejecutado, no podrá volver a modificar las variables de entrada/salida.
                         </TextBlock>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
                         <StackPanel Orientation="Horizontal" >
-                            <Button Content="Ejecutar" Click="ButtonEjecutar_Click" Name="bttnEjecutar"></Button> 
-                            <TextBlock >Haga Click para ejecutar y complete la ejecución</TextBlock>
+                            <Button Content="Ejecutar" Click="ButtonEjecutar_Click" Name="bttnEjecutar"></Button>
+                            <TextBlock TextWrapping="Wrap" >Haga Click para ejecutar y complete la ejecución</TextBlock>
                         </StackPanel>                        
                     </StackPanel>
                         
                     <StackPanel Grid.Row="2"> 
                         <StackPanel Orientation="Horizontal" Name="stackEjecucionSatisfactoria" Visibility="Collapsed">
-                            <TextBlock >Ejecucion satisfactoria</TextBlock>                        
+                            <TextBlock TextWrapping="Wrap" >Ejecucion satisfactoria</TextBlock>                        
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"  Name="stackEjecucionError" Visibility="Collapsed">
-                            <TextBlock >Error: No se pudo crear el test por un error en la ejecución</TextBlock>
+                            <TextBlock TextWrapping="Wrap" >Error: No se pudo crear el test por un error en la ejecución</TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -319,7 +352,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0">
-                        <TextBlock Width="430"  HorizontalAlignment="Left" >
+                        <TextBlock Width="430"  HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Elija un nombre y descripción para el test que acaba de crear:
                         </TextBlock>
                     </StackPanel>
@@ -339,7 +372,7 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <TextBlock Width="430" Grid.Row="2" HorizontalAlignment="Left" >
+                    <TextBlock Width="430" Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" >
                         El test quedará guardado de la siguiente manera:
                     </TextBlock>
 
@@ -385,5 +418,6 @@
             </aw:WizardPage>
 
         </aw:Wizard>
+        
     </Grid>
 </Window>

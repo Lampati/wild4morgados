@@ -12,6 +12,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares
         public NodoTablaSimbolos.TipoDeDato Tipo { get; set; }
         public int Valor { get; set; }
         public bool EsArreglo { get; set; }
+        public string RangoArregloSinPrefijo { get; set; }
 
 
         public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo)

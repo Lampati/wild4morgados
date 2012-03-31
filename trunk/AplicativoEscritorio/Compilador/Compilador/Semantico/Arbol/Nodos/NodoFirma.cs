@@ -33,7 +33,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal);
+                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal, f.RangoArregloSinPrefijo);
                 }
             }
 
@@ -70,7 +70,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal);
+                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal,f.RangoArregloSinPrefijo);
                 }
             }
 

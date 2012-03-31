@@ -28,6 +28,28 @@ namespace DiagramDesigner.TestsPruebas
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
+        private List<int> listaLineasValidas;
+        public List<int> ListaLineasValidas
+        {
+            get
+            {
+                return listaLineasValidas;
+            }
+
+            set
+            {
+                listaLineasValidas = value;
+
+                if (lineas != null)
+                {
+                    for (int i = 0; i < lineas.Count; i++)
+                    {
+                        lineas[i].EsHabilitada = listaLineasValidas.Contains(i);
+                    }
+                }
+            }
+        }
+
         private string codigo;
         public string Codigo
         {
@@ -39,16 +61,7 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
-        private ObservableCollection<Linea> ArmarLineas(string[] arr)
-        {
-            ObservableCollection<Linea> aux = new ObservableCollection<Linea>();
-            foreach (string item in arr)
-            {
-                aux.Add(new Linea() { Codigo = item, EsHabilitada = true });
-            }
-
-            return aux;
-        }
+       
 
         private ObservableCollection<Linea> lineas;
         public ObservableCollection<Linea> Lineas
@@ -167,7 +180,20 @@ namespace DiagramDesigner.TestsPruebas
         public WindowCreacionTest()
         {
             InitializeComponent();
-        }  
+
+            listaLineasValidas = new List<int>();
+        }
+
+        private ObservableCollection<Linea> ArmarLineas(string[] arr)
+        {
+            ObservableCollection<Linea> aux = new ObservableCollection<Linea>();
+            foreach (string item in arr)
+            {
+                aux.Add(new Linea() { Codigo = item, EsHabilitada = true });
+            }
+
+            return aux;
+        }
 
         void wizard_Cancelled(object sender, RoutedEventArgs e)
         {
