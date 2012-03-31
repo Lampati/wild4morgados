@@ -63,6 +63,7 @@
     <Compile Include="ErrorCompiladorEventArgs.cs" />
     <Compile Include="GeneracionCodigoHelpers.cs" />
     <Compile Include="GlobalesCompilador.cs" />
+    <Compile Include="Identador.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicografico.cs" />
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\CharHelper.cs" />

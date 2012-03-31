@@ -44,6 +44,10 @@ namespace DiagramDesigner.UserControls.Toolbar
 
                         this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Visible;
                         this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
+
+                        this.ribbonGroupIdentacion.Visibility = System.Windows.Visibility.Collapsed;
+                        
+
                         ButtonFlujo.IsChecked = true;
                         ButtonTexto.IsChecked = false;                        
                         break;
@@ -54,6 +58,9 @@ namespace DiagramDesigner.UserControls.Toolbar
 
                         this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
                         this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;
+
+                        this.ribbonGroupIdentacion.Visibility = System.Windows.Visibility.Visible;
+
                         ButtonFlujo.IsChecked = false;
                         ButtonTexto.IsChecked = true;
                         break;
@@ -225,6 +232,14 @@ namespace DiagramDesigner.UserControls.Toolbar
         {
             CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Flujo));
         }
+
+        private void ButtonIdentar_Click(object sender, RoutedEventArgs e)
+        {
+            IdentarEventFire(sender, new IdentarEventArgs());
+        }
+
+
+        
 
         private void ButtonBuscar_Click(object sender, RoutedEventArgs e)
         {

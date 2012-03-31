@@ -186,6 +186,8 @@
                         Label="Ejecutar" />
             </ribbon:RibbonGroup>
 
+            
+
             <ribbon:RibbonGroup Header="Visualización"  Name="ribbonGroupVisualizacion" ContextMenu="{Binding null}">
                 <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
@@ -198,6 +200,16 @@
                         Click="ButtonTexto_Click"
                         LargeImageSource="/Resources/Images/Gargar128.png"
                         Label="Gargar" />
+            </ribbon:RibbonGroup>
+
+
+            <ribbon:RibbonGroup Header="Identacion"  Name="ribbonGroupIdentacion" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton Name="ButtonIdentar" ContextMenu="{Binding null}"
+                        HorizontalContentAlignment="Center" 
+                        Click="ButtonIdentar_Click"
+                        LargeImageSource="/Resources/Images/Flow128.png"
+                        Label="Identar" />
+
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Alineación" Name="ribbonGroupAlineacion" ContextMenu="{Binding null}">

@@ -15,6 +15,7 @@ namespace DiagramDesigner.UserControls.Toolbar
         public delegate void SalvarConfiguracionEventHandler(object o, SalvarConfiguracionEventArgs e);
         public delegate void ModificarPropiedadesEjercicioHandler(object o, ModificarPropiedadesEjercicioEventArgs e);
         public delegate void TestPruebaHandler(object o, TestPruebaEventArgs e);
+        public delegate void IdentarEventHandler(object o, IdentarEventArgs e);
 
         public event CompilacionEventHandler CompilacionEvent;
         public event CambioModoEventHandler CambioModoEvent;
@@ -22,7 +23,17 @@ namespace DiagramDesigner.UserControls.Toolbar
         public event SalvarConfiguracionEventHandler SalvarConfiguracionEvent;
         public event ModificarPropiedadesEjercicioHandler ModificarPropiedadesEjercicioEvent;
         public event TestPruebaHandler TestPruebaEvent;
+        public event IdentarEventHandler IdentarEvent;
 
+
+        private void IdentarEventFire(object sender, IdentarEventArgs e)
+        {
+            if (IdentarEvent != null)
+            {
+                IdentarEvent(sender, e);
+            }
+
+        }
 
         private void TestPruebaEventFire(object sender, TestPruebaEventArgs e)
         {
