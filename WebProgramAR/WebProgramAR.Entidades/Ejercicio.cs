@@ -43,12 +43,6 @@ namespace WebProgramAR.Entidades
             set;
         }
     
-        public virtual string XML
-        {
-            get;
-            set;
-        }
-    
         public virtual bool Global
         {
             get;
@@ -112,6 +106,12 @@ namespace WebProgramAR.Entidades
         private int _estadoEjercicioId;
     
         public virtual int NivelEjercicio
+        {
+            get;
+            set;
+        }
+    
+        public virtual string XML
         {
             get;
             set;

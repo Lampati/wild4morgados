@@ -30,12 +30,6 @@ namespace WebProgramAR.Entidades
             get;
             set;
         }
-    
-        public virtual Nullable<int> TipoId
-        {
-            get;
-            set;
-        }
 
         #endregion
         #region Navigation Properties
