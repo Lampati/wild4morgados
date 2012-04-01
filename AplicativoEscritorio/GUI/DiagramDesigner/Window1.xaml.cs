@@ -196,11 +196,17 @@ namespace DiagramDesigner
 
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
         {
+            IdentarTexto();
+            
+            
+        }
+
+        private void IdentarTexto()
+        {
             Identador ident = new Identador(this.Esquema.GarGarACompilar);
             string codigoIdentado = ident.Identar();
 
             this.Esquema.GarGarACompilar = codigoIdentado;
-            
         }
 
         
@@ -254,12 +260,32 @@ namespace DiagramDesigner
 
         void ToolbarAplicacion_TestPruebaEvent(object o, TestPruebaEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
 
+            switch (result)
+            {
+                case MessageBoxResult.Cancel:                    
+                    break;
+
+                case MessageBoxResult.No:
+                    CrearTestPrueba();
+                    break;
+
+                case MessageBoxResult.Yes:
+                    IdentarTexto();
+                    CrearTestPrueba();
+                    break;
+            }          
+
+        }
+
+        private void CrearTestPrueba()
+        {
             ResultadoCompilacion res = Compilar();
 
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                
+
 
                 List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                 aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
@@ -279,7 +305,6 @@ namespace DiagramDesigner
 
 
             }
-
         }
 
         private ObservableCollection<Variables> TransformarAVariables(List<NodoTablaSimbolos> list)

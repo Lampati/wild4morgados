@@ -13,8 +13,10 @@ namespace CompiladorGargar.Sintactico
         GlobalDeclaracionesVariables,
         DeclaracionLocal,
         Cuerpo
+        
     }
 
+   
 
     internal enum ContextoLinea
     {
@@ -50,7 +52,7 @@ namespace CompiladorGargar.Sintactico
 
     internal static class EstadoSintactico
     {
-        
+        private static bool esProcSalida = false;
 
         private static List<Terminal> listaLeidoHastaAhora = new List<Terminal>();
 
@@ -174,6 +176,16 @@ namespace CompiladorGargar.Sintactico
         {            
             listaLineaActual.Add(t);
             listaLeidoHastaAhora.Add(t);
+
+            if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Salida)
+            {
+                esProcSalida = true;
+            }
+
+            if (esProcSalida && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin)
+            {
+                esProcSalida = false;
+            }
         }
 
         private static void NuevaLinea(Terminal t)
@@ -252,8 +264,8 @@ namespace CompiladorGargar.Sintactico
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Identificador:
                     contextoLinea = ContextoLinea.Asignacion;
                     break;
-                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Principal:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Salida:
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Principal:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Numero:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Verdadero:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Falso:
@@ -302,7 +314,7 @@ namespace CompiladorGargar.Sintactico
                 AgregarALinea(t);
             }
 
-            if (contextoGlobal == Sintactico.ContextoGlobal.Cuerpo)
+            if (contextoGlobal == Sintactico.ContextoGlobal.Cuerpo && !esProcSalida)
             {
                 if (!ListaLineasValidasParaInsertarCodigo.Contains(GlobalesCompilador.UltFila))
                 {
