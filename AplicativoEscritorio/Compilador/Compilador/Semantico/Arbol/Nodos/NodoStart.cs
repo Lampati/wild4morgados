@@ -88,9 +88,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             //strBldr.AppendLine(this.hijosNodo[1].VariablesProcPrincipal);
             strBldr.AppendLine("");
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesBasicas());
+            strBldr.AppendLine(GeneracionCodigoHelpers.ArmarProcedimientoMarcarEntradaEnArchivo(this.TablaSimbolos));
+            strBldr.AppendLine(GeneracionCodigoHelpers.ArmarProcedimientoResFinalEnArchivo(this.TablaSimbolos));
+
+            
             strBldr.AppendLine(this.hijosNodo[1].Codigo);
 
             strBldr.AppendLine("begin");
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearArchivoDeResultados());
             strBldr.Append(GeneracionCodigoHelpers.InicializarVariablesGlobales(this.TablaSimbolos));
             strBldr.AppendLine("try");       
             strBldr.Append("\t").AppendLine(string.Format("{0}PRINCIPAL();",GlobalesCompilador.PREFIJO_VARIABLES));            

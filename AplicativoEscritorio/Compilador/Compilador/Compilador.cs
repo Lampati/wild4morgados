@@ -35,6 +35,8 @@ namespace CompiladorGargar
             this.DirectorioEjecutables = dirEjec;
             this.NombreEjecutable = nombre;
 
+            GeneracionCodigoHelpers.DirectorioTemporales = dirTemp;
+
             CargarAnalizadorSintactico();
         }
 
