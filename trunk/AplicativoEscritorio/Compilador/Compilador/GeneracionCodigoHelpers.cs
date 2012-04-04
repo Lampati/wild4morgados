@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Semantico.Arbol.Nodos;
+using System.IO;
 
 namespace CompiladorGargar
 {
 
     class GeneracionCodigoHelpers
     {
+        public static string DirectorioTemporales { get; set; }
+
         private static string variableContadoraLineas;
         public static string VariableContadoraLineas
         {
@@ -18,6 +21,33 @@ namespace CompiladorGargar
             }
         }
 
+        private static string archivoTemporalEstaEjecucion;
+        public static string ArchivoTemporalEstaEjecucion
+        {
+            get
+            {
+                return archivoTemporalEstaEjecucion;
+            }
+        }
+
+        private static string llamarCrearEntradaEnArchResultado;
+        public static string LlamarCrearEntradaEnArchResultado
+        {
+            get
+            {
+                return llamarCrearEntradaEnArchResultado;
+            }
+        }
+
+        private static string llamarCrearResSalidaEnArchResultado;
+        public static string LlamarCrearResSalidaEnArchResultado
+        {
+            get
+            {
+                return llamarCrearResSalidaEnArchResultado;
+            }
+        }
+        
 
         public static string DefinirFuncionesBasicas()
         {
@@ -76,6 +106,7 @@ namespace CompiladorGargar
         internal static void ReiniciarValoresVariablesAleatorias()
         {
             variableContadoraLineas = Utilidades.RandomManager.RandomStringConPrefijo("ProgramAr_ContLineas",20,true);
+            archivoTemporalEstaEjecucion = Path.Combine(DirectorioTemporales,string.Format("{0}.xml",Utilidades.RandomManager.RandomStringConPrefijo("ProgramAr_ArchResName", 20, true)));
         }
 
         internal static string InicializarVariablesGlobales(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
@@ -204,7 +235,184 @@ namespace CompiladorGargar
 
             return strBldr.ToString();
         }
+
+
+        internal static string CrearArchivoDeResultados()
+        {
+            return string.Format("CrearArchivoResultados('{0}'); ",archivoTemporalEstaEjecucion);
+        }
+        
+        internal static string ArmarProcedimientoMarcarEntradaEnArchivo(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
+        {
+            StringBuilder strBldrEncabezado = new StringBuilder();
+            StringBuilder strBldrLlamado = new StringBuilder();
+            StringBuilder strBldrTotal = new StringBuilder();
+
+            string parametros = string.Empty;
+
+            foreach (Semantico.TablaDeSimbolos.NodoTablaSimbolos item in tablaSimbolos.ObtenerVariablesDelProcPrincipal())
+            {
+                if (!item.EsConstante)
+                {
+                    string tipo = ObtenerTipoParaParametroPascal(item.EsArreglo, item.TipoDato);
+
+                    strBldrEncabezado.AppendFormat("{0} : {1};", item.Nombre, tipo);
+                    strBldrLlamado.AppendFormat("{0},", item.NombreParaCodigo);
+                }
+            }
+
+            llamarCrearEntradaEnArchResultado = string.Format("FrameworkProgramArProgramAr0000001InsertarEntradaEnArchResultados({0});",strBldrLlamado.ToString().TrimEnd(','));
+
+            strBldrTotal.Append(" procedure FrameworkProgramArProgramAr0000001InsertarEntradaEnArchResultados( ").Append(strBldrEncabezado.ToString().TrimEnd(';')).Append(" ) ;").AppendLine();
+            strBldrTotal.Append(" begin ").AppendLine();
+            strBldrTotal.AppendFormat("  CrearNuevaEntradaParcial('{0}', {1}); ", archivoTemporalEstaEjecucion, variableContadoraLineas).AppendLine();
+
+            foreach (Semantico.TablaDeSimbolos.NodoTablaSimbolos item in tablaSimbolos.ObtenerVariablesDelProcPrincipal())
+            {
+                if (!item.EsConstante)
+                {
+                    if (item.EsArreglo)
+                    {
+
+                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}',{2},{3}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.ValorInt).AppendLine();
+
+                    }
+                    else
+                    {
+                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}',{2}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre).AppendLine();
+                    }
+                }
+            }
+
+            foreach (Semantico.TablaDeSimbolos.NodoTablaSimbolos item in tablaSimbolos.ObtenerVariablesGlobales())
+            {
+                if (!item.EsConstante)
+                {
+                    if (item.EsArreglo)
+                    {
+
+                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}',{2},{3}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo, item.ValorInt).AppendLine();
+
+                    }
+                    else
+                    {
+                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}',{2}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo).AppendLine();
+                    }
+                }
+            }
+
+            strBldrTotal.Append(" end; ").AppendLine();
+
+
+            return strBldrTotal.ToString();
+        }
+
+        internal static string ArmarLlamadaResFinalEnArchivo(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
+        {
+            StringBuilder strBldrLlamado = new StringBuilder();
+            foreach (Semantico.TablaDeSimbolos.NodoTablaSimbolos item in tablaSimbolos.ObtenerParametrosDelProcSalida())
+            {
+                if (!item.EsConstante)
+                {
+                    string tipo = ObtenerTipoParaParametroPascal(item.EsArreglo, item.TipoDato);
+
+                    strBldrLlamado.AppendFormat("{0},", item.NombreParaCodigo);
+                }
+            }
+
+            return string.Format("FrameworkProgramArProgramAr0000001InsertarResFinalEnArchResultados({0});", strBldrLlamado.ToString().TrimEnd(','));
+        }
+
+        internal static string ArmarProcedimientoResFinalEnArchivo(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
+        {
+            StringBuilder strBldrEncabezado = new StringBuilder();
+            StringBuilder strBldrTotal = new StringBuilder();
+
+            string parametros = string.Empty;
+
+            foreach (Semantico.TablaDeSimbolos.NodoTablaSimbolos item in tablaSimbolos.ObtenerParametrosDelProcSalida())
+            {
+                if (!item.EsConstante)
+                {
+                    string tipo = ObtenerTipoParaParametroPascal(item.EsArreglo, item.TipoDato);
+
+                    strBldrEncabezado.AppendFormat("{0} : {1};", item.Nombre, tipo);
+                }
+            }
+
+            strBldrTotal.Append(" procedure FrameworkProgramArProgramAr0000001InsertarResFinalEnArchResultados( ").Append(strBldrEncabezado.ToString().TrimEnd(';')).Append(" ) ;").AppendLine();
+            strBldrTotal.Append(" begin ").AppendLine();
+
+            foreach (Semantico.TablaDeSimbolos.NodoTablaSimbolos item in tablaSimbolos.ObtenerParametrosDelProcSalida())
+            {
+                if (!item.EsConstante)
+                {
+                    if (item.EsArreglo)
+                    {
+
+                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnResultado('{0}', '{1}',{1},{2}); ",
+                                    archivoTemporalEstaEjecucion, item.Nombre, item.ValorInt).AppendLine();
+
+                    }
+                    else
+                    {
+                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnResultado('{0}', '{1}',{1}); ",
+                                    archivoTemporalEstaEjecucion, item.Nombre).AppendLine();
+                    }
+                }
+            }
+
+            strBldrTotal.Append(" end; ").AppendLine();
+
+
+            return strBldrTotal.ToString();
+        }
+
+        private static string ObtenerTipoParaParametroPascal(bool esArreglo, Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato tipoDeDato)
+        {
+            string retorno = string.Empty;
+            switch (tipoDeDato)
+            {
+                case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.String:
+                    if (esArreglo)
+                    {
+                        retorno = "array of string";
+                    }
+                    else
+                    {
+                        retorno = "string";
+                    }
+                    break;
+                case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero:
+                    if (esArreglo)
+                    {
+                        retorno = "array of integer";
+                    }
+                    else
+                    {
+                        retorno = "integer";
+                    }
+                    break;
+                case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano:
+                    if (esArreglo)
+                    {
+                        retorno = "array of boolean";
+                    }
+                    else
+                    {
+                        retorno = "boolean";
+                    }
+                    break;
+                
+            }
+
+            return retorno;
+        }
+
+        
     }
-
-
 }
