@@ -130,7 +130,7 @@ namespace CompiladorGargar
         
                 switch (item.TipoDato)
                 {
-                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.String:
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Texto:
                         if (item.EsArreglo)
                         {
                             for (int i = 1; i <= item.ValorInt; i++)
@@ -200,7 +200,7 @@ namespace CompiladorGargar
 
                 switch (item.TipoDato)
                 {
-                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.String:
+                    case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Texto:
                        
                         if (!item.EsConstante)
                         {
@@ -240,6 +240,22 @@ namespace CompiladorGargar
         internal static string CrearArchivoDeResultados()
         {
             return string.Format("CrearArchivoResultados('{0}'); ",archivoTemporalEstaEjecucion);
+        }
+
+        internal static string CrearProcedimientoResultadoCorrectoEnArchivo()
+        {
+            return string.Format("ColocarResultadoCorrectoEnArch('{0}'); ", archivoTemporalEstaEjecucion);
+        }
+
+        internal static string CrearProcedimientoResultadoIncorrectoEnArchivo()
+        {
+            return string.Format("ColocarResultadoIncorrectoEnArch('{0}'); ", archivoTemporalEstaEjecucion);
+        }
+
+        internal static string CrearErrorEnArch(string tipoError, string descError)
+        {
+            return string.Format("AgregarErrorArchivoResultados('{0}','{1}','{2}',{3}); ", 
+                archivoTemporalEstaEjecucion,tipoError,descError,variableContadoraLineas);
         }
         
         internal static string ArmarProcedimientoMarcarEntradaEnArchivo(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
@@ -377,7 +393,7 @@ namespace CompiladorGargar
             string retorno = string.Empty;
             switch (tipoDeDato)
             {
-                case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.String:
+                case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Texto:
                     if (esArreglo)
                     {
                         retorno = "array of string";

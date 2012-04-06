@@ -45,6 +45,8 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
+        public int Numero { get; set; }
+
         public string Codigo { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

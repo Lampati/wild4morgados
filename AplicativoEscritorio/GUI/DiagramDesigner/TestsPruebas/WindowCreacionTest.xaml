@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:aw="clr-namespace:AvalonWizard;assembly=AvalonWizard"
         xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:userControls="clr-namespace:DiagramDesigner.UserControls"
         Title="WindowCreacionTest" Height="550" Width="450">
     <Grid>
         <aw:Wizard Name="wizard" aw:Designer.PageIndex="0" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
@@ -256,7 +257,7 @@
                            Text="Puede ingresar una descripción para cada una de las variables. Dicha descripcion servira luego para quien use el test entienda que proposito cumple la variable."
                            TextWrapping="Wrap"  />
 
-                    <DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaElegidas" AutoGenerateColumns="False" ItemsSource="{Binding VariablesEntradaSeleccionadas}" RowHeight="20">
+                    <DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaElegidas" AutoGenerateColumns="False" ItemsSource="{Binding VariablesSalidaSeleccionadas}" RowHeight="20">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
@@ -323,64 +324,67 @@
 
             <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 7: Chequear Valores" 
                            AllowFinish="False" >
-                <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
-                        </Style>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0">
-                        <TextBlock Width="430"  HorizontalAlignment="Left" TextWrapping="Wrap" >
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Width="430"  HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Elija un nombre y descripción para el test que acaba de crear:
-                        </TextBlock>
-                    </StackPanel>
+                            </TextBlock>
+                        </StackPanel>
 
-                    <StackPanel Grid.Row="1">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock HorizontalAlignment="Left" >
+                        <StackPanel Grid.Row="1">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock HorizontalAlignment="Left" >
                                 Nombre:
-                            </TextBlock>
-                            <TextBox Name="txtNombre" TextChanged="txtNombre_TextChanged" Width="100"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock  HorizontalAlignment="Left" >
+                                </TextBlock>
+                                <TextBox Name="txtNombre" TextChanged="txtNombre_TextChanged" Width="100"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock  HorizontalAlignment="Left" >
                                 Descripcion:
-                            </TextBlock>
-                            <TextBox Name="txtDescripcion" TextChanged="txtDescripcion_TextChanged" Width="100"></TextBox>
+                                </TextBlock>
+                                <TextBox Name="txtDescripcion" TextChanged="txtDescripcion_TextChanged" Width="100"></TextBox>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
-                    <TextBlock Width="430" Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                        <TextBlock Width="430" Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" >
                         El test quedará guardado de la siguiente manera:
-                    </TextBlock>
+                        </TextBlock>
 
-                    <TextBlock Width="430" Grid.Row="3" HorizontalAlignment="Left" >
+                        <TextBlock Width="430" Grid.Row="3" HorizontalAlignment="Left" >
                         Variables Entrada
-                    </TextBlock>
+                        </TextBlock>
 
-                    <ListView Grid.Row="4" Width="430" HorizontalAlignment="Left" Name="lstVarsEntradaFinal" ItemsSource="{Binding VariablesEntradaSeleccionadas}">
+                        <userControls:VariablesConValoresPresenter Grid.Row="4" Width="410" HorizontalAlignment="Left" x:Name="dataVarsEntradaFinal" EsVersionReducida="False" />
+
+                        <!--<ListView Grid.Row="4" Width="430" HorizontalAlignment="Left" Name="lstVarsEntradaFinal" ItemsSource="{Binding VariablesEntradaSeleccionadas}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 <GridView.Columns>                                    
@@ -393,13 +397,13 @@
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
-                    </ListView>
+                    </ListView>-->
 
-                    <TextBlock Width="430" Grid.Row="5" HorizontalAlignment="Left" >
+                        <TextBlock Width="430" Grid.Row="5" HorizontalAlignment="Left" >
                         Variables Salida
-                    </TextBlock>
+                        </TextBlock>
 
-                    <ListView Grid.Row="6" Width="430" HorizontalAlignment="Left" Name="lstVarsSalidaFinal" ItemsSource="{Binding VariablesSalidaSeleccionadas}">
+                        <!--<ListView Grid.Row="6" Width="430" HorizontalAlignment="Left" Name="lstVarsSalidaFinal" ItemsSource="{Binding VariablesSalidaSeleccionadas}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 <GridView.Columns>                                    
@@ -412,9 +416,12 @@
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
-                    </ListView>
+                    </ListView>-->
 
-                </Grid>
+
+                        <userControls:VariablesConValoresPresenter Grid.Row="6" Width="410" HorizontalAlignment="Left" x:Name="dataVarsSalidaFinal" EsVersionReducida="False" />
+                    </Grid>
+                </ScrollViewer>
             </aw:WizardPage>
 
         </aw:Wizard>

@@ -6,9 +6,9 @@ using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace DiagramDesigner.TestsPruebas
+namespace DataAccess.Entidades
 {
-    public class Variables : INotifyPropertyChanged
+    public class Variable : INotifyPropertyChanged
     {
         private bool esSeleccionada;
         public bool EsSeleccionada
@@ -54,7 +54,9 @@ namespace DiagramDesigner.TestsPruebas
         public bool EsArreglo { get; set; }        
         public string TamanioTipo { get; set; }
 
-        public Variables(NodoTablaSimbolos nodo)
+        public List<PosicionArreglo> Posiciones { get; set; }
+
+        public Variable(NodoTablaSimbolos nodo)
         {
             EsSeleccionada = false;
             Nombre = nodo.Nombre;
@@ -64,6 +66,57 @@ namespace DiagramDesigner.TestsPruebas
             TipoDato = nodo.TipoDato;
             EsArreglo = nodo.EsArreglo;
             TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
+
+        }
+
+        public Variable(NodoTablaSimbolos nodo, List<PosicionArreglo> posis)
+        {
+            EsSeleccionada = false;
+            Nombre = nodo.Nombre;
+            Descripcion = string.Empty;
+            NombreCodigo = nodo.NombreParaCodigo;
+            Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
+            TipoDato = nodo.TipoDato;
+            EsArreglo = nodo.EsArreglo;
+            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
+
+            Posiciones = posis;
+        }
+
+
+        public Variable(string n, string tipoDato, string tipoVar, bool esArr, string val, List<PosicionArreglo> posis)
+        {
+            EsSeleccionada = false;
+            Nombre = n;
+            Descripcion = string.Empty;
+            TamanioTipo = tipoVar;
+            TipoDato = ConvertirATipoDatoEnum(tipoDato);
+            EsArreglo = esArr;
+            Valor = val;
+            //TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
+
+            Posiciones = posis;
+        }
+
+        private NodoTablaSimbolos.TipoDeDato ConvertirATipoDatoEnum(string tipoDato)
+        {
+            NodoTablaSimbolos.TipoDeDato retorno = NodoTablaSimbolos.TipoDeDato.Ninguno;
+            switch (tipoDato.ToUpper())
+            {
+                case "NUMERO":
+                    retorno = NodoTablaSimbolos.TipoDeDato.Numero;
+                    break;
+                case "TEXTO":
+                    retorno = NodoTablaSimbolos.TipoDeDato.Texto;
+                    break;
+                case "BOOLEANO":
+                    retorno = NodoTablaSimbolos.TipoDeDato.Booleano;
+                    break;
+                default:
+                    break;
+            }
+
+            return retorno;
         }
 
         #region INotifyPropertyChanged Members

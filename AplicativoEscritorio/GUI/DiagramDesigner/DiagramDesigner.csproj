@@ -83,6 +83,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DialogWindows\ResultadoEjecucionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\ApplicationMenuResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\VariablesConValoresPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -205,6 +213,9 @@
     <Compile Include="DialogWindows\PropertyEditionWindow.xaml.cs">
       <DependentUpon>PropertyEditionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogWindows\ResultadoEjecucionDialog.xaml.cs">
+      <DependentUpon>ResultadoEjecucionDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
@@ -215,7 +226,6 @@
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
     <Compile Include="TestsPruebas\Linea.cs" />
-    <Compile Include="TestsPruebas\Variables.cs" />
     <Compile Include="TestsPruebas\WindowCreacionTest.xaml.cs">
       <DependentUpon>WindowCreacionTest.xaml</DependentUpon>
     </Compile>
@@ -281,6 +291,9 @@
     <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
     <Compile Include="ModoTexto\Configuracion\ModoTextoConfiguracion.cs" />
     <Compile Include="EventArgsClasses\IdentarEventArgs.cs" />
+    <Compile Include="UserControls\VariablesConValoresPresenter.xaml.cs">
+      <DependentUpon>VariablesConValoresPresenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window1.MenuCommands.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -437,6 +450,8 @@
     <Resource Include="Resources\Images\SearchRep24.png" />
     <Resource Include="Resources\Images\Flow48.png" />
     <Content Include="FolderBrowseLib\FolderPickerLib.dll" />
+    <Resource Include="Resources\Images\accepted_48.png" />
+    <Resource Include="Resources\Images\cancel_48.png" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
