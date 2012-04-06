@@ -39,6 +39,7 @@ namespace DataAccess.Entidades
                         foreach (XmlNode item in nodo.ChildNodes)
                         {
                             string nombre = item.Attributes["Nombre"].Value;
+                            string contexto = item.Attributes["Contexto"].Value;
                             string tipo = ConvertirATipoGarGar(item.Attributes["Tipo"].Value);
                             bool esArreglo = Convert.ToBoolean(item.Attributes["EsArreglo"].Value);
                             string valor = string.Empty;
@@ -63,7 +64,7 @@ namespace DataAccess.Entidades
                                 tipoVar = "Variable";
                             }
 
-                            VariablesSalida.Add(new Variable(nombre, tipo, tipoVar, esArreglo, valor, listaPosiciones));
+                            VariablesSalida.Add(new Variable(nombre, contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
 
                         }
 
@@ -104,6 +105,7 @@ namespace DataAccess.Entidades
                         foreach (XmlNode item in entrada.ChildNodes)
                         {
                             string nombre = item.Attributes["Nombre"].Value;
+                            string contexto = item.Attributes["Contexto"].Value;
                             string tipo = ConvertirATipoGarGar(item.Attributes["Tipo"].Value);
                             bool esArreglo = Convert.ToBoolean(item.Attributes["EsArreglo"].Value);
                             string valor = string.Empty;
@@ -128,7 +130,7 @@ namespace DataAccess.Entidades
                                 tipoVar = "Variable";
                             }
 
-                            variablesEntrada.Add(new Variable(nombre, tipo, tipoVar, esArreglo, valor, listaPosiciones));
+                            variablesEntrada.Add(new Variable(nombre, contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
                         }
 
                         Entradas.Add(new Entrada() { Linea = linea, Variables = variablesEntrada });
