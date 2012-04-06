@@ -14,6 +14,9 @@ using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using AplicativoEscritorio.DataAccess.Entidades;
+using DataAccess.Entidades;
+using CompiladorGargar.Resultado;
+using EJEKOR;
 
 namespace DiagramDesigner.TestsPruebas
 {
@@ -22,11 +25,15 @@ namespace DiagramDesigner.TestsPruebas
     /// </summary>
     public partial class WindowCreacionTest : Window
     {
+        private ArchResultado archResultadoEjecucuion;
+        
         #region Properties
 
         public TestPrueba TestGenerado { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
+        private CompiladorGargar.Compilador compilador;
 
         private List<int> listaLineasValidas;
         public List<int> ListaLineasValidas
@@ -83,8 +90,8 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
-        private ObservableCollection<Variables> variablesEntrada;
-        public ObservableCollection<Variables> VariablesEntrada
+        private ObservableCollection<Variable> variablesEntrada;
+        public ObservableCollection<Variable> VariablesEntrada
         {
             get
             {
@@ -103,8 +110,8 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
-        private ObservableCollection<Variables> variablesEntradaSeleccionadas;
-        public ObservableCollection<Variables> VariablesEntradaSeleccionadas
+        private ObservableCollection<Variable> variablesEntradaSeleccionadas;
+        public ObservableCollection<Variable> VariablesEntradaSeleccionadas
         {
             get
             {
@@ -116,20 +123,24 @@ namespace DiagramDesigner.TestsPruebas
             {
                 variablesEntradaSeleccionadas = value;
 
+                
+
                 //dataGridVarsEntrada.ItemsSource = variablesEntrada;
                 //dataGridVarsEntrada.Items.Refresh();
 
                 dataGridVariablesEntradaElegidas.ItemsSource = variablesEntradaSeleccionadas;
                 dataGridVariablesEntradaElegidas.Items.Refresh();
 
-                lstVarsEntradaFinal.ItemsSource = variablesEntradaSeleccionadas;
-                lstVarsEntradaFinal.Items.Refresh();
+                //lstVarsEntradaFinal.ItemsSource = variablesEntradaSeleccionadas;
+                //lstVarsEntradaFinal.Items.Refresh();
+
+                dataVarsEntradaFinal.Variables = variablesEntradaSeleccionadas;
                
             }
         }
 
-        private ObservableCollection<Variables> variablesSalida;
-        public ObservableCollection<Variables> VariablesSalida
+        private ObservableCollection<Variable> variablesSalida;
+        public ObservableCollection<Variable> VariablesSalida
         {
             get
             {
@@ -151,8 +162,8 @@ namespace DiagramDesigner.TestsPruebas
         }
 
 
-        private ObservableCollection<Variables> variablesSalidaSeleccionadas;
-        public ObservableCollection<Variables> VariablesSalidaSeleccionadas
+        private ObservableCollection<Variable> variablesSalidaSeleccionadas;
+        public ObservableCollection<Variable> VariablesSalidaSeleccionadas
         {
             get
             {
@@ -164,32 +175,53 @@ namespace DiagramDesigner.TestsPruebas
             {
                 variablesSalidaSeleccionadas = value;
 
+                
+
                 //dataGridVarsEntrada.ItemsSource = variablesEntrada;
                 //dataGridVarsEntrada.Items.Refresh();
 
                 dataGridVariablesSalidaElegidas.ItemsSource = variablesSalidaSeleccionadas;
                 dataGridVariablesSalidaElegidas.Items.Refresh();
 
-                lstVarsSalidaFinal.ItemsSource = variablesSalidaSeleccionadas;
-                lstVarsSalidaFinal.Items.Refresh();
+                //lstVarsSalidaFinal.ItemsSource = variablesSalidaSeleccionadas;
+                //lstVarsSalidaFinal.Items.Refresh();
+
+                dataVarsSalidaFinal.Variables = variablesSalidaSeleccionadas;
+            }
+        }
+
+        private void CompletarValoresVariablesSeleccionadas(ObservableCollection<Variable> seleccionadas, ObservableCollection<Variable> total)
+        {
+            foreach (Variable item in seleccionadas)
+            {
+              
+                Variable varConTodoCargado = total.Single(x => x.NombreCodigo == item.NombreCodigo);
+
+                item.Valor = varConTodoCargado.Valor;
+                item.Posiciones = varConTodoCargado.Posiciones;                                   
+                
             }
         }
 
         #endregion
 
-        public WindowCreacionTest()
+        public WindowCreacionTest(CompiladorGargar.Compilador comp)
         {
             InitializeComponent();
 
             listaLineasValidas = new List<int>();
+
+            compilador = comp;
         }
 
         private ObservableCollection<Linea> ArmarLineas(string[] arr)
         {
             ObservableCollection<Linea> aux = new ObservableCollection<Linea>();
+            int i = 1;
             foreach (string item in arr)
             {
-                aux.Add(new Linea() { Codigo = item, EsHabilitada = true });
+                aux.Add(new Linea() { Codigo = item, EsHabilitada = true, Numero = i });
+                i++;
             }
 
             return aux;
@@ -225,7 +257,7 @@ namespace DiagramDesigner.TestsPruebas
         
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            VariablesEntradaSeleccionadas = new ObservableCollection<Variables>(variablesEntrada.Where(x => x.EsSeleccionada));
+            VariablesEntradaSeleccionadas = new ObservableCollection<Variable>(variablesEntrada.Where(x => x.EsSeleccionada));
             int i = VariablesEntradaSeleccionadas.Count;
 
             this.wizard.CurrentPage.AllowNext = i > 0;
@@ -235,7 +267,7 @@ namespace DiagramDesigner.TestsPruebas
 
         private void CheckBoxSalida_Click(object sender, RoutedEventArgs e)
         {
-            VariablesSalidaSeleccionadas = new ObservableCollection<Variables>(VariablesSalida.Where(x => x.EsSeleccionada));
+            VariablesSalidaSeleccionadas = new ObservableCollection<Variable>(VariablesSalida.Where(x => x.EsSeleccionada));
             int i = VariablesSalidaSeleccionadas.Count;
 
             this.wizard.CurrentPage.AllowNext = i > 0;
@@ -255,15 +287,51 @@ namespace DiagramDesigner.TestsPruebas
                 chequeada.IsChecked = true;
             }
 
+            
+
             this.wizard.CurrentPage.AllowNext = chequeada.IsChecked == true;
         }
 
         private void ButtonEjecutar_Click(object sender, RoutedEventArgs e)
         {
             bttnEjecutar.IsEnabled = false;
-            stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
-            this.wizard.CurrentPage.AllowBack = false;
-            this.wizard.CurrentPage.AllowNext =  true;
+
+            int lineaElegida = lineas.Single(x => x.EsSeleccionada).Numero;
+
+            this.compilador.MarcarEntrada = true;
+            this.compilador.LineaEntrada = lineaElegida;
+
+            ResultadoCompilacion res = this.compilador.Compilar(this.Codigo);            
+
+            if (res.CompilacionGarGarCorrecta && res.GeneracionEjectuableCorrecto)
+            {
+                try
+                {
+                    EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
+
+                    archResultadoEjecucuion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
+
+                    CompletarValoresVariablesSeleccionadas(variablesEntradaSeleccionadas, archResultadoEjecucuion.Entradas.First().Variables);
+                    CompletarValoresVariablesSeleccionadas(variablesSalidaSeleccionadas, archResultadoEjecucuion.VariablesSalida);
+
+                    VariablesEntradaSeleccionadas = variablesEntradaSeleccionadas;
+                    VariablesSalidaSeleccionadas = variablesSalidaSeleccionadas;
+
+                    stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
+                    this.wizard.CurrentPage.AllowBack = false;
+                    this.wizard.CurrentPage.AllowNext = true;
+                }
+                catch (Exception)
+                {
+                    //Mostrar error pq no se puede continuar
+                }               
+            }
+            else
+            {
+                //Mostrar error pq no se puede continuar
+            }
+
+            this.compilador.MarcarEntrada = false;
         }
 
         private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)

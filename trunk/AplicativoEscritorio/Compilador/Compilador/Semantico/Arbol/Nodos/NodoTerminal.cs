@@ -53,7 +53,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     return NodoTablaSimbolos.TipoDeDato.Booleano;
 
                 case ComponenteLexico.TokenType.Literal:
-                    return NodoTablaSimbolos.TipoDeDato.String;
+                    return NodoTablaSimbolos.TipoDeDato.Texto;
 
                 case ComponenteLexico.TokenType.TipoNumero:
                     return NodoTablaSimbolos.TipoDeDato.Numero;
@@ -62,7 +62,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     return NodoTablaSimbolos.TipoDeDato.Booleano;
          
                 case ComponenteLexico.TokenType.TipoTexto:
-                    return NodoTablaSimbolos.TipoDeDato.String;  
+                    return NodoTablaSimbolos.TipoDeDato.Texto;  
 
 
                 case ComponenteLexico.TokenType.SumaEntero:
@@ -85,7 +85,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
 
                 case ComponenteLexico.TokenType.Concatenacion:
-                    return NodoTablaSimbolos.TipoDeDato.String;
+                    return NodoTablaSimbolos.TipoDeDato.Texto;
 
                 case ComponenteLexico.TokenType.And:
                     return NodoTablaSimbolos.TipoDeDato.Booleano;

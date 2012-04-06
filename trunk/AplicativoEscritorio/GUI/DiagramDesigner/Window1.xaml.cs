@@ -29,6 +29,8 @@ using DiagramDesigner.TestsPruebas;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using DiagramDesigner.DialogWindows;
+using DataAccess.Entidades;
 
 namespace DiagramDesigner
 {
@@ -151,6 +153,17 @@ namespace DiagramDesigner
             this.Loaded += new RoutedEventHandler(Window1_Loaded);
 
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
+
+
+            configApp = new ConfiguracionAplicacion();
+            configApp.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+
+            ToolbarAplicacion.DirEjCreados = configApp.DirectorioEjerciciosCreados;
+            ToolbarAplicacion.DirEjDescargados = configApp.DirectorioEjerciciosDescargados;
+            ToolbarAplicacion.DirResoluciones = configApp.DirectorioResolucionesEjercicios;
+            ToolbarAplicacion.DirTemporales = configApp.DirectorioTemporal;
+            ToolbarAplicacion.DirDefaultAbrir = configApp.DirectorioAbrirDefault; 
             
             ConfigurarCompilador();
 
@@ -164,15 +177,7 @@ namespace DiagramDesigner
             
             
 
-            configApp = new ConfiguracionAplicacion();
-            configApp.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
-                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
-
-            ToolbarAplicacion.DirEjCreados = configApp.DirectorioEjerciciosCreados;
-            ToolbarAplicacion.DirEjDescargados = configApp.DirectorioEjerciciosDescargados;
-            ToolbarAplicacion.DirResoluciones = configApp.DirectorioResolucionesEjercicios;
-            ToolbarAplicacion.DirTemporales = configApp.DirectorioTemporal;
-            ToolbarAplicacion.DirDefaultAbrir = configApp.DirectorioAbrirDefault; 
+            
             //configApp.DirectorioTemporal = "bla";
             //configApp.DirectorioEjerciciosCreados = "bla43";
             //configApp.DirectorioEjerciciosDescargados = "bla1";
@@ -268,12 +273,22 @@ namespace DiagramDesigner
                     break;
 
                 case MessageBoxResult.No:
-                    CrearTestPrueba();
+                    if (e.EsCreacion)
+                    {
+                        CrearTestPrueba();
+                    }
                     break;
 
                 case MessageBoxResult.Yes:
                     IdentarTexto();
-                    CrearTestPrueba();
+                    if (e.EsCreacion)
+                    {
+                        CrearTestPrueba();
+                    }
+                    else
+                    {
+                       
+                    }
                     break;
             }          
 
@@ -290,10 +305,10 @@ namespace DiagramDesigner
                 List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                 aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
 
-                ObservableCollection<Variables> listaVariablesEntrada = TransformarAVariables(aux);
-                ObservableCollection<Variables> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
+                ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
+                ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
 
-                WindowCreacionTest testWindow = new WindowCreacionTest();
+                WindowCreacionTest testWindow = new WindowCreacionTest(this.compilador);
                 testWindow.VariablesEntrada = listaVariablesEntrada;
                 testWindow.VariablesSalida = listaVariablesSalida;
                 testWindow.Codigo = res.CodigoGarGar;
@@ -307,13 +322,13 @@ namespace DiagramDesigner
             }
         }
 
-        private ObservableCollection<Variables> TransformarAVariables(List<NodoTablaSimbolos> list)
+        private ObservableCollection<Variable> TransformarAVariables(List<NodoTablaSimbolos> list)
         {
-            ObservableCollection<Variables> listaRetorno = new ObservableCollection<Variables>();
+            ObservableCollection<Variable> listaRetorno = new ObservableCollection<Variable>();
 
             foreach (var item in list)
             {
-                listaRetorno.Add(new Variables(item));
+                listaRetorno.Add(new Variable(item));
             }
 
             return listaRetorno;
@@ -368,7 +383,7 @@ namespace DiagramDesigner
 
             string directorioActual = Globales.ConstantesGlobales.PathEjecucionAplicacion;
 
-            compilador = new Compilador(modoDebug, directorioActual, directorioActual, "prueba");
+            compilador = new Compilador(modoDebug, configApp.DirectorioTemporal, configApp.DirectorioTemporal, "prueba");
         }
 
         void hotKeyCompilar_HotKeyPressed(HotKey obj)
@@ -391,6 +406,8 @@ namespace DiagramDesigner
         private ResultadoCompilacion Compilar()
         {
             ReiniciarIDEParaCompilacion();
+
+            ConfigurarCompilador();
 
             string programa = this.Esquema.GarGarACompilar;
             ResultadoCompilacion res = this.compilador.Compilar(programa);
@@ -419,6 +436,8 @@ namespace DiagramDesigner
         {
             ReiniciarIDEParaCompilacion();
 
+            ConfigurarCompilador();
+
             string programa = this.Esquema.GarGarACompilar;
             ResultadoCompilacion res = this.compilador.Compilar(programa);
 
@@ -439,6 +458,11 @@ namespace DiagramDesigner
                 }
 
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
+
+                ArchResultado archResultadoEjecucuion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
+
+                ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(archResultadoEjecucuion);
+                resultadosDialog.ShowDialog();
             }
         }
 

@@ -26,8 +26,13 @@ namespace CompiladorGargar
 
         private bool modoDebug { get; set; }
 
+        public bool MarcarEntrada { get; set; }
+        public int LineaEntrada { get; set; }
+
         public Compilador(bool modo, string dirTemp, string dirEjec, string nombre)
         {
+            MarcarEntrada = false;
+            LineaEntrada = -1;
             this.modoDebug = modo;
             //this.ArchivoGramatica = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
             this.ArchivoGramatica = "Gramatica.xml";
@@ -183,6 +188,10 @@ namespace CompiladorGargar
                     res.ArbolSemanticoResultado.CalcularExpresiones();
                     res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
 
+                    Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+
+                    //Esto se usa en la parte de los test de ejecucion. Le agrego que marque el valor de las var de entrada en la linea.
+                    
                     
                     res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
 
@@ -195,7 +204,19 @@ namespace CompiladorGargar
                     {
                         timeStampCod = Stopwatch.GetTimestamp();
 
-                        Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+                        if (this.MarcarEntrada)
+                        {
+                            int lineaEnPascal = bindeoLineasEntrePascalYGarGar.First(x => x.Value == this.LineaEntrada).Key;
+
+                            
+
+                            StringUtils.InsertarLineaEnArchivo(res.ArchTemporalCodigoPascalConRuta,
+                                GeneracionCodigoHelpers.LlamarCrearEntradaEnArchResultado,
+                                lineaEnPascal);
+
+                        }
+
+                        
                         ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta, bindeoLineasEntrePascalYGarGar);
 
                         
@@ -203,6 +224,7 @@ namespace CompiladorGargar
                         res.ResultadoCompPascal = resPas;
                         res.ArchEjecutable = resPas.NombreEjecutable;
                         res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
+                        res.ArchTemporalResultadosEjecucionConRuta = GeneracionCodigoHelpers.ArchivoTemporalEstaEjecucion;
                         res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
 
                         res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;                        
@@ -291,6 +313,8 @@ namespace CompiladorGargar
 
             try
             {
+                archTemporalPascal = string.Format("{0}{1}{0}",'"',archTemporalPascal);
+
                 string exe = Path.Combine(DirectorioEjecutables, NombreEjecutable);
 
                 if (!exe.Contains(".exe"))
@@ -298,10 +322,16 @@ namespace CompiladorGargar
                     exe = string.Concat(exe, ".exe");
                 }
 
-                string argumentoInclude = string.Format("-Fu{0}", Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion, Globales.ConstantesGlobales.NOMBRE_DIR_UNITS_PASCAL));
+                string auxExe = string.Format("{0}{1}{0}", '"', exe);
+
+                string pathIncludes = Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion, Globales.ConstantesGlobales.NOMBRE_DIR_UNITS_PASCAL);
+                pathIncludes = string.Format("{0}{1}{0}", '"', pathIncludes);
+
+
+                string argumentoInclude = string.Format("-Fu{0}", pathIncludes);
                 string argumentoModoCompilacion = string.Format("-Mobjfpc");
-                string argumentoChequearIndicesDeArreglos = string.Format("-Cr");                
-                string argumentoNombreExe = string.Format("-o{0}", exe);
+                string argumentoChequearIndicesDeArreglos = string.Format("-Cr");
+                string argumentoNombreExe = string.Format("-o{0}", auxExe);
 
                 string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumentoInclude, argumentoModoCompilacion, argumentoChequearIndicesDeArreglos, argumentoNombreExe, archTemporalPascal });
 
@@ -334,6 +364,8 @@ namespace CompiladorGargar
             return nombreArch;
         }
 
-     
+
+
+        
     }
 }

@@ -23,6 +23,8 @@ namespace EJEKOR
 
         private static string Ejecutar(string archConRuta, List<string> argumentos, ProcessWindowStyle ventana)
         {
+            archConRuta = string.Format("{0}{1}{0}", '"', archConRuta);
+
             ProcessStartInfo procInfo = new ProcessStartInfo();
             procInfo.CreateNoWindow = false;
             procInfo.FileName = archConRuta;

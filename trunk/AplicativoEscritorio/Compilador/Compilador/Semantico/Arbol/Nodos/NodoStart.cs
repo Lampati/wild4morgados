@@ -103,17 +103,25 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("on E: SysUtils.EDivByZero do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Se intento dividir por cero en la linea ',{0});",GeneracionCodigoHelpers.VariableContadoraLineas));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Division Por Cero", "Se intento dividir por cero. Dicha operacion no esta permitida" ));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on EIteracion: EIteracionInfinitaException do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Iteracion infinita posible encontrada en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Iteracion Infinita", "La iteracion parece no terminar. Por favor revise la condicion para que se cumpla."));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on ERango: SysUtils.ERangeError do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(string.Format("WriteLn('Error Fatal: Se intento acceder a una posicion invalida de un arreglo en la linea ',{0});", GeneracionCodigoHelpers.VariableContadoraLineas));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Posicion invalida de arreglo", "Se intento acceder a una posicion invalida de un arreglo. Por favor revise que no se este intentando acceder al arreglo por fuera de sus limites."));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicación."));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("end;");
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
@@ -135,7 +143,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 string tipo;
                 switch (item.TipoDato)
                 {
-                    case NodoTablaSimbolos.TipoDeDato.String:
+                    case NodoTablaSimbolos.TipoDeDato.Texto:
                         tipo = "string";
                         break;
                     case NodoTablaSimbolos.TipoDeDato.Numero:

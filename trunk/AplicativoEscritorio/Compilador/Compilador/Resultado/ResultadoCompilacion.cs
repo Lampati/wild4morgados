@@ -25,6 +25,8 @@ namespace CompiladorGargar.Resultado
         public string ArchTemporalCodigoPascal { get; set; }
         public string ArchTemporalCodigoPascalConRuta { get; set; }
 
+        public string ArchTemporalResultadosEjecucionConRuta { get; set; }
+
         public string ArchEjecutable { get; set; }
         public string ArchEjecutableConRuta { get; set; }
         public ResultadoCompilacionPascal ResultadoCompPascal { get; set; }

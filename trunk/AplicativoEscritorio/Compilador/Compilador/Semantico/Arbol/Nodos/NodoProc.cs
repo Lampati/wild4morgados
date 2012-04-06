@@ -280,6 +280,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     if (this.Lexema.ToUpper() == "SALIDA")
                     {
                         strBldr.AppendLine(GeneracionCodigoHelpers.ArmarLlamadaResFinalEnArchivo(this.TablaSimbolos));
+                        strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoCorrectoEnArchivo());
                     }
 
                     strBldr.AppendLine("end;");

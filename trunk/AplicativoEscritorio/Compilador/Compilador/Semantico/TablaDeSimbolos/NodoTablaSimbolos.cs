@@ -13,8 +13,8 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
     {
         public enum TipoDeDato
         {
-            [DescriptionAttribute("String")]
-            String,
+            [DescriptionAttribute("Texto")]
+            Texto,
             [DescriptionAttribute("Numero")]
             Numero,
             [DescriptionAttribute("Booleano")]

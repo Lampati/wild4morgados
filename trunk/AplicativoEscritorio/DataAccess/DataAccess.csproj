@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfiguracionAplicacion.cs" />
+    <Compile Include="Entidades\ArchResultado.cs" />
     <Compile Include="Entidades\Ejercicio.cs" />
     <Compile Include="Entidades\EntidadBase.cs" />
+    <Compile Include="Entidades\PosicionArreglo.cs" />
+    <Compile Include="Entidades\Variable.cs" />
     <Compile Include="Excepciones\ExcepcionCriptografia.cs" />
     <Compile Include="Interfases\IPropiedadesEjercicios.cs" />
     <Compile Include="Entidades\ResolucionEjercicio.cs" />
@@ -55,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Compilador\Compilador\CompiladorGarGar.csproj">
+      <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
+      <Name>CompiladorGarGar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Globales\Globales.csproj">
       <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
       <Name>Globales</Name>
