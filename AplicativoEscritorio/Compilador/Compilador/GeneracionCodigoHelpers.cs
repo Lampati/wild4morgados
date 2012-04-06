@@ -290,14 +290,14 @@ namespace CompiladorGargar
                     if (item.EsArreglo)
                     {
 
-                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}',{2},{3}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.ValorInt).AppendLine();
+                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.ValorInt, item.NombreContextoLocal).AppendLine();
 
                     }
                     else
                     {
-                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}',{2}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre).AppendLine();
+                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}','{3}',{2}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreContextoLocal).AppendLine();
                     }
                 }
             }
@@ -309,14 +309,14 @@ namespace CompiladorGargar
                     if (item.EsArreglo)
                     {
 
-                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}',{2},{3}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo, item.ValorInt).AppendLine();
+                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}','{5}',{3},{4}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.ValorInt, item.Contexto.ToString()).AppendLine();
 
                     }
                     else
                     {
-                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}',{2}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo).AppendLine();
+                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}','{4}',{3}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.Contexto.ToString()).AppendLine();
                     }
                 }
             }
@@ -370,14 +370,14 @@ namespace CompiladorGargar
                     if (item.EsArreglo)
                     {
 
-                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnResultado('{0}', '{1}',{1},{2}); ",
-                                    archivoTemporalEstaEjecucion, item.Nombre, item.ValorInt).AppendLine();
+                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnResultado('{0}', '{1}','{3}',{1},{2}); ",
+                                    archivoTemporalEstaEjecucion, item.Nombre, item.ValorInt, item.NombreContextoLocal).AppendLine();
 
                     }
                     else
                     {
-                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnResultado('{0}', '{1}',{1}); ",
-                                    archivoTemporalEstaEjecucion, item.Nombre).AppendLine();
+                        strBldrTotal.AppendFormat("  CrearNuevaVariableEnResultado('{0}', '{1}','{2}',{1}); ",
+                                    archivoTemporalEstaEjecucion, item.Nombre, item.NombreContextoLocal).AppendLine();
                     }
                 }
             }

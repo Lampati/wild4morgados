@@ -194,8 +194,8 @@ namespace DiagramDesigner.TestsPruebas
         {
             foreach (Variable item in seleccionadas)
             {
-              
-                Variable varConTodoCargado = total.Single(x => x.NombreCodigo == item.NombreCodigo);
+
+                Variable varConTodoCargado = total.Single(x => x.Nombre.ToUpper() == item.Nombre.ToUpper() && x.Contexto.ToUpper() == item.Contexto.ToUpper());
 
                 item.Valor = varConTodoCargado.Valor;
                 item.Posiciones = varConTodoCargado.Posiciones;                                   

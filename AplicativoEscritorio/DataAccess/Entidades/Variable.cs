@@ -84,7 +84,7 @@ namespace DataAccess.Entidades
         }
 
 
-        public Variable(string n, string tipoDato, string tipoVar, bool esArr, string val, List<PosicionArreglo> posis)
+        public Variable(string n, string cont, string tipoDato, string tipoVar, bool esArr, string val, List<PosicionArreglo> posis)
         {
             EsSeleccionada = false;
             Nombre = n;
@@ -93,6 +93,7 @@ namespace DataAccess.Entidades
             TipoDato = ConvertirATipoDatoEnum(tipoDato);
             EsArreglo = esArr;
             Valor = val;
+            Contexto = cont;
             //TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
 
             Posiciones = posis;
