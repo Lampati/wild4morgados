@@ -21,6 +21,14 @@ function updateSuccess() {
         $(".buttonSectionOptions").show();
     }
 }
+function updateSuccessView() {
+    if ($("#update-message").html().search("error") == "-1") {
+        window.location.href = $("#update-message").html();
+    }else{
+        $(".update-message-box").show();
+        $(".buttonSectionOptions").show();
+    } 
+}
 
     /********para el manejo de select tags********/
     // The select element to be replaced:

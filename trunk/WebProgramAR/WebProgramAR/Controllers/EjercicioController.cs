@@ -52,10 +52,20 @@ namespace WebProgramAR.Controllers
             ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });  
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
-            return View("Desaprobados",datos);
-
+            switch (estadoEjercicio)
+            {
+                case 1://pendientes
+                    return View("PendientesAprobacion", datos);
+                    break;
+                case 3://desaprobados
+                    return View("Desaprobados", datos);
+                    break;
+                default:
+                    return View("Index", datos);
+                    break;
+            }
         }
-
+        
         private EjercicioGrillaModel ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
@@ -349,10 +359,6 @@ namespace WebProgramAR.Controllers
             try
             {
                 Ejercicio ejercicio = EjercicioNegocio.GetEjercicioByIdOnlyUser(model.Ejercicio.EjercicioId);
-
-
-                
-                
 
                 MembershipUser membUsuario = Membership.GetUser(ejercicio.Usuario.UsuarioNombre);
                 Ejercicio ejercicioFunca = new Ejercicio();

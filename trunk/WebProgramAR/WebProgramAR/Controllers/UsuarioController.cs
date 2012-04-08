@@ -328,13 +328,13 @@ namespace WebProgramAR.Controllers
 
                 if (estado != MembershipCreateStatus.Success)
                 {
-                    string errorDevolver = ObtenerErrorCreacionOModificacionUsuario(estado);
+                    string errorDevolver = "Error:"+ObtenerErrorCreacionOModificacionUsuario(estado);
                     return Content(errorDevolver);
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(model.Usuario.UsuarioNombre, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    //FormsAuthentication.SetAuthCookie(model.Usuario.UsuarioNombre, false /* createPersistentCookie */);
+                    return Content("../Home/Index");
                 }            
 
             }

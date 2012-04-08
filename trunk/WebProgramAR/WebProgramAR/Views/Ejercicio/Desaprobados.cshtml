@@ -19,8 +19,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#filterSearchButton").live('click', function () {
-            $("#filterForm").submit();
+        $("#filterSearchButtonDesaprobados").live('click', function () {
+            $("#filterFormDesaprobados").submit();
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
@@ -30,11 +30,11 @@
                 $(this).removeClass("selected");
             }
         });
-        $('#btnFiltros').live('click', function (event) {
-            if ($('#filtros').css('display') == 'block') {
-                $('#filtros').fadeOut('slow');
+        $('#btnFiltrosDesaprobados').live('click', function (event) {
+            if ($('#filtrosDesaprobados').css('display') == 'block') {
+                $('#filtrosDesaprobados').fadeOut('slow');
             } else {
-                $('#filtros').fadeIn('slow');
+                $('#filtrosDesaprobados').fadeIn('slow');
             }
         });
 
@@ -55,15 +55,15 @@
 </script>
 
 
-<h1>Ejercicios Aprobados</h1>
+<h1>Ejercicios Desaprobados</h1>
 <div id="buttonSection" class="buttonSection">
-    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+    <div id="btnFiltrosDesaprobados" class="btn_filtros boton" >Filtros </div>
 </div>    
-<div id="filtros">
+<div id="filtrosDesaprobados" class="filtros">
     <div class="tituloabm">Seleccion de Ejercicios</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("Desaprobados", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("Desaprobados", "Ejercicio", FormMethod.Post, new { id = "filterFormDesaprobados" }))
         {    
             @Html.ValidationSummary(true)
             <table>
@@ -76,11 +76,11 @@
                     {
                         Text = Html.DisplayTextFor(_ => option).ToString(),
                         Value = option.ToString()
-                    }))
+                    }), new { @id = "nivelEjercicioDesaprobados", @style = "display:none" })
                     </td>
                 </tr>
             </table>
-            <div id="filterSearchButton" class="filterButton"></div>
+            <div id="filterSearchButtonDesaprobados" class="filterButton"></div>
         }
     </div>
 </div>
@@ -154,5 +154,5 @@ else
 
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    convertSelect("nivelEjercicio",1);
+    convertSelect("nivelEjercicioDesaprobados", 1);
 </script>

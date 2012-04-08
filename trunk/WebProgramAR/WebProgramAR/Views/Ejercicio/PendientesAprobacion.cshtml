@@ -18,8 +18,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#filterSearchButton").live('click', function () {
-            $("#filterForm").submit();
+        $("#filterSearchButtonPendientes").live('click', function () {
+            $("#filterFormPendientes").submit();
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
@@ -29,11 +29,11 @@
                 $(this).removeClass("selected");
             }
         });
-        $('#btnFiltros').live('click', function (event) {
-            if ($('#filtros').css('display') == 'block') {
-                $('#filtros').fadeOut('slow');
+        $('#btnFiltrosPendientes').live('click', function (event) {
+            if ($('#filtrosPendientes').css('display') == 'block') {
+                $('#filtrosPendientes').fadeOut('slow');
             } else {
-                $('#filtros').fadeIn('slow');
+                $('#filtrosPendientes').fadeIn('slow');
             }
         });
 
@@ -57,13 +57,13 @@
 
 <h1>Ejercicios Pendientes de Aprobacion</h1>
 <div id="buttonSection" class="buttonSection">
-    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+    <div id="btnFiltrosPendientes" class="btn_filtros boton" >Filtros </div>
 </div>    
-<div id="filtros">
+<div id="filtrosPendientes" class="filtros">
     <div class="tituloabm">Seleccion de Ejercicios</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("PendientesAprobacion", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
+        @using (Html.BeginForm("PendientesAprobacion", "Ejercicio", FormMethod.Post, new { id = "filterFormPendientes" }))
         {    
             @Html.ValidationSummary(true)
             <table>
@@ -76,11 +76,11 @@
                         {
                             Text = Html.DisplayTextFor(_ => option).ToString(),
                             Value = option.ToString()
-                        }))
+                        }), new { @id = "nivelEjercicioPendientes", @style = "display:none" })
                     </td>
                 </tr>
             </table>
-            <div id="filterSearchButton" class="filterButton"></div>
+            <div id="filterSearchButtonPendientes" class="filterButton"></div>
         }
     </div>
 </div>
@@ -121,5 +121,5 @@
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    convertSelect("nivelEjercicio",1);
+    convertSelect("nivelEjercicioPendientes", 1);
 </script>
