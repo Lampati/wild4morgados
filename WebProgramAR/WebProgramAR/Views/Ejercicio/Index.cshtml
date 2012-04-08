@@ -21,7 +21,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#filterSearchButton").live('click', function () {
+        $("#filterSearchButtonEjercicios").live('click', function () {
             $("#filterForm").submit();
         });
         //para el manejo del menu
@@ -32,11 +32,11 @@
                 $(this).removeClass("selected");
             }
         });
-        $('#btnFiltros').live('click', function (event) {
-            if ($('#filtros').css('display') == 'block') {
-                $('#filtros').fadeOut('slow');
+        $('#btnFiltrosEjercicios').live('click', function (event) {
+            if ($('#filtrosEjercicios').css('display') == 'block') {
+                $('#filtrosEjercicios').fadeOut('slow');
             } else {
-                $('#filtros').fadeIn('slow');
+                $('#filtrosEjercicios').fadeIn('slow');
             }
         });
         $('#btnNuevo').click(function (event) {
@@ -70,10 +70,10 @@
 {
     <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
 }
-    <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
+    <div id="btnFiltrosEjercicios" class="btn_filtros boton" >Filtros </div>
 </div>
 
-<div id="filtros">
+<div id="filtrosEjercicios" class="filtros">
     <div class="tituloabm">Seleccion de Ejercicios</div>
 
     <div class="filtrosabm">
@@ -103,7 +103,7 @@
                     </td>
                 </tr>
             </table>
-            <div id="filterSearchButton" class="filterButton"></div>
+            <div id="filterSearchButtonEjercicios" class="filterButton"></div>
         }
     </div>
 </div>
