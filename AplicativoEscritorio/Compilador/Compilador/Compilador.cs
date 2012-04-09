@@ -301,8 +301,11 @@ namespace CompiladorGargar
 
         private void BorrarTemporales()
         {
-            DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.pas");
-            DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.o");
+            if (!string.IsNullOrWhiteSpace(DirectorioTemporales))
+            {
+                DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.pas");
+                DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.o");
+            }
         }
 
 
