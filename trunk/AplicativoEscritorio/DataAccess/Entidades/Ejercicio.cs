@@ -96,7 +96,10 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         #endregion
 
         #region Constructores
-        public Ejercicio() { }
+        public Ejercicio() 
+        {
+            testsPrueba = new List<TestPrueba>();
+        }
 
         /// <summary>
         /// Sólo para desarrollo, borrar una vez productivo!!

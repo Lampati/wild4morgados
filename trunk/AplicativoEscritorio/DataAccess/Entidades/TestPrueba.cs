@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Utilidades.XML;
+using DataAccess.Entidades;
 
 namespace AplicativoEscritorio.DataAccess.Entidades
 {
@@ -12,7 +13,12 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         private List<VariableTest> variablesEntrada;
         private List<VariableTest> variablesSalida;
         private string codigoGarGarProcSalida;
+        private string id;
+        private string nombre;
         private string descripcion;
+        private string mensajesError;
+        private string mensajeErrorEntrada;
+        private string mensajeErrorSalida;
 
         #endregion
 
@@ -40,9 +46,40 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             get { return descripcion; }
             set { descripcion = value; }
         }
+
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public string MensajeError
+        {
+            get { return mensajesError; }
+            set { mensajesError = value; }
+        }
+
+        public string MensajeErrorEntrada
+        {
+            get { return mensajeErrorEntrada; }
+            set { mensajeErrorEntrada = value; }
+        }
+
+        public string MensajeErrorSalida
+        {
+            get { return mensajeErrorSalida; }
+            set { mensajeErrorSalida = value; }
+        }
         #endregion
 
         #region Constructores
+
         public TestPrueba() 
         {
             VariablesEntrada = new List<VariableTest>();
@@ -52,6 +89,61 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         #endregion
 
         #region Métodos
+
+        public bool ValidarVariablesEntrada(List<Variable> variablesEntradaActuales)
+        {
+            return ValidarVariables(variablesEntradaActuales, this.variablesEntrada, this.mensajeErrorEntrada);
+        }
+
+        public bool ValidarVariablesSalida(List<Variable> variablesSalidaActuales)
+        {
+            return ValidarVariables(variablesSalidaActuales, this.variablesSalida, this.mensajeErrorSalida);
+        }
+
+        private bool ValidarVariables(List<Variable> variablesActuales, List<VariableTest> variablesContraComparar, string mensaje)
+        {
+            List<VariableTest> auxiliarEntrada = new List<VariableTest>();
+
+            foreach (var item in variablesActuales)
+            {
+                VariableTest varTest = new VariableTest()
+                {
+                    Descripcion = item.Descripcion,
+                    Nombre = item.Nombre,
+                    ValorEsperado = item.Valor,
+                    EsArreglo = item.EsArreglo,
+                    TipoDato = item.TipoDato.ToString()                    
+                };
+
+                for (int j = 0; j < item.TopeArr; j++)
+                {
+                    varTest.Posiciones.Add(new PosicionVariableTest());
+                }
+               
+
+                auxiliarEntrada.Add(varTest);
+            }
+
+            int i = 0;
+            bool retorno = true;
+            StringBuilder strBldrVarsFaltantes = new StringBuilder();
+
+            while (i < variablesContraComparar.Count)            
+            {
+                if (!auxiliarEntrada.Contains(variablesContraComparar[i]))
+                {
+                    strBldrVarsFaltantes.AppendFormat("La variable {0} es requerida por el test, pero no esta declarada de la misma manera dentro de principal ni como variable global.", variablesContraComparar[i].Nombre).AppendLine();
+                    retorno = false;
+                }
+                i++;
+            }
+
+            mensaje = strBldrVarsFaltantes.ToString();
+
+            return retorno;
+            
+        }
+
         public void ToXML(XMLCreator xml)
         {
             xml.AddElement();
@@ -147,9 +239,17 @@ namespace AplicativoEscritorio.DataAccess.Entidades
     {
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        public string TipoDato { get; set; }
         public string VariableMapeada { get; set; }
 
         public string ValorEsperado { get; set; }
+        public bool EsArreglo { get; set; }
+        public List<PosicionVariableTest> Posiciones { get; set; }
+
+        public VariableTest()
+        {
+            Posiciones = new List<PosicionVariableTest>();
+        }
 
         public void ToXML(XMLCreator xml)
         {
@@ -185,6 +285,37 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.ValorEsperado = xmlElem.FindFirst("ValorEsperado").value;
         }
 
+        public override bool Equals(object obj)
+        {
+            //       
+            // See the full list of guidelines at
+            //   http://go.microsoft.com/fwlink/?LinkID=85237  
+            // and also the guidance for operator== at
+            //   http://go.microsoft.com/fwlink/?LinkId=85238
+            //
+
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            // safe because of the GetType check
+            VariableTest variable = (VariableTest)obj;
+
+            // use this pattern to compare reference members
+            if (variable.Nombre == this.Nombre
+                && variable.TipoDato == this.TipoDato
+                && variable.EsArreglo == this.EsArreglo
+                && variable.Posiciones.Count == this.Posiciones.Count )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #region Object Members
         public override string ToString()
         {
@@ -196,5 +327,11 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             return sb.ToString();
         }
         #endregion
+    }
+
+    public class PosicionVariableTest
+    {
+        public int Posicion { get; set; }
+        public string Valor { get; set; }
     }
 }

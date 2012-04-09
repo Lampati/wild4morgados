@@ -97,6 +97,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Collapsed;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Visible;
                         bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Visible;
+                        bttnConsultarTestPrueba.Visibility = System.Windows.Visibility.Visible;
                         ribbonGroupDetallesDescarga.Visibility = System.Windows.Visibility.Collapsed;
 
                         esEjercicio = true;
@@ -110,6 +111,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                         bttnSolGarGar.Visibility = System.Windows.Visibility.Visible;
                         menuBttnGuardarComoWeb.Visibility = System.Windows.Visibility.Collapsed;
                         bttnCrearTestPrueba.Visibility = System.Windows.Visibility.Collapsed;
+                        bttnConsultarTestPrueba.Visibility = System.Windows.Visibility.Collapsed;
                         ribbonGroupDetallesDescarga.Visibility = System.Windows.Visibility.Visible;
                         
                         esEjercicio = false;
@@ -525,12 +527,17 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void bttnCrearTestPrueba_Click(object sender, RoutedEventArgs e)
         {
-            TestPruebaEventFire(this, new TestPruebaEventArgs(true));
+            TestPruebaEventFire(this, new TestPruebaEventArgs(TestPruebaEventArgs.TipoAccion.Crear));
         }
 
         private void bttnEjecutarTestPrueba_Click(object sender, RoutedEventArgs e)
         {
-            TestPruebaEventFire(this, new TestPruebaEventArgs(false));
+            TestPruebaEventFire(this, new TestPruebaEventArgs(TestPruebaEventArgs.TipoAccion.Ejecutar));
+        }
+
+        private void bttnConsultarTestPrueba_Click(object sender, RoutedEventArgs e)
+        {
+            TestPruebaEventFire(this, new TestPruebaEventArgs(TestPruebaEventArgs.TipoAccion.Consultar));
         }
     }
 }

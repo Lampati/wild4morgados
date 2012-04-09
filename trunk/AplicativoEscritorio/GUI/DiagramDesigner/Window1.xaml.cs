@@ -265,60 +265,107 @@ namespace DiagramDesigner
 
         void ToolbarAplicacion_TestPruebaEvent(object o, TestPruebaEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
-
-            switch (result)
+            switch (e.Accion)
             {
-                case MessageBoxResult.Cancel:                    
+                case TestPruebaEventArgs.TipoAccion.Crear:
+                    CrearTestPrueba();
                     break;
-
-                case MessageBoxResult.No:
-                    if (e.EsCreacion)
-                    {
-                        CrearTestPrueba();
-                    }
+                case TestPruebaEventArgs.TipoAccion.Consultar:
+                    ConsultarTestPrueba();
                     break;
-
-                case MessageBoxResult.Yes:
-                    IdentarTexto();
-                    if (e.EsCreacion)
-                    {
-                        CrearTestPrueba();
-                    }
-                    else
-                    {
-                       
-                    }
+                case TestPruebaEventArgs.TipoAccion.Ejecutar:
+                    EjecutarTestPrueba();
                     break;
-            }          
+                default:
+                    break;
+            }
 
+
+           
+
+        }
+
+        private void EjecutarTestPrueba()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ConsultarTestPrueba()
+        {
+            if (archCargado.TestsPrueba == null || archCargado.TestsPrueba.Count == 0)
+            {
+                MessageBox.Show("No ha creado ningun test de prueba aun. No hay tests de prueba para mostrar", "ProgramAR", MessageBoxButton.OK);
+            }
+            else
+            {
+                ResultadoCompilacion res = Compilar();
+
+                if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                {
+                    List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                    aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
+
+                    ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
+                    ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
+
+                    WindowConsultaTests testWindow = new WindowConsultaTests();
+                    testWindow.VariablesEntrada = listaVariablesEntrada;
+                    testWindow.VariablesSalida = listaVariablesSalida;
+                    testWindow.TestPruebas = new ObservableCollection<TestPrueba>(archCargado.TestsPrueba);
+                    testWindow.Validar();
+
+                    testWindow.Title = "Tests de Prueba - Mis Tests";
+
+                    bool? confirmado = testWindow.ShowDialog();
+
+                    if (confirmado.HasValue && confirmado.Value)
+                    {
+
+                    }
+
+                    
+
+                }
+            }
         }
 
         private void CrearTestPrueba()
         {
-            ResultadoCompilacion res = Compilar();
+            MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
 
-            if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+            if (result != MessageBoxResult.Cancel)
             {
+                if (result == MessageBoxResult.Yes)
+                {
+                    IdentarTexto();
+                }
 
+                ResultadoCompilacion res = Compilar();
 
-                List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
-                aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
+                if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                {
+                    List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                    aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
 
-                ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
-                ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
+                    ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
+                    ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
 
-                WindowCreacionTest testWindow = new WindowCreacionTest(this.compilador);
-                testWindow.VariablesEntrada = listaVariablesEntrada;
-                testWindow.VariablesSalida = listaVariablesSalida;
-                testWindow.Codigo = res.CodigoGarGar;
-                testWindow.ListaLineasValidas = res.ListaLineasValidas;
+                    WindowCreacionTest testWindow = new WindowCreacionTest(this.compilador);
+                    testWindow.VariablesEntrada = listaVariablesEntrada;
+                    testWindow.VariablesSalida = listaVariablesSalida;
+                    testWindow.Codigo = res.CodigoGarGar;
+                    testWindow.ListaLineasValidas = res.ListaLineasValidas;
 
-                testWindow.Title = "Tests de Prueba - Crear";
+                    testWindow.Title = "Tests de Prueba - Crear";
 
-                testWindow.ShowDialog();
+                    testWindow.ShowDialog();
 
+                    if (testWindow.TestGenerado != null)
+                    {
+                        this.archCargado.TestsPrueba.Add(testWindow.TestGenerado);
+                    }
 
+                }
             }
         }
 

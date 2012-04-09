@@ -9,18 +9,28 @@ namespace DiagramDesigner.EventArgsClasses
 {
     public class TestPruebaEventArgs
     {
-        private bool esCreacion;
-        public bool EsCreacion
+
+        public enum TipoAccion
+        {
+            Crear,
+            Consultar,
+            Ejecutar
+        }
+
+        private TipoAccion accion;
+        public TipoAccion Accion
         {
             get
             {
-                return esCreacion;
+                return accion;
             }
         }
 
-        public TestPruebaEventArgs(bool modo)
+
+
+        public TestPruebaEventArgs(TipoAccion t)
         {
-            esCreacion = modo;
+            accion = t;
         }
     }
 }
