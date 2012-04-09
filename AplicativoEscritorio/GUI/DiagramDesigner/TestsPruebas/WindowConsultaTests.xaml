@@ -1,0 +1,44 @@
+﻿<Window x:Class="DiagramDesigner.TestsPruebas.WindowConsultaTests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WindowConsultaTests" Height="300" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" Width="430" HorizontalAlignment="Left" Name="lstTests" ItemsSource="{Binding TestsPrueba}" > 
+            <ListView.View>
+                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" >
+                    <GridView.Columns>
+                       
+                        <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
+                        <GridViewColumn Header="Descripcion" Width="200" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                        <GridViewColumn Header="" Width="32">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="48px" Height="48px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
+                                        <Image Source="/Resources/Images/cancel_48.png" Width="48px" Height="48px"></Image>
+                                    </Button>                                    
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="" Width="32">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="48px" Height="48px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
+                                        <Image Source="/Resources/Images/cancel_48.png" Width="48px" Height="48px"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Width="Auto">
+            <Button Width="20px" Content="Cancelar" HorizontalAlignment="Left" Margin="20,0,0,0" Click="ButtonCancelar_Click"/>
+            <Button Width="20px" Content="Aceptar" HorizontalAlignment="Right" Margin="0,0,20,0" Click="ButtonAceptar_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

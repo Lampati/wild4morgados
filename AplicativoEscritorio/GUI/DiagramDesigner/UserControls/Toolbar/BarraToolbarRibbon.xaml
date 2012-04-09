@@ -379,8 +379,9 @@
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Crear Test..." Name="bttnCrearTestPrueba" ContextMenu="{Binding null}" Click="bttnCrearTestPrueba_Click"></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Ejecutar Test..." Name="bttnEjecutarTestPrueba" ContextMenu="{Binding null}" Click="bttnEjecutarTestPrueba_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Mis Tests" Name="bttnConsultarTestPrueba" ContextMenu="{Binding null}" Click="bttnConsultarTestPrueba_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Crear Test" Name="bttnCrearTestPrueba" ContextMenu="{Binding null}" Click="bttnCrearTestPrueba_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Ejecutar Test" Name="bttnEjecutarTestPrueba" ContextMenu="{Binding null}" Click="bttnEjecutarTestPrueba_Click"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
 
 

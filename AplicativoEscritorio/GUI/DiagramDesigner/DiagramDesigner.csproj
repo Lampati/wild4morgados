@@ -95,6 +95,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TestsPruebas\WindowConsultaTests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestsPruebas\WindowCreacionTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +230,9 @@
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
     <Compile Include="TestsPruebas\Linea.cs" />
+    <Compile Include="TestsPruebas\WindowConsultaTests.xaml.cs">
+      <DependentUpon>WindowConsultaTests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestsPruebas\WindowCreacionTest.xaml.cs">
       <DependentUpon>WindowCreacionTest.xaml</DependentUpon>
     </Compile>

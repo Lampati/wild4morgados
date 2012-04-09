@@ -17,6 +17,7 @@ using AplicativoEscritorio.DataAccess.Entidades;
 using DataAccess.Entidades;
 using CompiladorGargar.Resultado;
 using EJEKOR;
+using Utilidades;
 
 namespace DiagramDesigner.TestsPruebas
 {
@@ -229,6 +230,7 @@ namespace DiagramDesigner.TestsPruebas
 
         void wizard_Cancelled(object sender, RoutedEventArgs e)
         {
+            this.TestGenerado = null;
             Close();
         }
 
@@ -238,18 +240,97 @@ namespace DiagramDesigner.TestsPruebas
 
             TestGenerado = new TestPrueba();
 
+            TestGenerado.Nombre = Nombre;
             TestGenerado.Descripcion = Descripcion;
+
+
 
             foreach (var item in variablesEntradaSeleccionadas)
             {
-                TestGenerado.VariablesEntrada.Add(new VariableTest()
+                VariableTest varTest = new VariableTest()
                 {
                     Descripcion = item.Descripcion,
                     Nombre = item.Nombre,
-                    ValorEsperado = item.Valor
-                   
-                });
+                    ValorEsperado = item.Valor,
+                    EsArreglo = item.EsArreglo,
+                    TipoDato = item.TipoDato.ToString()
+                };
+
+                foreach (var pos in item.Posiciones)
+                {
+                    varTest.Posiciones.Add(new PosicionVariableTest() { Posicion = pos.Posicion, Valor = pos.Valor });
+                }
+                
+                TestGenerado.VariablesEntrada.Add(varTest);
             }
+
+            StringBuilder strBldrCodigoGarGarSalida = new StringBuilder();
+            string controladorVar = "si ({0} = {1}) entonces \r\n Mostrar('La variable {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La variable {0} debia contener el valor {2} pero contenia el valor ',{0}); \r\nfinsi;";
+            string controladorPosArr = "si ({0}[{3}] = {1}) entonces \r\n Mostrar('La posicion {3} del arreglo {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La posicion {3} del arreglo {0} debia contener el valor {2} pero contenia el valor ',{0}); \r\nfinsi;";
+
+            foreach (var item in variablesSalidaSeleccionadas)
+            {
+                VariableTest varTest = new VariableTest()
+                {
+                    Descripcion = item.Descripcion,
+                    Nombre = item.Nombre,
+                    ValorEsperado = item.Valor,
+                    EsArreglo = item.EsArreglo
+                };
+
+                foreach (var pos in item.Posiciones)
+                {
+                    varTest.Posiciones.Add(new PosicionVariableTest() { Posicion = pos.Posicion, Valor = pos.Valor });
+                }
+
+                TestGenerado.VariablesSalida.Add(varTest);
+
+                if (item.EsArreglo)
+                {
+                    for (int j = 0; j < item.Posiciones.Count; j++)
+                    {
+                        switch (item.TipoDato)
+                        {
+                            case NodoTablaSimbolos.TipoDeDato.Texto:
+                                strBldrCodigoGarGarSalida.AppendFormat(controladorPosArr, item.Nombre, string.Format("{0}{1}{0}", "'", item.Posiciones[j].Valor), string.Format("{0}{1}{0}",'"', item.Posiciones[j].Valor), item.Posiciones[j].Posicion).AppendLine(); ;
+                                break;
+                            case NodoTablaSimbolos.TipoDeDato.Numero:
+                                strBldrCodigoGarGarSalida.AppendFormat(controladorPosArr, item.Nombre, item.Posiciones[j].Valor, item.Posiciones[j].Valor, item.Posiciones[j].Posicion).AppendLine();
+                                break;
+                            case NodoTablaSimbolos.TipoDeDato.Booleano:
+                                string aux = item.Posiciones[j].Valor.ToUpper() == "TRUE" ? "verdadero" : "falso";
+                                strBldrCodigoGarGarSalida.AppendFormat(controladorPosArr, item.Nombre, aux, aux, item.Posiciones[j].Posicion).AppendLine(); 
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    switch (item.TipoDato)
+                    {
+                        case NodoTablaSimbolos.TipoDeDato.Texto:
+                            strBldrCodigoGarGarSalida.AppendFormat(controladorVar, item.Nombre, string.Format("{0}{1}{0}", "'", item.Valor), string.Format("{0}{1}{0}",'"', item.Valor)).AppendLine();; 
+                            break;
+                        case NodoTablaSimbolos.TipoDeDato.Numero:
+                            strBldrCodigoGarGarSalida.AppendFormat(controladorVar, item.Nombre, item.Valor, item.Valor).AppendLine();
+                            break;
+                        case NodoTablaSimbolos.TipoDeDato.Booleano:
+                            string aux = item.Valor.ToUpper() == "TRUE" ? "verdadero" : "falso";
+                            strBldrCodigoGarGarSalida.AppendFormat(controladorVar, item.Nombre, aux, aux ).AppendLine();
+                            break;                        
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            TestGenerado.CodigoGarGarProcSalida = strBldrCodigoGarGarSalida.ToString();
+
+            TestGenerado.Id = RandomManager.RandomStringConPrefijo(40, true);
+
 
             Close();
         }

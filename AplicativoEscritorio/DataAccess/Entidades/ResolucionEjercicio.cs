@@ -25,7 +25,10 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         #endregion
 
         #region Constructores
-        public ResolucionEjercicio() { }
+        public ResolucionEjercicio() 
+        {
+            ejercicio = new Ejercicio();
+        }
 
         public ResolucionEjercicio(Ejercicio ej)
         {
