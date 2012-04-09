@@ -149,6 +149,14 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.AddElement();
             xml.SetTitle("TestPrueba");
             xml.AddElement();
+            xml.SetTitle("Id");
+            xml.SetValue(this.Id);
+            xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("Nombre");
+            xml.SetValue(this.nombre);
+            xml.LevelUp();
+            xml.AddElement();
             xml.SetTitle("CodigoGarGarProcSalida");
             xml.SetValue(this.codigoGarGarProcSalida);
             xml.LevelUp();
@@ -183,6 +191,8 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             this.codigoGarGarProcSalida = xmlElem.FindFirst("CodigoGarGarProcSalida").value;
             this.descripcion = xmlElem.FindFirst("Descripcion").value;
+            this.nombre = xmlElem.FindFirst("Nombre").value;
+            this.id = xmlElem.FindFirst("Id").value;
 
             XMLElement xmlEntradas = xmlElem.FindFirst("VariablesEntrada");
             if (!Object.Equals(xmlEntradas, null))
@@ -260,17 +270,29 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetValue(this.Nombre);
             xml.LevelUp();
             xml.AddElement();
-            xml.SetTitle("Descripcion");
-            xml.SetValue(this.Descripcion);
+            xml.SetTitle("EsArreglo");
+            xml.SetValue(this.EsArreglo.ToString());
             xml.LevelUp();
             xml.AddElement();
-            xml.SetTitle("VariableMapeada");
-            xml.SetValue(this.VariableMapeada);
+            xml.SetTitle("TipoDato");
+            xml.SetValue(this.Nombre);
             xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("Descripcion");
+            xml.SetValue(this.Descripcion);
+            xml.LevelUp();           
             xml.AddElement();
             xml.SetTitle("ValorEsperado");
             xml.SetValue(this.ValorEsperado);
             xml.LevelUp();
+            if (!Object.Equals(this.Posiciones, null))
+            {
+                xml.AddElement();
+                xml.SetTitle("Posiciones");
+                foreach (PosicionVariableTest pos in this.Posiciones)
+                    pos.ToXML(xml);
+                xml.LevelUp();
+            }
             xml.LevelUp();
         }
 
@@ -281,7 +303,6 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             this.Nombre = xmlElem.FindFirst("Nombre").value;
             this.Descripcion = xmlElem.FindFirst("Descripcion").value;
-            this.VariableMapeada = xmlElem.FindFirst("VariableMapeada").value;
             this.ValorEsperado = xmlElem.FindFirst("ValorEsperado").value;
         }
 
@@ -333,5 +354,31 @@ namespace AplicativoEscritorio.DataAccess.Entidades
     {
         public int Posicion { get; set; }
         public string Valor { get; set; }
+
+
+        public void ToXML(XMLCreator xml)
+        {
+            xml.AddElement();
+            xml.SetTitle("PosicionVariableTest");
+            xml.AddElement();
+            xml.SetTitle("Posicion");
+            xml.SetValue(this.Posicion.ToString());
+            xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("Valor");
+            xml.SetValue(this.Valor);
+            xml.LevelUp();            
+            xml.LevelUp();
+        }
+
+        public void FromXML(XMLElement xmlElem)
+        {
+            if (Object.Equals(xmlElem, null))
+                throw new NullReferenceException("El XML para el objeto PosicionVariableTest se encuentra nulo.");
+
+            this.Posicion = Convert.ToInt32(xmlElem.FindFirst("Posicion").value);
+            this.Valor = xmlElem.FindFirst("Valor").value;
+        }
+
     }
 }
