@@ -74,6 +74,8 @@ namespace DiagramDesigner.TestsPruebas
                         variable.Posiciones.Add(new PosicionArreglo(pos.Posicion, pos.Valor));
                     }
 
+                    variable.SetearDatosArregloPostCargadoPosiciones();
+
                     auxListaEntrada.Add(variable);
 
                 }
@@ -89,6 +91,8 @@ namespace DiagramDesigner.TestsPruebas
                     {
                         variable.Posiciones.Add(new PosicionArreglo(pos.Posicion, pos.Valor));
                     }
+
+                    variable.SetearDatosArregloPostCargadoPosiciones();
 
                     auxListaSalida.Add(variable);
 

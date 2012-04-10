@@ -320,10 +320,20 @@ namespace DiagramDesigner
 
                     if (confirmado.HasValue && confirmado.Value)
                     {
+                        //Por si elegi borrar alguno
+                        List<string> idsRemover = new List<string>();
+                       
+                        foreach (TestPrueba item in archCargado.TestsPrueba)
+                        {
+                            if (!testWindow.TestPruebas.Contains(item))
+                            {
+                                idsRemover.Add(item.Id);
+                            }
+                        }
 
+                        archCargado.TestsPrueba.RemoveAll(x => idsRemover.Contains(x.Id));
+                        
                     }
-
-                    
 
                 }
             }

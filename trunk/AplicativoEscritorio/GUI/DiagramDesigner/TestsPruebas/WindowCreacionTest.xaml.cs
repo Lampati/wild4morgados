@@ -253,7 +253,8 @@ namespace DiagramDesigner.TestsPruebas
                     Nombre = item.Nombre,
                     ValorEsperado = item.Valor,
                     EsArreglo = item.EsArreglo,
-                    TipoDato = item.TipoDato.ToString()
+                    TipoDato = item.TipoDato.ToString(),
+                    Contexto = item.Contexto
                 };
 
                 foreach (var pos in item.Posiciones)
@@ -275,7 +276,9 @@ namespace DiagramDesigner.TestsPruebas
                     Descripcion = item.Descripcion,
                     Nombre = item.Nombre,
                     ValorEsperado = item.Valor,
-                    EsArreglo = item.EsArreglo
+                    EsArreglo = item.EsArreglo,
+                    TipoDato = item.TipoDato.ToString(),
+                    Contexto = item.Contexto
                 };
 
                 foreach (var pos in item.Posiciones)
