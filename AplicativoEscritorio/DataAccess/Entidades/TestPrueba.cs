@@ -112,7 +112,8 @@ namespace AplicativoEscritorio.DataAccess.Entidades
                     Nombre = item.Nombre,
                     ValorEsperado = item.Valor,
                     EsArreglo = item.EsArreglo,
-                    TipoDato = item.TipoDato.ToString()                    
+                    TipoDato = item.TipoDato.ToString(),
+                    Contexto = item.Contexto
                 };
 
                 for (int j = 0; j < item.TopeArr; j++)
@@ -155,7 +156,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.AddElement();
             xml.SetTitle("Nombre");
             xml.SetValue(this.nombre);
-            xml.LevelUp();
+            xml.LevelUp();    
             xml.AddElement();
             xml.SetTitle("CodigoGarGarProcSalida");
             xml.SetValue(this.codigoGarGarProcSalida);
@@ -248,6 +249,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
     public class VariableTest
     {
         public string Nombre { get; set; }
+        public string Contexto { get; set; }
         public string Descripcion { get; set; }
         public string TipoDato { get; set; }
         public string VariableMapeada { get; set; }
@@ -270,12 +272,16 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetValue(this.Nombre);
             xml.LevelUp();
             xml.AddElement();
+            xml.SetTitle("Contexto");
+            xml.SetValue(this.Contexto);
+            xml.LevelUp();
+            xml.AddElement();
             xml.SetTitle("EsArreglo");
             xml.SetValue(this.EsArreglo.ToString());
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("TipoDato");
-            xml.SetValue(this.Nombre);
+            xml.SetValue(this.TipoDato);
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("Descripcion");
@@ -302,8 +308,26 @@ namespace AplicativoEscritorio.DataAccess.Entidades
                 throw new NullReferenceException("El XML para el objeto VariableTest se encuentra nulo.");
 
             this.Nombre = xmlElem.FindFirst("Nombre").value;
+            this.Contexto = xmlElem.FindFirst("Contexto").value;
             this.Descripcion = xmlElem.FindFirst("Descripcion").value;
             this.ValorEsperado = xmlElem.FindFirst("ValorEsperado").value;
+            this.TipoDato = xmlElem.FindFirst("TipoDato").value;
+            this.Contexto = xmlElem.FindFirst("Contexto").value;
+            this.EsArreglo = Convert.ToBoolean(xmlElem.FindFirst("EsArreglo").value);
+
+            XMLElement xmlPosiciones = xmlElem.FindFirst("Posiciones");
+            if (!Object.Equals(xmlPosiciones, null))
+            {
+                List<PosicionVariableTest> varsPos = new List<PosicionVariableTest>();
+                foreach (XMLElement xmlPosicion in xmlPosiciones.childs)
+                {
+                    PosicionVariableTest vt = new PosicionVariableTest();
+                    vt.FromXML(xmlPosicion);
+                    varsPos.Add(vt);
+                }
+
+                this.Posiciones = varsPos;
+            }
         }
 
         public override bool Equals(object obj)
@@ -326,7 +350,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             // use this pattern to compare reference members
             if (variable.Nombre == this.Nombre
                 && variable.TipoDato == this.TipoDato
-                && variable.EsArreglo == this.EsArreglo
+                && variable.EsArreglo == this.EsArreglo                
                 && variable.Posiciones.Count == this.Posiciones.Count )
             {
                 return true;

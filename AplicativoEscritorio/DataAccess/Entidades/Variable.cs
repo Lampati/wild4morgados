@@ -91,17 +91,32 @@ namespace DataAccess.Entidades
         {
             EsSeleccionada = false;
             Nombre = n;
-            Descripcion = string.Empty;
-            TamanioTipo = tipoVar;
-            TipoDato = ConvertirATipoDatoEnum(tipoDato);
             EsArreglo = esArr;
+            Descripcion = string.Empty;
+            
+            TipoDato = ConvertirATipoDatoEnum(tipoDato);
+            
             Valor = val;
             Contexto = cont;
-            TopeArr = posis.Count;
+            if (posis != null)
+            {
+                TopeArr = posis.Count;
+            }
             //TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
 
             Posiciones = posis;
+
+            if (!string.IsNullOrWhiteSpace(tipoVar))
+            {
+                TamanioTipo = tipoVar;
+            }
+            else
+            {
+                TamanioTipo = (EsArreglo) ? string.Format("Arreglo con tope {0}", TopeArr) : "Variable";
+            }
         }
+
+
 
         private NodoTablaSimbolos.TipoDeDato ConvertirATipoDatoEnum(string tipoDato)
         {
@@ -124,6 +139,11 @@ namespace DataAccess.Entidades
             return retorno;
         }
 
+        public void SetearTipoVariable()
+        {            
+            
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -134,5 +154,11 @@ namespace DataAccess.Entidades
         }
 
         #endregion
+
+        public void SetearDatosArregloPostCargadoPosiciones()
+        {
+            TopeArr = Posiciones.Count;
+            TamanioTipo = (EsArreglo) ? string.Format("Arreglo con tope {0}", TopeArr) : "Variable";            
+        }
     }
 }
