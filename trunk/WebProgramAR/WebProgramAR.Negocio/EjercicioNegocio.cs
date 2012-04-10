@@ -21,10 +21,11 @@ namespace WebProgramAR.Negocio
         {
             return EjercicioDA.GetEjercicioNotUsuario(usuarioId, cursoId, estadoEjercicio, nivelEjercicio, userLogueado);
         }
-        public static IEnumerable<Ejercicio> GetEjerciciosNotCurso(string nombre, int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, bool global, Usuario userLogueado, WebProgramAREntities db)
-        {
-            return EjercicioDA.GetEjerciciosNotCurso(nombre,usuarioId, cursoId, estadoEjercicio, nivelEjercicio,global, userLogueado,db);
-        }
+        //public static IEnumerable<Ejercicio> GetEjerciciosNotCurso(string nombre, int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, bool global, Usuario userLogueado)
+        //{
+        //    return EjercicioDA.GetEjerciciosNotCurso(nombre,usuarioId, cursoId, estadoEjercicio, nivelEjercicio,global, userLogueado);
+        //}
+
         public static void Alta(Ejercicio Ejercicio)
         {
             Ejercicio.FechaAlta = DateTime.Now;
