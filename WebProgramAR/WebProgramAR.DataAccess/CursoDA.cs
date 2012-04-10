@@ -40,8 +40,6 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-   
-
         private static void Modificar(Curso cursoModif, bool asignarEjercicios, WebProgramAREntities db)
         {
             Curso cursoOrig = db.Cursos.Single(u => u.CursoId == cursoModif.CursoId);

@@ -8,7 +8,7 @@
     
     ViewBag.Title = "Ejercicio";
 
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: true);
 
     grid.Bind(Model.Ejercicios, autoSortAndPage: true, rowCount: Model.Cantidad);
 

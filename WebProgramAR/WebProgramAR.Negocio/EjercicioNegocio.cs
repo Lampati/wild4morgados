@@ -21,6 +21,10 @@ namespace WebProgramAR.Negocio
         {
             return EjercicioDA.GetEjercicioNotUsuario(usuarioId, cursoId, estadoEjercicio, nivelEjercicio, userLogueado);
         }
+        public static IEnumerable<Ejercicio> GetEjerciciosNotCurso(string nombre, int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, bool global, Usuario userLogueado, WebProgramAREntities db)
+        {
+            return EjercicioDA.GetEjerciciosNotCurso(nombre,usuarioId, cursoId, estadoEjercicio, nivelEjercicio,global, userLogueado,db);
+        }
         public static void Alta(Ejercicio Ejercicio)
         {
             Ejercicio.FechaAlta = DateTime.Now;
@@ -41,12 +45,18 @@ namespace WebProgramAR.Negocio
         {
             return EjercicioDA.ContarCantidad(nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global,userLogueado);
         }
-
+        public static int ContarCantidadNotCurso(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
+        {
+            return EjercicioDA.ContarCantidadNotCurso(nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global, userLogueado);
+        }
         public static IEnumerable<Ejercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
         {
             return EjercicioDA.ObtenerPagina(paginaActual, personasPorPagina, sortColumns, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global,userLogueado).ToList();
         }
-
+        public static IEnumerable<Ejercicio> ObtenerPaginaNotCurso(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
+        {
+            return EjercicioDA.ObtenerPaginaNotCurso(paginaActual, personasPorPagina, sortColumns, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global, userLogueado).ToList();
+        }
 
 
         public static Ejercicio GetEjercicioByIdOnlyUser(int id)

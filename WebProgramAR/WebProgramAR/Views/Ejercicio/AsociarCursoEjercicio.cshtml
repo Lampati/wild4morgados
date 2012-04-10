@@ -4,10 +4,13 @@
     Layout = null;
     ViewBag.Title = "Asociaciones";
 
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid gridCurso = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
 
-    grid.Bind(Model.Ejercicios, autoSortAndPage: true, rowCount: Model.Cantidad);
+    gridCurso.Bind(ViewBag.EjerciciosCurso, autoSortAndPage: true, rowCount: Model.Cantidad);
 
+    gridNotCurso.Bind(ViewBag.EjerciciosNotCurso, autoSortAndPage: true, rowCount: Model.Cantidad);
+    
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 
     List<short> listaNivelesEjercicio = (List<short>)ViewBag.NivelesEjercicio;
@@ -43,10 +46,15 @@
         $('.botonDesasociar').click(function (event) { return false; });
 
         
-        var sortcol = '@grid.SortColumn';
+        var sortcol = '@gridCurso.SortColumn';
 
         if (sortcol != '')
-            $('thead > tr > th > a[href*="sort=@grid.SortColumn"]').parent().addClass('@(grid.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
+            $('thead > tr > th > a[href*="sort=@gridCurso.SortColumn"]').parent().addClass('@(gridCurso.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
+
+        var sortcolNotCurso = '@gridNotCurso.SortColumn';
+
+        if (sortcolNotCurso != '')
+            $('thead > tr > th > a[href*="sort=@gridNotCurso.SortColumn"]').parent().addClass('@(gridNotCurso.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
 
         //FuncionesAutorizadas('@funcionesAutorizadas');
     });
@@ -98,7 +106,7 @@
 
 <div id="contenedor-gridA">
 
-    @grid.GetHtml(
+    @gridCurso.GetHtml(
         tableStyle: "grid",
         fillEmptyRows: false,
         rowStyle: "gridRow",
@@ -111,11 +119,11 @@
         nextText: ">",
             lastText: " >>",
         columns: new[] {
-        grid.Column("EjercicioId", header: "Identificador"),
-        grid.Column("Enunciado", header: "Enunciado"),
-        grid.Column("NivelEjercicio", header: "Nivel"),
-        grid.Column("Usuario.UsuarioNombre", header: "Usuario"),        
-        grid.Column("", 
+        gridCurso.Column("EjercicioId", header: "Identificador"),
+        gridCurso.Column("Enunciado", header: "Enunciado"),
+        gridCurso.Column("NivelEjercicio", header: "Nivel"),
+        gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+        gridCurso.Column("", 
               header: "",
               format: @<text>
                         <input type="image" alt="Desasociar" src="@Url.Content("~/Content/images/remove.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
@@ -177,7 +185,7 @@
 
 <div id="contenedor-gridNA">
 
-    @grid.GetHtml(
+    @gridNotCurso.GetHtml(
         tableStyle: "grid",
         fillEmptyRows: false,
         rowStyle: "gridRow",
@@ -190,11 +198,11 @@
         nextText: ">",
             lastText: " >>",
         columns: new[] {
-        grid.Column("EjercicioId", header: "Identificador"),
-        grid.Column("Enunciado", header: "Enunciado"),
-        grid.Column("NivelEjercicio", header: "Nivel"),
-        grid.Column("Usuario.UsuarioNombre", header: "Usuario"),        
-        grid.Column("", 
+        gridNotCurso.Column("EjercicioId", header: "Identificador"),
+        gridNotCurso.Column("Enunciado", header: "Enunciado"),
+        gridNotCurso.Column("NivelEjercicio", header: "Nivel"),
+        gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+        gridNotCurso.Column("", 
               header: "",
               format: @<text>
                         <input type="image" alt="Asociar" src="@Url.Content("~/Content/images/append.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
