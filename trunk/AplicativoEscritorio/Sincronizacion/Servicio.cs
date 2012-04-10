@@ -34,11 +34,38 @@ namespace Sincronizacion
 
         public int EjerciciosGlobalesCount()
         {
-            object o = proxy.InvocarMetodo("EjerciciosGlobalesCount");
+            string ids = this.ListadoIds;
+            object o = proxy.InvocarMetodo("EjerciciosGlobalesCount", new object[] { ids });
             if (!Object.Equals(o, null))
                 return (int)o;
 
             return 0;
+        }
+
+        public void EjerciciosPorCurso(int cursoId)
+        {
+            string ids = this.ListadoIds;
+            object o = proxy.InvocarMetodo("EjerciciosXCurso", new object[] { ids, cursoId });
+            if (!Object.Equals(o, null))
+                this.GuardarEjercicios(o.ToString());
+        }
+
+        public int EjerciciosPorCursoCount(int cursoId)
+        {
+            string ids = this.ListadoIds;
+            object o = proxy.InvocarMetodo("EjerciciosXCursoCount", new object[] { ids, cursoId });
+            if (!Object.Equals(o, null))
+                return (int)o;
+
+            return 0;
+        }
+
+        public void EjerciciosPorId(int ejercicioId)
+        {
+            string ids = this.ListadoIds;
+            object o = proxy.InvocarMetodo("EjerciciosXCurso", new object[] { ids, cursoId });
+            if (!Object.Equals(o, null))
+                this.GuardarEjercicios(o.ToString());
         }
 
         private string ListadoIds

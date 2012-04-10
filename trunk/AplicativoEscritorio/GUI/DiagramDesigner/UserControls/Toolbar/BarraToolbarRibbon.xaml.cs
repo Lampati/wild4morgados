@@ -382,6 +382,19 @@ namespace DiagramDesigner.UserControls.Toolbar
             }        
         }
 
+        private Sincronizacion.Servicio servicio;
+
+        private Sincronizacion.Servicio Servicio
+        {
+            get
+            {
+                if (Object.Equals(servicio, null))
+                    servicio = new Sincronizacion.Servicio();
+
+                return servicio;
+            }
+        }
+
         private void btnSincroGeneral_Click(object sender, RoutedEventArgs e)
         {
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
@@ -398,8 +411,7 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             if (propertyEditorWindow.ShowDialog() == true)
             {
-                Sincronizacion.Servicio sv = new Sincronizacion.Servicio();
-                sv.EjerciciosGlobales();
+                this.Servicio.EjerciciosGlobales();
             }
         }
 
@@ -423,7 +435,9 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             if (propertyEditorWindow.ShowDialog() == true)
             {
-
+                int cursoId = 0;
+                if (int.TryParse(txtCurso.Text, out cursoId))
+                    this.Servicio.EjerciciosPorCurso(cursoId);
             }
         }
 
@@ -447,7 +461,9 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             if (propertyEditorWindow.ShowDialog() == true)
             {
-
+                int ejercicioId = 0;
+                //if (int.TryParse(txtEjercicio.Text, out ejercicioId))
+                    //this.Servicio.
             }
         }
 

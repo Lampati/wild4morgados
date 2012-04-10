@@ -69,6 +69,7 @@ namespace DiagramDesigner.DialogWindows
             btnAceptar.Margin = new Thickness(20, 0, 0, 0);
             btnAceptar.Width = 75;
             btnAceptar.Content = "Aceptar";
+            btnAceptar.IsDefault = true;
 
             Button btnCancelar = new Button();
             btnCancelar.Name = "btnCancelar";
@@ -140,14 +141,22 @@ namespace DiagramDesigner.DialogWindows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            bool primero = true;
             foreach (ObjetoVentana ov in this.objetos)
                 if (ov.SeCompleto)
                 {
                     if (ov.Controls != null)
                     {
-                        double max = 0;
+                        double max = 0;                        
                         foreach (Control ctrl in ov.Controls)
                         {
+                            if (primero)
+                                if (ctrl.Focusable)
+                                {
+                                    ctrl.Focus();
+                                    primero = false;
+                                }                                    
+
                             if (ctrl.ActualHeight > max)
                                 max = ctrl.ActualHeight;
                         }
