@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TestsPruebas\WindowDetalleConsultaTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Mensajes\BarraMensajes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +239,9 @@
     </Compile>
     <Compile Include="TestsPruebas\WindowCreacionTest.xaml.cs">
       <DependentUpon>WindowCreacionTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestsPruebas\WindowDetalleConsultaTest.xaml.cs">
+      <DependentUpon>WindowDetalleConsultaTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
