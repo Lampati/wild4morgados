@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
-using System.Web.Security;
-using WebProgramAR.MailSender;
 
 namespace WebProgramAR.Controllers
 {
@@ -111,7 +109,51 @@ namespace WebProgramAR.Controllers
 
             return datos;
         }
+        private EjercicioGrillaModel ObtenerEjercicioGrillaModelNotCurso(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
+        {
+            //Pasar la cantidad por pagina a una constante mas copada.
+            int cantidadPorPaginaTPC = 10;
 
+            Usuario userLogueado = GetUsuarioLogueado();
+
+            var numUsuarios = EjercicioNegocio.ContarCantidadNotCurso(nombre,
+                     usuarioId,
+                     cursoId,
+                     estadoEjercicio,
+                     nivelEjercicio,
+                     global,
+                     userLogueado);
+
+            sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
+
+            var validColumns = new[] { "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+
+            if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
+                sort = "Nombre";
+
+            var ejers = EjercicioNegocio.ObtenerPaginaNotCurso(
+                     page,
+                     cantidadPorPaginaTPC,
+                     sort + " " + sortDir,
+                     nombre,
+                     usuarioId,
+                     cursoId,
+                     estadoEjercicio,
+                     nivelEjercicio,
+                     global,
+                     userLogueado
+            );
+
+            var datos = new EjercicioGrillaModel()
+            {
+                Cantidad = numUsuarios,
+                CantidadPorPagina = cantidadPorPaginaTPC,
+                Ejercicios = ejers,
+                PaginaActual = page
+            };
+
+            return datos;
+        }
         private void Initilization()
         {
             //List<NivelEjercicio> listaNivelesEjercicio = new List<NivelEjercicio>();
@@ -296,18 +338,20 @@ namespace WebProgramAR.Controllers
 
         public ActionResult AsociarCursoEjercicio(int page = 1, string sort = "Nombre", string sortDir = "ASC",
              int usuarioId = -1, int cursoId = -1, string nombre = "",
-             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false)
+             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false,
+                int pageNotCurso = 1, string sortNotCurso = "Nombre", string sortDirNotCurso = "ASC",
+              string nombreNotCurso = "",int estadoEjercicioNotCurso = -1, int nivelEjercicioNotCurso = -1)
         {
             Usuario userLogueado = GetUsuarioLogueado();
 
-            var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
-
+            ViewBag.EjerciciosCurso    =    ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
+            ViewBag.EjerciciosNotCurso =    ObtenerEjercicioGrillaModelNotCurso(pageNotCurso, sortNotCurso, sortDirNotCurso, nombreNotCurso, usuarioId, cursoId, estadoEjercicioNotCurso, nivelEjercicioNotCurso, global);
             //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
             ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
-            return View(datos);
+            return View();
         }
 
         //

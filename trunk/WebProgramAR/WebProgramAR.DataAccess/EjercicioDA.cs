@@ -135,6 +135,18 @@ namespace WebProgramAR.DataAccess
             }
         }
 
+        public static int ContarCantidadNotCurso(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                List<Ejercicio> aux = GetEjerciciosNotCurso(nombre, usuarioId, cursoId, nivelEjercicio, estadoEjercicio, global, userLogueado,db).ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo).Count();
+
+            }
+        }
         public static IEnumerable<Ejercicio> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
@@ -169,7 +181,40 @@ namespace WebProgramAR.DataAccess
                 return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo);
             }
         }
+        public static IEnumerable<Ejercicio> ObtenerPaginaNotCurso(int paginaActual, int personasPorPagina, string sortColumns, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, Usuario userLogueado)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                if (paginaActual < 1) paginaActual = 1;
 
+
+                IQueryable<Ejercicio> query = GetEjerciciosNotCurso(nombre, usuarioId, cursoId, nivelEjercicio, estadoEjercicio, global, userLogueado,db);
+
+                if (sortColumns.Contains("Usuario"))
+                {
+                    sortColumns = sortColumns.Replace("Usuario", "Usuario.UsuarioId");
+                }
+                //if (sortColumns.Contains("Curso"))
+                //{
+                //    sortColumns = sortColumns.Replace("Curso", "Curso.CursoId");
+                //}
+                if (sortColumns.Contains("EstadoEjercicio"))
+                {
+                    sortColumns = sortColumns.Replace("EstadoEjercicio", "EstadoEjercicio.EstadoEjercicioId");
+                }
+
+
+
+                List<Ejercicio> aux = query.OrderUsingSortExpression(sortColumns)
+                            .Skip((paginaActual - 1) * personasPorPagina)
+                            .Take(personasPorPagina)
+                            .ToList();
+
+                float tiempo;
+
+                return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo);
+            }
+        }
         private static IQueryable<Ejercicio> GetEjercicios(string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global, WebProgramAREntities db)
         {
             IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
@@ -195,12 +240,11 @@ namespace WebProgramAR.DataAccess
                 return query.ToList();
             }
         }
+
         public static IEnumerable<Ejercicio> GetEjercicioNotUsuario(int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {            
-
-
                 List<Ejercicio> aux = (from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
                                       where (u.UsuarioId != usuarioId)
                                       && (cursoId == -1 || u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
@@ -212,6 +256,16 @@ namespace WebProgramAR.DataAccess
 
                 return Seguridad.SeguridadXValorManager.Filtrar<Ejercicio>(aux, _nombreTabla, userLogueado, out tiempo);
             }
+        }
+        public static IQueryable<Ejercicio> GetEjerciciosNotCurso(string nombre, int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, bool global, Usuario userLogueado, WebProgramAREntities db)
+        {
+            IQueryable<Ejercicio> query = (from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
+                                    where (u.Cursoes.Count(m => m.CursoId == cursoId) == 0)
+                                    && (u.UsuarioId ==usuarioId)
+                                    && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
+                                    && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
+                                    select u);
+            return query;
         }
 
         #region IFiltrablePorSeguridadPorValor Members
