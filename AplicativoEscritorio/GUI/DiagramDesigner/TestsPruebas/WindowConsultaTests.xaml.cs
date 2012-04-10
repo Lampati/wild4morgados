@@ -113,6 +113,14 @@ namespace DiagramDesigner.TestsPruebas
 
             string id = boton.DataContext.ToString();
 
+            TestPrueba test = this.testPruebas.Single(x => x.Id == id);
+
+            WindowDetalleConsultaTest detalle = new WindowDetalleConsultaTest();
+            detalle.TestPrueba = test;
+            detalle.VariablesEntrada = variablesEntrada;
+            detalle.VariablesSalida = variablesSalida;
+
+            detalle.ShowDialog();
 
         }
 
