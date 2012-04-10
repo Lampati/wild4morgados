@@ -22,22 +22,20 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static string GetEjercicioByGlobal(List<int> cursosAFiltrar)
+        public static string GetEjercicioByGlobal(List<int> ejerciciosAFiltrar)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("EstadoEjercicio").Include("Usuario")
-                                              where u.Global
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("EstadoEjercicio")
+                                              where u.Global && !(from int o in ejerciciosAFiltrar select o).Contains(u.EjercicioId)
                                               select u;
 
                 StringBuilder sb = new StringBuilder();
                 foreach (Ejercicio ej in query)
-                    if (!cursosAFiltrar.Contains(ej.EjercicioId)) //Horrible!! Pasarselo al query!! (cómo pasarle la lista "cursosAFiltrar" para que lo resuelva la BD??)
-                    {
-                        sb.Append(ej.XML);
-                        sb.Append(",");
-                    }
+                {
+                    sb.Append(ej.XML);
+                    sb.Append(",");
+                }
 
                 if (sb.Length > 0)
                     sb = sb.Remove(sb.Length - 1, 1);
@@ -46,19 +44,59 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static int GetEjercicioByGlobalCount(List<int> cursosAFiltrar)
+        public static int GetEjercicioByGlobalCount(List<int> ejerciciosAFiltrar)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
                 IQueryable<Ejercicio> query = from u in db.Ejercicios
-                                              where u.Global
+                                              where u.Global && !(from int o in ejerciciosAFiltrar select o).Contains(u.EjercicioId)
                                               select u;
 
                 int cant = 0;
                 foreach (Ejercicio ej in query)
-                    if (!cursosAFiltrar.Contains(ej.EjercicioId)) //Horrible!! Pasarselo al query!! (cómo pasarle la lista "cursosAFiltrar" para que lo resuelva la BD??)
-                        cant++;
+                    cant++;
+
+                return cant;
+            }
+        }
+
+        public static string GetEjercicioByCurso(List<int> ejerciciosAFiltrar, int cursoId)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("EstadoEjercicio").Include("Cursoes")
+                                              where u.Cursoes.Any(c => c.CursoId == cursoId)
+                                              && !(from int o in ejerciciosAFiltrar select o).Contains(u.EjercicioId)
+                                              select u;
+
+                StringBuilder sb = new StringBuilder();
+                foreach (Ejercicio ej in query)
+                {
+                    sb.Append(ej.XML);
+                    sb.Append(",");
+                }
+
+                if (sb.Length > 0)
+                    sb = sb.Remove(sb.Length - 1, 1);
+
+                return sb.ToString();
+            }
+        }
+
+        public static int GetEjercicioByCursoCount(List<int> ejerciciosAFiltrar, int cursoId)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios
+                                              where u.Cursoes.Any(c => c.CursoId == cursoId)
+                                              && !(from int o in ejerciciosAFiltrar select o).Contains(u.EjercicioId)
+                                              select u;
+
+                int cant = 0;
+                foreach (Ejercicio ej in query)
+                    cant++;
 
                 return cant;
             }
