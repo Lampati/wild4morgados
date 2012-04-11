@@ -15,20 +15,20 @@
                        
                         <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
                         <GridViewColumn Header="Descripcion" Width="240" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                        <GridViewColumn Header="" Width="60">
+                        <GridViewColumn Header="" Width="40">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="54px" Height="54px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
-                                        <Image Source="/Resources/Images/cancel_48.png" Width="48px" Height="48px"></Image>
+                                    <Button Width="38px" Height="38px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
+                                        <Image Source="/Resources/Images/detail32.png" Width="32px" Height="32px"></Image>
                                     </Button>                                    
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="" Width="60">
+                        <GridViewColumn Header="" Width="40">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="54px" Height="54px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
-                                        <Image Source="/Resources/Images/cancel_48.png" Width="48px" Height="48px"></Image>
+                                    <Button Width="38px" Height="38px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
+                                        <Image Source="/Resources/Images/remove32.png" Width="32px" Height="32px"></Image>
                                     </Button>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

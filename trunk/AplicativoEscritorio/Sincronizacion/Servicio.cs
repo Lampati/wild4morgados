@@ -63,7 +63,7 @@ namespace Sincronizacion
         public void EjerciciosPorId(int ejercicioId)
         {
             string ids = this.ListadoIds;
-            object o = proxy.InvocarMetodo("EjerciciosXCurso", new object[] { ids, cursoId });
+            object o = proxy.InvocarMetodo("EjerciciosXCurso", new object[] { ids, ejercicioId });
             if (!Object.Equals(o, null))
                 this.GuardarEjercicios(o.ToString());
         }
