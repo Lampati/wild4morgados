@@ -102,6 +102,46 @@ namespace WebProgramAR.DataAccess
             }
         }
 
+        public static string GetEjercicioById(List<int> ejerciciosAFiltrar, int ejercicioId)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios
+                                              where u.EjercicioId == ejercicioId
+                                              && !(from int o in ejerciciosAFiltrar select o).Contains(u.EjercicioId)
+                                              select u;
+
+                StringBuilder sb = new StringBuilder();
+                foreach (Ejercicio ej in query)
+                {
+                    sb.Append(ej.XML);
+                    sb.Append(",");
+                }
+
+                if (sb.Length > 0)
+                    sb = sb.Remove(sb.Length - 1, 1);
+
+                return sb.ToString();
+            }
+        }
+
+        public static int GetEjercicioByIdCount(List<int> ejerciciosAFiltrar, int ejercicioId)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios
+                                              where u.EjercicioId == ejercicioId
+                                              && !(from int o in ejerciciosAFiltrar select o).Contains(u.EjercicioId)
+                                              select u;
+
+                int cant = 0;
+                foreach (Ejercicio ej in query)
+                    cant++;
+
+                return cant;
+            }
+        }
+
         public static Ejercicio GetEjercicioByIdOnlyUser(int id)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
