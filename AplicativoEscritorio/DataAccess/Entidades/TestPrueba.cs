@@ -240,6 +240,8 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             sb.Append(this.codigoGarGarProcSalida);
             sb.Append(this.descripcion);
+            sb.Append(this.nombre);
+            sb.Append(this.id);
 
             return sb.ToString();
         }
@@ -366,9 +368,17 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(this.Nombre);
+            sb.Append(this.Contexto);
             sb.Append(this.Descripcion);
+            sb.Append(this.TipoDato);
             sb.Append(this.VariableMapeada);
             sb.Append(this.ValorEsperado);
+            sb.Append(this.EsArreglo.ToString());
+
+            if (!Object.Equals(this.Posiciones, null))
+                foreach (PosicionVariableTest pvt in this.Posiciones)
+                    sb.Append(pvt.ToString());
+
             return sb.ToString();
         }
         #endregion
@@ -378,7 +388,6 @@ namespace AplicativoEscritorio.DataAccess.Entidades
     {
         public int Posicion { get; set; }
         public string Valor { get; set; }
-
 
         public void ToXML(XMLCreator xml)
         {
@@ -404,5 +413,12 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.Valor = xmlElem.FindFirst("Valor").value;
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.Posicion);
+            sb.Append(this.Valor);
+            return sb.ToString();
+        }
     }
 }
