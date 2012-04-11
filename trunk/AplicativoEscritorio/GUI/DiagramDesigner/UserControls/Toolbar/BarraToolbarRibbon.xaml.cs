@@ -395,6 +395,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             }
         }
 
+        private delegate void UpdateProgressBarDelegate(System.Windows.DependencyProperty dp, Object value);
+
+        private void EscribirLabel(Label lbl, string texto)
+        {
+            Application.Current.Dispatcher.BeginInvoke(
+                            System.Windows.Threading.DispatcherPriority.Normal,
+                            new Action(() => lbl.Content = texto));
+        }
+
         private void btnSincroGeneral_Click(object sender, RoutedEventArgs e)
         {
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
@@ -405,13 +414,59 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             propertyEditorWindow.AgregarPropiedad("Los ejercicios a descargar son los ejercicios globales (disponibles para todos) sin importar curso/ejercicio.");
 
-            propertyEditorWindow.AgregarBotonera(
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));            
+            propertyEditorWindow.AgregarSeparador(false);
 
-            if (propertyEditorWindow.ShowDialog() == true)
+            ProgressBar pBar = new ProgressBar();
+            pBar.Orientation = Orientation.Horizontal;
+            pBar.Width = 300;
+            pBar.Height = 20;
+            pBar.Maximum = 100;
+            propertyEditorWindow.AgregarPropiedad(String.Empty, pBar);
+
+            Sincronizacion.Eventos.Handler.GuardarEjercicioEvent += new Sincronizacion.Eventos.Handler.GuardarEjercicioHandler(HDL_GuardarEjercicioEvent);
+
+            Label lblInfo = new Label();
+            lblInfo.Width = 300;
+            lblInfo.Height = 20;
+            propertyEditorWindow.AgregarPropiedad(String.Empty, lblInfo);
+
+            propertyEditorWindow.AgregarBotonera(
+                new RoutedEventHandler((snd, ev) =>
+                    {
+                        this.EscribirLabel(lblInfo, "Conectando ...");
+                        this.Servicio.BarraProgreso = pBar;
+                        this.Servicio.LabelInfo = lblInfo;
+                        this.Servicio.EjerciciosGlobales();
+                        System.Threading.Thread.Sleep(2000);
+                        propertyEditorWindow.DialogResult = true;
+                    }),
+                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
+            
+            propertyEditorWindow.ShowDialog();
+        }
+
+        void HDL_GuardarEjercicioEvent(object barra, object lblInfo, int cant, int total)
+        {
+            ProgressBar pBar = (ProgressBar)barra;
+            Label lbl = (Label)lblInfo;
+            UpdateProgressBarDelegate updatePbDelegate = new UpdateProgressBarDelegate(pBar.SetValue);
+
+            if (total.Equals(0))
             {
-                this.Servicio.EjerciciosGlobales();
+                this.EscribirLabel(lbl, "No hay ejercicios nuevos a descargar.");
+                Dispatcher.Invoke(updatePbDelegate,
+                System.Windows.Threading.DispatcherPriority.Background,
+                new object[] { ProgressBar.ValueProperty, (double)100 });
+            }
+            else
+            {
+                double value = ((double)(cant + 1) / (double)total) * 100;
+
+                this.EscribirLabel(lbl, "Ejercicio " + cant.ToString() + " de " + total.ToString());
+
+                Dispatcher.Invoke(updatePbDelegate,
+                System.Windows.Threading.DispatcherPriority.Background,
+                new object[] { ProgressBar.ValueProperty, value });
             }
         }
 
@@ -462,8 +517,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             if (propertyEditorWindow.ShowDialog() == true)
             {
                 int ejercicioId = 0;
-                //if (int.TryParse(txtEjercicio.Text, out ejercicioId))
-                    //this.Servicio.
+                if (int.TryParse(txtEjercicio.Text, out ejercicioId))
+                    this.Servicio.EjerciciosPorId(ejercicioId);
             }
         }
 

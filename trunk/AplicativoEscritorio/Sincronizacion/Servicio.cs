@@ -12,6 +12,8 @@ namespace Sincronizacion
     public class Servicio
     {
         private Proxy.ProxyDinamico proxy;
+        private object barraProgreso;
+        private object labelInfo;
 
         public Servicio()
         {
@@ -22,6 +24,18 @@ namespace Sincronizacion
         public Servicio(string wsdl)
         {
             this.proxy = new Proxy.ProxyDinamico(wsdl);    
+        }
+
+        public object BarraProgreso
+        {
+            get { return this.barraProgreso; }
+            set { this.barraProgreso = value; }
+        }
+
+        public object LabelInfo
+        {
+            get { return this.labelInfo; }
+            set { this.labelInfo = value; }
         }
 
         public void EjerciciosGlobales()
@@ -63,10 +77,19 @@ namespace Sincronizacion
         public void EjerciciosPorId(int ejercicioId)
         {
             string ids = this.ListadoIds;
-            //eht: se sincronizaba por profesor o por id de ejercicio???
-            object o = proxy.InvocarMetodo("EjerciciosXId", new object[] { ids, ejercicioId });
+            object o = proxy.InvocarMetodo("EjerciciosXEjercicioId", new object[] { ids, ejercicioId });
             if (!Object.Equals(o, null))
                 this.GuardarEjercicios(o.ToString());
+        }
+
+        public int EjerciciosPorIdCount(int ejercicioId)
+        {
+            string ids = this.ListadoIds;
+            object o = proxy.InvocarMetodo("EjerciciosXEjercicioIdCount", new object[] { ids, ejercicioId });
+            if (!Object.Equals(o, null))
+                return (int)o;
+
+            return 0;
         }
 
         private string ListadoIds
@@ -99,18 +122,20 @@ namespace Sincronizacion
 
         private void GuardarEjercicios(string respuestaWS)
         {
-            //Si la respuesta del WS es vacía no hay nada que hacer...
-            if (String.IsNullOrEmpty(respuestaWS))
-                return;
-
             //La respuesta del WS es el XML de cada ejercicio separado por una ",". Además viene encriptado.
             string[] ejerciciosEncriptadosStr = respuestaWS.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string ejercicioEncriptadoStr in ejerciciosEncriptadosStr)
-            {
-                Ejercicio ej = new Ejercicio();
-                ej.Abrir(ejercicioEncriptadoStr);
-                ej.Guardar(Path.Combine(@"D:\Acustico", ej.EjercicioId.ToString() + ".gej"));
-            }
+            int cant = 0;
+            if (ejerciciosEncriptadosStr.Length.Equals(0))
+                Eventos.Handler.GuardarEjercicioEventFire(this.BarraProgreso, this.LabelInfo, 0, 0);
+            else
+                foreach (string ejercicioEncriptadoStr in ejerciciosEncriptadosStr)
+                {
+                    Ejercicio ej = new Ejercicio();
+                    ej.Abrir(ejercicioEncriptadoStr);
+                    ej.Guardar(Path.Combine(@"D:\Acustico", ej.EjercicioId.ToString() + ".gej"));
+                    cant++;
+                    Eventos.Handler.GuardarEjercicioEventFire(this.BarraProgreso, this.LabelInfo, cant, ejerciciosEncriptadosStr.Length);
+                }
         }
     }
 }

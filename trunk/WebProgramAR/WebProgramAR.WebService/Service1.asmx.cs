@@ -54,19 +54,19 @@ namespace WebProgramAR.WebService
         [WebMethod]
         public int EjerciciosXCursoCount(string cursosLocales, int cursoId)
         {
-            return 0;
+            return EjercicioDA.GetEjercicioByCursoCount(this.Ids(cursosLocales), cursoId);
         }
 
         [WebMethod]
-        public string EjerciciosXProfesor(string cursosLocales, int profesorId)
+        public string EjerciciosXEjercicioId(string cursosLocales, int ejercicioId)
         {
-            return String.Empty;
+            return EjercicioDA.GetEjercicioById(this.Ids(cursosLocales), ejercicioId);
         }
 
         [WebMethod]
-        public int EjerciciosXProfesorCount(string cursosLocales, int profesorId)
+        public int EjerciciosXEjercicioIdCount(string cursosLocales, int ejercicioId)
         {
-            return 0;
+            return EjercicioDA.GetEjercicioByIdCount(this.Ids(cursosLocales), ejercicioId);
         }
     }
 }

@@ -119,7 +119,8 @@ namespace DiagramDesigner.DialogWindows
             this.grdObjetos.RowDefinitions.Add(rd);
 
             TextBlock txtBlock = new TextBlock();
-            txtBlock.Text = String.Concat(titulo, ":");
+            if (!String.IsNullOrEmpty(titulo))
+                txtBlock.Text = String.Concat(titulo, ":");
             txtBlock.TextWrapping = TextWrapping.Wrap;
             this.objetos.Add(new ObjetoVentana(txtBlock, ctrl));
             Grid.SetRow(txtBlock, this.objetos.Count);
@@ -166,7 +167,7 @@ namespace DiagramDesigner.DialogWindows
                         this.Height += ov.Texto.ActualHeight;
                 }
                 else //Es un separador
-                    this.Height += 10;
+                    this.Height += 12;
         }
     }
 }
