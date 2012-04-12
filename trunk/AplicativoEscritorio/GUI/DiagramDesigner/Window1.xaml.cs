@@ -322,7 +322,7 @@ namespace DiagramDesigner
                     ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
                     ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
 
-                    WindowConsultaTests testWindow = new WindowConsultaTests();
+                    WindowConsultaTests testWindow = new WindowConsultaTests(false);
                     testWindow.VariablesEntrada = listaVariablesEntrada;
                     testWindow.VariablesSalida = listaVariablesSalida;
                     testWindow.TestPruebas = new ObservableCollection<TestPrueba>(archCargado.TestsPrueba);
@@ -409,7 +409,7 @@ namespace DiagramDesigner
         {
             if (e.EsEjecucion)
             {
-                Ejecutar();
+                EjecutarConResultado();
             }
             else
             {
@@ -465,7 +465,7 @@ namespace DiagramDesigner
                     Compilar();
                     break;
                 case Keys.F4:
-                    Ejecutar();
+                    EjecutarConResultado();
                     break;
 
                 default:
@@ -503,8 +503,21 @@ namespace DiagramDesigner
             return res;
         }
 
-        private void Ejecutar()
+        private void EjecutarConResultado()
         {
+            ResultadoEjecucion res = Ejecutar();
+
+            if (res.ResEjecucion != null)
+            {
+                ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+                resultadosDialog.ShowDialog();
+            }
+        }
+
+        private ResultadoEjecucion Ejecutar()
+        {
+            ResultadoEjecucion resultadoEjecucion = new ResultadoEjecucion();
+
             ReiniciarIDEParaCompilacion();
 
             ConfigurarCompilador();
@@ -518,8 +531,8 @@ namespace DiagramDesigner
             {
                 MessageBox.Show(res.Error);
             }
-            
-            
+
+            resultadoEjecucion.ResCompilacion = res;
 
             if (res.CompilacionGarGarCorrecta && res.GeneracionEjectuableCorrecto)
             {
@@ -530,11 +543,12 @@ namespace DiagramDesigner
 
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
 
-                ArchResultado archResultadoEjecucuion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
+                resultadoEjecucion.ResEjecucion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
 
-                ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(archResultadoEjecucuion);
-                resultadosDialog.ShowDialog();
+                
             }
+
+            return resultadoEjecucion;
         }
 
         private void ReiniciarIDEParaCompilacion()

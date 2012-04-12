@@ -21,6 +21,10 @@ namespace DiagramDesigner.TestsPruebas
     /// </summary>
     public partial class WindowConsultaTests : Window
     {
+
+        private bool esReadOnly;
+
+
         private ObservableCollection<TestPrueba> testPruebas;
         public ObservableCollection<TestPrueba> TestPruebas
         {
@@ -69,11 +73,17 @@ namespace DiagramDesigner.TestsPruebas
         
                
 
-        public WindowConsultaTests()
+        public WindowConsultaTests(bool modoReadOnly)
         {
             InitializeComponent();
 
+            esReadOnly = modoReadOnly;
 
+            if (modoReadOnly)
+            {
+                gridTests.Columns.RemoveAt(3);
+                bttnCancelar.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         public void Validar()
@@ -135,8 +145,10 @@ namespace DiagramDesigner.TestsPruebas
         }
 
         private void ButtonAceptar_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
+        {      
+
+            DialogResult =  !esReadOnly;
+            
             Close();
         }
 

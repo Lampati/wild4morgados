@@ -233,6 +233,7 @@
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
+    <Compile Include="ResultadoEjecucion.cs" />
     <Compile Include="TestsPruebas\Linea.cs" />
     <Compile Include="TestsPruebas\WindowConsultaTests.xaml.cs">
       <DependentUpon>WindowConsultaTests.xaml</DependentUpon>

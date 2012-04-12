@@ -10,6 +10,13 @@ using System.Windows.Controls;
 using Globales.Enums;
 using AplicativoEscritorio.DataAccess.Entidades;
 using DiagramDesigner.Helpers;
+using EJEKOR;
+using CompiladorGargar.Resultado;
+using DataAccess.Entidades;
+using DiagramDesigner.DialogWindows;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
+using System.Collections.ObjectModel;
+using DiagramDesigner.TestsPruebas;
 
 namespace DiagramDesigner
 {
@@ -139,7 +146,7 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                GuardarADisco();
+                GuardarADiscoFormatoNormal();
             }
         }
 
@@ -147,12 +154,103 @@ namespace DiagramDesigner
 
         private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            string path;
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
+                switch (Convert.ToInt32(e.Parameter))
+                {
+                    case 1:
+                        path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", configApp.DirectorioAbrirDefault);
 
+                        if (path != string.Empty)
+                        {
+                                        
+                            GuardarADiscoFormatoNormal(path);
+                        }
+                        break;
+
+                    case 2:
+                        //Lo que tengo que hacer es Validar una Ejecucion Satisfactoria y luego todos sus tests.
+
+                        MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione OK para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK);
+
+                        ResultadoEjecucion res = Ejecutar();
+
+                        if (res.ResEjecucion != null)
+                        {
+                            if (res.ResEjecucion.EsCorrectaEjecucion)
+                            {
+                                bool aptoParaGuardar = true;
+
+                                if (archCargado.TestsPrueba.Count > 0)
+                                {
+                                    MessageBox.Show("Es necesario validar todos los test de prueba del programa. Presione OK para validar los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+
+                                    List<NodoTablaSimbolos> aux = res.ResCompilacion.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                                    aux.AddRange(res.ResCompilacion.TablaSimbolos.ObtenerVariablesGlobales());
+
+
+
+                                    ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
+                                    ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.ResCompilacion.TablaSimbolos.ObtenerParametrosDelProcSalida());
+
+
+                                    bool todosValidos = true;
+                                    StringBuilder strErrores = new StringBuilder();
+                                    foreach (TestPrueba test in this.archCargado.TestsPrueba)
+                                    {
+                                        todosValidos &= test.ValidarVariablesEntrada(listaVariablesEntrada.ToList()) && test.ValidarVariablesSalida(listaVariablesSalida.ToList());
+                                    }
+
+                                    if (todosValidos)
+                                    {
+                                        MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+
+                                        //PONER ACA LA EJECUCION
+
+                                        
+                                    }
+                                    else
+                                    {
+                                        //Abro la consulta, para que vea cuales son
+                                        aptoParaGuardar = false;
+
+                                        WindowConsultaTests testWindow = new WindowConsultaTests(true);
+                                        testWindow.VariablesEntrada = listaVariablesEntrada;
+                                        testWindow.VariablesSalida = listaVariablesSalida;
+                                        testWindow.TestPruebas = new ObservableCollection<TestPrueba>(archCargado.TestsPrueba);
+                                        testWindow.Validar();
+
+                                        testWindow.Title = "Tests de Prueba - Mis Tests";
+                                    }
+                                }
+
+                                if (aptoParaGuardar)
+                                {
+                                    path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", configApp.DirectorioAbrirDefault);
+                                    if (path != string.Empty)
+                                    {
+                                        GuardarADiscoFormatoExportar(path);
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                //Muestro cual fue el error pq termino mal
+                                ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+                                resultadosDialog.ShowDialog();
+                            }
+                        }
+                        
+                        break;
+                }
             }
+
         }
+
+        
 
         private void Print_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -217,7 +315,7 @@ namespace DiagramDesigner
                         break;
 
                     case MessageBoxResult.Yes:
-                        GuardarADisco();
+                        GuardarADiscoFormatoNormal();
                         break;
                 }
             }
@@ -225,11 +323,46 @@ namespace DiagramDesigner
             return retorno;
         }
 
-        private void GuardarADisco()
+
+        private void GuardarADiscoFormatoNormal()
         {
+            GuardarADiscoFormatoNormal(ArchCargado.PathGuardadoActual);
+        }
+
+        private void GuardarADiscoFormatoNormal(string path)
+        {
+            if (archCargado.GetType() == typeof(Ejercicio))
+            {
+                ((Ejercicio)archCargado).EsValidoSubirWeb = false;
+            }
+
+            GuardarADisco(path);
+        }
+
+        private void GuardarADiscoFormatoExportar()
+        {
+            GuardarADiscoFormatoExportar(ArchCargado.PathGuardadoActual);
+        }
+
+        private void GuardarADiscoFormatoExportar(string path)
+        {
+            if (archCargado.GetType() == typeof(Ejercicio))
+            {
+                ((Ejercicio)archCargado).EsValidoSubirWeb = true;
+            }
+
+            GuardarADisco(path);
+        }
+
+        private void GuardarADisco(string pathNuevo)
+        {
+            ArchCargado.PathGuardadoActual = pathNuevo;            
+
             ArchCargado.Guardar(ArchCargado.PathGuardadoActual);
             ArchCargado.ModificadoDesdeUltimoGuardado = false;
         }
+
+        
 
     }
 }
