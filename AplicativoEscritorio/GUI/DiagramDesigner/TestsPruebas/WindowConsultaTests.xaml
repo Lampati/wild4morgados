@@ -7,36 +7,40 @@
             <RowDefinition Height="220" MaxHeight="220" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Width="Auto" HorizontalAlignment="Left" Name="lstTests" ItemsSource="{Binding TestsPrueba}"> 
-            <ListView.View>
-                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" >
-                    
-                    <GridView.Columns>
-                       
-                        <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                        <GridViewColumn Header="Descripcion" Width="240" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                        <GridViewColumn Header="" Width="40">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Width="38px" Height="38px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
-                                        <Image Source="/Resources/Images/detail32.png" Width="32px" Height="32px"></Image>
-                                    </Button>                                    
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="" Width="40">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Width="38px" Height="38px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
-                                        <Image Source="/Resources/Images/remove32.png" Width="32px" Height="32px"></Image>
-                                    </Button>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <StackPanel Grid.Row="0" Width="Auto">
+            <ListView  HorizontalAlignment="Left" Name="lstTests" ItemsSource="{Binding TestsPrueba}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridTests">
+
+                        <GridView.Columns>
+
+                            <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
+                            <GridViewColumn Header="Descripcion" Width="240" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                            <GridViewColumn Header="" Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Width="38px" Height="38px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
+                                            <Image Source="/Resources/Images/detail32.png" Width="32px" Height="32px"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="" Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Width="38px" Height="38px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
+                                            <Image Source="/Resources/Images/remove32.png" Width="32px" Height="32px"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </StackPanel>
+        
         <Grid Grid.Row="1"  Width="Auto" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -45,7 +49,7 @@
                 <ColumnDefinition Width="240" />
                 <ColumnDefinition Width="240" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Width="120px" Content="Cancelar" HorizontalAlignment="Center"  Click="ButtonCancelar_Click"/>
+            <Button Grid.Column="0" Width="120px" Name="bttnCancelar" Content="Cancelar" HorizontalAlignment="Center"  Click="ButtonCancelar_Click"/>
             <Button Grid.Column="1" Width="120px" Content="Aceptar" HorizontalAlignment="Center"  Click="ButtonAceptar_Click"/>
         </Grid>
     </Grid>

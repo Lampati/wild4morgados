@@ -41,9 +41,18 @@ namespace DiagramDesigner.Helpers
         }
 
 
+        internal static string ElegirGuardarComo(Window padre, string titulo, string dirInicial)
+        {
+            return ElegirArchivoGuardar(padre, titulo, dirInicial,
+                string.Format("Archivos de Ejercicio (*.{0})|*.{0}",
+                Globales.ConstantesGlobales.EXTENSION_EJERCICIO)
+                );
+        }
+
+
         internal static string ElegirEjercicioParaResolucion(Window padre, string titulo, string dirInicial)
         {
-            return ElegirArchivo (padre, titulo, dirInicial, 
+            return ElegirArchivoAbrir (padre, titulo, dirInicial, 
                 string.Format("Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
                 Globales.ConstantesGlobales.EXTENSION_EJERCICIO)
                 );
@@ -51,14 +60,14 @@ namespace DiagramDesigner.Helpers
 
         internal static string ElegirArchivoParaAbrir(Window padre, string titulo, string dirInicial)
         {
-            return ElegirArchivo (padre, titulo, dirInicial,
+            return ElegirArchivoAbrir (padre, titulo, dirInicial,
                 string.Format("Archivos de Ragnarok (*.{1} o *.{0})|*.{1};*.{0}|Archivos de Resolución (*.{1})|*.{1}|Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
                 Globales.ConstantesGlobales.EXTENSION_EJERCICIO,
                 Globales.ConstantesGlobales.EXTENSION_RESOLUCION)
                 );
         }
 
-        internal static string ElegirArchivo(Window padre, string titulo, string dirInicial, string filtros)
+        internal static string ElegirArchivoAbrir(Window padre, string titulo, string dirInicial, string filtros)
         {
             OpenFileDialog file = new OpenFileDialog();
             file.CheckFileExists = true;
@@ -70,6 +79,20 @@ namespace DiagramDesigner.Helpers
 
             file.ShowDialog(padre);
             
+
+            return file.FileName;
+        }
+
+        internal static string ElegirArchivoGuardar(Window padre, string titulo, string dirInicial, string filtros)
+        {
+            SaveFileDialog file = new SaveFileDialog();
+            file.InitialDirectory = dirInicial;
+            file.Title = titulo;
+            file.Filter = filtros;
+            file.AddExtension = true;
+
+            file.ShowDialog(padre);
+
 
             return file.FileName;
         } 
