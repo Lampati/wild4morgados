@@ -112,6 +112,19 @@ namespace DiagramDesigner.DialogWindows
             //this.Height += txtBlock.ActualHeight;
         }
 
+        public void AgregarPropiedad(Control ctrl)
+        {
+            RowDefinition rd = new RowDefinition();
+            rd.Height = GridLength.Auto;
+            this.grdObjetos.RowDefinitions.Add(rd);
+
+            this.objetos.Add(new ObjetoVentana(null, ctrl));
+            Grid.SetRow(ctrl, this.objetos.Count);
+            Grid.SetColumnSpan(ctrl, 2);
+
+            this.grdObjetos.Children.Add(ctrl);
+        }
+
         public void AgregarPropiedad(string titulo, Control ctrl)
         {
             RowDefinition rd = new RowDefinition();
@@ -167,7 +180,7 @@ namespace DiagramDesigner.DialogWindows
                         this.Height += ov.Texto.ActualHeight;
                 }
                 else //Es un separador
-                    this.Height += 12;
+                    this.Height += 10;
         }
     }
 }
