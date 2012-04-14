@@ -99,56 +99,65 @@ namespace DiagramDesigner
 
         private void ProbarCarga()
         {
-            Ejercicio ej = new Ejercicio(4);
-            ej.Enunciado = "Enunciado del ejercicio";
-            ej.EsValidoSubirWeb = true;
-            ej.Gargar = "GqarGar";
-            ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
-            ej.NivelDificultad = 3;
-            ej.SolucionTexto = "Tendrías que haber puesto estoo!!";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            for (int id = 1; id < 10; id++)
+            {
+                Ejercicio ej = new Ejercicio(id);
+                ej.Enunciado = "Enunciado del ejercicio";
+                ej.EsValidoSubirWeb = true;
+                ej.Gargar = "GqarGar";
+                ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
+                ej.NivelDificultad = 3;
+                ej.SolucionTexto = "Tendrías que haber puesto estoo!!";
 
-            TestPrueba tp = new TestPrueba();
-            tp.CodigoGarGarProcSalida = "Codigo GarGar de salida";
-            tp.Descripcion = "Descripcion de test de prueba";
-            tp.VariablesEntrada = new List<VariableTest>();
-            tp.Id = "1";
-            tp.Nombre = "Test Prueba 1";            
-            VariableTest vt = new VariableTest();
-            vt.Descripcion = "Descripcion de variable de test de entrada";
-            vt.Nombre = "Nombre de variable de test de entrada";
-            vt.Contexto = "Contexto Variable Test de entrada";
-            vt.TipoDato = "Entero";
-            vt.ValorEsperado = "Valor esperado 4";
-            vt.VariableMapeada = "var Pepiono";
-            PosicionVariableTest pvt = new PosicionVariableTest();
-            pvt.Posicion = 232;
-            pvt.Valor = "Valor";
-            vt.Posiciones.Add(pvt);
-            tp.VariablesEntrada.Add(vt);
+                TestPrueba tp = new TestPrueba();
+                tp.CodigoGarGarProcSalida = "Codigo GarGar de salida";
+                tp.Descripcion = "Descripcion de test de prueba";
+                tp.VariablesEntrada = new List<VariableTest>();
+                tp.Id = "1";
+                tp.Nombre = "Test Prueba 1";
+                VariableTest vt = new VariableTest();
+                vt.Descripcion = "Descripcion de variable de test de entrada";
+                vt.Nombre = "Nombre de variable de test de entrada";
+                vt.Contexto = "Contexto Variable Test de entrada";
+                vt.TipoDato = "Entero";
+                vt.ValorEsperado = "Valor esperado 4";
+                vt.VariableMapeada = "var Pepiono";
+                PosicionVariableTest pvt = new PosicionVariableTest();
+                pvt.Posicion = 232;
+                pvt.Valor = "Valor";
+                vt.Posiciones.Add(pvt);
+                tp.VariablesEntrada.Add(vt);
 
-            VariableTest vt2 = new VariableTest();
-            vt2.Descripcion = "Descripcion de variable de test de salida";
-            vt2.Nombre = "Nombre de variable de test de salida";
-            vt.Contexto = "Contexto Variable Test de salida";
-            vt.TipoDato = "booleano";
-            vt2.ValorEsperado = "Valor esperado 4";
-            vt2.VariableMapeada = "var Pepiono";
-            PosicionVariableTest pvt2 = new PosicionVariableTest();
-            pvt2.Posicion = 12;
-            pvt2.Valor = "Valor12";
-            vt2.Posiciones.Add(pvt2);
-            tp.VariablesSalida = new List<VariableTest>();
-            tp.VariablesSalida.Add(vt2);
+                VariableTest vt2 = new VariableTest();
+                vt2.Descripcion = "Descripcion de variable de test de salida";
+                vt2.Nombre = "Nombre de variable de test de salida";
+                vt.Contexto = "Contexto Variable Test de salida";
+                vt.TipoDato = "booleano";
+                vt2.ValorEsperado = "Valor esperado 4";
+                vt2.VariableMapeada = "var Pepiono";
+                PosicionVariableTest pvt2 = new PosicionVariableTest();
+                pvt2.Posicion = 12;
+                pvt2.Valor = "Valor12";
+                vt2.Posiciones.Add(pvt2);
+                tp.VariablesSalida = new List<VariableTest>();
+                tp.VariablesSalida.Add(vt2);
 
-            ej.AgregarTestPrueba(tp);
-            ej.Guardar(@"D:\Acustico\4.gej");
+                ej.AgregarTestPrueba(tp);
+                string ejer = @"D:\Acustico\" + id.ToString() + ".gej";
+                ej.Guardar(ejer);
 
-            ej = new Ejercicio();
-            ej.Abrir(new FileInfo(@"D:\Acustico\1.gej"));
+                ej = new Ejercicio();
+                ej.Abrir(new FileInfo(ejer));
+
+                sb.Append(File.ReadAllText(ejer) + ",");
+            }
+            File.WriteAllText(@"D:\\Acustico\Ejercicios.txt", sb.ToString());
         }
 
         public Window1()
         {
+            //ProbarCarga();
             InitializeComponent();
 
             Title = ConstantesGlobales.NOMBRE_APLICACION;

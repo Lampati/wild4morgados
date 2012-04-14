@@ -213,6 +213,13 @@ namespace DiagramDesigner.UserControls.Toolbar
         public BarraToolbarRibbon()
         {
             InitializeComponent();
+
+            Sincronizacion.Eventos.Handler.GuardarEjercicioEvent += new Sincronizacion.Eventos.Handler.GuardarEjercicioHandler(Handler_GuardarEjercicioEvent);
+            Sincronizacion.Eventos.Handler.ConectandoEvent += new Sincronizacion.Eventos.Handler.ConectandoHandler(Handler_ConectandoEvent);
+            Sincronizacion.Eventos.Handler.ConectadoEvent += new Sincronizacion.Eventos.Handler.ConectadoHandler(Handler_ConectadoEvent);
+            Sincronizacion.Eventos.Handler.FinalizadoEvent += new Sincronizacion.Eventos.Handler.FinalizadoHandler(Handler_FinalizadoEvent);
+            Sincronizacion.Eventos.Handler.InvocandoMetodoEvent += new Sincronizacion.Eventos.Handler.InvocandoMetodoHandler(Handler_InvocandoMetodoEvent);
+            Sincronizacion.Eventos.Handler.ErrorConexionEvent += new Sincronizacion.Eventos.Handler.ErrorConexionHandler(Handler_ErrorConexionEvent);
         }
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)
@@ -389,7 +396,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             get
             {
                 if (Object.Equals(servicio, null))
-                    servicio = new Sincronizacion.Servicio();
+                    servicio = new Sincronizacion.Servicio(new List<string>() { "http://localhost:1890/Service1.asmx?wsdl", "http://localhost:1891/Service1.asmx?wsdl", "http://localhost:1889/Service1.asmx?wsdl" });
 
                 return servicio;
             }
@@ -400,9 +407,102 @@ namespace DiagramDesigner.UserControls.Toolbar
         private void EscribirLabel(Label lbl, string texto)
         {
             Application.Current.Dispatcher.BeginInvoke(
-                            System.Windows.Threading.DispatcherPriority.Normal,
+                            System.Windows.Threading.DispatcherPriority.Send,
                             new Action(() => lbl.Content = texto));
         }
+
+        private void EscribirProgress(ProgressBar pBar, double value)
+        {
+            UpdateProgressBarDelegate updatePbDelegate = new UpdateProgressBarDelegate(pBar.SetValue);
+
+            Dispatcher.Invoke(updatePbDelegate,
+                System.Windows.Threading.DispatcherPriority.Background,
+                new object[] { ProgressBar.ValueProperty, value });
+        }
+
+        private void SetearResultadoDialog(PropertyEditionWindow pew, bool resultado)
+        {
+            Application.Current.Dispatcher.BeginInvoke(
+                            System.Windows.Threading.DispatcherPriority.Background,
+                            new Action(() => pew.DialogResult = resultado));
+        }
+
+        #region Consumo Eventos
+        void Handler_InvocandoMetodoEvent(string texto, object lbl)
+        {
+            this.EscribirLabel((Label)lbl, texto);
+        }
+
+        void Handler_FinalizadoEvent(string texto, object lbl)
+        {
+            this.EscribirLabel((Label)lbl, texto);
+        }
+
+        void Handler_ConectadoEvent(string url, object lbl)
+        {
+            this.EscribirLabel((Label)lbl, "Conectando a " + url);
+        }
+
+        void Handler_ConectandoEvent(string url, object lbl)
+        {
+            this.EscribirLabel((Label)lbl, "Conectado a " + url + "!");
+        }
+
+        void Handler_GuardarEjercicioEvent(object barra, object lblInfo, int cant, int total)
+        {
+            ProgressBar pBar = (ProgressBar)barra;
+            Label lbl = (Label)lblInfo;
+
+            if (total.Equals(0))
+            {
+                this.EscribirLabel(lbl, "No hay ejercicios nuevos a descargar.");
+                EscribirProgress(pBar, 100);
+            }
+            else
+            {
+                double value = ((double)cant / (double)total) * 100;
+
+                this.EscribirLabel(lbl, "Guardando ejercicio " + cant.ToString() + " de " + total.ToString() + " ...");
+
+                EscribirProgress(pBar, value);
+            }
+        }
+
+        void Handler_ErrorConexionEvent(string txt, object lbl)
+        {
+            this.EscribirLabel((Label)lbl, txt);
+        }
+        #endregion
+
+        #region Metodos Threading
+        void SincronizarGlobales(object propertyWindow)
+        {
+            PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)propertyWindow;
+
+            if (this.Servicio.EjerciciosGlobales())
+                SetearResultadoDialog(propertyEditorWindow, true);
+        }
+
+        void SincronizarCurso(object propiedades)
+        {
+            object[] props = (object[])propiedades;
+            PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)props[0];
+            int cursoId = (int)props[1];
+
+            if (this.Servicio.EjerciciosPorCurso(cursoId))
+                SetearResultadoDialog(propertyEditorWindow, true);
+        }
+
+        void SincronizarEjercicio(object propiedades)
+        {
+            object[] props = (object[])propiedades;
+            PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)props[0];
+            int ejercicioId = (int)props[1];
+
+            if (this.Servicio.EjerciciosPorId(ejercicioId))
+                SetearResultadoDialog(propertyEditorWindow, true);
+        }
+        #endregion
 
         private void btnSincroGeneral_Click(object sender, RoutedEventArgs e)
         {
@@ -418,56 +518,39 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             ProgressBar pBar = new ProgressBar();
             pBar.Orientation = Orientation.Horizontal;
-            pBar.Width = 300;
+            pBar.Width = 400;
             pBar.Height = 20;
             pBar.Maximum = 100;
-            propertyEditorWindow.AgregarPropiedad(String.Empty, pBar);
-
-            Sincronizacion.Eventos.Handler.GuardarEjercicioEvent += new Sincronizacion.Eventos.Handler.GuardarEjercicioHandler(HDL_GuardarEjercicioEvent);
+            propertyEditorWindow.AgregarPropiedad(pBar);
 
             Label lblInfo = new Label();
-            lblInfo.Width = 300;
-            lblInfo.Height = 20;
-            propertyEditorWindow.AgregarPropiedad(String.Empty, lblInfo);
+            lblInfo.Width = 400;
+            lblInfo.Height = 25;
+            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            propertyEditorWindow.AgregarPropiedad(lblInfo);
 
+            this.Servicio.BarraProgreso = pBar;
+            this.Servicio.LabelInfo = lblInfo;
+
+            System.Threading.Thread th = null;
             propertyEditorWindow.AgregarBotonera(
                 new RoutedEventHandler((snd, ev) =>
                     {
-                        this.EscribirLabel(lblInfo, "Conectando ...");
-                        this.Servicio.BarraProgreso = pBar;
-                        this.Servicio.LabelInfo = lblInfo;
-                        this.Servicio.EjerciciosGlobales();
-                        System.Threading.Thread.Sleep(2000);
-                        propertyEditorWindow.DialogResult = true;
+                        if (Object.Equals(th, null) || !th.IsAlive)
+                        {
+                            th = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(SincronizarGlobales));
+                            th.Start(propertyEditorWindow);
+                        }
                     }),
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
-            
+                new RoutedEventHandler((snd, ev) =>
+                    {
+                        if (!Object.Equals(th, null) && th.IsAlive)
+                            th.Abort();
+                        propertyEditorWindow.DialogResult = false;
+                    }
+                    ));
+
             propertyEditorWindow.ShowDialog();
-        }
-
-        void HDL_GuardarEjercicioEvent(object barra, object lblInfo, int cant, int total)
-        {
-            ProgressBar pBar = (ProgressBar)barra;
-            Label lbl = (Label)lblInfo;
-            UpdateProgressBarDelegate updatePbDelegate = new UpdateProgressBarDelegate(pBar.SetValue);
-
-            if (total.Equals(0))
-            {
-                this.EscribirLabel(lbl, "No hay ejercicios nuevos a descargar.");
-                Dispatcher.Invoke(updatePbDelegate,
-                System.Windows.Threading.DispatcherPriority.Background,
-                new object[] { ProgressBar.ValueProperty, (double)100 });
-            }
-            else
-            {
-                double value = ((double)(cant + 1) / (double)total) * 100;
-
-                this.EscribirLabel(lbl, "Ejercicio " + cant.ToString() + " de " + total.ToString());
-
-                Dispatcher.Invoke(updatePbDelegate,
-                System.Windows.Threading.DispatcherPriority.Background,
-                new object[] { ProgressBar.ValueProperty, value });
-            }
         }
 
         private void btnSincroCurso_Click(object sender, RoutedEventArgs e)
@@ -484,16 +567,49 @@ namespace DiagramDesigner.UserControls.Toolbar
             txtCurso.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             propertyEditorWindow.AgregarPropiedad("ID Curso", txtCurso);
 
-            propertyEditorWindow.AgregarBotonera(
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
+            propertyEditorWindow.AgregarSeparador(false);
 
-            if (propertyEditorWindow.ShowDialog() == true)
-            {
-                int cursoId = 0;
-                if (int.TryParse(txtCurso.Text, out cursoId))
-                    this.Servicio.EjerciciosPorCurso(cursoId);
-            }
+            ProgressBar pBar = new ProgressBar();
+            pBar.Orientation = Orientation.Horizontal;
+            pBar.Width = 400;
+            pBar.Height = 20;
+            pBar.Maximum = 100;
+            propertyEditorWindow.AgregarPropiedad(pBar);
+
+            Label lblInfo = new Label();
+            lblInfo.Width = 400;
+            lblInfo.Height = 25;
+            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            propertyEditorWindow.AgregarPropiedad(lblInfo);
+
+            this.Servicio.BarraProgreso = pBar;
+            this.Servicio.LabelInfo = lblInfo;
+
+            System.Threading.Thread th = null;
+            propertyEditorWindow.AgregarBotonera(
+               new RoutedEventHandler((snd, ev) =>
+               {
+                   if (Object.Equals(th, null) || !th.IsAlive)
+                   {
+                       int cursoId = 0;
+                       if (int.TryParse(txtCurso.Text, out cursoId))
+                       {
+                           th = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(SincronizarCurso));
+                           th.Start(new object[] { propertyEditorWindow, cursoId });
+                       }
+                       else
+                           lblInfo.Content = "Debe ingresar un numero valido de curso";
+                   }
+               }),
+               new RoutedEventHandler((snd, ev) =>
+                   {
+                       if (!Object.Equals(th, null) && th.IsAlive)
+                           th.Abort();
+                       propertyEditorWindow.DialogResult = false;
+                   }
+                   ));
+
+            propertyEditorWindow.ShowDialog();
         }
 
         private void btnSincroEjercicio_Click(object sender, RoutedEventArgs e)
@@ -510,16 +626,49 @@ namespace DiagramDesigner.UserControls.Toolbar
             txtEjercicio.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             propertyEditorWindow.AgregarPropiedad("ID Ejercicio", txtEjercicio);
 
-            propertyEditorWindow.AgregarBotonera(
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
+            propertyEditorWindow.AgregarSeparador(false);
 
-            if (propertyEditorWindow.ShowDialog() == true)
-            {
-                int ejercicioId = 0;
-                if (int.TryParse(txtEjercicio.Text, out ejercicioId))
-                    this.Servicio.EjerciciosPorId(ejercicioId);
-            }
+            ProgressBar pBar = new ProgressBar();
+            pBar.Orientation = Orientation.Horizontal;
+            pBar.Width = 400;
+            pBar.Height = 20;
+            pBar.Maximum = 100;
+            propertyEditorWindow.AgregarPropiedad(pBar);
+
+            Label lblInfo = new Label();
+            lblInfo.Width = 400;
+            lblInfo.Height = 25;
+            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            propertyEditorWindow.AgregarPropiedad(lblInfo);
+
+            this.Servicio.BarraProgreso = pBar;
+            this.Servicio.LabelInfo = lblInfo;
+
+            System.Threading.Thread th = null;
+            propertyEditorWindow.AgregarBotonera(
+               new RoutedEventHandler((snd, ev) =>
+               {
+                   if (Object.Equals(th, null) || !th.IsAlive)
+                   {
+                       int ejercicioId = 0;
+                       if (int.TryParse(txtEjercicio.Text, out ejercicioId))
+                       {
+                           th = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(SincronizarEjercicio));
+                           th.Start(new object[] { propertyEditorWindow, ejercicioId });
+                       }
+                       else
+                           lblInfo.Content = "Debe ingresar un numero valido de ejercicio";
+                   }
+               }),
+               new RoutedEventHandler((snd, ev) =>
+                   {
+                       if (!Object.Equals(th, null) && th.IsAlive)
+                           th.Abort();
+                       propertyEditorWindow.DialogResult = false;
+                   }
+            ));
+
+            propertyEditorWindow.ShowDialog();
         }
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
