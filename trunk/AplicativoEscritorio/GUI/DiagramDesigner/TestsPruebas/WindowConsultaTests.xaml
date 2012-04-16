@@ -2,33 +2,69 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Mis Tests" Height="300" Width="500" ResizeMode="NoResize">
+    
+    
     <Grid Margin="5">
         <Grid.RowDefinitions>            
             <RowDefinition Height="220" MaxHeight="220" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Width="Auto">
-            <ListView  HorizontalAlignment="Left" Name="lstTests" ItemsSource="{Binding TestsPrueba}">
-                <ListView.View>
-                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridTests">
+            <ListView  HorizontalAlignment="Left" Name="lstTests"   
+                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                       
+                       ItemsSource="{Binding TestsPrueba}" >
+                <ListView.Resources>
 
+                    <Style  TargetType="ListViewItem">
+                        <Setter Property="ToolTip"
+                            Value="{Binding Path=MensajeError}" />
+                        
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+
+                                    <Border x:Name="Border" SnapsToDevicePixels="true" >
+                                        <GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=EsValido}" Value="True">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=EsValido}" Value="False">
+                                                        <Setter Property="Background" Value="Red"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    
+                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridTests" >
+                        
                         <GridView.Columns>
 
                             <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                            <GridViewColumn Header="Descripcion" Width="240" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                            <GridViewColumn Header="" Width="40">
+                            <GridViewColumn Header="Descripcion" Width="220" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                            <GridViewColumn Header="" Width="52">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Width="38px" Height="38px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
+                                        <Button Width="40px" Height="40px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
                                             <Image Source="/Resources/Images/detail32.png" Width="32px" Height="32px"></Image>
                                         </Button>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="" Width="40">
+                            <GridViewColumn Header="" Width="52">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Width="38px" Height="38px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
+                                        <Button Width="40px" Height="40px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
                                             <Image Source="/Resources/Images/remove32.png" Width="32px" Height="32px"></Image>
                                         </Button>
                                     </DataTemplate>

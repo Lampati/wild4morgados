@@ -6,7 +6,7 @@
         xmlns:userControls="clr-namespace:DiagramDesigner.UserControls"
         Title="WindowCreacionTest" Height="550" Width="450">
     <Grid>
-        <aw:Wizard Name="wizard" aw:Designer.PageIndex="0" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
+        <aw:Wizard Name="wizard" aw:Designer.PageIndex="2" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
             CancelButtonContent="Cancelar" FinishButtonContent="Finalizar" BackButtonContent="Atras" NextButtonContent="Siguiente">
             <aw:Wizard.Resources>
                 <Style TargetType="aw:WizardPage">
@@ -52,8 +52,28 @@
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
-                  
-                    
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Por favor elija el test de prueba a ejecutar."
+                           TextWrapping="Wrap"  />
+
+                    <ListView Grid.Row="1" Width="430" HorizontalAlignment="Left" Name="lstTests" ItemsSource="{Binding Tests}">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
+                                <GridView.Columns>
+                                    <GridViewColumn Header="">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EsSeleccionada, Mode=TwoWay}"  Click="CheckBoxTest_Click" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                    <GridViewColumn Header="Descripcion" Width="200" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
                 </Grid>
             </aw:WizardPage>
 
@@ -86,8 +106,30 @@
                            Text="Por favor elija las variables de la lista desplegable. Solo se mostraran aquellas variables que coinciden con el tipo de dato y variable de la variable del test."
                            TextWrapping="Wrap"  />
 
-                 
-                    
+                    <DataGrid Grid.Row="1" Width="Auto" 
+                              HorizontalAlignment="Left" Name="dataGridVariablesEntradaTest" 
+                              AutoGenerateColumns="False" ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
+                              RowHeight="35" LoadingRow="dataGridVariablesEntradaElegidas_LoadingRow"
+                              CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Descripción" Width="150" MinWidth="150" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Variable" Width="80" MinWidth="80" Binding="{Binding Path=TipoVariable}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Dato" Width="50" MinWidth="50" Binding="{Binding Path=TipoDato}"  IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="Variable a Mapear"  Width="120" MinWidth="120" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox SelectedValuePath="Nombre" 
+                                                    DisplayMemberPath="Nombre"   
+                                                    ItemsSource="{Binding  Path=PosiblesMapeos, Mode=TwoWay}"                                                    
+                                                    IsReadOnly="True" SelectionChanged="ComboBoxEntrada_SelectionChanged" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </Grid>
             </aw:WizardPage>
 
@@ -152,7 +194,7 @@
 
 
 
-            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 4: Elija las variables de salida que corresponden con las del test" 
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 4: Elija las variables de salida que corresponden con las del test" 
                            AllowNext="False" >
 
                 <Grid>
@@ -181,6 +223,7 @@
                            Text="Por favor elija las variables de la lista desplegable. Solo se mostraran aquellas variables que coinciden con el tipo de dato y variable de la variable del test."
                            TextWrapping="Wrap"  />
 
+                    
                     
                 </Grid>
             </aw:WizardPage>

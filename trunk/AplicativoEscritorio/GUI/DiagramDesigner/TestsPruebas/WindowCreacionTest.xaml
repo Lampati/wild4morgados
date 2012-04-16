@@ -17,9 +17,9 @@
                            AllowNext="True" >
                 <Grid>
                     <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
                     <TextBlock Height="93" Name="textBlock1" Grid.Row="0"
                            Text="Para que el test funcione recomendamos tener correctamente identado el programa, y todas las sentencias en lineas diferentes. Lineas dejadas en blanco no influyen."
                            TextWrapping="Wrap"   />
