@@ -21,7 +21,7 @@ namespace DiagramDesigner.TestsPruebas
     /// </summary>
     public partial class WindowConsultaTests : Window
     {
-
+        
         private bool esReadOnly;
 
 
@@ -84,6 +84,8 @@ namespace DiagramDesigner.TestsPruebas
                 gridTests.Columns.RemoveAt(3);
                 bttnCancelar.Visibility = System.Windows.Visibility.Collapsed;
             }
+
+            
         }
 
         public void Validar()
@@ -92,17 +94,36 @@ namespace DiagramDesigner.TestsPruebas
 
             foreach (TestPrueba item in this.testPruebas)
             {
-                if (!item.ValidarVariablesEntrada(variablesEntrada.ToList()))
+                bool entrada;
+                bool salida;
+                StringBuilder erroresEntrada = new StringBuilder();
+                StringBuilder erroresSalida = new StringBuilder();
+
+                entrada = item.ValidarVariablesEntrada(variablesEntrada.ToList() );
+                salida = item.ValidarVariablesSalida(variablesSalida.ToList());
+
+                if (!entrada)
                 {
                     strBldr.AppendLine(item.MensajeErrorEntrada);
+                    
                 }
 
-                if (!item.ValidarVariablesSalida(variablesSalida.ToList()))
+                if (!salida)
                 {
                     strBldr.AppendLine(item.MensajeErrorSalida);
                 }
 
-                item.MensajeError = strBldr.ToString();
+                item.EsValido = entrada && salida;
+
+                if (!item.EsValido)
+                {
+                    item.MensajeError = strBldr.ToString();
+                }
+                else
+                {
+                    item.MensajeError = "El test no tiene errores en sus variables";
+                }
+                
             }
 
             ActualizarLista();
@@ -126,9 +147,12 @@ namespace DiagramDesigner.TestsPruebas
             TestPrueba test = this.testPruebas.Single(x => x.Id == id);
 
             WindowDetalleConsultaTest detalle = new WindowDetalleConsultaTest();
-            detalle.TestPrueba = test;
+            
             detalle.VariablesEntrada = variablesEntrada;
             detalle.VariablesSalida = variablesSalida;
+            detalle.TestPrueba = test;
+
+            detalle.Title = string.Format("Variables del test {0}", test.Nombre);
 
             detalle.ShowDialog();
 

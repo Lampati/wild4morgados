@@ -223,6 +223,8 @@ namespace DiagramDesigner
                                         testWindow.Validar();
 
                                         testWindow.Title = "Tests de Prueba - Mis Tests";
+
+                                        testWindow.ShowDialog();
                                     }
                                 }
 

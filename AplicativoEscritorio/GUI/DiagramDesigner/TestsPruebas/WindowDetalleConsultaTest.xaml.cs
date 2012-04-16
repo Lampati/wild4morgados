@@ -66,7 +66,7 @@ namespace DiagramDesigner.TestsPruebas
 
                 foreach (var item in testPrueba.VariablesEntrada)
                 {
-                    Variable variable = new Variable(item.Nombre, string.Empty, item.TipoDato, string.Empty, item.EsArreglo, item.ValorEsperado, null);
+                    Variable variable = new Variable(item.Nombre, item.Contexto, item.TipoDato, string.Empty, item.EsArreglo, item.ValorEsperado, null);
                     variable.Posiciones = new List<PosicionArreglo>();
 
                     foreach (var pos in item.Posiciones)
@@ -75,6 +75,12 @@ namespace DiagramDesigner.TestsPruebas
                     }
 
                     variable.SetearDatosArregloPostCargadoPosiciones();
+
+                    variable.EsValida = variablesEntrada.SingleOrDefault(x => x.Contexto == variable.Contexto
+                                                                && x.Nombre == variable.Nombre
+                                                                && x.EsArreglo == variable.EsArreglo
+                                                                && x.TipoDato == variable.TipoDato) != null;
+                  
 
                     auxListaEntrada.Add(variable);
 
@@ -84,7 +90,7 @@ namespace DiagramDesigner.TestsPruebas
 
                 foreach (var item in testPrueba.VariablesSalida)
                 {
-                    Variable variable = new Variable(item.Nombre, string.Empty, item.TipoDato, string.Empty, item.EsArreglo, item.ValorEsperado, null);
+                    Variable variable = new Variable(item.Nombre, item.Contexto, item.TipoDato, string.Empty, item.EsArreglo, item.ValorEsperado, null);
                     variable.Posiciones = new List<PosicionArreglo>();
 
                     foreach (var pos in item.Posiciones)
@@ -93,6 +99,11 @@ namespace DiagramDesigner.TestsPruebas
                     }
 
                     variable.SetearDatosArregloPostCargadoPosiciones();
+
+                    variable.EsValida = variablesSalida.SingleOrDefault(x => x.Contexto == variable.Contexto
+                                                                && x.Nombre == variable.Nombre
+                                                                && x.EsArreglo == variable.EsArreglo
+                                                                && x.TipoDato == variable.TipoDato) != null;
 
                     auxListaSalida.Add(variable);
 

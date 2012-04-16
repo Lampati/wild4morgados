@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Utilidades.XML;
 using DataAccess.Entidades;
+using System.ComponentModel;
 
 namespace AplicativoEscritorio.DataAccess.Entidades
 {
-    public class TestPrueba
+    public class TestPrueba : INotifyPropertyChanged
     {
         #region Atributos
         private List<VariableTest> variablesEntrada;
@@ -19,10 +20,14 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         private string mensajesError;
         private string mensajeErrorEntrada;
         private string mensajeErrorSalida;
+        private bool esSeleccionada;
 
         #endregion
 
         #region Propiedades
+
+        public bool EsValido { get; set; }
+
         public List<VariableTest> VariablesEntrada
         {
             get { return variablesEntrada; }
@@ -76,6 +81,24 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             get { return mensajeErrorSalida; }
             set { mensajeErrorSalida = value; }
         }
+
+        public bool EsSeleccionada
+        {
+            get
+            {
+                return esSeleccionada;
+            }
+            set
+            {
+                if (esSeleccionada != value)
+                {
+                    esSeleccionada = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("EsSeleccionada"));
+                }
+
+            }
+        }
+
         #endregion
 
         #region Constructores
@@ -92,15 +115,15 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
         public bool ValidarVariablesEntrada(List<Variable> variablesEntradaActuales)
         {
-            return ValidarVariables(variablesEntradaActuales, this.variablesEntrada, this.mensajeErrorEntrada);
+            return ValidarVariables(variablesEntradaActuales, this.variablesEntrada, true);
         }
 
         public bool ValidarVariablesSalida(List<Variable> variablesSalidaActuales)
         {
-            return ValidarVariables(variablesSalidaActuales, this.variablesSalida, this.mensajeErrorSalida);
+            return ValidarVariables(variablesSalidaActuales, this.variablesSalida, false);
         }
 
-        private bool ValidarVariables(List<Variable> variablesActuales, List<VariableTest> variablesContraComparar, string mensaje)
+        private bool ValidarVariables(List<Variable> variablesActuales, List<VariableTest> variablesContraComparar,  bool esVariablesEntrada)
         {
             List<VariableTest> auxiliarEntrada = new List<VariableTest>();
 
@@ -127,19 +150,34 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             int i = 0;
             bool retorno = true;
-            StringBuilder strBldrVarsFaltantes = new StringBuilder();
+
+            StringBuilder erroresMensaje = new StringBuilder();
 
             while (i < variablesContraComparar.Count)            
             {
                 if (!auxiliarEntrada.Contains(variablesContraComparar[i]))
                 {
-                    strBldrVarsFaltantes.AppendFormat("La variable {0} es requerida por el test, pero no esta declarada de la misma manera dentro de principal ni como variable global.", variablesContraComparar[i].Nombre).AppendLine();
+                    if (esVariablesEntrada)
+                    {
+                        erroresMensaje.AppendFormat("La variable {0} es requerida por el test, pero no esta declarada de la misma manera dentro de principal ni como variable global.", variablesContraComparar[i].Nombre).AppendLine();
+                    }
+                    else
+                    {
+                        erroresMensaje.AppendFormat("La variable {0} es requerida por el test, pero no esta como parametro del procedimiento salida", variablesContraComparar[i].Nombre).AppendLine();
+                    }
                     retorno = false;
                 }
                 i++;
             }
 
-            mensaje = strBldrVarsFaltantes.ToString();
+            if (esVariablesEntrada)
+            {
+                mensajeErrorEntrada = erroresMensaje.ToString();
+            }
+            else
+            {
+                mensajeErrorSalida = erroresMensaje.ToString();
+            }
 
             return retorno;
             
@@ -246,6 +284,17 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             return sb.ToString();
         }
         #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, e);
+        }
+
+        #endregion
     }
 
     public class VariableTest
@@ -254,11 +303,16 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         public string Contexto { get; set; }
         public string Descripcion { get; set; }
         public string TipoDato { get; set; }
-        public string VariableMapeada { get; set; }
+
+        public string VariableMapeada { get; set; }  //Esta no va en el xml
+        public bool EsValida { get; set; }  //Esta no va en el xml
+        public List<Variable> PosiblesMapeos { get; set; }  //Esta no va en el xml
 
         public string ValorEsperado { get; set; }
         public bool EsArreglo { get; set; }
         public List<PosicionVariableTest> Posiciones { get; set; }
+
+        
 
         public VariableTest()
         {
@@ -293,10 +347,10 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetTitle("ValorEsperado");
             xml.SetValue(this.ValorEsperado);
             xml.LevelUp();
-            xml.AddElement();
-            xml.SetTitle("VariableMapeada");
-            xml.SetValue(this.VariableMapeada);
-            xml.LevelUp();
+            //xml.AddElement();
+            //xml.SetTitle("VariableMapeada");
+            //xml.SetValue(this.VariableMapeada);
+            //xml.LevelUp();
             if (!Object.Equals(this.Posiciones, null))
             {
                 xml.AddElement();
@@ -318,7 +372,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.Descripcion = xmlElem.FindFirst("Descripcion").value;
             this.ValorEsperado = xmlElem.FindFirst("ValorEsperado").value;
             this.TipoDato = xmlElem.FindFirst("TipoDato").value;
-            this.VariableMapeada = xmlElem.FindFirst("VariableMapeada").value;
+            //this.VariableMapeada = xmlElem.FindFirst("VariableMapeada").value;
             this.Contexto = xmlElem.FindFirst("Contexto").value;
             this.EsArreglo = Convert.ToBoolean(xmlElem.FindFirst("EsArreglo").value);
 
@@ -426,4 +480,6 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             return sb.ToString();
         }
     }
+
+
 }

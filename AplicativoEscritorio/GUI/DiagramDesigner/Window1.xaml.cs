@@ -310,7 +310,45 @@ namespace DiagramDesigner
 
         private void EjecutarTestPrueba()
         {
-            throw new NotImplementedException();
+            if (archCargado.TestsPrueba == null || archCargado.TestsPrueba.Count == 0)
+            {
+                MessageBox.Show("El ejercicio no tiene test de prueba para ejecutar", "ProgramAR", MessageBoxButton.OK);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
+
+                if (result != MessageBoxResult.Cancel)
+                {
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        IdentarTexto();
+                    }
+
+                    ResultadoCompilacion res = Compilar();
+
+                    if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                    {
+                        List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                        aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
+
+                        ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
+                        ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.TablaSimbolos.ObtenerParametrosDelProcSalida());
+
+                        WindowEjecucionTest testWindow = new WindowEjecucionTest(this.compilador);
+                        testWindow.VariablesEntrada = listaVariablesEntrada;
+                        testWindow.VariablesSalida = listaVariablesSalida;
+                        testWindow.Tests = new ObservableCollection<TestPrueba>(this.archCargado.TestsPrueba);
+                        testWindow.Codigo = res.CodigoGarGar;
+                        testWindow.ListaLineasValidas = res.ListaLineasValidas;
+
+                        testWindow.Title = "Tests de Prueba - Ejecutar";
+
+                        testWindow.ShowDialog();
+
+                    }
+                }
+            }
         }
 
         private void ConsultarTestPrueba()

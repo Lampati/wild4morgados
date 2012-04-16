@@ -10,6 +10,8 @@ namespace DataAccess.Entidades
 {
     public class Variable : INotifyPropertyChanged
     {
+        public bool EsValida { get; set; }
+
         private bool esSeleccionada;
         public bool EsSeleccionada
         {

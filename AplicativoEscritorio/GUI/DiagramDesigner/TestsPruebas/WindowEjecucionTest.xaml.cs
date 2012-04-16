@@ -27,6 +27,7 @@ namespace DiagramDesigner.TestsPruebas
     public partial class WindowEjecucionTest : Window
     {
         private ArchResultado archResultadoEjecucuion;
+        private TestPrueba testElegido;
         
         #region Properties
 
@@ -84,6 +85,24 @@ namespace DiagramDesigner.TestsPruebas
 
                 lstLineas.ItemsSource = lineas;
                 lstLineas.Items.Refresh();
+            }
+        }
+
+
+        private ObservableCollection<TestPrueba> tests;
+        public ObservableCollection<TestPrueba> Tests
+        {
+            get
+            {
+                return tests;
+            }
+
+            set
+            {
+                tests = value;
+
+                lstTests.ItemsSource = tests;
+                lstTests.Items.Refresh();
             }
         }
 
@@ -194,6 +213,40 @@ namespace DiagramDesigner.TestsPruebas
             this.wizard.CurrentPage.AllowNext = chequeada.IsChecked == true;
         }
 
+        private void CheckBoxTest_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox chequeada = (CheckBox)sender;
+
+            if (chequeada.IsChecked == true)
+            {
+                foreach (var item in tests)
+                {
+                    item.EsSeleccionada = false;
+                }
+
+                chequeada.IsChecked = true;
+            }
+            else
+            {
+                chequeada.IsChecked = true;
+            }
+
+            testElegido = tests.Single(x => x.EsSeleccionada);
+
+            foreach (var item in testElegido.VariablesEntrada)
+            {
+                item.PosiblesMapeos =  variablesEntrada.ToList().FindAll(x => x.EsArreglo == item.EsArreglo 
+                                        && x.TipoDato.ToString().ToUpper() == item.TipoDato.ToUpper()                                        
+                                        );
+            }
+
+            dataGridVariablesEntradaTest.ItemsSource = testElegido.VariablesEntrada;
+            dataGridVariablesEntradaTest.Items.Refresh();
+            
+
+            this.wizard.CurrentPage.AllowNext = chequeada.IsChecked == true;
+        }
+
         private void ButtonEjecutar_Click(object sender, RoutedEventArgs e)
         {
             bttnEjecutar.IsEnabled = false;
@@ -230,9 +283,42 @@ namespace DiagramDesigner.TestsPruebas
             this.compilador.MarcarEntrada = false;
         }
 
-    
+        private void dataGridVariablesEntradaElegidas_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            VariableTest variable = e.Row.Item as VariableTest;
+            if (variable != null)
+            {
+                
+
+
+                // Access cell values values if needed...
+                // var colValue = row["ColumnName1]";
+                // var colValue2 = row["ColumName2]";                
+
+            }     
+        }
+
+        private void ComboBoxEntrada_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo = e.OriginalSource as ComboBox;
+            Variable variableElegida = combo.SelectedItem as Variable;
+
+            var bla = sender as FrameworkElement;
+            if (bla == null)
+                return;
+            VariableTest variableOrig = bla.DataContext as VariableTest;
+
+            variableOrig.VariableMapeada = variableElegida.Nombre;
+
+            bool todosElegidos = true;            
+
+            foreach (var item in testElegido.VariablesEntrada)
+            {
+                todosElegidos &= !string.IsNullOrWhiteSpace(item.VariableMapeada);
+            }          
+
+
+            this.wizard.CurrentPage.AllowNext = todosElegidos;
+        }
     }
-
-
-   
 }
