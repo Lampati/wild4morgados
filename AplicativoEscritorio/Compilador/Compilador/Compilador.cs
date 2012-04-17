@@ -29,6 +29,14 @@ namespace CompiladorGargar
         public bool MarcarEntrada { get; set; }
         public int LineaEntrada { get; set; }
 
+        public bool ReemplazarSalida { get; set; }
+        public bool ReemplazarEntrada { get; set; }
+
+        public string CodigoReemplazoEntrada { get; set; }
+        public string CodigoReemplazoSalida { get; set; }
+        public int LineaComienzoReemplazoSalida { get; set; }
+        public int LineaFinReemplazoSalida { get; set; }
+
         public Compilador(bool modo, string dirTemp, string dirEjec, string nombre)
         {
             MarcarEntrada = false;
@@ -91,6 +99,25 @@ namespace CompiladorGargar
 
             ResultadoCompilacion res = new ResultadoCompilacion();
             res.CompilacionGarGarCorrecta = false;
+
+            if (this.ReemplazarEntrada)
+            {
+                
+
+                texto = StringUtils.InsertarLineaEnTexto(texto,
+                        this.CodigoReemplazoEntrada,
+                        this.LineaEntrada);
+            }
+
+            if (this.ReemplazarSalida)
+            {
+
+
+                texto = StringUtils.InsertarLineaEnTextoEntreLineas(texto,
+                        this.CodigoReemplazoSalida,
+                        this.LineaComienzoReemplazoSalida,
+                        this.LineaFinReemplazoSalida);
+            }
 
             int i = 1;
 
@@ -183,6 +210,7 @@ namespace CompiladorGargar
                     res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
 
                     res.ListaLineasValidas = EstadoSintactico.ListaLineasValidasParaInsertarCodigo;
+                    res.ListaLineasContenidoProcSalida = EstadoSintactico.ListaLineasContenidoProcSalida;
 
                     long timeStampCod = Stopwatch.GetTimestamp();
                     res.ArbolSemanticoResultado.CalcularExpresiones();
@@ -204,10 +232,10 @@ namespace CompiladorGargar
                     {
                         timeStampCod = Stopwatch.GetTimestamp();
 
+                        // Aca van las operaciones especiales con el compilador
                         if (this.MarcarEntrada)
                         {
                             int lineaEnPascal = bindeoLineasEntrePascalYGarGar.First(x => x.Value == this.LineaEntrada).Key;
-
                             
 
                             StringUtils.InsertarLineaEnArchivo(res.ArchTemporalCodigoPascalConRuta,
@@ -215,6 +243,8 @@ namespace CompiladorGargar
                                 lineaEnPascal);
 
                         }
+
+                      
 
                         
                         ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta, bindeoLineasEntrePascalYGarGar);
@@ -366,6 +396,10 @@ namespace CompiladorGargar
 
             return nombreArch;
         }
+
+
+
+
 
 
 

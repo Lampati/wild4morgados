@@ -341,6 +341,7 @@ namespace DiagramDesigner
                         testWindow.Tests = new ObservableCollection<TestPrueba>(this.archCargado.TestsPrueba);
                         testWindow.Codigo = res.CodigoGarGar;
                         testWindow.ListaLineasValidas = res.ListaLineasValidas;
+                        testWindow.ListaLineasContenidoProcSalida = res.ListaLineasContenidoProcSalida;
 
                         testWindow.Title = "Tests de Prueba - Ejecutar";
 

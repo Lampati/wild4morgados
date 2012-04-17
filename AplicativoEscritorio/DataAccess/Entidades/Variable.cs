@@ -12,6 +12,15 @@ namespace DataAccess.Entidades
     {
         public bool EsValida { get; set; }
 
+
+        public string NombreConContexto
+        {
+            get
+            {
+                return string.Format("{0} ({1})", Nombre, Contexto);
+            }
+        }
+
         private bool esSeleccionada;
         public bool EsSeleccionada
         {

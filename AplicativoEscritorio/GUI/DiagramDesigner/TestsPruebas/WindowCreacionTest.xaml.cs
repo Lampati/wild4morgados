@@ -416,6 +416,7 @@ namespace DiagramDesigner.TestsPruebas
             }
 
             this.compilador.MarcarEntrada = false;
+            
         }
 
         private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)

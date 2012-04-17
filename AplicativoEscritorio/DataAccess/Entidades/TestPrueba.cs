@@ -304,6 +304,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         public string Descripcion { get; set; }
         public string TipoDato { get; set; }
 
+        public string TipoVariable { get; set; }  //Esta no va en el xml
         public string VariableMapeada { get; set; }  //Esta no va en el xml
         public bool EsValida { get; set; }  //Esta no va en el xml
         public List<Variable> PosiblesMapeos { get; set; }  //Esta no va en el xml
