@@ -69,6 +69,13 @@ namespace CompiladorGargar.Sintactico
             set { listaLineasValidasParaInsertarCodigo = value; }
         }
 
+        private static List<int> listaLineasContenidoProcSalida = new List<int>();
+        internal static List<int> ListaLineasContenidoProcSalida
+        {
+            get { return listaLineasContenidoProcSalida; }
+            set { listaLineasContenidoProcSalida = value; }
+        }
+
         private static ContextoGlobal contextoGlobal = Sintactico.ContextoGlobal.Global;
         internal static ContextoGlobal ContextoGlobal
         {
@@ -206,9 +213,19 @@ namespace CompiladorGargar.Sintactico
                 esProcPrincipal = true;
             }
 
+            if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Salida)
+            {
+                esProcSalida = true;
+            }
+
             if (esProcPrincipal && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin)
             {
                 esProcPrincipal = false;
+            }
+
+            if (esProcSalida && t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.ProcedimientoFin)
+            {
+                esProcSalida = false;
             }
         }
 
@@ -343,6 +360,14 @@ namespace CompiladorGargar.Sintactico
                 if (!ListaLineasValidasParaInsertarCodigo.Contains(GlobalesCompilador.UltFila))
                 {
                     ListaLineasValidasParaInsertarCodigo.Add(GlobalesCompilador.UltFila);
+                }
+            }
+
+            if (contextoGlobal == Sintactico.ContextoGlobal.Cuerpo && esProcSalida)
+            {
+                if (!listaLineasContenidoProcSalida.Contains(GlobalesCompilador.UltFila))
+                {
+                    listaLineasContenidoProcSalida.Add(GlobalesCompilador.UltFila);
                 }
             }
         }

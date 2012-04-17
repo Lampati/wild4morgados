@@ -109,19 +109,19 @@
                     <DataGrid Grid.Row="1" Width="Auto" 
                               HorizontalAlignment="Left" Name="dataGridVariablesEntradaTest" 
                               AutoGenerateColumns="False" ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
-                              RowHeight="35" LoadingRow="dataGridVariablesEntradaElegidas_LoadingRow"
-                              CanUserAddRows="False">
+                              RowHeight="35" CanUserAddRows="False">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Descripción" Width="150" MinWidth="150" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tipo de Variable" Width="80" MinWidth="80" Binding="{Binding Path=TipoVariable}"  IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tipo de Dato" Width="50" MinWidth="50" Binding="{Binding Path=TipoDato}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Descripción" Width="120" MinWidth="150" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Variable" Width="90" MinWidth="80" Binding="{Binding Path=TipoVariable}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Dato" Width="70" MinWidth="50" Binding="{Binding Path=TipoDato}"  IsReadOnly="True"/>
                             <DataGridTemplateColumn Header="Variable a Mapear"  Width="120" MinWidth="120" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <ComboBox SelectedValuePath="Nombre" 
-                                                    DisplayMemberPath="Nombre"   
+                                        <ComboBox SelectedValuePath="NombreCodigo" 
+                                                  
+                                                    DisplayMemberPath="NombreConContexto"   
                                                     ItemsSource="{Binding  Path=PosiblesMapeos, Mode=TwoWay}"                                                    
                                                     IsReadOnly="True" SelectionChanged="ComboBoxEntrada_SelectionChanged" />
                                     </DataTemplate>
@@ -223,7 +223,29 @@
                            Text="Por favor elija las variables de la lista desplegable. Solo se mostraran aquellas variables que coinciden con el tipo de dato y variable de la variable del test."
                            TextWrapping="Wrap"  />
 
-                    
+                    <DataGrid Grid.Row="1" Width="Auto" 
+                              HorizontalAlignment="Left" Name="dataGridVariablesSalidaTest" 
+                              AutoGenerateColumns="False" ItemsSource="{Binding VariablesSalidaSeleccionadas}" 
+                              RowHeight="35" CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Descripción" Width="120" MinWidth="150" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Variable" Width="90" MinWidth="80" Binding="{Binding Path=TipoVariable}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Dato" Width="70" MinWidth="50" Binding="{Binding Path=TipoDato}"  IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="Variable a Mapear"  Width="120" MinWidth="120" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox SelectedValuePath="NombreCodigo" 
+                                                  
+                                                    DisplayMemberPath="NombreConContexto"   
+                                                    ItemsSource="{Binding  Path=PosiblesMapeos, Mode=TwoWay}"                                                    
+                                                    IsReadOnly="True" SelectionChanged="ComboBoxSalida_SelectionChanged" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     
                 </Grid>
             </aw:WizardPage>

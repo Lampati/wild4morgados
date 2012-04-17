@@ -55,6 +55,8 @@ namespace DiagramDesigner.TestsPruebas
             }
         }
 
+        public List<int> ListaLineasContenidoProcSalida { get; set; }        
+
         private string codigo;
         public string Codigo
         {
@@ -235,13 +237,51 @@ namespace DiagramDesigner.TestsPruebas
 
             foreach (var item in testElegido.VariablesEntrada)
             {
-                item.PosiblesMapeos =  variablesEntrada.ToList().FindAll(x => x.EsArreglo == item.EsArreglo 
+
+                if (item.EsArreglo)
+                {
+                    item.TipoVariable = string.Format("Arreglo con tope {0}", item.Posiciones.Count);
+                }
+                else
+                {
+                    item.TipoVariable = "Variable";
+                }
+
+                List<Variable> auxLista = new List<Variable>(variablesEntrada);
+
+                foreach (var variable in variablesEntrada)
+                {
+                    auxLista.RemoveAll(x => x.Contexto.ToUpper() == "GLOBAL" && variable.Contexto.ToUpper() == "PRINCIPAL" && variable.Nombre.ToUpper() == x.Nombre.ToUpper());
+                }
+
+                item.PosiblesMapeos =   auxLista.ToList().FindAll(x => x.EsArreglo == item.EsArreglo 
                                         && x.TipoDato.ToString().ToUpper() == item.TipoDato.ToUpper()                                        
                                         );
             }
 
             dataGridVariablesEntradaTest.ItemsSource = testElegido.VariablesEntrada;
             dataGridVariablesEntradaTest.Items.Refresh();
+
+
+            foreach (var item in testElegido.VariablesSalida)
+            {
+
+                if (item.EsArreglo)
+                {
+                    item.TipoVariable = string.Format("Arreglo con tope {0}", item.Posiciones.Count);
+                }
+                else
+                {
+                    item.TipoVariable = "Variable";
+                }
+
+                item.PosiblesMapeos = variablesSalida.ToList().FindAll(x => x.EsArreglo == item.EsArreglo
+                                        && x.TipoDato.ToString().ToUpper() == item.TipoDato.ToUpper()
+                                        );
+            }
+
+            dataGridVariablesSalidaTest.ItemsSource = testElegido.VariablesSalida;
+            dataGridVariablesSalidaTest.Items.Refresh();
             
 
             this.wizard.CurrentPage.AllowNext = chequeada.IsChecked == true;
@@ -251,10 +291,22 @@ namespace DiagramDesigner.TestsPruebas
         {
             bttnEjecutar.IsEnabled = false;
 
+           
+            string parteEntrada = ArmarCodigoParteEntrada(this.testElegido.VariablesEntrada);
+            string parteSalida = ArmarCodigoParteSalida(this.testElegido.VariablesSalida);            
+
+            
+
             int lineaElegida = lineas.Single(x => x.EsSeleccionada).Numero;
 
-            this.compilador.MarcarEntrada = true;
+            this.compilador.ReemplazarEntrada = true;
             this.compilador.LineaEntrada = lineaElegida;
+            this.compilador.CodigoReemplazoEntrada = parteEntrada;
+
+            this.compilador.ReemplazarSalida = true;
+            this.compilador.CodigoReemplazoSalida = parteSalida;
+            this.compilador.LineaComienzoReemplazoSalida = ListaLineasContenidoProcSalida.First();
+            this.compilador.LineaFinReemplazoSalida = ListaLineasContenidoProcSalida.Last();
 
             ResultadoCompilacion res = this.compilador.Compilar(this.Codigo);            
 
@@ -280,23 +332,121 @@ namespace DiagramDesigner.TestsPruebas
                 //Mostrar error pq no se puede continuar
             }
 
-            this.compilador.MarcarEntrada = false;
+            this.compilador.ReemplazarEntrada = false;
+            this.compilador.ReemplazarSalida = false;
         }
 
-        private void dataGridVariablesEntradaElegidas_LoadingRow(object sender, DataGridRowEventArgs e)
+        private string ArmarCodigoParteEntrada(List<VariableTest> list)
         {
-            VariableTest variable = e.Row.Item as VariableTest;
-            if (variable != null)
+            StringBuilder strBldrCodigoGarGarEntrada = new StringBuilder();
+            string controladorVar = "{0} := {1};";
+            string controladorPosArr = "{0}[{2}] := {1};";
+
+            foreach (var item in list)
             {
-                
+                if (item.EsArreglo)
+                {
+                    for (int j = 0; j < item.Posiciones.Count; j++)
+                    {
+                        switch (item.TipoDato.ToUpper())
+                        {
+                            case "TEXTO":
+                                strBldrCodigoGarGarEntrada.AppendFormat(controladorPosArr, item.VariableMapeada, string.Format("{0}{1}{0}", "'", item.Posiciones[j].Valor), item.Posiciones[j].Posicion).AppendLine(); 
+                                break;
+                            case "NUMERO":
+                                strBldrCodigoGarGarEntrada.AppendFormat(controladorPosArr, item.VariableMapeada, item.Posiciones[j].Valor, item.Posiciones[j].Posicion).AppendLine();
+                                break;
+                            case "BOOLEANO":
+                                string aux = item.Posiciones[j].Valor.ToUpper() == "TRUE" ? "verdadero" : "falso";
+                                strBldrCodigoGarGarEntrada.AppendFormat(controladorPosArr, item.VariableMapeada, aux, item.Posiciones[j].Posicion).AppendLine();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
+                }
+                else
+                {
+                    switch (item.TipoDato.ToUpper())
+                    {
+                        case "TEXTO":
+                            strBldrCodigoGarGarEntrada.AppendFormat(controladorVar, item.VariableMapeada, string.Format("{0}{1}{0}", "'", item.ValorEsperado)).AppendLine(); ;
+                            break;
+                        case "NUMERO":
+                            strBldrCodigoGarGarEntrada.AppendFormat(controladorVar, item.VariableMapeada, item.ValorEsperado).AppendLine();
+                            break;
+                        case "BOOLEANO":
+                            string aux = item.ValorEsperado.ToUpper() == "TRUE" ? "verdadero" : "falso";
+                            strBldrCodigoGarGarEntrada.AppendFormat(controladorVar, item.VariableMapeada, aux).AppendLine();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
-                // Access cell values values if needed...
-                // var colValue = row["ColumnName1]";
-                // var colValue2 = row["ColumName2]";                
-
-            }     
+            return strBldrCodigoGarGarEntrada.ToString();
         }
+
+        private string ArmarCodigoParteSalida(List<VariableTest> list)
+        {
+            StringBuilder strBldrCodigoGarGarSalida = new StringBuilder();
+
+
+            string controladorValorVar = "si ({0} = {1}) entonces \r\n Mostrar('La variable {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La variable {0} debia contener el valor {2} pero contenia el valor ',{0}); \r\nfinsi;";
+            string controladorValorPosArr = "si ({0}[{3}] = {1}) entonces \r\n Mostrar('La posicion {3} del arreglo {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La posicion {3} del arreglo {0} debia contener el valor {2} pero contenia el valor ',{0}[{3}]); \r\nfinsi;";
+
+            foreach (var item in list)
+            {
+                if (item.EsArreglo)
+                {
+                    for (int j = 0; j < item.Posiciones.Count; j++)
+                    {
+                        switch (item.TipoDato.ToUpper())
+                        {
+                            case "TEXTO":
+                                strBldrCodigoGarGarSalida.AppendFormat(controladorValorPosArr, item.VariableMapeada, string.Format("{0}{1}{0}", "'", item.Posiciones[j].Valor), string.Format("{0}{1}{0}", "'", item.Posiciones[j].Valor), item.Posiciones[j].Posicion).AppendLine(); ;
+                                break;
+                            case "NUMERO":
+                                strBldrCodigoGarGarSalida.AppendFormat(controladorValorPosArr, item.VariableMapeada, item.Posiciones[j].Valor, item.Posiciones[j].Valor, item.Posiciones[j].Posicion).AppendLine();
+                                break;
+                            case "BOOLEANO":
+                                string aux = item.Posiciones[j].Valor.ToUpper() == "TRUE" ? "verdadero" : "falso";
+                                strBldrCodigoGarGarSalida.AppendFormat(controladorValorPosArr, item.VariableMapeada, aux, aux, item.Posiciones[j].Posicion).AppendLine();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+                else
+                {
+                    switch (item.TipoDato.ToUpper())
+                    {
+                        case "TEXTO":
+                            strBldrCodigoGarGarSalida.AppendFormat(controladorValorVar, item.VariableMapeada, string.Format("{0}{1}{0}", "'", item.ValorEsperado), string.Format("{0}{1}{0}", '"', item.ValorEsperado)).AppendLine(); ;
+                            break;
+                        case "NUMERO":
+                            strBldrCodigoGarGarSalida.AppendFormat(controladorValorVar, item.VariableMapeada, item.ValorEsperado, item.ValorEsperado).AppendLine();
+                            break;
+                        case "BOOLEANO":
+                            string aux = item.ValorEsperado.ToUpper() == "TRUE" ? "verdadero" : "falso";
+                            strBldrCodigoGarGarSalida.AppendFormat(controladorValorVar, item.VariableMapeada, aux, aux).AppendLine();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            testElegido.CodigoGarGarProcSalida = strBldrCodigoGarGarSalida.ToString();
+
+            return strBldrCodigoGarGarSalida.ToString();
+        }
+
+       
 
         private void ComboBoxEntrada_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -320,5 +470,31 @@ namespace DiagramDesigner.TestsPruebas
 
             this.wizard.CurrentPage.AllowNext = todosElegidos;
         }
+
+
+        private void ComboBoxSalida_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combo = e.OriginalSource as ComboBox;
+            Variable variableElegida = combo.SelectedItem as Variable;
+
+            var bla = sender as FrameworkElement;
+            if (bla == null)
+                return;
+            VariableTest variableOrig = bla.DataContext as VariableTest;
+
+            variableOrig.VariableMapeada = variableElegida.Nombre;
+
+            bool todosElegidos = true;
+
+            foreach (var item in testElegido.VariablesSalida)
+            {
+                todosElegidos &= !string.IsNullOrWhiteSpace(item.VariableMapeada);
+            }
+
+
+            this.wizard.CurrentPage.AllowNext = todosElegidos;
+        }
     }
+
+
 }
