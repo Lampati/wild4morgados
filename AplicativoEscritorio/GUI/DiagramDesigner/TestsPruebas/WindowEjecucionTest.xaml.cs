@@ -28,10 +28,14 @@ namespace DiagramDesigner.TestsPruebas
     {
         private ArchResultado archResultadoEjecucuion;
         private TestPrueba testElegido;
-        
+
         #region Properties
 
         private CompiladorGargar.Compilador compilador;
+
+
+        private List<ResultadoFinal> listaResultadosFinales = new List<ResultadoFinal>();
+        
 
         private List<int> listaLineasValidas;
         public List<int> ListaLineasValidas
@@ -318,6 +322,8 @@ namespace DiagramDesigner.TestsPruebas
 
                     archResultadoEjecucuion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
 
+                    ArmarListaResultadosFinales();
+
                     stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
                     this.wizard.CurrentPage.AllowBack = false;
                     this.wizard.CurrentPage.AllowNext = true;
@@ -334,6 +340,47 @@ namespace DiagramDesigner.TestsPruebas
 
             this.compilador.ReemplazarEntrada = false;
             this.compilador.ReemplazarSalida = false;
+        }
+
+        private void ArmarListaResultadosFinales()
+        {
+            if (archResultadoEjecucuion.EsCorrectaEjecucion)
+            {
+                foreach (var item in this.archResultadoEjecucuion.VariablesSalida)
+	            {
+                    Variable variab = variablesSalida.ToList().Find(x => x.NombreCodigo == item.NombreCodigo);
+
+                    VariableTest variableDelTest = testElegido.VariablesSalida.Find(x => x.VariableMapeada == item.Nombre);
+
+                    List<PosicionesResultadoFinal> posiciones = new List<PosicionesResultadoFinal>();
+                    if (variab.EsArreglo)
+                    {
+                        for (int i = 0; i < variab.Posiciones.Count; i++)
+	                    {
+                            posiciones.Add(new PosicionesResultadoFinal() { Posicion = variab.Posiciones[i].Posicion, ValorReal = variab.Posiciones[i].Valor, ValorEsperado = variableDelTest.Posiciones[i].Valor });
+	                    }
+                        
+
+                    }
+
+                    listaResultadosFinales.Add(
+                        new ResultadoFinal()
+                        {
+                            Posiciones = posiciones,
+                            Nombre = item.Nombre,
+                            Descripcion = item.Descripcion,
+                            TipoDato = item.TipoDato.ToString(),
+                            TipoVariable = item.TamanioTipo,
+                            ValorReal = item.Valor,
+                            ValorEsperado = variableDelTest.ValorEsperado
+
+                        }
+                    );
+	            }
+
+                dataGridResultadoFinal.ItemsSource = listaResultadosFinales;
+                dataGridResultadoFinal.Items.Refresh();
+            }
         }
 
         private string ArmarCodigoParteEntrada(List<VariableTest> list)
@@ -494,7 +541,102 @@ namespace DiagramDesigner.TestsPruebas
 
             this.wizard.CurrentPage.AllowNext = todosElegidos;
         }
+
+        private void dataGridResultadoFinal_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            ResultadoFinal variable = e.Row.Item as ResultadoFinal;
+            if (variable != null)
+            {
+
+                if (variable.EsCorrecta)
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.Red);
+                }
+
+                // Access cell values values if needed...
+                // var colValue = row["ColumnName1]";
+                // var colValue2 = row["ColumName2]";                
+
+            }
+        }
+
+        private void dataGridResultadoFinalPosiciones_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            PosicionesResultadoFinal variable = e.Row.Item as PosicionesResultadoFinal;
+            if (variable != null )
+            {
+
+                if (variable.EsCorrecta)
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.Red);
+                }
+
+                // Access cell values values if needed...
+                // var colValue = row["ColumnName1]";
+                // var colValue2 = row["ColumName2]";                
+
+            }
+        }
     }
 
+    internal class ResultadoFinal
+    {
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string TipoDato { get; set; }
+        public string TipoVariable { get; set; }
+        public string ValorReal { get; set; }
+        public string ValorEsperado { get; set; }        
 
+        public List<PosicionesResultadoFinal> Posiciones { get; set; }
+
+        public bool EsCorrecta
+        {
+            get
+            {
+                bool aux = true;
+                if (Posiciones.Count > 0)
+                {
+                    int i = 0;
+                    while (i < Posiciones.Count && Posiciones[i].EsCorrecta)
+	                {
+                        i++;
+	                }
+
+                    aux = !(i < Posiciones.Count);
+
+                }
+                else
+                {
+                    aux = ValorReal.Equals(ValorEsperado);
+                }
+
+                return aux;
+            }
+        }
+        
+    }
+
+    internal class PosicionesResultadoFinal
+    {
+        public int Posicion { get; set; }
+        public string ValorReal { get; set; }
+        public string ValorEsperado { get; set; }
+
+        public bool EsCorrecta
+        {
+            get
+            {
+                return ValorReal.Equals(ValorEsperado);
+            }
+        }
+    }
 }
