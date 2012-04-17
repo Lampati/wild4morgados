@@ -6,7 +6,7 @@
         xmlns:userControls="clr-namespace:DiagramDesigner.UserControls"
         Title="WindowCreacionTest" Height="550" Width="450">
     <Grid>
-        <aw:Wizard Name="wizard" aw:Designer.PageIndex="2" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
+        <aw:Wizard Name="wizard" aw:Designer.PageIndex="6" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
             CancelButtonContent="Cancelar" FinishButtonContent="Finalizar" BackButtonContent="Atras" NextButtonContent="Siguiente">
             <aw:Wizard.Resources>
                 <Style TargetType="aw:WizardPage">
@@ -307,7 +307,7 @@
             </aw:WizardPage>
 
             <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 6: Resultados" 
-                           AllowFinish="False" >
+                           AllowFinish="True" ShowCancel="False" ShowBack="False">
                 <ScrollViewer>
                     <Grid>
                         <Grid.Resources>
@@ -335,9 +335,57 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>               
+                        </Grid.ColumnDefinitions>
 
-                       
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                            A continuacion se mostrarán los resultados del test de prueba. Haga click en finalizar para concluir con el test.
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" >
+                            Leyenda:
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" >
+                            Rojo   = El valor final no corresponde con el que esperaba el test.
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" >
+                            Verde = El valor final corresponde con el que esperaba el test.
+                            </TextBlock>
+                        </StackPanel>
+
+                        <DataGrid Grid.Row="0" Width="Auto" HorizontalAlignment="Left" Name="dataGridResultadoFinal" 
+                          AutoGenerateColumns="False" 
+                          ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
+                          LoadingRow="dataGridResultadoFinal_LoadingRow"                 
+                          RowHeight="20" Visibility="Collapsed">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Descripcion" Width="200" Binding="{Binding Path=Descripcion}"  IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tipo de Variable" Width="120" MinWidth="120" Binding="{Binding Path=TipoVariable, Mode=TwoWay}"  IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="200" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Valor Real" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorReal, Mode=TwoWay}"  IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Valor Esperado" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorEsperado, Mode=TwoWay}"  IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <StackPanel Height="Auto" Background="Gray">
+                                        <StackPanel Margin="10,0,0,0" Height="Auto" >
+                                            <DataGrid  Width="Auto" HorizontalAlignment="Left" Name="dataGridResultadoFinalPosiciones" 
+                                               AutoGenerateColumns="False" ItemsSource="{Binding Path=Posiciones}" 
+                                               RowHeight="20" HeadersVisibility="None"
+                                               LoadingRow="dataGridResultadoFinalPosiciones_LoadingRow" >
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Posicion" Width="20" Binding="{Binding Path=Posicion}"  IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Valor Real" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorReal, Mode=TwoWay}"  IsReadOnly="True"/>
+                                                    <DataGridTextColumn Header="Valor Esperado" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorEsperado, Mode=TwoWay}"  IsReadOnly="True"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
+                        </DataGrid>
+
+
                     </Grid>
                 </ScrollViewer>
             </aw:WizardPage>
