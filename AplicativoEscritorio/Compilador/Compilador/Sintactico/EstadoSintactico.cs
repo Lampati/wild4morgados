@@ -128,6 +128,9 @@ namespace CompiladorGargar.Sintactico
             contextoGlobal = Sintactico.ContextoGlobal.Global;
             contextoLinea = Sintactico.ContextoLinea.Ninguno;
 
+            listaLineasContenidoProcSalida.Clear();
+            listaLineasValidasParaInsertarCodigo.Clear();
+
             esProcSalida = false;
             esProcPrincipal = false;
             procSalidaLlamado = false;
