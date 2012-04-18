@@ -107,6 +107,11 @@ namespace DiagramDesigner.TestsPruebas
             {
                 tests = value;
 
+                foreach (var item in tests)
+                {
+                    item.EsSeleccionada = false;
+                }
+
                 lstTests.ItemsSource = tests;
                 lstTests.Items.Refresh();
             }
@@ -174,6 +179,10 @@ namespace DiagramDesigner.TestsPruebas
             InitializeComponent();
 
             listaLineasValidas = new List<int>();
+            listaResultadosFinales = new List<ResultadoFinal>();
+            testElegido = null;
+
+            
 
             compilador = comp;
         }
@@ -331,11 +340,17 @@ namespace DiagramDesigner.TestsPruebas
                 catch (Exception)
                 {
                     //Mostrar error pq no se puede continuar
+                    stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+                    this.wizard.CurrentPage.AllowBack = false;
+                    this.wizard.CurrentPage.AllowNext = true;
                 }               
             }
             else
             {
                 //Mostrar error pq no se puede continuar
+                stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+                this.wizard.CurrentPage.AllowBack = false;
+                this.wizard.CurrentPage.AllowNext = true;
             }
 
             this.compilador.ReemplazarEntrada = false;
@@ -348,16 +363,16 @@ namespace DiagramDesigner.TestsPruebas
             {
                 foreach (var item in this.archResultadoEjecucuion.VariablesSalida)
 	            {
-                    Variable variab = variablesSalida.ToList().Find(x => x.NombreCodigo == item.NombreCodigo);
+                    //Variable variab = variablesSalida.ToList().Find(x => x.Nombre == item.Nombre);
 
                     VariableTest variableDelTest = testElegido.VariablesSalida.Find(x => x.VariableMapeada == item.Nombre);
 
                     List<PosicionesResultadoFinal> posiciones = new List<PosicionesResultadoFinal>();
-                    if (variab.EsArreglo)
+                    if (item.EsArreglo)
                     {
-                        for (int i = 0; i < variab.Posiciones.Count; i++)
+                        for (int i = 0; i < item.Posiciones.Count; i++)
 	                    {
-                            posiciones.Add(new PosicionesResultadoFinal() { Posicion = variab.Posiciones[i].Posicion, ValorReal = variab.Posiciones[i].Valor, ValorEsperado = variableDelTest.Posiciones[i].Valor });
+                            posiciones.Add(new PosicionesResultadoFinal() { Posicion = item.Posiciones[i].Posicion, ValorReal = item.Posiciones[i].Valor, ValorEsperado = variableDelTest.Posiciones[i].Valor });
 	                    }
                         
 
