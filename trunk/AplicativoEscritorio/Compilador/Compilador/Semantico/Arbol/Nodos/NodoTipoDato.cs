@@ -41,7 +41,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             switch (this.hijosNodo[0].Lexema)
             {
                 case "numero":
-                    tipoDato =  "integer";
+                    tipoDato =  "real";
                     break;
                 case "texto":
                     tipoDato = "string";

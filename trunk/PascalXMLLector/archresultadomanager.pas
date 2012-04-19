@@ -13,21 +13,21 @@ procedure CrearArchivoResultados(pathCompletoArchivo : string);
 procedure ModificarEntradaArchivoResultados(pathCompletoArchivo : string; nombreNodo : string; valorNuevo : string);
 procedure AgregarErrorArchivoResultados(pathCompletoArchivo : string; tipoError : string; descError : string; linea : integer);
 procedure CrearNuevaEntradaParcial(pathCompletoArchivo : string; linea : integer);
-procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : integer );
+procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : real );
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : string );
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : boolean );
 procedure CrearNuevaVariableEnEntradaEnLineaGenerico(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; tipo : string; valor : string);
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of integer; topeArr : integer);
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of string; topeArr : integer);
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : integer);
+procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of real; topeArr : real);
+procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of string; topeArr : real);
+procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
 
-procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : integer );
+procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : real );
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : string );
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : boolean );
 procedure CrearNuevaVariableEnResultadoGenerico(pathCompletoArchivo : string; nombre : string; contexto : string;tipo : string; valor : string);
-procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of integer; topeArr : integer);
-procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of string; topeArr : integer);
-procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of boolean; topeArr : integer);
+procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of real; topeArr : real);
+procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of string; topeArr : real);
+procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
 
  function CrearNodoVariable(xdoc : TXMLDocument ;nombre : string; contexto : string; tipo : string; valor : string) :  TDOMNode ;
  function ObtenerNodoEntradaCorrespondiente( NodoEntradasParciales : TDOMNode ; linea : integer) : TDOMNode;
@@ -168,10 +168,10 @@ begin
      end;
 end;
 
-procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : integer );
+procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : real );
 
 begin
-        CrearNuevaVariableEnEntradaEnLineaGenerico(pathCompletoArchivo, linea, nombre, contexto,'Integer', IntToStr(variable));
+        CrearNuevaVariableEnEntradaEnLineaGenerico(pathCompletoArchivo, linea, nombre, contexto,'Integer', FloatToStr(variable));
 end;
 
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : string );
@@ -244,7 +244,7 @@ begin
 end;
 
 
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of integer; topeArr : integer);
+procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of real; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -269,11 +269,11 @@ begin
                      TDOMElement(NodoPadre).SetAttribute('Tipo', 'Integer');
                      TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
                      TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-                     TDOMElement(NodoPadre).SetAttribute('Tope', IntToStr(topeArr) );
+                     TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr) );
                      j := 0;
                      while (j < topeArr)  do
                      begin
-                          NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),IntToStr(arreglo[j]));
+                          NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),FloatToStr(arreglo[j]));
                           NodoPadre.Appendchild(NodoValor);
                           j := j+1;
                      end;
@@ -288,7 +288,7 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of string; topeArr : integer);
+procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of string; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -313,7 +313,7 @@ begin
                      TDOMElement(NodoPadre).SetAttribute('Tipo', 'String');
                      TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
                      TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-                     TDOMElement(NodoPadre).SetAttribute('Tope', IntToStr(topeArr));
+                     TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
                      j := 0;
                      while (j < topeArr)  do
                      begin
@@ -332,7 +332,7 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : integer);
+procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -357,7 +357,7 @@ begin
                      TDOMElement(NodoPadre).SetAttribute('Tipo', 'Boolean');
                      TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
                      TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-                     TDOMElement(NodoPadre).SetAttribute('Tope', IntToStr(topeArr));
+                     TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
                      j := 0;
                      while (j < topeArr)  do
                      begin
@@ -464,10 +464,10 @@ begin
 end;
 
 
-procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : integer );
+procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : real );
 
 begin
-        CrearNuevaVariableEnResultadoGenerico(pathCompletoArchivo,  nombre,  contexto,'Integer', IntToStr(variable));
+        CrearNuevaVariableEnResultadoGenerico(pathCompletoArchivo,  nombre,  contexto,'Real', FloatToStr(variable));
 end;
 
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; variable : string );
@@ -520,7 +520,7 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of integer; topeArr : integer);
+procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of real; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -540,11 +540,11 @@ begin
         TDOMElement(NodoPadre).SetAttribute('Tipo', 'Integer');
         TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
         TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-        TDOMElement(NodoPadre).SetAttribute('Tope', IntToStr(topeArr));
+        TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
         j := 0;
         while (j < topeArr)  do
         begin
-             NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),IntToStr(arreglo[j]));
+             NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),FloatToStr(arreglo[j]));
              NodoPadre.Appendchild(NodoValor);
              j := j+1;
         end;
@@ -558,7 +558,7 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of string; topeArr : integer);
+procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; arreglo : array of string; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -578,7 +578,7 @@ begin
         TDOMElement(NodoPadre).SetAttribute('Tipo', 'String');
         TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
         TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-        TDOMElement(NodoPadre).SetAttribute('Tope', IntToStr(topeArr));
+        TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
         j := 0;
         while (j < topeArr)  do
         begin
@@ -596,7 +596,7 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; arreglo : array of boolean; topeArr : integer);
+procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -615,7 +615,7 @@ begin
         TDOMElement(NodoPadre).SetAttribute('Tipo', 'Boolean');
         TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
         TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-        TDOMElement(NodoPadre).SetAttribute('Tope', IntToStr(topeArr));
+        TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
         j := 0;
         while (j < topeArr)  do
         begin

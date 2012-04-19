@@ -69,8 +69,25 @@ namespace CompiladorGargar
             strBldr.AppendLine("end; ");
             strBldr.AppendLine();
 
-           
+            strBldr.AppendLine(GeneracionCodigoHelpers.DefinirConversionYChequeoIndiceArreglo());
 
+
+            return strBldr.ToString();
+        }
+
+        private static string DefinirConversionYChequeoIndiceArreglo()
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.AppendLine("function FrameworkProgramArProgramAr0000001ConvertirAEnteroIndiceArreglo( num : real ; arregloAccedido : string ) : integer;");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("if (  num > trunc(num) ) then");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("raise EIndiceArregloInvalido.Create('El arreglo '+ arregloAccedido +' tenia un indice decimal. No se admiten arreglos con indices decimales.');");
+            strBldr.AppendLine("end;");
+
+            strBldr.AppendLine("FrameworkProgramArProgramAr0000001ConvertirAEnteroIndiceArreglo := trunc(num);");
+            strBldr.AppendLine("end;");
 
             return strBldr.ToString();
         }
@@ -212,7 +229,8 @@ namespace CompiladorGargar
                        
                         if (!item.EsConstante)
                         {
-                            strBldr.AppendLine(string.Format("var {0} : integer;", item.Nombre));
+                            //strBldr.AppendLine(string.Format("var {0} : integer;", item.Nombre));
+                            strBldr.AppendLine(string.Format("var {0} : real;", item.Nombre));
                         }
                         
                         break;
@@ -406,11 +424,12 @@ namespace CompiladorGargar
                 case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero:
                     if (esArreglo)
                     {
-                        retorno = "array of integer";
+                        //retorno = "array of integer";
+                        retorno = "array of real";
                     }
                     else
                     {
-                        retorno = "integer";
+                        retorno = "real";
                     }
                     break;
                 case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano:

@@ -63,11 +63,15 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
+            //if (this.hijosNodo.Count > 1)
+            //{
+            //    strBldr.Append("[");
+            //    strBldr.Append(string.Format("FrameworkProgramArProgramAr0000001ConvertirAEnteroIndiceArreglo({0},{1})", this.hijosNodo[1].Codigo));
+            //    strBldr.Append("]");
+            //}
             if (this.hijosNodo.Count > 1)
             {
-                strBldr.Append("[");
                 strBldr.Append(this.hijosNodo[1].Codigo);
-                strBldr.Append("]");
             }
 
             this.Codigo = strBldr.ToString();

@@ -78,20 +78,27 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
 
+            //if (this.hijosNodo.Count > 1)
+            //{
+            //    if (this.EsArreglo)
+            //    {
+            //        strBldr.Append("[");
+            //        strBldr.Append(this.hijosNodo[1].Codigo);
+            //        strBldr.Append("]");
+            //    }
+            //    else
+            //    {
+            //        strBldr.Append("(");
+            //        strBldr.Append(this.hijosNodo[1].Codigo);
+            //        strBldr.Append(")");
+            //    }
+            //}
+
             if (this.hijosNodo.Count > 1)
             {
-                if (this.EsArreglo)
-                {
-                    strBldr.Append("[");
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                    strBldr.Append("]");
-                }
-                else
-                {
-                    strBldr.Append("(");
-                    strBldr.Append(this.hijosNodo[1].Codigo);
-                    strBldr.Append(")");
-                }
+                
+
+                strBldr.Append(this.hijosNodo[1].Codigo);
             }
 
             this.Codigo = strBldr.ToString();
