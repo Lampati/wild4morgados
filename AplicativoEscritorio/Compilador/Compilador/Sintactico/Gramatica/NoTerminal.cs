@@ -66,7 +66,7 @@ namespace CompiladorGargar.Sintactico.Gramatica
 
         #region Atributos
 
-        public override int ObtenerValor()
+        public override double ObtenerValor()
         {
             throw new NotImplementedException();
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Lexicografico;
 using CompiladorGargar.Auxiliares;
+using System.Globalization;
 
 namespace CompiladorGargar.Sintactico.Gramatica
 {
@@ -168,16 +169,16 @@ namespace CompiladorGargar.Sintactico.Gramatica
         internal bool NoEsLambda()
         {
             return (this.componente.Token != ComponenteLexico.TokenType.Ninguno);
-        }                      
+        }
 
-        public override int ObtenerValor()
+        public override double ObtenerValor()
         {
-            int retorno = 0;
+            double retorno = 0;
             bool resultado;
             switch (this.Componente.Token)
             {
                 case ComponenteLexico.TokenType.Numero:
-                    resultado = int.TryParse(this.Componente.Lexema, out retorno);
+                    resultado = double.TryParse(this.Componente.Lexema, System.Globalization.NumberStyles.Number, new CultureInfo("en-US"),out retorno);
                     break;
 
                 

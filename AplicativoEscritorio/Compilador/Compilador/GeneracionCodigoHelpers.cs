@@ -150,7 +150,7 @@ namespace CompiladorGargar
                     case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Texto:
                         if (item.EsArreglo)
                         {
-                            for (int i = 1; i <= item.ValorInt; i++)
+                            for (int i = 1; i <= item.Valor; i++)
                             {
                                 strBldr.AppendLine(string.Format("{0}[{1}] := '';", item.NombreParaCodigo,i));
                             }
@@ -166,7 +166,7 @@ namespace CompiladorGargar
                     case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero:
                         if (item.EsArreglo)
                         {
-                            for (int i = 1; i <= item.ValorInt; i++)
+                            for (int i = 1; i <= item.Valor; i++)
                             {
                                 strBldr.AppendLine(string.Format("{0}[{1}] := 0;", item.NombreParaCodigo,i));
                             }
@@ -182,7 +182,7 @@ namespace CompiladorGargar
                     case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano:
                         if (item.EsArreglo)
                         {
-                            for (int i = 1; i <= item.ValorInt; i++)
+                            for (int i = 1; i <= item.Valor; i++)
                             {
                                 strBldr.AppendLine(string.Format("{0}[{1}] := true;", item.NombreParaCodigo,i));
                             }
@@ -275,6 +275,12 @@ namespace CompiladorGargar
             return string.Format("AgregarErrorArchivoResultados('{0}','{1}','{2}',{3}); ", 
                 archivoTemporalEstaEjecucion,tipoError,descError,variableContadoraLineas);
         }
+
+        internal static string CrearErrorEnArchConVariable(string tipoError, string variable)
+        {
+            return string.Format("AgregarErrorArchivoResultados('{0}','{1}',{2},{3}); ",
+                archivoTemporalEstaEjecucion, tipoError, variable, variableContadoraLineas);
+        }
         
         internal static string ArmarProcedimientoMarcarEntradaEnArchivo(Semantico.TablaDeSimbolos.TablaSimbolos tablaSimbolos)
         {
@@ -309,7 +315,7 @@ namespace CompiladorGargar
                     {
 
                         strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.ValorInt, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
 
                     }
                     else
@@ -328,7 +334,7 @@ namespace CompiladorGargar
                     {
 
                         strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}','{5}',{3},{4}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.ValorInt, item.Contexto.ToString()).AppendLine();
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.Valor, item.Contexto.ToString()).AppendLine();
 
                     }
                     else
@@ -389,7 +395,7 @@ namespace CompiladorGargar
                     {
 
                         strBldrTotal.AppendFormat("  CrearNuevoArregloEnResultado('{0}', '{1}','{3}',{1},{2}); ",
-                                    archivoTemporalEstaEjecucion, item.Nombre, item.ValorInt, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
 
                     }
                     else
@@ -448,6 +454,8 @@ namespace CompiladorGargar
             return retorno;
         }
 
-        
+
+
+       
     }
 }

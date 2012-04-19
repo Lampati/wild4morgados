@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using System.Globalization;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -23,7 +24,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             this.TipoDato = hijoASintetizar.TipoDato;
 
-            this.ValorConstanteNumerica = Convert.ToInt32(hijoASintetizar.Lexema);
+            this.ValorConstanteNumerica = Convert.ToDouble(hijoASintetizar.Lexema, new CultureInfo("en-US"));
             this.Lexema = hijoASintetizar.Lexema;
             
         }

@@ -64,7 +64,7 @@ namespace DataAccess.Entidades
         public NodoTablaSimbolos.TipoDeDato TipoDato { get; set; }
         public bool EsArreglo { get; set; }        
         public string TamanioTipo { get; set; }
-        public int TopeArr { get; set; }
+        public double TopeArr { get; set; }
 
         public List<PosicionArreglo> Posiciones { get; set; }
 
@@ -77,8 +77,8 @@ namespace DataAccess.Entidades
             Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
             TipoDato = nodo.TipoDato;
             EsArreglo = nodo.EsArreglo;
-            TopeArr = nodo.ValorInt;
-            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
+            TopeArr = nodo.Valor;
+            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.Valor) : "Variable";
 
         }
 
@@ -91,8 +91,8 @@ namespace DataAccess.Entidades
             Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
             TipoDato = nodo.TipoDato;
             EsArreglo = nodo.EsArreglo;
-            TopeArr = nodo.ValorInt;
-            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.ValorInt) : "Variable";
+            TopeArr = nodo.Valor;
+            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.Valor) : "Variable";
 
             Posiciones = posis;
         }

@@ -79,7 +79,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public List<Variable> VariablesACrear { get; set; }
         public List<Firma> ListaFirma { get; set; }
         public TipoOperatoria Operacion { get; set; }
-        public int ValorConstanteNumerica { get; set; }
+        public double ValorConstanteNumerica { get; set; }
 
         public bool EsProcSalida { get; set; }
         public bool ProcSalidaLlamadoMasDeUnaVez { get; set; }
@@ -214,7 +214,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             this.EsArregloEnParametro = false;
 
-            this.ValorConstanteNumerica = int.MinValue;
+            this.ValorConstanteNumerica = double.MinValue;
             
             this.ListaElementosVisualizar = new List<string>();
 
