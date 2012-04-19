@@ -150,6 +150,7 @@ namespace DataAccess.Entidades
             switch (p.ToUpper())
             {
                 case "INTEGER":
+                case "REAL":
                     retorno = "Numero";
                     break;
                 case "STRING":

@@ -79,7 +79,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("Const");
             strBldr.AppendLine(this.hijosNodo[0].ConstantesGlobales);
             strBldr.AppendLine("Type");
-            strBldr.AppendLine("EIteracionInfinitaException = class(Exception);");            
+            strBldr.AppendLine("EIteracionInfinitaException = class(Exception);");
+            strBldr.AppendLine("EIndiceArregloInvalido = class(Exception);");      
             strBldr.AppendLine(ArmarTiposDeArreglo(this.TablaSimbolos.ListaTiposArreglos));
             strBldr.AppendLine("Var");
             strBldr.AppendLine(string.Format("{0} : integer;",GeneracionCodigoHelpers.VariableContadoraLineas));
@@ -118,6 +119,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Posicion invalida de arreglo", "Se intento acceder a una posicion invalida de un arreglo. Por favor revise que no se este intentando acceder al arreglo por fuera de sus limites."));
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
+            strBldr.AppendLine("on EIndiceInvalido: EIndiceArregloInvalido do");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("WriteLn(EIndiceInvalido.Message);");
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Indice invalido de arreglo", "Se encontro un valor decimal en el indice de un arreglo. Los indices de los arreglos deben ser numeros enteros."));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
+            strBldr.AppendLine("end;");
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicación."));
@@ -147,7 +154,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         tipo = "string";
                         break;
                     case NodoTablaSimbolos.TipoDeDato.Numero:
-                        tipo = "integer";
+                        //tipo = "integer";
+                        tipo = "real";
                         break;
                     case NodoTablaSimbolos.TipoDeDato.Booleano:
                         tipo = "boolean";
