@@ -185,7 +185,7 @@ namespace CompiladorGargar.Auxiliares.AF
 
                 foreach (String duplas in auxEstadosFinales)
                 {
-                    string[] aux = duplas.Split(new string[] { ".." }, StringSplitOptions.None);
+                    string[] aux = duplas.Split(new string[] { "~~" }, StringSplitOptions.None);
 
                     Estado auxEstado = this.estados.Find(delegate(Estado _e) { if (_e.Nombre == aux[0]) return true; else return false; });
                     if (auxEstado != null)
@@ -245,7 +245,7 @@ namespace CompiladorGargar.Auxiliares.AF
 
                 foreach (String trans in auxTransiciones)
                 {
-                    string[] aux = trans.Split(new string[] { ".." }, StringSplitOptions.None);
+                    string[] aux = trans.Split(new string[] { "~~" }, StringSplitOptions.None);
 
                     //Esto es para escapar la , y el ; del lenguaje en la carga del AFD
                     //string simbolo = (aux[1] == "coma") ? "," : ((aux[1] == "puntoycoma") ? ";" : aux[1]);
@@ -283,7 +283,7 @@ namespace CompiladorGargar.Auxiliares.AF
         {
             try
             {
-                string[] aux = cadena.Split(new string[] { ".." }, StringSplitOptions.None);
+                string[] aux = cadena.Split(new string[] { "~~" }, StringSplitOptions.None);
 
                 foreach (String estado in aux)
                 {

@@ -44,7 +44,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 if (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Numero)
                 {
-                    int valor = t.ObtenerValor();
+                    double valor = t.ObtenerValor();
                     if (valor > 0)
                     {
 

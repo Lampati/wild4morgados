@@ -52,8 +52,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         {
 
 
-                            this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, this.RangoArregloSinPrefijo, false);
+                            bool res = this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, this.RangoArregloSinPrefijo, false);
 
+                            if (!res)
+                            {
+                                throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                            }
                         }
                         else
                         {

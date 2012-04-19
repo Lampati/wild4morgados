@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Diagnostics;
 using CompiladorGargar.Auxiliares;
+using System.Globalization;
 
 namespace CompiladorGargar.Semantico.TablaDeSimbolos
 {
@@ -76,10 +77,10 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc));
         }
 
-        internal void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc, int valorInt)
+        internal void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc, double valorInt)
         {
 
-            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { ValorInt = valorInt} );
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { Valor = valorInt} );
         }
 
 
@@ -215,12 +216,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             return !nodo.EsConstante;
         }
 
-        internal int RetornarValorConstante(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal double RetornarValorConstante(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
             NodoTablaSimbolos nodo = this.ObtenerVariable(nombre, contexto, nombreContexto);
             if (nodo.EsConstante)
             {
-                return nodo.ValorInt;
+                return nodo.Valor;
             }
             else
             {
@@ -235,44 +236,71 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         #region Manejo Arreglos
 
-        internal void AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, string rango, bool esConst)
+        internal bool AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, string rango, bool esConst)
         {
-            int rangoNum;
-            if (!int.TryParse(rango, out rangoNum))
+            double rangoNum;
+            if (!double.TryParse(rango, System.Globalization.NumberStyles.Number, new CultureInfo("es-AR"), out rangoNum))
             {
                 NodoTablaSimbolos nodoConstante = this.listaNodos.Find(x => x.Nombre.ToUpper().Equals(rango.ToUpper()) && x.EsConstante);
 
-                rangoNum = nodoConstante.ValorInt;
+                rangoNum = nodoConstante.Valor;
             }
 
-            this.listaNodos.Add(
+            //o sea, que sea entero
+            if (Math.Truncate(rangoNum) == rangoNum)
+            {
 
-                    new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable,
-                   tdato, true, esConst, contexto,
-                   nombreContexto) { ValorInt = rangoNum }
 
-                   );
+
+                this.listaNodos.Add(
+
+                        new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable,
+                       tdato, true, esConst, contexto,
+                       nombreContexto) { Valor = rangoNum }
+
+                       );
+
+                return true;
+            }
+            else
+            {
+                //Esto seria un error, no se puede tener un arreglo con rango decimal
+                return false;
+            }
         }
 
-        internal void AgregarArregloParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tipoDeDato, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, string rango)
+        internal bool AgregarArregloParametroDeProc(string nombre, NodoTablaSimbolos.TipoDeDato tipoDeDato, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, string rango)
         {
-            int rangoNum;
-            if (!int.TryParse(rango, out rangoNum))
+            double rangoNum;
+            if (!double.TryParse(rango, System.Globalization.NumberStyles.Number, new CultureInfo("es-AR"), out rangoNum))
             {
                 NodoTablaSimbolos nodoConstante = this.listaNodos.Find(x => x.Nombre.ToUpper().Equals(rango.ToUpper()) && x.EsConstante);
 
-                rangoNum = nodoConstante.ValorInt;
+                rangoNum = nodoConstante.Valor;
             }
 
-            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tipoDeDato, true, false, tipoContexto, nombreProc) { ValorInt = rangoNum });
+              //o sea, que sea entero
+            if (Math.Truncate(rangoNum) == rangoNum)
+            {
+
+
+                this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Parametro, tipoDeDato, true, false, tipoContexto, nombreProc) { Valor = rangoNum });
+
+                return true;
+            }
+            else
+            {
+                //Esto seria un error, no se puede tener un arreglo con rango decimal
+                return false;
+            }
         }
 
 
-        internal int ObtenerTopeArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
+        internal double ObtenerTopeArreglo(string nombre, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto)
         {
 
             NodoTablaSimbolos arr = ObtenerArreglo(nombre, contexto, nombreContexto);
-            return arr.ValorInt;
+            return arr.Valor;
         }
         
 
@@ -476,7 +504,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             
         }
 
-        internal void AgregarConstante(string nombre, NodoTablaSimbolos.TipoDeDato tipo, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, int valorInt)
+        internal void AgregarConstante(string nombre, NodoTablaSimbolos.TipoDeDato tipo, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, double valorInt)
         {
             AgregarVariable(nombre, tipo, true, tipoContexto, nombreProc, valorInt); 
         }

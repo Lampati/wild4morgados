@@ -33,7 +33,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal, f.RangoArregloSinPrefijo);
+                    bool res = this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal, f.RangoArregloSinPrefijo);
+
+                    if (!res)
+                    {
+                        throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                    }
                 }
             }
 
@@ -70,7 +75,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal,f.RangoArregloSinPrefijo);
+                    bool res = this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal,f.RangoArregloSinPrefijo);
+
+                    //if (!res)
+                    //{
+                    //    throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                    //}
                 }
             }
 

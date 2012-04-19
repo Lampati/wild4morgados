@@ -122,7 +122,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("on EIndiceInvalido: EIndiceArregloInvalido do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine("WriteLn(EIndiceInvalido.Message);");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Indice invalido de arreglo", "Se encontro un valor decimal en el indice de un arreglo. Los indices de los arreglos deben ser numeros enteros."));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Indice invalido de arreglo", "EIndiceInvalido.Message"));
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("on ETotal: Exception do");

@@ -8,6 +8,7 @@ using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Lexicografico;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -160,7 +161,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (t.Componente.Token == ComponenteLexico.TokenType.Numero)
             {
-                this.ValorConstanteNumerica = Convert.ToInt32(t.Componente.Lexema);
+                this.ValorConstanteNumerica = Convert.ToDouble(t.Componente.Lexema, new CultureInfo("en-US")); 
             }
 
             return this;

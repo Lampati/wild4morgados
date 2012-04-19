@@ -8,7 +8,7 @@ namespace CompiladorGargar.Sintactico.Gramatica
     internal abstract class ElementoGramatica
     {
 
-        public abstract int ObtenerValor();
+        public abstract double ObtenerValor();
         
     }
 }
