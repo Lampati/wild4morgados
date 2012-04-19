@@ -1,0 +1,43 @@
+﻿<Window x:Class="DiagramDesigner.DialogWindows.PropertyEditionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PropertyEditionWindow" Width="450"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"   
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        Loaded="Window_Loaded"
+        >
+   
+
+        <!-- Creates the shadow on the right and bottom -->
+        <Border BorderBrush="Gray"           
+            BorderThickness="0,0,2,2"
+            CornerRadius="10"
+            Background="Beige">
+            <!-- Create space between shadow and the next border -->
+            <Border BorderBrush="Transparent"
+              BorderThickness="5"
+              CornerRadius="10">
+                <!-- The inner border -->
+                <Border BorderBrush="Black"
+                BorderThickness="1.5"
+                CornerRadius="10">
+                <Grid Margin="3px" Name="grdObjetos" VerticalAlignment="Top" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label x:Name="labelTitulo" />                        
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Border>
+</Window>

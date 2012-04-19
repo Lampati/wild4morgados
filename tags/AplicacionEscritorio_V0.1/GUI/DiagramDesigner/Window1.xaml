@@ -1,0 +1,48 @@
+﻿<w:RibbonWindow x:Class="DiagramDesigner.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="clr-namespace:DiagramDesigner"
+        xmlns:w="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+        xmlns:c="clr-namespace:DiagramDesigner.Controls"
+        xmlns:mensajes="clr-namespace:DiagramDesigner.UserControls.Mensajes"
+        xmlns:estado="clr-namespace:DiagramDesigner.UserControls.Estado"                
+        xmlns:toolbar="clr-namespace:DiagramDesigner.UserControls.Toolbar"  
+        xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"    
+                Closing="RibbonWindow_Closing"  
+                >
+
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="75" />
+            <RowDefinition Height="25" /> 
+        </Grid.RowDefinitions>        
+        
+
+        <!--<Grid Grid.Row="0" Margin="0,10,0,0">
+            <s:BarraToolbar x:Name="ToolbarAplicacion"></s:BarraToolbar>
+        </Grid>-->
+        <Grid Grid.Row="0" >
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Grid.LayoutTransform>
+            <toolbar:BarraToolbarRibbon x:Name="ToolbarAplicacion"></toolbar:BarraToolbarRibbon>
+        </Grid>
+
+        <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->
+
+        <Grid Grid.Row="1" >
+            <entorno:EsquemaCentral x:Name="Esquema" VerticalAlignment="Stretch"></entorno:EsquemaCentral>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <mensajes:BarraMensajes x:Name="BarraMsgs"></mensajes:BarraMensajes>
+        </Grid>
+        <Grid Grid.Row="3">
+            <estado:BarraEstado x:Name="BarraEstado"></estado:BarraEstado>
+        </Grid>
+    </Grid>
+</w:RibbonWindow>

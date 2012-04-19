@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiagramDesigner</RootNamespace>
+    <AssemblyName>DiagramDesigner</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AvalonWizard, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>WizardDLL\AvalonWizard.dll</HintPath>
+    </Reference>
+    <Reference Include="FolderPickerLib, Version=1.0.4163.42504, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FolderBrowseLib\FolderPickerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RibbonDLL\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RibbonDLL\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="DialogWindows\PropertyEditionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DialogWindows\ResultadoEjecucionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ApplicationMenuResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\RibbonStylesResouceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestsPruebas\WindowEjecucionTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TestsPruebas\WindowConsultaTests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestsPruebas\WindowCreacionTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestsPruebas\WindowDetalleConsultaTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Mensajes\BarraMensajes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Estado\BarraEstado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Toolbar\BarraToolbarOLD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
+    </Page>
+    <Page Include="UserControls\Toolbar\BarraToolbarRibbon.xaml">
+      <Generator>MSBuild:Compilehttp://blogs.msdn.com/b/wpf/archive/2010/08/03/introducing-microsoft-ribbon-for-wpf.aspx</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DialogWindows\TextEditionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Entorno\EsquemaCentral.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ApplicationToolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Connection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\DesignerItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Stencils\FlowChartStencils.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Stencils\ShapeStencils.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\GroupBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\ToolBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Toolbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ToolboxItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\VariablesConValoresPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DialogWindows\ObjetoVentana.cs" />
+    <Compile Include="DialogWindows\PropertyEditionWindow.xaml.cs">
+      <DependentUpon>PropertyEditionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\ResultadoEjecucionDialog.xaml.cs">
+      <DependentUpon>ResultadoEjecucionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
+    <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
+    <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
+    <Compile Include="EventArgsClasses\TestPruebaEventArgs.cs" />
+    <Compile Include="EventArgsClasses\DoubleClickEventArgs.cs" />
+    <Compile Include="EventArgsClasses\ModificarPropiedadesEjercicioEventArgs.cs" />
+    <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
+    <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
+    <Compile Include="Helpers\FileDialogManager.cs" />
+    <Compile Include="ResultadoEjecucion.cs" />
+    <Compile Include="TestsPruebas\WindowEjecucionTest.xaml.cs">
+      <DependentUpon>WindowEjecucionTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestsPruebas\Linea.cs" />
+    <Compile Include="TestsPruebas\WindowConsultaTests.xaml.cs">
+      <DependentUpon>WindowConsultaTests.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestsPruebas\WindowCreacionTest.xaml.cs">
+      <DependentUpon>WindowCreacionTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestsPruebas\WindowDetalleConsultaTest.xaml.cs">
+      <DependentUpon>WindowDetalleConsultaTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
+    <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
+    <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">
+      <DependentUpon>BarraMensajes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Estado\BarraEstado.xaml.cs">
+      <DependentUpon>BarraEstado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Toolbar\BarraToolbarOLD.xaml.cs">
+      <DependentUpon>BarraToolbarOLD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Toolbar\BarraToolbarRibbon.Eventos.cs" />
+    <Compile Include="UserControls\Toolbar\BarraToolbarRibbon.xaml.cs">
+      <DependentUpon>BarraToolbarRibbon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataContextsMenu\ApplicationMenuItemData.cs" />
+    <Compile Include="DataContextsMenu\ApplicationMenuModel.cs" />
+    <Compile Include="DataContextsMenu\ApplicationSplitMenuItemData.cs" />
+    <Compile Include="DataContextsMenu\ButtonData.cs" />
+    <Compile Include="DataContextsMenu\CheckBoxData.cs" />
+    <Compile Include="DataContextsMenu\ComboBoxData.cs" />
+    <Compile Include="DataContextsMenu\ContextualTabGroupData.cs" />
+    <Compile Include="DataContextsMenu\ControlData.cs" />
+    <Compile Include="DataContextsMenu\DelegateCommand.cs" />
+    <Compile Include="DataContextsMenu\GalleryCategoryData.cs" />
+    <Compile Include="DataContextsMenu\GalleryData.cs" />
+    <Compile Include="DataContextsMenu\GalleryItemData.cs" />
+    <Compile Include="DataContextsMenu\GroupData.cs" />
+    <Compile Include="DataContextsMenu\MenuButtonData.cs" />
+    <Compile Include="DataContextsMenu\MenuItemData.cs" />
+    <Compile Include="DataContextsMenu\QatItem.cs" />
+    <Compile Include="DataContextsMenu\QatItems.cs" />
+    <Compile Include="DataContextsMenu\RadioButtonData.cs" />
+    <Compile Include="DataContextsMenu\RecentDocumentData.cs" />
+    <Compile Include="DataContextsMenu\RibbonData.cs" />
+    <Compile Include="DataContextsMenu\RowColumnCount.cs" />
+    <Compile Include="DataContextsMenu\SeparatorData.cs" />
+    <Compile Include="DataContextsMenu\SplitButtonData.cs" />
+    <Compile Include="DataContextsMenu\SplitMenuItemData.cs" />
+    <Compile Include="DataContextsMenu\StylesSet.cs" />
+    <Compile Include="DataContextsMenu\TabData.cs" />
+    <Compile Include="DataContextsMenu\TextBoxData.cs" />
+    <Compile Include="DataContextsMenu\ThemeFonts.cs" />
+    <Compile Include="DataContextsMenu\ToggleButtonData.cs" />
+    <Compile Include="DataContextsMenu\ViewModel.cs" />
+    <Compile Include="DialogWindows\TextEditionWindow.xaml.cs">
+      <DependentUpon>TextEditionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Mensaje.cs" />
+    <Compile Include="Enums\TipoElemento.cs" />
+    <Compile Include="Enums\TipoMensaje.cs" />
+    <Compile Include="UserControls\Entorno\EsquemaCentral.xaml.cs">
+      <DependentUpon>EsquemaCentral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\RibbonTextFixedWidth.cs" />
+    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\StarWidthConverter .cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationReformatter.cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarIndentationStrategy.cs" />
+    <Compile Include="ModoTexto\Configuracion\Indentacion\GarGarTextDocumentAccessor.cs" />
+    <Compile Include="ModoTexto\Configuracion\ModoTextoConfiguracion.cs" />
+    <Compile Include="EventArgsClasses\IdentarEventArgs.cs" />
+    <Compile Include="UserControls\VariablesConValoresPresenter.xaml.cs">
+      <DependentUpon>VariablesConValoresPresenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window1.MenuCommands.cs" />
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connection.cs" />
+    <Compile Include="ConnectionAdorner.cs" />
+    <Compile Include="Connector.cs" />
+    <Compile Include="ConnectorAdorner.cs" />
+    <Compile Include="Controls\DragThumb.cs" />
+    <Compile Include="Controls\RelativePositionPanel.cs" />
+    <Compile Include="Controls\ResizeThumb.cs" />
+    <Compile Include="DesignerCanvas.Commands.cs" />
+    <Compile Include="DesignerCanvas.cs" />
+    <Compile Include="DesignerItem.cs" />
+    <Compile Include="IGroupable.cs" />
+    <Compile Include="ISelectable.cs" />
+    <Compile Include="PathFinder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RubberbandAdorner.cs" />
+    <Compile Include="SelectionService.cs" />
+    <Compile Include="Toolbox.cs" />
+    <Compile Include="ToolboxItem.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModoTexto\Configuracion\Sintaxis\GarGar.xshd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AlignObjectsBottom.png" />
+    <Resource Include="Resources\Images\AlignObjectsCenteredHorizontal.png" />
+    <Resource Include="Resources\Images\AlignObjectsCenteredVertical.png" />
+    <Resource Include="Resources\Images\AlignObjectsLeft.png" />
+    <Resource Include="Resources\Images\AlignObjectsRight.png" />
+    <Resource Include="Resources\Images\AlignObjectsTop.png" />
+    <Resource Include="Resources\Images\BringForward.png" />
+    <Resource Include="Resources\Images\BringToFront.png" />
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Cut.png" />
+    <Resource Include="Resources\Images\Delete.png" />
+    <Resource Include="Resources\Images\DistributeObjectsHorizontal.png" />
+    <Resource Include="Resources\Images\DistributeObjectsVertical.png" />
+    <Resource Include="Resources\Images\GenericDocument.png" />
+    <Resource Include="Resources\Images\Group.png" />
+    <Resource Include="Resources\Images\OpenFolder.png" />
+    <Resource Include="Resources\Images\PasteBig.png" />
+    <Resource Include="Resources\Images\Paste.png" />
+    <Resource Include="Resources\Images\Print.png" />
+    <Resource Include="Resources\Images\Save.png" />
+    <Resource Include="Resources\Images\SendBackward.png" />
+    <Resource Include="Resources\Images\SendToBack.png" />
+    <Resource Include="Resources\Images\Ungroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Gargar.png" />
+    <Resource Include="Resources\Images\Workflow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Compilador\Compilador\CompiladorGarGar.csproj">
+      <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
+      <Name>CompiladorGarGar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\DataAccess.csproj">
+      <Project>{7F9DD2FC-B1FB-4CCE-AE6A-9F72DD296BC2}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EJEKOR\EJEKOR.csproj">
+      <Project>{A9F69EB3-5235-4B36-ADC6-D99FBEB7A512}</Project>
+      <Name>EJEKOR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FindReplace\FindReplace.csproj">
+      <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>
+      <Name>FindReplace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Globales\Globales.csproj">
+      <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
+      <Name>Globales</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sincronizacion\Sincronizacion.csproj">
+      <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
+      <Name>Sincronizacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilidades\Utilidades.csproj">
+      <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
+      <Name>Utilidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WpfApplicationHotKey\WpfApplicationHotKey.csproj">
+      <Project>{F32BAA9E-D765-4328-8031-1CDBB7A1BD72}</Project>
+      <Name>WpfApplicationHotKey</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Compile1.png" />
+    <Resource Include="Resources\Images\Compile2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ejecutar1.png" />
+    <Resource Include="Resources\Images\Ejecutar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\findreplace1.png" />
+    <Resource Include="Resources\Images\find2.png" />
+    <Resource Include="Resources\Images\find1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\find3.png" />
+    <Resource Include="Resources\Images\findreplace2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Open128.png" />
+    <Resource Include="Resources\Images\Flow128.png" />
+    <Resource Include="Resources\Images\GarGar128.png" />
+    <Resource Include="Resources\Images\Search128.png" />
+    <Resource Include="Resources\Images\SearchRep128.png" />
+    <SplashScreen Include="Resources\Images\LogoEjemplo.jpg" />
+    <Resource Include="Resources\Images\Oxygen_new.png" />
+    <Resource Include="Resources\Images\Oxygen_open1.png" />
+    <Resource Include="Resources\Images\Oxygen_open2.png" />
+    <Resource Include="Resources\Images\Oxygen_print.png" />
+    <Resource Include="Resources\Images\Oxygen_save.png" />
+    <Resource Include="Resources\Images\Oxygen_saveAs.png" />
+    <Resource Include="Resources\Images\Exit-32.png" />
+    <Resource Include="Resources\Images\redo.png" />
+    <Resource Include="Resources\Images\undo.png" />
+    <Resource Include="Resources\Images\Search24.png" />
+    <Resource Include="Resources\Images\SearchRep24.png" />
+    <Resource Include="Resources\Images\Flow48.png" />
+    <Content Include="FolderBrowseLib\FolderPickerLib.dll" />
+    <Resource Include="Resources\Images\accepted_48.png" />
+    <Resource Include="Resources\Images\cancel_48.png" />
+    <Resource Include="Resources\Images\detail32.png" />
+    <Resource Include="Resources\Images\remove32.png" />
+    <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
+    <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
+    <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
+    <Resource Include="RibbonDLL\RibbonControlsLibrary.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
