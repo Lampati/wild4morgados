@@ -269,22 +269,37 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();
-            strBldr.Append(this.hijosNodo[0].LexemaVariable);
+            
 
             if (this.hijosNodo[1].ObtenerCantidadHijos() > 1)
             {
                 if (this.EsArreglo)
                 {
+                    strBldr.Append(this.hijosNodo[0].LexemaVariable);
                     strBldr.Append("[");
                     strBldr.Append(string.Format("FrameworkProgramArProgramAr0000001ConvertirAEnteroIndiceArreglo({0},'{1}')", this.hijosNodo[1].Codigo, this.hijosNodo[0].Lexema));
                     strBldr.Append("]");
                 }
                 else
                 {
+                    string nombre = this.hijosNodo[0].LexemaVariable;
+
+                    
+                    if (this.TablaSimbolos.EsNombreFuncionFramework(this.hijosNodo[0].Lexema))
+                    {
+                        nombre = this.TablaSimbolos.ObtenerNombrePascalFuncionFramework(this.hijosNodo[0].Lexema);
+                    }
+
+                    strBldr.Append(nombre);
+
                     strBldr.Append("(");
                     strBldr.Append(this.hijosNodo[1].Codigo);
                     strBldr.Append(")");
                 }
+            }
+            else
+            {
+                strBldr.Append(this.hijosNodo[0].LexemaVariable);
             }
 
             //strBldr.Append(this.hijosNodo[1].Codigo);

@@ -403,6 +403,22 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Funcion, tdato, firma));
         }
 
+        internal void AgregarProcedimientoDelFramework(string nombre, List<FirmaProc> firma, string codigoPascal, string nombreFunc)
+        {
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Procedimiento,
+                NodoTablaSimbolos.TipoDeDato.Ninguno, firma) 
+                { EsDelFramework = true , CodigoPascalParaElFramework = codigoPascal, NombreFuncionEnPascal = nombreFunc}
+            );
+        }
+
+        internal void AgregarFuncionDelFramework(string nombre, List<FirmaProc> firma,
+            NodoTablaSimbolos.TipoDeDato tdato, string codigoPascal, string nombreFunc)
+        {
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Funcion, tdato, firma) 
+            { EsDelFramework = true, CodigoPascalParaElFramework = codigoPascal , NombreFuncionEnPascal = nombreFunc}
+            );
+        }
+
         internal bool ExisteProcedimiento(string nombre)
         {
             return this.listaNodos.Exists(
@@ -550,5 +566,15 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         }
 
         #endregion
+
+        internal bool EsNombreFuncionFramework(string p)
+        {
+            return this.listaNodos.Exists(x => x.EsDelFramework && x.Nombre.ToUpper().Equals(p.ToUpper()));
+        }    
+
+        internal string ObtenerNombrePascalFuncionFramework(string p)
+        {
+            return this.listaNodos.Find(x => x.EsDelFramework && x.Nombre.ToUpper().Equals(p.ToUpper())).NombreFuncionEnPascal;
+        }
     }
 }
