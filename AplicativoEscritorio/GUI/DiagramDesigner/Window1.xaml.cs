@@ -559,6 +559,15 @@ namespace DiagramDesigner
             {
                 ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
                 resultadosDialog.ShowDialog();
+
+                try
+                {
+                    File.Delete(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta);
+                }
+                catch
+                {                    
+                    
+                }
             }
         }
 

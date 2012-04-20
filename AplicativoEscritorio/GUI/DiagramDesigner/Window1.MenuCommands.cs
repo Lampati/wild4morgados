@@ -17,6 +17,7 @@ using DiagramDesigner.DialogWindows;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
 using DiagramDesigner.TestsPruebas;
+using System.IO;
 
 namespace DiagramDesigner
 {
@@ -243,6 +244,15 @@ namespace DiagramDesigner
                                 //Muestro cual fue el error pq termino mal
                                 ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
                                 resultadosDialog.ShowDialog();
+
+                                try
+                                {
+                                    File.Delete(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta);
+                                }
+                                catch
+                                {
+
+                                }
                             }
                         }
                         

@@ -18,6 +18,7 @@ using DataAccess.Entidades;
 using CompiladorGargar.Resultado;
 using EJEKOR;
 using Utilidades;
+using System.IO;
 
 namespace DiagramDesigner.TestsPruebas
 {
@@ -404,6 +405,15 @@ namespace DiagramDesigner.TestsPruebas
                     stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
                     this.wizard.CurrentPage.AllowBack = false;
                     this.wizard.CurrentPage.AllowNext = true;
+
+                    try
+                    {
+                        File.Delete(res.ArchTemporalResultadosEjecucionConRuta);
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 catch (Exception)
                 {
