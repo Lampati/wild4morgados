@@ -91,9 +91,31 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         public bool EsConstante
         {
             get { return esConstante; }
-        }  
+        }
 
+        private bool esDelFramework;
+        public bool EsDelFramework
+        {
+            get { return esDelFramework; }
+            set { esDelFramework = value; }
+        }
+
+        private string codigoPascalParaElFramework;
+        public string CodigoPascalParaElFramework
+        {
+            get { return codigoPascalParaElFramework; }
+            set { codigoPascalParaElFramework = value; }
+        }
+
+        private string nombreFuncionEnPascal;
+        public string NombreFuncionEnPascal
+        {
+            get { return nombreFuncionEnPascal; }
+            set { nombreFuncionEnPascal = value; }
+        }  
     
+
+        
        
         private string nombreContextoLocal;
         public string NombreContextoLocal
@@ -120,8 +142,11 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.contexto = TipoContexto.Global;
             this.nombreContextoLocal = string.Empty;
             this.valor = 0;
-        }
+            this.esDelFramework = false;
+        }    
 
+
+        
 
 
         internal NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato,
@@ -136,8 +161,11 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.esConstante = esConst;
             this.nombreContextoLocal = nombreProc;
             this.valor = 0;
+            this.esDelFramework = false;
             
         }
+
+       
 
         internal NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato, 
             bool esConst, TipoContexto cont, string nombreProc)
@@ -150,6 +178,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.contexto = cont;
             this.nombreContextoLocal = nombreProc;
             this.valor = 0;
+            this.esDelFramework = false;
         }
 
      

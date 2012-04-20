@@ -61,7 +61,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     tipoDato = "*";
                     break;
                 case @"/":
-                    tipoDato = "div";
+                    tipoDato = @"/";
                     break;                
                 default:
                     tipoDato = string.Empty;

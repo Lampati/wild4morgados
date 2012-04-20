@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CompiladorGargar.Semantico.Arbol.Nodos;
 using System.IO;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
 namespace CompiladorGargar
 {
@@ -490,6 +491,75 @@ namespace CompiladorGargar
 
 
 
-       
+
+
+        internal static string ArmarFuncionPotencia(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ; exponente : real) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("longitud : integer; ");
+            strBldr.AppendLine("begin ");
+            strBldr.Append(nombreFunc).AppendLine(" := Exp(exponente*Ln(x));");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        internal static string ArmarFuncionRaiz(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+            return strBldr.ToString();
+        }
+
+        internal static string ArmarFuncionEsPar(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : boolean ;");            
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : integer; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("aux := trunc(x); ");
+            
+            strBldr.Append(nombreFunc).AppendLine(" := Not Odd(aux);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        internal static string ArmarFuncionEsImpar(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : boolean ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : integer; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("aux := trunc(x); ");
+
+            strBldr.Append(nombreFunc).AppendLine(" := Odd(aux);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+        
+
+        internal static string DefinirFuncionesFramework(Semantico.TablaDeSimbolos.TablaSimbolos tabla)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            foreach (NodoTablaSimbolos item in tabla.ListaNodos.FindAll(x=> x.EsDelFramework))
+            {
+                strBldr.AppendLine(item.CodigoPascalParaElFramework);
+                strBldr.AppendLine();
+            }
+
+            return strBldr.ToString();
+        }
     }
 }

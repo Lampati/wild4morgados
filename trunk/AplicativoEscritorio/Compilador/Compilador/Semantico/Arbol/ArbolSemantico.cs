@@ -27,6 +27,7 @@ namespace CompiladorGargar.Semantico.Arbol
         {
             nodoRaiz = new NodoStart(null, nt);
             nodoRaiz.CrearTablaSimbolos();
+            
             nodoActual = nodoRaiz;
         }
 
