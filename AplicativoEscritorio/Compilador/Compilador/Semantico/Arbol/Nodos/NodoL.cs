@@ -62,6 +62,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     strBldr.Append(GeneracionCodigoHelpers.EscribirValorBooleano(this.hijosNodo[0].Codigo));
                 }
+                else if (this.hijosNodo[0].TipoDato == NodoTablaSimbolos.TipoDeDato.Numero)
+                {
+                    strBldr.Append(GeneracionCodigoHelpers.EscribirValorNumerico(this.hijosNodo[0].Codigo));
+                }
                 else
                 {
                     strBldr.Append(this.hijosNodo[0].Codigo);    

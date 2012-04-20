@@ -69,6 +69,28 @@ namespace CompiladorGargar
             strBldr.AppendLine("end; ");
             strBldr.AppendLine();
 
+            strBldr.AppendLine("function FrameworkProgramArProgramAr0000001EscribirReal( x : real) : string ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : string; ");
+            strBldr.AppendLine("longitud : integer; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("aux := FloatToStrF(x, ffFixed,15, 15);");
+            strBldr.AppendLine("longitud :=    Length(aux);");
+            strBldr.AppendLine("while ((longitud > 0) and (aux[longitud] = '0')) do");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tDelete(aux, longitud, 1);");
+            strBldr.AppendLine("\tlongitud := longitud - 1;");            
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine("longitud :=    Length(aux);");
+            strBldr.AppendLine("if (aux[longitud] = ',') then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tDelete(aux, longitud, 1);");            
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine("FrameworkProgramArProgramAr0000001EscribirReal := aux; ");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+         
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirConversionYChequeoIndiceArreglo());
 
 
@@ -100,6 +122,18 @@ namespace CompiladorGargar
             strBldr.Append(codigo);
             strBldr.Append(") ");
             
+
+            return strBldr.ToString();
+        }
+
+        public static string EscribirValorNumerico(string codigo)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("FrameworkProgramArProgramAr0000001EscribirReal( ");
+            strBldr.Append(codigo);
+            strBldr.Append(") ");
+
 
             return strBldr.ToString();
         }
