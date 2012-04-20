@@ -498,8 +498,19 @@ namespace CompiladorGargar
             StringBuilder strBldr = new StringBuilder();
 
             strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ; exponente : real) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("res : real; ");
             strBldr.AppendLine("begin ");
-            strBldr.Append(nombreFunc).AppendLine(" := Exp(exponente*Ln(x));");
+            strBldr.AppendLine("if ( x = 0 ) then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tres := 0; ");
+            strBldr.AppendLine("end ");
+            strBldr.AppendLine("else ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tres :=  Exp(exponente*Ln(Abs(x)));");
+            strBldr.AppendLine("end; ");
+            strBldr.Append(nombreFunc).AppendLine(" := res;");
+            //strBldr.Append(nombreFunc).AppendLine(" := power(x,exponente);");
             strBldr.AppendLine("end; ");
             strBldr.AppendLine();
 
@@ -508,7 +519,33 @@ namespace CompiladorGargar
 
         internal static string ArmarFuncionRaiz(string nombreFunc)
         {
+
+            //Si el exponetne es 0, tiene que dar error
+
+            //Si la base es negativa, tirar error
             StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ; exponente : real) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("res : real; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("if ( exponente = 0 ) then");
+            strBldr.AppendLine("begin ");
+            //excepcion por exponente = 0
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine("if ( x > 0 ) then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tres :=  Exp((1/exponente)*Ln(Abs(x)));");
+            strBldr.AppendLine("end ");
+            strBldr.AppendLine("else ");
+            strBldr.AppendLine("begin ");
+            //excepcion por base negativa            
+            strBldr.AppendLine("end; ");
+            strBldr.Append(nombreFunc).AppendLine(" := res;");
+            //strBldr.Append(nombreFunc).AppendLine(" := power(x,exponente);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
             return strBldr.ToString();
         }
 
