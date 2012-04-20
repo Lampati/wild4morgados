@@ -5,7 +5,7 @@
   <Color name="Tipo" foreground="LightGreen" />
 
   <!-- This is the main ruleset. -->
-  <RuleSet>
+  <RuleSet ignoreCase="true">
 
     <Span color="Comment" multiline="true" begin="{" end="}" />
 
@@ -52,8 +52,7 @@
     <Keywords fontWeight="bold" foreground="LightSlateGray" >
       <Word>mostrarp</Word>
       <Word>mostrar</Word>
-      <Word>leer</Word>
-      
+      <Word>leer</Word>      
     </Keywords>
 
     <Keywords fontWeight="bold" foreground="Firebrick">
@@ -66,6 +65,14 @@
     <Keywords fontWeight="bold" foreground="Violet">
       <Word>verdadero</Word>
       <Word>falso</Word>
+    </Keywords>
+	
+	<Keywords fontWeight="bold" foreground="Red">
+      <Word>EsPar</Word>
+      <Word>EsImpar</Word>
+	  <Word>Truncar</Word>
+	  <Word>Redondear</Word>
+	  <Word>Potencia</Word>
     </Keywords>
 
     <!-- Digits -->
