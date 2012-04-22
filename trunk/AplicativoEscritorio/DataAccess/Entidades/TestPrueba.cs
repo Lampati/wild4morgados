@@ -348,10 +348,12 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetTitle("ValorEsperado");
             xml.SetValue(this.ValorEsperado);
             xml.LevelUp();
+            
             //xml.AddElement();
             //xml.SetTitle("VariableMapeada");
             //xml.SetValue(this.VariableMapeada);
             //xml.LevelUp();
+
             if (!Object.Equals(this.Posiciones, null))
             {
                 xml.AddElement();
@@ -373,7 +375,9 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.Descripcion = xmlElem.FindFirst("Descripcion").value;
             this.ValorEsperado = xmlElem.FindFirst("ValorEsperado").value;
             this.TipoDato = xmlElem.FindFirst("TipoDato").value;
+
             //this.VariableMapeada = xmlElem.FindFirst("VariableMapeada").value;
+
             this.Contexto = xmlElem.FindFirst("Contexto").value;
             this.EsArreglo = Convert.ToBoolean(xmlElem.FindFirst("EsArreglo").value);
 
@@ -431,7 +435,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             sb.Append(this.Contexto);
             sb.Append(this.Descripcion);
             sb.Append(this.TipoDato);
-            sb.Append(this.VariableMapeada);
+            //sb.Append(this.VariableMapeada);
             sb.Append(this.ValorEsperado);
             sb.Append(this.EsArreglo.ToString());
 
