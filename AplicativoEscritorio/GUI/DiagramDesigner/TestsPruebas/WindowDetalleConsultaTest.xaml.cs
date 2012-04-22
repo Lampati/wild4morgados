@@ -79,6 +79,7 @@ namespace DiagramDesigner.TestsPruebas
                     variable.EsValida = variablesEntrada.SingleOrDefault(x => x.Contexto == variable.Contexto
                                                                 && x.Nombre == variable.Nombre
                                                                 && x.EsArreglo == variable.EsArreglo
+                                                                && (!x.EsArreglo || (x.EsArreglo && x.TopeArr == variable.TopeArr))
                                                                 && x.TipoDato == variable.TipoDato) != null;
                   
 
@@ -103,6 +104,7 @@ namespace DiagramDesigner.TestsPruebas
                     variable.EsValida = variablesSalida.SingleOrDefault(x => x.Contexto == variable.Contexto
                                                                 && x.Nombre == variable.Nombre
                                                                 && x.EsArreglo == variable.EsArreglo
+                                                                && (!x.EsArreglo || (x.EsArreglo && x.TopeArr == variable.TopeArr))
                                                                 && x.TipoDato == variable.TipoDato) != null;
 
                     auxListaSalida.Add(variable);

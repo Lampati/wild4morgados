@@ -206,16 +206,20 @@ namespace DiagramDesigner
 
                                     if (todosValidos)
                                     {
-                                        MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+                                        //MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "ProgramAR", MessageBoxButton.OK);
 
-                                        //PONER ACA LA EJECUCION
-
+                                        ////PONER ACA LA EJECUCION
                                         
+
+                                        //foreach (TestPrueba test in this.archCargado.TestsPrueba)
+                                        //{
+                                        //    todosValidos &= test.EjecutarConVariablesPredeterminadas;
+                                        //}
                                     }
                                     else
                                     {
                                         //Abro la consulta, para que vea cuales son
-                                        aptoParaGuardar = false;
+                                        aptoParaGuardar = false;                                        
 
                                         WindowConsultaTests testWindow = new WindowConsultaTests(true);
                                         testWindow.VariablesEntrada = listaVariablesEntrada;

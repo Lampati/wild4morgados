@@ -531,6 +531,7 @@ namespace CompiladorGargar
             strBldr.AppendLine("begin ");
             strBldr.AppendLine("if ( exponente = 0 ) then");
             strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\traise EMatematicaRaizException.Create('Se paso 0 como raiz a aplicar. No se admite 0 en el exponente de la raiz');");            
             //excepcion por exponente = 0
             strBldr.AppendLine("end; ");
             strBldr.AppendLine("if ( x > 0 ) then");
@@ -539,6 +540,7 @@ namespace CompiladorGargar
             strBldr.AppendLine("end ");
             strBldr.AppendLine("else ");
             strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\traise EMatematicaRaizException.Create('Se paso una base negativa en la raiz. El resultado seria un numero complejo y no estan admitidos en el lenguaje GarGar');");            
             //excepcion por base negativa            
             strBldr.AppendLine("end; ");
             strBldr.Append(nombreFunc).AppendLine(" := res;");

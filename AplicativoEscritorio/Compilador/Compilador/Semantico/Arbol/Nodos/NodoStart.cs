@@ -82,7 +82,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(this.hijosNodo[0].ConstantesGlobales);
             strBldr.AppendLine("Type");
             strBldr.AppendLine("EIteracionInfinitaException = class(Exception);");
-            strBldr.AppendLine("EIndiceArregloInvalido = class(Exception);");      
+            strBldr.AppendLine("EIndiceArregloInvalido = class(Exception);");
+            strBldr.AppendLine("EMatematicaRaizException = class(Exception);");      
             strBldr.AppendLine(ArmarTiposDeArreglo(this.TablaSimbolos.ListaTiposArreglos));
             strBldr.AppendLine("Var");
             strBldr.AppendLine(string.Format("{0} : integer;",GeneracionCodigoHelpers.VariableContadoraLineas));
@@ -128,6 +129,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Indice invalido de arreglo", "EIndiceInvalido.Message"));
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
+            strBldr.AppendLine("on ERaiz: EMatematicaRaizException do");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("WriteLn(ERaiz.Message);");
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Error al operar con una raiz", "ERaiz.Message"));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
+            strBldr.AppendLine("end;");            
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicación."));
