@@ -389,16 +389,33 @@ namespace DiagramDesigner.UserControls.Toolbar
             }        
         }
 
+        private AplicativoEscritorio.DataAccess.ConfiguracionAplicacion configApp;
         private Sincronizacion.Servicio servicio;
+
+        private AplicativoEscritorio.DataAccess.ConfiguracionAplicacion ConfigApp
+        {
+            get
+            {
+                this.configApp = new AplicativoEscritorio.DataAccess.ConfiguracionAplicacion();
+                this.configApp.Abrir(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                                Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+
+                return this.configApp;
+            }
+        }
 
         private Sincronizacion.Servicio Servicio
         {
             get
             {
-                if (Object.Equals(servicio, null))
-                    servicio = new Sincronizacion.Servicio(new List<string>() { "http://localhost:1890/Service1.asmx?wsdl", "http://localhost:1891/Service1.asmx?wsdl", "http://localhost:1889/Service1.asmx?wsdl" });
+                if (Object.Equals(this.servicio, null))
+                    this.servicio = new Sincronizacion.Servicio();
 
-                return servicio;
+                string[] urls = this.ConfigApp.UrlsDescargaEjercicios.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                this.servicio.Directorio = this.ConfigApp.DirectorioEjerciciosDescargados;
+                this.servicio.Urls = new List<string>(urls);
+
+                return this.servicio;
             }
         }
 
@@ -521,6 +538,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             pBar.Width = 400;
             pBar.Height = 20;
             pBar.Maximum = 100;
+            pBar.Visibility = System.Windows.Visibility.Hidden;
             propertyEditorWindow.AgregarPropiedad(pBar);
 
             Label lblInfo = new Label();
@@ -529,8 +547,10 @@ namespace DiagramDesigner.UserControls.Toolbar
             lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             propertyEditorWindow.AgregarPropiedad(lblInfo);
 
-            this.Servicio.BarraProgreso = pBar;
-            this.Servicio.LabelInfo = lblInfo;
+            Sincronizacion.Servicio srv = this.Servicio;
+
+            srv.BarraProgreso = pBar;
+            srv.LabelInfo = lblInfo;
 
             System.Threading.Thread th = null;
             propertyEditorWindow.AgregarBotonera(
@@ -538,6 +558,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                     {
                         if (Object.Equals(th, null) || !th.IsAlive)
                         {
+                            pBar.Visibility = System.Windows.Visibility.Visible;
                             th = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(SincronizarGlobales));
                             th.Start(propertyEditorWindow);
                         }
@@ -574,6 +595,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             pBar.Width = 400;
             pBar.Height = 20;
             pBar.Maximum = 100;
+            pBar.Visibility = System.Windows.Visibility.Hidden;
             propertyEditorWindow.AgregarPropiedad(pBar);
 
             Label lblInfo = new Label();
@@ -582,8 +604,10 @@ namespace DiagramDesigner.UserControls.Toolbar
             lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             propertyEditorWindow.AgregarPropiedad(lblInfo);
 
-            this.Servicio.BarraProgreso = pBar;
-            this.Servicio.LabelInfo = lblInfo;
+            Sincronizacion.Servicio srv = this.Servicio;
+
+            srv.BarraProgreso = pBar;
+            srv.LabelInfo = lblInfo;
 
             System.Threading.Thread th = null;
             propertyEditorWindow.AgregarBotonera(
@@ -594,6 +618,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                        int cursoId = 0;
                        if (int.TryParse(txtCurso.Text, out cursoId))
                        {
+                           pBar.Visibility = System.Windows.Visibility.Visible;
                            th = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(SincronizarCurso));
                            th.Start(new object[] { propertyEditorWindow, cursoId });
                        }
@@ -633,6 +658,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             pBar.Width = 400;
             pBar.Height = 20;
             pBar.Maximum = 100;
+            pBar.Visibility = System.Windows.Visibility.Hidden;
             propertyEditorWindow.AgregarPropiedad(pBar);
 
             Label lblInfo = new Label();
@@ -641,8 +667,10 @@ namespace DiagramDesigner.UserControls.Toolbar
             lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             propertyEditorWindow.AgregarPropiedad(lblInfo);
 
-            this.Servicio.BarraProgreso = pBar;
-            this.Servicio.LabelInfo = lblInfo;
+            Sincronizacion.Servicio srv = this.Servicio;
+
+            srv.BarraProgreso = pBar;
+            srv.LabelInfo = lblInfo;
 
             System.Threading.Thread th = null;
             propertyEditorWindow.AgregarBotonera(
@@ -653,6 +681,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                        int ejercicioId = 0;
                        if (int.TryParse(txtEjercicio.Text, out ejercicioId))
                        {
+                           pBar.Visibility = System.Windows.Visibility.Visible;
                            th = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(SincronizarEjercicio));
                            th.Start(new object[] { propertyEditorWindow, ejercicioId });
                        }
@@ -673,6 +702,8 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
         {
+            AplicativoEscritorio.DataAccess.ConfiguracionAplicacion config = this.ConfigApp;
+
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
             propertyEditorWindow.Titulo = "Propiedades de Sincronización";
             propertyEditorWindow.Owner = this.Owner;
@@ -685,21 +716,27 @@ namespace DiagramDesigner.UserControls.Toolbar
             txtIP.TextWrapping = TextWrapping.Wrap;
             txtIP.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
             txtIP.AcceptsReturn = true;
-            txtIP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;            
+            txtIP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            txtIP.Text = config.UrlsDescargaEjercicios;
             propertyEditorWindow.AgregarPropiedad("IP/Host Servidor (ingresar cada valor en una nueva línea)", txtIP);
 
-            propertyEditorWindow.AgregarSeparador(false);
+            /*propertyEditorWindow.AgregarSeparador(false);
             
             TextBox txtTimeout = new TextBox();
             txtTimeout.Height = 20;
             txtTimeout.Width = 30;
             txtTimeout.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            propertyEditorWindow.AgregarPropiedad("Timeout (segs)", txtTimeout);
+            propertyEditorWindow.AgregarPropiedad("Timeout (segs)", txtTimeout);*/
 
             propertyEditorWindow.AgregarSeparador();
 
             propertyEditorWindow.AgregarBotonera(
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = true),
+                new RoutedEventHandler((snd, ev) => 
+                {
+                    config.UrlsDescargaEjercicios = txtIP.Text;
+                    config.Guardar();
+                    propertyEditorWindow.DialogResult = true;
+                }),
                 new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
 
             if (propertyEditorWindow.ShowDialog() == true)
