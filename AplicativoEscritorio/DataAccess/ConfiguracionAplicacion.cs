@@ -17,9 +17,16 @@ namespace AplicativoEscritorio.DataAccess
         private string directorioEjerciciosDescargados;
         private string directorioEjerciciosCreados;
         private string directorioResolucionesEjercicios;
+        private string urlsDescargaEjercicios;
         #endregion
 
         #region Propiedades
+        public string UrlsDescargaEjercicios
+        {
+            get { return urlsDescargaEjercicios; }
+            set { urlsDescargaEjercicios = value; }
+        }
+
         public string DirectorioAbrirDefault
         {
             get { return directorioAbrirDefault; }
@@ -71,6 +78,7 @@ namespace AplicativoEscritorio.DataAccess
                 this.directorioResolucionesEjercicios = config.DirectorioResolucionesEjercicios;
                 this.directorioTemporal = config.DirectorioTemporal;
                 this.directorioAbrirDefault = config.DirectorioAbrirDefault;
+                this.urlsDescargaEjercicios = config.UrlsDescargaEjercicios;
             }
             else
             {
