@@ -238,10 +238,10 @@
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
     <Compile Include="ResultadoEjecucion.cs" />
+    <Compile Include="TestsPruebas\Linea.cs" />
     <Compile Include="TestsPruebas\WindowEjecucionTest.xaml.cs">
       <DependentUpon>WindowEjecucionTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="obj\Linea.cs" />
     <Compile Include="TestsPruebas\WindowConsultaTests.xaml.cs">
       <DependentUpon>WindowConsultaTests.xaml</DependentUpon>
     </Compile>
@@ -482,7 +482,9 @@
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
     <Resource Include="RibbonDLL\RibbonControlsLibrary.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
