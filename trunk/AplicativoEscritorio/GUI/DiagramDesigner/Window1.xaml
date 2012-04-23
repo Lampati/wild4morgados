@@ -10,10 +10,9 @@
         xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"    
-                Closing="RibbonWindow_Closing"  
-                >
+                Closing="RibbonWindow_Closing" SizeChanged="RibbonWindow_SizeChanged">
 
-    <Grid Margin="0">
+    <Grid Margin="0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="160"/>
             <RowDefinition Height="*" />
@@ -34,8 +33,8 @@
 
         <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->
 
-        <Grid Grid.Row="1" >
-            <entorno:EsquemaCentral x:Name="Esquema" VerticalAlignment="Stretch"></entorno:EsquemaCentral>
+        <Grid Grid.Row="1" VerticalAlignment="Stretch">
+            <entorno:EsquemaCentral x:Name="Esquema" ></entorno:EsquemaCentral>
         </Grid>
         
         <Grid Grid.Row="2">

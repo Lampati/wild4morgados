@@ -12,6 +12,7 @@ namespace DiagramDesigner.UserControls.Entorno
         public delegate void ModoTextoCambiarPosicionEventHandler(object o, ModoTextoCambiarPosicionEventArgs e);
         public event ModoTextoCambiarPosicionEventHandler ModoTextoCambiarPosicionEvent;
 
+
         private void ModoTextoCambiarPosicionEventFire(ModoTextoCambiarPosicionEventArgs e)
         {
             if (ModoTextoCambiarPosicionEvent != null)

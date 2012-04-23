@@ -210,6 +210,24 @@ namespace DiagramDesigner.UserControls.Entorno
                 findAndReplaceManager.ShowAsFind();
             }
         }
+
+        private void grdTexto_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (modo == ModoVisual.Texto)
+            {
+                grdTexto.MaxHeight = e.NewSize.Height;
+
+            }
+        }
+
+        internal void CambiarTamanio(double width, double height)
+        {
+            if (modo == ModoVisual.Texto)
+            {
+                grdTexto.MaxWidth = width;
+                grdTexto.MaxHeight = height;
+            }
+        }
     }
 
     

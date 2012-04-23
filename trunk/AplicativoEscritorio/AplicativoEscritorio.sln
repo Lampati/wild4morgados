@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sincronizacion", "Sincronizacion\Sincronizacion.csproj", "{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupProgramAR", "..\SetupProgramAR\SetupProgramAR.vdproj", "{84CCDA39-04CC-4CC5-B164-9ED604247DCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,12 @@ Global
 		{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{84CCDA39-04CC-4CC5-B164-9ED604247DCD}.Debug|Any CPU.ActiveCfg = Debug
+		{84CCDA39-04CC-4CC5-B164-9ED604247DCD}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{84CCDA39-04CC-4CC5-B164-9ED604247DCD}.Debug|x86.ActiveCfg = Debug
+		{84CCDA39-04CC-4CC5-B164-9ED604247DCD}.Release|Any CPU.ActiveCfg = Release
+		{84CCDA39-04CC-4CC5-B164-9ED604247DCD}.Release|Mixed Platforms.ActiveCfg = Release
+		{84CCDA39-04CC-4CC5-B164-9ED604247DCD}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

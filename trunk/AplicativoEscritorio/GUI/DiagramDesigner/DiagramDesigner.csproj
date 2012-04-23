@@ -241,7 +241,7 @@
     <Compile Include="TestsPruebas\WindowEjecucionTest.xaml.cs">
       <DependentUpon>WindowEjecucionTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestsPruebas\Linea.cs" />
+    <Compile Include="obj\Linea.cs" />
     <Compile Include="TestsPruebas\WindowConsultaTests.xaml.cs">
       <DependentUpon>WindowConsultaTests.xaml</DependentUpon>
     </Compile>
@@ -251,6 +251,7 @@
     <Compile Include="TestsPruebas\WindowDetalleConsultaTest.xaml.cs">
       <DependentUpon>WindowDetalleConsultaTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventArgsClasses\CambiarTamanioEventArgs.cs" />
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">
