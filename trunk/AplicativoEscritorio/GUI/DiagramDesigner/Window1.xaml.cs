@@ -31,6 +31,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using DiagramDesigner.DialogWindows;
 using DataAccess.Entidades;
+using DataAccess;
 
 namespace DiagramDesigner
 {
@@ -178,15 +179,13 @@ namespace DiagramDesigner
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
 
 
-            configApp = new ConfiguracionAplicacion();
-            configApp.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
-                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+            ConfiguracionAplicacion.Abrir();
 
-            ToolbarAplicacion.DirEjCreados = configApp.DirectorioEjerciciosCreados;
-            ToolbarAplicacion.DirEjDescargados = configApp.DirectorioEjerciciosDescargados;
-            ToolbarAplicacion.DirResoluciones = configApp.DirectorioResolucionesEjercicios;
-            ToolbarAplicacion.DirTemporales = configApp.DirectorioTemporal;
-            ToolbarAplicacion.DirDefaultAbrir = configApp.DirectorioAbrirDefault; 
+            ToolbarAplicacion.DirEjCreados = ConfiguracionAplicacion.DirectorioEjerciciosCreados;
+            ToolbarAplicacion.DirEjDescargados = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
+            ToolbarAplicacion.DirResoluciones = ConfiguracionAplicacion.DirectorioResolucionesEjercicios;
+            ToolbarAplicacion.DirTemporales = ConfiguracionAplicacion.DirectorioTemporal;
+            ToolbarAplicacion.DirDefaultAbrir = ConfiguracionAplicacion.DirectorioAbrirDefault; 
             
             ConfigurarCompilador();
 
@@ -255,13 +254,13 @@ namespace DiagramDesigner
 
         void ToolbarAplicacion_SalvarConfiguracionEvent(object o, SalvarConfiguracionEventArgs e)
         {
-            configApp.DirectorioEjerciciosCreados = ToolbarAplicacion.DirEjCreados;
-            configApp.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
-            configApp.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
-            configApp.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
-            configApp.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;  
+            ConfiguracionAplicacion.DirectorioEjerciciosCreados = ToolbarAplicacion.DirEjCreados;
+            ConfiguracionAplicacion.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
+            ConfiguracionAplicacion.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
+            ConfiguracionAplicacion.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
+            ConfiguracionAplicacion.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;
 
-            configApp.Guardar();
+            ConfiguracionAplicacion.Guardar();
         }
 
         void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -505,7 +504,7 @@ namespace DiagramDesigner
 
             string directorioActual = Globales.ConstantesGlobales.PathEjecucionAplicacion;
 
-            compilador = new Compilador(modoDebug, configApp.DirectorioTemporal, configApp.DirectorioTemporal, "prueba");
+            compilador = new Compilador(modoDebug, ConfiguracionAplicacion.DirectorioTemporal, ConfiguracionAplicacion.DirectorioTemporal, "prueba");
         }
 
         void hotKeyCompilar_HotKeyPressed(HotKey obj)

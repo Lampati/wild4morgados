@@ -18,6 +18,8 @@ using AplicativoEscritorio.DataAccess.Interfases;
 using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
 using Microsoft.Windows.Controls.Ribbon;
+using AplicativoEscritorio.DataAccess;
+using DataAccess;
 
 namespace DiagramDesigner.UserControls.Toolbar
 {
@@ -389,20 +391,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             }        
         }
 
-        private AplicativoEscritorio.DataAccess.ConfiguracionAplicacion configApp;
         private Sincronizacion.Servicio servicio;
-
-        private AplicativoEscritorio.DataAccess.ConfiguracionAplicacion ConfigApp
-        {
-            get
-            {
-                this.configApp = new AplicativoEscritorio.DataAccess.ConfiguracionAplicacion();
-                this.configApp.Abrir(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
-                                                Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
-
-                return this.configApp;
-            }
-        }
 
         private Sincronizacion.Servicio Servicio
         {
@@ -411,9 +400,9 @@ namespace DiagramDesigner.UserControls.Toolbar
                 if (Object.Equals(this.servicio, null))
                     this.servicio = new Sincronizacion.Servicio();
 
-                string[] urls = this.ConfigApp.UrlsDescargaEjercicios.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                this.servicio.Directorio = this.ConfigApp.DirectorioEjerciciosDescargados;
-                this.servicio.Urls = new List<string>(urls);
+                List<string> wsdls = new List<string>(ConfiguracionAplicacion.UrlsDescargaEjercicios.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+                this.servicio.Urls = wsdls;
+                this.servicio.Directorio = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
 
                 return this.servicio;
             }
@@ -702,8 +691,6 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
         {
-            AplicativoEscritorio.DataAccess.ConfiguracionAplicacion config = this.ConfigApp;
-
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
             propertyEditorWindow.Titulo = "Propiedades de Sincronización";
             propertyEditorWindow.Owner = this.Owner;
@@ -717,7 +704,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             txtIP.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
             txtIP.AcceptsReturn = true;
             txtIP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            txtIP.Text = config.UrlsDescargaEjercicios;
+            txtIP.Text = ConfiguracionAplicacion.UrlsDescargaEjercicios;
             propertyEditorWindow.AgregarPropiedad("IP/Host Servidor (ingresar cada valor en una nueva línea)", txtIP);
 
             /*propertyEditorWindow.AgregarSeparador(false);
@@ -733,8 +720,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             propertyEditorWindow.AgregarBotonera(
                 new RoutedEventHandler((snd, ev) => 
                 {
-                    config.UrlsDescargaEjercicios = txtIP.Text;
-                    config.Guardar();
+                    ConfiguracionAplicacion.UrlsDescargaEjercicios = txtIP.Text;
+                    ConfiguracionAplicacion.Guardar();
                     propertyEditorWindow.DialogResult = true;
                 }),
                 new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));

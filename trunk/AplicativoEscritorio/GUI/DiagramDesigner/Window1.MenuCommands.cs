@@ -18,6 +18,8 @@ using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
 using DiagramDesigner.TestsPruebas;
 using System.IO;
+using AplicativoEscritorio.DataAccess;
+using DataAccess;
 
 namespace DiagramDesigner
 {
@@ -37,7 +39,7 @@ namespace DiagramDesigner
                     {
                         case 1:
 
-                            path = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir nombre y ubicación para el nuevo ejercicio", configApp.DirectorioEjerciciosCreados);
+                            path = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir nombre y ubicación para el nuevo ejercicio", ConfiguracionAplicacion.DirectorioEjerciciosCreados);
 
                             if (!string.IsNullOrWhiteSpace(path))
                             {
@@ -56,7 +58,7 @@ namespace DiagramDesigner
                             break;
                         case 2:
 
-                            string pathEj = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir ejercicio a resolver", configApp.DirectorioEjerciciosDescargados);
+                            string pathEj = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir ejercicio a resolver", ConfiguracionAplicacion.DirectorioEjerciciosDescargados);
 
                             if (!string.IsNullOrWhiteSpace(pathEj))
                             {
@@ -71,7 +73,7 @@ namespace DiagramDesigner
                                     //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                     ej.ModificadoDesdeUltimoGuardado = false;
 
-                                    path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}", ej.Nombre), configApp.DirectorioResolucionesEjercicios);
+                                    path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}", ej.Nombre), ConfiguracionAplicacion.DirectorioResolucionesEjercicios);
 
                                     if (!string.IsNullOrWhiteSpace(path))
                                     {
@@ -110,7 +112,7 @@ namespace DiagramDesigner
 
                 if (continuar)
                 {
-                    string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", configApp.DirectorioAbrirDefault);
+                    string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", ConfiguracionAplicacion.DirectorioAbrirDefault);
 
                     if (!string.IsNullOrWhiteSpace(path))
                     {
@@ -162,7 +164,7 @@ namespace DiagramDesigner
                 switch (Convert.ToInt32(e.Parameter))
                 {
                     case 1:
-                        path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", configApp.DirectorioAbrirDefault);
+                        path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", ConfiguracionAplicacion.DirectorioAbrirDefault);
 
                         if (path != string.Empty)
                         {
@@ -235,7 +237,7 @@ namespace DiagramDesigner
 
                                 if (aptoParaGuardar)
                                 {
-                                    path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", configApp.DirectorioAbrirDefault);
+                                    path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", ConfiguracionAplicacion.DirectorioAbrirDefault);
                                     if (path != string.Empty)
                                     {
                                         GuardarADiscoFormatoExportar(path);
