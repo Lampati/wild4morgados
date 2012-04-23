@@ -60,7 +60,7 @@
             </GroupBox>
         </Grid>
 
-        <Grid Name="grdTexto" Visibility="Collapsed" Height="Auto" HorizontalAlignment="Stretch" >
+        <Grid Name="grdTexto" Visibility="Collapsed" Height="Auto" HorizontalAlignment="Stretch" SizeChanged="grdTexto_SizeChanged">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>

@@ -199,6 +199,7 @@ namespace DiagramDesigner
 
             
             
+            
 
             
             //configApp.DirectorioTemporal = "bla";
@@ -221,6 +222,8 @@ namespace DiagramDesigner
             ToolbarAplicacion.Owner = this;
             
         }
+
+   
 
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
         {
@@ -650,6 +653,16 @@ namespace DiagramDesigner
             if (!continuar)
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void RibbonWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (modo == ModoVisual.Texto)
+            {
+                double alturaRestar = ToolbarAplicacion.ActualHeight + BarraEstado.ActualHeight + BarraMsgs.ActualHeight;
+
+                Esquema.CambiarTamanio(e.NewSize.Width, e.NewSize.Height - alturaRestar);
             }
         }
     }
