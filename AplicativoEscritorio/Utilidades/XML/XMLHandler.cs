@@ -242,6 +242,7 @@ namespace Utilidades.XML
 
         public XMLElement Read(string xmlRead)
         {
+            xmlRead = xmlRead.Replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "");
             XMLElement root = new XMLElement();
             FillElement(root, xmlRead);
 

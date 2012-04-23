@@ -46,6 +46,7 @@
     <Compile Include="Entidades\EntidadBase.cs" />
     <Compile Include="Entidades\PosicionArreglo.cs" />
     <Compile Include="Entidades\Variable.cs" />
+    <Compile Include="Excepciones\ExcepcionCreacionDirectorios.cs" />
     <Compile Include="Excepciones\ExcepcionCriptografia.cs" />
     <Compile Include="Interfases\IPropiedadesEjercicios.cs" />
     <Compile Include="Entidades\ResolucionEjercicio.cs" />
