@@ -164,8 +164,9 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                             _nodo.Nombre.Equals(nombre) &&
                             _nodo.EsArreglo == false &&
                             ((_nodo.NombreContextoLocal == nombreContexto &&
-                            (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable)) ||                          
-                            (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro))
+                            (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable)) ||
+                            (_nodo.NombreContextoLocal == nombreContexto && 
+                            _nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro))
                     
                     );
                 }

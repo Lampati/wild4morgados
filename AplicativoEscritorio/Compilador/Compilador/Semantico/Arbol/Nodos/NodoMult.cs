@@ -56,7 +56,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                     if (this.Operacion == TipoOperatoria.Division)
                     {
-                        if (this.hijosNodo[1].Lexema.Trim() == "0")
+                        if (!string.IsNullOrEmpty(this.hijosNodo[1].Lexema) && this.hijosNodo[1].Lexema.Trim() == "0")
                         {
                             StringBuilder strbldr = new StringBuilder("No se puede dividir por cero.");
                             throw new ErrorSemanticoException(strbldr.ToString());
