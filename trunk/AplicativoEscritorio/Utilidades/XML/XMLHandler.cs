@@ -391,5 +391,32 @@ namespace Utilidades.XML
             }
             while (newData.Length > 0);
         }
+
+        public static string Escape(string xml)
+        {
+            if (!string.IsNullOrEmpty(xml))
+            {
+                xml = xml.Replace("&", "&amp;");
+                xml = xml.Replace("<", "&lt;");
+                xml = xml.Replace(">", "&gt;");
+                xml = xml.Replace("\"", "&quot;");
+                xml = xml.Replace("'", "&apos;");
+            }
+            return xml;
+        }
+
+        public static string Unescape(string xml)
+        {
+            if (!string.IsNullOrEmpty(xml))
+            {
+                // replace entities with literal values
+                xml = xml.Replace("&apos;", "'");
+                xml = xml.Replace("&quot;", "\"");
+                xml = xml.Replace("&gt;", ">");
+                xml = xml.Replace("&lt;", "<");
+                xml = xml.Replace("&amp;", "&");
+            }
+            return xml;
+        }
     }
 }
