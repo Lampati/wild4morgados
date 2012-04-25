@@ -78,8 +78,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("uses crt, Sysutils, ArchResultadoManager;");
             strBldr.AppendLine("");
 
-            strBldr.AppendLine("Const");
-            strBldr.AppendLine(this.hijosNodo[0].ConstantesGlobales);
+            if (!string.IsNullOrWhiteSpace(this.hijosNodo[0].ConstantesGlobales))
+            {
+                strBldr.AppendLine("Const");
+                strBldr.AppendLine(this.hijosNodo[0].ConstantesGlobales);
+            }
+
             strBldr.AppendLine("Type");
             strBldr.AppendLine("EIteracionInfinitaException = class(Exception);");
             strBldr.AppendLine("EIndiceArregloInvalido = class(Exception);");

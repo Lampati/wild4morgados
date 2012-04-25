@@ -3,6 +3,8 @@
 	<NoTerminales>
 		<NoTerminal>START</NoTerminal>
 		<NoTerminal>DECLARACIONESINI</NoTerminal>
+		<NoTerminal>CONSTANTESINI</NoTerminal>
+		<NoTerminal>VARIABLESINI</NoTerminal>
 		<NoTerminal>DECLARACIONES</NoTerminal>
 		<NoTerminal>PROCEDIMIENTOS</NoTerminal>
 		<NoTerminal>CONSTANTES</NoTerminal>
@@ -84,7 +86,34 @@
 			<Izq>DECLARACIONESINI</Izq>
 			<Ders>
 				<Der>
-					<Expresion>constantes CONSTANTES variables VARIABLES</Expresion>
+					<Expresion>CONSTANTESINI VARIABLESINI</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>CONSTANTESINI</Izq>
+			<Ders>
+				<Der>
+					<Expresion>constantes CONSTANTES</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
+				</Der>
+			</Ders>
+		</Produccion>
+		<!---->
+		<Produccion>
+			<Izq>VARIABLESINI</Izq>
+			<Ders>
+				<Der>
+					<Expresion>variables VARIABLES</Expresion>
+				</Der>
+				<Der>
+					<Expresion>lambda</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>

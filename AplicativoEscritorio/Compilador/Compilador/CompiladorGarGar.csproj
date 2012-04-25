@@ -80,6 +80,8 @@
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoVariablesIni.cs" />
+    <Compile Include="Semantico\Arbol\Nodos\NodoConstantesIni.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoReferencia.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoMostrarOp.cs" />
     <Compile Include="Sintactico\TerminalesHelpers.cs" />

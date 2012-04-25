@@ -6,26 +6,27 @@ using CompiladorGargar.Sintactico.Gramatica;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
-    class NodoDeclaracionesIni : NodoArbolSemantico
+    class NodoConstantesIni : NodoArbolSemantico
     {
-        public NodoDeclaracionesIni(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
+        public NodoConstantesIni(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
         {
-               
+            this.EsConstante = true;
+            this.DeclaracionesPermitidas = TipoDeclaracionesPermitidas.Constantes;
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
+        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {
-       
+            
         }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
+        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
         }
 
         public override void ChequearAtributos(Terminal t)
         {
-           
+            
         }
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
@@ -35,13 +36,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
-            // esto es asi pq las variables del proc, tienen que ser globales
+            StringBuilder strBldr = new StringBuilder();
+
             if (this.hijosNodo.Count > 1)
             {
-                this.ConstantesGlobales = this.hijosNodo[0].Codigo;
-                this.VariablesGlobales = this.hijosNodo[1].Codigo;
+                strBldr.Append(this.hijosNodo[1].Codigo);
             }
-            
+           
+            this.Codigo = strBldr.ToString();
         }
     }
 }
