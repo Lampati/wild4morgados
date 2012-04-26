@@ -10,8 +10,6 @@ namespace WebProgramAR.Models
 {
     public class UserModel
     {
-
-
         [Required]
         [Display(Name = "Usuario")]
         public string UserName { get; set; }

@@ -24,7 +24,7 @@
         });
         //para el manejo del menu
         $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "CURSOS") {
+            if ($(this).children().html().toUpperCase() == "CONFIGURACION") {
                 $(this).addClass("selected");
             } else {
                 $(this).removeClass("selected");
@@ -45,7 +45,7 @@
         { OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 470, 350); });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 470, 750);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 470, 350);
         });
 
         $('.botonDetalles').click(function (event) {
@@ -74,7 +74,7 @@
     <div id="btnFiltros" class="btn_filtros boton" >Filtros </div>
 </div>    
 <div id="filtros">
-    <div class="tituloabm">Seleccion de cursos</div>
+    <div class="tituloabm">Seleccion de Reglas</div>
 
     <div class="filtrosabm">
         @using (Html.BeginForm("Index", "Seguridad", FormMethod.Post, new { id = "filterForm" }))
@@ -88,11 +88,12 @@
                         </div>
                     </td>
                      <td valign="top">
-                            @Html.DropDownList("tablaId", listaTabla.Select(option => new SelectListItem
+                            @Html.DropDownList("tabla", listaTabla.Select(option => new SelectListItem
                            {
                                Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
                                Value = option.TablaId.ToString()
-                           }))
+                           }), new { @id = "tabla", @style = "display:none" })
+                           <input type="hidden" name="tablaId" id="tablaId" value="" />
                     </td>
                     <td>
                         <div class="label">
@@ -100,11 +101,12 @@
                         </div>
                     </td>
                      <td valign="top">
-                            @Html.DropDownList("tipoUsuarioId", listaTipoUsuario.Select(option => new SelectListItem
+                            @Html.DropDownList("tipoUsuario", listaTipoUsuario.Select(option => new SelectListItem
                             {
                                 Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                 Value = option.TipoUsuarioId.ToString()
-                            }))
+                            }), new { @id = "tipoUsuario", @style = "display:none" })
+                           <input type="hidden" name="tipoUsuarioId" id="tipoUsuarioId" value="" />
                     </td>
                     <td>
                         <div class="label">
@@ -114,16 +116,16 @@
                      <td valign="top">
                             @Html.TextBox("usuario", null, new { maxlength = 50, autocomplete = "off" })
                     </td>
-
+                </tr>
+                <tr>
                     <td>
                         <div class="label">
                             Habilitado
                         </div>
                     </td>
                      <td valign="top">
-                            Si @Html.RadioButton("activa", 1, false)
-                            No @Html.RadioButton("activa", 0, false)
-                            Todos @Html.RadioButton("activa", -1, true)
+                            @Html.DropDownList("habilitada", new []{new SelectListItem{Value="0",Text="No"},new SelectListItem{Value="1",Text="Si"}}, new { @id = "habilitada", @style = "display:none" })
+                           <input type="hidden" name="activa" id="activa" value="-1" />
                     </td>
 
                 </tr>
@@ -186,5 +188,26 @@
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    function OnChangeDo() { return false; }
+    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#tabla");
+    convertSelect("tabla");
+    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#tipoUsuario");
+    convertSelect("tipoUsuario");
+    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#habilitada");
+    convertSelect("habilitada");
+    function OnChangeDo(div) {
+        if (div.attr('id') == "tabla") {
+            var tablaId = $("#selectBox_tabla").attr("rel");
+            $("#tablaId").val(tablaId);
+        }
+        if (div.attr('id') == "tipoUsuario") {
+            var tipoUsuarioId = $("#selectBox_tipoUsuario").attr("rel");
+            $("#tipoUsuarioId").val(tipoUsuarioId);
+        }
+        if (div.attr('id') == "habilitada") {
+            var habilitadaId = $("#selectBox_habilitada").attr("rel");
+            $("#activa").val(habilitadaId);
+        }
+    }
+
+
 </script>

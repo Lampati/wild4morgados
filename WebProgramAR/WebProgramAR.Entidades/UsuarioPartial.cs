@@ -43,9 +43,6 @@ namespace WebProgramAR.Entidades
         [Required(ErrorMessage = "Requerido")]
         [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
         public string UsuarioNombre { get; set; }
-
-     
-
         
         [Display(Name = "Pais")]
         [Required(ErrorMessage = "Requerido")]

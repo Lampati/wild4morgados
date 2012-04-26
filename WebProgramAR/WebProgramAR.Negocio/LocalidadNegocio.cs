@@ -20,6 +20,11 @@ namespace WebProgramAR.Negocio
             return LocalidadDA.GetLocalidadesByLocalidadByProvinciaByPais(Localidad, provinciaId, paisId, userLogueado);
         }
 
+        public static IEnumerable<Localidad> GetLocalidadesByProvinciaByPais(string provinciaId, string paisId)
+        {
+            return LocalidadDA.GetLocalidadesByProvinciaByPais(provinciaId, paisId);
+        }
+
         //no se usa
         public static IEnumerable<Localidad> GetLocalidades(Usuario userLogueado)
         {
