@@ -123,7 +123,7 @@
                                 {
                                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                     Value = option.PaisId.ToString(),
-                                    Selected = ((Model != null) && (option.PaisId == Model.PaisId))
+                                    Selected = ((Model != null) && (option.PaisId.ToString() == Model.PaisId))
                                 }), new { @id = "PaisId", @style = "display:none" })
 
                 @Html.ValidationMessageFor(m => m.PaisId)
@@ -138,7 +138,7 @@
                                         {
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                             Value = option.ProvinciaId.ToString(),
-                                            Selected = ((Model != null) && (option.ProvinciaId == Model.ProvinciaId))
+                                            Selected = ((Model != null) && (option.ProvinciaId.ToString() == Model.ProvinciaId.ToString()))
                                         }), new { @id = "ProvinciaId", @style = "display:none" })
 
                     @Html.ValidationMessageFor(m => m.ProvinciaId)
@@ -158,36 +158,13 @@
         </fieldset>
         </div>
     </div>
-
-
-
-
-
 <script type="text/javascript">
     $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#PaisId");
     convertSelect("PaisId");
+    $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#ProvinciaId");
+    convertSelect("ProvinciaId");
     convertSelect("TipoUsuarioCreate");
-    //para la carga de provincias inicial de acuerdo al pais y seleccionar la provincia indicada
-    $.ajax({
-        url: '@Url.Action("GetProvinciasByPais")',
-        data: " { paisId: '" + $("#selectBox_PaisId").attr("rel") + "'}",
-        contentType: 'application/json',
-        type: 'POST',
-        dataType: 'json',
-        success: function (data) {
-            $("#listProvincias .tzSelect").remove();
-            $("#ProvinciaId").children().remove();
-            var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
-            for (var i = 0; i < provincias.length; i++) {
-                var val = provincias[i].Id;
-                var text = provincias[i].Value;
-                $("#ProvinciaId").get(0).options[$("#ProvinciaId").get(0).options.length] = new Option(text, val);
-            }
-            $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#ProvinciaId");
-            convertSelect("ProvinciaId");
-        }
-    });
-
+    
     $("#Usuario_FechaNacimiento").datepicker();
     $("#Usuario_FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode

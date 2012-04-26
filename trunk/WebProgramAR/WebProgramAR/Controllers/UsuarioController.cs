@@ -116,6 +116,8 @@ namespace WebProgramAR.Controllers
             List<Localidad> listaLocalidades = new List<Localidad>();
             List<TipoUsuario> listaTipoUsuarios = new List<TipoUsuario>();
             listaPaises.AddRange(Negocio.PaisNegocio.GetPaises(usuarioLogueado).ToList());
+            listaProvincias.AddRange(Negocio.ProvinciaNegocio.GetProvinciasByPais(usuarioLogueado.PaisId,usuarioLogueado).ToList());
+            listaLocalidades.AddRange(Negocio.LocalidadNegocio.GetLocalidadesByProvinciaByPais(usuarioLogueado.ProvinciaId,usuarioLogueado.PaisId).ToList());
             listaTipoUsuarios.AddRange(Negocio.TipoUsuarioNegocio.GetTiposUsuarioSinGuest().ToList());
             ViewBag.Paises = listaPaises;
             ViewBag.Provincias = listaProvincias;
@@ -193,55 +195,38 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Edit(Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid){
                 ActualizarRolesSiCorresponde(usuario);
-
                 MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
 
                 bool error = false;
                 string errorMensaje="";
                 string mailViejo = membUser.Email;
                 bool mailCambiado = false;
-
-                if  ( string.Compare( usuario.Email, membUser.Email, true) != 0)
-                {
-                    
-                    
+                if  ( string.Compare( usuario.Email, membUser.Email, true) != 0){
                     membUser.Email = usuario.Email;
-                    try
-                    {
+                    try{
                         Membership.UpdateUser(membUser);
                         mailCambiado = true;
                     }
-                    catch (Exception)
-                    {
+                    catch (Exception){
                         error = true;
                         errorMensaje = "Error al intentar modificar el mail. Ese mail ya estaba tomado";
                     }
-                    
                 }
-
-                if (!error)
-                {
-                    try
-                    {
+                if (!error){
+                    try{
                         UsuarioNegocio.Modificar(usuario);
                     }
-                    catch (Exception)
-                    {
-                        if (mailCambiado)
-                        {
+                    catch (Exception){
+                        if (mailCambiado){
                             membUser.Email = mailViejo;
                             Membership.UpdateUser(membUser);
                         }
-
                         return Content(Boolean.FalseString);
                     }
-                    
                 }
-                else
-                {
+                else{
                     return Content(errorMensaje);
                 }
 
@@ -277,6 +262,8 @@ namespace WebProgramAR.Controllers
             if (Request.IsAjaxRequest())
             {
                 Usuario u = UsuarioNegocio.GetUsuarioById(id);
+                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                u.Email = membUser.Email;
                 return View(u);
             }
             else

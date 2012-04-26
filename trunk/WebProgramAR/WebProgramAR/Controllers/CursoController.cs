@@ -148,7 +148,7 @@ namespace WebProgramAR.Controllers
 
 
         //
-        // GET: /Curso/Edit/5
+        // GET: /Curso/AsociarEjercicios/5
         public ActionResult AsociarEjercicios(int id)
         {
             if (Request.IsAjaxRequest())

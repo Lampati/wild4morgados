@@ -95,14 +95,14 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static IEnumerable<Curso> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idCurso, string apellido, int usuarioId, Usuario userLogueado)
+        public static IEnumerable<Curso> ObtenerPagina(int paginaActual, int personasPorPagina, string sortColumns, int idCurso, string nombre, int usuarioId, Usuario userLogueado)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
                 if (paginaActual < 1) paginaActual = 1;
 
 
-                IQueryable<Curso> query = GetCursos(idCurso, apellido, usuarioId, db);
+                IQueryable<Curso> query = GetCursos(idCurso, nombre, usuarioId, db);
 
 
                 List<Curso> aux = query.OrderUsingSortExpression(sortColumns)

@@ -65,14 +65,14 @@ namespace WebProgramAR.Controllers
             };
 
             List<Tabla> listaTabla = new List<Tabla>();
-            listaTabla.Add(new Tabla() { TablaId = -1, Nombre = "Todos" });
+            //listaTabla.Add(new Tabla() { TablaId = -1, Nombre = "Todos" });
             listaTabla.AddRange(SeguridadNegocio.GetTablas());
             ViewBag.ListaTablas = listaTabla;     
             List<TipoUsuario> listaTipo = new List<TipoUsuario>();
-            listaTipo.Add(new TipoUsuario() { TipoUsuarioId = -1, Descripcion = "Todos" });
+            //listaTipo.Add(new TipoUsuario() { TipoUsuarioId = -1, Descripcion = "Todos" });
             listaTipo.AddRange(TipoUsuarioNegocio.GetTiposUsuario());
             ViewBag.ListaTipoUsuarios = listaTipo;
-
+            ViewBag.listaHabilitado = new []{new SelectListItem{Value="0",Text="No"},new SelectListItem{Value="1",Text="Si"}};
             return View(datos);
 
         }

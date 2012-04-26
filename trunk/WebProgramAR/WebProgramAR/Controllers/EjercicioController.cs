@@ -336,14 +336,14 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Curso/Details/5
 
-        public ActionResult AsociarCursoEjercicio(int page = 1, string sort = "Nombre", string sortDir = "ASC",
+        public ActionResult AsociarCursoEjercicio(int id,int page = 1, string sort = "Nombre", string sortDir = "ASC",
              int usuarioId = -1, int cursoId = -1, string nombre = "",
              int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false,
                 int pageNotCurso = 1, string sortNotCurso = "Nombre", string sortDirNotCurso = "ASC",
               string nombreNotCurso = "",int estadoEjercicioNotCurso = -1, int nivelEjercicioNotCurso = -1)
         {
             Usuario userLogueado = GetUsuarioLogueado();
-
+            cursoId = id;
             ViewBag.EjerciciosCurso    =    ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
             ViewBag.EjerciciosNotCurso =    ObtenerEjercicioGrillaModelNotCurso(pageNotCurso, sortNotCurso, sortDirNotCurso, nombreNotCurso, usuarioId, cursoId, estadoEjercicioNotCurso, nivelEjercicioNotCurso, global);
             //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
@@ -352,6 +352,7 @@ namespace WebProgramAR.Controllers
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
 
             return View();
+            
         }
 
         //
