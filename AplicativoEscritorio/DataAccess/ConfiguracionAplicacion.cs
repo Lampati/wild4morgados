@@ -76,12 +76,18 @@ namespace DataAccess
                 xmlElem = xmlElem.FindFirst("Configuracion");
                 if (!Object.Equals(xmlElem, null))
                 {
-                    DirectorioEjerciciosCreados = xmlElem.FindFirst("DirectorioEjerciciosCreados").value;
-                    DirectorioEjerciciosDescargados = xmlElem.FindFirst("DirectorioEjerciciosDescargados").value;
-                    DirectorioResolucionesEjercicios = xmlElem.FindFirst("DirectorioResolucionesEjercicios").value;
-                    DirectorioTemporal = xmlElem.FindFirst("DirectorioTemporal").value;
-                    DirectorioAbrirDefault = xmlElem.FindFirst("DirectorioAbrirDefault").value;
-                    UrlsDescargaEjercicios = xmlElem.FindFirst("UrlsDescargaEjercicios").value;
+                    if (!Object.Equals(xmlElem.FindFirst("DirectorioEjerciciosCreados"), null))
+                        DirectorioEjerciciosCreados = xmlElem.FindFirst("DirectorioEjerciciosCreados").value;
+                    if (!Object.Equals(xmlElem.FindFirst("DirectorioEjerciciosDescargados"), null))
+                        DirectorioEjerciciosDescargados = xmlElem.FindFirst("DirectorioEjerciciosDescargados").value;
+                    if (!Object.Equals(xmlElem.FindFirst("DirectorioResolucionesEjercicios"), null))
+                        DirectorioResolucionesEjercicios = xmlElem.FindFirst("DirectorioResolucionesEjercicios").value;
+                    if (!Object.Equals(xmlElem.FindFirst("DirectorioTemporal"), null))
+                        DirectorioTemporal = xmlElem.FindFirst("DirectorioTemporal").value;
+                    if (!Object.Equals(xmlElem.FindFirst("DirectorioAbrirDefault"), null))
+                        DirectorioAbrirDefault = xmlElem.FindFirst("DirectorioAbrirDefault").value;
+                    if (!Object.Equals(xmlElem.FindFirst("UrlsDescargaEjercicios"), null))
+                        UrlsDescargaEjercicios = xmlElem.FindFirst("UrlsDescargaEjercicios").value;
                 }
                 else
                     CargarDefaults();
