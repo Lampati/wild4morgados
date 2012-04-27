@@ -13,4 +13,10 @@ namespace WebProgramAR.Sitio.Models
         public int Nivel { get; set; }
         public IEnumerable<Ejercicio> Ejercicios { get; set; }
     }
+
+    public class ListEjercicioGrillaModel
+    {
+        public List<EjercicioGrillaModel> ListEjerciciosGrillaModel { get; set; }
+        public int cursoId { get; set; }
+    }
 }

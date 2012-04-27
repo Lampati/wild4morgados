@@ -63,7 +63,11 @@ namespace WebProgramAR.Controllers
                     break;
             }
         }
-        
+        public ActionResult ObtenerEjercicioGrilla(int pageA = 1, string sortA = "Nombre", string sortDirA = "ASC", string nombreA = "", int usuarioIdA = -1, int cursoIdA = -1, int estadoEjercicioA = -1, int nivelEjercicioA = -1, bool global = true)
+        {
+            var datos = ObtenerEjercicioGrillaModel(pageA, sortA, sortDirA, nombreA, usuarioIdA, cursoIdA, estadoEjercicioA, nivelEjercicioA, global);
+            return View(datos);
+        }
         private EjercicioGrillaModel ObtenerEjercicioGrillaModel(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
@@ -108,6 +112,12 @@ namespace WebProgramAR.Controllers
             };
 
             return datos;
+        }
+
+        public ActionResult ObtenerEjercicioGrillaNotCurso(int pageNA = 1, string sortNA = "Nombre", string sortDirNA = "ASC", string nombreNA = "", int usuarioIdNA = -1, int cursoIdNA = -1, int estadoEjercicioNA = -1, int nivelEjercicioNA = -1, bool global = true)
+        {
+            var datos = ObtenerEjercicioGrillaModelNotCurso(pageNA, sortNA, sortDirNA, nombreNA, usuarioIdNA, cursoIdNA, estadoEjercicioNA, nivelEjercicioNA, global);
+            return View(datos);
         }
         private EjercicioGrillaModel ObtenerEjercicioGrillaModelNotCurso(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
@@ -337,43 +347,43 @@ namespace WebProgramAR.Controllers
         // GET: /Curso/Details/5
 
         public ActionResult AsociarCursoEjercicio(int id,int page = 1, string sort = "Nombre", string sortDir = "ASC",
-             int usuarioId = -1, int cursoId = -1, string nombre = "",
-             int estadoEjercicio = -1, int nivelEjercicio = -1, bool global = false,
+             int usuarioId = -1, int cursoId = -1, string nombreA = "",
+             int estadoEjercicioA = -1, int nivelEjercicioA = -1, bool global = false,
                 int pageNotCurso = 1, string sortNotCurso = "Nombre", string sortDirNotCurso = "ASC",
-              string nombreNotCurso = "",int estadoEjercicioNotCurso = -1, int nivelEjercicioNotCurso = -1)
+              string nombreNA = "", int estadoEjercicioNA = -1, int nivelEjercicioNA = -1)
         {
+            ListEjercicioGrillaModel datos = new ListEjercicioGrillaModel();
             Usuario userLogueado = GetUsuarioLogueado();
             cursoId = id;
-            ViewBag.EjerciciosCurso    =    ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
-            ViewBag.EjerciciosNotCurso =    ObtenerEjercicioGrillaModelNotCurso(pageNotCurso, sortNotCurso, sortDirNotCurso, nombreNotCurso, usuarioId, cursoId, estadoEjercicioNotCurso, nivelEjercicioNotCurso, global);
-            //ViewBag.NivelesEjercicio = Negocio.NivelEjercicioNegocio.GetNiveles();
+            datos.ListEjerciciosGrillaModel = new List<EjercicioGrillaModel>();
+            datos.cursoId = cursoId;
+            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(page, sort, sortDir, nombreA, usuarioId, cursoId, estadoEjercicioA, nivelEjercicioA, global));
+            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(pageNotCurso, sortNotCurso, sortDirNotCurso, nombreNA, usuarioId, cursoId, estadoEjercicioNA, nivelEjercicioNA, global));
             ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
-
-            return View();
-            
+            return View(datos);
         }
 
         //
         // POST: /Curso/Edit/5
 
-        [HttpPost]
-        public ActionResult AsociarCursoEjercicio(Curso curso)
+        /*[HttpPost]
+        public ActionResult AsociarCursoEjercicio(Curso curso,Ejercicio ejercicio)
         {
             // TODO: Add update logic here
             if (ModelState.IsValid)
             {
-                CursoNegocio.AsociarCursoEjercicio(curso);
+                CursoNegocio.AsociarCursoEjercicio(curso,ejercicio);
                 return Content(Boolean.TrueString);
             }
             else
             {
-                return View();
+                return Content(Boolean.TrueString);
+                //return View();
             }
 
         }
-
+        */
    
         [Authorize(Roles = "administrador, moderador")]
         public ActionResult Moderar(int id)

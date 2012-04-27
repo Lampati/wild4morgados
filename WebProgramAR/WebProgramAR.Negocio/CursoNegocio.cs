@@ -42,7 +42,7 @@ namespace WebProgramAR.Negocio
         }
 
 
-        public static void AsociarCursoEjercicio(Curso curso)
+        public static void AsociarCursoEjercicio(Curso curso,Ejercicio ejercicio)
         {
             throw new NotImplementedException();
         }

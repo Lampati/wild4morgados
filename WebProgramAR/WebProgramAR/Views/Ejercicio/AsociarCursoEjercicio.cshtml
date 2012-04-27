@@ -1,15 +1,15 @@
-﻿@model WebProgramAR.Sitio.Models.EjercicioGrillaModel
+﻿@model WebProgramAR.Sitio.Models.ListEjercicioGrillaModel
 
 @{
-    Layout = null;
+    //Layout = null;
     ViewBag.Title = "Asociaciones";
 
-    WebGrid gridCurso = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
-    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid gridCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[0].CantidadPorPagina, canPage: false);
+    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[1].CantidadPorPagina, canPage: false);
 
-    gridCurso.Bind(ViewBag.EjerciciosCurso, autoSortAndPage: true, rowCount: Model.Cantidad);
+    gridCurso.Bind(Model.ListEjerciciosGrillaModel[0].Ejercicios, autoSortAndPage: true, rowCount: Model.ListEjerciciosGrillaModel[0].Cantidad);
 
-    gridNotCurso.Bind(ViewBag.EjerciciosNotCurso, autoSortAndPage: true, rowCount: Model.Cantidad);
+    gridNotCurso.Bind(Model.ListEjerciciosGrillaModel[1].Ejercicios, autoSortAndPage: true, rowCount: Model.ListEjerciciosGrillaModel[1].Cantidad);
     
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 
@@ -40,10 +40,13 @@
                 $('#filtrosAsociarNA').fadeIn('slow');
             }
         });
-        $('.botonAsociar').click(function (event)
-        { return false;});
+        $('.botonAsociar').click(function (event) {
+            return false;
+        });
 
-        $('.botonDesasociar').click(function (event) { return false; });
+        $('.botonDesasociar').click(function (event) {
+            return false; 
+        });
 
         
         var sortcol = '@gridCurso.SortColumn';
@@ -59,163 +62,163 @@
         //FuncionesAutorizadas('@funcionesAutorizadas');
     });
 </script>
+    <h2>Asociar Ejercicios</h2>
+    <legend>Curso</legend>
+    <!--*******************EJERCICIOS ASOCIADOS************************-->
+    <h1>Ejercicios Asociados</h1>
+    <div id="buttonSectionA" class="buttonSection">
+        <div id="btnFiltrosAsociarA" class="btn_filtros boton" >Filtros </div>
+    </div>
+    <div id="filtrosAsociarA" class="filtros">
+        <div class="tituloabm">Seleccion de cursos</div>
 
-<h2>Asociar Ejercicios</h2>
-<legend>Curso</legend>
-<!--*******************EJERCICIOS ASOCIADOS************************-->
-<h1>Ejercicios Asociados</h1>
-<div id="buttonSectionA" class="buttonSection">
-    <div id="btnFiltrosAsociarA" class="btn_filtros boton" >Filtros </div>
-</div>
-
-<div id="filtrosAsociarA" class="filtros">
-    <div class="tituloabm">Seleccion de cursos</div>
-
-    <div class="filtrosabm">
-        @using (Html.BeginForm("AsociarCursoEjercicio", "Ejercicio", FormMethod.Post, new { id = "filterFormA" }))
-        {    
-            @Html.ValidationSummary(true)
+        <div class="filtrosabm">
+        @using (Html.BeginForm("ObtenerEjercicioGrilla", "Ejercicio", FormMethod.Post, new { id = "filterFormA" }))
+        {  
+            @Html.HiddenFor(model => Model.cursoId, new { id = "cursoIdA" })
             <table>
                 <tr>
                     <td><div class="label">Nombre</div></td>
                     <td valign="top">@Html.TextBox("nombreA", null, new { maxlength = 50, autocomplete = "off" })</td>
                     <td><div class="label">Estado</div></td>
                     <td valign="top">               
-                         @Html.DropDownList("estadoEjercicioA", listaEstadosEjercicio.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.EstadoEjercicioId.ToString()
-                    }), new { @style = "display:none" })
+                            @Html.DropDownList("estadoEjercicioA", listaEstadosEjercicio.Select(option => new SelectListItem
+                       {
+                           Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                           Value = option.EstadoEjercicioId.ToString()
+                       }), new { @style = "display:none" })
                     </td>
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
-                         @Html.DropDownList("nivelEjercicioA", listaNivelesEjercicio.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option).ToString(),
-                        Value = option.ToString()
-                    }), new { @style = "display:none" }
+                            @Html.DropDownList("nivelEjercicioA", listaNivelesEjercicio.Select(option => new SelectListItem
+                       {
+                           Text = Html.DisplayTextFor(_ => option).ToString(),
+                           Value = option.ToString()
+                       }), new { @style = "display:none" }
                     )
                     </td>
                 </tr>
             </table>
             <div id="filterSearchButtonA" class="filterButton"></div>
         }
+        </div>
     </div>
-</div>
     
 
-<div id="contenedor-gridA">
+    <div id="contenedor-gridA">
 
-    @gridCurso.GetHtml(
-        tableStyle: "grid",
-        fillEmptyRows: false,
-        rowStyle: "gridRow",
-        alternatingRowStyle: "gridAlternatingRow",
-        headerStyle: "gridHeader",
-        footerStyle: "gridPager",
-        mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
-        columns: new[] {
-        gridCurso.Column("EjercicioId", header: "Identificador"),
-        gridCurso.Column("Enunciado", header: "Enunciado"),
-        gridCurso.Column("NivelEjercicio", header: "Nivel"),
-        gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
-        gridCurso.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Desasociar" src="@Url.Content("~/Content/images/remove.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
-                      </text>
-        )
-    })
+        @gridCurso.GetHtml(
+            tableStyle: "grid",
+            fillEmptyRows: false,
+            rowStyle: "gridRow",
+            alternatingRowStyle: "gridAlternatingRow",
+            headerStyle: "gridHeader",
+            footerStyle: "gridPager",
+            mode: WebGridPagerModes.All,
+                firstText: "<<",
+                previousText: "<",
+            nextText: ">",
+                lastText: " >>",
+            columns: new[] {
+            gridCurso.Column("EjercicioId", header: "Identificador"),
+            gridCurso.Column("Enunciado", header: "Enunciado"),
+            gridCurso.Column("NivelEjercicio", header: "Nivel"),
+            gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+            gridCurso.Column("", 
+                  header: "",
+                  format: @<text>
+                            <input type="image" alt="Desasociar" src="@Url.Content("~/Content/images/remove.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
+                          </text>
+            )
+        })
 
-</div>
-<div id="dialog" class="dialogDiv" ></div>
-<script type="text/javascript">
-    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#nivelEjercicioA");
-    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicioA");
-    convertSelect("nivelEjercicioA",1);
-    convertSelect("estadoEjercicioA",1);
-    function OnChangeDo() { return false; }
-</script>
+    </div>
+    <div id="dialog" class="dialogDiv" ></div>
+    <script type="text/javascript">
+        $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#nivelEjercicioA");
+        $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#estadoEjercicioA");
+        convertSelect("nivelEjercicioA",1);
+        convertSelect("estadoEjercicioA",1);
+        function OnChangeDo() { return false; }
+    </script>
 
-<!--*******************EJERCICIOS NO ASOCIADOS************************-->
-<h1>Ejercicios No Asociados</h1>
-<div id="buttonSectionNA" class="buttonSection">
-    <div id="btnFiltrosAsociarNA" class="btn_filtros boton" >Filtros </div>
-</div>
+    <!--*******************EJERCICIOS NO ASOCIADOS************************-->
+    <h1>Ejercicios No Asociados</h1>
+    <div id="buttonSectionNA" class="buttonSection">
+        <div id="btnFiltrosAsociarNA" class="btn_filtros boton" >Filtros </div>
+    </div>
 
-<div id="filtrosAsociarNA" class="filtros">
-    <div class="tituloabm">Seleccion de cursos</div>
+    <div id="filtrosAsociarNA" class="filtros">
+        <div class="tituloabm">Seleccion de cursos</div>
 
-    <div class="filtrosabm">
-        @using (Html.BeginForm("AsociarCursoEjercicio", "Ejercicio", FormMethod.Post, new { id = "filterFormNA" }))
-        {    
-            @Html.ValidationSummary(true)
-            <table>
+        <div class="filtrosabm">
+        @using (Html.BeginForm("ObtenerEjercicioGrillaNotCurso", "Ejercicio", FormMethod.Post, new { id = "filterFormNA" }))
+        {  
+            @Html.HiddenFor(model => Model.cursoId, new { id = "cursoIdNA" })
+                <table>
                 <tr>
                     <td><div class="label">Nombre</div></td>
                     <td valign="top">@Html.TextBox("nombreNA", null, new { maxlength = 50, autocomplete = "off" })</td>
                     <td><div class="label">Estado</div></td>
                     <td valign="top">               
-                         @Html.DropDownList("estadoEjercicioNA", listaEstadosEjercicio.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.EstadoEjercicioId.ToString()
-                    }), new { @style = "display:none" })
+                            @Html.DropDownList("estadoEjercicioNA", listaEstadosEjercicio.Select(option => new SelectListItem
+                       {
+                           Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                           Value = option.EstadoEjercicioId.ToString()
+                       }), new { @style = "display:none" })
                     </td>
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
-                         @Html.DropDownList("nivelEjercicioNA", listaNivelesEjercicio.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option).ToString(),
-                        Value = option.ToString()
-                    }), new { @style = "display:none" }
+                            @Html.DropDownList("nivelEjercicioNA", listaNivelesEjercicio.Select(option => new SelectListItem
+                       {
+                           Text = Html.DisplayTextFor(_ => option).ToString(),
+                           Value = option.ToString()
+                       }), new { @style = "display:none" }
                     )
                     </td>
                 </tr>
             </table>
             <div id="filterSearchButtonNA" class="filterButton"></div>
         }
+        </div>
     </div>
-</div>
     
 
-<div id="contenedor-gridNA">
+    <div id="contenedor-gridNA">
 
-    @gridNotCurso.GetHtml(
-        tableStyle: "grid",
-        fillEmptyRows: false,
-        rowStyle: "gridRow",
-        alternatingRowStyle: "gridAlternatingRow",
-        headerStyle: "gridHeader",
-        footerStyle: "gridPager",
-        mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
-        columns: new[] {
-        gridNotCurso.Column("EjercicioId", header: "Identificador"),
-        gridNotCurso.Column("Enunciado", header: "Enunciado"),
-        gridNotCurso.Column("NivelEjercicio", header: "Nivel"),
-        gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
-        gridNotCurso.Column("", 
-              header: "",
-              format: @<text>
-                        <input type="image" alt="Asociar" src="@Url.Content("~/Content/images/append.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
-                      </text>
-        )
-    })
+        @gridNotCurso.GetHtml(
+            tableStyle: "grid",
+            fillEmptyRows: false,
+            rowStyle: "gridRow",
+            alternatingRowStyle: "gridAlternatingRow",
+            headerStyle: "gridHeader",
+            footerStyle: "gridPager",
+            mode: WebGridPagerModes.All,
+                firstText: "<<",
+                previousText: "<",
+            nextText: ">",
+                lastText: " >>",
+            columns: new[] {
+            gridNotCurso.Column("EjercicioId", header: "Identificador"),
+            gridNotCurso.Column("Enunciado", header: "Enunciado"),
+            gridNotCurso.Column("NivelEjercicio", header: "Nivel"),
+            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+            gridNotCurso.Column("", 
+                  header: "",
+                  format: @<text>
+                            <input type="image" alt="Asociar" src="@Url.Content("~/Content/images/append.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
+                          </text>
+            )
+        })
 
-</div>
-<div id="dialog" class="dialogDiv" ></div>
-<script type="text/javascript">
-    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#nivelEjercicioNA");
-    $("<option value='0' selected='selected'>TODOS</option>").prependTo("#estadoEjercicioNA");
+    </div>
+    <div id="dialog" class="dialogDiv" ></div>
+
+    <script type="text/javascript">
+    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#nivelEjercicioNA");
+    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#estadoEjercicioNA");
     convertSelect("nivelEjercicioNA", 1);
     convertSelect("estadoEjercicioNA", 1);
 </script>
+
 

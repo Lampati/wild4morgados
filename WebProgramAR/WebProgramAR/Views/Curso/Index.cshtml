@@ -54,8 +54,9 @@
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 250);
         });
         $('.botonAsociar').click(function (event) {
-            alert($(this).attr('data'));
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("../Ejercicio/AsociarCursoEjercicio")/', 950, 600);
+            var url = '@Url.Action("../Ejercicio/AsociarCursoEjercicio")/' + $(this).attr('data');
+            window.location = url;
+
         });
         var sortcol = '@grid.SortColumn';
 
