@@ -338,8 +338,8 @@ namespace WebProgramAR.DataAccess
         public static IQueryable<Ejercicio> GetEjerciciosNotCurso(string nombre, int usuarioId, int cursoId, int nivelEjercicio, int estadoEjercicio, bool global, Usuario userLogueado, WebProgramAREntities db)
         {
             IQueryable<Ejercicio> query = (from u in db.Ejercicios.Include("Cursoes").Include("EstadoEjercicio").Include("Usuario")
-                                    where (u.Cursoes.Count(m => m.CursoId == cursoId) == 0)
-                                    && (u.UsuarioId ==usuarioId)
+                                    where !(u.Cursoes.Count(m => m.CursoId == cursoId) > 0)
+                                    && (u.UsuarioId !=usuarioId)
                                     && (estadoEjercicio == -1 || u.EstadoEjercicioId == estadoEjercicio)
                                     && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
                                     select u);
