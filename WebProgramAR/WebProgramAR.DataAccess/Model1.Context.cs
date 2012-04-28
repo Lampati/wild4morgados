@@ -43,12 +43,6 @@ namespace WebProgramAR.DataAccess
     
         #region ObjectSet Properties
     
-        public ObjectSet<Curso> Cursos
-        {
-            get { return _cursos  ?? (_cursos = CreateObjectSet<Curso>("Cursos")); }
-        }
-        private ObjectSet<Curso> _cursos;
-    
         public ObjectSet<EstadoEjercicio> EstadoEjercicios
         {
             get { return _estadoEjercicios  ?? (_estadoEjercicios = CreateObjectSet<EstadoEjercicio>("EstadoEjercicios")); }
@@ -126,6 +120,12 @@ namespace WebProgramAR.DataAccess
             get { return _mensajeModeracions  ?? (_mensajeModeracions = CreateObjectSet<MensajeModeracion>("MensajeModeracions")); }
         }
         private ObjectSet<MensajeModeracion> _mensajeModeracions;
+    
+        public ObjectSet<Curso> Cursoes
+        {
+            get { return _cursoes  ?? (_cursoes = CreateObjectSet<Curso>("Cursoes")); }
+        }
+        private ObjectSet<Curso> _cursoes;
 
         #endregion
     }

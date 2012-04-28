@@ -29,8 +29,9 @@ namespace WebProgramAR.Negocio
 
         public static void Eliminar(Usuario u)
         {
-            CursoNegocio.EliminarCursosDeUsuario(u.UsuarioId);
-            UsuarioNegocio.QuitarRolesUsuario(u);
+            Usuario usuarioAEliminar = GetUsuarioById(u.UsuarioId);
+            CursoNegocio.EliminarCursosDeUsuario(usuarioAEliminar.UsuarioId);
+            UsuarioNegocio.QuitarRolesUsuario(usuarioAEliminar);
 
             UsuarioDA.Eliminar(u.UsuarioId);
         }

@@ -355,14 +355,23 @@ namespace WebProgramAR.Controllers
             ListEjercicioGrillaModel datos = new ListEjercicioGrillaModel();
             Usuario userLogueado = GetUsuarioLogueado();
             cursoId = id;
+
+            Curso curso = CursoNegocio.GetCursoById(id);
+
+            EjercicioGrillaModel ejAsociados = new EjercicioGrillaModel();
+            ejAsociados.Ejercicios = curso.Ejercicios.ToList();
+
             datos.ListEjerciciosGrillaModel = new List<EjercicioGrillaModel>();
             datos.cursoId = cursoId;
-            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(page, sort, sortDir, nombreA, usuarioId, cursoId, estadoEjercicioA, nivelEjercicioA, global));
+            datos.ListEjerciciosGrillaModel.Add(ejAsociados);
+            //datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(page, sort, sortDir, nombreA, usuarioId, cursoId, estadoEjercicioA, nivelEjercicioA, global));
             datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(pageNotCurso, sortNotCurso, sortDirNotCurso, nombreNA, usuarioId, cursoId, estadoEjercicioNA, nivelEjercicioNA, global));
             ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
             return View(datos);
         }
+
+
 
         //
         // POST: /Curso/Edit/5
