@@ -23,7 +23,7 @@ namespace WebProgramAR.Negocio
 
         public static void Modificar(Curso Curso)
         {
-            CursoDA.Modificar(Curso,false);
+            CursoDA.Modificar(Curso, new int[] {},true);
         }
 
         public static void Eliminar(int id)
@@ -50,10 +50,11 @@ namespace WebProgramAR.Negocio
         /// 
         /// </summary>
         /// <param name="curso">Curso a modificar</param>
-        /// <param name="p">Indica si hay que asignarle los ejercicios</param>
-        public static void Modificar(Curso curso, bool p)
+        /// <param name="idEjerciciosAgregar">Ids de los ejercicios a agregar</param>
+        /// <param name="agregar">True indica agregar / False indica quitar los ejercicios</param>
+        public static void Modificar(Curso curso, int[] idEjerciciosAgregar, bool agregar)
         {
-            CursoDA.Modificar(curso, p);
+            CursoDA.Modificar(curso, idEjerciciosAgregar, agregar);
         }
 
         internal static void EliminarCursosDeUsuario(int idUsuario)

@@ -126,38 +126,6 @@ namespace WebProgramAR.Entidades
         #endregion
         #region Navigation Properties
     
-        public virtual ICollection<Curso> Cursoes
-        {
-            get
-            {
-                if (_cursoes == null)
-                {
-                    var newCollection = new FixupCollection<Curso>();
-                    newCollection.CollectionChanged += FixupCursoes;
-                    _cursoes = newCollection;
-                }
-                return _cursoes;
-            }
-            set
-            {
-                if (!ReferenceEquals(_cursoes, value))
-                {
-                    var previousValue = _cursoes as FixupCollection<Curso>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupCursoes;
-                    }
-                    _cursoes = value;
-                    var newValue = value as FixupCollection<Curso>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupCursoes;
-                    }
-                }
-            }
-        }
-        private ICollection<Curso> _cursoes;
-    
         public virtual Localidad Localidad
         {
             get { return _localidad; }
@@ -281,6 +249,38 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Ejercicio> _ejercicios;
+    
+        public virtual ICollection<Curso> Cursoes
+        {
+            get
+            {
+                if (_cursoes == null)
+                {
+                    var newCollection = new FixupCollection<Curso>();
+                    newCollection.CollectionChanged += FixupCursoes;
+                    _cursoes = newCollection;
+                }
+                return _cursoes;
+            }
+            set
+            {
+                if (!ReferenceEquals(_cursoes, value))
+                {
+                    var previousValue = _cursoes as FixupCollection<Curso>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupCursoes;
+                    }
+                    _cursoes = value;
+                    var newValue = value as FixupCollection<Curso>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupCursoes;
+                    }
+                }
+            }
+        }
+        private ICollection<Curso> _cursoes;
 
         #endregion
         #region Association Fixup
@@ -365,28 +365,6 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupCursoes(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Curso item in e.NewItems)
-                {
-                    item.Usuario = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Curso item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Usuario, this))
-                    {
-                        item.Usuario = null;
-                    }
-                }
-            }
-        }
-    
         private void FixupReglasSeguridads(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -422,6 +400,28 @@ namespace WebProgramAR.Entidades
             if (e.OldItems != null)
             {
                 foreach (Ejercicio item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Usuario, this))
+                    {
+                        item.Usuario = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupCursoes(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Curso item in e.NewItems)
+                {
+                    item.Usuario = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Curso item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Usuario, this))
                     {

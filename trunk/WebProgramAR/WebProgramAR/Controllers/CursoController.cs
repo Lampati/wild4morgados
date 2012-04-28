@@ -177,33 +177,63 @@ namespace WebProgramAR.Controllers
         }
 
         //
-        // POST: /Curso/Edit/5
+        //// POST: /Curso/Edit/5
+        //[HttpPost]
+        //public ActionResult AsociarEjercicios(CursoAsociarModel model)
+        //{
+        //    // TODO: Add update logic here
+        //    if (ModelState.IsValid)
+        //    {
+        //        AgregarAsociacionesEjercicioACurso(model.Curso, model.EjerciciosId);
+
+        //        CursoNegocio.Modificar(model.Curso, true);
+                
+        //        return Content(Boolean.TrueString);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
+
+
+
         [HttpPost]
-        public ActionResult AsociarEjercicios(CursoAsociarModel model)
+        public ActionResult AsociarEjercicioACurso(int cursoId, int ejercicioId)
         {
             // TODO: Add update logic here
             if (ModelState.IsValid)
             {
-                AgregarAsociacionesEjercicioACurso(model.Curso, model.EjerciciosId);
+                Curso curso = CursoNegocio.GetCursoById(cursoId);
 
-                CursoNegocio.Modificar(model.Curso, true);
-                
-                return Content(Boolean.TrueString);
+                CursoNegocio.Modificar(curso, new int[] { ejercicioId }, true);
+
+                return Json(new { resultado = true }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return View();
+                return Json(new { resultado = false }, JsonRequestBehavior.AllowGet);
             }
-
         }
 
-        private void AgregarAsociacionesEjercicioACurso(Curso curso, int[] ejercicios)
+        [HttpPost]
+        public ActionResult DesasociarEjercicioACurso(int cursoId, int ejercicioId)
         {
-            foreach (int id in ejercicios.ToList())
+            // TODO: Add update logic here
+            if (ModelState.IsValid)
             {
-                curso.Ejercicios.Add(EjercicioNegocio.GetEjercicioById(id));
+                Curso curso = CursoNegocio.GetCursoById(cursoId);
+
+                CursoNegocio.Modificar(curso, new int[] { ejercicioId }, false);
+
+                return Json(new { resultado = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { resultado = false }, JsonRequestBehavior.AllowGet);
             }
         }
+
 
         //
         // GET: /Curso/Delete/5

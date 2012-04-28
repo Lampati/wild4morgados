@@ -15,7 +15,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Cursos.Include("Usuario").Include("Ejercicios").Single(u => u.CursoId  == id);
+                return db.Cursoes.Include("Usuario").Include("Ejercicios").Single(u => u.CursoId  == id);
             }
         }
         
@@ -23,7 +23,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                db.Cursos.AddObject(Curso);
+                db.Cursoes.AddObject(Curso);
                 db.SaveChanges();
             }
         }
@@ -31,29 +31,47 @@ namespace WebProgramAR.DataAccess
         /// 
         /// </summary>
         /// <param name="Curso"></param>
-        /// <param name="asignarEjercicios">Indica si tengo que reemplazar los ejercicios del curso</param>
-        public static void Modificar(Curso Curso, bool asignarEjercicios)
+        /// <param name="idEjerciciosAgregar">Ids de los ejercicios a agregar</param>
+        /// /// <param name="agregar">True indica agregar / False indica quitar los ejercicios</param>
+        public static void Modificar(Curso Curso, int[] idEjerciciosAgregar, bool agregar)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Modificar(Curso, asignarEjercicios, db);
+                Modificar(Curso, idEjerciciosAgregar, agregar, db);
             }
         }
 
-        private static void Modificar(Curso cursoModif, bool asignarEjercicios, WebProgramAREntities db)
+        private static void Modificar(Curso cursoModif, int[] idEjerciciosAgregar,  bool agregar,WebProgramAREntities db)
         {
-            Curso cursoOrig = db.Cursos.Single(u => u.CursoId == cursoModif.CursoId);
+            Curso cursoOrig = db.Cursoes.Single(u => u.CursoId == cursoModif.CursoId);
 
             cursoOrig.Nombre = cursoModif.Nombre;
 
-            if (asignarEjercicios)
+            if (idEjerciciosAgregar.Length > 0)
             {
-                AsignarEjerciciosQueCorrespondan(cursoOrig, cursoModif,db);
+                for (int i = 0; i < idEjerciciosAgregar.Length; i++)
+			    {          
+                    int ejId = idEjerciciosAgregar[i];
+
+                    Ejercicio ejModif = db.Ejercicios.Single(x => x.EjercicioId == ejId);
+
+                    if (agregar)
+                    {
+                        cursoOrig.Ejercicios.Add(ejModif);
+                    }
+                    else
+                    {
+                        cursoOrig.Ejercicios.Remove(ejModif);
+                    }
+			    }
+                //AsignarEjerciciosQueCorrespondan(cursoOrig, cursoModif,db);
             }
 
            
 
             db.ObjectStateManager.ChangeObjectState(cursoOrig, EntityState.Modified);
+
+            db.DetectChanges();
             db.SaveChanges();
         }
 
@@ -74,10 +92,10 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Curso Curso = db.Cursos.Single(u => u.CursoId == id);
+                Curso Curso = db.Cursoes.Single(u => u.CursoId == id);
                 //Curso.Status = false; //baja lógica
 
-                db.Cursos.DeleteObject(Curso);
+                db.Cursoes.DeleteObject(Curso);
                 db.SaveChanges();
             }
         }
@@ -118,7 +136,7 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<Curso> GetCursos(int idCurso, string nom, int usuarioId , WebProgramAREntities db)
         {
-            IQueryable<Curso> query = from u in db.Cursos
+            IQueryable<Curso> query = from u in db.Cursoes
                                       where (idCurso == -1 || u.CursoId == idCurso)
                                       && (usuarioId == -1 || u.UsuarioId == usuarioId)
                                       && ( nom.Equals(string.Empty) ||u.Nombre.ToUpper().Contains(nom.ToUpper()))
@@ -142,12 +160,12 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<Curso> cursos = from u in db.Cursos where u.UsuarioId == idUsuario select u;
+                IQueryable<Curso> cursos = from u in db.Cursoes where u.UsuarioId == idUsuario select u;
                 //Curso.Status = false; //baja lógica
 
                 foreach (var item in cursos.ToList())
 	            {
-                    db.Cursos.DeleteObject(item);		 
+                    db.Cursoes.DeleteObject(item);		 
 	            } 
 
                 

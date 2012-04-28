@@ -150,6 +150,21 @@ namespace WebProgramAR.Entidades
         }
         private Usuario _usuario;
     
+        public virtual MensajeModeracion MensajeModeracion
+        {
+            get { return _mensajeModeracion; }
+            set
+            {
+                if (!ReferenceEquals(_mensajeModeracion, value))
+                {
+                    var previousValue = _mensajeModeracion;
+                    _mensajeModeracion = value;
+                    FixupMensajeModeracion(previousValue);
+                }
+            }
+        }
+        private MensajeModeracion _mensajeModeracion;
+    
         public virtual ICollection<Curso> Cursoes
         {
             get
@@ -181,21 +196,6 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Curso> _cursoes;
-    
-        public virtual MensajeModeracion MensajeModeracion
-        {
-            get { return _mensajeModeracion; }
-            set
-            {
-                if (!ReferenceEquals(_mensajeModeracion, value))
-                {
-                    var previousValue = _mensajeModeracion;
-                    _mensajeModeracion = value;
-                    FixupMensajeModeracion(previousValue);
-                }
-            }
-        }
-        private MensajeModeracion _mensajeModeracion;
 
         #endregion
         #region Association Fixup
