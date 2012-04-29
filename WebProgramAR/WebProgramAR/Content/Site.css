@@ -5,6 +5,7 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body,html
 {
+	behavior: url(ie-css3.htc);
     background-image: -webkit-gradient(
     linear,
     left bottom,
@@ -12,6 +13,7 @@ body,html
     color-stop(0.27, rgb(1,45,202)),
     color-stop(0.82, rgb(255,255,255))
 	);
+	
 	background-image: -moz-linear-gradient(
 		center bottom,
 		rgb(1,45,202) ,
@@ -33,6 +35,9 @@ form
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
+	position:relative;
+    zoom:1;
+    behavior: url(ie-css3.htc);
 }
 .border_left_all{
 border-top-left-radius:10px;
@@ -300,6 +305,7 @@ ul#menu li a,.subMenu li a,.subMenu li.selected a
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
+    behavior: url(PIE.htc);
     border:1px solid  #fff;
     cursor:pointer;
     cursor:hand;

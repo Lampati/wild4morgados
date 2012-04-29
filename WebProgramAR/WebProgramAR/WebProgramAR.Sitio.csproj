@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ie-css3.htc" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bar_bottom.png" />
     <Content Include="Content\images\borrar.gif" />
