@@ -7,12 +7,12 @@
 
 <h2>Editar</h2>
 <legend>Curso</legend>
-        @Html.HiddenFor(model => model.CursoId)
 
 @using (Ajax.BeginForm("Edit", "Curso", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { 
     @Html.ValidationSummary(true)
         @Html.Partial("_CreateOrEdit", Model)
+        @Html.HiddenFor(model => model.CursoId)
         
          <div id="buttonSectionOptions" class="buttonSectionOptions">
             <div>

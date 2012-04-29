@@ -82,7 +82,7 @@
                 @Html.LabelFor(m => m.Usuario.FechaNacimiento)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.Usuario.FechaNacimiento, new { @class = "date-picker-needed" })
+                @Html.TextBoxFor(model => model.Usuario.FechaNacimiento, new {@readonly="readonly",@id = "Usuario_FechaNacimiento", @class = "date-picker-needed" })
                 @Html.ValidationMessageFor(m => m.Usuario.FechaNacimiento)
             </div>
         </fieldset>
