@@ -38,7 +38,14 @@ namespace DiagramDesigner.ModoTexto.Configuracion
             textEditor.Options.CutCopyWholeLine = true;
             textEditor.Options.EnableEmailHyperlinks = false;
             textEditor.Options.EnableHyperlinks = false;
-
+            textEditor.TextArea.TextView.BackgroundRenderers.Add(
+                new ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer(textEditor));
+            textEditor.Document.Changed += (sender, e) =>
+                {
+                    ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer sr = textEditor.TextArea.TextView.BackgroundRenderers.First() as
+                   ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer;
+                    sr.ResetearLineas();
+                };
 
 
             //textEditor.TextArea.IndentationStrategy = textEditor.TextArea.IndentationStrategy = new GarGarIndentationStrategy(textEditor.Options);
