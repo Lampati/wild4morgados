@@ -626,10 +626,13 @@ namespace DiagramDesigner
             else
             {
                 BarraEstado.Estado = "Error en compilación";
-
+                ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer sr = this.Esquema.textEditor.TextArea.TextView.BackgroundRenderers[0] as
+                    ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer;
+                
                 foreach (var item in res.ListaErrores)
                 {
                     this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
+                    sr.AgregarLinea(item.Fila);
                 }
 
                 if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
@@ -639,9 +642,12 @@ namespace DiagramDesigner
                         if (item.Mostrar)
                         {
                             this.BarraMsgs.AgregarError(item.ErrorTraducido, item.Fila, 0);
+                            sr.AgregarLinea(item.Fila);
                         }
                     }
                 }
+
+                this.Esquema.textEditor.TextArea.TextView.InvalidateLayer(ICSharpCode.AvalonEdit.Rendering.KnownLayer.Background);
             }
         }
 

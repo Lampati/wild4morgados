@@ -261,6 +261,7 @@
       <DependentUpon>FormattedTextElement.cs</DependentUpon>
     </Compile>
     <Compile Include="Rendering\SingleCharacterElementGenerator.cs" />
+    <Compile Include="Rendering\SubrayadoRenderer.cs" />
     <Compile Include="Rendering\TextLayer.cs">
       <DependentUpon>TextView.cs</DependentUpon>
     </Compile>
