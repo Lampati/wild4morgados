@@ -37,7 +37,6 @@ form
 	border-radius:10px;
 	position:relative;
     zoom:1;
-    behavior: url(ie-css3.htc);
 }
 .border_left_all{
 border-top-left-radius:10px;
@@ -253,10 +252,19 @@ footer .content
     float:left;
     width:120px;
     margin-top:10px;
+    padding-left:20px;
+    padding-right:30px;
     color:#fff;
     height:80%;
     border-right:1px dotted #fff;
 }
+.contentSiteMap
+{text-align:left;margin-left:10px;}
+.contentSiteMap a,a:link
+{color:#888; !important}
+.contentSiteMap a:hover
+{color:#fff; !important}
+
 *{ margin:0; padding:0;}
 
 
@@ -652,7 +660,7 @@ table th {
     font-size:1.5em;
     color:#fff;
     width:200px;
-    height:140px;
+    height:auto;
     display:none;
     position:absolute;
     right:120px;
@@ -667,13 +675,14 @@ table th {
     border-left: 5px solid #fff;
     border-right: 5px solid #fff;
     margin-left:20px;
-    margin-top:0px;
+    padding-top:10px;
     position:relative;
+    display:none;
 }
 .error
 {
     margin-left:10px;
-    height:140px;
+    height:auto;
 }
 
 nav, #menucontainer
@@ -2122,12 +2131,13 @@ ul.tabs
 .detailsContent
 {
     z-index:101;
+    margin-left:10px;
     opacity: .70;
     filter: alpha(opacity=70%);  
     background:#000;
     color:#fff;
-    height:120px;
-    width:150px;
+    height:auto;
+    width:auto;
     -moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
@@ -2135,6 +2145,7 @@ ul.tabs
 	bottom:30px;
 	right:20px;
 	padding:10px;
+	font-size:1.3em;
 }
 .queesSectionSpace
 {
@@ -2152,6 +2163,12 @@ important
 {
     font-size:1.2em;
     color:#19F;
+    text-transform:uppercase;
+}
+important_sitemap
+{
+    font-size:1.2em;
+    color:#000;
     text-transform:uppercase;
 }
 enfasis
@@ -2230,3 +2247,4 @@ enfasis
 .ribbon-green:after {
   right: 0;
 }​
+

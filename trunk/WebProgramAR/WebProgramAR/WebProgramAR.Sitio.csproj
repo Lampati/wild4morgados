@@ -99,7 +99,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ie-css3.htc" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bar_bottom.png" />
     <Content Include="Content\images\borrar.gif" />
@@ -146,6 +145,7 @@
     <Content Include="Content\images\list-information.png" />
     <Content Include="Content\images\list_task-16.png" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\logow4m.png" />
     <Content Include="Content\images\Logo_CETool.png" />
     <Content Include="Content\images\modulo_actividades.png" />
     <Content Include="Content\images\modulo_planificacion.png" />

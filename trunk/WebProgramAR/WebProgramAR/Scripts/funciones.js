@@ -14,7 +14,7 @@ function updateWin() {
 function updateSuccess() {
     if ($("#update-message").html() == "True") {
         $("#divOperacionExitosa").fadeIn(300);
-        $(".buttonSectionOptions").show();
+        //$(".buttonSectionOptions").show();
         updateWindow();
     } else {
         $(".update-message-box").show();
@@ -60,6 +60,7 @@ undefined: no darle importancia
                 selectBox.attr("rel", option.val());
             }
             if ((i) == select.attr('selectedIndex')) {
+                
                 if (i == 0 && selectFirstElement != undefined) {
                     selectBox.html(option.html());
                     selectBox.attr("rel", option.val());

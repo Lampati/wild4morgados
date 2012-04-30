@@ -195,12 +195,31 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Edit(Usuario usuario)
         {
+            bool error = false;
+            string errorMensaje = "";
             if (ModelState.IsValid){
                 ActualizarRolesSiCorresponde(usuario);
                 MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
 
-                bool error = false;
-                string errorMensaje="";
+                /*VALIDACION DE PAIS CORRECTO*/
+                if (usuario.PaisId == null || (PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                {
+                    error = true;
+                    errorMensaje = "Pais Inexistente";
+                }
+                /*VALIDACION DE PROVINCIA CORRECTO*/
+                if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                {
+                    error = true;
+                    errorMensaje = "Provincia Inexistente";
+                }
+                /*VALIDACION DE LOCALIDAD CORRECTO*/
+                if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar una localidad correcta";
+                }
+
                 string mailViejo = membUser.Email;
                 bool mailCambiado = false;
                 if  ( string.Compare( usuario.Email, membUser.Email, true) != 0){
@@ -230,11 +249,29 @@ namespace WebProgramAR.Controllers
                     return Content(errorMensaje);
                 }
 
-                return RedirectToAction("Index");
+                return Content(Boolean.TrueString);
             }
             else
             {
-                return View();
+                /*VALIDACION DE PAIS CORRECTO*/
+                if (usuario.PaisId==null ||(PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                {
+                    error = true;
+                    errorMensaje = "Pais Inexistente";
+                }
+                /*VALIDACION DE PROVINCIA CORRECTO*/
+                if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                {
+                    error = true;
+                    errorMensaje = "Provincia Inexistente";
+                }
+                /*VALIDACION DE LOCALIDAD CORRECTO*/
+                if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar una localidad correcta";
+                }
+                return Content(errorMensaje);
             }
         }
 
