@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <title>@ViewBag.Title</title>
 
@@ -107,10 +107,19 @@
             @RenderBody()
         </section>
         <footer>
-            <div class="content">Listado A</div>
-            <div class="content">Listado B</div>
-            <div class="content">Listado C</div>
-            <div class="logoEmpresa">LogoEmpresa</div>
+            <div class="content">
+                <important_sitemap>INFORMACION</important_sitemap><br />
+                <div class="contentSiteMap">@Html.ActionLink("Home", "Index", "Home")</div>
+                <div class="contentSiteMap">@Html.ActionLink("Que es?", "Descripcion", "Home")</div>
+                <div class="contentSiteMap">@Html.ActionLink("Contacto", "About", "Home")</div>
+            </div>
+            <div class="content">
+                <important_sitemap>ADMINISTRACION</important_sitemap><br />
+                <div class="contentSiteMap">@Html.ActionLink("Cursos", "Index", "Curso")</div>
+                <div class="contentSiteMap">@Html.ActionLink("Usuarios", "Index", "Usuario")</div>
+                <div class="contentSiteMap">@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</div>
+            </div>
+            <div style="position:absolute;display:inline;float:right;margin-left:200px;margin-top:6px;">Desarrollado por<input type="image" src="@Url.Content("~/Content/images/logow4m.png")" alt=""/></div>
         </footer>
     </div>
     <ul id="subSeccionEjercicios" class="submenu">

@@ -24,6 +24,7 @@ function GetPosition() {
 
 
 $(document).ready(function () {
+    
     /*PARA EL MANEJO DE MENU/SUBMENU*/
     $(".hasSubMenu").click(function () {
         var divId = $(this).attr("id");
