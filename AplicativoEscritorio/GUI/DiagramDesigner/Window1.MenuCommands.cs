@@ -45,11 +45,17 @@ namespace DiagramDesigner
                             {
 
                                 Ejercicio ej = new Ejercicio();
+                                string pathTemplate = Path.Combine(Environment.CurrentDirectory, "ModoTexto", "Configuracion", "Template.txt").ToLower();
+                                if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
+                                    pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
+                                if (File.Exists(pathTemplate))
+                                    ej.Abrir(new FileInfo(pathTemplate));
+
                                 ej.UltimoModoGuardado = ModoVisual.Texto;
                                 ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                 ej.ModificadoDesdeUltimoGuardado = false;
                                 ej.PathGuardadoActual = path;
-
+                                
                                 ej.Guardar(ej.PathGuardadoActual);
                                 ArchCargado = ej;
                                 //Se lo coloco despues la modificacion pq despues de cargar modifica el texto

@@ -477,6 +477,7 @@
     <Resource Include="Resources\Images\cancel_48.png" />
     <Resource Include="Resources\Images\detail32.png" />
     <Resource Include="Resources\Images\remove32.png" />
+    <Resource Include="ModoTexto\Configuracion\Template.txt" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
