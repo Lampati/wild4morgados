@@ -721,7 +721,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                 new RoutedEventHandler((snd, ev) => 
                 {
                     ConfiguracionAplicacion.UrlsDescargaEjercicios = txtIP.Text;
-                    ConfiguracionAplicacion.Guardar();
+                    ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
                     propertyEditorWindow.DialogResult = true;
                 }),
                 new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));

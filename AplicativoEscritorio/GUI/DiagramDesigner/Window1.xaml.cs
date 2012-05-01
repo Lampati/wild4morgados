@@ -62,7 +62,7 @@ namespace DiagramDesigner
                 if (archCargado != null)
                 {
                     BarraMsgs.Visibility = System.Windows.Visibility.Visible;                    
-                    Modo = archCargado.UltimoModoGuardado;
+                    Modo = (ModoVisual)archCargado.UltimoModoGuardado;
 
                     Title = string.Format("{0} -- {1}", ConstantesGlobales.NOMBRE_APLICACION, archCargado.Nombre);
                     
@@ -93,7 +93,7 @@ namespace DiagramDesigner
 
                 if (ArchCargado != null)
                 {
-                    ArchCargado.UltimoModoGuardado = modo;
+                    ArchCargado.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)modo;
                 }
             }
         }
@@ -179,7 +179,8 @@ namespace DiagramDesigner
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
 
 
-            ConfiguracionAplicacion.Abrir();
+            ConfiguracionAplicacion.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
 
             ToolbarAplicacion.DirEjCreados = ConfiguracionAplicacion.DirectorioEjerciciosCreados;
             ToolbarAplicacion.DirEjDescargados = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
@@ -260,7 +261,8 @@ namespace DiagramDesigner
             ConfiguracionAplicacion.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
             ConfiguracionAplicacion.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;
 
-            ConfiguracionAplicacion.Guardar();
+            ConfiguracionAplicacion.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
         }
 
         void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -449,7 +451,11 @@ namespace DiagramDesigner
 
             foreach (var item in list)
             {
-                listaRetorno.Add(new Variable(item));
+                listaRetorno.Add(new Variable(item.Nombre, item.NombreParaCodigo, 
+                    (AplicativoEscritorio.DataAccess.Enums.TipoContexto) item.Contexto, item.NombreContextoLocal, 
+                    (AplicativoEscritorio.DataAccess.Enums.TipoDato) item.TipoDato, item.EsArreglo, item.Valor)
+                    );
+                //listaRetorno.Add(new Variable(item));
             }
 
             return listaRetorno;

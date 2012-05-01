@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AplicativoEscritorio.DataAccess.Interfases;
-using Globales.Enums;
 using Utilidades.Criptografia;
 using System.IO;
 using Utilidades.XML;
+using AplicativoEscritorio.DataAccess.Enums;
 
 namespace AplicativoEscritorio.DataAccess.Entidades
 {
@@ -29,6 +29,12 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             string xmlEncriptado = Crypto.Encriptar(xml.Get());           
 
             File.WriteAllText(path, xmlEncriptado);
+        }
+
+        public virtual void Abrir(MemoryStream stream)
+        {
+            string decodedString = Encoding.UTF8.GetString(stream.ToArray());
+            this.Abrir(decodedString);
         }
 
         public virtual void Abrir(FileInfo fi)

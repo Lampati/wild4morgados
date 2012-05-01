@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using AplicativoEscritorio.DataAccess.Enums;
 
 namespace DataAccess.Entidades
 {
@@ -61,38 +61,67 @@ namespace DataAccess.Entidades
         public string Descripcion { get; set; }
         public string NombreCodigo { get; set; }
         public string Contexto { get; set; }
-        public NodoTablaSimbolos.TipoDeDato TipoDato { get; set; }
+        public TipoDato TipoDato { get; set; }
         public bool EsArreglo { get; set; }        
         public string TamanioTipo { get; set; }
         public double TopeArr { get; set; }
 
         public List<PosicionArreglo> Posiciones { get; set; }
 
-        public Variable(NodoTablaSimbolos nodo)
+        //public Variable(NodoTablaSimbolos nodo)
+        //{
+        //    EsSeleccionada = false;
+        //    Nombre = nodo.Nombre;
+        //    Descripcion = string.Empty;
+        //    NombreCodigo = nodo.NombreParaCodigo;
+        //    Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
+        //    TipoDato = nodo.TipoDato;
+        //    EsArreglo = nodo.EsArreglo;
+        //    TopeArr = nodo.Valor;
+        //    TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.Valor) : "Variable";
+
+        //}
+
+        public Variable(string nombre, string nombreCodigo, TipoContexto contexto, string nombreContLocal ,TipoDato tipoDato, bool esArreglo, double valor)
         {
             EsSeleccionada = false;
-            Nombre = nodo.Nombre;
+            Nombre = nombre;
             Descripcion = string.Empty;
-            NombreCodigo = nodo.NombreParaCodigo;
-            Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
-            TipoDato = nodo.TipoDato;
-            EsArreglo = nodo.EsArreglo;
-            TopeArr = nodo.Valor;
-            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.Valor) : "Variable";
+            NombreCodigo = nombreCodigo;
+            Contexto = (contexto == TipoContexto.Global) ? contexto.ToString() : nombreContLocal;
+            TipoDato = tipoDato;
+            EsArreglo = esArreglo;
+            TopeArr = valor;
+            TamanioTipo = (esArreglo) ? string.Format("Arreglo con tope {0}", valor) : "Variable";
 
         }
 
-        public Variable(NodoTablaSimbolos nodo, List<PosicionArreglo> posis)
+        //public Variable(NodoTablaSimbolos nodo, List<PosicionArreglo> posis)
+        //{
+        //    EsSeleccionada = false;
+        //    Nombre = nodo.Nombre;
+        //    Descripcion = string.Empty;
+        //    NombreCodigo = nodo.NombreParaCodigo;
+        //    Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
+        //    TipoDato = nodo.TipoDato;
+        //    EsArreglo = nodo.EsArreglo;
+        //    TopeArr = nodo.Valor;
+        //    TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.Valor) : "Variable";
+
+        //    Posiciones = posis;
+        //}
+
+        public Variable(string nombre, string nombreCodigo, TipoContexto contexto, string nombreContLocal, TipoDato tipoDato, bool esArreglo, double valor, List<PosicionArreglo> posis)
         {
             EsSeleccionada = false;
-            Nombre = nodo.Nombre;
+            Nombre = nombre;
             Descripcion = string.Empty;
-            NombreCodigo = nodo.NombreParaCodigo;
-            Contexto = (nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global) ? nodo.Contexto.ToString() : nodo.NombreContextoLocal;
-            TipoDato = nodo.TipoDato;
-            EsArreglo = nodo.EsArreglo;
-            TopeArr = nodo.Valor;
-            TamanioTipo = (nodo.EsArreglo) ? string.Format("Arreglo con tope {0}", nodo.Valor) : "Variable";
+            NombreCodigo = nombreCodigo;
+            Contexto = (contexto == TipoContexto.Global) ? contexto.ToString() : nombreContLocal;
+            TipoDato = tipoDato;
+            EsArreglo = esArreglo;
+            TopeArr = valor;
+            TamanioTipo = (esArreglo) ? string.Format("Arreglo con tope {0}", valor) : "Variable";
 
             Posiciones = posis;
         }
@@ -129,19 +158,19 @@ namespace DataAccess.Entidades
 
 
 
-        private NodoTablaSimbolos.TipoDeDato ConvertirATipoDatoEnum(string tipoDato)
+        private TipoDato ConvertirATipoDatoEnum(string tipoDato)
         {
-            NodoTablaSimbolos.TipoDeDato retorno = NodoTablaSimbolos.TipoDeDato.Ninguno;
+            TipoDato retorno = TipoDato.Ninguno;
             switch (tipoDato.ToUpper())
             {
                 case "NUMERO":
-                    retorno = NodoTablaSimbolos.TipoDeDato.Numero;
+                    retorno = TipoDato.Numero;
                     break;
                 case "TEXTO":
-                    retorno = NodoTablaSimbolos.TipoDeDato.Texto;
+                    retorno = TipoDato.Texto;
                     break;
                 case "BOOLEANO":
-                    retorno = NodoTablaSimbolos.TipoDeDato.Booleano;
+                    retorno = TipoDato.Booleano;
                     break;
                 default:
                     break;

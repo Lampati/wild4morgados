@@ -5,20 +5,21 @@ using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 
+
 namespace DiagramDesigner.Helpers
 {
     public static class FileDialogManager
     {
         internal static string ElegirUbicacionNuevoEjercicio(Window padre, string titulo, string dirInicial)
         {
-            return ElegirUbicacionNuevoArchivo(padre, titulo, dirInicial, Globales.ConstantesGlobales.EXTENSION_EJERCICIO,
-                string.Format("Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*", Globales.ConstantesGlobales.EXTENSION_EJERCICIO));
+            return ElegirUbicacionNuevoArchivo(padre, titulo, dirInicial, AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO,
+                string.Format("Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO));
         }
 
         internal static string ElegirUbicacionNuevaResolucion(Window padre, string titulo, string dirInicial)
         {
-            return ElegirUbicacionNuevoArchivo(padre, titulo, dirInicial, Globales.ConstantesGlobales.EXTENSION_RESOLUCION,
-                string.Format("Archivos de Resolución (*.{0})|*.{0}|Todos los archivos (*.*)|*.*", Globales.ConstantesGlobales.EXTENSION_RESOLUCION));
+            return ElegirUbicacionNuevoArchivo(padre, titulo, dirInicial, AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION,
+                string.Format("Archivos de Resolución (*.{0})|*.{0}|Todos los archivos (*.*)|*.*", AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION));
         }
 
 
@@ -45,7 +46,7 @@ namespace DiagramDesigner.Helpers
         {
             return ElegirArchivoGuardar(padre, titulo, dirInicial,
                 string.Format("Archivos de Ejercicio (*.{0})|*.{0}",
-                Globales.ConstantesGlobales.EXTENSION_EJERCICIO)
+                AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)
                 );
         }
 
@@ -54,7 +55,7 @@ namespace DiagramDesigner.Helpers
         {
             return ElegirArchivoAbrir (padre, titulo, dirInicial, 
                 string.Format("Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
-                Globales.ConstantesGlobales.EXTENSION_EJERCICIO)
+                AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)
                 );
         }
 
@@ -62,8 +63,8 @@ namespace DiagramDesigner.Helpers
         {
             return ElegirArchivoAbrir (padre, titulo, dirInicial,
                 string.Format("Archivos de Ragnarok (*.{1} o *.{0})|*.{1};*.{0}|Archivos de Resolución (*.{1})|*.{1}|Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
-                Globales.ConstantesGlobales.EXTENSION_EJERCICIO,
-                Globales.ConstantesGlobales.EXTENSION_RESOLUCION)
+                AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO,
+                AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION)
                 );
         }
 

@@ -295,13 +295,13 @@ namespace DiagramDesigner.TestsPruebas
                     {
                         switch (item.TipoDato)
                         {
-                            case NodoTablaSimbolos.TipoDeDato.Texto:
+                            case AplicativoEscritorio.DataAccess.Enums.TipoDato.Texto:
                                 strBldrCodigoGarGarSalida.AppendFormat(controladorPosArr, item.Nombre, string.Format("{0}{1}{0}", "'", item.Posiciones[j].Valor), string.Format("{0}{1}{0}",'"', item.Posiciones[j].Valor), item.Posiciones[j].Posicion).AppendLine(); ;
                                 break;
-                            case NodoTablaSimbolos.TipoDeDato.Numero:
+                            case AplicativoEscritorio.DataAccess.Enums.TipoDato.Numero:
                                 strBldrCodigoGarGarSalida.AppendFormat(controladorPosArr, item.Nombre, item.Posiciones[j].Valor, item.Posiciones[j].Valor, item.Posiciones[j].Posicion).AppendLine();
                                 break;
-                            case NodoTablaSimbolos.TipoDeDato.Booleano:
+                            case AplicativoEscritorio.DataAccess.Enums.TipoDato.Booleano:
                                 string aux = item.Posiciones[j].Valor.ToUpper() == "TRUE" ? "verdadero" : "falso";
                                 strBldrCodigoGarGarSalida.AppendFormat(controladorPosArr, item.Nombre, aux, aux, item.Posiciones[j].Posicion).AppendLine(); 
                                 break;
@@ -315,13 +315,13 @@ namespace DiagramDesigner.TestsPruebas
                 {
                     switch (item.TipoDato)
                     {
-                        case NodoTablaSimbolos.TipoDeDato.Texto:
+                        case AplicativoEscritorio.DataAccess.Enums.TipoDato.Texto:
                             strBldrCodigoGarGarSalida.AppendFormat(controladorVar, item.Nombre, string.Format("{0}{1}{0}", "'", item.Valor), string.Format("{0}{1}{0}",'"', item.Valor)).AppendLine();; 
                             break;
-                        case NodoTablaSimbolos.TipoDeDato.Numero:
+                        case AplicativoEscritorio.DataAccess.Enums.TipoDato.Numero:
                             strBldrCodigoGarGarSalida.AppendFormat(controladorVar, item.Nombre, item.Valor, item.Valor).AppendLine();
                             break;
-                        case NodoTablaSimbolos.TipoDeDato.Booleano:
+                        case AplicativoEscritorio.DataAccess.Enums.TipoDato.Booleano:
                             string aux = item.Valor.ToUpper() == "TRUE" ? "verdadero" : "falso";
                             strBldrCodigoGarGarSalida.AppendFormat(controladorVar, item.Nombre, aux, aux ).AppendLine();
                             break;                        

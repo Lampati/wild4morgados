@@ -14,13 +14,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         public enum TipoDeDato
         {
             [DescriptionAttribute("Texto")]
-            Texto,
+            Texto = 0,
             [DescriptionAttribute("Numero")]
-            Numero,
+            Numero = 1,
             [DescriptionAttribute("Booleano")]
-            Booleano,
+            Booleano = 2,
             [DescriptionAttribute("Ninguno")]
-            Ninguno
+            Ninguno = 3
         }
 
         public enum TipoDeEntrada
@@ -40,9 +40,9 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         public enum TipoContexto
         {
             [DescriptionAttribute("Global")]
-            Global,
+            Global = 0,
             [DescriptionAttribute("Local")]
-            Local
+            Local = 1
         }
 
         private string nombre;
