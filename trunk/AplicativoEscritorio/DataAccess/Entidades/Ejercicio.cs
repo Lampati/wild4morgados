@@ -7,12 +7,14 @@ using System.Text;
 using Utilidades.Criptografia;
 using System.IO;
 using AplicativoEscritorio.DataAccess.Excepciones;
-using Globales.Enums;
 
 namespace AplicativoEscritorio.DataAccess.Entidades
 {
     public class Ejercicio : EntidadBase
     {
+        public const string EXTENSION_EJERCICIO = @"gej";
+
+
         #region Atributos
         private int ejercicioId;
         private ModoEjercicio modo;
@@ -86,7 +88,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
         public override string Extension
         {
-            get { return Globales.ConstantesGlobales.EXTENSION_EJERCICIO; }
+            get { return EXTENSION_EJERCICIO; }
         }
 
         public bool TieneId

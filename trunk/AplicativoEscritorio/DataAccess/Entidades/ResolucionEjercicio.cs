@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using AplicativoEscritorio.DataAccess.Interfases;
 using AplicativoEscritorio.DataAccess.Enums;
-using Globales.Enums;
 using Utilidades.XML;
 using Utilidades.Criptografia;
 using AplicativoEscritorio.DataAccess.Excepciones;
@@ -13,6 +12,8 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 {
     public class ResolucionEjercicio : EntidadBase
     {
+        public const string EXTENSION_RESOLUCION = @"gres";
+
         #region Atributos
         private Ejercicio ejercicio;        
         #endregion
@@ -20,7 +21,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         #region Propiedades
         public override string Extension
         {
-            get { return Globales.ConstantesGlobales.EXTENSION_RESOLUCION; }
+            get { return EXTENSION_RESOLUCION; }
         }
         #endregion
 

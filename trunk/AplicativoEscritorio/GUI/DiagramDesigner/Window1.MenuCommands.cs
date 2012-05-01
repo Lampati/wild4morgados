@@ -51,7 +51,7 @@ namespace DiagramDesigner
                                 if (File.Exists(pathTemplate))
                                     ej.Abrir(new FileInfo(pathTemplate));
 
-                                ej.UltimoModoGuardado = ModoVisual.Texto;
+                                ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
                                 ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                 ej.ModificadoDesdeUltimoGuardado = false;
                                 ej.PathGuardadoActual = path;
@@ -70,7 +70,7 @@ namespace DiagramDesigner
                             {
 
                                 //chequeo de tipo de archivo
-                                if (pathEj.ToLower().EndsWith(string.Format(".{0}", Globales.ConstantesGlobales.EXTENSION_EJERCICIO)))
+                                if (pathEj.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
                                 {
 
                                     Ejercicio ej = new Ejercicio();
@@ -86,7 +86,7 @@ namespace DiagramDesigner
 
                                         ResolucionEjercicio res = new ResolucionEjercicio(ej);
 
-                                        res.UltimoModoGuardado = ModoVisual.Texto;
+                                        res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
                                         res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                         res.ModificadoDesdeUltimoGuardado = false;
                                         res.PathGuardadoActual = path;
@@ -123,7 +123,7 @@ namespace DiagramDesigner
                     if (!string.IsNullOrWhiteSpace(path))
                     {
                         //chequeo de tipo de archivo
-                        if (path.ToLower().EndsWith(string.Format(".{0}", Globales.ConstantesGlobales.EXTENSION_EJERCICIO)))
+                        if (path.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
                         {
                             Ejercicio ej = new Ejercicio();
                             ej.PathGuardadoActual = path;
@@ -132,7 +132,7 @@ namespace DiagramDesigner
                             //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                             ej.ModificadoDesdeUltimoGuardado = false;
                         }
-                        else if (path.ToLower().EndsWith(string.Format(".{0}", Globales.ConstantesGlobales.EXTENSION_RESOLUCION)))
+                        else if (path.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION)))
                         {
                             ResolucionEjercicio res = new ResolucionEjercicio();
                             res.PathGuardadoActual = path;

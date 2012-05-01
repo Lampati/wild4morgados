@@ -60,11 +60,7 @@ namespace DataAccess
         #endregion
 
         #region Métodos
-        public static void Abrir()
-        {
-            Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
-                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
-        }
+     
 
         public static void Abrir(string pathCompleto)
         {           
@@ -98,11 +94,7 @@ namespace DataAccess
             }
         }
 
-        public static void Guardar()
-        {
-            Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
-                                         Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
-        }
+       
 
         public static void Guardar(string path)
         {

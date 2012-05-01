@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AplicativoEscritorio.DataAccess.Entidades;
+using AplicativoEscritorio.DataAccess.Enums;
 
 namespace AplicativoEscritorio.DataAccess.Interfases
 {
@@ -11,7 +12,7 @@ namespace AplicativoEscritorio.DataAccess.Interfases
         short NivelDificultad { get;  }
         string SolucionGargar { get;  }
         string SolucionTexto { get;  }
-        Globales.Enums.ModoVisual UltimoModoGuardado { get; set; }
+        ModoVisual UltimoModoGuardado { get; set; }
         DataAccess.Enums.ModoEjercicio Modo { get; set; }
         List<TestPrueba> TestsPrueba { get; }
 
