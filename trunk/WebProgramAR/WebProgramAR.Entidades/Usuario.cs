@@ -218,38 +218,6 @@ namespace WebProgramAR.Entidades
         }
         private TipoUsuario _tipoUsuario;
     
-        public virtual ICollection<Ejercicio> Ejercicios
-        {
-            get
-            {
-                if (_ejercicios == null)
-                {
-                    var newCollection = new FixupCollection<Ejercicio>();
-                    newCollection.CollectionChanged += FixupEjercicios;
-                    _ejercicios = newCollection;
-                }
-                return _ejercicios;
-            }
-            set
-            {
-                if (!ReferenceEquals(_ejercicios, value))
-                {
-                    var previousValue = _ejercicios as FixupCollection<Ejercicio>;
-                    if (previousValue != null)
-                    {
-                        previousValue.CollectionChanged -= FixupEjercicios;
-                    }
-                    _ejercicios = value;
-                    var newValue = value as FixupCollection<Ejercicio>;
-                    if (newValue != null)
-                    {
-                        newValue.CollectionChanged += FixupEjercicios;
-                    }
-                }
-            }
-        }
-        private ICollection<Ejercicio> _ejercicios;
-    
         public virtual ICollection<Curso> Cursoes
         {
             get
@@ -281,6 +249,38 @@ namespace WebProgramAR.Entidades
             }
         }
         private ICollection<Curso> _cursoes;
+    
+        public virtual ICollection<Ejercicio> Ejercicios
+        {
+            get
+            {
+                if (_ejercicios == null)
+                {
+                    var newCollection = new FixupCollection<Ejercicio>();
+                    newCollection.CollectionChanged += FixupEjercicios;
+                    _ejercicios = newCollection;
+                }
+                return _ejercicios;
+            }
+            set
+            {
+                if (!ReferenceEquals(_ejercicios, value))
+                {
+                    var previousValue = _ejercicios as FixupCollection<Ejercicio>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= FixupEjercicios;
+                    }
+                    _ejercicios = value;
+                    var newValue = value as FixupCollection<Ejercicio>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += FixupEjercicios;
+                    }
+                }
+            }
+        }
+        private ICollection<Ejercicio> _ejercicios;
 
         #endregion
         #region Association Fixup
@@ -387,28 +387,6 @@ namespace WebProgramAR.Entidades
             }
         }
     
-        private void FixupEjercicios(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Ejercicio item in e.NewItems)
-                {
-                    item.Usuario = this;
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Ejercicio item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Usuario, this))
-                    {
-                        item.Usuario = null;
-                    }
-                }
-            }
-        }
-    
         private void FixupCursoes(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -422,6 +400,28 @@ namespace WebProgramAR.Entidades
             if (e.OldItems != null)
             {
                 foreach (Curso item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Usuario, this))
+                    {
+                        item.Usuario = null;
+                    }
+                }
+            }
+        }
+    
+        private void FixupEjercicios(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Ejercicio item in e.NewItems)
+                {
+                    item.Usuario = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Ejercicio item in e.OldItems)
                 {
                     if (ReferenceEquals(item.Usuario, this))
                     {

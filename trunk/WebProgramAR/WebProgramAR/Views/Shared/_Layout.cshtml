@@ -91,8 +91,18 @@
                         }
                         else
                         {
-                        <li>@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
+                            if (Request.IsAuthenticated)
+                            {
+                                <li id="SeccionEjerciciosNormal" class="hasSubMenu"><a>EJERCICIOS</a>
+                                
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="submenuLi">@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</li>
+                            }
                         }
+
                         @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("administrador"))
                         {
                             <li>@Html.ActionLink("Configuracion", "Index", "Seguridad")</li>
@@ -117,15 +127,19 @@
                 <important_sitemap>ADMINISTRACION</important_sitemap><br />
                 <div class="contentSiteMap">@Html.ActionLink("Cursos", "Index", "Curso")</div>
                 <div class="contentSiteMap">@Html.ActionLink("Usuarios", "Index", "Usuario")</div>
-                <div class="contentSiteMap">@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</div>
             </div>
             <div style="position:absolute;display:inline;float:right;margin-left:200px;margin-top:6px;">Desarrollado por<input type="image" src="@Url.Content("~/Content/images/logow4m.png")" alt=""/></div>
         </footer>
     </div>
     <ul id="subSeccionEjercicios" class="submenu">
+        <li class="submenuLi">@Html.ActionLink("Crear Ejercicio", "Upload", "Ejercicio")</li>
         <li class="submenuLi">@Html.ActionLink("Aprobados", "Index", "Ejercicio")</li>
         <li class="submenuLi">@Html.ActionLink("Pendientes", "PendientesAprobacion", "Ejercicio")</li>
         <li class="submenuLi">@Html.ActionLink("Desaprobados", "Desaprobados", "Ejercicio")</li>
+    </ul>
+    <ul id="subSeccionEjerciciosNormal" class="submenu">
+        <li class="submenuLi">@Html.ActionLink("Crear Ejercicio", "Upload", "Ejercicio")</li>
+        <li class="submenuLi">@Html.ActionLink("Ver Ejercicios", "Index", "Ejercicio")</li>
     </ul>
     <div id="disablingDiv"></div>    
     <div id="overDiv"></div>        

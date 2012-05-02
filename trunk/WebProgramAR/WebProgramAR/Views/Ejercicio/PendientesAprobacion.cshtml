@@ -38,11 +38,11 @@
         });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Moderar")/', 500, 680);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Moderar")/', 700, 680);
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 380);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 680);
         });
 
         var sortcol = '@grid.SortColumn';
@@ -110,8 +110,8 @@
           format: @<text>
                     <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles"/>
                   </text>
-    ),        
-    grid.Column("", 
+    )        
+    ,grid.Column("", 
           header: "",
           format: @<text>
                     <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.EjercicioId)" class="botonEditar"/>

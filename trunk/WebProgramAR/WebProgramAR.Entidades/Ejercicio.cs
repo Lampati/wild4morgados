@@ -37,7 +37,19 @@ namespace WebProgramAR.Entidades
             set;
         }
     
+        public virtual string SolucionGarGar
+        {
+            get;
+            set;
+        }
+    
         public virtual string SolucionTexto
+        {
+            get;
+            set;
+        }
+    
+        public virtual string XML
         {
             get;
             set;
@@ -50,6 +62,12 @@ namespace WebProgramAR.Entidades
         }
     
         public virtual System.DateTime FechaAlta
+        {
+            get;
+            set;
+        }
+    
+        public virtual int NivelEjercicio
         {
             get;
             set;
@@ -104,18 +122,6 @@ namespace WebProgramAR.Entidades
             }
         }
         private int _estadoEjercicioId;
-    
-        public virtual int NivelEjercicio
-        {
-            get;
-            set;
-        }
-    
-        public virtual string XML
-        {
-            get;
-            set;
-        }
 
         #endregion
         #region Navigation Properties

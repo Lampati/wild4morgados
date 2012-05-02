@@ -10,37 +10,10 @@
     <h2>Eliminar</h2>
     <legend>Ejercicio</legend>
     <h3>Confirmacion</h3>
-    <fieldset>
-    @Html.HiddenFor(m => m.EjercicioId)
-    <br style="height: 5px" />
-    <div class="fila">
-        <div class="display-label-delete">Nombre:</div>
-        <div class="display-field-delete">@Model.Nombre</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">Nivel Ejercicio:</div>
-        <div class="display-field-delete">@Model.NivelEjercicio</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">Enunciado:</div>
-        <div class="display-field-delete">@Model.Enunciado</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">Solucion:</div>
-        <div class="display-field-delete">@Model.Solucion</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">Solucion Modo Texto:</div>
-        <div class="display-field-delete">@Model.SolucionTexto</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">Usuario</div>
-        <div class="display-field-delete">@Model.Usuario.UsuarioNombre</div>
-    </div>
-    <div class="fila">
-        <div class="display-label-delete">Estado</div>
-        <div class="display-field-delete">@Model.EstadoEjercicio.Descripcion</div>
-    </div>
+    <fieldset class="fieldsetAncho">
+        @Html.HiddenFor(m => m.EjercicioId)
+        <br style="height: 5px" />
+        @Html.Partial("_Display", Model)
     
     </fieldset>
      <div id="buttonSectionOptions" class="buttonSectionOptions">

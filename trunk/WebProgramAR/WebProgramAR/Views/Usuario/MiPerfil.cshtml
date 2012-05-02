@@ -64,6 +64,7 @@
                 case "Desaprobados":
                     OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorDesprobado&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
                     break;
+                
             }
         });
     });

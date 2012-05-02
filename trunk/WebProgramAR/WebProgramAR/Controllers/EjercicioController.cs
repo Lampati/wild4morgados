@@ -6,6 +6,8 @@ using System.Web.Security;
 using WebProgramAR.Entidades;
 using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
+using System.Web;
+using System.IO;
 
 namespace WebProgramAR.Controllers
 {
@@ -190,19 +192,64 @@ namespace WebProgramAR.Controllers
         }
 
         //
-        // GET: /Ejercicio/Create
+        // GET: /Ejercicio/Upload
 
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult Upload()
         {
-            if (Request.IsAjaxRequest())
+            EjercicioUploadModel model = new EjercicioUploadModel();
+
+            
+            model.Error = false;
+            model.MensajeError = string.Empty;
+
+            return View("Upload", model);            
+        }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
             {
-                Initilization();
-                return View();
+                // extract only the fielname
+                var fileName = Path.GetFileName(file.FileName);
+
+                System.IO.MemoryStream memStream = new System.IO.MemoryStream();
+                file.InputStream.CopyTo(memStream);
+
+                try
+                {
+                    Ejercicio ejDeArchivo = EjercicioNegocio.ObtenerEjercicioDeArchivo(memStream);
+
+                    return View("Create", ejDeArchivo);
+                }
+                catch (CargarEjercicioArchivoException ex)
+                {
+                    EjercicioUploadModel modelError = new EjercicioUploadModel();
+
+                    modelError.Error = true;
+                    modelError.MensajeError = ex.Message;
+
+                    return View("Upload", modelError);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }               
             }
             else
             {
-                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+                EjercicioUploadModel modelError = new EjercicioUploadModel();
+
+                modelError.Error = true;
+                modelError.MensajeError = "No se subio ningun archivo o el archivo tenia 0 bytes";
+
+                return View("Upload", modelError);
             }
+
+
+            
         }
       
 
@@ -214,11 +261,9 @@ namespace WebProgramAR.Controllers
 
                 //flanzani
                 //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                ejercicio.UsuarioId = 1;
-                //curso.UsuarioId = usuarioLogueado;
-                ejercicio.Enunciado = "";
-                ejercicio.EstadoEjercicio.EstadoEjercicioId = 1;
-                ejercicio.SolucionTexto = "";
+                ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;
+                ejercicio.EstadoEjercicioId = 1; //lo coloco en pendiente
+                
                 EjercicioNegocio.Alta(ejercicio);
                 return Content(Boolean.TrueString);
             }
@@ -230,6 +275,7 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Ejercicio/Edit/5 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             if (Request.IsAjaxRequest())

@@ -39,20 +39,18 @@
                 $('#filtrosEjercicios').fadeIn('slow');
             }
         });
-        $('#btnNuevo').click(function (event) {
-            OpenDialog(event, '', '@Url.Action("Create")/', 500, 550);
-        });
+     
 
         $('.botonEliminar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 500, 350); 
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 700, 680);
         });
 
         $('.botonEditar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 500, 550);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Edit")/', 700, 680);
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 500, 350);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 680);
         });
         var sortcol = '@grid.SortColumn';
 
@@ -68,7 +66,7 @@
 <div id="buttonSection" class="buttonSection">
 @if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
 {
-    <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
+  @*<div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>*@
 }
     <div id="btnFiltrosEjercicios" class="btn_filtros boton" >Filtros </div>
 </div>
