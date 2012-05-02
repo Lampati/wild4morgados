@@ -180,90 +180,116 @@ namespace DiagramDesigner
                         break;
 
                     case 2:
+                        //Valido tambien que tenga enunciado, solucion y nivel
                         //Lo que tengo que hacer es Validar una Ejecucion Satisfactoria y luego todos sus tests.
 
-                        MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione OK para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK);
-
-                        ResultadoEjecucion res = Ejecutar();
-
-                        if (res.ResEjecucion != null)
+                        if (archCargado.NivelDificultad == 0 || string.IsNullOrWhiteSpace(archCargado.Enunciado) || string.IsNullOrWhiteSpace(archCargado.SolucionTexto))
                         {
-                            if (res.ResEjecucion.EsCorrectaEjecucion)
+                            StringBuilder strBldr = new StringBuilder("Es necesario cargar todos los detalles del ejercicio para poder subirlo a la web.").AppendLine();
+
+                            if (archCargado.NivelDificultad == 0)
                             {
-                                bool aptoParaGuardar = true;
-
-                                if (archCargado.TestsPrueba.Count > 0)
-                                {
-                                    MessageBox.Show("Es necesario validar todos los test de prueba del programa. Presione OK para validar los test de prueba.", "ProgramAR", MessageBoxButton.OK);
-
-                                    List<NodoTablaSimbolos> aux = res.ResCompilacion.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
-                                    aux.AddRange(res.ResCompilacion.TablaSimbolos.ObtenerVariablesGlobales());
-
-
-
-                                    ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
-                                    ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.ResCompilacion.TablaSimbolos.ObtenerParametrosDelProcSalida());
-
-
-                                    bool todosValidos = true;
-                                    StringBuilder strErrores = new StringBuilder();
-                                    foreach (TestPrueba test in this.archCargado.TestsPrueba)
-                                    {
-                                        todosValidos &= test.ValidarVariablesEntrada(listaVariablesEntrada.ToList()) && test.ValidarVariablesSalida(listaVariablesSalida.ToList());
-                                    }
-
-                                    if (todosValidos)
-                                    {
-                                        //MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "ProgramAR", MessageBoxButton.OK);
-
-                                        ////PONER ACA LA EJECUCION
-                                        
-
-                                        //foreach (TestPrueba test in this.archCargado.TestsPrueba)
-                                        //{
-                                        //    todosValidos &= test.EjecutarConVariablesPredeterminadas;
-                                        //}
-                                    }
-                                    else
-                                    {
-                                        //Abro la consulta, para que vea cuales son
-                                        aptoParaGuardar = false;                                        
-
-                                        WindowConsultaTests testWindow = new WindowConsultaTests(true);
-                                        testWindow.VariablesEntrada = listaVariablesEntrada;
-                                        testWindow.VariablesSalida = listaVariablesSalida;
-                                        testWindow.TestPruebas = new ObservableCollection<TestPrueba>(archCargado.TestsPrueba);
-                                        testWindow.Validar();
-
-                                        testWindow.Title = "Tests de Prueba - Mis Tests";
-
-                                        testWindow.ShowDialog();
-                                    }
-                                }
-
-                                if (aptoParaGuardar)
-                                {
-                                    path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", ConfiguracionAplicacion.DirectorioAbrirDefault);
-                                    if (path != string.Empty)
-                                    {
-                                        GuardarADiscoFormatoExportar(path);
-                                    }
-                                }
-
+                                strBldr.AppendLine("Falta cargar el nivel de dificultad del ejercicio");
                             }
-                            else
+
+                            if (string.IsNullOrWhiteSpace(archCargado.Enunciado))
                             {
-                                //Muestro cual fue el error pq termino mal
-                                ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
-                                resultadosDialog.ShowDialog();
+                                strBldr.AppendLine("Falta cargar el enunciado del ejercicio");
+                            }
 
-                                try
+                            if (string.IsNullOrWhiteSpace(archCargado.SolucionTexto))
+                            {
+                                strBldr.AppendLine("Falta cargar la solución en modo texto del ejercicio");
+                            }
+
+                            MessageBox.Show(strBldr.ToString(), "ProgramAR", MessageBoxButton.OK);
+                        }
+                        else
+                        {
+
+                            MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione OK para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK);
+
+                            ResultadoEjecucion res = Ejecutar();
+
+                            if (res.ResEjecucion != null)
+                            {
+                                if (res.ResEjecucion.EsCorrectaEjecucion)
                                 {
-                                    File.Delete(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta);
+                                    bool aptoParaGuardar = true;
+
+                                    if (archCargado.TestsPrueba.Count > 0)
+                                    {
+                                        MessageBox.Show("Es necesario validar todos los test de prueba del programa. Presione OK para validar los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+
+                                        List<NodoTablaSimbolos> aux = res.ResCompilacion.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
+                                        aux.AddRange(res.ResCompilacion.TablaSimbolos.ObtenerVariablesGlobales());
+
+
+
+                                        ObservableCollection<Variable> listaVariablesEntrada = TransformarAVariables(aux);
+                                        ObservableCollection<Variable> listaVariablesSalida = TransformarAVariables(res.ResCompilacion.TablaSimbolos.ObtenerParametrosDelProcSalida());
+
+
+                                        bool todosValidos = true;
+                                        StringBuilder strErrores = new StringBuilder();
+                                        foreach (TestPrueba test in this.archCargado.TestsPrueba)
+                                        {
+                                            todosValidos &= test.ValidarVariablesEntrada(listaVariablesEntrada.ToList()) && test.ValidarVariablesSalida(listaVariablesSalida.ToList());
+                                        }
+
+                                        if (todosValidos)
+                                        {
+                                            //MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+
+                                            ////PONER ACA LA EJECUCION
+
+
+                                            //foreach (TestPrueba test in this.archCargado.TestsPrueba)
+                                            //{
+                                            //    todosValidos &= test.EjecutarConVariablesPredeterminadas;
+                                            //}
+                                        }
+                                        else
+                                        {
+                                            //Abro la consulta, para que vea cuales son
+                                            aptoParaGuardar = false;
+
+                                            WindowConsultaTests testWindow = new WindowConsultaTests(true);
+                                            testWindow.VariablesEntrada = listaVariablesEntrada;
+                                            testWindow.VariablesSalida = listaVariablesSalida;
+                                            testWindow.TestPruebas = new ObservableCollection<TestPrueba>(archCargado.TestsPrueba);
+                                            testWindow.Validar();
+
+                                            testWindow.Title = "Tests de Prueba - Mis Tests";
+
+                                            testWindow.ShowDialog();
+                                        }
+                                    }
+
+                                    if (aptoParaGuardar)
+                                    {
+                                        path = FileDialogManager.ElegirGuardarComo(this, "Elija el nombre del ejercicio", ConfiguracionAplicacion.DirectorioAbrirDefault);
+                                        if (path != string.Empty)
+                                        {
+                                            GuardarADiscoFormatoExportar(path);
+                                        }
+                                    }
+
                                 }
-                                catch
+                                else
                                 {
+                                    //Muestro cual fue el error pq termino mal
+                                    ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+                                    resultadosDialog.ShowDialog();
 
+                                    try
+                                    {
+                                        File.Delete(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta);
+                                    }
+                                    catch
+                                    {
+
+                                    }
                                 }
                             }
                         }
