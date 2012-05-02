@@ -265,7 +265,7 @@ namespace WebProgramAR.Controllers
                 ejercicio.EstadoEjercicioId = 1; //lo coloco en pendiente
                 
                 EjercicioNegocio.Alta(ejercicio);
-                return Content(Boolean.TrueString);
+                return View("EjercicioCreado", ejercicio);
             }
             else
             {
