@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using WebProgramAR.Entidades;
 using WebProgramAR.DataAccess;
+using System.IO;
 
 namespace WebProgramAR.Negocio
 {
@@ -28,6 +29,7 @@ namespace WebProgramAR.Negocio
 
         public static void Alta(Ejercicio Ejercicio)
         {
+            
             Ejercicio.FechaAlta = DateTime.Now;
             EjercicioDA.Alta(Ejercicio);
         }
@@ -68,6 +70,39 @@ namespace WebProgramAR.Negocio
         public static void ModificarEstado(Ejercicio ejercicio)
         {
             EjercicioDA.ModificarEstado(ejercicio);
+        }
+
+
+        public static Ejercicio ObtenerEjercicioDeArchivo(MemoryStream memStreamArchEj)
+        {
+            AplicativoEscritorio.DataAccess.Entidades.Ejercicio ej;
+            try
+            {
+                ej = new AplicativoEscritorio.DataAccess.Entidades.Ejercicio();
+                ej.Abrir(memStreamArchEj);
+            }         
+            catch (Exception ex)
+            {                
+                throw new CargarEjercicioArchivoException("No se pudo cargar el ejercicio. El contenido del archivo no corresponde con lo que deberia contener un ejercicio.");
+            }
+
+            if (ej.EsValidoSubirWeb)
+            {
+                
+                Ejercicio ejRetorno = new Ejercicio();
+
+                ejRetorno.Nombre = ej.Nombre;
+                ejRetorno.SolucionTexto = ej.SolucionTexto;
+                ejRetorno.Enunciado = ej.Enunciado;
+                ejRetorno.NivelEjercicio = ej.NivelDificultad;
+                ejRetorno.SolucionGarGar = ej.SolucionGargar;
+
+                return ejRetorno;
+            }
+            else
+            {
+                throw new CargarEjercicioArchivoException("El ejercicio no estaba valido para subir a web. Por favor guarde el ejercicio en formato para subir a web, siga los pasos en el aplicativo, y luego vuelva a subirlo");
+            }
         }
     }
 }

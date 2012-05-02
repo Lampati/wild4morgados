@@ -1,0 +1,37 @@
+﻿@model WebProgramAR.Sitio.Models.EjercicioUploadModel
+
+
+@{    
+    ViewBag.Title = "Ejercicios";
+}
+
+<h2>Nuevo</h2>
+<legend>Ejercicio</legend>
+   
+@using (Html.BeginForm("Upload", "Ejercicio", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+        @Html.ValidationSummary(true)
+
+    <div style="display:block;vertical-align:middle">
+        <div class="editor-field" style="display:inline;vertical-align:middle;">
+            <input type="file" name="file" id="file" style="width:450px;" data-val-required="Requerido" data-val="true" style="width:auto;visibility:visible"/>
+            @Html.ValidationMessageFor(model => model.FileUpload)
+        </div>
+    
+        <div id="buttonSectionOptions" style="display:inline;vertical-align:middle">         
+            <input type="submit" value="Cargar Ejercicio" class="submit" id="btnGuardar" style="width:200px;margin-bottom:18px" />
+        </div>
+    </div>        
+    if (Model.Error)
+    {
+    <div style="width:100%; color:Red; font-size:1.2em">
+        <p>
+            @Model.MensajeError   
+        </p>
+    </div>
+            
+    }
+         
+      
+}
+

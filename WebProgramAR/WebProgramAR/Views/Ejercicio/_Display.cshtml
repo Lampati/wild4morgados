@@ -3,38 +3,64 @@
     
 }
 
-<div class="editor-label">
-     @Html.LabelFor(model => model.Nombre)
-</div>
-<div class="editor-field">
-    @Html.DisplayFor(model => model.Nombre)
-</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#accordion").accordion(
+        {
+            autoHeight: false
+        }
+        );
+    });
+</script>
 
-<div class="editor-label">
-    @Html.LabelFor(m => m.NivelEjercicio)
+<div class="fila">
+    <div class="display-label-delete">Nombre: </div>
+    <div class="display-field-delete">@Model.Nombre</div>
 </div>
-<div class="editor-field">
-    @Html.DisplayFor(model => model.NivelEjercicio)
+<div class="fila">
+    <div class="display-label-delete">Nivel Ejercicio: </div>
+    <div class="display-field-delete">@Model.NivelEjercicio</div>
 </div>
-   
-<div class="editor-label">
-    @Html.LabelFor(model => model.Enunciado)
-</div>
-<div class="editor-field">
-    @Html.DisplayFor(model => model.Enunciado)
-</div>
-    
-<div class="editor-label">
-    @Html.LabelFor(model => model.SolucionTexto)
-</div>
-<div class="editor-field">
-    @Html.DisplayFor(model => model.SolucionTexto)
-</div>
+<div class="fila" >
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Usuario)
+    <p>Detalles del ejercicio</p>
+
+    <div id="accordion">
+        <h3><a href="#">@Html.LabelFor(model => model.Enunciado)</a></h3>
+        <div>
+            <p>
+                @Html.Raw(Html.Encode(Model.Enunciado).Replace("\r\n", "<br />"))
+            </p>
+        </div>
+        <h3><a href="#">@Html.LabelFor(model => model.SolucionTexto)</a></h3>
+        <div>
+            <p>
+                @Html.Raw(Html.Encode(Model.SolucionTexto).Replace("\r\n", "<br />"))
+            </p>
+        </div>
+        <h3><a href="#">@Html.LabelFor(model => model.SolucionGarGar)</a></h3>
+        <div>
+            <p>
+                @Html.Raw(Html.Encode(Model.SolucionGarGar).Replace("\r\n", "<br />"))
+            </p>
+        </div>
+    </div>
 </div>
-<div class="editor-field">
-    @Html.DisplayFor(model => model.Usuario.UsuarioNombre)
+<div class="fila">
+    <div class="display-label-delete">Autor</div>
+    <div class="display-field-delete">@Model.Usuario.UsuarioNombre</div>
 </div>
+<div class="fila">
+    <div class="display-label-delete">Estado</div>
+    <div class="display-field-delete">@Model.EstadoEjercicio.Descripcion</div>
+</div>
+@if (Model.EstadoEjercicioId == Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Desaprobado) && Model.MensajeModeracion != null)
+{
+    <div class="fila">
+    <div class="display-label-delete">Razon desaprobado</div>
+    <div class="display-field-delete">@Model.MensajeModeracion.Mensaje</div>
+</div>
+}
+
+         
 

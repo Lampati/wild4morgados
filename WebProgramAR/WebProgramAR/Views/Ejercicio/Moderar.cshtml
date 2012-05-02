@@ -30,7 +30,7 @@
 
 @using (Ajax.BeginForm("Moderar", "Ejercicio", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { 
-    <fieldset>
+    <fieldset class="fieldsetAncho">
         <div>
             @Html.ValidationSummary(true)
 

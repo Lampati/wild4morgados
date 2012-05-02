@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataAccess">
+      <HintPath>DllsAccesoDatosArchivos\DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -39,8 +42,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Utilidades">
+      <HintPath>DllsAccesoDatosArchivos\Utilidades.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CargarEjercicioArchivoException.cs" />
     <Compile Include="SeguridadNegocio.cs" />
     <Compile Include="CursoNegocio.cs" />
     <Compile Include="EstadoEjercicioNegocio.cs" />
