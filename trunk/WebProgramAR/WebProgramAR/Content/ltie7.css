@@ -29,7 +29,7 @@ body,html
 }
 form
 {
- 
+ margin:10px;   
 }
 .border_all{
 	-moz-border-radius:10px;

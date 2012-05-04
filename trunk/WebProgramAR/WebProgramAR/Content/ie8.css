@@ -5,20 +5,7 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body,html
 {
-	behavior: url(ie-css3.htc);
-    background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0.27, rgb(1,45,202)),
-    color-stop(0.82, rgb(255,255,255))
-	);
-	
-	background-image: -moz-linear-gradient(
-		center bottom,
-		rgb(1,45,202) ,
-		rgb(255,255,255) 
-	);
+    background-color:#116FFF;
     font-size: 0.9em;
     font-family: Calibri,"Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -29,14 +16,12 @@ body,html
 }
 form
 {
- 
+    margin:10px;   
 }
 .border_all{
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
-	position:relative;
-    zoom:1;
 }
 .border_left_all{
 border-top-left-radius:10px;
@@ -186,9 +171,7 @@ page width. Or, you can specify an exact pixel width. */
 .page
 {
     width: 90%;
-    margin-top:-30px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2px auto;
     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px #888;
     box-shadow: 0 0 5px #888;
@@ -308,29 +291,27 @@ ul#menu li a,.subMenu li a,.subMenu li.selected a
     padding: 8px 20px;
     text-decoration: none;
     line-height: 3.5em;
-    background-color: #ccc ;
-    color: #fff !important;
+    background-color: #ccc !important;
+    color: #ffffff !important;
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    behavior: url(PIE.htc);
-    border:1px solid  #fff;
+    border:1px solid  #ffffff;
     cursor:pointer;
     cursor:hand;
-    
 }
 
 ul#menu li a:hover,ul.subMenu li a:hover,ul.subMenu li.selected a:hover
 {
     
-    background-color: #EE4000 ;
-    color:#fff !important;
+    background-color: #EE4000 !important;
+    color:#ffffff !important;
     text-decoration: none;
     border:1px solid #EE4400;
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px #888;
-    box-shadow: 0 0 5px #888;
-    
+    -moz-box-shadow: 0 0 5px #888fff;
+    -webkit-box-shadow: 0 0 5px #888fff;
+    box-shadow: 0 0 5px #888fff;
+    filter:progid:DXImageTransform.Microsoft.DropShadow(OffX=6, OffY=4, Color='gray');
 }
 
 ul#menu li a:active
@@ -379,8 +360,9 @@ ul.submenu
 	border-radius:10px;
 	z-index:1100;
 	opacity: .90;
-    filter: alpha(opacity=90%);
-	
+	filter: alpha(opacity=90%);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
 }
 .submenuLi a
 {
@@ -2051,15 +2033,13 @@ ul.tabs
 }
 .contentBox
 {
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px #888;
-    box-shadow: 0 0 5px #888;
-    border:3px solid #fff;   
-    width:120px;
-    height:120px;
-    color:#fff;
-    padding:30px;
-    margin:10px;
+    box-shadow: 0 0 5px #888fff;
+    border:3px solid #ffffff;   
+    width:120px auto;
+    height:120px auto;
+    color:#ffffff;
+    padding:30px auto;
+    margin:10px auto;
 }
 .contentBox:hover
 {
@@ -2121,6 +2101,8 @@ ul.tabs
 	text-transform:uppercase;
 	opacity: .70;
     filter: alpha(opacity=70%);   
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
 }
 .textContent
 {
@@ -2144,6 +2126,8 @@ ul.tabs
     margin-left:10px;
     opacity: .70;
     filter: alpha(opacity=70%);  
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
     background:#000;
     color:#fff;
     height:auto;
