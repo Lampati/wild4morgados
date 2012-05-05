@@ -6,7 +6,7 @@
 }
 
 <h2>Editar</h2>
-<legend>Usuario</legend>
+<h4>Usuario</h4>
 
 @using (Ajax.BeginForm("Edit", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 { 

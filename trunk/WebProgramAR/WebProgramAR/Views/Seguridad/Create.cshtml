@@ -6,7 +6,7 @@
 }
 
 <h2>Nuevo</h2>
-<legend>Seguridad</legend>
+<h4>Seguridad</h4>
    
 @using (Ajax.BeginForm("Create", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { 

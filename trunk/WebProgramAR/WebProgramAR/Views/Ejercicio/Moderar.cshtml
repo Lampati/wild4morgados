@@ -26,7 +26,7 @@
 
 
 <h2>Moderar</h2>
-<legend>Ejercicio</legend>
+<h4>Ejercicio</h4>
 
 @using (Ajax.BeginForm("Moderar", "Ejercicio", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { 

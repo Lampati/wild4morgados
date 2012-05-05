@@ -6,7 +6,7 @@
 }
 
 <h2>Editar</h2>
-<legend>Seguridad</legend>
+<h4>Seguridad</h4>
         @Html.HiddenFor(model => model.ReglaId)
 
 @using (Ajax.BeginForm("Edit", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))

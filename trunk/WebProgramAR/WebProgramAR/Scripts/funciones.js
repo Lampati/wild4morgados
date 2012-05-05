@@ -1,4 +1,25 @@
-﻿
+﻿function alertSize() {
+    var myWidth = 0, myHeight = 0;
+    if (typeof (window.innerWidth) == 'number') {
+        //Non-IE
+        myWidth = window.innerWidth;
+        myHeight = window.innerHeight;
+    } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+        //IE 6+ in 'standards compliant mode'
+        myWidth = document.documentElement.clientWidth;
+        myHeight = document.documentElement.clientHeight;
+    } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+        //IE 4 compatible
+        myWidth = document.body.clientWidth;
+        myHeight = document.body.clientHeight;
+    }
+    if (myHeight < 640)
+        $("body").attr("style", "overflow-y:scroll;");
+    else
+        $("body").attr("style", "overflow-y:hidden;");
+    //window.alert('Width = ' + myWidth);
+    //window.alert('Height = ' + myHeight);
+}
 /*para muestra de operacion satisfactoria u operacion no satisfactoria*/
 function disableButtons() {
     $(".buttonSectionOptions").hide();
@@ -51,7 +72,6 @@ undefined: no darle importancia
         } else {
             dropDown.css("height", "30px" * select.find('option').size());
         }
-
         select.find('option').each(function (i) {
             var option = $(this);
             //alert(option.attr('selected'));
@@ -59,9 +79,13 @@ undefined: no darle importancia
                 selectBox.html(option.html());
                 selectBox.attr("rel", option.val());
             }
-            if ((i) == select.attr('selectedIndex')) {
-                
-                if (i == 0 && selectFirstElement != undefined) {
+            if (selectFirstElement != undefined) {
+                if (i == 0) {
+                    selectBox.html(option.html());
+                    selectBox.attr("rel", option.val());
+                }
+            } else {
+                if ((i) == select.attr('selectedIndex')) {
                     selectBox.html(option.html());
                     selectBox.attr("rel", option.val());
                 }
