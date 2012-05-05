@@ -8,7 +8,7 @@
 }
 
 <h2>Nuevo</h2>
-<legend>Usuario</legend>
+<h4>Usuario</h4>
 
    
 @using (Ajax.BeginForm("Create", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))

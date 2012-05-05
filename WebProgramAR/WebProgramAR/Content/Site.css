@@ -23,7 +23,8 @@ body,html
     font-family: Calibri,"Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0; /*color: #696969;*/
-    overflow:auto;
+    overflow:hidden;
+    resize:none;
     width:100%;
     height:100%;
 }
@@ -170,7 +171,26 @@ h3
 
 h4
 {
-    font-size: 1.1em;
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:1.5em;
+    border-top-right-radius:10px;
+    -moz-border-radius-topright:10px;
+    -webkit-border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-right-radius:10px;
+    background:#333;
+    padding-bottom:10px;
+    padding-left:10px;
+    padding-top:5px;
+    padding-right:10px;
+    color:#fff;
+    margin-left:-14px;
+    margin-top:-48px;
+    margin-bottom:20px;
+    height:23px;
+    width:120px;
 }
 
 h5, h6
@@ -222,6 +242,7 @@ header h1, #header h1
 
 #main
 {
+    resize:both;
     padding: 10px 30px 15px 30px;
     background-color: #fff;
     border-radius: 4px 0 0 0;
@@ -313,7 +334,6 @@ ul#menu li a,.subMenu li a,.subMenu li.selected a
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    behavior: url(PIE.htc);
     border:1px solid  #fff;
     cursor:pointer;
     cursor:hand;
@@ -322,7 +342,6 @@ ul#menu li a,.subMenu li a,.subMenu li.selected a
 
 ul#menu li a:hover,ul.subMenu li a:hover,ul.subMenu li.selected a:hover
 {
-    
     background-color: #EE4000 ;
     color:#fff !important;
     text-decoration: none;
@@ -391,7 +410,7 @@ ul.submenu
     padding: 8px 20px !important;
     text-decoration: none !important;
     line-height: 3.5em  !important;
-    background-color: #fff  !important;
+    background-color: #ccc  !important;
     color: #666 ;
     border-radius: 8px !important;
     -webkit-border-radius: 8px !important;
@@ -400,7 +419,7 @@ ul.submenu
 }
 .submenuLi a:hover
 {
-    background-color: #19f  !important;
+    background-color: #EE4000 !important;
     color: #fff !important;
     border:1px solid #fff;
 }
@@ -577,14 +596,15 @@ input[type="submit"]:hover, .submit:hover,input[type="submit"]:active, .submit:a
     z-index:100;
     margin-top:-30px;
     top:190px;
-    right:160px;
     height:15px;
     -moz-border-radius:7px;
 	-webkit-border-radius:7px;
 	border-radius:7px;
 	color:#fff;
 	font-size: 1em;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right:20px;
     vertical-align: middle;
     text-transform:uppercase;
     font-family:Calibri;
@@ -1173,6 +1193,8 @@ div.menu ul li a:hover, .boton:hover
 	margin-top:5px;
 	padding:0;
 	width:100%;
+	padding-bottom:15px;
+	height:auto;
 }
 .filtrosabmBig
 {
@@ -2048,6 +2070,7 @@ ul.tabs
 #contentIndex
 {
     margin-top:20px;   
+    resize:both;
 }
 .contentBox
 {
@@ -2055,11 +2078,12 @@ ul.tabs
     -webkit-box-shadow: 0 0 5px #888;
     box-shadow: 0 0 5px #888;
     border:3px solid #fff;   
-    width:120px;
+    width:120px auto !important;
     height:120px;
     color:#fff;
     padding:30px;
     margin:10px;
+    resize:both;
 }
 .contentBox:hover
 {
@@ -2072,6 +2096,9 @@ ul.tabs
 .divLine
 {
     float:left;
+    resize:both;
+    width:20%;
+    height:auto;
 }
 .orange
 {
@@ -2093,6 +2120,7 @@ ul.tabs
 {
     width:600px;
     height:365px;
+    resize:both;
     padding:5px;
     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px #888;
@@ -2169,21 +2197,30 @@ ul.tabs
     color:#333;   
     width:220px;
 }
-important
+.h7
 {
-    font-size:1.2em;
+    font-size:1em;
     color:#19F;
     text-transform:uppercase;
+    float:left;
+    display:inline;
+    padding-right:2px;
 }
-important_sitemap
+.h8
 {
     font-size:1.2em;
     color:#000;
     text-transform:uppercase;
+    float:left;
+    padding-left:2px;
+    padding-right:2px;
 }
-enfasis
+.h9
 {
-    font-size:1.1em;
+    float:left;
+    display:inline;
+    padding-right:2px;
+    font-size:1em;
     color:#EE4400;
     font-style:italic;
     text-transform:uppercase;

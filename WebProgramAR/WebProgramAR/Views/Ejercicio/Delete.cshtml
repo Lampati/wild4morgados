@@ -8,7 +8,7 @@
 @using (Ajax.BeginForm("Delete", "Ejercicio", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 {
     <h2>Eliminar</h2>
-    <legend>Ejercicio</legend>
+    <h4>Ejercicio</h4>
     <h3>Confirmacion</h3>
     <fieldset class="fieldsetAncho">
         @Html.HiddenFor(m => m.EjercicioId)

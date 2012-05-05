@@ -198,7 +198,7 @@
                         $("#SelectProvinciaId").get(0).options[$("#SelectProvinciaId").get(0).options.length] = new Option(text, val);
                     }
                     $("<option value='0' >Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
-                    convertSelect("SelectProvinciaId");
+                    convertSelect("SelectProvinciaId",true);
                     $("#PaisId").val((div.attr("rel")));
                     reInitLocalidad();
                 }
@@ -246,7 +246,7 @@
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadId").val(ui.item.value);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-            $("#Nombre").focus();
+            $("#Nombre").focusIn();
         },
         change: function (event, ui) {
             if (ui.item != undefined) {

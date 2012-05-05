@@ -93,7 +93,8 @@ header, footer, nav, section
 {
     border-left:2px dotted #333;
     height:270px;
-    float:left;   
+    float:left;
+    padding:0;
 }
 .SameSectionSpace
 {
@@ -130,19 +131,13 @@ h2
     padding: 0 0 10px 0;
     text-transform:uppercase;
     font-size:1.5em;
-    border-top-right-radius:10px;
-    -moz-border-radius-topright:10px;
-    -webkit-border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-bottom-right-radius:10px;
     background:#EE4000;
     padding-left:60px;
     margin-left:100px;
     padding-top:5px;
     color:#fff;
     margin-bottom:10px;
-    width:80%;
+    width:90%;
     z-index:151;
 }
 
@@ -155,7 +150,21 @@ h3
 
 h4
 {
-    font-size: 1.1em;
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:1.5em;
+    background:#000000;
+    padding-bottom:10px;
+    padding-left:10px;
+    padding-top:5px;
+    padding-right:10px;
+    color:#fff;
+    margin-left:-14px;
+    margin-top:-48px;
+    margin-bottom:20px;
+    height:23px;
+    float:left;
+    width:15%;
 }
 
 h5, h6
@@ -430,18 +439,12 @@ fieldset.details
     font-family:Calibri;
     width:100%;
 }
-legend
+.legend
 {
     text-transform:uppercase;
     font-weight:bold;
     font-size:1.5em;
-    border-top-right-radius:10px;
-    -moz-border-radius-topright:10px;
-    -webkit-border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-bottom-right-radius:10px;
-    background:#333;
+    background:#000000;
     padding-bottom:10px;
     padding-left:10px;
     padding-top:5px;
@@ -451,7 +454,7 @@ legend
     margin-top:-48px;
     margin-bottom:20px;
     height:23px;
-    width:120px;
+    width:20%;
 }
 
 textarea
@@ -519,10 +522,7 @@ input[type="text"].textBoxForFilter
 }
 input[type="submit"], .submit
 {
-    -moz-border-radius:7px;
-	-webkit-border-radius:7px;
-	font-weight: bold;
-	border-radius:7px;
+    font-weight: bold;
 	color:#fff;
 	margin-top:20px;
     font-size: 1em;
@@ -2153,22 +2153,31 @@ ul.tabs
     color:#333;   
     width:220px;
 }
-important
+.h7
 {
-    font-size:1.2em;
+    font-size:1em;
     color:#19F;
     text-transform:uppercase;
+    float:left;
+    padding-right:1px;
+    display:inline;
 }
-important_sitemap
+.h8
 {
-    font-size:1.2em;
+    font-size:1em;
     color:#000;
+    float:left;
+    padding-left:2px;
+    padding-right:2px;
     text-transform:uppercase;
 }
-enfasis
+.h9
 {
-    font-size:1.1em;
+    font-size:1em;
     color:#EE4400;
+    float:left;
+    padding-right:1px;
+    display:inline;
     font-style:italic;
     text-transform:uppercase;
 }
