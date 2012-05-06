@@ -363,10 +363,11 @@ namespace CompiladorGargar
 
                 string argumentoInclude = string.Format("-Fu{0}", pathIncludes);
                 string argumentoModoCompilacion = string.Format("-Mobjfpc");
+                string argumentoUseAnsiStrings = string.Format("-Sh");
                 string argumentoChequearIndicesDeArreglos = string.Format("-Cr");
                 string argumentoNombreExe = string.Format("-o{0}", auxExe);
 
-                string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumentoInclude, argumentoModoCompilacion, argumentoChequearIndicesDeArreglos, argumentoNombreExe, archTemporalPascal });
+                string resultado = EjecucionManager.EjecutarSinVentana(Globales.ConstantesGlobales.NOMBRE_ARCH_COMPILADOR_PASCAL, new List<string>() { argumentoInclude, argumentoModoCompilacion, argumentoUseAnsiStrings, argumentoChequearIndicesDeArreglos, argumentoNombreExe, archTemporalPascal });
 
                 res = new ResultadoCompilacionPascal(resultado, bindeoLineas);
                 res.NombreEjecutable = exe;

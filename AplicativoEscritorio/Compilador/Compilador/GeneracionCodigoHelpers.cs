@@ -348,9 +348,22 @@ namespace CompiladorGargar
                 {
                     if (item.EsArreglo)
                     {
-
-                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
+                        switch (item.TipoDato)
+                        {
+                            case NodoTablaSimbolos.TipoDeDato.Texto:
+                                strBldrTotal.AppendFormat("  CrearNuevoArregloTextoEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
                                     archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                break;
+                            case NodoTablaSimbolos.TipoDeDato.Numero:
+                                strBldrTotal.AppendFormat("  CrearNuevoArregloNumeroEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                break;
+                            case NodoTablaSimbolos.TipoDeDato.Booleano:
+                                strBldrTotal.AppendFormat("  CrearNuevoArregloBooleanoEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                break;
+                        }
+                        
 
                     }
                     else
@@ -367,9 +380,23 @@ namespace CompiladorGargar
                 {
                     if (item.EsArreglo)
                     {
-
-                        strBldrTotal.AppendFormat("  CrearNuevoArregloEnEntradaEnLinea('{0}', {1},'{2}','{5}',{3},{4}); ",
+                        switch (item.TipoDato)
+                        {
+                            case NodoTablaSimbolos.TipoDeDato.Texto:
+                                strBldrTotal.AppendFormat("  CrearNuevoArregloTextoEnEntradaEnLinea('{0}', {1},'{2}','{5}',{3},{4}); ",
                                     archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.Valor, item.Contexto.ToString()).AppendLine();
+                                break;
+                            case NodoTablaSimbolos.TipoDeDato.Numero:
+                                strBldrTotal.AppendFormat("  CrearNuevoArregloNumeroEnEntradaEnLinea('{0}', {1},'{2}','{5}',{3},{4}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.Valor, item.Contexto.ToString()).AppendLine();
+                                break;
+                            case NodoTablaSimbolos.TipoDeDato.Booleano:
+                                strBldrTotal.AppendFormat("  CrearNuevoArregloBooleanoEnEntradaEnLinea('{0}', {1},'{2}','{5}',{3},{4}); ",
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreParaCodigo, item.Valor, item.Contexto.ToString()).AppendLine();
+                                break;
+                        }
+
+                        
 
                     }
                     else
