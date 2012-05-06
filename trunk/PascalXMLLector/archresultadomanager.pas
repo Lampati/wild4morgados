@@ -17,9 +17,9 @@ procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : string );
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : boolean );
 procedure CrearNuevaVariableEnEntradaEnLineaGenerico(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; tipo : string; valor : string);
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of real; topeArr : real);
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of string; topeArr : real);
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
+procedure CrearNuevoArregloNumeroEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of real; topeArr : real);
+procedure CrearNuevoArregloTextoEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of ansistring; topeArr : real);
+procedure CrearNuevoArregloBooleanoEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
 
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : real );
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : string );
@@ -244,7 +244,7 @@ begin
 end;
 
 
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of real; topeArr : real);
+procedure CrearNuevoArregloNumeroEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of real; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -288,7 +288,9 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of string; topeArr : real);
+
+
+procedure CrearNuevoArregloTextoEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of ansistring; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
@@ -332,7 +334,7 @@ begin
      end;
 end;
 
-procedure CrearNuevoArregloEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
+procedure CrearNuevoArregloBooleanoEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; arreglo : array of boolean; topeArr : real);
 var
   NodoContra: TDOMNode;
   xdoc:      TXMLDocument;
