@@ -72,6 +72,7 @@ undefined: no darle importancia
         } else {
             dropDown.css("height", "30px" * select.find('option').size());
         }
+        debugger;
         select.find('option').each(function (i) {
             var option = $(this);
             //alert(option.attr('selected'));
