@@ -112,7 +112,17 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                    //mejora de error. Me fijo si no ta declarada ya como arreglo o variable
+                    if (this.TablaSimbolos.ExisteVariable(nombre, this.ContextoActual, this.NombreContextoLocal))
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" esta declarada como variable y se intento usar como arreglo");
+                    }
+                    else
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" no esta declarada.");
+                    }
+
+                    
                     throw new ErrorSemanticoException(strbldr.ToString());
                 }
             }
