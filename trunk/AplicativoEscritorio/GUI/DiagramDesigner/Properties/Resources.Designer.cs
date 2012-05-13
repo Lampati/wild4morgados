@@ -59,5 +59,12 @@ namespace DiagramDesigner.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Icon fenrir {
+            get {
+                object obj = ResourceManager.GetObject("fenrir", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

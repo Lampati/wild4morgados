@@ -24,6 +24,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
             AgregarValidacionElementosConValorNoContiguosParteIzq();
             AgregarValidacionElementosConValorNoContiguosParteDer();
+
+            AgregarValidacionPorDefault();
         }
 
         private void AgregarValidacionAsignacionRepetido()
@@ -142,6 +144,19 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
         }
+
+
+        private void AgregarValidacionPorDefault()
+        {
+            string mensajeError = "La asignacion contiene un error sintactico.";
+            short importancia = 1;
+
+
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
+            listaValidaciones.Add(valRep);
+        }
+
+
 
        
     }

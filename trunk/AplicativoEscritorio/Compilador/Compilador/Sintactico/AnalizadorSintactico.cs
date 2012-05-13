@@ -179,6 +179,9 @@ namespace CompiladorGargar.Sintactico
                         filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
                         colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
                         this.habilitarSemantico = false;
+                        pararCompilacion = true; //siempre paro la compilacion al primer error
+
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion)); 
                     }
                 }
                 catch (ErroresManager.AnalizadorErroresException exAnaliz)
@@ -187,67 +190,72 @@ namespace CompiladorGargar.Sintactico
                     filaAMostrar = exAnaliz.Fila != -1 ? exAnaliz.Fila : filaAMostrar;
                     colAMostrar = exAnaliz.Columna != -1 ? exAnaliz.Columna : colAMostrar;
                     pararCompilacion = exAnaliz.Parar;
-                }
-                
 
-                if (ex.DescartarTopeCadena)
-                {
-                    if (!this.CadenaEntrada.EsFinDeCadena())
-                    {
-                        this.CadenaEntrada.EliminarPrimerTerminal();
-                    }
-                    try
-                    {
-                        this.RellenarCadenaEntrada();
-                    }
-                    catch (ErrorLexicoException exx)
-                    {
-                        retorno.Add(new PasoAnalizadorSintactico(exx.Descripcion, GlobalesCompilador.TipoError.Sintactico, exx.Fila, exx.Columna, false));
-                        //this.MostrarError(new ErrorCompiladorEventArgs(exx.Tipo, exx.Descripcion, exx.Fila, exx.Columna, false));
-                    }
-                    if (ex.Mostrar)
-                    {
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
-                    }
-                    //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
+                    retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion)); //siempre paro la compilacion al primer error
                 }
 
-                if (ex.DescartarTopePila)
-                {
-                    if (ex.TerminalHastaDondeDescartarPila != null)
-                    {
-                        bool parar = false;
-                        while (!this.Pila.esFinDePila() && !parar)
-                        {
-                            if (this.Pila.ObtenerTope().GetType() != typeof(Terminal)) 
-                            {
-                                this.Pila.DescartarTope();
-                            }
-                            else if (!(((Terminal)this.Pila.ObtenerTope()).Equals( Terminal.ElementoFinSentencia())))
-                            {
-                                this.Pila.DescartarTope();
-                            }
-                            else
-                            {
-                                this.Pila.DescartarTope();
-                                parar = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (!this.Pila.esFinDePila())
-                        {
-                            this.Pila.DescartarTope();
-                        }
-                    }
+                #region Parte Vieja maneja excepciones sintacticas
 
-                    if (ex.Mostrar)
-                    {
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
-                    }
-                    //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
-                }
+                //if (ex.DescartarTopeCadena)
+                //{
+                //    if (!this.CadenaEntrada.EsFinDeCadena())
+                //    {
+                //        this.CadenaEntrada.EliminarPrimerTerminal();
+                //    }
+                //    try
+                //    {
+                //        this.RellenarCadenaEntrada();
+                //    }
+                //    catch (ErrorLexicoException exx)
+                //    {
+                //        retorno.Add(new PasoAnalizadorSintactico(exx.Descripcion, GlobalesCompilador.TipoError.Sintactico, exx.Fila, exx.Columna, false));
+                //        //this.MostrarError(new ErrorCompiladorEventArgs(exx.Tipo, exx.Descripcion, exx.Fila, exx.Columna, false));
+                //    }
+                //    if (ex.Mostrar)
+                //    {
+                //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
+                //    }
+                //    //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
+                //}
+
+                //if (ex.DescartarTopePila)
+                //{
+                //    if (ex.TerminalHastaDondeDescartarPila != null)
+                //    {
+                //        bool parar = false;
+                //        while (!this.Pila.esFinDePila() && !parar)
+                //        {
+                //            if (this.Pila.ObtenerTope().GetType() != typeof(Terminal))
+                //            {
+                //                this.Pila.DescartarTope();
+                //            }
+                //            else if (!(((Terminal)this.Pila.ObtenerTope()).Equals(Terminal.ElementoFinSentencia())))
+                //            {
+                //                this.Pila.DescartarTope();
+                //            }
+                //            else
+                //            {
+                //                this.Pila.DescartarTope();
+                //                parar = true;
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        if (!this.Pila.esFinDePila())
+                //        {
+                //            this.Pila.DescartarTope();
+                //        }
+                //    }
+
+                //    if (ex.Mostrar)
+                //    {
+                //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
+                //    }
+                //    //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
+                //}
+
+                #endregion
 
                 if (cantErroresSintacticos >= GlobalesCompilador.CANT_MAX_ERRORES_SINTACTICOS)
                 {

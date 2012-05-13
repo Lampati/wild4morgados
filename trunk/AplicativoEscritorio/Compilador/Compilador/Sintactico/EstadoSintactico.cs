@@ -238,6 +238,7 @@ namespace CompiladorGargar.Sintactico
             switch (t.Componente.Token)
             {
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Mostrar:
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MostrarConPausa:
                     contextoLinea = ContextoLinea.Mostrar;
                     break;
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MientrasComienzo:
