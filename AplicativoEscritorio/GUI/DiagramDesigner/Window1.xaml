@@ -10,7 +10,8 @@
         xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"    
-                Closing="RibbonWindow_Closing" SizeChanged="RibbonWindow_SizeChanged">
+                Closing="RibbonWindow_Closing" SizeChanged="RibbonWindow_SizeChanged" 
+                Icon="/DiagramDesigner;component/Images/loboTribal1.png">
 
     <Grid Margin="0" >
         <Grid.RowDefinitions>

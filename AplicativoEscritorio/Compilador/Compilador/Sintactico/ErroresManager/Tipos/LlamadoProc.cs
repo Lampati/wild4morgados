@@ -13,6 +13,17 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             : base(fila,col)
         {
             listaLineaEntera = lista;
+            AgregarValidacionPorDefault();
+        }
+
+        private void AgregarValidacionPorDefault()
+        {
+            string mensajeError = "La llamada al procedimiento contiene un error sintactico.";
+            short importancia = 1;
+
+
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
+            listaValidaciones.Add(valRep);
         }
     }
 }

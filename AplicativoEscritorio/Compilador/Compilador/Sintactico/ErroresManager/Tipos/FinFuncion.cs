@@ -15,12 +15,23 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
             AgregarValidacionFin();
 
+            AgregarValidacionPorDefault();
+        }
+
+        private void AgregarValidacionPorDefault()
+        {
+            string mensajeError = "El fin de la declaracion de la funcion contiene un error sintactico.";
+            short importancia = 1;
+
+
+            Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
+            listaValidaciones.Add(valRep);
         }
 
 
         private void AgregarValidacionFin()
         {
-            string mensajeError = "El fin de la declaración de un procedimiento debe especificarse de la siguiente manera: finproc;";
+            string mensajeError = "El fin de la declaración de una función debe especificarse de la siguiente manera: finfunc;";
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarFinProc, FilaDelError, ColumnaDelError);

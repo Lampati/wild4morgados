@@ -37,6 +37,17 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             List<Terminal> lineaEntera = new List<Terminal>(linea);
 
             List<Terminal> terminalesQueTerminanLinea = new List<Terminal>();
+            List<Terminal> terminalesQueIndicanComienzoOtraSentencia = new List<Terminal>();
+
+            //Estos son comunes a todos. Algunos tienen alguno mas.
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoSi());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoMientras());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoFuncion());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoLlamar());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoVar());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoConst());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoMostrar());
+            terminalesQueIndicanComienzoOtraSentencia.Add(Terminal.ElementoMostrarP());
             switch (tipo)
             {
                 case ContextoLinea.Asignacion:
@@ -49,18 +60,25 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                 case ContextoLinea.FinFuncion:
                 case ContextoLinea.FinSi:
                 case ContextoLinea.FinMientras:
-                    terminalesQueTerminanLinea.Add(Terminal.ElementoFinSentencia());
+                    terminalesQueTerminanLinea.Add(Terminal.ElementoFinSentencia());    
+                
+                    
                     break;
                 case ContextoLinea.Mientras:
                     terminalesQueTerminanLinea.Add(Terminal.ElementoHacer());
+
                     break;
                 case ContextoLinea.Si:
                     terminalesQueTerminanLinea.Add(Terminal.ElementoEntonces());
+
+                   
                     break;
                 case ContextoLinea.DeclaracionFuncion:
                     terminalesQueTerminanLinea.Add(Terminal.ElementoTipoBooleano());
                     terminalesQueTerminanLinea.Add(Terminal.ElementoTipoNumero());
                     terminalesQueTerminanLinea.Add(Terminal.ElementoTipoTexto());
+
+
                     break;
                 case ContextoLinea.DeclaracionProc:
                     terminalesQueTerminanLinea.Add(Terminal.ElementoParentesisClausura());
@@ -74,19 +92,31 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
             if (!errorLineaFueraContextoGlobal)
             {
+                
 
                 int i = 0;
-                while (i < cadenaEntradaFaltante.Count && !terminalesQueTerminanLinea.Contains(cadenaEntradaFaltante[i]))
+                while (i < cadenaEntradaFaltante.Count 
+                        && !terminalesQueTerminanLinea.Contains(cadenaEntradaFaltante[i])
+                        && !terminalesQueIndicanComienzoOtraSentencia.Contains(cadenaEntradaFaltante[i]))
                 {
+                    
                     lineaEntera.Add(cadenaEntradaFaltante[i]);
+                    
                     i++;
                 }
 
                 if (i < cadenaEntradaFaltante.Count)
                 {
-                    //salida normal, agarre la linea entera
+                    bool lineaContieneTerminalDeOtraSentencia = terminalesQueIndicanComienzoOtraSentencia.Contains(cadenaEntradaFaltante[i]);
 
-                    lineaEntera.Add(cadenaEntradaFaltante[i]);
+                    if (!lineaContieneTerminalDeOtraSentencia)
+                    {
+                        //salida normal, agarre la linea entera
+                        lineaEntera.Add(cadenaEntradaFaltante[i]);
+                    }
+
+
+
                     return Crear(lineaEntera, contextoGlobal, tipo, fila, col);
                 }
                 else

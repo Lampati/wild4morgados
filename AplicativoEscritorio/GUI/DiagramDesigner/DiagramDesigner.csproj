@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fenrir_trasnp.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AvalonWizard, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,6 +62,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -472,12 +476,20 @@
     <Resource Include="Resources\Images\Search24.png" />
     <Resource Include="Resources\Images\SearchRep24.png" />
     <Resource Include="Resources\Images\Flow48.png" />
+    <Content Include="fenrir.ico" />
+    <Resource Include="fenrir_trasnp.ico" />
     <Content Include="FolderBrowseLib\FolderPickerLib.dll" />
     <Resource Include="Resources\Images\accepted_48.png" />
     <Resource Include="Resources\Images\cancel_48.png" />
     <Resource Include="Resources\Images\detail32.png" />
     <Resource Include="Resources\Images\remove32.png" />
     <Resource Include="ModoTexto\Configuracion\Template.txt" />
+    <None Include="Resources\AppIcon.ico" />
+    <None Include="Resources\fenrir.ico" />
+    <Resource Include="Images\fenrir.jpg" />
+    <Resource Include="Images\fenrir_512x512x32.png" />
+    <Resource Include="Images\loboTribal.png" />
+    <Resource Include="Images\loboTribal1.png" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />

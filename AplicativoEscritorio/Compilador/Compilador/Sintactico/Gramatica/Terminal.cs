@@ -195,5 +195,77 @@ namespace CompiladorGargar.Sintactico.Gramatica
 
             return retorno;
         }
+
+        internal static Terminal ElementoSi()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.SiComienzo;
+            t.componente.Lexema = "si";
+            return t;
+        }
+
+        internal static Terminal ElementoMientras()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.MientrasComienzo;
+            t.componente.Lexema = "mientras";
+            return t;
+        }
+
+        internal static Terminal ElementoFuncion()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.FuncionComienzo;
+            t.componente.Lexema = "funcion";
+            return t;
+        }
+
+        internal static Terminal ElementoLlamar()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.Llamar;
+            t.componente.Lexema = "llamar";
+            return t;
+        }
+
+        internal static Terminal ElementoVar()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.Var;
+            t.componente.Lexema = "var";
+            return t;
+        }
+
+        internal static Terminal ElementoConst()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.Const;
+            t.componente.Lexema = "const";
+            return t;
+        }
+
+        internal static Terminal ElementoMostrar()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.Mostrar;
+            t.componente.Lexema = "mostrar";
+            return t;
+        }
+
+        internal static Terminal ElementoMostrarP()
+        {
+            Terminal t = new Terminal();
+            t.componente = new ComponenteLexico();
+            t.componente.Token = ComponenteLexico.TokenType.MostrarConPausa;
+            t.componente.Lexema = "mostrarp";
+            return t;
+        }
     }
 }
