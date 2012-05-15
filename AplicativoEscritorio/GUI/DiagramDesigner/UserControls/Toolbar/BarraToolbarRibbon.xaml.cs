@@ -810,7 +810,7 @@ namespace DiagramDesigner.UserControls.Toolbar
                     break;
 
                 case 2:
-                    window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.EjerciciosCorrectos);
+                    window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.ErroresSintacticos);
                     break;
 
             }

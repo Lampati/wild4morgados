@@ -44,10 +44,10 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridArchs" >
                         <GridView.Columns>
-                            <GridViewColumn Header="Nombre" Width="60" DisplayMemberBinding="{Binding Path=NombreArch}" />
-                            <GridViewColumn Header="CodigoCorrecta" Width="30" DisplayMemberBinding="{Binding Path=EsValidoCodigoGlobal}" />
-                            <GridViewColumn Header="LineaCorrecta" Width="30" DisplayMemberBinding="{Binding Path=EsValidaLinea}" />
-                            <GridViewColumn Header="Mensaje" Width="130" DisplayMemberBinding="{Binding Path=Mensaje}" />
+                            <GridViewColumn Header="Nombre" Width="130" DisplayMemberBinding="{Binding Path=NombreArch}" />
+                            <GridViewColumn Header="CodigoCorrecta" Width="70" DisplayMemberBinding="{Binding Path=EsValidoCodigoGlobal}" />
+                            <GridViewColumn Header="LineaCorrecta" Width="70" DisplayMemberBinding="{Binding Path=EsValidaLinea}" />
+                            <GridViewColumn Header="Mensaje" Width="230" DisplayMemberBinding="{Binding Path=Mensaje}" />
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>
@@ -87,8 +87,8 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridArchsCorrectos" >
                         <GridView.Columns>
-                            <GridViewColumn Header="Nombre" Width="60" DisplayMemberBinding="{Binding Path=NombreArch}" />
-                            <GridViewColumn Header="Mensaje" Width="130" DisplayMemberBinding="{Binding Path=Mensaje}" />
+                            <GridViewColumn Header="Nombre" Width="150" DisplayMemberBinding="{Binding Path=NombreArch}" />
+                            <GridViewColumn Header="Mensaje" Width="230" DisplayMemberBinding="{Binding Path=Mensaje}" />
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>

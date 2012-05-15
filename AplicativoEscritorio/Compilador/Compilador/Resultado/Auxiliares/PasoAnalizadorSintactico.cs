@@ -39,12 +39,13 @@ namespace CompiladorGargar.Resultado.Auxiliares
         public PasoAnalizadorSintactico(string mensajeAMostrar, GlobalesCompilador.TipoError tipoError, int filaAMostrar, int colAMostrar, bool pararCompilacion, Sintactico.ErroresManager.Errores.MensajeError mensajeError)
         {
             
-            this.mensajeAMostrar = mensajeAMostrar;
             this.TipoError = tipoError;
-            this.filaAMostrar = filaAMostrar;
-            this.colAMostrar = colAMostrar;
+            this.Fila = filaAMostrar;
+            this.Columna = colAMostrar;
             this.PararCompilacion = pararCompilacion;
             this.MensajeError = mensajeError;
+
+            this.Descripcion = mensajeAMostrar;
         }
 
         public string Descripcion { get; set; }
