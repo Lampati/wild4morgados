@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -18,7 +19,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionPorDefault()
         {
-            string mensajeError = "La llamada al procedimiento contiene un error sintactico.";
+            MensajeError mensajeError = new ErrorLlamadoProcValidacionPorDefault();
             short importancia = 1;
 
 

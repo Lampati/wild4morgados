@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -29,7 +30,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionPorDefault()
         {
-            string mensajeError = "La declaración de la constante contiene un error sintactico.";
+            MensajeError mensajeError = new ErrorDeclaracionConstanteGenerico();
             short importancia = 1;
 
 
@@ -40,7 +41,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoDefRepetido()
         {
-            string mensajeError = "El : esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoDefRepetido();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarDefTipoDatoRepetido, FilaDelError, ColumnaDelError);
@@ -50,7 +51,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoDefFaltante()
         {
-            string mensajeError = ": faltante en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoDefFaltante();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarDefTipoDatoFaltante, FilaDelError, ColumnaDelError);
@@ -62,7 +63,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionAsignarValorRepetido()
         {
-            string mensajeError = "El = esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new ErrorAsignarValorRepetido();
             short importancia = 9;
 
             List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -74,7 +75,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionAsignarValorFaltante()
         {
-            string mensajeError = "= faltante en la declaración";
+            MensajeError mensajeError = new ErrorAsignarValorFaltante();
             short importancia = 9;
 
             List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera,Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -86,7 +87,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoSinArreglo()
         {
-            string mensajeError = "Las constantes no pueden ser arreglos";
+            MensajeError mensajeError = new ErrorConstanteTipoDatoSinArreglo();
             short importancia = 7;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -99,7 +100,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoRepetido()
         {
-            string mensajeError = "El tipo de dato esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoRepetido();
             short importancia = 7;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -112,7 +113,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoFaltante()
         {
-            string mensajeError = "Tipo de dato faltante en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoFaltante();
             short importancia = 7;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -125,7 +126,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionValorRepetido()
         {
-            string mensajeError = "El valor de constante esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new ErrorConstanteValorRepetido();
             short importancia = 6;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -138,7 +139,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionValorFaltante()
         {
-            string mensajeError = "Valor de constante faltante en la declaración";
+            MensajeError mensajeError = new ErrorConstanteValorFaltante();
             short importancia = 6;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -211,12 +212,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                 i++;
             }
 
-            string mensajeError = "{0} no tiene lugar en una declaración de constante";
+            MensajeError mensajeError = new ErrorConstanteElementoQueSobraErroneo(string.Empty);
             Validacion valRep;
 
             if (i < listaLineaEntera.Count)
             {
-                mensajeError = string.Format(mensajeError, terminalErroneo.Componente.Lexema);
+                mensajeError = new ErrorConstanteElementoQueSobraErroneo(terminalErroneo.Componente.Lexema);
                 valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
             }
             else

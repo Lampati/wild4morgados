@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -20,7 +21,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionPorDefault()
         {
-            string mensajeError = "El fin de la declaracion de la funcion contiene un error sintactico.";
+            MensajeError mensajeError = new ErrorFinFuncValidacionPorDefault();
             short importancia = 1;
 
 
@@ -31,7 +32,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionFin()
         {
-            string mensajeError = "El fin de la declaración de una función debe especificarse de la siguiente manera: finfunc;";
+            MensajeError mensajeError = new ErrorFinFuncValidacionFin();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarFinProc, FilaDelError, ColumnaDelError);
