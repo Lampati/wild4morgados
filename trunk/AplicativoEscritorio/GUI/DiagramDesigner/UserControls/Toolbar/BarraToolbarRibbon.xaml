@@ -388,6 +388,13 @@
 
 
 
+            <ribbon:RibbonGroup Header="Tester Archivos" Name="ribbonGroupTestsAutomatizados" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Tests Correctos" Name="bttnTestsCorrectos" ContextMenu="{Binding null}" CommandParameter="1" Click="bttnTestBatch_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Tests Errores Sintacticos" Name="bttnErroresSintacticosCorrectos" ContextMenu="{Binding null}" CommandParameter="2" Click="bttnTestBatch_Click"></ribbon:RibbonButton>
+            </ribbon:RibbonGroup>
+
+
+
         </ribbon:RibbonTab>
 
         <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">

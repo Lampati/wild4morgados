@@ -58,7 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="TesterBatchWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,13 +66,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ArchivoConError.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="EntradaArchivoAComprobar.cs" />
+    <Compile Include="InfoArchivo.cs" />
+    <Compile Include="TesterBatchWindow.xaml.cs">
+      <DependentUpon>TesterBatchWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +106,10 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{7F9DD2FC-B1FB-4CCE-AE6A-9F72DD296BC2}</Project>
       <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Globales\Globales.csproj">
+      <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
+      <Name>Globales</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
