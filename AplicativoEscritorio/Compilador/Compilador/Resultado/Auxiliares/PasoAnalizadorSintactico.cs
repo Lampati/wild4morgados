@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Resultado.Auxiliares
 {
     public class PasoAnalizadorSintactico
     {
+        private string mensajeAMostrar;
+        private int filaAMostrar;
+        private int colAMostrar;
+        private Sintactico.ErroresManager.Errores.MensajeError mensajeError;
+
         public PasoAnalizadorSintactico()
         {
 
@@ -30,8 +36,21 @@ namespace CompiladorGargar.Resultado.Auxiliares
             this.PararCompilacion = false;
         }
 
+        public PasoAnalizadorSintactico(string mensajeAMostrar, GlobalesCompilador.TipoError tipoError, int filaAMostrar, int colAMostrar, bool pararCompilacion, Sintactico.ErroresManager.Errores.MensajeError mensajeError)
+        {
+            
+            this.mensajeAMostrar = mensajeAMostrar;
+            this.TipoError = tipoError;
+            this.filaAMostrar = filaAMostrar;
+            this.colAMostrar = colAMostrar;
+            this.PararCompilacion = pararCompilacion;
+            this.MensajeError = mensajeError;
+        }
+
         public string Descripcion { get; set; }
         public bool PararCompilacion { get; set; }
+
+        public MensajeError MensajeError { get; set; }
 
         public int Fila { get; set; }
         public int Columna { get; set; }

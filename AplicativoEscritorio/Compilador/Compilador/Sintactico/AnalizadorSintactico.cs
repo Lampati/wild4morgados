@@ -181,7 +181,7 @@ namespace CompiladorGargar.Sintactico
                         this.habilitarSemantico = false;
                         pararCompilacion = true; //siempre paro la compilacion al primer error
 
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion)); 
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion,excepVal.MensjError)); 
                     }
                 }
                 catch (ErroresManager.AnalizadorErroresException exAnaliz)

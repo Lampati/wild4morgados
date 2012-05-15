@@ -20,6 +20,7 @@ using Globales.Enums;
 using Microsoft.Windows.Controls.Ribbon;
 using AplicativoEscritorio.DataAccess;
 using DataAccess;
+using System.Diagnostics;
 
 namespace DiagramDesigner.UserControls.Toolbar
 {
@@ -222,6 +223,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             Sincronizacion.Eventos.Handler.FinalizadoEvent += new Sincronizacion.Eventos.Handler.FinalizadoHandler(Handler_FinalizadoEvent);
             Sincronizacion.Eventos.Handler.InvocandoMetodoEvent += new Sincronizacion.Eventos.Handler.InvocandoMetodoHandler(Handler_InvocandoMetodoEvent);
             Sincronizacion.Eventos.Handler.ErrorConexionEvent += new Sincronizacion.Eventos.Handler.ErrorConexionHandler(Handler_ErrorConexionEvent);
+
+            if (Debugger.IsAttached)
+            {
+                ribbonGroupTestsAutomatizados.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                ribbonGroupTestsAutomatizados.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)
@@ -783,6 +793,28 @@ namespace DiagramDesigner.UserControls.Toolbar
         private void bttnConsultarTestPrueba_Click(object sender, RoutedEventArgs e)
         {
             TestPruebaEventFire(this, new TestPruebaEventArgs(TestPruebaEventArgs.TipoAccion.Consultar));
+        }
+
+        private void bttnTestBatch_Click(object sender, RoutedEventArgs e)
+        {
+            TesterCompilador.TesterBatchWindow window = null;
+
+            RibbonButton botonPresionado = (RibbonButton)e.Source;             
+            switch (Convert.ToInt32(botonPresionado.CommandParameter))
+            {
+                case 1:
+                    window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.EjerciciosCorrectos);
+                    break;
+
+                case 2:
+                    window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.EjerciciosCorrectos);
+                    break;
+
+            }
+            if (window != null)
+            {
+                window.Show();
+            }
         }
     }
 }

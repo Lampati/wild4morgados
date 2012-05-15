@@ -431,6 +431,10 @@
       <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
       <Name>Sincronizacion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\TesterCompilador\TesterCompilador.csproj">
+      <Project>{449AD090-26E6-496B-B93C-7309E2A29FA0}</Project>
+      <Name>TesterCompilador</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utilidades\Utilidades.csproj">
       <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
       <Name>Utilidades</Name>

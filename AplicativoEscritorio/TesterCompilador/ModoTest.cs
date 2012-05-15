@@ -5,7 +5,9 @@ using System.Text;
 
 namespace TesterCompilador
 {
-    class ArchivoConError
-    {
-    }
+    public enum ModoTest
+	{
+	    ErroresSintacticos,
+        EjerciciosCorrectos
+	} 
 }
