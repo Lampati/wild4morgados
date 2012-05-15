@@ -104,7 +104,7 @@ namespace TesterCompilador
                 }
                 else
                 {
-                    InfoArchivo infoArch = ObtenerMensajePrevistoDeArchivo(file.Name);
+                    InfoArchivo infoArch = ObtenerMensajePrevistoDeArchivo(System.IO.Path.GetFileNameWithoutExtension(file.Name));
 
                     if (infoArch.Valido)
                     {                      
