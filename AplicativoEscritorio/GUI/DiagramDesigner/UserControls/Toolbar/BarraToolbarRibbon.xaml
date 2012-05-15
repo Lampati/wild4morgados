@@ -387,14 +387,6 @@
             </ribbon:RibbonGroup>
 
 
-
-            <ribbon:RibbonGroup Header="Tester Archivos" Name="ribbonGroupTestsAutomatizados" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Tests Correctos" Name="bttnTestsCorrectos" ContextMenu="{Binding null}" CommandParameter="1" Click="bttnTestBatch_Click"></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Tests Errores Sintacticos" Name="bttnErroresSintacticosCorrectos" ContextMenu="{Binding null}" CommandParameter="2" Click="bttnTestBatch_Click"></ribbon:RibbonButton>
-            </ribbon:RibbonGroup>
-
-
-
         </ribbon:RibbonTab>
 
         <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
@@ -411,7 +403,7 @@
 
         </ribbon:RibbonTab>
 
-        <ribbon:RibbonTab Name="TabConfiguración" Header="Configuración" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+        <ribbon:RibbonTab Name="TabConfiguracion" Header="Configuración" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
             <ribbon:RibbonGroup Header="Directorios Ejercicios" Name="ribbonGroupDirEjercicios" ContextMenu="{Binding null}">
                 
                 <StackPanel Orientation="Horizontal">
@@ -437,6 +429,14 @@
                     <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Default Abrir" Name="textBoxDirAbrirDefault" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
                     <ribbon:RibbonButton Name="bttnDirAbrirDefault" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirAbrirDefault_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
                 </StackPanel>
+            </ribbon:RibbonGroup>
+        </ribbon:RibbonTab>
+
+        <ribbon:RibbonTab Name="TabTestsAutomatizados" Header="TestsAutomatizados" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+
+            <ribbon:RibbonGroup Header="Tester Archivos" Name="ribbonGroupTestsAutomatizados" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Tests Correctos" Name="bttnTestsCorrectos" ContextMenu="{Binding null}" CommandParameter="1" Click="bttnTestBatch_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Tests Errores Sintacticos" Name="bttnErroresSintacticosCorrectos" ContextMenu="{Binding null}" CommandParameter="2" Click="bttnTestBatch_Click"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>
 
