@@ -27,6 +27,9 @@
                                             <Style TargetType="Border">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=EsValido}" Value="True">
+                                                        <Setter Property="Background" Value="LightGreen"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=EsValido}" Value="False">
                                                         <Setter Property="Background" Value="Red"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -67,6 +70,9 @@
                                             <Style TargetType="Border">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=EsValido}" Value="True">
+                                                        <Setter Property="Background" Value="LightGreen"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=EsValido}" Value="False">
                                                         <Setter Property="Background" Value="Red"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>

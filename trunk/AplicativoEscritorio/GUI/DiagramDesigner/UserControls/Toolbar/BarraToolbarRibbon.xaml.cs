@@ -224,14 +224,17 @@ namespace DiagramDesigner.UserControls.Toolbar
             Sincronizacion.Eventos.Handler.InvocandoMetodoEvent += new Sincronizacion.Eventos.Handler.InvocandoMetodoHandler(Handler_InvocandoMetodoEvent);
             Sincronizacion.Eventos.Handler.ErrorConexionEvent += new Sincronizacion.Eventos.Handler.ErrorConexionHandler(Handler_ErrorConexionEvent);
 
-            if (Debugger.IsAttached)
-            {
-                ribbonGroupTestsAutomatizados.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                ribbonGroupTestsAutomatizados.Visibility = System.Windows.Visibility.Collapsed;
-            }
+            #if (DEBUG)
+            
+            
+                TabTestsAutomatizados.Visibility = System.Windows.Visibility.Visible;
+            
+            
+            #else
+            
+                TabTestsAutomatizados.Visibility = System.Windows.Visibility.Collapsed;
+            #endif
+
         }
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)

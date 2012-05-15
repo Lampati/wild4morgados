@@ -41,9 +41,13 @@ namespace TesterCompilador
             {
                 case ModoTest.ErroresSintacticos:
                     lblTipoTest.Content = "Verificador Errores Sintacticos Correctos";
+                    lstTestsCorrectos.Visibility = System.Windows.Visibility.Collapsed;
+                    lstTestsSintacticos.Visibility = System.Windows.Visibility.Visible;
                     break;
                 case ModoTest.EjerciciosCorrectos:
                     lblTipoTest.Content = "Verificador Ejercicios Correctos";
+                    lstTestsCorrectos.Visibility = System.Windows.Visibility.Visible;
+                    lstTestsSintacticos.Visibility = System.Windows.Visibility.Collapsed;
                     break;
                 default:
                     break;
@@ -81,20 +85,29 @@ namespace TesterCompilador
 
             foreach (var file in listFiles)
             {
-                InfoArchivo infoArch = ObtenerMensajePrevistoDeArchivo(file.Name);
 
-                if (infoArch.Valido)
+                Ejercicio ej = new Ejercicio();
+                ej.Abrir(file);
+
+                ConfigurarCompilador();
+                string programa = ej.Gargar;
+
+                ResultadoCompilacion res = this.compilador.Compilar(programa);
+
+                if (modoTest == ModoTest.EjerciciosCorrectos)
                 {
-                    Ejercicio ej = new Ejercicio();
-                    ej.Abrir(file);
+                    EntradaArchivoAComprobar entrada = new EntradaArchivoAComprobar();
+                    entrada.NombreArch = file.Name;
+                    entrada.CompilacionCorrecta = res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta;
 
-                    ConfigurarCompilador();
+                    listaRetorno.Add(entrada);
+                }
+                else
+                {
+                    InfoArchivo infoArch = ObtenerMensajePrevistoDeArchivo(file.Name);
 
-                    string programa = ej.Gargar;
-                    ResultadoCompilacion res = this.compilador.Compilar(programa);
-
-                    if (modoTest == ModoTest.ErroresSintacticos)
-                    {
+                    if (infoArch.Valido)
+                    {                      
                         if (res.ListaErrores.Count == 1)
                         {
                             PasoAnalizadorSintactico error = res.ListaErrores[0];
@@ -115,13 +128,6 @@ namespace TesterCompilador
                                 listaRetorno.Add(entrada);
                             }
                         }
-                    }
-                    else
-                    {
-                        EntradaArchivoAComprobar entrada = new EntradaArchivoAComprobar();
-                        entrada.CompilacionCorrecta = res.ResultadoCompPascal.CompilacionPascalCorrecta;
-
-                        listaRetorno.Add(entrada);
                     }
                 }
             }
