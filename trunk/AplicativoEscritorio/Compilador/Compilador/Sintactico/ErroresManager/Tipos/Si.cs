@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -19,7 +20,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionPorDefault()
         {
-            string mensajeError = "La declaracion del bloque si contiene un error sintactico.";
+            MensajeError mensajeError = new ErrorSiValidacionPorDefault();
             short importancia = 1;
 
 

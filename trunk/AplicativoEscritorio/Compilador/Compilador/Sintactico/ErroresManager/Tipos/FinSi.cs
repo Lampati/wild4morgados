@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -19,7 +20,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionFin()
         {
-            string mensajeError = "El fin de un bloque si debe especificarse de la siguiente manera: finsi;";
+            MensajeError mensajeError = new ErrorFinSiValidacionFin();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarFinSi, FilaDelError, ColumnaDelError);

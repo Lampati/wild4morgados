@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -27,7 +28,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionPorDefault()
         {
-            string mensajeError = "La declaración de la variable contiene un error sintactico.";
+            MensajeError mensajeError = new ErrorDeclaracionVariableValidacionPorDefault();
             short importancia = 1;
 
 
@@ -38,7 +39,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoDefRepetido()
         {
-            string mensajeError = "El : esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoDefRepetido();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarDefTipoDatoRepetido, FilaDelError, ColumnaDelError);
@@ -48,7 +49,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoDefFaltante()
         {
-            string mensajeError = ": faltante en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoDefFaltante();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ValidarDefTipoDatoFaltante, FilaDelError, ColumnaDelError);
@@ -58,7 +59,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoRepetido()
         {
-            string mensajeError = "El tipo de dato esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoRepetido();
             short importancia = 9;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -71,7 +72,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTipoDatoFaltante()
         {
-            string mensajeError = "Tipo de dato faltante en la declaración";
+            MensajeError mensajeError = new ErrorTipoDatoFaltante();
             short importancia = 9;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.TipoDato);
@@ -84,7 +85,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionParteIzquierdaCorrecta()
         {
-            string mensajeError = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
+            MensajeError mensajeError = new ErrorDeclaracionVariableParteIzquierdaValida();
             short importancia = 8;
 
             List<Terminal> aux = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Var);
@@ -97,7 +98,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionCantArregloNoRepetido()
         {
-            string mensajeError = "El arreglo esta especificado mas de una vez en la declaración";
+            MensajeError mensajeError = new  ErrorDeclaracionVariableCantArregloNoRepetido();
             short importancia = 7;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ArregloRepetido, FilaDelError, ColumnaDelError);
@@ -107,7 +108,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionCorchetesBalanceadosParteIzq()
         {
-            string mensajeError = "Los corchetes no estan balanceados en la declaracion del arreglo";
+            MensajeError mensajeError = new ErrorDeclaracionVariableCorchetesBalanceadosParteIzq();
             short importancia = 6;
 
             int cantArreglos = listaLineaEntera.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo).Count;
@@ -185,12 +186,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
                     i++;
                 }
 
-                string mensajeError = "Error sintactico: {0} es incorrecto en la declaración de un arreglo. La forma correcta es arreglo [MAX] de TIPO";
+                MensajeError mensajeError = new ErrorDeclaracionVariableElementoQueSobraErroneo(string.Empty);
                 Validacion valRep;
 
                 if (i < listaLineaEntera.Count)
                 {
-                    mensajeError = string.Format(mensajeError, terminalErroneo.Componente.Lexema);
+                    mensajeError = new ErrorDeclaracionVariableElementoQueSobraErroneo(terminalErroneo.Componente.Lexema);
                     valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.ForzarFalso, FilaDelError, ColumnaDelError);
                 }
                 else

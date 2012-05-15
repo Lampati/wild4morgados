@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
@@ -30,7 +31,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionAsignacionRepetido()
         {
-            string mensajeError = "El := esta especificado mas de una vez en la asignacion";
+            MensajeError mensajeError = new ErrorAsignacionRepetido();
             short importancia = 10;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.AsignacionRepetido, FilaDelError, ColumnaDelError);
@@ -43,7 +44,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionAsignacionFaltante()
         {
-            string mensajeError = ":= faltante en la asignacion";
+            MensajeError mensajeError = new ErrorAsignacionFaltante();
             short importancia = 9;
 
             Validacion valRep = new Validacion(listaLineaEntera, mensajeError, importancia, ValidacionesFactory.AsignacionFaltante, FilaDelError, ColumnaDelError);
@@ -55,7 +56,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionTerminaCorrectamente()
         {
-            string mensajeError = "La asignacion termina incorrectamente";
+            MensajeError mensajeError = new ErrorAsignacionTerminaCorrectamente();
             short importancia = 8;
 
             List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
@@ -67,7 +68,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionParteIzqCorrecta()
         {
-            string mensajeError = "Error sintactico en la parte izq";
+            MensajeError mensajeError = new ErrorAsignacionParteIzqCorrecta();
             short importancia = 7;
 
             List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
@@ -79,7 +80,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionParentesisBalanceadosParteIzq()
         {
-            string mensajeError = "Los parentesis no estan balanceados en la parte izquierda de la asignacion";
+            MensajeError mensajeError = new ErrorAsignacionParentesisBalanceadosParteIzq();
             short importancia = 6;
 
             List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
@@ -92,7 +93,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionParentesisBalanceadosParteDer()
         {
-            string mensajeError = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
+            MensajeError mensajeError = new ErrorAsignacionParentesisBalanceadosParteDer();
             short importancia = 6;
 
             List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
@@ -103,7 +104,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionCorchetesBalanceadosParteIzq()
         {
-            string mensajeError = "Los corchetes no estan balanceados en la parte izquierda de la asignacion";
+            MensajeError mensajeError = new ErrorAsignacionCorchetesBalanceadosParteIzq();
             short importancia = 5;
 
             List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
@@ -114,7 +115,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionCorchetesBalanceadosParteDer()
         {
-            string mensajeError = "Los corchetes no estan balanceados en la parte derecha de la asignacion";
+            MensajeError mensajeError = new ErrorAsignacionCorchetesBalanceadosParteDer();
             short importancia = 5;
 
             List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
@@ -125,7 +126,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionElementosConValorNoContiguosParteIzq()
         {
-            string mensajeError = "La asignacion contiene una expresión mal formada en su parte izquierda.";
+            MensajeError mensajeError = new ErrorAsignacionElementosConValorNoContiguosParteIzq();
             short importancia = 4;
 
             List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
@@ -136,7 +137,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionElementosConValorNoContiguosParteDer()
         {
-            string mensajeError = "La asignacion contiene una expresión mal formada en su parte derecha.";
+            MensajeError mensajeError = new ErrorAsignacionElementosConValorNoContiguosParteDer();
             short importancia = 4;
 
             List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
@@ -148,7 +149,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
         private void AgregarValidacionPorDefault()
         {
-            string mensajeError = "La asignacion contiene un error sintactico.";
+            MensajeError mensajeError = new ErrorAsignacionValidacionPorDefault();
             short importancia = 1;
 
 

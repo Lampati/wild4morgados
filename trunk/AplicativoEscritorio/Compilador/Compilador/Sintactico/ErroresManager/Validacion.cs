@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager
 {
@@ -12,7 +13,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         private List<Terminal> lista;
         private ValidacionDelegate metodoValidacion;
-        private string mensajeError;
+        private MensajeError mensajeError;
         private short importancia;
 
         private int filaDelError;
@@ -46,7 +47,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         /// <param name="mens">Mensaje de Error a mostrar si la validacion no se cumple</param>
         /// <param name="importancia">Importancia de la validacion</param>
         /// <param name="metodoVal">Metodo que contiene el codigo a ejecutar de la validacion</param>
-        internal Validacion(List<Terminal> terminalesAValidar, string mens, short p, ValidacionDelegate metodoVal, int f, int c)
+        internal Validacion(List<Terminal> terminalesAValidar, MensajeError mens, short p, ValidacionDelegate metodoVal, int f, int c)
         {
             lista = terminalesAValidar;
             mensajeError = mens;
@@ -64,7 +65,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal void ArrojarExcepcion()
         {
-            throw new ValidacionException(mensajeError) { Fila = filaDelError, Columna = columnaDelError };
+            throw new ValidacionException(mensajeError, mensajeError.Mensaje) { Fila = filaDelError, Columna = columnaDelError };
         }
     }
 }

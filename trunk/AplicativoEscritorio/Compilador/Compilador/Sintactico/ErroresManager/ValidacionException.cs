@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Sintactico.ErroresManager
 {
@@ -9,10 +10,11 @@ namespace CompiladorGargar.Sintactico.ErroresManager
     {
         public int Fila { get; set; }
         public int Columna { get; set; }
+        public MensajeError MensjError { get; set; }
 
-        public ValidacionException(string m) : base(m)
+        public ValidacionException(MensajeError mensaje, string m) : base(m)
         {
-          
+            MensjError = mensaje;
         }
     }
 }
