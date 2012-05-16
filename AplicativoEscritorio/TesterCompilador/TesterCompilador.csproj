@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ErroresMensajeDisplayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TesterBatchWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +71,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EntradaArchivoAComprobar.cs" />
+    <Compile Include="ErroresMensajeDisplayerWindow.xaml.cs">
+      <DependentUpon>ErroresMensajeDisplayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InfoArchivo.cs" />
     <Compile Include="TesterBatchWindow.xaml.cs">
       <DependentUpon>TesterBatchWindow.xaml</DependentUpon>

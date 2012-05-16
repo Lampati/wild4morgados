@@ -819,5 +819,12 @@ namespace DiagramDesigner.UserControls.Toolbar
                 window.Show();
             }
         }
+
+        private void bttnMostrarMensajesError_Click(object sender, RoutedEventArgs e)
+        {
+            TesterCompilador.ErroresMensajeDisplayerWindow window = new TesterCompilador.ErroresMensajeDisplayerWindow();
+
+            window.Show();
+        }
     }
 }
