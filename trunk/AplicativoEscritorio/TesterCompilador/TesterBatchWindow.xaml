@@ -3,18 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Tester Batch" Height="550" Width="525">
     <Grid>
-        <StackPanel>
-            <Label Name="lblTipoTest"></Label>
-            <Grid>
-                <TextBox IsEnabled="False" Name="textBoxDir" ContextMenu="{Binding null}" Margin="29,0,249,0"></TextBox>
-                <Button Name="bttnDirTemporales" Click="bttnDirTemporales_Click" ContextMenu="{Binding null}" Margin="286,0,178,0">Ver</Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-                <Button Name="bttnCompilarTodo" Click="bttnCompilarTodo_Click" ContextMenu="{Binding null}" Margin="415,0,6,0" IsEnabled="False">Compilar</Button>
-            </Grid>
-            <ScrollViewer>
-                <StackPanel>
-                    <ListView  HorizontalAlignment="Left" Name="lstTestsSintacticos"   
-                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Height="500"                      
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Name="lblTipoTest"></Label>
+            <StackPanel Orientation="Horizontal">
+                <TextBox IsEnabled="False" Name="textBoxDir" ContextMenu="{Binding null}" Width="230"></TextBox>
+                <Button Name="bttnDirTemporales" Click="bttnDirTemporales_Click" ContextMenu="{Binding null}" >Ver</Button>
+
+                <Button Name="bttnCompilarTodo" Click="bttnCompilarTodo_Click" ContextMenu="{Binding null}"
+                        HorizontalAlignment="Right" IsEnabled="False" Margin="150,0,0,0">
+                    Chequear
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <ListView  HorizontalAlignment="Left" Name="lstTestsSintacticos"   Grid.Row="1" 
+                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"  
+                        ScrollViewer.CanContentScroll="True"
+                        Height="Auto" BorderThickness="1"
+                        Width="Auto"                    
                         >
                         <ListView.Resources>
                             <Style  TargetType="ListViewItem">
@@ -56,8 +71,12 @@
                     </ListView>
 
 
-                    <ListView  HorizontalAlignment="Left" Name="lstTestsCorrectos"   
-                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"                        
+        <ListView  HorizontalAlignment="Left" Name="lstTestsCorrectos" Grid.Row="1"   
+                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"  
+                        ScrollViewer.CanContentScroll="True"
+                        Height="Auto" BorderThickness="1"
+                        Width="Auto"                       
                         >
                         <ListView.Resources>
                             <Style  TargetType="ListViewItem">
@@ -95,9 +114,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
+           
         
     </Grid>
 </Window>
