@@ -13,6 +13,13 @@
                 Closing="RibbonWindow_Closing" SizeChanged="RibbonWindow_SizeChanged" 
                 Icon="/DiagramDesigner;component/Images/loboTribal1.png">
 
+    <Window.Resources>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="RenderOptions.BitmapScalingMode"
+               Value="HighQuality" />
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="160"/>
