@@ -8,20 +8,12 @@
     
     ViewBag.Title = "Cursos";
 
-<<<<<<< .mine
+
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina);
-=======
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: true );
-    
-    
-    grid.Bind(Model.Cursos, autoSortAndPage: false, rowCount: Model.Cantidad);
->>>>>>> .r335
 
-<<<<<<< .mine
     grid.Bind(Model.Cursos, autoSortAndPage: false, rowCount: Model.Cantidad);
 
-=======
->>>>>>> .r335
+
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 }
 
