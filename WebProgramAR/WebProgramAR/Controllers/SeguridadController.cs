@@ -128,7 +128,7 @@ namespace WebProgramAR.Controllers
             if (Request.IsAjaxRequest())
             {
                 ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
-                ArmarViewBags();
+                ArmarViewBags(id);
 
                 ReglaSeguridadViewModel modelo = new ReglaSeguridadViewModel();
                 modelo.ReglaId = c.ReglaId;
@@ -168,12 +168,6 @@ namespace WebProgramAR.Controllers
             }
             
         }
-
-
-      
-
-     
-
         //
         // GET: /Seguridad/Delete/5
         [Authorize(Roles = "administrador")] 
@@ -257,13 +251,20 @@ namespace WebProgramAR.Controllers
         }
 
 
-        private void ArmarViewBags()
+        private void ArmarViewBags(int id=-1)
         {
             Usuario usuarioLogueado = GetUsuarioLogueado();
-
+            if (id != -1)
+            {
+                ViewBag.Columnas = SeguridadNegocio.GetColumnasByTabla(SeguridadNegocio.GetReglaSeguridadById(id).TablaId);
+                ViewBag.Comparadores = SeguridadNegocio.GetComparadorByColumna(SeguridadNegocio.GetReglaSeguridadById(id).ColumnaId);
+            }
+            else
+            {
+                ViewBag.Columnas = new List<Columna>();
+                ViewBag.Comparadores = new List<Comparador>();
+            }
             ViewBag.ListaTablas = SeguridadNegocio.GetTablas();
-            ViewBag.Columnas = new List<Columna>();
-            ViewBag.Comparadores = new List<Comparador>();
             List<TipoUsuario> listaTipo = new List<TipoUsuario>();
             listaTipo.Add(new TipoUsuario() { TipoUsuarioId = -1, Descripcion = "Todos" });
             listaTipo.AddRange(TipoUsuarioNegocio.GetTiposUsuario());

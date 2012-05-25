@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Usuarios";
 
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina);
 
     grid.Bind(Model.Usuarios, autoSortAndPage: false, rowCount: Model.Cantidad);
 
@@ -105,10 +105,10 @@
         headerStyle: "gridHeader",
         footerStyle: "gridPager",
         mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
+            firstText: "Prim",
+            previousText: "<< Ant",
+            nextText: "Prox >>",
+            lastText: " Ult",
         columns: new[] {
         grid.Column("Nombre", header: "Nombre"),
         grid.Column("Apellido", header: "Apellido"),
@@ -154,10 +154,10 @@ else
         headerStyle: "gridHeader",
         footerStyle: "gridPager",
         mode: WebGridPagerModes.All,
-            firstText: "<<",
-            previousText: "<",
-        nextText: ">",
-            lastText: " >>",
+            firstText: "Prim",
+            previousText: "<< Ant",
+            nextText: "Prox >>",
+            lastText: " Ult",
         columns: new[] {
         grid.Column("Nombre", header: "Nombre"),
         grid.Column("Apellido", header: "Apellido"),

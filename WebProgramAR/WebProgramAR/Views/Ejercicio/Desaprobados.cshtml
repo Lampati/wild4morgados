@@ -9,7 +9,7 @@
 
     ViewBag.Title = "Ejercicios pendientes de aprobacion";
 
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina);
 
     grid.Bind(Model.Ejercicios, autoSortAndPage: false, rowCount: Model.Cantidad);
 
@@ -39,11 +39,11 @@
         });
 
         $('.botonEliminar').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 700, 680);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 700, 540);
         });
 
         $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 680);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 700, 480);
         });
         var sortcol = '@grid.SortColumn';
 
@@ -97,10 +97,10 @@
             headerStyle: "gridHeader",
             footerStyle: "gridPager",
             mode: WebGridPagerModes.All,
-                firstText: "<<",
-                previousText: "<",
-            nextText: ">",
-                lastText: " >>",
+                 firstText: "Prim",
+                 previousText: "<< Ant",
+                 nextText: "Prox >>",
+                 lastText: " Ult",
             columns: new[] {
             grid.Column("EjercicioId", header: "Identificador"),
             grid.Column("Enunciado", header: "Enunciado"),
@@ -109,7 +109,7 @@
             grid.Column("", 
                   header: "",
                   format: @<text>
-                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles"/>
+                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
                           </text>
             ),
                 grid.Column("", 
@@ -133,10 +133,10 @@ else
             headerStyle: "gridHeader",
             footerStyle: "gridPager",
             mode: WebGridPagerModes.All,
-                firstText: "<<",
-                previousText: "<",
-            nextText: ">",
-                lastText: " >>",
+                 firstText: "Prim",
+                 previousText: "<< Ant",
+                 nextText: "Prox >>",
+                 lastText: " Ult",
             columns: new[] {
             grid.Column("EjercicioId", header: "Identificador"),
             grid.Column("Enunciado", header: "Enunciado"),
@@ -145,7 +145,7 @@ else
             grid.Column("", 
                   header: "",
                   format: @<text>
-                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles"/>
+                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
                           </text>
             )
         })

@@ -8,11 +8,20 @@
     
     ViewBag.Title = "Cursos";
 
+<<<<<<< .mine
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina);
+=======
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: true );
     
     
     grid.Bind(Model.Cursos, autoSortAndPage: false, rowCount: Model.Cantidad);
+>>>>>>> .r335
 
+<<<<<<< .mine
+    grid.Bind(Model.Cursos, autoSortAndPage: false, rowCount: Model.Cantidad);
+
+=======
+>>>>>>> .r335
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 }
 
@@ -115,10 +124,10 @@
     headerStyle: "gridHeader",
     footerStyle: "gridPager",    
     mode: WebGridPagerModes.All,
-        firstText: "Primero",
-        previousText: "Anterior",
-        nextText: "Proximo",
-        lastText: " Ultimo",
+           firstText: "Prim",
+            previousText: "<< Ant",
+            nextText: "Prox >>",
+            lastText: " Ult",
     columns: new[] {
     grid.Column("Nombre", header: "Nombre"),
    
@@ -161,10 +170,10 @@ else
     headerStyle: "gridHeader",
     footerStyle: "gridPager",
     mode: WebGridPagerModes.All,
-        firstText: "Primero",
-        previousText: "Anterior",
-        nextText: "Proximo",
-        lastText: " Ultimo",
+        firstText: "Prim",
+        previousText: "<< Ant",
+        nextText: "Prox >>",
+        lastText: " Ult",
     columns: new[] {
     grid.Column("Nombre", header: "Nombre"),
    

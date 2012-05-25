@@ -4,8 +4,8 @@
     //Layout = null;
     ViewBag.Title = "Asociaciones";
 
-    WebGrid gridCurso = new WebGrid(rowsPerPage: int.MaxValue, canPage: false, canSort: false);
-    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[1].CantidadPorPagina, canPage: false);
+    WebGrid gridCurso = new WebGrid(rowsPerPage: int.MaxValue);
+    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[1].CantidadPorPagina);
 
     gridCurso.Bind(Model.ListEjerciciosGrillaModel[0].Ejercicios, autoSortAndPage: false, rowCount: Model.ListEjerciciosGrillaModel[0].Cantidad);
 
