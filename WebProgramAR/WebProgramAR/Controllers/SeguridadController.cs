@@ -91,8 +91,15 @@ namespace WebProgramAR.Controllers
         [Authorize(Roles = "administrador")]
         public ActionResult Create()
         {
-            ArmarViewBags();
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                ArmarViewBags();
+                return View();
+            }
+            else
+            {
+                throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
+            }
         } 
 
         //
@@ -100,11 +107,11 @@ namespace WebProgramAR.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrador")]
-        public ActionResult Create(ReglasSeguridad regla)
+        public ActionResult Create(ReglaSeguridadViewModel regla)
         {
             if (ModelState.IsValid)
             {
-                SeguridadNegocio.Alta(regla);
+                //SeguridadNegocio.Alta(regla);
                 return Content(Boolean.TrueString);
                 
             }else
@@ -122,7 +129,20 @@ namespace WebProgramAR.Controllers
             {
                 ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
                 ArmarViewBags();
-                return View("Edit", c);
+
+                ReglaSeguridadViewModel modelo = new ReglaSeguridadViewModel();
+                modelo.ReglaId = c.ReglaId;
+                modelo.Activa = c.Activa;
+                modelo.ColumnaId = c.ColumnaId;
+                modelo.ComparadorId = c.ComparadorId;
+                modelo.TablaId = c.TablaId;
+                modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : int.MinValue;
+                modelo.UsuarioId = c.UsuarioId.HasValue ? c.UsuarioId.Value : int.MinValue;
+                modelo.Valor = c.Valor;
+
+                modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();
+
+                return View("Edit", modelo);
             }
             else
             {
@@ -191,10 +211,10 @@ namespace WebProgramAR.Controllers
         {
             List<Columna> listaCols = Negocio.SeguridadNegocio.GetColumnasByTabla(tablaId).ToList();
 
-            List<GenericJsonModel> listaRetorno = new List<GenericJsonModel>();
+            List<ColumnaJsonModel> listaRetorno = new List<ColumnaJsonModel>();
             foreach (Columna item in listaCols)
             {
-                listaRetorno.Add(new GenericJsonModel() { Id = item.ColumnaId.ToString(), Value = item.Nombre });
+                listaRetorno.Add(new ColumnaJsonModel() { Id = item.ColumnaId.ToString(), Value = item.Nombre, TipoId = item.TipoId.ToString(), TipoDesc = item.Tipo.Nombre.ToUpper() });
             }
 
             return Json(listaRetorno, JsonRequestBehavior.AllowGet);

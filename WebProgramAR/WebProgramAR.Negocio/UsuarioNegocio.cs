@@ -31,6 +31,9 @@ namespace WebProgramAR.Negocio
         {
             Usuario usuarioAEliminar = GetUsuarioById(u.UsuarioId);
             CursoNegocio.EliminarCursosDeUsuario(usuarioAEliminar.UsuarioId);
+
+
+
             UsuarioNegocio.QuitarRolesUsuario(usuarioAEliminar);
 
             UsuarioDA.Eliminar(u.UsuarioId);

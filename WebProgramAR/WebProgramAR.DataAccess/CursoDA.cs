@@ -92,10 +92,12 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Curso Curso = db.Cursoes.Single(u => u.CursoId == id);
+                Curso curso = db.Cursoes.Include("Ejercicios").Single(u => u.CursoId == id);
                 //Curso.Status = false; //baja lógica
 
-                db.Cursoes.DeleteObject(Curso);
+                
+
+                db.Cursoes.DeleteObject(curso);
                 db.SaveChanges();
             }
         }

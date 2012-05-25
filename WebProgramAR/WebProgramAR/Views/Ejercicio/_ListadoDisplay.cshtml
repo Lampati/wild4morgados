@@ -1,0 +1,102 @@
+﻿@model List<WebProgramAR.Entidades.Ejercicio>
+@{
+    
+    string nombreDivCurso = "curso";
+    int i = 1;
+}
+
+
+@if (Model != null && Model.Count > 0)
+{
+
+    <div onclick="colapseClick('ejerciciosDiv')" style="font-size: 16px;">
+    Ejercicios
+    </div> 
+
+    <div id="ejerciciosDiv" style="margin-left:8px;">                      
+        @foreach (var item in Model)
+        {
+            <div style="margin-bottom:5px;background-color: #cae1f3; width:100%">
+                <div onclick="colapseClick('@string.Format("{0}{1}", nombreDivCurso, i)')" style="font-size: 16px;">
+                    @item.Nombre
+                </div> 
+    
+                <div id="@string.Format("{0}{1}", nombreDivCurso, i)" style="margin-left:8px;">  
+                
+                    <div onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "autor")')" style="display:block">
+                        Autor
+                    </div>   
+            
+                    <div id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "autor")"  style="display:block">  
+                        @item.Usuario.UsuarioNombre
+                    </div>    
+
+                    <div onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "nivel")')" style="display:block">
+                        Nivel Ejercicio
+                    </div>   
+            
+                    <div id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "nivel")"  style="display:block">  
+                        @item.NivelEjercicio
+                    </div>    
+                    
+            
+                    <div onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")')" style="display:block">
+                        Enunciado
+                    </div>   
+            
+                    <div id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")"  style="display:block">  
+                        @item.Enunciado
+                    </div>          
+
+                    <div onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")')" style="display:block">
+                        Solución
+                    </div>   
+            
+                    <div id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")" style="display:block">  
+                        @item.SolucionTexto
+                    </div>
+
+                    <div onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")')"  style="display:block">
+                        Solución Código
+                    </div>   
+            
+                    <div id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")"  style="display:block">  
+                        @item.SolucionGarGar
+                    </div>
+
+                
+
+                </div>
+            </div>
+        
+            i++;
+
+        }
+    </div>
+
+}
+else
+{
+    <div class="display-field-delete">Este curso no tiene ejercicios asociados.</div>
+}
+
+
+
+ 
+
+<script language="javascript" type="text/javascript">
+
+    function colapseClick(ulName) {
+
+        $("#" + ulName).fadeToggle('fast', 'linear');
+
+    }
+
+</script> 
+
+
+
+
+
+         
+

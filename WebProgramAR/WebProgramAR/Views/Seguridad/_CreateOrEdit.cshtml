@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Entidades.ReglasSeguridad
+﻿@model WebProgramAR.Sitio.Models.ReglaSeguridadViewModel
            
 @using WebProgramAR.Helpers           
 
@@ -7,14 +7,17 @@
     List<WebProgramAR.Entidades.Columna> listaColumna = (List<WebProgramAR.Entidades.Columna>)ViewBag.Columnas;
     List<WebProgramAR.Entidades.Comparador> listaComparador = (List<WebProgramAR.Entidades.Comparador>)ViewBag.Comparadores;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.ListaTipoUsuarios;
+
+    string tipoInicial = (Model != null) ? Model.Tipo : string.Empty;
+    string valor = (Model != null) ? Model.Valor : string.Empty;
 }
 
 <script type="text/javascript">
     $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#TablaId");
     convertSelect("TablaId");
     convertSelect("TipoUsuarioCreate");
-    $("#Usuario_FechaNacimiento").datepicker();
-    $("#Usuario_FechaNacimiento").keypress(function (event) {
+    $("#datetimeValor").datepicker();
+    $("#datetimeValor").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
         if (charCode == 8) return false; //  backspace
         if (charCode == 46) return false; // delete
@@ -31,6 +34,7 @@
         if ($(div).attr("rel") != "-1") {
             if (div.attr('id') == "TablaId") {
                 var tabla = $("#selectBox_TablaId").attr("rel");
+
                 $.ajax({
                     url: '@Url.Action("GetColumnasByTabla")',
                     data: " { tablaId: '" + tabla + "'}",
@@ -44,7 +48,16 @@
                         for (var i = 0; i < columnas.length; i++) {
                             var val = columnas[i].Id;
                             var text = columnas[i].Value;
+                            var tipo = columnas[i].TipoDesc;
+                            alert(tipo);
+
                             $("#ColumnaId").get(0).options[$("#ColumnaId").get(0).options.length] = new Option(text, val);
+
+                            alert($("#ColumnaId").get(0).options[$("#ColumnaId").get(0).options.length - 1]);
+                            alert($("#ColumnaId").get(0).options[$("#ColumnaId").get(0).options.length - 1].attributes["tipo"]);
+
+                            $("#ColumnaId").get(0).options[$("#ColumnaId").get(0).options.length - 1].setAttribute('tipo', tipo);
+                            alert($("#ColumnaId").get(0).options[$("#ColumnaId").get(0).options.length - 1].attributes["tipo"]);
                         }
                         $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#ColumnaId");
                         convertSelect("ColumnaId", 2);
@@ -56,6 +69,8 @@
             }
             if (div.attr('id') == "ColumnaId") {
                 var col = $("#selectBox_ColumnaId").attr("rel");
+                var tipo = $("#selectBox_ColumnaId").attr("tipo");
+                alert(tipo);
                 $.ajax({
                     url: '@Url.Action("GetComparadoresByColumna")',
                     data: " { colId: '" + col + "'}",
@@ -119,6 +134,55 @@
             }
         }
     });
+
+
+    function CargarDatosIniciales() {
+
+        debugger;
+
+        var tipo = '@tipoInicial';
+
+
+        if (tipo == 'STRING') {
+            $("#stringValor").val('@valor')
+            $("#stringValor").show();
+        } else if (tipo == 'INT') {
+            $("#intValor").val('@valor')
+            $("#intValor").show();
+        } else if (tipo == 'DATETIME') {
+            $("#datetimeValor").val('@valor')
+            $("#datetimeValor").show();
+        } else if (tipo == 'BOOL') {
+            $("#boolValor").val()
+            $("#boolValor").show();
+        }
+    }
+
+    function PasarValor() {
+
+        var tipo = $("#hddnTipoSeleccionado").val()
+
+        if (tipo == 'STRING') {
+            $("#hddnValor").val($("#stringValor").val())
+        } else if (tipo == 'INT') {
+            $("#hddnValor").val($("#intValor").val())
+        } else if (tipo == 'DATETIME') {
+            $("#hddnValor").val($("#datetimeValor").val())
+        } else if (tipo == 'BOOL') {
+            $("#hddnValor").val($("#boolValor").val())
+        }
+
+    }
+
+    $(document).ready(function () {
+        $("#btnGuardar").click(function () {
+            PasarValor();
+        });
+        CargarDatosIniciales();
+    });
+
+    
+</script>
             
 </script>
 
@@ -178,7 +242,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(m => m.TipoUsuario)
+    Tipo de Usuario
 </div>
 <div class="editor-field">
     @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
@@ -195,7 +259,22 @@
     @Html.LabelFor(m => m.Valor)
 </div>
 <div class="editor-field">
-    @Html.TextBoxFor(m => m.Valor)
+    @Html.Hidden("hddnTipoSeleccionado", new { id = "hddnTipoSeleccionado" })
+    @Html.HiddenFor(m => m.Valor, new { id = "hddnValor" })
+    <div id="valorTipoString" style="visibility:hidden">
+        @Html.TextBox("stringValor", new { id = "stringValor" })
+    </div>
+    <div id="valorTipoDateTime" style="visibility:hidden">    
+        @Html.TextBox("datetimeValor", new { id = "datetimeValor" })
+    </div>
+    <div id="valorTipoInteger" style="visibility:hidden">
+        @Html.TextBox("intValor", new { id = "intValor" })
+    </div>
+    <div id="valorTipoBooleano" style="visibility:hidden">
+        @Html.CheckBox("boolValor", new { id = "boolValor" })
+    </div>
+
+    
     @Html.ValidationMessageFor(m => m.Valor)
 </div>
 

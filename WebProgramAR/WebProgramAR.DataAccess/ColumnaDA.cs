@@ -24,7 +24,7 @@ namespace WebProgramAR.DataAccess
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
-                IQueryable<Columna> query = from u in db.Columnas
+                IQueryable<Columna> query = from u in db.Columnas.Include("Tipo")
                                               where (u.TablaId == tablaId)
                                               select u;
                 return query.ToList();
