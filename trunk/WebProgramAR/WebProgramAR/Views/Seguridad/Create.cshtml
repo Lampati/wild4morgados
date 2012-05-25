@@ -1,14 +1,21 @@
-﻿@model WebProgramAR.Entidades.ReglasSeguridad
+﻿@model WebProgramAR.Sitio.Models.ReglaSeguridadViewModel
 
 @{
     Layout = null;
     ViewBag.Title = "Crear";
+
+    
 }
+
 
 <h2>Nuevo</h2>
 <h4>Seguridad</h4>
+
+
    
-@using (Ajax.BeginForm("Create", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+@* @using (Ajax.BeginForm("Create", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" })) *@
+
+@using (Html.BeginForm("Create", "Seguridad", FormMethod.Post))
 { 
     @Html.ValidationSummary(true)
 

@@ -68,10 +68,10 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Usuario usuario = db.Usuarios.Single(u => u.UsuarioId == id);
-                //usuario.Status = false; //baja lógica
-                //db.ObjectStateManager.ChangeObjectState(usuario, EntityState.Modified);
-                //db.SaveChanges();
+                Usuario usuario = db.Usuarios.Include("Ejercicios").Single(u => u.UsuarioId == id);
+
+                
+                
                 db.Usuarios.DeleteObject(usuario);
                 db.SaveChanges();
             }

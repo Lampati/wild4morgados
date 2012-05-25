@@ -85,8 +85,11 @@
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ContactModels.cs" />
+    <Compile Include="Models\ColumnaJsonModel.cs" />
+    <Compile Include="Models\ContactoJsonModel.cs" />
     <Compile Include="Models\EjercicioUploadModel.cs" />
     <Compile Include="Models\EjercicioCreacionModel.cs" />
+    <Compile Include="Models\ReglaSeguridadViewModel.cs" />
     <Compile Include="Models\SeguridadGrillaModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ModerarEjercicioModel.cs" />
@@ -391,6 +394,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ejercicio\EjercicioCreado.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\_ListadoDisplay.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
