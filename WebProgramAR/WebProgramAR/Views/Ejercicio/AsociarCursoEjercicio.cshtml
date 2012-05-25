@@ -7,9 +7,9 @@
     WebGrid gridCurso = new WebGrid(rowsPerPage: int.MaxValue, canPage: false, canSort: false);
     WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[1].CantidadPorPagina, canPage: false);
 
-    gridCurso.Bind(Model.ListEjerciciosGrillaModel[0].Ejercicios, autoSortAndPage: true, rowCount: Model.ListEjerciciosGrillaModel[0].Cantidad);
+    gridCurso.Bind(Model.ListEjerciciosGrillaModel[0].Ejercicios, autoSortAndPage: false, rowCount: Model.ListEjerciciosGrillaModel[0].Cantidad);
 
-    gridNotCurso.Bind(Model.ListEjerciciosGrillaModel[1].Ejercicios, autoSortAndPage: true, rowCount: Model.ListEjerciciosGrillaModel[1].Cantidad);
+    gridNotCurso.Bind(Model.ListEjerciciosGrillaModel[1].Ejercicios, autoSortAndPage: false, rowCount: Model.ListEjerciciosGrillaModel[1].Cantidad);
     
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 
