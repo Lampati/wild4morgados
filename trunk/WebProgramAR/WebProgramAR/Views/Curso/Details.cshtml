@@ -7,6 +7,29 @@
 <div style="overflow:auto;height:400px; width:100%">
     <fieldset class="details" style="width:85%">
     
+<<<<<<< .mine
+    <div class="fila">
+        <div class="display-label-delete">Nombre:</div>
+        <div class="display-field-delete">@Model.Nombre</div>
+    </div>
+    <div class="fila">
+        <!--<div class="display-label-delete-group">Ejercicios</div>-->
+        @if (Model.Ejercicios.Count > 0)
+        {
+            foreach (var Ejercicio in Model.Ejercicios)
+            {
+                <div class="display-field-details">
+                    @Html.DisplayFor(m => Ejercicio.Nombre)
+                </div>
+            }
+        }
+        else
+        {
+            <div class="display-field-delete">Este curso no tiene ejercicios asociados.</div>
+        }
+     </div>    
+</fieldset>
+=======
         <div class="fila">
             <div class="display-label-delete">Nombre:</div>
             <div class="display-field-delete">@Model.Nombre</div>
@@ -16,6 +39,7 @@
         </div>    
     </fieldset>
 </div>
+>>>>>>> .r335
 <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
         <td align="center">

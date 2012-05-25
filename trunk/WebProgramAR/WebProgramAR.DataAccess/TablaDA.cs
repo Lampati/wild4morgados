@@ -23,16 +23,11 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-
                 IQueryable<Tabla> query = from u in db.Tablas
                                             select u;
                 return query.ToList();
             }
         }
 
-        
-
-
-        
     }
 }

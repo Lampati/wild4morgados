@@ -1,0 +1,218 @@
+﻿@model WebProgramAR.Entidades.ReglasSeguridad
+           
+@using WebProgramAR.Helpers           
+
+@{
+    List<WebProgramAR.Entidades.Tabla> listaTabla = (List<WebProgramAR.Entidades.Tabla>)ViewBag.ListaTablas;
+    List<WebProgramAR.Entidades.Columna> listaColumna = (List<WebProgramAR.Entidades.Columna>)ViewBag.Columnas;
+    List<WebProgramAR.Entidades.Comparador> listaComparador = (List<WebProgramAR.Entidades.Comparador>)ViewBag.Comparadores;
+    List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.ListaTipoUsuarios;
+}
+
+<script type="text/javascript">
+    $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#SelectTablaId");
+    convertSelect("SelectTablaId");
+    convertSelect("SelectTipoUsuarioCreate");
+    convertSelect("SelectColumnaId");
+    convertSelect("SelectComparadorId");
+    function reInitColumnas() {
+        $("#SelectColumnaId").val("");
+        $("#SelectColumnaId").attr("rel", "");
+    }
+    function reInitComparadores() {
+        $("#SelectComparadorId").val("");
+        $("#SelectComparadorId").attr("rel", "");
+    }
+    function OnChangeDo(div) {
+        if ($(div).attr("rel") != "-1") {
+            if (div.attr('id') == "SelectTablaId") {
+                var tabla = $("#selectBox_SelectTablaId").attr("rel");
+                $.ajax({
+                    url: '@Url.Action("GetColumnasByTabla")',
+                    data: " { tablaId: '" + tabla + "'}",
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#listColumnas .tzSelect").remove();
+                        $("#SelectColumnaId").children().remove();
+                        var columnas = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                        for (var i = 0; i < columnas.length; i++) {
+                            var val = columnas[i].Id;
+                            var text = columnas[i].Value;
+                            $("#SelectColumnaId").get(0).options[$("#SelectColumnaId").get(0).options.length] = new Option(text, val);
+                        }
+                        $("<option value='-1'  selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectColumnaId");
+                        convertSelect("SelectColumnaId", 2);
+                        $("#TablaId").val((div.attr("rel")));
+                        $("#ColumnaId").val("-1");
+                        $("#ComparadorId").val("-1");
+                        reInitColumna();
+                    }
+                });
+                $("#listComparadores").hide();
+                return;
+            }
+            if (div.attr('id') == "SelectColumnaId") {
+                var col = $("#selectBox_SelectColumnaId").attr("rel");
+                $.ajax({
+                    url: '@Url.Action("GetComparadoresByColumna")',
+                    data: " { colId: '" + col + "'}",
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#listComparadores .tzSelect").remove();
+                        $("#SelectComparadorId").children().remove();
+                        var comparadores = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                        for (var i = 0; i < comparadores.length; i++) {
+                            var val = comparadores[i].Id;
+                            var text = comparadores[i].Value;
+                            $("#SelectComparadorId").get(0).options[$("#SelectComparadorId").get(0).options.length] = new Option(text, val);
+                        }
+                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectComparadorId");
+                        convertSelect("SelectComparadorId", 2);
+                        $("#ColumnaId").val((div.attr("rel")));
+                        $("#ComparadorId").val("-1");
+                    }
+                });
+                $("#listComparadores").show();
+                return;
+            }
+            if (div.attr('id') == "SelectComparadorId") {
+                $("#ComparadorId").val((div.attr("rel")));
+            }           
+            if (div.attr('id')=="SelectTipoUsuarioCreate"){
+                $("#TipoUsuarioId").val((div.attr("rel")));
+            }           
+        }
+    }
+
+    $("#UsuarioIdAutoComplete").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("GetUsuariosByNombreUsuario")',
+                data: " {user: '" + request.term + "' }",
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Value,
+                            value: item.Id
+                        }
+                    }));
+                }
+            })
+
+        },
+        scrollHeight: 10,
+        minChars: 1,
+        delay: 100,
+        type: 'POST',
+        selectFirst: false,
+        select: function (event, ui) {
+            $("#UsuarioIdAutoComplete").val(ui.item.label);
+            $("#UsuarioId").val(ui.item.value);
+            $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+        },
+        change: function (event, ui) {
+            if (ui.item != undefined) {
+                $("#UsuarioIdAutoComplete").val(ui.item.label);
+                $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+                $("#UsuarioId").val(ui.item.value);
+            }
+        }
+    });
+            
+</script>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.TablaId)
+</div>
+<div class="editor-field">
+
+        @Html.DropDownListWithValidationFor(model => model.TablaId, listaTabla.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+            Value = option.TablaId.ToString(),
+            Selected = ((Model != null) && (option.TablaId == Model.TablaId))
+        }), new { @id = "SelectTablaId", @style = "display:none", @name = "SelectTablaId" })
+        @Html.HiddenFor(model => Model.TablaId)
+        @Html.ValidationMessageFor(m => m.TablaId)
+</div>
+
+<div id="listColumnas">
+<div class="editor-label">
+    @Html.LabelFor(m => m.ColumnaId)
+</div>
+<div class="editor-field">
+     @Html.DropDownListWithValidationFor(model => model.ColumnaId, listaColumna.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+            Value = option.ColumnaId.ToString(),
+            Selected = ((Model != null) && (option.ColumnaId == Model.ComparadorId))
+        }), new { @id = "SelectColumnaId", @style = "display:none", @name = "SelectColumnaId" })
+    @Html.HiddenFor(model => Model.ColumnaId)
+    @Html.ValidationMessageFor(m => m.ColumnaId)
+</div>
+</div>
+
+<div  id="listComparadores">
+<div class="editor-label">
+    @Html.LabelFor(m => m.ComparadorId)
+</div>
+<div class="editor-field">
+     @Html.DropDownListWithValidationFor(model => model.ComparadorId, listaComparador.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+            Value = option.ComparadorId.ToString(),
+            Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
+        }), new { @id = "SelectComparadorId", @style = "display:none", @Name = "SelectComparadorId" })
+    @Html.HiddenFor(model => Model.ComparadorId)
+    @Html.ValidationMessageFor(m => m.ComparadorId)
+</div>
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.UsuarioId)
+</div>
+    <div class="editor-field">
+    @Html.TextBoxFor(model => model.UsuarioId, new { @rel=" ", @Value = " ", @id = "UsuarioIdAutoComplete" })
+    @Html.HiddenFor(model => model.UsuarioId, new { @rel=" ",@Value = " ", @id = "UsuarioId" })
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.TipoUsuario)
+</div>
+<div class="editor-field">
+    @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+        {
+            Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+            Value = option.TipoUsuarioId.ToString(),
+            Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+        }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @name = "SelectTipoUsuarioCreate" })
+        @Html.HiddenFor(model => Model.TipoUsuarioId)
+        @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.Valor)
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor(m => m.Valor)
+    @Html.ValidationMessageFor(m => m.Valor)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.Activa)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(m => m.Activa)
+</div>
+
+
+
+
+

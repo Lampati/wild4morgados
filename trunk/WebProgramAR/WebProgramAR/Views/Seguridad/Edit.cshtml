@@ -14,7 +14,7 @@
 @using (Ajax.BeginForm("Edit", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
 { 
     @Html.ValidationSummary(true)
-        @Html.Partial("_CreateOrEdit", Model)
+        @Html.Partial("_Edit", Model)
         
          <div id="buttonSectionOptions" class="buttonSectionOptions">
             <div>
