@@ -10,7 +10,7 @@
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: true);
 
-    grid.Bind(Model.Ejercicios, autoSortAndPage: true, rowCount: Model.Cantidad);
+    grid.Bind(Model.Ejercicios, autoSortAndPage: false, rowCount: Model.Cantidad);
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 

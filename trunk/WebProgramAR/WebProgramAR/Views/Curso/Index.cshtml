@@ -8,9 +8,10 @@
     
     ViewBag.Title = "Cursos";
 
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: true);
-
-    grid.Bind(Model.Cursos, autoSortAndPage: true, rowCount: Model.Cantidad);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: true );
+    
+    
+    grid.Bind(Model.Cursos, autoSortAndPage: false, rowCount: Model.Cantidad);
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
 }
@@ -112,7 +113,7 @@
     rowStyle: "gridRow",
     alternatingRowStyle: "gridAlternatingRow",
     headerStyle: "gridHeader",
-    footerStyle: "gridPager",
+    footerStyle: "gridPager",    
     mode: WebGridPagerModes.All,
         firstText: "Primero",
         previousText: "Anterior",

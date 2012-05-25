@@ -6,7 +6,7 @@
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
 
-    grid.Bind(Model.ReglasSeguridad, autoSortAndPage: true, rowCount: Model.Cantidad);
+    grid.Bind(Model.ReglasSeguridad, autoSortAndPage: false, rowCount: Model.Cantidad);
 
     List<WebProgramAR.Entidades.Tabla> listaTabla = (List<WebProgramAR.Entidades.Tabla>)ViewBag.ListaTablas;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.ListaTipoUsuarios;
