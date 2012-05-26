@@ -16,12 +16,14 @@
     convertSelect("SelectColumnaId");
     convertSelect("SelectComparadorId");
     function reInitColumnas() {
+        $("#ColumnaId").val("-1");
         $("#SelectColumnaId").val("");
         $("#SelectColumnaId").attr("rel", "");
     }
     function reInitComparadores() {
         $("#SelectComparadorId").val("");
         $("#SelectComparadorId").attr("rel", "");
+        $("#ComparadorId").val("-1");
     }
     function OnChangeDo(div) {
         if ($(div).attr("rel") != "-1") {
@@ -45,9 +47,8 @@
                         $("<option value='-1'  selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectColumnaId");
                         convertSelect("SelectColumnaId", 2);
                         $("#TablaId").val((div.attr("rel")));
-                        $("#ColumnaId").val("-1");
-                        $("#ComparadorId").val("-1");
-                        reInitColumna();
+                        reInitColumnas();
+                        reInitComparadores();
                     }
                 });
                 $("#listComparadores").hide();
@@ -73,7 +74,7 @@
                         $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectComparadorId");
                         convertSelect("SelectComparadorId", 2);
                         $("#ColumnaId").val((div.attr("rel")));
-                        $("#ComparadorId").val("-1");
+                        reInitComparadores();
                     }
                 });
                 $("#listComparadores").show();

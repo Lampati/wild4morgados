@@ -16,7 +16,7 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Seguridad/
         [Authorize(Roles = "administrador")]
-        public ActionResult Index(int page = 1, string sort = "Tabla", string sortDir = "ASC", int tablaId = -1, int? tipoUsuarioId = -1,
+        public ActionResult Index(int page = 1, string sort = "Tabla", string sortDir = "ASC", int tablaId = -1, int tipoUsuarioId = -1,
             string usuario = null, int comparadorId = -1, int columnaId = -1, int activa = -1)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
