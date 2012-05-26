@@ -1,22 +1,20 @@
 ﻿@model WebProgramAR.Sitio.Models.ReglaSeguridadViewModel
 
 @{
-    Layout = null;  
+    Layout = null;
     ViewBag.Title = "Editar";
 }
-
-
-
-<h2>Editar</h2>
+<h2>Nuevo</h2>
 <h4>Seguridad</h4>
-        @Html.HiddenFor(model => model.ReglaId)
+@* @using (Ajax.BeginForm("Create", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" })) *@
 
-@using (Ajax.BeginForm("Edit", "Seguridad", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+@using (Html.BeginForm("Edit", "Seguridad", FormMethod.Post))
 { 
     @Html.ValidationSummary(true)
+
         @Html.Partial("_Edit", Model)
         
-         <div id="buttonSectionOptions" class="buttonSectionOptions">
+       <div id="buttonSectionOptions" class="buttonSectionOptions">
             <div>
                 <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
             </div>
