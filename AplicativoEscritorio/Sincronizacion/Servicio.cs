@@ -224,6 +224,7 @@ namespace Sincronizacion
                         ej.Abrir(new FileInfo(archivo));
                     }
                     catch (ExcepcionCriptografia) { errorApertura = true; }
+                    catch (ExcepcionHashNoConcuerda) { errorApertura = true; }
                     if (!errorApertura && ej.TieneId)
                     {
                         sb.Append(ej.EjercicioId.ToString());

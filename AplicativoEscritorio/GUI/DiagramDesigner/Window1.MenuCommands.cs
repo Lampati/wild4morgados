@@ -30,81 +30,96 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                bool continuar = SalvarSiUsuarioQuiere();
-
-                if (continuar)
+                try
                 {
-                    string path;
-                    switch (Convert.ToInt32(e.Parameter))
+                    bool continuar = SalvarSiUsuarioQuiere();
+
+                    if (continuar)
                     {
-                        case 1:
+                        string path;
+                        switch (Convert.ToInt32(e.Parameter))
+                        {
+                            case 1:
 
-                            path = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir nombre y ubicación para el nuevo ejercicio", ConfiguracionAplicacion.DirectorioEjerciciosCreados);
+                                path = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir nombre y ubicación para el nuevo ejercicio", ConfiguracionAplicacion.DirectorioEjerciciosCreados);
 
-                            if (!string.IsNullOrWhiteSpace(path))
-                            {
-
-                                Ejercicio ej = new Ejercicio();
-                                string pathTemplate = Path.Combine(Environment.CurrentDirectory, "ModoTexto", "Configuracion", "Template.txt").ToLower();
-                                if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
-                                    pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
-                                if (File.Exists(pathTemplate))
-                                    ej.Abrir(new FileInfo(pathTemplate));
-
-                                ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
-                                ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
-                                ej.ModificadoDesdeUltimoGuardado = false;
-                                ej.PathGuardadoActual = path;
-                                
-                                ej.Guardar(ej.PathGuardadoActual);
-                                ArchCargado = ej;
-                                //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                                ej.ModificadoDesdeUltimoGuardado = false;
-                            }
-                            break;
-                        case 2:
-
-                            string pathEj = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir ejercicio a resolver", ConfiguracionAplicacion.DirectorioEjerciciosDescargados);
-
-                            if (!string.IsNullOrWhiteSpace(pathEj))
-                            {
-
-                                //chequeo de tipo de archivo
-                                if (pathEj.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
+                                if (!string.IsNullOrWhiteSpace(path))
                                 {
 
                                     Ejercicio ej = new Ejercicio();
-                                    ej.PathGuardadoActual = pathEj;
-                                    ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
+                                    string pathTemplate = Path.Combine(Environment.CurrentDirectory, "ModoTexto", "Configuracion", "Template.txt").ToLower();
+                                    if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
+                                        pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
+                                    if (File.Exists(pathTemplate))
+                                        ej.Abrir(new FileInfo(pathTemplate));
+
+                                    ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                    ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
+                                    ej.ModificadoDesdeUltimoGuardado = false;
+                                    ej.PathGuardadoActual = path;
+
+                                    ej.Guardar(ej.PathGuardadoActual);
+                                    ArchCargado = ej;
                                     //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                     ej.ModificadoDesdeUltimoGuardado = false;
+                                }
+                                break;
+                            case 2:
 
-                                    path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}", ej.Nombre), ConfiguracionAplicacion.DirectorioResolucionesEjercicios);
+                                string pathEj = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir ejercicio a resolver", ConfiguracionAplicacion.DirectorioEjerciciosDescargados);
 
-                                    if (!string.IsNullOrWhiteSpace(path))
+                                if (!string.IsNullOrWhiteSpace(pathEj))
+                                {
+
+                                    //chequeo de tipo de archivo
+                                    if (pathEj.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
                                     {
 
-                                        ResolucionEjercicio res = new ResolucionEjercicio(ej);
-
-                                        res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
-                                        res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
-                                        res.ModificadoDesdeUltimoGuardado = false;
-                                        res.PathGuardadoActual = path;
-                                        res.Guardar(res.PathGuardadoActual);
-                                        ArchCargado = res;
+                                        Ejercicio ej = new Ejercicio();
+                                        ej.PathGuardadoActual = pathEj;
+                                        ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
                                         //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                                        res.ModificadoDesdeUltimoGuardado = false;
+                                        ej.ModificadoDesdeUltimoGuardado = false;
+
+                                        path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}", ej.Nombre), ConfiguracionAplicacion.DirectorioResolucionesEjercicios);
+
+                                        if (!string.IsNullOrWhiteSpace(path))
+                                        {
+
+                                            ResolucionEjercicio res = new ResolucionEjercicio(ej);
+
+                                            res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                            res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
+                                            res.ModificadoDesdeUltimoGuardado = false;
+                                            res.PathGuardadoActual = path;
+                                            res.Guardar(res.PathGuardadoActual);
+                                            ArchCargado = res;
+                                            //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                            res.ModificadoDesdeUltimoGuardado = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Error formato no soportado
                                     }
                                 }
-                                else
-                                {
-                                    //Error formato no soportado
-                                }
-                            }
-                            break;
+                                break;
+                        }
                     }
                 }
-            }
+                catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionCriptografia)
+                {
+                    MessageBox.Show("El contenido del archivo no puede ser leído por Program.AR", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionHashNoConcuerda)
+                {
+                    MessageBox.Show("El contenido del archivo ha sido alterado del original y no se puede abrir", "Hash Incoherente", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error inesperado de apertura", "Error Inesperado", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            } //fin si
         }
 
 
@@ -114,38 +129,53 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                bool continuar = SalvarSiUsuarioQuiere();
-
-                if (continuar)
+                try
                 {
-                    string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", ConfiguracionAplicacion.DirectorioAbrirDefault);
+                    bool continuar = SalvarSiUsuarioQuiere();
 
-                    if (!string.IsNullOrWhiteSpace(path))
+                    if (continuar)
                     {
-                        //chequeo de tipo de archivo
-                        if (path.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
+                        string path = FileDialogManager.ElegirArchivoParaAbrir(this, "Elija el archivo a abrir", ConfiguracionAplicacion.DirectorioAbrirDefault);
+
+                        if (!string.IsNullOrWhiteSpace(path))
                         {
-                            Ejercicio ej = new Ejercicio();
-                            ej.PathGuardadoActual = path;
-                            ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
-                            ArchCargado = ej;
-                            //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                            ej.ModificadoDesdeUltimoGuardado = false;
-                        }
-                        else if (path.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION)))
-                        {
-                            ResolucionEjercicio res = new ResolucionEjercicio();
-                            res.PathGuardadoActual = path;
-                            res.Abrir(new System.IO.FileInfo(res.PathGuardadoActual));
-                            ArchCargado = res;
-                            //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                            res.ModificadoDesdeUltimoGuardado = false;
-                        }
-                        else
-                        {
-                            //Error formato no soportado
+                            //chequeo de tipo de archivo
+                            if (path.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
+                            {
+                                Ejercicio ej = new Ejercicio();
+                                ej.PathGuardadoActual = path;
+                                ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
+                                ArchCargado = ej;
+                                //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                ej.ModificadoDesdeUltimoGuardado = false;
+                            }
+                            else if (path.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION)))
+                            {
+                                ResolucionEjercicio res = new ResolucionEjercicio();
+                                res.PathGuardadoActual = path;
+                                res.Abrir(new System.IO.FileInfo(res.PathGuardadoActual));
+                                ArchCargado = res;
+                                //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                res.ModificadoDesdeUltimoGuardado = false;
+                            }
+                            else
+                            {
+                                //Error formato no soportado
+                            }
                         }
                     }
+                }
+                catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionCriptografia)
+                {
+                    MessageBox.Show("El contenido del archivo no puede ser leído por Program.AR", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionHashNoConcuerda)
+                {
+                    MessageBox.Show("El contenido del archivo ha sido alterado del original y no se puede abrir", "Hash Incoherente", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error inesperado de apertura", "Error Inesperado", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
