@@ -147,7 +147,7 @@ namespace WebProgramAR.Controllers
             else
             {
                 // If we got this far, something failed, redisplay form
-                return View(model);
+                return Content(Boolean.FalseString);
             }
         }
         
@@ -202,19 +202,28 @@ namespace WebProgramAR.Controllers
                 MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
 
                 /*VALIDACION DE PAIS CORRECTO*/
-                if (usuario.PaisId == null || (PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                //flanzani 27/05/2012
+                //Modifico las validaciones pq el GetById tira excepcion
+                //if (usuario.PaisId==null ||(PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                if (usuario.PaisId == null || usuario.PaisId.Equals("-1"))
                 {
                     error = true;
-                    errorMensaje = "Pais Inexistente";
+                    errorMensaje = "Debe seleccionar un pais";
                 }
                 /*VALIDACION DE PROVINCIA CORRECTO*/
-                if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                //flanzani 27/05/2012
+                //Modifico las validaciones pq el GetById tira excepcion
+                //if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                if (!error && (usuario.ProvinciaId == null || usuario.ProvinciaId.Equals("-1")))
                 {
                     error = true;
-                    errorMensaje = "Provincia Inexistente";
+                    errorMensaje = "Debe seleccionar una provincia";
                 }
                 /*VALIDACION DE LOCALIDAD CORRECTO*/
-                if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                //flanzani 27/05/2012
+                //Modifico las validaciones pq el GetById tira excepcion
+                //if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                if (!error && (usuario.LocalidadId == null || usuario.LocalidadId.Equals("-1")))
                 {
                     error = true;
                     errorMensaje = "Debe seleccionar una localidad correcta";
@@ -254,19 +263,28 @@ namespace WebProgramAR.Controllers
             else
             {
                 /*VALIDACION DE PAIS CORRECTO*/
-                if (usuario.PaisId==null ||(PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                //flanzani 27/05/2012
+                //Modifico las validaciones pq el GetById tira excepcion
+                //if (usuario.PaisId==null ||(PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                if (usuario.PaisId == null || usuario.PaisId.Equals("-1"))
                 {
                     error = true;
-                    errorMensaje = "Pais Inexistente";
+                    errorMensaje = "Debe seleccionar un pais";
                 }
                 /*VALIDACION DE PROVINCIA CORRECTO*/
-                if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                //flanzani 27/05/2012
+                //Modifico las validaciones pq el GetById tira excepcion
+                //if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                if (!error && ( usuario.ProvinciaId == null || usuario.ProvinciaId.Equals("-1")))                
                 {
                     error = true;
-                    errorMensaje = "Provincia Inexistente";
+                    errorMensaje = "Debe seleccionar una provincia";
                 }
                 /*VALIDACION DE LOCALIDAD CORRECTO*/
-                if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                //flanzani 27/05/2012
+                //Modifico las validaciones pq el GetById tira excepcion
+                //if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                if (!error && ( usuario.LocalidadId == null || usuario.LocalidadId.Equals("-1")))  
                 {
                     error = true;
                     errorMensaje = "Debe seleccionar una localidad correcta";

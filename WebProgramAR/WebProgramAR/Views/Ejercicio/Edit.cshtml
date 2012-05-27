@@ -23,7 +23,6 @@
             autoHeight: false
         }
         );
-        debugger;
     });
 </script>
 
@@ -33,6 +32,10 @@
     <fieldset class="fieldsetAncho">
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.EjercicioId)
+        @Html.HiddenFor(model => model.SolucionGarGar)
+        @Html.HiddenFor(model => model.SolucionTexto)
+        @Html.HiddenFor(model => model.Enunciado)
+        @Html.HiddenFor(model => model.Nombre)
         
         <div style="overflow:auto;display:block">
            <div class="editor-label">

@@ -176,9 +176,7 @@ namespace WebProgramAR.DataAccess
         {
             Ejercicio ejercicioOrig = db.Ejercicios.Single(u => u.EjercicioId == ejercicio.EjercicioId);
 
-            ejercicioOrig.EstadoEjercicioId = ejercicio.EstadoEjercicioId;
-            ejercicioOrig.Enunciado = ejercicio.Enunciado;
-            ejercicioOrig.SolucionTexto = ejercicio.SolucionTexto;
+ 
             ejercicioOrig.Global = ejercicio.Global;
             
 

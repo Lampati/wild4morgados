@@ -303,7 +303,9 @@ namespace WebProgramAR.Controllers
                 return Content(Boolean.TrueString);
             }else
             {
-                return View();
+                Initilization();
+                Ejercicio e = EjercicioNegocio.GetEjercicioById(ejercicio.EjercicioId);
+                return View("Edit", e);
             }
         }
 
