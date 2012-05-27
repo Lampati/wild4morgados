@@ -46,14 +46,17 @@ namespace WebProgramAR.Entidades
         
         [Display(Name = "Pais")]
         [Required(ErrorMessage = "Requerido")]
+        [RegularExpression("^((?!-1).*)$", ErrorMessage = "Requerido")]
         public string PaisId { get; set; }
 
         [Display(Name = "Provincia")]
         [Required(ErrorMessage = "Requerido")]
+        [RegularExpression("^((?!-1).*)$", ErrorMessage = "Requerido")]
         public string ProvinciaId { get; set; }
 
         [Display(Name = "Localidad")]
         [Required(ErrorMessage = "Requerido")]
+        [RegularExpression("^((?!-1).*)$", ErrorMessage = "Requerido")]
         public string LocalidadId { get; set; }
 
     }

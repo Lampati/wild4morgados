@@ -80,6 +80,10 @@
             ModificarEjerciciosDelCurso(url,curso,ejercicio)
         });
 
+          $('.botonDetalles').click(function (event) {
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 600);
+        });
+
         
         var sortcol = '@gridCurso.SortColumn';
 
@@ -117,7 +121,13 @@
             gridCurso.Column("EjercicioId", header: "Identificador"),
             gridCurso.Column("Enunciado", header: "Enunciado"),
             gridCurso.Column("NivelEjercicio", header: "Nivel"),
-            gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+            gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),    
+            gridCurso.Column("", 
+              header: "",
+              format: @<text>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                      </text>
+            ),            
             gridCurso.Column("", 
                   header: "",
                   format: @<text>
@@ -188,7 +198,13 @@
             gridNotCurso.Column("EjercicioId", header: "Identificador"),
             gridNotCurso.Column("Enunciado", header: "Enunciado"),
             gridNotCurso.Column("NivelEjercicio", header: "Nivel"),
-            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),        
+            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),
+            gridNotCurso.Column("", 
+              header: "",
+              format: @<text>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                      </text>
+            ),          
             gridNotCurso.Column("", 
                   header: "",
                   format: @<text>

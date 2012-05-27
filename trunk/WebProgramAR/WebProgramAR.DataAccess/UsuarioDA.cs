@@ -53,8 +53,10 @@ namespace WebProgramAR.DataAccess
             //db.Usuarios.Attach(usuario);
             Usuario usuarioOrig = db.Usuarios.Single(u => u.UsuarioId == usuario.UsuarioId);
 
-            usuario.Nombre = usuario.Nombre;
-            usuario.Apellido = usuario.Apellido;            
+            usuarioOrig.Nombre = usuario.Nombre;
+            usuarioOrig.Apellido = usuario.Apellido;
+            usuarioOrig.FechaNacimiento = usuario.FechaNacimiento;
+            usuarioOrig.Email = usuario.Email;
 
             usuarioOrig.PaisId = usuario.PaisId;
             usuarioOrig.ProvinciaId = usuario.ProvinciaId;
