@@ -15,40 +15,18 @@ namespace WebProgramAR.MailSender
         /// </summary>
         public static int SmtpPort = 25;
 
-        public static bool Enviar(string from, string to, string subject, string body)
+        public static bool Enviar(string to, string subject, string body)
         {
-            //string domainName = GetDomainName(to);
-            //IPAddress[] servers = GetMailExchangeServer(domainName);
-           
+            SmtpClient smtpClient = new SmtpClient("smtp.program-ar.com.ar", SmtpPort);
 
-            //foreach (IPAddress server in servers)
-            //{
-            //    try
-            //    {
-            //        SmtpClient client = new SmtpClient(server.ToString(), SmtpPort);
-            //        client.Send(from, to, subject, body);
-            //        return true;
-            //    }
-            //    catch
-            //    {
-            //        continue;
-            //    }
-            //}
-            //return false;
-
-            
-            SmtpClient smtpClient = new SmtpClient();
-            NetworkCredential basicCredential =
-                new NetworkCredential("fede@program-ar.com.ar", "Pr0gr4m4r");
             MailMessage message = new MailMessage();
-            MailAddress fromAddress = new MailAddress(from);
+            MailAddress fromAddress = new MailAddress("colo@program-ar.com.ar");
 
 
-            smtpClient.Host = "216.59.32.145";
-            //smtpClient.Host = "smtp.program-ar.com.ar";
+            //smtpClient.Host = "216.59.32.145";
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.Credentials = basicCredential;
-           
+            smtpClient.Credentials = new NetworkCredential("colo@program-ar.com.ar", "Pr0gr4m4r");
+            smtpClient.EnableSsl = false;
 
             message.From = fromAddress;
             message.Subject = subject;
@@ -56,6 +34,7 @@ namespace WebProgramAR.MailSender
             message.IsBodyHtml = true;
             message.Body = body;
             message.To.Add(to);
+            message.BodyEncoding = Encoding.Unicode;
 
             try
             {
