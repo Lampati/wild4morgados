@@ -11,6 +11,7 @@ namespace LibreriaActividades
     [Designer(typeof(DeclaracionDesigner))]
     public class Declaracion : ActividadBase
     {
+        private System.Windows.Visibility visible;
         public string NombreVariable { get; set; }
         public eTipoVariable Tipo { get; set; }
         public string Tamano { get; set; }
@@ -23,6 +24,12 @@ namespace LibreriaActividades
         public static void Attach(ModelItem modelItem)
         {
             EditingContext editingContext = modelItem.GetEditingContext();
+        }
+
+        public System.Windows.Visibility Visible
+        {
+            get { return this.visible; }
+            set { this.visible = value; }
         }
 
         protected override void Execute(System.Activities.NativeActivityContext context)

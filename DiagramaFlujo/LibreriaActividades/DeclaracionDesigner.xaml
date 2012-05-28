@@ -25,7 +25,7 @@
                     <Label Visibility="{Binding Path=ModelItem.Visible}" Content="Tamaño" Height="25" HorizontalAlignment="Center" Name="lblTamano" VerticalAlignment="Top" Grid.Column="3" Grid.Row="0" />
                     <TextBox Height="23" HorizontalAlignment="Center" Name="txtVariable" VerticalAlignment="Top" Width="140" Grid.Column="0" Grid.Row="1"
                              Text="{Binding Path=ModelItem.NombreVariable, Mode=TwoWay}" AutomationProperties.AutomationId="NombreVariable"  />
-                    <ComboBox SelectedValue="{Binding Path=ModelItem.Tipo, Mode=TwoWay, Converter={StaticResource comboBoxItemConverter}}" SelectedValuePath="Content" Grid.Row="1" Grid.Column="2" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBox Name="cbo" SelectedValue="{Binding Path=ModelItem.Tipo, Mode=TwoWay, Converter={StaticResource comboBoxItemConverter}}" SelectedValuePath="Content" Grid.Row="1" Grid.Column="2" SelectionChanged="ComboBox_SelectionChanged">
                         <ComboBoxItem>Numero</ComboBoxItem>
                         <ComboBoxItem>Texto</ComboBoxItem>
                         <ComboBoxItem>Booleano</ComboBoxItem>

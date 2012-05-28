@@ -44,7 +44,7 @@ namespace Microsoft.Samples.UsingWorkflowItemPresenter
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Declaracion)));
 
             init = new Secuencia() { DisplayName = "Secuencia Principal" };
-            //init.Branches.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución" });
+            init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución" });
 
             CreateDesigner();
      

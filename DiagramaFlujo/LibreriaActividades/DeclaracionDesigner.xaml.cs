@@ -38,14 +38,14 @@ namespace LibreriaActividades
 
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {            
             if (e.AddedItems.Count > 0)
             {
                 ComboBoxItem ci = (ComboBoxItem)e.AddedItems[0];
                 if (ci.Content.ToString() == "Vector")
-                    this.visible = System.Windows.Visibility.Visible;
+                    ModelItem.Properties["Visible"].SetValue(System.Windows.Visibility.Visible);
                 else
-                    this.visible = System.Windows.Visibility.Hidden;
+                    ModelItem.Properties["Visible"].SetValue(System.Windows.Visibility.Hidden);
             }
         }
     }

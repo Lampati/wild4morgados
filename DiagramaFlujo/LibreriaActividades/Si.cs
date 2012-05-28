@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Activities;
 using System.ComponentModel;
+using System.Activities.Presentation;
+using System.Windows;
 
 namespace LibreriaActividades
 {
     [Designer(typeof(SiDesigner))]
-    public class Si : ActividadBase
+    public class Si : ActividadBase, IActivityTemplateFactory
     {
         // this property contains an activity that will be scheduled in the execute method
         // the WorkflowItemPresenter in the designer is bound to this to enable editing
@@ -45,6 +47,22 @@ namespace LibreriaActividades
         public override void Ejecutar(NativeActivityContext context)
         {
             this.Execute(context);
+        }
+
+        public Activity Create(DependencyObject target)
+        {
+            return new Si()
+            {
+                DisplayName = "Si",
+                BranchVerdadero = new Secuencia()
+                {
+                    DisplayName = "Rama Verdadero"
+                },
+                BranchFalso = new Secuencia()
+                {
+                    DisplayName = "Rama Falso"
+                }
+            };
         }
     }
 }
