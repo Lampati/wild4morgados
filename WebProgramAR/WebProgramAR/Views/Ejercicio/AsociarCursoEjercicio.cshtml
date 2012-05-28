@@ -4,8 +4,18 @@
     //Layout = null;
     ViewBag.Title = "Asociaciones";
 
-    WebGrid gridCurso = new WebGrid(rowsPerPage: int.MaxValue);
-    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[1].CantidadPorPagina);
+    WebGrid gridCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[0].CantidadPorPagina
+                        , fieldNamePrefix: "Curso_"
+                        //, pageFieldName: "Curso_"
+                        //, sortFieldName: "Curso_"
+                        //, sortDirectionFieldName: "Curso_"
+                        );
+    WebGrid gridNotCurso = new WebGrid(rowsPerPage: Model.ListEjerciciosGrillaModel[1].CantidadPorPagina
+                        , fieldNamePrefix: "NotCurso_"
+                        //, pageFieldName: "NotCurso_"
+                        //, sortFieldName: "NotCurso_"
+                        //, sortDirectionFieldName: "NotCurso_"
+                        );
 
     gridCurso.Bind(Model.ListEjerciciosGrillaModel[0].Ejercicios, autoSortAndPage: false, rowCount: Model.ListEjerciciosGrillaModel[0].Cantidad);
 
@@ -84,16 +94,17 @@
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 600);
         });
 
+    
         
         var sortcol = '@gridCurso.SortColumn';
 
         if (sortcol != '')
-            $('thead > tr > th > a[href*="sort=@gridCurso.SortColumn"]').parent().addClass('@(gridCurso.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
+            $('div#contenedor-gridA > table > thead > tr > th > a[href*="Curso_sort=@gridCurso.SortColumn"]').parent().addClass('@(gridCurso.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
 
         var sortcolNotCurso = '@gridNotCurso.SortColumn';
 
         if (sortcolNotCurso != '')
-            $('thead > tr > th > a[href*="sort=@gridNotCurso.SortColumn"]').parent().addClass('@(gridNotCurso.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
+            $('div#contenedor-gridNA > table > thead > tr > th > a[href*="NotCurso_sort=@gridNotCurso.SortColumn"]').parent().addClass('@(gridNotCurso.SortDirection == SortDirection.Descending ? "grid_sort_asc" : "grid_sort_desc")');
 
         //FuncionesAutorizadas('@funcionesAutorizadas');
     });
@@ -119,7 +130,7 @@
                 lastText: " >>",
             columns: new[] {
             gridCurso.Column("EjercicioId", header: "Identificador"),
-            gridCurso.Column("Enunciado", header: "Enunciado"),
+            gridCurso.Column("Nombre", header: "Nombre"),
             gridCurso.Column("NivelEjercicio", header: "Nivel"),
             gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),    
             gridCurso.Column("", 
@@ -154,15 +165,7 @@
                 <table>
                 <tr>
                     <td><div class="label">Nombre</div></td>
-                    <td valign="top">@Html.TextBox("nombreNA", null, new { maxlength = 50, autocomplete = "off" })</td>
-                    <td><div class="label">Estado</div></td>
-                    <td valign="top">               
-                            @Html.DropDownList("estadoEjercicioNA", listaEstadosEjercicio.Select(option => new SelectListItem
-                       {
-                           Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                           Value = option.EstadoEjercicioId.ToString()
-                       }), new { @style = "display:none" })
-                    </td>
+                    <td valign="top">@Html.TextBox("nombreNA", null, new { maxlength = 50, autocomplete = "off" })</td>                    
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
                             @Html.DropDownList("nivelEjercicioNA", listaNivelesEjercicio.Select(option => new SelectListItem
@@ -196,7 +199,7 @@
                 lastText: " >>",
             columns: new[] {
             gridNotCurso.Column("EjercicioId", header: "Identificador"),
-            gridNotCurso.Column("Enunciado", header: "Enunciado"),
+            gridNotCurso.Column("Nombre", header: "Nombre"),
             gridNotCurso.Column("NivelEjercicio", header: "Nivel"),
             gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),
             gridNotCurso.Column("", 

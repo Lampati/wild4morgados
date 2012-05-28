@@ -3,6 +3,8 @@
 @{
     Layout = null;  
     ViewBag.Title = "Editar";
+
+    bool mostrarBotonCancelar = !(ViewBag.EsMiPerfil);
 }
 
 <h2>Editar</h2>
@@ -18,9 +20,13 @@
                 <div>
                     <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
                 </div>
-                <div >
-                     <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
-                </div>
+                @if (mostrarBotonCancelar)
+                {
+                    
+                    <div >
+                         <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
+                    </div>
+                }
             </div>
 }
 <div class="update-message-box">
