@@ -20,12 +20,12 @@ namespace WebProgramAR.MailSender
             SmtpClient smtpClient = new SmtpClient("smtp.program-ar.com.ar", SmtpPort);
 
             MailMessage message = new MailMessage();
-            MailAddress fromAddress = new MailAddress("colo@program-ar.com.ar");
+            MailAddress fromAddress = new MailAddress("admin@program-ar.com.ar");
 
 
             //smtpClient.Host = "216.59.32.145";
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.Credentials = new NetworkCredential("colo@program-ar.com.ar", "Pr0gr4m4r");
+            smtpClient.Credentials = new NetworkCredential("admin@program-ar.com.ar", "Pr0gr4m4r");
             smtpClient.EnableSsl = false;
 
             message.From = fromAddress;
