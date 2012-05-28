@@ -105,5 +105,10 @@ namespace WebProgramAR.Negocio
                 throw new CargarEjercicioArchivoException("El ejercicio no estaba valido para subir a web. Por favor guarde el ejercicio en formato para subir a web, siga los pasos en el aplicativo, y luego vuelva a subirlo");
             }
         }
+
+        public static bool ExisteEjercicioById(int ejercicioId)
+        {
+            return EjercicioDA.ExisteEjercicioById(ejercicioId);
+        }
     }
 }

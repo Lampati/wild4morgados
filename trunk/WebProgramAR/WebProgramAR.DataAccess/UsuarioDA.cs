@@ -270,5 +270,17 @@ namespace WebProgramAR.DataAccess
         
 
         #endregion
+
+        public static bool ExisteUsuarioById(int id)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Usuario> query = from u in db.Usuarios
+                                          where u.UsuarioId == id
+                                          select u;
+
+                return query.ToList().Count == 1;
+            }
+        }
     }
 }

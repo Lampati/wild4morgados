@@ -182,9 +182,16 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
-                ViewBag.EsDelete = false;
-                return View(e);
+                if (EjercicioNegocio.ExisteEjercicioById(id))
+                {
+                    Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                    ViewBag.EsDelete = false;
+                    return View(e);
+                }
+                else
+                {
+                    throw new Exception("El ejercicio seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -281,9 +288,16 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Initilization();
-                Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
-                return View("Edit", e);
+                if (EjercicioNegocio.ExisteEjercicioById(id))
+                {
+                    Initilization();
+                    Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                    return View("Edit", e);
+                }
+                else
+                {
+                    throw new Exception("El ejercicio seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -293,15 +307,22 @@ namespace WebProgramAR.Controllers
 
         //
         // POST: /Ejercicio/Edit/5
-
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(Ejercicio ejercicio)
         {
             // TODO: Add update logic here
             if (ModelState.IsValid)
             {
-                EjercicioNegocio.Modificar(ejercicio);
-                return Content(Boolean.TrueString);
+                if (EjercicioNegocio.ExisteEjercicioById(ejercicio.EjercicioId))
+                {
+                    EjercicioNegocio.Modificar(ejercicio);
+                    return Content(Boolean.TrueString);
+                }
+                else
+                {
+                    throw new Exception("El ejercicio sobre el cual se estaba trabajando fue borrado.");
+                }
             }else
             {
                 Initilization();
@@ -317,9 +338,16 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
-                ViewBag.EsDelete = true;
-                return View(e);
+                if (EjercicioNegocio.ExisteEjercicioById(id))
+                {
+                    Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                    ViewBag.EsDelete = true;
+                    return View(e);
+                }
+                else
+                {
+                    throw new Exception("El ejercicio seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -335,10 +363,17 @@ namespace WebProgramAR.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-                EjercicioNegocio.Eliminar(ejercicio.EjercicioId);
+                if (EjercicioNegocio.ExisteEjercicioById(ejercicio.EjercicioId))
+                {
+                    // TODO: Add delete logic here
+                    EjercicioNegocio.Eliminar(ejercicio.EjercicioId);
 
-                return Content(Boolean.TrueString);
+                    return Content(Boolean.TrueString);
+                }
+                else
+                {
+                    throw new Exception("El ejercicio sobre el cual se estaba trabajando fue borrado.");
+                }
             }
             catch
             {
@@ -463,13 +498,28 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                ModerarEjercicioModel model = new ModerarEjercicioModel();
-                model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
-                model.Aceptado = false;
-                model.MensajeModeracion = string.Empty;
-                ViewBag.EsDelete = false;
+                if (EjercicioNegocio.ExisteEjercicioById(id))
+                {
+                    ModerarEjercicioModel model = new ModerarEjercicioModel();
+                    model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
 
-                return View(model);
+                    if (model.Ejercicio.EstadoEjercicioId != 1)
+                    {
+                        model.Aceptado = false;
+                        model.MensajeModeracion = string.Empty;
+                        ViewBag.EsDelete = false;
+
+                        return View(model);
+                    }
+                    else
+                    {
+                        throw new Exception("El ejercicio seleccionado ya fue moderado.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("El ejercicio seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -486,38 +536,53 @@ namespace WebProgramAR.Controllers
 
             try
             {
-                Ejercicio ejercicio = EjercicioNegocio.GetEjercicioByIdOnlyUser(model.Ejercicio.EjercicioId);
-
-                MembershipUser membUsuario = Membership.GetUser(ejercicio.Usuario.UsuarioNombre);
-                Ejercicio ejercicioFunca = new Ejercicio();
-
-                ejercicioFunca.EjercicioId = ejercicio.EjercicioId;
-                ejercicioFunca.EstadoEjercicioId = ejercicio.EstadoEjercicioId;
-                ejercicioFunca.Enunciado = ejercicio.Enunciado;
-                ejercicioFunca.SolucionTexto = ejercicio.SolucionTexto;
-                ejercicioFunca.Global = ejercicio.Global;
-
-                ejercicioFunca.MensajeModeracion = new MensajeModeracion();
-                //ejercicioFunca.MensajeModeracion.MensajeModeracionId = null;
-                ejercicioFunca.MensajeModeracion.EjercicioId = ejercicio.EjercicioId;
-                ejercicioFunca.MensajeModeracion.Mensaje = model.MensajeModeracion;
-
-                EstadoEjercicio estado;
-
-                if (model.Aceptado)
+                if (EjercicioNegocio.ExisteEjercicioById(model.Ejercicio.EjercicioId))
                 {
-                    //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Aprobado"), "Aprobado");
-                    estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
-                    
+                    if (EjercicioNegocio.GetEjercicioById(model.Ejercicio.EjercicioId).EstadoEjercicioId != 1)
+                    {
+
+                        Ejercicio ejercicio = EjercicioNegocio.GetEjercicioByIdOnlyUser(model.Ejercicio.EjercicioId);
+
+                        MembershipUser membUsuario = Membership.GetUser(ejercicio.Usuario.UsuarioNombre);
+                        Ejercicio ejercicioFunca = new Ejercicio();
+
+                        ejercicioFunca.EjercicioId = ejercicio.EjercicioId;
+                        ejercicioFunca.EstadoEjercicioId = ejercicio.EstadoEjercicioId;
+                        ejercicioFunca.Enunciado = ejercicio.Enunciado;
+                        ejercicioFunca.SolucionTexto = ejercicio.SolucionTexto;
+                        ejercicioFunca.Global = ejercicio.Global;
+
+                        ejercicioFunca.MensajeModeracion = new MensajeModeracion();
+                        //ejercicioFunca.MensajeModeracion.MensajeModeracionId = null;
+                        ejercicioFunca.MensajeModeracion.EjercicioId = ejercicio.EjercicioId;
+                        ejercicioFunca.MensajeModeracion.Mensaje = model.MensajeModeracion;
+
+                        EstadoEjercicio estado;
+
+                        if (model.Aceptado)
+                        {
+                            //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Aprobado"), "Aprobado");
+                            estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
+
+                        }
+                        else
+                        {
+                            //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Desaprobado"), "Desaprobado");
+                            estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Desaprobado");
+                        }
+
+                        ejercicioFunca.EstadoEjercicioId = estado.EstadoEjercicioId;
+                        EjercicioNegocio.ModificarEstado(ejercicioFunca);
+                    }
+                    else
+                    {
+                        throw new Exception("El ejercicio que se intento moderar ya fue moderado.");
+                    }
                 }
                 else
                 {
-                    //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Desaprobado"), "Desaprobado");
-                    estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Desaprobado");
+                    throw new Exception("El ejercicio sobre el cual se estaba trabajando fue borrado.");
                 }
-
-                ejercicioFunca.EstadoEjercicioId = estado.EstadoEjercicioId;
-                EjercicioNegocio.ModificarEstado(ejercicioFunca);
             }
             catch (Exception)
             {
