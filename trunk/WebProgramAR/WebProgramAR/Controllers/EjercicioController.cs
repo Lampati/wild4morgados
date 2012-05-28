@@ -116,12 +116,12 @@ namespace WebProgramAR.Controllers
             return datos;
         }
 
-        public ActionResult ObtenerEjercicioGrillaNotCurso(int pageNA = 1, string sortNA = "Nombre", string sortDirNA = "ASC", string nombreNA = "", int usuarioIdNA = -1, int cursoIdNA = -1,  int nivelEjercicioNA = -1, bool global = true)
+        public ActionResult ObtenerEjercicioGrillaNotCurso(int pageNA = 1, string sortNA = "Nombre", string sortDirNA = "ASC", string nombreNA = "", int usuarioIdNA = -1, int cursoIdNA = -1, int estadoEjercicioNA = -1, int nivelEjercicioNA = -1, bool global = true)
         {
-            var datos = ObtenerEjercicioGrillaModelNotCurso(pageNA, sortNA, sortDirNA, nombreNA, usuarioIdNA, cursoIdNA, nivelEjercicioNA, global);
+            var datos = ObtenerEjercicioGrillaModelNotCurso(pageNA, sortNA, sortDirNA, nombreNA, usuarioIdNA, cursoIdNA, estadoEjercicioNA, nivelEjercicioNA, global);
             return View(datos);
         }
-        private EjercicioGrillaModel ObtenerEjercicioGrillaModelNotCurso(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int nivelEjercicio, bool global)
+        private EjercicioGrillaModel ObtenerEjercicioGrillaModelNotCurso(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
@@ -340,7 +340,7 @@ namespace WebProgramAR.Controllers
             }
             catch
             {
-                return View();
+                return Content(Boolean.FalseString);
             }
         }
 
@@ -406,6 +406,7 @@ namespace WebProgramAR.Controllers
 
             Curso curso = CursoNegocio.GetCursoById(id);
 
+            int idEjercicioAprobado = 2;
             //EjercicioGrillaModel ejAsociados = new EjercicioGrillaModel();
             //ejAsociados.Ejercicios = curso.Ejercicios.ToList();
             //ejAsociados.Cantidad = curso.Ejercicios.ToList().Count;
@@ -415,8 +416,8 @@ namespace WebProgramAR.Controllers
             datos.ListEjerciciosGrillaModel = new List<EjercicioGrillaModel>();
             datos.cursoId = cursoId;
             //datos.ListEjerciciosGrillaModel.Add(ejAsociados);
-            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(Curso_page, Curso_sort, Curso_sortDir, nombreA, usuarioId, cursoId, 2, nivelEjercicioA, global));
-            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(NotCurso_page, NotCurso_sort, NotCurso_sortDir, nombreNA, usuarioId, cursoId, nivelEjercicioNA, global));
+            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(Curso_page, Curso_sort, Curso_sortDir, nombreA, usuarioId, cursoId, idEjercicioAprobado, nivelEjercicioA, global));
+            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(NotCurso_page, NotCurso_sort, NotCurso_sortDir, nombreNA, usuarioId, cursoId, idEjercicioAprobado, nivelEjercicioNA, global));
             ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
             return View(datos);
