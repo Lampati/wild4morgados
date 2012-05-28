@@ -64,8 +64,15 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Curso c = CursoNegocio.GetCursoById(id);
-                return View(c);
+                if (CursoNegocio.ExisteCursoById(id))
+                {
+                    Curso c = CursoNegocio.GetCursoById(id);
+                    return View(c);
+                }
+                else
+                {
+                    throw new Exception("El curso seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -119,8 +126,15 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Curso c = CursoNegocio.GetCursoById(id);
-                return View("Edit", c);
+                if (CursoNegocio.ExisteCursoById(id))
+                {
+                    Curso c = CursoNegocio.GetCursoById(id);
+                    return View("Edit", c);
+                }
+                else
+                {
+                    throw new Exception("El curso seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -136,8 +150,15 @@ namespace WebProgramAR.Controllers
                 // TODO: Add update logic here
                 if (ModelState.IsValid)
                 {
-                    CursoNegocio.Modificar(curso);
-                    return Content(Boolean.TrueString);
+                    if (CursoNegocio.ExisteCursoById(curso.CursoId))
+                    {
+                        CursoNegocio.Modificar(curso);
+                        return Content(Boolean.TrueString);
+                    }
+                    else
+                    {
+                        throw new Exception("El curso sobre el cual se estaba trabajando fue borrado.");
+                    }
                 }
                 else
                 {
@@ -153,22 +174,30 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Curso c = CursoNegocio.GetCursoById(id);
 
-                CursoAsociarModel model = new CursoAsociarModel();
-                model.Curso = c;
+                if (CursoNegocio.ExisteCursoById(id))
+                {
+                    Curso c = CursoNegocio.GetCursoById(id);
 
-                List<int> listaEjerciciosId = new List<int>();
-                
-                foreach (Ejercicio item in c.Ejercicios)
-	            {
-                    listaEjerciciosId.Add(item.EjercicioId);		 
-	            }
+                    CursoAsociarModel model = new CursoAsociarModel();
+                    model.Curso = c;
 
-                model.Curso.Ejercicios.Clear();
-                model.EjerciciosId = listaEjerciciosId.ToArray();
+                    List<int> listaEjerciciosId = new List<int>();
 
-                return View("AsociarEjercicios", model);
+                    foreach (Ejercicio item in c.Ejercicios)
+                    {
+                        listaEjerciciosId.Add(item.EjercicioId);
+                    }
+
+                    model.Curso.Ejercicios.Clear();
+                    model.EjerciciosId = listaEjerciciosId.ToArray();
+
+                    return View("AsociarEjercicios", model);
+                }
+                else
+                {
+                    throw new Exception("El curso seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -204,11 +233,25 @@ namespace WebProgramAR.Controllers
             // TODO: Add update logic here
             if (ModelState.IsValid)
             {
-                Curso curso = CursoNegocio.GetCursoById(cursoId);
+                if (CursoNegocio.ExisteCursoById(cursoId))
+                {
+                    if (EjercicioNegocio.ExisteEjercicioById(ejercicioId))
+                    {
+                        Curso curso = CursoNegocio.GetCursoById(cursoId);
 
-                CursoNegocio.Modificar(curso, new int[] { ejercicioId }, true);
+                        CursoNegocio.Modificar(curso, new int[] { ejercicioId }, true);
 
-                return Json(new { resultado = true }, JsonRequestBehavior.AllowGet);
+                        return Json(new { resultado = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        throw new Exception("El ejercicio que se intento asociar fue borrado.");
+                    }
+                }
+                else
+	            {
+                    throw new Exception("El curso sobre el cual se estaba trabajando fue borrado.");
+	            }
             }
             else
             {
@@ -222,11 +265,25 @@ namespace WebProgramAR.Controllers
             // TODO: Add update logic here
             if (ModelState.IsValid)
             {
-                Curso curso = CursoNegocio.GetCursoById(cursoId);
+                if (CursoNegocio.ExisteCursoById(cursoId))
+                {
+                    if (EjercicioNegocio.ExisteEjercicioById(ejercicioId))
+                    {
+                        Curso curso = CursoNegocio.GetCursoById(cursoId);
 
-                CursoNegocio.Modificar(curso, new int[] { ejercicioId }, false);
+                        CursoNegocio.Modificar(curso, new int[] { ejercicioId }, false);
 
-                return Json(new { resultado = true }, JsonRequestBehavior.AllowGet);
+                        return Json(new { resultado = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        throw new Exception("El ejercicio que se intento desasociar fue borrado.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("El curso sobre el cual se estaba trabajando fue borrado.");
+                }
             }
             else
             {
@@ -242,8 +299,15 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Curso c = CursoNegocio.GetCursoById(id);
-                return View("Delete", c);
+                if (CursoNegocio.ExisteCursoById(id))
+                {
+                    Curso c = CursoNegocio.GetCursoById(id);
+                    return View("Delete", c);
+                }
+                else
+                {
+                    throw new Exception("El curso seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -257,8 +321,15 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Delete(Curso curso)
         {
-            CursoNegocio.Eliminar(curso.CursoId);
-            return Content(Boolean.TrueString);
+            if (CursoNegocio.ExisteCursoById(curso.CursoId))
+            {
+                CursoNegocio.Eliminar(curso.CursoId);
+                return Content(Boolean.TrueString);
+            }
+            else
+            {
+                throw new Exception("Se intento borrar un curso que no existía mas.");
+            }
             
         }
 

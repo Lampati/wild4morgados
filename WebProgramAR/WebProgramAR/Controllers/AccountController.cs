@@ -152,15 +152,22 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Usuario usuario = UsuarioNegocio.GetUsuarioById(id);
+                if (UsuarioNegocio.ExisteUsuarioById(id))
+                {
+                    Usuario usuario = UsuarioNegocio.GetUsuarioById(id);
 
 
-                ChangePasswordModel model = new ChangePasswordModel();
-                model.EsResetPassword = true;
-                model.OldPassword = "noValueInserted";
-                model.UserName = usuario.UsuarioNombre;
+                    ChangePasswordModel model = new ChangePasswordModel();
+                    model.EsResetPassword = true;
+                    model.OldPassword = "noValueInserted";
+                    model.UserName = usuario.UsuarioNombre;
 
-                return View("ChangePassword", model);
+                    return View("ChangePassword", model);
+                }
+                else
+                {
+                    throw new Exception("El usuario seleccionado fue borrado.");
+                }
             }
             else
             {
@@ -178,7 +185,7 @@ namespace WebProgramAR.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                
                 // ChangePassword will throw an exception rather
                 // than return false in certain failure scenarios.
                 bool changePasswordSucceeded;

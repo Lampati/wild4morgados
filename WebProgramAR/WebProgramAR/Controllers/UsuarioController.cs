@@ -75,12 +75,19 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Usuario u = UsuarioNegocio.GetUsuarioById(id);
+                if (UsuarioNegocio.ExisteUsuarioById(id))
+                {
+                    Usuario u = UsuarioNegocio.GetUsuarioById(id);
 
-                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
-                u.Email = membUser.Email;
+                    MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                    u.Email = membUser.Email;
 
-                return View(u);
+                    return View(u);
+                }
+                else
+                {
+                    throw new Exception("El usuario seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -157,15 +164,22 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Usuario u = UsuarioNegocio.GetUsuarioById(id);
+                if (UsuarioNegocio.ExisteUsuarioById(id))
+                {
+                    Usuario u = UsuarioNegocio.GetUsuarioById(id);
 
-                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
-                u.Email = membUser.Email;
+                    MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                    u.Email = membUser.Email;
 
-                ViewBag.EsMiPerfil = esMiPerfil;
-                ViewBag.descripcionLocalidad = Negocio.LocalidadNegocio.GetLocalidadById(u.LocalidadId).Descripcion;
-                Initilization();
-                return View("Edit", u);
+                    ViewBag.EsMiPerfil = esMiPerfil;
+                    ViewBag.descripcionLocalidad = Negocio.LocalidadNegocio.GetLocalidadById(u.LocalidadId).Descripcion;
+                    Initilization();
+                    return View("Edit", u);
+                }
+                else
+                {
+                    throw new Exception("El usuario seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -198,67 +212,82 @@ namespace WebProgramAR.Controllers
             bool error = false;
             string errorMensaje = "";
             if (ModelState.IsValid){
-                ActualizarRolesSiCorresponde(usuario);
-                MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
+                if (UsuarioNegocio.ExisteUsuarioById(usuario.UsuarioId))
+                {
+                    ActualizarRolesSiCorresponde(usuario);
+                    MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
 
-                /*VALIDACION DE PAIS CORRECTO*/
-                //flanzani 27/05/2012
-                //Modifico las validaciones pq el GetById tira excepcion
-                //if (usuario.PaisId==null ||(PaisNegocio.GetPaisById(usuario.PaisId) == null))
-                if (usuario.PaisId == null || usuario.PaisId.Equals("-1"))
-                {
-                    error = true;
-                    errorMensaje = "Debe seleccionar un pais";
-                }
-                /*VALIDACION DE PROVINCIA CORRECTO*/
-                //flanzani 27/05/2012
-                //Modifico las validaciones pq el GetById tira excepcion
-                //if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
-                if (!error && (usuario.ProvinciaId == null || usuario.ProvinciaId.Equals("-1")))
-                {
-                    error = true;
-                    errorMensaje = "Debe seleccionar una provincia";
-                }
-                /*VALIDACION DE LOCALIDAD CORRECTO*/
-                //flanzani 27/05/2012
-                //Modifico las validaciones pq el GetById tira excepcion
-                //if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
-                if (!error && (usuario.LocalidadId == null || usuario.LocalidadId.Equals("-1")))
-                {
-                    error = true;
-                    errorMensaje = "Debe seleccionar una localidad correcta";
-                }
-
-                string mailViejo = membUser.Email;
-                bool mailCambiado = false;
-                if  ( string.Compare( usuario.Email, membUser.Email, true) != 0){
-                    membUser.Email = usuario.Email;
-                    try{
-                        Membership.UpdateUser(membUser);
-                        mailCambiado = true;
-                    }
-                    catch (Exception){
+                    /*VALIDACION DE PAIS CORRECTO*/
+                    //flanzani 27/05/2012
+                    //Modifico las validaciones pq el GetById tira excepcion
+                    //if (usuario.PaisId==null ||(PaisNegocio.GetPaisById(usuario.PaisId) == null))
+                    if (usuario.PaisId == null || usuario.PaisId.Equals("-1"))
+                    {
                         error = true;
-                        errorMensaje = "Error al intentar modificar el mail. Ese mail ya estaba tomado";
+                        errorMensaje = "Debe seleccionar un pais";
                     }
-                }
-                if (!error){
-                    try{
-                        UsuarioNegocio.Modificar(usuario);
+                    /*VALIDACION DE PROVINCIA CORRECTO*/
+                    //flanzani 27/05/2012
+                    //Modifico las validaciones pq el GetById tira excepcion
+                    //if (usuario.ProvinciaId == null || (ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId) == null))
+                    if (!error && (usuario.ProvinciaId == null || usuario.ProvinciaId.Equals("-1")))
+                    {
+                        error = true;
+                        errorMensaje = "Debe seleccionar una provincia";
                     }
-                    catch (Exception){
-                        if (mailCambiado){
-                            membUser.Email = mailViejo;
-                            Membership.UpdateUser(membUser);
-                        }
-                        return Content(Boolean.FalseString);
+                    /*VALIDACION DE LOCALIDAD CORRECTO*/
+                    //flanzani 27/05/2012
+                    //Modifico las validaciones pq el GetById tira excepcion
+                    //if (usuario.LocalidadId == null || (LocalidadNegocio.GetLocalidadById(usuario.LocalidadId) == null))
+                    if (!error && (usuario.LocalidadId == null || usuario.LocalidadId.Equals("-1")))
+                    {
+                        error = true;
+                        errorMensaje = "Debe seleccionar una localidad correcta";
                     }
-                }
-                else{
-                    return Content(errorMensaje);
-                }
 
-                return Content(Boolean.TrueString);
+                    string mailViejo = membUser.Email;
+                    bool mailCambiado = false;
+                    if (string.Compare(usuario.Email, membUser.Email, true) != 0)
+                    {
+                        membUser.Email = usuario.Email;
+                        try
+                        {
+                            Membership.UpdateUser(membUser);
+                            mailCambiado = true;
+                        }
+                        catch (Exception)
+                        {
+                            error = true;
+                            errorMensaje = "Error al intentar modificar el mail. Ese mail ya estaba tomado";
+                        }
+                    }
+                    if (!error)
+                    {
+                        try
+                        {
+                            UsuarioNegocio.Modificar(usuario);
+                        }
+                        catch (Exception)
+                        {
+                            if (mailCambiado)
+                            {
+                                membUser.Email = mailViejo;
+                                Membership.UpdateUser(membUser);
+                            }
+                            return Content(Boolean.FalseString);
+                        }
+                    }
+                    else
+                    {
+                        return Content(errorMensaje);
+                    }
+
+                    return Content(Boolean.TrueString);
+                }
+                else
+                {
+                    throw new Exception("El usuario sobre el cual se estaba trabajando fue borrado.");
+                }
             }
             else
             {
@@ -316,10 +345,17 @@ namespace WebProgramAR.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                Usuario u = UsuarioNegocio.GetUsuarioById(id);
-                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
-                u.Email = membUser.Email;
-                return View(u);
+                if (UsuarioNegocio.ExisteUsuarioById(id))
+                {
+                    Usuario u = UsuarioNegocio.GetUsuarioById(id);
+                    MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                    u.Email = membUser.Email;
+                    return View(u);
+                }
+                else
+                {
+                    throw new Exception("El usuario seleccionado no existe mas.");
+                }
             }
             else
             {
@@ -337,8 +373,15 @@ namespace WebProgramAR.Controllers
             
                 try
                 {
-                    UsuarioNegocio.Eliminar(u);
-                    return RedirectToAction("Index");
+                    if (UsuarioNegocio.ExisteUsuarioById(u.UsuarioId))
+                    {
+                        UsuarioNegocio.Eliminar(u);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        throw new Exception("El usuario sobre el cual se estaba trabajando fue borrado.");
+                    }
                 }
                 catch
                 {

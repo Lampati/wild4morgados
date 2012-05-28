@@ -374,5 +374,17 @@ namespace WebProgramAR.DataAccess
                 db.SaveChanges();
             }
         }
+
+        public static bool ExisteEjercicioById(int ejercicioId)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios
+                                          where u.EjercicioId == ejercicioId
+                                          select u;
+
+                return query.ToList().Count == 1;
+            }
+        }
     }
 }

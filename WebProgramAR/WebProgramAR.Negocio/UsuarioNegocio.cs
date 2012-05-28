@@ -95,5 +95,10 @@ namespace WebProgramAR.Negocio
                 Roles.AddUserToRole(usuario.UsuarioNombre, Globales.Globals.TiposRoles.administrador.ToString());
             }
         }
+
+        public static bool ExisteUsuarioById(int id)
+        {
+            return UsuarioDA.ExisteUsuarioById(id);
+        }
     }
 }
