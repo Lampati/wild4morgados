@@ -183,6 +183,7 @@ namespace WebProgramAR.Controllers
             if (Request.IsAjaxRequest())
             {
                 Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                ViewBag.EsDelete = false;
                 return View(e);
             }
             else
@@ -317,6 +318,7 @@ namespace WebProgramAR.Controllers
             if (Request.IsAjaxRequest())
             {
                 Ejercicio e = EjercicioNegocio.GetEjercicioById(id);
+                ViewBag.EsDelete = true;
                 return View(e);
             }
             else
@@ -394,33 +396,43 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Curso/Details/5
 
+        [Authorize]
         public ActionResult AsociarCursoEjercicio(int id, int Curso_page = 1, string Curso_sort = "Nombre", string Curso_sortDir = "ASC",
              int usuarioId = -1, int cursoId = -1, string nombreA = "",
              int nivelEjercicioA = -1, bool global = false,
              int NotCurso_page = 1, string NotCurso_sort = "Nombre", string NotCurso_sortDir = "ASC",
              string nombreNA = "",  int nivelEjercicioNA = -1)
         {
-            ListEjercicioGrillaModel datos = new ListEjercicioGrillaModel();
-            Usuario userLogueado = GetUsuarioLogueado();
-            cursoId = id;
+            
+            if (CursoNegocio.ExisteCursoById(id))
+            {
 
-            Curso curso = CursoNegocio.GetCursoById(id);
+                ListEjercicioGrillaModel datos = new ListEjercicioGrillaModel();
+                Usuario userLogueado = GetUsuarioLogueado();
+                cursoId = id;
 
-            int idEjercicioAprobado = 2;
-            //EjercicioGrillaModel ejAsociados = new EjercicioGrillaModel();
-            //ejAsociados.Ejercicios = curso.Ejercicios.ToList();
-            //ejAsociados.Cantidad = curso.Ejercicios.ToList().Count;
-            //ejAsociados.CantidadPorPagina = 10;
-            //ejAsociados.PaginaActual = Curso_page;
+                Curso curso = CursoNegocio.GetCursoById(id);
 
-            datos.ListEjerciciosGrillaModel = new List<EjercicioGrillaModel>();
-            datos.cursoId = cursoId;
-            //datos.ListEjerciciosGrillaModel.Add(ejAsociados);
-            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(Curso_page, Curso_sort, Curso_sortDir, nombreA, usuarioId, cursoId, idEjercicioAprobado, nivelEjercicioA, global));
-            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(NotCurso_page, NotCurso_sort, NotCurso_sortDir, nombreNA, usuarioId, cursoId, idEjercicioAprobado, nivelEjercicioNA, global));
-            ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-            ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
-            return View(datos);
+                int idEjercicioAprobado = 2;
+                //EjercicioGrillaModel ejAsociados = new EjercicioGrillaModel();
+                //ejAsociados.Ejercicios = curso.Ejercicios.ToList();
+                //ejAsociados.Cantidad = curso.Ejercicios.ToList().Count;
+                //ejAsociados.CantidadPorPagina = 10;
+                //ejAsociados.PaginaActual = Curso_page;
+
+                datos.ListEjerciciosGrillaModel = new List<EjercicioGrillaModel>();
+                datos.cursoId = cursoId;
+                //datos.ListEjerciciosGrillaModel.Add(ejAsociados);
+                datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(Curso_page, Curso_sort, Curso_sortDir, nombreA, usuarioId, cursoId, idEjercicioAprobado, nivelEjercicioA, global));
+                datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(NotCurso_page, NotCurso_sort, NotCurso_sortDir, nombreNA, usuarioId, cursoId, idEjercicioAprobado, nivelEjercicioNA, global));
+                ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+                ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
+                return View(datos);
+            }
+            else
+            {
+                throw new Exception("El curso especificado no existe. Por favor utilice la pagina para acceder a la pagina");
+            }
         }
 
 
@@ -455,7 +467,7 @@ namespace WebProgramAR.Controllers
                 model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
                 model.Aceptado = false;
                 model.MensajeModeracion = string.Empty;
-
+                ViewBag.EsDelete = false;
 
                 return View(model);
             }

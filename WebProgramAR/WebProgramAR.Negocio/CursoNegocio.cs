@@ -61,5 +61,10 @@ namespace WebProgramAR.Negocio
         {
             CursoDA.EliminarCursosDeUsuario(idUsuario);
         }
+
+        public static bool ExisteCursoById(int id)
+        {
+            return CursoDA.ExisteCursoById(id);
+        }
     }
 }

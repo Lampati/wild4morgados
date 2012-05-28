@@ -62,5 +62,21 @@
 </div>
 }
 
+<div class="fila">
+@if (Model.Cursoes != null && Model.Cursoes.ToList().Count > 0)
+{
+    <div class="display-label-delete">NOTA:</div>
+    if (ViewBag.EsDelete)
+    {
+        <div class="display-field-delete">El ejercicio se encuentra asociado a al menos un curso. Si lo elimina, sera borrado del curso.</div>
+    }
+    else
+    {
+        <div class="display-field-delete">El ejercicio se encuentra asociado a al menos un curso.</div>
+    }
+}
+  
+</div>
+
          
 
