@@ -5,3 +5,10 @@
     Booleano,
     Vector
 }
+
+public enum eTipoVector
+{
+    Numero,
+    Texto,
+    Booleano
+}
