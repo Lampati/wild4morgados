@@ -10,6 +10,7 @@ namespace LibreriaActividades
     public static class Extension
     {
         private static StringBuilder code;
+        private static int profundidadIdentacion = 0;
 
         public static StringBuilder Code
         {
@@ -22,6 +23,24 @@ namespace LibreriaActividades
             set
             {
                 code = value;
+            }
+        }
+
+        public static int ProfundidadIdentacion
+        {
+            get { return profundidadIdentacion; }
+            set { profundidadIdentacion = value; }
+        }
+
+        public static string Tabs
+        {
+            get
+            {
+                string tabs = String.Empty;
+                for (int i = 0; i < Extension.ProfundidadIdentacion; i++)
+                    tabs += "\t";
+
+                return tabs;
             }
         }
 

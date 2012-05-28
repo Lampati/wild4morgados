@@ -3,5 +3,28 @@
                       xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
                       xmlns:sacdt="clr-namespace:System.Activities.Core.Presentation.Themes;assembly=System.Activities.Core.Presentation"
                       xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation">
+    <sap:ActivityDesigner.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type sap:WorkflowItemsPresenter}">
+                <Style.Setters>
+                    <Setter Property="HintText" Value="Arrastrar actividades acá"/>
+                </Style.Setters>
+            </Style>
+        </ResourceDictionary>
+    </sap:ActivityDesigner.Resources>
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <ImageDrawing>
+                    <ImageDrawing.Rect>
+                        <Rect Location="0,0" Size="16,16" ></Rect>
+                    </ImageDrawing.Rect>
+                    <ImageDrawing.ImageSource>
+                        <BitmapImage UriSource="Secuencia.png" ></BitmapImage>
+                    </ImageDrawing.ImageSource>
+                </ImageDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
     <ContentPresenter x:Uid="ContentPresenter_1" Style="{x:Static sacdt:DesignerStylesDictionary.SequenceStyle}" Content="{Binding}" />
     </sap:ActivityDesigner>

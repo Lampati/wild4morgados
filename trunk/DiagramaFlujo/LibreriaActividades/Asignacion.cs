@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace LibreriaActividades
 {
     [Designer(typeof(AsignacionDesigner))]
+    [ToolboxBitmap(typeof(Asignacion), "Resources.Asignacion.png")]
     public class Asignacion : ActividadBase
     {
         public string LadoIzquierdo { get; set; }
@@ -22,7 +24,7 @@ namespace LibreriaActividades
             if (String.IsNullOrEmpty(this.LadoIzquierdo) || String.IsNullOrEmpty(this.LadoDerecho))
                 return;
             
-            Extension.Code.AppendLine(String.Format("{0} := {1};", this.LadoIzquierdo, this.LadoDerecho));
+            Extension.Code.AppendLine(String.Format(Extension.Tabs + "{0} := {1};", this.LadoIzquierdo, this.LadoDerecho));
         }
     }
 }

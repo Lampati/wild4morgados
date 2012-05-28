@@ -42,6 +42,7 @@
     <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Xaml" />
@@ -56,6 +57,7 @@
       <DependentUpon>AsignacionDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="ComboBoxItemConverter.cs" />
+    <Compile Include="ComboBoxVectorItemConverter.cs" />
     <Compile Include="Declaracion.cs" />
     <Compile Include="DeclaracionDesigner.xaml.cs">
       <DependentUpon>DeclaracionDesigner.xaml</DependentUpon>
@@ -88,6 +90,10 @@
     <Compile Include="Extension.cs" />
   </ItemGroup>
   <ItemGroup>
+    <XamlAppdef Include="Activity1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </XamlAppdef>
     <Page Include="AsignacionDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +126,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Mientras.png" />
+    <Resource Include="Secuencia.png" />
+    <Resource Include="Si.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Secuencia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Si.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Mientras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asignacion.png" />
+    <Resource Include="LlamarProcedimiento.png" />
+    <Resource Include="Mostrar.png" />
+    <EmbeddedResource Include="Resources\Asignacion.png" />
+    <EmbeddedResource Include="Resources\LlamarProcedimiento.png" />
+    <EmbeddedResource Include="Resources\Mostrar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Declaracion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Declaracion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

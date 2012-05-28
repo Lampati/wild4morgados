@@ -6,10 +6,12 @@ using System.Activities;
 using System.ComponentModel;
 using System.Activities.Statements;
 using System.Collections.ObjectModel;
+using System.Drawing;
 
 namespace LibreriaActividades
 {
     //[Designer("System.Activities.Core.Presentation.SequenceDesigner, System.Activities.Core.Presentation")]
+    [ToolboxBitmap(typeof(Secuencia), "Resources.Secuencia.png")]
     public class Secuencia : ActividadBase
     {
         [Browsable(false)]
