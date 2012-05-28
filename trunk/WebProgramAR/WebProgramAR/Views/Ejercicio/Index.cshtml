@@ -85,15 +85,7 @@
                 <tr>
                     <td><div class="label">Nombre</div></td>
                     <td valign="top">@Html.TextBox("nombre", null, new { maxlength = 50, autocomplete = "off" })</td>
-                    <td><div class="label">Estado</div></td>
-                    <td valign="top">               
-                         @Html.DropDownList("estadoEjercicio", listaEstadosEjercicio.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.EstadoEjercicioId.ToString()
-                    }), new { @style = "display:none" })
-                    </td>
-
+                    
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
                          @Html.DropDownList("nivelEjercicio", listaNivelesEjercicio.Select(option => new SelectListItem

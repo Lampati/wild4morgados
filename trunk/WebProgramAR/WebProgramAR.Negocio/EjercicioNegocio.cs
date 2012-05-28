@@ -41,6 +41,7 @@ namespace WebProgramAR.Negocio
 
         public static void Eliminar(int id)
         {
+
             EjercicioDA.Eliminar(id);
         }
 

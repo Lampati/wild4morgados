@@ -57,7 +57,16 @@
         });
         $('.botonAsociar').click(function (event) {
             var url = '@Url.Action("../Ejercicio/AsociarCursoEjercicio")/' + $(this).attr('data');
+
             window.location = url;
+
+//            $.ajax({
+//                url: '@Url.Action("../Ejercicio/AsociarCursoEjercicio")/',
+//                data: " {id: " + $(this).attr('data') + " }",
+//                contentType: 'application/json',
+//                type: 'POST',
+//                dataType: 'json'               
+//            })
 
         });
         var sortcol = '@grid.SortColumn';

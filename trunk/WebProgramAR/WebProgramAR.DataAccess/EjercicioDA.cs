@@ -16,7 +16,7 @@ namespace WebProgramAR.DataAccess
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
 
-                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("MensajeModeracion").Include("EstadoEjercicio").Include("Usuario")
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("MensajeModeracion").Include("EstadoEjercicio").Include("Usuario").Include("Cursoes")
                                                 where u.EjercicioId  == id select u;
                 return query.ToArray()[0];
             }
@@ -189,7 +189,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Ejercicio Ejercicio = db.Ejercicios.Single(u => u.EjercicioId == id);
+                Ejercicio Ejercicio = db.Ejercicios.Include("Cursoes").Single(u => u.EjercicioId == id);
                 //Ejercicio.Status = false; //baja lógica
 
                 db.Ejercicios.DeleteObject(Ejercicio);
