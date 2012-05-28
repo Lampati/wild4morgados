@@ -87,7 +87,7 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";
@@ -116,12 +116,12 @@ namespace WebProgramAR.Controllers
             return datos;
         }
 
-        public ActionResult ObtenerEjercicioGrillaNotCurso(int pageNA = 1, string sortNA = "Nombre", string sortDirNA = "ASC", string nombreNA = "", int usuarioIdNA = -1, int cursoIdNA = -1, int estadoEjercicioNA = -1, int nivelEjercicioNA = -1, bool global = true)
+        public ActionResult ObtenerEjercicioGrillaNotCurso(int pageNA = 1, string sortNA = "Nombre", string sortDirNA = "ASC", string nombreNA = "", int usuarioIdNA = -1, int cursoIdNA = -1,  int nivelEjercicioNA = -1, bool global = true)
         {
-            var datos = ObtenerEjercicioGrillaModelNotCurso(pageNA, sortNA, sortDirNA, nombreNA, usuarioIdNA, cursoIdNA, estadoEjercicioNA, nivelEjercicioNA, global);
+            var datos = ObtenerEjercicioGrillaModelNotCurso(pageNA, sortNA, sortDirNA, nombreNA, usuarioIdNA, cursoIdNA, nivelEjercicioNA, global);
             return View(datos);
         }
-        private EjercicioGrillaModel ObtenerEjercicioGrillaModelNotCurso(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int estadoEjercicio, int nivelEjercicio, bool global)
+        private EjercicioGrillaModel ObtenerEjercicioGrillaModelNotCurso(int page, string sort, string sortDir, string nombre, int usuarioId, int cursoId, int nivelEjercicio, bool global)
         {
             //Pasar la cantidad por pagina a una constante mas copada.
             int cantidadPorPaginaTPC = 10;
@@ -131,14 +131,14 @@ namespace WebProgramAR.Controllers
             var numUsuarios = EjercicioNegocio.ContarCantidadNotCurso(nombre,
                      usuarioId,
                      cursoId,
-                     estadoEjercicio,
+                     2, //Los aprobados
                      nivelEjercicio,
                      global,
                      userLogueado);
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";
@@ -150,7 +150,7 @@ namespace WebProgramAR.Controllers
                      nombre,
                      usuarioId,
                      cursoId,
-                     estadoEjercicio,
+                     2, //Los aprobados
                      nivelEjercicio,
                      global,
                      userLogueado
@@ -394,11 +394,11 @@ namespace WebProgramAR.Controllers
         //
         // GET: /Curso/Details/5
 
-        public ActionResult AsociarCursoEjercicio(int id,int page = 1, string sort = "Nombre", string sortDir = "ASC",
+        public ActionResult AsociarCursoEjercicio(int id, int Curso_page = 1, string Curso_sort = "Nombre", string Curso_sortDir = "ASC",
              int usuarioId = -1, int cursoId = -1, string nombreA = "",
-             int estadoEjercicioA = -1, int nivelEjercicioA = -1, bool global = false,
-                int pageNotCurso = 1, string sortNotCurso = "Nombre", string sortDirNotCurso = "ASC",
-              string nombreNA = "", int estadoEjercicioNA = -1, int nivelEjercicioNA = -1)
+             int nivelEjercicioA = -1, bool global = false,
+             int NotCurso_page = 1, string NotCurso_sort = "Nombre", string NotCurso_sortDir = "ASC",
+             string nombreNA = "",  int nivelEjercicioNA = -1)
         {
             ListEjercicioGrillaModel datos = new ListEjercicioGrillaModel();
             Usuario userLogueado = GetUsuarioLogueado();
@@ -406,14 +406,17 @@ namespace WebProgramAR.Controllers
 
             Curso curso = CursoNegocio.GetCursoById(id);
 
-            EjercicioGrillaModel ejAsociados = new EjercicioGrillaModel();
-            ejAsociados.Ejercicios = curso.Ejercicios.ToList();
+            //EjercicioGrillaModel ejAsociados = new EjercicioGrillaModel();
+            //ejAsociados.Ejercicios = curso.Ejercicios.ToList();
+            //ejAsociados.Cantidad = curso.Ejercicios.ToList().Count;
+            //ejAsociados.CantidadPorPagina = 10;
+            //ejAsociados.PaginaActual = Curso_page;
 
             datos.ListEjerciciosGrillaModel = new List<EjercicioGrillaModel>();
             datos.cursoId = cursoId;
-            datos.ListEjerciciosGrillaModel.Add(ejAsociados);
-            //datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(page, sort, sortDir, nombreA, usuarioId, cursoId, estadoEjercicioA, nivelEjercicioA, global));
-            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(pageNotCurso, sortNotCurso, sortDirNotCurso, nombreNA, usuarioId, cursoId, estadoEjercicioNA, nivelEjercicioNA, global));
+            //datos.ListEjerciciosGrillaModel.Add(ejAsociados);
+            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModel(Curso_page, Curso_sort, Curso_sortDir, nombreA, usuarioId, cursoId, 2, nivelEjercicioA, global));
+            datos.ListEjerciciosGrillaModel.Add(ObtenerEjercicioGrillaModelNotCurso(NotCurso_page, NotCurso_sort, NotCurso_sortDir, nombreNA, usuarioId, cursoId, nivelEjercicioNA, global));
             ViewBag.NivelesEjercicio = new List<short>(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
             ViewBag.EstadosEjercicio = Negocio.EstadoEjercicioNegocio.GetEstadoEjercicios();
             return View(datos);
