@@ -78,11 +78,10 @@ a:active
     color: #12eb87;
 }
 
-p, ul
+p
 {
     margin-bottom: 2px;
     line-height: 1.6em;
-    
 }
 
 header, footer, nav, section
@@ -133,7 +132,7 @@ h2
     font-size:1.5em;
     background:#EE4000;
     padding-left:60px;
-    margin-left:100px;
+    margin-left:40px;
     padding-top:5px;
     color:#fff;
     margin-bottom:10px;
@@ -164,7 +163,7 @@ h4
     margin-bottom:20px;
     height:23px;
     float:left;
-    width:15%;
+    width:auto;
 }
 
 h5, h6
@@ -418,16 +417,16 @@ ul.submenu
 fieldset
 {
     border: 0px solid #ddd;
-    padding: 0 1em 1.4em 1.4em;
-    margin: 0 0 1em 0;
+    padding: 0 0 0 0 ;
+    margin: 0 0 0 0;
     font-family:Calibri;
     width:220px;
 }
 fieldset.fieldsetAncho
 {
     border: 0px solid #ddd;
-    padding: 0 1em 1.4em 1.4em;
-    margin: 0 0 1em 0;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
     font-family:Calibri;
     width:550px;
 }
@@ -707,22 +706,16 @@ div#title
 {
     background: #ec3e3e;
     color:#fff;
-    float:left;
-    position:relative;
-    display:block;
-    width:92%;
     font-size:0.8em;
-    margin-left:0px;
-    margin-top:-10px;
+    padding-left:10px;
+    padding-right:10px;
+    margin-top:-60px;
+    margin-right:120px;
     height:20px;
+    display:inline-block;
+    width:80%;
     opacity: .70;
     filter: alpha(opacity=70%);
-    border-bottom-right-radius:10px;
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-bottom-right-radius:10px;
-    border-bottom-left-radius:10px;
-    -moz-border-radius-bottomleft:10px;
-    -webkit-border-bottom-left-radius:10px;
 }
 .field-validation-error span
 {

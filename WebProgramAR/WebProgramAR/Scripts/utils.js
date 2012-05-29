@@ -160,7 +160,7 @@ function OpenTab(event, id, accion,idTab) {
     /*$("#"+idTab).unbind("tabOpen");
     $("#" + idTab).bind("dialogopen", function (event, ui) {*/
     $("#" + idTab).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />').delay(300).html();
-    $("#" + idTab).delay(600).load(accion + id, function () {
+    $("#" + idTab).stop(true,true).load(accion + id, function () {
             //alert('Load was performed.');
         });/*
     });*/

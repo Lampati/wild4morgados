@@ -109,7 +109,7 @@
             {
                 if (Model != null )
                 {
-                    @Html.HiddenFor(model => model.Usuario.TipoUsuarioId)
+                    @Html.HiddenFor(model => model.Usuario.TipoUsuarioId, new { @id = "TipoUsuarioId", @name = "TipoUsuarioId" })
                 }
                 else
                 {
@@ -127,7 +127,7 @@
                                     Value = option.PaisId.ToString(),
                                     Selected = ((Model != null) && (option.PaisId.ToString() == Model.Usuario.PaisId))
                                 }), new { @id = "SelectPaisId", @style = "display:none", @Name = "SelectPaisId" })
-                @Html.HiddenFor(model => model.Usuario.PaisId)
+                @Html.HiddenFor(model => model.Usuario.PaisId, new { @id = "PaisId", @name = "PaisId" })
                 @Html.ValidationMessageFor(m => m.Usuario.PaisId)
             </div>
              <div id="listProvincias" style="display:none;">
@@ -142,7 +142,7 @@
                                             Value = option.ProvinciaId.ToString(),
                                             Selected = ((Model != null) && (option.ProvinciaId.ToString() == Model.Usuario.ProvinciaId.ToString()))
                                         }), new { @id = "SelectProvinciaId", @style = "display:none", @Name = "SelectProvinciaId" })
-                    @Html.HiddenFor(model => model.Usuario.ProvinciaId)
+                    @Html.HiddenFor(model => model.Usuario.ProvinciaId, new { @id = "ProvinciaId", @name = "ProvinciaId" })
                     @Html.ValidationMessageFor(m => m.Usuario.ProvinciaId)
                 </div>
             </div>
@@ -171,16 +171,17 @@
         if (charCode == 8) return false; //  backspace
         if (charCode == 46) return false; // delete
     });
-    function reInitLocalidad() {
-        $("#LocalidadIdAutoComplete").val("");
-        $("#LocalidadIdAutoComplete").attr("rel", "");
+    function reInitProvincia() {
+        $("#ProvinciaId").val("");
     }
-    function reInitLocalidadId() {
+    function reInitLocalidad() {
         $("#LocalidadId").val("");
         $("#LocalidadIdAutoComplete").attr("rel", "");
+        $("#LocalidadIdAutoComplete").val("");
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "SelectPaisId") {
+        if (pais != "-1") {
             var pais = $("#selectBox_SelectPaisId").attr("rel");
             $.ajax({
                 url: '@Url.Action("GetProvinciasByPais")',
@@ -197,19 +198,28 @@
                         var text = provincias[i].Value;
                         $("#SelectProvinciaId").get(0).options[$("#SelectProvinciaId").get(0).options.length] = new Option(text, val);
                     }
-                    $("<option value='0' >Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
-                    convertSelect("SelectProvinciaId",true);
+                    $("<option value='0' selected='selected' >Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
+                    convertSelect("SelectProvinciaId", true);
+                    reInitProvincia();
                     $("#PaisId").val((div.attr("rel")));
                     reInitLocalidad();
                 }
             });
             $("#listProvincias").show();
+        } else {
+            $("#listProvincias").hide();
+            $("#listLocalidades").hide();
+        }
             return;
         }
         if (div.attr('id') == "SelectProvinciaId") {
-            $("#listLocalidades").show();
-            $("#ProvinciaId").val((div.attr("rel")));
-            reInitLocalidad();
+             if ((div.attr("rel")!="-1")) {
+                $("#listLocalidades").show();
+                $("#ProvinciaId").val((div.attr("rel")));
+            } else {
+                $("#listLocalidades").hide();
+            }
+        reInitLocalidad();
             return;
         }
     }
@@ -224,7 +234,7 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data == null || data == "") {
-                        reInitLocalidadId();
+                        reInitLocalidad();
                     } else {
                         response($.map(data, function (item) {
                             return {
@@ -246,7 +256,7 @@
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadId").val(ui.item.value);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-            $("#Nombre").focusIn();
+            $("#Usuario_Nombre").focus();
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
