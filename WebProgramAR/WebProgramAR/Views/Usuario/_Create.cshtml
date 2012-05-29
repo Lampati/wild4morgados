@@ -98,12 +98,13 @@
                      @Html.DropDownListWithValidationFor(model => model.Usuario.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
                     {
                         Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.TipoUsuarioId.ToString(),
+                        Value = option.TipoUsuarioId.ToString(), 
                         Selected = ((Model != null) && (option.TipoUsuarioId == Model.Usuario.TipoUsuarioId))
-                    }), new { @id = "TipoUsuarioCreate", @style = "display:none" })
+                    }),"Seleccione una opcion", new { @id = "TipoUsuarioCreate", @style = "display:none" })
 
                         @Html.ValidationMessageFor(m => m.Usuario.TipoUsuarioId)
                 </div>
+                
             }
             else
             {
@@ -163,7 +164,7 @@
 <script type="text/javascript">
     $("<option value='0' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectPaisId");
     convertSelect("SelectPaisId", true);
-    $("<option value='0' selected='selected' >Seleccion una Opcion</option>").prependTo("#TipoUsuarioCreate");
+//    $("<option value='0' selected='selected' >Seleccion una Opcion</option>").prependTo("#TipoUsuarioCreate");
     convertSelect("TipoUsuarioCreate",true);
     $("#Usuario_FechaNacimiento").datepicker({minDate:new Date(1920,01,01), changeMonth: true,changeYear: true,yearRange: "1920:1995",maxDate:new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
     $("#Usuario_FechaNacimiento").keypress(function (event) {
