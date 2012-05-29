@@ -189,7 +189,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                Ejercicio Ejercicio = db.Ejercicios.Include("Cursoes").Single(u => u.EjercicioId == id);
+                Ejercicio Ejercicio = db.Ejercicios.Include("Cursoes").Include("MensajeModeracion").Single(u => u.EjercicioId == id);
                 //Ejercicio.Status = false; //baja lógica
 
                 db.Ejercicios.DeleteObject(Ejercicio);

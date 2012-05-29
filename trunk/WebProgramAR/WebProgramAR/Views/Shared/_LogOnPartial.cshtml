@@ -42,6 +42,10 @@
     function LoginPopUp(event) {
         OpenDialogLogin(event, '', '@Url.Action("../Account/LogOn")/', 500, 370);
     }
+
+    function RecoverPasswordPopUp(event) {
+        OpenDialogRecoverPassword(event, '', '@Url.Action("../Account/RecoverPassword")/', 500, 370);
+    }
 </script>
 
 @if(Request.IsAuthenticated) {
@@ -73,3 +77,4 @@ else
     </div>
 }
 <div id="dialogLogin" class="dialogDiv border_all" ></div>
+<div id="dialogRecoverPassword" class="dialogDiv border_all"  ></div>

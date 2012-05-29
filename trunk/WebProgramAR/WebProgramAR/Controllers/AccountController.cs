@@ -238,7 +238,10 @@ namespace WebProgramAR.Controllers
             return View();
         }
 
-
+        public ActionResult RecoverPassword()
+        {
+            return View();
+        }
         
         [HttpPost]
         public ActionResult RecoverPassword(RecoverPasswordModel model)
@@ -264,7 +267,7 @@ namespace WebProgramAR.Controllers
 
                         string actualPassword = usuarioARecuperar.GetPassword();
 
-                        //MailManager.Enviar("programar", model.Email, "Su contraseña", string.Format("Su contraseña es: {0}", actualPassword));
+                        MailManager.Enviar( model.Email, "Su contraseña", string.Format("Su contraseña es: {0}", actualPassword));
                     }
                 }
                 else
@@ -272,11 +275,12 @@ namespace WebProgramAR.Controllers
                     //No existe usuario con ese mail. Abortamos todo
                 }
 
+                //Siempre devuelvo true, pq me interesa que un usuario malicioso no pueda descubrir los mails registrados en la aplicacion.
                 return Content(Boolean.TrueString);
             }
             else
             {
-                // If we got this far, something failed, redisplay form
+                // El mail de alguna manera llego incorrecto. Devuelvo false.
                 return Content(Boolean.FalseString);
             }
         }

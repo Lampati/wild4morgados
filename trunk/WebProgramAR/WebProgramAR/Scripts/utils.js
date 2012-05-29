@@ -68,6 +68,19 @@ $(document).ready(function () {
         hide: "blind"
             , error: function (msg) { alert(msg); }
     });
+
+    $('#dialogRecoverPassword').dialog({
+        autoOpen: false,
+        draggable: true,
+        resizable: false,
+        position: GetPosition(),
+        title: '',
+        modal: true,
+        overlay: { opacity: 1.5, background: "black" },
+        show: "slide",
+        hide: "blind"
+            , error: function (msg) { alert(msg); }
+    });
     $(".hoverRel").mousemove(function (event) {
         $("#overDiv").css({ 'top': event.pageY, 'left': event.pageX });
     });
@@ -132,6 +145,56 @@ function OpenDialogLogin(event, id, accion, ancho, alto) {
 
 function CerrarDialogLogin() {
     $('#dialogLogin').dialog("close");
+}
+
+
+function OpenDialogRecoverPassword(event, id, accion, ancho, alto) {
+    if (event != null) {
+        event.preventDefault();
+    }
+
+    // obtenemos ancho y alto de la ventana del explorer
+    var wscr = $(window).width();
+    var hscr = $(window).height();
+
+    if (alto > 400) {
+        position = 'top';
+    } else {
+        position = 'center';
+    }
+
+    if (alto > 0) {
+        $("#dialogRecoverPassword").dialog("option", "height", alto);
+    }
+    else {
+        $("#dialogRecoverPassword").dialog("option", "height", 'auto');
+    }
+
+    if (ancho > 0) {
+        $("#dialogRecoverPassword").dialog("option", "width", ancho);
+    }
+    else {
+        $("#dialogRecoverPassword").dialog("option", "height", 'auto');
+    }
+
+    $("#dialogRecoverPassword").unbind("dialogopen");
+    $("#dialogRecoverPassword").bind("dialogopen", function (event, ui) {
+        $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
+        $(this).load(accion + id, function () {
+            //alert('Load was performed.');
+
+        });
+    });
+    $("#dialogRecoverPassword").dialog({
+        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); }
+    });
+    $("#disablingDiv").fadeIn("slow");
+
+    $('#dialogRecoverPassword').dialog('open');
+}
+
+function CerrarDialogRecoverPassword() {
+    $('#dialogRecoverPassword').dialog("close");
 }
 
 
