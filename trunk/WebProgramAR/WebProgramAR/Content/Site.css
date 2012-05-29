@@ -23,7 +23,7 @@ body,html
     font-family: Calibri,"Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0; /*color: #696969;*/
-    overflow:hidden;
+    overflow:auto;
     resize:none;
     width:100%;
     height:100%;
@@ -691,7 +691,8 @@ table th {
     height:auto;
     display:none;
     position:absolute;
-    right:120px;
+    right:0;
+    padding-right:20px;
     z-index:1111;
 }
 .pointerBox
@@ -745,14 +746,14 @@ div#title
 {
     background: #ec3e3e;
     color:#fff;
-    float:left;
-    position:relative;
-    display:block;
-    width:92%;
     font-size:0.8em;
-    margin-left:0px;
-    margin-top:-10px;
+    padding-left:10px;
+    padding-right:10px;
+    margin-top:-60px;
+    margin-right:120px;
     height:20px;
+    display:inline-block;
+    width:80%;
     opacity: .70;
     filter: alpha(opacity=70%);
     border-bottom-right-radius:10px;

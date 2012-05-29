@@ -5,11 +5,7 @@
     Layout = null;
 }
 
-<h2>Informacion de Cuenta</h2>
-<h4>Log On</h4>
-<p>
-    Por favor ingrese usuario y contraseña. @Html.ActionLink("Registrese", "Register","Usuario") si no posee una cuenta.
-</p>
+
 
 <script type="text/javascript">
 
@@ -44,15 +40,16 @@
     }
     
 </script>
-
-
+<h2>Informacion de Cuenta</h2>
+<h4>Log On</h4>
 
 @using (Ajax.BeginForm("LogOn", "Account", new AjaxOptions { UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { id = "frmLogIn" }))
 {
+    
     @Html.ValidationSummary(true, "Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.")
-    <div>
-        <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.
-        </div>  
+    <div style="padding-left:0px">
+        &nbsp;
+        <div id="logonerror">Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.</div>  
         <fieldset>
             <div id="result"></div>
             <div class="editor-label">
@@ -70,10 +67,10 @@
                 @Html.PasswordFor(m => m.Password, new { Class = "required" })
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
-            <p><input type="submit" id="logonButton" value="Log On" /></p>
+            <input type="submit" id="logonButton" value="Log On" />
         </fieldset>
         <p>En caso de no recordar su contraseña,  @Html.ActionLink("Click Aqui", "Register","Usuario") .</p>
-            
+        <p>@Html.ActionLink("Registrese", "Register","Usuario") si no posee una cuenta.</p>
     </div>
 }
 
