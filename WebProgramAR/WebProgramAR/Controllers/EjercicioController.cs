@@ -8,6 +8,7 @@ using WebProgramAR.Negocio;
 using WebProgramAR.Sitio.Models;
 using System.Web;
 using System.IO;
+using WebProgramAR.MailSender;
 
 namespace WebProgramAR.Controllers
 {
@@ -503,7 +504,7 @@ namespace WebProgramAR.Controllers
                     ModerarEjercicioModel model = new ModerarEjercicioModel();
                     model.Ejercicio = EjercicioNegocio.GetEjercicioById(id);
 
-                    if (model.Ejercicio.EstadoEjercicioId != 1)
+                    if (model.Ejercicio.EstadoEjercicioId == 1)
                     {
                         model.Aceptado = false;
                         model.MensajeModeracion = string.Empty;
@@ -538,7 +539,7 @@ namespace WebProgramAR.Controllers
             {
                 if (EjercicioNegocio.ExisteEjercicioById(model.Ejercicio.EjercicioId))
                 {
-                    if (EjercicioNegocio.GetEjercicioById(model.Ejercicio.EjercicioId).EstadoEjercicioId != 1)
+                    if (EjercicioNegocio.GetEjercicioById(model.Ejercicio.EjercicioId).EstadoEjercicioId == 1)
                     {
 
                         Ejercicio ejercicio = EjercicioNegocio.GetEjercicioByIdOnlyUser(model.Ejercicio.EjercicioId);
@@ -561,13 +562,13 @@ namespace WebProgramAR.Controllers
 
                         if (model.Aceptado)
                         {
-                            //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Aprobado"), "Aprobado");
+                            MailManager.Enviar(membUsuario.Email, string.Format("Ejercicio Aprobado"), model.MensajeModeracion);
                             estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
 
                         }
                         else
                         {
-                            //MailManager.Enviar("programAr@gmail.com", membUsuario.Email, string.Format("Ejercicio Desaprobado"), "Desaprobado");
+                            MailManager.Enviar( membUsuario.Email, string.Format("Ejercicio Desaprobado"), model.MensajeModeracion);
                             estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Desaprobado");
                         }
 

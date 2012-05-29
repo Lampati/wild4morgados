@@ -9,6 +9,12 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function () {
+        $("#RecoverPasswordLink").click(function (event) {
+            CerrarDialogLogin();
+            RecoverPasswordPopUp(event);
+        });
+    });
     function updateWindow() {
         $("#divOperacionExitosa").delay(300).fadeOut(500);
         setTimeout("updateWin()", 1000);
@@ -69,7 +75,7 @@
             </div>
             <input type="submit" id="logonButton" value="Log On" />
         </fieldset>
-        <p>En caso de no recordar su contraseña,  @Html.ActionLink("Click Aqui", "Register","Usuario") .</p>
+        <p>En caso de no recordar su contraseña haga <a href="#" id="RecoverPasswordLink">click aqui</a></p>
         <p>@Html.ActionLink("Registrese", "Register","Usuario") si no posee una cuenta.</p>
     </div>
 }
