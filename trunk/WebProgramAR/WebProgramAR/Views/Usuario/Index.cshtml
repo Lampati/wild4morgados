@@ -81,7 +81,7 @@
                      <td><div class="label">Apellido</div></td>
                      <td valign="top">@Html.TextBox("Apellido", null, new { maxlength = 50, autocomplete = "off" })</td>
                      <td><div class="label">Tipo Usuario</div></td>
-                     <td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios, new { @id = "TipoUsuario", @style = "display:none",@name ="TipoUsuario" })</td>
+                     <td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios, "TODOS",new { @id = "TipoUsuario", @style = "display:none",@name ="TipoUsuario" })</td>
                      <input type="hidden" id="tipoUsuarioId" name="tipoUsuarioId" value="-1"/>
                 </tr>
                 
@@ -175,7 +175,6 @@ else
 <div id="dialog" class="dialogDiv" ></div>
 <div id="subDialog" class="dialogDiv"></div>
 <script type="text/javascript">
-    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#TipoUsuario");
     convertSelect("TipoUsuario", true);
     function OnChangeDo(div) {
         if (div.attr('id') == "TipoUsuario") {

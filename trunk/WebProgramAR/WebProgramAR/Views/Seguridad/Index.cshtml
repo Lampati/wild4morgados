@@ -89,7 +89,7 @@
                            {
                                Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
                                Value = option.TablaId.ToString()
-                           }), new { @id = "tabla", @style = "display:none" })
+                           }), "TODOS", new { @id = "tabla", @style = "display:none" })
                            <input type="hidden" name="tablaId" id="tablaId" value="" />
                     </td>
                     <td>
@@ -102,7 +102,7 @@
                             {
                                 Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                 Value = option.TipoUsuarioId.ToString()
-                            }), new { @id = "tipoUsuario", @style = "display:none" })
+                            }), "TODOS", new { @id = "tipoUsuario", @style = "display:none" })
                            <input type="hidden" name="tipoUsuarioId" id="tipoUsuarioId" value="" />
                     </td>
                     <td>
@@ -121,7 +121,7 @@
                         </div>
                     </td>
                      <td valign="top">
-                            @Html.DropDownList("habilitada", new []{new SelectListItem{Value="0",Text="No"},new SelectListItem{Value="1",Text="Si"}}, new { @id = "habilitada", @style = "display:none" })
+                            @Html.DropDownList("habilitada", new[] { new SelectListItem { Value = "0", Text = "No" }, new SelectListItem { Value = "1", Text = "Si" } }, "TODOS", new { @id = "habilitada", @style = "display:none" })
                            <input type="hidden" name="activa" id="activa" value="-1" />
                     </td>
 
@@ -185,11 +185,8 @@
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#tabla");
     convertSelect("tabla");
-    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#tipoUsuario");
     convertSelect("tipoUsuario");
-    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#habilitada");
     convertSelect("habilitada");
     function OnChangeDo(div) {
         if (div.attr('id') == "tabla") {
