@@ -17,7 +17,7 @@ namespace WebProgramAR.MailSender
 
         public static bool Enviar(string to, string subject, string body)
         {
-            SmtpClient smtpClient = new SmtpClient("smtp.program-ar.com.ar", SmtpPort);
+            SmtpClient smtpClient = new SmtpClient("smtp.ec2-23-22-33-245.compute-1.amazonaws.com", SmtpPort);
 
             MailMessage message = new MailMessage();
             MailAddress fromAddress = new MailAddress("admin@program-ar.com.ar");

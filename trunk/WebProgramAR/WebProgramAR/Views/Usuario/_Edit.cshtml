@@ -80,7 +80,8 @@
                 @Html.LabelFor(m => m.FechaNacimiento)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.FechaNacimiento.GetDateTimeFormats()[0], new { @readonly = "readonly", @id = "FechaNacimiento",@name = "FechaNacimiento", @class = "date-picker-needed" })
+                @Html.TextBox("FechaNacimiento", Model.FechaNacimiento.GetDateTimeFormats()[0], new { @readonly = "readonly", @id = "FechaNacimiento", @name = "FechaNacimiento", @class = "date-picker-needed" })
+                @*@Html.TextBoxFor(model => model.FechaNacimiento.GetDateTimeFormats()[0], new { @readonly = "readonly", @id = "FechaNacimiento",@name = "FechaNacimiento", @class = "date-picker-needed" })*@
                 @Html.ValidationMessageFor(m => m.FechaNacimiento)
             </div>
         </fieldset>
