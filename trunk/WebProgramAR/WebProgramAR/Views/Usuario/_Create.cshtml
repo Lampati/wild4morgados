@@ -127,7 +127,7 @@
                                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                     Value = option.PaisId.ToString(),
                                     Selected = ((Model != null) && (option.PaisId.ToString() == Model.Usuario.PaisId))
-                                }), new { @id = "SelectPaisId", @style = "display:none", @Name = "SelectPaisId" })
+                                }), "Seleccione una opcion",new { @id = "SelectPaisId", @style = "display:none", @Name = "SelectPaisId" })
                 @Html.HiddenFor(model => model.Usuario.PaisId, new { @id = "PaisId", @name = "PaisId" })
                 @Html.ValidationMessageFor(m => m.Usuario.PaisId)
             </div>
@@ -142,7 +142,7 @@
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                             Value = option.ProvinciaId.ToString(),
                                             Selected = ((Model != null) && (option.ProvinciaId.ToString() == Model.Usuario.ProvinciaId.ToString()))
-                                        }), new { @id = "SelectProvinciaId", @style = "display:none", @Name = "SelectProvinciaId" })
+                                        }), "Seleccione una opcion",new { @id = "SelectProvinciaId", @style = "display:none", @Name = "SelectProvinciaId" })
                     @Html.HiddenFor(model => model.Usuario.ProvinciaId, new { @id = "ProvinciaId", @name = "ProvinciaId" })
                     @Html.ValidationMessageFor(m => m.Usuario.ProvinciaId)
                 </div>
@@ -162,9 +162,7 @@
         </div>
     </div>
 <script type="text/javascript">
-    $("<option value='0' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectPaisId");
     convertSelect("SelectPaisId", true);
-//    $("<option value='0' selected='selected' >Seleccion una Opcion</option>").prependTo("#TipoUsuarioCreate");
     convertSelect("TipoUsuarioCreate",true);
     $("#Usuario_FechaNacimiento").datepicker({minDate:new Date(1920,01,01), changeMonth: true,changeYear: true,yearRange: "1920:1995",maxDate:new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
     $("#Usuario_FechaNacimiento").keypress(function (event) {
@@ -182,7 +180,7 @@
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "SelectPaisId") {
-        if (pais != "-1") {
+        if (pais != "") {
             var pais = $("#selectBox_SelectPaisId").attr("rel");
             $.ajax({
                 url: '@Url.Action("GetProvinciasByPais")',
@@ -214,7 +212,7 @@
             return;
         }
         if (div.attr('id') == "SelectProvinciaId") {
-             if ((div.attr("rel")!="-1")) {
+             if ((div.attr("rel")!="")) {
                 $("#listLocalidades").show();
                 $("#ProvinciaId").val((div.attr("rel")));
             } else {

@@ -13,7 +13,7 @@
         myWidth = document.body.clientWidth;
         myHeight = document.body.clientHeight;
     }
-    if (myHeight < 640)
+    if (myHeight < 660)
         $("body").attr("style", "overflow-y:scroll;");
     else
         $("body").attr("style", "overflow-y:hidden;");
@@ -72,11 +72,10 @@ undefined: no darle importancia
         } else {
             dropDown.css("height", "30px" * select.find('option').size());
         }
-        
+
         select.find('option').each(function (i) {
             var option = $(this);
-            //alert(option.attr('selected'));
-            if (option.attr("selected") == true) {
+            if (option.attr("selected") == "selected" || option.attr("selected")==true) {
                 selectBox.html(option.html());
                 selectBox.attr("rel", option.val());
             }
@@ -86,7 +85,7 @@ undefined: no darle importancia
                     selectBox.attr("rel", option.val());
                 }
             } else {
-                if ((i) == select.attr('selectedIndex')) {
+                if (option.attr("selected") == "selected" || option.attr("selected") == true) {
                     selectBox.html(option.html());
                     selectBox.attr("rel", option.val());
                 }
