@@ -17,7 +17,7 @@ namespace WebProgramAR.MailSender
 
         public static bool Enviar(string to, string subject, string body)
         {
-            SmtpClient smtpClient = new SmtpClient("smtp.ec2-23-22-33-245.compute-1.amazonaws.com", SmtpPort);
+            SmtpClient smtpClient = new SmtpClient("smtp.program-ar.com.ar", SmtpPort);
 
             MailMessage message = new MailMessage();
             MailAddress fromAddress = new MailAddress("admin@program-ar.com.ar");
@@ -25,7 +25,7 @@ namespace WebProgramAR.MailSender
 
             //smtpClient.Host = "216.59.32.145";
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.Credentials = new NetworkCredential("amazona-2fjpvok\smtp", "Pr0gr4m4r");
+            smtpClient.Credentials = new NetworkCredential("admin@program-ar.com.ar", "Pr0gr4m4r");
             smtpClient.EnableSsl = false;
 
             message.From = fromAddress;

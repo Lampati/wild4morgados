@@ -23,7 +23,8 @@ body,html
     font-family: Calibri,"Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0; /*color: #696969;*/
-    overflow:auto;
+    overflow-y:auto;
+    overflow-x:hidden;
     width:100%;
     height:100%;
 }
@@ -222,13 +223,15 @@ header h1, #header h1
 
 #main
 {
+    resize:both;
     padding: 10px 30px 15px 30px;
-    background-color: #fff;
+    background: #ccc;
     border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px 0 0 0;
     -moz-border-radius: 4px 0 0 0;
     background-image: url('images/fondo.png');
-    height:440px;
+    background-repeat:repeat;
+    height:480px;
 }
 
 footer, #footer
@@ -1924,14 +1927,11 @@ ul.tabs
 .contentInformation
 {
     border:3px solid #333;
-    width:90%;
+    width:80%;
     height:80%;
     margin-top:11px;
-    margin-left:30px;
-    padding:10px;
- 	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
+    margin-left:50px;
+    padding:10px; 	
 }
 
 /*para las opciones del login*/
@@ -2274,3 +2274,33 @@ enfasis
   right: 0;
 }​
 
+.collapse{cursor:normal;font-size:1em;font-family:Calibri;border:1px dotted #fff;}
+.collapse:hover{cursor:pointer;}
+.collapseSection
+{
+    background:#4D90FE;
+    color:#fff;
+}
+.collapseSecion:hover
+{
+    color:#333;
+}
+.collapseTitle
+{
+    background:#ccc;
+    margin-left:3px;
+    color:#fff;
+}
+.collapseTitle:hover
+{
+    color:#333;
+}
+.collapseItem
+{
+    background:#eee;
+    color:#333;
+}
+.collapseItem:hover
+{
+ color:#000;   
+}
