@@ -25,7 +25,7 @@ namespace WebProgramAR.MailSender
 
             //smtpClient.Host = "216.59.32.145";
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.Credentials = new NetworkCredential("admin@program-ar.com.ar", "Pr0gr4m4r");
+            smtpClient.Credentials = new NetworkCredential("amazona-2fjpvok\smtp", "Pr0gr4m4r");
             smtpClient.EnableSsl = false;
 
             message.From = fromAddress;
