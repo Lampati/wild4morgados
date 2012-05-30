@@ -92,7 +92,7 @@
                     {
                         Text = Html.DisplayTextFor(_ => option).ToString(),
                         Value = option.ToString()
-                    }), new { @style = "display:none" })
+                    }), "TODOS", new { @style = "display:none" })
                     </td>
                 </tr>
             </table>
@@ -175,9 +175,7 @@ else
 </div>
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
-    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#nivelEjercicio");
-    $("<option value='-1' selected='selected'>TODOS</option>").prependTo("#estadoEjercicio");
     convertSelect("nivelEjercicio",1);
-    convertSelect("estadoEjercicio",1);
+//    convertSelect("estadoEjercicio",1);
     function OnChangeDo(){return false;}
 </script>
