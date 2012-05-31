@@ -123,7 +123,7 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
+            LogOutWithSessionClear();
             return Json(Boolean.TrueString,JsonRequestBehavior.AllowGet);
         }
         //

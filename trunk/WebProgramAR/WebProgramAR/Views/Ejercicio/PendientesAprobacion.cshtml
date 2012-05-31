@@ -5,7 +5,7 @@
     {
         Layout = null;
     }
-    
+
     ViewBag.Title = "Ejercicios pendientes de aprobacion";
 
     WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina);
@@ -72,10 +72,10 @@
                     <td><div class="label">Nivel</div></td>
                     <td valign="top">               
                          @Html.DropDownList("nivelEjercicio", listaNivelesEjercicio.Select(option => new SelectListItem
-                        {
-                            Text = Html.DisplayTextFor(_ => option).ToString(),
-                            Value = option.ToString()
-                        }), "TODOS", new { @id = "nivelEjercicioPendientes", @style = "display:none" })
+                    {
+                        Text = Html.DisplayTextFor(_ => option).ToString(),
+                        Value = option.ToString()
+                    }), "TODOS", new { @id = "nivelEjercicioPendientes", @style = "display:none" })
                     </td>
                 </tr>
             </table>
@@ -85,39 +85,77 @@
 </div>
     
 
+@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador") || HttpContext.Current.User.IsInRole("moderador")))
+{
 
-<div id="contenedor-grid">
-@grid.GetHtml(
-    tableStyle: "grid",
-    fillEmptyRows: false,
-    rowStyle: "gridRow",
-    alternatingRowStyle: "gridAlternatingRow",
-    headerStyle: "gridHeader",
-    footerStyle: "gridPager",
-    mode: WebGridPagerModes.All,
-            firstText: "Prim",
-            previousText: "<< Ant",
-            nextText: "Prox >>",
-            lastText: " Ult",
-    columns: new[] {
-    grid.Column("EjercicioId", header: "Identificador"),
-    grid.Column("Nombre", header: "Nombre"),
-    grid.Column("NivelEjercicio", header: "Nivel"),
-    grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
-    grid.Column("", 
-          header: "",
-          format: @<text>
-                    <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
-                  </text>
-    )        
-    ,grid.Column("", 
-          header: "",
-          format: @<text>
-                    <input type="image" alt="Moderar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.EjercicioId)" class="botonEditar hoverRel"/>
-                  </text>
-    )
-})
-</div>
+    <div id="contenedor-grid">
+    @grid.GetHtml(
+        tableStyle: "grid",
+        fillEmptyRows: false,
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAlternatingRow",
+        headerStyle: "gridHeader",
+        footerStyle: "gridPager",
+        mode: WebGridPagerModes.All,
+                firstText: "Prim",
+                previousText: "<< Ant",
+                nextText: "Prox >>",
+                lastText: " Ult",
+        columns: new[] {
+        grid.Column("EjercicioId", header: "Identificador"),
+        grid.Column("Nombre", header: "Nombre"),
+        grid.Column("NivelEjercicio", header: "Nivel"),
+        grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
+        grid.Column("", 
+              header: "",
+              format: @<text>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                      </text>
+        )        
+        ,grid.Column("", 
+              header: "",
+              format: @<text>
+                        <input type="image" alt="Moderar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.EjercicioId)" class="botonEditar hoverRel"/>
+                      </text>
+        )
+    })
+
+    </div>
+
+}
+else
+{
+    <div id="contenedor-grid">
+    @grid.GetHtml(
+        tableStyle: "grid",
+        fillEmptyRows: false,
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAlternatingRow",
+        headerStyle: "gridHeader",
+        footerStyle: "gridPager",
+        mode: WebGridPagerModes.All,
+                firstText: "Prim",
+                previousText: "<< Ant",
+                nextText: "Prox >>",
+                lastText: " Ult",
+        columns: new[] {
+        grid.Column("EjercicioId", header: "Identificador"),
+        grid.Column("Nombre", header: "Nombre"),
+        grid.Column("NivelEjercicio", header: "Nivel"),
+        grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
+        grid.Column("", 
+              header: "",
+              format: @<text>
+                        <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                      </text>
+        )       
+        
+    })
+
+    </div>
+
+}
+
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
     convertSelect("nivelEjercicioPendientes", 1);

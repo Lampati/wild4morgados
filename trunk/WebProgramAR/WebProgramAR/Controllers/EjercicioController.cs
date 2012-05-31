@@ -334,7 +334,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Ejercicio/Delete/5
- 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             if (Request.IsAjaxRequest())
