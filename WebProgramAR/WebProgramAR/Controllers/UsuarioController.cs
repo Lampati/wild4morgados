@@ -97,7 +97,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Usuario/Create
-
+        [Authorize(Roles = "administrador, moderador")]
         public ActionResult Create()
         {
             if (Request.IsAjaxRequest())
@@ -135,6 +135,7 @@ namespace WebProgramAR.Controllers
         //
         // POST: /Usuario/Create
         [HttpPost]
+        [Authorize(Roles = "administrador, moderador")]
         public ActionResult Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -160,6 +161,7 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Usuario/Edit/5 
+        [Authorize]
         public ActionResult Edit(int id, bool esMiPerfil = false)
         {
             if (Request.IsAjaxRequest())
@@ -207,6 +209,7 @@ namespace WebProgramAR.Controllers
         //
         // POST: /Usuario/Edit/5
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(Usuario usuario)
         {
             bool error = false;
@@ -340,7 +343,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Usuario/Delete/5
- 
+        [Authorize(Roles = "administrador, moderador")]
         public ActionResult Delete(int id)
         {
             if (Request.IsAjaxRequest())
@@ -368,6 +371,7 @@ namespace WebProgramAR.Controllers
         // POST: /Usuario/Delete/5
 
         [HttpPost]
+        [Authorize(Roles = "administrador, moderador")]
         public ActionResult Delete(Usuario u)
         {
             
