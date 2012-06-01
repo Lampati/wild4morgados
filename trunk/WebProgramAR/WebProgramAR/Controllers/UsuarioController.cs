@@ -17,7 +17,7 @@ namespace WebProgramAR.Controllers
         // GET: /Usuario/
 
         public ActionResult Index(int page = 1, string sort = "Nombre", string sortDir = "ASC",
-              int tipoUsuarioId = -1,  string nombre = "", string apellido = "", string usuarioNombre = "",
+              int tipoUsuarioFiltrado = -1, string nombre = "", string apellido = "", string usuarioNombre = "",
               string pais = "", string provincia = "", string localidad = "")
         {
             //Pasar la cantidad por pagina a una constante mas copada.
@@ -28,7 +28,7 @@ namespace WebProgramAR.Controllers
             var numUsuarios = UsuarioNegocio.ContarCantidad(nombre,
                      apellido,
                      usuarioNombre,
-                     tipoUsuarioId,
+                     tipoUsuarioFiltrado,
                      pais,
                      provincia,
                      localidad,
@@ -48,7 +48,7 @@ namespace WebProgramAR.Controllers
                      nombre,
                      apellido,
                      usuarioNombre,
-                     tipoUsuarioId,
+                     tipoUsuarioFiltrado,
                      pais,
                      provincia,
                      localidad,

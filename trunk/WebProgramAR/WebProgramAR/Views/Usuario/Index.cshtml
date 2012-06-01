@@ -73,7 +73,7 @@
     <div class="filtrosabm">
         @using (Html.BeginForm("Index", "Usuario", FormMethod.Post, new { id = "filterForm" }))
         {    
-            @Html.ValidationSummary(true)
+          
             <table>
                 <tr>
                      <td><div class="label">Nombre</div></td>
@@ -82,7 +82,7 @@
                      <td valign="top">@Html.TextBox("Apellido", null, new { maxlength = 50, autocomplete = "off" })</td>
                      <td><div class="label">Tipo Usuario</div></td>
                      @*<td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios, "TODOS",new { @id = "TipoUsuario", @style = "display:none",@name ="TipoUsuario" })</td>*@
-                     <td valign="top">@Html.DropDownList("TipoUsuario", (SelectList)ViewBag.TipoUsuarios, "TODOS", new { @id = "TipoUsuario", @style = "display:none" })</td>
+                     <td valign="top">@Html.DropDownList("tipoUsuarioFiltrado", (SelectList)ViewBag.TipoUsuarios, "TODOS", new { @id = "tipoUsuarioFiltrado", @style = "display:none" })</td>
                 </tr>
                 
             </table>
@@ -175,7 +175,7 @@ else
 <div id="dialog" class="dialogDiv" ></div>
 <div id="subDialog" class="dialogDiv"></div>
 <script type="text/javascript">
-    convertSelect("TipoUsuario", 1);
+    convertSelect("tipoUsuarioFiltrado", 1);
     function OnChangeDo(div) {
         return false;
     
