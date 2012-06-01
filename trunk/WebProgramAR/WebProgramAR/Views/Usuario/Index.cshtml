@@ -13,7 +13,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#filterSearchButton").click( function () {
+        $("#filterSearchButton").click(function () {
             $("#filterForm").submit();
         });
         //para el manejo del menu
@@ -83,7 +83,6 @@
                      <td><div class="label">Tipo Usuario</div></td>
                      @*<td valign="top">@Html.DropDownListFor(m => m.TipoUsuario, (SelectList)ViewBag.TipoUsuarios, "TODOS",new { @id = "TipoUsuario", @style = "display:none",@name ="TipoUsuario" })</td>*@
                      <td valign="top">@Html.DropDownList("TipoUsuario", (SelectList)ViewBag.TipoUsuarios, "TODOS", new { @id = "TipoUsuario", @style = "display:none" })</td>
-                     @*<input type="hidden" id="tipoUsuarioId" name="tipoUsuarioId" value="-1"/>*@
                 </tr>
                 
             </table>
@@ -176,12 +175,9 @@ else
 <div id="dialog" class="dialogDiv" ></div>
 <div id="subDialog" class="dialogDiv"></div>
 <script type="text/javascript">
-    convertSelect("TipoUsuario", true);
+    convertSelect("TipoUsuario", 1);
     function OnChangeDo(div) {
-        if (div.attr('id') == "TipoUsuario") {
-            var tipoUsuarioId = $("#selectBox_TipoUsuario").attr("rel");
-            $("#tipoUsuarioId").val(tipoUsuarioId);
-        }
+        return false;
     
     }
 </script>
