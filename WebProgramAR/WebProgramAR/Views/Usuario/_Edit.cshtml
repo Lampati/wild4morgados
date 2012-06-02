@@ -175,13 +175,14 @@
     }
     function reInitLocalidad() {
         $("#LocalidadId").val("");
-        $("#LocalidadIdAutoComplete").attr("rel", "");
-        $("#LocalidadIdAutoComplete").val("");
+        alert($("#LocalidadIdAutoComplete").val());
+        $("#LocalidadIdAutoComplete").val(" ");
+        alert($("#LocalidadIdAutoComplete").val());
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "SelectPaisId") {
             var pais = $("#selectBox_SelectPaisId").attr("rel");
-            if (pais != "") {
+            if (pais != 0) {
                 $.ajax({
                     url: '@Url.Action("GetProvinciasByPais")',
                     data: " { paisId: '" + pais + "'}",
@@ -213,7 +214,7 @@
             return;
         }
         if (div.attr('id') == "SelectProvinciaId") {
-            if ((div.attr("rel")!="")) {
+            if ((div.attr("rel")!=0)) {
                 $("#listLocalidades").show();
                 $("#ProvinciaId").val((div.attr("rel")));
             }else{
@@ -253,16 +254,9 @@
         delay: 10,
         type: 'POST',
         selectFirst: false,
-        select: function (event, ui) {
-            $("#LocalidadIdAutoComplete").val(ui.item.label);
-            $("#LocalidadId").val(ui.item.value);
-            $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-            $("#Nombre").focus();
-        },
         change: function (event, ui) {
             if (ui.item != undefined) {
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
-                $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
                 $("#LocalidadId").val(ui.item.value);
             } else {
                 reInitLocalidad();
