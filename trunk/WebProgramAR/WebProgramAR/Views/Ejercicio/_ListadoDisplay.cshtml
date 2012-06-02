@@ -10,7 +10,7 @@
 {
 
     <div class="collapseSection collapse" onclick="colapseClick('ejerciciosDiv')" style="font-size: 16px;">
-    Ejercicios
+    <div class="preElement toggle_off" id="pre_ejerciciosDiv"></div>Ejercicios
     </div> 
 
     <div id="ejerciciosDiv">                      
@@ -18,13 +18,13 @@
         {
             <div >
                 <div class="collapseTitle collapse" onclick="colapseClick('@string.Format("{0}{1}", nombreDivCurso, i)')" style="font-size: 16px;">
-                    @item.Nombre
+                    <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}", nombreDivCurso, i)"></div>@item.Nombre
                 </div> 
     
                 <div id="@string.Format("{0}{1}", nombreDivCurso, i)" style="margin-left:8px;">  
                 
                     <div class="collapseItem collapse" onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "autor")')" style="display:block">
-                        Autor
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i, "autor")"></div>Autor
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "autor")"  style="display:block">  
@@ -32,7 +32,7 @@
                     </div>    
 
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "nivel")')" style="display:block">
-                        Nivel Ejercicio
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i, "nivel")"></div>Nivel Ejercicio
                     </div>   
             
                     <div class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "nivel")"  style="display:block">  
@@ -41,7 +41,7 @@
                     
             
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")')" style="display:block">
-                        Enunciado
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i,"enunciado")"></div>Enunciado
                     </div>   
             
                     <div class="item"   id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")"  style="display:block">  
@@ -49,7 +49,7 @@
                     </div>          
 
                     <div  class="collapseItem collapse" onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")')" style="display:block">
-                        Solución
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i,"solucionTexto")"></div>Solución
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")" style="display:block">  
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")')"  style="display:block">
-                        Solución Código
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i,"solucionGargar")"></div>Solución Código
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")"  style="display:block">  
@@ -88,7 +88,15 @@ else
 
     function colapseClick(ulName) {
 
-        $("#" + ulName).fadeToggle('fast', 'linear');
+        $("#" + ulName).fadeToggle('fast', 'linear', function () {
+            if ($("#" + ulName).css("display") == "none") {
+                $("#pre_" + ulName).removeClass("toggle_off");
+                $("#pre_" + ulName).addClass("toggle_on");
+            } else {
+                $("#pre_" + ulName).addClass("toggle_off");
+                $("#pre_" + ulName).removeClass("toggle_on");
+            }
+        });
 
     }
 

@@ -6,22 +6,32 @@
 }
 
 <h2>Nuevo</h2>
-<h4>Ejercicio</h4>
-   
+<h4>Ejercicio</h4>   
 @using (Html.BeginForm("Upload", "Ejercicio", FormMethod.Post, new { enctype = "multipart/form-data" }))
 { 
         @Html.ValidationSummary(true)
 
     <div style="display:block;vertical-align:middle">
+        Seleccione el archivo de ejercicio que desea cargar
+        <br /><br />
         <div class="editor-field" style="display:inline;vertical-align:middle;">
-            <input type="file" name="file" id="file" style="width:auto;" data-val-required="Requerido" data-val="true" style="width:auto;visibility:visible"/>
+            <!--<input type="file" name="file" id="file" data-val-required="Requerido" data-val="true" style="visibility:visible"/>-->
+            <div class="field">
+		        <label class="file-upload">
+			        <span><img src="@Url.Content("~/Content/images/upload.png")" /></span>
+			        <input type="file" name="file" />
+		        </label>
+	        </div>
             @Html.ValidationMessageFor(model => model.FileUpload)
         </div>
-    
         <div id="buttonSectionOptions" style="display:inline;vertical-align:middle">         
             <input type="submit" value="Cargar Ejercicio" class="submit" id="btnGuardar" style="width:200px;margin-bottom:18px" />
         </div>
     </div>        
+    <div class="comentario" style="top:120px;right:120px;">
+            <div class="ribbon-wrapper-green"><div class="ribbon-green">Descarga</div></div>
+            <div class="queesContent">Desde la aplicación...</div>
+        </div>
     if (Model.Error)
     {
     <div style="width:100%; color:Red; font-size:1.2em">

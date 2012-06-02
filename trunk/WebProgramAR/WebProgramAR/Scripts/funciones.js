@@ -13,7 +13,7 @@
         myWidth = document.body.clientWidth;
         myHeight = document.body.clientHeight;
     }
-    if (myHeight < 660)
+    if (myHeight < 640)
         $("body").attr("style", "overflow-y:scroll;");
     else
         $("body").attr("style", "overflow-y:hidden;");

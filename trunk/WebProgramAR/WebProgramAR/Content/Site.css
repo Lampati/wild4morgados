@@ -23,8 +23,7 @@ body,html
     font-family: Calibri,"Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0; /*color: #696969;*/
-    overflow-y:auto;
-    overflow-x:hidden;
+    overflow:hidden;
     resize:none;
     width:100%;
     height:100%;
@@ -251,7 +250,9 @@ header h1, #header h1
     -moz-border-radius: 4px 0 0 0;
     background-repeat:repeat;
     background-position:center top; 
-    height:480px;
+    min-height:420px;
+    height:auto;
+    overflow:hidden;
 }
 
 footer, #footer
@@ -495,11 +496,28 @@ legend
 
 textarea
 {
-    min-height: 160px;
-    min-width:200px;
+    margin-top:4px;
+    -moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	color:#fff;
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1em;
+    font-family:Calibri;
+    color: #333;
+    
+    height:60px;
+	display:inline-block;
+	min-width:250px;
+	position:relative;
+	
+	/* Preloading the background image for the dropdown */
+	background:url("images/dropdown_slice.png") no-repeat -99999px;
+	resize:none;
 }
 
-input[type="text"], input[type="password"],textarea
+input[type="text"], input[type="password"]
 {
     margin-top:4px;
     -moz-border-radius:3px;
@@ -811,6 +829,9 @@ div#title
 {
     margin: auto 0.5em 0 0;
     height:auto;
+    max-height:50px;
+    width:auto;
+    max-width:120px;
 }
 #accordion
 {
@@ -1087,32 +1108,27 @@ div.menu ul li a:hover, .boton:hover
     font-size: 1em;
     text-align:right;
     font-family:Calibri;
+    height:25px;
 }
 .gridPager a, .gridPager a:link, .gridPager a:visited, .gridPager a:active
 {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    padding-left:10px;
-    padding-right:10px;
-    border:1px solid #19f;
+    padding-left:7px;
+    padding-right:7px;
+    border:1px solid #ccc;
     color:#fff;
-    background:#4D90FE;
-    font-size: 1.2em;
+    background:#333;
+    font-size: 1em;
     width:40px;
-    height:100px;
+    height:100%;
 }
 .gridPager a:hover
 {
     border:1px solid #ccc;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
     background:#fff;
-    color: #4d90fe;
-    font-size: 1.2em;
-    width:40px;
-    height:100px;
+    color: #333;
 }
 .gridFooter
 {
@@ -1632,11 +1648,12 @@ input[type="text"].datosExtraTextBox
 .tabla
 {
    clear: none;
-   overflow: auto;
+   overflow: hidden;
 }
 
 .fila
 {
+   margin-top:5px;
    clear: both;
 }
 
@@ -1918,6 +1935,7 @@ input[type="file"]
     margin-left:10px;
     width:auto;
     height:auto;
+    overflow:hidden;
 }
 /*PARA EL MANEJO DE TABS*/
 ul.tabs
@@ -2327,7 +2345,7 @@ ul.tabs
 .ribbon-green:after {
   right: 0;
 }​
-.collapse{cursor:normal;font-size:1em;font-family:Calibri;border:1px dotted #fff;}
+.collapse{cursor:normal;font-size:1em;font-family:Calibri;border:1px dotted #fff;vertical-align:middle;}
 .collapse:hover{cursor:pointer;}
 .collapseSection
 {
@@ -2357,3 +2375,101 @@ ul.tabs
 {
  color:#000;   
 }
+/*PARA EL TREE VIEW*/
+.preElement
+{
+    width:30px;
+    height:20px;
+    display:inline-block;
+}
+.toggle_on
+{
+    background:url("images/toggle_on.png") no-repeat ;
+}
+.toggle_off
+{
+    background:url("images/toggle_off.png") no-repeat ;
+}
+/*TAMAÑO DE GRIDS TABLE*/
+.gridRowShort
+{
+    width:50px !important;
+}
+.gridRowMedium
+{
+    width:100px !important;
+}
+.gridRowLarge
+{
+    width:200px !important;
+}
+/*PARA EL INPUT FILE*/
+/* 
+
+	As this stylesheet is lazy loaded these styles only apply if JavaScript is enabled
+
+*/	
+.file-upload {
+	overflow: hidden;
+	display: inline-block;
+	position: relative;	
+	vertical-align: middle;
+	text-align: center;
+
+	/* Cosmetics */
+	color: #fff;
+	border: 2px solid #2FA2FF;
+	background: #fff;
+
+	/* Nice if your browser can do it */
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	text-shadow: #000 1px 1px 4px;
+    }
+	
+.file-upload:hover,.file-upload span:hover { 
+	cursor:pointer;
+	}
+
+.file-upload input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	font-size: 70px;
+
+	/* Loses tab index in webkit if width is set to 0 */
+	opacity: 0;
+	filter: alpha(opacity=0);
+	}
+
+.file-upload strong { 
+	font: normal 1.75em arial,sans-serif; 
+	}	
+	
+.file-upload span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+
+	/* Adjust button text vertical alignment */
+	padding-top: .45em;
+	}
+
+/* Adjust the button size */	
+.file-upload { height: 3em; }
+.file-upload,
+.file-upload span {	width: 4em; }	
+
+.file-upload-status {
+	margin-left: 10px;
+	vertical-align: middle;
+	padding: 7px 11px;
+	font-weight: bold;	
+	font-size: 16px;
+	color: #888;
+	background: #f8f8f8;
+	border: 3px solid #ddd;
+	}
