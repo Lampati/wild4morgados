@@ -50,10 +50,10 @@
     
     $(document).ready(function () {
 
-        $("#filterSearchButtonA").live('click', function () {
+        $("#filterSearchButtonA").click(function () {
             $("#filterFormA").submit();
         });
-        $("#filterSearchButtonNA").live('click', function () {
+        $("#filterSearchButtonNA").click(function () {
             $("#filterFormNA").submit();
         });
         $('#btnFiltrosAsociarA').live('click', function (event) {
@@ -224,8 +224,14 @@
 //        convertSelect("estadoEjercicioNA", 1);
 
 
-       
-        function OnChangeDo() { return false; }
+        
+        function OnChangeDo(div) {
+            if (div.attr('id') == "nivelEjercicioNA") {
+                $("#nivelEjercicioNA").children().each(function () { $(this).removeAttr("selected"); });
+                var tipoUsuario = $("#selectBox_nivelEjercicioNA").attr("rel");
+                $('#nivelEjercicioNA option[value="' + tipoUsuario + '"]').attr("selected", "selected");
+            }
+        }
     </script>
 
 
