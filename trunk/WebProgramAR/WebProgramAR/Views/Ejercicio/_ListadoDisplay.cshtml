@@ -5,7 +5,6 @@
     int i = 1;
 }
 
-
 @if (Model != null && Model.Count > 0)
 {
 
@@ -79,13 +78,12 @@ else
 {
     <div class="display-field-delete">Este curso no tiene ejercicios asociados.</div>
 }
-
-
-
- 
-
 <script language="javascript" type="text/javascript">
-
+    if ($('.collapse').length == 0) {
+        $("#submitButton").css("position", "absolute");
+        $("#submitButton").css("top", "150px");
+        $("#dialog").animate({ height: "260px" }); 
+    }
     function colapseClick(ulName) {
 
         $("#" + ulName).fadeToggle('fast', 'linear', function () {
@@ -96,8 +94,11 @@ else
                 $("#pre_" + ulName).addClass("toggle_off");
                 $("#pre_" + ulName).removeClass("toggle_on");
             }
+            var size = $(".details").css("height");
+            var currentHeight = parseInt(size.substring(0, size.length - 2)) + parseInt(170);
+            $("#dialog").animate({ height: currentHeight + "px" }); 
         });
-
+        
     }
 
 </script> 

@@ -89,28 +89,27 @@
         </div>
         <div class="SameSectionSpace">
         <fieldset>
-            @if (ViewBag.EsRegister == null || ViewBag.EsRegister == false)
+            @if (ViewBag.EsMiPerfil == null || ViewBag.EsMiPerfil == false)
             {
                 <div class="editor-label">
-                    @Html.LabelFor(m => m.Usuario.TipoUsuario)
+                    @Html.LabelFor(model => model.Usuario.TipoUsuario)
                 </div>
                 <div class="editor-field">
                      @Html.DropDownListWithValidationFor(model => model.Usuario.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
-                    {
-                        Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                        Value = option.TipoUsuarioId.ToString(), 
-                        Selected = ((Model != null) && (option.TipoUsuarioId == Model.Usuario.TipoUsuarioId))
-                    }),"Seleccione una opcion", new { @id = "TipoUsuarioCreate", @style = "display:none" })
-
-                        @Html.ValidationMessageFor(m => m.Usuario.TipoUsuarioId)
+                {
+                    Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                    Value = option.TipoUsuarioId.ToString(),
+                    Selected = ((Model != null) && (option.TipoUsuarioId == Model.Usuario.TipoUsuarioId))
+                }), new { @id = "SelectTipoUsuarioId", @style = "display:none", @Name = "SelectTipoUsuarioId" })
+                @Html.HiddenFor(model => model.Usuario.TipoUsuarioId)
+                @Html.ValidationMessageFor(model=> model.Usuario.TipoUsuarioId)
                 </div>
-                
             }
             else
             {
-                if (Model != null )
+                if (Model != null)
                 {
-                    @Html.HiddenFor(model => model.Usuario.TipoUsuarioId, new { @id = "TipoUsuarioId", @name = "TipoUsuarioId" })
+                    @Html.HiddenFor(model => model.Usuario.TipoUsuarioId)
                 }
                 else
                 {
@@ -118,42 +117,42 @@
                 }
             }
             <div class="editor-label">
-                @Html.LabelFor(m => m.Usuario.Pais)
+                @Html.LabelFor(model => model.Usuario.Pais)
             </div>
             <div class="editor-field">
-                 @Html.DropDownListWithValidationFor(model => model.Usuario.PaisId,
+                 @Html.DropDownListFor(model => model.Usuario.PaisId,
                                 listaPaises.Select(option => new SelectListItem
                                 {
                                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                     Value = option.PaisId.ToString(),
                                     Selected = ((Model != null) && (option.PaisId.ToString() == Model.Usuario.PaisId))
                                 }), "Seleccione una opcion",new { @id = "SelectPaisId", @style = "display:none", @Name = "SelectPaisId" })
-                @Html.HiddenFor(model => model.Usuario.PaisId, new { @id = "PaisId", @name = "PaisId" })
-                @Html.ValidationMessageFor(m => m.Usuario.PaisId)
+                @Html.HiddenFor(model => model.Usuario.PaisId)
+                @Html.ValidationMessageFor(model => model.Usuario.PaisId)
             </div>
-             <div id="listProvincias" style="display:none;">
+             <div id="listProvincias" style="display:none";>
                 <div class="editor-label">
-                    @Html.LabelFor(m => m.Usuario.Provincia)
+                    @Html.LabelFor(model => model.Usuario.Provincia)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListWithValidationFor(model => model.Usuario.ProvinciaId,
+                    @Html.DropDownListFor(model => model.Usuario.ProvinciaId,
                                         listaProvincias.Select(option => new SelectListItem
                                         {
                                             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                                             Value = option.ProvinciaId.ToString(),
                                             Selected = ((Model != null) && (option.ProvinciaId.ToString() == Model.Usuario.ProvinciaId.ToString()))
                                         }), "Seleccione una opcion",new { @id = "SelectProvinciaId", @style = "display:none", @Name = "SelectProvinciaId" })
-                    @Html.HiddenFor(model => model.Usuario.ProvinciaId, new { @id = "ProvinciaId", @name = "ProvinciaId" })
+                    @Html.HiddenFor(model => model.Usuario.ProvinciaId)
                     @Html.ValidationMessageFor(m => m.Usuario.ProvinciaId)
                 </div>
             </div>
-            <div  id="listLocalidades" style="display:none;"  >
+            <div  id="listLocalidades" style="display:none"; >
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Usuario.Localidad)
                 </div>
                  <div class="editor-field">
-                    @Html.TextBoxFor(model => model.Usuario.LocalidadId, new {  @rel = "", @Value = ViewBag.descripcionLocalidad, @id = "LocalidadIdAutoComplete", @Name = "LocalidadIdAutoComplete" })
-                    @Html.HiddenFor(model => model.Usuario.LocalidadId, new { @id = "LocalidadId", @Name = "LocalidadId" })
+                    @Html.TextBoxFor(model => model.Usuario.LocalidadId, new { @id = "LocalidadIdAutoComplete", @Name = "LocalidadIdAutoComplete" })
+                    @Html.HiddenFor(model => model.Usuario.LocalidadId)
                     @Html.ValidationMessageFor(m => m.Usuario.LocalidadId)
                 </div>
             </div>
@@ -162,63 +161,74 @@
         </div>
     </div>
 <script type="text/javascript">
-    convertSelect("SelectPaisId", true);
-    convertSelect("TipoUsuarioCreate",true);
+    $("#Usuario_TipoUsuarioId").val(1);
+    convertSelect("SelectPaisId");
+    convertSelect("SelectTipoUsuarioId");
     $("#Usuario_FechaNacimiento").datepicker({minDate:new Date(1920,01,01), changeMonth: true,changeYear: true,yearRange: "1920:1995",maxDate:new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
     $("#Usuario_FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
         if (charCode == 8) return false; //  backspace
         if (charCode == 46) return false; // delete
     });
+    function selectElement(name) {
+        $("#select"+name).children().each(function () { $(this).removeAttr("selected"); });
+        var selectedElementRel = $("#selectBox_Select" + name).attr("rel");
+        $("#Usuario_" + name).val(selectedElementRel);
+        $('#select' + name + ' option[value="' + selectedElementRel + '"]').attr("selected", "selected");
+    }
     function reInitProvincia() {
         $("#ProvinciaId").val("");
     }
     function reInitLocalidad() {
-        $("#LocalidadId").val("");
+        $("#Usuario_LocalidadId").val("");
         $("#LocalidadIdAutoComplete").attr("rel", "");
         $("#LocalidadIdAutoComplete").val("");
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "SelectPaisId") {
-        if (pais != "") {
             var pais = $("#selectBox_SelectPaisId").attr("rel");
-            $.ajax({
-                url: '@Url.Action("GetProvinciasByPais")',
-                data: " { paisId: '" + pais + "'}",
-                contentType: 'application/json',
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    $("#listProvincias .tzSelect").remove();
-                    $("#SelectProvinciaId").children().remove();
-                    var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
-                    for (var i = 0; i < provincias.length; i++) {
-                        var val = provincias[i].Id;
-                        var text = provincias[i].Value;
-                        $("#SelectProvinciaId").get(0).options[$("#SelectProvinciaId").get(0).options.length] = new Option(text, val);
+            if (pais != 0) {
+                $.ajax({
+                    url: '@Url.Action("GetProvinciasByPais")',
+                    data: " { paisId: '" + pais + "'}",
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#listProvincias .tzSelect").remove();
+                        $("#SelectProvinciaId").children().remove();
+                        var provincias = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                        for (var i = 0; i < provincias.length; i++) {
+                            var val = provincias[i].Id;
+                            var text = provincias[i].Value;
+                            $("#SelectProvinciaId").get(0).options[$("#SelectProvinciaId").get(0).options.length] = new Option(text, val);
+                        }
+                        $("<option value='0' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
+                        convertSelect("SelectProvinciaId");
+                        $("#PaisId").val((div.attr("rel")));
+                        reInitProvincia();
+                        reInitLocalidad();
+                        selectElement("PaisId");
+
                     }
-                    $("<option value='0' selected='selected' >Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
-                    convertSelect("SelectProvinciaId", true);
-                    reInitProvincia();
-                    $("#PaisId").val((div.attr("rel")));
-                    reInitLocalidad();
-                }
-            });
-            $("#listProvincias").show();
-        } else {
-            $("#listProvincias").hide();
-            $("#listLocalidades").hide();
-        }
+                });
+                $("#listProvincias").show();
+            } else {
+                $("#listProvincias").hide();
+                $("#listLocalidades").hide();
+            }
             return;
         }
         if (div.attr('id') == "SelectProvinciaId") {
-             if ((div.attr("rel")!="")) {
+            if ((div.attr("rel") != 0)) {
                 $("#listLocalidades").show();
                 $("#ProvinciaId").val((div.attr("rel")));
+                selectElement("ProvinciaId");
             } else {
                 $("#listLocalidades").hide();
             }
-        reInitLocalidad();
+            reInitLocalidad();
+
             return;
         }
     }
@@ -253,15 +263,15 @@
         selectFirst: false,
         select: function (event, ui) {
             $("#LocalidadIdAutoComplete").val(ui.item.label);
-            $("#LocalidadId").val(ui.item.value);
+            $("#Usuario_LocalidadId").val(ui.item.value);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-            $("#Usuario_Nombre").focus();
+            $("#Nombre").focus();
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-                $("#LocalidadId").val(ui.item.value);
+                $("#Usuario_LocalidadId").val(ui.item.value);
             } else {
                 reInitLocalidad();
             }

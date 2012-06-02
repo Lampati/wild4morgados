@@ -250,7 +250,7 @@ header h1, #header h1
     -moz-border-radius: 4px 0 0 0;
     background-repeat:repeat;
     background-position:center top; 
-    min-height:420px;
+    min-height:460px;
     height:auto;
     overflow:hidden;
 }
@@ -563,6 +563,7 @@ input[type="text"].textBoxForFilter
     color:#333;
     background:#ccc;
 }
+
 .buttonSectionOptions
 {   
     position:relative;
@@ -771,9 +772,10 @@ div#title
     padding-right:10px;
     margin-top:-60px;
     margin-right:120px;
-    height:20px;
+    height:auto;
+    min-height:20px;
     display:inline-block;
-    width:80%;
+    width:140%;
     opacity: .70;
     filter: alpha(opacity=70%);
     border-bottom-right-radius:10px;
@@ -1691,6 +1693,27 @@ input[type="text"].datosExtraTextBox
     font-family:Calibri;
     text-transform:uppercase;
     
+}
+select
+{
+    height:23px;
+    vertical-align:middle;
+    min-width:100px;
+    width:auto;
+}
+select:focus
+{
+     -moz-box-shadow: 0 0 50px #fff;
+	-webkit-box-shadow: 0 0 50px #fff;
+	box-shadow: 0 0 50px #fff;  
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;  
+	background:url('images/dropdown_slice.png') repeat-x #222;
+	background-image:url('images/dropdown_slice.png'),url('images/dropdown_slice.png'),url('images/dropdown_slice.png');
+	background-position: 50% -171px, 0 -85px, 0 0;
+	background-repeat: no-repeat, no-repeat, repeat-x;
+	color:#fff;
 }
 /*para el manejo de selectbox convertidos*/
 .tzSelect{
