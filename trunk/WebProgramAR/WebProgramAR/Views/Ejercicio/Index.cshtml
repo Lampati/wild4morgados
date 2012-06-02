@@ -21,7 +21,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#filterSearchButtonEjercicios").live('click', function () {
+        $("#filterSearchButtonEjercicios").click(function () {
             $("#filterForm").submit();
         });
         //para el manejo del menu
@@ -80,7 +80,7 @@
     <div class="filtrosabm">
         @using (Html.BeginForm("Index", "Ejercicio", FormMethod.Post, new { id = "filterForm" }))
         {    
-            @Html.ValidationSummary(true)
+            
             <table>
                 <tr>
                     <td><div class="label">Nombre</div></td>
@@ -176,5 +176,11 @@ else
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
     convertSelect("nivelEjercicio",1);
-    function OnChangeDo(){return false;}
+    function OnChangeDo(div) {
+        if (div.attr('id') == "nivelEjercicio") {
+            $("#nivelEjercicio").children().each(function () { $(this).removeAttr("selected"); });
+            var tipoUsuario = $("#selectBox_nivelEjercicio").attr("rel");
+            $('#nivelEjercicio option[value="' + tipoUsuario + '"]').attr("selected", "selected");
+        }
+    }
 </script>
