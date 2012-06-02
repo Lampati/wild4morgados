@@ -35,14 +35,14 @@
             @Html.ValidationSummary(true)
 
             @Html.Partial("_Display", Model.Ejercicio)
-
-            <div class="editor-label">
-                Mensaje de moderación
+            <div id="mensajeModeracion" style="position:relative;margin-bottom:30px;">
+                <div class="editor-label">
+                    Mensaje de moderación
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.MensajeModeracion)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.MensajeModeracion)
-            </div>
-
             @Html.HiddenFor(m => m.Aceptado, new { id = "hddnResultadoModeracion"})
             @Html.HiddenFor(m => m.Ejercicio.EjercicioId)
          

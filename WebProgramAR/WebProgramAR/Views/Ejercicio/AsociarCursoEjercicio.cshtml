@@ -65,10 +65,23 @@
         });
         $('#btnFiltrosAsociarNA').live('click', function (event) {
             if ($('#filtrosAsociarNA').css('display') == 'block') {
-                $('#filtrosAsociarNA').fadeOut('slow');
+                $('#filtrosAsociarNA').fadeOut('slow',function(){
+                var mainSize = $("#main").height();
+                if (mainSize > 450)
+                    $("body").attr("style", "overflow-y:scroll;");
+                else
+                    $("body").attr("style", "overflow-y:hidden;");
+                });
             } else {
-                $('#filtrosAsociarNA').fadeIn('slow');
+                $('#filtrosAsociarNA').fadeIn('slow',function(){
+                var mainSize = $("#main").height();
+                if (mainSize > 450)
+                    $("body").attr("style", "overflow-y:scroll;");
+                else
+                    $("body").attr("style", "overflow-y:hidden;");
+                });
             }
+            
         });
 
 
@@ -91,7 +104,7 @@
         });
 
           $('.botonDetalles').click(function (event) {
-            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 470, 600);
+            OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 530, 540);
         });
 
     
@@ -129,21 +142,23 @@
             nextText: ">",
                 lastText: " >>",
             columns: new[] {
-            gridCurso.Column("EjercicioId", header: "Identificador"),
-            gridCurso.Column("Nombre", header: "Nombre"),
-            gridCurso.Column("NivelEjercicio", header: "Nivel"),
-            gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),    
+            gridNotCurso.Column("EjercicioId", header: "Identificador",style:"gridRowShort"),
+            gridNotCurso.Column("Nombre", header: "Nombre",style:"gridRowLarge"),
+            gridNotCurso.Column("NivelEjercicio", header: "Nivel",style:"gridRowShort"),
+            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario",style:"gridRowMedium"),
             gridCurso.Column("", 
               header: "",
               format: @<text>
                         <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
-                      </text>
+                      </text>,
+              style:"gridRowShort"
             ),            
             gridCurso.Column("", 
                   header: "",
                   format: @<text>
                             <input type="image" alt="Desasociar" src="@Url.Content("~/Content/images/remove.png")" data="@(item.EjercicioId)" class="botonDesasociar hoverRel"/>
-                          </text>
+                          </text>,
+              style:"gridRowShort"
             )
         })
 
@@ -198,21 +213,23 @@
             nextText: ">",
                 lastText: " >>",
             columns: new[] {
-            gridNotCurso.Column("EjercicioId", header: "Identificador"),
-            gridNotCurso.Column("Nombre", header: "Nombre"),
-            gridNotCurso.Column("NivelEjercicio", header: "Nivel"),
-            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario"),
+            gridNotCurso.Column("EjercicioId", header: "Identificador",style:"gridRowShort"),
+            gridNotCurso.Column("Nombre", header: "Nombre",style:"gridRowLarge"),
+            gridNotCurso.Column("NivelEjercicio", header: "Nivel",style:"gridRowShort"),
+            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario",style:"gridRowMedium"),
             gridNotCurso.Column("", 
               header: "",
               format: @<text>
                         <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
-                      </text>
+                      </text>,
+              style:"gridRowShort"
             ),          
             gridNotCurso.Column("", 
                   header: "",
                   format: @<text>
                             <input type="image" alt="Asociar" src="@Url.Content("~/Content/images/append.png")" data="@(item.EjercicioId)" class="botonAsociar hoverRel"/>
-                          </text>
+                          </text>,
+              style:"gridRowShort"
             )
         })
 
