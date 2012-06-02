@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="UsingWorkflowItemPresenter.Views.BrandsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tab="clr-namespace:FormattedTabControl;assembly=FormattedTabControl"
+             xmlns:vm="clr-namespace:UsingWorkflowItemPresenter.ViewModels"
+             xmlns:vw="clr-namespace:UsingWorkflowItemPresenter.Views">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:Tab}">
+            <vw:SingleBrandView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500*" />
+        </Grid.RowDefinitions>        
+        <tab:FormattedTab x:Name="tab" 
+                          Grid.Row="1"
+                          ItemSource="{Binding Brands}"/>
+    </Grid>
+</UserControl>

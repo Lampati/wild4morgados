@@ -40,7 +40,7 @@ namespace Microsoft.Samples.UsingWorkflowItemPresenter
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Asignacion)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(LlamarProcedimiento)));
-            Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Secuencia), "Secuencia.png", "Secuencia"));
+            Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Secuencia)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Declaracion)));
 
             init = new Secuencia() { DisplayName = "Secuencia Principal" };
@@ -76,6 +76,7 @@ namespace Microsoft.Samples.UsingWorkflowItemPresenter
         private void btnEjecutar_Click(object sender, RoutedEventArgs e)
         {
             LibreriaActividades.Extension.Code = null;
+
             WorkflowApplication app = new WorkflowApplication(init);
 
             app.Completed = delegate(WorkflowApplicationCompletedEventArgs ea)
