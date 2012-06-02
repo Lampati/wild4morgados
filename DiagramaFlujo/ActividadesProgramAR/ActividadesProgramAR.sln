@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingWorkflowItemPresenter"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreriaActividades", "..\LibreriaActividades\LibreriaActividades.csproj", "{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormattedTabControl", "..\FormattedTabControl\FormattedTabControl.csproj", "{A3516F6D-8369-4AC3-919F-1444B89F0319}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
