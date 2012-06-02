@@ -215,13 +215,15 @@ header h1, #header h1
 {
     resize:both;
     padding: 10px 30px 15px 30px;
-    background: #ccc;
+    background: #fff;
     border-radius: 4px 0 0 0;
     -webkit-border-radius: 4px 0 0 0;
     -moz-border-radius: 4px 0 0 0;
-    background-image: url('images/fondo.png');
     background-repeat:repeat;
+    background-position:center top; 
+    min-height:420px;
     height:auto;
+    overflow:hidden;
 }
 
 footer, #footer
