@@ -108,13 +108,13 @@ else
             var size = $(".details").css("height");
             var currentHeight = parseInt(size.substring(0, size.length - 2)) + parseInt(170);
             if (currentHeight > 500) {
-                $("#dialog").animate({ height: "450px" });
-                $("#dialog").css("overflow-y", "scroll");
-            }
-            else {
-                $("#dialog").animate({ height: currentHeight + "px" });
-                $("#dialog").css("overflow-y", "hidden");
-            }
+				$("#dialog").animate({ height: "450px" });
+				$("#dialog").css("overflowY", "auto !important");
+			}
+			else {
+				$("#dialog").animate({ height: currentHeight + "px" });
+				$("#dialog").css("overflowY", "hidden");
+			}
         });
         
     }
