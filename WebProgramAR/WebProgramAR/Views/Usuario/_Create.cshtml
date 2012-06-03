@@ -89,7 +89,7 @@
         </div>
         <div class="SameSectionSpace">
         <fieldset>
-            @if (ViewBag.EsMiPerfil == null || ViewBag.EsMiPerfil == false)
+            @if (ViewBag.EsRegister == null || ViewBag.EsRegister == false)
             {
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Usuario.TipoUsuario)
@@ -257,8 +257,8 @@
 
         },
         scrollHeight: 10,
-        minChars: 1,
-        delay: 10,
+        minChars: 2,
+        delay: 300,
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
