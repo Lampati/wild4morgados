@@ -102,5 +102,7 @@ namespace WebProgramAR.Models
                 HttpContext.Current.Session[UserSessionVar] = value;
             }
         }
+
+      
     }
 }

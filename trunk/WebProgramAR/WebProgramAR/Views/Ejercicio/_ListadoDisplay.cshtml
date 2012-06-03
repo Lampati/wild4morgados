@@ -27,7 +27,14 @@
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "autor")"  style="display:block">  
+                    @if (item.Usuario != null)
+                    {
                         @item.Usuario.UsuarioNombre
+                    }
+                    else
+                    {
+                        @string.Format("El usuario creador no existe mas")                           
+                    }
                     </div>    
 
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "nivel")')" style="display:block">
@@ -40,7 +47,7 @@
                     
             
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")')" style="display:block">
-                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i,"enunciado")"></div>Enunciado
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i, "enunciado")"></div>Enunciado
                     </div>   
             
                     <div class="item"   id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")"  style="display:block">  
@@ -48,7 +55,7 @@
                     </div>          
 
                     <div  class="collapseItem collapse" onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")')" style="display:block">
-                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i,"solucionTexto")"></div>Solución
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i, "solucionTexto")"></div>Solución
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")" style="display:block">  
@@ -56,7 +63,7 @@
                     </div>
 
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")')"  style="display:block">
-                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i,"solucionGargar")"></div>Solución Código
+                        <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i, "solucionGargar")"></div>Solución Código
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")"  style="display:block">  
@@ -68,7 +75,7 @@
                 </div>
             </div>
         
-            i++;
+                    i++;
 
         }
     </div>
