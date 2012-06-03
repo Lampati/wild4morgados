@@ -82,7 +82,18 @@ else
     if ($('.collapse').length == 0) {
         $("#submitButton").css("position", "absolute");
         $("#submitButton").css("top", "150px");
-        $("#dialog").animate({ height: "260px" }); 
+        $("#dialog").animate({ height: "260px" });
+    } else {
+        var size = $(".details").css("height");
+        var currentHeight = parseInt(size.substring(0, size.length - 2)) + parseInt(170);
+        if (currentHeight > 500) {
+            $("#dialog").animate({ height: "450px" });
+            $("#dialog").css("overflowY", "auto !important");
+        }
+        else {
+            $("#dialog").animate({ height: currentHeight + "px" });
+            $("#dialog").css("overflowY", "hidden");
+        }
     }
     function colapseClick(ulName) {
 
@@ -96,7 +107,14 @@ else
             }
             var size = $(".details").css("height");
             var currentHeight = parseInt(size.substring(0, size.length - 2)) + parseInt(170);
-            $("#dialog").animate({ height: currentHeight + "px" }); 
+            if (currentHeight > 500) {
+                $("#dialog").animate({ height: "450px" });
+                $("#dialog").css("overflow-y", "scroll");
+            }
+            else {
+                $("#dialog").animate({ height: currentHeight + "px" });
+                $("#dialog").css("overflow-y", "hidden");
+            }
         });
         
     }
