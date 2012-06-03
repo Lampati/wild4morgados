@@ -5,8 +5,7 @@
     ViewBag.Title = "Ejercicios";
 }
 
-<h2>Nuevo</h2>
-<h4>Ejercicio</h4>   
+<h1>Nuevo Ejercicio</h1>
 @using (Html.BeginForm("Upload", "Ejercicio", FormMethod.Post, new { enctype = "multipart/form-data" }))
 { 
         @Html.ValidationSummary(true)
