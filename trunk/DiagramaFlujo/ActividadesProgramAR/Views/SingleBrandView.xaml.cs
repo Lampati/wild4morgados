@@ -12,5 +12,11 @@
         {
             InitializeComponent();
         }
+
+        private void CommandBinding_PreviewCanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+            e.Handled = true; 
+        }
     }
 }

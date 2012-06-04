@@ -8,7 +8,7 @@ namespace UsingWorkflowItemPresenter
 {
     public class TabItemAgregar : Tab
     {
-        public override void Ejecutar()
+        public override void Ejecutar(StringBuilder sb)
         {
             //no hace nada este tab
         }
@@ -16,6 +16,11 @@ namespace UsingWorkflowItemPresenter
         protected override void RecrearWorkflowDesigner()
         {
             //no hago nada, no tengo que recrear el designer
+        }
+
+        public override int Orden
+        {
+            get { return 0; }
         }
     }
 }

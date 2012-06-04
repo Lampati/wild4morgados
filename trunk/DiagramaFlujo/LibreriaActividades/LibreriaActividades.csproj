@@ -58,9 +58,13 @@
     </Compile>
     <Compile Include="ComboBoxItemConverter.cs" />
     <Compile Include="ComboBoxVectorItemConverter.cs" />
-    <Compile Include="Declaracion.cs" />
-    <Compile Include="DeclaracionDesigner.xaml.cs">
-      <DependentUpon>DeclaracionDesigner.xaml</DependentUpon>
+    <Compile Include="DeclaracionConstanteDesigner.xaml.cs">
+      <DependentUpon>DeclaracionConstanteDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeclaracionConstante.cs" />
+    <Compile Include="DeclaracionVariable.cs" />
+    <Compile Include="DeclaracionVariableDesigner.xaml.cs">
+      <DependentUpon>DeclaracionVariableDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="eTipoVariable.cs" />
     <Compile Include="Secuencia.cs" />
@@ -94,7 +98,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DeclaracionDesigner.xaml">
+    <Page Include="DeclaracionConstanteDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeclaracionVariableDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,10 +154,16 @@
     <EmbeddedResource Include="Resources\Mostrar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Declaracion.png" />
+    <Resource Include="DeclaracionVariable.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Declaracion.png" />
+    <EmbeddedResource Include="Resources\DeclaracionVariable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DeclaracionConstante.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DeclaracionConstante.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

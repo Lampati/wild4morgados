@@ -61,10 +61,12 @@ namespace UsingWorkflowItemPresenter
                 return;
 
             Toolbox.Categories[0].Tools.Clear();
-            if (t.Content.ToString() == "VARIABLES" || t.Content.ToString() == "CONSTANTES")
+            if (t.Content.ToString() == "VARIABLES")
             {
-                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Declaracion)));
+                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
             }
+            else if (t.Content.ToString() == "CONSTANTES")
+                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
             else
             {
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
@@ -107,18 +109,23 @@ namespace UsingWorkflowItemPresenter
             builder.AddCustomAttributes(typeof(Asignacion), new DesignerAttribute(typeof(AsignacionDesigner)));
             builder.AddCustomAttributes(typeof(LlamarProcedimiento), new DesignerAttribute(typeof(LlamarProcedimientoDesigner)));
             builder.AddCustomAttributes(typeof(Secuencia), new DesignerAttribute(typeof(SecuenciaDesigner)));
-            builder.AddCustomAttributes(typeof(Declaracion), new DesignerAttribute(typeof(DeclaracionDesigner)));
+            builder.AddCustomAttributes(typeof(DeclaracionVariable), new DesignerAttribute(typeof(DeclaracionVariableDesigner)));
+            builder.AddCustomAttributes(typeof(DeclaracionConstante), new DesignerAttribute(typeof(DeclaracionConstanteDesigner)));
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
         private void btnEjecutar_Click(object sender, RoutedEventArgs e)
         {
-            LibreriaActividades.Extension.Code = null;
+            StringBuilder sb = new StringBuilder();
+            System.Collections.SortedList sl = new System.Collections.SortedList();
 
             foreach (Tab t in this.Tabs.tab.ItemSource)
-                t.Ejecutar();
+                sl.Add(t.Orden, t);
 
-            MessageBox.Show(LibreriaActividades.Extension.Code.ToString());
+            foreach (Tab t in sl.Values)
+                t.Ejecutar(sb);
+
+            MessageBox.Show(sb.ToString());
         }
     }
 }

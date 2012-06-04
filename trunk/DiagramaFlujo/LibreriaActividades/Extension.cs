@@ -11,6 +11,7 @@ namespace LibreriaActividades
     {
         private static StringBuilder code;
         private static int profundidadIdentacion = 0;
+        private static int ordenTab = 10;
 
         public static StringBuilder Code
         {
@@ -32,6 +33,15 @@ namespace LibreriaActividades
             set { profundidadIdentacion = value; }
         }
 
+        /// <summary>
+        /// Este orden aplica unicamente a las Funciones / Procedimientos, el resto va hardcodeado
+        /// </summary>
+        public static int AsignarOrdenTab()
+        {
+            ordenTab++;
+            return ordenTab;
+        }
+
         public static string Tabs
         {
             get
@@ -44,19 +54,19 @@ namespace LibreriaActividades
             }
         }
 
-        public static void Ejecutar(this Activity act, NativeActivityContext context)
+        public static void Ejecutar(this Activity act, StringBuilder sb)
         {
             Sequence seq = act as Sequence;
             if (seq != null)
             {
                 foreach (ActividadBase ab in seq.Activities)
-                    ab.Ejecutar(context);
+                    ab.Ejecutar(sb);
             }
             else
             {
                 ActividadBase ab = act as ActividadBase;
                 if (ab != null)
-                    ab.Ejecutar(context);
+                    ab.Ejecutar(sb);
             }
         }
     }

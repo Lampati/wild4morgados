@@ -16,25 +16,22 @@ namespace LibreriaActividades
         public string Condicion { get; set; }
         public Activity Cuerpo { get; set; }
 
-        public override void Ejecutar(System.Activities.NativeActivityContext context)
-        {
-            this.Execute(context);
-        }
-
-        protected override void Execute(System.Activities.NativeActivityContext context)
+        public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.Condicion))
                 return;
 
-            Extension.Code.AppendLine(String.Format(Extension.Tabs + "MIENTRAS ({0}) HACER", this.Condicion));
+            sb.AppendLine(String.Format(Extension.Tabs + "MIENTRAS ({0}) HACER", this.Condicion));
             if (Cuerpo != null)
             {
                 Extension.ProfundidadIdentacion++;
-                Cuerpo.Ejecutar(context);
+                Cuerpo.Ejecutar(sb);
                 Extension.ProfundidadIdentacion--;
             }
-            Extension.Code.AppendLine(Extension.Tabs + "FINMIENTRAS;");
+            sb.AppendLine(Extension.Tabs + "FINMIENTRAS;");
         }
+
+        protected override void Execute(System.Activities.NativeActivityContext context) { }
 
         public Activity Create(DependencyObject target)
         {
