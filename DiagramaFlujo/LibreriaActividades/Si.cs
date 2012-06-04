@@ -32,29 +32,29 @@ namespace LibreriaActividades
 
         protected override void Execute(NativeActivityContext context)
         {
+            
+        }
+
+        public override void Ejecutar(StringBuilder sb)
+        {
             if (BranchVerdadero == null && BranchFalso == null)
                 return;
 
-            Extension.Code.AppendLine(String.Format(Extension.Tabs + "SI ({0}) ENTONCES", Condicion));
+            sb.AppendLine(String.Format(Extension.Tabs + "SI ({0}) ENTONCES", Condicion));
             if (BranchVerdadero != null)
             {
                 Extension.ProfundidadIdentacion++;
-                BranchVerdadero.Ejecutar(context);
+                BranchVerdadero.Ejecutar(sb);
                 Extension.ProfundidadIdentacion--;
             }
             if (BranchFalso != null)
             {
-                Extension.Code.AppendLine(Extension.Tabs + "SINO");
+                sb.AppendLine(Extension.Tabs + "SINO");
                 Extension.ProfundidadIdentacion++;
-                BranchFalso.Ejecutar(context);
+                BranchFalso.Ejecutar(sb);
                 Extension.ProfundidadIdentacion--;
             }
-            Extension.Code.AppendLine(Extension.Tabs + "FINSI;");
-        }
-
-        public override void Ejecutar(NativeActivityContext context)
-        {
-            this.Execute(context);
+            sb.AppendLine(Extension.Tabs + "FINSI;");
         }
 
         public Activity Create(DependencyObject target)

@@ -29,16 +29,16 @@ namespace LibreriaActividades
 
         protected override void Execute(NativeActivityContext context)
         {
+            
+        }
+
+        public override void Ejecutar(StringBuilder sb)
+        {
             if (Activities != null)
             {
                 foreach (ActividadBase a in this.Activities)
-                    a.Ejecutar(context);
+                    a.Ejecutar(sb);
             }
-        }
-        
-        public override void Ejecutar(NativeActivityContext context)
-        {
-            this.Execute(context);
         }
     }
 }

@@ -14,17 +14,14 @@ namespace LibreriaActividades
         public string LadoIzquierdo { get; set; }
         public string LadoDerecho { get; set; }
 
-        public override void Ejecutar(System.Activities.NativeActivityContext context)
-        {
-            this.Execute(context);
-        }
-
-        protected override void Execute(System.Activities.NativeActivityContext context)
+        public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.LadoIzquierdo) || String.IsNullOrEmpty(this.LadoDerecho))
                 return;
-            
-            Extension.Code.AppendLine(String.Format(Extension.Tabs + "{0} := {1};", this.LadoIzquierdo, this.LadoDerecho));
+
+            sb.AppendLine(String.Format(Extension.Tabs + "{0} := {1};", this.LadoIzquierdo, this.LadoDerecho));
         }
+
+        protected override void Execute(System.Activities.NativeActivityContext context) { }
     }
 }

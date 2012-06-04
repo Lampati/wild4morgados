@@ -4,6 +4,7 @@
     using Microsoft.Practices.Prism.Commands;
 using UsingWorkflowItemPresenter.Views;
     using System;
+    using UsingWorkflowItemPresenter.Enums;
 
     public class BrandsViewModel : BaseViewModel
     {
@@ -25,7 +26,8 @@ using UsingWorkflowItemPresenter.Views;
 
             if (t.Content.ToString() == " + ")
             {
-                this.ExecuteAddBrand("Proc/Func " + cant.ToString(), true, TipoTab.TabItemFuncionProcedimiento);
+                //TODO aca viene el wizard para crear funciones / procedimientos!
+                this.ExecuteAddBrand("Proc/Func " + cant.ToString(), true, eTipoTab.TabItemProcedimiento);
                 cant++;
             }
         }
@@ -67,23 +69,29 @@ using UsingWorkflowItemPresenter.Views;
         //    }
         //}
 
-        public void ExecuteAddBrand(string obj, bool acomodar, TipoTab tipo)
+        public void ExecuteAddBrand(string obj, bool acomodar, eTipoTab tipo)
         {
             if (!string.IsNullOrEmpty(obj))
             {
                 Tab t = null;
                 switch (tipo)
                 {
-                    case TipoTab.TabItemAgregar:
+                    case eTipoTab.TabItemAgregar:
                         t = new TabItemAgregar();
                         break;
-                    case TipoTab.TabItemDeclaracion:
-                        t = new TabItemDeclaracion();
+                    case eTipoTab.TabItemDeclaracionVariable:
+                        t = new TabItemDeclaracionVariable();
                         break;
-                    case TipoTab.TabItemFuncionProcedimiento:
-                        t = new TabItemFuncionProcedimiento();
+                    case eTipoTab.TabItemDeclaracionConstante:
+                        t = new TabItemDeclaracionConstante();
                         break;
-                    case TipoTab.TabItemPrincipal:
+                    case eTipoTab.TabItemFuncion:
+                        t = new TabItemFuncion();
+                        break;
+                    case eTipoTab.TabItemProcedimiento:
+                        t = new TabItemProcedimiento();
+                        break;
+                    case eTipoTab.TabItemPrincipal:
                         t = new TabItemPrincipal();
                         break;
                 }

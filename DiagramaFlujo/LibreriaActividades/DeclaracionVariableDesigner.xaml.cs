@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace LibreriaActividades
 {
     // Interaction logic for DeclaracionDesigner.xaml
-    public partial class DeclaracionDesigner
+    public partial class DeclaracionVariableDesigner
     {
         System.Windows.Visibility visible;
 
@@ -25,14 +25,14 @@ namespace LibreriaActividades
             set { this.visible = value; }
         }
 
-        public DeclaracionDesigner()
+        public DeclaracionVariableDesigner()
         {
             InitializeComponent();
         }
 
         protected override void OnModelItemChanged(Object newItem)
         {
-            Declaracion.Attach(ModelItem);
+            DeclaracionVariable.Attach(ModelItem);
             base.OnModelItemChanged(newItem);
         }
 

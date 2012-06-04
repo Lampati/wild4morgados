@@ -3,14 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using UsingWorkflowItemPresenter.ViewModels;
-
-    public enum TipoTab
-    {
-        TabItemPrincipal,
-        TabItemDeclaracion,
-        TabItemFuncionProcedimiento,
-        TabItemAgregar
-    }
+    using UsingWorkflowItemPresenter.Enums;
 
     /// <summary>
     /// Interaction logic for BrandView.xaml
@@ -22,10 +15,10 @@
             InitializeComponent();
             this.FindAndApplyResources();
             this.DataContext = new BrandsViewModel();
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("PRINCIPAL", false, TipoTab.TabItemPrincipal);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("CONSTANTES", false, TipoTab.TabItemDeclaracion);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("VARIABLES", false, TipoTab.TabItemDeclaracion);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand(" + ", false, TipoTab.TabItemAgregar);                    
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("PRINCIPAL", false, eTipoTab.TabItemPrincipal);
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("CONSTANTES", false, eTipoTab.TabItemDeclaracionConstante);
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("VARIABLES", false, eTipoTab.TabItemDeclaracionVariable);
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand(" + ", false, eTipoTab.TabItemAgregar);                    
         }
 
         private void FindAndApplyResources()

@@ -8,6 +8,14 @@ namespace LibreriaActividades
 {
     public abstract class ActividadBase : NativeActivity
     {
-        public abstract void Ejecutar(NativeActivityContext context);
+        private bool sePuedeEliminar = true;
+
+        public abstract void Ejecutar(StringBuilder sb);
+
+        public virtual bool SePuedeEliminar
+        {
+            get { return this.sePuedeEliminar; }
+            set { this.sePuedeEliminar = value; }
+        }
     }
 }
