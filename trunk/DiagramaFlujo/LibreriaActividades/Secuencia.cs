@@ -14,8 +14,16 @@ namespace LibreriaActividades
     [ToolboxBitmap(typeof(Secuencia), "Resources.Secuencia.png")]
     public class Secuencia : ActividadBase
     {
+        private bool admiteDeclaraciones;
+
         [Browsable(false)]
         public Collection<Activity> Activities { get; set; }
+
+        public bool AdmiteDelaraciones
+        {
+            get { return this.admiteDeclaraciones; }
+            set { this.admiteDeclaraciones = value; }
+        }
 
         public Secuencia()
         {

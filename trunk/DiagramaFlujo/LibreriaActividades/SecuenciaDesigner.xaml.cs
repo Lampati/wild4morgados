@@ -20,6 +20,24 @@ namespace LibreriaActividades
         public SecuenciaDesigner()
         {
             InitializeComponent();
+            base.PreviewDragOver += new DragEventHandler(SecuenciaDesigner_PreviewDragOver);
+        }
+
+        void SecuenciaDesigner_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            string actividad = e.Data.GetData("WorkflowItemTypeNameFormat").ToString();
+            if ((bool)this.ModelItem.Properties["AdmiteDelaraciones"].ComputedValue)
+            {
+                if (!actividad.Contains("LibreriaActividades.DeclaracionVariable"))
+                    e.Effects = DragDropEffects.None;
+            }
+            else
+            {
+                if (actividad.Contains("LibreriaActividades.DeclaracionVariable"))
+                    e.Effects = DragDropEffects.None;
+            }
+            
+            
         }
     }
 }

@@ -42,7 +42,7 @@
                     
                     if (this is TabItemPrincipal)
                     {
-                        init = new Secuencia() { DisplayName = "Secuencia Principal" };
+                        init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
                         init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
                     }
                     else
@@ -51,7 +51,7 @@
                         if (this is TabItemDeclaracionVariable || this is TabItemDeclaracionConstante)
                             display = "DECLARACION " + this.Header;
 
-                        init = new Secuencia() { DisplayName = display };
+                        init = new Secuencia() { DisplayName = display, AdmiteDelaraciones = false };
                     }
 
                     System.Threading.Thread thread = new System.Threading.Thread(
@@ -65,12 +65,17 @@
                                   {
                                       wd.Load(init);
                                       this.ReconstruirContextMenu(wd);
+                                      if (((Grid)wd.View).Children.Count > 0)
+                                      {
+                                          System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
+                                          dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
+                                      }
                                   }
                               ));
                           }
                       ));
                     thread.Start();                    
-                }
+                }                   
 
                 return wd.View;
             }

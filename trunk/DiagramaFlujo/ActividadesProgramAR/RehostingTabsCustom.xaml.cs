@@ -69,6 +69,7 @@ namespace UsingWorkflowItemPresenter
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
             else
             {
+                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mostrar)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
@@ -85,6 +86,7 @@ namespace UsingWorkflowItemPresenter
             RegisterCustomMetadata();
             // add custom activity to toolbox
             Toolbox.Categories.Add(new ToolboxCategory("Actividades GarGar"));
+            Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mostrar)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
