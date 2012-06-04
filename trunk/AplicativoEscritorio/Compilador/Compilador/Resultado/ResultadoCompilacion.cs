@@ -5,6 +5,8 @@ using System.Text;
 using CompiladorGargar.Semantico.Arbol;
 using CompiladorGargar.Resultado.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
+using CompiladorGargar.Semantico.RecorredorArbol;
+using CompiladorGargar.Semantico.Arbol.Nodos;
 
 namespace CompiladorGargar.Resultado
 {
@@ -44,7 +46,37 @@ namespace CompiladorGargar.Resultado
             ListaDebugSintactico = new List<PasoCompilacion>();
             ListaErrores = new List<PasoAnalizadorSintactico>();
         }
-        
+
+        public string ArmarArbol()
+        {
+            NodoArbolSemantico nodoActual = this.ArbolSemanticoResultado.ObtenerRaiz();
+
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.AppendLine(nodoActual.ToString());
+
+            for (int i = 0; i < nodoActual.ObtenerCantidadHijos(); i++)
+            {
+                NodoArbolSemantico nodo = nodoActual.ObtenerHijo(i);
+                strBldr.AppendLine(ObtenerStringNodo(nodo));
+            }
+
+
+            return strBldr.ToString();
+        }
+
+        private string ObtenerStringNodo(NodoArbolSemantico nodoActual)
+        {
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.AppendLine(nodoActual.ToString());
+
+            for (int i = 0; i < nodoActual.ObtenerCantidadHijos(); i++)
+            {
+                NodoArbolSemantico nodo = nodoActual.ObtenerHijo(i);
+                strBldr.AppendLine(ObtenerStringNodo(nodo));
+            }
+
+            return strBldr.ToString();
+        }
     }
 
     

@@ -13,13 +13,6 @@ namespace CompiladorGargar.Semantico.Arbol
 {
     internal class ArbolSemantico
     {
-
-      
-        
-
-        
-
-
         private NodoArbolSemantico nodoRaiz;
         private NodoArbolSemantico nodoActual;
 
@@ -29,6 +22,11 @@ namespace CompiladorGargar.Semantico.Arbol
             nodoRaiz.CrearTablaSimbolos();
             
             nodoActual = nodoRaiz;
+        }
+
+        internal NodoArbolSemantico ObtenerRaiz()
+        {
+            return nodoRaiz;
         }
 
         internal void AgregarHijosNodoActual(Produccion prod)
@@ -89,8 +87,6 @@ namespace CompiladorGargar.Semantico.Arbol
         //        }
 
         //    }
-
-            
         //}
 
         internal List<PasoAnalizadorSintactico> CalcularAtributos(Terminal t)
