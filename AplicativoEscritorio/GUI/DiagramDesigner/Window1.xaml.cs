@@ -539,7 +539,8 @@ namespace DiagramDesigner
             string programa = this.Esquema.GarGarACompilar;
             ResultadoCompilacion res = this.compilador.Compilar(programa);
             res.CodigoGarGar = programa;
-            
+
+            string arbol = res.ArmarArbol();
 
             MostrarResultadosCompilacion(res);
 
