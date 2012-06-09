@@ -16,9 +16,9 @@ using System.Activities.Presentation.Toolbox;
 using System.Activities.Core.Presentation;
 using System.Activities.Presentation.Metadata;
 using System.ComponentModel;
-using UsingWorkflowItemPresenter.ViewModels;
+using DiagramDesigner.ViewModels;
 
-namespace UsingWorkflowItemPresenter
+namespace DiagramDesigner
 {
     /// <summary>
     /// Interaction logic for RehostingTabsCustom.xaml

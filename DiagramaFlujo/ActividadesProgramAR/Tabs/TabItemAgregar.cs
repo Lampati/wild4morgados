@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UsingWorkflowItemPresenter.ViewModels;
+using DiagramDesigner.ViewModels;
 
-namespace UsingWorkflowItemPresenter
+namespace DiagramDesigner.Tabs
 {
     public class TabItemAgregar : Tab
     {

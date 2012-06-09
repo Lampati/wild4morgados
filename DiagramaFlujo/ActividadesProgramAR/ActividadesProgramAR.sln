@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingWorkflowItemPresenter", "UsingWorkflowItemPresenter.csproj", "{55DA6F29-A074-47FB-8248-E684F9C7EECF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagramDesigner", "DiagramDesigner.csproj", "{55DA6F29-A074-47FB-8248-E684F9C7EECF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreriaActividades", "..\LibreriaActividades\LibreriaActividades.csproj", "{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}"
 EndProject

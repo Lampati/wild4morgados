@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>FolderBrowseLib\FolderPickerLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>RibbonDLL\Microsoft.Windows.Shell.dll</HintPath>
@@ -59,10 +63,14 @@
       <HintPath>RibbonDLL\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Core.Presentation" />
+    <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -90,6 +98,10 @@
     <Page Include="DialogWindows\ResultadoEjecucionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RehostingTabsCustom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\ApplicationMenuResourceDictionary.xaml">
       <SubType>Designer</SubType>
@@ -215,6 +227,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BrandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SingleBrandView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -232,6 +252,7 @@
     <Compile Include="DialogWindows\ResultadoEjecucionDialog.xaml.cs">
       <DependentUpon>ResultadoEjecucionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums\eTipoTab.cs" />
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
@@ -241,7 +262,16 @@
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
+    <Compile Include="RehostingTabsCustom.xaml.cs">
+      <DependentUpon>RehostingTabsCustom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResultadoEjecucion.cs" />
+    <Compile Include="Tabs\TabItemAgregar.cs" />
+    <Compile Include="Tabs\TabItemDeclaracionConstante.cs" />
+    <Compile Include="Tabs\TabItemDeclaracionVariable.cs" />
+    <Compile Include="Tabs\TabItemFuncion.cs" />
+    <Compile Include="Tabs\TabItemPrincipal.cs" />
+    <Compile Include="Tabs\TabItemProcedimiento.cs" />
     <Compile Include="TestsPruebas\Linea.cs" />
     <Compile Include="TestsPruebas\WindowEjecucionTest.xaml.cs">
       <DependentUpon>WindowEjecucionTest.xaml</DependentUpon>
@@ -320,6 +350,16 @@
     <Compile Include="EventArgsClasses\IdentarEventArgs.cs" />
     <Compile Include="UserControls\VariablesConValoresPresenter.xaml.cs">
       <DependentUpon>VariablesConValoresPresenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BrandsViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\Tab.cs" />
+    <Compile Include="Views\BrandsView.xaml.cs">
+      <DependentUpon>BrandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SingleBrandView.xaml.cs">
+      <DependentUpon>SingleBrandView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window1.MenuCommands.cs" />
     <Compile Include="Window1.xaml.cs">
@@ -419,6 +459,10 @@
       <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>
       <Name>FindReplace</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\FormattedTabControl\FormattedTabControl.csproj">
+      <Project>{A3516F6D-8369-4AC3-919F-1444B89F0319}</Project>
+      <Name>FormattedTabControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Globales\Globales.csproj">
       <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
       <Name>Globales</Name>
@@ -426,6 +470,10 @@
     <ProjectReference Include="..\..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibreriaActividades\LibreriaActividades.csproj">
+      <Project>{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}</Project>
+      <Name>LibreriaActividades</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Sincronizacion\Sincronizacion.csproj">
       <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
@@ -494,6 +542,7 @@
     <Resource Include="Images\fenrir_512x512x32.png" />
     <Resource Include="Images\loboTribal.png" />
     <Resource Include="Images\loboTribal1.png" />
+    <Content Include="Lib\Microsoft.Practices.Prism.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />

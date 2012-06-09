@@ -78,12 +78,12 @@
     <Compile Include="RehostingTabsCustom.xaml.cs">
       <DependentUpon>RehostingTabsCustom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TabItemAgregar.cs" />
-    <Compile Include="TabItemDeclaracionVariable.cs" />
-    <Compile Include="TabItemDeclaracionConstante.cs" />
-    <Compile Include="TabItemFuncion.cs" />
-    <Compile Include="TabItemPrincipal.cs" />
-    <Compile Include="TabItemProcedimiento.cs" />
+    <Compile Include="Tabs\TabItemAgregar.cs" />
+    <Compile Include="Tabs\TabItemDeclaracionVariable.cs" />
+    <Compile Include="Tabs\TabItemDeclaracionConstante.cs" />
+    <Compile Include="Tabs\TabItemFuncion.cs" />
+    <Compile Include="Tabs\TabItemPrincipal.cs" />
+    <Compile Include="Tabs\TabItemProcedimiento.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BrandsViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
