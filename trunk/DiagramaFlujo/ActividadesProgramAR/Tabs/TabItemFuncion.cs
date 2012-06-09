@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using UsingWorkflowItemPresenter.ViewModels;
+using DiagramDesigner.ViewModels;
 
-namespace UsingWorkflowItemPresenter
+namespace DiagramDesigner.Tabs
 {
     public class TabItemFuncion : Tab
     {
