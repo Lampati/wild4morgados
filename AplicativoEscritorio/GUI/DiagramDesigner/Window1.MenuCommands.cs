@@ -357,7 +357,7 @@ namespace DiagramDesigner
                 }
                 else
                 {
-                    printDialog.PrintVisual(Esquema.MyDesigner, "WPF Diagram");
+                    //printDialog.PrintVisual(Esquema.MyDesigner, "WPF Diagram");
                 }
             }
         }

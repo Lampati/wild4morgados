@@ -1,7 +1,8 @@
 ﻿<UserControl x:Class="DiagramDesigner.Views.SingleBrandView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             >
     <UserControl.CommandBindings>
         <CommandBinding Command="Delete" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
         <CommandBinding Command="sapv:DesignerView.CutCommand" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
@@ -10,15 +11,16 @@
     </UserControl.CommandBindings>
     <Grid Name="grd">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600*" />
+            <ColumnDefinition Width="350*" />
+            <ColumnDefinition Width="650*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200*" />
-            <RowDefinition Height="500*" />
+            <RowDefinition Height="700*" />
+            
         </Grid.RowDefinitions>
-        <ContentControl Grid.Column="0" Grid.Row="0" Name="contentDesignerDeclaraciones"
-                        Content="{Binding Path=WFDeclaraciones}"/>
-        <ContentControl Grid.Column="0" Grid.Row="1" Name="contentDesigner"
-                        Content="{Binding Path=WF}"/>
+        <ContentControl Grid.Row="0" Grid.Column="0" Name="contentDesignerDeclaraciones"
+                        Content="{Binding Path=WFDeclaraciones}" ScrollViewer.CanContentScroll="True"/>
+        <ContentControl  Grid.Row="0" Grid.Column="1" Name="contentDesigner"
+                        Content="{Binding Path=WF}" ScrollViewer.CanContentScroll="True"/>
     </Grid>
 </UserControl>
