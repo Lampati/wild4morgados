@@ -11,7 +11,7 @@
     </UserControl.CommandBindings>
     <Grid Name="grd">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350*" />
+            <ColumnDefinition Width="350*"  />
             <ColumnDefinition Width="650*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -19,7 +19,7 @@
             
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="0" Grid.Column="0" Name="contentDesignerDeclaraciones"
-                        Content="{Binding Path=WFDeclaraciones}" ScrollViewer.CanContentScroll="True"/>
+                        Content="{Binding Path=WFDeclaraciones}" ScrollViewer.CanContentScroll="True" BorderBrush="Black" BorderThickness="2px"/>
         <ContentControl  Grid.Row="0" Grid.Column="1" Name="contentDesigner"
                         Content="{Binding Path=WF}" ScrollViewer.CanContentScroll="True"/>
     </Grid>
