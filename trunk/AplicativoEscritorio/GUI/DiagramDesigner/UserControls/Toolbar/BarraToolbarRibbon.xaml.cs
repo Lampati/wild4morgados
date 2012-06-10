@@ -45,8 +45,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                         this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Collapsed;
                         this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Visible;
 
-                        this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Visible;
-                        this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
+                        //this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Visible;
+                        //this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
 
                         this.ribbonGroupIdentacion.Visibility = System.Windows.Visibility.Collapsed;
                         
@@ -59,8 +59,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                         this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Visible;
                         this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Collapsed;
 
-                        this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
-                        this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;
+                        //this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
+                        //this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;
 
                         this.ribbonGroupIdentacion.Visibility = System.Windows.Visibility.Visible;
 
