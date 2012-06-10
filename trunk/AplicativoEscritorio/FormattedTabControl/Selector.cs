@@ -15,8 +15,8 @@ namespace FormattedTabControl
         public override Style SelectStyle(object item,
           DependencyObject container)
         {
-            string path = item.GetType().GetProperty("Header").GetValue(item, null).ToString();
-            if (path == " + " || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES")
+            string path = item.GetType().GetProperty("Header").GetValue(item, null).ToString().Trim();
+            if (path == "+" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES")
                 return SinEstilo;
             return ConEstilo;
             

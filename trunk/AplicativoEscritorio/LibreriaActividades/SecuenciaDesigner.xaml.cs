@@ -25,6 +25,10 @@ namespace LibreriaActividades
 
         void SecuenciaDesigner_PreviewDragOver(object sender, DragEventArgs e)
         {
+            object wfAct = e.Data.GetData("WorkflowItemTypeNameFormat") as object;
+            if (Object.Equals(wfAct, null))
+                return;
+
             string actividad = e.Data.GetData("WorkflowItemTypeNameFormat").ToString();
             if ((bool)this.ModelItem.Properties["AdmiteDelaraciones"].ComputedValue)
             {

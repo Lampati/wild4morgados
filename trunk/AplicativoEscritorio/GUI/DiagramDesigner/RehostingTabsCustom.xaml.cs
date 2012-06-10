@@ -58,11 +58,11 @@ namespace DiagramDesigner
                 return;
 
             Toolbox.Categories[0].Tools.Clear();
-            if (t.Content.ToString() == "VARIABLES")
+            if (t.Content.ToString().Trim() == "VARIABLES")
             {
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
             }
-            else if (t.Content.ToString() == "CONSTANTES")
+            else if (t.Content.ToString().Trim() == "CONSTANTES")
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
             else
             {
