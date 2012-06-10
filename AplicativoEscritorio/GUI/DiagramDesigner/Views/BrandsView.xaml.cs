@@ -15,10 +15,10 @@
             InitializeComponent();
             this.FindAndApplyResources();
             this.DataContext = new BrandsViewModel();
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("PRINCIPAL", false, eTipoTab.TabItemPrincipal);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("CONSTANTES", false, eTipoTab.TabItemDeclaracionConstante);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("VARIABLES", false, eTipoTab.TabItemDeclaracionVariable);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand(" + ", false, eTipoTab.TabItemAgregar);                    
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("    PRINCIPAL    ", false, eTipoTab.TabItemPrincipal);
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("    CONSTANTES    ", false, eTipoTab.TabItemDeclaracionConstante);
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("    VARIABLES    ", false, eTipoTab.TabItemDeclaracionVariable);
+            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("     +     ", false, eTipoTab.TabItemAgregar);                    
         }
 
         private void FindAndApplyResources()

@@ -66,5 +66,10 @@
                     }
                 }, System.Windows.Threading.DispatcherPriority.Render, null);
         }
+
+        private void tc_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -25,10 +25,10 @@
             if (Object.Equals(t, null))
                 return;
 
-            if (t.Content.ToString() == " + ")
+            if (t.Content.ToString().Trim() == "+")
             {
                 //TODO aca viene el wizard para crear funciones / procedimientos!
-                this.ExecuteAddBrand("Proc/Func " + cant.ToString(), true, eTipoTab.TabItemProcedimiento);
+                this.ExecuteAddBrand("Proc/Func" + cant.ToString(), true, eTipoTab.TabItemProcedimiento);
                 cant++;
             }
         }
