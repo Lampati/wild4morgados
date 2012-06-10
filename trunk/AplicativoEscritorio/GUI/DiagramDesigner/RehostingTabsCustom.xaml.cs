@@ -23,7 +23,7 @@ namespace DiagramDesigner
     /// <summary>
     /// Interaction logic for RehostingTabsCustom.xaml
     /// </summary>
-    public partial class RehostingTabsCustom : Window
+    public partial class RehostingTabsCustom : UserControl
     {
         public RehostingTabsCustom()
         {

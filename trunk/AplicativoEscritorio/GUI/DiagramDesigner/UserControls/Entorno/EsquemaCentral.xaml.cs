@@ -99,7 +99,7 @@ namespace DiagramDesigner.UserControls.Entorno
                         this.grdVisual.Visibility = System.Windows.Visibility.Visible;
                         this.grdTexto.Visibility = System.Windows.Visibility.Collapsed;
                         DesconfigurarBuscarYReemplazarModoTexto();
-                        MyDesigner.Focus();                        
+                        //MyDesigner.Focus();                        
                         break;
                     case ModoVisual.Texto:
                         this.grdVisual.Visibility = System.Windows.Visibility.Collapsed;
@@ -222,11 +222,10 @@ namespace DiagramDesigner.UserControls.Entorno
 
         internal void CambiarTamanio(double width, double height)
         {
-            if (modo == ModoVisual.Texto)
-            {
                 grdTexto.MaxWidth = width;
                 grdTexto.MaxHeight = height;
-            }
+                grdVisual.MaxWidth = width;
+                grdVisual.MaxHeight = height;
         }
     }
 

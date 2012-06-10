@@ -21,42 +21,10 @@
     <StackPanel VerticalAlignment="Stretch" Height="Auto">
         <Grid Name="grdVisual" Visibility="Visible" VerticalAlignment="Stretch" Height="Auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!-- Toolbox -->
-            <StackPanel Grid.Column="0" Margin="0,0,0,0">
-                <Expander Header="Flujo" Width="80" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
-                <Expander Header="Figuras" Width="80" Content="{StaticResource ShapeStencils}" IsExpanded="True"/>
-            </StackPanel>
-            <!-- GridSplitter -->
-            <!--<GridSplitter Focusable="False" Width="2" Background="LightGray"
-                        VerticalAlignment="Stretch" HorizontalAlignment="Right"/>-->
-            <!-- Designer -->
-            <StackPanel Grid.Column="1">
-                <GroupBox Header="Diagrama" Margin="3,0,0,0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" Name="ScrollFiguras"
-                                VerticalScrollBarVisibility="Auto" Height="350">
-                        <s:DesignerCanvas Focusable="true" x:Name="MyDesigner"
-                                    Background="{StaticResource WindowBackgroundBrush}"
-                                    Margin="10" FocusVisualStyle="{x:Null}"
-                                    ContextMenu="{StaticResource DesignerCanvasContextMenu}">
-                            <s:DesignerCanvas.LayoutTransform>
-                                <ScaleTransform ScaleX="{Binding ElementName=ZoomSlider, Path=Value}" 
-                                ScaleY="{Binding ElementName=ZoomSlider, Path=Value}" />
-                            </s:DesignerCanvas.LayoutTransform>
-                        </s:DesignerCanvas>
-                    </ScrollViewer>
-                </GroupBox>
-                <Slider Name="ZoomSlider" Value="1" Maximum="2" Width="50"/>
-            </StackPanel>
-            <!-- GridSplitter -->
-            <!--<GridSplitter Focusable="False" Width="2" Background="LightGray"
-                        VerticalAlignment="Stretch" HorizontalAlignment="Right"/>-->
-            <!-- Propiedades -->
-            <GroupBox Header="Propiedades" Grid.Column="2" Margin="3,0,0,0">
-                <TextBox Name="txt"></TextBox>
+            <GroupBox Header="Gráfico" Grid.Column="0" Margin="0,0,0,0" Height="Auto" MaxHeight="500" VerticalAlignment="Stretch">
+                <s:RehostingTabsCustom HorizontalAlignment="Stretch" Margin="0,5,0,0" x:Name="modoGrafico"></s:RehostingTabsCustom>
             </GroupBox>
         </Grid>
 

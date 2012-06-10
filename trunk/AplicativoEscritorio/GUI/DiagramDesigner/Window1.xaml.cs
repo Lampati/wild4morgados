@@ -670,12 +670,9 @@ namespace DiagramDesigner
 
         private void RibbonWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (modo == ModoVisual.Texto)
-            {
-                double alturaRestar = ToolbarAplicacion.ActualHeight + BarraEstado.ActualHeight + BarraMsgs.ActualHeight;
+            double alturaRestar = ToolbarAplicacion.ActualHeight + BarraEstado.ActualHeight + BarraMsgs.ActualHeight;            
 
-                Esquema.CambiarTamanio(e.NewSize.Width, e.NewSize.Height - alturaRestar);
-            }
+            Esquema.CambiarTamanio(e.NewSize.Width, e.NewSize.Height - alturaRestar);
         }
     }
 }
