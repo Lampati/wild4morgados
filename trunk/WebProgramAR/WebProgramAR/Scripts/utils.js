@@ -1,5 +1,6 @@
 ﻿$.ajaxSetup({ cache: false });
 var position = 'center';
+var initOpenTab = true;
 
 function SetFiltroOpenClose() {
     $(document).ready(function () {
@@ -221,13 +222,17 @@ function OpenTab(event, id, accion,idTab) {
     if (event != null) {
         event.preventDefault();
     }
-    /*$("#"+idTab).unbind("tabOpen");
-    $("#" + idTab).bind("dialogopen", function (event, ui) {*/
-    $("#" + idTab).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />').delay(300).html();
-    $("#" + idTab).stop(true,true).load(accion + id, function () {
+    if (initOpenTab) {
+        //$("#"+idTab).unbind("tabOpen");
+        //$("#" + idTab).bind("dialogopen", function (event, ui) {
+        $("#" + idTab).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />').delay(300).html();
+        initOpenTab = false;
+        $("#" + idTab).stop(true, true).load(accion + id, function () {
+            initOpenTab = true;
             //alert('Load was performed.');
-        });/*
-    });*/
+        });
+        //});
+    }
 }
 function OpenDialog(event, id, accion, ancho, alto) {
     if (event != null) {

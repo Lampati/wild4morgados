@@ -2005,7 +2005,8 @@ ul.tabs
 {
     border:3px solid #333;
     width:90%;
-    height:80%;
+    height:auto;
+    min-height:325px;
     margin-top:11px;
     margin-left:30px;
     padding:10px;

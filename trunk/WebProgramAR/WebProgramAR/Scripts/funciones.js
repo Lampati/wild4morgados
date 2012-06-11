@@ -72,13 +72,13 @@ undefined: no darle importancia
         } else {
             dropDown.css("height", "30px" * select.find('option').size());
         }
-
         select.find('option').each(function (i) {
             var option = $(this);
-            if (option.attr("selected") == "selected" || option.attr("selected")==true) {
+            //alert(selectFirstElement + ":" + option.attr("selected")+":"+option.html());
+            /*if ((option.attr("selected") == "selected" || option.attr("selected") == true) && !seleccionado) {
                 selectBox.html(option.html());
                 selectBox.attr("rel", option.val());
-            }
+            }*/
             if (selectFirstElement != undefined) {
                 if (i == 0) {
                     selectBox.html(option.html());
