@@ -1910,7 +1910,8 @@ ul.tabs
 {
     border:3px solid #333;
     width:90%;
-    height:80%;
+    height:auto;
+    min-height:325px;
     margin-top:11px;
     margin-left:30px;
     padding:10px; 	
@@ -2166,7 +2167,8 @@ ul.tabs
 .queesContent
 {
     font-size:1em;
-    color:#333;   
+    color:#fff;   
+    font-family:Calibri;
     width:220px;
 }
 .h7
@@ -2226,7 +2228,7 @@ ul.tabs
 }
 
 .ribbon-green {
-  font: bold 15px Sans-Serif;
+  font: bold 12px Calibri;
   color: #333;
   text-align: left;
   text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;

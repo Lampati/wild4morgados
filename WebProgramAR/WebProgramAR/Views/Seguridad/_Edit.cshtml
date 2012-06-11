@@ -10,7 +10,7 @@
 }
 
 <script type="text/javascript">
-    $("<option value='-1' >Seleccion una Opcion</option>").prependTo("#SelectTablaId");
+    $("<option value='' >Seleccion una Opcion</option>").prependTo("#SelectTablaId");
     convertSelect("SelectTablaId");
     convertSelect("SelectTipoUsuarioCreate");
     convertSelect("SelectColumnaId");
@@ -193,7 +193,7 @@
             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
             Value = option.TipoUsuarioId.ToString(),
             Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-        }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @name = "SelectTipoUsuarioCreate" })
+        }), "Seleccione tipo de Usuario", new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @name = "SelectTipoUsuarioCreate" })
         @Html.HiddenFor(model => Model.TipoUsuarioId)
         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
 </div>

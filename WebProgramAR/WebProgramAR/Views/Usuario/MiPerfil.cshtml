@@ -36,34 +36,38 @@
     OpenTab(null, $("#UsuarioId").val() + '?esMiPerfil=true', '@Url.Action("Edit")/', "content");
     $(document).ready(function () {
         $(".tabs li").click(function (event) {
-            var actual = $(this).attr("id");
-            $(".tabs li").each(function (e) {
-                if ($(this).attr("id") == actual) {
-                    $("#" + actual).fadeIn("slow");
-                    $(this).addClass("selected");
-                }
-                else {
-                    $(this).removeClass("selected");
-                }
+            if (initOpenTab) {
+                var actual = $(this).attr("id");
+                if ($(".tabs li.selected").attr("id") != actual) {
+                    $(".tabs li").each(function (e) {
+                        if ($(this).attr("id") == actual) {
+                            $("#" + actual).fadeIn("slow");
+                            $(this).addClass("selected");
+                        }
+                        else {
+                            $(this).removeClass("selected");
+                        }
 
-            });
-            switch ($(this).attr("id")) {
-                case "Perfil":
-                    OpenTab(event, $("#UsuarioId").val() + '?esMiPerfil=true', '@Url.Action("Edit")/', "content");
-                    break;
-                case "Cursos":
-                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
-                    break;
-                case "Aprobados":
-                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
-                    break;
-                case "Pendientes":
-                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorPendiente&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
-                    break;
-                case "Desaprobados":
-                    OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorDesprobado&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
-                    break;
-                
+                    });
+                    switch ($(this).attr("id")) {
+                        case "Perfil":
+                            OpenTab(event, $("#UsuarioId").val() + '?esMiPerfil=true', '@Url.Action("Edit")/', "content");
+                            break;
+                        case "Cursos":
+                            OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Curso/Index")/', "content");
+                            break;
+                        case "Aprobados":
+                            OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/Index")/', "content");
+                            break;
+                        case "Pendientes":
+                            OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorPendiente&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
+                            break;
+                        case "Desaprobados":
+                            OpenTab(event, $("#UsuarioId").val() + '?conLayout=false&aplicarPermisos=false&estadoEjercicio=@valorDesprobado&usuarioId=' + $("#UsuarioId").val(), '@Url.Action("../Ejercicio/ListarEjerciciosGrillaSinPermisos")/', "content");
+                            break;
+
+                    }
+                }
             }
         });
     });

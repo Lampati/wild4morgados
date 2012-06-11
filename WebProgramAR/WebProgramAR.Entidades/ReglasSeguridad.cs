@@ -240,6 +240,7 @@ namespace WebProgramAR.Entidades
         }
         private Columna _columna;
 
+        public string Tipo { get; set; }
         #endregion
         #region Association Fixup
     

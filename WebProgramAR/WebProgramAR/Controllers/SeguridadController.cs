@@ -130,14 +130,14 @@ namespace WebProgramAR.Controllers
                 ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
                 ArmarViewBags(id);
 
-                ReglaSeguridadViewModel modelo = new ReglaSeguridadViewModel();
+                ReglasSeguridad modelo = new ReglasSeguridad();
                 modelo.ReglaId = c.ReglaId;
                 modelo.Activa = c.Activa;
                 modelo.ColumnaId = c.ColumnaId;
                 modelo.ComparadorId = c.ComparadorId;
                 modelo.TablaId = c.TablaId;
-                modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : int.MinValue;
-                modelo.UsuarioId = c.UsuarioId.HasValue ? c.UsuarioId.Value : int.MinValue;
+                modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : -1;
+                modelo.UsuarioId = c.UsuarioId.HasValue ? c.UsuarioId.Value : -1;
                 modelo.Valor = c.Valor;
 
                 modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();

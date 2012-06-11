@@ -162,8 +162,8 @@
     </div>
 <script type="text/javascript">
     $("#Usuario_TipoUsuarioId").val(1);
-    convertSelect("SelectPaisId");
-    convertSelect("SelectTipoUsuarioId");
+    convertSelect("SelectPaisId",1);
+    convertSelect("SelectTipoUsuarioId",1);
     $("#Usuario_FechaNacimiento").datepicker({minDate:new Date(1920,01,01), changeMonth: true,changeYear: true,yearRange: "1920:1995",maxDate:new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
     $("#Usuario_FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
@@ -203,8 +203,8 @@
                             var text = provincias[i].Value;
                             $("#SelectProvinciaId").get(0).options[$("#SelectProvinciaId").get(0).options.length] = new Option(text, val);
                         }
-                        $("<option value='0' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
-                        convertSelect("SelectProvinciaId");
+                        $("<option value=''>Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
+                        convertSelect("SelectProvinciaId",1);
                         $("#PaisId").val((div.attr("rel")));
                         reInitProvincia();
                         reInitLocalidad();

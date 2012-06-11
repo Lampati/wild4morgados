@@ -1929,7 +1929,8 @@ ul.tabs
 {
     border:3px solid #333;
     width:80%;
-    height:80%;
+    height:auto;
+    min-height:325px;
     margin-top:11px;
     margin-left:50px;
     padding:10px; 	
