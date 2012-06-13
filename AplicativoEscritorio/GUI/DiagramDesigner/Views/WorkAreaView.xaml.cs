@@ -35,8 +35,11 @@
             {
                 ((BrandsViewModel)this.DataContext).AgregarNuevo();
             }
+            else
+            {
+                CambioTabEventFire(o, e);
+            }
 
-            CambioTabEventFire(o, e);
         }
 
         private void CambioTabEventFire(object sender, TipoTabCambiadoEventArgs e)
