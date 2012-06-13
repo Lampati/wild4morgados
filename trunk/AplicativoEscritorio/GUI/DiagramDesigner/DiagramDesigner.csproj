@@ -361,8 +361,7 @@
       <DependentUpon>VariablesConValoresPresenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\BrandsViewModel.cs" />
-    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\WorkAreaViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="Views\WorkAreaView.xaml.cs">
       <DependentUpon>WorkAreaView.xaml</DependentUpon>

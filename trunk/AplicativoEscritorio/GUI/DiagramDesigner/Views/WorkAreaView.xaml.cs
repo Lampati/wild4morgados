@@ -22,18 +22,18 @@
             this.tab.CambioTabEvent += new Tabs.TabsControl.TipoTabCambiadoEventHandler(tab_CambioTabEvent);
 
             this.FindAndApplyResources();
-            this.DataContext = new BrandsViewModel();
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("    PRINCIPAL    ", false, eTipoTab.TabItemPrincipal);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("    CONSTANTES    ", false, eTipoTab.TabItemDeclaracionConstante);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("    VARIABLES    ", false, eTipoTab.TabItemDeclaracionVariable);
-            ((BrandsViewModel)this.DataContext).ExecuteAddBrand("     +     ", false, eTipoTab.TabItemAgregar);                    
+            this.DataContext = new WorkAreaViewModel();
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("    PRINCIPAL    ", false, eTipoTab.TabItemPrincipal);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("    CONSTANTES    ", false, eTipoTab.TabItemDeclaracionConstante);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("    VARIABLES    ", false, eTipoTab.TabItemDeclaracionVariable);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("     +     ", false, eTipoTab.TabItemAgregar);                    
         }
 
         void tab_CambioTabEvent(object o, TipoTabCambiadoEventArgs e)
         {
             if (e.Tipo == eTipoTab.TabItemAgregar)
             {
-                ((BrandsViewModel)this.DataContext).AgregarNuevo();
+                ((WorkAreaViewModel)this.DataContext).AgregarNuevo();
             }
             else
             {
@@ -54,13 +54,10 @@
         private void FindAndApplyResources()
         {
             var singleBrandKey = new DataTemplateKey(typeof(Tab));
-            var productKey = new DataTemplateKey(typeof(ProductViewModel));
             var singleBrandTemplate = this.TryFindResource(singleBrandKey);
-            var productTemplate = this.TryFindResource(productKey);
-            if (singleBrandTemplate != null && productTemplate != null)
+            if (singleBrandTemplate != null )
             {
                 this.tab.AddResource(singleBrandKey, singleBrandTemplate);
-                this.tab.AddResource(productKey, productTemplate);
                 
             }
         }

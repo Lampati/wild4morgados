@@ -7,13 +7,13 @@
     using DiagramDesigner.Enums;
     using DiagramDesigner.Tabs;
 
-    public class BrandsViewModel : BaseViewModel
+    public class WorkAreaViewModel : BaseViewModel
     {
         private DelegateCommand<Tab> deleteBrand;
         private ObservableCollection<Tab> brands;
         private int cant = 1;
 
-        public BrandsViewModel()
+        public WorkAreaViewModel()
             : base()
         {
             DiagramDesigner.Tabs.EditableTabHeaderControl.ClickEvento += new DiagramDesigner.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
