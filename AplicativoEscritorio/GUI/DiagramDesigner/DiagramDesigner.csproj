@@ -99,7 +99,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RehostingTabsCustom.xaml">
+    <Page Include="ModoGrafico.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -110,6 +110,10 @@
     <Page Include="Resources\RibbonStylesResouceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tabs\TabsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="TestsPruebas\WindowEjecucionTest.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -227,11 +231,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BrandsView.xaml">
+    <Page Include="Views\WorkAreaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SingleBrandView.xaml">
+    <Page Include="Views\SingleWorkAreaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -262,10 +266,15 @@
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
-    <Compile Include="RehostingTabsCustom.xaml.cs">
-      <DependentUpon>RehostingTabsCustom.xaml</DependentUpon>
+    <Compile Include="ModoGrafico.xaml.cs">
+      <DependentUpon>ModoGrafico.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResultadoEjecucion.cs" />
+    <Compile Include="Tabs\EditableTabHeaderControl.cs" />
+    <Compile Include="Tabs\TabsControl.xaml.cs">
+      <DependentUpon>TabsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\Selector.cs" />
     <Compile Include="Tabs\TabItemAgregar.cs" />
     <Compile Include="Tabs\TabItemDeclaracionConstante.cs" />
     <Compile Include="Tabs\TabItemDeclaracionVariable.cs" />
@@ -355,12 +364,13 @@
     <Compile Include="ViewModels\BrandsViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
-    <Compile Include="Views\BrandsView.xaml.cs">
-      <DependentUpon>BrandsView.xaml</DependentUpon>
+    <Compile Include="Views\WorkAreaView.xaml.cs">
+      <DependentUpon>WorkAreaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SingleBrandView.xaml.cs">
-      <DependentUpon>SingleBrandView.xaml</DependentUpon>
+    <Compile Include="Views\SingleWorkAreaView.xaml.cs">
+      <DependentUpon>SingleWorkAreaView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventArgsClasses\TipoTabCambiadoEventArgs.cs" />
     <Compile Include="Window1.MenuCommands.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -458,10 +468,6 @@
     <ProjectReference Include="..\..\FindReplace\FindReplace.csproj">
       <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>
       <Name>FindReplace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormattedTabControl\FormattedTabControl.csproj">
-      <Project>{A3516F6D-8369-4AC3-919F-1444B89F0319}</Project>
-      <Name>FormattedTabControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Globales\Globales.csproj">
       <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>

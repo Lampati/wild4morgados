@@ -1,4 +1,4 @@
-﻿namespace FormattedTabControl
+﻿namespace DiagramDesigner.Tabs
 {
     using System;
     using System.Windows;

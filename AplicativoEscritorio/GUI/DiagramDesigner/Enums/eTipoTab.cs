@@ -7,6 +7,7 @@
         TabItemDeclaracionConstante,
         TabItemFuncion,
         TabItemProcedimiento,
+        TabItemSalida,
         TabItemAgregar
     }
 }
