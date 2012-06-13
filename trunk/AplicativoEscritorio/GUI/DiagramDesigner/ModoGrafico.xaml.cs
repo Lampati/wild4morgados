@@ -17,21 +17,23 @@ using System.Activities.Core.Presentation;
 using System.Activities.Presentation.Metadata;
 using System.ComponentModel;
 using DiagramDesigner.ViewModels;
+using DiagramDesigner.Enums;
 
 namespace DiagramDesigner
 {
     /// <summary>
     /// Interaction logic for RehostingTabsCustom.xaml
     /// </summary>
-    public partial class RehostingTabsCustom : UserControl
+    public partial class ModoGrafico : UserControl
     {
-        public RehostingTabsCustom()
+        public ModoGrafico()
         {
             InitializeComponent();
-            FormattedTabControl.EditableTabHeaderControl.ClickEvento += new FormattedTabControl.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+            this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
+            DiagramDesigner.Tabs.EditableTabHeaderControl.ClickEvento += new DiagramDesigner.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
 
-        void EditableTabHeaderControl_ClickEvento(object sender, MouseButtonEventArgs e)
+        void WorkArea_CambioTabEvent(object sender, EventArgsClasses.TipoTabCambiadoEventArgs e)
         {
             System.Threading.Thread thread = new System.Threading.Thread(
                 new System.Threading.ThreadStart(
@@ -42,7 +44,7 @@ namespace DiagramDesigner
                         new Action(
                           delegate()
                           {
-                              this.ActualizarToolbox(sender);
+                              this.ActualizarToolbox(sender, e.Tipo );
                           }
                       ));
                   }
@@ -51,18 +53,55 @@ namespace DiagramDesigner
             thread.Start();
         }
 
-        private void ActualizarToolbox(object sender)
+        void EditableTabHeaderControl_ClickEvento(object sender, MouseButtonEventArgs e)
         {
-            FormattedTabControl.EditableTabHeaderControl t = sender as FormattedTabControl.EditableTabHeaderControl;
-            if (Object.Equals(t, null))
-                return;
+            //System.Threading.Thread thread = new System.Threading.Thread(
+            //    new System.Threading.ThreadStart(
+            //      delegate()
+            //      {
+            //          Application.Current.Dispatcher.Invoke(
+            //            System.Windows.Threading.DispatcherPriority.Normal,
+            //            new Action(
+            //              delegate()
+            //              {
+            //                  this.ActualizarToolbox(sender);
+            //              }
+            //          ));
+            //      }
+            //  ));
+
+            //thread.Start();
+        }
+
+        private void ActualizarToolbox(object sender, eTipoTab tipoDeTab)
+        {
+            //DiagramDesigner.Tabs.EditableTabHeaderControl t = sender as DiagramDesigner.Tabs.EditableTabHeaderControl;
+            //if (Object.Equals(t, null))
+            //    return;
+
+            //Toolbox.Categories[0].Tools.Clear();
+            //if (t.Content.ToString().Trim() == "VARIABLES")
+            //{
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
+            //}
+            //else if (t.Content.ToString().Trim() == "CONSTANTES")
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
+            //else
+            //{
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mostrar)));
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Asignacion)));
+            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(LlamarProcedimiento)));
+            //}
 
             Toolbox.Categories[0].Tools.Clear();
-            if (t.Content.ToString().Trim() == "VARIABLES")
+            if (tipoDeTab == eTipoTab.TabItemDeclaracionVariable)
             {
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
             }
-            else if (t.Content.ToString().Trim() == "CONSTANTES")
+            else if (tipoDeTab == eTipoTab.TabItemDeclaracionConstante)
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
             else
             {
@@ -118,7 +157,7 @@ namespace DiagramDesigner
             StringBuilder sb = new StringBuilder();
             System.Collections.SortedList sl = new System.Collections.SortedList();
 
-            foreach (Tab t in this.Tabs.tab.ItemSource)
+            foreach (Tab t in this.WorkArea.tab.ItemSource)
                 sl.Add(t.Orden, t);
 
             foreach (Tab t in sl.Values)

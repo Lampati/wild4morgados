@@ -6,12 +6,12 @@
     /// <summary>
     /// Interaction logic for SingleBrandView.xaml
     /// </summary>
-    public partial class SingleBrandView : UserControl
+    public partial class SingleWorkAreaView : UserControl
     {
-        public SingleBrandView()
+        public SingleWorkAreaView()
         {
             InitializeComponent();
-            FormattedTabControl.EditableTabHeaderControl.ClickEvento += new FormattedTabControl.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+            DiagramDesigner.Tabs.EditableTabHeaderControl.ClickEvento += new DiagramDesigner.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
 
         void EditableTabHeaderControl_ClickEvento(object sender, System.Windows.Input.MouseButtonEventArgs e)

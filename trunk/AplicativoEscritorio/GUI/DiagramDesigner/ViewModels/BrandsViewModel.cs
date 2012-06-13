@@ -16,21 +16,27 @@
         public BrandsViewModel()
             : base()
         {
-            FormattedTabControl.EditableTabHeaderControl.ClickEvento += new FormattedTabControl.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+            DiagramDesigner.Tabs.EditableTabHeaderControl.ClickEvento += new DiagramDesigner.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+        }
+
+        public void AgregarNuevo()
+        {
+            this.ExecuteAddBrand("Proc/Func" + cant.ToString(), true, eTipoTab.TabItemProcedimiento);
+            cant++;
         }
 
         void EditableTabHeaderControl_ClickEvento(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            FormattedTabControl.EditableTabHeaderControl t = sender as FormattedTabControl.EditableTabHeaderControl;
-            if (Object.Equals(t, null))
-                return;
+            //DiagramDesigner.Tabs.EditableTabHeaderControl t = sender as DiagramDesigner.Tabs.EditableTabHeaderControl;
+            //if (Object.Equals(t, null))
+            //    return;
 
-            if (t.Content.ToString().Trim() == "+")
-            {
-                //TODO aca viene el wizard para crear funciones / procedimientos!
-                this.ExecuteAddBrand("Proc/Func" + cant.ToString(), true, eTipoTab.TabItemProcedimiento);
-                cant++;
-            }
+            //if (t.Content.ToString().Trim() == "+")
+            //{
+            //    //TODO aca viene el wizard para crear funciones / procedimientos!
+            //    this.ExecuteAddBrand("Proc/Func" + cant.ToString(), true, eTipoTab.TabItemProcedimiento);
+            //    cant++;
+            //}
         }
 
         public ObservableCollection<Tab> Brands
@@ -112,12 +118,18 @@
             if (this.Brands.Contains(obj))
             {
                 this.Brands.Remove(obj);
-                if (this.Brands.Count == 4)
-                {
-                    FormattedTabControl.EditableTabHeaderControl etc = new FormattedTabControl.EditableTabHeaderControl();
-                    etc.Content = this.Brands[0].Header;
-                    FormattedTabControl.EditableTabHeaderControl.ClickEventoFire(etc, null);
-                }
+                //if (this.Brands.Count == 4)
+                //{
+                //    DiagramDesigner.Tabs.EditableTabHeaderControl etc = new DiagramDesigner.Tabs.EditableTabHeaderControl();
+                //    etc.Content = this.Brands[0].Header;
+                //    DiagramDesigner.Tabs.EditableTabHeaderControl.ClickEventoFire(etc, null);
+                //}
+
+                
+                DiagramDesigner.Tabs.EditableTabHeaderControl etc = new DiagramDesigner.Tabs.EditableTabHeaderControl();
+                etc.Content = this.Brands[0].Header;
+                DiagramDesigner.Tabs.EditableTabHeaderControl.ClickEventoFire(etc, null);
+            
                 obj = null;
             }
         }

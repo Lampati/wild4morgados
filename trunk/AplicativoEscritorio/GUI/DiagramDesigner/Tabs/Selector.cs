@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace FormattedTabControl
+namespace DiagramDesigner.Tabs
 {
     public class Selector : StyleSelector
     {
