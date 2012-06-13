@@ -29,8 +29,6 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupProgramAR", "..\SetupP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesterCompilador", "TesterCompilador\TesterCompilador.csproj", "{449AD090-26E6-496B-B93C-7309E2A29FA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormattedTabControl", "FormattedTabControl\FormattedTabControl.csproj", "{A3516F6D-8369-4AC3-919F-1444B89F0319}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreriaActividades", "LibreriaActividades\LibreriaActividades.csproj", "{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}"
 EndProject
 Global
@@ -179,16 +177,6 @@ Global
 		{449AD090-26E6-496B-B93C-7309E2A29FA0}.Release|Mixed Platforms.Build.0 = Release|x86
 		{449AD090-26E6-496B-B93C-7309E2A29FA0}.Release|x86.ActiveCfg = Release|x86
 		{449AD090-26E6-496B-B93C-7309E2A29FA0}.Release|x86.Build.0 = Release|x86
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A3516F6D-8369-4AC3-919F-1444B89F0319}.Release|x86.ActiveCfg = Release|Any CPU
 		{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
