@@ -135,7 +135,7 @@
             for (int i = 0; i < wd.ContextMenu.Items.Count; i++)
             {
                 MenuItem mi = wd.ContextMenu.Items[i] as MenuItem;
-                if (mi != null && mi.InputGestureText == "Del")
+                if (mi != null && (mi.InputGestureText == "Del" || mi.InputGestureText == "Supr"))
                 {
                     borrar = (MenuItem)wd.ContextMenu.Items[i];
                 }
