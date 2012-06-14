@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Activities.Statements;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using Microsoft.CSharp.RuntimeBinder;
+using ModoGrafico.Datos;
 
 namespace LibreriaActividades
 {
@@ -46,6 +48,42 @@ namespace LibreriaActividades
             {
                 foreach (ActividadBase a in this.Activities)
                     a.Ejecutar(sb);
+            }
+        }
+
+
+        public override ModoGrafico.Datos.ActividadViewModelBase Datos
+        {
+            get
+            {
+                SecuenciaViewModel retorno = new SecuenciaViewModel();
+                retorno.ListaActividades = new List<ActividadViewModelBase>();
+
+                foreach (ActividadBase item in this.Activities)
+                {
+                    retorno.ListaActividades.Add(item.Datos);
+                }
+
+                return retorno;  
+            }
+        
+        }
+
+        public override void AsignarDatos(dynamic datos)
+        {           
+            try
+            {
+                SecuenciaViewModel datosMapeados = datos as SecuenciaViewModel;
+
+                foreach (ActividadViewModelBase item in datosMapeados.ListaActividades)
+                {
+                    ActividadBase actividadCreada = ActividadFactory.CrearActividad(item);
+                    Activities.Add(actividadCreada);
+                }
+            }
+            catch (RuntimeBinderException)
+            {
+                throw;
             }
         }
     }

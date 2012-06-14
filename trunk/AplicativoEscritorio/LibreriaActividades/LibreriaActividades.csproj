@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActividadBase.cs" />
+    <Compile Include="ActividadFactory.cs" />
     <Compile Include="Asignacion.cs" />
     <Compile Include="AsignacionDesigner.xaml.cs">
       <DependentUpon>AsignacionDesigner.xaml</DependentUpon>
@@ -164,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="DeclaracionConstante.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModoGrafico.Datos\ModoGrafico.Datos.csproj">
+      <Project>{65FFD7BC-DE34-4757-AE3F-AF4C275B6C82}</Project>
+      <Name>ModoGrafico.Datos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

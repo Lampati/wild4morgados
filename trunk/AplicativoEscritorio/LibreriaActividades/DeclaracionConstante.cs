@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Activities.Presentation.Model;
 using System.Activities.Presentation;
 using System.Drawing;
+using ModoGrafico.Datos;
 
 namespace LibreriaActividades
 {
@@ -43,5 +44,19 @@ namespace LibreriaActividades
         }
 
         protected override void Execute(System.Activities.NativeActivityContext context) { }
+
+        public override ActividadViewModelBase Datos
+        {
+            get
+            {
+                return null;
+            }
+
+        }
+
+        public override void AsignarDatos(dynamic datos)
+        {
+            
+        }
     }
 }
