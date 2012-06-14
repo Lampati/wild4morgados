@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Activities.Presentation;
 using System.Windows;
 using System.Drawing;
+using ModoGrafico.Datos;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace LibreriaActividades
 {
@@ -44,6 +46,36 @@ namespace LibreriaActividades
                     SePuedeEliminar = false
                 }
             };
+        }
+
+        public override ModoGrafico.Datos.ActividadViewModelBase Datos
+        {
+            get
+            {
+                MientrasViewModel retorno = new MientrasViewModel();
+                retorno.Condicion = this.Condicion;
+                retorno.Cuerpo = ((Secuencia)this.Cuerpo).Datos as SecuenciaViewModel;
+
+                return retorno;
+            }
+        }
+
+        public override void AsignarDatos(dynamic datos)
+        {
+            try
+            {
+                MientrasViewModel datosMapeados = datos as MientrasViewModel;
+
+                this.Condicion = datosMapeados.Condicion;
+
+                ActividadBase actSec = ActividadFactory.CrearActividad(datosMapeados.Cuerpo);
+                this.Cuerpo = actSec;                
+                
+            }
+            catch (RuntimeBinderException)
+            {
+                throw;
+            }
         }
     }
 }

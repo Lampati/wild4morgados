@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Drawing;
+using ModoGrafico.Datos;
 
 namespace LibreriaActividades
 {
@@ -22,5 +23,19 @@ namespace LibreriaActividades
         }
 
         protected override void Execute(System.Activities.NativeActivityContext context) { }
+
+        public override ActividadViewModelBase Datos
+        {
+            get
+            {
+                return null;
+            }
+
+        }
+
+        public override void AsignarDatos(dynamic datos)
+        {
+            
+        }
     }
 }

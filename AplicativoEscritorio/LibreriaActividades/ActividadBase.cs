@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Activities;
+using ModoGrafico.Datos;
 
 namespace LibreriaActividades
 {
@@ -17,5 +18,13 @@ namespace LibreriaActividades
             get { return this.sePuedeEliminar; }
             set { this.sePuedeEliminar = value; }
         }
+
+
+        public abstract ActividadViewModelBase Datos
+        {
+            get;
+        }
+
+        public abstract void AsignarDatos(dynamic datos);
     }
 }

@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Activities.Presentation;
 using System.Windows;
 using System.Drawing;
+using ModoGrafico.Datos;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace LibreriaActividades
 {
@@ -73,6 +75,41 @@ namespace LibreriaActividades
                     DisplayName = "Rama Falso"
                 }
             };
+        }
+
+
+        public override ModoGrafico.Datos.ActividadViewModelBase Datos
+        {
+            get
+            {
+                SiViewModel retorno = new SiViewModel();
+                retorno.Condicion = this.Condicion;
+                retorno.BranchVerdadero = ((Secuencia)this.BranchVerdadero).Datos as SecuenciaViewModel;
+                retorno.BranchFalso = ((Secuencia)this.BranchFalso).Datos as SecuenciaViewModel;
+
+                return retorno;
+            }
+        }
+
+        public override void AsignarDatos(dynamic datos)
+        {
+            try
+            {
+                SiViewModel datosMapeados = datos as SiViewModel;
+
+                this.Condicion = datosMapeados.Condicion;
+
+                ActividadBase actVerdadero = ActividadFactory.CrearActividad(datosMapeados.BranchVerdadero);
+                this.BranchVerdadero = actVerdadero;
+
+                ActividadBase actFalso = ActividadFactory.CrearActividad(datosMapeados.BranchVerdadero);
+                this.BranchFalso = actFalso;
+
+            }
+            catch (RuntimeBinderException)
+            {
+                throw;
+            }
         }
     }
 }
