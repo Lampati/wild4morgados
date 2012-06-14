@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ModoGrafico.Views.WorkAreaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tab="clr-namespace:ModoGrafico.Tabs"
+             xmlns:vm="clr-namespace:ModoGrafico.ViewModels"
+             xmlns:vw="clr-namespace:ModoGrafico.Views">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:Tab}">
+            <vw:SingleWorkAreaView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500*" />
+        </Grid.RowDefinitions>        
+        <tab:TabsControl x:Name="tab" 
+                          Grid.Row="1"
+                          ItemSource="{Binding Brands}" />
+    </Grid>
+</UserControl>
