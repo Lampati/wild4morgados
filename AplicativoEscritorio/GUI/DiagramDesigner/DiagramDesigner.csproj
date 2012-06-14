@@ -63,9 +63,6 @@
       <HintPath>RibbonDLL\RibbonControlsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Activities" />
-    <Reference Include="System.Activities.Core.Presentation" />
-    <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -99,10 +96,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ModoGrafico.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\ApplicationMenuResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,10 +103,6 @@
     <Page Include="Resources\RibbonStylesResouceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tabs\TabsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="TestsPruebas\WindowEjecucionTest.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -231,14 +220,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WorkAreaView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SingleWorkAreaView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -256,7 +237,6 @@
     <Compile Include="DialogWindows\ResultadoEjecucionDialog.xaml.cs">
       <DependentUpon>ResultadoEjecucionDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\eTipoTab.cs" />
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
@@ -266,21 +246,7 @@
     <Compile Include="EventArgsClasses\ModoTextoCambiarPosicionEventArgs.cs" />
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
-    <Compile Include="ModoGrafico.xaml.cs">
-      <DependentUpon>ModoGrafico.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ResultadoEjecucion.cs" />
-    <Compile Include="Tabs\EditableTabHeaderControl.cs" />
-    <Compile Include="Tabs\TabsControl.xaml.cs">
-      <DependentUpon>TabsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tabs\Selector.cs" />
-    <Compile Include="Tabs\TabItemAgregar.cs" />
-    <Compile Include="Tabs\TabItemDeclaracionConstante.cs" />
-    <Compile Include="Tabs\TabItemDeclaracionVariable.cs" />
-    <Compile Include="Tabs\TabItemFuncion.cs" />
-    <Compile Include="Tabs\TabItemPrincipal.cs" />
-    <Compile Include="Tabs\TabItemProcedimiento.cs" />
     <Compile Include="TestsPruebas\Linea.cs" />
     <Compile Include="TestsPruebas\WindowEjecucionTest.xaml.cs">
       <DependentUpon>WindowEjecucionTest.xaml</DependentUpon>
@@ -360,16 +326,6 @@
     <Compile Include="UserControls\VariablesConValoresPresenter.xaml.cs">
       <DependentUpon>VariablesConValoresPresenter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\WorkAreaViewModel.cs" />
-    <Compile Include="ViewModels\Tab.cs" />
-    <Compile Include="Views\WorkAreaView.xaml.cs">
-      <DependentUpon>WorkAreaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SingleWorkAreaView.xaml.cs">
-      <DependentUpon>SingleWorkAreaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EventArgsClasses\TipoTabCambiadoEventArgs.cs" />
     <Compile Include="Window1.MenuCommands.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -479,6 +435,10 @@
     <ProjectReference Include="..\..\LibreriaActividades\LibreriaActividades.csproj">
       <Project>{B7D157CE-1EA9-493D-BD75-B747B7BDCD69}</Project>
       <Name>LibreriaActividades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ModoGrafico\ModoGrafico.csproj">
+      <Project>{B3763BD7-9913-486D-A1BC-2DFFA6F0682D}</Project>
+      <Name>ModoGrafico</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Sincronizacion\Sincronizacion.csproj">
       <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
