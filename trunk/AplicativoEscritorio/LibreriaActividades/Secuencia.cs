@@ -8,7 +8,7 @@ using System.Activities.Statements;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using Microsoft.CSharp.RuntimeBinder;
-using ModoGrafico.Datos;
+using InterfazTextoGrafico;
 
 namespace LibreriaActividades
 {
@@ -52,7 +52,7 @@ namespace LibreriaActividades
         }
 
 
-        public override ModoGrafico.Datos.ActividadViewModelBase Datos
+        public override ActividadViewModelBase Datos
         {
             get
             {
