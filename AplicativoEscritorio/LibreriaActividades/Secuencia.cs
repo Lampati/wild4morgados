@@ -69,7 +69,7 @@ namespace LibreriaActividades
         
         }
 
-        public override void AsignarDatos(dynamic datos)
+        public override void AsignarDatos(ActividadViewModelBase datos)
         {           
             try
             {

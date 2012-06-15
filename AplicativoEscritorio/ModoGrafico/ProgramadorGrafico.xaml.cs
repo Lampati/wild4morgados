@@ -18,7 +18,7 @@ using System.Activities.Presentation.Metadata;
 using System.ComponentModel;
 using ModoGrafico.ViewModels;
 using ModoGrafico.Enums;
-using ModoGrafico.Datos;
+using InterfazTextoGrafico;
 
 namespace ModoGrafico
 {
@@ -132,13 +132,13 @@ namespace ModoGrafico
 
 
             //pruebas transformacion
-            //SecuenciaViewModel secuenciaOrig = new SecuenciaViewModel();
-            //secuenciaOrig.ListaActividades.Add(new MientrasViewModel() { Condicion = "buenos dias", Cuerpo = null });
+            SecuenciaViewModel secuenciaOrig = new SecuenciaViewModel();
+            secuenciaOrig.ListaActividades.Add(new MientrasViewModel() { Condicion = "buenos dias", Cuerpo = null });
 
-            //Secuencia sec = new Secuencia();
-            //sec.AsignarDatos(secuenciaOrig);
+            Secuencia sec = new Secuencia();
+            sec.AsignarDatos(secuenciaOrig);
 
-            //int i = 0;
+            int i = 0;
         }
 
         private WorkflowDesigner CrearDesigner()
