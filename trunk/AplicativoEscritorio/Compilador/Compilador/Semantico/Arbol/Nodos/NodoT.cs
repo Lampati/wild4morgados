@@ -29,7 +29,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                    
                     this.TipoDato = this.hijosNodo[2].TipoDato;
                     this.Lexema = this.hijosNodo[2].Lexema;
-
+                    this.Gargar = string.Format("! ({0})", this.hijosNodo[2].Gargar);
 
                     this.EsArregloEnParametro = this.hijosNodo[2].EsArregloEnParametro;
                     //this.Lugar = this.hijosNodo[2].Lugar;
@@ -52,7 +52,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     this.Lexema = this.hijosNodo[1].Lexema;
                     this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
 
-                   
+                    this.Gargar = string.Format("({0})", this.hijosNodo[1].Gargar);
 
                     this.AsignaParametros = this.hijosNodo[1].AsignaParametros;
                     this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales;
@@ -71,6 +71,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
               
                 this.AsignaParametros = this.hijosNodo[0].AsignaParametros;
                 this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales;
+
+                this.Gargar = this.hijosNodo[0].Gargar;
             }
 
             return this;

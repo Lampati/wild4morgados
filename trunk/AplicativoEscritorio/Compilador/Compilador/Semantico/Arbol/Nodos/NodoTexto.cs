@@ -23,6 +23,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             this.Lexema = hijoASintetizar.Lexema;
             this.TipoDato = hijoASintetizar.TipoDato;
+
+            this.Gargar = hijoASintetizar.Gargar;
         }
 
         public override void ChequearAtributos(Terminal t)

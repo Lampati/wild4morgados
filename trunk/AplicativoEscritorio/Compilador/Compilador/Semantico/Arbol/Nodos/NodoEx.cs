@@ -31,7 +31,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             if (hijosNodo.Count > 1)
             {
-                
+                this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);
 
                 this.TipoDato = this.hijosNodo[1].TipoDato;
                 this.Comparacion = this.hijosNodo[0].Comparacion;

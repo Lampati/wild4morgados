@@ -28,7 +28,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
-               
+
+                this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);
 
 
                 //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.

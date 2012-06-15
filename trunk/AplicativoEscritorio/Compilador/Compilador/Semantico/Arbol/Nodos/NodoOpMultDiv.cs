@@ -27,16 +27,15 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
 
                 case "*":
-                case "**":
                     this.Operacion = TipoOperatoria.Multiplicacion;
                     break;
 
                 case "/":
-                case "//":
                     this.Operacion = TipoOperatoria.Division;
                     break;
             }
 
+            this.Gargar = hijoASintetizar.Gargar;
         }
 
         public override void ChequearAtributos(Terminal t)

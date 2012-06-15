@@ -28,6 +28,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.EsFuncion = false;
             this.EsArreglo = false;
 
+            this.Gargar = string.Empty;
+
             if (this.hijosNodo.Count > 1)
             {
                 string tipoEntrada = this.hijosNodo[0].Lexema;
@@ -40,11 +42,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         this.EsFuncion = true;
                         this.ListaFirma = this.hijosNodo[1].ListaFirma;
                         this.UsaVariablesGlobales = this.hijosNodo[1].UsaVariablesGlobales;
+                        this.Gargar = string.Format("({0})", this.hijosNodo[1].Gargar);
                         break;
 
                     case "[":
                         this.EsArreglo = true;
                         this.TipoDato = this.hijosNodo[1].TipoDato;
+                        this.Gargar = string.Format("({0})", this.hijosNodo[1].Gargar);
                         break;
                 }
             }
