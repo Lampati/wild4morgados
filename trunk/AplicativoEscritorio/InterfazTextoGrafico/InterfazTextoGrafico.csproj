@@ -41,6 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActividadViewModelBase.cs" />
+    <Compile Include="AsignacionViewModel.cs" />
+    <Compile Include="DeclaracionConstanteViewModel.cs" />
+    <Compile Include="DeclaracionVariableViewModel.cs" />
+    <Compile Include="LlamarProcedimientoViewModel.cs" />
+    <Compile Include="MostrarViewModel.cs" />
     <Compile Include="MientrasViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecuenciaViewModel.cs" />
