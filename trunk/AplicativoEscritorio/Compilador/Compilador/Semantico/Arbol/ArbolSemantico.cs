@@ -219,6 +219,10 @@ namespace CompiladorGargar.Semantico.Arbol
         }
 
 
+        internal InterfazTextoGrafico.ProgramaViewModel ObtenerProgramaViewModel()
+        {
+            return nodoRaiz.ActividadViewModel as InterfazTextoGrafico.ProgramaViewModel;
+        }
 
         
 

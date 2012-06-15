@@ -12,10 +12,11 @@ using System.Windows.Forms;
 
 
 using System.ComponentModel;
+using InterfazTextoGrafico;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
-    abstract class NodoArbolSemantico
+    abstract class NodoArbolSemantico : CompiladorGargar.Semantico.Arbol.Interfases.IGraficable
     {
         public enum TipoOperatoria
         {
@@ -113,6 +114,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
        
         public string Codigo { get; set; }
+
+
+        public string Gargar { get; set; }
+        public ActividadViewModelBase ActividadViewModel { get; set; }
+
 
 
         protected ElementoGramatica elemento;

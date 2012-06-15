@@ -26,6 +26,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             string nombre = this.hijosNodo[0].Lexema;
             bool esArreglo = this.hijosNodo[0].EsArreglo;
 
+            Gargar = string.Format("{0} {1} {2}{3}", 
+                this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar, this.hijosNodo[2].Gargar, this.hijosNodo[3].Gargar);
+
+            ArmarActividadViewModel();
+
             NodoTablaSimbolos.TipoDeDato tipoExp = this.hijosNodo[2].TipoDato;
 
             NodoTablaSimbolos.TipoDeDato tipo;
@@ -148,6 +153,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
 
             return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.AsignacionViewModel activ = new InterfazTextoGrafico.AsignacionViewModel();       
+
+            ActividadViewModel = activ;
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)

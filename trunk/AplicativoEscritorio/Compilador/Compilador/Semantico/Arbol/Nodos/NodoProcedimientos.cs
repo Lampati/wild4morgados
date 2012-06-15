@@ -33,6 +33,31 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         }
 
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            ArmarActividadViewModel();
+
+            return this;
+        }
+
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.ProcedimientosViewModel activ = new InterfazTextoGrafico.ProcedimientosViewModel();
+
+            if (this.hijosNodo[0].ActividadViewModel != null)
+            {
+                activ.Procedimientos.Add(this.hijosNodo[0].ActividadViewModel as InterfazTextoGrafico.ProcedimientoViewModel);
+            }
+
+            if (this.hijosNodo[1].ActividadViewModel != null)
+            {
+                activ.Procedimientos.AddRange(((InterfazTextoGrafico.ProcedimientosViewModel)this.hijosNodo[1].ActividadViewModel).Procedimientos);
+            }
+
+            ActividadViewModel = activ;
+        }
+
         public override void ChequearAtributos(Terminal t)
         {
             

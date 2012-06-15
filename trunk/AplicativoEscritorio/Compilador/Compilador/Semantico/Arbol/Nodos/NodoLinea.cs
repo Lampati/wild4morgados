@@ -32,7 +32,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ModificaParametros = this.hijosNodo[0].ModificaParametros;
             this.AsignaParametros = this.hijosNodo[0].AsignaParametros ;
             this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales ;
-            
+
+            this.ActividadViewModel = this.hijosNodo[0].ActividadViewModel;
 
             return this;
         }

@@ -25,6 +25,7 @@ namespace CompiladorGargar.Resultado
 
         public string CodigoGarGar { get; set; }
         public string CodigoPascal { get; set; }
+        public InterfazTextoGrafico.ProgramaViewModel RepresentacionGrafica { get; set; }
         public string ArchTemporalCodigoPascal { get; set; }
         public string ArchTemporalCodigoPascalConRuta { get; set; }
 

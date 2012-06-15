@@ -26,14 +26,18 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             if (hijosNodo.Count > 2)
             {
                 this.EsSino = true;
+                ActividadViewModel = this.hijosNodo[1].ActividadViewModel;
             }
             else
             {
                 this.EsSino = false;
+                ActividadViewModel = null;
             }
 
             return this;
         }
+
+     
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {

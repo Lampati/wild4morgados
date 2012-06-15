@@ -9,7 +9,7 @@ using Utilidades;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
-    class NodoBloqueMientras: NodoArbolSemantico
+    class NodoBloqueMientras : NodoArbolSemantico
     {
         private string nombreVarControladora;
 
@@ -34,7 +34,19 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             nombreVarControladora = RandomManager.RandomStringConPrefijo("mientrasVar", 20, true);
             this.TablaSimbolos.AgregarAuxiliarParaCodIntermedio(nombreVarControladora, TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero);
 
+            ArmarActividadViewModel();
+           
+
             return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.MientrasViewModel activ = new InterfazTextoGrafico.MientrasViewModel();
+            activ.Condicion = this.hijosNodo[2].Gargar;
+            activ.Cuerpo = this.hijosNodo[5].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+
+            ActividadViewModel = activ;
         }
 
         public override void ChequearAtributos(Terminal t)
@@ -74,5 +86,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             this.Codigo = strBldr.ToString();
         }
+
+       
     }
 }

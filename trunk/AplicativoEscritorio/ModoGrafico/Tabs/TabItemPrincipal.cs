@@ -4,11 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using ModoGrafico.ViewModels;
+using InterfazTextoGrafico;
 
 namespace ModoGrafico.Tabs
 {
     public class TabItemPrincipal : Tab
     {
+        public TabItemPrincipal()
+        {
+
+        }
+
+        public TabItemPrincipal(ProcedimientoViewModel proc)
+            : base()
+        {
+            actividadViewModel = proc;
+        }
+
+
         public override void Ejecutar(StringBuilder sb)
         {
             sb.AppendLine(LibreriaActividades.Extension.Tabs + String.Format("PROCEDIMIENTO PRINCIPAL()"));

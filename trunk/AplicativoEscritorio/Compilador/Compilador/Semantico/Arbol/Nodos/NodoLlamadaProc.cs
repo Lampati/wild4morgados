@@ -31,6 +31,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             string nombre = this.hijosNodo[1].Lexema;
             this.Lexema = nombre;
 
+            ArmarActividadViewModel();
+
             LineaCorrespondiente = GlobalesCompilador.UltFila;
 
             StringBuilder strbldr;
@@ -115,6 +117,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.LlamarProcedimientoViewModel activ = new InterfazTextoGrafico.LlamarProcedimientoViewModel();
+
+            ActividadViewModel = activ;
+        }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {

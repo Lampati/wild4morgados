@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ModoGrafico.ViewModels;
+using InterfazTextoGrafico;
 
 namespace ModoGrafico.Tabs
 {
@@ -12,6 +13,13 @@ namespace ModoGrafico.Tabs
 
         public TabItemProcedimiento() : base()
         {
+            this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
+        }
+
+        public TabItemProcedimiento(ProcedimientoViewModel proc)
+            : base()
+        {
+            actividadViewModel = proc;
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
         }
 
