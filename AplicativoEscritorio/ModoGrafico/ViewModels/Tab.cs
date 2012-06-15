@@ -95,6 +95,7 @@ using InterfazTextoGrafico;
                                 new Action(
                                   delegate()
                                   {
+                                      
                                       wd.Load(init);
                                       this.ReconstruirContextMenu(wd);
                                       if (((Grid)wd.View).Children.Count > 0)
@@ -161,7 +162,7 @@ using InterfazTextoGrafico;
             for (int i = 0; i < wd.ContextMenu.Items.Count; i++)
             {
                 MenuItem mi = wd.ContextMenu.Items[i] as MenuItem;
-                if (mi != null && mi.InputGestureText == "Del")
+                if (mi != null && (mi.InputGestureText == "Del" || mi.InputGestureText == "Supr"))
                 {
                     borrar = (MenuItem)wd.ContextMenu.Items[i];
                 }

@@ -130,6 +130,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             if (t.Componente.Token != ComponenteLexico.TokenType.Referencia)
             {
                 this.Lexema = t.Componente.Lexema;
+
+                this.Gargar = this.Lexema;
             }
             switch (this.Lexema)
             {

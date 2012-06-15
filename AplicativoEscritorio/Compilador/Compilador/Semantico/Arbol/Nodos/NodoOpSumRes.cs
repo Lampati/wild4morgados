@@ -41,6 +41,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             }
 
+            this.Gargar = hijoASintetizar.Gargar;
+
         }
 
         public override void ChequearAtributos(Terminal t)

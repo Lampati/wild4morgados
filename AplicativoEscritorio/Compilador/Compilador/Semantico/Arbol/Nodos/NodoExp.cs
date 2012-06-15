@@ -29,6 +29,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                this.Gargar = string.Format("{0} {1} {2}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar, this.hijosNodo[2].Gargar);
               
 
                 this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
@@ -66,6 +67,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
+                this.Gargar = string.Empty;
                 this.Operacion = TipoOperatoria.Ninguna;
             }
 

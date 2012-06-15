@@ -32,7 +32,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             string nombre = this.hijosNodo[0].Lexema;
 
-
+            this.Gargar = string.Format("{0}{1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);
 
             if (esFuncion)
             {
