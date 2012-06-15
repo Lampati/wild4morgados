@@ -28,6 +28,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             if (this.hijosNodo.Count > 1)
             {
+
+                ArmarActividadViewModel();
+                Gargar = new StringBuilder(this.hijosNodo[0].Gargar).AppendLine().AppendLine(this.hijosNodo[1].Gargar).ToString();
+
                 //Si no tiene valor, es pq es un lambda
                 if (this.hijosNodo[1].LlamaProcSalida.HasValue)
                 {
@@ -60,10 +64,26 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             else
             {
                 this.LlamaProcSalida = null;
+                Gargar = string.Empty;
+                ActividadViewModel = null;
             }
 
 
             return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.SecuenciaViewModel activ = new InterfazTextoGrafico.SecuenciaViewModel();
+            activ.ListaActividades.Add(this.hijosNodo[0].ActividadViewModel);
+
+            if (this.hijosNodo[1].ActividadViewModel != null)
+            {
+                activ.ListaActividades.AddRange(((InterfazTextoGrafico.SecuenciaViewModel)this.hijosNodo[1].ActividadViewModel).ListaActividades);
+            }
+
+
+            ActividadViewModel = activ;
         }
 
         public override void ChequearAtributos(Terminal t)

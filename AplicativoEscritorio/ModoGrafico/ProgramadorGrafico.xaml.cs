@@ -34,6 +34,15 @@ namespace ModoGrafico
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
 
+
+        public void CargarProgramaEnModoGrafico(ProgramaViewModel programa)
+        {
+            if (programa != null)
+            {
+                this.WorkArea.CargarPrograma(programa);
+            }
+        }
+
         void WorkArea_CambioTabEvent(object sender, EventArgsClasses.TipoTabCambiadoEventArgs e)
         {
             System.Threading.Thread thread = new System.Threading.Thread(
@@ -132,13 +141,13 @@ namespace ModoGrafico
 
 
             //pruebas transformacion
-            SecuenciaViewModel secuenciaOrig = new SecuenciaViewModel();
-            secuenciaOrig.ListaActividades.Add(new MientrasViewModel() { Condicion = "buenos dias", Cuerpo = null });
+            //SecuenciaViewModel secuenciaOrig = new SecuenciaViewModel();
+            //secuenciaOrig.ListaActividades.Add(new MientrasViewModel() { Condicion = "buenos dias", Cuerpo = null });
 
-            Secuencia sec = new Secuencia();
-            sec.AsignarDatos(secuenciaOrig);
+            //Secuencia sec = new Secuencia();
+            //sec.AsignarDatos(secuenciaOrig);
 
-            int i = 0;
+            //int i = 0;
         }
 
         private WorkflowDesigner CrearDesigner()

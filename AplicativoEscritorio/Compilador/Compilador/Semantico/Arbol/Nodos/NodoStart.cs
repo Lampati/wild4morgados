@@ -70,6 +70,27 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
         }
 
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            ArmarActividadViewModel();
+
+            return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.ProgramaViewModel activ = new InterfazTextoGrafico.ProgramaViewModel();
+
+          
+
+            if (this.hijosNodo[1].ActividadViewModel != null)
+            {
+                activ.Procedimientos.AddRange(((InterfazTextoGrafico.ProcedimientosViewModel)this.hijosNodo[1].ActividadViewModel).Procedimientos);
+            }
+
+            ActividadViewModel = activ;
+        }
+
         public override void CalcularCodigo()
         {
             StringBuilder strBldr = new StringBuilder();

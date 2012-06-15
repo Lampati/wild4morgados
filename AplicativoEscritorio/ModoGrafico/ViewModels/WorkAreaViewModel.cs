@@ -6,6 +6,7 @@
     using System;
     using ModoGrafico.Enums;
     using ModoGrafico.Tabs;
+using InterfazTextoGrafico;
 
     public class WorkAreaViewModel : BaseViewModel
     {
@@ -133,5 +134,41 @@
                 obj = null;
             }
         }
+
+        public Tab ExecuteAddProcedimiento(string obj, bool acomodar, TipoTab tipo, ProcedimientoViewModel proc)
+        {
+            if (!string.IsNullOrEmpty(obj))
+            {
+                Tab t = null;
+                switch (tipo)
+                {
+                    case TipoTab.TabItemFuncion:
+                        t = new TabItemFuncion(proc);
+                        break;
+                    case TipoTab.TabItemProcedimiento:
+                        t = new TabItemProcedimiento(proc);
+                        break;
+                    case TipoTab.TabItemPrincipal:
+                        t = new TabItemPrincipal(proc);
+                        break;
+                    case TipoTab.TabItemSalida:
+                        t = new TabItemPrincipal(proc);
+                        break;
+                }           
+                t.Header = obj;
+                if (this.Brands.Count == 0 || !acomodar)
+                    this.Brands.Add(t);
+                else
+                    this.Brands.Insert(this.Brands.Count - 1, t);
+                return t;
+            }
+
+            return null;
+        }
+
+       
+
+
+
     }
 }

@@ -14,6 +14,7 @@
     using System.Windows.Controls;
     using System.Collections.Generic;
     using ModoGrafico.Tabs;
+using InterfazTextoGrafico;
 
     public abstract class Tab : BaseViewModel
     {
@@ -22,6 +23,7 @@
         protected Secuencia init;
         protected Secuencia initLocales;
         AutoResetEvent syncEvent = new AutoResetEvent(false);
+        protected ActividadViewModelBase actividadViewModel;
 
         public Tab()
         {
@@ -44,8 +46,32 @@
                     
                     if (this is TabItemPrincipal)
                     {
-                        init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
-                        init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
+                        //init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
+                        //init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
+
+                        if (actividadViewModel != null)
+                        {
+                            ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
+
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false };
+                            aux.AsignarDatos(procViewModel.Cuerpo);
+
+                            init = aux;
+                        }
+                        else
+                        {
+                            init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
+                            init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
+                        }
+                    }
+                    else if (this is TabItemProcedimiento)
+                    {
+                        ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
+
+                        Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
+                        aux.AsignarDatos(procViewModel.Cuerpo);
+
+                        init = aux;
                     }
                     else
                     {

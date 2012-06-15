@@ -35,6 +35,19 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
         }
 
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            if (this.hijosNodo.Count > 1)
+            {
+                ArmarActividadViewModel();
+            }
+            else
+            {
+                ActividadViewModel = null;
+            }
+            return this;
+        }
+
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {
             return this;
@@ -45,7 +58,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             StringBuilder strBldr = new StringBuilder();
 
             if (this.hijosNodo.Count > 1)
-            {
+            {               
+
                 this.VariablesProcPrincipal = this.hijosNodo[0].VariablesProcPrincipal + this.hijosNodo[1].VariablesProcPrincipal;
 
                 strBldr.Append(this.hijosNodo[0].Codigo);
@@ -53,6 +67,23 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
 
             this.Codigo = strBldr.ToString();
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.ProcedimientosViewModel activ = new InterfazTextoGrafico.ProcedimientosViewModel();
+
+            if (this.hijosNodo[0].ActividadViewModel != null)
+            {
+                activ.Procedimientos.Add(this.hijosNodo[0].ActividadViewModel as InterfazTextoGrafico.ProcedimientoViewModel);
+            }
+
+            if (this.hijosNodo[1].ActividadViewModel != null)
+            {
+                activ.Procedimientos.AddRange(((InterfazTextoGrafico.ProcedimientosViewModel)this.hijosNodo[1].ActividadViewModel).Procedimientos);
+            }
+
+            ActividadViewModel = activ;
         }
     }
 }

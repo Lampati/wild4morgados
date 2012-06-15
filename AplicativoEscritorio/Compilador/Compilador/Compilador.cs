@@ -215,6 +215,7 @@ namespace CompiladorGargar
                     long timeStampCod = Stopwatch.GetTimestamp();
                     res.ArbolSemanticoResultado.CalcularExpresiones();
                     res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
+                    res.RepresentacionGrafica = res.ArbolSemanticoResultado.ObtenerProgramaViewModel();
 
                     Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
 

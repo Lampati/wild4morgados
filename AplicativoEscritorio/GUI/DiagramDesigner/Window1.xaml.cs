@@ -285,8 +285,26 @@ namespace DiagramDesigner
 
             ReiniciarIDEParaCompilacion();
 
-            Modo = e.ModoSeleccionado;
-            
+            if (Modo == ModoVisual.Texto)
+            {
+
+                ResultadoCompilacion res = Compilar();
+
+                if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                {
+                    Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
+
+                    Modo = e.ModoSeleccionado;
+                }
+
+            }
+            else
+            {
+                Modo = e.ModoSeleccionado;
+            }
+
+
+            //Modo = e.ModoSeleccionado;
 
         }
 

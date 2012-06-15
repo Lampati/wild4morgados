@@ -26,6 +26,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
+            ArmarActividadViewModel();
+
             LineaCorrespondiente = GlobalesCompilador.UltFila;
 
             this.ListaElementosVisualizar = this.hijosNodo[2].ListaElementosVisualizar;
@@ -33,6 +35,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ConPausa = ((NodoMostrarOp)this.hijosNodo[0]).ConPausa;
 
             return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.MostrarViewModel activ = new InterfazTextoGrafico.MostrarViewModel();
+
+            ActividadViewModel = activ;
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)

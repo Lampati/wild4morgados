@@ -27,6 +27,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             this.EsSino = this.hijosNodo[4].EsSino;
 
+            ArmarActividadViewModel();
+
             return this;
         }
 
@@ -43,6 +45,16 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {
             return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.SiViewModel activ = new InterfazTextoGrafico.SiViewModel();
+            activ.Condicion = this.hijosNodo[2].Gargar;
+            activ.BranchVerdadero = this.hijosNodo[5].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+            activ.BranchFalso = this.hijosNodo[6].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+
+            ActividadViewModel = activ;
         }
 
         public override void CalcularCodigo()

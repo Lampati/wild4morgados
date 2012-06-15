@@ -63,6 +63,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                                 this.TablaSimbolos.AgregarFuncion(nombre, listaFirmas, devolucion);
 
+                                AgregarFuncionActivityModel(nombre);
+
 
                                 if (this.hijosNodo[9].LlamaProcSalida.HasValue && this.hijosNodo[9].LlamaProcSalida.Value)
                                 {
@@ -119,7 +121,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                     this.TablaSimbolos.AgregarProcedimiento(nombre, listaFirmas );
 
-                    
+                    AgregarProcedimientoActivityModel(nombre);
                    
 
                     if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
@@ -200,6 +202,41 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             return this;
         }
+
+        private void AgregarProcedimientoActivityModel(string nombre)
+        {
+            InterfazTextoGrafico.ProcedimientoViewModel activ = new InterfazTextoGrafico.ProcedimientoViewModel();
+            activ.Nombre = nombre;
+            activ.VariablesLocales = this.hijosNodo[5].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+            activ.Cuerpo = this.hijosNodo[7].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+
+            if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
+            {
+                activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
+            }
+            else if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA.ToLower()))
+            {
+                activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Salida;
+            }
+            else
+            {
+                activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
+            }
+
+            ActividadViewModel = activ;
+        }
+
+        private void AgregarFuncionActivityModel(string nombre)
+        {
+            InterfazTextoGrafico.ProcedimientoViewModel activ = new InterfazTextoGrafico.ProcedimientoViewModel();
+            activ.Nombre = nombre;
+            activ.VariablesLocales = this.hijosNodo[7].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+            activ.Cuerpo = this.hijosNodo[9].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+            activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
+            ActividadViewModel = activ;
+        }
+
+
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {
