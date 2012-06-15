@@ -167,9 +167,9 @@
     <Resource Include="DeclaracionConstante.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModoGrafico.Datos\IntefazTextoGrafico.csproj">
-      <Project>{65FFD7BC-DE34-4757-AE3F-AF4C275B6C82}</Project>
-      <Name>IntefazTextoGrafico</Name>
+    <ProjectReference Include="..\InterfazTextoGrafico\InterfazTextoGrafico.csproj">
+      <Project>{97A51588-9D03-46C3-B101-1AF10BC285F5}</Project>
+      <Name>InterfazTextoGrafico</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

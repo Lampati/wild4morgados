@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ModoGrafico.Datos
+namespace InterfazTextoGrafico
 {
     public abstract class ActividadViewModelBase
     {

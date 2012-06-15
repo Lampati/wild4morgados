@@ -7,8 +7,8 @@ using System.ComponentModel;
 using System.Activities.Presentation;
 using System.Windows;
 using System.Drawing;
-using ModoGrafico.Datos;
 using Microsoft.CSharp.RuntimeBinder;
+using InterfazTextoGrafico;
 
 namespace LibreriaActividades
 {
@@ -78,7 +78,7 @@ namespace LibreriaActividades
         }
 
 
-        public override ModoGrafico.Datos.ActividadViewModelBase Datos
+        public override ActividadViewModelBase Datos
         {
             get
             {
@@ -91,7 +91,7 @@ namespace LibreriaActividades
             }
         }
 
-        public override void AsignarDatos(dynamic datos)
+        public override void AsignarDatos(ActividadViewModelBase datos)
         {
             try
             {

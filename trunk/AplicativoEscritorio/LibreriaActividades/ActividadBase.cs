@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Activities;
-using ModoGrafico.Datos;
+using InterfazTextoGrafico;
 
 namespace LibreriaActividades
 {
@@ -25,6 +25,6 @@ namespace LibreriaActividades
             get;
         }
 
-        public abstract void AsignarDatos(dynamic datos);
+        public abstract void AsignarDatos(ActividadViewModelBase datos);
     }
 }
