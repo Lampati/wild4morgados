@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Activities.Presentation.Model;
 using System.Activities.Presentation;
 using System.Drawing;
-using ModoGrafico.Datos;
+using InterfazTextoGrafico;
 
 namespace LibreriaActividades
 {

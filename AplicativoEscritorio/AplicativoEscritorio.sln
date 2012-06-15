@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreriaActividades", "Libr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModoGrafico", "ModoGrafico\ModoGrafico.csproj", "{B3763BD7-9913-486D-A1BC-2DFFA6F0682D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModoGrafico.Datos", "ModoGrafico.Datos\ModoGrafico.Datos.csproj", "{65FFD7BC-DE34-4757-AE3F-AF4C275B6C82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntefazTextoGrafico", "ModoGrafico.Datos\IntefazTextoGrafico.csproj", "{65FFD7BC-DE34-4757-AE3F-AF4C275B6C82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
