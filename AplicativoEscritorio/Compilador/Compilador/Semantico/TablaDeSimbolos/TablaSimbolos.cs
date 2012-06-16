@@ -83,6 +83,11 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { Valor = valorInt} );
         }
 
+        internal void AgregarVariable(string nombre, NodoTablaSimbolos.TipoDeDato tdato, bool esConstante, NodoTablaSimbolos.TipoContexto contexto, string nombreProc, string valor)
+        {
+            this.listaNodos.Add(new NodoTablaSimbolos(nombre, NodoTablaSimbolos.TipoDeEntrada.Variable, tdato, esConstante, contexto, nombreProc) { ValorTexto = valor });
+        }
+
 
         internal List<NodoTablaSimbolos> ObtenerVariablesDeclaradasEnProcedimiento(Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoContexto cont, string nombreProc)
         {
@@ -522,8 +527,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
         }
 
         internal void AgregarConstante(string nombre, NodoTablaSimbolos.TipoDeDato tipo, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, double valorInt)
-        {
+        {            
             AgregarVariable(nombre, tipo, true, tipoContexto, nombreProc, valorInt); 
+        }
+
+        internal void AgregarConstante(string nombre, NodoTablaSimbolos.TipoDeDato tipo, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreProc, string valorTexto)
+        {
+            AgregarVariable(nombre, tipo, true, tipoContexto, nombreProc, valorTexto);
         }
 
         internal bool EsVariableGlobal(string nombre, NodoTablaSimbolos.TipoContexto tipoContexto, string nombreCont)

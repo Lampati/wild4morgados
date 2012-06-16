@@ -166,9 +166,42 @@ using InterfazTextoGrafico;
             return null;
         }
 
-       
 
 
 
+
+
+        internal Tab ExecuteAddGlobales(string obj, bool acomodar, TipoTab tipoTab, SecuenciaViewModel secuenciaViewModel)
+        {
+            if (!string.IsNullOrEmpty(obj))
+            {
+                Tab t = null;
+                if (tipoTab == TipoTab.TabItemDeclaracionConstante)
+                {
+                    t = new TabItemDeclaracionConstante(secuenciaViewModel);
+                }
+                else if (tipoTab == TipoTab.TabItemDeclaracionVariable)
+	            {
+                    t = new TabItemDeclaracionVariable(secuenciaViewModel);
+	            }
+
+                t.Header = obj;
+
+                if (this.Brands.Count == 0 || !acomodar)
+                    this.Brands.Add(t);
+                else
+                    this.Brands.Insert(this.Brands.Count - 1, t);
+                return t;    
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        internal void ExecuteAddVariablesGlobales(string obj, bool acomodar, SecuenciaViewModel secuenciaViewModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

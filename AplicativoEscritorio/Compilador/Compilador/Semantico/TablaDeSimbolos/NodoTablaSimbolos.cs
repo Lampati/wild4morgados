@@ -131,6 +131,13 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             set { valor = value; }
         }
 
+        private string valorTexto;
+        public string ValorTexto
+        {
+            get { return valorTexto; }
+            set { valorTexto = value; }
+        }
+
 
 
         internal NodoTablaSimbolos(string nom, TipoDeEntrada entrada, TipoDeDato tdato, List<FirmaProc> firma)

@@ -34,11 +34,21 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     }
 
                     this.ValorConstanteNumerica = this.hijosNodo[4].ValorConstanteNumerica;
+                    this.ValorConstanteTexto = this.hijosNodo[4].ValorConstanteTexto;
 
-                    this.TablaSimbolos.AgregarConstante(nombre, tipo, this.ContextoActual, this.NombreContextoLocal, this.ValorConstanteNumerica);
+                    if (tipo == NodoTablaSimbolos.TipoDeDato.Numero)
+                    {
+                        this.TablaSimbolos.AgregarConstante(nombre, tipo, this.ContextoActual, this.NombreContextoLocal, this.ValorConstanteNumerica);
+                        AgregarConstanteViewModel(nombre, tipo, this.ValorConstanteNumerica.ToString());
+                    }
+                    else
+                    {
+                        this.TablaSimbolos.AgregarConstante(nombre, tipo, this.ContextoActual, this.NombreContextoLocal, this.ValorConstanteTexto);
+                        AgregarConstanteViewModel(nombre, tipo, this.ValorConstanteTexto);
+                    }
 
                     //this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
-                    AgregarConstanteViewModel(nombre, tipo, this.ValorConstanteNumerica);
+                    
                    
 
                 }
@@ -55,7 +65,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        private void AgregarConstanteViewModel(string nombre, NodoTablaSimbolos.TipoDeDato tipo, double val)
+        private void AgregarConstanteViewModel(string nombre, NodoTablaSimbolos.TipoDeDato tipo, string val)
         {
             DeclaracionConstanteViewModel act = new DeclaracionConstanteViewModel();
 
@@ -77,6 +87,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             this.ActividadViewModel = act;
         }
+
+   
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
         {

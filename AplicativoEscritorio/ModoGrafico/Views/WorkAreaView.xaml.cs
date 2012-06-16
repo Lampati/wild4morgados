@@ -45,8 +45,8 @@ using InterfazTextoGrafico;
 
             ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento("    PRINCIPAL    ", false, TipoTab.TabItemPrincipal, procPrincipal);
             ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento("    SALIDA    ", false, TipoTab.TabItemSalida, procSalida);
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("    CONSTANTES    ", false, TipoTab.TabItemDeclaracionConstante);
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("    VARIABLES    ", false, TipoTab.TabItemDeclaracionVariable);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddGlobales("    CONSTANTES    ", false, TipoTab.TabItemDeclaracionConstante, programa.ConstantesGlobales);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddGlobales("    VARIABLES    ", false, TipoTab.TabItemDeclaracionVariable, programa.VariablesGlobales);
 
             foreach (var item in listaProcs)
             {
@@ -86,7 +86,6 @@ using InterfazTextoGrafico;
             if (singleBrandTemplate != null )
             {
                 this.tab.AddResource(singleBrandKey, singleBrandTemplate);
-                
             }
         }
 

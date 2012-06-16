@@ -66,24 +66,43 @@ using InterfazTextoGrafico;
                     }
                     else if (this is TabItemProcedimiento)
                     {
-                        ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
-
-                        Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
-                        aux.AsignarDatos(procViewModel.Cuerpo);
-
-                        init = aux;
-                    }
-                    else
-                    {
-                        string display = "SECUENCIA";
-                        bool admiteDeclaraciones = false;
-                        if (this is TabItemDeclaracionVariable || this is TabItemDeclaracionConstante)
+                        if (actividadViewModel != null)
                         {
-                            display = "DECLARACION " + this.Header;
-                            admiteDeclaraciones = true;
-                        }
+                            ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                        init = new Secuencia() { DisplayName = display, AdmiteDelaraciones = admiteDeclaraciones };
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
+                            aux.AsignarDatos(procViewModel.Cuerpo);
+
+                            init = aux;
+                        }
+                        else
+                        {
+                            init = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false };
+                        }
+                    }
+                    else if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable)
+                    {
+                        if (actividadViewModel != null)
+                        {
+                            SecuenciaViewModel secViewModel = actividadViewModel as SecuenciaViewModel;
+
+                            Secuencia aux = new Secuencia() { DisplayName = "DECLARACION " + this.Header, AdmiteDelaraciones = true };
+                            aux.AsignarDatos(secViewModel);
+
+                            init = aux;
+                        }
+                        else
+                        {
+                            string display = "SECUENCIA";
+                            bool admiteDeclaraciones = false;
+                            if (this is TabItemDeclaracionVariable || this is TabItemDeclaracionConstante)
+                            {
+                                display = "DECLARACION " + this.Header;
+                                admiteDeclaraciones = true;
+                            }
+
+                            init = new Secuencia() { DisplayName = display, AdmiteDelaraciones = admiteDeclaraciones };
+                        }
                     }
 
                     System.Threading.Thread thread = new System.Threading.Thread(
