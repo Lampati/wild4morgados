@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ModoGrafico.ViewModels;
+using InterfazTextoGrafico;
 
 namespace ModoGrafico.Tabs
 {
     public class TabItemDeclaracionConstante : Tab
     {
+        public TabItemDeclaracionConstante()
+        {
+
+        }
+
+        public TabItemDeclaracionConstante(SecuenciaViewModel proc)
+            : base()
+        {
+            actividadViewModel = proc;
+        }
+
         public override int Orden
         {
             get { return 1; }

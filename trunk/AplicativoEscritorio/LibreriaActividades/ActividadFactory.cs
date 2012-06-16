@@ -29,6 +29,30 @@ namespace LibreriaActividades
                 {
                     retorno = new Secuencia();
                 }
+                else if (tipo == typeof(AsignacionViewModel))
+                {
+                    retorno = new Asignacion();
+                }
+                else if (tipo == typeof(DeclaracionArregloViewModel))
+                {
+                    retorno = new DeclaracionVariable();
+                }
+                else if (tipo == typeof(DeclaracionVariableViewModel))
+                {
+                    retorno = new DeclaracionVariable();
+                }
+                else if (tipo == typeof(DeclaracionConstanteViewModel))
+                {
+                    retorno = new DeclaracionConstante();
+                }
+                else if (tipo == typeof(LlamarProcedimientoViewModel))
+                {
+                    retorno = new LlamarProcedimiento();
+                }
+                else if (tipo == typeof(MostrarViewModel))
+                {
+                    retorno = new Mostrar();
+                }
 
                 if (retorno != null)
                 {

@@ -102,7 +102,7 @@ namespace LibreriaActividades
                 ActividadBase actVerdadero = ActividadFactory.CrearActividad(datosMapeados.BranchVerdadero);
                 this.BranchVerdadero = actVerdadero;
 
-                ActividadBase actFalso = ActividadFactory.CrearActividad(datosMapeados.BranchVerdadero);
+                ActividadBase actFalso = ActividadFactory.CrearActividad(datosMapeados.BranchFalso);
                 this.BranchFalso = actFalso;
 
             }

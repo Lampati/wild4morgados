@@ -81,6 +81,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public List<Firma> ListaFirma { get; set; }
         public TipoOperatoria Operacion { get; set; }
         public double ValorConstanteNumerica { get; set; }
+        public string ValorConstanteTexto { get; set; }
 
         public bool EsProcSalida { get; set; }
         public bool ProcSalidaLlamadoMasDeUnaVez { get; set; }

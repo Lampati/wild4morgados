@@ -4,11 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using ModoGrafico.ViewModels;
+using InterfazTextoGrafico;
 
 namespace ModoGrafico.Tabs
 {
     public class TabItemDeclaracionVariable : Tab
     {
+        public TabItemDeclaracionVariable()
+        {
+
+        }
+
+        public TabItemDeclaracionVariable(SecuenciaViewModel proc)
+            : base()
+        {
+            actividadViewModel = proc;
+        }
+
         public override int Orden
         {
             get { return 2; }

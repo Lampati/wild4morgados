@@ -23,6 +23,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             this.TipoDato = hijoASintetizar.TipoDato;
             this.ValorConstanteNumerica = hijoASintetizar.ValorConstanteNumerica;
+            this.ValorConstanteTexto = hijoASintetizar.Lexema;
         }
 
         public override void ChequearAtributos(Terminal t)
