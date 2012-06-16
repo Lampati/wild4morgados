@@ -9,6 +9,7 @@ using CompiladorGargar.Auxiliares;
 
 using System.IO;
 using System.Configuration;
+using InterfazTextoGrafico;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -81,8 +82,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             InterfazTextoGrafico.ProgramaViewModel activ = new InterfazTextoGrafico.ProgramaViewModel();
 
-          
+            if (this.hijosNodo[0].ActividadViewModel != null)
+            {
+                DeclaracionesGlobalesViewModel decs = this.hijosNodo[0].ActividadViewModel as DeclaracionesGlobalesViewModel;
 
+                activ.ConstantesGlobales = decs.ConstantesGlobales;
+                activ.VariablesGlobales = decs.VariablesGlobales;
+            }
+          
             if (this.hijosNodo[1].ActividadViewModel != null)
             {
                 activ.Procedimientos.AddRange(((InterfazTextoGrafico.ProcedimientosViewModel)this.hijosNodo[1].ActividadViewModel).Procedimientos);

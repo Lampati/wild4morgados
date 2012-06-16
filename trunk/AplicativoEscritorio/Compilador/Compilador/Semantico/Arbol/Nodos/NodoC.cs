@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using InterfazTextoGrafico;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -37,7 +38,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     this.TablaSimbolos.AgregarConstante(nombre, tipo, this.ContextoActual, this.NombreContextoLocal, this.ValorConstanteNumerica);
 
                     //this.TablaSimbolos.AgregarVariable(nombre, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
-
+                    AgregarConstanteViewModel(nombre, tipo, this.ValorConstanteNumerica);
                    
 
                 }
@@ -52,6 +53,29 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
 
             return this;
+        }
+
+        private void AgregarConstanteViewModel(string nombre, NodoTablaSimbolos.TipoDeDato tipo, double val)
+        {
+            DeclaracionConstanteViewModel act = new DeclaracionConstanteViewModel();
+
+            act.Nombre = nombre;
+            act.Valor = val.ToString();
+
+            switch (tipo)
+            {
+                case NodoTablaSimbolos.TipoDeDato.Texto:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Numero:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Booleano:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                    break;
+            }
+
+            this.ActividadViewModel = act;
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)

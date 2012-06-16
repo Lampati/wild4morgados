@@ -24,6 +24,20 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
         }
 
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            if (this.hijosNodo.Count > 1)
+            {
+                ActividadViewModel = this.hijosNodo[1].ActividadViewModel;
+            }
+            else
+            {
+                ActividadViewModel = null;
+            }
+
+            return this;
+        }
+
         public override void ChequearAtributos(Terminal t)
         {
             
