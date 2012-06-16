@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
+using InterfazTextoGrafico;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -21,6 +22,29 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
         {
+        }
+
+        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+        {
+            if (this.hijosNodo.Count > 1)
+            {
+                ArmarActividadViewModel();
+            }
+            else
+            {
+                ActividadViewModel = null;
+            }
+
+            return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            DeclaracionesGlobalesViewModel act = new DeclaracionesGlobalesViewModel();
+            act.ConstantesGlobales = this.hijosNodo[0].ActividadViewModel as SecuenciaViewModel;
+            act.VariablesGlobales = this.hijosNodo[1].ActividadViewModel as SecuenciaViewModel;
+
+            ActividadViewModel = act;
         }
 
         public override void ChequearAtributos(Terminal t)

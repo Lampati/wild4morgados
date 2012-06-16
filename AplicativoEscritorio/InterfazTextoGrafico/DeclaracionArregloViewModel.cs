@@ -5,9 +5,10 @@ using System.Text;
 
 namespace InterfazTextoGrafico
 {
-    public class DeclaracionVariableViewModel  : ActividadViewModelBase
+    public class DeclaracionArregloViewModel : ActividadViewModelBase
     {
         public string Nombre { get; set; }
         public InterfazTextoGrafico.Enums.TipoDato Tipo { get; set; }
+        public string Tope { get; set; }
     }
 }

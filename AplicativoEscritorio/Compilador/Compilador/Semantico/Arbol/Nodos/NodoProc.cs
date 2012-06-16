@@ -228,7 +228,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         private void AgregarFuncionActivityModel(string nombre)
         {
-            InterfazTextoGrafico.ProcedimientoViewModel activ = new InterfazTextoGrafico.ProcedimientoViewModel();
+            InterfazTextoGrafico.ProcedimientoViewModel activ = new InterfazTextoGrafico.ProcedimientoViewModel();            
             activ.Nombre = nombre;
             activ.VariablesLocales = this.hijosNodo[7].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
             activ.Cuerpo = this.hijosNodo[9].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;

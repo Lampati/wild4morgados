@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="ActividadViewModelBase.cs" />
     <Compile Include="AsignacionViewModel.cs" />
+    <Compile Include="DeclaracionesGlobalesViewModel.cs" />
+    <Compile Include="DeclaracionArregloViewModel.cs" />
+    <Compile Include="Enums\TipoDato.cs" />
     <Compile Include="Enums\TipoRutina.cs" />
     <Compile Include="ProcedimientosViewModel.cs" />
     <Compile Include="ProgramaViewModel.cs" />

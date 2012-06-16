@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Auxiliares;
+using InterfazTextoGrafico;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -39,6 +40,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
                             textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
 
+                            AgregarVariableViewModel(v.Lexema, tipo);
                         }
                         else
                         {
@@ -58,6 +60,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             {
                                 throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
                             }
+
+                            AgregarArregloViewModel(v.Lexema, tipo, this.RangoArregloSinPrefijo);
                         }
                         else
                         {
@@ -72,6 +76,51 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
 
             return this;
+        }
+
+        private void AgregarArregloViewModel(string nombre, NodoTablaSimbolos.TipoDeDato tipo, string tope)
+        {
+            DeclaracionArregloViewModel act = new DeclaracionArregloViewModel();
+
+            act.Nombre = nombre;
+            act.Tope = tope;
+
+            switch (tipo)
+            {
+                case NodoTablaSimbolos.TipoDeDato.Texto:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Numero:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Booleano:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                    break;
+            }
+
+            this.ActividadViewModel = act;
+        }
+
+        private void AgregarVariableViewModel(string nombre, NodoTablaSimbolos.TipoDeDato tipo)
+        {
+            DeclaracionVariableViewModel act = new DeclaracionVariableViewModel();
+
+            act.Nombre = nombre;
+
+            switch (tipo)
+            {
+                case NodoTablaSimbolos.TipoDeDato.Texto:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Numero:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Booleano:
+                    act.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                    break;
+            }
+
+            this.ActividadViewModel = act;
         }
 
         public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
