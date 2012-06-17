@@ -10,14 +10,14 @@ using InterfazTextoGrafico;
 
 namespace LibreriaActividades
 {
-    [Designer(typeof(DeclaracionConstanteDesigner))]
-    [ToolboxBitmap(typeof(DeclaracionConstante), "Resources.DeclaracionConstante.png")]
-    public class DeclaracionConstante : ActividadBase
+    [Designer(typeof(DeclaracionArregloDesigner))]
+    [ToolboxBitmap(typeof(DeclaracionConstante), "Resources.DeclaracionArreglo.png")]
+    public class DeclaracionArreglo : ActividadBase
     {
         private System.Windows.Visibility visible;
         public string NombreConstante { get; set; }
         public eTipoVariable Tipo { get; set; }
-        public string Valor { get; set; }
+        public string Tope { get; set; }
 
         public override void Ejecutar(StringBuilder sb)
         {
@@ -27,7 +27,9 @@ namespace LibreriaActividades
             //if (this.Tipo == eTipoVariable.Vector)
             //    sb.AppendLine(String.Format(Extension.Tabs + "CONST {0} : ARREGLO[{1}] de {2};", this.NombreConstante, this.Tamano, this.TipoVector.ToString().ToUpper()));
             //else
-                sb.AppendLine(String.Format(Extension.Tabs + "CONST {0} : {1};", this.NombreConstante, this.Tipo.ToString().ToUpper()));
+                //sb.AppendLine(String.Format(Extension.Tabs + "CONST {0} : {1};", this.NombreConstante, this.Tipo.ToString().ToUpper()));
+
+            sb.AppendLine(String.Format(Extension.Tabs + "VAR {0} : ARREGLO[{1}] de {2};", this.NombreConstante, this.Tope, this.Tipo.ToString().ToUpper()));
         }
 
         public static void Attach(ModelItem modelItem)
@@ -55,10 +57,10 @@ namespace LibreriaActividades
 
         public override void AsignarDatos(ActividadViewModelBase datos)
         {
-            DeclaracionConstanteViewModel datosMapeados = datos as DeclaracionConstanteViewModel;
+            DeclaracionArregloViewModel datosMapeados = datos as DeclaracionArregloViewModel;
 
             this.NombreConstante = datosMapeados.Nombre;
-            this.Valor = datosMapeados.Valor;
+            this.Tope = datosMapeados.Tope;
 
             switch (datosMapeados.Tipo)
             {

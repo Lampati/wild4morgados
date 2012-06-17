@@ -145,7 +145,22 @@ using InterfazTextoGrafico;
                 if (Object.Equals(wdDecl, null))
                 {
                     wdDecl = new WorkflowDesigner();
-                     System.Threading.Thread thread = new System.Threading.Thread(
+
+                    if (actividadViewModel != null)
+                    {
+                        ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
+
+                        Secuencia aux = new Secuencia() { DisplayName = "Variables Locales", AdmiteDelaraciones = true, SePuedeEliminar = false };
+                        aux.AsignarDatos(procViewModel.VariablesLocales);
+
+                        initLocales = aux;
+                    }
+                    else
+                    {
+                        initLocales = new Secuencia() { AdmiteDelaraciones = true, DisplayName = "Variables Locales", SePuedeEliminar = false };
+                    }
+
+                    System.Threading.Thread thread = new System.Threading.Thread(
                         new System.Threading.ThreadStart(
                           delegate()
                           {
@@ -154,7 +169,7 @@ using InterfazTextoGrafico;
                                 new Action(
                                   delegate()
                                   {
-                                      initLocales = new Secuencia() { AdmiteDelaraciones = true, DisplayName = "Variables Locales", SePuedeEliminar = false };
+                                      
                                       wdDecl.Load(initLocales);
                                       this.ReconstruirContextMenu(wdDecl);
                                       if (((Grid)wdDecl.View).Children.Count > 0)

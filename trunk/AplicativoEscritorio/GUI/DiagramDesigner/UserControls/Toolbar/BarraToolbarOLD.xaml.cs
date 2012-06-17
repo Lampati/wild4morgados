@@ -81,12 +81,12 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void ButtonTexto_Click(object sender, RoutedEventArgs e)
         {
-            CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Texto));
+            CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Texto,e));
         }
 
         private void ButtonFlujo_Click(object sender, RoutedEventArgs e)
         {
-            CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Flujo));
+            CambioModoEventFire(sender, new CambioModoEventArgs(ModoVisual.Flujo,e));
         }
 
         private void CambioModoEventFire(object sender, CambioModoEventArgs e)

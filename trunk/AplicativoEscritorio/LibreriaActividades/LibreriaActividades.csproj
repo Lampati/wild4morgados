@@ -59,6 +59,10 @@
     </Compile>
     <Compile Include="ComboBoxItemConverter.cs" />
     <Compile Include="ComboBoxVectorItemConverter.cs" />
+    <Compile Include="DeclaracionArreglo.cs" />
+    <Compile Include="DeclaracionArregloDesigner.xaml.cs">
+      <DependentUpon>DeclaracionArregloDesigner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeclaracionConstanteDesigner.xaml.cs">
       <DependentUpon>DeclaracionConstanteDesigner.xaml</DependentUpon>
     </Compile>
@@ -98,6 +102,10 @@
     <Page Include="AsignacionDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeclaracionArregloDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DeclaracionConstanteDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +179,9 @@
       <Project>{97A51588-9D03-46C3-B101-1AF10BC285F5}</Project>
       <Name>InterfazTextoGrafico</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DeclaracionArreglo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
