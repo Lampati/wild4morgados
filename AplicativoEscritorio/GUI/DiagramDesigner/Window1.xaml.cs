@@ -283,27 +283,40 @@ namespace DiagramDesigner
         {
             //ToggleButton botonPresionado = (ToggleButton)o;
 
-            ReiniciarIDEParaCompilacion();
-
-            if (Modo == ModoVisual.Texto)
+            if (Modo != e.ModoSeleccionado)
             {
 
-                ResultadoCompilacion res = Compilar();
-
-                if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                if (Modo == ModoVisual.Texto)
                 {
-                    Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
 
+                    ResultadoCompilacion res = Compilar();
+
+                    if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                    {
+                        Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
+
+                        Modo = e.ModoSeleccionado;
+                    }
+                    else
+                    {
+                        //Pq no hago el cambio, mantengo el actual
+                        RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
+                        botonPresionado.IsChecked = false;
+                    }
+
+                }
+                else
+                {
                     Modo = e.ModoSeleccionado;
                 }
 
             }
             else
             {
-                Modo = e.ModoSeleccionado;
+                //Presione el mismo boton que ya estaba, lo dejo.
+                RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
+                botonPresionado.IsChecked = true;
             }
-
-
             //Modo = e.ModoSeleccionado;
 
         }

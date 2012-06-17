@@ -50,17 +50,21 @@ namespace CompiladorGargar.Resultado
 
         public string ArmarArbol()
         {
-            NodoArbolSemantico nodoActual = this.ArbolSemanticoResultado.ObtenerRaiz();
-
             StringBuilder strBldr = new StringBuilder();
-            strBldr.AppendLine(nodoActual.ToString());
 
-            for (int i = 0; i < nodoActual.ObtenerCantidadHijos(); i++)
+            if (this.ArbolSemanticoResultado != null)
             {
-                NodoArbolSemantico nodo = nodoActual.ObtenerHijo(i);
-                strBldr.AppendLine(ObtenerStringNodo(nodo));
-            }
+                NodoArbolSemantico nodoActual = this.ArbolSemanticoResultado.ObtenerRaiz();
 
+                
+                strBldr.AppendLine(nodoActual.ToString());
+
+                for (int i = 0; i < nodoActual.ObtenerCantidadHijos(); i++)
+                {
+                    NodoArbolSemantico nodo = nodoActual.ObtenerHijo(i);
+                    strBldr.AppendLine(ObtenerStringNodo(nodo));
+                }
+            }
 
             return strBldr.ToString();
         }

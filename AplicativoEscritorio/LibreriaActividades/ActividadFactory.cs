@@ -35,7 +35,7 @@ namespace LibreriaActividades
                 }
                 else if (tipo == typeof(DeclaracionArregloViewModel))
                 {
-                    retorno = new DeclaracionVariable();
+                    retorno = new DeclaracionArreglo();
                 }
                 else if (tipo == typeof(DeclaracionVariableViewModel))
                 {

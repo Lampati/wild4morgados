@@ -110,12 +110,14 @@ namespace ModoGrafico
             if (tipoDeTab == TipoTab.TabItemDeclaracionVariable)
             {
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
+                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionArreglo)));
             }
             else if (tipoDeTab == TipoTab.TabItemDeclaracionConstante)
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
             else
             {
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
+                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionArreglo)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mostrar)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
@@ -133,6 +135,7 @@ namespace ModoGrafico
             // add custom activity to toolbox
             Toolbox.Categories.Add(new ToolboxCategory("Actividades GarGar"));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
+            Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionArreglo)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mostrar)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
@@ -168,6 +171,7 @@ namespace ModoGrafico
             builder.AddCustomAttributes(typeof(LlamarProcedimiento), new DesignerAttribute(typeof(LlamarProcedimientoDesigner)));
             builder.AddCustomAttributes(typeof(Secuencia), new DesignerAttribute(typeof(SecuenciaDesigner)));
             builder.AddCustomAttributes(typeof(DeclaracionVariable), new DesignerAttribute(typeof(DeclaracionVariableDesigner)));
+            builder.AddCustomAttributes(typeof(DeclaracionArreglo), new DesignerAttribute(typeof(DeclaracionArregloDesigner)));
             builder.AddCustomAttributes(typeof(DeclaracionConstante), new DesignerAttribute(typeof(DeclaracionConstanteDesigner)));
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

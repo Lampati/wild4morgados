@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DiagramDesigner.Enums;
 using Globales.Enums;
+using System.Windows;
 
 namespace DiagramDesigner.EventArgsClasses
 {
@@ -18,9 +19,21 @@ namespace DiagramDesigner.EventArgsClasses
             }
         }
 
-        public CambioModoEventArgs(ModoVisual modo)
+        private RoutedEventArgs sourceEvent;
+        public RoutedEventArgs SourceEvent
+        {
+            get
+            {
+                return sourceEvent;
+            }
+        }
+
+        
+
+        public CambioModoEventArgs(ModoVisual modo, RoutedEventArgs ev)
         {
             modoSeleccionado = modo;
+            sourceEvent = ev;
         }
     }
 }
