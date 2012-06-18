@@ -60,7 +60,7 @@ namespace WebProgramAR.Controllers
                 strbldr.AppendLine("Email:" + model.Email);
                 strbldr.AppendLine("Telefono:" + model.Telefono);
                 strbldr.AppendLine("Mensaje:" + model.Descripcion);
-                MailManager.Enviar("ucicohen@gmail.com", "Contacto - " + model.Nombre, strbldr.ToString());
+                MailManager.Enviar(model.Email, "Contacto - " + model.Nombre, strbldr.ToString());
                 return Content(Boolean.TrueString);
             }
             else

@@ -16,7 +16,10 @@
 @Model.Exception.InnerException
 </p>
 
+@foreach (var item in @Model.Exception.StackTrace.Split(new string[]{ "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+{
+    <p>
+        @item
+    </p>
+}
 
-<p>
-@Model.Exception.StackTrace
-</p>
