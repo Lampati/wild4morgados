@@ -42,10 +42,10 @@ namespace WebProgramAR.MailSender
                 smtpClient.Send(message);
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 //Error, could not send the message
-                
+                throw;
             }
             return false;
             
