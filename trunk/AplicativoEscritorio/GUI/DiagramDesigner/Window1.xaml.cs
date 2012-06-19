@@ -290,7 +290,7 @@ namespace DiagramDesigner
                 if (Modo == ModoVisual.Texto)
                 {
 
-                    ResultadoCompilacion res = Compilar();
+                    ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
@@ -312,6 +312,21 @@ namespace DiagramDesigner
                     string gargar = new Identador( programa.Gargar).Identar();
 
                     Modo = e.ModoSeleccionado;
+
+                    //ResultadoCompilacion res = Compilar(gargar);
+
+                    //if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                    //{
+                    //    Esquema.GarGarACompilar = gargar;
+
+                    //    Modo = e.ModoSeleccionado;
+                    //}
+                    //else
+                    //{
+                    //    //Pq no hago el cambio, mantengo el actual
+                    //    RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
+                    //    botonPresionado.IsChecked = false;
+                    //}
                 }
 
             }
@@ -364,7 +379,7 @@ namespace DiagramDesigner
                         IdentarTexto();
                     }
 
-                    ResultadoCompilacion res = Compilar();
+                    ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
@@ -399,7 +414,7 @@ namespace DiagramDesigner
             }
             else
             {
-                ResultadoCompilacion res = Compilar();
+                ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
                 if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                 {
@@ -451,7 +466,7 @@ namespace DiagramDesigner
                     IdentarTexto();
                 }
 
-                ResultadoCompilacion res = Compilar();
+                ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
                 if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                 {
@@ -504,7 +519,7 @@ namespace DiagramDesigner
             }
             else
             {
-                Compilar();
+                Compilar(this.Esquema.GarGarACompilar);
             }
         }
 
@@ -553,7 +568,7 @@ namespace DiagramDesigner
             switch (obj.Key)
             {
                 case Keys.F3:
-                    Compilar();
+                    Compilar(this.Esquema.GarGarACompilar);
                     break;
                 case Keys.F4:
                     EjecutarConResultado();
@@ -565,13 +580,13 @@ namespace DiagramDesigner
 
         }
 
-        private ResultadoCompilacion Compilar()
+        private ResultadoCompilacion Compilar(string programa)
         {
             ReiniciarIDEParaCompilacion();
 
             ConfigurarCompilador();
 
-            string programa = this.Esquema.GarGarACompilar;
+            //string programa = this.Esquema.GarGarACompilar;
             ResultadoCompilacion res = this.compilador.Compilar(programa);
             res.CodigoGarGar = programa;
 
