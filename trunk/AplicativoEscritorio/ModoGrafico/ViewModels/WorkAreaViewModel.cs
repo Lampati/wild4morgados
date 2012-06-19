@@ -10,8 +10,8 @@ using InterfazTextoGrafico;
 
     public class WorkAreaViewModel : BaseViewModel
     {
-        private DelegateCommand<Tab> deleteBrand;
-        private ObservableCollection<Tab> brands;
+        private DelegateCommand<Tab> deleteTab;
+        private ObservableCollection<Tab> tabs;
         private int cant = 1;
 
         public WorkAreaViewModel()
@@ -22,7 +22,7 @@ using InterfazTextoGrafico;
 
         public void AgregarNuevo()
         {
-            this.ExecuteAddBrand("Proc/Func" + cant.ToString(), true, TipoTab.TabItemProcedimiento);
+            this.ExecuteAddTab("Proc/Func" + cant.ToString(), true, TipoTab.TabItemProcedimiento);
             cant++;
         }
 
@@ -40,29 +40,29 @@ using InterfazTextoGrafico;
             //}
         }
 
-        public ObservableCollection<Tab> Brands
+        public ObservableCollection<Tab> Tabs
         {
             get
             {
-                return this.brands ?? (this.brands = new ObservableCollection<Tab>());
+                return this.tabs ?? (this.tabs = new ObservableCollection<Tab>());
             }
 
             set
             {
                 if (value != null)
                 {
-                    this.brands = value;
-                    NotifyPropertyChanged("Brands");
+                    this.tabs = value;
+                    NotifyPropertyChanged("Tabs");
                 }
             }
         }
 
-        public DelegateCommand<Tab> DeleteBrand
+        public DelegateCommand<Tab> DeleteTab
         {
             get
             {
-                return this.deleteBrand ?? (this.deleteBrand = new DelegateCommand<Tab>(
-                                                                                 this.ExecuteDeleteBrand,
+                return this.deleteTab ?? (this.deleteTab = new DelegateCommand<Tab>(
+                                                                                 this.ExecuteDeleteTab,
                                                                                  (arg) => true));
             }
         }
@@ -77,7 +77,7 @@ using InterfazTextoGrafico;
         //    }
         //}
 
-        public Tab ExecuteAddBrand(string obj, bool acomodar, TipoTab tipo)
+        public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo)
         {
             if (!string.IsNullOrEmpty(obj))
             {
@@ -104,21 +104,21 @@ using InterfazTextoGrafico;
                         break;
                 }
                 t.Header = obj;
-                if (this.Brands.Count == 0 || !acomodar)
-                    this.Brands.Add(t);
+                if (this.Tabs.Count == 0 || !acomodar)
+                    this.Tabs.Add(t);
                 else
-                    this.Brands.Insert(this.Brands.Count - 1, t);
+                    this.Tabs.Insert(this.Tabs.Count - 1, t);
                 return t;
             }
 
             return null;
         }
 
-        private void ExecuteDeleteBrand(Tab obj)
+        private void ExecuteDeleteTab(Tab obj)
         {
-            if (this.Brands.Contains(obj))
+            if (this.Tabs.Contains(obj))
             {
-                this.Brands.Remove(obj);
+                this.Tabs.Remove(obj);
                 //if (this.Brands.Count == 4)
                 //{
                 //    ModoGrafico.Tabs.EditableTabHeaderControl etc = new ModoGrafico.Tabs.EditableTabHeaderControl();
@@ -128,7 +128,7 @@ using InterfazTextoGrafico;
 
                 
                 ModoGrafico.Tabs.EditableTabHeaderControl etc = new ModoGrafico.Tabs.EditableTabHeaderControl();
-                etc.Content = this.Brands[0].Header;
+                etc.Content = this.Tabs[0].Header;
                 ModoGrafico.Tabs.EditableTabHeaderControl.ClickEventoFire(etc, null);
             
                 obj = null;
@@ -156,10 +156,10 @@ using InterfazTextoGrafico;
                         break;
                 }           
                 t.Header = obj;
-                if (this.Brands.Count == 0 || !acomodar)
-                    this.Brands.Add(t);
+                if (this.Tabs.Count == 0 || !acomodar)
+                    this.Tabs.Add(t);
                 else
-                    this.Brands.Insert(this.Brands.Count - 1, t);
+                    this.Tabs.Insert(this.Tabs.Count - 1, t);
                 return t;
             }
 
@@ -187,10 +187,10 @@ using InterfazTextoGrafico;
 
                 t.Header = obj;
 
-                if (this.Brands.Count == 0 || !acomodar)
-                    this.Brands.Add(t);
+                if (this.Tabs.Count == 0 || !acomodar)
+                    this.Tabs.Add(t);
                 else
-                    this.Brands.Insert(this.Brands.Count - 1, t);
+                    this.Tabs.Insert(this.Tabs.Count - 1, t);
                 return t;    
             }
             else

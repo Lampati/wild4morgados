@@ -15,13 +15,13 @@ namespace LibreriaActividades
     public class DeclaracionArreglo : ActividadBase
     {
         private System.Windows.Visibility visible;
-        public string NombreConstante { get; set; }
+        public string Nombre { get; set; }
         public eTipoVariable Tipo { get; set; }
         public string Tope { get; set; }
 
         public override void Ejecutar(StringBuilder sb)
         {
-            if (String.IsNullOrEmpty(this.NombreConstante))
+            if (String.IsNullOrEmpty(this.Nombre))
                 return;
 
             //if (this.Tipo == eTipoVariable.Vector)
@@ -29,7 +29,7 @@ namespace LibreriaActividades
             //else
                 //sb.AppendLine(String.Format(Extension.Tabs + "CONST {0} : {1};", this.NombreConstante, this.Tipo.ToString().ToUpper()));
 
-            sb.AppendLine(String.Format(Extension.Tabs + "VAR {0} : ARREGLO[{1}] de {2};", this.NombreConstante, this.Tope, this.Tipo.ToString().ToUpper()));
+            sb.AppendLine(String.Format(Extension.Tabs + "VAR {0} : ARREGLO[{1}] de {2};", this.Nombre, this.Tope, this.Tipo.ToString().ToUpper()));
         }
 
         public static void Attach(ModelItem modelItem)
@@ -50,7 +50,27 @@ namespace LibreriaActividades
         {
             get
             {
-                return null;
+                DeclaracionArregloViewModel activ = new DeclaracionArregloViewModel();
+
+                activ.Nombre = this.Nombre;
+                activ.Tope = this.Tope;
+
+                switch (this.Tipo)
+                {
+                    case eTipoVariable.Numero:
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                        break;
+                    case eTipoVariable.Texto:
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                        break;
+                    case eTipoVariable.Booleano:
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                        break;                    
+                    default:
+                        break;
+                }
+
+                return activ;
             }
 
         }
@@ -59,7 +79,7 @@ namespace LibreriaActividades
         {
             DeclaracionArregloViewModel datosMapeados = datos as DeclaracionArregloViewModel;
 
-            this.NombreConstante = datosMapeados.Nombre;
+            this.Nombre = datosMapeados.Nombre;
             this.Tope = datosMapeados.Tope;
 
             switch (datosMapeados.Tipo)

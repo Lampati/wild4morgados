@@ -8,6 +8,13 @@ namespace ModoGrafico.Tabs
 {
     public class TabItemAgregar : Tab
     {
+
+        public TabItemAgregar()
+            : base()
+        {
+            Tipo = Enums.TipoTab.TabItemAgregar;
+        }
+
         public override void Ejecutar(StringBuilder sb)
         {
             //no hace nada este tab

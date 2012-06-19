@@ -29,7 +29,11 @@ namespace LibreriaActividades
         {
             get
             {
-                return null;
+                LlamarProcedimientoViewModel activ = new LlamarProcedimientoViewModel();
+
+             
+
+                return activ;
             }
 
         }

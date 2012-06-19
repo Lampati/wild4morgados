@@ -28,7 +28,9 @@ namespace LibreriaActividades
         {
             get
             {
-                return null;
+                MostrarViewModel activ = new MostrarViewModel();
+
+                return activ;
             }
 
         }

@@ -43,6 +43,11 @@ namespace ModoGrafico
             }
         }
 
+        public ProgramaViewModel ObtenerProgramaEnModoGrafico()
+        {
+            return this.WorkArea.ObtenerProgramaDiagramado();
+        }
+
         void WorkArea_CambioTabEvent(object sender, EventArgsClasses.TipoTabCambiadoEventArgs e)
         {
             System.Threading.Thread thread = new System.Threading.Thread(

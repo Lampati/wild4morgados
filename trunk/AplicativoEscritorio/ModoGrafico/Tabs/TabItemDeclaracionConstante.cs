@@ -11,13 +11,14 @@ namespace ModoGrafico.Tabs
     {
         public TabItemDeclaracionConstante()
         {
-
+            Tipo = Enums.TipoTab.TabItemDeclaracionConstante;
         }
 
         public TabItemDeclaracionConstante(SecuenciaViewModel proc)
             : base()
         {
             actividadViewModel = proc;
+            Tipo = Enums.TipoTab.TabItemDeclaracionConstante;
         }
 
         public override int Orden
@@ -27,7 +28,7 @@ namespace ModoGrafico.Tabs
 
         public override void Ejecutar(StringBuilder sb)
         {
-            if (!Object.Equals(base.init, null) && base.init.Activities.Count > 0)
+            if (!Object.Equals(base.SecuenciaInicialProcedimiento, null) && base.SecuenciaInicialProcedimiento.Activities.Count > 0)
             {
                 sb.AppendLine(LibreriaActividades.Extension.Tabs + String.Format("CONSTANTES"));
                 LibreriaActividades.Extension.ProfundidadIdentacion++;

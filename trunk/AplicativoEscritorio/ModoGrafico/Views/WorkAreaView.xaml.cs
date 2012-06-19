@@ -53,8 +53,112 @@ using InterfazTextoGrafico;
                 ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento(item.Nombre.ToUpper(), false, TipoTab.TabItemProcedimiento, item);
             }
 
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("     +     ", false, TipoTab.TabItemAgregar);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("     +     ", false, TipoTab.TabItemAgregar);
             
+        }
+
+        public ProgramaViewModel ObtenerProgramaDiagramado()
+        {
+            WorkAreaViewModel workArea = this.DataContext as WorkAreaViewModel;
+
+            ProgramaViewModel programa = new ProgramaViewModel();
+
+            foreach (Tab item in workArea.Tabs)
+            {
+                switch (item.Tipo)
+                {
+                    case TipoTab.TabItemPrincipal:
+                        ProcedimientoViewModel activ = new ProcedimientoViewModel();
+                        activ.Nombre = item.Header;
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
+                        if (item.SecuenciaInicialProcedimiento != null)
+                        {
+                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                        }
+                        else
+                        {
+                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                        }
+                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                        break;
+                    case TipoTab.TabItemDeclaracionVariable:
+                        if (item.SecuenciaInicialProcedimiento != null)
+                        {
+                            programa.VariablesGlobales = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                        }
+                        else
+                        {
+                            programa.VariablesGlobales = item.actividadViewModel as SecuenciaViewModel;
+                        }
+                        break;
+                    case TipoTab.TabItemDeclaracionConstante:
+                        if (item.SecuenciaInicialProcedimiento != null)
+                        {
+                            programa.ConstantesGlobales = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                        }
+                        else
+                        {
+                            programa.ConstantesGlobales = item.actividadViewModel as SecuenciaViewModel;
+                        }
+                        break;
+                    case TipoTab.TabItemFuncion:
+                        activ = new ProcedimientoViewModel();
+                        activ.Nombre = item.Header;
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
+                        if (item.SecuenciaInicialProcedimiento != null)
+                        {
+                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                        }
+                        else
+                        {
+                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                        }
+                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                        break;
+                    case TipoTab.TabItemProcedimiento:
+                        activ = new ProcedimientoViewModel();
+                        activ.Nombre = item.Header;
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
+                        if (item.SecuenciaInicialProcedimiento != null)
+                        {
+                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                        }
+                        else
+                        {
+                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                        }
+                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                        break;
+                    case TipoTab.TabItemSalida:
+                       activ = new ProcedimientoViewModel();
+                        activ.Nombre = item.Header;
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Salida;
+                        if (item.SecuenciaInicialProcedimiento != null)
+                        {
+                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                        }
+                        else
+                        {
+                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                        }
+                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                        break;
+                    case TipoTab.TabItemAgregar:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return programa;
         }
 
         void tab_CambioTabEvent(object o, TipoTabCambiadoEventArgs e)

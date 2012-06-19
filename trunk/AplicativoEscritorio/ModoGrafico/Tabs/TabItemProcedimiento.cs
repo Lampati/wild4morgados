@@ -14,6 +14,7 @@ namespace ModoGrafico.Tabs
         public TabItemProcedimiento() : base()
         {
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
+            Tipo = Enums.TipoTab.TabItemProcedimiento;
         }
 
         public TabItemProcedimiento(ProcedimientoViewModel proc)
@@ -21,6 +22,7 @@ namespace ModoGrafico.Tabs
         {
             actividadViewModel = proc;
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
+            Tipo = Enums.TipoTab.TabItemProcedimiento;
         }
 
         public override int Orden
@@ -31,8 +33,8 @@ namespace ModoGrafico.Tabs
         public override void Ejecutar(StringBuilder sb)
         {
             sb.AppendLine(LibreriaActividades.Extension.Tabs + String.Format("PROCEDIMIENTO {0}()", this.Header));
-            if (!Object.Equals(base.initLocales, null) && base.initLocales.Activities.Count > 0)
-                foreach (LibreriaActividades.ActividadBase ab in base.initLocales.Activities)
+            if (!Object.Equals(base.SecuenciaInicialDeclaraciones, null) && base.SecuenciaInicialDeclaraciones.Activities.Count > 0)
+                foreach (LibreriaActividades.ActividadBase ab in base.SecuenciaInicialDeclaraciones.Activities)
                     ab.Ejecutar(sb);
             sb.AppendLine("COMENZAR");
             LibreriaActividades.Extension.ProfundidadIdentacion++;

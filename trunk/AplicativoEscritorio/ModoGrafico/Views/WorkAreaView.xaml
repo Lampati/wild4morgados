@@ -18,6 +18,6 @@
         </Grid.RowDefinitions>        
         <tab:TabsControl x:Name="tab" 
                           Grid.Row="1"
-                          ItemSource="{Binding Brands}" />
+                          ItemSource="{Binding Tabs}" />
     </Grid>
 </UserControl>
