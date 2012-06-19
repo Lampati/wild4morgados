@@ -12,21 +12,23 @@ namespace ModoGrafico.Tabs
     {
         public TabItemPrincipal()
         {
-
+            Tipo = Enums.TipoTab.TabItemPrincipal;
         }
 
         public TabItemPrincipal(ProcedimientoViewModel proc)
             : base()
         {
             actividadViewModel = proc;
+            Tipo = Enums.TipoTab.TabItemPrincipal;
+
         }
 
 
         public override void Ejecutar(StringBuilder sb)
         {
             sb.AppendLine(LibreriaActividades.Extension.Tabs + String.Format("PROCEDIMIENTO PRINCIPAL()"));
-            if (!Object.Equals(base.initLocales, null) && base.initLocales.Activities.Count > 0)
-                foreach (LibreriaActividades.ActividadBase ab in base.initLocales.Activities)
+            if (!Object.Equals(base.SecuenciaInicialDeclaraciones, null) && base.SecuenciaInicialDeclaraciones.Activities.Count > 0)
+                foreach (LibreriaActividades.ActividadBase ab in base.SecuenciaInicialDeclaraciones.Activities)
                     ab.Ejecutar(sb);
             sb.AppendLine("COMENZAR");
             LibreriaActividades.Extension.ProfundidadIdentacion++;

@@ -15,15 +15,17 @@
     using System.Collections.Generic;
     using ModoGrafico.Tabs;
 using InterfazTextoGrafico;
+using ModoGrafico.Enums;
 
     public abstract class Tab : BaseViewModel
     {
         private WorkflowDesigner wd;
         private string header;
-        protected Secuencia init;
-        protected Secuencia initLocales;
+        internal Secuencia SecuenciaInicialProcedimiento {get; set;}
+        internal Secuencia SecuenciaInicialDeclaraciones {get; set;}
         AutoResetEvent syncEvent = new AutoResetEvent(false);
-        protected ActividadViewModelBase actividadViewModel;
+        internal ActividadViewModelBase actividadViewModel {get; set;}
+        internal TipoTab Tipo { get; set; }
 
         public Tab()
         {
@@ -56,12 +58,12 @@ using InterfazTextoGrafico;
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
 
-                            init = aux;
+                            SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
-                            init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
+                            SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
                         }
                     }
                     else if (this is TabItemProcedimiento)
@@ -73,11 +75,11 @@ using InterfazTextoGrafico;
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
                             aux.AsignarDatos(procViewModel.Cuerpo);
 
-                            init = aux;
+                            SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            init = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false };
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false };
                         }
                     }
                     else if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable)
@@ -89,7 +91,7 @@ using InterfazTextoGrafico;
                             Secuencia aux = new Secuencia() { DisplayName = "DECLARACION " + this.Header, AdmiteDelaraciones = true };
                             aux.AsignarDatos(secViewModel);
 
-                            init = aux;
+                            SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
@@ -101,7 +103,7 @@ using InterfazTextoGrafico;
                                 admiteDeclaraciones = true;
                             }
 
-                            init = new Secuencia() { DisplayName = display, AdmiteDelaraciones = admiteDeclaraciones };
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = display, AdmiteDelaraciones = admiteDeclaraciones };
                         }
                     }
 
@@ -115,7 +117,7 @@ using InterfazTextoGrafico;
                                   delegate()
                                   {
                                       
-                                      wd.Load(init);
+                                      wd.Load(SecuenciaInicialProcedimiento);
                                       this.ReconstruirContextMenu(wd);
                                       if (((Grid)wd.View).Children.Count > 0)
                                       {
@@ -153,11 +155,11 @@ using InterfazTextoGrafico;
                         Secuencia aux = new Secuencia() { DisplayName = "Variables Locales", AdmiteDelaraciones = true, SePuedeEliminar = false };
                         aux.AsignarDatos(procViewModel.VariablesLocales);
 
-                        initLocales = aux;
+                        SecuenciaInicialDeclaraciones = aux;
                     }
                     else
                     {
-                        initLocales = new Secuencia() { AdmiteDelaraciones = true, DisplayName = "Variables Locales", SePuedeEliminar = false };
+                        SecuenciaInicialDeclaraciones = new Secuencia() { AdmiteDelaraciones = true, DisplayName = "Variables Locales", SePuedeEliminar = false };
                     }
 
                     System.Threading.Thread thread = new System.Threading.Thread(
@@ -170,7 +172,7 @@ using InterfazTextoGrafico;
                                   delegate()
                                   {
                                       
-                                      wdDecl.Load(initLocales);
+                                      wdDecl.Load(SecuenciaInicialDeclaraciones);
                                       this.ReconstruirContextMenu(wdDecl);
                                       if (((Grid)wdDecl.View).Children.Count > 0)
                                       {
@@ -308,11 +310,11 @@ using InterfazTextoGrafico;
 
         protected virtual void RecrearWorkflowDesigner()
         {
-            if (Object.Equals(init, null))
+            if (Object.Equals(SecuenciaInicialProcedimiento, null))
                 return;
 
             wd = new WorkflowDesigner();
-            wd.Load(init);
+            wd.Load(SecuenciaInicialProcedimiento);
         }
 
         private void RecrearWorkflows()
@@ -337,10 +339,10 @@ using InterfazTextoGrafico;
 
         public virtual void Ejecutar(StringBuilder sb)
         {
-            if (Object.Equals(init, null))
+            if (Object.Equals(SecuenciaInicialProcedimiento, null))
                 return;
 
-            foreach (ActividadBase ab in init.Activities)
+            foreach (ActividadBase ab in SecuenciaInicialProcedimiento.Activities)
                 ab.Ejecutar(sb);
 
             /*

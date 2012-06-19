@@ -32,6 +32,7 @@ using System.Collections.ObjectModel;
 using DiagramDesigner.DialogWindows;
 using DataAccess.Entidades;
 using DataAccess;
+using InterfazTextoGrafico;
 
 namespace DiagramDesigner
 {
@@ -307,6 +308,7 @@ namespace DiagramDesigner
                 }
                 else
                 {
+                    ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
                     Modo = e.ModoSeleccionado;
                 }
 

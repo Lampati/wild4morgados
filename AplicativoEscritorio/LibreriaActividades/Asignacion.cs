@@ -29,7 +29,7 @@ namespace LibreriaActividades
         {
             get
             {
-                return null;
+                return new AsignacionViewModel();
             }
           
         }

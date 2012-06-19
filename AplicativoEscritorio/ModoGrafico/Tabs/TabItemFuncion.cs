@@ -15,13 +15,14 @@ namespace ModoGrafico.Tabs
         public TabItemFuncion() : base()
         {
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
+            Tipo = Enums.TipoTab.TabItemFuncion;
         }
 
         public TabItemFuncion(ProcedimientoViewModel proc) : base()
         {
             actividadViewModel = proc;
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
-
+            Tipo = Enums.TipoTab.TabItemFuncion;
         }
 
         

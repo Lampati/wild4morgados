@@ -24,7 +24,7 @@
                     <Label Content="Tipo" Height="25" HorizontalAlignment="Center" Name="lblTipo" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" />
                     <Label Content="Tope" Height="25" HorizontalAlignment="Center" Name="lblTope" VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" />
                     <TextBox Height="25" HorizontalAlignment="Center" Name="txtConstante" VerticalAlignment="Top" Width="60" Grid.Column="0" Grid.Row="2"
-                             Text="{Binding Path=ModelItem.NombreConstante, Mode=TwoWay}" AutomationProperties.AutomationId="NombreConstante"  />
+                             Text="{Binding Path=ModelItem.Nombre, Mode=TwoWay}" AutomationProperties.AutomationId="Nombre"  />
                     <ComboBox Name="cbo" SelectedValue="{Binding Path=ModelItem.Tipo, Mode=TwoWay, Converter={StaticResource comboBoxItemConverter}}" SelectedValuePath="Content" Grid.Row="2" Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged" Width="70">
                         <ComboBoxItem>Numero</ComboBoxItem>
                         <ComboBoxItem>Texto</ComboBoxItem>

@@ -48,7 +48,27 @@ namespace LibreriaActividades
         {
             get
             {
-                return null;
+                DeclaracionConstanteViewModel activ = new DeclaracionConstanteViewModel();
+
+                activ.Nombre = this.NombreConstante;
+                activ.Valor = this.Valor;
+
+                switch (this.Tipo)
+                {
+                    case eTipoVariable.Numero:
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                        break;
+                    case eTipoVariable.Texto:
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                        break;
+                    case eTipoVariable.Booleano:
+                        activ.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                        break;
+                    default:
+                        break;
+                }
+
+                return activ;
             }
 
         }

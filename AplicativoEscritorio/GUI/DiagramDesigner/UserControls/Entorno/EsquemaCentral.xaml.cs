@@ -60,7 +60,20 @@ namespace DiagramDesigner.UserControls.Entorno
         }
 
 
-        public InterfazTextoGrafico.ProgramaViewModel RepresentacionGraficaActual { get; set; }      
+        public InterfazTextoGrafico.ProgramaViewModel representacionGraficaActual;
+        public InterfazTextoGrafico.ProgramaViewModel RepresentacionGraficaActual 
+        {
+            get
+            {
+                representacionGraficaActual = modoGrafico.ObtenerProgramaEnModoGrafico();
+                return representacionGraficaActual;
+            }
+            set
+            {
+                representacionGraficaActual = value;
+                modoGrafico.CargarProgramaEnModoGrafico(representacionGraficaActual);
+            }
+        }      
 
         public string GarGarACompilar
         {
@@ -96,8 +109,7 @@ namespace DiagramDesigner.UserControls.Entorno
                 this.modo = value;
                 switch (this.modo)
                 {
-                    case ModoVisual.Flujo:
-                        modoGrafico.CargarProgramaEnModoGrafico(RepresentacionGraficaActual);
+                    case ModoVisual.Flujo:                        
                         this.grdVisual.Visibility = System.Windows.Visibility.Visible;
                         this.grdTexto.Visibility = System.Windows.Visibility.Collapsed;
                         DesconfigurarBuscarYReemplazarModoTexto();

@@ -153,7 +153,7 @@
                             <Button x:Name="cmdTabItemCloseButton" 
                                     Style="{StaticResource TabItemCloseButtonStyle}"
                                     Grid.Column="1" Margin="0,0,0,0"
-                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteBrand}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteTab}"
                                     CommandParameter="{Binding}"/>
                         </Grid>
                     </DataTemplate>
