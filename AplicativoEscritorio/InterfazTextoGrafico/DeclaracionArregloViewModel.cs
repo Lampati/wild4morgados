@@ -10,5 +10,17 @@ namespace InterfazTextoGrafico
         public string Nombre { get; set; }
         public InterfazTextoGrafico.Enums.TipoDato Tipo { get; set; }
         public string Tope { get; set; }
+
+        public override string Gargar
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendFormat("var {0} : arreglo [1..{1}] de {2};", Nombre, Tope ,Tipo.ToString());
+
+                return strBldr.ToString();
+            }
+        }
     }
 }

@@ -7,6 +7,6 @@ namespace InterfazTextoGrafico
 {
     public abstract class ActividadViewModelBase
     {
-        
+        public abstract string Gargar { get; }
     }
 }

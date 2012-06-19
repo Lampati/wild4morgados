@@ -9,5 +9,16 @@ namespace InterfazTextoGrafico
     {
         public SecuenciaViewModel ConstantesGlobales { get; set; }
         public SecuenciaViewModel VariablesGlobales { get; set; }
+
+        public override string Gargar
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+
+                return strBldr.ToString();
+            }
+        }
     }
 }

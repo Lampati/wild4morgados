@@ -309,6 +309,8 @@ namespace DiagramDesigner
                 else
                 {
                     ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
+                    string gargar = new Identador( programa.Gargar).Identar();
+
                     Modo = e.ModoSeleccionado;
                 }
 

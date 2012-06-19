@@ -13,5 +13,20 @@ namespace InterfazTextoGrafico
         {
             ListaActividades = new List<ActividadViewModelBase>();
         }
+
+        public override string Gargar
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                foreach (var item in ListaActividades)
+                {
+                    strBldr.AppendLine(item.Gargar);
+                }
+
+                return strBldr.ToString();
+            }
+        }
     }
 }
