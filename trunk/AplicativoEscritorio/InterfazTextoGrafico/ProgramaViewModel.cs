@@ -16,5 +16,35 @@ namespace InterfazTextoGrafico
         {
             Procedimientos = new List<ProcedimientoViewModel>();
         }
+
+        public override string Gargar
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                if (ConstantesGlobales != null && ConstantesGlobales.ListaActividades.Count > 0)
+                {
+                    strBldr.AppendLine("constantes");
+                    strBldr.AppendLine(ConstantesGlobales.Gargar);
+                }
+
+                if (VariablesGlobales != null && VariablesGlobales.ListaActividades.Count > 0)
+                {
+                    strBldr.AppendLine("variables");
+                    strBldr.AppendLine(VariablesGlobales.Gargar);
+                }
+
+                //Hacer el sort correctamente por orden de uso de los procedimientos
+
+                foreach (var item in Procedimientos)
+                {
+                    strBldr.AppendLine(item.Gargar);
+                }
+
+
+                return strBldr.ToString();
+            }
+        }
     }
 }

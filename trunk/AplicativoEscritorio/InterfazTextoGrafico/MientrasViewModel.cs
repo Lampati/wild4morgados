@@ -9,5 +9,19 @@ namespace InterfazTextoGrafico
     {
         public SecuenciaViewModel Cuerpo { get; set; }
         public string Condicion { get; set; }
+
+        public override string Gargar
+        {
+            get 
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendFormat("mientras ( {0} ) hacer", Condicion).AppendLine();
+                strBldr.AppendLine(Cuerpo.Gargar);
+                strBldr.AppendLine("finmientras;");
+
+                return strBldr.ToString();
+            }
+        }
     }
 }

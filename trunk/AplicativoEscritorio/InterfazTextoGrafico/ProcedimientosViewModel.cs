@@ -13,5 +13,16 @@ namespace InterfazTextoGrafico
         {
             Procedimientos = new List<ProcedimientoViewModel>();
         }
+
+        public override string Gargar
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+
+                return strBldr.ToString();
+            }
+        }
     }
 }
