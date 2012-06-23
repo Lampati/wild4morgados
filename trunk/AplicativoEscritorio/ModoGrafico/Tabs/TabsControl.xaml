@@ -140,19 +140,19 @@
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Grid Margin="0,0,-4,0">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" Margin="0,0,0,0">
+                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}">
                                 <local:EditableTabHeaderControl.Content>
                                     <Binding Path="Header" Mode="TwoWay"/>
                                 </local:EditableTabHeaderControl.Content>
                             </local:EditableTabHeaderControl>
                             <Button x:Name="cmdTabItemCloseButton" 
                                     Style="{StaticResource TabItemCloseButtonStyle}"
-                                    Grid.Column="1" Margin="0,0,0,0"
+                                    Grid.Column="1"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteTab}"
                                     CommandParameter="{Binding}"/>
                         </Grid>
@@ -164,11 +164,11 @@
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Grid Margin="-7,-2,-7,-2">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Padding="0" Height="20">
+                            <local:EditableTabHeaderControl Grid.Column="0" Height="20">
                                 <local:EditableTabHeaderControl.Content>
                                     <Binding Path="Header" Mode="TwoWay" />
                                 </local:EditableTabHeaderControl.Content>
@@ -183,6 +183,6 @@
             ConEstilo="{StaticResource TabItemHeaderContainerStyle}" 
             x:Key="consinEstiloSelector" />
     </UserControl.Resources>
-    <TabControl x:Name="tc" ItemContainerStyleSelector="{StaticResource consinEstiloSelector}" SelectionChanged="tc_SelectionChanged" MouseLeftButtonDown="tc_MouseLeftButtonDown" Padding="0">
+    <TabControl x:Name="tc" ItemContainerStyleSelector="{StaticResource consinEstiloSelector}" SelectionChanged="tc_SelectionChanged" MouseLeftButtonDown="tc_MouseLeftButtonDown">
     </TabControl>
 </Controls:UserControl>

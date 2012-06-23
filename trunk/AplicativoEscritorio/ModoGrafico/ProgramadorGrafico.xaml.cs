@@ -128,6 +128,7 @@ namespace ModoGrafico
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Asignacion)));
                 Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(LlamarProcedimiento)));
+                Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Leer)));
             }
         }
 
@@ -146,6 +147,7 @@ namespace ModoGrafico
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Asignacion)));
             Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(LlamarProcedimiento)));
+            Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Leer)));
 
 
             //pruebas transformacion
@@ -178,6 +180,7 @@ namespace ModoGrafico
             builder.AddCustomAttributes(typeof(DeclaracionVariable), new DesignerAttribute(typeof(DeclaracionVariableDesigner)));
             builder.AddCustomAttributes(typeof(DeclaracionArreglo), new DesignerAttribute(typeof(DeclaracionArregloDesigner)));
             builder.AddCustomAttributes(typeof(DeclaracionConstante), new DesignerAttribute(typeof(DeclaracionConstanteDesigner)));
+            builder.AddCustomAttributes(typeof(Leer), new DesignerAttribute(typeof(LeerDesigner)));
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 

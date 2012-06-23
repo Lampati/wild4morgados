@@ -42,7 +42,9 @@ namespace InterfazTextoGrafico
             
                 }
 
-                strBldr.AppendLine(VariablesLocales.Gargar);
+                if (!Object.Equals(VariablesLocales, null))
+                    strBldr.AppendLine(VariablesLocales.Gargar);
+
                 strBldr.AppendLine("comenzar");
                 strBldr.AppendLine(Cuerpo.Gargar);
                 strBldr.AppendLine(fin);
