@@ -66,7 +66,7 @@ using ModoGrafico.Enums;
                             SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
                         }
                     }
-                    else if (this is TabItemProcedimiento)
+                    else if (this is TabItemProcedimiento || this is TabItemFuncion)
                     {
                         if (actividadViewModel != null)
                         {
@@ -80,6 +80,7 @@ using ModoGrafico.Enums;
                         else
                         {
                             SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false };
+                            SecuenciaInicialProcedimiento.Activities.Add(new Retorno() { });
                         }
                     }
                     else if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable)
@@ -153,7 +154,8 @@ using ModoGrafico.Enums;
                         ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
                         Secuencia aux = new Secuencia() { DisplayName = "Variables Locales", AdmiteDelaraciones = true, SePuedeEliminar = false };
-                        aux.AsignarDatos(procViewModel.VariablesLocales);
+                        if (!Object.Equals(procViewModel.VariablesLocales, null))
+                            aux.AsignarDatos(procViewModel.VariablesLocales);
 
                         SecuenciaInicialDeclaraciones = aux;
                     }

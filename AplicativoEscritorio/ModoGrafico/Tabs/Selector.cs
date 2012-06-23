@@ -16,7 +16,7 @@ namespace ModoGrafico.Tabs
           DependencyObject container)
         {
             string path = item.GetType().GetProperty("Header").GetValue(item, null).ToString().Trim();
-            if (path == "+" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES")
+            if (path == "+" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES" || path == "SALIDA")
                 return SinEstilo;
             return ConEstilo;
             

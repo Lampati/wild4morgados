@@ -72,6 +72,14 @@
       <DependentUpon>DeclaracionVariableDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="eTipoVariable.cs" />
+    <Compile Include="Leer.cs" />
+    <Compile Include="LeerDesigner.xaml.cs">
+      <DependentUpon>LeerDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retorno.cs" />
+    <Compile Include="RetornoDesigner.xaml.cs">
+      <DependentUpon>RetornoDesigner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Secuencia.cs" />
     <Compile Include="SecuenciaDesigner.xaml.cs">
       <DependentUpon>SecuenciaDesigner.xaml</DependentUpon>
@@ -112,6 +120,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DeclaracionVariableDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeerDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RetornoDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,7 +20,13 @@ namespace LibreriaActividades
         public SecuenciaDesigner()
         {
             InitializeComponent();
+            base.DragOver += new DragEventHandler(SecuenciaDesigner_DragOver);
             base.PreviewDragOver += new DragEventHandler(SecuenciaDesigner_PreviewDragOver);
+        }
+
+        void SecuenciaDesigner_DragOver(object sender, DragEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         void SecuenciaDesigner_PreviewDragOver(object sender, DragEventArgs e)
@@ -32,12 +38,12 @@ namespace LibreriaActividades
             string actividad = e.Data.GetData("WorkflowItemTypeNameFormat").ToString();
             if ((bool)this.ModelItem.Properties["AdmiteDelaraciones"].ComputedValue)
             {
-                if (!actividad.Contains("DeclaracionVariable") && !actividad.Contains("DeclaracionConstante"))
+                if (!actividad.Contains("DeclaracionVariable") && !actividad.Contains("DeclaracionConstante") && !actividad.Contains("DeclaracionArreglo"))
                     e.Effects = DragDropEffects.None;
             }
             else
             {
-                if (actividad.Contains("DeclaracionVariable") || actividad.Contains("DeclaracionConstante"))
+                if (actividad.Contains("DeclaracionVariable") || actividad.Contains("DeclaracionConstante") || actividad.Contains("DeclaracionArreglo"))
                     e.Effects = DragDropEffects.None;
             }
         }

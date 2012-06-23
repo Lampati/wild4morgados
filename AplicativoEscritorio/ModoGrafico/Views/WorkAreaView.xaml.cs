@@ -43,10 +43,10 @@ using InterfazTextoGrafico;
             List<ProcedimientoViewModel> listaProcs = programa.Procedimientos.FindAll(y => y.Tipo != InterfazTextoGrafico.Enums.TipoRutina.Principal
                                                       && y.Tipo != InterfazTextoGrafico.Enums.TipoRutina.Salida);
 
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento("    PRINCIPAL    ", false, TipoTab.TabItemPrincipal, procPrincipal);
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento("    SALIDA    ", false, TipoTab.TabItemSalida, procSalida);
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddGlobales("    CONSTANTES    ", false, TipoTab.TabItemDeclaracionConstante, programa.ConstantesGlobales);
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddGlobales("    VARIABLES    ", false, TipoTab.TabItemDeclaracionVariable, programa.VariablesGlobales);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento("PRINCIPAL", false, TipoTab.TabItemPrincipal, procPrincipal);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento("SALIDA", false, TipoTab.TabItemSalida, procSalida);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddGlobales("CONSTANTES", false, TipoTab.TabItemDeclaracionConstante, programa.ConstantesGlobales);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddGlobales("VARIABLES", false, TipoTab.TabItemDeclaracionVariable, programa.VariablesGlobales);
 
             foreach (var item in listaProcs)
             {

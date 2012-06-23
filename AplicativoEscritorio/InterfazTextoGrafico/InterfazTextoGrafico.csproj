@@ -46,6 +46,7 @@
     <Compile Include="DeclaracionArregloViewModel.cs" />
     <Compile Include="Enums\TipoDato.cs" />
     <Compile Include="Enums\TipoRutina.cs" />
+    <Compile Include="LeerViewModel.cs" />
     <Compile Include="ProcedimientosViewModel.cs" />
     <Compile Include="ProgramaViewModel.cs" />
     <Compile Include="ProcedimientoViewModel.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="MostrarViewModel.cs" />
     <Compile Include="MientrasViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetornoViewModel.cs" />
     <Compile Include="SecuenciaViewModel.cs" />
     <Compile Include="SiViewModel.cs" />
   </ItemGroup>
