@@ -109,20 +109,20 @@
 
         },
         scrollHeight: 10,
-        minChars: 2,
-        delay: 300,
+        minChars: 1,
+        delay: 3,
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#UsuarioIdAutoComplete").val(ui.item.label);
             $("#UsuarioId").val(ui.item.value);
             $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+            return false;
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
-                $("#UsuarioIdAutoComplete").val(ui.item.label);
                 $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
                 $("#UsuarioId").val(ui.item.value);
+                return false;
             }
         }
     });
@@ -180,8 +180,8 @@
     @Html.LabelFor(m => m.UsuarioId)
 </div>
     <div class="editor-field">
-    @Html.TextBoxFor(model => model.UsuarioId, new { @rel=" ", @Value = " ", @id = "UsuarioIdAutoComplete" })
-    @Html.HiddenFor(model => model.UsuarioId, new { @rel=" ",@Value = " ", @id = "UsuarioId" })
+    @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
+    @Html.HiddenFor(model => model.UsuarioId)
 </div>
 
 <div class="editor-label">

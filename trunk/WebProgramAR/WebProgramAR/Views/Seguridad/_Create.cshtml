@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Entidades.ReglasSeguridad
+﻿@model WebProgramAR.Sitio.Models.ReglaSeguridadViewModel
            
 @using WebProgramAR.Helpers           
 
@@ -52,6 +52,7 @@
                     }
                 });
                 $("#listColumnas").show();
+                $("#dialog").animate({ height: "450px" });
                 $("#listComparadores").hide();
                 return;
             }
@@ -79,6 +80,7 @@
                     }
                 });
                 $("#listComparadores").show();
+                $("#dialog").animate({ height: "+=50px" });
                 return;
             }
             if (div.attr('id') == "SelectComparadorId") {
@@ -111,19 +113,19 @@
         },
         scrollHeight: 10,
         minChars: 1,
-        delay: 100,
+        delay: 3,
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#UsuarioIdAutoComplete").val(ui.item.label);
             $("#UsuarioId").val(ui.item.value);
             $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+            return false;
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
-                $("#UsuarioIdAutoComplete").val(ui.item.label);
                 $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
                 $("#UsuarioId").val(ui.item.value);
+                return false;
             }
         }
     });
@@ -176,13 +178,20 @@
     @Html.ValidationMessageFor(m => m.ComparadorId)
 </div>
 </div>
+<div class="editor-label">
+    @Html.LabelFor(m => m.Valor)
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor(m => m.Valor)
+    @Html.ValidationMessageFor(m => m.Valor)
+</div>
 
 <div class="editor-label">
     @Html.LabelFor(m => m.UsuarioId)
 </div>
     <div class="editor-field">
-    @Html.TextBoxFor(model => model.UsuarioId, new { @rel=" ", @Value = " ", @id = "UsuarioIdAutoComplete" })
-    @Html.HiddenFor(model => model.UsuarioId, new { @rel=" ",@Value = " ", @id = "UsuarioId" })
+    @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
+    @Html.HiddenFor(model => model.UsuarioId)
 </div>
 
 <div class="editor-label">
@@ -197,14 +206,6 @@
         }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @name = "SelectTipoUsuarioCreate" })
         @Html.HiddenFor(model => Model.TipoUsuarioId)
         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(m => m.Valor)
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(m => m.Valor)
-    @Html.ValidationMessageFor(m => m.Valor)
 </div>
 
 <div class="editor-label">
