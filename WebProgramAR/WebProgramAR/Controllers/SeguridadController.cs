@@ -107,11 +107,11 @@ namespace WebProgramAR.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrador")]
-        public ActionResult Create(ReglaSeguridadViewModel regla)
+        public ActionResult Create(ReglasSeguridad regla)
         {
             if (ModelState.IsValid)
             {
-                //SeguridadNegocio.Alta(regla);
+                SeguridadNegocio.Alta(regla);
                 return Content(Boolean.TrueString);
                 
             }else

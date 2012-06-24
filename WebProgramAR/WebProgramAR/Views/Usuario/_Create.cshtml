@@ -262,16 +262,17 @@
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
-            $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#Usuario_LocalidadId").val(ui.item.value);
+            $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-            $("#Nombre").focus();
+            return false;
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
                 $("#Usuario_LocalidadId").val(ui.item.value);
+                return false;
             } else {
                 reInitLocalidad();
             }
