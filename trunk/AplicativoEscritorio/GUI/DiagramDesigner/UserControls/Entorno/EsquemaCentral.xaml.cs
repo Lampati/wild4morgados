@@ -45,7 +45,10 @@ namespace DiagramDesigner.UserControls.Entorno
             this.InicializarAvalon();
 
             this.textEditor.TextArea.Caret.PositionChanged += new EventHandler(Caret_PositionChanged);
+            this.modoGrafico.ModoGraficoModificadoEvent += new ModoGrafico.ProgramadorGrafico.ModoGraficoModificadoEventHandler(modoGrafico_ModoGraficoModificadoEvent);
         }
+
+    
 
         void Caret_PositionChanged(object sender, EventArgs e)
         {
@@ -141,7 +144,14 @@ namespace DiagramDesigner.UserControls.Entorno
                 }
                 else
                 {
-                    textEditor.Text = archCargado.Gargar;
+                    if (archCargado.UltimoModoGuardado == AplicativoEscritorio.DataAccess.Enums.ModoVisual.Texto)
+                    {
+                        textEditor.Text = archCargado.Gargar;
+                    }
+                    else
+                    {
+                        RepresentacionGraficaActual = archCargado.RepresentacionGrafica; 
+                    }
                 }
             }
         }
@@ -170,6 +180,17 @@ namespace DiagramDesigner.UserControls.Entorno
                 ArchCargado.CompilacionCorrecta = false;
                 ArchCargado.EjecucionCorrecta = false;
                 ArchCargado.Gargar = textEditor.Text;
+            }
+        }
+
+        void modoGrafico_ModoGraficoModificadoEvent(object o, ModoGrafico.EventArgsClasses.ModoGraficoModificadoEventArgs e)
+        {
+            if (ArchCargado != null)
+            {
+                ArchCargado.ModificadoDesdeUltimoGuardado = true;
+                ArchCargado.CompilacionCorrecta = false;
+                ArchCargado.EjecucionCorrecta = false;
+                ArchCargado.RepresentacionGrafica = modoGrafico.ObtenerProgramaEnModoGrafico();
             }
         }
 

@@ -5,7 +5,7 @@
     using ModoGrafico.ViewModels;
     using ModoGrafico.Enums;
     using ModoGrafico.EventArgsClasses;
-using InterfazTextoGrafico;
+    using InterfazTextoGrafico;
     using System.Collections.Generic;
 
     /// <summary>
@@ -63,98 +63,133 @@ using InterfazTextoGrafico;
 
             ProgramaViewModel programa = new ProgramaViewModel();
 
-            foreach (Tab item in workArea.Tabs)
+            if (workArea != null)
             {
-                switch (item.Tipo)
+                foreach (Tab item in workArea.Tabs)
                 {
-                    case TipoTab.TabItemPrincipal:
-                        ProcedimientoViewModel activ = new ProcedimientoViewModel();
-                        activ.Nombre = item.Header;
-                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
-                        if (item.SecuenciaInicialProcedimiento != null)
-                        {
-                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
-                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
-                        }
-                        else
-                        {
-                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
-                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
-                        }
-                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
-                        break;
-                    case TipoTab.TabItemDeclaracionVariable:
-                        if (item.SecuenciaInicialProcedimiento != null)
-                        {
-                            programa.VariablesGlobales = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
-                        }
-                        else
-                        {
-                            programa.VariablesGlobales = item.actividadViewModel as SecuenciaViewModel;
-                        }
-                        break;
-                    case TipoTab.TabItemDeclaracionConstante:
-                        if (item.SecuenciaInicialProcedimiento != null)
-                        {
-                            programa.ConstantesGlobales = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
-                        }
-                        else
-                        {
-                            programa.ConstantesGlobales = item.actividadViewModel as SecuenciaViewModel;
-                        }
-                        break;
-                    case TipoTab.TabItemFuncion:
-                        activ = new ProcedimientoViewModel();
-                        activ.Nombre = item.Header;
-                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
-                        if (item.SecuenciaInicialProcedimiento != null)
-                        {
-                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
-                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
-                        }
-                        else
-                        {
-                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
-                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
-                        }
-                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
-                        break;
-                    case TipoTab.TabItemProcedimiento:
-                        activ = new ProcedimientoViewModel();
-                        activ.Nombre = item.Header;
-                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
-                        if (item.SecuenciaInicialProcedimiento != null)
-                        {
-                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
-                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
-                        }
-                        else
-                        {
-                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
-                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
-                        }
-                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
-                        break;
-                    case TipoTab.TabItemSalida:
-                       activ = new ProcedimientoViewModel();
-                        activ.Nombre = item.Header;
-                        activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Salida;
-                        if (item.SecuenciaInicialProcedimiento != null)
-                        {
-                            activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
-                            activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
-                        }
-                        else
-                        {
-                            activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
-                            activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
-                        }
-                        programa.Procedimientos.Add(activ as ProcedimientoViewModel);
-                        break;
-                    case TipoTab.TabItemAgregar:
-                        break;
-                    default:
-                        break;
+                    switch (item.Tipo)
+                    {
+                        case TipoTab.TabItemPrincipal:
+                            ProcedimientoViewModel activ = new ProcedimientoViewModel();
+                            activ.Nombre = item.Header;
+                            activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
+                            if (item.SecuenciaInicialProcedimiento != null)
+                            {
+                                activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                                activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                            }
+                            else
+                            {
+                                if (item.actividadViewModel != null)
+                                {
+                                    activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                                    activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                                }
+                                else
+                                {
+                                    activ.VariablesLocales = new SecuenciaViewModel();
+                                    activ.Cuerpo = new SecuenciaViewModel();
+                                }
+                            }
+                            programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                            break;
+                        case TipoTab.TabItemDeclaracionVariable:
+                            if (item.SecuenciaInicialProcedimiento != null)
+                            {
+                                programa.VariablesGlobales = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                            }
+                            else
+                            {
+                                programa.VariablesGlobales = item.actividadViewModel as SecuenciaViewModel;
+                            }
+                            break;
+                        case TipoTab.TabItemDeclaracionConstante:
+                            if (item.SecuenciaInicialProcedimiento != null)
+                            {
+                                programa.ConstantesGlobales = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                            }
+                            else
+                            {
+                                programa.ConstantesGlobales = item.actividadViewModel as SecuenciaViewModel;
+                            }
+                            break;
+                        case TipoTab.TabItemFuncion:
+                            activ = new ProcedimientoViewModel();
+                            activ.Nombre = item.Header;
+                            activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
+                            if (item.SecuenciaInicialProcedimiento != null)
+                            {
+                                activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                                activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                            }
+                            else
+                            {
+                                if (item.actividadViewModel != null)
+                                {
+                                    activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                                    activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                                }
+                                else
+                                {
+                                    activ.VariablesLocales = new SecuenciaViewModel();
+                                    activ.Cuerpo = new SecuenciaViewModel();
+                                }
+                            }
+                            programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                            break;
+                        case TipoTab.TabItemProcedimiento:
+                            activ = new ProcedimientoViewModel();
+                            activ.Nombre = item.Header;
+                            activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
+                            if (item.SecuenciaInicialProcedimiento != null)
+                            {
+                                activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                                activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                            }
+                            else
+                            {
+                                if (item.actividadViewModel != null)
+                                {
+                                    activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                                    activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                                }
+                                else
+                                {
+                                    activ.VariablesLocales = new SecuenciaViewModel();
+                                    activ.Cuerpo = new SecuenciaViewModel();
+                                }
+                            }
+                            programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                            break;
+                        case TipoTab.TabItemSalida:
+                            activ = new ProcedimientoViewModel();
+                            activ.Nombre = item.Header;
+                            activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Salida;
+                            if (item.SecuenciaInicialProcedimiento != null)
+                            {
+                                activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
+                                activ.Cuerpo = item.SecuenciaInicialProcedimiento.Datos as SecuenciaViewModel;
+                            }
+                            else
+                            {
+                                if (item.actividadViewModel != null)
+                                {
+                                    activ.VariablesLocales = ((ProcedimientoViewModel)item.actividadViewModel).VariablesLocales;
+                                    activ.Cuerpo = ((ProcedimientoViewModel)item.actividadViewModel).Cuerpo;
+                                }
+                                else
+                                {
+                                    activ.VariablesLocales = new SecuenciaViewModel();
+                                    activ.Cuerpo = new SecuenciaViewModel();
+                                }
+                            }
+                            programa.Procedimientos.Add(activ as ProcedimientoViewModel);
+                            break;
+                        case TipoTab.TabItemAgregar:
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 

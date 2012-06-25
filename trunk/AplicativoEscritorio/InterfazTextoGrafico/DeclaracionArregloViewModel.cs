@@ -22,5 +22,13 @@ namespace InterfazTextoGrafico
                 return strBldr.ToString();
             }
         }
+
+        public override void ToXML(Utilidades.XML.XMLCreator xml)
+        {
+        }
+
+        public override void FromXML(Utilidades.XML.XMLElement xmlElem)
+        {
+        }
     }
 }

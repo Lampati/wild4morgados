@@ -511,7 +511,7 @@
     <Resource Include="Images\fenrir_512x512x32.png" />
     <Resource Include="Images\loboTribal.png" />
     <Resource Include="Images\loboTribal1.png" />
-    <Content Include="Lib\Microsoft.Practices.Prism.dll" />
+    <Content Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />

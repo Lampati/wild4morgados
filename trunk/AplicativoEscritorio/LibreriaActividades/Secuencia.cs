@@ -75,10 +75,13 @@ namespace LibreriaActividades
             {
                 SecuenciaViewModel datosMapeados = datos as SecuenciaViewModel;
 
-                foreach (ActividadViewModelBase item in datosMapeados.ListaActividades)
+                if (datosMapeados != null)
                 {
-                    ActividadBase actividadCreada = ActividadFactory.CrearActividad(item);
-                    Activities.Add(actividadCreada);
+                    foreach (ActividadViewModelBase item in datosMapeados.ListaActividades)
+                    {
+                        ActividadBase actividadCreada = ActividadFactory.CrearActividad(item);
+                        Activities.Add(actividadCreada);
+                    }
                 }
             }
             catch (RuntimeBinderException)

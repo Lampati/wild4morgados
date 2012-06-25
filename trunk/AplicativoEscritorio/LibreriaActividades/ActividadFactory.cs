@@ -53,6 +53,10 @@ namespace LibreriaActividades
                 {
                     retorno = new Mostrar();
                 }
+                else if (tipo == typeof(LeerViewModel))
+                {
+                    retorno = new Leer();
+                }
 
                 if (retorno != null)
                 {

@@ -99,6 +99,9 @@ using InterfazTextoGrafico;
                     case TipoTab.TabItemProcedimiento:
                         t = new TabItemProcedimiento();
                         break;
+                    case TipoTab.TabItemSalida:
+                        t = new TabItemSalida();
+                        break;
                     case TipoTab.TabItemPrincipal:
                         t = new TabItemPrincipal();
                         break;
@@ -152,7 +155,7 @@ using InterfazTextoGrafico;
                         t = new TabItemPrincipal(proc);
                         break;
                     case TipoTab.TabItemSalida:
-                        t = new TabItemPrincipal(proc);
+                        t = new TabItemSalida(proc);
                         break;
                 }           
                 t.Header = obj;

@@ -53,11 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\TipoTab.cs" />
+    <Compile Include="EventArgsClasses\ModoGraficoModificadoEventArgs.cs" />
     <Compile Include="EventArgsClasses\TipoTabCambiadoEventArgs.cs" />
     <Compile Include="ProgramadorGrafico.xaml.cs">
       <DependentUpon>ProgramadorGrafico.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tabs\TabItemSalida.cs" />
     <Compile Include="Tabs\EditableTabHeaderControl.cs" />
     <Compile Include="Tabs\Selector.cs" />
     <Compile Include="Tabs\TabItemAgregar.cs" />

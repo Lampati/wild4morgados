@@ -66,6 +66,25 @@ using ModoGrafico.Enums;
                             SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
                         }
                     }
+                    else if (this is TabItemSalida)
+                    {
+                        //init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
+                        //init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
+
+                        if (actividadViewModel != null)
+                        {
+                            ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
+
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
+                            aux.AsignarDatos(procViewModel.Cuerpo);
+
+                            SecuenciaInicialProcedimiento = aux;
+                        }
+                        else
+                        {
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = "Secuencia Salida", AdmiteDelaraciones = false };
+                        }
+                    }
                     else if (this is TabItemProcedimiento || this is TabItemFuncion)
                     {
                         if (actividadViewModel != null)

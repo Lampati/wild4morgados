@@ -185,6 +185,7 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
+                ArchCargado.RepresentacionGrafica = Esquema.RepresentacionGraficaActual;
                 GuardarADiscoFormatoNormal();
             }
         }
@@ -239,7 +240,15 @@ namespace DiagramDesigner
 
                             MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione OK para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK);
 
-                            ResultadoEjecucion res = Ejecutar();
+                            ResultadoEjecucion res;
+                            if (Modo == ModoVisual.Texto)
+                            {
+                                res = Ejecutar(this.Esquema.GarGarACompilar);
+                            }
+                            else
+                            {
+                                res = Ejecutar(this.Esquema.RepresentacionGraficaActual.Gargar);
+                            }
 
                             if (res.ResEjecucion != null)
                             {

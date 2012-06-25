@@ -7,6 +7,8 @@ using System.Text;
 using Utilidades.Criptografia;
 using System.IO;
 using AplicativoEscritorio.DataAccess.Excepciones;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace AplicativoEscritorio.DataAccess.Entidades
 {
@@ -86,6 +88,16 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             }
         }
 
+        public override InterfazTextoGrafico.ProgramaViewModel RepresentacionGrafica
+        {
+            get { return this.representacionGrafica; }
+            set
+            {
+                this.representacionGrafica = value;
+                
+            }
+        }
+
         public override string Extension
         {
             get { return EXTENSION_EJERCICIO; }
@@ -156,6 +168,14 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetTitle("Gargar");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(this.gargar));
             xml.LevelUp();
+            //xml.AddElement();
+            //xml.SetTitle("RepresentacionGrafica");
+            //MemoryStream strm = new MemoryStream();
+            //XmlSerializer serializador = new XmlSerializer(this.representacionGrafica.GetType());
+            //serializador.Serialize(strm,this.representacionGrafica);
+            //xml.SetValue(new StreamReader(strm).ReadToEnd());
+            //xml.LevelUp();
+            this.representacionGrafica.ToXML(xml);
             if (!Object.Equals(this.testsPrueba, null))
             {
                 xml.AddElement();
@@ -185,10 +205,29 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.Enunciado = xmlElem.FindFirst("Enunciado").value;
             this.NivelDificultad = short.Parse(xmlElem.FindFirst("NivelDificultad").value);
             this.solucionGargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("SolucionGargar").value);
-            this.gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
+          
             this.SolucionTexto = xmlElem.FindFirst("SolucionTexto").value;
             this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             this.Modo = (ModoEjercicio)int.Parse(xmlElem.FindFirst("Modo").value);
+
+            if (UltimoModoGuardado == ModoVisual.Texto)
+            {
+                this.gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
+                this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+            }
+            else
+            {
+                //MemoryStream strm = new MemoryStream();
+                //XmlSerializer serializador = new XmlSerializer(typeof(InterfazTextoGrafico.ProgramaViewModel));
+                //XmlReader xmlReader = XmlReader.Create(new StringReader(xmlElem.FindFirst("RepresentacionGrafica").value));              
+                //this.RepresentacionGrafica = serializador.Deserialize(xmlReader) as InterfazTextoGrafico.ProgramaViewModel;
+
+                this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+                this.RepresentacionGrafica.FromXML(xmlElem.FindFirst("ProgramaViewModel"));
+                this.gargar = string.Empty;
+            }
+            
+
             XMLElement xmlTests = xmlElem.FindFirst("TestsPrueba");
             if (!Object.Equals(xmlTests, null))
             {

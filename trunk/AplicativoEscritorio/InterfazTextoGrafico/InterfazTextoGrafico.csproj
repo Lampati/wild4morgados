@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActividadViewModelBase.cs" />
+    <Compile Include="ActividadViewModelFactory.cs" />
     <Compile Include="AsignacionViewModel.cs" />
     <Compile Include="DeclaracionesGlobalesViewModel.cs" />
     <Compile Include="DeclaracionArregloViewModel.cs" />
@@ -59,6 +60,12 @@
     <Compile Include="RetornoViewModel.cs" />
     <Compile Include="SecuenciaViewModel.cs" />
     <Compile Include="SiViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
+      <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
+      <Name>Utilidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

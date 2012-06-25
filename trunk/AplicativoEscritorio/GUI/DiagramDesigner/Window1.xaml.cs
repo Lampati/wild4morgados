@@ -107,7 +107,7 @@ namespace DiagramDesigner
                 Ejercicio ej = new Ejercicio(id);
                 ej.Enunciado = "Enunciado del ejercicio";
                 ej.EsValidoSubirWeb = true;
-                ej.Gargar = "GqarGar";
+                ej.Gargar = "GarGar";
                 ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                 ej.NivelDificultad = 3;
                 ej.SolucionTexto = "Tendrías que haber puesto estoo!!";
@@ -166,6 +166,7 @@ namespace DiagramDesigner
 
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
             this.Esquema.ModoTextoCambiarPosicionEvent += new EsquemaCentral.ModoTextoCambiarPosicionEventHandler(Esquema_ModoTextoCambiarPosicionEvent);
+            
 
             this.ToolbarAplicacion.CompilacionEvent += new BarraToolbarRibbon.CompilacionEventHandler(ToolbarAplicacion_CompilacionEvent);
             this.ToolbarAplicacion.CambioModoEvent += new BarraToolbarRibbon.CambioModoEventHandler(ToolbarAplicacion_CambioModoEvent);
@@ -197,7 +198,7 @@ namespace DiagramDesigner
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
 
-
+            
             
             
             
@@ -294,6 +295,7 @@ namespace DiagramDesigner
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
+                        
                         Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
 
                         Modo = e.ModoSeleccionado;
@@ -515,11 +517,25 @@ namespace DiagramDesigner
         {
             if (e.EsEjecucion)
             {
-                EjecutarConResultado();
+                if (this.Modo == ModoVisual.Texto)
+                {
+                    EjecutarConResultado(this.Esquema.GarGarACompilar);
+                }
+                else
+                {
+                    EjecutarConResultado(this.Esquema.RepresentacionGraficaActual.Gargar);
+                }
             }
             else
             {
-                Compilar(this.Esquema.GarGarACompilar);
+                if (this.Modo == ModoVisual.Texto)
+                {
+                    Compilar(this.Esquema.GarGarACompilar);
+                }
+                else
+                {
+                    Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
+                }
             }
         }
 
@@ -568,10 +584,24 @@ namespace DiagramDesigner
             switch (obj.Key)
             {
                 case Keys.F3:
-                    Compilar(this.Esquema.GarGarACompilar);
+                    if (this.Modo == ModoVisual.Texto)
+                    {
+                        Compilar(this.Esquema.GarGarACompilar);
+                    }
+                    else
+                    {
+                        Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
+                    }
                     break;
                 case Keys.F4:
-                    EjecutarConResultado();
+                    if (this.Modo == ModoVisual.Texto)
+                    {
+                        EjecutarConResultado(this.Esquema.GarGarACompilar);
+                    }
+                    else
+                    {
+                        EjecutarConResultado(this.Esquema.RepresentacionGraficaActual.Gargar);
+                    }
                     break;
 
                 default:
@@ -610,9 +640,9 @@ namespace DiagramDesigner
             return res;
         }
 
-        private void EjecutarConResultado()
+        private void EjecutarConResultado(string programa)
         {
-            ResultadoEjecucion res = Ejecutar();
+            ResultadoEjecucion res = Ejecutar(programa);
 
             if (res.ResEjecucion != null)
             {
@@ -630,7 +660,7 @@ namespace DiagramDesigner
             }
         }
 
-        private ResultadoEjecucion Ejecutar()
+        private ResultadoEjecucion Ejecutar(string programa)
         {
             ResultadoEjecucion resultadoEjecucion = new ResultadoEjecucion();
 
@@ -638,7 +668,7 @@ namespace DiagramDesigner
 
             ConfigurarCompilador();
 
-            string programa = this.Esquema.GarGarACompilar;
+            //string programa = this.Esquema.GarGarACompilar;
             ResultadoCompilacion res = this.compilador.Compilar(programa);
 
             MostrarResultadosCompilacion(res);

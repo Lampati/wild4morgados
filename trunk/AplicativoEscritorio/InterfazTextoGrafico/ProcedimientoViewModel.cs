@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using InterfazTextoGrafico.Enums;
+using Utilidades.XML;
 
 namespace InterfazTextoGrafico
 {
@@ -51,6 +52,69 @@ namespace InterfazTextoGrafico
 
                 return strBldr.ToString();
             }
+        }
+
+        public override void ToXML(Utilidades.XML.XMLCreator xml)
+        {
+            xml.AddElement();
+            xml.SetTitle("Procedimiento");
+
+            xml.AddElement();
+            xml.SetTitle("Nombre");
+            xml.SetValue(this.Nombre);            
+            xml.LevelUp();
+
+            xml.AddElement();
+            xml.SetTitle("Tipo");
+            xml.SetValue(((int)this.Tipo).ToString());
+            xml.LevelUp();
+
+            xml.AddElement();
+            xml.SetTitle("Orden");
+            xml.SetValue(this.Orden.ToString());
+            xml.LevelUp();
+
+            if (!Object.Equals(this.VariablesLocales, null))
+            {
+                xml.AddElement();
+                xml.SetTitle("VariablesLocales");
+                this.VariablesLocales.ToXML(xml);
+                xml.LevelUp();
+            }
+
+            if (!Object.Equals(this.Cuerpo, null))
+            {
+                xml.AddElement();
+                xml.SetTitle("Cuerpo");
+                this.Cuerpo.ToXML(xml);
+                xml.LevelUp();
+            }
+
+            xml.LevelUp();
+        }
+
+        public override void FromXML(Utilidades.XML.XMLElement xmlElem)
+        {
+
+            XMLElement xmlvars = xmlElem.FindFirst("VariablesLocales");
+            if (!Object.Equals(xmlvars, null))
+            {
+                SecuenciaViewModel vars = new SecuenciaViewModel();
+                vars.FromXML(xmlvars);
+                VariablesLocales = vars;
+            }
+
+            XMLElement xmlCuerpo = xmlElem.FindFirst("Cuerpo");
+            if (!Object.Equals(xmlCuerpo, null))
+            {
+                SecuenciaViewModel cuerpo = new SecuenciaViewModel();
+                cuerpo.FromXML(xmlCuerpo);
+                Cuerpo = cuerpo;
+            }
+
+            this.Nombre = xmlElem.FindFirst("Nombre").value;
+            this.Tipo = (TipoRutina)int.Parse(xmlElem.FindFirst("Tipo").value);
+            this.Orden = short.Parse(xmlElem.FindFirst("Orden").value);
         }
     }
 }
