@@ -378,6 +378,12 @@ using ModoGrafico.Enums;
             RecrearWorkflows();*/
         }
 
-        public abstract int Orden { get; }
+        protected int orden;
+
+        public virtual int Orden
+        {
+            get { return int.MaxValue; }
+            set { this.orden = value; }
+        }
     }
 }
