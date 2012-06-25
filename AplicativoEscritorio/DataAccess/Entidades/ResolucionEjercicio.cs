@@ -7,6 +7,8 @@ using AplicativoEscritorio.DataAccess.Enums;
 using Utilidades.XML;
 using Utilidades.Criptografia;
 using AplicativoEscritorio.DataAccess.Excepciones;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace AplicativoEscritorio.DataAccess.Entidades
 {
@@ -59,6 +61,13 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.ejercicio.ToXML(xml);
             xml.LevelUp();
             xml.AddElement();
+            xml.SetTitle("RepresentacionGrafica");
+            MemoryStream strm = new MemoryStream();
+            XmlSerializer serializador = new XmlSerializer(this.representacionGrafica.GetType());
+            serializador.Serialize(strm, this.representacionGrafica);
+            xml.SetValue(new StreamReader(strm).ReadToEnd());
+            xml.LevelUp();
+            xml.AddElement();
             xml.SetTitle("HashResolucionEjercicio");
             xml.SetValue(this.Hash);
             xml.LevelUp();
@@ -77,7 +86,14 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             this.ModificadoDesdeUltimoGuardado = bool.Parse(xmlElem.FindFirst("ModificadoDesdeUltimoGuardado").value);
             this.PathGuardadoActual = this.Enunciado = xmlElem.FindFirst("PathGuardadoActual").value;
-            this.Gargar = xmlElem.FindFirst("Gargar").value;
+            this.Gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
+
+            MemoryStream strm = new MemoryStream();
+            XmlSerializer serializador = new XmlSerializer(this.representacionGrafica.GetType());
+            XMLReader reader = new XMLReader();
+            
+
+            this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel(xmlElem.FindFirst("RepresentacionGrafica").value);
 
             this.ejercicio = new Ejercicio();
             this.ejercicio.FromXML(xmlElem.FindFirst("EjercicioCorrespondiente"));
@@ -110,6 +126,16 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             set
             {
                 gargar = value;
+            }
+        }
+
+        public override InterfazTextoGrafico.ProgramaViewModel RepresentacionGrafica
+        {
+            get { return this.representacionGrafica; }
+            set
+            {
+                this.representacionGrafica = value;
+
             }
         }
 

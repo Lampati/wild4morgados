@@ -7,9 +7,10 @@ namespace InterfazTextoGrafico.Enums
 {
     public enum TipoRutina
     {
-        Principal,
-        Funcion,
-        Procedimiento,
-        Salida
+        Principal = 1,
+        Salida = 2,
+        Funcion = 3,
+        Procedimiento = 4
+        
     }
 }

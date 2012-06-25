@@ -14,6 +14,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
     {
         protected ModoVisual ultimoModoGuardado;
         protected string gargar;
+        protected InterfazTextoGrafico.ProgramaViewModel representacionGrafica;
         protected bool modificadoDesdeUltimoGuardado;
         protected string pathGuardadoActual;
         protected string nombre;
@@ -147,7 +148,13 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         {
             get;
             set;
-        }       
+        }
+
+        public abstract InterfazTextoGrafico.ProgramaViewModel RepresentacionGrafica
+        {
+            get;
+            set;
+        }
 
 
         public abstract string Gargar

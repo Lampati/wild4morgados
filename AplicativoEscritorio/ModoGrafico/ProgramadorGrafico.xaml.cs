@@ -19,6 +19,7 @@ using System.ComponentModel;
 using ModoGrafico.ViewModels;
 using ModoGrafico.Enums;
 using InterfazTextoGrafico;
+using ModoGrafico.EventArgsClasses;
 
 namespace ModoGrafico
 {
@@ -27,10 +28,23 @@ namespace ModoGrafico
     /// </summary>
     public partial class ProgramadorGrafico : UserControl
     {
+        public delegate void ModoGraficoModificadoEventHandler(object o, ModoGraficoModificadoEventArgs e);
+        public event ModoGraficoModificadoEventHandler ModoGraficoModificadoEvent;
+
+        private void ModoGraficoModificadoEventFire(object sender, ModoGraficoModificadoEventArgs e)
+        {
+            if (ModoGraficoModificadoEvent != null)
+            {
+                ModoGraficoModificadoEvent(sender, e);
+            }
+        }
+
         public ProgramadorGrafico()
         {
             InitializeComponent();
             this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
+
+            
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
 

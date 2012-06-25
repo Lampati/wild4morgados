@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InterfazTextoGrafico\InterfazTextoGrafico.csproj">
+      <Project>{97A51588-9D03-46C3-B101-1AF10BC285F5}</Project>
+      <Name>InterfazTextoGrafico</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilidades\Utilidades.csproj">
       <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>
       <Name>Utilidades</Name>
