@@ -20,6 +20,8 @@ using ModoGrafico.ViewModels;
 using ModoGrafico.Enums;
 using InterfazTextoGrafico;
 using ModoGrafico.EventArgsClasses;
+using ModoGrafico.Tabs;
+using System.Text.RegularExpressions;
 
 namespace ModoGrafico
 {
@@ -202,9 +204,40 @@ namespace ModoGrafico
         {
             StringBuilder sb = new StringBuilder();
             System.Collections.SortedList sl = new System.Collections.SortedList();
+            Dictionary<string, string> codigosFuncProc = new Dictionary<string, string>();
 
+            //Acá comienzo con el asunto del orden de las func/proc
             foreach (Tab t in this.WorkArea.tab.ItemSource)
-                sl.Add(t.Orden, t);
+                if (t is TabItemAgregar) continue;
+                else if (t is TabItemPrincipal || t is TabItemDeclaracionConstante
+                    || t is TabItemDeclaracionVariable || t is TabItemSalida)
+                    sl.Add(t.Orden, t);
+                else
+                {
+                    StringBuilder sbFuncProc = new StringBuilder();
+                    t.Ejecutar(sbFuncProc);
+                    codigosFuncProc.Add(t.Header, sbFuncProc.ToString());
+                }
+
+            /*ET: FALTA TERMINAR ACA!!
+            int orden = 10;
+
+            foreach (string key in codigosFuncProc.Keys)
+            {
+                Regex regex = new Regex(key + "[\\s]*[(][\\w(,)*]*[)]");
+                foreach (string key2 in codigosFuncProc.Keys)
+                {
+                    if (key == key2) continue;
+
+                    string codigo = codigosFuncProc[key2].ToString();
+                    int ixComienzo = codigo.LastIndexOf("COMENZAR");
+                    if (ixComienzo < 0)
+                        throw new Exception("No se encontró la sentencia COMENZAR, error grave."); //no debería pasar jamás.
+
+                    if (regex.IsMatch(codigo, ixComienzo))
+                        orden++;
+                }
+            }*/
 
             foreach (Tab t in sl.Values)
                 t.Ejecutar(sb);

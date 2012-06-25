@@ -39,7 +39,7 @@ namespace ModoGrafico.Tabs
 
         public override int Orden
         {
-            get { return int.MaxValue; }
+            get { return int.MaxValue - 1; }
         }
     }
 }

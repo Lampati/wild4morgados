@@ -45,9 +45,11 @@ namespace DiagramDesigner
 
                                 if (!string.IsNullOrWhiteSpace(path))
                                 {
-
+                                    
                                     Ejercicio ej = new Ejercicio();
-                                    string pathTemplate = Path.Combine(Environment.CurrentDirectory, "ModoTexto", "Configuracion", "Template.txt").ToLower();
+                                    string exePath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
+                                    string dir = Path.GetDirectoryName(exePath);
+                                    string pathTemplate = Path.Combine(dir, "ModoTexto", "Configuracion", "Template.txt").ToLower();
                                     if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
                                         pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
                                     if (File.Exists(pathTemplate))

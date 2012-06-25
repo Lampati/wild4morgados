@@ -175,7 +175,13 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             //serializador.Serialize(strm,this.representacionGrafica);
             //xml.SetValue(new StreamReader(strm).ReadToEnd());
             //xml.LevelUp();
+
+            //25/06/2012 ET: acá daba error NullReference, pregunto si es null y en ese caso, creo una entidad vacía.
+            if (Object.Equals(this.representacionGrafica, null))
+                this.representacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+            
             this.representacionGrafica.ToXML(xml);
+
             if (!Object.Equals(this.testsPrueba, null))
             {
                 xml.AddElement();
