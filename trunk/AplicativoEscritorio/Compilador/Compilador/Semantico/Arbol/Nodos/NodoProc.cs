@@ -213,10 +213,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
             {
                 activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
+                activ.Orden = 0;
             }
             else if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_SALIDA.ToLower()))
             {
                 activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Salida;
+                activ.Orden = 1;
             }
             else
             {
@@ -245,8 +247,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             hijoAHeredar.ProcSalidaYaCreadoyCorrecto = this.ProcSalidaYaCreadoyCorrecto;
             hijoAHeredar.ProcSalidaCrearUnaVez = this.ProcSalidaCrearUnaVez;
             hijoAHeredar.NombreContextoLocal = this.NombreContextoLocal;
-
-            
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)

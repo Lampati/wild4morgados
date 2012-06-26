@@ -30,6 +30,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             NodoTablaSimbolos.TipoDeDato tipo;
             StringBuilder strbldr;
 
+            ArmarActividadViewModel();
+
             LineaCorrespondiente = GlobalesCompilador.UltFila;
 
             if (!esArreglo)
@@ -87,22 +89,22 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     //{
                     tipo = this.TablaSimbolos.ObtenerTipoArreglo(nombre, this.ContextoActual, this.NombreContextoLocal);
 
-                       
+                    
 
-                        this.Lexema = nombre;
+                    this.Lexema = nombre;
                         
 
-                        if (tipo == NodoTablaSimbolos.TipoDeDato.Booleano)
-                        {
-                            strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es booleana, no se le puede asignar un valor desde el teclado, porque sus unicos valores son verdadero y falso.");
-                            throw new ErrorSemanticoException(strbldr.ToString());
-                        }
-                        //else
-                        //{
-                        //    strbldr = new StringBuilder("El arreglo ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
-                        //    strbldr.Append(" pero la funcion leer lee solo enteros.");
-                        //    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
-                        //}
+                    if (tipo == NodoTablaSimbolos.TipoDeDato.Booleano)
+                    {
+                        strbldr = new StringBuilder("La variable ").Append(nombre).Append(" es booleana, no se le puede asignar un valor desde el teclado, porque sus unicos valores son verdadero y falso.");
+                        throw new ErrorSemanticoException(strbldr.ToString());
+                    }
+                    //else
+                    //{
+                    //    strbldr = new StringBuilder("El arreglo ").Append(nombre).Append(" es del tipo ").Append(EnumUtils.stringValueOf(tipo));
+                    //    strbldr.Append(" pero la funcion leer lee solo enteros.");
+                    //    throw new ErrorSemanticoException(strbldr.ToString(), t.Componente.Fila, t.Componente.Columna);
+                    //}
                     //}
                     //else
                     //{
@@ -128,6 +130,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
 
             return this;
+        }
+
+        private void ArmarActividadViewModel()
+        {
+            InterfazTextoGrafico.LeerViewModel activ = new InterfazTextoGrafico.LeerViewModel();
+            activ.Parametro = this.hijosNodo[1].Gargar;
+            ActividadViewModel = activ;
         }
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)

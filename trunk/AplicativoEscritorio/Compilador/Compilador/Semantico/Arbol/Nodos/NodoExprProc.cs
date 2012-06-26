@@ -37,6 +37,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 this.ListaFirma.Add(new Firma(this.hijosNodo[1].Lexema, this.hijosNodo[1].TipoDato, this.hijosNodo[1].EsArregloEnParametro));
                 this.ListaFirma.AddRange(this.hijosNodo[2].ListaFirma);
+
+                this.Gargar = string.Format(", {0} {1}", this.hijosNodo[1].Gargar, this.hijosNodo[2].Gargar);
             }
             return this;
         }

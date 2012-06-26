@@ -27,13 +27,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.EsArreglo = true;
                 this.TipoDato = this.hijosNodo[1].TipoDato;
 
-                
+                this.Gargar = string.Format("[{0}]", this.hijosNodo[1].Gargar);
                 
                 
             }
             else
             {
                 this.EsArreglo = false;
+                this.Gargar = string.Empty;
             }
             return this;
         }

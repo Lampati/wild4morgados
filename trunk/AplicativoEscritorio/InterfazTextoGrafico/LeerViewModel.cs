@@ -15,7 +15,7 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("leer ( {0} );", this.Parametro);
+                strBldr.AppendFormat("leer ( {0} );", this.Parametro).AppendLine();
 
                 return strBldr.ToString();
             }
@@ -23,10 +23,28 @@ namespace InterfazTextoGrafico
 
         public override void ToXML(Utilidades.XML.XMLCreator xml)
         {
+            xml.AddElement();
+            xml.SetTitle("Leer");
+
+            xml.AddElement();
+            xml.SetTitle("Parametro");
+            xml.SetValue(Utilidades.XML.XMLReader.Escape(Parametro));
+            xml.LevelUp();
+
+            xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("LeerViewModel");
+            xml.LevelUp();            
+
+
+            xml.LevelUp();
         }
 
         public override void FromXML(Utilidades.XML.XMLElement xmlElem)
         {
+
+            this.Parametro = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Parametro").value);
+            
         }
     }
 }

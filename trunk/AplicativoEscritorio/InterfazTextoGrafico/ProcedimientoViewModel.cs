@@ -90,6 +90,12 @@ namespace InterfazTextoGrafico
                 xml.LevelUp();
             }
 
+            xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("ProcedimientoViewModel");
+            xml.LevelUp();            
+
+
             xml.LevelUp();
         }
 
@@ -116,5 +122,6 @@ namespace InterfazTextoGrafico
             this.Tipo = (TipoRutina)int.Parse(xmlElem.FindFirst("Tipo").value);
             this.Orden = short.Parse(xmlElem.FindFirst("Orden").value);
         }
+        
     }
 }

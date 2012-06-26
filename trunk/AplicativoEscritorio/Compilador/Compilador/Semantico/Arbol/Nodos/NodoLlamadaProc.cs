@@ -120,7 +120,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         private void ArmarActividadViewModel()
         {
             InterfazTextoGrafico.LlamarProcedimientoViewModel activ = new InterfazTextoGrafico.LlamarProcedimientoViewModel();
-
+            activ.NombreProcedimiento = this.Lexema;
+            activ.Parametros = this.hijosNodo[3].Gargar;
             ActividadViewModel = activ;
         }
 

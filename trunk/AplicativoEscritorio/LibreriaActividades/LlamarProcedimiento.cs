@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Drawing;
 using InterfazTextoGrafico;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace LibreriaActividades
 {
@@ -31,6 +32,8 @@ namespace LibreriaActividades
             {
                 LlamarProcedimientoViewModel activ = new LlamarProcedimientoViewModel();
 
+                activ.NombreProcedimiento = this.NombreProcedimiento;
+                activ.Parametros = this.Parametros;
              
 
                 return activ;
@@ -40,7 +43,19 @@ namespace LibreriaActividades
 
         public override void AsignarDatos(ActividadViewModelBase datos)
         {
-            
+            try
+            {
+                LlamarProcedimientoViewModel datosMapeados = datos as LlamarProcedimientoViewModel;
+
+                this.NombreProcedimiento = datosMapeados.NombreProcedimiento;
+                this.Parametros = datosMapeados.Parametros;
+
+
+            }
+            catch (RuntimeBinderException)
+            {
+                throw;
+            }
         }
     }
 }

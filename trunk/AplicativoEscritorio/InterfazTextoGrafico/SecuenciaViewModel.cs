@@ -33,19 +33,25 @@ namespace InterfazTextoGrafico
         public override void ToXML(Utilidades.XML.XMLCreator xml)
         {
             xml.AddElement();
-            xml.SetTitle("SecuenciaViewModel");
+            xml.SetTitle(string.Format("Secuencia{0}",InterfazTextoGrafico.Auxiliares.GlobalXMLTags.Instance.CantSecuencias));
 
             foreach (ActividadViewModelBase actividad in ListaActividades)
             {
                 actividad.ToXML(xml);
             }
 
+            xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("SecuenciaViewModel");
+            xml.LevelUp();            
+
+
             xml.LevelUp();
         }
 
         public override void FromXML(Utilidades.XML.XMLElement xmlElem)
         {
-            XMLElement xmlSecuencia = xmlElem.FindFirst("SecuenciaViewModel");
+            XMLElement xmlSecuencia = xmlElem.FindFirstPrefix("Secuencia");
 
             if (!Object.Equals(xmlSecuencia, null))
             {
@@ -53,9 +59,21 @@ namespace InterfazTextoGrafico
 
                 foreach (XMLElement xmlProc in xmlSecuencia.childs)
                 {
-                    ActividadViewModelBase tp = ActividadViewModelFactory.CrearActividadViewModel(xmlElem.FindFirst("NombreTipo").value);
-                    tp.FromXML(xmlProc);
-                    acts.Add(tp);
+                    try
+                    {
+                        if (xmlProc.title != "NombreTipo")
+                        {
+                            string nombre = xmlProc.FindFirst("NombreTipo").value;
+
+                            ActividadViewModelBase tp = ActividadViewModelFactory.CrearActividadViewModel(nombre);
+                            tp.FromXML(xmlProc);
+                            acts.Add(tp);
+                        }
+                    }
+                    catch
+                    {
+                        throw;
+                    }
                 }
 
                 ListaActividades = acts;

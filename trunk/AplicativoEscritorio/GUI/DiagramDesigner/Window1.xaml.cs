@@ -313,22 +313,22 @@ namespace DiagramDesigner
                     ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
                     string gargar = new Identador( programa.Gargar).Identar();
 
-                    Modo = e.ModoSeleccionado;
+                  
 
-                    //ResultadoCompilacion res = Compilar(gargar);
+                    ResultadoCompilacion res = Compilar(gargar);
 
-                    //if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
-                    //{
-                    //    Esquema.GarGarACompilar = gargar;
+                    if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                    {
+                        Esquema.GarGarACompilar = gargar;
 
-                    //    Modo = e.ModoSeleccionado;
-                    //}
-                    //else
-                    //{
-                    //    //Pq no hago el cambio, mantengo el actual
-                    //    RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
-                    //    botonPresionado.IsChecked = false;
-                    //}
+                        Modo = e.ModoSeleccionado;
+                    }
+                    else
+                    {
+                        //Pq no hago el cambio, mantengo el actual
+                        RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
+                        botonPresionado.IsChecked = false;
+                    }
                 }
 
             }
