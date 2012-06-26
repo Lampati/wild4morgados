@@ -27,7 +27,7 @@ namespace LibreriaActividades
                 }
                 else if (tipo == typeof(SecuenciaViewModel))
                 {
-                    retorno = new Secuencia();
+                    retorno = new Secuencia(){ SePuedeEliminar = false };
                 }
                 else if (tipo == typeof(AsignacionViewModel))
                 {
