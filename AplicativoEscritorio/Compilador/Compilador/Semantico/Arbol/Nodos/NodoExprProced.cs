@@ -30,6 +30,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.ListaFirma.AddRange(this.hijosNodo[1].ListaFirma);
 
                 this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales || this.hijosNodo[1].UsaVariablesGlobales;
+
+                this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);
             }
             return this;
         }

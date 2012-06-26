@@ -128,6 +128,25 @@ namespace Utilidades.XML
             }
             return element;
         }
+
+        public XMLElement FindFirstPrefix(string title)
+        {
+            XMLElement element = null;
+            foreach (XMLElement child in this.childs)
+            {
+                if (child.title.StartsWith(title))
+                {
+                    element = child;
+                    break;
+                }
+                else
+                {
+                    element = child.FindFirstPrefix(title);
+                    if (element != null) break;
+                }
+            }
+            return element;
+        }
     }
 
     public class XMLproperty
@@ -275,11 +294,18 @@ namespace Utilidades.XML
 
                 if (!empty)
                 {
-                    string strClose = "</" + element.FullTitle() + ">";
-                    int dataEnd = data.IndexOf(strClose, idx);
-                    string newData = data.Substring(end + 1, dataEnd - end - 1);
-                    FillElement(element, newData);
-                    idx = dataEnd + strClose.Length;
+                    try
+                    {
+                        string strClose = "</" + element.FullTitle() + ">";
+                        int dataEnd = data.IndexOf(strClose, idx);
+                        string newData = data.Substring(end + 1, dataEnd - end - 1);
+                        FillElement(element, newData);
+                        idx = dataEnd + strClose.Length;
+                    }
+                    catch
+                    {
+                        throw;
+                    }
                 }
                 else
                 {

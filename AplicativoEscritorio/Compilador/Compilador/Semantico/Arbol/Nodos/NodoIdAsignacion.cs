@@ -41,7 +41,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             //    nombreContexto = this.TablaSimbolos.ObtenerNombreContextoVariable(this.Lexema, this.ContextoActual, this.nombreContextoLocal);
             //}
 
-
+            this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Lexema, this.hijosNodo[1].Gargar);
             
             
 

@@ -157,8 +157,9 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         private void ArmarActividadViewModel()
         {
-            InterfazTextoGrafico.AsignacionViewModel activ = new InterfazTextoGrafico.AsignacionViewModel();       
-
+            InterfazTextoGrafico.AsignacionViewModel activ = new InterfazTextoGrafico.AsignacionViewModel();
+            activ.LadoIzquierdo = this.hijosNodo[0].Gargar;
+            activ.LadoDerecho = this.hijosNodo[2].Gargar;
             ActividadViewModel = activ;
         }
 

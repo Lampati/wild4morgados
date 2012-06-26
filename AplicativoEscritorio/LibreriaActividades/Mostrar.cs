@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Drawing;
 using InterfazTextoGrafico;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace LibreriaActividades
 {
@@ -13,6 +14,7 @@ namespace LibreriaActividades
     public class Mostrar : ActividadBase
     {
         public string Elemento { get; set; }
+        public bool ConPausa { get; set; }
 
         public override void Ejecutar(StringBuilder sb)
         {
@@ -29,7 +31,8 @@ namespace LibreriaActividades
             get
             {
                 MostrarViewModel activ = new MostrarViewModel();
-
+                activ.ElementosAMostrar = this.Elemento;
+                activ.ConPausa = this.ConPausa;
                 return activ;
             }
 
@@ -37,7 +40,18 @@ namespace LibreriaActividades
 
         public override void AsignarDatos(ActividadViewModelBase datos)
         {
-            
+            try
+            {
+                MostrarViewModel datosMapeados = datos as MostrarViewModel;
+
+                this.Elemento = datosMapeados.ElementosAMostrar;
+                this.ConPausa = datosMapeados.ConPausa;
+
+            }
+            catch (RuntimeBinderException)
+            {
+                throw;
+            }
         }
     }
 }

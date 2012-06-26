@@ -25,6 +25,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 this.ListaElementosVisualizar.AddRange(this.hijosNodo[1].ListaElementosVisualizar);
                 this.ListaElementosVisualizar.AddRange(this.hijosNodo[2].ListaElementosVisualizar);
+
+                this.Gargar = string.Format(", {0} {1}", this.hijosNodo[1].Gargar, this.hijosNodo[2].Gargar);
+            }
+            else
+            {
+                this.Gargar = string.Empty;
             }
 
             return this;

@@ -7,8 +7,8 @@ namespace InterfazTextoGrafico.Enums
 {
     public enum TipoDato
     {
-        Numero,
-        Texto,
-        Booleano
+        Numero = 1,
+        Texto = 2,
+        Booleano = 3
     }
 }

@@ -43,6 +43,7 @@
     <Compile Include="ActividadViewModelBase.cs" />
     <Compile Include="ActividadViewModelFactory.cs" />
     <Compile Include="AsignacionViewModel.cs" />
+    <Compile Include="Auxiliares\GlobalXMLTags.cs" />
     <Compile Include="DeclaracionesGlobalesViewModel.cs" />
     <Compile Include="DeclaracionArregloViewModel.cs" />
     <Compile Include="Enums\TipoDato.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Drawing;
 using InterfazTextoGrafico;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace LibreriaActividades
 {
@@ -29,14 +30,28 @@ namespace LibreriaActividades
         {
             get
             {
-                return new AsignacionViewModel();
+                AsignacionViewModel activ = new AsignacionViewModel();
+                activ.LadoIzquierdo = this.LadoIzquierdo;
+                activ.LadoDerecho = this.LadoDerecho;
+                return activ;
             }
           
         }
 
         public override void AsignarDatos(ActividadViewModelBase datos)
         {
-            
+            try
+            {
+                AsignacionViewModel datosMapeados = datos as AsignacionViewModel;
+
+                this.LadoIzquierdo = datosMapeados.LadoIzquierdo;
+                this.LadoDerecho = datosMapeados.LadoDerecho;
+
+            }
+            catch (RuntimeBinderException)
+            {
+                throw;
+            }
         }
     }
 }

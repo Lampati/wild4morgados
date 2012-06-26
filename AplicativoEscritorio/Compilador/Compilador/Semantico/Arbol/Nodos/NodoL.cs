@@ -27,7 +27,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 this.Lexema = this.hijosNodo[0].Lexema.Replace("'", string.Empty);
 
+                this.Gargar = this.hijosNodo[0].Lexema;
                
+            }
+            else
+            {
+                this.Gargar = this.hijosNodo[0].Gargar;
             }
             
 
