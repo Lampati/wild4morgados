@@ -512,6 +512,7 @@
     <Resource Include="Images\loboTribal.png" />
     <Resource Include="Images\loboTribal1.png" />
     <Content Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
+    <None Include="Resources\Images\loading-intro.gif" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
