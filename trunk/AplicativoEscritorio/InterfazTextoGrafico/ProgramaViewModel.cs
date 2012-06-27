@@ -288,7 +288,7 @@ namespace InterfazTextoGrafico
                 }
             }
 
-            return null;
+            return this;
         }
     }
 }
