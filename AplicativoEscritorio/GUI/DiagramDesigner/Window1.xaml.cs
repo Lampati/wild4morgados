@@ -311,15 +311,21 @@ namespace DiagramDesigner
                 else
                 {
                     ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
-                    string gargar = new Identador( programa.Gargar).Identar();
+                    programa.CalcularLineas(1);
+                    //string gargar = new Identador( programa.Gargar).Identar();
 
-                  
+                    ActividadViewModelBase activ = programa.EncontrarActividadPorLinea(20);
+                    ActividadViewModelBase activ2 = programa.EncontrarActividadPorLinea(24);
+                    ActividadViewModelBase activ3 = programa.EncontrarActividadPorLinea(4);
+                    ActividadViewModelBase activ4 = programa.EncontrarActividadPorLinea(1);
+                    ActividadViewModelBase activ5 = programa.EncontrarActividadPorLinea(14);
 
-                    ResultadoCompilacion res = Compilar(gargar);
+
+                    ResultadoCompilacion res = Compilar(programa.Gargar);
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
-                        Esquema.GarGarACompilar = gargar;
+                        Esquema.GarGarACompilar = new Identador(programa.Gargar).Identar();
 
                         Modo = e.ModoSeleccionado;
                     }

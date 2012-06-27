@@ -19,13 +19,88 @@ namespace InterfazTextoGrafico
                 StringBuilder strBldr = new StringBuilder();
 
                 strBldr.AppendFormat("si ( {0} ) entonces",Condicion).AppendLine();
-                strBldr.AppendLine(BranchVerdadero.Gargar);
-                if (BranchFalso != null)
+                strBldr.Append(BranchVerdadero.Gargar);
+                if (BranchFalso != null && BranchFalso.ListaActividades.Count > 0)
                 {
-                    strBldr.AppendLine(BranchFalso.Gargar);
+                    strBldr.AppendLine("sino");
+                    strBldr.Append(BranchFalso.Gargar);
                 }
 
                 strBldr.AppendLine("finsi;");
+
+                return strBldr.ToString();
+            }
+        }
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+
+            int lineaAux = lineaComienzo;
+
+            //aumento 1 por la linea de la condicion del si
+            lineaAux++;
+
+            if (BranchVerdadero != null && BranchVerdadero.ListaActividades.Count > 0)
+            {
+                BranchVerdadero.CalcularLineas(lineaAux);
+                lineaAux = BranchVerdadero.LineaFinal + 1;
+
+                if (BranchFalso != null && BranchFalso.ListaActividades.Count > 0)
+                {
+                    //aumento 1 por la linea del sino
+                    lineaAux++;
+                    BranchFalso.CalcularLineas(lineaAux);
+                    lineaAux = BranchFalso.LineaFinal;
+                }
+                else
+                {
+                    //Le resto una pq me quedo sumada de mas en el primer si
+                    lineaAux--;
+                }
+            }
+            else
+            {
+                if (BranchFalso != null && BranchFalso.ListaActividades.Count > 0)
+                {
+                    //aumento 1 por la linea del sino
+                    lineaAux++;
+                    BranchFalso.CalcularLineas(lineaAux);
+                    lineaAux = BranchFalso.LineaFinal;
+                }
+
+               
+            }
+
+          
+
+            //aumento 1 por la linea del finsi
+            lineaAux++;
+
+            lineaFinal = lineaAux;
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+                if (BranchVerdadero != null)
+                {
+                    strBldr.AppendLine(BranchVerdadero.DescripcionLineas);
+                }
+
+                if (BranchFalso != null && BranchFalso.ListaActividades.Count > 0)
+                {
+                    strBldr.AppendLine(BranchFalso.DescripcionLineas);
+                }
 
                 return strBldr.ToString();
             }
@@ -82,6 +157,28 @@ namespace InterfazTextoGrafico
                 BranchFalso = cuerpo;
             }
             
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+            if (BranchVerdadero != null)
+            {
+                if (BranchVerdadero.LineaComienzo <= lineaABuscar && lineaABuscar <= BranchVerdadero.LineaFinal)
+                {
+                    return BranchVerdadero.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            if (BranchFalso != null && BranchFalso.ListaActividades.Count > 0)
+            {
+                if (BranchFalso.LineaComienzo <= lineaABuscar && lineaABuscar <= BranchFalso.LineaFinal)
+                {
+                    return BranchFalso.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            //Si no era ninguno de sus subhijos es pq es algo de esta actividad sin subHijos
+            return this;
         }
     }
 }

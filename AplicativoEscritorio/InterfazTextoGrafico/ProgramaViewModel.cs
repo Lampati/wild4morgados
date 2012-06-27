@@ -103,22 +103,84 @@ namespace InterfazTextoGrafico
                 if (ConstantesGlobales != null && ConstantesGlobales.ListaActividades.Count > 0)
                 {
                     strBldr.AppendLine("constantes");
-                    strBldr.AppendLine(ConstantesGlobales.Gargar);
+                    strBldr.Append(ConstantesGlobales.Gargar);
                 }
 
                 if (VariablesGlobales != null && VariablesGlobales.ListaActividades.Count > 0)
                 {
                     strBldr.AppendLine("variables");
-                    strBldr.AppendLine(VariablesGlobales.Gargar);
+                    strBldr.Append(VariablesGlobales.Gargar);
                 }
 
                 //Hacer el sort correctamente por orden de uso de los procedimientos
 
                 foreach (var item in Procedimientos)
                 {
-                    strBldr.AppendLine(item.Gargar);
+                    strBldr.Append(item.Gargar);
                 }
 
+
+                return strBldr.ToString();
+            }
+        }
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+
+            int lineaAux = lineaComienzo;
+
+            if (ConstantesGlobales != null)
+            {
+                //Por la linea constantes
+                lineaAux++;
+                ConstantesGlobales.CalcularLineas(lineaAux);
+                lineaAux = ConstantesGlobales.LineaFinal + 1;
+            }
+
+            if (VariablesGlobales != null)
+            {
+                //Por la linea variables
+                lineaAux++;
+                VariablesGlobales.CalcularLineas(lineaAux);
+                lineaAux = VariablesGlobales.LineaFinal + 1;
+            }
+
+            foreach (ProcedimientoViewModel proc in Procedimientos)
+            {
+                proc.CalcularLineas(lineaAux);
+                lineaAux = proc.LineaFinal + 1;
+            }
+
+            lineaFinal = lineaAux;
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+                if (ConstantesGlobales != null)
+                {
+                    strBldr.AppendLine(ConstantesGlobales.DescripcionLineas);
+                }
+
+                if (VariablesGlobales != null)
+                {
+                    strBldr.AppendLine(VariablesGlobales.DescripcionLineas);
+                }
+
+                foreach (ProcedimientoViewModel proc in Procedimientos)
+                {
+                    strBldr.AppendLine(proc.DescripcionLineas);
+                }
 
                 return strBldr.ToString();
             }
@@ -198,6 +260,35 @@ namespace InterfazTextoGrafico
             }
             
             
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+            if (ConstantesGlobales != null)
+            {
+                if (ConstantesGlobales.LineaComienzo <= lineaABuscar && lineaABuscar <= ConstantesGlobales.LineaFinal)
+                {
+                    return ConstantesGlobales.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            if (VariablesGlobales != null)
+            {
+                if (VariablesGlobales.LineaComienzo <= lineaABuscar && lineaABuscar <= VariablesGlobales.LineaFinal)
+                {
+                    return VariablesGlobales.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            foreach (ProcedimientoViewModel proc in Procedimientos)
+            {
+                if (proc.LineaComienzo <= lineaABuscar && lineaABuscar <= proc.LineaFinal)
+                {
+                    return proc.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            return null;
         }
     }
 }

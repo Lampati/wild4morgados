@@ -17,9 +17,46 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("var {0} : arreglo [1..{1}] de {2};", Nombre, Tope ,Tipo.ToString());
+                strBldr.AppendFormat("var {0} : arreglo [1..{1}] de {2};", Nombre, Tope ,Tipo.ToString()).AppendLine();
 
                 return strBldr.ToString();
+            }
+        }
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+
+            int cantLineas = Utilidades.StringUtils.CantidadDeLineas(Gargar) - 1;
+
+            lineaFinal = lineaComienzo + cantLineas;
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+                return strBldr.ToString();
+            }
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+            if (this.lineaComienzo == lineaABuscar)
+            {
+                return this;
+            }
+            else
+            {
+                return null;
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Utilidades
 {
@@ -70,6 +71,13 @@ namespace Utilidades
 
             return textoModif;
         
+        }
+
+        static Regex regexNuevasLineas = new Regex("\r\n", RegexOptions.Multiline);
+        public static int CantidadDeLineas(string texto)
+        {
+            MatchCollection mc = regexNuevasLineas.Matches(texto);
+            return mc.Count;
         }
 
         public static string InsertarLineaEnTextoEntreLineas(string texto, string textoAInsertar, int lineaCom, int lineaFin)

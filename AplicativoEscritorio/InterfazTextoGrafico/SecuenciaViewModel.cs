@@ -23,7 +23,47 @@ namespace InterfazTextoGrafico
 
                 foreach (var item in ListaActividades)
                 {
-                    strBldr.AppendLine(item.Gargar);
+                    strBldr.Append(item.Gargar);
+                }
+
+                return strBldr.ToString();
+            }
+        }
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+            int lineaAux = linea;
+
+            if (ListaActividades.Count > 0)
+            {
+                foreach (ActividadViewModelBase act in ListaActividades)
+                {
+                    act.CalcularLineas(lineaAux);
+                    lineaAux = act.LineaFinal + 1;
+                }
+                //Le resto uno pq siempre termino con un incremento mas
+                lineaAux--;
+            }
+
+            lineaFinal = lineaAux;
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+                foreach (ActividadViewModelBase act in ListaActividades)
+                {
+                    strBldr.AppendLine(act.DescripcionLineas);
                 }
 
                 return strBldr.ToString();
@@ -78,6 +118,20 @@ namespace InterfazTextoGrafico
 
                 ListaActividades = acts;
             }
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+
+            foreach (ActividadViewModelBase act in ListaActividades)
+            {
+                if (act.LineaComienzo <= lineaABuscar && lineaABuscar <= act.LineaFinal)
+                {
+                    return act.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            return null;
         }
     }
 }
