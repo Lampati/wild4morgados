@@ -22,7 +22,6 @@ using InterfazTextoGrafico;
 using ModoGrafico.EventArgsClasses;
 using ModoGrafico.Tabs;
 using System.Text.RegularExpressions;
-using ModoGrafico.Validaciones;
 
 namespace ModoGrafico
 {
@@ -201,7 +200,7 @@ namespace ModoGrafico
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
-        private void ConstruirOrdenRecursivo(Dictionary<string, string> codigosFuncProc, System.Collections.SortedList sl, string codigo, ref int orden, string invocador)
+        /*private void ConstruirOrdenRecursivo(Dictionary<string, string> codigosFuncProc, System.Collections.SortedList sl, string codigo, ref int orden, string invocador)
         {
             if (String.IsNullOrEmpty(codigo)) return;
 
@@ -233,13 +232,13 @@ namespace ModoGrafico
                 }
         }
 
-        private DetectorLoops detector;
+        private DetectorLoops detector;*/
 
         private void btnEjecutar_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                StringBuilder sb = new StringBuilder();
+               /* StringBuilder sb = new StringBuilder();
                 System.Collections.SortedList sl = new System.Collections.SortedList();
                 Dictionary<string, string> codigosFuncProc = new Dictionary<string, string>();
                 this.detector = new DetectorLoops();
@@ -270,7 +269,7 @@ namespace ModoGrafico
                 foreach (string t in sl.Values)
                     sb.Append(t);
 
-                MessageBox.Show(sb.ToString());
+                MessageBox.Show(sb.ToString());*/
             }
             catch (Exception ex)
             {
