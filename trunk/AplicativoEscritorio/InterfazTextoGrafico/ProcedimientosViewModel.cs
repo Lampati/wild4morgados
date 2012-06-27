@@ -14,6 +14,18 @@ namespace InterfazTextoGrafico
             Procedimientos = new List<ProcedimientoViewModel>();
         }
 
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+
+
+                return strBldr.ToString();
+            }
+        }
+
         public override string Gargar
         {
             get
@@ -23,6 +35,16 @@ namespace InterfazTextoGrafico
 
                 return strBldr.ToString();
             }
+        }
+
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+            return null;
+        }
+
+        public override void CalcularLineas(int linea)
+        {
         }
 
         public override void ToXML(Utilidades.XML.XMLCreator xml)

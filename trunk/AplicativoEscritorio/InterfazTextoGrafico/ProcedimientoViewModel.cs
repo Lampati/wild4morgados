@@ -44,12 +44,74 @@ namespace InterfazTextoGrafico
                 }
 
                 if (!Object.Equals(VariablesLocales, null))
-                    strBldr.AppendLine(VariablesLocales.Gargar);
+                    strBldr.Append(VariablesLocales.Gargar);
 
                 strBldr.AppendLine("comenzar");
                 if (!Object.Equals(Cuerpo, null))
-                    strBldr.AppendLine(Cuerpo.Gargar);
+                    strBldr.Append(Cuerpo.Gargar);
                 strBldr.AppendLine(fin);
+
+                return strBldr.ToString();
+            }
+        }
+
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+
+            int lineaAux = lineaComienzo;
+
+            //aumento 1 por la cabecera
+            lineaAux++;
+
+            if (VariablesLocales != null)
+            {
+                VariablesLocales.CalcularLineas(lineaAux);
+                lineaAux = VariablesLocales.LineaFinal + 1;
+            }
+
+            //aumento 1 por la linea del comenzar
+            lineaAux++;
+
+            if (Cuerpo != null)
+            {
+                Cuerpo.CalcularLineas(lineaAux);
+                lineaAux = Cuerpo.LineaFinal + 1;
+                //No hace falta aumentar uno cuando termine.
+            }
+            else
+            {
+                //aumento 1 por la linea del finproc
+                lineaAux++;
+            }
+            ////aumento 1 por la linea del finproc
+            ////lineaAux++;
+
+            lineaFinal = lineaAux;
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+                if (VariablesLocales != null)
+                {
+                    strBldr.AppendLine(VariablesLocales.DescripcionLineas);
+                }
+
+                if (Cuerpo != null)
+                {
+                    strBldr.AppendLine(Cuerpo.DescripcionLineas);
+                }
 
                 return strBldr.ToString();
             }
@@ -122,6 +184,28 @@ namespace InterfazTextoGrafico
             this.Nombre = xmlElem.FindFirst("Nombre").value;
             this.Tipo = (TipoRutina)int.Parse(xmlElem.FindFirst("Tipo").value);
             this.Orden = short.Parse(xmlElem.FindFirst("Orden").value);
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+            if (VariablesLocales != null)
+            {
+                if (VariablesLocales.LineaComienzo <= lineaABuscar && lineaABuscar <= VariablesLocales.LineaFinal)
+                {
+                    return VariablesLocales.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            if (Cuerpo != null)
+            {
+                if (Cuerpo.LineaComienzo <= lineaABuscar && lineaABuscar <= Cuerpo.LineaFinal)
+                {
+                    return Cuerpo.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }            
+
+            //Si no era ninguno de sus subhijos es pq es algo de esta actividad sin subHijos
+            return this;
         }
         
     }

@@ -21,18 +21,57 @@ namespace InterfazTextoGrafico
                 switch (Tipo)
                 {
                     case InterfazTextoGrafico.Enums.TipoDato.Numero:
-                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor);
+                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor).AppendLine();
                         break;
                     case InterfazTextoGrafico.Enums.TipoDato.Texto:
-                        strBldr.AppendFormat("const {0} : {1} = '{2}';", Nombre, Tipo.ToString(), Valor);
+                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor).AppendLine();
                         break;
                     case InterfazTextoGrafico.Enums.TipoDato.Booleano:
-                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor);
+                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor).AppendLine();
                         break;
                 }
 
                 return strBldr.ToString();
             }
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+                return strBldr.ToString();
+            }
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+            if (this.lineaComienzo == lineaABuscar)
+            {
+                return this;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+
+
+
+            int cantLineas = Utilidades.StringUtils.CantidadDeLineas(Gargar) - 1;
+
+            lineaFinal = lineaComienzo + cantLineas;
         }
 
         public override void ToXML(Utilidades.XML.XMLCreator xml)

@@ -19,8 +19,51 @@ namespace InterfazTextoGrafico
                 StringBuilder strBldr = new StringBuilder();
 
                 strBldr.AppendFormat("mientras ( {0} ) hacer", Condicion).AppendLine();
-                strBldr.AppendLine(Cuerpo.Gargar);
+                strBldr.Append(Cuerpo.Gargar);
                 strBldr.AppendLine("finmientras;");
+
+                return strBldr.ToString();
+            }
+        }
+
+        public override void CalcularLineas(int linea)
+        {
+            lineaComienzo = linea;
+
+            int lineaAux = lineaComienzo;
+
+            //aumento 1 por la linea de la condicion del mientras
+            lineaAux++;
+
+            if (Cuerpo != null)
+            {
+                Cuerpo.CalcularLineas(lineaAux);
+                lineaAux = Cuerpo.LineaFinal;
+            }
+
+            //aumento 1 por la linea del finmientras
+            lineaAux++;
+
+            lineaFinal = lineaAux;
+        }
+
+        public override string DescripcionLineas
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                strBldr.AppendLine(string.Format("{0} - {1} a {2}",
+                    this.GetType().ToString(),
+                    this.lineaComienzo,
+                    this.lineaFinal
+                ));
+
+     
+                if (Cuerpo != null)
+                {
+                    strBldr.AppendLine(Cuerpo.DescripcionLineas);
+                }
 
                 return strBldr.ToString();
             }
@@ -63,6 +106,22 @@ namespace InterfazTextoGrafico
                 Cuerpo = cuerpo;
             }
               
+        }
+
+        public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
+        {
+           
+
+            if (Cuerpo != null)
+            {
+                if (Cuerpo.LineaComienzo <= lineaFinal && lineaFinal <= Cuerpo.LineaFinal)
+                {
+                    return Cuerpo.EncontrarActividadPorLinea(lineaABuscar);
+                }
+            }
+
+            //Si no era ninguno de sus subhijos es pq es algo de esta actividad sin subHijos
+            return this;
         }
     }
 }

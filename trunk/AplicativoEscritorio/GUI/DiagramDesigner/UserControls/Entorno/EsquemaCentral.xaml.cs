@@ -69,6 +69,7 @@ namespace DiagramDesigner.UserControls.Entorno
             get
             {
                 representacionGraficaActual = modoGrafico.ObtenerProgramaEnModoGrafico();
+                representacionGraficaActual.OrdenarProcedimientos();
                 return representacionGraficaActual;
             }
             set
