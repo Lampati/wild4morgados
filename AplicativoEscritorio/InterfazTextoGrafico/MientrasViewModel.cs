@@ -114,7 +114,7 @@ namespace InterfazTextoGrafico
 
             if (Cuerpo != null)
             {
-                if (Cuerpo.LineaComienzo <= lineaFinal && lineaFinal <= Cuerpo.LineaFinal)
+                if (Cuerpo.LineaComienzo <= lineaABuscar && lineaABuscar <= Cuerpo.LineaFinal)
                 {
                     return Cuerpo.EncontrarActividadPorLinea(lineaABuscar);
                 }
