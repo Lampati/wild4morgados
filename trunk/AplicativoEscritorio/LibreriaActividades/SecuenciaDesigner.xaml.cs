@@ -20,13 +20,7 @@ namespace LibreriaActividades
         public SecuenciaDesigner()
         {
             InitializeComponent();
-            base.DragOver += new DragEventHandler(SecuenciaDesigner_DragOver);
             base.PreviewDragOver += new DragEventHandler(SecuenciaDesigner_PreviewDragOver);
-        }
-
-        void SecuenciaDesigner_DragOver(object sender, DragEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         void SecuenciaDesigner_PreviewDragOver(object sender, DragEventArgs e)

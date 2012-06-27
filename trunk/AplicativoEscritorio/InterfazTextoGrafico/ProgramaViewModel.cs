@@ -59,42 +59,39 @@ namespace InterfazTextoGrafico
                 }
         }
 
-        public List<ProcedimientoViewModel> ProcedimientosOrdenados
+        public void OrdenarProcedimientos()
         {
-            get
+            SortedList sl = new SortedList();
+            Dictionary<string, ProcedimientoViewModel> codigosFuncProc = new Dictionary<string, ProcedimientoViewModel>();
+            this.detector = new DetectorLoops();
+
+            ProcedimientoViewModel salida = null;
+            ProcedimientoViewModel principal = null;
+            foreach (ProcedimientoViewModel proc in this.Procedimientos)
             {
-                SortedList sl = new SortedList();
-                Dictionary<string, ProcedimientoViewModel> codigosFuncProc = new Dictionary<string, ProcedimientoViewModel>();
-                this.detector = new DetectorLoops();
-
-                ProcedimientoViewModel salida = null;
-                ProcedimientoViewModel principal = null;
-                foreach (ProcedimientoViewModel proc in this.Procedimientos)
+                switch (proc.Tipo)
                 {
-                    switch (proc.Tipo)
-                    {
-                        case Enums.TipoRutina.Principal:
-                            principal = proc; break;
-                        case Enums.TipoRutina.Salida:
-                            salida = proc; break;
-                        case Enums.TipoRutina.Funcion:
-                        case Enums.TipoRutina.Procedimiento:
-                            codigosFuncProc.Add(proc.Nombre, proc);
-                            break;
-                    }
+                    case Enums.TipoRutina.Principal:
+                        principal = proc; break;
+                    case Enums.TipoRutina.Salida:
+                        salida = proc; break;
+                    case Enums.TipoRutina.Funcion:
+                    case Enums.TipoRutina.Procedimiento:
+                        codigosFuncProc.Add(proc.Nombre, proc);
+                        break;
                 }
-
-                int orden = 10;
-                foreach (string key in codigosFuncProc.Keys)
-                {
-                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
-                }
-
-                sl.Add(int.MaxValue, principal);
-                sl.Add(int.MaxValue - 1, salida);
-
-                return sl.Values.Cast<ProcedimientoViewModel>().ToList();
             }
+
+            int orden = 10;
+            foreach (string key in codigosFuncProc.Keys)
+            {
+                this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
+            }
+
+            sl.Add(int.MaxValue, principal);
+            sl.Add(int.MaxValue - 1, salida);
+
+            this.Procedimientos = sl.Values.Cast<ProcedimientoViewModel>().ToList();
         }
 
         public override string Gargar
@@ -117,7 +114,7 @@ namespace InterfazTextoGrafico
 
                 //Hacer el sort correctamente por orden de uso de los procedimientos
 
-                foreach (var item in ProcedimientosOrdenados)
+                foreach (var item in Procedimientos)
                 {
                     strBldr.AppendLine(item.Gargar);
                 }
