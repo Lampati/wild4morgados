@@ -71,6 +71,7 @@
     <Compile Include="Tabs\TabsControl.xaml.cs">
       <DependentUpon>TabsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones\DetectorLoops.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\WorkAreaViewModel.cs" />
@@ -109,6 +110,7 @@
       <Name>LibreriaActividades</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

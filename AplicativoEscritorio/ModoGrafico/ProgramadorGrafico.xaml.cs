@@ -22,6 +22,7 @@ using InterfazTextoGrafico;
 using ModoGrafico.EventArgsClasses;
 using ModoGrafico.Tabs;
 using System.Text.RegularExpressions;
+using ModoGrafico.Validaciones;
 
 namespace ModoGrafico
 {
@@ -200,49 +201,81 @@ namespace ModoGrafico
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
-        private void btnEjecutar_Click(object sender, RoutedEventArgs e)
+        private void ConstruirOrdenRecursivo(Dictionary<string, string> codigosFuncProc, System.Collections.SortedList sl, string codigo, ref int orden, string invocador)
         {
-            StringBuilder sb = new StringBuilder();
-            System.Collections.SortedList sl = new System.Collections.SortedList();
-            Dictionary<string, string> codigosFuncProc = new Dictionary<string, string>();
+            if (String.IsNullOrEmpty(codigo)) return;
 
-            //Acá comienzo con el asunto del orden de las func/proc
-            foreach (Tab t in this.WorkArea.tab.ItemSource)
-                if (t is TabItemAgregar) continue;
-                else if (t is TabItemPrincipal || t is TabItemDeclaracionConstante
-                    || t is TabItemDeclaracionVariable || t is TabItemSalida)
-                    sl.Add(t.Orden, t);
-                else
-                {
-                    StringBuilder sbFuncProc = new StringBuilder();
-                    t.Ejecutar(sbFuncProc);
-                    codigosFuncProc.Add(t.Header, sbFuncProc.ToString());
-                }
-
-            /*ET: FALTA TERMINAR ACA!!
-            int orden = 10;
-
+            bool encontroLlamado = false;
             foreach (string key in codigosFuncProc.Keys)
             {
-                Regex regex = new Regex(key + "[\\s]*[(][\\w(,)*]*[)]");
-                foreach (string key2 in codigosFuncProc.Keys)
+                Regex regex = new Regex(key + "[\\s]*[(].*[)]", RegexOptions.IgnoreCase);
+                int ixComienzo = codigo.LastIndexOf("COMENZAR");
+                if (ixComienzo < 0)
+                    throw new Exception("No se encontró la sentencia COMENZAR, error grave."); //no debería pasar jamás.
+
+                if (regex.IsMatch(codigo, ixComienzo))
                 {
-                    if (key == key2) continue;
-
-                    string codigo = codigosFuncProc[key2].ToString();
-                    int ixComienzo = codigo.LastIndexOf("COMENZAR");
-                    if (ixComienzo < 0)
-                        throw new Exception("No se encontró la sentencia COMENZAR, error grave."); //no debería pasar jamás.
-
-                    if (regex.IsMatch(codigo, ixComienzo))
-                        orden++;
+                    this.detector.AgregarLlamada(invocador, key);
+                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
+                    if (!sl.ContainsValue(codigo))
+                    {
+                        sl.Add(orden++, codigo);
+                        encontroLlamado = true;
+                    }
                 }
-            }*/
+            }
 
-            foreach (Tab t in sl.Values)
-                t.Ejecutar(sb);
+            if (!encontroLlamado)
+                if (!sl.ContainsValue(codigo))
+                {
+                    this.detector.AgregarLlamada(invocador);
+                    sl.Add(orden++, codigo);
+                }
+        }
 
-            MessageBox.Show(sb.ToString());
+        private DetectorLoops detector;
+
+        private void btnEjecutar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                System.Collections.SortedList sl = new System.Collections.SortedList();
+                Dictionary<string, string> codigosFuncProc = new Dictionary<string, string>();
+                this.detector = new DetectorLoops();
+
+                //Acá comienzo con el asunto del orden de las func/proc
+                foreach (Tab t in this.WorkArea.tab.ItemSource)
+                    if (t is TabItemAgregar) continue;
+                    else if (t is TabItemPrincipal || t is TabItemDeclaracionConstante
+                        || t is TabItemDeclaracionVariable || t is TabItemSalida)
+                    {
+                        StringBuilder sbStandards = new StringBuilder();
+                        t.Ejecutar(sbStandards);
+                        sl.Add(t.Orden, sbStandards.ToString());
+                    }
+                    else
+                    {
+                        StringBuilder sbFuncProc = new StringBuilder();
+                        t.Ejecutar(sbFuncProc);
+                        codigosFuncProc.Add(t.Header, sbFuncProc.ToString());
+                    }
+
+                int orden = 10;
+                foreach (string key in codigosFuncProc.Keys)
+                {
+                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
+                }
+
+                foreach (string t in sl.Values)
+                    sb.Append(t);
+
+                MessageBox.Show(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al generar el código", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
