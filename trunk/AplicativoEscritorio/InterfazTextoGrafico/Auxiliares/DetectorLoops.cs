@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Collections;
 
-namespace ModoGrafico.Validaciones
+namespace InterfazTextoGrafico.Auxiliares
 {
     internal class DetectorLoops
     {
@@ -49,11 +48,11 @@ namespace ModoGrafico.Validaciones
             foreach (string llam in lista)
             {
                 if (!cadenaInvocaciones.Contains(llam))
-                    cadenaInvocaciones.Add(llam); 
+                    cadenaInvocaciones.Add(llam);
                 else
                     throw new Exception(String.Format("Se ha detectado una llamada circular en {0}", llam));
 
-                if (this.llamadas.ContainsKey(llam))  
+                if (this.llamadas.ContainsKey(llam))
                     if (cadenaInvocaciones.Contains(invocador))
                         throw new Exception(String.Format("Se ha detectado una llamada circular en {0} ({1})", llamador, invocador));
                     else
