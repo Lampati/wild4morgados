@@ -47,7 +47,6 @@
                         else {
                             $(this).removeClass("selected");
                         }
-
                     });
                     switch ($(this).attr("id")) {
                         case "Perfil":
@@ -69,6 +68,11 @@
                     }
                 }
             }
+        });
+        $(".gridPager a").live('click', function (event) {
+            var hrefUrl = $(this).attr("href");
+            OpenTab(event, hrefUrl, "", "content");
+            return false;
         });
     });
 </script>
