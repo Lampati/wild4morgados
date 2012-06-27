@@ -129,7 +129,6 @@ namespace WebProgramAR.Controllers
             {
                 ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
                 ArmarViewBags(id);
-
                 ReglasSeguridad modelo = new ReglasSeguridad();
                 modelo.ReglaId = c.ReglaId;
                 modelo.Activa = c.Activa;
@@ -137,7 +136,8 @@ namespace WebProgramAR.Controllers
                 modelo.ComparadorId = c.ComparadorId;
                 modelo.TablaId = c.TablaId;
                 modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : -1;
-                modelo.UsuarioId = c.UsuarioId.HasValue ? c.UsuarioId.Value : -1;
+                if (c.UsuarioId.HasValue) modelo.UsuarioId = c.UsuarioId.Value;
+                ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre : "";
                 modelo.Valor = c.Valor;
 
                 modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();

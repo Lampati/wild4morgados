@@ -75,8 +75,6 @@ namespace WebProgramAR.DataAccess
             reglaOrig.TipoUsuarioId = reglaModif.TipoUsuarioId;
             reglaOrig.Activa = reglaModif.Activa;
             reglaOrig.Valor = reglaModif.Valor;
-                     
-
 
             db.ObjectStateManager.ChangeObjectState(reglaOrig, EntityState.Modified);
             db.SaveChanges();

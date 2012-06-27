@@ -116,6 +116,10 @@
         delay: 3,
         type: 'POST',
         selectFirst: false,
+        focus: function (event, ui) {
+            $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+            return false;
+        },
         select: function (event, ui) {
             $("#UsuarioId").val(ui.item.value);
             $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
@@ -142,7 +146,7 @@
             Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
             Value = option.TablaId.ToString(),
             Selected = ((Model != null) && (option.TablaId == Model.TablaId))
-        }), new { @id = "SelectTablaId", @style = "display:none", @name = "SelectTablaId" })
+        }), new { @id = "SelectTablaId", @style = "display:none", @Name = "SelectTablaId" })
         @Html.HiddenFor(model => Model.TablaId)
         @Html.ValidationMessageFor(m => m.TablaId)
 </div>
@@ -157,7 +161,7 @@
             Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
             Value = option.ColumnaId.ToString(),
             Selected = ((Model != null) && (option.ColumnaId == Model.ComparadorId))
-        }), new { @id = "SelectColumnaId", @style = "display:none", @name = "SelectColumnaId" })
+        }), new { @id = "SelectColumnaId", @style = "display:none", @Name = "SelectColumnaId" })
     @Html.HiddenFor(model => Model.ColumnaId)
     @Html.ValidationMessageFor(m => m.ColumnaId)
 </div>
@@ -195,7 +199,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(m => m.TipoUsuario)
+    @Html.LabelFor(m => m.TipoUsuarioId)
 </div>
 <div class="editor-field">
     @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
@@ -203,7 +207,7 @@
             Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
             Value = option.TipoUsuarioId.ToString(),
             Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-        }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @name = "SelectTipoUsuarioCreate" })
+        }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @Name = "SelectTipoUsuarioCreate" })
         @Html.HiddenFor(model => Model.TipoUsuarioId)
         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
 </div>

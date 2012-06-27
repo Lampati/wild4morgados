@@ -13,7 +13,7 @@
         myWidth = document.body.clientWidth;
         myHeight = document.body.clientHeight;
     }
-    if (myHeight < 640)
+    if (myHeight < 660)
         $("body").attr("style", "overflow-y:scroll;");
     else
         $("body").attr("style", "overflow-y:hidden;");
@@ -43,7 +43,7 @@ function updateSuccess() {
     }
 }
 function updateSuccessView() {
-    if ($("#update-message").html().search("error") == "-1") {
+    if ($("#update-message").html().search("Error") == "-1") {
         window.location.href = $("#update-message").html();
     }else{
         $(".update-message-box").show();

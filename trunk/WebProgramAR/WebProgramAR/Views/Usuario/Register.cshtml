@@ -15,7 +15,36 @@
 <p>
     La contraseña requiere como minimo de @Membership.MinRequiredPasswordLength caracteres.
 </p>
+<script type="text/jscript">
+    function validForm() {
+        var countErrors = 0;
+        if ($("#Usuario_PaisId").val() == "") {
+            countErrors++;
+            $("#Usuario_PaisId").parent().last().css("display", "block");
+        } else {
+            $("#Usuario_PaisId").parent().last().css("display", "none");
+        }
+        if ($("#Usuario_ProvinciaId").val() == "") {
+            countErrors++;
+            $("#Usuario_ProvinciaId").parent().last().css("display", "block");
+        } else {
+            $("#Usuario_ProvinciaId").parent().last().css("display", "none");
+        }
+        if ($("#Usuario_LocalidadId").val() == "") {
+            countErrors++;
+            $("#Usuario_LocalidadId").parent().last().css("display", "block");
+        } else {
+            $("#Usuario_LocalidadId").parent().last().css("display", "none");
+        }
+        if (countErrors == 0) return true; else return false;
+    }
+    $("#btnAceptar").click(function () {
+        if (validForm()) {
+            $("#form0").submit();
+        }
+    });
 
+</script>
 @using (Ajax.BeginForm("Register", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccessView", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
