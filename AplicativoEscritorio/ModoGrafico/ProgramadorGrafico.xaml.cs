@@ -33,21 +33,30 @@ namespace ModoGrafico
         public delegate void ModoGraficoModificadoEventHandler(object o, ModoGraficoModificadoEventArgs e);
         public event ModoGraficoModificadoEventHandler ModoGraficoModificadoEvent;
 
+
+     
+
+        public ProgramadorGrafico()
+        {
+            InitializeComponent();
+            this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
+            this.WorkArea.WorkflowChangedEvent += new Views.WorkAreaView.WorkflowChangedEventHandler(WorkArea_WorkflowChangedEvent);
+            
+            ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+        }
+           
+
+        void WorkArea_WorkflowChangedEvent(object o, WorkflowChangedEventArgs args)
+        {
+            ModoGraficoModificadoEventFire(this, new ModoGraficoModificadoEventArgs());
+        }
+
         private void ModoGraficoModificadoEventFire(object sender, ModoGraficoModificadoEventArgs e)
         {
             if (ModoGraficoModificadoEvent != null)
             {
                 ModoGraficoModificadoEvent(sender, e);
             }
-        }
-
-        public ProgramadorGrafico()
-        {
-            InitializeComponent();
-            this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
-
-            
-            ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
 
 
@@ -61,7 +70,11 @@ namespace ModoGrafico
 
         public ProgramaViewModel ObtenerProgramaEnModoGrafico()
         {
-            return this.WorkArea.ObtenerProgramaDiagramado();
+            ProgramaViewModel programa = this.WorkArea.ObtenerProgramaDiagramado();
+            programa.OrdenarProcedimientos();
+            programa.CalcularLineas(1);
+
+            return programa;
         }
 
         void WorkArea_CambioTabEvent(object sender, EventArgsClasses.TipoTabCambiadoEventArgs e)

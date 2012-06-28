@@ -9,6 +9,11 @@ namespace InterfazTextoGrafico
     {
         public List<ProcedimientoViewModel> Procedimientos { get; set; }
 
+        public override string NombreActividad
+        {
+            get { return ""; }
+        }
+
         public ProcedimientosViewModel()
         {
             Procedimientos = new List<ProcedimientoViewModel>();

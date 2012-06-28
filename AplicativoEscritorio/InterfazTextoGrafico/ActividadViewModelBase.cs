@@ -28,6 +28,7 @@ namespace InterfazTextoGrafico
 
         public abstract string Gargar { get; }
         public abstract string DescripcionLineas { get; }
+        public abstract string NombreActividad { get; }
 
         public int LineaComienzo
         {

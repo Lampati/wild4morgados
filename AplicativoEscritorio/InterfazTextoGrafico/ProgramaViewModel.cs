@@ -15,6 +15,10 @@ namespace InterfazTextoGrafico
         public SecuenciaViewModel ConstantesGlobales { get; set; }
         public SecuenciaViewModel VariablesGlobales { get; set; }
 
+        public override string NombreActividad
+        {
+            get { return "Programa"; }
+        }
 
         public ProgramaViewModel()
         {

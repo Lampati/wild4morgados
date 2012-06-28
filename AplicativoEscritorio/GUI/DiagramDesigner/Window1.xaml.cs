@@ -197,12 +197,6 @@ namespace DiagramDesigner
 
             hotKeyCompilar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
             hotKeyEjecutar.HotKeyPressed += new Action<HotKey>(hotKeyCompilar_HotKeyPressed);
-
-            
-            
-            
-            
-
             
             //configApp.DirectorioTemporal = "bla";
             //configApp.DirectorioEjerciciosCreados = "bla43";
@@ -212,8 +206,6 @@ namespace DiagramDesigner
             //configApp.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
             //                               Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
 
-            
-
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.New, New_Executed));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Open, Open_Executed));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Save, Save_Executed));
@@ -222,16 +214,11 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
 
             ToolbarAplicacion.Owner = this;
-            
         }
-
-   
 
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
         {
             IdentarTexto();
-            
-            
         }
 
         private void IdentarTexto()
@@ -311,14 +298,13 @@ namespace DiagramDesigner
                 else
                 {
                     ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
-                    programa.CalcularLineas(1);
                     //string gargar = new Identador( programa.Gargar).Identar();
 
-                    ActividadViewModelBase activ = programa.EncontrarActividadPorLinea(20);
-                    ActividadViewModelBase activ2 = programa.EncontrarActividadPorLinea(24);
-                    ActividadViewModelBase activ3 = programa.EncontrarActividadPorLinea(4);
-                    ActividadViewModelBase activ4 = programa.EncontrarActividadPorLinea(1);
-                    ActividadViewModelBase activ5 = programa.EncontrarActividadPorLinea(14);
+                    //ActividadViewModelBase activ = programa.EncontrarActividadPorLinea(20);
+                    //ActividadViewModelBase activ2 = programa.EncontrarActividadPorLinea(24);
+                    //ActividadViewModelBase activ3 = programa.EncontrarActividadPorLinea(4);
+                    //ActividadViewModelBase activ4 = programa.EncontrarActividadPorLinea(1);
+                    //ActividadViewModelBase activ5 = programa.EncontrarActividadPorLinea(14);
 
 
                     ResultadoCompilacion res = Compilar(programa.Gargar);
@@ -552,7 +538,14 @@ namespace DiagramDesigner
 
         void BarraMsgs_DoubleClickEvent(object o, DoubleClickEventArgs e)
         {
-            this.Esquema.PosicionarseEn(e.Fila, e.Columna);
+            if (Modo == ModoVisual.Texto)
+            {
+                this.Esquema.PosicionarseEn(e.Fila, e.Columna);
+            }
+            else
+            {
+
+            }
         }
 
         void ToolbarAplicacion_ModificarPropiedadesEjercicioEvent(object o, ModificarPropiedadesEjercicioEventArgs e)
@@ -719,29 +712,67 @@ namespace DiagramDesigner
             else
             {
                 BarraEstado.Estado = "Error en compilación";
-                ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer sr = this.Esquema.textEditor.TextArea.TextView.BackgroundRenderers[0] as
-                    ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer;
-                
-                foreach (var item in res.ListaErrores)
+
+                if (Modo == ModoVisual.Flujo)
                 {
-                    this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
-                    sr.AgregarLinea(item.Fila);
+                    MostrarResultadosModoGrafico(res);
+                }
+                else
+                {
+                    MostrarResultadosModoTexto(res);
                 }
 
-                if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
+                
+            }
+        }
+
+        private void MostrarResultadosModoTexto(ResultadoCompilacion res)
+        {
+            ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer sr = this.Esquema.textEditor.TextArea.TextView.BackgroundRenderers[0] as
+                    ICSharpCode.AvalonEdit.Rendering.SubrayadoRenderer;
+
+            foreach (var item in res.ListaErrores)
+            {
+                this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
+                sr.AgregarLinea(item.Fila);
+            }
+
+            if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
+            {
+                foreach (ResultadoCompilacionPascalLinea item in res.ResultadoCompPascal.ListaErrores)
                 {
-                    foreach (ResultadoCompilacionPascalLinea item in res.ResultadoCompPascal.ListaErrores)
+                    if (item.Mostrar)
                     {
-                        if (item.Mostrar)
-                        {
-                            this.BarraMsgs.AgregarError(item.ErrorTraducido, item.Fila, 0);
-                            sr.AgregarLinea(item.Fila);
-                        }
+                        this.BarraMsgs.AgregarError(item.ErrorTraducido, item.Fila, 0);
+                        sr.AgregarLinea(item.Fila);
                     }
                 }
-
-                this.Esquema.textEditor.TextArea.TextView.InvalidateLayer(ICSharpCode.AvalonEdit.Rendering.KnownLayer.Background);
             }
+
+            this.Esquema.textEditor.TextArea.TextView.InvalidateLayer(ICSharpCode.AvalonEdit.Rendering.KnownLayer.Background);
+        }
+
+        private void MostrarResultadosModoGrafico(ResultadoCompilacion res)
+        {
+
+            foreach (var item in res.ListaErrores)
+            {
+                ActividadViewModelBase act = ArchCargado.RepresentacionGrafica.EncontrarActividadPorLinea(item.Fila);
+                this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.NombreActividad);
+            }
+
+            if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
+            {
+                foreach (ResultadoCompilacionPascalLinea item in res.ResultadoCompPascal.ListaErrores)
+                {
+                    if (item.Mostrar)
+                    {
+                        ActividadViewModelBase act = ArchCargado.RepresentacionGrafica.EncontrarActividadPorLinea(item.Fila);
+                        this.BarraMsgs.AgregarErrorModoGrafico(item.ErrorTraducido, act.NombreActividad);
+                    }
+                }
+            }
+
         }
 
         private void RibbonWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

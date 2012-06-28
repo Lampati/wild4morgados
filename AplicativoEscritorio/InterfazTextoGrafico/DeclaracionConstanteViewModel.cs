@@ -12,6 +12,13 @@ namespace InterfazTextoGrafico
         public InterfazTextoGrafico.Enums.TipoDato Tipo {get; set;}
         public string Valor {get; set;}
 
+    
+
+          public override string  NombreActividad
+        {
+            get { return "DeclaracionConstante"; }
+        }
+
         public override string Gargar
         {
             get

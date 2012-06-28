@@ -131,8 +131,12 @@ namespace DiagramDesigner.UserControls.Mensajes
 
         }
 
-       
 
+        public void AgregarErrorModoGrafico(string msg, string figura)
+        {
+            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Error) { Figura = figura };
+            AgregarLinea(m);
+        }
        
 
         public void AgregarError(string msg, int fila, int columna)
@@ -162,7 +166,6 @@ namespace DiagramDesigner.UserControls.Mensajes
             }
             else
             {
-                men.Figura = "prueba";
                 this.lstVwMensajesModoGrafico.Items.Add(men);
             }
         }

@@ -10,7 +10,12 @@ namespace InterfazTextoGrafico
 
         public string LadoIzquierdo { get; set; }
         public string LadoDerecho { get; set; }
-        
+       
+        public override string  NombreActividad
+        {
+            get { return "Asignacion"; }
+        }
+
         public override string Gargar
         {
             get
@@ -95,5 +100,7 @@ namespace InterfazTextoGrafico
             this.LadoDerecho = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("LadoDerecho").value);
             
         }
+    
+
     }
 }

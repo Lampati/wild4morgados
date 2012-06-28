@@ -9,6 +9,11 @@ namespace InterfazTextoGrafico
     {
         public string Expresion { get; set; }
 
+        public override string NombreActividad
+        {
+            get { return ""; }
+        }
+
         public override string Gargar
         {
             get

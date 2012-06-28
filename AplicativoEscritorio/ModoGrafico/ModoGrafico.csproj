@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\WorkAreaViewModel.cs" />
+    <Compile Include="EventArgsClasses\WorkflowChangedEventArgs.cs" />
     <Compile Include="Views\SingleWorkAreaView.xaml.cs">
       <DependentUpon>SingleWorkAreaView.xaml</DependentUpon>
     </Compile>

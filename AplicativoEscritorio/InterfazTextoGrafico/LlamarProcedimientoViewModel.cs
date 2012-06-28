@@ -11,6 +11,13 @@ namespace InterfazTextoGrafico
         public string NombreProcedimiento { get; set; }
         public string Parametros { get; set; }
 
+      
+
+        public override string NombreActividad
+        {
+            get { return "LlamarProcedimiento"; }
+        }
+
         public override string Gargar
         {
             get

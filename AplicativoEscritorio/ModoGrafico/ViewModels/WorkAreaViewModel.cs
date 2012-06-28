@@ -7,9 +7,13 @@
     using ModoGrafico.Enums;
     using ModoGrafico.Tabs;
 using InterfazTextoGrafico;
+    using ModoGrafico.EventArgsClasses;
 
     public class WorkAreaViewModel : BaseViewModel
     {
+        public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
+        public event WorkflowChangedEventHandler WorkflowChangedEvent;
+
         private DelegateCommand<Tab> deleteTab;
         private ObservableCollection<Tab> tabs;
         private int cant = 1;
@@ -147,15 +151,19 @@ using InterfazTextoGrafico;
                 {
                     case TipoTab.TabItemFuncion:
                         t = new TabItemFuncion(proc);
+                        t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                         break;
                     case TipoTab.TabItemProcedimiento:
                         t = new TabItemProcedimiento(proc);
+                        t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                         break;
                     case TipoTab.TabItemPrincipal:
                         t = new TabItemPrincipal(proc);
+                        t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                         break;
                     case TipoTab.TabItemSalida:
                         t = new TabItemSalida(proc);
+                        t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                         break;
                 }           
                 t.Header = obj;
@@ -182,10 +190,12 @@ using InterfazTextoGrafico;
                 if (tipoTab == TipoTab.TabItemDeclaracionConstante)
                 {
                     t = new TabItemDeclaracionConstante(secuenciaViewModel);
+                    t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                 }
                 else if (tipoTab == TipoTab.TabItemDeclaracionVariable)
 	            {
                     t = new TabItemDeclaracionVariable(secuenciaViewModel);
+                    t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
 	            }
 
                 t.Header = obj;
@@ -202,9 +212,17 @@ using InterfazTextoGrafico;
             }
         }
 
-        internal void ExecuteAddVariablesGlobales(string obj, bool acomodar, SecuenciaViewModel secuenciaViewModel)
+        void t_WorkflowChangedEvent(object o, WorkflowChangedEventArgs args)
         {
-            throw new NotImplementedException();
+            WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
+        }
+        
+        private void WorkflowChangedEventFire(object tab, WorkflowChangedEventArgs workflowChangedEventArgs)
+        {
+            if (WorkflowChangedEvent != null)
+            {
+                WorkflowChangedEvent(tab, workflowChangedEventArgs);
+            }
         }
     }
 }

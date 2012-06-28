@@ -187,7 +187,6 @@ namespace DiagramDesigner
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
-                ArchCargado.RepresentacionGrafica = Esquema.RepresentacionGraficaActual;
                 GuardarADiscoFormatoNormal();
             }
         }

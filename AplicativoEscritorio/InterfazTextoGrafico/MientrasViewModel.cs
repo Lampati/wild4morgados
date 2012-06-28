@@ -12,6 +12,13 @@ namespace InterfazTextoGrafico
         public SecuenciaViewModel Cuerpo { get; set; }
         public string Condicion { get; set; }
 
+      
+
+        public override string NombreActividad
+        {
+            get { return "Mientras"; }
+        }
+
         public override string Gargar
         {
             get 
