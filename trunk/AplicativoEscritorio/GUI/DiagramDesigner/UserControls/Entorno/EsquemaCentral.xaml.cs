@@ -69,12 +69,13 @@ namespace DiagramDesigner.UserControls.Entorno
             get
             {
                 representacionGraficaActual = modoGrafico.ObtenerProgramaEnModoGrafico();
-                representacionGraficaActual.OrdenarProcedimientos();
+                archCargado.RepresentacionGrafica = representacionGraficaActual;
                 return representacionGraficaActual;
             }
             set
             {
                 representacionGraficaActual = value;
+                archCargado.RepresentacionGrafica = representacionGraficaActual;
                 modoGrafico.CargarProgramaEnModoGrafico(representacionGraficaActual);
             }
         }      
@@ -85,7 +86,7 @@ namespace DiagramDesigner.UserControls.Entorno
             {
                 if (Modo == ModoVisual.Texto)
                 {
-                    return this.textEditor.Text;
+                    return RepresentacionGraficaActual.Gargar;
                 }
                 else
                 {
@@ -98,10 +99,7 @@ namespace DiagramDesigner.UserControls.Entorno
                 {
                     this.textEditor.Text = value;
                 }
-                else
-                {
-                    this.textEditor.Text = value;
-                } 
+                
             }
         }
 

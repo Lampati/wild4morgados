@@ -203,7 +203,7 @@
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
 
-                    <GridViewColumn Header="Figura" Width="110" >
+                    <GridViewColumn Header="Figura" Width="150" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Figura}"

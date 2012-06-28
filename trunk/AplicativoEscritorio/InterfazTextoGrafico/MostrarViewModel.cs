@@ -11,6 +11,12 @@ namespace InterfazTextoGrafico
         public string ElementosAMostrar { get; set; }
         public bool ConPausa { get; set; }
 
+
+        public override string NombreActividad
+        {
+            get { return "Mostrar"; }
+        }
+
         public override string Gargar
         {
             get

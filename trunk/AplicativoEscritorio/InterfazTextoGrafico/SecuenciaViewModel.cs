@@ -13,6 +13,12 @@ namespace InterfazTextoGrafico
         public SecuenciaViewModel()
         {
             ListaActividades = new List<ActividadViewModelBase>();
+            
+        }
+
+        public override string NombreActividad
+        {
+            get { return "Secuencia"; }
         }
 
         public override string Gargar

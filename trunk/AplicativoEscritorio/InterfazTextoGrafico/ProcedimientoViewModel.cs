@@ -15,6 +15,13 @@ namespace InterfazTextoGrafico
         public TipoRutina Tipo { get; set; }
         public short Orden { get; set; }
 
+      
+
+        public override string NombreActividad
+        {
+            get { return "Rutina"; }
+        }
+
         public override string Gargar
         {
             get

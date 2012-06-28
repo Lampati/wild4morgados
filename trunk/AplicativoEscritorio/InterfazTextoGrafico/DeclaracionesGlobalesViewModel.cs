@@ -10,6 +10,11 @@ namespace InterfazTextoGrafico
         public SecuenciaViewModel ConstantesGlobales { get; set; }
         public SecuenciaViewModel VariablesGlobales { get; set; }
 
+        public override string NombreActividad
+        {
+            get { return ""; }
+        }
+
         public override string Gargar
         {
             get

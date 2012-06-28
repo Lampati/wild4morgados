@@ -16,9 +16,13 @@
     using ModoGrafico.Tabs;
 using InterfazTextoGrafico;
 using ModoGrafico.Enums;
+    using ModoGrafico.EventArgsClasses;
 
     public abstract class Tab : BaseViewModel
     {
+        public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
+        public event WorkflowChangedEventHandler WorkflowChangedEvent;
+
         private WorkflowDesigner wd;
         private string header;
         internal Secuencia SecuenciaInicialProcedimiento {get; set;}
@@ -29,6 +33,7 @@ using ModoGrafico.Enums;
 
         public Tab()
         {
+            
         }
 
         ~Tab()
@@ -45,6 +50,7 @@ using ModoGrafico.Enums;
                 if (Object.Equals(wd, null))
                 {
                     wd = new WorkflowDesigner();
+                    wd.ModelChanged += new EventHandler(wd_ModelChanged);
                     
                     if (this is TabItemPrincipal)
                     {
@@ -77,7 +83,7 @@ using ModoGrafico.Enums;
 
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
                             aux.AsignarDatos(procViewModel.Cuerpo);
-
+                            
                             SecuenciaInicialProcedimiento = aux;
                         }
                         else
@@ -152,6 +158,20 @@ using ModoGrafico.Enums;
                 }                   
 
                 return wd.View;
+            }
+        }
+
+        void wd_ModelChanged(object sender, EventArgs e)
+        {
+            WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
+
+        }
+
+        private void WorkflowChangedEventFire(Tab tab, WorkflowChangedEventArgs workflowChangedEventArgs)
+        {
+            if (WorkflowChangedEvent != null)
+            {
+                WorkflowChangedEvent(tab, workflowChangedEventArgs);
             }
         }
 

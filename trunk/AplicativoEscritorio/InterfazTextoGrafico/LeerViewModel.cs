@@ -9,6 +9,12 @@ namespace InterfazTextoGrafico
     {
         public string Parametro { get; set; }
 
+       
+        public override string NombreActividad
+        {
+            get { return "Leer"; }
+        }
+
         public override string Gargar
         {
             get

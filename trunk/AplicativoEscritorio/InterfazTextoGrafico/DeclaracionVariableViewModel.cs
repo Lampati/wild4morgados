@@ -10,6 +10,13 @@ namespace InterfazTextoGrafico
         public string Nombre { get; set; }
         public InterfazTextoGrafico.Enums.TipoDato Tipo { get; set; }
 
+     
+
+        public override string  NombreActividad
+        {
+            get { return "DeclaracionVariable"; }
+        }
+
         public override string Gargar
         {
             get

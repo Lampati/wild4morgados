@@ -16,6 +16,8 @@
         public delegate void TipoTabCambiadoEventHandler(object o, TipoTabCambiadoEventArgs e);
         public event TipoTabCambiadoEventHandler CambioTabEvent;
 
+        public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
+        public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
         public WorkAreaView()
         {
@@ -37,6 +39,7 @@
         {
             
             this.DataContext = new WorkAreaViewModel();
+            ((WorkAreaViewModel)this.DataContext).WorkflowChangedEvent += new WorkAreaViewModel.WorkflowChangedEventHandler(WorkAreaView_WorkflowChangedEvent);
 
             ProcedimientoViewModel procPrincipal = programa.Procedimientos.Find(y => y.Tipo == InterfazTextoGrafico.Enums.TipoRutina.Principal);
             ProcedimientoViewModel procSalida = programa.Procedimientos.Find(y => y.Tipo == InterfazTextoGrafico.Enums.TipoRutina.Salida);
@@ -55,6 +58,19 @@
 
             ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("     +     ", false, TipoTab.TabItemAgregar);
             
+        }
+
+        void WorkAreaView_WorkflowChangedEvent(object o, WorkflowChangedEventArgs args)
+        {
+            WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
+        }
+
+        private void WorkflowChangedEventFire(object tab, WorkflowChangedEventArgs workflowChangedEventArgs)
+        {
+            if (WorkflowChangedEvent != null)
+            {
+                WorkflowChangedEvent(tab, workflowChangedEventArgs);
+            }
         }
 
         public ProgramaViewModel ObtenerProgramaDiagramado()
@@ -195,6 +211,8 @@
 
             return programa;
         }
+
+       
 
         void tab_CambioTabEvent(object o, TipoTabCambiadoEventArgs e)
         {
