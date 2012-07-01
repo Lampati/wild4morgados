@@ -92,8 +92,11 @@ namespace InterfazTextoGrafico
                 this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
             }
 
-            sl.Add(int.MaxValue, principal);
-            sl.Add(int.MaxValue - 1, salida);
+            if (!Object.Equals(salida, null))
+                sl.Add(int.MaxValue, principal);
+
+            if (!Object.Equals(principal, null))
+                sl.Add(int.MaxValue - 1, salida);
 
             this.Procedimientos = sl.Values.Cast<ProcedimientoViewModel>().ToList();
         }
