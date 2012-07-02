@@ -508,6 +508,7 @@ namespace DiagramDesigner
 
         void ToolbarAplicacion_CompilacionEvent(object o, CompilacionEventArgs e)
         {
+
             if (e.EsEjecucion)
             {
                 if (this.Modo == ModoVisual.Texto)
@@ -527,6 +528,7 @@ namespace DiagramDesigner
                 }
                 else
                 {
+                    
                     Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
                 }
             }
@@ -761,7 +763,7 @@ namespace DiagramDesigner
 
             foreach (var item in res.ListaErrores)
             {
-                ActividadViewModelBase act = ArchCargado.RepresentacionGrafica.EncontrarActividadPorLinea(item.Fila);
+                ActividadViewModelBase act = this.Esquema.RepresentacionGraficaActual.EncontrarActividadPorLinea(item.Fila);
                 this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.Id, act.NombreActividad, string.Empty, act.ActividadReferenciada);
             }
 
@@ -771,7 +773,7 @@ namespace DiagramDesigner
                 {
                     if (item.Mostrar)
                     {
-                        ActividadViewModelBase act = ArchCargado.RepresentacionGrafica.EncontrarActividadPorLinea(item.Fila);
+                        ActividadViewModelBase act = this.Esquema.RepresentacionGraficaActual.EncontrarActividadPorLinea(item.Fila);
                         this.BarraMsgs.AgregarErrorModoGrafico(item.ErrorTraducido, act.Id, act.NombreActividad, string.Empty, act.ActividadReferenciada);
                     }
                 }

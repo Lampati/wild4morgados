@@ -12,6 +12,8 @@
     using System;
     using LibreriaActividades;
     using System.Activities;
+    using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.Model;
 
     /// <summary>
     /// Interaction logic for BrandView.xaml
@@ -291,20 +293,19 @@
                 || tipoActividad == typeof(DeclaracionArreglo)
                 )
             {
-                actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesignerDeclaraciones);
+                //actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesignerDeclaraciones);
             }
             else
             {
-                actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesigner);
+                //actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesigner);
             }
 
             //no anda bien pq no se generan siempre los ID de una
             //Activity actAPonerFoco = (WorkflowInspectionServices.Resolve(actividadRoot, actividad.Id));
 
-            
-            
+            //List<Activity> listaActividades = new List<Activity>((WorkflowInspectionServices.GetActivities(actividadRoot)));
 
-            List<Activity> listaActividades = new List<Activity>((WorkflowInspectionServices.GetActivities(actividadRoot)));
+            actividad.ContieneError = true;
 
             
         }

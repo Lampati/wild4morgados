@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ActividadBase.cs" />
     <Compile Include="ActividadFactory.cs" />
+    <Compile Include="ActivityDesignerBase.cs" />
     <Compile Include="Asignacion.cs" />
     <Compile Include="AsignacionDesigner.xaml.cs">
       <DependentUpon>AsignacionDesigner.xaml</DependentUpon>

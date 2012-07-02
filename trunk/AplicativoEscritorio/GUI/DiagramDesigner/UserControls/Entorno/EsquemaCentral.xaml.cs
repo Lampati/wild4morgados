@@ -87,11 +87,12 @@ namespace DiagramDesigner.UserControls.Entorno
             {
                 if (Modo == ModoVisual.Texto)
                 {
-                    return RepresentacionGraficaActual.Gargar;
+                    return this.textEditor.Text;
+                    
                 }
                 else
                 {
-                    return this.textEditor.Text;
+                    return RepresentacionGraficaActual.Gargar;
                 }
             }
             set
