@@ -23,6 +23,8 @@ namespace ModoGrafico.Tabs
             actividadViewModel = proc;
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
             Tipo = Enums.TipoTab.TabItemFuncion;
+
+            header = proc.Nombre.ToUpper().Trim();
         }
 
         

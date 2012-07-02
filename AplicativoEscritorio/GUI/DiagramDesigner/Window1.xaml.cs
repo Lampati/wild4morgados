@@ -33,6 +33,7 @@ using DiagramDesigner.DialogWindows;
 using DataAccess.Entidades;
 using DataAccess;
 using InterfazTextoGrafico;
+using LibreriaActividades;
 
 namespace DiagramDesigner
 {
@@ -544,7 +545,10 @@ namespace DiagramDesigner
             }
             else
             {
-
+                if (e.ActividadReferenciada != null)
+                {
+                    this.Esquema.PonerFocoEnActividad(e.FiguraProcedimientoNombre, e.ActividadReferenciada);
+                }
             }
         }
 
@@ -758,7 +762,7 @@ namespace DiagramDesigner
             foreach (var item in res.ListaErrores)
             {
                 ActividadViewModelBase act = ArchCargado.RepresentacionGrafica.EncontrarActividadPorLinea(item.Fila);
-                this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.NombreActividad);
+                this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.Id, act.NombreActividad, string.Empty, act.ActividadReferenciada);
             }
 
             if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
@@ -768,7 +772,7 @@ namespace DiagramDesigner
                     if (item.Mostrar)
                     {
                         ActividadViewModelBase act = ArchCargado.RepresentacionGrafica.EncontrarActividadPorLinea(item.Fila);
-                        this.BarraMsgs.AgregarErrorModoGrafico(item.ErrorTraducido, act.NombreActividad);
+                        this.BarraMsgs.AgregarErrorModoGrafico(item.ErrorTraducido, act.Id, act.NombreActividad, string.Empty, act.ActividadReferenciada);
                     }
                 }
             }

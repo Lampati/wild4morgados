@@ -31,7 +31,8 @@ namespace LibreriaActividades
             {
                 LeerViewModel retorno = new LeerViewModel();
                 retorno.Parametro = this.Parametro;
-
+                retorno.Id = Id;
+                retorno.ActividadReferenciada = this;
                 return retorno;
             }
         }

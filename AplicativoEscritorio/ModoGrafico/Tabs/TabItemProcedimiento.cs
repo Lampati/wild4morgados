@@ -23,6 +23,7 @@ namespace ModoGrafico.Tabs
             actividadViewModel = proc;
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
             Tipo = Enums.TipoTab.TabItemProcedimiento;
+            header = proc.Nombre.ToUpper().Trim();
         }
 
         public override int Orden

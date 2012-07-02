@@ -20,5 +20,7 @@ namespace DiagramDesigner.UserControls.Entorno
                 ModoTextoCambiarPosicionEvent(this, e);
             }
         }
+
+      
     }
 }

@@ -22,6 +22,7 @@ using DiagramDesigner.EventArgsClasses;
 using AplicativoEscritorio.DataAccess.Interfases;
 using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
+using LibreriaActividades;
 
 
 namespace DiagramDesigner.UserControls.Entorno
@@ -260,6 +261,11 @@ namespace DiagramDesigner.UserControls.Entorno
                 grdTexto.MaxHeight = height;
                 grdVisual.MaxWidth = width;
                 grdVisual.MaxHeight = height;
+        }
+
+        internal void PonerFocoEnActividad(string p, object actividadBase)
+        {
+            modoGrafico.PonerFocoEnActividad(p, actividadBase);
         }
     }
 

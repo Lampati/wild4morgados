@@ -31,10 +31,10 @@ namespace LibreriaActividades
             get
             {
                 LlamarProcedimientoViewModel activ = new LlamarProcedimientoViewModel();
-
+                activ.Id = Id;
                 activ.NombreProcedimiento = this.NombreProcedimiento;
                 activ.Parametros = this.Parametros;
-             
+                activ.ActividadReferenciada = this;
 
                 return activ;
             }

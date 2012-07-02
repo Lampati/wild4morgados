@@ -50,9 +50,9 @@ namespace LibreriaActividades
             get
             {
                 DeclaracionVariableViewModel activ = new DeclaracionVariableViewModel();
-
+                activ.Id = Id;
                 activ.Nombre = this.NombreVariable;
-
+                activ.ActividadReferenciada = this;
                 switch (this.Tipo)
                 {
                     case eTipoVariable.Numero:

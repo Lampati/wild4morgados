@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DiagramDesigner.Enums;
+using LibreriaActividades;
 
 namespace DiagramDesigner.DTO
 {
@@ -12,7 +13,11 @@ namespace DiagramDesigner.DTO
         private int columna;
         private TipoMensaje tipo;
         private string contenido;
-        private string figura;
+        private string figuraId;
+        private string figuraNombre;
+        private string figuraNombreProc;
+        private object actividadReferenciada;
+        
 
         public int Linea
         {
@@ -38,11 +43,30 @@ namespace DiagramDesigner.DTO
             set { this.contenido = value; }
         }
 
-        public string Figura
+        public string FiguraId
         {
-            get { return this.figura; }
-            set { this.figura = value; }
+            get { return this.figuraId; }
+            set { this.figuraId = value; }
         }
+
+        public string FiguraNombre
+        {
+            get { return this.figuraNombre; }
+            set { this.figuraNombre = value; }
+        }
+
+        public string FiguraNombreProc
+        {
+            get { return this.figuraNombreProc; }
+            set { this.figuraNombreProc = value; }
+        }
+
+        public object ActividadReferenciada
+        {
+            get { return this.actividadReferenciada; }
+            set { this.actividadReferenciada = value; }
+        }
+        
 
         public Mensaje(string msg) : this(msg, TipoMensaje.Informacion)
         {

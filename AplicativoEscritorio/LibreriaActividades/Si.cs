@@ -86,7 +86,8 @@ namespace LibreriaActividades
                 retorno.Condicion = this.Condicion;
                 retorno.BranchVerdadero = ((Secuencia)this.BranchVerdadero).Datos as SecuenciaViewModel;
                 retorno.BranchFalso = ((Secuencia)this.BranchFalso).Datos as SecuenciaViewModel;
-
+                retorno.Id = Id;
+                retorno.ActividadReferenciada = this;
                 return retorno;
             }
         }

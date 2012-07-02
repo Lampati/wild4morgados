@@ -19,7 +19,7 @@
             <StackPanel>
                 <sapt:ToolboxControl Name="Toolbox">
                 </sapt:ToolboxControl>
-                <Button Name="btnEjecutar" Height="50" Content="Ejecutar" Margin="5" Click="btnEjecutar_Click"></Button>
+                <Button Name="btnEjecutar" Height="50" Content="Ejecutar" Margin="5" ></Button>
             </StackPanel>
         </Border>
         <Border Grid.Column="1" Name="DesignerBorder">

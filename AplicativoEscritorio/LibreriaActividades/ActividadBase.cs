@@ -9,6 +9,9 @@ namespace LibreriaActividades
 {
     public abstract class ActividadBase : NativeActivity
     {
+
+        private static int _contadorGlobalAct = 0;
+
         private bool sePuedeEliminar = true;
 
         public abstract void Ejecutar(StringBuilder sb);
@@ -23,6 +26,21 @@ namespace LibreriaActividades
         public abstract ActividadViewModelBase Datos
         {
             get;
+        }
+
+        protected long idPropio;
+        public long IdPropio
+        {
+            get
+            {
+                return idPropio;
+            }
+
+        }
+
+        public ActividadBase() : base()
+        {
+            idPropio = ++_contadorGlobalAct;
         }
 
         public abstract void AsignarDatos(ActividadViewModelBase datos);

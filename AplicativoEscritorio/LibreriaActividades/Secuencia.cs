@@ -58,12 +58,12 @@ namespace LibreriaActividades
             {
                 SecuenciaViewModel retorno = new SecuenciaViewModel();
                 retorno.ListaActividades = new List<ActividadViewModelBase>();
-
+                retorno.Id = Id;
                 foreach (ActividadBase item in this.Activities)
                 {
                     retorno.ListaActividades.Add(item.Datos);
                 }
-
+                retorno.ActividadReferenciada = this;
                 return retorno;  
             }
         

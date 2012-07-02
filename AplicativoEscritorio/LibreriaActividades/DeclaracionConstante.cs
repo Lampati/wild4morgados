@@ -52,7 +52,8 @@ namespace LibreriaActividades
 
                 activ.Nombre = this.NombreConstante;
                 activ.Valor = this.Valor;
-
+                activ.Id = Id;
+                activ.ActividadReferenciada = this;
                 switch (this.Tipo)
                 {
                     case eTipoVariable.Numero:

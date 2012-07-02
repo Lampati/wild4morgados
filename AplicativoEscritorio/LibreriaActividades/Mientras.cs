@@ -55,7 +55,8 @@ namespace LibreriaActividades
                 MientrasViewModel retorno = new MientrasViewModel();
                 retorno.Condicion = this.Condicion;
                 retorno.Cuerpo = ((Secuencia)this.Cuerpo).Datos as SecuenciaViewModel;
-
+                retorno.Id = Id;
+                retorno.ActividadReferenciada = this;
                 return retorno;
             }
         }

@@ -16,6 +16,12 @@ namespace LibreriaActividades
         public string Elemento { get; set; }
         public bool ConPausa { get; set; }
 
+        public Mostrar()
+            : base()
+        {
+
+        }
+
         public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.Elemento))
@@ -33,6 +39,8 @@ namespace LibreriaActividades
                 MostrarViewModel activ = new MostrarViewModel();
                 activ.ElementosAMostrar = this.Elemento;
                 activ.ConPausa = this.ConPausa;
+                activ.Id = Id;
+                activ.ActividadReferenciada = this;
                 return activ;
             }
 
