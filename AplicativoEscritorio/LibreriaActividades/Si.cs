@@ -85,7 +85,10 @@ namespace LibreriaActividades
                 SiViewModel retorno = new SiViewModel();
                 retorno.Condicion = this.Condicion;
                 retorno.BranchVerdadero = ((Secuencia)this.BranchVerdadero).Datos as SecuenciaViewModel;
-                retorno.BranchFalso = ((Secuencia)this.BranchFalso).Datos as SecuenciaViewModel;
+                if (this.BranchFalso != null)
+                {
+                    retorno.BranchFalso = ((Secuencia)this.BranchFalso).Datos as SecuenciaViewModel;
+                }
                 retorno.Id = Id;
                 retorno.ActividadReferenciada = this;
                 return retorno;

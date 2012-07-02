@@ -21,7 +21,7 @@ namespace LibreriaActividades
         public Asignacion() 
             : base()
         {
-
+            
         }
 
         public override void Ejecutar(StringBuilder sb)
