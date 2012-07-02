@@ -15,6 +15,7 @@ using DiagramDesigner.DTO;
 using DiagramDesigner.Enums;
 using DiagramDesigner.EventArgsClasses;
 using Globales.Enums;
+using LibreriaActividades;
 
 namespace DiagramDesigner.UserControls.Mensajes
 {
@@ -126,15 +127,15 @@ namespace DiagramDesigner.UserControls.Mensajes
             if (indice != -1)
             {
                 Mensaje mens = mensajes[indice];
-                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna, mens.Figura));
+                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna, mens.FiguraId, mens.FiguraNombre, mens.FiguraNombreProc, mens.ActividadReferenciada));
             }
 
         }
 
 
-        public void AgregarErrorModoGrafico(string msg, string figura)
+        public void AgregarErrorModoGrafico(string msg, string figuraId, string figuraProc, string figuraNombre, object act)
         {
-            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Error) { Figura = figura };
+            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Error) { FiguraId = figuraId, FiguraNombreProc = figuraProc, ActividadReferenciada = act };
             AgregarLinea(m);
         }
        

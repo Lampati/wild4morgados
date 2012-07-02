@@ -7,6 +7,11 @@
     using ModoGrafico.EventArgsClasses;
     using InterfazTextoGrafico;
     using System.Collections.Generic;
+    using ModoGrafico.Tabs;
+    using ModoGrafico.Helpers;
+    using System;
+    using LibreriaActividades;
+    using System.Activities;
 
     /// <summary>
     /// Interaction logic for BrandView.xaml
@@ -249,6 +254,59 @@
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)
+        {
+            WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
+            List<Tab> lista = new List<Tab>(workAreaVM.Tabs);
+            Tab tabElegido;
+
+            if (procedimiento.ToUpper().Trim().Equals("PRINCIPAL"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemPrincipal));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("SALIDA"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemSalida));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("DECLARACIONCONSTANTE"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemDeclaracionConstante));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("DECLARACIONVARIABLE"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemDeclaracionVariable));
+            }
+            else
+            {
+                tabElegido = lista.Find(x => x.Header.ToUpper().Trim().Equals(procedimiento.ToUpper().Trim()));
+            }
+
+            Type tipoActividad = actividad.GetType();
+            Activity actividadRoot;
+
+            if (tipoActividad == typeof(DeclaracionVariable)
+                || tipoActividad == typeof(DeclaracionConstante)
+                || tipoActividad == typeof(DeclaracionArreglo)
+                )
+            {
+                actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesignerDeclaraciones);
+            }
+            else
+            {
+                actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesigner);
+            }
+
+            //no anda bien pq no se generan siempre los ID de una
+            //Activity actAPonerFoco = (WorkflowInspectionServices.Resolve(actividadRoot, actividad.Id));
+
+            
+            
+
+            List<Activity> listaActividades = new List<Activity>((WorkflowInspectionServices.GetActivities(actividadRoot)));
+
+            
         }
     }
 }

@@ -20,11 +20,14 @@ using ModoGrafico.Enums;
 
     public abstract class Tab : BaseViewModel
     {
+        
+
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
         private WorkflowDesigner wd;
-        private string header;
+        private WorkflowDesigner wdDecl;
+        protected string header;
         internal Secuencia SecuenciaInicialProcedimiento {get; set;}
         internal Secuencia SecuenciaInicialDeclaraciones {get; set;}
         AutoResetEvent syncEvent = new AutoResetEvent(false);
@@ -41,6 +44,22 @@ using ModoGrafico.Enums;
             this.wd = null;
         }
 
+        public WorkflowDesigner WorkflowDesigner
+        {
+            get
+            {
+                return wd;
+            }
+        }
+
+        public WorkflowDesigner WorkflowDesignerDeclaraciones
+        {
+            get
+            {
+                return wdDecl;
+            }
+        }
+
         public UIElement WF
         {
             get {
@@ -51,6 +70,7 @@ using ModoGrafico.Enums;
                 {
                     wd = new WorkflowDesigner();
                     wd.ModelChanged += new EventHandler(wd_ModelChanged);
+                    
                     
                     if (this is TabItemPrincipal)
                     {
@@ -144,6 +164,7 @@ using ModoGrafico.Enums;
                                   {
                                       
                                       wd.Load(SecuenciaInicialProcedimiento);
+                                      wd.Flush();
                                       this.ReconstruirContextMenu(wd);
                                       if (((Grid)wd.View).Children.Count > 0)
                                       {
@@ -155,27 +176,14 @@ using ModoGrafico.Enums;
                           }
                       ));
                     thread.Start();                    
-                }                   
+                }
 
+                
                 return wd.View;
             }
         }
 
-        void wd_ModelChanged(object sender, EventArgs e)
-        {
-            WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
-
-        }
-
-        private void WorkflowChangedEventFire(Tab tab, WorkflowChangedEventArgs workflowChangedEventArgs)
-        {
-            if (WorkflowChangedEvent != null)
-            {
-                WorkflowChangedEvent(tab, workflowChangedEventArgs);
-            }
-        }
-
-        private WorkflowDesigner wdDecl;
+      
 
         public UIElement WFDeclaraciones
         {
@@ -187,6 +195,7 @@ using ModoGrafico.Enums;
                 if (Object.Equals(wdDecl, null))
                 {
                     wdDecl = new WorkflowDesigner();
+                    wdDecl.ModelChanged += new EventHandler(wd_ModelChanged);
 
                     if (actividadViewModel != null)
                     {
@@ -214,7 +223,8 @@ using ModoGrafico.Enums;
                                   {
                                       
                                       wdDecl.Load(SecuenciaInicialDeclaraciones);
-                                      this.ReconstruirContextMenu(wdDecl);
+                                      wdDecl.Flush();
+                                      this.ReconstruirContextMenu(wdDecl);                                      
                                       if (((Grid)wdDecl.View).Children.Count > 0)
                                       {
                                           System.Activities.Presentation.View.DesignerView dv = ((Grid)wdDecl.View).Children[0] as System.Activities.Presentation.View.DesignerView;
@@ -229,6 +239,22 @@ using ModoGrafico.Enums;
                 return wdDecl.View;
             }
         }
+
+        void wd_ModelChanged(object sender, EventArgs e)
+        {
+            WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
+
+        }
+
+        private void WorkflowChangedEventFire(Tab tab, WorkflowChangedEventArgs workflowChangedEventArgs)
+        {
+            if (WorkflowChangedEvent != null)
+            {
+                WorkflowChangedEvent(tab, workflowChangedEventArgs);
+            }
+        }
+
+        
 
         void ReconstruirContextMenu(WorkflowDesigner wd)
         {

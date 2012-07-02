@@ -33,18 +33,14 @@ namespace ModoGrafico
         public delegate void ModoGraficoModificadoEventHandler(object o, ModoGraficoModificadoEventArgs e);
         public event ModoGraficoModificadoEventHandler ModoGraficoModificadoEvent;
 
-
-     
-
         public ProgramadorGrafico()
         {
             InitializeComponent();
             this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
             this.WorkArea.WorkflowChangedEvent += new Views.WorkAreaView.WorkflowChangedEventHandler(WorkArea_WorkflowChangedEvent);
             
-            ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+            //ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
-           
 
         void WorkArea_WorkflowChangedEvent(object o, WorkflowChangedEventArgs args)
         {
@@ -58,7 +54,6 @@ namespace ModoGrafico
                 ModoGraficoModificadoEvent(sender, e);
             }
         }
-
 
         public void CargarProgramaEnModoGrafico(ProgramaViewModel programa)
         {
@@ -97,25 +92,7 @@ namespace ModoGrafico
             thread.Start();
         }
 
-        void EditableTabHeaderControl_ClickEvento(object sender, MouseButtonEventArgs e)
-        {
-            //System.Threading.Thread thread = new System.Threading.Thread(
-            //    new System.Threading.ThreadStart(
-            //      delegate()
-            //      {
-            //          Application.Current.Dispatcher.Invoke(
-            //            System.Windows.Threading.DispatcherPriority.Normal,
-            //            new Action(
-            //              delegate()
-            //              {
-            //                  this.ActualizarToolbox(sender);
-            //              }
-            //          ));
-            //      }
-            //  ));
-
-            //thread.Start();
-        }
+   
 
         private void ActualizarToolbox(object sender, TipoTab tipoDeTab)
         {
@@ -213,81 +190,9 @@ namespace ModoGrafico
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
 
-        /*private void ConstruirOrdenRecursivo(Dictionary<string, string> codigosFuncProc, System.Collections.SortedList sl, string codigo, ref int orden, string invocador)
+        public void PonerFocoEnActividad(string procedimiento, object actividadBase)
         {
-            if (String.IsNullOrEmpty(codigo)) return;
-
-            bool encontroLlamado = false;
-            foreach (string key in codigosFuncProc.Keys)
-            {
-                Regex regex = new Regex(key + "[\\s]*[(].*[)]", RegexOptions.IgnoreCase);
-                int ixComienzo = codigo.LastIndexOf("COMENZAR");
-                if (ixComienzo < 0)
-                    throw new Exception("No se encontró la sentencia COMENZAR, error grave."); //no debería pasar jamás.
-
-                if (regex.IsMatch(codigo, ixComienzo))
-                {
-                    this.detector.AgregarLlamada(invocador, key);
-                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
-                    if (!sl.ContainsValue(codigo))
-                    {
-                        sl.Add(orden++, codigo);
-                        encontroLlamado = true;
-                    }
-                }
-            }
-
-            if (!encontroLlamado)
-                if (!sl.ContainsValue(codigo))
-                {
-                    this.detector.AgregarLlamada(invocador);
-                    sl.Add(orden++, codigo);
-                }
-        }
-
-        private DetectorLoops detector;*/
-
-        private void btnEjecutar_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-               /* StringBuilder sb = new StringBuilder();
-                System.Collections.SortedList sl = new System.Collections.SortedList();
-                Dictionary<string, string> codigosFuncProc = new Dictionary<string, string>();
-                this.detector = new DetectorLoops();
-
-                //Acá comienzo con el asunto del orden de las func/proc
-                foreach (Tab t in this.WorkArea.tab.ItemSource)
-                    if (t is TabItemAgregar) continue;
-                    else if (t is TabItemPrincipal || t is TabItemDeclaracionConstante
-                        || t is TabItemDeclaracionVariable || t is TabItemSalida)
-                    {
-                        StringBuilder sbStandards = new StringBuilder();
-                        t.Ejecutar(sbStandards);
-                        sl.Add(t.Orden, sbStandards.ToString());
-                    }
-                    else
-                    {
-                        StringBuilder sbFuncProc = new StringBuilder();
-                        t.Ejecutar(sbFuncProc);
-                        codigosFuncProc.Add(t.Header, sbFuncProc.ToString());
-                    }
-
-                int orden = 10;
-                foreach (string key in codigosFuncProc.Keys)
-                {
-                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
-                }
-
-                foreach (string t in sl.Values)
-                    sb.Append(t);
-
-                MessageBox.Show(sb.ToString());*/
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error al generar el código", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            WorkArea.PonerFocoEnActividad(procedimiento, actividadBase as ActividadBase);
         }
     }
 }

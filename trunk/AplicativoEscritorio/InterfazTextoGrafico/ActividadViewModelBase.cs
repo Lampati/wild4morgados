@@ -23,12 +23,56 @@ namespace InterfazTextoGrafico
     [System.Xml.Serialization.XmlInclude(typeof(SiViewModel))]
     public abstract class ActividadViewModelBase
     {
+        private static int _contadorGlobalAct = 0;
+
+        protected string id;
+        protected long idPropio;
+
+        protected object actividadReferenciada;
+
         protected int lineaComienzo;
         protected int lineaFinal;
 
         public abstract string Gargar { get; }
         public abstract string DescripcionLineas { get; }
         public abstract string NombreActividad { get; }
+
+        
+
+        public long IdPropio
+        {
+            get
+            {
+                return idPropio;
+            }        
+
+        }
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+             set
+            {
+                id = value;
+            }
+        }
+
+        public object ActividadReferenciada
+        {
+            get
+            {
+                return actividadReferenciada;
+            }
+            set
+            {
+                actividadReferenciada = value;
+            }
+        }
+
+        
 
         public int LineaComienzo
         {
@@ -44,6 +88,11 @@ namespace InterfazTextoGrafico
             {
                 return lineaFinal;
             }
+        }
+
+        public ActividadViewModelBase()
+        {
+            idPropio = ++_contadorGlobalAct;
         }
 
         public abstract void ToXML(XMLCreator xml);

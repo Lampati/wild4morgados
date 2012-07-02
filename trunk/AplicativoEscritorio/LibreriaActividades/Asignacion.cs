@@ -13,8 +13,16 @@ namespace LibreriaActividades
     [ToolboxBitmap(typeof(Asignacion), "Resources.Asignacion.png")]
     public class Asignacion : ActividadBase
     {
+           
+
         public string LadoIzquierdo { get; set; }
         public string LadoDerecho { get; set; }
+
+        public Asignacion() 
+            : base()
+        {
+
+        }
 
         public override void Ejecutar(StringBuilder sb)
         {
@@ -31,8 +39,10 @@ namespace LibreriaActividades
             get
             {
                 AsignacionViewModel activ = new AsignacionViewModel();
+                activ.Id = Id;                
                 activ.LadoIzquierdo = this.LadoIzquierdo;
                 activ.LadoDerecho = this.LadoDerecho;
+                activ.ActividadReferenciada = this;
                 return activ;
             }
           

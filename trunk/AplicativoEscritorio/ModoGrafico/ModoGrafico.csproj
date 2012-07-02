@@ -55,6 +55,7 @@
     <Compile Include="Enums\TipoTab.cs" />
     <Compile Include="EventArgsClasses\ModoGraficoModificadoEventArgs.cs" />
     <Compile Include="EventArgsClasses\TipoTabCambiadoEventArgs.cs" />
+    <Compile Include="Helpers\WorkflowHelpers.cs" />
     <Compile Include="ProgramadorGrafico.xaml.cs">
       <DependentUpon>ProgramadorGrafico.xaml</DependentUpon>
     </Compile>

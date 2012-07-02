@@ -51,10 +51,10 @@ namespace LibreriaActividades
             get
             {
                 DeclaracionArregloViewModel activ = new DeclaracionArregloViewModel();
-
+                activ.Id = Id;
                 activ.Nombre = this.Nombre;
                 activ.Tope = this.Tope;
-
+                activ.ActividadReferenciada = this;
                 switch (this.Tipo)
                 {
                     case eTipoVariable.Numero:
