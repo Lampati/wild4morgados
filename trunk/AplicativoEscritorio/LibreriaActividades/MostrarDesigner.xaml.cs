@@ -20,6 +20,13 @@ namespace LibreriaActividades
         public MostrarDesigner()
         {
             InitializeComponent();
+
+            if (!yaCreada)
+            {
+                yaCreada = true;
+                GlobalActivityStore.AgregarSiNoExiste(this);
+            }
+            
         }
     }
 }

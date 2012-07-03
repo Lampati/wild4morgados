@@ -7,9 +7,17 @@ using System.Collections.ObjectModel;
 
 namespace LibreriaActividades
 {
-    class ActivityDesignerBase : ActivityDesigner
+    public class ActivityDesignerBase : ActivityDesigner
     {
+        public long IdPropio
+        {
+            get
+            {
+                return Convert.ToInt64(this.ModelItem.Properties["IdPropio"].Value.ToString());
+            }
+        }
 
-       
+
+        protected bool yaCreada = false;
     }
 }
