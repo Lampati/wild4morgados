@@ -39,7 +39,7 @@ namespace LibreriaActividades
                 MostrarViewModel activ = new MostrarViewModel();
                 activ.ElementosAMostrar = this.Elemento;
                 activ.ConPausa = this.ConPausa;
-                activ.Id = Id;
+                activ.Id = Id;                
                 activ.ActividadReferenciada = this;
                 return activ;
             }

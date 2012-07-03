@@ -293,11 +293,11 @@
                 || tipoActividad == typeof(DeclaracionArreglo)
                 )
             {
-                //actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesignerDeclaraciones);
+                actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesignerDeclaraciones);
             }
             else
             {
-                //actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesigner);
+                actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesigner);
             }
 
             //no anda bien pq no se generan siempre los ID de una
@@ -307,7 +307,11 @@
 
             actividad.ContieneError = true;
 
-            
+            ActivityDesignerBase diag = GlobalActivityStore._actividades.Find(x => x.IdPropio == actividad.IdPropio);
+
+            diag.BringIntoView();
+
+            //WorkflowHelpers.Bla(tabElegido.WorkflowDesigner);
         }
     }
 }

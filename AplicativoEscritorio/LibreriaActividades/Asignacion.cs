@@ -6,10 +6,11 @@ using System.ComponentModel;
 using System.Drawing;
 using InterfazTextoGrafico;
 using Microsoft.CSharp.RuntimeBinder;
+using System.ComponentModel.Design;
 
 namespace LibreriaActividades
 {
-    [Designer(typeof(AsignacionDesigner))]
+    [Designer(typeof(AsignacionDesigner), typeof(IDesigner))]
     [ToolboxBitmap(typeof(Asignacion), "Resources.Asignacion.png")]
     public class Asignacion : ActividadBase
     {
@@ -21,7 +22,8 @@ namespace LibreriaActividades
         public Asignacion() 
             : base()
         {
-            
+          
+              
         }
 
         public override void Ejecutar(StringBuilder sb)

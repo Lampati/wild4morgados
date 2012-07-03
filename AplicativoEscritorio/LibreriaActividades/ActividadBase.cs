@@ -5,15 +5,17 @@ using System.Text;
 using System.Activities;
 using InterfazTextoGrafico;
 using System.ComponentModel;
+using System.Activities.Presentation;
 
 namespace LibreriaActividades
 {
     public abstract class ActividadBase : NativeActivity, INotifyPropertyChanged
     {
-
+         
         private static int _contadorGlobalAct = 0;
 
         private bool sePuedeEliminar = true;
+         
 
         public abstract void Ejecutar(StringBuilder sb);
 
@@ -55,6 +57,19 @@ namespace LibreriaActividades
         }
 
         public abstract void AsignarDatos(ActividadViewModelBase datos);
+
+        protected ActivityDesigner actDesigner;
+        public ActivityDesigner ActivDesigner
+        {
+            get
+            {
+                return actDesigner;
+            }
+            set
+            {
+                actDesigner = value;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

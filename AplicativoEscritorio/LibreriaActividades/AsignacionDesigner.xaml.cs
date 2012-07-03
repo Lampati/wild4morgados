@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Activities;
+using System.Activities.Presentation;
+using System.ComponentModel.Design;
 
 namespace LibreriaActividades
 {
@@ -21,5 +24,10 @@ namespace LibreriaActividades
         {
             InitializeComponent();
         }
+            
+            
+          
+        
+
     }
 }

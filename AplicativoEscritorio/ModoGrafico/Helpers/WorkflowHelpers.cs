@@ -6,6 +6,7 @@ using System.Activities;
 using System.Activities.Presentation;
 using System.Activities.Presentation.Services;
 using System.Activities.Debugger;
+using System.Activities.Presentation.View;
 
 namespace ModoGrafico.Helpers
 {
@@ -43,6 +44,20 @@ namespace ModoGrafico.Helpers
                 activity = rootModelObject as Activity;
             }
             return activity;
+        }
+
+
+        public static void Bla(WorkflowDesigner workflowDesigner)
+        {
+            DesignerView view = workflowDesigner.Context.Services.GetService<DesignerView>();
+
+            
+
+            ActivityDesigner bla = new ActivityDesigner();
+            bla.BringIntoView();
+            //view.MoveFocus(
+            
+
         }
     }
 }
