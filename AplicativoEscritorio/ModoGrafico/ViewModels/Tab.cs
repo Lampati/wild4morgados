@@ -17,6 +17,7 @@
 using InterfazTextoGrafico;
 using ModoGrafico.Enums;
     using ModoGrafico.EventArgsClasses;
+    using ModoGrafico.Helpers;
 
     public abstract class Tab : BaseViewModel
     {
@@ -179,6 +180,7 @@ using ModoGrafico.Enums;
                 }
 
                 
+                
                 return wd.View;
             }
         }
@@ -236,6 +238,9 @@ using ModoGrafico.Enums;
                       ));
                      thread.Start();    
                 }
+
+                
+
                 return wdDecl.View;
             }
         }

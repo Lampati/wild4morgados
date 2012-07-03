@@ -7,6 +7,10 @@ using System.Activities.Presentation;
 using System.Activities.Presentation.Services;
 using System.Activities.Debugger;
 using System.Activities.Presentation.View;
+using System.ComponentModel.Design;
+using LibreriaActividades;
+using System.Activities.Presentation.Model;
+using System.Windows.Input;
 
 namespace ModoGrafico.Helpers
 {
@@ -37,6 +41,7 @@ namespace ModoGrafico.Helpers
             
             if (debuggableWorkflowTree != null)
             {
+                
                 activity = debuggableWorkflowTree.GetWorkflowRoot();
             }
             else
@@ -44,6 +49,54 @@ namespace ModoGrafico.Helpers
                 activity = rootModelObject as Activity;
             }
             return activity;
+        }
+
+        public static ActivityDesignerBase GetDesignerViewForActivity(WorkflowDesigner workflowDesigner, ActividadBase actividad)
+        {
+            var modelService = workflowDesigner.Context.Services.GetService<ModelService>();
+
+            if (modelService != null)
+            {
+                foreach (var item in modelService.Find(modelService.Root, actividad.GetType()))
+                {
+                    if (Convert.ToInt64(item.Properties["IdPropio"].Value.ToString()) == actividad.IdPropio)
+                    {
+
+                    }
+                     
+                }
+                
+            }
+            return null;
+        }
+
+        public static void GetDesignerView(WorkflowDesigner workflowDesigner)
+        {
+            var modelService1 = workflowDesigner.Context.Services.GetService<DesignerView>();
+            var modelService2 = workflowDesigner.Context.Services.GetService<ModelService>();
+            var modelService3 = workflowDesigner.Context.Services.GetService<ViewStateService>();
+            var modelService4 = workflowDesigner.Context.Services.GetService<ModelTreeManager>();
+        }
+
+
+
+
+        public static void MakeWorkflowViewFitScreen(WorkflowDesigner workflowDesigner)
+        {
+            DesignerView designer = workflowDesigner.Context.Services.GetService<DesignerView>();
+            ((RoutedCommand)DesignerView.FitToScreenCommand).Execute(null, designer);
+        }
+
+        public static void MakeWorkflowZoomTo(WorkflowDesigner workflowDesigner)
+        {
+            DesignerView designer = workflowDesigner.Context.Services.GetService<DesignerView>();
+            ((RoutedCommand)DesignerView.ZoomInCommand).Execute(null, designer);
+        }
+
+        public static void SelectWorkflow(WorkflowDesigner workflowDesigner)
+        {
+            DesignerView designer = workflowDesigner.Context.Services.GetService<DesignerView>();
+            ((RoutedCommand)DesignerView.SelectAllCommand).Execute(null, designer);
         }
 
 

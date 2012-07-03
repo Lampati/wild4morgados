@@ -264,6 +264,8 @@
             List<Tab> lista = new List<Tab>(workAreaVM.Tabs);
             Tab tabElegido;
 
+           
+
             if (procedimiento.ToUpper().Trim().Equals("PRINCIPAL"))
             {
                 tabElegido = lista.Find(x => x.GetType() == typeof(TabItemPrincipal));
@@ -285,8 +287,15 @@
                 tabElegido = lista.Find(x => x.Header.ToUpper().Trim().Equals(procedimiento.ToUpper().Trim()));
             }
 
+
+            tabElegido = lista.Find(x => x.GetType() == typeof(TabItemPrincipal));
+
+
+
             Type tipoActividad = actividad.GetType();
             Activity actividadRoot;
+
+            object actDes;
 
             if (tipoActividad == typeof(DeclaracionVariable)
                 || tipoActividad == typeof(DeclaracionConstante)
@@ -294,22 +303,36 @@
                 )
             {
                 actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesignerDeclaraciones);
+                actDes = WorkflowHelpers.GetDesignerViewForActivity(tabElegido.WorkflowDesignerDeclaraciones, actividad);
             }
             else
             {
+                //WorkflowHelpers.MakeWorkflowViewFitScreen(tabElegido.WorkflowDesigner);
                 actividadRoot = WorkflowHelpers.GetActivity(tabElegido.WorkflowDesigner);
+                actDes = WorkflowHelpers.GetDesignerViewForActivity(tabElegido.WorkflowDesigner, actividad);
+                //WorkflowHelpers.MakeWorkflowZoomTo(tabElegido.WorkflowDesigner);
+                WorkflowHelpers.GetDesignerView(tabElegido.WorkflowDesigner);
             }
 
-            //no anda bien pq no se generan siempre los ID de una
-            //Activity actAPonerFoco = (WorkflowInspectionServices.Resolve(actividadRoot, actividad.Id));
+            if (actDes != null)
+            {
+                //actDes.BringIntoView();
 
-            //List<Activity> listaActividades = new List<Activity>((WorkflowInspectionServices.GetActivities(actividadRoot)));
+                //no anda bien pq no se generan siempre los ID de una
+                //Activity actAPonerFoco = (WorkflowInspectionServices.Resolve(actividadRoot, actividad.Id));
 
-            actividad.ContieneError = true;
+                //List<Activity> listaActividades = new List<Activity>((WorkflowInspectionServices.GetActivities(actividadRoot)));
+
+                actividad.ContieneError = true;
+            }
+            
 
             ActivityDesignerBase diag = GlobalActivityStore._actividades.Find(x => x.IdPropio == actividad.IdPropio);
 
-            diag.BringIntoView();
+            if (diag != null)
+            {
+                diag.BringIntoView();
+            }
 
             //WorkflowHelpers.Bla(tabElegido.WorkflowDesigner);
         }

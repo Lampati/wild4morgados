@@ -23,6 +23,13 @@ namespace LibreriaActividades
         public AsignacionDesigner()
         {
             InitializeComponent();
+
+            if (!yaCreada)
+            {
+                yaCreada = true;
+                GlobalActivityStore.AgregarSiNoExiste(this);
+            }
+            
         }
             
             
