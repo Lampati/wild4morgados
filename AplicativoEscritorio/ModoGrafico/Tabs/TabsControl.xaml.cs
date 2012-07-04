@@ -70,20 +70,36 @@
         {
             if (e.AddedItems != null && e.AddedItems.Count > 0 && e.AddedItems[0] != null)
             {
-                if (e.AddedItems[0].GetType() == typeof(TabItemAgregar))
-                {
-                    
+                if (e.AddedItems[0].GetType() == typeof(TabItemAgregarProcedimiento))
+                {                   
 
                     Application.Current.Dispatcher.BeginInvoke
                     ((System.Action)delegate
                     {
-                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregar));
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregarProcedimiento));
 
                         if (e.AddedItems.Count > 0)
                         {
-                            if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregar"))
+                            if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregarProcedimiento"))
                             {
-                                tc.SelectedIndex = tc.Items.Count - 2;
+                                tc.SelectedIndex = tc.Items.Count - 3;
+                            }
+                        }
+                    }, System.Windows.Threading.DispatcherPriority.Render, null);
+                }
+                else if (e.AddedItems[0].GetType() == typeof(TabItemAgregarFuncion))
+                {
+
+                    Application.Current.Dispatcher.BeginInvoke
+                    ((System.Action)delegate
+                    {
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregarFuncion));
+
+                        if (e.AddedItems.Count > 0)
+                        {
+                            if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregarFuncion"))
+                            {
+                                tc.SelectedIndex = tc.Items.Count - 3;
                             }
                         }
                     }, System.Windows.Threading.DispatcherPriority.Render, null);
@@ -107,6 +123,10 @@
                 else if (e.AddedItems[0].GetType() == typeof(TabItemPrincipal))
                 {
                     CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemPrincipal));
+                }
+                else if (e.AddedItems[0].GetType() == typeof(TabItemSalida))
+                {
+                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemSalida));
                 }
             }
             else

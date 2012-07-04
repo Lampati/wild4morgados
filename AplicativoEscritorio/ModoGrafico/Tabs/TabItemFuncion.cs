@@ -12,6 +12,35 @@ namespace ModoGrafico.Tabs
     {
         private int orden;
 
+        public string retorno;
+        public string Retorno
+        {
+            get
+            {
+                return retorno;
+            }
+            set
+            {
+                retorno = value;
+                NotifyPropertyChanged("Retorno");
+            }
+        }
+
+        public eTipoVariable tipoRetorno;
+        public eTipoVariable TipoRetorno
+        {
+            get
+            {
+                return tipoRetorno;
+            }
+            set
+            {
+                tipoRetorno = value;
+                NotifyPropertyChanged("TipoRetorno");
+            }
+        }
+
+
         public TabItemFuncion() : base()
         {
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();

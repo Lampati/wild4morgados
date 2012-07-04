@@ -8,6 +8,7 @@
         TabItemFuncion,
         TabItemProcedimiento,
         TabItemSalida,
-        TabItemAgregar
+        TabItemAgregarFuncion,
+        TabItemAgregarProcedimiento
     }
 }

@@ -6,13 +6,13 @@ using ModoGrafico.ViewModels;
 
 namespace ModoGrafico.Tabs
 {
-    public class TabItemAgregar : Tab
+    public class TabItemAgregarProcedimiento : Tab
     {
 
-        public TabItemAgregar()
+        public TabItemAgregarProcedimiento()
             : base()
         {
-            Tipo = Enums.TipoTab.TabItemAgregar;
+            Tipo = Enums.TipoTab.TabItemAgregarProcedimiento;
         }
 
         public override void Ejecutar(StringBuilder sb)

@@ -81,7 +81,10 @@ namespace InterfazTextoGrafico
                         salida = proc; break;
                     case Enums.TipoRutina.Funcion:
                     case Enums.TipoRutina.Procedimiento:
-                        codigosFuncProc.Add(proc.Nombre, proc);
+                        if (proc.Nombre != null)
+                        {
+                            codigosFuncProc.Add(proc.Nombre, proc);
+                        }
                         break;
                 }
             }
