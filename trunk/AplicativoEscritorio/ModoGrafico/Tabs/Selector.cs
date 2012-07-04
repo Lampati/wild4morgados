@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows;
+using ModoGrafico.ViewModels;
 
 namespace ModoGrafico.Tabs
 {
@@ -15,9 +16,18 @@ namespace ModoGrafico.Tabs
         public override Style SelectStyle(object item,
           DependencyObject container)
         {
-            string path = item.GetType().GetProperty("Header").GetValue(item, null).ToString().Trim();
-            if (path == "+" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES" || path == "SALIDA")
-                return SinEstilo;
+            Tab tab = item as Tab;
+
+            if (tab != null)
+            {
+                if (tab.Header != null)
+                {
+                    string path = tab.Header.ToString().Trim();
+                    //string path = item.GetType().GetProperty("Header").GetValue(item, null).ToString().Trim();
+                    if (path == "+" || path == "PROC +" || path == "FUNC +" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES" || path == "SALIDA")
+                        return SinEstilo;
+                }
+            }
             return ConEstilo;
             
         }

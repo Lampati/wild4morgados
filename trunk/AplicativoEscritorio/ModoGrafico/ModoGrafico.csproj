@@ -60,10 +60,11 @@
       <DependentUpon>ProgramadorGrafico.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tabs\TabItemAgregarFuncion.cs" />
     <Compile Include="Tabs\TabItemSalida.cs" />
     <Compile Include="Tabs\EditableTabHeaderControl.cs" />
     <Compile Include="Tabs\Selector.cs" />
-    <Compile Include="Tabs\TabItemAgregar.cs" />
+    <Compile Include="Tabs\TabItemAgregarProcedimiento.cs" />
     <Compile Include="Tabs\TabItemDeclaracionConstante.cs" />
     <Compile Include="Tabs\TabItemDeclaracionVariable.cs" />
     <Compile Include="Tabs\TabItemFuncion.cs" />

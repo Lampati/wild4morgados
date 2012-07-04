@@ -6,7 +6,7 @@
              xmlns:vw="clr-namespace:ModoGrafico.Views">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type vm:Tab}">
-            <vw:SingleWorkAreaView />
+            <vw:SingleWorkAreaView  />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>

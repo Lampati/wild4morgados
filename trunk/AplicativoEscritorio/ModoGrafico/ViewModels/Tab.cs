@@ -64,7 +64,7 @@ using ModoGrafico.Enums;
         public UIElement WF
         {
             get {
-                if (this is TabItemAgregar)
+                if (this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion)
                     return null;
 
                 if (Object.Equals(wd, null))

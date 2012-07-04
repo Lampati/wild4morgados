@@ -24,9 +24,9 @@ using InterfazTextoGrafico;
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
         }
 
-        public void AgregarNuevo()
+        public void AgregarNuevo(string nombre, TipoTab tipoTab)
         {
-            this.ExecuteAddTab("Proc/Func" + cant.ToString(), true, TipoTab.TabItemProcedimiento);
+            this.ExecuteAddTab(nombre, true, tipoTab);
             cant++;
         }
 
@@ -83,42 +83,47 @@ using InterfazTextoGrafico;
 
         public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo)
         {
-            if (!string.IsNullOrEmpty(obj))
+         
+            Tab t = null;
+            switch (tipo)
             {
-                Tab t = null;
-                switch (tipo)
-                {
-                    case TipoTab.TabItemAgregar:
-                        t = new TabItemAgregar();
-                        break;
-                    case TipoTab.TabItemDeclaracionVariable:
-                        t = new TabItemDeclaracionVariable();
-                        break;
-                    case TipoTab.TabItemDeclaracionConstante:
-                        t = new TabItemDeclaracionConstante();
-                        break;
-                    case TipoTab.TabItemFuncion:
-                        t = new TabItemFuncion();
-                        break;
-                    case TipoTab.TabItemProcedimiento:
-                        t = new TabItemProcedimiento();
-                        break;
-                    case TipoTab.TabItemSalida:
-                        t = new TabItemSalida();
-                        break;
-                    case TipoTab.TabItemPrincipal:
-                        t = new TabItemPrincipal();
-                        break;
-                }
-                t.Header = obj;
-                if (this.Tabs.Count == 0 || !acomodar)
-                    this.Tabs.Add(t);
-                else
-                    this.Tabs.Insert(this.Tabs.Count - 1, t);
-                return t;
+                case TipoTab.TabItemAgregarProcedimiento:
+                    t = new TabItemAgregarProcedimiento();
+                    break;
+                case TipoTab.TabItemAgregarFuncion:
+                    t = new TabItemAgregarFuncion();
+                    break;
+                case TipoTab.TabItemDeclaracionVariable:
+                    t = new TabItemDeclaracionVariable();
+                    break;
+                case TipoTab.TabItemDeclaracionConstante:
+                    t = new TabItemDeclaracionConstante();
+                    break;
+                case TipoTab.TabItemFuncion:
+                    t = new TabItemFuncion();
+                    break;
+                case TipoTab.TabItemProcedimiento:
+                    t = new TabItemProcedimiento();
+                    break;
+                case TipoTab.TabItemSalida:
+                    t = new TabItemSalida();
+                    break;
+                case TipoTab.TabItemPrincipal:
+                    t = new TabItemPrincipal();
+                    break;
             }
+            t.Header = obj;
+            if (this.Tabs.Count == 0 || !acomodar)
+            {
+                this.Tabs.Add(t);
+            }
+            else
+            { 
+                this.Tabs.Insert(this.Tabs.Count - 2, t); 
+            }
+            return t;
+            
 
-            return null;
         }
 
         private void ExecuteDeleteTab(Tab obj)

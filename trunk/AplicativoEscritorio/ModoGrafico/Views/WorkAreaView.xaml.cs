@@ -23,6 +23,11 @@
         public delegate void TipoTabCambiadoEventHandler(object o, TipoTabCambiadoEventArgs e);
         public event TipoTabCambiadoEventHandler CambioTabEvent;
 
+
+        public static event TipoTabCambiadoEventHandler CambioTabStaticEvent;
+
+
+
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
@@ -63,7 +68,8 @@
                 ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento(item.Nombre.ToUpper(), false, TipoTab.TabItemProcedimiento, item);
             }
 
-            ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("     +     ", false, TipoTab.TabItemAgregar);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("PROC +", false, TipoTab.TabItemAgregarProcedimiento);
+            ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("FUNC +", false, TipoTab.TabItemAgregarFuncion);
             
         }
 
@@ -79,6 +85,16 @@
                 WorkflowChangedEvent(tab, workflowChangedEventArgs);
             }
         }
+
+        private static void CambioTabStaticEventFire(object tab, TipoTabCambiadoEventArgs args)
+        {
+            if (CambioTabStaticEvent != null)
+            {
+                CambioTabStaticEvent(tab, args);
+            }
+        }
+
+        
 
         public ProgramaViewModel ObtenerProgramaDiagramado()
         {
@@ -208,7 +224,8 @@
                             }
                             programa.Procedimientos.Add(activ as ProcedimientoViewModel);
                             break;
-                        case TipoTab.TabItemAgregar:
+                        case TipoTab.TabItemAgregarProcedimiento:
+                        case TipoTab.TabItemAgregarFuncion:
                             break;
                         default:
                             break;
@@ -223,13 +240,19 @@
 
         void tab_CambioTabEvent(object o, TipoTabCambiadoEventArgs e)
         {
-            if (e.Tipo == TipoTab.TabItemAgregar)
+            if (e.Tipo == TipoTab.TabItemAgregarProcedimiento)
             {
-                ((WorkAreaViewModel)this.DataContext).AgregarNuevo();
+                ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemProcedimiento);
+            }
+            else if (e.Tipo == TipoTab.TabItemAgregarFuncion)
+            {
+                ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemFuncion);
             }
             else
             {
                 CambioTabEventFire(o, e);
+
+                CambioTabStaticEventFire(o, e);
             }
 
         }
