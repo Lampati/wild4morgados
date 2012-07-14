@@ -1,5 +1,5 @@
 ﻿$.ajaxSetup({ cache: false });
-var position = 'center';
+var position = 'top';
 var initOpenTab = true;
 
 function SetFiltroOpenClose() {

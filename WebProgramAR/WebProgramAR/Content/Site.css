@@ -708,10 +708,10 @@ table th {
     background: Red;
     font-size:1em;
     color:#fff;
-    width:230px;
+    max-width:200px;
+    width:auto;
     display:none;
     bottom:80px;
-    position:fixed;
     padding-right:20px;
     z-index:1111;
 }
@@ -833,7 +833,8 @@ div#title
     height:auto;
     max-height:50px;
     width:auto;
-    max-width:120px;
+    max-width:390px;
+    min-width:120px;
 }
 #accordion
 {
@@ -1722,7 +1723,8 @@ select:focus
 	
 	height:34px;
 	display:inline-block;
-	min-width:200px;
+	min-width:180px;
+	width:auto;
 	position:relative;
 	
 	/* Preloading the background image for the dropdown */
@@ -1733,7 +1735,8 @@ select:focus
 	position:absolute;
 	
 	height:100%;
-	width:100%;
+	min-width:180px;
+	width:auto;
 	margin-top:5px;
 	/* Font settings */
 	
@@ -1767,7 +1770,7 @@ select:focus
 	position:absolute;
 	top:40px;
 	left:0;
-	width:100%;
+	min-width:100%;
 	height:auto;
 	overflow:auto;
 	border:1px solid #32333b;
@@ -1835,9 +1838,8 @@ select:focus
 }
 #btnAceptar
 {
-    position:absolute;
     right:120px;
-    bottom:120px;
+    margin-top:250px !important;
 }
 /*div manejo archivos*/
 div.upload {
