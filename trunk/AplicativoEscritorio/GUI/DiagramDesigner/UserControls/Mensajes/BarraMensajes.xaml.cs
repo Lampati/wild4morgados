@@ -111,7 +111,7 @@ namespace DiagramDesigner.UserControls.Mensajes
                 width = 100;
             }
 
-            gv.Columns[1].Width = width - 15;
+            gv.Columns[3].Width = width - 15;
         }
 
    
@@ -127,7 +127,7 @@ namespace DiagramDesigner.UserControls.Mensajes
             if (indice != -1)
             {
                 Mensaje mens = mensajes[indice];
-                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna, mens.FiguraId, mens.FiguraNombre, mens.FiguraNombreProc, mens.ActividadReferenciada));
+                DoubleClickEventFire(new DoubleClickEventArgs(mens.Linea, mens.Columna, mens.FiguraId, mens.Figura, mens.Contexto, mens.ActividadReferenciada));
             }
 
         }
@@ -135,7 +135,7 @@ namespace DiagramDesigner.UserControls.Mensajes
 
         public void AgregarErrorModoGrafico(string msg, string figuraId, string figuraProc, string figuraNombre, object act)
         {
-            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Error) { FiguraId = figuraId, FiguraNombreProc = figuraProc, ActividadReferenciada = act };
+            Mensaje m = new Mensaje(msg, Enums.TipoMensaje.Error) { FiguraId = figuraId, Contexto = figuraProc, ActividadReferenciada = act, Figura = figuraNombre };
             AgregarLinea(m);
         }
        

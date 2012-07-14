@@ -67,7 +67,7 @@ namespace ModoGrafico
         {
             ProgramaViewModel programa = this.WorkArea.ObtenerProgramaDiagramado();
             programa.OrdenarProcedimientos();
-            programa.CalcularLineas(1);
+            programa.CalcularLineasYAsignarContextoAHijos(1, "PROGRAMA");
 
             return programa;
         }

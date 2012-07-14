@@ -33,18 +33,20 @@ namespace InterfazTextoGrafico
             }
         }
 
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
             lineaComienzo = linea;
 
             int lineaAux = lineaComienzo;
+
+            contexto = nombreContexto;
 
             //aumento 1 por la linea de la condicion del mientras
             lineaAux++;
 
             if (Cuerpo != null)
             {
-                Cuerpo.CalcularLineas(lineaAux);
+                Cuerpo.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                 lineaAux = Cuerpo.LineaFinal;
             }
 

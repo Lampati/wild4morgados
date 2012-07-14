@@ -39,25 +39,27 @@ namespace InterfazTextoGrafico
             }
         }
 
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
             lineaComienzo = linea;
 
             int lineaAux = lineaComienzo;
+
+            contexto = nombreContexto;
 
             //aumento 1 por la linea de la condicion del si
             lineaAux++;
 
             if (BranchVerdadero != null && BranchVerdadero.ListaActividades.Count > 0)
             {
-                BranchVerdadero.CalcularLineas(lineaAux);
+                BranchVerdadero.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                 lineaAux = BranchVerdadero.LineaFinal + 1;
 
                 if (BranchFalso != null && BranchFalso.ListaActividades.Count > 0)
                 {
                     //aumento 1 por la linea del sino
                     lineaAux++;
-                    BranchFalso.CalcularLineas(lineaAux);
+                    BranchFalso.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                     lineaAux = BranchFalso.LineaFinal;
                 }
                 else
@@ -72,7 +74,7 @@ namespace InterfazTextoGrafico
                 {
                     //aumento 1 por la linea del sino
                     lineaAux++;
-                    BranchFalso.CalcularLineas(lineaAux);
+                    BranchFalso.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                     lineaAux = BranchFalso.LineaFinal;
                 }
 

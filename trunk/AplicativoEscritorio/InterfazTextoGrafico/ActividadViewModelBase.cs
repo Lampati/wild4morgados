@@ -37,7 +37,7 @@ namespace InterfazTextoGrafico
         public abstract string DescripcionLineas { get; }
         public abstract string NombreActividad { get; }
 
-        
+        protected string contexto;
 
         public long IdPropio
         {
@@ -45,6 +45,15 @@ namespace InterfazTextoGrafico
             {
                 return idPropio;
             }        
+
+        }
+
+        public string Contexto
+        {
+            get
+            {
+                return contexto;
+            }
 
         }
 
@@ -98,7 +107,7 @@ namespace InterfazTextoGrafico
         public abstract void ToXML(XMLCreator xml);
         public abstract void FromXML(XMLElement xmlElem);
 
-        public abstract void CalcularLineas(int lineaAnterior);
+        public abstract void CalcularLineasYAsignarContextoAHijos(int lineaAnterior, string nombreContexto);
 
         public abstract ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar);
 

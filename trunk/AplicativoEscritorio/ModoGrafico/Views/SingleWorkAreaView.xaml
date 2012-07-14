@@ -26,44 +26,7 @@
             <RowDefinition Height="700*" />            
         </Grid.RowDefinitions>
 
-        <Grid  Name="GridRutinaDetalles" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"  />
-                <ColumnDefinition Width="150"  />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"  />                
-                <RowDefinition Height="25"  />
-                <RowDefinition Height="25" />
-            </Grid.RowDefinitions>
-
-            <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
-                Nombre:
-            </TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Name="textBoxNombre" Text="{Binding Path=Header, Mode=TwoWay}"
-                     KeyUp="textBoxNombre_KeyUp"
-                     HorizontalAlignment="Stretch" Width="Auto"/>
-
-            <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Name="HeaderTipo" Visibility="Collapsed">
-                Tipo:
-            </TextBlock>
-            <ComboBox Grid.Row="1" Grid.Column="1" Name="cboTipoRetorno" 
-                      SelectedValue="{Binding Path=TipoRetorno, Mode=TwoWay}" 
-                      SelectedValuePath="Content"  >
-                    <ComboBoxItem>Numero</ComboBoxItem>
-                    <ComboBoxItem>Texto</ComboBoxItem>
-                    <ComboBoxItem>Booleano</ComboBoxItem>
-                    <!--<ComboBoxItem>Vector</ComboBoxItem>-->
-            </ComboBox>
-
-            <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Name="HeaderRetorno" Visibility="Collapsed">
-                Retorno:
-            </TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="textBoxRetorno" Visibility="Collapsed"
-                     HorizontalAlignment="Stretch" Width="Auto"/>
-
-
-        </Grid>
+        
         <ContentControl Grid.Row="0" Grid.Column="0" Name="contentDesignerDeclaraciones"
                         Content="{Binding Path=WFDeclaraciones}" ScrollViewer.CanContentScroll="True" BorderBrush="Black" BorderThickness="2px"/>
         <ContentControl  Grid.Row="0" Grid.Column="1" Name="contentDesigner"

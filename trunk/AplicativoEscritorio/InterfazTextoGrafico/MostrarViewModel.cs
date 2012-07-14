@@ -60,9 +60,11 @@ namespace InterfazTextoGrafico
             xml.LevelUp();
         }
 
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
             lineaComienzo = linea;
+
+            contexto = nombreContexto;
 
             int cantLineas = Utilidades.StringUtils.CantidadDeLineas(Gargar) - 1;
 

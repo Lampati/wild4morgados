@@ -764,7 +764,7 @@ namespace DiagramDesigner
             foreach (var item in res.ListaErrores)
             {
                 ActividadViewModelBase act = this.Esquema.RepresentacionGraficaActual.EncontrarActividadPorLinea(item.Fila);
-                this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.Id, act.NombreActividad, string.Empty, act.ActividadReferenciada);
+                this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.IdPropio.ToString(), act.Contexto, act.NombreActividad, act.ActividadReferenciada);
             }
 
             if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
@@ -774,7 +774,7 @@ namespace DiagramDesigner
                     if (item.Mostrar)
                     {
                         ActividadViewModelBase act = this.Esquema.RepresentacionGraficaActual.EncontrarActividadPorLinea(item.Fila);
-                        this.BarraMsgs.AgregarErrorModoGrafico(item.ErrorTraducido, act.Id, act.NombreActividad, string.Empty, act.ActividadReferenciada);
+                        this.BarraMsgs.AgregarErrorModoGrafico(item.ErrorTraducido, act.Id, act.Contexto, act.NombreActividad, act.ActividadReferenciada);
                     }
                 }
             }
