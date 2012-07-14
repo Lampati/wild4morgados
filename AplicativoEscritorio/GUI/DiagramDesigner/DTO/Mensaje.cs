@@ -49,13 +49,13 @@ namespace DiagramDesigner.DTO
             set { this.figuraId = value; }
         }
 
-        public string FiguraNombre
+        public string Figura
         {
             get { return this.figuraNombre; }
             set { this.figuraNombre = value; }
         }
 
-        public string FiguraNombreProc
+        public string Contexto
         {
             get { return this.figuraNombreProc; }
             set { this.figuraNombreProc = value; }

@@ -43,7 +43,7 @@ namespace InterfazTextoGrafico
             return null;
         }
 
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
         }
 

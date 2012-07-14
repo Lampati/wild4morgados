@@ -133,10 +133,11 @@ namespace InterfazTextoGrafico
                 return strBldr.ToString();
             }
         }
-
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)        
         {
             lineaComienzo = linea;
+
+            contexto = nombreContexto;
 
             int lineaAux = lineaComienzo;
 
@@ -144,7 +145,7 @@ namespace InterfazTextoGrafico
             {
                 //Por la linea constantes
                 lineaAux++;
-                ConstantesGlobales.CalcularLineas(lineaAux);
+                ConstantesGlobales.CalcularLineasYAsignarContextoAHijos(lineaAux, "CONSTANTES");
                 lineaAux = ConstantesGlobales.LineaFinal + 1;
             }
 
@@ -152,13 +153,13 @@ namespace InterfazTextoGrafico
             {
                 //Por la linea variables
                 lineaAux++;
-                VariablesGlobales.CalcularLineas(lineaAux);
+                VariablesGlobales.CalcularLineasYAsignarContextoAHijos(lineaAux, "VARIABLES");
                 lineaAux = VariablesGlobales.LineaFinal + 1;
             }
 
             foreach (ProcedimientoViewModel proc in Procedimientos)
             {
-                proc.CalcularLineas(lineaAux);
+                proc.CalcularLineasYAsignarContextoAHijos(lineaAux, proc.Nombre);
                 lineaAux = proc.LineaFinal + 1;
             }
 

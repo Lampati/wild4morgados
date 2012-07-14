@@ -36,7 +36,7 @@ namespace InterfazTextoGrafico
             }
         }
 
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
             lineaComienzo = linea;
             int lineaAux = linea;
@@ -45,7 +45,7 @@ namespace InterfazTextoGrafico
             {
                 foreach (ActividadViewModelBase act in ListaActividades)
                 {
-                    act.CalcularLineas(lineaAux);
+                    act.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                     lineaAux = act.LineaFinal + 1;
                 }
                 //Le resto uno pq siempre termino con un incremento mas

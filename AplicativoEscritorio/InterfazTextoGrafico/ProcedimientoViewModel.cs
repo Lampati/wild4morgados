@@ -63,7 +63,7 @@ namespace InterfazTextoGrafico
         }
 
 
-        public override void CalcularLineas(int linea)
+        public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
             lineaComienzo = linea;
 
@@ -74,7 +74,7 @@ namespace InterfazTextoGrafico
 
             if (VariablesLocales != null)
             {
-                VariablesLocales.CalcularLineas(lineaAux);
+                VariablesLocales.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                 lineaAux = VariablesLocales.LineaFinal + 1;
             }
 
@@ -83,7 +83,7 @@ namespace InterfazTextoGrafico
 
             if (Cuerpo != null)
             {
-                Cuerpo.CalcularLineas(lineaAux);
+                Cuerpo.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                 lineaAux = Cuerpo.LineaFinal + 1;
                 //No hace falta aumentar uno cuando termine.
             }
