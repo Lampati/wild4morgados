@@ -652,10 +652,10 @@ table th {
     background: Red;
     font-size:1.5em;
     color:#fff;
-    width:200px;
+    max-width:200px;
+    width:auto;
     height:auto;
     display:none;
-    position:absolute;
     right:120px;
     z-index:1111;
 }
@@ -769,6 +769,10 @@ div#title
 {
     margin: auto 0.5em 0 0;
     height:auto;
+    max-height:50px;
+    width:auto;
+    max-width:390px;
+    min-width:120px;
 }
 #accordion
 {
@@ -1629,7 +1633,8 @@ input[type="text"].datosExtraTextBox
 	
 	height:34px;
 	display:inline-block;
-	min-width:200px;
+	min-width:180px;
+	width:auto;
 	position:relative;
 	
 	/* Preloading the background image for the dropdown */
@@ -1640,7 +1645,8 @@ input[type="text"].datosExtraTextBox
 	position:absolute;
 	
 	height:100%;
-	width:100%;
+	min-width:180px;
+	width:auto;
 	margin-top:5px;
 	/* Font settings */
 	
@@ -1674,7 +1680,7 @@ input[type="text"].datosExtraTextBox
 	position:absolute;
 	top:40px;
 	left:0;
-	width:100%;
+	min-width:100%;
 	height:auto;
 	overflow:auto;
 	border:1px solid #32333b;
@@ -1742,9 +1748,8 @@ input[type="text"].datosExtraTextBox
 }
 #btnAceptar
 {
-    position:absolute;
-    right:120px;
-    bottom:120px;
+ right:120px;
+    margin-top:250px !important;
 }
 /*div manejo archivos*/
 div.upload {

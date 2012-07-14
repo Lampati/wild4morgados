@@ -10,20 +10,48 @@
 }
 
 <script type="text/javascript">
-    $("<option value='-1' selected='selected' >Seleccion una Opcion</option>").prependTo("#SelectTablaId");
+    $("<option value='' selected='selected' >Seleccion una Opcion</option>").prependTo("#SelectTablaId");
     convertSelect("SelectTablaId",1);
     convertSelect("SelectTipoUsuarioCreate",1);
     convertSelect("SelectColumnaId",1);
-    convertSelect("SelectComparadorId",1);
+    convertSelect("SelectComparadorId", 1);
+    reSizeWindow();
     function reInitColumnas() {
         $("#ColumnaId").val("-1");
         $("#SelectColumnaId").val("");
         $("#SelectColumnaId").attr("rel", "");
     }
+
+    
     function reInitComparadores() {
         $("#SelectComparadorId").val("");
         $("#SelectComparadorId").attr("rel", "");
         $("#ComparadorId").val("-1");
+    }
+
+    function reSizeWindow() {
+        var size = $(".groupElement").filter(":visible").size();
+        if (size > 5) {
+            $("#dialog").animate({ height: "540px" });
+            $("#dialog").css("overflowY", "auto !important");
+        }
+        else {
+            switch (size) {
+                case 2:
+                    var totalSize = 380;
+                    break;
+                case 3:
+                    var totalSize = 420;
+                    break;
+                default:
+                    var sizeHeight = ($("#dialog").css("height"));
+                    var currentHeight = parseInt(sizeHeight.substring(0, sizeHeight.length - 2));
+                    var totalSize = (currentHeight) + parseInt((size - 1) * 40);
+
+            }
+            $("#dialog").animate({ height: totalSize + "px" });
+            $("#dialog").css("overflowY", "hidden");
+        }
     }
     function OnChangeDo(div) {
         if ($(div).attr("rel") != "-1") {
@@ -42,9 +70,11 @@
                         for (var i = 0; i < columnas.length; i++) {
                             var val = columnas[i].Id;
                             var text = columnas[i].Value;
+                            var tipo = columnas[i].TipoDesc;
                             $("#SelectColumnaId").get(0).options[$("#SelectColumnaId").get(0).options.length] = new Option(text, val);
+                            $("#SelectColumnaId").children().last().attr("rel", tipo);
                         }
-                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectColumnaId");
+                        $("<option value='' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectColumnaId");
                         convertSelect("SelectColumnaId", 2);
                         $("#TablaId").val((div.attr("rel")));
                         reInitColumnas();
@@ -52,8 +82,11 @@
                     }
                 });
                 $("#listColumnas").show();
-                $("#dialog").animate({ height: "450px" });
                 $("#listComparadores").hide();
+                $("#valorDiv").hide();
+                $("#usuarioDiv").hide();
+                $("#activaDiv").hide();
+                reSizeWindow();
                 return;
             }
             if (div.attr('id') == "SelectColumnaId") {
@@ -73,25 +106,52 @@
                             var text = comparadores[i].Value;
                             $("#SelectComparadorId").get(0).options[$("#SelectComparadorId").get(0).options.length] = new Option(text, val);
                         }
-                        $("<option value='-1' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectComparadorId");
+                        $("<option value='' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectComparadorId");
                         convertSelect("SelectComparadorId", 2);
                         $("#ColumnaId").val((div.attr("rel")));
                         reInitComparadores();
                     }
                 });
                 $("#listComparadores").show();
-                $("#dialog").animate({ height: "+=50px" });
+                $("#valorDiv").hide();
+                $("#usuarioDiv").hide();
+                $("#activaDiv").hide();
+                reSizeWindow();
                 return;
             }
             if (div.attr('id') == "SelectComparadorId") {
                 $("#ComparadorId").val((div.attr("rel")));
+                $("#valorDiv").show();
+                showValorDivType();
+                $("#usuarioDiv").show();
+                $("#activaDiv").show();
+                reSizeWindow();
+                return;
             }           
             if (div.attr('id') == "SelectTipoUsuarioCreate") {
                 $("#TipoUsuarioId").val((div.attr("rel")));
-            }           
+            }
         }
     }
-
+    function showValorDivType() {
+        var col = $("#selectBox_SelectColumnaId").attr("rel");
+        var tipo = $("#SelectColumnaId option[value=" + col + "]").attr("rel");
+        $("#tipoColumnaId").val(tipo);
+        switch (tipo) {
+            case "INT":
+                $("#valorText").show();
+                $("#valorDate").hide();
+                break;
+            case "DATETIME":
+                $("#valorText").hide();
+                $("#valorDate").show();
+                break;
+            case "STRING":
+                $("#valorText").show();
+                $("#valorDate").hide();
+                break;
+        }
+    }
     $("#UsuarioIdAutoComplete").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -122,12 +182,14 @@
         },
         select: function (event, ui) {
             $("#UsuarioId").val(ui.item.value);
+            $("#UsuarioIdAutoComplete").val(ui.item.label);
             $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
             return false;
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
                 $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+                $("#UsuarioIdAutoComplete").val(ui.item.label);
                 $("#UsuarioId").val(ui.item.value);
                 return false;
             }
@@ -135,88 +197,104 @@
     });
             
 </script>
-
-<div class="editor-label">
-    @Html.LabelFor(m => m.TablaId)
-</div>
-<div class="editor-field">
-
-        @Html.DropDownListWithValidationFor(model => model.TablaId, listaTabla.Select(option => new SelectListItem
-        {
-            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
-            Value = option.TablaId.ToString(),
-            Selected = ((Model != null) && (option.TablaId == Model.TablaId))
-        }), new { @id = "SelectTablaId", @style = "display:none", @Name = "SelectTablaId" })
-        @Html.HiddenFor(model => Model.TablaId)
-        @Html.ValidationMessageFor(m => m.TablaId)
-</div>
-
-<div id="listColumnas" style="display:none;">
-<div class="editor-label">
-    @Html.LabelFor(m => m.ColumnaId)
-</div>
-<div class="editor-field">
-     @Html.DropDownListWithValidationFor(model => model.ColumnaId, listaColumna.Select(option => new SelectListItem
-        {
-            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
-            Value = option.ColumnaId.ToString(),
-            Selected = ((Model != null) && (option.ColumnaId == Model.ComparadorId))
-        }), new { @id = "SelectColumnaId", @style = "display:none", @Name = "SelectColumnaId" })
-    @Html.HiddenFor(model => Model.ColumnaId)
-    @Html.ValidationMessageFor(m => m.ColumnaId)
-</div>
-</div>
-
-<div  id="listComparadores" style="display:none;">
-<div class="editor-label">
-    @Html.LabelFor(m => m.ComparadorId)
-</div>
-<div class="editor-field">
-     @Html.DropDownListWithValidationFor(model => model.ComparadorId, listaComparador.Select(option => new SelectListItem
-        {
-            Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
-            Value = option.ComparadorId.ToString(),
-            Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
-        }), new { @id = "SelectComparadorId", @style = "display:none", @Name = "SelectComparadorId" })
-    @Html.HiddenFor(model => Model.ComparadorId)
-    @Html.ValidationMessageFor(m => m.ComparadorId)
-</div>
-</div>
-<div class="editor-label">
-    @Html.LabelFor(m => m.Valor)
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(m => m.Valor)
-    @Html.ValidationMessageFor(m => m.Valor)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(m => m.UsuarioId)
-</div>
+<div id="tableDiv" class="groupElement">
+    <div class="editor-label">
+        @Html.LabelFor(m => m.TablaId)
+    </div>
     <div class="editor-field">
-    @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
-    @Html.HiddenFor(model => model.UsuarioId)
+
+            @Html.DropDownListWithValidationFor(model => model.TablaId, listaTabla.Select(option => new SelectListItem
+            {
+                Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+                Value = option.TablaId.ToString(),
+                Selected = ((Model != null) && (option.TablaId == Model.TablaId))
+            }), new { @id = "SelectTablaId", @style = "display:none", @Name = "SelectTablaId" })
+            @Html.HiddenFor(model => Model.TablaId)
+            @Html.ValidationMessageFor(m => m.TablaId)
+    </div>
+</div>
+<div id="listColumnas" style="display:none;" class="groupElement">
+    <div class="editor-label">
+        @Html.LabelFor(m => m.ColumnaId)
+    </div>
+    <div class="editor-field">
+         @Html.DropDownListWithValidationFor(model => model.ColumnaId, listaColumna.Select(option => new SelectListItem
+            {
+                Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+                Value = option.ColumnaId.ToString(),
+                Selected = ((Model != null) && (option.ColumnaId == Model.ComparadorId))
+            }), new { @id = "SelectColumnaId", @style = "display:none", @Name = "SelectColumnaId" })
+        @Html.HiddenFor(model => Model.ColumnaId)
+        @Html.ValidationMessageFor(m => m.ColumnaId)
+    </div>
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(m => m.TipoUsuarioId)
+<div id="listComparadores" style="display:none;" class="groupElement">
+    <div class="editor-label">
+        @Html.LabelFor(m => m.ComparadorId)
+    </div>
+    <div class="editor-field">
+         @Html.DropDownListWithValidationFor(model => model.ComparadorId, listaComparador.Select(option => new SelectListItem
+            {
+                Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
+                Value = option.ComparadorId.ToString(),
+                Selected = ((Model != null) && (option.ComparadorId == Model.ComparadorId))
+            }), new { @id = "SelectComparadorId", @style = "display:none", @Name = "SelectComparadorId" })
+        @Html.HiddenFor(model => Model.ComparadorId)
+        @Html.ValidationMessageFor(m => m.ComparadorId)
+    </div>
 </div>
-<div class="editor-field">
-    @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
-        {
-            Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-            Value = option.TipoUsuarioId.ToString(),
-            Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-        }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @Name = "SelectTipoUsuarioCreate" })
-        @Html.HiddenFor(model => Model.TipoUsuarioId)
-        @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+<div  id="valorDiv" style="display:none;" class="groupElement">
+    <input type="hidden" name="tipoColumnaId" id="tipoColumnaId" />
+    <div class="editor-label">
+        @Html.LabelFor(m => m.Valor)
+    </div>
+    <div id="valorText" style="display:none;">
+        <div class="editor-field">
+            @Html.TextBoxFor(m => m.Valor)
+            @Html.ValidationMessageFor(m => m.Valor)
+        </div>
+    </div>
+    <div id="valorDate" style="display:none;">
+        <div class="editor-field">
+            @Html.TextBoxFor(m => m.Valor, new {@readonly="readonly",@id = "valor", @class = "date-picker-needed" })
+            @Html.ValidationMessageFor(m => m.Valor)
+            <script type="text/javascript">
+                $("#valor").datepicker({ minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
+            </script>
+        </div>
+    </div>
 </div>
+<div id="usuarioDiv" style="display:none;" class="groupElement">
+    <div class="editor-label">
+        @Html.LabelFor(m => m.UsuarioId)
+    </div>
+        <div class="editor-field">
+        @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
+        @Html.HiddenFor(model => model.UsuarioId)
+    </div>
 
-<div class="editor-label">
-    @Html.LabelFor(m => m.Activa)
+    <div class="editor-label">
+        @Html.LabelFor(m => m.TipoUsuarioId)
+    </div>
+    <div class="editor-field">
+        @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+            {
+                Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                Value = option.TipoUsuarioId.ToString(),
+                Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+            }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @Name = "SelectTipoUsuarioCreate" })
+            @Html.HiddenFor(model => Model.TipoUsuarioId)
+            @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+    </div>
 </div>
-<div class="editor-field">
-    @Html.EditorFor(m => m.Activa)
+<div id="activaDiv" style="display:none;" class="groupElement">
+    <div class="editor-label">
+        @Html.LabelFor(m => m.Activa)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(m => m.Activa)
+    </div>
 </div>
 
 

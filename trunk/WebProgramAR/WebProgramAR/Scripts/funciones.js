@@ -67,10 +67,14 @@ undefined: no darle importancia
         });
         var dropDown = $('<ul>', { className: 'dropDown' });
         var selectBox = selectBoxContainer.find('.selectBox');
-        if (select.find('option').size() > 5) {
+        if (select.find('option').size() == undefined) {
             dropDown.css("height", "150px");
         } else {
-            dropDown.css("height", "30px" * select.find('option').size());
+            if (select.find('option').size() > 5) {
+                dropDown.css("height", "150px");
+            } else {
+                dropDown.css("height", "30px" * select.find('option').size());
+            }
         }
         select.find('option').each(function (i) {
             var option = $(this);
