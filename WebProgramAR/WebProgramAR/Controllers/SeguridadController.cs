@@ -137,7 +137,8 @@ namespace WebProgramAR.Controllers
                 modelo.TablaId = c.TablaId;
                 modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : -1;
                 if (c.UsuarioId.HasValue) modelo.UsuarioId = c.UsuarioId.Value;
-                ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre : "";
+                //ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre : "";
+                ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.UsuarioId.HasValue.ToString() : "";
                 modelo.Valor = c.Valor;
 
                 modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();

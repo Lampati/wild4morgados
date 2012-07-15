@@ -10,6 +10,24 @@
 }
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("input:radio[name=groupUsuario]").change(function () {
+            switch ($("input:radio[name=groupUsuario]").filter(":checked").val()) {
+                case "usuario":
+                    $('#UsuarioIdAutoComplete').attr('readonly', false);
+                    $('#tipoUsuarioDiv').hide();
+                    $('#usuarioNombreDiv').show();
+                    $('#TipoUsuarioId').val(" ");
+                    break;
+                case "tipoUsuario":
+                    $('#UsuarioIdAutoComplete').attr('readonly', true);
+                    $('#UsuarioIdAutoComplete').val(" ");
+                    $('#tipoUsuarioDiv').show();
+                    $('#usuarioNombreDiv').hide();
+                    break;
+            }
+        });
+    });
     $("<option value='' selected='selected' >Seleccion una Opcion</option>").prependTo("#SelectTablaId");
     convertSelect("SelectTablaId",1);
     convertSelect("SelectTipoUsuarioCreate",1);
@@ -31,8 +49,8 @@
 
     function reSizeWindow() {
         var size = $(".groupElement").filter(":visible").size();
-        if (size > 5) {
-            $("#dialog").animate({ height: "540px" });
+        if (size >= 5) {
+            $("#dialog").animate({ height: "490px" });
             $("#dialog").css("overflowY", "auto !important");
         }
         else {
@@ -244,7 +262,7 @@
         @Html.ValidationMessageFor(m => m.ComparadorId)
     </div>
 </div>
-<div  id="valorDiv" style="display:none;" class="groupElement">
+<div id="valorDiv" style="display:none;" class="groupElement">
     <input type="hidden" name="tipoColumnaId" id="tipoColumnaId" />
     <div class="editor-label">
         @Html.LabelFor(m => m.Valor)
@@ -266,26 +284,31 @@
     </div>
 </div>
 <div id="usuarioDiv" style="display:none;" class="groupElement">
-    <div class="editor-label">
-        @Html.LabelFor(m => m.UsuarioId)
+    <input type="radio" name="groupUsuario" id="groupUsuario" value="usuario" checked="checked"> Por Usuario<br>
+    <div id="usuarioNombreDiv" class="groupElements">
+        <div class="editor-label">
+            @Html.LabelFor(m => m.UsuarioId)
+        </div>
+            <div class="editor-field">
+            @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
+            @Html.HiddenFor(model => model.UsuarioId)
+        </div>
     </div>
+    <input type="radio" name="groupUsuario" id="groupUsuario" value="tipoUsuario" > Por Perfil<br>
+    <div id="tipoUsuarioDiv" class="groupElements" style="display:none;">
+        <div class="editor-label">
+            @Html.LabelFor(m => m.TipoUsuarioId)
+        </div>
         <div class="editor-field">
-        @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
-        @Html.HiddenFor(model => model.UsuarioId)
-    </div>
-
-    <div class="editor-label">
-        @Html.LabelFor(m => m.TipoUsuarioId)
-    </div>
-    <div class="editor-field">
-        @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
-            {
-                Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                Value = option.TipoUsuarioId.ToString(),
-                Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
-            }), new { @id = "SelectTipoUsuarioCreate", @style = "display:none", @Name = "SelectTipoUsuarioCreate" })
-            @Html.HiddenFor(model => Model.TipoUsuarioId)
-            @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+            @Html.DropDownListWithValidationFor(model => model.TipoUsuarioId, listaTipoUsuario.Select(option => new SelectListItem
+                {
+                    Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
+                    Value = option.TipoUsuarioId.ToString(),
+                    Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+                }), new {@readonly="readonly", @id = "SelectTipoUsuarioCreate", @style = "display:none", @Name = "SelectTipoUsuarioCreate" })
+                @Html.HiddenFor(model => Model.TipoUsuarioId)
+                @Html.ValidationMessageFor(m => m.TipoUsuarioId)
+        </div>
     </div>
 </div>
 <div id="activaDiv" style="display:none;" class="groupElement">

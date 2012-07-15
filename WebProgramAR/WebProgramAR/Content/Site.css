@@ -2499,3 +2499,8 @@ ul.tabs
 	background: #f8f8f8;
 	border: 3px solid #ddd;
 	}
+	.groupElements
+	{
+	 border:2px solid #333;
+	 padding:10px;
+	}
