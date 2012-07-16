@@ -12,7 +12,17 @@ namespace InterfazTextoGrafico
         public SecuenciaViewModel Cuerpo { get; set; }
         public string Condicion { get; set; }
 
-      
+        public MientrasViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+        public MientrasViewModel()
+            : base()
+        {
+
+        }
 
         public override string NombreActividad
         {

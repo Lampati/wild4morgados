@@ -49,7 +49,7 @@ namespace LibreriaActividades
         {
             get
             {
-                DeclaracionVariableViewModel activ = new DeclaracionVariableViewModel();
+                DeclaracionVariableViewModel activ = new DeclaracionVariableViewModel(this.IdPropio);
                 activ.Id = Id;
                 activ.Nombre = this.NombreVariable;
                 activ.ActividadReferenciada = this;
@@ -67,6 +67,8 @@ namespace LibreriaActividades
                     default:
                         break;
                 }
+
+                IdPropio = activ.IdPropio;
 
                 return activ;
             }
@@ -91,6 +93,8 @@ namespace LibreriaActividades
                     this.Tipo = eTipoVariable.Booleano;
                     break;
             }
+
+            this.IdPropio = datosMapeados.IdPropio;
         }
     }
 }

@@ -96,6 +96,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DialogWindows\SelectorModoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\ApplicationMenuResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,6 +240,9 @@
     </Compile>
     <Compile Include="DialogWindows\ResultadoEjecucionDialog.xaml.cs">
       <DependentUpon>ResultadoEjecucionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\SelectorModoDialog.xaml.cs">
+      <DependentUpon>SelectorModoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />

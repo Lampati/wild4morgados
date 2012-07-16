@@ -36,6 +36,8 @@ namespace LibreriaActividades
                 activ.Parametros = this.Parametros;
                 activ.ActividadReferenciada = this;
 
+                IdPropio = activ.IdPropio;
+
                 return activ;
             }
 
@@ -50,7 +52,7 @@ namespace LibreriaActividades
                 this.NombreProcedimiento = datosMapeados.NombreProcedimiento;
                 this.Parametros = datosMapeados.Parametros;
 
-
+                this.IdPropio = datosMapeados.IdPropio;
             }
             catch (RuntimeBinderException)
             {

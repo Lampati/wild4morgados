@@ -432,6 +432,13 @@
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>
 
+        <ribbon:RibbonTab Name="TabAyuda" Header="Ayuda" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Ayuda de Program.Ar" Name="ribbonGroupAyudaProgramar" ContextMenu="{Binding null}">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Manual" Name="bttnAyudaManual" ContextMenu="{Binding null}" Click="bttnAyudaManual_Click"></ribbon:RibbonButton>
+            </ribbon:RibbonGroup>
+        </ribbon:RibbonTab>
+
+
         <ribbon:RibbonTab Name="TabTestsAutomatizados" Header="TestsAutomatizados" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
 
             <ribbon:RibbonGroup Header="Tester Archivos" Name="ribbonGroupTestsAutomatizados" ContextMenu="{Binding null}">

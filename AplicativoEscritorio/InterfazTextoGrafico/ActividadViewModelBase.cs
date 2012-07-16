@@ -99,6 +99,18 @@ namespace InterfazTextoGrafico
             }
         }
 
+        public ActividadViewModelBase(long id)
+        {
+            if (id == long.MinValue)
+            {
+                idPropio = ++_contadorGlobalAct;
+            }
+            else
+            {
+                idPropio = id;
+            }
+        }
+
         public ActividadViewModelBase()
         {
             idPropio = ++_contadorGlobalAct;

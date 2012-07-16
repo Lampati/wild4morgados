@@ -48,7 +48,7 @@ namespace LibreriaActividades
         {
             get
             {
-                DeclaracionConstanteViewModel activ = new DeclaracionConstanteViewModel();
+                DeclaracionConstanteViewModel activ = new DeclaracionConstanteViewModel(this.IdPropio);
 
                 activ.Nombre = this.NombreConstante;
                 activ.Valor = this.Valor;
@@ -68,6 +68,8 @@ namespace LibreriaActividades
                     default:
                         break;
                 }
+
+                IdPropio = activ.IdPropio;
 
                 return activ;
             }
@@ -93,6 +95,8 @@ namespace LibreriaActividades
                     this.Tipo = eTipoVariable.Booleano;
                     break;
             }
+
+            this.IdPropio = datosMapeados.IdPropio;
         }
     }
 }

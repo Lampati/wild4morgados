@@ -19,5 +19,12 @@ namespace LibreriaActividades
 
 
         protected bool yaCreada = false;
+
+        //Esto lo que hace es prevenir que se pueda editar el header de una actividad.
+        //Es correcto que quede vacio
+        public override void OnApplyTemplate()
+        {
+            
+        }
     }
 }

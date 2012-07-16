@@ -91,6 +91,9 @@ namespace LibreriaActividades
                 }
                 retorno.Id = Id;
                 retorno.ActividadReferenciada = this;
+
+                IdPropio = retorno.IdPropio;
+
                 return retorno;
             }
         }
@@ -108,6 +111,8 @@ namespace LibreriaActividades
 
                 ActividadBase actFalso = ActividadFactory.CrearActividad(datosMapeados.BranchFalso);
                 this.BranchFalso = actFalso;
+
+                this.IdPropio = datosMapeados.IdPropio;
 
             }
             catch (RuntimeBinderException)

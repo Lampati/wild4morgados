@@ -16,6 +16,17 @@ namespace InterfazTextoGrafico
         public short Orden { get; set; }
 
       
+         public ProcedimientoViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+         public ProcedimientoViewModel()
+            : base()
+        {
+
+        }
 
         public override string NombreActividad
         {

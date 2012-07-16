@@ -57,6 +57,9 @@ namespace LibreriaActividades
                 retorno.Cuerpo = ((Secuencia)this.Cuerpo).Datos as SecuenciaViewModel;
                 retorno.Id = Id;
                 retorno.ActividadReferenciada = this;
+
+                IdPropio = retorno.IdPropio;
+
                 return retorno;
             }
         }
@@ -70,7 +73,9 @@ namespace LibreriaActividades
                 this.Condicion = datosMapeados.Condicion;
 
                 ActividadBase actSec = ActividadFactory.CrearActividad(datosMapeados.Cuerpo);
-                this.Cuerpo = actSec;                
+                this.Cuerpo = actSec;
+
+                this.IdPropio = datosMapeados.IdPropio;
                 
             }
             catch (RuntimeBinderException)

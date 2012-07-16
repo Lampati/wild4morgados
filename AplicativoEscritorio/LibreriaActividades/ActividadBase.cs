@@ -48,6 +48,17 @@ namespace LibreriaActividades
             {
                 return idPropio;
             }
+            set
+            {
+                if (idPropio != long.MinValue)
+                {
+                    DisplayName = string.Format("{0} ({1})", this.GetType().Name, idPropio);
+                }
+                else
+                {
+                    DisplayName = string.Format("{0} ()", this.GetType().Name.ToString());
+                }
+            }
 
         }
 

@@ -9,11 +9,18 @@ namespace InterfazTextoGrafico
     public class SecuenciaViewModel : ActividadViewModelBase
     {
         public List<ActividadViewModelBase> ListaActividades { get; set; }
+            
 
-        public SecuenciaViewModel()
+         public SecuenciaViewModel(long id)
+            : base(id)
         {
             ListaActividades = new List<ActividadViewModelBase>();
-            
+        }
+
+         public SecuenciaViewModel()
+            : base()
+        {
+            ListaActividades = new List<ActividadViewModelBase>();
         }
 
         public override string NombreActividad

@@ -12,7 +12,17 @@ namespace InterfazTextoGrafico
         public InterfazTextoGrafico.Enums.TipoDato Tipo {get; set;}
         public string Valor {get; set;}
 
-    
+        public DeclaracionConstanteViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+        public DeclaracionConstanteViewModel()
+            : base()
+        {
+
+        }
 
           public override string  NombreActividad
         {

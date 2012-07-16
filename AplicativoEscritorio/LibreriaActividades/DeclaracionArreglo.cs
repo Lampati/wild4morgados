@@ -50,7 +50,7 @@ namespace LibreriaActividades
         {
             get
             {
-                DeclaracionArregloViewModel activ = new DeclaracionArregloViewModel();
+                DeclaracionArregloViewModel activ = new DeclaracionArregloViewModel(this.IdPropio);
                 activ.Id = Id;
                 activ.Nombre = this.Nombre;
                 activ.Tope = this.Tope;
@@ -69,6 +69,8 @@ namespace LibreriaActividades
                     default:
                         break;
                 }
+
+                IdPropio = activ.IdPropio;
 
                 return activ;
             }
@@ -94,6 +96,8 @@ namespace LibreriaActividades
                     this.Tipo = eTipoVariable.Booleano;
                     break;
             }
+
+            this.IdPropio = datosMapeados.IdPropio;
         }
     }
 }

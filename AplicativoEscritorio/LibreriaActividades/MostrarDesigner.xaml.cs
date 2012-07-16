@@ -17,6 +17,8 @@ namespace LibreriaActividades
     // Interaction logic for MostrarDesigner.xaml
     public partial class MostrarDesigner
     {
+        
+
         public MostrarDesigner()
         {
             InitializeComponent();
@@ -26,6 +28,9 @@ namespace LibreriaActividades
                 yaCreada = true;
                 GlobalActivityStore.AgregarSiNoExiste(this);
             }
+        
+            
+            
             
         }
     }
