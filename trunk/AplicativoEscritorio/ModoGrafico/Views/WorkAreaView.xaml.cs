@@ -37,6 +37,8 @@
 
             this.tab.CambioTabEvent += new Tabs.TabsControl.TipoTabCambiadoEventHandler(tab_CambioTabEvent);
 
+            ModoGrafico.Tabs.EditableTabHeaderControl.PropertiesClickEvento += new EditableTabHeaderControl.HeaderPropertiesClickedHandler(EditableTabHeaderControl_PropertiesClickEvento);
+
             this.FindAndApplyResources();
 
 
@@ -288,6 +290,16 @@
             Tab tabElegido = workAreaVM.ObtenerTab(procedimiento);
 
             this.tab.tc.SelectedItem = tabElegido;
+        }
+
+        void EditableTabHeaderControl_PropertiesClickEvento(object sender, HeaderPropertiesClickedEventArgs e)
+        {
+            WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
+            Tab tabElegido = workAreaVM.ObtenerTab(e.NombreContexto);
+
+            this.tab.tc.SelectedItem = tabElegido;
+
+
         }
 
         internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)

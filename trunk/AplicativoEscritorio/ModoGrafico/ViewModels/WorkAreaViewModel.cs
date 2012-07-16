@@ -23,13 +23,10 @@ using InterfazTextoGrafico;
             : base()
         {
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
-            ModoGrafico.Tabs.EditableTabHeaderControl.PropertiesClickEvento += new EditableTabHeaderControl.HeaderPropertiesClickedHandler(EditableTabHeaderControl_PropertiesClickEvento);
+            
         }
 
-        void EditableTabHeaderControl_PropertiesClickEvento(object sender, HeaderPropertiesClickedEventArgs e)
-        {
-            Tab tabElegido = ObtenerTab(e.NombreContexto);
-        }
+       
 
         public void AgregarNuevo(string nombre, TipoTab tipoTab)
         {
