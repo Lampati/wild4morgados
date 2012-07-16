@@ -8,6 +8,7 @@
     using ModoGrafico.Tabs;
 using InterfazTextoGrafico;
     using ModoGrafico.EventArgsClasses;
+    using System.Collections.Generic;
 
     public class WorkAreaViewModel : BaseViewModel
     {
@@ -22,6 +23,12 @@ using InterfazTextoGrafico;
             : base()
         {
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+            ModoGrafico.Tabs.EditableTabHeaderControl.PropertiesClickEvento += new EditableTabHeaderControl.HeaderPropertiesClickedHandler(EditableTabHeaderControl_PropertiesClickEvento);
+        }
+
+        void EditableTabHeaderControl_PropertiesClickEvento(object sender, HeaderPropertiesClickedEventArgs e)
+        {
+            Tab tabElegido = ObtenerTab(e.NombreContexto);
         }
 
         public void AgregarNuevo(string nombre, TipoTab tipoTab)
@@ -230,6 +237,35 @@ using InterfazTextoGrafico;
             {
                 WorkflowChangedEvent(tab, workflowChangedEventArgs);
             }
+        }
+
+        internal Tab ObtenerTab(string procedimiento)
+        {
+            Tab tabElegido;
+            List<Tab> lista = new List<Tab>(Tabs);
+
+            if (procedimiento.ToUpper().Trim().Equals("PRINCIPAL"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemPrincipal));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("SALIDA"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemSalida));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("DECLARACIONCONSTANTE"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemDeclaracionConstante));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("DECLARACIONVARIABLE"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemDeclaracionVariable));
+            }
+            else
+            {
+                tabElegido = lista.Find(x => x.Header.ToUpper().Trim().Equals(procedimiento.ToUpper().Trim()));
+            }
+
+            return tabElegido;
         }
     }
 }

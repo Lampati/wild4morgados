@@ -5,6 +5,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Threading;
+    using ModoGrafico.EventArgsClasses;
 
     /// <summary>
     /// Header Editable TabItem
@@ -22,6 +23,39 @@
         private delegate void FocusTextBox();
         public delegate void ClickHandler(object sender, MouseButtonEventArgs e);
         public static event ClickHandler ClickEvento;
+
+        public delegate void HeaderPropertiesClickedHandler(object sender, HeaderPropertiesClickedEventArgs e);
+        public static event HeaderPropertiesClickedHandler PropertiesClickEvento;
+
+
+        public EditableTabHeaderControl()
+        {
+            ContextMenu con = new ContextMenu();
+
+            //falta el icono
+            MenuItem prop = new MenuItem() { Header = "Propiedades", ToolTip = "Propiedades del tab seleccionado" };
+            prop.Click += new RoutedEventHandler(prop_Click);            
+            con.Items.Add(prop);
+
+            ContextMenu = con;
+
+            ToolTip = "Click derecho para desplegar el menu";
+        }
+
+        void prop_Click(object sender, RoutedEventArgs e)
+        {
+            HeaderPropertiesClickedEventFire(this, new HeaderPropertiesClickedEventArgs() { NombreContexto = this.Content.ToString() });
+        }
+
+
+        public static void HeaderPropertiesClickedEventFire(object sender, HeaderPropertiesClickedEventArgs e)
+        {
+            if (PropertiesClickEvento != null)
+            {
+                PropertiesClickEvento(sender, e);
+            }
+        }
+       
 
         public static void ClickEventoFire(object sender, MouseButtonEventArgs e)
         {
