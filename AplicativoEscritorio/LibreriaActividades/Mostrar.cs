@@ -30,8 +30,7 @@ namespace LibreriaActividades
         public string Elemento { get; set; }
         public bool ConPausa { get; set; }
 
-        public Mostrar()
-            : base()
+        public Mostrar()            
         {
 
         }

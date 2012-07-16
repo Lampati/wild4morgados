@@ -20,7 +20,7 @@ namespace LibreriaActividades
         public string LadoDerecho { get; set; }
 
         public Asignacion() 
-            : base()
+           
         {
           
               
