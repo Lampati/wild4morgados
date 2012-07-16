@@ -12,7 +12,17 @@ namespace InterfazTextoGrafico
         public SecuenciaViewModel BranchFalso { get; set; }
         public string Condicion { get; set; }
 
-        
+        public SiViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+        public SiViewModel()
+            : base()
+        {
+
+        }
 
         public override string NombreActividad
         {

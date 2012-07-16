@@ -21,6 +21,7 @@ using Microsoft.Windows.Controls.Ribbon;
 using AplicativoEscritorio.DataAccess;
 using DataAccess;
 using System.Diagnostics;
+using System.IO;
 
 namespace DiagramDesigner.UserControls.Toolbar
 {
@@ -825,6 +826,23 @@ namespace DiagramDesigner.UserControls.Toolbar
             TesterCompilador.ErroresMensajeDisplayerWindow window = new TesterCompilador.ErroresMensajeDisplayerWindow();
 
             window.Show();
+        }
+
+        private void bttnAyudaManual_Click(object sender, RoutedEventArgs e)
+        {
+            //Abre el manual
+
+            if (File.Exists(""))
+            {
+                System.Diagnostics.Process.Start(@"c:\file.pdf");
+            }
+            else
+            {
+                MessageBox.Show("El manual no se encuentra en la ubicación por defecto, y no puede ser abierto.");
+            }
+
+            
+
         }
     }
 }

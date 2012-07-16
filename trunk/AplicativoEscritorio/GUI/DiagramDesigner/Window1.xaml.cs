@@ -278,6 +278,11 @@ namespace DiagramDesigner
 
                 if (Modo == ModoVisual.Texto)
                 {
+                    //Para ponerle lo minimo si ta vacio para poder transformarlo
+                    if (string.IsNullOrEmpty(this.Esquema.GarGarACompilar))
+                    {
+                        this.Esquema.GarGarACompilar = GlobalesCompilador.ObtenerProgramaConEstructuraVacia();
+                    }
 
                     ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 

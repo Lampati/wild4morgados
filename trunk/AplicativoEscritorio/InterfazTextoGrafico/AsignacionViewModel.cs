@@ -10,6 +10,18 @@ namespace InterfazTextoGrafico
 
         public string LadoIzquierdo { get; set; }
         public string LadoDerecho { get; set; }
+
+        public AsignacionViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+        public AsignacionViewModel()
+            : base()
+        {
+
+        }
        
         public override string  NombreActividad
         {

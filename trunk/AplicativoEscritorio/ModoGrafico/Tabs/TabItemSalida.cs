@@ -20,7 +20,7 @@ namespace ModoGrafico.Tabs
         {
             actividadViewModel = proc;
             Tipo = Enums.TipoTab.TabItemSalida;
-            header = proc.Nombre.ToUpper().Trim();
+            header = "SALIDA";
 
         }
 

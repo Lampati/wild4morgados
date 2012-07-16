@@ -11,7 +11,17 @@ namespace InterfazTextoGrafico
         public string NombreProcedimiento { get; set; }
         public string Parametros { get; set; }
 
-      
+        public LlamarProcedimientoViewModel(long id)
+        : base(id)
+        {
+
+        }
+
+        public LlamarProcedimientoViewModel()
+            : base()
+        {
+
+        }
 
         public override string NombreActividad
         {

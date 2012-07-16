@@ -30,6 +30,7 @@ namespace LibreriaActividades
         public Secuencia()
         {
             Activities = new Collection<Activity>();
+            
         }
 
 
@@ -64,6 +65,9 @@ namespace LibreriaActividades
                     retorno.ListaActividades.Add(item.Datos);
                 }
                 retorno.ActividadReferenciada = this;
+
+                IdPropio = retorno.IdPropio;
+
                 return retorno;  
             }
         
@@ -82,7 +86,11 @@ namespace LibreriaActividades
                         ActividadBase actividadCreada = ActividadFactory.CrearActividad(item);
                         Activities.Add(actividadCreada);
                     }
+
+                    this.IdPropio = datosMapeados.IdPropio;
                 }
+
+                
             }
             catch (RuntimeBinderException)
             {

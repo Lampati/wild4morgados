@@ -49,13 +49,24 @@ namespace DiagramDesigner
                                     Ejercicio ej = new Ejercicio();
                                     string exePath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
                                     string dir = Path.GetDirectoryName(exePath);
-                                    string pathTemplate = Path.Combine(dir, "ModoTexto", "Configuracion", "Template.txt").ToLower();
-                                    if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
-                                        pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
-                                    if (File.Exists(pathTemplate))
-                                        ej.Abrir(new FileInfo(pathTemplate));
+                                    //string pathTemplate = Path.Combine(dir, "ModoTexto", "Configuracion", "Template.txt").ToLower();
+                                    //if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
+                                    //    pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
+                                    //if (File.Exists(pathTemplate))
+                                    //    ej.Abrir(new FileInfo(pathTemplate));
 
-                                    ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                    SelectorModoDialog selectorModo = new SelectorModoDialog();
+                                    selectorModo.ShowDialog();
+
+                                    switch (selectorModo.ModoElegido)
+                                    {
+                                        case SelectorModoDialog.TiposModo.ModoGrafico:
+                                            ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Flujo;
+                                            break;
+                                        case SelectorModoDialog.TiposModo.ModoTexto:
+                                            ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                            break;
+                                    }
                                     ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                     ej.ModificadoDesdeUltimoGuardado = false;
                                     ej.PathGuardadoActual = path;

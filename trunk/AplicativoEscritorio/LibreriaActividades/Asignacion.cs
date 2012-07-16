@@ -40,11 +40,14 @@ namespace LibreriaActividades
         {
             get
             {
-                AsignacionViewModel activ = new AsignacionViewModel();
+                AsignacionViewModel activ = new AsignacionViewModel(this.IdPropio);
                 activ.Id = Id;                
                 activ.LadoIzquierdo = this.LadoIzquierdo;
                 activ.LadoDerecho = this.LadoDerecho;
                 activ.ActividadReferenciada = this;
+
+                IdPropio = activ.IdPropio;
+
                 return activ;
             }
           
@@ -58,7 +61,7 @@ namespace LibreriaActividades
 
                 this.LadoIzquierdo = datosMapeados.LadoIzquierdo;
                 this.LadoDerecho = datosMapeados.LadoDerecho;
-
+                this.IdPropio = datosMapeados.IdPropio;
             }
             catch (RuntimeBinderException)
             {

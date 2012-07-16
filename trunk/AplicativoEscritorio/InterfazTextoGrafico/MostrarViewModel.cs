@@ -16,7 +16,21 @@ namespace InterfazTextoGrafico
         {
             get { return "Mostrar"; }
         }
+ 
 
+        public MostrarViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+        public MostrarViewModel()
+            : base()
+        {
+
+        }
+
+    
         public override string Gargar
         {
             get

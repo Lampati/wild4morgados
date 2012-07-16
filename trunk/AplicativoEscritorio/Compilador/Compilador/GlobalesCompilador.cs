@@ -28,6 +28,22 @@ namespace CompiladorGargar
             Ninguno
         }
 
+        public static string ObtenerProgramaConEstructuraVacia()
+        {
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.AppendLine("procedimiento SALIDA()");
+            strBldr.AppendLine("comenzar");
+            strBldr.AppendLine("finproc;");
+            strBldr.AppendLine();
+            strBldr.AppendLine("procedimiento PRINCIPAL()");
+            strBldr.AppendLine("comenzar");
+            strBldr.AppendLine("llamar SALIDA();");
+            strBldr.AppendLine("finproc;");
+            
+
+
+            return strBldr.ToString();
+        }
 
         public static void AgregarLibreriasFramework(TablaSimbolos tablaSimbolos)
         {

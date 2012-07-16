@@ -13,6 +13,20 @@ namespace LibreriaActividades
     [ToolboxBitmap(typeof(Mostrar), "Resources.Mostrar.png")]
     public class Mostrar : ActividadBase
     {
+        //private string idProp = string.Empty;
+        //public string IdProp 
+        //{
+        //    get
+        //    {
+        //        return idProp;
+        //    }
+        //    set
+        //    {
+        //        idProp = value;
+        //        DisplayName = string.Format("Mostrar ({0})",idProp);
+        //    }
+        //}
+
         public string Elemento { get; set; }
         public bool ConPausa { get; set; }
 
@@ -36,11 +50,14 @@ namespace LibreriaActividades
         {
             get
             {
-                MostrarViewModel activ = new MostrarViewModel();
+                MostrarViewModel activ = new MostrarViewModel(this.IdPropio);
                 activ.ElementosAMostrar = this.Elemento;
                 activ.ConPausa = this.ConPausa;
                 activ.Id = Id;                
                 activ.ActividadReferenciada = this;
+
+                IdPropio = activ.IdPropio;
+
                 return activ;
             }
 
@@ -54,6 +71,7 @@ namespace LibreriaActividades
 
                 this.Elemento = datosMapeados.ElementosAMostrar;
                 this.ConPausa = datosMapeados.ConPausa;
+                this.IdPropio = datosMapeados.IdPropio;
 
             }
             catch (RuntimeBinderException)

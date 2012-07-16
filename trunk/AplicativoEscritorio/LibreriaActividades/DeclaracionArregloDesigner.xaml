@@ -1,9 +1,10 @@
-﻿<sap:ActivityDesigner xmlns:c="clr-namespace:LibreriaActividades"  x:Class="LibreriaActividades.DeclaracionArregloDesigner"
+﻿<base:ActivityDesignerBase xmlns:c="clr-namespace:LibreriaActividades"  x:Class="LibreriaActividades.DeclaracionArregloDesigner"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
-    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation">
-    <sap:ActivityDesigner.Resources>
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:base="clr-namespace:LibreriaActividades"                        >
+    <base:ActivityDesignerBase.Resources>
         <c:ComboBoxItemConverter x:Key="comboBoxItemConverter"/>
         <c:ComboBoxVectorItemConverter x:Key="comboBoxVectorItemConverter"/>
         <DataTemplate x:Key="Collapsed">
@@ -44,8 +45,8 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-    </sap:ActivityDesigner.Resources>
-    <sap:ActivityDesigner.Icon>
+    </base:ActivityDesignerBase.Resources>
+    <base:ActivityDesignerBase.Icon>
         <DrawingBrush>
             <DrawingBrush.Drawing>
                 <ImageDrawing>
@@ -58,8 +59,8 @@
                 </ImageDrawing>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-    </sap:ActivityDesigner.Icon>
+    </base:ActivityDesignerBase.Icon>
     <Grid>
         <ContentPresenter Style="{DynamicResource ExpandOrCollapsedStyle}" Content="{Binding}" />
     </Grid>
-</sap:ActivityDesigner>
+</base:ActivityDesignerBase>

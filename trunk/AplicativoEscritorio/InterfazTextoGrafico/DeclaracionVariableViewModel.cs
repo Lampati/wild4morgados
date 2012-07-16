@@ -7,6 +7,18 @@ namespace InterfazTextoGrafico
 {
     public class DeclaracionVariableViewModel  : ActividadViewModelBase
     {
+        public DeclaracionVariableViewModel()
+            : base()
+        {
+
+        }
+
+        public DeclaracionVariableViewModel(long p)
+            : base(p)
+        {
+            
+        }
+
         public string Nombre { get; set; }
         public InterfazTextoGrafico.Enums.TipoDato Tipo { get; set; }
 

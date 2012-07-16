@@ -9,6 +9,17 @@ namespace InterfazTextoGrafico
     {
         public string Parametro { get; set; }
 
+         public LeerViewModel(long id)
+            : base(id)
+        {
+
+        }
+
+         public LeerViewModel()
+            : base()
+        {
+
+        }
        
         public override string NombreActividad
         {

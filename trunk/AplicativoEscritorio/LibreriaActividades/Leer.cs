@@ -29,10 +29,13 @@ namespace LibreriaActividades
         {
             get
             {
-                LeerViewModel retorno = new LeerViewModel();
+                LeerViewModel retorno = new LeerViewModel(this.IdPropio);
                 retorno.Parametro = this.Parametro;
                 retorno.Id = Id;
                 retorno.ActividadReferenciada = this;
+
+                IdPropio = retorno.IdPropio;
+
                 return retorno;
             }
         }
@@ -44,6 +47,8 @@ namespace LibreriaActividades
                 LeerViewModel datosMapeados = datos as LeerViewModel;
 
                 this.Parametro = datosMapeados.Parametro;
+
+                this.IdPropio = datosMapeados.IdPropio;
 
             }
             catch (RuntimeBinderException)
