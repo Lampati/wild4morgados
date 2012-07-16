@@ -50,6 +50,7 @@ namespace LibreriaActividades
             }
             set
             {
+                idPropio = value;
                 if (idPropio != long.MinValue)
                 {
                     DisplayName = string.Format("{0} ({1})", this.GetType().Name, idPropio);
@@ -63,8 +64,8 @@ namespace LibreriaActividades
         }
 
         public ActividadBase() : base()
-        {
-            idPropio = ++_contadorGlobalAct;
+        {            
+            //idPropio = ++_contadorGlobalAct;
         }
 
         public abstract void AsignarDatos(ActividadViewModelBase datos);
