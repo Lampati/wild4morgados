@@ -194,5 +194,11 @@ namespace ModoGrafico
         {
             WorkArea.PonerFocoEnActividad(procedimiento, actividadBase as ActividadBase);
         }
+
+
+        public void PonerFocoEnTab(string procedimiento)
+        {
+            WorkArea.PonerFocoEnTab(procedimiento);
+        }
     }
 }

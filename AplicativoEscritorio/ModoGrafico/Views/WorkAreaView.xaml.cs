@@ -281,13 +281,11 @@
 
         }
 
-        internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)
+        internal void PonerFocoEnTab(string procedimiento)
         {
             WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
             List<Tab> lista = new List<Tab>(workAreaVM.Tabs);
             Tab tabElegido;
-
-           
 
             if (procedimiento.ToUpper().Trim().Equals("PRINCIPAL"))
             {
@@ -309,6 +307,42 @@
             {
                 tabElegido = lista.Find(x => x.Header.ToUpper().Trim().Equals(procedimiento.ToUpper().Trim()));
             }
+
+
+            this.tab.tc.SelectedItem = tabElegido;
+        }
+
+        internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)
+        {
+
+
+            WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
+            List<Tab> lista = new List<Tab>(workAreaVM.Tabs);
+            Tab tabElegido;
+
+            if (procedimiento.ToUpper().Trim().Equals("PRINCIPAL"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemPrincipal));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("SALIDA"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemSalida));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("DECLARACIONCONSTANTE"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemDeclaracionConstante));
+            }
+            else if (procedimiento.ToUpper().Trim().Equals("DECLARACIONVARIABLE"))
+            {
+                tabElegido = lista.Find(x => x.GetType() == typeof(TabItemDeclaracionVariable));
+            }
+            else
+            {
+                tabElegido = lista.Find(x => x.Header.ToUpper().Trim().Equals(procedimiento.ToUpper().Trim()));
+            }
+           
+
+            
 
 
             tabElegido = lista.Find(x => x.GetType() == typeof(TabItemPrincipal));

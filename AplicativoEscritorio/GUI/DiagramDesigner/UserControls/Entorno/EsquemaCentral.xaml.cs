@@ -268,6 +268,13 @@ namespace DiagramDesigner.UserControls.Entorno
         {
             modoGrafico.PonerFocoEnActividad(p, actividadBase);
         }
+
+        internal void PonerFocoEnTab(string p)
+        {
+            modoGrafico.PonerFocoEnTab(p);
+        }
+
+        
     }
 
     
