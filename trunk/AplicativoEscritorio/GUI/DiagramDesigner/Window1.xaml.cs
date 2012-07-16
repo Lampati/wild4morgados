@@ -552,10 +552,14 @@ namespace DiagramDesigner
             }
             else
             {
-                if (e.ActividadReferenciada != null)
-                {
-                    this.Esquema.PonerFocoEnActividad(e.FiguraProcedimientoNombre, e.ActividadReferenciada);
-                }
+                //if (e.ActividadReferenciada != null)
+                //{
+                //    //this.Esquema.PonerFocoEnActividad(e.FiguraProcedimientoNombre, e.ActividadReferenciada);
+                //    this.Esquema.PonerFocoEnTab(e.FiguraProcedimientoNombre);
+                    
+                //}
+
+                this.Esquema.PonerFocoEnTab(e.FiguraProcedimientoNombre);
             }
         }
 

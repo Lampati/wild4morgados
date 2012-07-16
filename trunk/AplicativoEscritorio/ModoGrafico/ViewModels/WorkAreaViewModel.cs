@@ -147,6 +147,8 @@ using InterfazTextoGrafico;
             }
         }
 
+
+
         public Tab ExecuteAddProcedimiento(string obj, bool acomodar, TipoTab tipo, ProcedimientoViewModel proc)
         {
             if (!string.IsNullOrEmpty(obj))
