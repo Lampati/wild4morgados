@@ -8,7 +8,7 @@ using ModoGrafico.ViewModels;
 namespace ModoGrafico.Interfaces
 {
 
-    interface IPropiedadesContexto
+    public interface IPropiedadesContexto
     {      
 
         string Nombre { get; set; }

@@ -44,5 +44,16 @@ namespace ModoGrafico.Tabs
             sb.AppendLine(LibreriaActividades.Extension.Tabs + String.Format("FINPROC;"));
             sb.AppendLine();
         }
+
+        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
+        {
+
+        }
+
+        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
+        {
+
+            return null;
+        }
     }
 }

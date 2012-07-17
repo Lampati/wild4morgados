@@ -20,6 +20,16 @@ namespace ModoGrafico.Tabs
             //no hace nada este tab
         }
 
+        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
+        {
+
+        }
+
+        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
+        {
+            return null;
+        }
+
         protected override void RecrearWorkflowDesigner()
         {
             //no hago nada, no tengo que recrear el designer

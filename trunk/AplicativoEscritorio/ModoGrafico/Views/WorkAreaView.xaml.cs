@@ -14,6 +14,7 @@
     using System.Activities;
     using System.Activities.Presentation.Services;
     using System.Activities.Presentation.Model;
+    using ModoGrafico.Interfaces;
 
     /// <summary>
     /// Interaction logic for BrandView.xaml
@@ -297,9 +298,20 @@
             WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
             Tab tabElegido = workAreaVM.ObtenerTab(e.NombreContexto);
 
-            this.tab.tc.SelectedItem = tabElegido;
+            if (tabElegido.Tipo == TipoTab.TabItemFuncion
+                || tabElegido.Tipo == TipoTab.TabItemProcedimiento
+                || tabElegido.Tipo == TipoTab.TabItemSalida
+                || tabElegido.Tipo == TipoTab.TabItemPrincipal)
+            {
+
+                this.tab.tc.SelectedItem = tabElegido;
 
 
+                IPropiedadesContexto propiedades;
+
+
+                
+            }
         }
 
         internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)

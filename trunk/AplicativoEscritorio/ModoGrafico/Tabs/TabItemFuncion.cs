@@ -56,6 +56,16 @@ namespace ModoGrafico.Tabs
             header = proc.Nombre.ToUpper().Trim();
         }
 
+        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
+        {
+
+        }
+
+        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
+        {
+            return null;
+        }
+
         
 
         public override int Orden
