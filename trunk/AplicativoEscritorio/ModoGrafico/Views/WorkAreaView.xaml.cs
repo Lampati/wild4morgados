@@ -109,12 +109,18 @@
             {
                 foreach (Tab item in workArea.Tabs)
                 {
+                    IPropiedadesContexto propiedades = item.ObtenerPropiedadesTab();
+
                     switch (item.Tipo)
                     {
+
                         case TipoTab.TabItemPrincipal:
                             ProcedimientoViewModel activ = new ProcedimientoViewModel();
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
+                            
+                            
+
                             if (item.SecuenciaInicialProcedimiento != null)
                             {
                                 activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;

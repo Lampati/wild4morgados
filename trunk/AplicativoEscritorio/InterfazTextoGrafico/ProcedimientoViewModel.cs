@@ -14,6 +14,27 @@ namespace InterfazTextoGrafico
         public string Nombre { get; set; }
         public TipoRutina Tipo { get; set; }
         public short Orden { get; set; }
+        public List<ParametroViewModel> Parametros { get; set; }
+
+        private string CadenaParametros
+        {
+            get
+            {
+                StringBuilder strBldr = new StringBuilder();
+
+                if (Parametros.Count > 0)
+                {
+                    foreach (var item in Parametros)
+                    {
+                        strBldr.Append(item.Gargar).Append(";");
+                    }
+
+                    strBldr.Remove(strBldr.Length - 1, 1);
+                }
+
+                return strBldr.ToString();
+            }
+        }
 
       
          public ProcedimientoViewModel(long id)
@@ -47,11 +68,11 @@ namespace InterfazTextoGrafico
                         fin = "finproc;";
                         break;
                     case TipoRutina.Funcion:
-                        strBldr.AppendFormat("funcion {0}()", Nombre).AppendLine();
+                        strBldr.AppendFormat("funcion {0}({1})", Nombre, CadenaParametros).AppendLine();
                         fin = "finfunc;";
                         break;
                     case TipoRutina.Procedimiento:
-                        strBldr.AppendFormat("procedimiento {0}()",Nombre).AppendLine();                        
+                        strBldr.AppendFormat("procedimiento {0}({1})", Nombre, CadenaParametros).AppendLine();                        
                         fin = "finproc;";
                         break;
                     case TipoRutina.Salida:
