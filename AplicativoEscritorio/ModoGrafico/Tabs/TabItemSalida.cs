@@ -24,6 +24,16 @@ namespace ModoGrafico.Tabs
 
         }
 
+        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
+        {
+            
+        }
+
+        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
+        {
+            return null;
+        }
+
 
         public override void Ejecutar(StringBuilder sb)
         {

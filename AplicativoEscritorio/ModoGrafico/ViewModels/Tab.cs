@@ -18,6 +18,7 @@ using InterfazTextoGrafico;
 using ModoGrafico.Enums;
     using ModoGrafico.EventArgsClasses;
     using ModoGrafico.Helpers;
+using ModoGrafico.Interfaces;
 
     public abstract class Tab : BaseViewModel
     {
@@ -34,6 +35,9 @@ using ModoGrafico.Enums;
         AutoResetEvent syncEvent = new AutoResetEvent(false);
         internal ActividadViewModelBase actividadViewModel {get; set;}
         internal TipoTab Tipo { get; set; }
+
+        public abstract void ActualizarPropiedadesTab(IPropiedadesContexto props);
+        public abstract IPropiedadesContexto ObtenerPropiedadesTab();
 
         public Tab()
         {

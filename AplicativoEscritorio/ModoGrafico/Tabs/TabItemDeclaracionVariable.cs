@@ -22,6 +22,16 @@ namespace ModoGrafico.Tabs
             Tipo = Enums.TipoTab.TabItemDeclaracionVariable;
         }
 
+        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
+        {
+
+        }
+
+        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
+        {
+            return null;
+        }
+
         public override int Orden
         {
             get { return 2; }
