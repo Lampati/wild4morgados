@@ -14,7 +14,10 @@ namespace InterfazTextoGrafico
         public string Nombre { get; set; }
         public TipoRutina Tipo { get; set; }
         public short Orden { get; set; }
+
         public List<ParametroViewModel> Parametros { get; set; }
+        public TipoDato TipoRetorno { get; set; }
+        public string Retorno { get; set; }
 
         private string CadenaParametros
         {
@@ -68,8 +71,8 @@ namespace InterfazTextoGrafico
                         fin = "finproc;";
                         break;
                     case TipoRutina.Funcion:
-                        strBldr.AppendFormat("funcion {0}({1})", Nombre, CadenaParametros).AppendLine();
-                        fin = "finfunc;";
+                        strBldr.AppendFormat("funcion {0}({1}) : {2}", Nombre, CadenaParametros, TipoRetorno.ToString()).AppendLine();
+                        fin = string.Format("finfunc {0};", Retorno);
                         break;
                     case TipoRutina.Procedimiento:
                         strBldr.AppendFormat("procedimiento {0}({1})", Nombre, CadenaParametros).AppendLine();                        

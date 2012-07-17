@@ -14,7 +14,7 @@ namespace ModoGrafico.Tabs
         public TabItemProcedimiento() : base()
         {
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
-            Tipo = Enums.TipoTab.TabItemProcedimiento;
+            Tipo = Enums.TipoTab.TabItemProcedimiento;            
         }
 
         public TabItemProcedimiento(ProcedimientoViewModel proc)
@@ -45,15 +45,8 @@ namespace ModoGrafico.Tabs
             sb.AppendLine();
         }
 
-        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
-        {
+       
 
-        }
-
-        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
-        {
-
-            return null;
-        }
+       
     }
 }

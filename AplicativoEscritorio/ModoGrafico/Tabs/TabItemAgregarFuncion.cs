@@ -25,15 +25,7 @@ namespace ModoGrafico.Tabs
             //no hago nada, no tengo que recrear el designer
         }
 
-        public override void ActualizarPropiedadesTab(Interfaces.IPropiedadesContexto props)
-        {
-        }
-
-        public override Interfaces.IPropiedadesContexto ObtenerPropiedadesTab()
-        {
-            return null;
-        }
-
+     
         public override int Orden
         {
             get { return 0; }

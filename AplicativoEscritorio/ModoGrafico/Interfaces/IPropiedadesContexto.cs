@@ -5,6 +5,7 @@ using System.Text;
 using ModoGrafico.Enums;
 using ModoGrafico.ViewModels;
 using InterfazTextoGrafico;
+using InterfazTextoGrafico.Enums;
 
 namespace ModoGrafico.Interfaces
 {

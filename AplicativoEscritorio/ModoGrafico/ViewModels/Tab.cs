@@ -36,12 +36,24 @@ using ModoGrafico.Interfaces;
         internal ActividadViewModelBase actividadViewModel {get; set;}
         internal TipoTab Tipo { get; set; }
 
-        public abstract void ActualizarPropiedadesTab(IPropiedadesContexto props);
-        public abstract IPropiedadesContexto ObtenerPropiedadesTab();
+        protected TabPropiedades propiedades;
+        internal TabPropiedades Propiedades
+        {
+            get
+            {
+                return propiedades;
+            }
+            set
+            {
+                propiedades = value;
+            }
+        }
+      
+        
 
         public Tab()
         {
-            
+            propiedades = new TabPropiedades();
         }
 
         ~Tab()

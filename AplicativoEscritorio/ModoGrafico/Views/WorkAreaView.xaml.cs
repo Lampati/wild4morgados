@@ -15,6 +15,7 @@
     using System.Activities.Presentation.Services;
     using System.Activities.Presentation.Model;
     using ModoGrafico.Interfaces;
+    using InterfazTextoGrafico.Enums;
 
     /// <summary>
     /// Interaction logic for BrandView.xaml
@@ -109,7 +110,7 @@
             {
                 foreach (Tab item in workArea.Tabs)
                 {
-                    IPropiedadesContexto propiedades = item.ObtenerPropiedadesTab();
+                    IPropiedadesContexto propiedades = item.Propiedades;
 
                     switch (item.Tipo)
                     {
@@ -118,7 +119,7 @@
                             ProcedimientoViewModel activ = new ProcedimientoViewModel();
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
-                            
+
                             
 
                             if (item.SecuenciaInicialProcedimiento != null)
@@ -165,6 +166,12 @@
                             activ = new ProcedimientoViewModel();
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
+
+                            activ.Parametros = propiedades.Parametros;
+                            activ.Retorno = propiedades.Retorno;
+                            activ.TipoRetorno = propiedades.TipoRetorno;
+                            
+
                             if (item.SecuenciaInicialProcedimiento != null)
                             {
                                 activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
@@ -189,6 +196,11 @@
                             activ = new ProcedimientoViewModel();
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
+
+                            activ.Parametros = propiedades.Parametros;
+                            activ.Retorno = propiedades.Retorno;
+                            activ.TipoRetorno = propiedades.TipoRetorno;
+
                             if (item.SecuenciaInicialProcedimiento != null)
                             {
                                 activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;
@@ -244,6 +256,8 @@
 
             return programa;
         }
+
+
 
        
 
