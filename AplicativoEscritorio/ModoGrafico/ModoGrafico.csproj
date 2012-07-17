@@ -52,11 +52,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\TipoDato.cs" />
     <Compile Include="Enums\TipoTab.cs" />
     <Compile Include="EventArgsClasses\HeaderPropertiesClickedEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModoGraficoModificadoEventArgs.cs" />
     <Compile Include="EventArgsClasses\TipoTabCambiadoEventArgs.cs" />
     <Compile Include="Helpers\WorkflowHelpers.cs" />
+    <Compile Include="Interfaces\IPropiedadesContexto.cs" />
     <Compile Include="ProgramadorGrafico.xaml.cs">
       <DependentUpon>ProgramadorGrafico.xaml</DependentUpon>
     </Compile>
@@ -75,6 +77,7 @@
       <DependentUpon>TabsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Parametro.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\WorkAreaViewModel.cs" />
     <Compile Include="EventArgsClasses\WorkflowChangedEventArgs.cs" />
