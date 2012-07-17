@@ -101,7 +101,19 @@ namespace DiagramDesigner
 
                                             ResolucionEjercicio res = new ResolucionEjercicio(ej);
 
-                                            res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                            SelectorModoDialog selectorModo = new SelectorModoDialog();
+                                            selectorModo.ShowDialog();
+
+                                            switch (selectorModo.ModoElegido)
+                                            {
+                                                case SelectorModoDialog.TiposModo.ModoGrafico:
+                                                    res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Flujo;
+                                                    break;
+                                                case SelectorModoDialog.TiposModo.ModoTexto:
+                                                    res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                                    break;
+                                            }
+
                                             res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                             res.ModificadoDesdeUltimoGuardado = false;
                                             res.PathGuardadoActual = path;
@@ -378,7 +390,7 @@ namespace DiagramDesigner
                 }
                 else
                 {
-                    //printDialog.PrintVisual(Esquema.MyDesigner, "WPF Diagram");
+                    printDialog.PrintVisual(Esquema.modoGrafico, "Programa");
                 }
             }
         }
