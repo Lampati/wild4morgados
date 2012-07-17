@@ -13,7 +13,7 @@ namespace ModoGrafico.ViewModels
         private string nombre;
         private TipoDato tipoRetorno;
         private string retorno;
-        private List<ParametroViewModel> parametros;
+        private List<ParametroViewModel> parametros = new List<ParametroViewModel>();
         
 
         public string Nombre

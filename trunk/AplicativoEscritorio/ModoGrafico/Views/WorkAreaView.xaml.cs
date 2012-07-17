@@ -323,12 +323,14 @@
                 || tabElegido.Tipo == TipoTab.TabItemSalida
                 || tabElegido.Tipo == TipoTab.TabItemPrincipal)
             {
-
                 this.tab.tc.SelectedItem = tabElegido;
 
 
-                IPropiedadesContexto propiedades;
 
+                IPropiedadesContexto propiedades = new TabPropiedades();
+                propiedades.Retorno = " x * 2";
+                propiedades.TipoRetorno = TipoDato.Numero;
+                tabElegido.Propiedades = propiedades;
 
                 
             }

@@ -43,13 +43,13 @@ namespace InterfazTextoGrafico
          public ProcedimientoViewModel(long id)
             : base(id)
         {
-
+            Parametros = new List<ParametroViewModel>();
         }
 
          public ProcedimientoViewModel()
             : base()
         {
-
+            Parametros = new List<ParametroViewModel>();
         }
 
         public override string NombreActividad
