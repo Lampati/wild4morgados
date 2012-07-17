@@ -36,8 +36,8 @@ using ModoGrafico.Interfaces;
         internal ActividadViewModelBase actividadViewModel {get; set;}
         internal TipoTab Tipo { get; set; }
 
-        protected TabPropiedades propiedades;
-        internal TabPropiedades Propiedades
+        protected IPropiedadesContexto propiedades;
+        internal IPropiedadesContexto Propiedades
         {
             get
             {
@@ -54,6 +54,7 @@ using ModoGrafico.Interfaces;
         public Tab()
         {
             propiedades = new TabPropiedades();
+            Header = "BonBini";
         }
 
         ~Tab()
@@ -98,6 +99,8 @@ using ModoGrafico.Interfaces;
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
+                            
+
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
 
@@ -133,6 +136,14 @@ using ModoGrafico.Interfaces;
                         if (actividadViewModel != null)
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
+
+                            TabPropiedades props = new TabPropiedades();
+                            props.Parametros = procViewModel.Parametros;
+                            props.Retorno = procViewModel.Retorno;
+                            props.TipoRetorno = procViewModel.TipoRetorno;
+
+                            propiedades = props;
+
 
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
                             aux.AsignarDatos(procViewModel.Cuerpo);
