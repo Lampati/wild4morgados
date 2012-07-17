@@ -77,7 +77,6 @@
       <DependentUpon>TabsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Parametro.cs" />
     <Compile Include="ViewModels\Tab.cs" />
     <Compile Include="ViewModels\WorkAreaViewModel.cs" />
     <Compile Include="EventArgsClasses\WorkflowChangedEventArgs.cs" />

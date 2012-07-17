@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ModoGrafico.Enums;
 using ModoGrafico.ViewModels;
+using InterfazTextoGrafico;
 
 namespace ModoGrafico.Interfaces
 {
@@ -14,6 +15,6 @@ namespace ModoGrafico.Interfaces
         string Nombre { get; set; }
         TipoDato TipoRetorno { get; set; }
         string Retorno { get; set; }
-        List<Parametro> Parametros { get; set; }
+        List<ParametroViewModel> Parametros { get; set; }
     }
 }
