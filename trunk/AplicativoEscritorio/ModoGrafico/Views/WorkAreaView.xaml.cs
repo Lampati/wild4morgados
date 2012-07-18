@@ -110,7 +110,7 @@
             {
                 foreach (Tab item in workArea.Tabs)
                 {
-                    IPropiedadesContexto propiedades = item.Propiedades;
+                    
 
                     switch (item.Tipo)
                     {
@@ -167,9 +167,9 @@
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
 
-                            activ.Parametros = propiedades.Parametros;
-                            activ.Retorno = propiedades.Retorno;
-                            activ.TipoRetorno = propiedades.TipoRetorno;
+                            activ.Parametros = item.Parametros;
+                            activ.Retorno = item.Retorno;
+                            activ.TipoRetorno = item.TipoRetorno;
                             
 
                             if (item.SecuenciaInicialProcedimiento != null)
@@ -197,9 +197,9 @@
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
 
-                            activ.Parametros = propiedades.Parametros;
-                            activ.Retorno = propiedades.Retorno;
-                            activ.TipoRetorno = propiedades.TipoRetorno;
+                            activ.Parametros = item.Parametros;
+                            activ.Retorno = item.Retorno;
+                            activ.TipoRetorno = item.TipoRetorno;
 
                             if (item.SecuenciaInicialProcedimiento != null)
                             {
@@ -326,11 +326,8 @@
                 this.tab.tc.SelectedItem = tabElegido;
 
 
-
-                TabPropiedades propiedades = new TabPropiedades();
-                propiedades.Retorno = " x * 2";
-                propiedades.TipoRetorno = TipoDato.Numero;
-                tabElegido.Propiedades = propiedades;
+                tabElegido.Retorno = " x * 2";
+                tabElegido.TipoRetorno = TipoDato.Texto;
 
                 
             }

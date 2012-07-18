@@ -28,15 +28,15 @@
                 <TextBox IsReadOnly="True" Name="txtNombre" Width="100" Margin="8,0,0,3"
                          Text="{Binding Path=Header, Mode=TwoWay}" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelTipoRetorno" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelTipoRetorno" >
                 <TextBlock>Tipo:</TextBlock>
                 <TextBox IsReadOnly="True" Name="txtTipoRetorno" Width="100" Margin="8,0,0,3"
-                         Text="{Binding Path=Propiedades.TipoRetorno, Mode=TwoWay}" />
+                         Text="{Binding Path=TipoRetorno, Mode=TwoWay}" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelRetorno" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelRetorno" >
                 <TextBlock>Retorno:</TextBlock>
                 <TextBox IsReadOnly="True" Name="txtRetorno" Width="100" Margin="8,0,0,3"
-                         DataContext="{Binding Path=Propiedades}" Text="{Binding Path=Retorno, Mode=TwoWay}" />
+                         Text="{Binding Path=Retorno, Mode=TwoWay}" />
             </StackPanel>
         </StackPanel>
         <Grid Name="grd" Grid.Row="1">

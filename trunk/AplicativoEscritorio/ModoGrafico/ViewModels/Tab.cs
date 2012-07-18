@@ -19,10 +19,11 @@ using ModoGrafico.Enums;
     using ModoGrafico.EventArgsClasses;
     using ModoGrafico.Helpers;
 using ModoGrafico.Interfaces;
+    using InterfazTextoGrafico.Enums;
 
-    public abstract class Tab : BaseViewModel
+    public abstract class Tab : BaseViewModel, IPropiedadesContexto
     {
-        
+        public static int _generadorId = 0;
 
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
@@ -36,31 +37,89 @@ using ModoGrafico.Interfaces;
         internal ActividadViewModelBase actividadViewModel {get; set;}
         internal TipoTab Tipo { get; set; }
 
-        protected TabPropiedades propiedades;
-        internal TabPropiedades Propiedades
+        private string nombre;
+        private TipoDato tipoRetorno;
+        private string retorno;
+        private List<ParametroViewModel> parametros = new List<ParametroViewModel>();
+
+        private int tabId;
+        public int TabId
         {
             get
             {
-                return propiedades;
+                return tabId;
+            }
+        }
+
+            
+
+
+        public string Nombre
+        {
+            get
+            {
+                return header;
             }
             set
             {
-                propiedades = value;
 
-                propiedades.Nombre = value.Nombre;
-                propiedades.Retorno = value.Retorno;
-                propiedades.TipoRetorno = value.TipoRetorno;
-
-                NotifyPropertyChanged("Propiedades");
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.header = value;
+                    NotifyPropertyChanged("Header");
+                    NotifyPropertyChanged("Nombre");
+                }
             }
         }
-      
+
+        public TipoDato TipoRetorno
+        {
+            get
+            {
+                return tipoRetorno;
+            }
+            set
+            {
+                tipoRetorno = value;
+
+                NotifyPropertyChanged("TipoRetorno");
+            }
+        }
+
+        public string Retorno
+        {
+            get
+            {
+                return retorno;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.retorno = value;
+                    NotifyPropertyChanged("Retorno");
+                }
+            }
+        }
+
+        public List<ParametroViewModel> Parametros
+        {
+            get
+            {
+                return parametros;
+            }
+            set
+            {
+                parametros = value;
+            }
+        }
         
 
         public Tab()
         {
-            propiedades = new TabPropiedades();
             Header = "BonBini";
+            parametros = new List<ParametroViewModel>();
+            tabId = ++_generadorId;
         }
 
         ~Tab()
@@ -143,12 +202,11 @@ using ModoGrafico.Interfaces;
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                            TabPropiedades props = new TabPropiedades();
-                            props.Parametros = procViewModel.Parametros;
-                            props.Retorno = procViewModel.Retorno;
-                            props.TipoRetorno = procViewModel.TipoRetorno;
+                            this.Parametros = procViewModel.Parametros;
+                            this.Retorno = procViewModel.Retorno;
+                            this.TipoRetorno = procViewModel.TipoRetorno;
 
-                            propiedades = props;
+                            
 
 
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
@@ -409,6 +467,7 @@ using ModoGrafico.Interfaces;
                 {
                     this.header = value;
                     NotifyPropertyChanged("Header");
+                    NotifyPropertyChanged("Nombre");
                 }
             }
         }
@@ -469,5 +528,10 @@ using ModoGrafico.Interfaces;
             get { return int.MaxValue; }
             set { this.orden = value; }
         }
+
+       
+
+        
+
     }
 }
