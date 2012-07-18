@@ -13,23 +13,49 @@
     <UserControl.Resources>
         <c:ComboBoxItemConverter x:Key="comboBoxItemConverter"/>
     </UserControl.Resources>
-    
-    <Grid Name="grd">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <!--<ColumnDefinition Width="250*"  />
-            <ColumnDefinition Width="350*"  />
-            <ColumnDefinition Width="650*" />-->
-            <ColumnDefinition Width="350*"  />
-            <ColumnDefinition Width="850*" />
+            <ColumnDefinition Width="*"  />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="700*" />            
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                        Name="stackPanelPropiedades">
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center">
+                <TextBlock>Nombre:</TextBlock>
+                <TextBox IsReadOnly="True" Name="txtNombre" Width="100" Margin="8,0,0,3"
+                         Text="{Binding Path=Header, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelTipoRetorno" Visibility="Collapsed">
+                <TextBlock>Tipo:</TextBlock>
+                <TextBox IsReadOnly="True" Name="txtTipoRetorno" Width="100" Margin="8,0,0,3"
+                         Text="{Binding Path=Propiedades.TipoRetorno, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelRetorno" Visibility="Collapsed">
+                <TextBlock>Retorno:</TextBlock>
+                <TextBox IsReadOnly="True" Name="txtRetorno" Width="100" Margin="8,0,0,3"
+                         DataContext="{Binding Path=Propiedades}" Text="{Binding Path=Retorno, Mode=TwoWay}" />
+            </StackPanel>
+        </StackPanel>
+        <Grid Name="grd" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <!--<ColumnDefinition Width="250*"  />
+                <ColumnDefinition Width="350*"  />
+                <ColumnDefinition Width="650*" />-->
+                <ColumnDefinition Width="350*"  />
+                <ColumnDefinition Width="850*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>                
+                <RowDefinition Height="700*" />            
+            </Grid.RowDefinitions>
 
         
-        <ContentControl Grid.Row="0" Grid.Column="0" Name="contentDesignerDeclaraciones"
-                        Content="{Binding Path=WFDeclaraciones}" ScrollViewer.CanContentScroll="True" BorderBrush="Black" BorderThickness="2px"/>
-        <ContentControl  Grid.Row="0" Grid.Column="1" Name="contentDesigner"
-                        Content="{Binding Path=WF}" ScrollViewer.CanContentScroll="True"/>
+            <ContentControl Grid.Row="1" Grid.Column="0" Name="contentDesignerDeclaraciones"
+                            Content="{Binding Path=WFDeclaraciones}" ScrollViewer.CanContentScroll="True" BorderBrush="Black" BorderThickness="2px"/>
+            <ContentControl  Grid.Row="1" Grid.Column="1" Name="contentDesigner"
+                            Content="{Binding Path=WF}" ScrollViewer.CanContentScroll="True"/>
+        </Grid>
     </Grid>
 </UserControl>

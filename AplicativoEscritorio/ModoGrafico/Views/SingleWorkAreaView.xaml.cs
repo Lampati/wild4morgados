@@ -42,6 +42,7 @@ using System.ComponentModel;
 
                     case ModoGrafico.Enums.TipoTab.TabItemDeclaracionVariable:
                     case ModoGrafico.Enums.TipoTab.TabItemDeclaracionConstante:
+                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Collapsed;
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(1050, System.Windows.GridUnitType.Star) });
                         Grid.SetColumn(this.contentDesigner, 0);
                         break;
@@ -49,12 +50,22 @@ using System.ComponentModel;
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
+
+                        stackPanelRetorno.Visibility = System.Windows.Visibility.Visible;
+                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Visible;
+                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
                         
 
                         Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
                         Grid.SetColumn(this.contentDesigner, 1);
                         break;
                     case ModoGrafico.Enums.TipoTab.TabItemProcedimiento:
+
+
+                        stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
+
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
@@ -65,15 +76,20 @@ using System.ComponentModel;
                         break;
                     case ModoGrafico.Enums.TipoTab.TabItemPrincipal:
                     case ModoGrafico.Enums.TipoTab.TabItemSalida:
+
+                        stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
+
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
                         Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
                         Grid.SetColumn(this.contentDesigner, 1);
                         break;
-                    case ModoGrafico.Enums.TipoTab.TabItemAgregarFuncion:
-                        break;
+                    case ModoGrafico.Enums.TipoTab.TabItemAgregarFuncion:                        
                     case ModoGrafico.Enums.TipoTab.TabItemAgregarProcedimiento:
+                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Collapsed;
                         break;
                     default:
                         break;
@@ -95,9 +111,5 @@ using System.ComponentModel;
 
       
 
-        private void textBoxNombre_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            NotifyPropertyChanged("Header");
-        }
     }
 }

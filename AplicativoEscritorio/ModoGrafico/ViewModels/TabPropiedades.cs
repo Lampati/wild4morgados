@@ -5,11 +5,14 @@ using System.Text;
 using ModoGrafico.Interfaces;
 using InterfazTextoGrafico.Enums;
 using InterfazTextoGrafico;
+using System.ComponentModel;
 
 namespace ModoGrafico.ViewModels
 {
-    public class TabPropiedades : IPropiedadesContexto
+    public class TabPropiedades : IPropiedadesContexto, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        
         private string nombre;
         private TipoDato tipoRetorno;
         private string retorno;
@@ -23,8 +26,13 @@ namespace ModoGrafico.ViewModels
                 return nombre;
             }
             set
-            {
-                nombre = value;
+            {               
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.nombre = value;
+                    NotifyPropertyChanged("Nombre");
+                }
             }
         }
 
@@ -37,6 +45,8 @@ namespace ModoGrafico.ViewModels
             set
             {
                 tipoRetorno = value;
+
+                NotifyPropertyChanged("TipoRetorno");
             }
         }
 
@@ -48,7 +58,11 @@ namespace ModoGrafico.ViewModels
             }
             set
             {
-                retorno = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.retorno = value;
+                    NotifyPropertyChanged("Retorno");
+                }
             }
         }
 
@@ -64,6 +78,14 @@ namespace ModoGrafico.ViewModels
             }
         }
 
-      
+        
+
+        protected void NotifyPropertyChanged(string info)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
     }
 }
