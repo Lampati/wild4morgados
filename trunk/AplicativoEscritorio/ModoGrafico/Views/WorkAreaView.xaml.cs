@@ -327,7 +327,7 @@
 
 
 
-                IPropiedadesContexto propiedades = new TabPropiedades();
+                TabPropiedades propiedades = new TabPropiedades();
                 propiedades.Retorno = " x * 2";
                 propiedades.TipoRetorno = TipoDato.Numero;
                 tabElegido.Propiedades = propiedades;

@@ -36,8 +36,8 @@ using ModoGrafico.Interfaces;
         internal ActividadViewModelBase actividadViewModel {get; set;}
         internal TipoTab Tipo { get; set; }
 
-        protected IPropiedadesContexto propiedades;
-        internal IPropiedadesContexto Propiedades
+        protected TabPropiedades propiedades;
+        internal TabPropiedades Propiedades
         {
             get
             {
@@ -46,6 +46,12 @@ using ModoGrafico.Interfaces;
             set
             {
                 propiedades = value;
+
+                propiedades.Nombre = value.Nombre;
+                propiedades.Retorno = value.Retorno;
+                propiedades.TipoRetorno = value.TipoRetorno;
+
+                NotifyPropertyChanged("Propiedades");
             }
         }
       
