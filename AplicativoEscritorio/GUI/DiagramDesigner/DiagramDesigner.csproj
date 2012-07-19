@@ -92,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DialogWindows\PropiedadesMetodoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DialogWindows\ResultadoEjecucionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +241,9 @@
     <Compile Include="DialogWindows\ObjetoVentana.cs" />
     <Compile Include="DialogWindows\PropertyEditionWindow.xaml.cs">
       <DependentUpon>PropertyEditionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\PropiedadesMetodoDialog.xaml.cs">
+      <DependentUpon>PropiedadesMetodoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogWindows\ResultadoEjecucionDialog.xaml.cs">
       <DependentUpon>ResultadoEjecucionDialog.xaml</DependentUpon>
