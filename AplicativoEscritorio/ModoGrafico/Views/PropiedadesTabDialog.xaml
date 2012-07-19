@@ -1,0 +1,114 @@
+﻿<Window x:Class="ModoGrafico.Views.PropiedadesTabDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="PropiedadesMetodoDialog" Height="300" Width="326">
+    <StackPanel>
+        <Grid Name="grdPropiedades">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"></ColumnDefinition>
+                <ColumnDefinition Width="225"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Nombre</Label>
+            <TextBox Grid.Column="1" Height="24" Grid.Row="0" Width="220" Name="txtNombre"></TextBox>
+            <Label Grid.Column="0" Grid.Row="1">Retorno</Label>
+            <TextBox Grid.Column="1" Height="24" Grid.Row="1"  Width="220" Name="txtRetorno"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2">Tipo</Label>
+            <ComboBox Grid.Column="1" Grid.Row="2" Width="220" Height="24" Name="cboTipoRetorno"></ComboBox>
+            <Label Grid.Column="0" Grid.Row="3">Parámetros</Label>        
+        </Grid>
+        <TextBlock>Variables</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <Label >Nombre</Label>
+            <TextBox Height="24" Grid.Row="0" Width="220" Name="txtNombreParam"></TextBox>
+            <Label >Tipo</Label>
+            <TextBox Height="24" Grid.Row="0" Width="220" Name="txtTipo"></TextBox>
+            <Button Click="Button_Click">Agregar</Button>
+        </StackPanel>
+        <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
+                         RowEditEnding="dgData_RowEditEnding" ItemsSource="{Binding Parametros}" RowHeight="25"
+                         CommandManager.PreviewExecuted="dgData_PreviewExecuted" CanUserAddRows="False"
+                  >
+            <DataGrid.Resources>
+                <!-- SINGLE CLICK EDITING -->
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="Nombre"/>
+                <DataGridComboBoxColumn SelectedItemBinding="{Binding Path=RoleProperty}" Header="Tipo" >
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <CompositeCollection>
+                            <system:String>Numero</system:String>
+                            <system:String>Texto</system:String>
+                            <system:String>Booleano</system:String>
+                        </CompositeCollection>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+                <DataGridTemplateColumn  Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="ButtonEliminar_Click">Eliminar</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+            
+        </DataGrid>
+
+
+        <TextBlock>Arreglos</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <Label>Nombre</Label>
+            <TextBox Height="24" Grid.Row="0" Width="220" Name="txtNombreParamArreglo"></TextBox>
+            <Label>Tipo</Label>
+            <TextBox Height="24" Grid.Row="0" Width="220" Name="txtTipoArreglo"></TextBox>
+            <Label>Tope</Label>
+            <TextBox Height="24" Grid.Row="0" Width="220" Name="txtTopeArreglo"></TextBox>
+            <Button Click="ButtonArreglos_Click">Agregar</Button>
+        </StackPanel>
+        <DataGrid x:Name="dgDataArreglos" Margin="0" AutoGenerateColumns="False" 
+                         RowEditEnding="dgDataArreglos_RowEditEnding" ItemsSource="{Binding Parametros}" RowHeight="25"
+                         CommandManager.PreviewExecuted="dgDataArreglos_PreviewExecuted" CanUserAddRows="False">
+            <DataGrid.Resources>
+                <!-- SINGLE CLICK EDITING -->
+                <Style TargetType="{x:Type DataGridCell}">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="Nombre"/>
+                <DataGridComboBoxColumn SelectedItemBinding="{Binding Path=RoleProperty}" Header="Tipo" >
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <CompositeCollection>
+                            <system:String>Numero</system:String>
+                            <system:String>Texto</system:String>
+                            <system:String>Booleano</system:String>
+                        </CompositeCollection>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Binding="{Binding Path=Tope}" Header="Tope"/>
+                <DataGridTemplateColumn  Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="ButtonEliminarArreglo_Click">Eliminar</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </StackPanel>
+    
+</Window>

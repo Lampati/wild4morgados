@@ -215,13 +215,7 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, Close_Executed));
 
             ToolbarAplicacion.Owner = this;
-            ModoGrafico.Tabs.EditableTabHeaderControl.PropertiesClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.HeaderPropertiesClickedHandler(EditableTabHeaderControl_PropertiesClickEvento);
-        }
-
-        void EditableTabHeaderControl_PropertiesClickEvento(object sender, ModoGrafico.EventArgsClasses.HeaderPropertiesClickedEventArgs e)
-        {
-            PropiedadesMetodoDialog propiedades = new PropiedadesMetodoDialog();
-            propiedades.ShowDialog();
+          
         }
 
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)

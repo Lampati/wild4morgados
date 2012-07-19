@@ -325,6 +325,8 @@
             {
                 this.tab.tc.SelectedItem = tabElegido;
 
+                PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+                propiedades.ShowDialog();
 
                 tabElegido.Retorno = " x * 2";
                 tabElegido.TipoRetorno = TipoDato.Texto;

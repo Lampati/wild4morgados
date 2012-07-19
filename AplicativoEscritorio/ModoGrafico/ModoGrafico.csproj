@@ -42,7 +42,6 @@
     <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -53,7 +52,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Decorador.cs" />
     <Compile Include="Enums\TipoTab.cs" />
     <Compile Include="EventArgsClasses\HeaderPropertiesClickedEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModoGraficoModificadoEventArgs.cs" />
@@ -79,9 +77,14 @@
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Tab.cs" />
-    <Compile Include="ViewModels\TabPropiedades.cs" />
     <Compile Include="ViewModels\WorkAreaViewModel.cs" />
     <Compile Include="EventArgsClasses\WorkflowChangedEventArgs.cs" />
+    <Compile Include="Views\PropiedadesTabDialog.xaml.cs">
+      <DependentUpon>PropiedadesTabDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropiedadesMetodoDialog.xaml.cs">
+      <DependentUpon>PropiedadesMetodoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SingleWorkAreaView.xaml.cs">
       <DependentUpon>SingleWorkAreaView.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Tabs\TabsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PropiedadesTabDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PropiedadesMetodoDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
