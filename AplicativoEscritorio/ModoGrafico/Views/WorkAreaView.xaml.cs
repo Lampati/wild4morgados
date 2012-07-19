@@ -326,12 +326,17 @@
                 this.tab.tc.SelectedItem = tabElegido;
 
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+                propiedades.Retorno = tabElegido.Retorno;
+                propiedades.TipoRetorno = tabElegido.TipoRetorno;
+                propiedades.Parametros = tabElegido.Parametros;
                 propiedades.ShowDialog();
 
-                tabElegido.Retorno = " x * 2";
-                tabElegido.TipoRetorno = TipoDato.Texto;
-
-                
+                if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
+                {
+                    tabElegido.Retorno = propiedades.Retorno;
+                    tabElegido.TipoRetorno = propiedades.TipoRetorno;
+                    tabElegido.Parametros = propiedades.Parametros;
+                }
             }
         }
 
