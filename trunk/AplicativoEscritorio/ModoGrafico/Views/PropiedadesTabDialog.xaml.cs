@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using InterfazTextoGrafico;
+using System.ComponentModel;
 
 namespace ModoGrafico.Views
 {
@@ -20,51 +21,72 @@ namespace ModoGrafico.Views
     /// <summary>
     /// Interaction logic for PropiedadesMetodoDialog.xaml
     /// </summary>
-    public partial class PropiedadesTabDialog : Window
+    public partial class PropiedadesTabDialog : Window, INotifyPropertyChanged
     {
         ObservableCollection<Parametro> listaParametros = new ObservableCollection<Parametro>();
         ObservableCollection<ParametroArreglo> listaParametrosArreglos = new ObservableCollection<ParametroArreglo>();
 
-        private int cont = 4;
-        //private System.Collections.Hashtable htBotones;
-
         public PropiedadesTabDialog()
         {
             InitializeComponent();
-            foreach (string s in Enum.GetNames(typeof(InterfazTextoGrafico.Enums.TipoDato)))
-            {
-                this.cboTipoRetorno.Items.Add(s);
-            }
-            //this.htBotones = new System.Collections.Hashtable();
+
+            grdPropiedades.DataContext = this;
         }
 
-       
 
+        private string nombre;
         public string Nombre
         {
-            get { return this.txtNombre.Text; }
-            set { this.txtNombre.Text = value; }
+            get
+            {
+                return nombre;
+            }
+            set
+            {
+                nombre = value;
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    NotifyPropertyChanged("Nombre");
+                }
+            }
         }
 
-       
-
+        private InterfazTextoGrafico.Enums.TipoDato tipoRetorno;
         public InterfazTextoGrafico.Enums.TipoDato TipoRetorno
         {
             get
             {
-                return (InterfazTextoGrafico.Enums.TipoDato)Enum.Parse(typeof(InterfazTextoGrafico.Enums.TipoDato),
-                    this.cboTipoRetorno.SelectedValue.ToString());
+                return tipoRetorno;
             }
-            set { }
+            set
+            {
+                tipoRetorno = value;
+
+
+                NotifyPropertyChanged("TipoRetorno");
+            }
         }
 
+        private string retorno;
         public string Retorno
         {
-            get { return this.txtRetorno.Text; }
-            set { this.txtRetorno.Text = value; }
+            get
+            {
+                return retorno;
+            }
+            set
+            {
+                retorno = value;
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    NotifyPropertyChanged("Retorno");
+                }
+            }
         }
 
-        public ObservableCollection<Parametro> Parametros
+        private ObservableCollection<Parametro> ParametrosVariables
         {
             get { return listaParametros; }
             set 
@@ -76,7 +98,7 @@ namespace ModoGrafico.Views
             }
         }
 
-        public ObservableCollection<ParametroArreglo> ParametrosArreglos
+        private ObservableCollection<ParametroArreglo> ParametrosArreglos
         {
             get { return listaParametrosArreglos; }
             set
@@ -85,6 +107,47 @@ namespace ModoGrafico.Views
 
                 dgDataArreglos.ItemsSource = listaParametrosArreglos;
                 dgDataArreglos.Items.Refresh();
+            }
+        }
+
+        public List<ParametroViewModel> Parametros
+        {
+            get
+            {
+                List<ParametroViewModel> listaRetorno = new List<ParametroViewModel>();
+
+                foreach (var item in ParametrosVariables)
+                {
+                    listaRetorno.Add(new ParametroViewModel() { Nombre = item.Nombre, Tipo = item.Tipo, EsArreglo = false });
+                }
+
+                foreach (var item in ParametrosArreglos)
+                {
+                    listaRetorno.Add(new ParametroViewModel() { Nombre = item.Nombre, Tipo = item.Tipo, EsArreglo = true, TopeArreglo = item.Tope });
+                }
+
+                return listaRetorno;
+            }
+
+            set
+            {
+                ObservableCollection<Parametro> listaParametroVariable = new ObservableCollection<Parametro>();
+                ObservableCollection<ParametroArreglo> listaParametroArreglo = new ObservableCollection<ParametroArreglo>();
+
+                foreach (var item in value as List<ParametroViewModel>)
+                {
+                    if (item.EsArreglo)
+                    {
+                        listaParametroArreglo.Add(new ParametroArreglo() { Nombre = item.Nombre, Tipo = item.Tipo, Tope = item.TopeArreglo });
+                    }
+                    else
+                    {
+                        listaParametroVariable.Add(new Parametro() { Nombre = item.Nombre, Tipo = item.Tipo });
+                    }
+                }
+
+                ParametrosVariables = listaParametroVariable;
+                ParametrosArreglos = listaParametroArreglo;
             }
         }
 
@@ -160,9 +223,25 @@ namespace ModoGrafico.Views
             Parametro param = new Parametro();
             param.Nombre = txtNombreParam.Text;
 
+            switch (cboTipo.SelectedValue.ToString().ToUpper().Trim())
+            {
+                case "NUMERO":
+                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                    break;
+                case "TEXTO":
+                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                    break;
+                case "BOOLEANO":
+                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                    break;
+                default:
+                    break;
+            }
+            
+
             listaParametros.Add(param);
 
-            Parametros = listaParametros;
+            ParametrosVariables = listaParametros;
         }
 
          private void ButtonArreglos_Click(object sender, RoutedEventArgs e)
@@ -170,6 +249,21 @@ namespace ModoGrafico.Views
             ParametroArreglo param = new ParametroArreglo();
             param.Nombre = txtNombreParamArreglo.Text;
             param.Tope = txtTopeArreglo.Text;
+
+            switch (cboTipoArreglo.SelectedValue.ToString().ToUpper().Trim())
+            {
+                case "NUMERO":
+                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                    break;
+                case "TEXTO":
+                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                    break;
+                case "BOOLEANO":
+                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                    break;
+                default:
+                    break;
+            }
 
             listaParametrosArreglos.Add(param);
 
@@ -240,7 +334,7 @@ namespace ModoGrafico.Views
                 else
                 {
                     listaParametros.Remove(parametro);
-                    Parametros = listaParametros;
+                    ParametrosVariables = listaParametros;
                 }
 
             }
@@ -269,6 +363,32 @@ namespace ModoGrafico.Views
 
             }
         }
+
+
+        private void bttnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            Close();
+        }
+
+        private void bttnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            Close();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged(string info)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+     
 
        
     }
