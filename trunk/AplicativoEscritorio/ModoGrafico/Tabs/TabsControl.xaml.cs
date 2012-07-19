@@ -46,6 +46,7 @@
 
             set
             {
+                
                 this.tc.ItemsSource = value;
                 this.tc.SelectedIndex = 0;
             }
