@@ -13,12 +13,26 @@ using System.Windows.Shapes;
 
 namespace DiagramDesigner.DialogWindows
 {
+    internal class Objetin
+    {
+        internal int Index { get; set; }
+        internal StackPanel SP { get; set; }
+        internal RowDefinition RD { get; set; }
+
+        internal Objetin(int ix, StackPanel sp, RowDefinition rd)
+        {
+            this.Index = ix;
+            this.SP = sp;
+            this.RD = rd;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for PropiedadesMetodoDialog.xaml
     /// </summary>
     public partial class PropiedadesMetodoDialog : Window, ModoGrafico.Interfaces.IPropiedadesContexto
     {
-        private int cont = 1;
+        private int cont = 4;
         //private System.Collections.Hashtable htBotones;
 
         public PropiedadesMetodoDialog()
@@ -59,7 +73,8 @@ namespace DiagramDesigner.DialogWindows
             rd.Height = new GridLength(25);
             this.grdPropiedades.RowDefinitions.Add(rd);
             int rowIndex = this.grdPropiedades.RowDefinitions.Count - 1;
-            btnQuitar.Tag = rd;
+            
+            
             //this.htBotones.Add(rowIndex, btnQuitar);
 
             StackPanel sp = new StackPanel();
@@ -71,6 +86,8 @@ namespace DiagramDesigner.DialogWindows
             Grid.SetColumn(sp, 1);
             this.grdPropiedades.Children.Add(sp);
 
+            Objetin o = new Objetin(rowIndex, sp, rd);
+            btnQuitar.Tag = o;
             /*Grid.SetRow(txt, rowIndex);
             Grid.SetColumn(txt, 1);
             this.grdPropiedades.Children.Add(txt);
@@ -84,10 +101,15 @@ namespace DiagramDesigner.DialogWindows
         }
 
         void btnQuitar_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             Control button = (Control)sender;
-            RowDefinition rd = (RowDefinition)button.Tag;
-            this.grdPropiedades.RowDefinitions.Remove(rd);
+            Objetin rd = (Objetin)button.Tag;
+
+            rd.SP.Children.Clear();
+            this.grdPropiedades.Children.Remove(rd.SP);
+            this.grdPropiedades.RowDefinitions.Remove(rd.RD);
+            this.grdPropiedades.InvalidateArrange();
+            
             /*int ix = (int)button.Tag;
             this.grdPropiedades.RowDefinitions.RemoveAt(ix);
             this.htBotones.Remove(ix);
