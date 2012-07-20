@@ -274,7 +274,6 @@
             {
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
-                propiedades.EsReadOnly = false;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
@@ -287,12 +286,11 @@
             {
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
-                propiedades.EsReadOnly = false;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
                 {
-                    ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemFuncion, propiedades.TipoRetorno, propiedades.Retorno, propiedades.Parametros);
+                    ((WorkAreaViewModel)this.DataContext).AgregarNuevo(propiedades.Nombre, TipoTab.TabItemFuncion, propiedades.TipoRetorno, propiedades.Retorno, propiedades.Parametros);
                 }    
             }
             else
