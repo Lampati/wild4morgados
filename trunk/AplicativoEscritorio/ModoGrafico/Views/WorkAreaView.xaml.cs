@@ -39,11 +39,11 @@
             InitializeComponent();
 
             this.tab.CambioTabEvent += new Tabs.TabsControl.TipoTabCambiadoEventHandler(tab_CambioTabEvent);
-
-            ModoGrafico.Tabs.EditableTabHeaderControl.PropertiesClickEvento += new EditableTabHeaderControl.HeaderPropertiesClickedHandler(EditableTabHeaderControl_PropertiesClickEvento);
+            
 
             this.FindAndApplyResources();
 
+            
 
             //this.DataContext = new WorkAreaViewModel();
             //((WorkAreaViewModel)this.DataContext).ExecuteAddBrand("    PRINCIPAL    ", false, TipoTab.TabItemPrincipal);
@@ -57,6 +57,7 @@
             
             this.DataContext = new WorkAreaViewModel();
             ((WorkAreaViewModel)this.DataContext).WorkflowChangedEvent += new WorkAreaViewModel.WorkflowChangedEventHandler(WorkAreaView_WorkflowChangedEvent);
+            ((WorkAreaViewModel)this.DataContext).PonerFocoTabEvent += new WorkAreaViewModel.PonerFocoTabEventHandler(WorkAreaView_PonerFocoTabEvent);
 
             ProcedimientoViewModel procPrincipal = programa.Procedimientos.Find(y => y.Tipo == InterfazTextoGrafico.Enums.TipoRutina.Principal);
             ProcedimientoViewModel procSalida = programa.Procedimientos.Find(y => y.Tipo == InterfazTextoGrafico.Enums.TipoRutina.Salida);
@@ -75,7 +76,14 @@
 
             ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("PROC +", false, TipoTab.TabItemAgregarProcedimiento);
             ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("FUNC +", false, TipoTab.TabItemAgregarFuncion);
+
             
+            
+        }
+
+        void WorkAreaView_PonerFocoTabEvent(object o, PonerFocoTabEventArgs args)
+        {
+            this.tab.tc.SelectedItem = args.Tab;
         }
 
         void WorkAreaView_WorkflowChangedEvent(object o, WorkflowChangedEventArgs args)
@@ -267,11 +275,12 @@
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
                 propiedades.EsReadOnly = false;
-                propiedades.EsCreacion = true;
                 propiedades.ShowDialog();
 
-                Tab tabCreado = ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemProcedimiento);
-
+                if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
+                {
+                    ((WorkAreaViewModel)this.DataContext).AgregarNuevo(propiedades.Nombre, TipoTab.TabItemProcedimiento, propiedades.TipoRetorno, propiedades.Retorno, propiedades.Parametros);
+                }
                 
             }
             else if (e.Tipo == TipoTab.TabItemAgregarFuncion)
@@ -279,11 +288,12 @@
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
                 propiedades.EsReadOnly = false;
-                propiedades.EsCreacion = true;
                 propiedades.ShowDialog();
 
-                ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemFuncion);
-                
+                if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
+                {
+                    ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemFuncion, propiedades.TipoRetorno, propiedades.Retorno, propiedades.Parametros);
+                }    
             }
             else
             {
@@ -327,43 +337,43 @@
             this.tab.tc.SelectedItem = tabElegido;
         }
 
-        void EditableTabHeaderControl_PropertiesClickEvento(object sender, HeaderPropertiesClickedEventArgs e)
-        {
-            WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
-            Tab tabElegido = workAreaVM.ObtenerTab(e.NombreContexto);
+        //void EditableTabHeaderControl_PropertiesClickEvento(object sender, HeaderPropertiesClickedEventArgs e)
+        //{
+        //    WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
+        //    Tab tabElegido = workAreaVM.ObtenerTab(e.NombreContexto);
 
-            if (tabElegido.Tipo == TipoTab.TabItemFuncion
-                || tabElegido.Tipo == TipoTab.TabItemProcedimiento
-                || tabElegido.Tipo == TipoTab.TabItemSalida
-                || tabElegido.Tipo == TipoTab.TabItemPrincipal)
-            {
-                this.tab.tc.SelectedItem = tabElegido;
+        //    if (tabElegido.Tipo == TipoTab.TabItemFuncion
+        //        || tabElegido.Tipo == TipoTab.TabItemProcedimiento
+        //        || tabElegido.Tipo == TipoTab.TabItemSalida
+        //        || tabElegido.Tipo == TipoTab.TabItemPrincipal)
+        //    {
+        //        this.tab.tc.SelectedItem = tabElegido;
 
-                PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
-                if (tabElegido.Tipo == TipoTab.TabItemFuncion)
-                {
-                    propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
-                }
-                else
-                {
-                    propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
-                }
+        //        PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+        //        if (tabElegido.Tipo == TipoTab.TabItemFuncion)
+        //        {
+        //            propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
+        //        }
+        //        else
+        //        {
+        //            propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
+        //        }
 
-                propiedades.Retorno = tabElegido.Retorno;
-                propiedades.TipoRetorno = tabElegido.TipoRetorno;
-                propiedades.Parametros = tabElegido.Parametros;
-                propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
-                propiedades.EsCreacion = false;
-                propiedades.ShowDialog();
+        //        propiedades.Retorno = tabElegido.Retorno;
+        //        propiedades.TipoRetorno = tabElegido.TipoRetorno;
+        //        propiedades.Parametros = tabElegido.Parametros;
+        //        propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
+        //        propiedades.EsCreacion = false;
+        //        propiedades.ShowDialog();
 
-                if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
-                {
-                    tabElegido.Retorno = propiedades.Retorno;
-                    tabElegido.TipoRetorno = propiedades.TipoRetorno;
-                    tabElegido.Parametros = propiedades.Parametros;
-                }
-            }
-        }
+        //        if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
+        //        {
+        //            tabElegido.Retorno = propiedades.Retorno;
+        //            tabElegido.TipoRetorno = propiedades.TipoRetorno;
+        //            tabElegido.Parametros = propiedades.Parametros;
+        //        }
+        //    }
+        //}
 
         internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)
         {

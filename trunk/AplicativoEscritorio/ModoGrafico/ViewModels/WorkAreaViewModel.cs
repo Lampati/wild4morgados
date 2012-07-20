@@ -15,6 +15,10 @@ using InterfazTextoGrafico;
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
+
+        public delegate void PonerFocoTabEventHandler(object o, PonerFocoTabEventArgs args);
+        public event PonerFocoTabEventHandler PonerFocoTabEvent;
+
         private DelegateCommand<Tab> deleteTab;
         private DelegateCommand<Tab> propertiesTab;
         private ObservableCollection<Tab> tabs;
@@ -29,9 +33,9 @@ using InterfazTextoGrafico;
 
 
 
-        public Tab AgregarNuevo(string nombre, TipoTab tipoTab)
+        public Tab AgregarNuevo(string nombre, TipoTab tipoTab, InterfazTextoGrafico.Enums.TipoDato tipoRetorno, string retorno, List<ParametroViewModel> parametros )
         {
-            Tab t = this.ExecuteAddTab(nombre, true, tipoTab);
+            Tab t = this.ExecuteAddTab(nombre, true, tipoTab, tipoRetorno, retorno, parametros);
             cant++;
 
             return t;
@@ -100,6 +104,11 @@ using InterfazTextoGrafico;
 
         public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo)
         {
+            return ExecuteAddTab(obj, acomodar, tipo, InterfazTextoGrafico.Enums.TipoDato.Booleano ,string.Empty, new List<ParametroViewModel>());
+        }
+
+        public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo, InterfazTextoGrafico.Enums.TipoDato tipoRetorno, string retorno, List<ParametroViewModel> parametros)
+        {
          
             Tab t = null;
             switch (tipo)
@@ -129,7 +138,11 @@ using InterfazTextoGrafico;
                     t = new TabItemPrincipal();
                     break;
             }
+
             t.Header = obj;
+            t.TipoRetorno = tipoRetorno;
+            t.Retorno = retorno;
+            t.Parametros = parametros;
             if (this.Tabs.Count == 0 || !acomodar)
             {
                 this.Tabs.Add(t);
@@ -154,6 +167,8 @@ using InterfazTextoGrafico;
             {
                 //this.tab.tc.SelectedItem = tabElegido;
 
+                PonerFocoTabEventFire(this, new PonerFocoTabEventArgs(tabElegido));
+
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 if (tabElegido.Tipo == TipoTab.TabItemFuncion)
                 {
@@ -164,15 +179,16 @@ using InterfazTextoGrafico;
                     propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
                 }
 
+                propiedades.Nombre = tabElegido.Header;
                 propiedades.Retorno = tabElegido.Retorno;
                 propiedades.TipoRetorno = tabElegido.TipoRetorno;
                 propiedades.Parametros = tabElegido.Parametros;
                 propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
-                propiedades.EsCreacion = false;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
                 {
+                    tabElegido.Header = propiedades.Nombre;
                     tabElegido.Retorno = propiedades.Retorno;
                     tabElegido.TipoRetorno = propiedades.TipoRetorno;
                     tabElegido.Parametros = propiedades.Parametros;
@@ -283,6 +299,15 @@ using InterfazTextoGrafico;
             if (WorkflowChangedEvent != null)
             {
                 WorkflowChangedEvent(tab, workflowChangedEventArgs);
+            }
+        }
+
+
+        private void PonerFocoTabEventFire(object o, PonerFocoTabEventArgs eventArgs)
+        {
+            if (PonerFocoTabEvent != null)
+            {
+                PonerFocoTabEvent(o, eventArgs);
             }
         }
 

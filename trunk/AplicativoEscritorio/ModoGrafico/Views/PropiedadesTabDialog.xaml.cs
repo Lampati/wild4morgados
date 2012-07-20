@@ -62,27 +62,7 @@ namespace ModoGrafico.Views
             }
         }
 
-        private bool esCreacion;
-        public bool EsCreacion
-        {
-            get
-            {
-                return esCreacion;
-            }
-            set
-            {
-                esCreacion = value;
-
-                if (esCreacion)
-                {
-                    bttnCancelar.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                else
-                {
-                    bttnCancelar.Visibility = System.Windows.Visibility.Visible;
-                }
-            }
-        }
+      
 
         private bool esReadOnly;
         public bool EsReadOnly
