@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\TipoTab.cs" />
+    <Compile Include="EventArgsClasses\PonerFocoTabEventArgs.cs" />
     <Compile Include="EventArgsClasses\HeaderPropertiesClickedEventArgs.cs" />
     <Compile Include="EventArgsClasses\ModoGraficoModificadoEventArgs.cs" />
     <Compile Include="EventArgsClasses\TipoTabCambiadoEventArgs.cs" />
