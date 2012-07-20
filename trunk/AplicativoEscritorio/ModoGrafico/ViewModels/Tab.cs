@@ -117,7 +117,6 @@ using ModoGrafico.Interfaces;
 
         public Tab()
         {
-            Header = "BonBini";
             parametros = new List<ParametroViewModel>();
             tabId = ++_generadorId;
         }

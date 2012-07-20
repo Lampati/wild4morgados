@@ -50,6 +50,28 @@ namespace ModoGrafico.Views
             {
                 tipoPropiedades = value;
 
+                if (tipoPropiedades == TipoContexto.Funcion)
+                {
+                    Grid.SetRow(lblNombre, 0);
+                    Grid.SetRow(txtNombre, 0);
+
+                    lblRetorno.Visibility = System.Windows.Visibility.Visible;
+                    lblTipoRetorno.Visibility = System.Windows.Visibility.Visible;
+                    txtRetorno.Visibility = System.Windows.Visibility.Visible;
+                    cboTipoRetorno.Visibility = System.Windows.Visibility.Visible;
+
+                  
+                }
+                else
+                {
+                    lblRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                    lblTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                    txtRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                    cboTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+
+                    Grid.SetRow(lblNombre, 1);
+                    Grid.SetRow(txtNombre, 1);
+                }
                 //if (tipoPropiedades == TipoContexto.Procedimiento)
                 //{
                 //    panelParteFuncion.Visibility = System.Windows.Visibility.Hidden;
@@ -64,36 +86,36 @@ namespace ModoGrafico.Views
 
       
 
-        private bool esReadOnly;
-        public bool EsReadOnly
-        {
-            get
-            {
-                return esReadOnly;
-            }
-            set
-            {
-                esReadOnly = value;
+        //private bool esReadOnly;
+        //public bool EsReadOnly
+        //{
+        //    get
+        //    {
+        //        return esReadOnly;
+        //    }
+        //    set
+        //    {
+        //        esReadOnly = value;
 
-                if (esReadOnly)
-                {
-                    panelAgregarVariable.Visibility = System.Windows.Visibility.Collapsed;
-                    panelAgregarArreglo.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                else
-                {
-                    panelAgregarVariable.Visibility = System.Windows.Visibility.Visible;
-                    panelAgregarArreglo.Visibility = System.Windows.Visibility.Visible;
-                }
+        //        if (esReadOnly)
+        //        {
+        //            panelAgregarVariable.Visibility = System.Windows.Visibility.Collapsed;
+        //            panelAgregarArreglo.Visibility = System.Windows.Visibility.Collapsed;
+        //        }
+        //        else
+        //        {
+        //            panelAgregarVariable.Visibility = System.Windows.Visibility.Visible;
+        //            panelAgregarArreglo.Visibility = System.Windows.Visibility.Visible;
+        //        }
 
-                dgData.IsEnabled = !esReadOnly;
-                dgDataArreglos.IsEnabled = !esReadOnly;
-                txtNombre.IsEnabled = !esReadOnly;
-                txtRetorno.IsEnabled = !esReadOnly;
-                cboTipoRetorno.IsEnabled = !esReadOnly;
+        //        dgData.IsEnabled = !esReadOnly;
+        //        dgDataArreglos.IsEnabled = !esReadOnly;
+        //        txtNombre.IsEnabled = !esReadOnly;
+        //        txtRetorno.IsEnabled = !esReadOnly;
+        //        cboTipoRetorno.IsEnabled = !esReadOnly;
              
-            }
-        }
+        //    }
+        //}
 
 
         private string nombre;
@@ -426,6 +448,74 @@ namespace ModoGrafico.Views
             }
         }
 
+        public bool Validar( out string mensaje)
+        {
+            mensaje = "";
+
+            bool valido = true;
+
+            valido &= !string.IsNullOrWhiteSpace(Nombre);
+
+            if (valido)
+            {
+                if (TipoPropiedades == TipoContexto.Funcion)
+                {
+                    valido &= cboTipoRetorno.SelectedIndex != -1;
+
+                    if (!valido)
+                    {
+                        mensaje = "La función debe tener un tipo de retorno";
+                    }                
+                }
+
+                if (valido)
+                {
+
+                    int i = 0;
+
+                    while (i < listaParametros.Count && listaParametros[i].Validar())
+                    {
+                        i++;
+                    }
+                    valido &= (i >= listaParametros.Count);
+
+                    if (valido)
+                    {
+                        i = 0;
+
+                        while (i < listaParametrosArreglos.Count && listaParametrosArreglos[i].Validar())
+                        {
+                            i++;
+                        }
+                        valido &= (i >= listaParametrosArreglos.Count);
+
+                        if (!valido)
+                        {
+                            mensaje = string.Format("El parametro (arreglo) {0} no es valido. Debe tener nombre, tipo y tope definidos");
+                        }
+                    }
+                    else
+                    {
+                        mensaje = string.Format("El parametro (variable) {0} no es valido. Debe tener nombre y tipo definidos");
+                    }
+                }
+            }
+            else
+            {
+                if (TipoPropiedades == TipoContexto.Funcion)
+                {
+                    mensaje = "La función debe tener un nombre";
+                }
+                else
+                {
+                    mensaje = "El procedimiento debe tener un nombre";
+                }
+            }
+
+
+            return valido;
+
+        }
 
         private void bttnCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -435,9 +525,18 @@ namespace ModoGrafico.Views
 
         private void bttnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            Close();
+            string mensaje;
+            if (Validar(out mensaje))
+            {
+                this.DialogResult = true;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show(this, mensaje);
+            }
         }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -451,6 +550,7 @@ namespace ModoGrafico.Views
         }
 
      
+
 
        
     }
@@ -476,29 +576,27 @@ namespace ModoGrafico.Views
             _id = ++_contId;
         }
 
+        public virtual bool Validar()
+        {
+            return !string.IsNullOrWhiteSpace(Nombre);
+
+        }
     }
 
-    public class ParametroArreglo
-    {
-        static int _contId = 0;
-        private int _id;
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-
-        }
-        public string Nombre { get; set; }
+    public class ParametroArreglo : Parametro
+    {        
         public string Tope { get; set; }
 
-        public InterfazTextoGrafico.Enums.TipoDato Tipo { get; set; }
-
-        public ParametroArreglo()
+        public ParametroArreglo() : base()
         {
-            _id = ++_contId;
+            
         }
 
+        public override bool Validar()
+        {
+            return !string.IsNullOrWhiteSpace(Nombre) && !string.IsNullOrWhiteSpace(Tope);
+
+        }
+        
     }
 }

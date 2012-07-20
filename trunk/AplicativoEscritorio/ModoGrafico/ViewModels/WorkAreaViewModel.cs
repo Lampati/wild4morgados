@@ -183,7 +183,6 @@ using InterfazTextoGrafico;
                 propiedades.Retorno = tabElegido.Retorno;
                 propiedades.TipoRetorno = tabElegido.TipoRetorno;
                 propiedades.Parametros = tabElegido.Parametros;
-                propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
