@@ -23,6 +23,12 @@ namespace ModoGrafico.Views
     /// </summary>
     public partial class PropiedadesTabDialog : Window, INotifyPropertyChanged
     {
+        public enum TipoContexto
+        {
+            Funcion,
+            Procedimiento
+        }
+
         ObservableCollection<Parametro> listaParametros = new ObservableCollection<Parametro>();
         ObservableCollection<ParametroArreglo> listaParametrosArreglos = new ObservableCollection<ParametroArreglo>();
 
@@ -31,6 +37,82 @@ namespace ModoGrafico.Views
             InitializeComponent();
 
             grdPropiedades.DataContext = this;
+        }
+
+        private TipoContexto tipoPropiedades;
+        public TipoContexto TipoPropiedades
+        {
+            get
+            {
+                return tipoPropiedades;
+            }
+            set
+            {
+                tipoPropiedades = value;
+
+                //if (tipoPropiedades == TipoContexto.Procedimiento)
+                //{
+                //    panelParteFuncion.Visibility = System.Windows.Visibility.Hidden;
+                //}
+                //else
+                //{
+                //    panelParteFuncion.Visibility = System.Windows.Visibility.Visible;
+                //}
+
+            }
+        }
+
+        private bool esCreacion;
+        public bool EsCreacion
+        {
+            get
+            {
+                return esCreacion;
+            }
+            set
+            {
+                esCreacion = value;
+
+                if (esCreacion)
+                {
+                    bttnCancelar.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    bttnCancelar.Visibility = System.Windows.Visibility.Visible;
+                }
+            }
+        }
+
+        private bool esReadOnly;
+        public bool EsReadOnly
+        {
+            get
+            {
+                return esReadOnly;
+            }
+            set
+            {
+                esReadOnly = value;
+
+                if (esReadOnly)
+                {
+                    panelAgregarVariable.Visibility = System.Windows.Visibility.Collapsed;
+                    panelAgregarArreglo.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    panelAgregarVariable.Visibility = System.Windows.Visibility.Visible;
+                    panelAgregarArreglo.Visibility = System.Windows.Visibility.Visible;
+                }
+
+                dgData.IsEnabled = !esReadOnly;
+                dgDataArreglos.IsEnabled = !esReadOnly;
+                txtNombre.IsEnabled = !esReadOnly;
+                txtRetorno.IsEnabled = !esReadOnly;
+                cboTipoRetorno.IsEnabled = !esReadOnly;
+             
+            }
         }
 
 

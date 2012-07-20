@@ -61,6 +61,11 @@
         <SolidColorBrush x:Key="TabItemCloseButtonPressedForegroundBrush"
                        Color="#EEEE"/>
         <Style x:Key="EditableTabHeaderControl" TargetType="{x:Type local:EditableTabHeaderControl}">
+            <!--<Setter Property="SelectedTab" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=SelectedItem, Mode=OneWay, NotifyOnSourceUpdated=True}">                              
+            </Setter>
+            <Setter Property="SelectedIndex" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=SelectedIndex, Mode=OneWay, NotifyOnSourceUpdated=True}">
+            </Setter>-->
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:EditableTabHeaderControl}">
@@ -144,15 +149,25 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}">
+                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" SelectedIndex="5" >
                                 <local:EditableTabHeaderControl.Content>
                                     <Binding Path="Header" Mode="TwoWay"/>
                                 </local:EditableTabHeaderControl.Content>
                             </local:EditableTabHeaderControl>
+
+                            <Button x:Name="cmdTabItemPropertiesButton" 
+                                    Content="?"
+                                    Grid.Column="1"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.PropertiesTab}"
+                                    CommandParameter="{Binding}"/>
+
+                           
+
                             <Button x:Name="cmdTabItemCloseButton" 
                                     Style="{StaticResource TabItemCloseButtonStyle}"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteTab}"
                                     CommandParameter="{Binding}"/>
                         </Grid>
