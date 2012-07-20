@@ -24,22 +24,25 @@
         public delegate void ClickHandler(object sender, MouseButtonEventArgs e);
         public static event ClickHandler ClickEvento;
 
+        public TabItem SelectedTab { get; set; }
+        public int SelectedIndex { get; set; }
+
         public delegate void HeaderPropertiesClickedHandler(object sender, HeaderPropertiesClickedEventArgs e);
         public static event HeaderPropertiesClickedHandler PropertiesClickEvento;
 
 
         public EditableTabHeaderControl()
         {
-            ContextMenu con = new ContextMenu();
+            //ContextMenu con = new ContextMenu();
 
-            //falta el icono
-            MenuItem prop = new MenuItem() { Header = "Propiedades", ToolTip = "Propiedades del tab seleccionado" };
-            prop.Click += new RoutedEventHandler(prop_Click);            
-            con.Items.Add(prop);
+            ////falta el icono
+            //MenuItem prop = new MenuItem() { Header = "Propiedades", ToolTip = "Propiedades del tab seleccionado" };
+            //prop.Click += new RoutedEventHandler(prop_Click);            
+            //con.Items.Add(prop);
 
-            ContextMenu = con;
+            //ContextMenu = con;
 
-            ToolTip = "Click derecho para desplegar el menu";
+            //ToolTip = "Click derecho para desplegar el menu";
         }
 
         void prop_Click(object sender, RoutedEventArgs e)

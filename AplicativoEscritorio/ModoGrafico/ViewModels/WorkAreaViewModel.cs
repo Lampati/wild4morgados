@@ -16,6 +16,7 @@ using InterfazTextoGrafico;
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
         private DelegateCommand<Tab> deleteTab;
+        private DelegateCommand<Tab> propertiesTab;
         private ObservableCollection<Tab> tabs;
         private int cant = 1;
 
@@ -26,12 +27,14 @@ using InterfazTextoGrafico;
             
         }
 
-       
 
-        public void AgregarNuevo(string nombre, TipoTab tipoTab)
+
+        public Tab AgregarNuevo(string nombre, TipoTab tipoTab)
         {
-            this.ExecuteAddTab(nombre, true, tipoTab);
+            Tab t = this.ExecuteAddTab(nombre, true, tipoTab);
             cant++;
+
+            return t;
         }
 
         void EditableTabHeaderControl_ClickEvento(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -71,6 +74,16 @@ using InterfazTextoGrafico;
             {
                 return this.deleteTab ?? (this.deleteTab = new DelegateCommand<Tab>(
                                                                                  this.ExecuteDeleteTab,
+                                                                                 (arg) => true));
+            }
+        }
+
+        public DelegateCommand<Tab> PropertiesTab
+        {
+            get
+            {
+                return this.propertiesTab ?? (this.propertiesTab = new DelegateCommand<Tab>(
+                                                                                 this.ShowPropertiesTab,
                                                                                  (arg) => true));
             }
         }
@@ -128,6 +141,43 @@ using InterfazTextoGrafico;
             return t;
             
 
+        }
+
+        private void ShowPropertiesTab(Tab obj)
+        {
+            Tab tabElegido = obj;
+
+            if (tabElegido.Tipo == TipoTab.TabItemFuncion
+               || tabElegido.Tipo == TipoTab.TabItemProcedimiento
+               || tabElegido.Tipo == TipoTab.TabItemSalida
+               || tabElegido.Tipo == TipoTab.TabItemPrincipal)
+            {
+                //this.tab.tc.SelectedItem = tabElegido;
+
+                PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+                if (tabElegido.Tipo == TipoTab.TabItemFuncion)
+                {
+                    propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
+                }
+                else
+                {
+                    propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
+                }
+
+                propiedades.Retorno = tabElegido.Retorno;
+                propiedades.TipoRetorno = tabElegido.TipoRetorno;
+                propiedades.Parametros = tabElegido.Parametros;
+                propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
+                propiedades.EsCreacion = false;
+                propiedades.ShowDialog();
+
+                if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
+                {
+                    tabElegido.Retorno = propiedades.Retorno;
+                    tabElegido.TipoRetorno = propiedades.TipoRetorno;
+                    tabElegido.Parametros = propiedades.Parametros;
+                }
+            }
         }
 
         private void ExecuteDeleteTab(Tab obj)

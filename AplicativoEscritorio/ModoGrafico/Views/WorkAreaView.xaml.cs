@@ -16,6 +16,7 @@
     using System.Activities.Presentation.Model;
     using ModoGrafico.Interfaces;
     using InterfazTextoGrafico.Enums;
+    using Microsoft.Practices.Prism.Commands;
 
     /// <summary>
     /// Interaction logic for BrandView.xaml
@@ -257,19 +258,32 @@
             return programa;
         }
 
-
-
-       
+               
 
         void tab_CambioTabEvent(object o, TipoTabCambiadoEventArgs e)
         {
             if (e.Tipo == TipoTab.TabItemAgregarProcedimiento)
             {
-                ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemProcedimiento);
+                PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+                propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
+                propiedades.EsReadOnly = false;
+                propiedades.EsCreacion = true;
+                propiedades.ShowDialog();
+
+                Tab tabCreado = ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemProcedimiento);
+
+                
             }
             else if (e.Tipo == TipoTab.TabItemAgregarFuncion)
             {
+                PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+                propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
+                propiedades.EsReadOnly = false;
+                propiedades.EsCreacion = true;
+                propiedades.ShowDialog();
+
                 ((WorkAreaViewModel)this.DataContext).AgregarNuevo(string.Empty, TipoTab.TabItemFuncion);
+                
             }
             else
             {
@@ -326,9 +340,20 @@
                 this.tab.tc.SelectedItem = tabElegido;
 
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
+                if (tabElegido.Tipo == TipoTab.TabItemFuncion)
+                {
+                    propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
+                }
+                else
+                {
+                    propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
+                }
+
                 propiedades.Retorno = tabElegido.Retorno;
                 propiedades.TipoRetorno = tabElegido.TipoRetorno;
                 propiedades.Parametros = tabElegido.Parametros;
+                propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
+                propiedades.EsCreacion = false;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
