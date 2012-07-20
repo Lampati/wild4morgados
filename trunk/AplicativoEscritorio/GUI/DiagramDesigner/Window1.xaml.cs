@@ -523,7 +523,16 @@ namespace DiagramDesigner
                 }
                 else
                 {
-                    EjecutarConResultado(this.Esquema.RepresentacionGraficaActual.Gargar);
+                    try
+                    {
+                        ProgramaViewModel pvm = this.Esquema.RepresentacionGraficaActual;
+                        pvm.ValidarRepetidos();
+                        EjecutarConResultado(pvm.Gargar);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
@@ -534,8 +543,16 @@ namespace DiagramDesigner
                 }
                 else
                 {
-                    
-                    Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
+                    try
+                    {
+                        ProgramaViewModel pvm = this.Esquema.RepresentacionGraficaActual;
+                        pvm.ValidarRepetidos();
+                        Compilar(pvm.Gargar);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }
