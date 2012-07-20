@@ -38,15 +38,16 @@ namespace InterfazTextoGrafico
             bool encontroLlamado = false;
             foreach (string key in codigosFuncProc.Keys)
             {
-                Regex regex = new Regex(key + "[\\s]*[(].*[)]", RegexOptions.IgnoreCase);
+                string key2 = key.Substring(0, key.LastIndexOf("_"));
+                Regex regex = new Regex(key2 + "[\\s]*[(].*[)]", RegexOptions.IgnoreCase);
                 int ixComienzo = codigo.ToUpper().LastIndexOf("COMENZAR");
                 if (ixComienzo < 0)
                     throw new Exception("No se encontró la sentencia COMENZAR, error grave."); //no debería pasar jamás.
 
                 if (regex.IsMatch(codigo, ixComienzo))
                 {
-                    this.detector.AgregarLlamada(invocador, key);
-                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
+                    this.detector.AgregarLlamada(invocador, key2);
+                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key2], ref orden, key2);
                     if (!sl.ContainsValue(proc))
                     {
                         sl.Add(orden++, proc);
@@ -68,6 +69,7 @@ namespace InterfazTextoGrafico
             SortedList sl = new SortedList();
             Dictionary<string, ProcedimientoViewModel> codigosFuncProc = new Dictionary<string, ProcedimientoViewModel>();
             this.detector = new DetectorLoops();
+            int i = 0;
 
             ProcedimientoViewModel salida = null;
             ProcedimientoViewModel principal = null;
@@ -83,10 +85,11 @@ namespace InterfazTextoGrafico
                     case Enums.TipoRutina.Procedimiento:
                         if (proc.Nombre != null)
                         {
-                            codigosFuncProc.Add(proc.Nombre, proc);
+                            codigosFuncProc.Add(proc.Nombre + "_" + i.ToString(), proc);
                         }
                         break;
                 }
+                i++;
             }
 
             int orden = 10;
@@ -102,6 +105,26 @@ namespace InterfazTextoGrafico
                 sl.Add(int.MaxValue - 1, salida);
 
             this.Procedimientos = sl.Values.Cast<ProcedimientoViewModel>().ToList();
+        }
+
+        public void ValidarRepetidos()
+        {
+            //La manera más sencilla de ver si hay repetidos es agregarlos a una hash y ver si da clave duplicada
+            string nombre = String.Empty;
+            try
+            {
+                System.Collections.Hashtable hash = new System.Collections.Hashtable();
+                foreach (ProcedimientoViewModel proc in this.Procedimientos)
+                {
+                    nombre = proc.Nombre.ToLower();
+                    hash.Add(nombre, null);
+                }
+            }
+            catch (ArgumentException)
+            {
+                //dio clave duplicada, hay procedimientos/funciones repetidos, informamos cuál
+                throw new Exception(String.Format("Se ha encontrado un nombre repetido en las funciones/procedimientos ({0})", nombre));
+            }
         }
 
         public override string Gargar
