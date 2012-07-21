@@ -139,6 +139,8 @@ using InterfazTextoGrafico;
                     break;
             }
 
+            t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
+
             t.Header = obj;
             t.TipoRetorno = tipoRetorno;
             t.Retorno = retorno;
@@ -151,6 +153,9 @@ using InterfazTextoGrafico;
             { 
                 this.Tabs.Insert(this.Tabs.Count - 2, t); 
             }
+
+            WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
+
             return t;
             
 
@@ -191,6 +196,8 @@ using InterfazTextoGrafico;
                     tabElegido.Retorno = propiedades.Retorno;
                     tabElegido.TipoRetorno = propiedades.TipoRetorno;
                     tabElegido.Parametros = propiedades.Parametros;
+
+                    WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
                 }
             }
         }
@@ -213,6 +220,8 @@ using InterfazTextoGrafico;
                 ModoGrafico.Tabs.EditableTabHeaderControl.ClickEventoFire(etc, null);
             
                 obj = null;
+
+                WorkflowChangedEventFire(null, new WorkflowChangedEventArgs());
             }
         }
 

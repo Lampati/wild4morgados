@@ -71,7 +71,14 @@
 
             foreach (var item in listaProcs)
             {
-                ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento(item.Nombre.ToUpper(), false, TipoTab.TabItemProcedimiento, item);
+                if (item.Tipo == TipoRutina.Funcion)
+                {
+                    ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento(item.Nombre.ToUpper(), false, TipoTab.TabItemFuncion, item);
+                }
+                else
+                {
+                    ((WorkAreaViewModel)this.DataContext).ExecuteAddProcedimiento(item.Nombre.ToUpper(), false, TipoTab.TabItemProcedimiento, item);
+                }
             }
 
             ((WorkAreaViewModel)this.DataContext).ExecuteAddTab("PROC +", false, TipoTab.TabItemAgregarProcedimiento);

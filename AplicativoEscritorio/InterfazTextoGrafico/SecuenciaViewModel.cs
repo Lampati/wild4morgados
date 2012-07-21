@@ -9,7 +9,15 @@ namespace InterfazTextoGrafico
     public class SecuenciaViewModel : ActividadViewModelBase
     {
         public List<ActividadViewModelBase> ListaActividades { get; set; }
-            
+
+
+        public int Count
+        {
+            get
+            {
+                return ListaActividades.Count;
+            }
+        }
 
          public SecuenciaViewModel(long id)
             : base(id)
@@ -135,6 +143,7 @@ namespace InterfazTextoGrafico
 
         public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
         {
+            ActividadViewModelBase retorno = null;
 
             foreach (ActividadViewModelBase act in ListaActividades)
             {
@@ -144,7 +153,12 @@ namespace InterfazTextoGrafico
                 }
             }
 
-            return null;
+            if (retorno == null)
+            {
+                retorno = this;
+            }
+
+            return retorno;
         }
     }
 }
