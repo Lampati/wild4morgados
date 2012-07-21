@@ -54,7 +54,18 @@ namespace InterfazTextoGrafico
 
         public override string NombreActividad
         {
-            get { return "Rutina"; }
+            get 
+            {
+                if (Tipo == TipoRutina.Funcion)
+                {
+                    return "Función";
+                }
+                else
+                {
+
+                    return "Procedimiento";
+                }
+            }
         }
 
         public override string Gargar
@@ -100,6 +111,8 @@ namespace InterfazTextoGrafico
 
         public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
         {
+            contexto = nombreContexto;
+
             lineaComienzo = linea;
 
             int lineaAux = lineaComienzo;
@@ -107,7 +120,7 @@ namespace InterfazTextoGrafico
             //aumento 1 por la cabecera
             lineaAux++;
 
-            if (VariablesLocales != null)
+            if (VariablesLocales != null && VariablesLocales.Count > 0)
             {
                 VariablesLocales.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                 lineaAux = VariablesLocales.LineaFinal + 1;
@@ -116,7 +129,7 @@ namespace InterfazTextoGrafico
             //aumento 1 por la linea del comenzar
             lineaAux++;
 
-            if (Cuerpo != null)
+            if (Cuerpo != null && Cuerpo.Count > 0)
             {
                 Cuerpo.CalcularLineasYAsignarContextoAHijos(lineaAux, nombreContexto);
                 lineaAux = Cuerpo.LineaFinal + 1;
@@ -125,7 +138,7 @@ namespace InterfazTextoGrafico
             else
             {
                 //aumento 1 por la linea del finproc
-                lineaAux++;
+                //lineaAux++;
             }
             ////aumento 1 por la linea del finproc
             ////lineaAux++;
@@ -175,9 +188,30 @@ namespace InterfazTextoGrafico
             xml.LevelUp();
 
             xml.AddElement();
+            xml.SetTitle("TipoRetorno");
+            xml.SetValue(((int)this.TipoRetorno).ToString());
+            xml.LevelUp();
+
+            xml.AddElement();
+            xml.SetTitle("Retorno");
+            xml.SetValue(this.Retorno);
+            xml.LevelUp();
+
+            xml.AddElement();
             xml.SetTitle("Orden");
             xml.SetValue(this.Orden.ToString());
             xml.LevelUp();
+
+            if (!Object.Equals(this.Parametros, null))
+            {
+                xml.AddElement();
+                xml.SetTitle("Parametros");
+                foreach (var item in Parametros)
+                {
+                    item.ToXML(xml);
+                }              
+                xml.LevelUp();
+            }
 
             if (!Object.Equals(this.VariablesLocales, null))
             {
@@ -223,18 +257,36 @@ namespace InterfazTextoGrafico
                 Cuerpo = cuerpo;
             }
 
+            Parametros = new List<ParametroViewModel>();
+            XMLElement xmlParams = xmlElem.FindFirst("Parametros");
+            if (!Object.Equals(xmlParams, null))
+            {
+                foreach (XMLElement xmlParam in xmlParams.childs)
+                {
+                    ParametroViewModel param = new ParametroViewModel();
+                    param.FromXML(xmlParam);
+
+                    Parametros.Add(param);
+                }
+            }
+
             this.Nombre = xmlElem.FindFirst("Nombre").value;
             this.Tipo = (TipoRutina)int.Parse(xmlElem.FindFirst("Tipo").value);
             this.Orden = short.Parse(xmlElem.FindFirst("Orden").value);
+            this.Retorno = xmlElem.FindFirst("Retorno").value;
+            this.TipoRetorno = (TipoDato)int.Parse(xmlElem.FindFirst("TipoRetorno").value);
         }
 
         public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
         {
+
+            ActividadViewModelBase retorno = null;
+
             if (VariablesLocales != null)
             {
                 if (VariablesLocales.LineaComienzo <= lineaABuscar && lineaABuscar <= VariablesLocales.LineaFinal)
                 {
-                    return VariablesLocales.EncontrarActividadPorLinea(lineaABuscar);
+                    retorno = VariablesLocales.EncontrarActividadPorLinea(lineaABuscar);
                 }
             }
 
@@ -242,12 +294,17 @@ namespace InterfazTextoGrafico
             {
                 if (Cuerpo.LineaComienzo <= lineaABuscar && lineaABuscar <= Cuerpo.LineaFinal)
                 {
-                    return Cuerpo.EncontrarActividadPorLinea(lineaABuscar);
+                    retorno = Cuerpo.EncontrarActividadPorLinea(lineaABuscar);
                 }
-            }            
+            }
+
+            if (retorno == null)
+            {
+                retorno = this;
+            }
 
             //Si no era ninguno de sus subhijos es pq es algo de esta actividad sin subHijos
-            return this;
+            return retorno;
         }
         
     }

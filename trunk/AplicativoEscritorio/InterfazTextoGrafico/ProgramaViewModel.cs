@@ -184,6 +184,7 @@ namespace InterfazTextoGrafico
             {
                 proc.CalcularLineasYAsignarContextoAHijos(lineaAux, proc.Nombre);
                 lineaAux = proc.LineaFinal + 1;
+                //lineaAux = proc.LineaFinal;
             }
 
             lineaFinal = lineaAux;
@@ -298,11 +299,13 @@ namespace InterfazTextoGrafico
 
         public override ActividadViewModelBase EncontrarActividadPorLinea(int lineaABuscar)
         {
+            ActividadViewModelBase retorno = null;
+
             if (ConstantesGlobales != null)
             {
                 if (ConstantesGlobales.LineaComienzo <= lineaABuscar && lineaABuscar <= ConstantesGlobales.LineaFinal)
                 {
-                    return ConstantesGlobales.EncontrarActividadPorLinea(lineaABuscar);
+                    retorno = ConstantesGlobales.EncontrarActividadPorLinea(lineaABuscar);
                 }
             }
 
@@ -310,7 +313,7 @@ namespace InterfazTextoGrafico
             {
                 if (VariablesGlobales.LineaComienzo <= lineaABuscar && lineaABuscar <= VariablesGlobales.LineaFinal)
                 {
-                    return VariablesGlobales.EncontrarActividadPorLinea(lineaABuscar);
+                    retorno = VariablesGlobales.EncontrarActividadPorLinea(lineaABuscar);
                 }
             }
 
@@ -318,11 +321,17 @@ namespace InterfazTextoGrafico
             {
                 if (proc.LineaComienzo <= lineaABuscar && lineaABuscar <= proc.LineaFinal)
                 {
-                    return proc.EncontrarActividadPorLinea(lineaABuscar);
+                    retorno = proc.EncontrarActividadPorLinea(lineaABuscar);
                 }
             }
 
-            return this;
+            if (retorno == null)
+            {
+                retorno = this;
+            }
+
+
+            return retorno;
         }
     }
 }

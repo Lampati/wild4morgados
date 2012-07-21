@@ -59,7 +59,7 @@ namespace InterfazTextoGrafico
         public override void ToXML(Utilidades.XML.XMLCreator xml)
         {
             xml.AddElement();
-            xml.SetTitle("Procedimiento");
+            xml.SetTitle("Parametro");
 
             xml.AddElement();
             xml.SetTitle("Nombre");
@@ -71,16 +71,25 @@ namespace InterfazTextoGrafico
             xml.SetValue(((int)this.Tipo).ToString());
             xml.LevelUp();
 
+            xml.AddElement();
+            xml.SetTitle("EsArreglo");
+            xml.SetValue(((bool)this.EsArreglo).ToString());
+            xml.LevelUp();
+
+            xml.AddElement();
+            xml.SetTitle("TopeArreglo");
+            xml.SetValue(this.TopeArreglo);
+            xml.LevelUp();
+
             xml.LevelUp();
         }
 
         public override void FromXML(Utilidades.XML.XMLElement xmlElem)
-        {
-
-           
-
+        {          
             this.Nombre = xmlElem.FindFirst("Nombre").value;
-           
+            this.Tipo = (TipoDato)int.Parse(xmlElem.FindFirst("Tipo").value);
+            this.EsArreglo = bool.Parse(xmlElem.FindFirst("EsArreglo").value);
+            this.TopeArreglo = xmlElem.FindFirst("TopeArreglo").value;
         }
 
         public override void CalcularLineasYAsignarContextoAHijos(int linea, string nombreContexto)
