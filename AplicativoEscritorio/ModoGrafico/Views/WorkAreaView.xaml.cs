@@ -183,7 +183,7 @@
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
 
-                            activ.Parametros = item.Parametros;
+                            activ.Parametros = new List<ParametroViewModel>(item.Parametros);
                             activ.Retorno = item.Retorno;
                             activ.TipoRetorno = item.TipoRetorno;
                             
@@ -213,7 +213,7 @@
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Procedimiento;
 
-                            activ.Parametros = item.Parametros;
+                            activ.Parametros = new List<ParametroViewModel>(item.Parametros);
                             activ.Retorno = item.Retorno;
                             activ.TipoRetorno = item.TipoRetorno;
 

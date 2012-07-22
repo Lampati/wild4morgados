@@ -28,12 +28,18 @@
                 <TextBox IsReadOnly="True" Name="txtNombre" Width="100" Margin="8,0,0,3"
                          Text="{Binding Path=Header, Mode=TwoWay}" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelTipoRetorno" >
+            <!--<StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelParametros" >
+                <TextBlock>Parametros:</TextBlock>
+                <ComboBox ItemsSource="{Binding Path=Parametros}" Name="cboBoxParametros" Margin="8,0,0,3"
+                            DisplayMemberPath="Gargar" 
+                            SelectedValuePath="Gargar" />
+            </StackPanel>-->
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelTipoRetorno" Visibility="Collapsed">
                 <TextBlock>Tipo:</TextBlock>
                 <TextBox IsReadOnly="True" Name="txtTipoRetorno" Width="100" Margin="8,0,0,3"
                          Text="{Binding Path=TipoRetorno, Mode=TwoWay}" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelRetorno" >
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelRetorno" Visibility="Collapsed">
                 <TextBlock>Retorno:</TextBlock>
                 <TextBox IsReadOnly="True" Name="txtRetorno" Width="100" Margin="8,0,0,3"
                          Text="{Binding Path=Retorno, Mode=TwoWay}" />

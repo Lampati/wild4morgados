@@ -56,6 +56,12 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetTitle("Gargar");
             xml.SetValue(this.Gargar);
             xml.LevelUp();
+
+            if (Object.Equals(this.representacionGrafica, null))
+                this.representacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+
+            this.representacionGrafica.ToXML(xml);
+
             xml.AddElement();
             xml.SetTitle("EjercicioCorrespondiente");
             this.ejercicio.ToXML(xml);
@@ -86,17 +92,24 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             this.ModificadoDesdeUltimoGuardado = bool.Parse(xmlElem.FindFirst("ModificadoDesdeUltimoGuardado").value);
             this.PathGuardadoActual = this.Enunciado = xmlElem.FindFirst("PathGuardadoActual").value;
-            this.Gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
-
-            MemoryStream strm = new MemoryStream();
-            XmlSerializer serializador = new XmlSerializer(this.representacionGrafica.GetType());
-            XMLReader reader = new XMLReader();
+            this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             
-
-            this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel(xmlElem.FindFirst("RepresentacionGrafica").value);
 
             this.ejercicio = new Ejercicio();
             this.ejercicio.FromXML(xmlElem.FindFirst("EjercicioCorrespondiente"));
+
+            if (UltimoModoGuardado == ModoVisual.Texto)
+            {
+                this.gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
+                this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+            }
+            else
+            {
+
+                this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+                this.RepresentacionGrafica.FromXML(xmlElem.FindFirst("ProgramaViewModel"));
+                this.gargar = string.Empty;
+            }
         }
 
         #endregion        
