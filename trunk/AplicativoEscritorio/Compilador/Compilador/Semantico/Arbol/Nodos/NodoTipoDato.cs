@@ -38,7 +38,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             StringBuilder strBldr = new StringBuilder();
             string tipoDato;
-            switch (this.hijosNodo[0].Lexema)
+            switch (this.hijosNodo[0].Lexema.ToLower())
             {
                 case "numero":
                     tipoDato =  "real";
