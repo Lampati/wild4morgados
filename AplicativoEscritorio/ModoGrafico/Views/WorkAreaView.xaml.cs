@@ -24,11 +24,13 @@
     public partial class WorkAreaView : UserControl
     {
         public delegate void TipoTabCambiadoEventHandler(object o, TipoTabCambiadoEventArgs e);
+        public delegate void ActualizarParametrosEventHandler(object o, ActualizarParametrosEventArgs e);
         public event TipoTabCambiadoEventHandler CambioTabEvent;
 
 
         public static event TipoTabCambiadoEventHandler CambioTabStaticEvent;
 
+        public static event ActualizarParametrosEventHandler ActualizarParametrosStaticEvent;
 
 
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
@@ -58,6 +60,7 @@
             this.DataContext = new WorkAreaViewModel();
             ((WorkAreaViewModel)this.DataContext).WorkflowChangedEvent += new WorkAreaViewModel.WorkflowChangedEventHandler(WorkAreaView_WorkflowChangedEvent);
             ((WorkAreaViewModel)this.DataContext).PonerFocoTabEvent += new WorkAreaViewModel.PonerFocoTabEventHandler(WorkAreaView_PonerFocoTabEvent);
+            ((WorkAreaViewModel)this.DataContext).ActualizarParametrosEvent += new WorkAreaViewModel.ActualizarParametrosEventHandler(WorkAreaView_ActualizarParametrosEvent);
 
             ProcedimientoViewModel procPrincipal = programa.Procedimientos.Find(y => y.Tipo == InterfazTextoGrafico.Enums.TipoRutina.Principal);
             ProcedimientoViewModel procSalida = programa.Procedimientos.Find(y => y.Tipo == InterfazTextoGrafico.Enums.TipoRutina.Salida);
@@ -88,6 +91,11 @@
             
         }
 
+        void WorkAreaView_ActualizarParametrosEvent(object o, ActualizarParametrosEventArgs e)
+        {
+            ActualizarParametrosEventFire(o, e);
+        }
+
         void WorkAreaView_PonerFocoTabEvent(object o, PonerFocoTabEventArgs args)
         {
             this.tab.tc.SelectedItem = args.Tab;
@@ -111,6 +119,14 @@
             if (CambioTabStaticEvent != null)
             {
                 CambioTabStaticEvent(tab, args);
+            }
+        }
+
+        private static void ActualizarParametrosEventFire(object o, ActualizarParametrosEventArgs args)
+        {
+            if (ActualizarParametrosStaticEvent != null)
+            {
+                ActualizarParametrosStaticEvent(o, args);
             }
         }
 

@@ -5,6 +5,7 @@
 using ModoGrafico.ViewModels;
 using System.ComponentModel;
     using System.Windows.Data;
+    using System.Windows;
 
     /// <summary>
     /// Interaction logic for SingleBrandView.xaml
@@ -27,11 +28,18 @@ using System.ComponentModel;
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
 
             ModoGrafico.Views.WorkAreaView.CambioTabStaticEvent += new WorkAreaView.TipoTabCambiadoEventHandler(WorkAreaView_CambioTabStaticEvent);
+            ModoGrafico.Views.WorkAreaView.ActualizarParametrosStaticEvent += new WorkAreaView.ActualizarParametrosEventHandler(WorkAreaView_ActualizarParametrosStaticEvent);
+        }
+
+        void WorkAreaView_ActualizarParametrosStaticEvent(object o, EventArgsClasses.ActualizarParametrosEventArgs e)
+        {
+            this.cboBoxParametros.ItemsSource = e.Parametros;
+
+            PonerPrimerParametroComoActivo();
         }
 
         void WorkAreaView_CambioTabStaticEvent(object o, EventArgsClasses.TipoTabCambiadoEventArgs e)
         {
-
             System.Windows.Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, (System.Action)(() =>
             {
                 Tab tabCorrespondiente = this.DataContext as Tab;
@@ -51,12 +59,9 @@ using System.ComponentModel;
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
+                        PonerPrimerParametroComoActivo();
 
-                        //if (cboBoxParametros.Items.Count > 0)
-                        //{
-                        //    cboBoxParametros.SelectedIndex = 0;
-                        //}
-                        //stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
+                        stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Visible;
                         stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Visible;
                         stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
@@ -67,19 +72,17 @@ using System.ComponentModel;
                         break;
                     case ModoGrafico.Enums.TipoTab.TabItemProcedimiento:
 
-                        //if (cboBoxParametros.Items.Count > 0)
-                        //{
-                        //    cboBoxParametros.SelectedIndex = 0;
-                        //}
-                        //stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
+                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
+                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
+
+                        //cboBoxParametros.ItemsSource = tabCorrespondiente.Parametros;    
+
+                        PonerPrimerParametroComoActivo();
+                      
+                        stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;                        
                         stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
-
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
-
-                       
 
                         Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
                         Grid.SetColumn(this.contentDesigner, 1);
@@ -87,7 +90,7 @@ using System.ComponentModel;
                     case ModoGrafico.Enums.TipoTab.TabItemPrincipal:
                     case ModoGrafico.Enums.TipoTab.TabItemSalida:
 
-                        //stackPanelParametros.Visibility = System.Windows.Visibility.Collapsed;
+                        stackPanelParametros.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
@@ -107,6 +110,29 @@ using System.ComponentModel;
                 }
             }));
         }
+
+        private void PonerPrimerParametroComoActivo()
+        {
+            if (cboBoxParametros.Items.Count > 0)
+            {
+                cboBoxParametros.SelectedIndex = 0;
+            }
+        }
+
+        //private void ComboBox_OnGotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    ComboBox theComboBox = sender as ComboBox;
+
+        //    if (theComboBox != null)
+        //    {
+        //        MultiBindingExpression binding = BindingOperations.GetMultiBindingExpression(theComboBox, ComboBox.ItemsSourceProperty);
+        //        if (binding != null)
+        //        {
+        //            binding.UpdateTarget();
+        //        }
+        //    }
+        //}
+
 
         void EditableTabHeaderControl_ClickEvento(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

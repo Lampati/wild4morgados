@@ -6,6 +6,7 @@
     using System.Windows.Data;
     using System;
     using ModoGrafico.EventArgsClasses;
+    using InterfazTextoGrafico;
 
     /// <summary>
     /// Interaction logic for FormattedTab.xaml
@@ -134,7 +135,10 @@
             {
                 if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] != null)
                 {
-                    tc.SelectedIndex = 0;
+                    if (e.RemovedItems[0].GetType() != typeof(ParametroViewModel))
+                    {
+                        tc.SelectedIndex = 0;
+                    }
                 }
             }
         }

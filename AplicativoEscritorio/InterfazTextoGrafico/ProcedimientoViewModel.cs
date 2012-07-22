@@ -29,7 +29,7 @@ namespace InterfazTextoGrafico
                 {
                     foreach (var item in Parametros)
                     {
-                        strBldr.Append(item.Gargar).Append(";");
+                        strBldr.Append(item.Gargar).Append(",");
                     }
 
                     strBldr.Remove(strBldr.Length - 1, 1);
