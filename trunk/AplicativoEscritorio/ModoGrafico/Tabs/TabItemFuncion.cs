@@ -12,33 +12,33 @@ namespace ModoGrafico.Tabs
     {
         private int orden;
 
-        public string retorno;
-        public string Retorno
-        {
-            get
-            {
-                return retorno;
-            }
-            set
-            {
-                retorno = value;
-                NotifyPropertyChanged("Retorno");
-            }
-        }
+        //public string retorno;
+        //public string Retorno
+        //{
+        //    get
+        //    {
+        //        return retorno;
+        //    }
+        //    set
+        //    {
+        //        retorno = value;
+        //        NotifyPropertyChanged("Retorno");
+        //    }
+        //}
 
-        public eTipoVariable tipoRetorno;
-        public eTipoVariable TipoRetorno
-        {
-            get
-            {
-                return tipoRetorno;
-            }
-            set
-            {
-                tipoRetorno = value;
-                NotifyPropertyChanged("TipoRetorno");
-            }
-        }
+        //public eTipoVariable tipoRetorno;
+        //public eTipoVariable TipoRetorno
+        //{
+        //    get
+        //    {
+        //        return tipoRetorno;
+        //    }
+        //    set
+        //    {
+        //        tipoRetorno = value;
+        //        NotifyPropertyChanged("TipoRetorno");
+        //    }
+        //}
 
 
         public TabItemFuncion() : base()
@@ -54,6 +54,11 @@ namespace ModoGrafico.Tabs
             Tipo = Enums.TipoTab.TabItemFuncion;
 
             header = proc.Nombre.ToUpper().Trim();
+            Retorno = proc.Retorno;
+            TipoRetorno = proc.TipoRetorno;
+            
+            
+            Parametros = new System.Collections.ObjectModel.ObservableCollection<ParametroViewModel>( proc.Parametros);
         }
 
      

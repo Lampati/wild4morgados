@@ -40,7 +40,7 @@ using ModoGrafico.Interfaces;
         private string nombre;
         private TipoDato tipoRetorno;
         private string retorno;
-        private List<ParametroViewModel> parametros = new List<ParametroViewModel>();
+        private ObservableCollection<ParametroViewModel> parametros = new ObservableCollection<ParametroViewModel>();
 
         private int tabId;
         public int TabId
@@ -94,15 +94,14 @@ using ModoGrafico.Interfaces;
             }
             set
             {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    this.retorno = value;
-                    NotifyPropertyChanged("Retorno");
-                }
+               
+                this.retorno = value;
+                NotifyPropertyChanged("Retorno");
+                
             }
         }
 
-        public List<ParametroViewModel> Parametros
+        public ObservableCollection<ParametroViewModel> Parametros
         {
             get
             {
@@ -117,7 +116,7 @@ using ModoGrafico.Interfaces;
 
         public Tab()
         {
-            parametros = new List<ParametroViewModel>();
+            parametros = new ObservableCollection<ParametroViewModel>();
             tabId = ++_generadorId;
         }
 
@@ -200,13 +199,6 @@ using ModoGrafico.Interfaces;
                         if (actividadViewModel != null)
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
-
-                            this.Parametros = procViewModel.Parametros;
-                            this.Retorno = procViewModel.Retorno;
-                            this.TipoRetorno = procViewModel.TipoRetorno;
-
-                            
-
 
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
                             aux.AsignarDatos(procViewModel.Cuerpo);

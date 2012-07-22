@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace ModoGrafico.Views
 {
@@ -148,7 +149,7 @@ namespace ModoGrafico.Views
             set { this.txtRetorno.Text = value; }
         }
 
-        public List<InterfazTextoGrafico.ParametroViewModel> Parametros
+        public ObservableCollection<InterfazTextoGrafico.ParametroViewModel> Parametros
         {
             get { return null; }
             set { }

@@ -33,7 +33,7 @@ using InterfazTextoGrafico;
 
 
 
-        public Tab AgregarNuevo(string nombre, TipoTab tipoTab, InterfazTextoGrafico.Enums.TipoDato tipoRetorno, string retorno, List<ParametroViewModel> parametros )
+        public Tab AgregarNuevo(string nombre, TipoTab tipoTab, InterfazTextoGrafico.Enums.TipoDato tipoRetorno, string retorno, ObservableCollection<ParametroViewModel> parametros)
         {
             Tab t = this.ExecuteAddTab(nombre, true, tipoTab, tipoRetorno, retorno, parametros);
             cant++;
@@ -104,10 +104,10 @@ using InterfazTextoGrafico;
 
         public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo)
         {
-            return ExecuteAddTab(obj, acomodar, tipo, InterfazTextoGrafico.Enums.TipoDato.Booleano ,string.Empty, new List<ParametroViewModel>());
+            return ExecuteAddTab(obj, acomodar, tipo, InterfazTextoGrafico.Enums.TipoDato.Booleano, string.Empty, new ObservableCollection<ParametroViewModel>());
         }
 
-        public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo, InterfazTextoGrafico.Enums.TipoDato tipoRetorno, string retorno, List<ParametroViewModel> parametros)
+        public Tab ExecuteAddTab(string obj, bool acomodar, TipoTab tipo, InterfazTextoGrafico.Enums.TipoDato tipoRetorno, string retorno, ObservableCollection<ParametroViewModel> parametros)
         {
          
             Tab t = null;
@@ -239,7 +239,7 @@ using InterfazTextoGrafico;
                         t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                         break;
                     case TipoTab.TabItemProcedimiento:
-                        t = new TabItemProcedimiento(proc);
+                        t = new TabItemProcedimiento(proc);                        
                         t.WorkflowChangedEvent += new Tab.WorkflowChangedEventHandler(t_WorkflowChangedEvent);
                         break;
                     case TipoTab.TabItemPrincipal:

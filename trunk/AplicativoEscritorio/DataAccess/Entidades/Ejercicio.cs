@@ -223,11 +223,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             }
             else
             {
-                //MemoryStream strm = new MemoryStream();
-                //XmlSerializer serializador = new XmlSerializer(typeof(InterfazTextoGrafico.ProgramaViewModel));
-                //XmlReader xmlReader = XmlReader.Create(new StringReader(xmlElem.FindFirst("RepresentacionGrafica").value));              
-                //this.RepresentacionGrafica = serializador.Deserialize(xmlReader) as InterfazTextoGrafico.ProgramaViewModel;
-
+                
                 this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
                 this.RepresentacionGrafica.FromXML(xmlElem.FindFirst("ProgramaViewModel"));
                 this.gargar = string.Empty;

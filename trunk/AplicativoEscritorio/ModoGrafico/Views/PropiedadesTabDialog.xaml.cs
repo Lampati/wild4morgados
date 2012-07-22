@@ -194,11 +194,11 @@ namespace ModoGrafico.Views
             }
         }
 
-        public List<ParametroViewModel> Parametros
+        public ObservableCollection<ParametroViewModel> Parametros
         {
             get
             {
-                List<ParametroViewModel> listaRetorno = new List<ParametroViewModel>();
+                ObservableCollection<ParametroViewModel> listaRetorno = new ObservableCollection<ParametroViewModel>();
 
                 foreach (var item in ParametrosVariables)
                 {
@@ -218,7 +218,7 @@ namespace ModoGrafico.Views
                 ObservableCollection<Parametro> listaParametroVariable = new ObservableCollection<Parametro>();
                 ObservableCollection<ParametroArreglo> listaParametroArreglo = new ObservableCollection<ParametroArreglo>();
 
-                foreach (var item in value as List<ParametroViewModel>)
+                foreach (var item in value as ObservableCollection<ParametroViewModel>)
                 {
                     if (item.EsArreglo)
                     {

@@ -6,6 +6,7 @@ using ModoGrafico.Enums;
 using ModoGrafico.ViewModels;
 using InterfazTextoGrafico;
 using InterfazTextoGrafico.Enums;
+using System.Collections.ObjectModel;
 
 namespace ModoGrafico.Interfaces
 {
@@ -16,6 +17,6 @@ namespace ModoGrafico.Interfaces
         string Nombre { get; set; }
         TipoDato TipoRetorno { get; set; }
         string Retorno { get; set; }
-        List<ParametroViewModel> Parametros { get; set; }
+        ObservableCollection<ParametroViewModel> Parametros { get; set; }
     }
 }

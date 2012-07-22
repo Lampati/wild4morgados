@@ -24,6 +24,7 @@ namespace ModoGrafico.Tabs
             this.orden = LibreriaActividades.Extension.AsignarOrdenTab();
             Tipo = Enums.TipoTab.TabItemProcedimiento;
             header = proc.Nombre.ToUpper().Trim();
+            Parametros = new System.Collections.ObjectModel.ObservableCollection<ParametroViewModel>( proc.Parametros);
         }
 
         public override int Orden

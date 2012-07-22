@@ -27,11 +27,6 @@ using System.ComponentModel;
             ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
 
             ModoGrafico.Views.WorkAreaView.CambioTabStaticEvent += new WorkAreaView.TipoTabCambiadoEventHandler(WorkAreaView_CambioTabStaticEvent);
-
-            Binding binding = new Binding("Retorno");
-            binding.Source = this.DataContext as Tab;
-            binding.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(txtRetorno, TextBox.TextProperty, binding);
         }
 
         void WorkAreaView_CambioTabStaticEvent(object o, EventArgsClasses.TipoTabCambiadoEventArgs e)
@@ -57,8 +52,11 @@ using System.ComponentModel;
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
 
-                      
-
+                        //if (cboBoxParametros.Items.Count > 0)
+                        //{
+                        //    cboBoxParametros.SelectedIndex = 0;
+                        //}
+                        //stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Visible;
                         stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Visible;
                         stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
@@ -69,9 +67,13 @@ using System.ComponentModel;
                         break;
                     case ModoGrafico.Enums.TipoTab.TabItemProcedimiento:
 
-
+                        //if (cboBoxParametros.Items.Count > 0)
+                        //{
+                        //    cboBoxParametros.SelectedIndex = 0;
+                        //}
+                        //stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
-                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;                        
                         stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
 
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
@@ -85,6 +87,7 @@ using System.ComponentModel;
                     case ModoGrafico.Enums.TipoTab.TabItemPrincipal:
                     case ModoGrafico.Enums.TipoTab.TabItemSalida:
 
+                        //stackPanelParametros.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
