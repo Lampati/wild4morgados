@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 using CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using CompiladorGargar.Auxiliares;
+using InterfazTextoGrafico;
 
 
 
@@ -210,6 +211,39 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             activ.VariablesLocales = this.hijosNodo[5].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
             activ.Cuerpo = this.hijosNodo[7].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
 
+            activ.Parametros = new List<ParametroViewModel>();
+
+            if (this.hijosNodo[3].ListaFirma != null)
+            {
+                foreach (var item in this.hijosNodo[3].ListaFirma)
+                {
+                    ParametroViewModel param = new InterfazTextoGrafico.ParametroViewModel();
+                    param.EsArreglo = item.EsArreglo;
+                    param.Nombre = item.Lexema;
+                    param.TopeArreglo = item.RangoArregloSinPrefijo;
+
+                    switch (item.Tipo)
+                    {
+                        case NodoTablaSimbolos.TipoDeDato.Texto:
+                            param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                            break;
+                        case NodoTablaSimbolos.TipoDeDato.Numero:
+                            param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                            break;
+                        case NodoTablaSimbolos.TipoDeDato.Booleano:
+                            param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                            break;
+                    }
+
+                    activ.Parametros.Add(param);
+
+                }
+            }
+           
+
+
+
+
             if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
             {
                 activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Principal;
@@ -234,6 +268,51 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             activ.Nombre = nombre;
             activ.VariablesLocales = this.hijosNodo[7].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
             activ.Cuerpo = this.hijosNodo[9].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
+            switch (this.hijosNodo[6].TipoDato)
+            {
+                case NodoTablaSimbolos.TipoDeDato.Texto:
+                    activ.TipoRetorno = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Numero:
+                    activ.TipoRetorno = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                    break;
+                case NodoTablaSimbolos.TipoDeDato.Booleano:
+                    activ.TipoRetorno = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                    break;
+            }            
+            activ.Retorno = this.hijosNodo[11].Gargar;
+
+            activ.Parametros = new List<ParametroViewModel>();
+
+            if (this.hijosNodo[3].ListaFirma != null)
+            {
+                foreach (var item in this.hijosNodo[3].ListaFirma)
+                {
+                    ParametroViewModel param = new InterfazTextoGrafico.ParametroViewModel();
+                    param.EsArreglo = item.EsArreglo;
+                    param.Nombre = item.Lexema;
+                    param.TopeArreglo = item.RangoArregloSinPrefijo;
+
+                    switch (item.Tipo)
+                    {
+                        case NodoTablaSimbolos.TipoDeDato.Texto:
+                            param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                            break;
+                        case NodoTablaSimbolos.TipoDeDato.Numero:
+                            param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                            break;
+                        case NodoTablaSimbolos.TipoDeDato.Booleano:
+                            param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                            break;
+                    }
+
+                    activ.Parametros.Add(param);
+
+                }
+            }
+
+
+
             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Funcion;
             ActividadViewModel = activ;
         }
