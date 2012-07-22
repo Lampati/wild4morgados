@@ -289,10 +289,11 @@ namespace DiagramDesigner
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
+                        Modo = e.ModoSeleccionado;
                         
                         Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
 
-                        Modo = e.ModoSeleccionado;
+                        
                     }
                     else
                     {
@@ -318,9 +319,11 @@ namespace DiagramDesigner
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
+                        Modo = e.ModoSeleccionado;
+
                         Esquema.GarGarACompilar = new Identador(programa.Gargar).Identar();
 
-                        Modo = e.ModoSeleccionado;
+                        
                     }
                     else
                     {
@@ -795,11 +798,7 @@ namespace DiagramDesigner
                 {
                     this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.IdPropio.ToString(), act.Contexto, act.NombreActividad, act.ActividadReferenciada);
                 }
-                else
-                {
-                    
-                    this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, string.Empty, string.Empty, act.NombreActividad, null);
-                }
+                
             }
 
             if (res.ResultadoCompPascal != null && res.ResultadoCompPascal.ListaErrores != null)
