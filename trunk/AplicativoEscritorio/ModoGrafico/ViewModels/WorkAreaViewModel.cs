@@ -15,6 +15,9 @@ using InterfazTextoGrafico;
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
+        public delegate void ActualizarParametrosEventHandler(object o, ActualizarParametrosEventArgs e);
+        public event ActualizarParametrosEventHandler ActualizarParametrosEvent;
+
 
         public delegate void PonerFocoTabEventHandler(object o, PonerFocoTabEventArgs args);
         public event PonerFocoTabEventHandler PonerFocoTabEvent;
@@ -197,6 +200,9 @@ using InterfazTextoGrafico;
                     tabElegido.TipoRetorno = propiedades.TipoRetorno;
                     tabElegido.Parametros = propiedades.Parametros;
 
+                    ActualizarParametrosEventFire(this, new ActualizarParametrosEventArgs() { Parametros = tabElegido.Parametros });    
+                    
+
                     WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
                 }
             }
@@ -310,12 +316,19 @@ using InterfazTextoGrafico;
             }
         }
 
-
         private void PonerFocoTabEventFire(object o, PonerFocoTabEventArgs eventArgs)
         {
             if (PonerFocoTabEvent != null)
             {
                 PonerFocoTabEvent(o, eventArgs);
+            }
+        }
+
+        private void ActualizarParametrosEventFire(object o, ActualizarParametrosEventArgs eventArgs)
+        {
+            if (ActualizarParametrosEvent != null)
+            {
+                ActualizarParametrosEvent(o, eventArgs);
             }
         }
 
