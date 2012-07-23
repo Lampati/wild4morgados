@@ -184,10 +184,12 @@ using InterfazTextoGrafico;
                 }
                 else
                 {
+                    
                     propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
                 }
 
                 propiedades.Nombre = tabElegido.Header;
+                propiedades.NombreReadOnly = tabElegido.Tipo == TipoTab.TabItemSalida;
                 propiedades.Retorno = tabElegido.Retorno;
                 propiedades.TipoRetorno = tabElegido.TipoRetorno;
                 propiedades.Parametros = tabElegido.Parametros;

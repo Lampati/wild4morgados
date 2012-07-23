@@ -171,8 +171,8 @@ using ModoGrafico.Interfaces;
                         }
                         else
                         {
-                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
-                            SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
+                            SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDelaraciones = false };
+                            SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA" });
                         }
                     }
                     else if (this is TabItemSalida)
@@ -184,14 +184,14 @@ using ModoGrafico.Interfaces;
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false, SePuedeEliminar = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
                             
                             SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = "Secuencia Salida", AdmiteDelaraciones = false };
+                            SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDelaraciones = false, SePuedeEliminar = false };
                         }
                     }
                     else if (this is TabItemProcedimiento || this is TabItemFuncion)
@@ -200,15 +200,14 @@ using ModoGrafico.Interfaces;
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = true };
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false, SePuedeEliminar = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
 
                             SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false };
-                            SecuenciaInicialProcedimiento.Activities.Add(new Retorno() { });
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false, SePuedeEliminar = false };
                         }
                     }
                     else if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable)
@@ -217,7 +216,7 @@ using ModoGrafico.Interfaces;
                         {
                             SecuenciaViewModel secViewModel = actividadViewModel as SecuenciaViewModel;
 
-                            Secuencia aux = new Secuencia() { DisplayName = "DECLARACION " + this.Header, AdmiteDelaraciones = true };
+                            Secuencia aux = new Secuencia() { DisplayName = "DECLARACIONES " + this.Header, AdmiteDelaraciones = true };
                             aux.AsignarDatos(secViewModel);
 
                             SecuenciaInicialProcedimiento = aux;
@@ -228,7 +227,7 @@ using ModoGrafico.Interfaces;
                             bool admiteDeclaraciones = false;
                             if (this is TabItemDeclaracionVariable || this is TabItemDeclaracionConstante)
                             {
-                                display = "DECLARACION " + this.Header;
+                                display = "DECLARACIONES " + this.Header;
                                 admiteDeclaraciones = true;
                             }
 
