@@ -37,6 +37,16 @@ namespace ModoGrafico.Views
             InitializeComponent();
 
             grdPropiedades.DataContext = this;
+
+            if (cboTipo.Items.Count > 0)
+            {
+                cboTipo.SelectedIndex = 0;
+            }
+
+            if (cboTipoArreglo.Items.Count > 0)
+            {
+                cboTipoArreglo.SelectedIndex = 0;
+            }
         }
 
         private TipoContexto tipoPropiedades;
@@ -72,50 +82,14 @@ namespace ModoGrafico.Views
                     Grid.SetRow(lblNombre, 1);
                     Grid.SetRow(txtNombre, 1);
                 }
-                //if (tipoPropiedades == TipoContexto.Procedimiento)
-                //{
-                //    panelParteFuncion.Visibility = System.Windows.Visibility.Hidden;
-                //}
-                //else
-                //{
-                //    panelParteFuncion.Visibility = System.Windows.Visibility.Visible;
-                //}
+              
 
             }
         }
 
       
 
-        //private bool esReadOnly;
-        //public bool EsReadOnly
-        //{
-        //    get
-        //    {
-        //        return esReadOnly;
-        //    }
-        //    set
-        //    {
-        //        esReadOnly = value;
-
-        //        if (esReadOnly)
-        //        {
-        //            panelAgregarVariable.Visibility = System.Windows.Visibility.Collapsed;
-        //            panelAgregarArreglo.Visibility = System.Windows.Visibility.Collapsed;
-        //        }
-        //        else
-        //        {
-        //            panelAgregarVariable.Visibility = System.Windows.Visibility.Visible;
-        //            panelAgregarArreglo.Visibility = System.Windows.Visibility.Visible;
-        //        }
-
-        //        dgData.IsEnabled = !esReadOnly;
-        //        dgDataArreglos.IsEnabled = !esReadOnly;
-        //        txtNombre.IsEnabled = !esReadOnly;
-        //        txtRetorno.IsEnabled = !esReadOnly;
-        //        cboTipoRetorno.IsEnabled = !esReadOnly;
-             
-        //    }
-        //}
+     
 
 
         private string nombre;
@@ -304,54 +278,65 @@ namespace ModoGrafico.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Parametro param = new Parametro();
-            param.Nombre = txtNombreParam.Text;
-
-            switch (cboTipo.SelectedValue.ToString().ToUpper().Trim())
+            if (!string.IsNullOrEmpty(txtNombreParam.Text) )
             {
-                case "NUMERO":
-                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
-                    break;
-                case "TEXTO":
-                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
-                    break;
-                case "BOOLEANO":
-                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
-                    break;
-                default:
-                    break;
+                Parametro param = new Parametro();
+                param.Nombre = txtNombreParam.Text;
+
+                switch (cboTipo.SelectedValue.ToString().ToUpper().Trim())
+                {
+                    case "NUMERO":
+                        param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                        break;
+                    case "TEXTO":
+                        param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                        break;
+                    case "BOOLEANO":
+                        param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                        break;
+                    default:
+                        break;
+                }
+
+
+                listaParametros.Add(param);
+
+                ParametrosVariables = listaParametros;
+
+                txtNombreParam.Text = string.Empty;
             }
-            
-
-            listaParametros.Add(param);
-
-            ParametrosVariables = listaParametros;
         }
 
          private void ButtonArreglos_Click(object sender, RoutedEventArgs e)
         {
-            ParametroArreglo param = new ParametroArreglo();
-            param.Nombre = txtNombreParamArreglo.Text;
-            param.Tope = txtTopeArreglo.Text;
-
-            switch (cboTipoArreglo.SelectedValue.ToString().ToUpper().Trim())
+            if (!string.IsNullOrEmpty(txtNombreParamArreglo.Text) && !string.IsNullOrEmpty(txtTopeArreglo.Text))
             {
-                case "NUMERO":
-                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
-                    break;
-                case "TEXTO":
-                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
-                    break;
-                case "BOOLEANO":
-                    param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
-                    break;
-                default:
-                    break;
+                ParametroArreglo param = new ParametroArreglo();
+                param.Nombre = txtNombreParamArreglo.Text;
+                param.Tope = txtTopeArreglo.Text;
+
+                switch (cboTipoArreglo.SelectedValue.ToString().ToUpper().Trim())
+                {
+                    case "NUMERO":
+                        param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Numero;
+                        break;
+                    case "TEXTO":
+                        param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Texto;
+                        break;
+                    case "BOOLEANO":
+                        param.Tipo = InterfazTextoGrafico.Enums.TipoDato.Booleano;
+                        break;
+                    default:
+                        break;
+                }
+
+                listaParametrosArreglos.Add(param);
+
+                ParametrosArreglos = listaParametrosArreglos;
+
+                txtNombreParamArreglo.Text = string.Empty;
+                txtTopeArreglo.Text = string.Empty;
             }
-
-            listaParametrosArreglos.Add(param);
-
-            ParametrosArreglos = listaParametrosArreglos;
         } 
 
 
@@ -410,16 +395,10 @@ namespace ModoGrafico.Views
 
             if (parametro != null)
             {
-                if (!(MessageBox.Show("Are You Sure you want to Delete ?",
-                    "Confirm Delete !", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
-                {
-                    e.Handled = true;
-                }
-                else
-                {
-                    listaParametros.Remove(parametro);
-                    ParametrosVariables = listaParametros;
-                }
+                
+                listaParametros.Remove(parametro);
+                ParametrosVariables = listaParametros;
+                
 
             }
         }
@@ -434,16 +413,10 @@ namespace ModoGrafico.Views
 
             if (parametro != null)
             {
-                if (!(MessageBox.Show("Are You Sure you want to Delete ?",
-                    "Confirm Delete !", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
-                {
-                    e.Handled = true;
-                }
-                else
-                {
-                    listaParametrosArreglos.Remove(parametro);
-                    ParametrosArreglos = listaParametrosArreglos;
-                }
+                
+                listaParametrosArreglos.Remove(parametro);
+                ParametrosArreglos = listaParametrosArreglos;
+                
 
             }
         }
