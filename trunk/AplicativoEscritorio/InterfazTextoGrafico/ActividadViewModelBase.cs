@@ -43,6 +43,11 @@ namespace InterfazTextoGrafico
         {
             get
             {
+                if (idPropio == 0)
+                {
+                    idPropio = ++_contadorGlobalAct;
+                }
+
                 return idPropio;
             }        
 
@@ -115,6 +120,13 @@ namespace InterfazTextoGrafico
         {
             idPropio = ++_contadorGlobalAct;
         }
+
+        public static void ReiniciarContadorGlobal()
+        {
+            _contadorGlobalAct = 0;
+        }
+
+     
 
         public abstract void ToXML(XMLCreator xml);
         public abstract void FromXML(XMLElement xmlElem);

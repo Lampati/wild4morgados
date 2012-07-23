@@ -34,6 +34,7 @@ using DataAccess.Entidades;
 using DataAccess;
 using InterfazTextoGrafico;
 using LibreriaActividades;
+using ModoGrafico;
 
 namespace DiagramDesigner
 {
@@ -285,6 +286,8 @@ namespace DiagramDesigner
                         this.Esquema.GarGarACompilar = GlobalesCompilador.ObtenerProgramaConEstructuraVacia();
                     }
 
+                    ProgramadorGrafico.ReiniciarContadoresId();
+
                     ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
@@ -292,8 +295,6 @@ namespace DiagramDesigner
                         Modo = e.ModoSeleccionado;
                         
                         Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
-
-                        
                     }
                     else
                     {
@@ -322,8 +323,6 @@ namespace DiagramDesigner
                         Modo = e.ModoSeleccionado;
 
                         Esquema.GarGarACompilar = new Identador(programa.Gargar).Identar();
-
-                        
                     }
                     else
                     {
@@ -360,10 +359,6 @@ namespace DiagramDesigner
                 default:
                     break;
             }
-
-
-           
-
         }
 
         private void EjecutarTestPrueba()

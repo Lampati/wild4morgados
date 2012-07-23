@@ -402,12 +402,14 @@ namespace DiagramDesigner
 
         public void Salir()
         {
-            bool continuar = SalvarSiUsuarioQuiere();
+            //bool continuar = SalvarSiUsuarioQuiere();
 
-            if (continuar)
-            {
-                Close();
-            }
+            //if (continuar)
+            //{
+            //    Close();
+            //}
+
+            Close();
         }
 
         private bool SalvarSiUsuarioQuiere()
