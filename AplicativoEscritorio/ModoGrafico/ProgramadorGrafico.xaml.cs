@@ -33,6 +33,11 @@ namespace ModoGrafico
         public delegate void ModoGraficoModificadoEventHandler(object o, ModoGraficoModificadoEventArgs e);
         public event ModoGraficoModificadoEventHandler ModoGraficoModificadoEvent;
 
+        public static void ReiniciarContadoresId()
+        {
+            ActividadViewModelBase.ReiniciarContadorGlobal();
+        }
+
         public ProgramadorGrafico()
         {
             InitializeComponent();

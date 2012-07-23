@@ -51,6 +51,11 @@ namespace LibreriaActividades
             set
             {
                 idPropio = value;
+                if (idPropio == 0)
+                {
+
+                }
+
                 if (idPropio != long.MinValue)
                 {
                     DisplayName = string.Format("{0} ({1})", this.GetType().Name, idPropio);
