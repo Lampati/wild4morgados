@@ -11,6 +11,7 @@ namespace ModoGrafico.Tabs
     public class Selector : StyleSelector
     {
         public Style SinEstilo { get; set; }
+        public Style SoloPropiedadesEstilo { get; set; }
         public Style ConEstilo { get; set; }
 
         public override Style SelectStyle(object item,
@@ -24,8 +25,14 @@ namespace ModoGrafico.Tabs
                 {
                     string path = tab.Header.ToString().Trim();
                     //string path = item.GetType().GetProperty("Header").GetValue(item, null).ToString().Trim();
-                    if (path == "+" || path == "PROC +" || path == "FUNC +" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES" || path == "SALIDA")
+                    if (path == "+" || path == "PROC +" || path == "FUNC +" || path == "PRINCIPAL" || path == "CONSTANTES" || path == "VARIABLES" )
+                    {
                         return SinEstilo;
+                    }
+                    else if (path == "SALIDA")
+                    {
+                        return SoloPropiedadesEstilo;
+                    }
                 }
             }
             return ConEstilo;

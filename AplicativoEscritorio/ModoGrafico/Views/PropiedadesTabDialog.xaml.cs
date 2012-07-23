@@ -87,8 +87,20 @@ namespace ModoGrafico.Views
             }
         }
 
-      
+        private bool nombreReadOnly = false;
+        public bool NombreReadOnly
+        {
+            get
+            {
+                return nombreReadOnly;
+            }
+            set
+            {
+                nombreReadOnly = value;
+                txtNombre.IsReadOnly = nombreReadOnly;
+            }
 
+        }
      
 
 

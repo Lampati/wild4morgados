@@ -151,7 +151,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" SelectedIndex="5" >
+                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" >
                                 <local:EditableTabHeaderControl.Content>
                                     <Binding Path="Header" Mode="TwoWay"/>
                                 </local:EditableTabHeaderControl.Content>
@@ -170,6 +170,33 @@
                                     Grid.Column="2"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteTab}"
                                     CommandParameter="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TabItemHeaderContainerSoloPropiedadesStyle" TargetType="TabItem">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" >
+                                <local:EditableTabHeaderControl.Content>
+                                    <Binding Path="Header" Mode="TwoWay"/>
+                                </local:EditableTabHeaderControl.Content>
+                            </local:EditableTabHeaderControl>
+
+                            <Button x:Name="cmdTabItemPropertiesButton" 
+                                    Content="?"
+                                    Grid.Column="1"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.PropertiesTab}"
+                                    CommandParameter="{Binding}"/>
+
                         </Grid>
                     </DataTemplate>
                 </Setter.Value>
@@ -196,6 +223,7 @@
         <local:Selector 
             SinEstilo="{StaticResource TabItemHeaderContainerSinStyle}" 
             ConEstilo="{StaticResource TabItemHeaderContainerStyle}" 
+            SoloPropiedadesEstilo="{StaticResource TabItemHeaderContainerSoloPropiedadesStyle}"
             x:Key="consinEstiloSelector" />
     </UserControl.Resources>
     <TabControl x:Name="tc" ItemContainerStyleSelector="{StaticResource consinEstiloSelector}" SelectionChanged="tc_SelectionChanged" MouseLeftButtonDown="tc_MouseLeftButtonDown">
