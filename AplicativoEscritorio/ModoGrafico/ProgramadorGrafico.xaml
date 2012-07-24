@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0">
             <StackPanel>
-                <sapt:ToolboxControl Name="Toolbox">
+                <sapt:ToolboxControl Name="Toolbox" >
                 </sapt:ToolboxControl>
                 <!--<Button Name="btnEjecutar" Height="50" Content="Ejecutar" Margin="5" ></Button>-->
             </StackPanel>

@@ -43,8 +43,27 @@ namespace ModoGrafico
             InitializeComponent();
             this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
             this.WorkArea.WorkflowChangedEvent += new Views.WorkAreaView.WorkflowChangedEventHandler(WorkArea_WorkflowChangedEvent);
-            
+
+            this.Loaded += new RoutedEventHandler(ProgramadorGrafico_Loaded);
             //ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
+        }
+
+        void ProgramadorGrafico_Loaded(object sender, RoutedEventArgs e)
+        {
+            // hide the search box
+            TextBox searchBox = Toolbox.Template.FindName("PART_SearchBox", Toolbox) as TextBox;
+            searchBox.Visibility = System.Windows.Visibility.Collapsed;
+
+            // hide the hint text, which is a TextBlock
+            Grid grid = VisualTreeHelper.GetParent(searchBox) as Grid;
+            foreach (UIElement item in grid.Children)
+            {
+                if (item is TextBlock)
+                {
+                    item.Visibility = System.Windows.Visibility.Collapsed;
+                    break;
+                }
+            }
         }
 
         void WorkArea_WorkflowChangedEvent(object o, WorkflowChangedEventArgs args)

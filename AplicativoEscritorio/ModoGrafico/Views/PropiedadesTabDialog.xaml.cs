@@ -70,7 +70,7 @@ namespace ModoGrafico.Views
                     txtRetorno.Visibility = System.Windows.Visibility.Visible;
                     cboTipoRetorno.Visibility = System.Windows.Visibility.Visible;
 
-                  
+                    lblEncabezado.Content = "Funcion";
                 }
                 else
                 {
@@ -81,6 +81,8 @@ namespace ModoGrafico.Views
 
                     Grid.SetRow(lblNombre, 1);
                     Grid.SetRow(txtNombre, 1);
+
+                    lblEncabezado.Content = "Procedimiento";
                 }
               
 

@@ -807,7 +807,7 @@ namespace DiagramDesigner
                     }
                 }
             }
-
+            
         }
 
         private void RibbonWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
