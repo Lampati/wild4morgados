@@ -84,9 +84,6 @@
     <Compile Include="Views\PropiedadesTabDialog.xaml.cs">
       <DependentUpon>PropiedadesTabDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PropiedadesMetodoDialog.xaml.cs">
-      <DependentUpon>PropiedadesMetodoDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SingleWorkAreaView.xaml.cs">
       <DependentUpon>SingleWorkAreaView.xaml</DependentUpon>
     </Compile>
@@ -104,10 +101,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PropiedadesTabDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PropiedadesMetodoDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

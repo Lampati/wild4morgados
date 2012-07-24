@@ -19,7 +19,12 @@
         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/ApplicationMenuResourceDictionary.xaml"/>
 
-      </ResourceDictionary.MergedDictionaries>
+
+
+
+
+
+            </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
