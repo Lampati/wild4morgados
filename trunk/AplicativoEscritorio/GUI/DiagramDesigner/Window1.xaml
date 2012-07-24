@@ -22,7 +22,7 @@
 
     <Grid Margin="0" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="160"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="90" />
             <RowDefinition Height="25" /> 
@@ -41,7 +41,7 @@
 
         <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->
 
-        <Grid Grid.Row="1" VerticalAlignment="Stretch">
+        <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,10,0,0">
             <entorno:EsquemaCentral x:Name="Esquema" ></entorno:EsquemaCentral>
         </Grid>
         
