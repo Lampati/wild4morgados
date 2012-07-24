@@ -18,6 +18,7 @@
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/ApplicationMenuResourceDictionary.xaml"/>
+        <ResourceDictionary Source="Resources/TooltipsResource.xaml"/>
 
 
 
