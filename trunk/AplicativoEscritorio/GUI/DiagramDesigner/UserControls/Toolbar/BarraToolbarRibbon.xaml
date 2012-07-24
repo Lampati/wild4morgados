@@ -54,41 +54,8 @@
 
         <ribbon:RibbonTab Name="TabGeneral" Header="General" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
 
-
-
-            <!--<ribbon:RibbonGroup Header="Archivo"  >
-                <ribbon:RibbonButton 
-                        HorizontalContentAlignment="Center"
-                        Command="{x:Static ApplicationCommands.New}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
-                        LargeImageSource="Resources/Images/GenericDocument.png"
-                        Label="Nuevo" RenderOptions.ClearTypeHint="Enabled" />
-
-                <ribbon:RibbonButton 
-                        HorizontalContentAlignment="Center"
-                        Command="{x:Static ApplicationCommands.Open}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
-                        SmallImageSource="Resources/Images/OpenFolder.png"
-                        Label="Abrir" />
-
-                <ribbon:RibbonButton 
-                        HorizontalContentAlignment="Center"
-                        Command="{x:Static ApplicationCommands.Save}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
-                        SmallImageSource="Resources/Images/Save.png"
-                        Label="Guardar" />
-
-                <ribbon:RibbonButton 
-                        HorizontalContentAlignment="Center"
-                        Command="{x:Static ApplicationCommands.Print}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
-                        SmallImageSource="Resources/Images/Print.png"
-                        Label="Imprimir" />
-
-
-            </ribbon:RibbonGroup>-->
-
-            <ribbon:RibbonGroup Header="Edicion"   Name="ribbonGroupEdicion" ContextMenu="{Binding null}">
+        
+            <ribbon:RibbonGroup Header="Edicion"   Name="ribbonGroupEdicion" ContextMenu="{Binding null}" >
                 <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Paste}" 
