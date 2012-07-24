@@ -4,7 +4,9 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
-             xmlns:local="clr-namespace:ModoGrafico.Tabs">
+             xmlns:local="clr-namespace:ModoGrafico.Tabs"
+             
+                       >
     <UserControl.Resources>
         <LinearGradientBrush x:Key="TabItemCloseButtonNormalBackgroundBrush" 
                            StartPoint="0,0" EndPoint="1,0">
@@ -43,7 +45,7 @@
             </GradientBrush.GradientStops>
         </LinearGradientBrush>
         <Color x:Key="TabItem_ForegroundColor_Base">#4971A3</Color>
-        <sys:Double x:Key="CloseButtonWidthAndHeight">14</sys:Double>
+        <sys:Double x:Key="CloseButtonWidthAndHeight">16</sys:Double>
         <LinearGradientBrush x:Key="TabItemCloseButtonPressedBorderBrush" 
                            StartPoint="0,0" EndPoint="1,1">
             <GradientBrush.GradientStops>
@@ -53,7 +55,8 @@
                 </GradientStopCollection>
             </GradientBrush.GradientStops>
         </LinearGradientBrush>
-        <Geometry x:Key="X_CloseButton">M0,0 L10,10 M0,10 L10,0</Geometry>        
+        <Geometry x:Key="X_CloseButton">M0,0 L10,10 M0,10 L10,0</Geometry>
+        <Geometry x:Key="P_PropertiesButton">M0,0 L0,15 M0,0 A6,5 180 1 1 0,5</Geometry>
         <SolidColorBrush x:Key="TabItemCloseButtonNormalForegroundBrush"
                        Color="{StaticResource TabItem_ForegroundColor_Base}"/>
         <SolidColorBrush x:Key="TabItemCloseButtonHoverForegroundBrush"
@@ -141,6 +144,64 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="TabItemPropertiesButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="false"/>
+            <Setter Property="Height" Value="{StaticResource CloseButtonWidthAndHeight}"/>
+            <Setter Property="Width" Value="{StaticResource CloseButtonWidthAndHeight}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ButtonBorder"  
+                          CornerRadius="2" 
+                          BorderThickness="1"
+                          Background="{StaticResource TabItemCloseButtonNormalBackgroundBrush}"
+                          BorderBrush="{StaticResource TabItemCloseButtonNormalBorderBrush}">
+                            <Grid>
+                                
+                                <Path x:Name="ButtonPath" 
+                              Margin="2"
+                              Data="{StaticResource P_PropertiesButton}"
+                              Stroke="{StaticResource TabItemCloseButtonNormalForegroundBrush}" 
+                              StrokeThickness="2"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              Stretch="Uniform"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" 
+                                Value="{StaticResource TabItemCloseButtonHoverBackgroundBrush}" />
+                                <Setter TargetName="ButtonPath" Property="Stroke" 
+                                Value="{StaticResource TabItemCloseButtonHoverForegroundBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="ButtonBorder" 
+                                Property="Background" 
+                                Value="{StaticResource TabItemCloseButtonPressedBackgroundBrush}" />
+                                <Setter TargetName="ButtonBorder" 
+                                Property="BorderBrush" 
+                                Value="{StaticResource TabItemCloseButtonPressedBorderBrush}" />
+                                <Setter TargetName="ButtonPath" Property="Stroke" 
+                                Value="{StaticResource TabItemCloseButtonPressedForegroundBrush}"/>
+                                <Setter TargetName="ButtonPath" Property="Margin" Value="2.5,2.5,0,1.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="TabItemHeaderContainerStyle" TargetType="TabItem">
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
@@ -157,19 +218,21 @@
                                 </local:EditableTabHeaderControl.Content>
                             </local:EditableTabHeaderControl>
 
-                            <Button x:Name="cmdTabItemPropertiesButton" 
-                                    Content="?"
+                            <Button x:Name="cmdTabItemPropertiesButton" Margin="3,0,0,0"
+                                    Style="{StaticResource TabItemPropertiesButtonStyle}"                                    
                                     Grid.Column="1"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.PropertiesTab}"
-                                    CommandParameter="{Binding}"/>
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Propiedades"/>
 
-                           
 
-                            <Button x:Name="cmdTabItemCloseButton" 
+
+                            <Button x:Name="cmdTabItemCloseButton" Margin="3,0,0,0"
                                     Style="{StaticResource TabItemCloseButtonStyle}"
                                     Grid.Column="2"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteTab}"
-                                    CommandParameter="{Binding}"/>
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Eliminar"/>
                         </Grid>
                     </DataTemplate>
                 </Setter.Value>
@@ -183,7 +246,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" >
                                 <local:EditableTabHeaderControl.Content>
@@ -191,11 +253,12 @@
                                 </local:EditableTabHeaderControl.Content>
                             </local:EditableTabHeaderControl>
 
-                            <Button x:Name="cmdTabItemPropertiesButton" 
-                                    Content="?"
+                            <Button x:Name="cmdTabItemPropertiesButton" Margin="3,0,0,0"
+                                    Style="{StaticResource TabItemPropertiesButtonStyle}"
                                     Grid.Column="1"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.PropertiesTab}"
-                                    CommandParameter="{Binding}"/>
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Propiedades"/>
 
                         </Grid>
                     </DataTemplate>
