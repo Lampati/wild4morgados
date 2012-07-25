@@ -17,6 +17,17 @@
             </MenuItem>
             <MenuItem Header="Select All" Command="{x:Static s:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
+        <Style x:Key="MainGroupBox" TargetType="{x:Type GroupBox}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="Transparent" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        </Style>
+
     </UserControl.Resources>
 
     <StackPanel VerticalAlignment="Stretch" Height="Auto">
@@ -24,8 +35,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Gráfico" Grid.Column="0" Margin="0,0,0,0" Height="Auto" MaxHeight="500" VerticalAlignment="Stretch">
-                <grafico:ProgramadorGrafico HorizontalAlignment="Stretch" Margin="0,5,0,0" x:Name="modoGrafico"></grafico:ProgramadorGrafico>
+            <GroupBox Header="Gráfico" Grid.Column="0" Margin="0,0,0,0" Height="Auto"  VerticalAlignment="Stretch"> <!--Style="{StaticResource MainGroupBox}"-->
+                      
+                <grafico:ProgramadorGrafico HorizontalAlignment="Stretch" Margin="0,0,0,0" x:Name="modoGrafico"></grafico:ProgramadorGrafico>
             </GroupBox>
         </Grid>
 
@@ -36,8 +48,8 @@
 
 
 
-            <GroupBox Header="Gargar" Grid.Column="0" Margin="0,0,0,0" Height="Auto" MaxHeight="500" VerticalAlignment="Stretch">
-                <avalonedit:TextEditor HorizontalAlignment="Stretch" Margin="0,5,0,0" Name="textEditor"  >
+            <GroupBox Header="Gargar" Grid.Column="0" Margin="0,0,0,0" Height="Auto"  VerticalAlignment="Stretch" Foreground="Black" Background="#FF1B5ADB">
+                <avalonedit:TextEditor HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="textEditor"  >
                     <avalonedit:TextEditor.ContextMenu>
                         <ContextMenu>
                             <MenuItem Command="Undo" Header="Deshacer" />
