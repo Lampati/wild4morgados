@@ -22,8 +22,8 @@
         <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
 
         <Color x:Key="ControlLightColor">White</Color>
-        <Color x:Key="ControlMediumColor">#FF7381F9</Color>
-        <Color x:Key="ControlDarkColor">#FF211AA9</Color>
+        <Color x:Key="ControlMediumColor">#C8CDFC</Color>
+        <Color x:Key="ControlDarkColor">#5E6DF0</Color>
 
         <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
         <Color x:Key="ControlPressedColor">#FF211AA9</Color>
@@ -33,9 +33,9 @@
         <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
 
         <!--Border colors-->
-        <Color x:Key="BorderLightColor">#FFCCCCCC</Color>
-        <Color x:Key="BorderMediumColor">#FF888888</Color>
-        <Color x:Key="BorderDarkColor">#FF444444</Color>
+        <Color x:Key="BorderLightColor">#5E6DF0</Color>
+        <Color x:Key="BorderMediumColor">Black</Color>
+        <Color x:Key="BorderDarkColor">Black</Color>
 
         <Color x:Key="PressedBorderLightColor">#FF888888</Color>
         <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
@@ -230,7 +230,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>                   
 
-                    <GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >
+                    <GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >                        
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Contenido}"
@@ -240,6 +240,9 @@
                     </GridViewColumn>
 
                 </GridView>
+
+               
+
             </ListView.View>
         </ListView>
     </Grid>

@@ -63,6 +63,13 @@ namespace DiagramDesigner.UserControls.Mensajes
 
             gridView = (GridView)lstVwMensajesModoGrafico.View;
             gridView.AllowsColumnReorder = false;
+
+            Loaded += new RoutedEventHandler(BarraMensajes_Loaded);
+        }
+
+        void BarraMensajes_Loaded(object sender, RoutedEventArgs e)
+        {
+            AjustarSize();
         }
 
         
@@ -96,7 +103,8 @@ namespace DiagramDesigner.UserControls.Mensajes
                 width = 100;
             }
 
-            gv.Columns[2].Width = width - 15;
+            //gv.Columns[2].Width = width - 15;
+            gv.Columns[2].Width = width - 2;
 
             width = this.ActualWidth;
 
@@ -111,7 +119,8 @@ namespace DiagramDesigner.UserControls.Mensajes
                 width = 100;
             }
 
-            gv.Columns[3].Width = width - 15;
+            //gv.Columns[3].Width = width - 15;
+            gv.Columns[3].Width = width - 2 ;
         }
 
    

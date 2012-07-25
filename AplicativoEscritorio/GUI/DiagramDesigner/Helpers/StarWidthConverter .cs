@@ -31,7 +31,8 @@ namespace DiagramDesigner.Helpers
             {
                     width -= gv.Columns[i].Width;
             }
-            return width - 15;// this is to take care of margin/padding
+            //return width - 15;// this is to take care of margin/padding
+            return width ;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
