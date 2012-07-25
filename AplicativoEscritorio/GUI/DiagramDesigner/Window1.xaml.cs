@@ -180,7 +180,7 @@ namespace DiagramDesigner
 
             this.Loaded += new RoutedEventHandler(Window1_Loaded);
 
-            this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged);
+            
 
 
             ConfiguracionAplicacion.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
@@ -242,12 +242,7 @@ namespace DiagramDesigner
 
             ArchCargado = null;
 
-            //AjustarSize(this.ActualWidth, this.ActualHeight);
-
-            this.BarraMsgs.AgregarError("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", 1, 2);
-            this.BarraMsgs.AgregarError("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", 1, 6);
-            this.BarraMsgs.AgregarError("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", 2, 4);
-            this.BarraMsgs.AgregarError("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", 2, 1);
+           
         }
 
        
@@ -266,10 +261,7 @@ namespace DiagramDesigner
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
         }
 
-        void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //BarraMsgs.AjustarSize();
-        }
+      
 
         void ToolbarAplicacion_AbrirBusquedaEvent(object o, AbrirBusquedaEventArgs e)
         {
