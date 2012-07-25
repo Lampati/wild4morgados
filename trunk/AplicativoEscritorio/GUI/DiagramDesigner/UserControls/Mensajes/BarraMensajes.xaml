@@ -9,6 +9,8 @@
     <UserControl.Resources>
         <local:StarWidthConverter x:Key="starWidthConverter"></local:StarWidthConverter>
 
+       
+
         <!--Control colors.-->
         <Color x:Key="WindowColor">#FFE8EDF9</Color>
         <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
@@ -156,6 +158,8 @@
             </Style.Triggers>
         </Style>
 
+      
+
     </UserControl.Resources>
 
 
@@ -168,25 +172,35 @@
             <!--<Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             </Style>-->
-
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View >
-                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}"  >
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}"  
+                          >
                     
                         <GridViewColumn Header="Linea" Width="55" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Linea}"
-                                 TextWrapping="Wrap"/>
-                                </DataTemplate>
+                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=Linea}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
+                            </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
                         <GridViewColumn Header="Columna" Width="55" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Columna}"
-                                 TextWrapping="Wrap"/>
-                                </DataTemplate>
+
+                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=Columna}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
+                            </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
@@ -194,10 +208,12 @@
                         <!--<GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >-->
                         <GridViewColumn Header="Mensaje" >
                             <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Contenido}"
-                                 TextWrapping="Wrap" />
-                                </DataTemplate>
+                                <DataTemplate>                                 
+                                <Border BorderBrush="Black" Margin="-12,3,-6,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=Contenido}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
+                            </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                 </GridView>
@@ -206,15 +222,22 @@
 
         <ListView Name="lstVwMensajesModoGrafico" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                   RenderOptions.ClearTypeHint="Enabled" SizeChanged="lstVwMensajesModoGrafico_SizeChanged" 
-                  ScrollViewer.VerticalScrollBarVisibility="Visible"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Padding="0,0,3,0" >                  
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Padding="0,0,3,0" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" >
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}"  >
 
                     <GridViewColumn Header="Contexto" Width="100" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Contexto}"
-                             TextWrapping="Wrap"/>
+                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=Contexto}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -222,8 +245,10 @@
                     <GridViewColumn Header="Figura" Width="100" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Figura}"
-                             TextWrapping="Wrap"/>
+                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=Figura}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -231,8 +256,10 @@
                     <GridViewColumn Header="Id" Width="55" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=FiguraId}"
-                             TextWrapping="Wrap"/>
+                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=FiguraId}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -240,8 +267,10 @@
                     <GridViewColumn Header="Mensaje" >                        
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=Contenido}"
-                             TextWrapping="Wrap" />
+                                <Border BorderBrush="Black" Margin="-12,3,-6,0" BorderThickness="0,0,0,1"  >
+                                    <TextBlock Text="{Binding Path=Contenido}" Margin="14,0,0,0"
+                                    TextWrapping="Wrap"/>
+                                </Border>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
