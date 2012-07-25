@@ -162,7 +162,7 @@
 
         <Grid>
 
-        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed"  RenderOptions.ClearTypeHint="Enabled">
+        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed"  RenderOptions.ClearTypeHint="Enabled" Height="90">
             <!--<Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             </Style>-->
@@ -199,7 +199,7 @@
             </ListView.View>
         </ListView>
 
-        <ListView Name="lstVwMensajesModoGrafico" Visibility="Collapsed">
+        <ListView Name="lstVwMensajesModoGrafico" Visibility="Collapsed" Height="90">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
 
