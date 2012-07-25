@@ -10,7 +10,7 @@
         xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"    
-                Closing="RibbonWindow_Closing" SizeChanged="RibbonWindow_SizeChanged" 
+                Closing="RibbonWindow_Closing" 
                 Icon="/DiagramDesigner;component/Images/loboTribal1.png">
 
     <Window.Resources>
@@ -20,31 +20,35 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="0" >
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" /> 
-        </Grid.RowDefinitions>        
-        
+        </Grid.RowDefinitions>       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-     
-        <Grid Grid.Row="0" >
+
+
+
+        <Grid Grid.Row="0"  Grid.Column="0">
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Grid.LayoutTransform>
             <toolbar:BarraToolbarRibbon x:Name="ToolbarAplicacion"></toolbar:BarraToolbarRibbon>
         </Grid>
 
-        <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,0,0,0">
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="0,0,0,0">
             <entorno:EsquemaCentral x:Name="Esquema" ></entorno:EsquemaCentral>
         </Grid>
-        
-        <Grid Grid.Row="2" >
+
+        <Grid Grid.Row="2" Grid.Column="0">
             <mensajes:BarraMensajes x:Name="BarraMsgs"></mensajes:BarraMensajes>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Grid.Column="0">
             <estado:BarraEstado x:Name="BarraEstado"></estado:BarraEstado>
         </Grid>
     </Grid>
