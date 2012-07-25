@@ -247,14 +247,7 @@ namespace DiagramDesigner.UserControls.Entorno
             }
         }
 
-        private void grdTexto_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (modo == ModoVisual.Texto)
-            {
-                grdTexto.MaxHeight = e.NewSize.Height;
-
-            }
-        }
+      
 
         internal void CambiarTamanio(double width, double height)
         {

@@ -104,7 +104,7 @@ namespace DiagramDesigner.UserControls.Mensajes
             }
 
             //gv.Columns[2].Width = width - 15;
-            gv.Columns[2].Width = width - 2;
+            gv.Columns[2].Width = width - 4;
 
             width = this.ActualWidth;
 
@@ -120,7 +120,7 @@ namespace DiagramDesigner.UserControls.Mensajes
             }
 
             //gv.Columns[3].Width = width - 15;
-            gv.Columns[3].Width = width - 2 ;
+            gv.Columns[3].Width = width - 4 ;
         }
 
    

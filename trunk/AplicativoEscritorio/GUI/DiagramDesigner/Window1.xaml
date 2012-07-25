@@ -23,23 +23,19 @@
     <Grid Margin="0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="90" />
-            <RowDefinition Height="25" /> 
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" /> 
         </Grid.RowDefinitions>        
         
 
-        <!--<Grid Grid.Row="0" Margin="0,10,0,0">
-            <s:BarraToolbar x:Name="ToolbarAplicacion"></s:BarraToolbar>
-        </Grid>-->
+     
         <Grid Grid.Row="0" >
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Grid.LayoutTransform>
             <toolbar:BarraToolbarRibbon x:Name="ToolbarAplicacion"></toolbar:BarraToolbarRibbon>
         </Grid>
-
-        <!--<ContentControl Content="{StaticResource MyToolbar}" Name="BarraToolBar"/>-->
 
         <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,0,0,0">
             <entorno:EsquemaCentral x:Name="Esquema" ></entorno:EsquemaCentral>
