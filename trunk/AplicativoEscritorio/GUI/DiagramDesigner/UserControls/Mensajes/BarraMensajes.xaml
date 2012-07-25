@@ -158,17 +158,20 @@
 
     </UserControl.Resources>
 
-   
 
-        <Grid>
 
-        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed"  RenderOptions.ClearTypeHint="Enabled" Height="90">
+    <Grid Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <ListView Name="lstVwMensajesModoTexto" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                  RenderOptions.ClearTypeHint="Enabled" SizeChanged="lstVwMensajesModoTexto_SizeChanged"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Padding="0,0,3,0" >
             <!--<Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             </Style>-->
 
             <ListView.View >
-                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" >
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}"  >
+                    
                         <GridViewColumn Header="Linea" Width="55" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -187,7 +190,9 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >
+                    
+                        <!--<GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >-->
+                        <GridViewColumn Header="Mensaje" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Contenido}"
@@ -199,9 +204,11 @@
             </ListView.View>
         </ListView>
 
-        <ListView Name="lstVwMensajesModoGrafico" Visibility="Collapsed" Height="90">
+        <ListView Name="lstVwMensajesModoGrafico" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                  RenderOptions.ClearTypeHint="Enabled" SizeChanged="lstVwMensajesModoGrafico_SizeChanged" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" Padding="0,0,3,0" >                  
             <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}" >
 
                     <GridViewColumn Header="Contexto" Width="100" >
                         <GridViewColumn.CellTemplate>
@@ -228,9 +235,9 @@
                              TextWrapping="Wrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>                   
+                    </GridViewColumn>
 
-                    <GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >                        
+                    <GridViewColumn Header="Mensaje" >                        
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Contenido}"

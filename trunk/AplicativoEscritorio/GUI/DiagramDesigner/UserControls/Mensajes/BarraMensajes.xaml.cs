@@ -64,12 +64,14 @@ namespace DiagramDesigner.UserControls.Mensajes
             gridView = (GridView)lstVwMensajesModoGrafico.View;
             gridView.AllowsColumnReorder = false;
 
+
+
             Loaded += new RoutedEventHandler(BarraMensajes_Loaded);
         }
 
         void BarraMensajes_Loaded(object sender, RoutedEventArgs e)
         {
-            AjustarSize();
+            //AjustarSize();
         }
 
         
@@ -88,10 +90,13 @@ namespace DiagramDesigner.UserControls.Mensajes
             //{            
             //    width = listview.Width;
             //}
+            double aux = this.Width;
 
-            width = this.ActualWidth;
+            width = lstVwMensajesModoTexto.ActualWidth;
 
             GridView gv = lstVwMensajesModoTexto.View as GridView;
+            
+            width = lstVwMensajesModoTexto.ActualWidth;
             for (int i = 0; i < gv.Columns.Count -1 ; i++)
             {
                 
@@ -104,9 +109,9 @@ namespace DiagramDesigner.UserControls.Mensajes
             }
 
             //gv.Columns[2].Width = width - 15;
-            gv.Columns[2].Width = width - 4;
+            gv.Columns[2].Width = width -15 ;
 
-            width = this.ActualWidth;
+            width = lstVwMensajesModoGrafico.ActualWidth;
 
             gv = lstVwMensajesModoGrafico.View as GridView;
             for (int i = 0; i < gv.Columns.Count-1; i++)
@@ -120,11 +125,59 @@ namespace DiagramDesigner.UserControls.Mensajes
             }
 
             //gv.Columns[3].Width = width - 15;
-            gv.Columns[3].Width = width - 4 ;
+            gv.Columns[3].Width = width - 15 ;
         }
 
-   
 
+        private void lstVwMensajesModoTexto_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.WidthChanged)
+            {
+                GridView view = this.lstVwMensajesModoTexto.View as GridView;
+                Decorator border = VisualTreeHelper.GetChild(this.lstVwMensajesModoTexto, 0) as Decorator;
+                if (border != null)
+                {
+                    ScrollViewer scroller = border.Child as ScrollViewer;
+                    if (scroller != null)
+                    {
+                        ItemsPresenter presenter = scroller.Content as ItemsPresenter;
+                        if (presenter != null)
+                        {
+                            view.Columns[2].Width = presenter.ActualWidth;
+                            for (int i = 0; i < view.Columns.Count - 1; i++)
+                            {
+                                view.Columns[2].Width -= view.Columns[i].ActualWidth;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void lstVwMensajesModoGrafico_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.WidthChanged)
+            {
+                GridView view = this.lstVwMensajesModoGrafico.View as GridView;
+                Decorator border = VisualTreeHelper.GetChild(this.lstVwMensajesModoGrafico, 0) as Decorator;
+                if (border != null)
+                {
+                    ScrollViewer scroller = border.Child as ScrollViewer;
+                    if (scroller != null)
+                    {
+                        ItemsPresenter presenter = scroller.Content as ItemsPresenter;
+                        if (presenter != null)
+                        {
+                            view.Columns[3].Width = presenter.ActualWidth;
+                            for (int i = 0; i < view.Columns.Count - 1; i++)
+                            {
+                                view.Columns[3].Width -= view.Columns[i].ActualWidth;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         void lstVwMensajes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
