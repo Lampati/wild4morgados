@@ -12,7 +12,7 @@
     <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False" ContextMenu="{Binding null}" >
         
         <ribbon:Ribbon.ApplicationMenu>
-            <ribbon:RibbonApplicationMenu SmallImageSource="/Resources/Images/Copy.png">
+            <ribbon:RibbonApplicationMenu SmallImageSource="/Resources/Images/Copy.png" >                
                 <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="/Resources/Images/GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="0" ContextMenu="{Binding null}" >
                     <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="/Resources/Images/Oxygen_new.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="1" ContextMenu="{Binding null}"/>
                     <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="/Resources/Images/Oxygen_new.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=Window1}" CommandParameter="2" ContextMenu="{Binding null}"/>
@@ -28,22 +28,7 @@
                 <ribbon:RibbonApplicationMenuItem RenderOptions.BitmapScalingMode="NearestNeighbor" SnapsToDevicePixels="True" Header="Imprimir" x:Name="menuBttnImprimir" ImageSource="/Resources/Images/Oxygen_print.png" Command="Print" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
                 <ribbon:RibbonSeparator />
                 <ribbon:RibbonApplicationMenuItem Header="Salir" x:Name="menuBttnSalir" ImageSource="/Resources/Images/Exit-32.png" Command="Close" CommandTarget="{Binding ElementName=Window1}" ContextMenu="{Binding null}"/>
-
-
-                <!--<ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>
-                    <ribbon:RibbonGallery CanUserFilter="False"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto">
-                        <ribbon:RibbonGalleryCategory Header="Recent Documents" 
-                                      Background="Transparent" 
-                                      ItemsSource="{DynamicResource MostRecentFiles}">
-                            <ribbon:RibbonGalleryCategory.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical" IsItemsHost="True"/>
-                                </ItemsPanelTemplate>
-                            </ribbon:RibbonGalleryCategory.ItemsPanel>
-                        </ribbon:RibbonGalleryCategory>
-                    </ribbon:RibbonGallery>
-                </ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>-->
+           
 
             </ribbon:RibbonApplicationMenu>
         </ribbon:Ribbon.ApplicationMenu>
