@@ -447,6 +447,8 @@ namespace DiagramDesigner
                             }
                         }
 
+                        
+
                         archCargado.TestsPrueba.RemoveAll(x => idsRemover.Contains(x.Id));
                         
                     }
