@@ -181,7 +181,7 @@
                         <GridViewColumn Header="Linea" Width="55" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                <Border BorderBrush="LightGray" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=Linea}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>
@@ -193,7 +193,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
 
-                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                <Border BorderBrush="LightGray" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=Columna}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>
@@ -205,8 +205,8 @@
                         <!--<GridViewColumn Header="Mensaje" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Converter={StaticResource starWidthConverter}}" >-->
                         <GridViewColumn Header="Mensaje" >
                             <GridViewColumn.CellTemplate>
-                                <DataTemplate>                                 
-                                <Border BorderBrush="Black" Margin="-12,3,-6,0" BorderThickness="0,0,0,1"  >
+                                <DataTemplate>
+                                <Border BorderBrush="LightGray" Margin="-12,3,-6,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=Contenido}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>
@@ -231,7 +231,7 @@
                     <GridViewColumn Header="Contexto" Width="100" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                <Border BorderBrush="LightGray" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=Contexto}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>
@@ -242,7 +242,7 @@
                     <GridViewColumn Header="Figura" Width="100" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                <Border BorderBrush="LightGray" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=Figura}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>
@@ -253,7 +253,7 @@
                     <GridViewColumn Header="Id" Width="55" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Black" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
+                                <Border BorderBrush="LightGray" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=FiguraId}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>
@@ -264,7 +264,7 @@
                     <GridViewColumn Header="Mensaje" >                        
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Black" Margin="-12,3,-6,0" BorderThickness="0,0,0,1"  >
+                                <Border BorderBrush="LightGray" Margin="-12,3,-6,0" BorderThickness="0,0,0,1"  >
                                     <TextBlock Text="{Binding Path=Contenido}" Margin="14,0,0,0"
                                     TextWrapping="Wrap"/>
                                 </Border>

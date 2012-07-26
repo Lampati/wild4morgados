@@ -821,23 +821,6 @@ namespace DiagramDesigner
             }
         }
 
-        //private void RibbonWindow_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    //AjustarSize(e.NewSize.Width, e.NewSize.Height);
-          
-        //}
-
-        //private void AjustarSize(double ancho, double alto)
-        //{
-        //    double alturaRestar = ToolbarAplicacion.ActualHeight + BarraEstado.ActualHeight + BarraMsgs.ActualHeight;
-
-        //    alturaRestar += BarraEstado.Margin.Top + BarraEstado.Margin.Bottom;
-        //    alturaRestar += BarraMsgs.Margin.Top + BarraMsgs.Margin.Bottom;
-        //    alturaRestar += Esquema.Margin.Top + Esquema.Margin.Bottom;
-        //    alturaRestar += ToolbarAplicacion.Margin.Top + ToolbarAplicacion.Margin.Bottom;
-
-
-        //    Esquema.CambiarTamanio(ancho, alto - alturaRestar);
-        //}
+  
     }
 }
