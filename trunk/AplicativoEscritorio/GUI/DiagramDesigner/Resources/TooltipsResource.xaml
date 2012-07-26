@@ -62,4 +62,74 @@
         Se recomienda identar el codigo si se encuentra trabajando en modo texto antes de usar esta funcionalidad
     </clr:String>
 
+    <clr:String x:Key="TooltipSincronizar">
+        Bajar del servidor especificado en propiedades, todos aquellos ejercicios catalogados como globales en la Web de ProgramAr
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizarPorCurso">
+        Bajar del servidor especificado en propiedades, todos aquellos ejercicios pertenecientes al curso especificado por el usuario. Esta funcionalidad sirve cuando se quiere bajar un grupo de ejercicios agrupados por sus caracteristicas en comun.
+    </clr:String> 
+
+    <clr:String x:Key="TooltipSincronizarPorEjercicio">
+        Bajar del servidor especificado en propiedades, el ejercicio especificado por el usuario. Esta funcionalidad sirve cuando se quiere sincronizar un ejercicio en particular visto en la web.
+    </clr:String>
+
+    <clr:String x:Key="TooltipDondeEncontrarIdEjercicio">
+        El id de ejercicio es el identificador unico que le da ProgramAr a cada ejercicio. Puede consultar los id de ejercicios en la web de ProgramAr
+    </clr:String>
+
+    <clr:String x:Key="TooltipDondeEncontrarIdCurso">
+        El id de curso es el identificador unico que le da ProgramAr a cada curso. Puede consultar los id de ejercicios en la web de ProgramAr
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizarPropiedades">
+        Configurar las propiedades de sincronización, como el nombre del servidor.
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizarPropiedadesWarning">
+        Consulte la página de ProgramAr para configurar la sincronización
+    </clr:String>
+
+    <clr:String x:Key="TooltipPegar">
+        Pegar los contenidos del portapapeles
+    </clr:String>
+
+    <clr:String x:Key="TooltipCortar">
+        Cortar la selección al portapapeles
+    </clr:String>
+    
+    <clr:String x:Key="TooltipCopiar">
+        Copiar la selección al portapapeles
+    </clr:String>
+
+    <clr:String x:Key="TooltipEliminar">
+        Eliminar la selección
+    </clr:String>
+
+    <clr:String x:Key="TooltipUndoGargar">
+        Deshacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipRedoGargar">
+        Rehacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipUndoFlujo">
+        Deshacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipRedoFlujo">
+        Rehacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipBuscar">
+        Abre el dialogo de busqueda
+    </clr:String>
+
+    <clr:String x:Key="TooltipBuscaryReemplazar">
+        Abre el dialogo de busqueda y reemplazo
+    </clr:String>
+
+    
+
 </ResourceDictionary>

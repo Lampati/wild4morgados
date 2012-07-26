@@ -57,8 +57,8 @@
                         Command="{x:Static ApplicationCommands.Paste}" 
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         LargeImageSource="/Resources/Images/PasteBig.png" 
-                        Label="Pegar" ToolTipDescription="Pegar los contenidos del portapapeles" ToolTipTitle="Pegar"
-                                      />
+                        Label="Pegar" ToolTipDescription="{StaticResource TooltipPegar}" 
+                        ToolTipTitle="Pegar" />
 
 
 
@@ -68,23 +68,26 @@
                         Command="{x:Static ApplicationCommands.Cut}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Cut.png"
-                        Label="Cortar" />
+                        Label="Cortar" ToolTipTitle="Cortar" 
+                        ToolTipDescription="{StaticResource TooltipCortar}"/>
 
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Copy}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Copy.png"                                     
-                        Label="Copiar" />
+                        Label="Copiar" ToolTipTitle="Copiar" 
+                        ToolTipDescription="{StaticResource TooltipCopiar}"/>                                     
 
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Delete}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Delete.png"
-                        Label="Eliminar" />
-                
-                
+                        Label="Eliminar" ToolTipTitle="Eliminar" 
+                        ToolTipDescription="{StaticResource TooltipEliminar}"/>
+
+
 
 
 
@@ -97,12 +100,15 @@
                     Command="{x:Static ApplicationCommands.Undo}"
                     CommandTarget="{Binding ElementName=TextEditor}"
                     SmallImageSource="/Resources/Images/undo.png"
-                    Label="Deshacer"/>
+                    Label="Deshacer" ToolTipTitle="Deshacer" 
+                    ToolTipDescription="{StaticResource TooltipUndoGargar}"/>
+                    
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                     Command="{x:Static ApplicationCommands.Redo}"
                     CommandTarget="{Binding ElementName=TextEditor}"
                     SmallImageSource="/Resources/Images/redo.png"
-                    Label="Rehacer"/>
+                    Label="Rehacer" ToolTipTitle="Rehacer"
+                    ToolTipDescription="{StaticResource TooltipRedoGargar}"/>                                     
 
                 </StackPanel>
 
@@ -114,12 +120,14 @@
                         Command="{x:Static ApplicationCommands.Undo}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/undo.png"
-                        Label="Deshacer"/>
+                        Label="Deshacer" ToolTipTitle="Deshacer" 
+                        ToolTipDescription="{StaticResource TooltipUndoFlujo}" />
                     <ribbon:RibbonButton ContextMenu="{Binding null}"
                         Command="{x:Static ApplicationCommands.Redo}"
                         CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/redo.png"
-                        Label="Rehacer"/>
+                        Label="Rehacer" ToolTipTitle="Rehacer" 
+                        ToolTipDescription="{StaticResource TooltipRedoFlujo}" />
                     </StackPanel>             
             </ribbon:RibbonGroup>
 
@@ -129,13 +137,15 @@
                             HorizontalContentAlignment="Center"
                             SmallImageSource="/Resources/Images/Search128.png"
                             Label="Buscar"
-                            Click="ButtonBuscar_Click"/>
+                            Click="ButtonBuscar_Click" ToolTipTitle="Buscar" 
+                            ToolTipDescription="{StaticResource TooltipBuscar}" />
 
                     <ribbon:RibbonButton ContextMenu="{Binding null}"
                             HorizontalContentAlignment="Center"
                             SmallImageSource="/Resources/Images/SearchRep128.png"
                             Label="Buscar/Reemplazar" 
-                            Click="ButtonBuscarYReemplazar_Click"/>
+                            Click="ButtonBuscarYReemplazar_Click" ToolTipTitle="Buscar y reemplazar" 
+                            ToolTipDescription="{StaticResource TooltipBuscaryReemplazar}" />
                 </StackPanel>
             </ribbon:RibbonGroup>
 
@@ -247,13 +257,17 @@
 
         <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
             <ribbon:RibbonGroup Header="Sincronizador" Name="ribbonGroupSincro" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro General" ContextMenu="{Binding null}" Click="btnSincroGeneral_Click"></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Curso" ContextMenu="{Binding null}" Click="btnSincroCurso_Click"></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ContextMenu="{Binding null}" Click="btnSincroEjercicio_Click"></ribbon:RibbonButton>                
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro General" ContextMenu="{Binding null}" Click="btnSincroGeneral_Click" 
+                                     ToolTipTitle="Sincronización general" ToolTipDescription="{StaticResource TooltipSincronizar}" />
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Curso" ContextMenu="{Binding null}" Click="btnSincroCurso_Click" 
+                                     ToolTipTitle="Sincronizacion por ID de curso" ToolTipDescription="{StaticResource TooltipSincronizarPorCurso}" ToolTipFooterTitle="{StaticResource TooltipDondeEncontrarIdCurso}" />
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ContextMenu="{Binding null}" Click="btnSincroEjercicio_Click" 
+                                     ToolTipTitle="Sincronizacion por ID de ejercicio" ToolTipDescription="{StaticResource TooltipSincronizarPorEjercicio}" ToolTipFooterTitle="{StaticResource TooltipDondeEncontrarIdEjercicio}" />
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Propiedades" ContextMenu="{Binding null}" Click="btnPropiedadesSincro_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Propiedades" ContextMenu="{Binding null}" Click="btnPropiedadesSincro_Click" 
+                                     ToolTipTitle="Propiedades de sincronización" ToolTipDescription="{StaticResource TooltipSincronizarPropiedades}" ToolTipFooterTitle="{StaticResource TooltipSincronizarPropiedadesWarning}" />
             </ribbon:RibbonGroup>
 
 
