@@ -58,10 +58,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>RibbonDLL\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
-    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>RibbonDLL\RibbonControlsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -459,6 +455,10 @@
     <ProjectReference Include="..\..\ModoGrafico\ModoGrafico.csproj">
       <Project>{B3763BD7-9913-486D-A1BC-2DFFA6F0682D}</Project>
       <Name>ModoGrafico</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ribbon Source\RibbonControlsLibrary\v4.0\RibbonControlsLibrary_v40.csproj">
+      <Project>{2CA5E547-4567-45C9-8240-A408BCA5C714}</Project>
+      <Name>RibbonControlsLibrary_v40</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Sincronizacion\Sincronizacion.csproj">
       <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
