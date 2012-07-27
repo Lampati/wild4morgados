@@ -109,8 +109,22 @@ namespace LibreriaActividades
                 ActividadBase actVerdadero = ActividadFactory.CrearActividad(datosMapeados.BranchVerdadero);
                 this.BranchVerdadero = actVerdadero;
 
+                if (this.BranchVerdadero == null)
+                {
+                    BranchVerdadero = new Secuencia();
+                }
+
+                this.BranchVerdadero.DisplayName = "Rama Verdadero";
+
                 ActividadBase actFalso = ActividadFactory.CrearActividad(datosMapeados.BranchFalso);
                 this.BranchFalso = actFalso;
+
+                if (this.BranchFalso == null)
+                {
+                    BranchFalso = new Secuencia();
+                }
+
+                this.BranchFalso.DisplayName = "Rama Falso";
 
                 this.IdPropio = datosMapeados.IdPropio;
 

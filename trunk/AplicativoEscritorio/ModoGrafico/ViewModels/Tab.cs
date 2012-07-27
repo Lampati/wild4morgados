@@ -414,6 +414,7 @@ using ModoGrafico.Interfaces;
 
         void m_Click(object sender, RoutedEventArgs e)
         {
+            
             bool elimina = (bool)((System.Activities.Presentation.WorkflowViewElement)(((System.Windows.Controls.MenuItem)(sender)).CommandTarget)).ModelItem.Properties["SePuedeEliminar"].ComputedValue;
             if (!elimina)
                 MessageBox.Show("No se puede eliminar esta actividad.", "Error eliminación", MessageBoxButton.OK, MessageBoxImage.Error);
