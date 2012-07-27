@@ -223,7 +223,9 @@ To automatically copy the files, set the environment variable
 <SolidColorBrush x:Key="&#229;" Color="#B8FFFFFF" />
 <SolidColorBrush x:Key="&#263;" Color="#EEFFFFFF"  />
 
-<!-- We use this brush to achieve the exact same gray foreground color for disabled text as Win7 ribbon. 
+<SolidColorBrush x:Key="whiteBrush" Color="#FFFFFFFF"  />
+
+    <!-- We use this brush to achieve the exact same gray foreground color for disabled text as Win7 ribbon. 
      However, since this is not from SystemColors, we still need to use triggers to set the disabled
      foreground color to SystemColors.GrayTextBrushKey when in high-contrast. -->
 <SolidColorBrush x:Key="&#203;" Color="#FF9E9E9E" />
@@ -1856,6 +1858,13 @@ To automatically copy the files, set the environment variable
 <!--=================================================================
         RibbonWindow
     ==================================================================-->
+    
+    <Style x:Key="ContentButtonPathStyle" TargetType="{x:Type Path}">        
+        <Setter Property="Stroke" Value="White"/>        
+    </Style>
+
+
+
 
     <primitives:RibbonWindowSmallIconConverter x:Key="&#302;"/>
     <Style x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type ribbon:Ribbon},ResourceId=RibbonWindowStyle}" TargetType="{x:Type ribbon:RibbonWindow}">
@@ -1872,30 +1881,46 @@ To automatically copy the files, set the environment variable
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ribbon:RibbonWindow}">
                     <ControlTemplate.Resources>
-                        <Style TargetType="{x:Type Button}" x:Key="&#303;">
+                        <Style TargetType="{x:Type Button}" x:Key="&#303;">   
+                            <Setter Property="Margin" Value="0,0,1,0" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Grid >
-                                            <Grid.Background>
-                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                    <GradientStop Color="#7895EF" Offset="0.0" />
-                                                    <GradientStop Color="#3B75F2" Offset="1" />
-                                                </LinearGradientBrush>
-                                            </Grid.Background>
-                                            <Border x:Name="OuterTopLeftBorder" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-                                            <Border x:Name="OuterBottomRightBorder" BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
-                                            <Border x:Name="InnerTopLeftBorder" BorderThickness="1,1,0,0" Margin="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
-                                            <Border x:Name="InnerBottomRightBorder" BorderThickness="0,0,1,1" Margin="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"/>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
+                                        <Border BorderThickness="1" BorderBrush="{StaticResource whiteBrush}" CornerRadius="2" >
+                                            <Grid x:Name="gridBotonBarra" >
+                                                <Grid.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#7B9FFD" Offset="0.0" />
+                                                        <GradientStop Color="#0E53D2" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Grid.Background>
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center" Content="{TemplateBinding Content}">                                                  
+                                                </ContentPresenter>
+
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>                                            
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" TargetName="gridBotonBarra">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                            <GradientStop Color="#789DFF" Offset="0.0" />
+                                                            <GradientStop Color="#326AE7" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
                                             <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="OuterTopLeftBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
-                                                <Setter TargetName="OuterBottomRightBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-                                                <Setter TargetName="InnerTopLeftBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
-                                                <Setter TargetName="InnerBottomRightBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+                                                <Setter Property="Background" TargetName="gridBotonBarra" >
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#0A096B" Offset="0.0" />
+                                                            <GradientStop Color="#3B75F2" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="gridBotonBarra" Property="Opacity" Value="0.7" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -1903,30 +1928,47 @@ To automatically copy the files, set the environment variable
                             </Setter>
                         </Style>
                         <Style TargetType="{x:Type Button}" x:Key="&#304;">
+                            <Setter Property="Margin" Value="0,0,1,0" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Grid >
-                                            <Grid.Background>
-                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                    <GradientStop Color="#B298B5" Offset="0.0" />
-                                                    <GradientStop Color="#A06173" Offset="1" />
-                                                </LinearGradientBrush>
-                                            </Grid.Background>
-                                            <Border x:Name="OuterTopLeftBorder" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-                                            <Border x:Name="OuterBottomRightBorder" BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
-                                            <Border x:Name="InnerTopLeftBorder" BorderThickness="1,1,0,0" Margin="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
-                                            <Border x:Name="InnerBottomRightBorder" BorderThickness="0,0,1,1" Margin="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
-                                            <ContentPresenter HorizontalAlignment="Center"
+                                        <Border BorderThickness="1" BorderBrush="{StaticResource whiteBrush}" CornerRadius="2" >
+                                            <Grid x:Name="gridBotonBarraCerar">
+                                                <Grid.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#E79B91" Offset="0.0" />
+                                                        <GradientStop Color="#C43609" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Grid.Background>
+                                               
+                                                <ContentPresenter HorizontalAlignment="Center"
                                                               VerticalAlignment="Center"/>
-                                        </Grid>
+                                            </Grid>                                            
+                                        </Border>
                                         <ControlTemplate.Triggers>
-                                            <Trigger Property="IsPressed" Value="True">                                           
-                                                <Setter TargetName="OuterTopLeftBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
-                                                <Setter TargetName="OuterBottomRightBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-                                                <Setter TargetName="InnerTopLeftBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
-                                                <Setter TargetName="InnerBottomRightBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" TargetName="gridBotonBarraCerar">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                            <GradientStop Color="#F07C61" Offset="0.0" />
+                                                            <GradientStop Color="#C5512F" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
                                             </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" TargetName="gridBotonBarraCerar" >
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#CD1E1E" Offset="0.0" />
+                                                            <GradientStop Color="#C6380F" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="gridBotonBarraCerar" Property="Opacity" Value="0.7" />
+                                                
+                                            </Trigger>
+
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -1992,24 +2034,26 @@ To automatically copy the files, set the environment variable
                                 </Grid.ColumnDefinitions>
                                 <Button Name="PART_MinimizeWindowButton"
                                         Grid.Column="1"
-                                        Margin="0,2"
+                                        Margin="0,2,2,2"
                                         shell:WindowChrome.IsHitTestVisibleInChrome="True"
                                         Command="shell:SystemCommands.MinimizeWindowCommand"
                                         Focusable="False"
                                         Style="{StaticResource &#303;}">
-                                    <Path x:Name="MinimizeWindowButtonGlyph"
-                                          Stroke="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
-                                          StrokeThickness="2">
+                                    <Path x:Name="MinimizeWindowButtonGlyph" Style="{StaticResource ContentButtonPathStyle}"
+                                          StrokeThickness="3">
                                         <Path.Data>
                                             <PathGeometry>
-                                                <PathFigure StartPoint="0,6">
-                                                    <LineSegment Point="6,6"/>
+                                                <PathFigure StartPoint="0,15">
+                                                    <LineSegment Point="5,15"/>                                                    
+                                                </PathFigure>
+                                                <PathFigure StartPoint="5,15">
+                                                    <LineSegment Point="-2,15"/>
                                                 </PathFigure>
                                             </PathGeometry>
                                         </Path.Data>
                                     </Path>
                                 </Button>
-                                <Button Name="PART_RestoreWindowButton"
+                                <Button Name="PART_RestoreWindowButton" 
                                         Grid.Column="2"
                                         Margin="0,2"
                                         shell:WindowChrome.IsHitTestVisibleInChrome="True"
@@ -2017,13 +2061,12 @@ To automatically copy the files, set the environment variable
                                         Focusable="False"
                                         Style="{StaticResource &#303;}"
                                         Visibility="Collapsed">
-                                    <Path x:Name="RestoreWindowButtonGlyph"
-                                          Stroke="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
-                                          StrokeThickness="1">
+                                    <Path x:Name="RestoreWindowButtonGlyph" Style="{StaticResource ContentButtonPathStyle}"
+                                          StrokeThickness="2">
                                         <Path.Data>
                                             <PathGeometry>
-                                                <PathFigure StartPoint="0,3" IsClosed="False">
-                                                    <LineSegment Point="0,8" />
+                                                <!--<PathFigure StartPoint="0,3" IsClosed="False">-->
+                                                    <!--<LineSegment Point="0,8" />
                                                     <LineSegment Point="5,8" />
                                                     <LineSegment Point="5,3" />
                                                     <LineSegment Point="0,3" />
@@ -2034,10 +2077,24 @@ To automatically copy the files, set the environment variable
                                                     <LineSegment Point="7,0" />
                                                     <LineSegment Point="2,0" />
                                                     <LineSegment Point="2,1" />
-                                                    <LineSegment Point="7,1" />
+                                                    <LineSegment Point="7,1" />-->
+                                                <PathFigure StartPoint="0,6" IsClosed="False">
+                                                    <LineSegment Point="0,16" />
+                                                    <LineSegment Point="10,16" />
+                                                    <LineSegment Point="10,6" />
+                                                    <LineSegment Point="0,6" />
+                                                    <LineSegment Point="0,8" />
+                                                    <LineSegment Point="10,8" />
+                                                    <LineSegment Point="10,10" />
+                                                    <LineSegment Point="14,10" />
+                                                    <LineSegment Point="14,0" />
+                                                    <LineSegment Point="4,0" />
+                                                    <LineSegment Point="4,2" />
+                                                    <LineSegment Point="14,2" />                                                 
                                                 </PathFigure>
-                                                <PathFigure StartPoint="2,1" IsClosed="False">
-                                                    <LineSegment Point="2,3" />
+                                         
+                                                <PathFigure StartPoint="4,2" IsClosed="False">
+                                                    <LineSegment Point="4,6" />
                                                 </PathFigure>
                                             </PathGeometry>
                                         </Path.Data>
@@ -2050,19 +2107,21 @@ To automatically copy the files, set the environment variable
                                         Command="shell:SystemCommands.MaximizeWindowCommand"
                                         Focusable="False"
                                         Style="{StaticResource &#303;}">
-                                    <Path x:Name="MaximizeWindowButtonGlyph"
-                                          Stroke="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
-                                          StrokeThickness="1">
+                                    <Path x:Name="MaximizeWindowButtonGlyph" Style="{StaticResource ContentButtonPathStyle}"
+                                          StrokeThickness="2">
                                         <Path.Data>
                                             <PathGeometry>
                                                 <PathFigure StartPoint="0,0" IsClosed="False">
-                                                    <LineSegment Point="0,8" />
-                                                    <LineSegment Point="8,8" />
-                                                    <LineSegment Point="8,0" />
+                                                    <LineSegment Point="0,16" />
+                                                    <LineSegment Point="16,16" />
+                                                    <LineSegment Point="16,0" />
                                                     <LineSegment Point="0,0" />
                                                 </PathFigure>
-                                                <PathFigure StartPoint="0.5,1">
-                                                    <LineSegment Point="7.5,1" />
+                                                <PathFigure StartPoint="0,1">
+                                                    <LineSegment Point="16,1" />
+                                                    <LineSegment Point="16,2" />
+                                                    <LineSegment Point="0,2" />
+                                                    <LineSegment Point="0,0" />
                                                 </PathFigure>
                                             </PathGeometry>
                                         </Path.Data>
@@ -2075,16 +2134,15 @@ To automatically copy the files, set the environment variable
                                         Command="shell:SystemCommands.CloseWindowCommand"
                                         Focusable="False"
                                         Style="{StaticResource &#304;}">
-                                    <Path x:Name="CloseWindowButtonGlyph"
-                                          Stroke="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"
-                                          StrokeThickness="1.5">
+                                    <Path x:Name="CloseWindowButtonGlyph" Style="{StaticResource ContentButtonPathStyle}"
+                                          StrokeThickness="3">
                                         <Path.Data>
                                             <PathGeometry>
                                                 <PathFigure StartPoint="0,0">
-                                                    <LineSegment Point="8,7"/>
+                                                    <LineSegment Point="15,15"/>
                                                 </PathFigure>
-                                                <PathFigure StartPoint="8,0">
-                                                    <LineSegment Point="0,7"/>
+                                                <PathFigure StartPoint="15,0">
+                                                    <LineSegment Point="0,15"/>
                                                 </PathFigure>
                                             </PathGeometry>
                                         </Path.Data>
