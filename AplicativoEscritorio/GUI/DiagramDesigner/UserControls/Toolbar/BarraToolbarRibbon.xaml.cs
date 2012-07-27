@@ -50,10 +50,14 @@ namespace DiagramDesigner.UserControls.Toolbar
                         //this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
 
                         this.ribbonGroupIdentacion.Visibility = System.Windows.Visibility.Collapsed;
-                        
+                        this.ribbonGroupBusqueda.Visibility = System.Windows.Visibility.Collapsed;
 
                         ButtonFlujo.IsChecked = true;
-                        ButtonTexto.IsChecked = false;                        
+                        ButtonTexto.IsChecked = false;    
+                    
+                        //hasta que sepamos que imprimir, queda deshabilitado en modo grafico
+                        menuBttnImprimir.IsEnabled = false;
+
                         break;
 
                     case ModoVisual.Texto:
@@ -64,9 +68,13 @@ namespace DiagramDesigner.UserControls.Toolbar
                         //this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;
 
                         this.ribbonGroupIdentacion.Visibility = System.Windows.Visibility.Visible;
+                        this.ribbonGroupBusqueda.Visibility = System.Windows.Visibility.Visible;
 
                         ButtonFlujo.IsChecked = false;
                         ButtonTexto.IsChecked = true;
+
+                        menuBttnImprimir.IsEnabled = true;
+
                         break;
                 }
             }
@@ -779,10 +787,7 @@ namespace DiagramDesigner.UserControls.Toolbar
           
         }
 
-        private void RibbonButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
         private void bttnCrearTestPrueba_Click(object sender, RoutedEventArgs e)
         {
