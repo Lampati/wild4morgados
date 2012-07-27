@@ -30,7 +30,7 @@ namespace LibreriaActividades
         public Secuencia()
         {
             Activities = new Collection<Activity>();
-            
+            SePuedeEliminar = false;
         }
 
 
@@ -90,7 +90,7 @@ namespace LibreriaActividades
                     this.IdPropio = datosMapeados.IdPropio;
                 }
 
-                this.SePuedeEliminar = false;
+                SePuedeEliminar = false;
             }
             catch (RuntimeBinderException)
             {

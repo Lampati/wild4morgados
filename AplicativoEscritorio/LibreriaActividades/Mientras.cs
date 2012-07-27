@@ -75,6 +75,13 @@ namespace LibreriaActividades
                 ActividadBase actSec = ActividadFactory.CrearActividad(datosMapeados.Cuerpo);
                 this.Cuerpo = actSec;
 
+                if (this.Cuerpo == null)
+                {
+                    Cuerpo = new Secuencia();
+                }
+
+                this.Cuerpo.DisplayName = "Hacer";
+
                 this.IdPropio = datosMapeados.IdPropio;
                 
             }
