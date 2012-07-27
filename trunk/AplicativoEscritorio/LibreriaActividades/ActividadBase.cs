@@ -73,6 +73,8 @@ namespace LibreriaActividades
             //idPropio = ++_contadorGlobalAct;
         }
 
+        
+
         public abstract void AsignarDatos(ActividadViewModelBase datos);
 
         protected ActivityDesigner actDesigner;
