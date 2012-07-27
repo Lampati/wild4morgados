@@ -94,6 +94,8 @@ namespace DiagramDesigner
                 BarraEstado.Modo = value;
                 ToolbarAplicacion.Modo = value;
 
+                
+
                 if (ArchCargado != null)
                 {
                     ArchCargado.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)modo;
@@ -370,15 +372,27 @@ namespace DiagramDesigner
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
+                bool continuar = true;
 
-                if (result != MessageBoxResult.Cancel)
+                if (Modo == ModoVisual.Texto)
                 {
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        IdentarTexto();
-                    }
+                    MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
 
+                    if (result != MessageBoxResult.Cancel)
+                    {
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            IdentarTexto();
+                        }
+                    }
+                    else
+                    {
+                        continuar = false;
+                    }
+                }
+
+                if (continuar)
+                {
                     ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
                     if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
@@ -459,14 +473,26 @@ namespace DiagramDesigner
 
         private void CrearTestPrueba()
         {
-            MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
-
-            if (result != MessageBoxResult.Cancel)
+            bool continuar = true;
+            if (Modo == ModoVisual.Texto)
             {
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
+
+                if (result != MessageBoxResult.Cancel)
                 {
-                    IdentarTexto();
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        IdentarTexto();
+                    }
                 }
+                else
+                {
+                    continuar = false;
+                }
+            }
+
+            if (continuar)
+            {
 
                 ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
 
@@ -495,6 +521,7 @@ namespace DiagramDesigner
 
                 }
             }
+            
         }
 
         private ObservableCollection<Variable> TransformarAVariables(List<NodoTablaSimbolos> list)
@@ -614,33 +641,36 @@ namespace DiagramDesigner
 
         void hotKeyCompilar_HotKeyPressed(HotKey obj)
         {
-            switch (obj.Key)
+            if (IsActive && ArchCargado != null)
             {
-                case Keys.F3:
-                    if (this.Modo == ModoVisual.Texto)
-                    {
-                        Compilar(this.Esquema.GarGarACompilar);
-                    }
-                    else
-                    {
-                        Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
-                    }
-                    break;
-                case Keys.F4:
-                    if (this.Modo == ModoVisual.Texto)
-                    {
-                        EjecutarConResultado(this.Esquema.GarGarACompilar);
-                    }
-                    else
-                    {
-                        EjecutarConResultado(this.Esquema.RepresentacionGraficaActual.Gargar);
-                    }
-                    break;
 
-                default:
-                    break;
+                switch (obj.Key)
+                {
+                    case Keys.F3:
+                        if (this.Modo == ModoVisual.Texto)
+                        {
+                            Compilar(this.Esquema.GarGarACompilar);
+                        }
+                        else
+                        {
+                            Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
+                        }
+                        break;
+                    case Keys.F4:
+                        if (this.Modo == ModoVisual.Texto)
+                        {
+                            EjecutarConResultado(this.Esquema.GarGarACompilar);
+                        }
+                        else
+                        {
+                            EjecutarConResultado(this.Esquema.RepresentacionGraficaActual.Gargar);
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
             }
-
         }
 
         private ResultadoCompilacion Compilar(string programa)

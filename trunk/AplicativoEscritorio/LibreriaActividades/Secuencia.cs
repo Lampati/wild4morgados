@@ -90,7 +90,7 @@ namespace LibreriaActividades
                     this.IdPropio = datosMapeados.IdPropio;
                 }
 
-                
+                this.SePuedeEliminar = false;
             }
             catch (RuntimeBinderException)
             {

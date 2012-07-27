@@ -142,7 +142,7 @@ namespace DiagramDesigner
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Error inesperado de apertura", "Error Inesperado", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error apertura", "Error de lectura de archivo. Por favor corrobore que el archivo sea un ejercicio o resolución de ProgramAr", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             } //fin si
         }
