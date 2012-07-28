@@ -32,6 +32,7 @@ namespace WebProgramAR.Sitio.Models
         [Display(Name = "Valor")]
         [Required(ErrorMessage = "Requerido")]
         public string Valor { get; set; }
+        public bool IsValorBool { get { return bool.Parse(Valor); } }
 
         [Display(Name = "Habilitada")]
         public bool Activa { get; set; }
