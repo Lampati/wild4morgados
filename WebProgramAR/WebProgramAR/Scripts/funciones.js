@@ -134,4 +134,30 @@ undefined: no darle importancia
             return false;
         });
     }
-    
+    /*VALIDACIONES EXPRESIONES REGULARES*/
+        function validateType(data,type){
+            switch(type){
+                case "mail": return regIsMail(data);break;
+                case "integer":return regIsNumber(data);break;
+                case "string":
+                default:
+                    return regIsString(data);
+                break;
+            }
+
+        }
+
+    // check is number
+        function regIsNumber(fData){
+            var reg = new RegExp("/^[0-9]$/");
+            return reg.test(fData)
+        }
+
+        function regIsString(fData){
+            var reg = new RegExp("/^[a-zA-Z]$/");
+            return reg.test(fData)
+        }
+        function regIsMail(fData){
+            var reg = new RegExp("/^[0-9a-zA-Z]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$/");
+            return reg.test(fData)
+        }

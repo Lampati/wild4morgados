@@ -30,7 +30,11 @@ namespace WebProgramAR.Entidades
             get;
             set;
         }
-    
+        public bool IsValorBool { get {
+            string value = "False";
+            bool b = bool.Parse(value);
+            return bool.TryParse(Valor,out b); 
+        } }
         public virtual int TablaId
         {
             get { return _tablaId; }
