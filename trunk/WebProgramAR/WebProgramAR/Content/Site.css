@@ -775,7 +775,7 @@ div#title
     height:auto;
     min-height:20px;
     display:inline-block;
-    width:140%;
+    width:80%;
     opacity: .70;
     filter: alpha(opacity=70%);
     border-bottom-right-radius:10px;
@@ -792,6 +792,23 @@ div#title
 .field-validation-valid
 {
     display: none;
+    background: #ec3e3e;
+    color:#fff;
+    font-size:0.8em;
+    padding-left:10px;
+    padding-right:10px;
+    margin-right:120px;
+    height:auto;
+    min-height:20px;
+    width:160px;
+    opacity: .70;
+    filter: alpha(opacity=70%);
+    border-bottom-right-radius:10px;
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+    -moz-border-radius-bottomleft:10px;
+    -webkit-border-bottom-left-radius:10px;
 }
 
 .input-validation-error

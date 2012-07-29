@@ -31,16 +31,15 @@
             $("#Usuario_LocalidadId").parent().last().css("display", "none");
         }
             if (countErrors==0)return true;else return false;
-    }
-    $("#btnGuardar").click(function () {
-        if (validForm()) {
-            $("#form0").submit();
         }
-    });
-
+        $(document).ready(function () {
+            $("#btnGuardarNuevo").live('click', function () {
+                if (validForm()) {
+                    $("#form0").submit();
+                }
+            });
+        });
 </script>
-
-   
 @using (Ajax.BeginForm("Create", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
@@ -50,7 +49,7 @@
          
         <div id="buttonSectionOptions" class="buttonSectionOptions">
             <div>
-                <input type="submit" value="Guardar" class="submit" id="btnGuardar"/>
+                <input type="submit" value="Guardar" class="submit" id="btnGuardarNuevo"/>
             </div>
             <div >
                  <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>

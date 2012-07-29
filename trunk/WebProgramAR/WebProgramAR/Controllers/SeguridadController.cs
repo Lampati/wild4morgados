@@ -109,14 +109,45 @@ namespace WebProgramAR.Controllers
         [Authorize(Roles = "administrador")]
         public ActionResult Create(ReglasSeguridad regla)
         {
+            bool error = false;
+            string errorMensaje = "";
             if (ModelState.IsValid)
             {
-                SeguridadNegocio.Alta(regla);
+                if (regla.TablaId== null || regla.TablaId.Equals("-1"))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar una tabla";
+                }
+                if (!error && (regla.ColumnaId == null || regla.ColumnaId.Equals("-1")))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar una columna";
+                }
+                if (!error && (regla.ComparadorId == null || regla.ComparadorId.Equals("-1")))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar un comparador";
+                }
+                if (!error)
+                {
+                    try
+                    {
+                        SeguridadNegocio.Alta(regla);
+                    }
+                    catch (Exception)
+                    {
+                        return Content(errorMensaje);
+                    }
+                }
+                else
+                {
+                    return Content(errorMensaje);
+                }
+
                 return Content(Boolean.TrueString);
-                
             }else
             {
-                return View();
+                return Content("Ha ocurrido un error. Verifique los datos ingresados por favor");
             }
         }
         
@@ -138,7 +169,7 @@ namespace WebProgramAR.Controllers
                 modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : -1;
                 if (c.UsuarioId.HasValue) modelo.UsuarioId = c.UsuarioId.Value;
                 //ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre : "";
-                ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.UsuarioId.HasValue.ToString() : "";
+                ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre.ToString() : "";
                 modelo.Valor = c.Valor;
 
                 modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();
@@ -157,15 +188,46 @@ namespace WebProgramAR.Controllers
         [Authorize(Roles = "administrador")]
         public ActionResult Edit(ReglasSeguridad regla)
         {
-            // TODO: Add update logic here
+            bool error = false;
+            string errorMensaje = "";
             if (ModelState.IsValid)
             {
-                SeguridadNegocio.Modificar(regla);
+                if (regla.TablaId == null || regla.TablaId.Equals("-1"))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar una tabla";
+                }
+                if (!error && (regla.ColumnaId == null || regla.ColumnaId.Equals("-1")))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar una columna";
+                }
+                if (!error && (regla.ComparadorId == null || regla.ComparadorId.Equals("-1")))
+                {
+                    error = true;
+                    errorMensaje = "Debe seleccionar un comparador";
+                }
+                if (!error)
+                {
+                    try
+                    {
+                        SeguridadNegocio.Modificar(regla);
+                    }
+                    catch (Exception)
+                    {
+                        return Content(errorMensaje);
+                    }
+                }
+                else
+                {
+                    return Content(errorMensaje);
+                }
+
                 return Content(Boolean.TrueString);
             }
             else
             {
-                return View();
+                return Content("Ha ocurrido un error. Verifique los datos ingresados por favor");
             }
             
         }

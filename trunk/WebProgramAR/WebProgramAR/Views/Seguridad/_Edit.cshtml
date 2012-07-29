@@ -16,6 +16,10 @@
         $("input:radio[name=groupUsuario]").change(function () {
             checkedRadio();
         });
+        $("#ValorBool").focusout(function () { $("#Valor").val($(this).val()) });
+        $("#ValorInt").focusout(function () { $("#Valor").val($(this).val()) });
+        $("#ValorText").focusout(function () { $("#Valor").val($(this).val()) });
+        $("#ValorDate").focusout(function () { $("#Valor").val($(this).val()) });
     });
     function checkedRadio() {
             switch ($("input:radio[name=groupUsuario]").filter(":checked").val()) {
@@ -54,19 +58,22 @@
     reSizeWindow();
     function reInitColumnas() {
         $("#ColumnaId").val("-1");
-        $("#SelectColumnaId").val(" ");
-        $("#SelectColumnaId").attr("rel", " ");
+        $("#SelectColumnaId").val("");
+        $("#SelectColumnaId").attr("rel", "");
         reInitComparadores();
+        $(".error").hide();
     }
     function reInitValor() {
-        $("#Valor").val(" ");
-        $("#UsuarioId").val(" ");
+        $("#Valor").val("");
+        $("#UsuarioId").val("");
+        $(".error").hide();
     }
     function reInitComparadores() {
-        $("#SelectComparadorId").val(" ");
-        $("#SelectComparadorId").attr("rel", " ");
+        $("#SelectComparadorId").val("");
+        $("#SelectComparadorId").attr("rel", "");
         $("#ComparadorId").val("-1");
         reInitValor();
+        $(".error").hide();
     }
     function reSizeWindow() {
         var size = $(".groupElement").filter(":visible").size();
@@ -92,6 +99,9 @@
             $("#dialog").css("overflowY", "hidden");
         }
     }
+
+    
+
     function OnChangeDo(div) {
         if ($(div).attr("rel") != "-1") {
             if (div.attr('id') == "SelectTablaId") {
@@ -190,7 +200,6 @@
     }
     function showValorDivType() {
         var tipo = $("#tipoColumnaId").val();
-        console.log(tipo);
         switch (tipo) {
             case "BOOL":
                 $("#valorInteger").hide();
@@ -312,33 +321,34 @@
     </div>
 </div>
 <div  id="valorDiv" class="groupElement">
-    <input type="hidden" name="tipoColumnaId" id="tipoColumnaId" />
+    @Html.HiddenFor(model => Model.Tipo, new {@id = "tipoColumnaId",@name="tipoColumnaId"})
     <div class="editor-label">
         @Html.LabelFor(m => m.Valor)
+        @Html.HiddenFor(model => Model.Valor)
     </div>
     <div id="valorBool" style="display:none;">
         <div class="editor-field">
-        @Html.EditorFor(m => m.IsValorBool, new { @id = "valor" })
+            @Html.EditorFor(m => m.IsValorBool, new { @id = "ValorBool" })
         </div>
     </div>
     <div id="valorInteger" style="display:none;">
         <div class="editor-field">
-            @Html.TextBoxFor(m => m.Valor, new { @class = "input-integer-validation", @size = "20" })
+            @Html.TextBoxFor(m => m.Valor, new { @class = "input-integer-validation", @size = "20" , @id = "ValorInt" })
             @Html.ValidationMessageFor(m => m.Valor)
         </div>
     </div>
     <div id="valorText" style="display:none;">
         <div class="editor-field">
-            @Html.TextBoxFor(m => m.Valor, new { @class = "input-string-validation", @size = "20" })
+            @Html.TextBoxFor(m => m.Valor, new { @class = "input-string-validation", @size = "20", @id = "ValorText" })
             @Html.ValidationMessageFor(m => m.Valor)
         </div>
     </div>
     <div id="valorDate" style="display:none;">
         <div class="editor-field">
-            @Html.TextBoxFor(m => m.Valor, new { @readonly = "readonly", @id = "valor", @class = "date-picker-needed" })
+            @Html.TextBoxFor(m => m.Valor, new { @readonly = "readonly", @id = "ValorDate", @class = "date-picker-needed" })
             @Html.ValidationMessageFor(m => m.Valor)
             <script type="text/javascript">
-                $("#valor").datepicker({ minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
+                $("#ValorDate").datepicker({ minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
             </script>
         </div>
     </div>
@@ -379,7 +389,28 @@
         @Html.EditorFor(m => m.Activa)
     </div>
 </div>
-
+<script language="javascript">
+    function getColumnsByAjax() {
+        var tabla = $("#selectBox_SelectTablaId").attr("rel");
+        $.ajax({
+            url: '@Url.Action("GetColumnasByTabla")',
+            data: " { tablaId: '" + tabla + "'}",
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                var columnas = (typeof data) == 'string' ? eval('(' + data + ')') : data;
+                for (var i = 0; i < columnas.length; i++) {
+                    var val = columnas[i].Id;
+                    var text = columnas[i].Value;
+                    var tipo = columnas[i].TipoDesc;
+                    $("#SelectColumnaId option[value='"+val+"']").attr("rel", tipo);
+                }
+            }
+        });
+    }
+    getColumnsByAjax();
+</script>
 
 
 
