@@ -92,7 +92,7 @@ $(document).ready(function () {
     }).mouseout(function () {
         nActiveDiv();
     });
-
+    
 });
 
 function activeDiv() {
