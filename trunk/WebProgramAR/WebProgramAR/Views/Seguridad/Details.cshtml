@@ -29,7 +29,7 @@
 
     <div class="fila">
         <div class="display-label-delete">TipoUsuario:</div>
-        <div class="display-field-delete">@(Model.TipoUsuario != null ? Model.TipoUsuario.Descripcion : "Todos")</div>
+        <div class="display-field-delete">@((Model.TipoUsuario != null) ? Model.TipoUsuario.Descripcion : "Todos")</div>
     </div>
 
     <div class="fila">
