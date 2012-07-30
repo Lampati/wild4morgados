@@ -239,7 +239,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Figura" Width="100" >
+                    <GridViewColumn Header="Figura" Width="125" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="LightGray" Margin="-12,3,0,0" BorderThickness="0,0,0,1"  >
