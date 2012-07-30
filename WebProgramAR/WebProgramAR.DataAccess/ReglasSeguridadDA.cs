@@ -37,7 +37,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipoes").Include("Usuario").Single(u => u.ReglaId == id);
+                return db.ReglasSeguridads.Include("Tabla").Include("Columna").Include("Comparador").Include("Columna.Tipo").Include("Comparador.Tipoes").Include("Usuario").Include("TipoUsuario").Single(u => u.ReglaId == id);
             }
         }
 

@@ -33,12 +33,12 @@
 
         <div class="fila">
             <div class="display-label-delete">Usuario:</div>
-            <div class="display-field-delete">@(Model.Usuario != null ? Model.Usuario.UsuarioNombre : "")</div>
+            <div class="display-field-delete">@(Model.Usuario != null ? Model.Usuario.UsuarioNombre : "Todos")</div>
         </div>
 
         <div class="fila">
             <div class="display-label-delete">TipoUsuario:</div>
-            <div class="display-field-delete">@(Model.TipoUsuario != null ? Model.TipoUsuario.Descripcion : "")</div>
+            <div class="display-field-delete">@((Model.TipoUsuario != null) ? Model.TipoUsuario.Descripcion : "Todos")</div>
         </div>
 
         <div class="fila">

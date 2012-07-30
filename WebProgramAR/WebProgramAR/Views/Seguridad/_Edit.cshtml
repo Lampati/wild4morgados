@@ -12,14 +12,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".input-integer-validation").limitkeypress({ rexp: /^[+]?\d*$/ });
-        $(".input-string-validation").limitkeypress({ rexp: /^[A-Za-z]*$/ });
+        $(".input-string-validation").limitkeypress({ rexp: /^[A-Za-z _-]*$/ });
         $("input:radio[name=groupUsuario]").change(function () {
             checkedRadio();
         });
-        $("#ValorBool").focusout(function () { $("#Valor").val($(this).val()) });
+        $("#IsValorBool").click(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); });
         $("#ValorInt").focusout(function () { $("#Valor").val($(this).val()) });
         $("#ValorText").focusout(function () { $("#Valor").val($(this).val()) });
-        $("#ValorDate").focusout(function () { $("#Valor").val($(this).val()) });
+        $("#ValorDate").change(function () { $("#Valor").val($(this).val()) });
     });
     function checkedRadio() {
             switch ($("input:radio[name=groupUsuario]").filter(":checked").val()) {
@@ -348,7 +348,7 @@
             @Html.TextBoxFor(m => m.Valor, new { @readonly = "readonly", @id = "ValorDate", @class = "date-picker-needed" })
             @Html.ValidationMessageFor(m => m.Valor)
             <script type="text/javascript">
-                $("#ValorDate").datepicker({ minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
+                $("#ValorDate").datepicker({ minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true });
             </script>
         </div>
     </div>
