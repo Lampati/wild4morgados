@@ -358,43 +358,7 @@
             this.tab.tc.SelectedItem = tabElegido;
         }
 
-        //void EditableTabHeaderControl_PropertiesClickEvento(object sender, HeaderPropertiesClickedEventArgs e)
-        //{
-        //    WorkAreaViewModel workAreaVM = this.DataContext as WorkAreaViewModel;
-        //    Tab tabElegido = workAreaVM.ObtenerTab(e.NombreContexto);
-
-        //    if (tabElegido.Tipo == TipoTab.TabItemFuncion
-        //        || tabElegido.Tipo == TipoTab.TabItemProcedimiento
-        //        || tabElegido.Tipo == TipoTab.TabItemSalida
-        //        || tabElegido.Tipo == TipoTab.TabItemPrincipal)
-        //    {
-        //        this.tab.tc.SelectedItem = tabElegido;
-
-        //        PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
-        //        if (tabElegido.Tipo == TipoTab.TabItemFuncion)
-        //        {
-        //            propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
-        //        }
-        //        else
-        //        {
-        //            propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
-        //        }
-
-        //        propiedades.Retorno = tabElegido.Retorno;
-        //        propiedades.TipoRetorno = tabElegido.TipoRetorno;
-        //        propiedades.Parametros = tabElegido.Parametros;
-        //        propiedades.EsReadOnly = tabElegido.Tipo == TipoTab.TabItemPrincipal || tabElegido.Tipo == TipoTab.TabItemSalida;
-        //        propiedades.EsCreacion = false;
-        //        propiedades.ShowDialog();
-
-        //        if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
-        //        {
-        //            tabElegido.Retorno = propiedades.Retorno;
-        //            tabElegido.TipoRetorno = propiedades.TipoRetorno;
-        //            tabElegido.Parametros = propiedades.Parametros;
-        //        }
-        //    }
-        //}
+      
 
         internal void PonerFocoEnActividad(string procedimiento, LibreriaActividades.ActividadBase actividad)
         {

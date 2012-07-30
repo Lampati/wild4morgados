@@ -84,16 +84,35 @@ namespace ModoGrafico
             if (programa != null)
             {
                 this.WorkArea.CargarPrograma(programa);
+
+
             }
         }
 
         public ProgramaViewModel ObtenerProgramaEnModoGrafico()
         {
+            CambiarFocoActualParaTomarCambios();
+
+          
+
             ProgramaViewModel programa = this.WorkArea.ObtenerProgramaDiagramado();
             programa.OrdenarProcedimientos();
             programa.CalcularLineasYAsignarContextoAHijos(1, "PROGRAMA");
 
             return programa;
+        }
+
+        private void CambiarFocoActualParaTomarCambios()
+        {
+            // Gets the element with keyboard focus.
+            UIElement elementWithFocus = Keyboard.FocusedElement as UIElement;
+
+            // Change keyboard focus.
+            if (elementWithFocus != null)
+            {
+                elementWithFocus.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+
+            }
         }
 
         void WorkArea_CambioTabEvent(object sender, EventArgsClasses.TipoTabCambiadoEventArgs e)
@@ -120,26 +139,7 @@ namespace ModoGrafico
 
         private void ActualizarToolbox(object sender, TipoTab tipoDeTab)
         {
-            //ModoGrafico.Tabs.EditableTabHeaderControl t = sender as ModoGrafico.Tabs.EditableTabHeaderControl;
-            //if (Object.Equals(t, null))
-            //    return;
-
-            //Toolbox.Categories[0].Tools.Clear();
-            //if (t.Content.ToString().Trim() == "VARIABLES")
-            //{
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
-            //}
-            //else if (t.Content.ToString().Trim() == "CONSTANTES")
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionConstante)));
-            //else
-            //{
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(DeclaracionVariable)));
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Si)));
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mostrar)));
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Mientras)));
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(Asignacion)));
-            //    Toolbox.Categories[0].Add(new ToolboxItemWrapper(typeof(LlamarProcedimiento)));
-            //}
+           
 
             Toolbox.Categories[0].Tools.Clear();
             if (tipoDeTab == TipoTab.TabItemDeclaracionVariable)

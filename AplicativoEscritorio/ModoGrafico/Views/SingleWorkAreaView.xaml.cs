@@ -119,20 +119,7 @@ using System.ComponentModel;
             }
         }
 
-        //private void ComboBox_OnGotFocus(object sender, RoutedEventArgs e)
-        //{
-        //    ComboBox theComboBox = sender as ComboBox;
-
-        //    if (theComboBox != null)
-        //    {
-        //        MultiBindingExpression binding = BindingOperations.GetMultiBindingExpression(theComboBox, ComboBox.ItemsSourceProperty);
-        //        if (binding != null)
-        //        {
-        //            binding.UpdateTarget();
-        //        }
-        //    }
-        //}
-
+    
 
         void EditableTabHeaderControl_ClickEvento(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

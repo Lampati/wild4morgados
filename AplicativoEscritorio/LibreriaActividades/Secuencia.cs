@@ -97,5 +97,17 @@ namespace LibreriaActividades
                 throw;
             }
         }
+
+        public override void ReasignarId()
+        {
+            ActividadViewModelBase datos = Datos;
+            datos.ReasignarId();
+            IdPropio = datos.IdPropio;
+
+            foreach (ActividadBase item in Activities)
+            {
+                item.ReasignarId();
+            }       
+        }
     }
 }

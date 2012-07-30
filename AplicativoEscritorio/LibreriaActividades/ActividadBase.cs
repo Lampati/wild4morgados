@@ -73,7 +73,12 @@ namespace LibreriaActividades
             //idPropio = ++_contadorGlobalAct;
         }
 
-        
+        public virtual void ReasignarId()
+        {
+            ActividadViewModelBase datos = Datos;
+            datos.ReasignarId();
+            IdPropio = datos.IdPropio;
+        }
 
         public abstract void AsignarDatos(ActividadViewModelBase datos);
 

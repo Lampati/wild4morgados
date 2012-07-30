@@ -77,6 +77,27 @@ namespace LibreriaActividades
             };
         }
 
+        public override void ReasignarId()
+        {
+            ActividadViewModelBase datos = Datos;
+            datos.ReasignarId();
+            IdPropio = datos.IdPropio;
+
+            Secuencia secVerdadero = ((Secuencia)this.BranchVerdadero);
+            if (secVerdadero != null)
+            {
+                secVerdadero.ReasignarId();
+            }
+
+            Secuencia secFalsa = ((Secuencia)this.BranchFalso);
+            if (secFalsa != null)
+            {
+                secFalsa.ReasignarId();
+            }
+
+            
+        }
+
 
         public override ActividadViewModelBase Datos
         {

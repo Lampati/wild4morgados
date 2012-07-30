@@ -21,24 +21,44 @@ namespace LibreriaActividades
         {
             InitializeComponent();
             base.PreviewDragOver += new DragEventHandler(SecuenciaDesigner_PreviewDragOver);
+            
         }
 
         void SecuenciaDesigner_PreviewDragOver(object sender, DragEventArgs e)
         {
-            object wfAct = e.Data.GetData("WorkflowItemTypeNameFormat") as object;
-            if (Object.Equals(wfAct, null))
-                return;
-
-            string actividad = e.Data.GetData("WorkflowItemTypeNameFormat").ToString();
-            if ((bool)this.ModelItem.Properties["AdmiteDelaraciones"].ComputedValue)
+            string nombre = e.Data.GetFormats().SingleOrDefault(x => x.StartsWith("ModelItemFormat"));
+            if (string.IsNullOrEmpty(nombre))
             {
-                if (!actividad.Contains("DeclaracionVariable") && !actividad.Contains("DeclaracionConstante") && !actividad.Contains("DeclaracionArreglo"))
-                    e.Effects = DragDropEffects.None;
+
+                //Es una actividad que arrastro
+                object wfAct = e.Data.GetData("WorkflowItemTypeNameFormat") as object;
+                if (Object.Equals(wfAct, null))
+                    return;
+
+                string actividad = e.Data.GetData("WorkflowItemTypeNameFormat").ToString();
+                if ((bool)this.ModelItem.Properties["AdmiteDelaraciones"].ComputedValue)
+                {
+                    if (!actividad.Contains("DeclaracionVariable") && !actividad.Contains("DeclaracionConstante") && !actividad.Contains("DeclaracionArreglo"))
+                        e.Effects = DragDropEffects.None;
+                }
+                else
+                {
+                    if (actividad.Contains("DeclaracionVariable") || actividad.Contains("DeclaracionConstante") || actividad.Contains("DeclaracionArreglo"))
+                        e.Effects = DragDropEffects.None;
+                }
+                
             }
             else
             {
-                if (actividad.Contains("DeclaracionVariable") || actividad.Contains("DeclaracionConstante") || actividad.Contains("DeclaracionArreglo"))
+
+                System.Activities.Presentation.Model.ModelItem resultado = e.Data.GetData(nombre) as System.Activities.Presentation.Model.ModelItem;
+
+                ActividadBase act = resultado.GetCurrentValue() as ActividadBase;
+
+                if (act.GetType() == typeof(Secuencia))
+                {
                     e.Effects = DragDropEffects.None;
+                }
             }
         }
     }

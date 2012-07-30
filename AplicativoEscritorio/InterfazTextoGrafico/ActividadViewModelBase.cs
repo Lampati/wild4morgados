@@ -126,6 +126,10 @@ namespace InterfazTextoGrafico
             _contadorGlobalAct = 0;
         }
 
+        public void ReasignarId()
+        {
+            idPropio = ++_contadorGlobalAct;
+        }
      
 
         public abstract void ToXML(XMLCreator xml);

@@ -90,5 +90,19 @@ namespace LibreriaActividades
                 throw;
             }
         }
+
+        public override void ReasignarId()
+        {
+            ActividadViewModelBase datos = Datos;
+            datos.ReasignarId();
+            IdPropio = datos.IdPropio;
+
+            Secuencia secCuerpo = ((Secuencia)this.Cuerpo);
+            if (secCuerpo != null)
+            {
+                secCuerpo.ReasignarId();
+            }
+
+        }
     }
 }
