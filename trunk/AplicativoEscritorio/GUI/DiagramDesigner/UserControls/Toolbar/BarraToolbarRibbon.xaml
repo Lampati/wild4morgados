@@ -42,7 +42,6 @@
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Paste}" 
                         LargeImageSource="/Resources/Images/PasteBig.png" 
-                        CommandManager.Executed="RibbonButtonPaste_Executed"  
                         Label="Pegar" ToolTipDescription="{StaticResource TooltipPegar}" 
                         ToolTipTitle="Pegar" />
                 
@@ -51,7 +50,6 @@
                         Command="{x:Static ApplicationCommands.Cut}"
                         SmallImageSource="/Resources/Images/Cut.png"
                         Label="Cortar" ToolTipTitle="Cortar" 
-                        CommandManager.Executed="RibbonButtonCortar_Executed"    
                         ToolTipDescription="{StaticResource TooltipCortar}" />
                     
                 
@@ -60,7 +58,6 @@
                         Command="{x:Static ApplicationCommands.Copy}"
                         SmallImageSource="/Resources/Images/Copy.png"                                     
                         Label="Copiar" ToolTipTitle="Copiar" 
-                        CommandManager.Executed="RibbonButtonCopiar_Executed"   
                         ToolTipDescription="{StaticResource TooltipCopiar}"/>                                   
 
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
@@ -68,7 +65,6 @@
                         Command="{x:Static ApplicationCommands.Delete}"
                         SmallImageSource="/Resources/Images/Delete.png"
                         Label="Eliminar" ToolTipTitle="Eliminar" 
-                        CommandManager.Executed="RibbonButtonDelete_Executed"   
                         ToolTipDescription="{StaticResource TooltipEliminar}"/>
             </ribbon:RibbonGroup>
 

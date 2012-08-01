@@ -21,5 +21,29 @@ namespace LibreriaActividades
         {
             InitializeComponent();
         }
+
+        protected override void commBindApplicationCopy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            SiDesigner act = sender as SiDesigner;
+
+
+            e.CanExecute = System.Activities.Presentation.View.DesignerView.CopyCommand.CanExecute(null) && act.IsFocused;
+
+        }
+
+        protected override void commBindApplicationCut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            SiDesigner act = sender as SiDesigner;
+
+            e.CanExecute = System.Activities.Presentation.View.DesignerView.CopyCommand.CanExecute(null) && act.IsFocused;
+
+        }
+
+        protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            SiDesigner act = sender as SiDesigner;
+            e.CanExecute = act.IsFocused;
+
+        }
     }
 }

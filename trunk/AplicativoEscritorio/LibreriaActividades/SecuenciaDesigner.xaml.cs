@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Activities.Presentation.Model;
 
 namespace LibreriaActividades
 {
@@ -36,7 +37,7 @@ namespace LibreriaActividades
                     return;
 
                 string actividad = e.Data.GetData("WorkflowItemTypeNameFormat").ToString();
-                if ((bool)this.ModelItem.Properties["AdmiteDelaraciones"].ComputedValue)
+                if ((bool)this.ModelItem.Properties["AdmiteDeclaraciones"].ComputedValue)
                 {
                     if (!actividad.Contains("DeclaracionVariable") && !actividad.Contains("DeclaracionConstante") && !actividad.Contains("DeclaracionArreglo"))
                         e.Effects = DragDropEffects.None;
@@ -61,5 +62,74 @@ namespace LibreriaActividades
                 }
             }
         }
+
+        protected override void commBindApplicationPaste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            string textoCopiado = Clipboard.GetText();
+
+
+            //var padreTemplated = ((UserControl)e.OriginalSource).TemplatedParent;
+            //var padre = ((UserControl)e.OriginalSource).Parent;
+
+            bool esDeclaracion = textoCopiado.Contains("<l:DeclaracionVariable)")
+                                || textoCopiado.Contains("<l:DeclaracionConstante)")
+                                || textoCopiado.Contains("<l:DeclaracionArreglo)");
+
+            ModelProperty prop = this.ModelItem.Properties["AdmiteDeclaraciones"];
+
+            if (prop != null)
+            {
+                bool admiteDeclaraciones = Convert.ToBoolean(prop.Value.ToString());
+
+                e.CanExecute = (admiteDeclaraciones && esDeclaracion || !admiteDeclaraciones && !esDeclaracion) && System.Activities.Presentation.View.DesignerView.PasteCommand.CanExecute(null);
+            }
+            else
+            {
+                e.CanExecute =  System.Activities.Presentation.View.DesignerView.PasteCommand.CanExecute(null);
+            }
+          
+
+        }
+
+        protected override void commBindApplicationCopy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+        }
+
+        protected override void commBindApplicationCut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+        }
+
+        protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+        }
+
+        //protected override void commBindApplicationPaste_Executed(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    string textoCopiado = Clipboard.GetText();
+
+
+        //    //var padreTemplated = ((UserControl)e.OriginalSource).TemplatedParent;
+        //    //var padre = ((UserControl)e.OriginalSource).Parent;
+
+        //    bool esDeclaracion = textoCopiado.Contains("<l:DeclaracionVariable)")
+        //                        || textoCopiado.Contains("<l:DeclaracionConstante)")
+        //                        || textoCopiado.Contains("<l:DeclaracionArreglo)");
+
+        //    ModelProperty prop = this.ModelItem.Properties["AdmiteDeclaraciones"];
+
+        //    if (prop != null)
+        //    {
+        //        bool admiteDeclaraciones = Convert.ToBoolean(prop.Value.ToString());
+
+        //        e.Handled = (admiteDeclaraciones && esDeclaracion || !admiteDeclaraciones && !esDeclaracion) && System.Activities.Presentation.View.DesignerView.PasteCommand.CanExecute(null);
+        //    }
+        //    else
+        //    {
+        //        e.Handled = System.Activities.Presentation.View.DesignerView.PasteCommand.CanExecute(null);
+        //    }
+        //}
     }
 }

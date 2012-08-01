@@ -20,8 +20,6 @@ using ModoGrafico.Enums;
     using ModoGrafico.Helpers;
 using ModoGrafico.Interfaces;
     using InterfazTextoGrafico.Enums;
-    using System.Activities.Presentation.Services;
-    using System.Activities.Presentation.Model;
 
     public abstract class Tab : BaseViewModel, IPropiedadesContexto
     {
@@ -152,12 +150,12 @@ using ModoGrafico.Interfaces;
                 if (Object.Equals(wd, null))
                 {
                     wd = new WorkflowDesigner();
-                    wd.ModelChanged += new EventHandler(wd_ModelChanged);                  
+                    wd.ModelChanged += new EventHandler(wd_ModelChanged);
                     
                     
                     if (this is TabItemPrincipal)
                     {
-                        //init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
+                        //init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDeclaraciones = false };
                         //init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
 
                         if (actividadViewModel != null)
@@ -166,34 +164,34 @@ using ModoGrafico.Interfaces;
 
                             
 
-                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false };
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDeclaraciones = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
 
                             SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDelaraciones = false };
+                            SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDeclaraciones = false };
                             SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA" });
                         }
                     }
                     else if (this is TabItemSalida)
                     {
-                        //init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDelaraciones = false };
+                        //init = new Secuencia() { DisplayName = "Secuencia Principal", AdmiteDeclaraciones = false };
                         //init.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA", DisplayName = "Fin Ejecución", SePuedeEliminar = false });
 
                         if (actividadViewModel != null)
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false, SePuedeEliminar = false };
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDeclaraciones = false, SePuedeEliminar = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
                             
                             SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDelaraciones = false, SePuedeEliminar = false };
+                            SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDeclaraciones = false, SePuedeEliminar = false };
                         }
                     }
                     else if (this is TabItemProcedimiento || this is TabItemFuncion)
@@ -202,14 +200,14 @@ using ModoGrafico.Interfaces;
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDelaraciones = false, SePuedeEliminar = false };
+                            Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDeclaraciones = false, SePuedeEliminar = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
 
                             SecuenciaInicialProcedimiento = aux;
                         }
                         else
                         {
-                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = this.header, AdmiteDelaraciones = false, SePuedeEliminar = false };
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = this.header, AdmiteDeclaraciones = false, SePuedeEliminar = false };
                         }
                     }
                     else if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable)
@@ -218,7 +216,7 @@ using ModoGrafico.Interfaces;
                         {
                             SecuenciaViewModel secViewModel = actividadViewModel as SecuenciaViewModel;
 
-                            Secuencia aux = new Secuencia() { DisplayName = "DECLARACIONES " + this.Header, AdmiteDelaraciones = true };
+                            Secuencia aux = new Secuencia() { DisplayName = "DECLARACIONES " + this.Header, AdmiteDeclaraciones = true };
                             aux.AsignarDatos(secViewModel);
 
                             SecuenciaInicialProcedimiento = aux;
@@ -233,7 +231,7 @@ using ModoGrafico.Interfaces;
                                 admiteDeclaraciones = true;
                             }
 
-                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = display, AdmiteDelaraciones = admiteDeclaraciones };
+                            SecuenciaInicialProcedimiento = new Secuencia() { DisplayName = display, AdmiteDeclaraciones = admiteDeclaraciones };
                         }
                     }
 
@@ -249,19 +247,11 @@ using ModoGrafico.Interfaces;
                                       
                                       wd.Load(SecuenciaInicialProcedimiento);
                                       wd.Flush();
-
-                                      ModelService ms = wd.Context.Services.GetService<ModelService>();
-                                      if (ms != null)
-                                      {
-                                          ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
-                                      }
-
                                       this.ReconstruirContextMenu(wd);
                                       if (((Grid)wd.View).Children.Count > 0)
                                       {
                                           System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
                                           dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
-                                          
                                       }
                                   }
                               ));
@@ -270,13 +260,12 @@ using ModoGrafico.Interfaces;
                     thread.Start();                    
                 }
 
-             
+                
                 
                 return wd.View;
             }
         }
 
-      
       
 
         public UIElement WFDeclaraciones
@@ -291,13 +280,11 @@ using ModoGrafico.Interfaces;
                     wdDecl = new WorkflowDesigner();
                     wdDecl.ModelChanged += new EventHandler(wd_ModelChanged);
 
-                   
-
                     if (actividadViewModel != null)
                     {
                         ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
 
-                        Secuencia aux = new Secuencia() { DisplayName = "Variables Locales", AdmiteDelaraciones = true, SePuedeEliminar = false };
+                        Secuencia aux = new Secuencia() { DisplayName = "Variables Locales", AdmiteDeclaraciones = true, SePuedeEliminar = false };
                         if (!Object.Equals(procViewModel.VariablesLocales, null))
                             aux.AsignarDatos(procViewModel.VariablesLocales);
 
@@ -305,7 +292,7 @@ using ModoGrafico.Interfaces;
                     }
                     else
                     {
-                        SecuenciaInicialDeclaraciones = new Secuencia() { AdmiteDelaraciones = true, DisplayName = "Variables Locales", SePuedeEliminar = false };
+                        SecuenciaInicialDeclaraciones = new Secuencia() { AdmiteDeclaraciones = true, DisplayName = "Variables Locales", SePuedeEliminar = false };
                     }
 
                     System.Threading.Thread thread = new System.Threading.Thread(
@@ -320,13 +307,6 @@ using ModoGrafico.Interfaces;
                                       
                                       wdDecl.Load(SecuenciaInicialDeclaraciones);
                                       wdDecl.Flush();
-
-                                      ModelService ms = wdDecl.Context.Services.GetService<ModelService>();
-                                      if (ms != null)
-                                      {
-                                          ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
-                                      }
-
                                       this.ReconstruirContextMenu(wdDecl);                                      
                                       if (((Grid)wdDecl.View).Children.Count > 0)
                                       {
@@ -340,61 +320,17 @@ using ModoGrafico.Interfaces;
                      thread.Start();    
                 }
 
-               
+                
 
                 return wdDecl.View;
             }
         }
 
-        private List<long> listaIdRemovidos = new List<long>();
-
-        void wdModel_ModelChanged(object sender, ModelChangedEventArgs e)
-        {
-            List<ModelItem> listaAgregados = new List<ModelItem>();
-            if (e.ItemsAdded != null)
-            {
-                listaAgregados.AddRange(e.ItemsAdded);
-            }
-
-            List<ModelItem> listaRemovidos = new List<ModelItem>();
-            if (e.ItemsRemoved != null)
-            {
-                listaRemovidos.AddRange(e.ItemsRemoved);
-            }
-
-            if (listaAgregados.Count > 0)
-            {
-                foreach (var item in listaAgregados)
-                {
-                    ActividadBase actividad = item.GetCurrentValue() as ActividadBase;
-
-                    //Si la actividad tiene 0 como id, significa que es nueva
-                    //Si la actividad esta contenida en esa lista de removidos es pq o lo estoy moviendo, o lo corte
-                    if (actividad.IdPropio > 0 && !listaIdRemovidos.Contains(actividad.IdPropio))
-                    {
-                        actividad.ReasignarId();
-                    }
-                }
-            }
-
-            listaIdRemovidos.Clear();
-
-            if (listaRemovidos.Count > 0)
-            {
-                foreach (var item in listaRemovidos)
-                {
-                    ActividadBase actividad = item.GetCurrentValue() as ActividadBase;
-                    listaIdRemovidos.Add(actividad.IdPropio);
-                }
-            }
-
-        }
-
         void wd_ModelChanged(object sender, EventArgs e)
         {
             WorkflowChangedEventFire(this, new WorkflowChangedEventArgs());
-        }
 
+        }
 
         private void WorkflowChangedEventFire(Tab tab, WorkflowChangedEventArgs workflowChangedEventArgs)
         {
@@ -432,8 +368,6 @@ using ModoGrafico.Interfaces;
                     pegar = (MenuItem)wd.ContextMenu.Items[i];
                 }
             }
-
-            
 
             wd.ContextMenu.Items.Clear();
 

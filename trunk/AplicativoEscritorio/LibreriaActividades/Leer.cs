@@ -15,6 +15,11 @@ namespace LibreriaActividades
     {
         public string Parametro { get; set; }
 
+        public Leer()
+        {
+            SePuedeEliminar = true;
+        }
+
         public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.Parametro))

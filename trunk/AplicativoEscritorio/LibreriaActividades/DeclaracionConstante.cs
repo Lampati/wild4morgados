@@ -19,6 +19,12 @@ namespace LibreriaActividades
         public eTipoVariable Tipo { get; set; }
         public string Valor { get; set; }
 
+        public DeclaracionConstante()
+        {
+
+            SePuedeEliminar = true; 
+        }
+
         public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.NombreConstante))
