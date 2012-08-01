@@ -21,7 +21,7 @@ namespace LibreriaActividades
         [Browsable(false)]
         public Collection<Activity> Activities { get; set; }
 
-        public bool AdmiteDelaraciones
+        public bool AdmiteDeclaraciones
         {
             get { return this.admiteDeclaraciones; }
             set { this.admiteDeclaraciones = value; }

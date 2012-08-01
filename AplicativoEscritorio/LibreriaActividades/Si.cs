@@ -64,6 +64,7 @@ namespace LibreriaActividades
             return new Si()
             {
                 DisplayName = "Si",
+                SePuedeEliminar = true,
                 BranchVerdadero = new Secuencia()
                 {
                     SePuedeEliminar = false,

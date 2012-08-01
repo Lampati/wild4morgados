@@ -20,6 +20,11 @@ namespace LibreriaActividades
         //public string Tamano { get; set; }
         //public eTipoVector TipoVector { get; set; }
 
+        public DeclaracionVariable()
+        {
+            SePuedeEliminar = true;
+        }
+
         public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.NombreVariable))

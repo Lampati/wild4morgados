@@ -40,11 +40,13 @@ namespace LibreriaActividades
             return new Mientras()
             {
                 DisplayName = "Mientras",
+                SePuedeEliminar = true,
                 Cuerpo = new Secuencia()
                 {
                     DisplayName = "Hacer",
                     SePuedeEliminar = false
                 }
+                
             };
         }
 

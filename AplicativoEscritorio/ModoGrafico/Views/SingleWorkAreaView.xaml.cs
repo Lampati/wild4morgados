@@ -129,45 +129,45 @@ using System.ComponentModel;
 
         }
 
-        private void CommandBinding_PreviewCanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
-        {
-            //e.CanExecute = false;
-            //e.Handled = true; 
-            ActivityDesignerBase source = e.OriginalSource as ActivityDesignerBase;
+        //private void CommandBinding_PreviewCanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        //{
+        //    //e.CanExecute = false;
+        //    //e.Handled = true; 
+        //    ActivityDesignerBase source = e.OriginalSource as ActivityDesignerBase;
             
 
-            if (source != null)
-            {
-                bool esModificable = Convert.ToBoolean(source.ModelItem.Properties["SePuedeEliminar"].Value.ToString());
-                e.CanExecute = esModificable;
-            }
+        //    if (source != null)
+        //    {
+        //        bool esModificable = Convert.ToBoolean(source.ModelItem.Properties["SePuedeEliminar"].Value.ToString());
+        //        e.CanExecute = esModificable;
+        //    }
 
-        }
+        //}
 
-        private void CommandBindingPaste_PreviewCanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
-        {
+        //private void CommandBindingPaste_PreviewCanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        //{
 
-            Type tipo = e.OriginalSource.GetType();
+        //    Type tipo = e.OriginalSource.GetType();
             
-            //lo ideal seria hacer esto pero no puedo pq es privada la clase
-            //e.CanExecute = tipo == typeof(System.Activities.Core.Presentation.VerticalConnector) || tipo == typeof(TextBox);
+        //    //lo ideal seria hacer esto pero no puedo pq es privada la clase
+        //    //e.CanExecute = tipo == typeof(System.Activities.Core.Presentation.VerticalConnector) || tipo == typeof(TextBox);
 
-            string textoCopiado = Clipboard.GetText();
+        //    string textoCopiado = Clipboard.GetText();
 
-            bool esActividad = textoCopiado.Contains("xmlns:l=\"clr-namespace:LibreriaActividades;assembly=LibreriaActividades");
+        //    bool esActividad = textoCopiado.Contains("xmlns:l=\"clr-namespace:LibreriaActividades;assembly=LibreriaActividades");
 
-            //var padreTemplated = ((UserControl)e.OriginalSource).TemplatedParent;
-            //var padre = ((UserControl)e.OriginalSource).Parent;
+        //    //var padreTemplated = ((UserControl)e.OriginalSource).TemplatedParent;
+        //    //var padre = ((UserControl)e.OriginalSource).Parent;
 
-            bool esDeclaracion = textoCopiado.Contains("<l:DeclaracionVariable)")
-                                || textoCopiado.Contains("<l:DeclaracionConstante)")
-                                || textoCopiado.Contains("<l:DeclaracionArreglo)");
+        //    bool esDeclaracion = textoCopiado.Contains("<l:DeclaracionVariable)")
+        //                        || textoCopiado.Contains("<l:DeclaracionConstante)")
+        //                        || textoCopiado.Contains("<l:DeclaracionArreglo)");
 
 
             
 
-            e.CanExecute = tipo.FullName.Equals("System.Activities.Core.Presentation.VerticalConnector") || tipo == typeof(TextBox);
-        }
+        //    e.CanExecute = tipo.FullName.Equals("System.Activities.Core.Presentation.VerticalConnector") || tipo == typeof(TextBox);
+        //}
 
       
 

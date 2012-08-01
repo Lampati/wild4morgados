@@ -852,39 +852,5 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         
 
-        private void RibbonButtonCortar_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (Modo == ModoVisual.Flujo)
-            {
-                e.Handled = false;
-                System.Activities.Presentation.View.DesignerView.CutCommand.Execute(null);
-            }
-        }
-
-        private void RibbonButtonCopiar_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (Modo == ModoVisual.Flujo)
-            {
-                e.Handled = false;
-                System.Activities.Presentation.View.DesignerView.CopyCommand.Execute(null);
-            }
-        }
-
-        private void RibbonButtonPaste_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (Modo == ModoVisual.Flujo)
-            {
-                e.Handled = false;                
-                System.Activities.Presentation.View.DesignerView.PasteCommand.Execute(null);
-            }
-        }
-
-        private void RibbonButtonDelete_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (Modo == ModoVisual.Flujo)
-            {
-                
-            }
-        }
     }
 }

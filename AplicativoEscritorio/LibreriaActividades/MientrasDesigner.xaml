@@ -1,10 +1,10 @@
-﻿<sap:ActivityDesigner x:Class="LibreriaActividades.MientrasDesigner"
+﻿<base:ActivityDesignerBase x:Class="LibreriaActividades.MientrasDesigner"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
     xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
     xmlns:base="clr-namespace:LibreriaActividades">
-    <sap:ActivityDesigner.Resources>
+    <base:ActivityDesignerBase.Resources>
         <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
             <Style.Setters>
                 <Setter Property="BorderBrush" Value="LightGray"/>
@@ -58,8 +58,8 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-    </sap:ActivityDesigner.Resources>
-    <sap:ActivityDesigner.Icon>
+    </base:ActivityDesignerBase.Resources>
+    <base:ActivityDesignerBase.Icon>
         <DrawingBrush>
             <DrawingBrush.Drawing>
                 <ImageDrawing>
@@ -72,8 +72,8 @@
                 </ImageDrawing>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-    </sap:ActivityDesigner.Icon>
+    </base:ActivityDesignerBase.Icon>
     <Grid>
         <ContentPresenter Style="{DynamicResource ExpandOrCollapsedStyle}" Content="{Binding}" />
     </Grid>
-</sap:ActivityDesigner>
+</base:ActivityDesignerBase>

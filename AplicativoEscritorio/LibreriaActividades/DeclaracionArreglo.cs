@@ -19,6 +19,12 @@ namespace LibreriaActividades
         public eTipoVariable Tipo { get; set; }
         public string Tope { get; set; }
 
+        public DeclaracionArreglo()
+        {
+            SePuedeEliminar = true;
+        }
+
+
         public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.Nombre))

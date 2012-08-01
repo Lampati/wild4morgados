@@ -16,6 +16,11 @@ namespace LibreriaActividades
         public string NombreProcedimiento { get; set; }
         public string Parametros { get; set; }
 
+        public LlamarProcedimiento()
+        {
+            SePuedeEliminar = true;
+        }
+
         public override void Ejecutar(StringBuilder sb)
         {
             if (String.IsNullOrEmpty(this.NombreProcedimiento))
