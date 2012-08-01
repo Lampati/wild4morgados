@@ -5,10 +5,13 @@
              xmlns:c="clr-namespace:LibreriaActividades;assembly=LibreriaActividades" 
              >
     <UserControl.CommandBindings>
-        <CommandBinding Command="Delete" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
-        <CommandBinding Command="sapv:DesignerView.CutCommand" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
+        <CommandBinding Command="{x:Static ApplicationCommands.Delete}" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
+        <CommandBinding Command="{x:Static ApplicationCommands.Cut}" PreviewCanExecute="CommandBinding_PreviewCanExecute" />
+        <CommandBinding Command="{x:Static ApplicationCommands.Copy}" PreviewCanExecute="CommandBinding_PreviewCanExecute" />
+        <CommandBinding Command="{x:Static ApplicationCommands.Paste}" PreviewCanExecute="CommandBindingPaste_PreviewCanExecute"/>
+        <!--<CommandBinding Command="sapv:DesignerView.CutCommand" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
         <CommandBinding Command="sapv:DesignerView.PasteCommand" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
-        <CommandBinding Command="sapv:DesignerView.CopyCommand" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>
+        <CommandBinding Command="sapv:DesignerView.CopyCommand" PreviewCanExecute="CommandBinding_PreviewCanExecute"/>-->
     </UserControl.CommandBindings>
     <UserControl.Resources>
         <c:ComboBoxItemConverter x:Key="comboBoxItemConverter"/>

@@ -32,7 +32,7 @@ namespace LibreriaActividades
 
         public Mostrar()            
         {
-
+            SePuedeEliminar = true;
         }
 
         public override void Ejecutar(StringBuilder sb)
