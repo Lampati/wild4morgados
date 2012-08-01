@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:s="clr-namespace:DiagramDesigner"
-             xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"   
+             xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"  
+             xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
              xmlns:custom="clr-namespace:DiagramDesigner.Helpers"
              xmlns:data="clr-namespace:DiagramDesigner.DataContextsMenu"
              mc:Ignorable="d" >
@@ -40,44 +41,38 @@
                 <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Paste}" 
-                        CommandTarget="{Binding ElementName=MyDesigner}"
                         LargeImageSource="/Resources/Images/PasteBig.png" 
+                        CommandManager.Executed="RibbonButtonPaste_Executed"  
                         Label="Pegar" ToolTipDescription="{StaticResource TooltipPegar}" 
                         ToolTipTitle="Pegar" />
-
-
-
-
+                
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Cut}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Cut.png"
                         Label="Cortar" ToolTipTitle="Cortar" 
-                        ToolTipDescription="{StaticResource TooltipCortar}"/>
-
+                        CommandManager.Executed="RibbonButtonCortar_Executed"    
+                        ToolTipDescription="{StaticResource TooltipCortar}" />
+                    
+                
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Copy}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Copy.png"                                     
                         Label="Copiar" ToolTipTitle="Copiar" 
-                        ToolTipDescription="{StaticResource TooltipCopiar}"/>                                     
+                        CommandManager.Executed="RibbonButtonCopiar_Executed"   
+                        ToolTipDescription="{StaticResource TooltipCopiar}"/>                                   
 
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Delete}"
-                        CommandTarget="{Binding ElementName=MyDesigner}"
                         SmallImageSource="/Resources/Images/Delete.png"
                         Label="Eliminar" ToolTipTitle="Eliminar" 
+                        CommandManager.Executed="RibbonButtonDelete_Executed"   
                         ToolTipDescription="{StaticResource TooltipEliminar}"/>
-
-
-
-
-
-
             </ribbon:RibbonGroup>
+
+            
 
             <ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoGargar" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Vertical" Margin="0,12,0,0">

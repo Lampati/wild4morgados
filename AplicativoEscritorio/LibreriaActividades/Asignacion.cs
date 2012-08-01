@@ -22,7 +22,7 @@ namespace LibreriaActividades
         public Asignacion() 
            
         {
-          
+            SePuedeEliminar = true;
               
         }
 
