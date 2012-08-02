@@ -54,7 +54,7 @@ namespace LibreriaActividades
         {
             get
             {
-                MientrasViewModel retorno = new MientrasViewModel();
+                MientrasViewModel retorno = new MientrasViewModel(IdPropio);
                 retorno.Condicion = this.Condicion;
                 retorno.Cuerpo = ((Secuencia)this.Cuerpo).Datos as SecuenciaViewModel;
                 retorno.Id = Id;

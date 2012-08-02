@@ -25,7 +25,6 @@ namespace LibreriaActividades
         protected override void commBindApplicationCopy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             MientrasDesigner act = sender as MientrasDesigner;
-
             
             e.CanExecute = System.Activities.Presentation.View.DesignerView.CopyCommand.CanExecute(null) && act.IsFocused;            
 
@@ -35,15 +34,15 @@ namespace LibreriaActividades
         {
             MientrasDesigner act = sender as MientrasDesigner;
 
-            e.CanExecute = System.Activities.Presentation.View.DesignerView.CopyCommand.CanExecute(null) && act.IsFocused;
+            e.CanExecute = System.Activities.Presentation.View.DesignerView.CutCommand.CanExecute(null) && act.IsFocused;
 
         }
 
-        protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            MientrasDesigner act = sender as MientrasDesigner;
-            e.CanExecute = act.IsFocused;
+        //protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        //{
+        //    MientrasDesigner act = sender as MientrasDesigner;
+        //    e.CanExecute = act.IsFocused;
 
-        }
+        //}
     }
 }

@@ -57,7 +57,7 @@ namespace LibreriaActividades
         {
             get
             {
-                SecuenciaViewModel retorno = new SecuenciaViewModel();
+                SecuenciaViewModel retorno = new SecuenciaViewModel(IdPropio);
                 retorno.ListaActividades = new List<ActividadViewModelBase>();
                 retorno.Id = Id;
                 foreach (ActividadBase item in this.Activities)

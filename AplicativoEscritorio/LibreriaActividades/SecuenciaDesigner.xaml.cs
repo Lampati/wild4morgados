@@ -101,10 +101,16 @@ namespace LibreriaActividades
             e.CanExecute = false;
         }
 
-        protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = false;
-        }
+        //protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        //{
+        //    //e.CanExecute = false;
+        //    e.CanExecute = true;
+        //}
+
+        //protected override void commBindApplicationDelete_Executed(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    e.Handled = true;
+        //}
 
         //protected override void commBindApplicationPaste_Executed(object sender, ExecutedRoutedEventArgs e)
         //{
