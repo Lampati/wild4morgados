@@ -104,7 +104,7 @@ namespace LibreriaActividades
         {
             get
             {
-                SiViewModel retorno = new SiViewModel();
+                SiViewModel retorno = new SiViewModel(IdPropio);
                 retorno.Condicion = this.Condicion;
                 retorno.BranchVerdadero = ((Secuencia)this.BranchVerdadero).Datos as SecuenciaViewModel;
                 if (this.BranchFalso != null)

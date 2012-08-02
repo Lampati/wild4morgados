@@ -20,6 +20,8 @@ using ModoGrafico.Enums;
     using ModoGrafico.Helpers;
 using ModoGrafico.Interfaces;
     using InterfazTextoGrafico.Enums;
+    using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.Model;
 
     public abstract class Tab : BaseViewModel, IPropiedadesContexto
     {
@@ -247,6 +249,13 @@ using ModoGrafico.Interfaces;
                                       
                                       wd.Load(SecuenciaInicialProcedimiento);
                                       wd.Flush();
+
+                                      ModelService ms = wd.Context.Services.GetService<ModelService>();
+                                      if (ms != null)
+                                      {
+                                          ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
+                                      }
+
                                       this.ReconstruirContextMenu(wd);
                                       if (((Grid)wd.View).Children.Count > 0)
                                       {
@@ -307,6 +316,13 @@ using ModoGrafico.Interfaces;
                                       
                                       wdDecl.Load(SecuenciaInicialDeclaraciones);
                                       wdDecl.Flush();
+
+                                      ModelService ms = wdDecl.Context.Services.GetService<ModelService>();
+                                      if (ms != null)
+                                      {
+                                          ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
+                                      }
+
                                       this.ReconstruirContextMenu(wdDecl);                                      
                                       if (((Grid)wdDecl.View).Children.Count > 0)
                                       {
@@ -324,6 +340,50 @@ using ModoGrafico.Interfaces;
 
                 return wdDecl.View;
             }
+        }
+
+        private List<long> listaIdRemovidos = new List<long>();
+
+        void wdModel_ModelChanged(object sender, ModelChangedEventArgs e)
+        {
+            List<ModelItem> listaAgregados = new List<ModelItem>();
+            if (e.ItemsAdded != null)
+            {
+                listaAgregados.AddRange(e.ItemsAdded);
+            }
+
+            List<ModelItem> listaRemovidos = new List<ModelItem>();
+            if (e.ItemsRemoved != null)
+            {
+                listaRemovidos.AddRange(e.ItemsRemoved);
+            }
+
+            if (listaAgregados.Count > 0)
+            {
+                foreach (var item in listaAgregados)
+                {
+                    ActividadBase actividad = item.GetCurrentValue() as ActividadBase;
+
+                    //Si la actividad tiene 0 como id, significa que es nueva
+                    //Si la actividad esta contenida en esa lista de removidos es pq o lo estoy moviendo, o lo corte
+                    if (actividad.IdPropio > 0 && !listaIdRemovidos.Contains(actividad.IdPropio))
+                    {
+                        actividad.ReasignarId();
+                    }
+                }
+            }
+
+            listaIdRemovidos.Clear();
+
+            if (listaRemovidos.Count > 0)
+            {
+                foreach (var item in listaRemovidos)
+                {
+                    ActividadBase actividad = item.GetCurrentValue() as ActividadBase;
+                    listaIdRemovidos.Add(actividad.IdPropio);
+                }
+            }
+
         }
 
         void wd_ModelChanged(object sender, EventArgs e)

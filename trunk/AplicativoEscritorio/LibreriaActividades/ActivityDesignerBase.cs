@@ -59,11 +59,14 @@ namespace LibreriaActividades
             commBindDelete = new CommandBinding();
             commBindDelete.Command = ApplicationCommands.Delete;
             commBindDelete.CanExecute += new CanExecuteRoutedEventHandler(commBindApplicationDelete_CanExecute);
-
+            //commBindDelete.Executed += new ExecutedRoutedEventHandler(commBindApplicationDelete_Executed);
+            
             CommandBindings.Add(commBindDelete);
 
      
         }
+
+       
 
         protected virtual void commBindApplicationPaste_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -109,18 +112,49 @@ namespace LibreriaActividades
 
         }
 
+        //protected virtual void commBindApplicationDelete_Executed(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    ActivityDesignerBase act = sender as ActivityDesignerBase;
+
+
+        //    if (act.IsFocused)
+        //    {
+        //        ModelProperty prop = this.ModelItem.Properties["SePuedeEliminar"];
+
+        //        if (prop != null)
+        //        {
+        //            bool esModificable = Convert.ToBoolean(this.ModelItem.Properties["SePuedeEliminar"].Value.ToString());
+
+        //            if (esModificable && ApplicationCommands.Delete.CanExecute(null, act))
+        //            {
+                       
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("La actividad seleccionada no puede ser borrada");
+        //            }
+
+
+        //        }
+        //    }
+        //}
+
+     
+     
+
      
 
         protected virtual void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            ActivityDesignerBase act = sender as ActivityDesignerBase;
             ModelProperty prop = this.ModelItem.Properties["SePuedeEliminar"];
 
             if (prop != null)
             {
                 bool esModificable = Convert.ToBoolean(this.ModelItem.Properties["SePuedeEliminar"].Value.ToString());
-                e.CanExecute = esModificable;
+                e.CanExecute = esModificable && act.IsFocused;                    
             }
-
+            e.Handled = true;
         }
 
        
