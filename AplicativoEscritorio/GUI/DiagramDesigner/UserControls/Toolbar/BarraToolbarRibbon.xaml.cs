@@ -43,8 +43,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                 switch (this.modo)
                 {
                     case ModoVisual.Flujo:
-                        this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Collapsed;
-                        this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Visible;
+                        //this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Collapsed;
+                        //this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Visible;
 
                         //this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Visible;
                         //this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Visible;
@@ -61,8 +61,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                         break;
 
                     case ModoVisual.Texto:
-                        this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Visible;
-                        this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Collapsed;
+                        //this.ribbonGroupUndoRedoGargar.Visibility = System.Windows.Visibility.Visible;
+                        //this.ribbonGroupUndoRedoDesigner.Visibility = System.Windows.Visibility.Collapsed;
 
                         //this.ribbonGroupDiagramacion.Visibility = System.Windows.Visibility.Collapsed;
                         //this.ribbonGroupAlineacion.Visibility = System.Windows.Visibility.Collapsed;

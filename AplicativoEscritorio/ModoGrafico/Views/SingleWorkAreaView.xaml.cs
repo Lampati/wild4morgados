@@ -8,6 +8,7 @@ using System.ComponentModel;
     using System.Windows;
     using LibreriaActividades;
     using System;
+using System.Windows.Input;
 
     /// <summary>
     /// Interaction logic for SingleBrandView.xaml
@@ -23,6 +24,9 @@ using System.ComponentModel;
                 this.PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+
+        CommandBinding commBindUndo;
+        CommandBinding commBindRedo;
     
         public SingleWorkAreaView()
         {
@@ -31,6 +35,41 @@ using System.ComponentModel;
 
             ModoGrafico.Views.WorkAreaView.CambioTabStaticEvent += new WorkAreaView.TipoTabCambiadoEventHandler(WorkAreaView_CambioTabStaticEvent);
             ModoGrafico.Views.WorkAreaView.ActualizarParametrosStaticEvent += new WorkAreaView.ActualizarParametrosEventHandler(WorkAreaView_ActualizarParametrosStaticEvent);
+
+
+            commBindUndo = new CommandBinding();
+            commBindUndo.Command = ApplicationCommands.Undo;
+            commBindUndo.CanExecute += new CanExecuteRoutedEventHandler(commBindApplicationUndo_CanExecute);
+            commBindUndo.Executed += new ExecutedRoutedEventHandler(commBindApplicationUndo_Executed);         
+
+            commBindRedo = new CommandBinding();
+            commBindRedo.Command = ApplicationCommands.Cut;
+            commBindRedo.CanExecute += new CanExecuteRoutedEventHandler(commBindApplicationRedo_CanExecute);
+            commBindRedo.Executed += new ExecutedRoutedEventHandler(commBindApplicationRedo_Executed);
+
+            CommandBindings.Add(commBindUndo);
+            CommandBindings.Add(commBindRedo);
+
+        }
+
+        protected virtual void commBindApplicationUndo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Activities.Presentation.View.DesignerView.UndoCommand.Execute(null);
+        }
+
+        protected virtual void commBindApplicationUndo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = System.Activities.Presentation.View.DesignerView.UndoCommand.CanExecute(null);
+        }
+
+        protected virtual void commBindApplicationRedo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Activities.Presentation.View.DesignerView.RedoCommand.Execute(null);
+        }
+
+        protected virtual void commBindApplicationRedo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = System.Activities.Presentation.View.DesignerView.RedoCommand.CanExecute(null);
         }
 
         void WorkAreaView_ActualizarParametrosStaticEvent(object o, EventArgsClasses.ActualizarParametrosEventArgs e)

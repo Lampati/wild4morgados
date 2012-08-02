@@ -22,6 +22,8 @@ using ModoGrafico.Interfaces;
     using InterfazTextoGrafico.Enums;
     using System.Activities.Presentation.Services;
     using System.Activities.Presentation.Model;
+    using System.Windows.Input;
+    using System.Windows.Media.Imaging;
 
     public abstract class Tab : BaseViewModel, IPropiedadesContexto
     {
@@ -400,8 +402,6 @@ using ModoGrafico.Interfaces;
             }
         }
 
-        
-
         void ReconstruirContextMenu(WorkflowDesigner wd)
         {
             MenuItem borrar = null;
@@ -428,31 +428,33 @@ using ModoGrafico.Interfaces;
                     pegar = (MenuItem)wd.ContextMenu.Items[i];
                 }
             }
-
+            
             wd.ContextMenu.Items.Clear();
 
             MenuItem m2 = new MenuItem();
+
+            //Uri uri = new Uri("Resources/Cut.png", UriKind.Relative);
+            //BitmapImage imagen = new BitmapImage(uri);
+            //System.Windows.Media.Imaging.CachedBitmap bitmap = new CachedBitmap( imagen, BitmapCreateOptions.None, BitmapCacheOption.Default);
+            //m2.Icon = new System.Windows.Controls.Image()
+            //{
+            //    Source = bitmap
+            //};
             m2.Icon = cortar.Icon;
             m2.Header = "Cortar";
-            m2.InputGestureText = "Ctrl+X";
-            m2.Click += new RoutedEventHandler(m2_Click);
-            comandoCortar = cortar.Command;
+            m2.Command = ApplicationCommands.Cut;
             wd.ContextMenu.Items.Add(m2);
 
             MenuItem m3 = new MenuItem();
             m3.Icon = copiar.Icon;
             m3.Header = "Copiar";
-            m3.InputGestureText = "Ctrl+C";
-            m3.Click += new RoutedEventHandler(m3_Click);
-            comandoCopiar = copiar.Command;
+            m3.Command = ApplicationCommands.Copy;
             wd.ContextMenu.Items.Add(m3);
 
             MenuItem m4 = new MenuItem();
             m4.Icon = pegar.Icon;
             m4.Header = "Pegar";
-            m4.InputGestureText = "Ctrl+V";
-            m4.Click += new RoutedEventHandler(m4_Click);
-            comandoPegar = pegar.Command;
+            m4.Command = ApplicationCommands.Paste;
             wd.ContextMenu.Items.Add(m4);
 
             Separator s = new Separator();
@@ -461,11 +463,74 @@ using ModoGrafico.Interfaces;
             MenuItem m = new MenuItem();
             m.Icon = borrar.Icon;
             m.Header = "Eliminar";
-            m.InputGestureText = "Del";
-            m.Click += new RoutedEventHandler(m_Click);
-            comandoBorrar = borrar.Command;
+            m.Command = ApplicationCommands.Delete;            
             wd.ContextMenu.Items.Add(m);
         }
+
+        //void ReconstruirContextMenu(WorkflowDesigner wd)
+        //{
+        //    MenuItem borrar = null;
+        //    MenuItem cortar = null;
+        //    MenuItem copiar = null;
+        //    MenuItem pegar = null;
+        //    for (int i = 0; i < wd.ContextMenu.Items.Count; i++)
+        //    {
+        //        MenuItem mi = wd.ContextMenu.Items[i] as MenuItem;
+        //        if (mi != null && (mi.InputGestureText == "Del" || mi.InputGestureText == "Supr"))
+        //        {
+        //            borrar = (MenuItem)wd.ContextMenu.Items[i];
+        //        }
+        //        if (mi != null && mi.InputGestureText == "Ctrl+X")
+        //        {
+        //            cortar = (MenuItem)wd.ContextMenu.Items[i];
+        //        }
+        //        if (mi != null && mi.InputGestureText == "Ctrl+C")
+        //        {
+        //            copiar = (MenuItem)wd.ContextMenu.Items[i];
+        //        }
+        //        if (mi != null && mi.InputGestureText == "Ctrl+V")
+        //        {
+        //            pegar = (MenuItem)wd.ContextMenu.Items[i];
+        //        }
+        //    }
+
+        //    wd.ContextMenu.Items.Clear();
+
+        //    MenuItem m2 = new MenuItem();
+        //    m2.Icon = cortar.Icon;
+        //    m2.Header = "Cortar";
+        //    m2.InputGestureText = "Ctrl+X";
+        //    m2.Click += new RoutedEventHandler(m2_Click);
+        //    comandoCortar = cortar.Command;
+        //    wd.ContextMenu.Items.Add(m2);
+
+        //    MenuItem m3 = new MenuItem();
+        //    m3.Icon = copiar.Icon;
+        //    m3.Header = "Copiar";
+        //    m3.InputGestureText = "Ctrl+C";
+        //    m3.Click += new RoutedEventHandler(m3_Click);
+        //    comandoCopiar = copiar.Command;
+        //    wd.ContextMenu.Items.Add(m3);
+
+        //    MenuItem m4 = new MenuItem();
+        //    m4.Icon = pegar.Icon;
+        //    m4.Header = "Pegar";
+        //    m4.InputGestureText = "Ctrl+V";
+        //    m4.Click += new RoutedEventHandler(m4_Click);
+        //    comandoPegar = pegar.Command;
+        //    wd.ContextMenu.Items.Add(m4);
+
+        //    Separator s = new Separator();
+        //    wd.ContextMenu.Items.Add(s);
+
+        //    MenuItem m = new MenuItem();
+        //    m.Icon = borrar.Icon;
+        //    m.Header = "Eliminar";
+        //    m.InputGestureText = "Del";
+        //    m.Click += new RoutedEventHandler(m_Click);
+        //    comandoBorrar = borrar.Command;
+        //    wd.ContextMenu.Items.Add(m);
+        //}
 
         System.Windows.Input.ICommand comandoBorrar;
         System.Windows.Input.ICommand comandoCortar;

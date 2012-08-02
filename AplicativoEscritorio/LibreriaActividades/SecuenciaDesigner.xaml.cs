@@ -94,11 +94,13 @@ namespace LibreriaActividades
         protected override void commBindApplicationCopy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = false;
+            e.Handled = true;
         }
 
         protected override void commBindApplicationCut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = false;
+            e.Handled = true;
         }
 
         //protected override void commBindApplicationDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)

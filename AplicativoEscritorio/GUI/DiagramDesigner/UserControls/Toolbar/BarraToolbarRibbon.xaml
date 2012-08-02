@@ -90,7 +90,7 @@
 
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoDesigner" ContextMenu="{Binding null}">
+            <!--<ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoDesigner" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Vertical" Margin="0,12,0,0">
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                         Command="sapv:DesignerView.UndoCommand"
@@ -103,7 +103,7 @@
                         Label="Rehacer" ToolTipTitle="Rehacer" 
                         ToolTipDescription="{StaticResource TooltipRedoFlujo}" />
                     </StackPanel>             
-            </ribbon:RibbonGroup>
+            </ribbon:RibbonGroup>-->
 
             <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
                 <StackPanel Margin="0,12,0,0">
