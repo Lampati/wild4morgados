@@ -105,23 +105,7 @@
                     </StackPanel>             
             </ribbon:RibbonGroup>-->
 
-            <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
-                <StackPanel Margin="0,12,0,0">
-                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
-                            HorizontalContentAlignment="Center"
-                            SmallImageSource="/Resources/Images/Search128.png"
-                            Label="Buscar"
-                            Click="ButtonBuscar_Click" ToolTipTitle="Buscar" 
-                            ToolTipDescription="{StaticResource TooltipBuscar}" />
-
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
-                            HorizontalContentAlignment="Center"
-                            SmallImageSource="/Resources/Images/SearchRep128.png"
-                            Label="Buscar/Reemplazar" 
-                            Click="ButtonBuscarYReemplazar_Click" ToolTipTitle="Buscar y reemplazar" 
-                            ToolTipDescription="{StaticResource TooltipBuscaryReemplazar}" />
-                </StackPanel>
-            </ribbon:RibbonGroup>
+          
 
             <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
@@ -155,6 +139,24 @@
                         LargeImageSource="/Resources/Images/Gargar128.png"
                         Label="Gargar" 
                         ToolTipDescription="{StaticResource TooltipCambiarATexto}" ToolTipTitle="Pasar a Modo Texto" ToolTipFooterTitle="{StaticResource TooltipFooterDebeCompilar}" />
+            </ribbon:RibbonGroup>
+
+            <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
+                <StackPanel Margin="0,12,0,0">
+                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
+                            HorizontalContentAlignment="Center"
+                            SmallImageSource="/Resources/Images/Search128.png"
+                            Label="Buscar"
+                            Click="ButtonBuscar_Click" ToolTipTitle="Buscar" 
+                            ToolTipDescription="{StaticResource TooltipBuscar}" />
+
+                    <ribbon:RibbonButton ContextMenu="{Binding null}"
+                            HorizontalContentAlignment="Center"
+                            SmallImageSource="/Resources/Images/SearchRep128.png"
+                            Label="Buscar/Reemplazar" 
+                            Click="ButtonBuscarYReemplazar_Click" ToolTipTitle="Buscar y reemplazar" 
+                            ToolTipDescription="{StaticResource TooltipBuscaryReemplazar}" />
+                </StackPanel>
             </ribbon:RibbonGroup>
 
 
