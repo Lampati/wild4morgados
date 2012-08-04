@@ -541,6 +541,14 @@ input[type="submit"], .submit
     border: 1px solid #3079ED;
     
 }
+.submitDisabled
+{
+    background:#666 !important;
+}
+.submitDisabled.hover
+{
+    cursor:normal !important;
+}
 input[type="submit"]:hover, .submit:hover,input[type="submit"]:active, .submit:active
 {
     background: #357AE8;

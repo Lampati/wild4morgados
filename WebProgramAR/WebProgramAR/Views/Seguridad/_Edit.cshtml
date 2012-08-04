@@ -13,19 +13,49 @@
     $(document).ready(function () {
         $(".input-integer-validation").limitkeypress({ rexp: /^[+]?\d*$/ });
         $(".input-string-validation").limitkeypress({ rexp: /^[A-Za-z _-]*$/ });
-        $("input:radio[name=groupUsuario]").change(function () {
-            checkedRadio();
-        });
-        $("#IsValorBool").click(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); });
-        $("#ValorInt").focusout(function () { $("#Valor").val($(this).val()) });
-        $("#ValorText").focusout(function () { $("#Valor").val($(this).val()) });
-        $("#ValorDate").change(function () { $("#Valor").val($(this).val()) });
+        $("#UsuarioIdAutoComplete").keyup(function () { $("#UsuarioId").val(""); isValid(); });
+        $(".input-integer-validation").change(function () { isValid(); });
+        $(".input-string-validation").change(function () { isValid(); });
+        $("input:radio[name=groupUsuario]").change(function () { checkedRadio(); });
+        $("#IsValorBool").click(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
+        $("#ValorInt").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
+        $("#ValorText").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
+        $("#ValorDate").change(function () { $("#Valor").val($(this).val()); isValid(); });
+        isValid();
     });
+    function isValid() {
+        var valid = false;
+        if ($("#selectBox_SelectTablaId").is(":visible") &&
+            $("#selectBox_SelectColumnaId").is(":visible") &&
+            $("#selectBox_SelectComparadorId").is(":visible") &&
+            $("#valorDiv").is(":visible")
+            ) {
+            if ($("#TablaId").val() != "" &&
+                    $("#ColumnaId").val() != "" &&
+                    $("#ComparadorId").val() != "" &&
+                    $("#Valor").val() != ""
+                    ) {
+                if ($("input:radio[name=groupUsuario]").filter(":checked").val() == "usuario") {
+                    if ($("#UsuarioId").val() != "") {
+                        valid = true;
+                    }
+                } else {
+                    valid = true;
+                }
+            }
+        }
+        if (valid) {
+            $("#btnGuardar").show();
+            $("#btnGuardarDisabled").hide();
+        } else {
+            $("#btnGuardar").hide();
+            $("#btnGuardarDisabled").show();
+        }
+    }
     function checkedRadio() {
             switch ($("input:radio[name=groupUsuario]").filter(":checked").val()) {
                 case "tipoUsuario":
                     $('#UsuarioIdAutoComplete').attr('readonly', true);
-                    $('#UsuarioIdAutoComplete').val(" ");
                     $('#tipoUsuarioDiv').show();
                     $('#usuarioNombreDiv').hide();
                     break;
@@ -37,6 +67,7 @@
                     $('#TipoUsuarioId').val(" ");
                     break;
             }
+            isValid();
     }
     var $radios = $('input:radio[name=groupUsuario]');
     if ($("#UsuarioId").val() != "") {
@@ -45,10 +76,6 @@
         $radios.filter('[value=tipoUsuario]').attr('checked', true);
     }
     checkedRadio();
-    $("<option value='' >Seleccione una Opcion</option>").prependTo("#SelectTablaId");
-    $("<option value='' >Seleccione una Opcion</option>").prependTo("#SelectColumnaId");
-    $("<option value='' >Seleccione una Opcion</option>").prependTo("#SelectComparadorId");
-    $("<option value='' >Seleccione una Opcion</option>").prependTo("#SelectTipoUsuarioCreate");
     convertSelect("SelectTablaId");
     convertSelect("SelectTipoUsuarioCreate");
     convertSelect("SelectColumnaId");
@@ -64,6 +91,9 @@
         $(".error").hide();
     }
     function reInitValor() {
+        $("#ValorInt").val("");
+        $("#ValorText").val("");
+        $("#ValorDate").val("");
         $("#Valor").val("");
         $("#UsuarioId").val("");
         $(".error").hide();
@@ -78,7 +108,7 @@
     function reSizeWindow() {
         var size = $(".groupElement").filter(":visible").size();
         if (size >= 5) {
-            $("#dialog").animate({ height: "490px" });
+            $("#dialog").animate({ height: "530px" });
             $("#dialog").css("overflowY", "auto !important");
         }
         else {
@@ -140,6 +170,7 @@
                 $("#usuarioDiv").hide();
                 $("#activaDiv").hide();
                 reSizeWindow();
+                isValid();
                 return;
             }
             if (div.attr('id') == "SelectColumnaId") {
@@ -177,6 +208,7 @@
                 $("#usuarioDiv").hide();
                 $("#activaDiv").hide();
                 reSizeWindow();
+                isValid();
                 return;
             }
             if (div.attr('id') == "SelectComparadorId") {
@@ -192,11 +224,14 @@
                     $("#activaDiv").hide();
                 }
                 reSizeWindow();
-            }           
-            if (div.attr('id')=="SelectTipoUsuarioCreate"){
-                $("#TipoUsuarioId").val((div.attr("rel")));
-            }           
+                isValid();
+            }
+
         }
+        if (div.attr('id') == "SelectTipoUsuarioCreate") {
+            $("#TipoUsuarioId").val((div.attr("rel")));
+            isValid();
+        }           
     }
     function showValorDivType() {
         var tipo = $("#tipoColumnaId").val();
@@ -248,17 +283,19 @@
         },
         scrollHeight: 10,
         minChars: 1,
-        delay: 3,
+        delay: 0,
         type: 'POST',
-        selectFirst: false,
+        selectFirst: true,
         focus: function (event, ui) {
             $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+            isValid();
             return false;
         },
         select: function (event, ui) {
             $("#UsuarioId").val(ui.item.value);
             $("#UsuarioIdAutoComplete").val(ui.item.label);
             $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
+            isValid();
             return false;
         },
         change: function (event, ui) {
@@ -266,8 +303,9 @@
                 $("#UsuarioIdAutoComplete").attr("rel", ui.item.value);
                 $("#UsuarioIdAutoComplete").val(ui.item.label);
                 $("#UsuarioId").val(ui.item.value);
+                isValid();
                 return false;
-            }
+            } 
         }
     });
             
@@ -410,6 +448,7 @@
         });
     }
     getColumnsByAjax();
+    isValid();
 </script>
 
 

@@ -4,7 +4,7 @@
     
     ViewBag.Title = "Configuración";
 
-    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina, canPage: false);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.CantidadPorPagina);
 
     grid.Bind(Model.ReglasSeguridad, autoSortAndPage: false, rowCount: Model.Cantidad);
 
