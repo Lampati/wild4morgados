@@ -195,15 +195,24 @@ namespace WebProgramAR.Controllers
         public ActionResult MiPerfil()
         {
             string usuario = SimpleSessionPersister.UserName;
-            Usuario u = UsuarioNegocio.GetUsuarioByLoginUsuario(usuario);
-            
-            MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
-            u.Email = membUser.Email;
+            if (usuario != null)
+            {
+                Usuario u = UsuarioNegocio.GetUsuarioByLoginUsuario(usuario);
 
-            ViewBag.EsMiPerfil = false;
+                MembershipUser membUser = Membership.GetUser(u.UsuarioNombre);
+                u.Email = membUser.Email;
 
-            Initilization();
-            return View("MiPerfil", u);
+                ViewBag.EsMiPerfil = false;
+
+                Initilization();
+                return View("MiPerfil", u);
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+                Session.Abandon();
+                return View("Index", "Home"); 
+            }
         }
 
         //

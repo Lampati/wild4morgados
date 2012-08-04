@@ -271,7 +271,9 @@
             }
         }
     });
-            
+    $(document).ready(function () {
+        $("#LocalidadIdAutoComplete").keyup(function () { $("#LocalidadId").val(""); });
+    });  
 </script>
 
 

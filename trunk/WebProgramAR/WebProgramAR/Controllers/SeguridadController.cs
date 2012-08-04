@@ -128,6 +128,7 @@ namespace WebProgramAR.Controllers
                     error = true;
                     errorMensaje = "Debe seleccionar un comparador";
                 }
+                if (regla.TipoUsuarioId == -1) regla.TipoUsuarioId = null;
                 if (!error)
                 {
                     try
@@ -207,6 +208,7 @@ namespace WebProgramAR.Controllers
                     error = true;
                     errorMensaje = "Debe seleccionar un comparador";
                 }
+                if (regla.TipoUsuarioId == -1) regla.TipoUsuarioId = null;
                 if (!error)
                 {
                     try

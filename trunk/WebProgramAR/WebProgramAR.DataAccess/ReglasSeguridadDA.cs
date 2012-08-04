@@ -133,7 +133,7 @@ namespace WebProgramAR.DataAccess
                                                 && (columnaId == -1 || u.ColumnaId == columnaId)
                                                 && (comparadorId == -1 || u.ComparadorId == comparadorId)
                                                 && (esVacioUsuario || (u.Usuario != null && u.Usuario.UsuarioNombre.Contains(usuario)))
-                                                //&& (tipoUsuarioId == -1 || u.TipoUsuarioId.Equals(tipoUsuarioId))
+                                                && (tipoUsuarioId == -1 || u.TipoUsuarioId==tipoUsuarioId)
                                                 && (activa == null || u.Activa == activa.Value)
                                                 select u;
             return query;
