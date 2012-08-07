@@ -32,7 +32,7 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("leer ( {0} );", this.Parametro).AppendLine();
+                strBldr.AppendFormat("leer {0} ;", this.Parametro).AppendLine();
 
                 return strBldr.ToString();
             }

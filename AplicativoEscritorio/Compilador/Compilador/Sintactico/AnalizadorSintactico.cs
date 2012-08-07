@@ -191,7 +191,11 @@ namespace CompiladorGargar.Sintactico
                     colAMostrar = exAnaliz.Columna != -1 ? exAnaliz.Columna : colAMostrar;
                     pararCompilacion = exAnaliz.Parar;
 
-                    retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion)); //siempre paro la compilacion al primer error
+                    CompiladorGargar.Sintactico.ErroresManager.Errores.MensajeError mensErr = new CompiladorGargar.Sintactico.ErroresManager.Errores.ErrorVacio();
+                    mensErr.MensajeModoTexto = exAnaliz.Message;
+                    mensErr.MensajeModoGrafico = exAnaliz.MensajeModoGrafico;
+
+                    retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, mensErr)); //siempre paro la compilacion al primer error
                 }
 
                 #region Parte Vieja maneja excepciones sintacticas

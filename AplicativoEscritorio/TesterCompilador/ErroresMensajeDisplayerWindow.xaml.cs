@@ -49,7 +49,7 @@ namespace TesterCompilador
         {
             if (txtBxFiltroTexto.Text != string.Empty)
             {
-                ObservableCollection<MensajeError> listaFiltrada = new ObservableCollection<MensajeError>( listaCompletaErrores.ToList().FindAll(x => x.Mensaje.ToUpper().Contains(txtBxFiltroTexto.Text.ToUpper())));
+                ObservableCollection<MensajeError> listaFiltrada = new ObservableCollection<MensajeError>( listaCompletaErrores.ToList().FindAll(x => x.MensajeModoTexto.ToUpper().Contains(txtBxFiltroTexto.Text.ToUpper())));
                 ActualizarLista(listaFiltrada);
             }
             else

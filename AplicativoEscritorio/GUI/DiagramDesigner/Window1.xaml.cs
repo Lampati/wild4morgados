@@ -797,7 +797,8 @@ namespace DiagramDesigner
 
             foreach (var item in res.ListaErrores)
             {
-                this.BarraMsgs.AgregarError(item.Descripcion, item.Fila, item.Columna);
+                string errorMostrar = item.MensajeError == null ? item.Descripcion : item.MensajeError.MensajeModoTexto;
+                this.BarraMsgs.AgregarError(errorMostrar, item.Fila, item.Columna);
                 sr.AgregarLinea(item.Fila);
             }
 
@@ -824,7 +825,8 @@ namespace DiagramDesigner
                 ActividadViewModelBase act = this.Esquema.RepresentacionGraficaActual.EncontrarActividadPorLinea(item.Fila);
                 if (act != null)
                 {
-                    this.BarraMsgs.AgregarErrorModoGrafico(item.Descripcion, act.IdPropio.ToString(), act.Contexto, act.NombreActividad, act.ActividadReferenciada);
+                    string errorMostrar = item.MensajeError == null ? item.Descripcion : item.MensajeError.MensajeModoGrafico;
+                    this.BarraMsgs.AgregarErrorModoGrafico(errorMostrar, act.IdPropio.ToString(), act.Contexto, act.NombreActividad, act.ActividadReferenciada);
                 }
                 
             }

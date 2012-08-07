@@ -76,7 +76,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
                 if (mensajeError != null)
                 {
-                    throw new AnalizadorErroresException(mensajeError) 
+                    throw new AnalizadorErroresException(mensajeError, string.Empty) 
                         { Fila = terminal.Componente.Fila, Columna = terminal.Componente.Columna, Parar = true };
                 }
             }
@@ -85,7 +85,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         private void ConstruirYArrojarExcepcion(Terminal terminal, ContextoGlobal contextoGlobal)
         {
 
-            string mensajeError;
+            string mensajeError, mensajeErrorModoGrafico;
+
+            mensajeErrorModoGrafico = string.Empty;
 
             ContextoLinea cont = EstadoSintactico.ContextoPerteneceTerminal(terminal);
 
@@ -168,15 +170,24 @@ namespace CompiladorGargar.Sintactico.ErroresManager
                     mensajeError = "La operación mostrar no tiene lugar. Solo puede ser hecha dentro del cuerpo de un procedimiento o funcion";
                     break;
                 case ContextoLinea.Ninguno:
-                    mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.",terminal.Componente.Lexema);
+                    if (terminal.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion)
+                    {
+                        mensajeErrorModoGrafico = "Error sintactico en la asignación";
+                        mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
+                    }
+                    else
+                    {
+                        mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
+                    }
+                    
                     break;
                 default:
                     mensajeError = string.Format("Error sintactico en {0}. {0} no tiene lugar o la linea comienza incorrectamente.", terminal.Componente.Lexema);
                     break;
             }
 
-            throw new AnalizadorErroresException(mensajeError) 
-                    { Fila = terminal.Componente.Fila, Columna = terminal.Componente.Columna, Parar = true };
+            throw new AnalizadorErroresException(mensajeError, mensajeErrorModoGrafico) 
+                    { Fila = terminal.Componente.Fila, Columna = terminal.Componente.Columna, Parar = true  };
         }
 
         internal void Validar()

@@ -18,6 +18,9 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             AgregarValidacionPorDefault();
         }
 
+    
+
+
         private void AgregarValidacionPorDefault()
         {
             MensajeError mensajeError = new ErrorMostrarValidacionPorDefault();

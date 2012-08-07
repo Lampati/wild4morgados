@@ -5,6 +5,7 @@ using System.Text;
 using CompiladorGargar.Sintactico.Gramatica;
 
 using CompiladorGargar.Auxiliares;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -26,6 +27,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             this.EsSino = this.hijosNodo[4].EsSino;
+
+            NodoTablaSimbolos.TipoDeDato tipoDato = this.hijosNodo[2].TipoDato;
+
+            if (tipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
+            {                
+                throw new ErrorSemanticoException(new StringBuilder("La condicion resultante del bloque si debe ser booleana").ToString());                
+            }
 
             ArmarActividadViewModel();
 

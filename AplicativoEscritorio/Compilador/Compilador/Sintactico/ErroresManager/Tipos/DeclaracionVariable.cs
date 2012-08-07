@@ -20,7 +20,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             AgregarValidacionTipoDatoRepetido();
             AgregarValidacionParteIzquierdaCorrecta();
             AgregarValidacionCantArregloNoRepetido();
-            AgregarValidacionElementoQueSobraErroneo();
+            //AgregarValidacionElementoQueSobraErroneo();
 
 
             AgregarValidacionPorDefault();

@@ -35,7 +35,7 @@ namespace LibreriaActividades
         {
             get
             {
-                LlamarProcedimientoViewModel activ = new LlamarProcedimientoViewModel();
+                LlamarProcedimientoViewModel activ = new LlamarProcedimientoViewModel(this.IdPropio);
                 activ.Id = Id;
                 activ.NombreProcedimiento = this.NombreProcedimiento;
                 activ.Parametros = this.Parametros;

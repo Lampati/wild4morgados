@@ -123,7 +123,7 @@ namespace TesterCompilador
                                 entrada.LineaReal = error.Fila;
                                 entrada.CodigoGlobalReal = error.MensajeError.CodigoGlobal;
 
-                                entrada.Mensaje = error.MensajeError.Mensaje;
+                                entrada.Mensaje = error.MensajeError.MensajeModoTexto;
 
                                 listaRetorno.Add(entrada);
                             }

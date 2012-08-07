@@ -244,6 +244,12 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
         internal bool AgregarArreglo(string nombre, NodoTablaSimbolos.TipoDeDato tdato, NodoTablaSimbolos.TipoContexto contexto, string nombreContexto, string rango, bool esConst)
         {
+            //Para que no falle pq se puso mal el rango del arrego, si viene en null, se pone en 1
+            if (rango == null)
+            {
+                rango = "1";
+            }
+
             double rangoNum;
             if (!double.TryParse(rango, System.Globalization.NumberStyles.Number, new CultureInfo("es-AR"), out rangoNum))
             {

@@ -6,6 +6,7 @@ using CompiladorGargar.Sintactico.Gramatica;
 
 using CompiladorGargar.Auxiliares;
 using Utilidades;
+using CompiladorGargar.Semantico.TablaDeSimbolos;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
@@ -33,6 +34,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             nombreVarControladora = RandomManager.RandomStringConPrefijo("mientrasVar", 20, true);
             this.TablaSimbolos.AgregarAuxiliarParaCodIntermedio(nombreVarControladora, TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero);
+
+            NodoTablaSimbolos.TipoDeDato tipoDato = this.hijosNodo[2].TipoDato;
+            if (tipoDato != NodoTablaSimbolos.TipoDeDato.Booleano)
+            {
+                throw new ErrorSemanticoException(new StringBuilder("La condicion resultante del bloque mientras debe ser booleana").ToString());
+            }
 
             ArmarActividadViewModel();
            

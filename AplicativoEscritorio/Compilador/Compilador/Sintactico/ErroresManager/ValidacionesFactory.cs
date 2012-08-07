@@ -114,7 +114,14 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             }
             else
             {
-                retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador;
+                if (lista.Count > 0)
+                {
+                    retorno = lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador;
+                }
+                else
+                {
+                    retorno = false;
+                }
             }
             return retorno;
         }
@@ -123,7 +130,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
         {
             int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Arreglo).Count;
 
-            return cantidad > 0;
+            return cantidad == 0 || cantidad == 1;
         }
 
         
@@ -166,6 +173,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
             return cantidad < 2;
         }
+
+       
 
         internal static bool AsignacionFaltante(List<Terminal> lista)
         {
@@ -300,7 +309,30 @@ namespace CompiladorGargar.Sintactico.ErroresManager
             return retorno;
         }
 
-        
+        internal static bool LeerRepetido(List<Terminal> lista)
+        {
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Leer).Count;
+
+            return cantidad < 2;
+        }
+
+        internal static bool LeerSolo(List<Terminal> lista)
+        {
+            return lista.Count > 2;
+        }
+
+        internal static bool LeerNoIdentificador(List<Terminal> lista)
+        {
+            if (lista.Count > 0)
+            {
+                return lista[0].Componente.Token == Lexicografico.ComponenteLexico.TokenType.Identificador;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         
     }
 }
