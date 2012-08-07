@@ -35,6 +35,7 @@ using DataAccess;
 using InterfazTextoGrafico;
 using LibreriaActividades;
 using ModoGrafico;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace DiagramDesigner
 {
@@ -825,6 +826,14 @@ namespace DiagramDesigner
                 ActividadViewModelBase act = this.Esquema.RepresentacionGraficaActual.EncontrarActividadPorLinea(item.Fila);
                 if (act != null)
                 {
+                    if (item.MensajeError != null)
+                    {
+
+                        item.MensajeError = AsignarMensajeErrorCorrecto(item.MensajeError, act);
+                        
+                        
+                    }
+
                     string errorMostrar = item.MensajeError == null ? item.Descripcion : item.MensajeError.MensajeModoGrafico;
                     this.BarraMsgs.AgregarErrorModoGrafico(errorMostrar, act.IdPropio.ToString(), act.Contexto, act.NombreActividad, act.ActividadReferenciada);
                 }
@@ -843,6 +852,117 @@ namespace DiagramDesigner
                 }
             }
             
+        }
+
+        private MensajeError AsignarMensajeErrorCorrecto(MensajeError mensajeError, ActividadViewModelBase act)
+        {
+            MensajeError retorno = mensajeError;
+
+            Type tipo = act.GetType();
+
+            if (!mensajeError.EsErrorBienDefinido && tipo == typeof(AsignacionViewModel))
+            {
+                retorno = new CompiladorGargar.Sintactico.ErroresManager.Errores.ErrorAsignacionValidacionPorDefault();
+            }
+            else
+            {
+                CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias sentencia = ObtenerSentenciaAcordeATipoActividad(tipo);
+
+                if (sentencia != Sentencias.Ninguno 
+                    && !mensajeError.SentenciasQueTienenElError.Contains(sentencia) )
+                {
+
+                    switch (sentencia)
+                    {
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.Mientras:
+                            retorno = new ErrorMientrasValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.Si:
+                            retorno = new ErrorSiValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.Leer:
+                            retorno = new ErrorLeerValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.Mostrar:
+                            retorno = new ErrorMostrarValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.LlamarProcedimiento:
+                            retorno = new ErrorLlamadoProcValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.Asignacion:
+                            retorno = new ErrorAsignacionValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.DeclaracionVariable:
+                            retorno = new ErrorDeclaracionVariableValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.DeclaracionConstante:
+                            retorno = new ErrorDeclaracionConstanteGenerico();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.DeclaracionFuncion:
+                            retorno = new ErrorDeclaracionFuncionValidacionPorDefault();
+                            break;
+                        case CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias.DeclaracionProcedimiento:
+                            retorno = new ErrorDeclaracionProcedimientoValidacionPorDefault();
+                            break;
+                    }
+                }
+            }
+            return retorno;
+        }
+
+        private CompiladorGargar.Sintactico.ErroresManager.Errores.Sentencias ObtenerSentenciaAcordeATipoActividad(Type tipo)
+        {
+            string nombreTipo = tipo.Name;
+            if (!string.IsNullOrEmpty(nombreTipo))
+            {
+                if (nombreTipo.ToUpper().Equals("SiViewModel".ToUpper()))
+                {
+                    return Sentencias.Si;
+                }
+                else if (nombreTipo.ToUpper().Equals("MientrasViewModel".ToUpper()))
+                {
+                    return Sentencias.Mientras;
+                }
+                else if (nombreTipo.ToUpper().Equals("DeclaracionConstanteViewModel".ToUpper()))
+                {
+                    return Sentencias.DeclaracionConstante;
+                }
+                else if (nombreTipo.ToUpper().Equals("DeclaracionVariableViewModel".ToUpper()))
+                {
+                    return Sentencias.DeclaracionVariable;
+                }
+                else if (nombreTipo.ToUpper().Equals("DeclaracionArregloViewModel".ToUpper()))
+                {
+                    return Sentencias.DeclaracionVariable;
+                }
+                else if (nombreTipo.ToUpper().Equals("AsignacionViewModel".ToUpper()))
+                {
+                    return Sentencias.Asignacion;
+                }
+                else if (nombreTipo.ToUpper().Equals("SecuenciaViewModel".ToUpper()))
+                {
+                    return Sentencias.Ninguno;
+                }
+                else if (nombreTipo.ToUpper().Equals("DeclaracionConstanteViewModel".ToUpper()))
+                {
+                    return Sentencias.DeclaracionConstante;
+                }
+                else if (nombreTipo.ToUpper().Equals("LeerViewModel".ToUpper()))
+                {
+                    return Sentencias.Leer;
+                }
+                else if (nombreTipo.ToUpper().Equals("MostrarViewModel".ToUpper()))
+                {
+                    return Sentencias.Mostrar;
+                }
+                else if (nombreTipo.ToUpper().Equals("LlamarProcedimientoViewModel".ToUpper()))
+                {
+                    return Sentencias.LlamarProcedimiento;
+                }
+
+            }
+
+            return Sentencias.Ninguno;
         }
 
         private void RibbonWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -5,15 +5,34 @@ using System.Text;
 
 namespace CompiladorGargar.Sintactico.ErroresManager.Errores
 {
+    public enum Sentencias
+    {
+        Mientras,
+        Si,
+        Leer,
+        Mostrar,
+        LlamarProcedimiento,
+        Asignacion,
+        DeclaracionVariable,
+        DeclaracionConstante,
+        DeclaracionFuncion,
+        DeclaracionProcedimiento,
+        Ninguno
+
+    }
+
     public abstract class MensajeError
     {
         public string MensajeModoTexto { get; set; }
         public string MensajeModoGrafico { get; set; }
         public int CodigoGlobal { get; set; }
+        public bool EsErrorBienDefinido { get; set; }
+        public List<Sentencias> SentenciasQueTienenElError { get; set; }
 
         public MensajeError()
         {
-
+            SentenciasQueTienenElError = new List<Sentencias>();
+            EsErrorBienDefinido = true;
         }
     }
 
@@ -25,6 +44,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 0;
             MensajeModoTexto = "";
             MensajeModoGrafico = "";
+            EsErrorBienDefinido = false;
         }
     }
 
@@ -36,6 +56,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 1;
             MensajeModoTexto = "La declaración de la constante contiene un error sintactico.";
             MensajeModoGrafico = "La declaración de la constante contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
 
@@ -47,6 +68,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 2;
             MensajeModoTexto = "El : esta especificado mas de una vez en la declaración";
             MensajeModoGrafico = "La declaración contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -58,6 +81,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 3;
             MensajeModoTexto = ": faltante en la declaración";
             MensajeModoGrafico = "La declaración contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -69,6 +94,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 4;
             MensajeModoTexto = "El = esta especificado mas de una vez en la declaración";
             MensajeModoGrafico = "La declaración contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
 
@@ -80,6 +106,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 5;
             MensajeModoTexto = "= faltante en la declaración";
             MensajeModoGrafico = "La declaración contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
 
@@ -91,6 +118,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 6;
             MensajeModoTexto = "Las constantes no pueden ser arreglos";
             MensajeModoGrafico = "Las constantes no pueden ser arreglos";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
 
@@ -102,6 +130,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 7;
             MensajeModoTexto = "El tipo de dato esta especificado mas de una vez en la declaración";
             MensajeModoGrafico = "El tipo de dato esta especificado mas de una vez en la declaración";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -113,6 +143,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 8;
             MensajeModoTexto = "Tipo de dato faltante en la declaración";
             MensajeModoGrafico = "Tipo de dato faltante en la declaración";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -124,6 +156,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 9;
             MensajeModoTexto = "El valor de constante esta especificado mas de una vez en la declaración";
             MensajeModoGrafico = "El valor de constante esta especificado mas de una vez en la declaración";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
+            
         }
     }
 
@@ -135,6 +169,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 10;
             MensajeModoTexto = "Valor de constante faltante en la declaración";
             MensajeModoGrafico = "Valor de constante faltante en la declaración";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
 
@@ -146,6 +181,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 11;
             MensajeModoTexto = string.Format("{0} no tiene lugar en una declaración de constante", elementoErroneo);
             MensajeModoGrafico = string.Format("{0} no tiene lugar en una declaración de constante", elementoErroneo);
+
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
 
@@ -157,6 +194,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 12;
             MensajeModoTexto = "El := esta especificado mas de una vez en la asignacion";
             MensajeModoGrafico = "El := esta especificado mas de una vez en la asignacion";
+
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -168,6 +207,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 13;
             MensajeModoTexto = ":= faltante en la asignacion";
             MensajeModoGrafico = ":= faltante en la asignacion";
+
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -179,6 +220,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 14;
             MensajeModoTexto = "La asignacion termina incorrectamente";
             MensajeModoGrafico = "La asignacion termina incorrectamente";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -190,6 +232,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 15;
             MensajeModoTexto = "Error sintactico en la parte izq de la asignación";
             MensajeModoGrafico = "Error sintactico en la parte izq de la asignación";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -201,6 +244,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 16;
             MensajeModoTexto = "Los parentesis no estan balanceados en la parte izquierda de la asignacion";
             MensajeModoGrafico = "Los parentesis no estan balanceados en la parte izquierda de la asignacion";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
 
         }
     }
@@ -213,6 +257,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 17;
             MensajeModoTexto = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
             MensajeModoGrafico = "Los parentesis no estan balanceados en la parte derecha de la asignacion";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -224,6 +269,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 18;
             MensajeModoTexto = "Los corchetes no estan balanceados en la parte izquierda de la asignacion";
             MensajeModoGrafico = "Los corchetes no estan balanceados en la parte izquierda de la asignacion";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -235,6 +281,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 19;
             MensajeModoTexto = "Los corchetes no estan balanceados en la parte derecha de la asignacion";
             MensajeModoGrafico = "Los corchetes no estan balanceados en la parte derecha de la asignacion";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -246,6 +293,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 20;
             MensajeModoTexto = "La asignacion contiene una expresión mal formada en su parte izquierda";
             MensajeModoGrafico = "La asignacion contiene una expresión mal formada en su parte izquierda";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -257,6 +305,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 21;
             MensajeModoTexto = "La asignacion contiene una expresión mal formada en su parte derecha";
             MensajeModoGrafico = "La asignacion contiene una expresión mal formada en su parte derecha";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -268,6 +317,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 22;
             MensajeModoTexto = "La asignacion contiene un error sintactico";
             MensajeModoGrafico = "La asignacion contiene un error sintactico";
+            SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
 
@@ -279,6 +329,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 23;
             MensajeModoTexto = "La declaración de la función contiene un error sintactico";
             MensajeModoGrafico = "La declaración de la función contiene un error sintactico";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
 
@@ -290,6 +341,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 24;
             MensajeModoTexto = "La declaración del procedimiento contiene un error sintactico";
             MensajeModoGrafico = "La declaración del procedimiento contiene un error sintactico";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
         }
     }
 
@@ -301,6 +353,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 25;
             MensajeModoTexto = "La declaración de la variable contiene un error sintactico";
             MensajeModoGrafico = "La declaración de la variable contiene un error sintactico";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -312,6 +365,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 26;
             MensajeModoTexto = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
             MensajeModoGrafico = "La declaración de variables es incorrecta. Debe ser una lista de identificadores separados por comas o un identificador solo";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -323,6 +377,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 27;
             MensajeModoTexto = "El arreglo esta especificado mas de una vez en la declaración";
             MensajeModoGrafico = "El arreglo esta especificado mas de una vez en la declaración";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -334,6 +389,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 28;
             MensajeModoTexto = "Los corchetes no estan balanceados en la declaracion del arreglo";
             MensajeModoGrafico = "Los corchetes no estan balanceados en la declaracion del arreglo";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -345,6 +401,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 29;
             MensajeModoTexto = string.Format("Error sintactico: {0} es incorrecto en la declaración de un arreglo. La forma correcta es arreglo [MAX] de TIPO", elementoErroneo);
             MensajeModoGrafico = string.Format("Error sintactico: {0} es incorrecto en la declaración de un arreglo.", elementoErroneo);
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
 
@@ -356,6 +413,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 30;
             MensajeModoTexto = "El mientras contiene un error sintactico.";
             MensajeModoGrafico = "El mientras contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.Mientras);
         }
     }
 
@@ -367,6 +425,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 31;
             MensajeModoTexto = "El fin de un bloque si debe especificarse de la siguiente manera: finsi;";
             MensajeModoGrafico = "El fin de un bloque si debe especificarse de la siguiente manera: finsi;";
+            SentenciasQueTienenElError.Add(Sentencias.Si);
         }
     }
 
@@ -378,6 +437,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 32;
             MensajeModoTexto = "La llamada al procedimiento contiene un error sintactico.";
             MensajeModoGrafico = "La llamada al procedimiento contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.LlamarProcedimiento);
         }
     }
 
@@ -400,6 +460,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 34;
             MensajeModoTexto = "El fin de un bloque mientras debe especificarse de la siguiente manera: finmientras;";
             MensajeModoGrafico = "El fin de un bloque mientras debe especificarse de la siguiente manera: finmientras;";
+            SentenciasQueTienenElError.Add(Sentencias.Mientras);
         }
     }
 
@@ -411,6 +472,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 35;
             MensajeModoTexto = "La declaracion del bloque si contiene un error sintactico.";
             MensajeModoGrafico = "La declaracion del bloque si contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.Si);
         }
     }
 
@@ -422,6 +484,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 36;
             MensajeModoTexto = "La llamada a mostrar contiene un error sintactico.";
             MensajeModoGrafico = "La llamada a mostrar contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.Mostrar);
         }
     }
 
@@ -433,6 +496,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 37;
             MensajeModoTexto = "El fin de la declaración de un procedimiento debe especificarse de la siguiente manera: finproc;";
             MensajeModoGrafico = "El fin de la declaración de un procedimiento debe especificarse de la siguiente manera: finproc;";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
         }
     }
 
@@ -444,6 +508,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 38;
             MensajeModoTexto = "El fin de la declaración de una función debe especificarse de la siguiente manera: finfunc;";
             MensajeModoGrafico = "El fin de la declaración de una función debe especificarse de la siguiente manera: finfunc;";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
 
@@ -455,6 +520,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 39;
             MensajeModoTexto = "El fin de la declaracion de la funcion contiene un error sintactico.";
             MensajeModoGrafico = "El fin de la declaracion de la funcion contiene un error sintactico.";
+            SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
 
@@ -466,6 +532,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 40;
             MensajeModoTexto = "Hay llamadas a leer repetidas en la misma linea";
             MensajeModoGrafico = "Hay llamadas a leer repetidas en la misma linea";
+            SentenciasQueTienenElError.Add(Sentencias.Leer);
         }
     }
 
@@ -477,6 +544,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 41;
             MensajeModoTexto = "La llamada a leer debe estar acompañada de una variable o una posición de un arreglo";
             MensajeModoGrafico = "La llamada a leer debe estar acompañada de una variable o una posición de un arreglo";
+            SentenciasQueTienenElError.Add(Sentencias.Leer);
         }
     }
 
@@ -488,6 +556,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             CodigoGlobal = 42;
             MensajeModoTexto = "La llamada a leer puede estar acompañada unicamente de una variable o una posición de un arreglo";
             MensajeModoGrafico = "La llamada a leer puede estar acompañada unicamente de una variable o una posición de un arreglo";
+            SentenciasQueTienenElError.Add(Sentencias.Leer);
         }
     }
 }
