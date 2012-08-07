@@ -65,7 +65,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal void ArrojarExcepcion()
         {
-            throw new ValidacionException(mensajeError, mensajeError.Mensaje) { Fila = filaDelError, Columna = columnaDelError };
+            throw new ValidacionException(mensajeError, mensajeError.MensajeModoTexto) { Fila = filaDelError, Columna = columnaDelError };
         }
     }
 }

@@ -58,7 +58,7 @@ namespace CompiladorGargar.Sintactico
         internal static bool EsTipoDeDato(Terminal t)
         {
             return (t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
-                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoNumero
+                 || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoBooleano
                  || t.Componente.Token == Lexicografico.ComponenteLexico.TokenType.TipoTexto
                  );
         }

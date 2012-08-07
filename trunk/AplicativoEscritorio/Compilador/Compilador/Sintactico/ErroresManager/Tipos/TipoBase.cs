@@ -116,7 +116,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 
                 List<Terminal> parte;
 
-                if (i > 0)
+                if (i >= 0)
                 {
                     if (haciaDer)
                     {

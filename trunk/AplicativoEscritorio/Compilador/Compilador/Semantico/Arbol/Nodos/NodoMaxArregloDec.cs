@@ -97,7 +97,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(Lexema).Append(" no ya existia ").ToString());
+                    throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(Lexema).Append(" no existia ").ToString());
                 }
             }
 
