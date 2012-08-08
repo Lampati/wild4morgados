@@ -38,13 +38,13 @@ namespace InterfazTextoGrafico
                 switch (Tipo)
                 {
                     case InterfazTextoGrafico.Enums.TipoDato.Numero:
-                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor).AppendLine();
+                        strBldr.AppendFormat("const {0} : {1} = {2} ;", Nombre, Tipo.ToString(), Valor).AppendLine();
                         break;
                     case InterfazTextoGrafico.Enums.TipoDato.Texto:
-                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor).AppendLine();
+                        strBldr.AppendFormat("const {0} : {1} = {2} ;", Nombre, Tipo.ToString(), Valor).AppendLine();
                         break;
                     case InterfazTextoGrafico.Enums.TipoDato.Booleano:
-                        strBldr.AppendFormat("const {0} : {1} = {2};", Nombre, Tipo.ToString(), Valor).AppendLine();
+                        strBldr.AppendFormat("const {0} : {1} = {2} ;", Nombre, Tipo.ToString(), Valor).AppendLine();
                         break;
                 }
 

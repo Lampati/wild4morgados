@@ -39,11 +39,11 @@ namespace InterfazTextoGrafico
 
                 if (ConPausa)
                 {
-                    strBldr.AppendFormat("MostrarP({0});",ElementosAMostrar).AppendLine();
+                    strBldr.AppendFormat("MostrarP( {0} );",ElementosAMostrar).AppendLine();
                 }
                 else
                 {
-                    strBldr.AppendFormat("Mostrar({0});", ElementosAMostrar).AppendLine();
+                    strBldr.AppendFormat("Mostrar( {0} );", ElementosAMostrar).AppendLine();
                 }
 
                 return strBldr.ToString();

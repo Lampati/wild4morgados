@@ -771,7 +771,7 @@ namespace DiagramDesigner.UserControls.Toolbar
         private void bttnSolTexto_Click(object sender, RoutedEventArgs e)
         {
             TextEditionWindow textEditorWindow = new TextEditionWindow();
-            textEditorWindow.Titulo = "Enunciado para este ejercicio";
+            textEditorWindow.Titulo = "Solución para este ejercicio";
             textEditorWindow.Texto = ArchCargado.SolucionTexto;
             textEditorWindow.EsEditable = esEjercicio;
 

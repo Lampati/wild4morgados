@@ -34,7 +34,7 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("var {0} : arreglo [{1}] de {2};", Nombre, Tope ,Tipo.ToString()).AppendLine();
+                strBldr.AppendFormat("var {0} : arreglo [ {1} ] de {2} ;", Nombre, Tope ,Tipo.ToString()).AppendLine();
 
                 return strBldr.ToString();
             }
