@@ -43,11 +43,11 @@ namespace InterfazTextoGrafico
 
                 if (EsArreglo)
                 {
-                    strBldr.AppendFormat("arreglo [{0}] de {1} ",TopeArreglo,Tipo.ToString());
+                    strBldr.AppendFormat("arreglo [ {0} ] de {1} ",TopeArreglo,Tipo.ToString());
                 }
                 else
                 {
-                    strBldr.AppendFormat("{0} ", Tipo.ToString());
+                    strBldr.AppendFormat(" {0} ", Tipo.ToString());
                 }
 
                 return strBldr.ToString();

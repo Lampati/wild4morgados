@@ -82,11 +82,11 @@ namespace InterfazTextoGrafico
                         fin = "finproc;";
                         break;
                     case TipoRutina.Funcion:
-                        strBldr.AppendFormat("funcion {0}({1}) : {2}", Nombre, CadenaParametros, TipoRetorno.ToString()).AppendLine();
-                        fin = string.Format("finfunc {0};", Retorno);
+                        strBldr.AppendFormat("funcion {0} ( {1} ) : {2}", Nombre, CadenaParametros, TipoRetorno.ToString()).AppendLine();
+                        fin = string.Format("finfunc {0} ;", Retorno);
                         break;
                     case TipoRutina.Procedimiento:
-                        strBldr.AppendFormat("procedimiento {0}({1})", Nombre, CadenaParametros).AppendLine();                        
+                        strBldr.AppendFormat("procedimiento {0} ( {1} )", Nombre, CadenaParametros).AppendLine();                        
                         fin = "finproc;";
                         break;
                     case TipoRutina.Salida:

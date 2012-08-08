@@ -35,7 +35,7 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("var {0} : {1};", Nombre, Tipo.ToString()).AppendLine();
+                strBldr.AppendFormat("var {0} : {1} ;", Nombre, Tipo.ToString()).AppendLine();
 
                 return strBldr.ToString();
             }

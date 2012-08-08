@@ -34,7 +34,7 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("{0} := {1};",
+                strBldr.AppendFormat("{0} := {1} ;",
                     LadoIzquierdo,
                     LadoDerecho).AppendLine();
 
