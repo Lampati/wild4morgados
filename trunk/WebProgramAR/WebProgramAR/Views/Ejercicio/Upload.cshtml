@@ -43,4 +43,12 @@
          
       
 }
-
+<script type="text/javascript">
+$("#menu li").each(function (index) {
+        if ($(this).children().html().toUpperCase() == "EJERCICIOS") {
+            $(this).addClass("selected");
+        } else {
+            $(this).removeClass("selected");
+        }
+    });
+</script>

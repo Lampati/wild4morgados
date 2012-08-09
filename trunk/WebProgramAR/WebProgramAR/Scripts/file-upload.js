@@ -18,6 +18,10 @@
 			        // IE shows the whole system path, we're reducing it 
 			        // to the filename for consistency
 			        var value = browser.ie ? this.value.split('\\').pop() : this.value;
+			        pos = value.indexOf("fakepath");
+			        if (pos != -1) {
+			            value = value.substr(12);
+			        }
 			        status.innerHTML = value;
 			        insertAfter(status, this.parentNode);
 
@@ -46,7 +50,6 @@
 
             // Create a status element, and store it
             storeData(field, 'upload-status', createElement('span.file-upload-status'));
-
             // Bind events
             addEvent(field, 'focus', onUploadFocus);
             addEvent(field, 'blur', onUploadBlur);

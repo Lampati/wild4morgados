@@ -85,7 +85,8 @@ namespace WebProgramAR.DataAccess.Seguridad
                                 resFiltro = Comparar((int)obj, regla.Comparador.Nombre, Convert.ToInt32(regla.Valor));
                                 break;
                             case ConstantesSeguridad.TIPO_BOOL:
-                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Convert.ToBoolean(regla.Valor));
+                                bool flag;
+                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Boolean.TryParse(regla.Valor.ToString(),out flag));
                                 break;
                             case ConstantesSeguridad.TIPO_DATETIME:
                                 resFiltro = Comparar((DateTime)obj, regla.Comparador.Nombre, Convert.ToDateTime(regla.Valor));
@@ -175,7 +176,8 @@ namespace WebProgramAR.DataAccess.Seguridad
                                 resFiltro = Comparar((int)obj, regla.Comparador.Nombre, Convert.ToInt32(regla.Valor));
                                 break;
                             case ConstantesSeguridad.TIPO_BOOL:
-                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Convert.ToBoolean(regla.Valor));
+                                bool flag;
+                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Boolean.TryParse(regla.Valor.ToString(),out flag));
                                 break;
                             case ConstantesSeguridad.TIPO_DATETIME:
                                 resFiltro = Comparar((DateTime)obj, regla.Comparador.Nombre, Convert.ToDateTime(regla.Valor));
@@ -312,7 +314,8 @@ namespace WebProgramAR.DataAccess.Seguridad
                                 resFiltro = Comparar((int)obj, regla.Comparador.Nombre, Convert.ToInt32(regla.Valor));
                                 break;
                             case ConstantesSeguridad.TIPO_BOOL:
-                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Convert.ToBoolean(regla.Valor));
+                                bool flag;
+                                resFiltro = Comparar((bool)obj, regla.Comparador.Nombre, Boolean.TryParse(regla.Valor.ToString(),out flag));
                                 break;
                             case ConstantesSeguridad.TIPO_DATETIME:
                                 resFiltro = Comparar((DateTime)obj, regla.Comparador.Nombre, Convert.ToDateTime(regla.Valor));
