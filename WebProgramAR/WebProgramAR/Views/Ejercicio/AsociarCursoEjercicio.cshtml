@@ -241,7 +241,9 @@
 //        convertSelect("estadoEjercicioNA", 1);
 
 
-        
+        if ($(".grid").find("tbody").children().length == 0) {
+            $(".grid").find("tbody").append("No se han encontrado Resultados");
+        }
         function OnChangeDo(div) {
             if (div.attr('id') == "nivelEjercicioNA") {
                 $("#nivelEjercicioNA").children().each(function () { $(this).removeAttr("selected"); });

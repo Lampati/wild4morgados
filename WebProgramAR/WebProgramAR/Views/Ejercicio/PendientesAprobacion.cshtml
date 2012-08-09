@@ -158,5 +158,8 @@ else
 
 <div id="dialog" class="dialogDiv" ></div>
 <script type="text/javascript">
+    if ($(".grid").find("tbody").children().length == 0) {
+        $(".grid").find("tbody").append("No se han encontrado Resultados");
+    }
     convertSelect("nivelEjercicioPendientes");
 </script>
