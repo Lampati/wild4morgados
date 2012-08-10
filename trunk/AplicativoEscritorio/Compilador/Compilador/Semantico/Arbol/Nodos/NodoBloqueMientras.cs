@@ -53,6 +53,11 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             activ.Condicion = this.hijosNodo[2].Gargar;
             activ.Cuerpo = this.hijosNodo[5].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
 
+            if (activ.Cuerpo == null)
+            {
+                activ.Cuerpo = new InterfazTextoGrafico.SecuenciaViewModel();
+            }
+
             ActividadViewModel = activ;
         }
 

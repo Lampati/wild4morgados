@@ -62,6 +62,16 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             activ.BranchVerdadero = this.hijosNodo[5].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
             activ.BranchFalso = this.hijosNodo[6].ActividadViewModel as InterfazTextoGrafico.SecuenciaViewModel;
 
+            if (activ.BranchVerdadero == null)
+            {
+                activ.BranchVerdadero = new InterfazTextoGrafico.SecuenciaViewModel();
+            }
+
+            if (activ.BranchFalso == null)
+            {
+                activ.BranchFalso = new InterfazTextoGrafico.SecuenciaViewModel();
+            }
+
             ActividadViewModel = activ;
         }
 

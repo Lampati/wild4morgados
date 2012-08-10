@@ -28,45 +28,59 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (DeclaracionesPermitidas == TipoDeclaracionesPermitidas.Variables)
             {
+                List<string> nombresVariables = new List<string>();
 
-                foreach (Variable v in variables)
+                if (variables.Count > 0)
                 {
-                    if (!this.hijosNodo[2].EsArreglo)
-                    //if (!v.EsArreglo)
-                    {
-                        if (!this.TablaSimbolos.ExisteVariableEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
-                        {
-                            this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
-                            textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
-                            textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
 
-                            AgregarVariableViewModel(v.Lexema, tipo);
+                    foreach (Variable v in variables)
+                    {
+                        if (!this.hijosNodo[2].EsArreglo)
+                        //if (!v.EsArreglo)
+                        {
+                            if (!this.TablaSimbolos.ExisteVariableEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
+                            {
+                                this.TablaSimbolos.AgregarVariable(v.Lexema, tipo, this.EsConstante, this.ContextoActual, this.NombreContextoLocal);
+                                textoParaArbol.Append("Declaracion de variable ").Append(v.Lexema).Append(" ").Append(EnumUtils.stringValueOf(this.ContextoActual));
+                                textoParaArbol.Append(" de tipo ").Append(EnumUtils.stringValueOf(tipo));
+
+                                nombresVariables.Add(v.Lexema);
+                            }
+                            else
+                            {
+                                throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(v.Lexema).Append(" ya existia en ese contexto").ToString());
+                            }
                         }
                         else
                         {
-                            throw new ErrorSemanticoException(new StringBuilder("La variable ").Append(v.Lexema).Append(" ya existia en ese contexto").ToString());
+
+                            if (!this.TablaSimbolos.ExisteArregloEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
+                            {
+
+
+                                bool res = this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, this.RangoArregloSinPrefijo, false);
+
+                                if (!res)
+                                {
+                                    throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                                }
+
+                                nombresVariables.Add(v.Lexema);
+                            }
+                            else
+                            {
+                                throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString());
+                            }
                         }
+                    }
+
+                    if (!this.hijosNodo[2].EsArreglo)
+                    {
+                        AgregarVariableViewModel(string.Join(",", nombresVariables.ToArray()), tipo);
                     }
                     else
                     {
-
-                        if (!this.TablaSimbolos.ExisteArregloEnEsteContexto(v.Lexema, this.ContextoActual, this.NombreContextoLocal))
-                        {
-
-
-                            bool res = this.TablaSimbolos.AgregarArreglo(v.Lexema, tipo, this.ContextoActual, this.NombreContextoLocal, this.RangoArregloSinPrefijo, false);
-
-                            if (!res)
-                            {
-                                throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
-                            }
-
-                            AgregarArregloViewModel(v.Lexema, tipo, this.RangoArregloSinPrefijo);
-                        }
-                        else
-                        {
-                            throw new ErrorSemanticoException(new StringBuilder("El arreglo ").Append(v.Lexema).Append(" ya existia").ToString());
-                        }
+                        AgregarArregloViewModel(string.Join(",", nombresVariables.ToArray()), tipo, this.RangoArregloSinPrefijo);
                     }
                 }
             }
