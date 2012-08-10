@@ -20,6 +20,7 @@ using DiagramDesigner.TestsPruebas;
 using System.IO;
 using AplicativoEscritorio.DataAccess;
 using DataAccess;
+using System.Windows.Resources;
 
 namespace DiagramDesigner
 {
@@ -49,6 +50,8 @@ namespace DiagramDesigner
                                     Ejercicio ej = new Ejercicio();
                                     string exePath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
                                     string dir = Path.GetDirectoryName(exePath);
+
+                                    
                                     //string pathTemplate = Path.Combine(dir, "ModoTexto", "Configuracion", "Template.txt").ToLower();
                                     //if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
                                     //    pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
@@ -70,6 +73,11 @@ namespace DiagramDesigner
                                     ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                     ej.ModificadoDesdeUltimoGuardado = false;
                                     ej.PathGuardadoActual = path;
+
+
+                                    
+
+                                    ej.Gargar = AsignarTemplate(); 
 
                                     ej.Guardar(ej.PathGuardadoActual);
                                     ArchCargado = ej;
@@ -145,6 +153,19 @@ namespace DiagramDesigner
                     MessageBox.Show("Error apertura", "Error de lectura de archivo. Por favor corrobore que el archivo sea un ejercicio o resolución de ProgramAr", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             } //fin si
+        }
+
+        private string AsignarTemplate()
+        {
+            Uri uri = new Uri("/ModoTexto/Configuracion/Template.txt", UriKind.Relative);
+            StreamResourceInfo info = Application.GetResourceStream(uri);
+
+            using (StreamReader txtRdr = new StreamReader(info.Stream))
+            {
+                return txtRdr.ReadToEnd();
+            }
+            
+            
         }
 
 
