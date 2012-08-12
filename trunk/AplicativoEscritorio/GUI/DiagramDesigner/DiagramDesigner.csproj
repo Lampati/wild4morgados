@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>RibbonDLL\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
+    <Reference Include="ReuxablesLegacy">
+      <HintPath>Resources\ReuxablesLegacy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Activities.Presentation" />
@@ -531,6 +534,7 @@
     <Resource Include="Images\loboTribal1.png" />
     <Content Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
     <None Include="Resources\Images\loading-intro.gif" />
+    <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
