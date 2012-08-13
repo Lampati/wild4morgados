@@ -202,17 +202,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="TabItemHeaderContainerStyle" TargetType="TabItem">
+        <Style x:Key="TabItemHeaderContainerStyle" TargetType="TabItem">            
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Name="grid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}"  x:Name="hdr_texto">
                                 <local:EditableTabHeaderControl.Content>
                                     <Binding Path="Header" Mode="TwoWay"/>
                                 </local:EditableTabHeaderControl.Content>
@@ -233,7 +236,12 @@
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=DataContext.DeleteTab}"
                                     CommandParameter="{Binding}"
                                     ToolTip="Eliminar"/>
-                        </Grid>
+                        </Grid>                                       
+                        <DataTemplate.Triggers>
+                            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TabItem}},Path=IsSelected}" Value="True">
+                                <Setter TargetName="grid" Property="Background" Value="#285FBA"/>                               
+                            </DataTrigger>-->
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
