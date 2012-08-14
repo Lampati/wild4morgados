@@ -38,11 +38,11 @@
             }
         });
 
-        $('.botonEliminar').click(function (event) {
+        $('.botonEliminarDesaprobados').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Delete")/', 550, 540);
         });
 
-        $('.botonDetalles').click(function (event) {
+        $('.botonDetallesDesaprobados').click(function (event) {
             OpenDialog(event, $(this).attr('data'), '@Url.Action("Details")/', 550, 520);
         });
         var sortcol = '@grid.SortColumn';
@@ -109,13 +109,13 @@
             grid.Column("", 
                   header: "",
                   format: @<text>
-                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetallesDesaprobados hoverRel"/>
                           </text>
             ),
                 grid.Column("", 
                       header: "",
                       format: @<text>
-                                <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.EjercicioId)" class="botonEliminar hoverRel"/>
+                                <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.EjercicioId)" class="botonEliminarDesaprobados hoverRel"/>
                     
                               </text>
             )
@@ -145,7 +145,7 @@ else
             grid.Column("", 
                   header: "",
                   format: @<text>
-                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetalles hoverRel"/>
+                            <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.EjercicioId)" class="botonDetallesDesaprobados hoverRel"/>
                           </text>
             )
         })

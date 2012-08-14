@@ -12,7 +12,7 @@
  *
  * http://docs.jquery.com/UI/Dialog#theming
  */
-.ui-dialog { position: absolute; padding: .2em; width: 300px; overflow: auto; z-index:1000;font-family:Calibri;Font-size:1em;}
+.ui-dialog { padding: .2em; width: auto; overflow: auto; z-index:1000;font-family:Calibri;Font-size:1em;overflow:hidden;}
 .ui-dialog .ui-dialog-titlebar { padding: .2em 1em; position: relative; }
 .ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .1em 0; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; right:20px;}
