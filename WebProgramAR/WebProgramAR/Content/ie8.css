@@ -254,7 +254,7 @@ footer .content
     border-right:1px dotted #fff;
 }
 .contentSiteMap
-{text-align:left;margin-left:10px;}
+{text-align:right;margin-left:10px;width:-moz-fit-content}
 .contentSiteMap a,a:link
 {color:#888; !important}
 .contentSiteMap a:hover
@@ -2192,7 +2192,7 @@ ul.tabs
 .queesContent
 {
     font-size:1em;
-    color:#fff;   
+   color:#333;   
     font-family:Calibri;
     width:220px;
 }

@@ -250,20 +250,9 @@ function OpenDialog(event, id, accion, ancho, alto) {
         position = 'center';
     }
 
-    if (alto > 0) {
-        $("#dialog").dialog("option", "height", alto);
-    }
-    else {
-        $("#dialog").dialog("option", "height", 'auto');
-    }
-
-    if (ancho > 0) {
-        $("#dialog").dialog("option", "width", ancho);
-    }
-    else {
-        $("#dialog").dialog("option", "height", 'auto');
-    }
-
+    $("#dialog").dialog("option", "height", alto);
+    $("#dialog").dialog("option", "width", ancho);
+    
     $("#dialog").unbind("dialogopen");
     $("#dialog").bind("dialogopen", function (event, ui) {
         $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
