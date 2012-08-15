@@ -15,43 +15,14 @@
 <p>
     La contraseña requiere como minimo de @Membership.MinRequiredPasswordLength caracteres.
 </p>
-<script type="text/jscript">
-    function validForm() {
-        var countErrors = 0;
-        if ($("#Usuario_PaisId").val() == "") {
-            countErrors++;
-            $("#Usuario_PaisId").parent().last().css("display", "block");
-        } else {
-            $("#Usuario_PaisId").parent().last().css("display", "none");
-        }
-        if ($("#Usuario_ProvinciaId").val() == "") {
-            countErrors++;
-            $("#Usuario_ProvinciaId").parent().last().css("display", "block");
-        } else {
-            $("#Usuario_ProvinciaId").parent().last().css("display", "none");
-        }
-        if ($("#Usuario_LocalidadId").val() == "") {
-            countErrors++;
-            $("#Usuario_LocalidadId").parent().last().css("display", "block");
-        } else {
-            $("#Usuario_LocalidadId").parent().last().css("display", "none");
-        }
-        if (countErrors == 0) return true; else return false;
-    }
-    $("#btnAceptar").click(function () {
-        if (validForm()) {
-            $("#form0").submit();
-        }
-    });
-
-</script>
 @using (Ajax.BeginForm("Register", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccessView", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
 
         @Html.Partial("_Create", Model)
         <div>    
-            <input type="submit" value="Registrar" class="submit"  id="btnAceptar" style="bottom:170px;"/> 
+            <input type="submit" value="Registrar" class="submit" id="btnGuardarNuevo" style="bottom:170px;"/>
+            <input type="button" value="Registrar" class="submit submitDisabled" id="btnGuardarDisabled" style="left:50px;top:80px;"/>
         </div>
 
 }
@@ -59,3 +30,6 @@
     <div id="update-message" class="error" ></div>
 </div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
+<script>
+    validForm();
+</script>

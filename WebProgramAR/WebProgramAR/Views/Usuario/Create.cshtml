@@ -9,37 +9,7 @@
 
 <h2>Nuevo</h2>
 <h4>Usuario</h4>
-<script type="text/jscript">
-    function validForm() {
-        var countErrors = 0;
-        if ($("#Usuario_PaisId").val() == "") {
-            countErrors++;
-            $("#Usuario_PaisId").parent().last().css("display", "block");
-        } else {
-            $("#Usuario_PaisId").parent().last().css("display", "none");
-        }
-        if ($("#Usuario_ProvinciaId").val() == "") {
-            countErrors++;
-            $("#Usuario_ProvinciaId").parent().last().css("display", "block");
-        } else {
-            $("#Usuario_ProvinciaId").parent().last().css("display", "none");
-        }
-        if ($("#Usuario_LocalidadId").val() == "") {
-            countErrors++;
-            $("#Usuario_LocalidadId").parent().last().css("display", "block");
-        } else {
-            $("#Usuario_LocalidadId").parent().last().css("display", "none");
-        }
-            if (countErrors==0)return true;else return false;
-        }
-        $(document).ready(function () {
-            $("#btnGuardarNuevo").live('click', function () {
-                if (validForm()) {
-                    $("#form0").submit();
-                }
-            });
-        });
-</script>
+
 @using (Ajax.BeginForm("Create", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
@@ -50,6 +20,7 @@
         <div id="buttonSectionOptions" class="buttonSectionOptions">
             <div>
                 <input type="submit" value="Guardar" class="submit" id="btnGuardarNuevo"/>
+                <input type="button" value="Guardar" class="submit submitDisabled" id="btnGuardarDisabled"/>
             </div>
             <div >
                  <input type="button" value="Cancelar" class="submit" id="btnCancelar"/>
@@ -60,3 +31,6 @@
     <div id="update-message" class="error" ></div>
 </div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
+<script>
+    validForm();
+</script>
