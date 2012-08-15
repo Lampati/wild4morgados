@@ -20,7 +20,7 @@ namespace WebProgramAR.MailSender
             SmtpClient smtpClient = new SmtpClient("smtp.apgconsulting.com.ar", SmtpPort);
 
             MailMessage message = new MailMessage();
-            MailAddress fromAddress = new MailAddress("admin@program-ar.com.ar");
+            MailAddress fromAddress = new MailAddress("noreply@program-ar.com.ar");
 
 
             //smtpClient.Host = "216.59.32.145";
