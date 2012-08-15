@@ -82,7 +82,7 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Curso/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             if (Request.IsAjaxRequest())
@@ -122,6 +122,7 @@ namespace WebProgramAR.Controllers
         
         //
         // GET: /Curso/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             if (Request.IsAjaxRequest())
@@ -170,6 +171,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Curso/AsociarEjercicios/5
+        [Authorize]
         public ActionResult AsociarEjercicios(int id)
         {
             if (Request.IsAjaxRequest())
@@ -294,7 +296,7 @@ namespace WebProgramAR.Controllers
 
         //
         // GET: /Curso/Delete/5
- 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             if (Request.IsAjaxRequest())
