@@ -1,0 +1,2 @@
+#labels Phase-QA
+Contiene una imagen con los posibles cambios de estado que puede sufrir un defecto.
