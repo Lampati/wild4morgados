@@ -170,6 +170,47 @@
         if (charCode == 8) return false; //  backspace
         if (charCode == 46) return false; // delete
     });
+
+    function validForm() {
+        var countErrors = 0;
+        if ($("#Usuario_UsuarioNombre").val() != "" &&
+        $("#Usuario_Email").val() != "" &&
+        $("#Contrasena").val() != "" &&
+        $("#ConfirmarContrasena").val() != "" &&
+        $("#Usuario_Nombre").val() != "" &&
+        $("#Usuario_Apellido").val() != "" &&
+        $("#Usuario_FechaNacimiento").val() != ""
+        ) {
+            if ($("#Usuario_PaisId").val() == "") {
+                countErrors++;
+                $("#Usuario_PaisId").parents(".tzSelect").find(".field-validation-valid").css("display", "block");
+            } else {
+                $("#Usuario_PaisId").parents(".tzSelect").find(".field-validation-valid").css("display", "none");
+            }
+            if ($("#Usuario_ProvinciaId").val() == "") {
+                countErrors++;
+                $("#Usuario_ProvinciaId").parents(".tzSelect").find(".field-validation-valid").css("display", "block");
+            } else {
+                $("#Usuario_ProvinciaId").parents(".tzSelect").find(".field-validation-valid").css("display", "none");
+            }
+            if ($("#Usuario_LocalidadId").val() == "") {
+                countErrors++;
+                $("#Usuario_LocalidadId").parents(".tzSelect").find(".field-validation-valid").css("display", "block");
+            } else {
+                $("#Usuario_LocalidadId").parents(".tzSelect").find(".field-validation-valid").css("display", "none");
+            }
+            if (countErrors == 0) {
+                $("#btnGuardarNuevo").show();
+                $("#btnGuardarDisabled").hide();
+            } else {
+                $("#btnGuardarNuevo").hide();
+                $("#btnGuardarDisabled").show();
+            }
+        } else {
+            $("#btnGuardarDisabled").show();
+            $("#btnGuardarNuevo").hide();
+        }
+    }
     function selectElement(name) {
         $("#select"+name).children().each(function () { $(this).removeAttr("selected"); });
         var selectedElementRel = $("#selectBox_Select" + name).attr("rel");
@@ -228,7 +269,6 @@
                 $("#listLocalidades").hide();
             }
             reInitLocalidad();
-
             return;
         }
     }
@@ -263,12 +303,14 @@
         selectFirst: false,
         focus: function (event, ui) {
             $("#LocalidadIdAutoComplete").val(ui.item.label);
+            validForm();
             return false;
         },
         select: function (event, ui) {
             $("#Usuario_LocalidadId").val(ui.item.value);
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+            validForm();
             return false;
         },
         change: function (event, ui) {
@@ -276,13 +318,18 @@
                 $("#Usuario_LocalidadId").val(ui.item.value);
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+                validForm();
                 return false;
             } else {
                 reInitLocalidad();
+                validForm();
             }
         }
     });
     $(document).ready(function () {
         $("#LocalidadIdAutoComplete").keyup(function () { $("#Usuario_LocalidadId").val("");});
+        $("#btnGuardarNuevo").live('click', function () {
+            $("#form0").submit();
+        });
     });            
 </script>
