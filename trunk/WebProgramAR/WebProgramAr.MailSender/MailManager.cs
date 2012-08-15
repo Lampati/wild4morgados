@@ -13,12 +13,11 @@ namespace WebProgramAR.MailSender
         /// <summary>
         /// Default SMTP Port.
         /// </summary>
-        public static int SmtpPort = 25;
+        public static int SmtpPort = 6666;
 
         public static bool Enviar(string to, string subject, string body)
         {
-            //SmtpClient smtpClient = new SmtpClient("smtp.ec2-23-22-33-245.compute-1.amazonaws.com", SmtpPort);
-            SmtpClient smtpClient = new SmtpClient("localhost", SmtpPort);
+            SmtpClient smtpClient = new SmtpClient("smtp.apgconsulting.com.ar", SmtpPort);
 
             MailMessage message = new MailMessage();
             MailAddress fromAddress = new MailAddress("admin@program-ar.com.ar");
@@ -26,7 +25,7 @@ namespace WebProgramAR.MailSender
 
             //smtpClient.Host = "216.59.32.145";
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.Credentials = new NetworkCredential(@"amazona-2fjpvok\smtp", "Pr0gr4m4r");
+            smtpClient.Credentials = new NetworkCredential("programar", "Pr0gr4m4r");
             smtpClient.EnableSsl = false;
 
             message.From = fromAddress;
