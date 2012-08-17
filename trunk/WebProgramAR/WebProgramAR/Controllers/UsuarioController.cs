@@ -36,7 +36,7 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "Nombre", "Apellido", "NombreUsuario", "TipoUsuario", "Pais", "Provincia" , "Localidad"};
+            var validColumns = new[] { "Nombre", "Apellido", "UsuarioNombre", "TipoUsuario", "Pais", "Provincia", "Localidad" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";
@@ -149,11 +149,13 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
+                    Initilization();
                     return Content(Boolean.TrueString);
                 }            
             }
             else
             {
+                Initilization();
                 // If we got this far, something failed, redisplay form
                 return Content(Boolean.FalseString);
             }

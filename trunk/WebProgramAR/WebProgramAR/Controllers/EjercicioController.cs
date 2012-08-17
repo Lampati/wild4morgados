@@ -26,6 +26,13 @@ namespace WebProgramAR.Controllers
             EstadoEjercicio estado = EstadoEjercicioNegocio.GetEstadoEjercicioByName("Aprobado");
             estadoEjercicio = estado.EstadoEjercicioId;
 
+            sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
+
+            var validColumns = new[] { "EjercicioId", "Nombre", "NivelEjercicio", "Usuario.UsuarioNombre"};
+
+            if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
+                sort = "Nombre";
+
             var datos = ObtenerEjercicioGrillaModel(page, sort, sortDir, nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global);
             datos.ConLayout = conLayout;
             datos.AplicarPermisos = aplicarPermisos;
@@ -88,7 +95,7 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario.UsuarioNombre", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";
@@ -139,7 +146,7 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario.UsuarioNombre", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";

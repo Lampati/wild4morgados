@@ -13,16 +13,40 @@
     $(document).ready(function () {
         $(".input-integer-validation").limitkeypress({ rexp: /^[+]?\d*$/ });
         $(".input-string-validation").limitkeypress({ rexp: /^[A-Za-z _-]*$/ });
-        $("#UsuarioIdAutoComplete").keyup(function () {$("#UsuarioId").val("");isValid();});
+        $("#UsuarioIdAutoComplete").keyup(function () { $("#UsuarioId").val(""); isValid(); });
         $(".input-integer-validation").change(function () { isValid(); });
         $(".input-string-validation").change(function () { isValid(); });
-        $("input:radio[name=groupUsuario]").change(function () {checkedRadio();});
+        $("input:radio[name=groupUsuario]").change(function () { checkedRadio(); });
         $("#IsValorBool").click(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
         $("#ValorInt").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
         $("#ValorText").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
         $("#ValorDate").change(function () { $("#Valor").val($(this).val()); isValid(); });
         isValid();
+        $("#btnGuardarDisabled").live('click', function () {
+            showErrorField();
+        });
     });
+    function showErrorField() {
+        $("#form0").find(".editor-field:visible").each(function () {
+            if ($(this).find("input").attr("id") != "TipoUsuarioId") {
+                if ($(this).find("input[type='hidden']").length > 0) {
+                    if ($(this).find("input[type='hidden']").val() == "" || $(this).find("input[type='hidden']").val() == "-1") {
+                        $(this).find("span").html("Requerido");
+                        $(this).find("span").css({ display: 'block' });
+                    } else {
+                        $(this).find("span").hide();
+                    }
+                } else {
+                    if ($(this).find("input").val() == "") {
+                        $(this).find("span").html("Requerido");
+                        $(this).find("span").css({ display: 'block' });
+                    } else {
+                        $(this).find("span").hide();
+                    }
+                }
+            }
+        });
+    }
     function isValid() {
         var valid = false;
         if ($("#selectBox_SelectTablaId").is(":visible") &&
@@ -51,6 +75,7 @@
             $("#btnGuardar").hide();
             $("#btnGuardarDisabled").show();
         }
+        setTimeout("showErrorField()",2000);
     }
 
     function checkedRadio() {
@@ -392,6 +417,7 @@
             <div class="editor-field">
             @Html.TextBoxFor(model => model.UsuarioId, new { @Name = "UsuarioIdAutoComplete", @id = "UsuarioIdAutoComplete" })
             @Html.HiddenFor(model => model.UsuarioId)
+            @Html.ValidationMessageFor(m => m.UsuarioId)
         </div>
     </div>
     <input type="radio" name="groupUsuario" id="groupUsuario" value="tipoUsuario" > Por Perfil<br>
