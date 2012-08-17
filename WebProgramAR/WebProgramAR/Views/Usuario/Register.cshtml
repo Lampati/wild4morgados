@@ -15,14 +15,13 @@
 <p>
     La contraseña requiere como minimo de @Membership.MinRequiredPasswordLength caracteres.
 </p>
-@using (Ajax.BeginForm("Register", "Usuario", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccessView", HttpMethod = "POST" }))
+@using (Ajax.BeginForm("Register", "Usuario", new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccessView", HttpMethod = "POST" }))
 { 
         @Html.ValidationSummary(true)
 
         @Html.Partial("_Create", Model)
         <div>    
             <input type="submit" value="Registrar" class="submit" id="btnGuardarNuevo" style="bottom:170px;"/>
-            <input type="button" value="Registrar" class="submit submitDisabled" id="btnGuardarDisabled" style="left:50px;top:80px;"/>
         </div>
 
 }
@@ -30,6 +29,3 @@
     <div id="update-message" class="error" ></div>
 </div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
-<script>
-    validForm();
-</script>

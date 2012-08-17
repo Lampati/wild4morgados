@@ -172,46 +172,6 @@
         if (charCode == 46) return false; // delete
     });
 
-    function validForm() {
-        var countErrors = 0;
-        if ($("#Usuario_UsuarioNombre").val() != "" &&
-        $("#Usuario_Email").val() != "" &&
-        $("#Contrasena").val() != "" &&
-        $("#ConfirmarContrasena").val() != "" &&
-        $("#Usuario_Nombre").val() != "" &&
-        $("#Usuario_Apellido").val() != "" &&
-        $("#Usuario_FechaNacimiento").val() != ""
-        ) {
-            if ($("#Usuario_PaisId").val() == "") {
-                countErrors++;
-                $("#Usuario_PaisId").parents(".tzSelect").find(".field-validation-valid").css("display", "block");
-            } else {
-                $("#Usuario_PaisId").parents(".tzSelect").find(".field-validation-valid").css("display", "none");
-            }
-            if ($("#Usuario_ProvinciaId").val() == "") {
-                countErrors++;
-                $("#Usuario_ProvinciaId").parents(".tzSelect").find(".field-validation-valid").css("display", "block");
-            } else {
-                $("#Usuario_ProvinciaId").parents(".tzSelect").find(".field-validation-valid").css("display", "none");
-            }
-            if ($("#Usuario_LocalidadId").val() == "") {
-                countErrors++;
-                $("#Usuario_LocalidadId").parents(".tzSelect").find(".field-validation-valid").css("display", "block");
-            } else {
-                $("#Usuario_LocalidadId").parents(".tzSelect").find(".field-validation-valid").css("display", "none");
-            }
-            if (countErrors == 0) {
-                $("#btnGuardar").show();
-                $("#btnGuardarDisabled").hide();
-            } else {
-                $("#btnGuardar").hide();
-                $("#btnGuardarDisabled").show();
-            }
-        } else {
-            $("#btnGuardarDisabled").show();
-            $("#btnGuardar").hide();
-        }
-    }
     function reInitProvincia() {
         $("#ProvinciaId").val("");
     }
@@ -300,7 +260,6 @@
             $("#LocalidadId").val(ui.item.value);
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
-            validForm();
             return false;
         },
         change: function (event, ui) {
@@ -308,19 +267,14 @@
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
                 $("#LocalidadId").val(ui.item.value);
-                validForm();
                 return false;
             } else {
                 reInitLocalidad();
-                validForm();
             }
         }
     });
     $(document).ready(function () {
         $("#LocalidadIdAutoComplete").keyup(function () { $("#LocalidadId").val(""); });
-        $("#btnGuardarNuevo").live('click', function () {
-            $("#form0").submit();
-        });
     });  
 
 </script>

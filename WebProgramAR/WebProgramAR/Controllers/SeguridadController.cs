@@ -39,7 +39,7 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "Tabla", "Columna", "Comparador", "Usuario","TipoUsuario" };
+            var validColumns = new[] { "Tabla.Nombre", "Columna.Nombre", "Comparador.Nombre", "Usuario","TipoUsuario", "Valor","Activa" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Tabla";

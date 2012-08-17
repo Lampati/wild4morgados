@@ -35,12 +35,14 @@
 
     function updateSuccess() {
         
-        if ($("#frmLogIn").find("#update-message").html() == "True") {
-            $("#frmLogIn").find("#divOperacionExitosa").fadeIn(300);
+        if ($("#update-message").html() == "True") {
+            $("#divOperacionExitosa").fadeIn(300);
             updateWindow();
 
         } else {
-            $("#frmLogIn").find("#logonerror").show();
+            $("#logonerror").show();
+            $(".dialogDiv").animate({ height: '370' });
+            $(".ui-dialog").animate({ height: '430' });
         }
 
     }
