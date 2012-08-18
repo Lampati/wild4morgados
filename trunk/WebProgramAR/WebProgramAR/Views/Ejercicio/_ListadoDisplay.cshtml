@@ -90,11 +90,12 @@ else
         $("#submitButton").css("position", "absolute");
         $("#submitButton").css("top", "150px");
         $("#dialog").animate({ height: "260px" });
+        $(".cursoEdition").animate({ height: "114px" });
     } else {
         var size = $(".details").css("height");
         var currentHeight = parseInt(size.substring(0, size.length - 2)) + parseInt(170);
         if (currentHeight > 500) {
-            $("#dialog").animate({ height: "450px" });
+            $("#dialog").animate({ height: "530px" });
             $("#dialog").css("overflowY", "auto !important");
         }
         else {
