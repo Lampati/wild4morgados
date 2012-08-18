@@ -249,8 +249,12 @@ function OpenDialog(event, id, accion, ancho, alto) {
     } else {
         position = 'center';
     }
-
-    $("#dialog").dialog("option", "height", alto);
+    if (alto > 0) {
+        $("#dialog").dialog("option", "height", alto);
+    }
+    else {
+        $("#dialog").dialog("option", "height", 'auto');
+    }
     $("#dialog").dialog("option", "width", ancho);
     
     $("#dialog").unbind("dialogopen");
