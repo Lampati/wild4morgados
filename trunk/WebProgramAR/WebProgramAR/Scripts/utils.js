@@ -23,10 +23,64 @@ function GetPosition() {
 }
 //Dialogo login
 
+function initDialogs() {
+    $('#dialog').dialog({
+        autoOpen: false,
+        draggable: true,
+        resizable: false,
+        position: GetPosition(),
+        title: '',
+        modal: true,
+        overlay: { opacity: 1.5, background: "black" },
+        show: "slide",
+        hide: "blind"
+            , error: function (msg) { alert(msg); }
+    });
+    $('#dialogLogin').dialog({
+        autoOpen: false,
+        draggable: true,
+        resizable: false,
+        position: GetPosition(),
+        title: '',
+        modal: true,
+        overlay: { opacity: 1.5, background: "black" },
+        show: "slide",
+        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); },
+        hide: "blind"
+            , error: function (msg) { alert(msg); }
+    });
+
+    $('#dialogRecoverPassword').dialog({
+        autoOpen: false,
+        draggable: true,
+        resizable: false,
+        position: GetPosition(),
+        title: '',
+        modal: true,
+        overlay: { opacity: 1.5, background: "black" },
+        show: "slide",
+        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); },
+        hide: "blind"
+            , error: function (msg) { alert(msg); }
+    });
+    $('#subDialog').dialog({
+        autoOpen: false,
+        draggable: true,
+        resizable: false,
+        position: 'center',
+        title: '',
+        modal: true,
+        overlay: { opacity: 1.5, background: "black" },
+        show: "blind",
+        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); },
+        hide: "blind"
+            , error: function (msg) { alert(msg); }
+    });
+}
 
 $(document).ready(function () {
     alertSize();
-
+    initDialogs();
     /*PARA EL MANEJO DE MENU/SUBMENU*/
     $(".hasSubMenu").click(function () {
         var divId = $(this).attr("id");
@@ -58,31 +112,7 @@ $(document).ready(function () {
         CerrarSubDialog();
     });
 
-    $('#dialogLogin').dialog({
-        autoOpen: false,
-        draggable: true,
-        resizable: false,
-        position: GetPosition(),
-        title: '',
-        modal: true,
-        overlay: { opacity: 1.5, background: "black" },
-        show: "slide",
-        hide: "blind"
-            , error: function (msg) { alert(msg); }
-    });
 
-    $('#dialogRecoverPassword').dialog({
-        autoOpen: false,
-        draggable: true,
-        resizable: false,
-        position: GetPosition(),
-        title: '',
-        modal: true,
-        overlay: { opacity: 1.5, background: "black" },
-        show: "slide",
-        hide: "blind"
-            , error: function (msg) { alert(msg); }
-    });
     $(".hoverRel").mousemove(function (event) {
         $("#overDiv").css({ 'top': event.pageY, 'left': event.pageX });
     });
@@ -92,7 +122,7 @@ $(document).ready(function () {
     }).mouseout(function () {
         nActiveDiv();
     });
-    
+
 });
 
 function activeDiv() {
@@ -105,6 +135,8 @@ function OpenDialogLogin(event, id, accion, ancho, alto) {
     if (event != null) {
         event.preventDefault();
     }
+    initDialogs();
+    
 
     // obtenemos ancho y alto de la ventana del explorer
     var wscr = $(window).width();
@@ -138,16 +170,15 @@ function OpenDialogLogin(event, id, accion, ancho, alto) {
 
         });
     });
-    $("#dialogLogin").dialog({
-        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); }
-    });
     $("#disablingDiv").fadeIn("slow");
-
-    $('#dialogLogin').dialog('open');
+    $("#dialogLogin").dialog({ beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); } });
+    $("#dialogLogin").dialog("open");
 }
 
 function CerrarDialogLogin() {
     $('#dialogLogin').dialog("close");
+    $('#dialogLogin').dialog("destroy");
+    initDialogs();
 }
 
 
@@ -155,7 +186,8 @@ function OpenDialogRecoverPassword(event, id, accion, ancho, alto) {
     if (event != null) {
         event.preventDefault();
     }
-
+    initDialogs();
+    
     // obtenemos ancho y alto de la ventana del explorer
     var wscr = $(window).width();
     var hscr = $(window).height();
@@ -188,37 +220,17 @@ function OpenDialogRecoverPassword(event, id, accion, ancho, alto) {
 
         });
     });
-    $("#dialogRecoverPassword").dialog({
-        beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); }
-    });
     $("#disablingDiv").fadeIn("slow");
-
-    $('#dialogRecoverPassword').dialog('open');
+    $("#dialogRecoverPassword").dialog({ beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); } });
+    $("#dialogRecoverPassword").dialog("open");
 }
 
 function CerrarDialogRecoverPassword() {
     $('#dialogRecoverPassword').dialog("close");
+    $('#dialogRecoverPassword').dialog("destroy");
+    initDialogs();
 }
 
-
-
-$(document).ready(function () {
-
-    $('#dialog').dialog({
-        autoOpen: false,
-        draggable: true,
-        resizable: false,
-        position: GetPosition(),
-        title: '',
-        modal: true,
-        overlay: { opacity: 1.5, background: "black" },
-        show: "slide",
-        hide: "blind"
-            , error: function (msg) { alert(msg); }
-    });
-
-  
-});
 function OpenTab(event, id, accion,idTab) {
     if (event != null) {
         event.preventDefault();
@@ -230,6 +242,7 @@ function OpenTab(event, id, accion,idTab) {
         initOpenTab = false;
         $("#" + idTab).stop(true, true).load(accion + id, function () {
             initOpenTab = true;
+            $("#dialog").unbind("dialogopen");
             //alert('Load was performed.');
         });
         //});
@@ -239,24 +252,26 @@ function OpenDialog(event, id, accion, ancho, alto) {
     if (event != null) {
         event.preventDefault();
     }
+    initDialogs();
+    
 
     // obtenemos ancho y alto de la ventana del explorer
     var wscr = $(window).width();
     var hscr = $(window).height();
 
-    if (alto > 400) {
-        position = 'top';
-    } else {
-        position = 'center';
-    }
+    position = 'top';
     if (alto > 0) {
         $("#dialog").dialog("option", "height", alto);
     }
     else {
         $("#dialog").dialog("option", "height", 'auto');
     }
-    $("#dialog").dialog("option", "width", ancho);
-    
+    if (ancho > 0) {
+        $("#dialog").dialog("option", "width", ancho);
+    }
+    else {
+        $("#dialog").dialog("option", "width", "auto");
+    }
     $("#dialog").unbind("dialogopen");
     $("#dialog").bind("dialogopen", function (event, ui) {
         $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
@@ -265,12 +280,15 @@ function OpenDialog(event, id, accion, ancho, alto) {
 
         });
     });
-    $( "#dialog" ).dialog({
-       beforeClose: function(event, ui) { $("#disablingDiv").fadeOut("slow"); }
-    });
     $("#disablingDiv").fadeIn("slow");
-    
-    $('#dialog').dialog('open');
+    $("#dialog").dialog({
+        beforeClose: function (event, ui) {
+            $("#disablingDiv").fadeOut("slow");
+            $("#dialog").dialog("destroy");
+        }
+    });
+    $("#dialog").dialog("open");
+
 }
 
 function OpenDialogConParametrosOpcionales(event, id, accion, ancho, alto) {
@@ -282,13 +300,9 @@ function OpenDialogConParametrosOpcionales(event, id, accion, ancho, alto) {
     // obtenemos ancho y alto de la ventana del explorer
     var wscr = $(window).width();
     var hscr = $(window).height();
-
-    if (alto > 400) {
-        position = 'top';
-    } else {
-        position = 'center';
-    }
-
+    initDialogs();
+    position = 'top';
+    
     if (alto > 0) {
         $("#dialog").dialog("option", "height", alto);
     }
@@ -315,31 +329,20 @@ function OpenDialogConParametrosOpcionales(event, id, accion, ancho, alto) {
 
         });
     });
-    $('#dialog').dialog('open');
+    
+    $("#dialog").dialog({ beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); } });
+    $("#dialog").dialog("open");
 }
 
 function CerrarDialog() {
     $('#dialog').dialog("close");
+    $('#dialog').dialog("destroy");
+    initDialogs();
 }
-
-
-$(document).ready(function () {
-    $('#subDialog').dialog({
-        autoOpen: false,
-        draggable: true,
-        resizable: false,
-        position: 'center',
-        title: '',
-        modal: true,
-        overlay: { opacity: 1.5, background: "black" },
-        show: "blind",
-        hide: "blind"
-            , error: function (msg) { alert(msg); }
-    });
-});
 
 function OpenSubDialog(event, id, accion, ancho, alto) {
     event.preventDefault();
+    initDialogs();
     
     if (alto > 0) {
         $("#subDialog").dialog("option", "height", alto);
@@ -370,11 +373,15 @@ function OpenSubDialog(event, id, accion, ancho, alto) {
 
         });
     });
-    $('#subDialog').dialog('open');
+    $("#subDialog").dialog("open");
+    $("#subDialog").dialog({ beforeClose: function (event, ui) { $("#disablingDiv").fadeOut("slow"); } });
+    
 }
 
 function CerrarSubDialog() {
     $('#subDialog').dialog("close");
+    $('#subDialog').dialog("destroy");
+    initDialogs();
 }
 
 function FuncionesAutorizadas(funciones) {
@@ -405,9 +412,6 @@ function FuncionesAutorizadas(funciones) {
         }
     }
 }
-
-
-
 
 (function ($) {
     $.widget("ui.combobox", {

@@ -104,16 +104,22 @@ namespace WebProgramAR.Controllers
             if (ModelState.IsValid)
             {
 
-                //flanzani
-                //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                Usuario userBd = UsuarioNegocio.GetUsuarioByLoginUsuario(SimpleSessionPersister.UserName);
+                if (CursoNegocio.ExisteCursoByNombre(curso.Nombre))
+                {
+                    return Content("Ya existe un curso con ese nombre.Modifica el nombre que has elegido e intenta nuevamente");
+                }
+                else
+                {
+                    //flanzani
+                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                    Usuario userBd = UsuarioNegocio.GetUsuarioByLoginUsuario(SimpleSessionPersister.UserName);
 
-                curso.UsuarioId = userBd.UsuarioId;
-                //curso.UsuarioId = usuarioLogueado;
+                    curso.UsuarioId = userBd.UsuarioId;
+                    //curso.UsuarioId = usuarioLogueado;
 
-                CursoNegocio.Alta(curso);
-                return Content(Boolean.TrueString);
-                
+                    CursoNegocio.Alta(curso);
+                    return Content(Boolean.TrueString);
+                }
             }else
             {
                 return View();
@@ -153,8 +159,15 @@ namespace WebProgramAR.Controllers
                 {
                     if (CursoNegocio.ExisteCursoById(curso.CursoId))
                     {
-                        CursoNegocio.Modificar(curso);
-                        return Content(Boolean.TrueString);
+                        if (CursoNegocio.ExisteCursoByNombre(curso.Nombre))
+                        {
+                            return Content("Ya existe un curso con ese nombre.Modifica el nombre que has elegido e intenta nuevamente");
+                        }
+                        else
+                        {
+                            CursoNegocio.Modificar(curso);
+                            return Content(Boolean.TrueString);
+                        }
                     }
                     else
                     {

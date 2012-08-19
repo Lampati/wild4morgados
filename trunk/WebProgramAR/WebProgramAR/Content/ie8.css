@@ -159,9 +159,9 @@ h4
     padding-right:10px;
     color:#fff;
     margin-left:-14px;
-    margin-top:-48px;
+    margin-top:-49px;
     margin-bottom:20px;
-    height:23px;
+    height:24px;
     float:left;
     width:auto;
 }
@@ -515,7 +515,7 @@ input[type="text"].textBoxForFilter
 .buttonSectionOptions
 {   
     position:relative;
-    float:right;
+    float:left;
     bottom:20px;
 }
 .buttonSectionOptions div
@@ -666,6 +666,7 @@ table th {
     display:none;
     right:120px;
     z-index:1111;
+    float:left;
 }
 .pointerBox
 {
@@ -685,6 +686,8 @@ table th {
     font-size:1em;
     margin-left:10px;
     height:auto;
+    max-height:120px;
+    min-height:20px;
 }
 
 nav, #menucontainer

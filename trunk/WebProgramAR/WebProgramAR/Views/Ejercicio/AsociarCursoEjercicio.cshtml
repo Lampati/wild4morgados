@@ -108,7 +108,14 @@
         });
 
     
-        
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "CURSOS") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
         var sortcol = '@gridCurso.SortColumn';
 
         if (sortcol != '')

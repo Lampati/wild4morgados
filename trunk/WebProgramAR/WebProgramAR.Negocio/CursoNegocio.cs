@@ -14,6 +14,7 @@ namespace WebProgramAR.Negocio
             return CursoDA.GetCursoById(id);
         }
 
+
         public static void Alta(Curso Curso)
         {
             Curso.FechaAlta = DateTime.Now;
@@ -65,6 +66,10 @@ namespace WebProgramAR.Negocio
         public static bool ExisteCursoById(int id)
         {
             return CursoDA.ExisteCursoById(id);
+        }
+        public static bool ExisteCursoByNombre(string nombre)
+        {
+            return CursoDA.ExisteCursoByNombre(nombre);
         }
     }
 }
