@@ -186,5 +186,17 @@ namespace WebProgramAR.DataAccess
                 return query.ToList().Count == 1;
             }
         }
+
+        public static bool ExisteCursoByNombre(string nombre)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Curso> query = from u in db.Cursoes
+                                          where u.Nombre == nombre
+                                          select u;
+
+                return query.ToList().Count == 1;
+            }
+        }
     }
 }

@@ -172,19 +172,20 @@
         if (charCode == 46) return false; // delete
     });
 
+    function reInitPais() {
+        $("#PaisId").val("");
+    }
     function reInitProvincia() {
         $("#ProvinciaId").val("");
     }
     function reInitLocalidad() {
         $("#LocalidadId").val("");
-        alert($("#LocalidadIdAutoComplete").val());
         $("#LocalidadIdAutoComplete").val(" ");
-        alert($("#LocalidadIdAutoComplete").val());
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "SelectPaisId") {
             var pais = $("#selectBox_SelectPaisId").attr("rel");
-            if (pais != 0) {
+            if (pais !="") {
                 $.ajax({
                     url: '@Url.Action("GetProvinciasByPais")',
                     data: " { paisId: '" + pais + "'}",
@@ -203,26 +204,29 @@
                         $("<option value='0' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
                         convertSelect("SelectProvinciaId",1);
                         $("#PaisId").val((div.attr("rel")));
-                        reInitProvincia();
-                        reInitLocalidad();
+                        
                         
                     }
                 });
                 $("#listProvincias").show();
             } else {
+            reInitPais();
                 $("#listProvincias").hide();
                 $("#listLocalidades").hide();
             }
+            reInitProvincia();
+            reInitLocalidad();
             return;
         }
         if (div.attr('id') == "SelectProvinciaId") {
             if ((div.attr("rel")!=0)) {
                 $("#listLocalidades").show();
                 $("#ProvinciaId").val((div.attr("rel")));
-            }else{
+            } else {
+                reInitProvincia();
                 $("#listLocalidades").hide();
             }
-                reInitLocalidad();
+            reInitLocalidad();
             
             return;
         }
@@ -253,7 +257,7 @@
         },
         scrollHeight: 10,
         minChars: 1,
-        delay: 10,
+        delay: 1,
         type: 'POST',
         selectFirst: false,
         select: function (event, ui) {
