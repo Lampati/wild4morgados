@@ -22,6 +22,7 @@ using AplicativoEscritorio.DataAccess;
 using DataAccess;
 using System.Diagnostics;
 using System.IO;
+using ModoGrafico.Views;
 
 namespace DiagramDesigner.UserControls.Toolbar
 {
@@ -713,45 +714,60 @@ namespace DiagramDesigner.UserControls.Toolbar
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
         {
-            PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
-            propertyEditorWindow.Titulo = "Propiedades de Sincronización";
-            propertyEditorWindow.Owner = this.Owner;
+            //PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
+            //propertyEditorWindow.Titulo = "Propiedades de Sincronización";
+            //propertyEditorWindow.Owner = this.Owner;
 
-            propertyEditorWindow.AgregarSeparador();
+            //propertyEditorWindow.AgregarSeparador();
 
-            TextBox txtIP = new TextBox();
-            txtIP.Height = 80;
-            txtIP.Width = 300;
-            txtIP.TextWrapping = TextWrapping.Wrap;
-            txtIP.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-            txtIP.AcceptsReturn = true;
-            txtIP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            txtIP.Text = ConfiguracionAplicacion.UrlsDescargaEjercicios;
-            propertyEditorWindow.AgregarPropiedad("IP/Host Servidor (ingresar cada valor en una nueva línea)", txtIP);
+            //TextBox txtIP = new TextBox();
+            //txtIP.Height = 80;
+            //txtIP.Width = 300;
+            //txtIP.TextWrapping = TextWrapping.Wrap;
+            //txtIP.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            //txtIP.AcceptsReturn = true;
+            //txtIP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            //txtIP.Text = ConfiguracionAplicacion.UrlsDescargaEjercicios;
+            //propertyEditorWindow.AgregarPropiedad("IP/Host Servidor (ingresar cada valor en una nueva línea)", txtIP);
 
-            /*propertyEditorWindow.AgregarSeparador(false);
+            ///*propertyEditorWindow.AgregarSeparador(false);
             
-            TextBox txtTimeout = new TextBox();
-            txtTimeout.Height = 20;
-            txtTimeout.Width = 30;
-            txtTimeout.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            propertyEditorWindow.AgregarPropiedad("Timeout (segs)", txtTimeout);*/
+            //TextBox txtTimeout = new TextBox();
+            //txtTimeout.Height = 20;
+            //txtTimeout.Width = 30;
+            //txtTimeout.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            //propertyEditorWindow.AgregarPropiedad("Timeout (segs)", txtTimeout);*/
 
-            propertyEditorWindow.AgregarSeparador();
+            //propertyEditorWindow.AgregarSeparador();
 
-            propertyEditorWindow.AgregarBotonera(
-                new RoutedEventHandler((snd, ev) => 
+            //propertyEditorWindow.AgregarBotonera(
+            //    new RoutedEventHandler((snd, ev) => 
+            //    {
+            //        ConfiguracionAplicacion.UrlsDescargaEjercicios = txtIP.Text;
+            //        ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+            //                             Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
+            //        propertyEditorWindow.DialogResult = true;
+            //    }),
+            //    new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
+
+            //if (propertyEditorWindow.ShowDialog() == true)
+            //{
+            
+            //}
+
+            PropiedadesSincronizacionDialog dialog = new PropiedadesSincronizacionDialog();
+            dialog.CargarServidores(ConfiguracionAplicacion.UrlsDescargaEjercicios);
+            dialog.Owner = this.Owner;
+            dialog.ShowDialog();
+
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value == true)
+            {
+                if (dialog.Servidores.Count > 0)
                 {
-                    ConfiguracionAplicacion.UrlsDescargaEjercicios = txtIP.Text;
+                    ConfiguracionAplicacion.UrlsDescargaEjercicios = string.Join("\r\n",dialog.Servidores);
                     ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
-                    propertyEditorWindow.DialogResult = true;
-                }),
-                new RoutedEventHandler((snd, ev) => propertyEditorWindow.DialogResult = false));
-
-            if (propertyEditorWindow.ShowDialog() == true)
-            {
-            
+                }
             }
         }
 

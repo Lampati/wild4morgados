@@ -1,0 +1,77 @@
+﻿<Window x:Class="ModoGrafico.Views.PropiedadesSincronizacionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:ModoGrafico.Views;assembly=ModoGrafico"
+        xmlns:interfaz="clr-namespace:InterfazTextoGrafico.Enums;assembly=InterfazTextoGrafico"
+        ShowInTaskbar="False" ShowActivated="True" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" 
+        Title="Propiedades" Height="355" Width="425">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Border>
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="White" Offset="0"/>
+                <GradientStop Color="LightGray" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <StackPanel>
+
+            <Label Margin="0,0,0,0" FontSize="18" Name="lblEncabezado">Propiedades Sincronización</Label>
+            <Separator Margin="0,0,0,8"></Separator>
+
+            <StackPanel Margin="0,0,0,0" >
+                
+                <StackPanel Margin="5,0,5,0" >
+                    <TextBlock Margin="0,0,0,7" FontSize="14">Agregar nuevo servidor</TextBlock>
+                    <StackPanel Orientation="Horizontal" Name="panelAgregarVariable">
+                        <Label >Url (o IP)</Label>
+                        <TextBox Height="24" Grid.Row="0" Width="100" Name="txtIP"></TextBox>
+                        <Label Margin="10,0,0,0">Puerto</Label>
+                        <TextBox Height="24" Grid.Row="0" Width="50" Name="txtPuerto"></TextBox>
+                        <Button Click="Button_Click" Margin="20,0,0,0">Agregar</Button>
+                    </StackPanel>
+                    <Separator Margin="0,8,0,8"></Separator>
+                    <TextBlock Margin="0,0,0,7" FontSize="14">Servidores cargados</TextBlock>
+                    <DataGrid x:Name="dgData" Margin="0,5,0,0" AutoGenerateColumns="False" 
+                                 RowEditEnding="dgData_RowEditEnding" ItemsSource="{Binding ParametrosVariables}" RowHeight="25"
+                                 CommandManager.PreviewExecuted="dgData_PreviewExecuted" CanUserAddRows="False"
+                          MaxHeight="100" MinHeight="100" ScrollViewer.CanContentScroll="True"
+                              CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" 
+                              CanUserSortColumns="False">
+                        <DataGrid.Resources>
+                            <!-- SINGLE CLICK EDITING -->
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=Ip}" Header="Url" Width="80" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Path=Puerto}" Header="Puerto" Width="80" IsReadOnly="True"/>
+                            
+                            <DataGridTemplateColumn  Header="" Width="80">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="ButtonEliminar_Click">Eliminar</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+               
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button  Width="60" Name="bttnAceptar" Click="bttnAceptar_Click">Aceptar</Button>
+                <Button  Width="60" Name="bttnCancelar" Margin="20,0,0,0" Click="bttnCancelar_Click">Cancelar</Button>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
