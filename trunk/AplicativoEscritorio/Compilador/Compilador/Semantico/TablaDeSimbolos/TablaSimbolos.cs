@@ -358,7 +358,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                     //Faltaba agregar el nombre del contexto local, pq sino puede traer de cualquiera.
                     return (
                             _nodo.Contexto == NodoTablaSimbolos.TipoContexto.Local &&
-                            _nodo.Nombre.Equals(nombre) &&
+                            _nodo.Nombre.ToUpper().Equals(nombre.ToUpper()) &&
                             _nodo.EsArreglo &&
                             ((_nodo.NombreContextoLocal == nombreContexto &&
                             (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable)) ||
@@ -376,7 +376,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                 {
                     return _nodo.EsArreglo &&
                         (_nodo.Contexto == NodoTablaSimbolos.TipoContexto.Global &&
-                        _nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable && _nodo.Nombre.Equals(nombre));
+                        _nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable && _nodo.Nombre.ToUpper().Equals(nombre.ToUpper()));
                 }
                 );
             }
@@ -437,7 +437,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
                 delegate(NodoTablaSimbolos _nodo)
                 {
-                    return (_nodo.Nombre.Equals(nombre) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Procedimiento));
+                    return (_nodo.Nombre.ToUpper().Equals(nombre.ToUpper()) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Procedimiento));
                 }
                 );
         }
@@ -448,7 +448,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
                 delegate(NodoTablaSimbolos _nodo)
                 {
-                    return (_nodo.Nombre.Equals(nombre) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Funcion));
+                    return (_nodo.Nombre.ToUpper().Equals(nombre.ToUpper()) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Funcion));
                 }
                 );
         }
@@ -462,7 +462,7 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                 delegate(NodoTablaSimbolos _nodo)
                 {
                     return (_nodo.TipoEntrada == tipo &&
-                         _nodo.Nombre.Equals(nombre));
+                         _nodo.Nombre.ToUpper().Equals(nombre.ToUpper()));
                 }
                 );
 
@@ -478,24 +478,24 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
             return nodo.Firma;
         }
 
-        internal List<string> ObtenerParametros(string nombre)
-        {
-            List<NodoTablaSimbolos> nodos = this.listaNodos.FindAll(
-                delegate(NodoTablaSimbolos _nodo) 
-                {
-                    return (_nodo.NombreContextoLocal.Equals(nombre) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro));
-                }                   
-            );
+        //internal List<string> ObtenerParametros(string nombre)
+        //{
+        //    List<NodoTablaSimbolos> nodos = this.listaNodos.FindAll(
+        //        delegate(NodoTablaSimbolos _nodo) 
+        //        {
+        //            return (_nodo.NombreContextoLocal.Equals(nombre) && (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro));
+        //        }                   
+        //    );
 
-            List<string> retorno = new List<string>();
+        //    List<string> retorno = new List<string>();
 
-            foreach (NodoTablaSimbolos nodo in nodos)
-            {
-                retorno.Add(nodo.Nombre);
-            }
+        //    foreach (NodoTablaSimbolos nodo in nodos)
+        //    {
+        //        retorno.Add(nodo.Nombre);
+        //    }
 
-            return retorno;
-        }
+        //    return retorno;
+        //}
 
         internal NodoTablaSimbolos.TipoDeDato ObtenerTipoFuncion(string nombre)
         {
@@ -524,8 +524,8 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
 
             NodoTablaSimbolos nodo = ObtenerVariable(nombre, tipoContexto, nombreCont);
 
-            return nodo != null 
-                && nodo.Nombre.Equals(nombre) 
+            return nodo != null
+                && nodo.Nombre.ToUpper().Equals(nombre.ToUpper()) 
                 && nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Parametro
                 && nodo.Contexto == tipoContexto
                 && nodo.NombreContextoLocal == nombreCont;
