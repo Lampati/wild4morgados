@@ -173,7 +173,7 @@ namespace WebProgramAR.Controllers
                 ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre.ToString() : "";
                 modelo.Valor = c.Valor;
 
-                modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();
+                //modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();
 
                 return View("Edit", modelo);
             }

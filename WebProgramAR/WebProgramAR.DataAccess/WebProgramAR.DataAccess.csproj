@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ColumnaDA.cs" />
     <Compile Include="ComparadorDA.cs" />
+    <Compile Include="MailDA.cs" />
     <Compile Include="Seguridad\Helpers\MemberComparer.cs" />
     <Compile Include="Seguridad\Helpers\TypeUtility.cs" />
     <Compile Include="TablaDA.cs" />

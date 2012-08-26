@@ -126,6 +126,12 @@ namespace WebProgramAR.DataAccess
             get { return _ejercicios  ?? (_ejercicios = CreateObjectSet<Ejercicio>("Ejercicios")); }
         }
         private ObjectSet<Ejercicio> _ejercicios;
+    
+        public ObjectSet<Mail> Mails
+        {
+            get { return _mails  ?? (_mails = CreateObjectSet<Mail>("Mails")); }
+        }
+        private ObjectSet<Mail> _mails;
 
         #endregion
     }

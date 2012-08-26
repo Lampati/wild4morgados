@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CargarEjercicioArchivoException.cs" />
+    <Compile Include="MailNegocio.cs" />
     <Compile Include="SeguridadNegocio.cs" />
     <Compile Include="CursoNegocio.cs" />
     <Compile Include="EstadoEjercicioNegocio.cs" />

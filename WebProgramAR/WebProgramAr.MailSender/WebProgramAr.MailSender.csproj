@@ -49,6 +49,16 @@
     <Compile Include="MailManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebProgramAR.Entidades\WebProgramAR.Entidades.csproj">
+      <Project>{EFAE4217-3F3A-42D6-AD00-583A5D72073A}</Project>
+      <Name>WebProgramAR.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebProgramAR.Negocio\WebProgramAR.Negocio.csproj">
+      <Project>{C5640C30-872A-4E79-8168-54DA04824F7D}</Project>
+      <Name>WebProgramAR.Negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
