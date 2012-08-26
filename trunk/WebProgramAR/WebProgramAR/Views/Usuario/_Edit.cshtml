@@ -8,17 +8,6 @@
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
     
 }
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#botonCambiarPassword').click(function (event) {
-            OpenSubDialog(event, $(this).attr('data'), '@Url.Action("ChangePassword","Account")/', 450, 400);
-        });
-    });
-
-</script>
-
 <div class="sectionSpace">
  @*   @Html.HiddenFor(model => model.UsuarioId)*@
 
@@ -81,7 +70,7 @@
                 @Html.LabelFor(m => m.FechaNacimiento)
             </div>
             <div class="editor-field">
-                @Html.TextBox("FechaNacimiento", Model.FechaNacimiento.GetDateTimeFormats()[0], new { @readonly = "readonly", @id = "FechaNacimiento", @name = "FechaNacimiento", @class = "date-picker-needed" })
+                @Html.TextBox("FechaNacimiento", Model.FechaNacimiento.GetDateTimeFormats()[6], new { @readonly = "readonly", @id = "FechaNacimiento", @name = "FechaNacimiento", @class = "date-picker-needed" })
                 @*@Html.TextBoxFor(model => model.FechaNacimiento.GetDateTimeFormats()[0], new { @readonly = "readonly", @id = "FechaNacimiento",@name = "FechaNacimiento", @class = "date-picker-needed" })*@
                 @Html.ValidationMessageFor(m => m.FechaNacimiento)
             </div>
@@ -100,7 +89,7 @@
                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                     Value = option.TipoUsuarioId.ToString(),
                     Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId)) 
-                }), "Seleccione una opcion",new { @id = "TipoUsuarioCreate", @style = "display:none" })
+                }), new { @id = "TipoUsuarioCreate", @style = "display:none" })
 
                         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
                 </div>
@@ -165,7 +154,7 @@
     convertSelect("SelectProvinciaId");
     convertSelect("TipoUsuarioCreate");
 
-    $("#FechaNacimiento").datepicker({ minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
+    $("#FechaNacimiento").datepicker({ onSelect: function () { $(this).parents(".editor-field").find(".field-validation-valid").hide() }, dateFormat: "yy-mm-dd", minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
     $("#FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
         if (charCode == 8) return false; //  backspace
@@ -277,8 +266,36 @@
             }
         }
     });
+    function verifyCombosOnTheFly() {
+        var valid = true;
+        if ($("#Usuario_PaisId").val() == "") {
+            $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
+            $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
+            valid = false;
+        }
+        if ($("#Usuario_ProvinciaId").val() == "" && $("#listProvincias").css("display") == "block") {
+            $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
+            $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
+            valid = false;
+        }
+        if ($("#Usuario_LocalidadId").val() == "" && $("#listLocalidades").css("display") == "block") {
+            $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
+            $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
+            valid = false;
+        }
+        return valid;
+
+    }
+
     $(document).ready(function () {
         $("#LocalidadIdAutoComplete").keyup(function () { $("#LocalidadId").val(""); });
+        $('#botonCambiarPassword').click(function (event) {
+            OpenSubDialog(event, $(this).attr('data'), '@Url.Action("ChangePassword","Account")/', 450, 500);
+        });
+        $("#form0").find("input").live('click', function () {
+            $(".update-message-box").hide();
+            verifyCombosOnTheFly();
+        });
     });  
 
 </script>

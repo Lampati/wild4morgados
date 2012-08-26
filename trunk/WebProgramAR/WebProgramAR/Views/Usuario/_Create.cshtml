@@ -45,7 +45,7 @@
                 @Html.PasswordFor(m => m.Contrasena, new { autocomplete = "off" })
                 @Html.ValidationMessageFor(m => m.Contrasena)
             </div>
-
+            <br />
             <div class="editor-label">
                 @Html.LabelFor(m => m.ConfirmarContrasena)
             </div>
@@ -113,7 +113,7 @@
                 }
                 else
                 {
-                    @Html.Hidden("TipoUsuarioId", -1)
+                    @Html.Hidden("TipoUsuarioId", 1)
                 }
             }
             <div class="editor-label">
@@ -130,7 +130,7 @@
                 @Html.HiddenFor(model => model.Usuario.PaisId)
                 @Html.ValidationMessageFor(model => model.Usuario.PaisId)
             </div>
-             <div id="listProvincias" style="display:none";>
+             <div id="listProvincias" style="display:none">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Usuario.Provincia)
                 </div>
@@ -146,7 +146,7 @@
                     @Html.ValidationMessageFor(m => m.Usuario.ProvinciaId)
                 </div>
             </div>
-            <div  id="listLocalidades" style="display:none"; >
+            <div  id="listLocalidades" style="display:none" >
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Usuario.Localidad)
                 </div>
@@ -164,7 +164,7 @@
     $("#Usuario_TipoUsuarioId").val(1);
     convertSelect("SelectPaisId",1);
     convertSelect("SelectTipoUsuarioId",1);
-    $("#Usuario_FechaNacimiento").datepicker({minDate:new Date(1920,01,01), changeMonth: true,changeYear: true,yearRange: "1920:1995",maxDate:new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
+    $("#Usuario_FechaNacimiento").datepicker({onSelect:function(){$(this).parents(".editor-field").find(".field-validation-valid").hide()},dateFormat: "yy-mm-dd",minDate:new Date(1920,01,01), changeMonth: true,changeYear: true,yearRange: "1920:1995",maxDate:new Date(new Date().getFullYear()-17,new Date().getMonth(),new Date().getDay())});
     $("#Usuario_FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
         if (charCode == 8) return false; //  backspace
@@ -206,8 +206,9 @@
                             $("#SelectProvinciaId").get(0).options[$("#SelectProvinciaId").get(0).options.length] = new Option(text, val);
                         }
                         $("<option value=''>Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
-                        convertSelect("SelectProvinciaId",1);
-                        $("#PaisId").val((div.attr("rel")));
+                        convertSelect("SelectProvinciaId", 1);
+                        $("#Usuario_PaisId").val((div.attr("rel")));
+                        $("#selectBox_SelectPaisId").parents(".editor-field").find(".field-validation-valid").hide();
                         reInitProvincia();
                         reInitLocalidad();
                         selectElement("PaisId");
@@ -224,7 +225,9 @@
         if (div.attr('id') == "SelectProvinciaId") {
             if ((div.attr("rel") != 0)) {
                 $("#listLocalidades").show();
-                $("#ProvinciaId").val((div.attr("rel")));
+                $("#Usuario_ProvinciaId").val((div.attr("rel")));
+                $("#selectBox_SelectProvinciaId").parents(".editor-field").find(".field-validation-valid").hide();
+                        
                 selectElement("ProvinciaId");
             } else {
                 $("#listLocalidades").hide();
@@ -264,12 +267,14 @@
         selectFirst: false,
         focus: function (event, ui) {
             $("#LocalidadIdAutoComplete").val(ui.item.label);
+            $("#LocalidadIdAutoComplete").parents(".editor-field").find(".field-validation-valid").hide();
             return false;
         },
         select: function (event, ui) {
             $("#Usuario_LocalidadId").val(ui.item.value);
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+            $("#LocalidadIdAutoComplete").parents(".editor-field").find(".field-validation-valid").hide();
             return false;
         },
         change: function (event, ui) {
@@ -277,13 +282,39 @@
                 $("#Usuario_LocalidadId").val(ui.item.value);
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+                $("#LocalidadIdAutoComplete").parents(".editor-field").find(".field-validation-valid").hide();
                 return false;
             } else {
                 reInitLocalidad();
             }
         }
     });
+    function verifyCombosOnTheFly() {
+        var valid = true;
+        if ($("#Usuario_PaisId").val() == "") {
+            $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
+            $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
+            valid = false;
+        }
+        if ($("#Usuario_ProvinciaId").val() == "" && $("#listProvincias").css("display")=="block") {
+            $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
+            $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
+            valid = false;
+        }
+        if ($("#Usuario_LocalidadId").val() == "" && $("#listLocalidades").css("display") == "block") {
+            $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
+            $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
+            valid = false;
+        }
+        return valid;
+
+    }
+
     $(document).ready(function () {
         $("#LocalidadIdAutoComplete").keyup(function () { $("#Usuario_LocalidadId").val(""); });
+        $("#form0").find("input").live('click', function () {
+            $(".update-message-box").hide();
+            verifyCombosOnTheFly();
+        });
     });            
 </script>

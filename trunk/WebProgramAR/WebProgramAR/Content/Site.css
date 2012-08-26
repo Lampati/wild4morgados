@@ -723,6 +723,7 @@ table th {
     padding-right:20px;
     z-index:1111;
     float:left;
+    margin-top:10px;
 }
 .pointerBox
 {
@@ -785,7 +786,7 @@ div#title
     margin-right:120px;
     height:auto;
     min-height:20px;
-    display:inline-block;
+    display:inline-table;
     width:80%;
     opacity: .70;
     filter: alpha(opacity=70%);
@@ -1708,8 +1709,8 @@ input[type="text"].datosExtraTextBox
 #logonerror
 {
     display:none;
-    background:#000;   
-    color:red;
+    background:red;   
+    color:#fff;
     display:none;
     opacity: .70;
     filter: alpha(opacity=70%);   

@@ -44,6 +44,7 @@ function updateSuccess() {
 }
 function updateSuccessView() {
     if ($("#update-message").html().search("Error") == "-1") {
+        $("#update-message").hide();
         window.location.href = $("#update-message").html();
     }else{
         $(".update-message-box").show();
