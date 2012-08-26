@@ -257,7 +257,8 @@ namespace WebProgramAR.Controllers
                     if (usuarios.Count > 1)
                     {
                         //Hay mas de un usuario por mail, y eso no esta permitido.
-
+                        string errorMensaje = "Existe mas de un usuario con ese Email";
+                        return Content(errorMensaje);
                         //DEVOLVER ERROR
                     }
                     else
@@ -272,6 +273,9 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
+                    // El mail de alguna manera llego incorrecto. Devuelvo false.
+                    string errorMensaje = "No Existe un usuario con ese Email";
+                    return Content(errorMensaje);
                     //No existe usuario con ese mail. Abortamos todo
                 }
 
