@@ -47,10 +47,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BibliotecaMails\WebProgramAR.BibliotecaMails.csproj">
+    <ProjectReference Include="..\WebProgramAR.BibliotecaMails\WebProgramAR.BibliotecaMails.csproj">
       <Project>{64FC0943-DB77-4EF6-A3CD-7B52B0A293CA}</Project>
       <Name>WebProgramAR.BibliotecaMails</Name>
     </ProjectReference>
