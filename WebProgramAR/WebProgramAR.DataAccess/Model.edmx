@@ -14,18 +14,7 @@
           <EntitySet Name="EjercicioCurso" EntityType="WebProgramARModel.Store.EjercicioCurso" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EstadoEjercicio" EntityType="WebProgramARModel.Store.EstadoEjercicio" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Localidad" EntityType="WebProgramARModel.Store.Localidad" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Mails" EntityType="WebProgramARModel.Store.Mails" store:Type="Tables" store:Schema="dbo" store:Name="Mails">
-            <DefiningQuery>SELECT 
-      [Mails].[From] AS [From], 
-      [Mails].[To] AS [To], 
-      [Mails].[Subject] AS [Subject], 
-      [Mails].[Body] AS [Body], 
-      [Mails].[FechaCreacion] AS [FechaCreacion], 
-      [Mails].[Enviado] AS [Enviado], 
-      [Mails].[FechaEnvio] AS [FechaEnvio], 
-      [Mails].[id] AS [id]
-      FROM [dbo].[Mails] AS [Mails]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Mails" EntityType="WebProgramARModel.Store.Mails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MensajeModeracion" EntityType="WebProgramARModel.Store.MensajeModeracion" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Pais" EntityType="WebProgramARModel.Store.Pais" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Provincia" EntityType="WebProgramARModel.Store.Provincia" store:Type="Tables" Schema="dbo" />
@@ -197,17 +186,8 @@
           <Property Name="PaisId" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="ProvinciaId" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'programarDesarrollo.dbo.Mails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="Mails">
           <Key>
-            <PropertyRef Name="From" />
-            <PropertyRef Name="To" />
-            <PropertyRef Name="Subject" />
-            <PropertyRef Name="Body" />
-            <PropertyRef Name="FechaCreacion" />
-            <PropertyRef Name="Enviado" />
             <PropertyRef Name="id" />
           </Key>
           <Property Name="From" Type="nvarchar" Nullable="false" MaxLength="256" />
@@ -1050,12 +1030,6 @@
         </Association>
         <EntityType Name="Mail">
           <Key>
-            <PropertyRef Name="From" />
-            <PropertyRef Name="To" />
-            <PropertyRef Name="Subject" />
-            <PropertyRef Name="Body" />
-            <PropertyRef Name="FechaCreacion" />
-            <PropertyRef Name="Enviado" />
             <PropertyRef Name="id" />
           </Key>
           <Property Type="String" Name="From" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -1242,7 +1216,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -1266,12 +1240,12 @@
           <ConnectorPoint PointX="2.25" PointY="9.0063919208089409" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Provincia_Pais" >
-          <ConnectorPoint PointX="2.2500000000000009" PointY="5.8127083571751905" />
-          <ConnectorPoint PointX="2.625" PointY="6.18770835717519" />
-          <ConnectorPoint PointX="2.625" PointY="8.7499198817055213" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="8.7499198817055213" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="8.7499198817055213" />
-          <ConnectorPoint PointX="7.75" PointY="8.7499198817055213" />
+          <ConnectorPoint PointX="2.2500000000000009" PointY="5.8552864583333326" />
+          <ConnectorPoint PointX="2.625" PointY="6.2302864583333317" />
+          <ConnectorPoint PointX="2.625" PointY="8.8750567553668773" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="8.8750567553668773" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="8.8750567553668773" />
+          <ConnectorPoint PointX="7.75" PointY="8.8750567553668773" />
         </AssociationConnector>
         <EntityTypeShape EntityType="WebProgramARModel.Columna" Width="1.5" PointX="11.125" PointY="16" Height="2.1246875268220897" />
         <EntityTypeShape EntityType="WebProgramARModel.Comparador" Width="1.5" PointX="7.5" PointY="13.875" Height="1.7507291875282931" />
@@ -1291,8 +1265,10 @@
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Comparador" >
           <ConnectorPoint PointX="7.59375" PointY="13.875" />
-          <ConnectorPoint PointX="7.59375" PointY="1.5006237589406961" />
-          <ConnectorPoint PointX="9.75" PointY="1.5006237589406961" />
+          <ConnectorPoint PointX="7.59375" PointY="3.3266432974522147" />
+          <ConnectorPoint PointX="9.3541666666666661" PointY="3.3266432974522138" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="3.3266432974522147" />
+          <ConnectorPoint PointX="9.75" PointY="3.3266432974522147" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_ReglasSeguridad_Tabla" >
           <ConnectorPoint PointX="9" PointY="16.25" />
@@ -1321,21 +1297,21 @@
           <ConnectorPoint PointX="14.125" PointY="7.8064583929379765" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Pais" >
-          <ConnectorPoint PointX="1.0937475" PointY="5.8127083571751905" />
-          <ConnectorPoint PointX="1.0937475" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="1.4166666666666667" PointY="7.0588021295269341" />
-          <ConnectorPoint PointX="1.5833333333333333" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="7.0588021295269341" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="7.510416666666667" PointY="7.0588021295269341" />
-          <ConnectorPoint PointX="7.677083333333333" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="7.0588021295269341" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="10.385414666666666" PointY="7.0588021295269341" />
-          <ConnectorPoint PointX="10.552081333333334" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="11.885419166666667" PointY="7.0588021295269341" />
-          <ConnectorPoint PointX="12.052085833333335" PointY="7.058802129526935" />
-          <ConnectorPoint PointX="13" PointY="7.058802129526935" />
+          <ConnectorPoint PointX="1.1953081250000004" PointY="5.8552864583333326" />
+          <ConnectorPoint PointX="1.1953081250000004" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="1.6197879166666673" PointY="7.1412972005208308" />
+          <ConnectorPoint PointX="1.7864545833333339" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.1412972005208308" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="7.1412972005208308" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="7.1412972005208308" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="10.385414666666666" PointY="7.1412972005208308" />
+          <ConnectorPoint PointX="10.552081333333334" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="11.885419166666667" PointY="7.1412972005208308" />
+          <ConnectorPoint PointX="12.052085833333335" PointY="7.1412972005208317" />
+          <ConnectorPoint PointX="13" PointY="7.1412972005208317" />
         </AssociationConnector>
         <AssociationConnector Association="WebProgramARModel.FK_Usuario_Provincia" >
           <ConnectorPoint PointX="9.25" PointY="9.3123437634110449" />
@@ -1424,7 +1400,7 @@
           <ConnectorPoint PointX="17.5" PointY="9.07671877682209" />
           <ConnectorPoint PointX="18.25" PointY="9.07671877682209" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WebProgramARModel.Mail" Width="1.5" PointX="3.375" PointY="3.75" Height="2.4986458661158935" />
+        <EntityTypeShape EntityType="WebProgramARModel.Mail" Width="1.5" PointX="3.375" PointY="3.75" Height="2.5571907552083388" />
         </Diagram>
     </Diagrams>
   </Designer>
