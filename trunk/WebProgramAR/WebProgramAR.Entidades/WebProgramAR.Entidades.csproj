@@ -54,6 +54,8 @@
     </Compile>
     <Compile Include="Mail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>
+      </SubType>
     </Compile>
     <Compile Include="ReglasSeguridadPartial.cs" />
     <Compile Include="CursoPartial.cs" />
