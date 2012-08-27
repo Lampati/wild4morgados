@@ -62,15 +62,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BibliotecaMails\WebProgramAR.BibliotecaMails.csproj">
-      <Project>{64FC0943-DB77-4EF6-A3CD-7B52B0A293CA}</Project>
-      <Name>WebProgramAR.BibliotecaMails</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebProgramAR.BibliotecaMails\WebProgramAR.BibliotecaMails.csproj">
+      <Project>{64FC0943-DB77-4EF6-A3CD-7B52B0A293CA}</Project>
+      <Name>WebProgramAR.BibliotecaMails</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
