@@ -40,7 +40,7 @@
                                  RowEditEnding="dgData_RowEditEnding" ItemsSource="{Binding ParametrosVariables}" RowHeight="25"
                                  CommandManager.PreviewExecuted="dgData_PreviewExecuted" CanUserAddRows="False"
                           MaxHeight="100" MinHeight="100" ScrollViewer.CanContentScroll="True"
-                              CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" 
+                              CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserResizeRows="False" 
                               CanUserSortColumns="False">
                         <DataGrid.Resources>
                             <!-- SINGLE CLICK EDITING -->
@@ -49,7 +49,7 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Path=Ip}" Header="Url" Width="80" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Path=Ip}" Header="Url" Width="225" IsReadOnly="True"/>
                             <DataGridTextColumn Binding="{Binding Path=Puerto}" Header="Puerto" Width="80" IsReadOnly="True"/>
                             
                             <DataGridTemplateColumn  Header="" Width="80">
