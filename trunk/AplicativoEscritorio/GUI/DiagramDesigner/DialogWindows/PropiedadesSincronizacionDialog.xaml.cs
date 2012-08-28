@@ -231,9 +231,13 @@ namespace ModoGrafico.Views
                 {
                     foreach (string item in servidores.Split(new string[] { "\r\n"}, StringSplitOptions.RemoveEmptyEntries))
                     {
-                        string[] entrada = item.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                        //string[] entrada = item.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
 
-                        listaServidores.Add(new Servidor() { Ip = entrada[0], Puerto = entrada[1] });
+                        string url = item.Substring(0, item.LastIndexOf(':'));
+                        string puerto = item.Substring(item.LastIndexOf(':') + 1);
+
+                        //listaServidores.Add(new Servidor() { Ip = entrada[0], Puerto = entrada[1] });
+                        listaServidores.Add(new Servidor() { Ip = url, Puerto = puerto });
                     }
 
                     dgData.ItemsSource = listaServidores;
