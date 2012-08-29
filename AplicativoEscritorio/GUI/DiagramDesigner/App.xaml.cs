@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using ModoGrafico.Views;
+using System.Diagnostics;
 
 namespace DiagramDesigner
 {
@@ -22,15 +23,16 @@ namespace DiagramDesigner
 
         void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-#if DEBUG   // In debug mode do not custom-handle the exception, let Visual Studio handle it
+            int i = 0;
 
-            e.Handled = false;
-
-#else
-
-            ShowUnhandeledException(e);    
-
-#endif
+            if (Debugger.IsAttached)   // In debug mode do not custom-handle the exception, let Visual Studio handle it
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                ShowUnhandeledException(e);
+            }
         }
 
         void ShowUnhandeledException(DispatcherUnhandledExceptionEventArgs e)
