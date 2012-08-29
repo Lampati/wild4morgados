@@ -755,7 +755,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             
             //}
 
-            throw new Exception("Falla catastrofica en la app");
+            
 
             PropiedadesSincronizacionDialog dialog = new PropiedadesSincronizacionDialog();
             dialog.CargarServidores(ConfiguracionAplicacion.UrlsDescargaEjercicios);
