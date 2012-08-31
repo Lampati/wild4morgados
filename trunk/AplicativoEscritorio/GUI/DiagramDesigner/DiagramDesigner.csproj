@@ -552,6 +552,12 @@
     <Resource Include="Images\loboTribal1.png" />
     <Content Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
     <None Include="Resources\Images\loading-intro.gif" />
+    <Resource Include="Resources\Images\search.png" />
+    <Resource Include="Resources\Images\search_replace.png" />
+    <Resource Include="Resources\Images\solucionExplicada.png" />
+    <Resource Include="Resources\Images\solucionGarGar.png" />
+    <Resource Include="Resources\Images\enunciado.png" />
+    <Resource Include="Resources\Images\Identar.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />

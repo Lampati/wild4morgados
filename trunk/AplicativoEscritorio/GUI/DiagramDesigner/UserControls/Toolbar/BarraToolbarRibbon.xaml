@@ -41,6 +41,7 @@
                 <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Paste}" 
+                        SmallImageSource="/Resources/Images/PasteBig.png" 
                         LargeImageSource="/Resources/Images/PasteBig.png" 
                         Label="Pegar" ToolTipDescription="{StaticResource TooltipPegar}" 
                         ToolTipTitle="Pegar" />
@@ -90,27 +91,11 @@
 
             </ribbon:RibbonGroup>
 
-            <!--<ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoDesigner" ContextMenu="{Binding null}">
-                <StackPanel Orientation="Vertical" Margin="0,12,0,0">
-                    <ribbon:RibbonButton ContextMenu="{Binding null}" 
-                        Command="sapv:DesignerView.UndoCommand"
-                        SmallImageSource="/Resources/Images/undo.png"
-                        Label="Deshacer" ToolTipTitle="Deshacer" 
-                        ToolTipDescription="{StaticResource TooltipUndoFlujo}" />
-                    <ribbon:RibbonButton ContextMenu="{Binding null}"
-                        Command="sapv:DesignerView.RedoCommand"
-                        SmallImageSource="/Resources/Images/redo.png"
-                        Label="Rehacer" ToolTipTitle="Rehacer" 
-                        ToolTipDescription="{StaticResource TooltipRedoFlujo}" />
-                    </StackPanel>             
-            </ribbon:RibbonGroup>-->
-
-          
-
             <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonCompilacion_Click"
+                        SmallImageSource="/Resources/Images/Compile1.png"
                         LargeImageSource="/Resources/Images/Compile1.png"
                         Label="Compilar" RenderOptions.ClearTypeHint="Enabled"
                         ToolTipDescription="{StaticResource TooltipCompilarDesc}" ToolTipTitle="Compilar"/>
@@ -118,6 +103,7 @@
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonEjecucion_Click"
+                        SmallImageSource="/Resources/Images/Ejecutar1.png"
                         LargeImageSource="/Resources/Images/Ejecutar1.png"
                         Label="Ejecutar" 
                         ToolTipDescription="{StaticResource TooltipEjecutarDesc}" ToolTipTitle="Ejecutar"/>
@@ -129,6 +115,7 @@
                 <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
                         Click="ButtonFlujo_Click"
+                        SmallImageSource="/Resources/Images/Flow128.png"
                         LargeImageSource="/Resources/Images/Flow128.png"
                         Label="Flujo" 
                         ToolTipDescription="{StaticResource TooltipCambiarAGrafico}" ToolTipTitle="Pasar a Modo Gráfico"  ToolTipFooterTitle="{StaticResource TooltipFooterDebeCompilar}" />                 
@@ -136,6 +123,7 @@
                 <ribbon:RibbonToggleButton Name="ButtonTexto" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonTexto_Click"
+                        SmallImageSource="/Resources/Images/Gargar128.png"
                         LargeImageSource="/Resources/Images/Gargar128.png"
                         Label="Gargar" 
                         ToolTipDescription="{StaticResource TooltipCambiarATexto}" ToolTipTitle="Pasar a Modo Texto" ToolTipFooterTitle="{StaticResource TooltipFooterDebeCompilar}" />
@@ -145,14 +133,14 @@
                 <StackPanel Margin="0,12,0,0">
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                             HorizontalContentAlignment="Center"
-                            SmallImageSource="/Resources/Images/Search128.png"
+                            SmallImageSource="/Resources/Images/Search.png"                                         
                             Label="Buscar"
                             Click="ButtonBuscar_Click" ToolTipTitle="Buscar" 
                             ToolTipDescription="{StaticResource TooltipBuscar}" />
 
                     <ribbon:RibbonButton ContextMenu="{Binding null}"
                             HorizontalContentAlignment="Center"
-                            SmallImageSource="/Resources/Images/SearchRep128.png"
+                            SmallImageSource="/Resources/Images/Search_Replace.png"
                             Label="Buscar/Reemplazar" 
                             Click="ButtonBuscarYReemplazar_Click" ToolTipTitle="Buscar y reemplazar" 
                             ToolTipDescription="{StaticResource TooltipBuscaryReemplazar}" />
@@ -164,7 +152,8 @@
                 <ribbon:RibbonButton Name="ButtonIdentar" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
                         Click="ButtonIdentar_Click"
-                        LargeImageSource="/Resources/Images/Flow128.png"
+                        SmallImageSource="/Resources/Images/Identar.png"
+                        LargeImageSource="/Resources/Images/Identar.png"
                         Label="Identar" 
                         RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality" SnapsToDevicePixels="True"
                         ToolTipDescription="{StaticResource TooltipIdentación}" ToolTipTitle="Identar" ToolTipFooterTitle="{StaticResource TooltipAdvertenciaIdentación}" /> 
@@ -177,9 +166,9 @@
 
             <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal" >
-                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click" ToolTipDescription="{StaticResource TooltipEnunciado}" ToolTipTitle="Enunciado" />
-                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click" ToolTipDescription="{StaticResource TooltipSolucionGarGar}" ToolTipTitle="Solucion GarGar del creador" />
-                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/Gargar.png" x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click" ToolTipDescription="{StaticResource TooltipSolucionExplicacion}" ToolTipTitle="Solucion Explicada" />
+                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/enunciado.png" x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click" ToolTipDescription="{StaticResource TooltipEnunciado}" ToolTipTitle="Enunciado" />                    
+                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionExplicada.png" x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click" ToolTipDescription="{StaticResource TooltipSolucionExplicacion}" ToolTipTitle="Solucion Explicada" />
+                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionGarGar.png" x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click" ToolTipDescription="{StaticResource TooltipSolucionGarGar}" ToolTipTitle="Solucion GarGar del creador" />
                     <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}" SelectionBoxWidth="35" ToolTipDescription="{StaticResource TooltipDificultadEjercicio}" ToolTipTitle="Dificultad del Ejercicio">
                         <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}" ColumnsStretchToFill="True" MaxColumnCount="1" SelectedValuePath="Content">
                             <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}" VerticalContentAlignment="Center">
