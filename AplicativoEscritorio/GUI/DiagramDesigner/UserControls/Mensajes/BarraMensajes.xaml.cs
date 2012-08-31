@@ -171,7 +171,14 @@ namespace DiagramDesigner.UserControls.Mensajes
                             view.Columns[3].Width = presenter.ActualWidth;
                             for (int i = 0; i < view.Columns.Count - 1; i++)
                             {
-                                view.Columns[3].Width -= view.Columns[i].ActualWidth;
+                                if (view.Columns[3].Width > view.Columns[i].ActualWidth)
+                                {
+                                    view.Columns[3].Width -= view.Columns[i].ActualWidth;
+                                }
+                                else
+                                {
+                                    view.Columns[3].Width = 0;
+                                }
                             }
                         }
                     }
