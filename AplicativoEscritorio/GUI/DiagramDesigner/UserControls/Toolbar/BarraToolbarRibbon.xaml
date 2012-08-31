@@ -115,8 +115,8 @@
                 <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
                         Click="ButtonFlujo_Click"
-                        SmallImageSource="/Resources/Images/Flow128.png"
-                        LargeImageSource="/Resources/Images/Flow128.png"
+                        SmallImageSource="/Resources/Images/Flow48.png"
+                        LargeImageSource="/Resources/Images/Flow48.png"
                         Label="Flujo" 
                         ToolTipDescription="{StaticResource TooltipCambiarAGrafico}" ToolTipTitle="Pasar a Modo Gráfico"  ToolTipFooterTitle="{StaticResource TooltipFooterDebeCompilar}" />                 
 
@@ -148,7 +148,7 @@
             </ribbon:RibbonGroup>
 
 
-            <ribbon:RibbonGroup Header="Identacion"  Name="ribbonGroupIdentacion" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Identacion"  Name="ribbonGroupIdentacion" ContextMenu="{Binding null}" LargeImageSource="/Resources/Images/Identar.png">
                 <ribbon:RibbonButton Name="ButtonIdentar" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
                         Click="ButtonIdentar_Click"
@@ -166,9 +166,12 @@
 
             <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal" >
-                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/enunciado.png" x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click" ToolTipDescription="{StaticResource TooltipEnunciado}" ToolTipTitle="Enunciado" />                    
-                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionExplicada.png" x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click" ToolTipDescription="{StaticResource TooltipSolucionExplicacion}" ToolTipTitle="Solucion Explicada" />
-                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionGarGar.png" x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click" ToolTipDescription="{StaticResource TooltipSolucionGarGar}" ToolTipTitle="Solucion GarGar del creador" />
+                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/enunciado.png" SmallImageSource="/Resources/Images/enunciado.png" 
+                                         x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click" ToolTipDescription="{StaticResource TooltipEnunciado}" ToolTipTitle="Enunciado" />
+                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionExplicada.png" SmallImageSource="/Resources/Images/solucionExplicada.png" 
+                                         x:Name="bttnSolTexto"  Label="Solución Explicada" ContextMenu="{Binding null}" Click="bttnSolTexto_Click" ToolTipDescription="{StaticResource TooltipSolucionExplicacion}" ToolTipTitle="Solucion Explicada" />
+                    <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionGarGar.png"  SmallImageSource="/Resources/Images/solucionGarGar.png" 
+                                         x:Name="bttnSolGarGar" Label="Solución GarGar" ContextMenu="{Binding null}" Click="bttnSolGarGar_Click" ToolTipDescription="{StaticResource TooltipSolucionGarGar}" ToolTipTitle="Solucion GarGar del creador" />
                     <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center" ContextMenu="{Binding null}" SelectionBoxWidth="35" ToolTipDescription="{StaticResource TooltipDificultadEjercicio}" ToolTipTitle="Dificultad del Ejercicio">
                         <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged" ContextMenu="{Binding null}" ColumnsStretchToFill="True" MaxColumnCount="1" SelectedValuePath="Content">
                             <ribbon:RibbonGalleryCategory ContextMenu="{Binding null}" VerticalContentAlignment="Center">
@@ -211,27 +214,34 @@
                 
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Mis Tests" Name="bttnConsultarTestPrueba" ContextMenu="{Binding null}" Click="bttnConsultarTestPrueba_Click" ToolTipDescription="{StaticResource TooltipMisTests}" ToolTipTitle="Listado de Mis Tests de Prueba" ></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Crear Test" Name="bttnCrearTestPrueba" ContextMenu="{Binding null}" Click="bttnCrearTestPrueba_Click" ToolTipDescription="{StaticResource TooltipCrearTestDePrueba}" ToolTipTitle="Crear un nuevo Test de Prueba" ToolTipFooterTitle="{StaticResource TooltipAdvertenciaIdentacionTest}"></ribbon:RibbonButton>
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Ejecutar Test" Name="bttnEjecutarTestPrueba" ContextMenu="{Binding null}" Click="bttnEjecutarTestPrueba_Click" ToolTipDescription="{StaticResource TooltipEjecutarTestDePrueba}" ToolTipTitle="Ejecutar un Test de Prueba" ToolTipFooterTitle="{StaticResource TooltipAdvertenciaIdentacionTest}"></ribbon:RibbonButton>
+            <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests" ContextMenu="{Binding null}" LargeImageSource="/Resources/Images/testPruebaListado.png" SmallImageSource="/Resources/Images/testPruebaListado.png">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/testPruebaListado.png" SmallImageSource="/Resources/Images/testPruebaListado.png" 
+                                     Label="Mis Tests" Name="bttnConsultarTestPrueba" ContextMenu="{Binding null}" Click="bttnConsultarTestPrueba_Click" ToolTipDescription="{StaticResource TooltipMisTests}" ToolTipTitle="Listado de Mis Tests de Prueba" ></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/testPruebaNuevo2.png" SmallImageSource="/Resources/Images/add.png" 
+                                     Label="Crear Test" Name="bttnCrearTestPrueba" ContextMenu="{Binding null}" Click="bttnCrearTestPrueba_Click" ToolTipDescription="{StaticResource TooltipCrearTestDePrueba}" ToolTipTitle="Crear un nuevo Test de Prueba" ToolTipFooterTitle="{StaticResource TooltipAdvertenciaIdentacionTest}"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/testPruebaEjecutar2.png" SmallImageSource="/Resources/Images/play.png" 
+                                     Label="Ejecutar Test" Name="bttnEjecutarTestPrueba" ContextMenu="{Binding null}" Click="bttnEjecutarTestPrueba_Click" ToolTipDescription="{StaticResource TooltipEjecutarTestDePrueba}" ToolTipTitle="Ejecutar un Test de Prueba" ToolTipFooterTitle="{StaticResource TooltipAdvertenciaIdentacionTest}"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
 
 
         </ribbon:RibbonTab>
 
         <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
-            <ribbon:RibbonGroup Header="Sincronizador" Name="ribbonGroupSincro" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro General" ContextMenu="{Binding null}" Click="btnSincroGeneral_Click" 
+            <ribbon:RibbonGroup Header="Sincronizador" Name="ribbonGroupSincro" ContextMenu="{Binding null}" LargeImageSource="/Resources/Images/Sync.png">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncGlobal.png" SmallImageSource="/Resources/Images/SyncGlobal.png" 
+                                     Label="Sincro General" ContextMenu="{Binding null}" Click="btnSincroGeneral_Click" 
                                      ToolTipTitle="Sincronización general" ToolTipDescription="{StaticResource TooltipSincronizar}" />
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Curso" ContextMenu="{Binding null}" Click="btnSincroCurso_Click" 
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncCurso.png" SmallImageSource="/Resources/Images/SyncCurso.png" 
+                                     Label="Sincro por Curso" ContextMenu="{Binding null}" Click="btnSincroCurso_Click" 
                                      ToolTipTitle="Sincronizacion por ID de curso" ToolTipDescription="{StaticResource TooltipSincronizarPorCurso}" ToolTipFooterTitle="{StaticResource TooltipDondeEncontrarIdCurso}" />
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Sincro por Ejercicio" ContextMenu="{Binding null}" Click="btnSincroEjercicio_Click" 
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncEjercicio.png" SmallImageSource="/Resources/Images/SyncEjercicio.png" 
+                                     Label="Sincro por Ejercicio" ContextMenu="{Binding null}" Click="btnSincroEjercicio_Click" 
                                      ToolTipTitle="Sincronizacion por ID de ejercicio" ToolTipDescription="{StaticResource TooltipSincronizarPorEjercicio}" ToolTipFooterTitle="{StaticResource TooltipDondeEncontrarIdEjercicio}" />
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Propiedades" ContextMenu="{Binding null}" Click="btnPropiedadesSincro_Click" 
+            <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro" ContextMenu="{Binding null}" LargeImageSource="/Resources/Images/SyncConfig.png">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncConfig.png" SmallImageSource="/Resources/Images/SyncConfig.png"
+                                     Label="Propiedades" ContextMenu="{Binding null}" Click="btnPropiedadesSincro_Click" 
                                      ToolTipTitle="Propiedades de sincronización" ToolTipDescription="{StaticResource TooltipSincronizarPropiedades}" ToolTipFooterTitle="{StaticResource TooltipSincronizarPropiedadesWarning}" />
             </ribbon:RibbonGroup>
 
