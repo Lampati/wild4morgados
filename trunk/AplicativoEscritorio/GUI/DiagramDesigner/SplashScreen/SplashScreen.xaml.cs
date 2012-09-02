@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace SplashDemo
+namespace SplashScreen
 {
     /// <summary>
     /// Interaction logic for SplashScreen.xaml
@@ -21,6 +21,8 @@ namespace SplashDemo
         public SplashScreen ( )
         {
             InitializeComponent ( );
+
+             
         }
     }
 }

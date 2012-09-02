@@ -81,14 +81,17 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif">
+      <HintPath>..\..\packages\WpfAnimatedGif.1.1.0\lib\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Page Include="DialogWindows\ErrorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -561,7 +564,7 @@
     <Resource Include="Images\loboTribal.png" />
     <Resource Include="Images\loboTribal1.png" />
     <Content Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
-    <None Include="Resources\Images\loading-intro.gif" />
+    <Resource Include="Resources\Images\loading-intro.gif" />
     <Resource Include="Resources\Images\search.png" />
     <Resource Include="Resources\Images\search_replace.png" />
     <Resource Include="Resources\Images\solucionExplicada.png" />
@@ -580,6 +583,12 @@
     <Resource Include="Resources\Images\SyncCurso.png" />
     <Resource Include="Resources\Images\SyncEjercicio.png" />
     <Resource Include="Resources\Images\SyncGlobal.png" />
+    <Resource Include="Resources\Images\DetallesEjercicio.png" />
+    <Resource Include="Resources\Images\CompilarGroup.png" />
+    <Resource Include="Resources\Images\edicionModo.png" />
+    <Resource Include="Resources\Images\ModosGrupo.png" />
+    <Resource Include="Resources\Images\SearchReplaceGroup.png" />
+    <Resource Include="Resources\Images\UndoRedoGrupo.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />

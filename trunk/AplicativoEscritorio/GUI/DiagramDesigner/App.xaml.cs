@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Threading;
 using ModoGrafico.Views;
 using System.Diagnostics;
+using SplashScreen;
+using System.Threading;
 
 namespace DiagramDesigner
 {
@@ -15,6 +17,38 @@ namespace DiagramDesigner
     /// </summary>
     public partial class App : Application
     {
+        [STAThread()]
+        static void Main()
+        {
+            Splasher.Splash = new SplashScreen.SplashScreen();
+            Splasher.ShowSplash();
+
+            //MessageListener.Instance.ReceiveMessage(string.Format("Cargando interfaz de usuario..."));
+
+            for (int i = 0; i < 1000; i++)
+            {
+                MessageListener.Instance.ReceiveMessage(string.Format("Cargando Ragnarok, por favor espere..."));
+                Thread.Sleep(1);
+            }
+
+            new App();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public App()
+        {
+            
+            StartupUri = new System.Uri("Window1.xaml", UriKind.Relative);
+
+            
+            InitializeComponent();
+
+            //MessageListener.Instance.ReceiveMessage(string.Format("Cargando compilador..."));
+
+            Run();
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Global exception handling  

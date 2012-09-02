@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Diagnostics;
 
-namespace SplashDemo
+namespace SplashScreen
 {
     /// <summary>
     /// Message listener, singlton pattern.

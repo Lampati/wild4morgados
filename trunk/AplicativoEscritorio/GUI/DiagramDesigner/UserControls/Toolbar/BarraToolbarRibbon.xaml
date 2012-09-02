@@ -9,6 +9,8 @@
              xmlns:custom="clr-namespace:DiagramDesigner.Helpers"
              xmlns:data="clr-namespace:DiagramDesigner.DataContextsMenu"
              mc:Ignorable="d" >
+    
+   
    
     <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False" ContextMenu="{Binding null}" >
         
@@ -36,8 +38,8 @@
 
         <ribbon:RibbonTab Name="TabGeneral" Header="General" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
 
-        
-            <ribbon:RibbonGroup Header="Edicion"   Name="ribbonGroupEdicion" ContextMenu="{Binding null}" >
+
+            <ribbon:RibbonGroup Header="Edicion" LargeImageSource="/Resources/Images/edicionModo.png"   Name="ribbonGroupEdicion" ContextMenu="{Binding null}" >
                 <ribbon:RibbonButton  ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Command="{x:Static ApplicationCommands.Paste}" 
@@ -69,9 +71,9 @@
                         ToolTipDescription="{StaticResource TooltipEliminar}"/>
             </ribbon:RibbonGroup>
 
-            
 
-            <ribbon:RibbonGroup Header="Deshacer/Rehacer"   Name="ribbonGroupUndoRedoGargar" ContextMenu="{Binding null}">
+
+            <ribbon:RibbonGroup Header="Deshacer/Rehacer" LargeImageSource="/Resources/Images/UndoRedoGrupo.png"   Name="ribbonGroupUndoRedoGargar" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Vertical" Margin="0,12,0,0">
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                     Command="{x:Static ApplicationCommands.Undo}"
@@ -91,7 +93,7 @@
 
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion" LargeImageSource="/Resources/Images/CompilarGroup.png"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
                 <ribbon:RibbonButton ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center"
                         Click="ButtonCompilacion_Click"
@@ -109,9 +111,9 @@
                         ToolTipDescription="{StaticResource TooltipEjecutarDesc}" ToolTipTitle="Ejecutar"/>
             </ribbon:RibbonGroup>
 
-            
 
-            <ribbon:RibbonGroup Header="Visualización"  Name="ribbonGroupVisualizacion" ContextMenu="{Binding null}">
+
+            <ribbon:RibbonGroup Header="Visualización"  Name="ribbonGroupVisualizacion" LargeImageSource="/Resources/Images/ModosGrupo.png"  ContextMenu="{Binding null}">
                 <ribbon:RibbonToggleButton Name="ButtonFlujo" ContextMenu="{Binding null}"
                         HorizontalContentAlignment="Center" 
                         Click="ButtonFlujo_Click"
@@ -129,7 +131,7 @@
                         ToolTipDescription="{StaticResource TooltipCambiarATexto}" ToolTipTitle="Pasar a Modo Texto" ToolTipFooterTitle="{StaticResource TooltipFooterDebeCompilar}" />
             </ribbon:RibbonGroup>
 
-            <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" LargeImageSource="/Resources/Images/SearchReplaceGroup.png" ContextMenu="{Binding null}">
                 <StackPanel Margin="0,12,0,0">
                     <ribbon:RibbonButton ContextMenu="{Binding null}" 
                             HorizontalContentAlignment="Center"
@@ -162,9 +164,9 @@
 
         </ribbon:RibbonTab>
 
-        <ribbon:RibbonTab Name="TabDetallesEjercicio" Header="Detalles Ejercicio" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
+        <ribbon:RibbonTab Name="TabDetallesEjercicio" Header="Detalles Ejercicio"  RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
 
-            <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga" ContextMenu="{Binding null}">
+            <ribbon:RibbonGroup Header="Detalles del Ejercicio" Name="ribbonGroupDetallesCarga" LargeImageSource="/Resources/Images/DetallesEjercicio.png" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal" >
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/enunciado.png" SmallImageSource="/Resources/Images/enunciado.png" 
                                          x:Name="bttnEnunciado" Label="Enunciado" ContextMenu="{Binding null}" Click="bttnEnunciado_Click" ToolTipDescription="{StaticResource TooltipEnunciado}" ToolTipTitle="Enunciado" />

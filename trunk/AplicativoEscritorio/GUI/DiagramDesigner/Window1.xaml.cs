@@ -36,6 +36,7 @@ using InterfazTextoGrafico;
 using LibreriaActividades;
 using ModoGrafico;
 using CompiladorGargar.Sintactico.ErroresManager.Errores;
+using SplashScreen;
 
 namespace DiagramDesigner
 {
@@ -241,11 +242,13 @@ namespace DiagramDesigner
 
         void Window1_Loaded(object sender, RoutedEventArgs e)
         {
+            MessageListener.Instance.ReceiveMessage(string.Format("Finalizando carga del programa..."));
+            
             Modo = ModoVisual.Flujo;
 
             ArchCargado = null;
 
-           
+            Splasher.CloseSplash();
         }
 
        
