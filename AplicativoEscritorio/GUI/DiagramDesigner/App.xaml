@@ -20,7 +20,8 @@
         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml" />
         <ResourceDictionary Source="Resources/ApplicationMenuResourceDictionary.xaml" />
         <ResourceDictionary Source="Resources/TooltipsResource.xaml" />
-        <!--<ResourceDictionary Source="/ReuxablesLegacy;component/edge.xaml" />-->
+
+                <!--<ResourceDictionary Source="/ReuxablesLegacy;component/edge.xaml" />-->
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

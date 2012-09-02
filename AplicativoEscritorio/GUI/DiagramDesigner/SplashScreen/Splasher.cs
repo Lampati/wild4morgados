@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-namespace SplashDemo
+namespace SplashScreen
 {
     /// <summary>
     /// Helper to show or close given splash window

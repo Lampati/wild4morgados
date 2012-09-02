@@ -5,7 +5,7 @@ using System.Text;
 using System.Security.Permissions;
 using System.Windows.Threading;
 
-namespace SplashDemo
+namespace SplashScreen
 {
     /// <summary>
     /// 
