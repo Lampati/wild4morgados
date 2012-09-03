@@ -71,61 +71,7 @@ namespace DiagramDesigner.UserControls.Mensajes
 
         void BarraMensajes_Loaded(object sender, RoutedEventArgs e)
         {
-            //AjustarSize();
-        }
-
-        
-
-
-        public void AjustarSize()
-        {
-
-            double width;
-
-            //if (listview.Width == Double.NaN)
-            //{
-            //    width = ((DiagramDesigner.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
-            //}
-            //else
-            //{            
-            //    width = listview.Width;
-            //}
-            double aux = this.Width;
-
-            width = lstVwMensajesModoTexto.ActualWidth;
-
-            GridView gv = lstVwMensajesModoTexto.View as GridView;
             
-            width = lstVwMensajesModoTexto.ActualWidth;
-            for (int i = 0; i < gv.Columns.Count -1 ; i++)
-            {
-                
-                    width -= gv.Columns[i].ActualWidth;
-            }
-
-            if (width < 100)
-            {
-                width = 100;
-            }
-
-            //gv.Columns[2].Width = width - 15;
-            gv.Columns[2].Width = width -15 ;
-
-            width = lstVwMensajesModoGrafico.ActualWidth;
-
-            gv = lstVwMensajesModoGrafico.View as GridView;
-            for (int i = 0; i < gv.Columns.Count-1; i++)
-            {
-                    width -= gv.Columns[i].ActualWidth;
-            }
-
-            if (width < 100)
-            {
-                width = 100;
-            }
-
-            //gv.Columns[3].Width = width - 15;
-            gv.Columns[3].Width = width - 15 ;
         }
 
 
@@ -143,10 +89,21 @@ namespace DiagramDesigner.UserControls.Mensajes
                         ItemsPresenter presenter = scroller.Content as ItemsPresenter;
                         if (presenter != null)
                         {
+                            
+
                             view.Columns[2].Width = presenter.ActualWidth;
                             for (int i = 0; i < view.Columns.Count - 1; i++)
                             {
-                                view.Columns[2].Width -= view.Columns[i].ActualWidth;
+                                
+
+                                if (view.Columns[2].Width > view.Columns[i].ActualWidth)
+                                {
+                                    view.Columns[2].Width -= view.Columns[i].ActualWidth;
+                                }
+                                else
+                                {
+                                    view.Columns[2].Width = 0;
+                                }
                             }
                         }
                     }
