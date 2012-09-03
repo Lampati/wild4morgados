@@ -7,7 +7,7 @@
         xmlns:interfaz="clr-namespace:InterfazTextoGrafico.Enums;assembly=InterfazTextoGrafico"
         ShowInTaskbar="False" ShowActivated="True" 
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize" 
-        Title="Propiedades de Sincronización" Height="375" Width="425">
+        Title="Propiedades de Sincronización" Height="330" Width="425">
     <Window.Resources>
         
     </Window.Resources>
@@ -32,16 +32,16 @@
 
             <StackPanel Margin="0,0,0,0" >                
                 <StackPanel Margin="5,0,5,0" >
-                    <TextBlock Margin="0,0,0,7" FontSize="14">Agregar nuevo servidor</TextBlock>
+                    <TextBlock Margin="0,0,0,7" FontSize="15" >Agregar nuevo servidor</TextBlock>
                     <StackPanel Orientation="Horizontal" Name="panelAgregarVariable">
                         <Label >Url (o IP)</Label>
                         <TextBox Height="24" Grid.Row="0" Width="100" Name="txtIP"></TextBox>
                         <Label Margin="10,0,0,0">Puerto</Label>
                         <TextBox Height="24" Grid.Row="0" Width="50" Name="txtPuerto"></TextBox>
-                        <Button Click="Button_Click" Margin="20,0,0,0">Agregar</Button>
+                        <Button Click="Button_Click" Margin="20,0,0,0" Style="{StaticResource BlueButton}">Agregar</Button>
                     </StackPanel>
                     <Separator Margin="0,8,0,8"></Separator>
-                    <TextBlock Margin="0,0,0,7" FontSize="14">Servidores cargados</TextBlock>
+                    <TextBlock Margin="0,0,0,7" FontSize="15">Servidores cargados</TextBlock>
                     <DataGrid x:Name="dgData" Margin="0,5,0,0" AutoGenerateColumns="False" 
                                  RowEditEnding="dgData_RowEditEnding" ItemsSource="{Binding ParametrosVariables}" RowHeight="25"
                                  CommandManager.PreviewExecuted="dgData_PreviewExecuted" CanUserAddRows="False"
@@ -55,7 +55,7 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Path=Ip}" Header="Url" Width="225" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Path=Ip}" Header="Url" Width="235" IsReadOnly="True"/>
                             <DataGridTextColumn Binding="{Binding Path=Puerto}" Header="Puerto" Width="80" IsReadOnly="True"/>
                             
                             <DataGridTemplateColumn  Header="" Width="80">
@@ -74,9 +74,9 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <Button  Width="60" Name="bttnAceptar" Click="bttnAceptar_Click">Aceptar</Button>
-                <Button  Width="60" Name="bttnCancelar" Margin="20,0,0,0" Click="bttnCancelar_Click">Cancelar</Button>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,6,0">
+                <Button  Width="60" Name="bttnAceptar" Click="bttnAceptar_Click"  Style="{StaticResource BlueButton}">Aceptar</Button>
+                <Button  Width="60" Name="bttnCancelar" Margin="15,0,0,0" Click="bttnCancelar_Click" Style="{StaticResource BlueButton}">Cancelar</Button>
             </StackPanel>
         </StackPanel>
     </Border>
