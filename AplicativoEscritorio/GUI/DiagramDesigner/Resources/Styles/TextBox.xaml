@@ -47,38 +47,8 @@
         </Setter>
         <Style.Triggers>
            
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsFocused"  Value="True" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.EnterActions>
+            
 
-                    <BeginStoryboard>
-                        <Storyboard>
-                            
-                            <DoubleAnimation To="1.0"
-                                                 Storyboard.TargetProperty="(Effect).Opacity"
-                                                 Duration="00:00:00"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.EnterActions>
-                <MultiTrigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>                            
-                            <DoubleAnimation To="0.0"
-                                                 Storyboard.TargetProperty="(Effect).Opacity"
-                                                 Duration="00:00:00"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.ExitActions>
-            </MultiTrigger>
-
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                
-            </MultiTrigger>
 
             <Trigger Property="IsFocused" Value="true">
                 <Setter Property="Background" Value="#FFE8A5" />
@@ -86,7 +56,6 @@
 
             <Trigger Property="IsMouseOver" Value="true">
                 <Trigger.EnterActions>
-
                     <BeginStoryboard>
                         <Storyboard>
 
