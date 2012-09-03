@@ -11,10 +11,12 @@
         <ResourceDictionary Source="Resources/Styles/GroupBox.xaml" />
         <ResourceDictionary Source="Resources/Styles/Expander.xaml" />
         <ResourceDictionary Source="Resources/Styles/ScrollBar.xaml" />
+        <ResourceDictionary Source="Resources/Styles/TextBox.xaml" />          
         <ResourceDictionary Source="Resources/ApplicationToolbar.xaml" />
         <ResourceDictionary Source="Resources/DesignerItem.xaml" />
         <ResourceDictionary Source="Resources/ToolboxItem.xaml" />
         <ResourceDictionary Source="Resources/Toolbox.xaml" />
+                
         <ResourceDictionary Source="Resources/Connection.xaml" />
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml" />
         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml" />

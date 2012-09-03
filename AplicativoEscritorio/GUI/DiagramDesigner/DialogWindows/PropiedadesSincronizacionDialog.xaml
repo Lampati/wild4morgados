@@ -7,24 +7,30 @@
         xmlns:interfaz="clr-namespace:InterfazTextoGrafico.Enums;assembly=InterfazTextoGrafico"
         ShowInTaskbar="False" ShowActivated="True" 
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize" 
-        Title="Propiedades" Height="355" Width="425">
+        Title="Propiedades de Sincronización" Height="375" Width="425">
     <Window.Resources>
         
     </Window.Resources>
-    <Border>
+    <Border >
         <Border.Background>
             <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                <GradientStop Color="White" Offset="0"/>
-                <GradientStop Color="LightGray" Offset="0.8"/>
+                <GradientStop Color="#FCFEFD" Offset="0"/>
+                <GradientStop Color="#EDF3F9" Offset="0.5"/>
             </LinearGradientBrush>
         </Border.Background>
         <StackPanel>
 
-            <Label Margin="0,0,0,0" FontSize="18" Name="lblEncabezado">Propiedades Sincronización</Label>
+            <!--<Label Margin="0,0,0,0" FontSize="18" Name="lblEncabezado"
+                   Background="#0E62E9" Foreground="White" FontWeight="Bold">
+                Propiedades Sincronización
+            </Label>-->
+            <StackPanel Margin="4,10,4,5">
+                <TextBlock>Utilice esta pantalla para cargar los servidores a los cuales sincronizar</TextBlock>
+                <TextBlock>Para mayor informacion visite la web de program.ar</TextBlock>
+            </StackPanel>
             <Separator Margin="0,0,0,8"></Separator>
 
-            <StackPanel Margin="0,0,0,0" >
-                
+            <StackPanel Margin="0,0,0,0" >                
                 <StackPanel Margin="5,0,5,0" >
                     <TextBlock Margin="0,0,0,7" FontSize="14">Agregar nuevo servidor</TextBlock>
                     <StackPanel Orientation="Horizontal" Name="panelAgregarVariable">
