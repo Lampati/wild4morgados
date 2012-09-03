@@ -31,7 +31,7 @@ namespace DiagramDesigner.UserControls.Toolbar
     /// </summary>
     public partial class BarraToolbarRibbon : UserControl
     {
-        public Window Owner { get; set; }
+        public Window1 Owner { get; set; }
 
 
         private ModoVisual modo;
@@ -291,10 +291,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             fd.InitialPath = textBoxDirEjCreados.Text;
             fd.Title = "Elija la carpeta por defecto para los ejercicios creados";
 
+            fd.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             if (fd.ShowDialog().Value == true)
             {
                 textBoxDirEjCreados.Text = fd.SelectedPath;
             }
+
+            this.Owner.ClearBlurEffect();
 
             //FolderBrowserDialog fd = new FolderBrowserDialog();
             //if (fd.ShowDialog().Value == true)
@@ -319,10 +324,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             fd.InitialPath = textBoxDirEjDescargados.Text;
             fd.Title = "Elija la carpeta por defecto para los ejercicios descargados";
 
+            fd.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             if (fd.ShowDialog().Value == true)
             {
                 textBoxDirEjDescargados.Text = fd.SelectedPath;
             }
+
+            this.Owner.ClearBlurEffect();
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
@@ -339,10 +349,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             fd.InitialPath = textBoxDirResoluciones.Text;
             fd.Title = "Elija la carpeta por defecto para las resoluciones";
 
+            fd.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             if (fd.ShowDialog().Value == true)
             {
                 textBoxDirResoluciones.Text = fd.SelectedPath;
             }
+
+            this.Owner.ClearBlurEffect();
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
@@ -359,10 +374,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             fd.InitialPath = textBoxDirTemp.Text;
             fd.Title = "Elija la carpeta donde se almacenaran los temporales de la aplicación";
 
+            fd.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             if (fd.ShowDialog().Value == true)
             {
                 textBoxDirTemp.Text = fd.SelectedPath;
             }
+
+            this.Owner.ClearBlurEffect();
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
@@ -380,10 +400,15 @@ namespace DiagramDesigner.UserControls.Toolbar
             fd.InitialPath = textBoxDirAbrirDefault.Text;
             fd.Title = "Elija la carpeta que se visualizara por defecto al elegir Abrir";
 
+            fd.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             if (fd.ShowDialog().Value == true)
             {
                 textBoxDirAbrirDefault.Text = fd.SelectedPath;
             }
+
+            this.Owner.ClearBlurEffect();
 
             SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
         }
@@ -403,6 +428,9 @@ namespace DiagramDesigner.UserControls.Toolbar
             textEditorWindow.EsEditable = esEjercicio;
             textEditorWindow.Owner = this.Owner;
 
+            textEditorWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             if (textEditorWindow.ShowDialog() == true)
             {
                 if (esEjercicio)
@@ -411,7 +439,10 @@ namespace DiagramDesigner.UserControls.Toolbar
                     eventArgs.Enunciado = textEditorWindow.Texto;
                     ModificarPropiedadesEjercicioEventFire(sender, eventArgs);
                 }
-            }        
+            }
+
+            this.Owner.ClearBlurEffect();
+
         }
 
         private Sincronizacion.Servicio servicio;
@@ -583,7 +614,12 @@ namespace DiagramDesigner.UserControls.Toolbar
                     }
                     ));
 
+            propertyEditorWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             propertyEditorWindow.ShowDialog();
+
+            this.Owner.ClearBlurEffect();
         }
 
         private void btnSincroCurso_Click(object sender, RoutedEventArgs e)
@@ -646,7 +682,12 @@ namespace DiagramDesigner.UserControls.Toolbar
                    }
                    ));
 
+            propertyEditorWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             propertyEditorWindow.ShowDialog();
+
+            this.Owner.ClearBlurEffect();
         }
 
         private void btnSincroEjercicio_Click(object sender, RoutedEventArgs e)
@@ -709,7 +750,12 @@ namespace DiagramDesigner.UserControls.Toolbar
                    }
             ));
 
+            propertyEditorWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
             propertyEditorWindow.ShowDialog();
+
+            this.Owner.ClearBlurEffect();
         }
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
@@ -760,6 +806,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             PropiedadesSincronizacionDialog dialog = new PropiedadesSincronizacionDialog();
             dialog.CargarServidores(ConfiguracionAplicacion.UrlsDescargaEjercicios);
             dialog.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
             dialog.ShowDialog();
 
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value == true)
@@ -771,6 +818,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
                 }
             }
+
+            this.Owner.ClearBlurEffect();
         }
 
         private void bttnSolGarGar_Click(object sender, RoutedEventArgs e)
@@ -781,9 +830,12 @@ namespace DiagramDesigner.UserControls.Toolbar
             textEditorWindow.Texto = ArchCargado.SolucionGargar;
             textEditorWindow.EsEditable = esEjercicio;
             textEditorWindow.EsContenidoGarGar = true;
+            textEditorWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
 
             textEditorWindow.ShowDialog();
-           
+
+            this.Owner.ClearBlurEffect();
         }
 
         private void bttnSolTexto_Click(object sender, RoutedEventArgs e)
@@ -792,6 +844,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             textEditorWindow.Titulo = "Solución para este ejercicio";
             textEditorWindow.Texto = ArchCargado.SolucionTexto;
             textEditorWindow.EsEditable = esEjercicio;
+            textEditorWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
 
             if (textEditorWindow.ShowDialog() == true)
             {
@@ -802,6 +856,8 @@ namespace DiagramDesigner.UserControls.Toolbar
                     ModificarPropiedadesEjercicioEventFire(sender, eventArgs);
                 }
             }
+
+            this.Owner.ClearBlurEffect();
           
         }
 

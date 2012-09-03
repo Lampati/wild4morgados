@@ -191,10 +191,7 @@
                         </ribbon:RibbonGallery>                        
                     </ribbon:RibbonComboBox>
                 </StackPanel>
-                
             </ribbon:RibbonGroup>
-
-
 
             <ribbon:RibbonGroup Header="Detalles Adicionales" Name="ribbonGroupDetallesDescarga" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
@@ -213,7 +210,6 @@
                     <TextBlock Margin="0,0,5,0">Curso:</TextBlock>
                     <TextBlock Name="txtCurso"></TextBlock>
                 </StackPanel>
-                
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Tests de Prueba" Name="ribbonGroupTests" ContextMenu="{Binding null}" LargeImageSource="/Resources/Images/testPruebaListado.png" SmallImageSource="/Resources/Images/testPruebaListado.png">
@@ -224,8 +220,6 @@
                 <ribbon:RibbonButton LargeImageSource="/Resources/Images/testPruebaEjecutar2.png" SmallImageSource="/Resources/Images/play.png" 
                                      Label="Ejecutar Test" Name="bttnEjecutarTestPrueba" ContextMenu="{Binding null}" Click="bttnEjecutarTestPrueba_Click" ToolTipDescription="{StaticResource TooltipEjecutarTestDePrueba}" ToolTipTitle="Ejecutar un Test de Prueba" ToolTipFooterTitle="{StaticResource TooltipAdvertenciaIdentacionTest}"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
-
-
         </ribbon:RibbonTab>
 
         <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
@@ -254,27 +248,37 @@
             <ribbon:RibbonGroup Header="Directorios Ejercicios" Name="ribbonGroupDirEjercicios" ContextMenu="{Binding null}">
                 
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Ejercicios Creados" Name="textBoxDirEjCreados" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirEjCreados" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirEjCreados_Click" HorizontalAlignment="Left" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                          TextBoxWidth="100" Label="Directorio Ejercicios Creados" Name="textBoxDirEjCreados" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirEjCreados" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirEjCreados_Click" HorizontalAlignment="Left" ContextMenu="{Binding null}"
+                                         ToolTipDescription="{StaticResource TooltipDirCreacionEjercicios}" ToolTipTitle="Cambiar carpeta de creación de ejercicios" ToolTipFooterTitle="{StaticResource TooltipCambiosANivelGlobal}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Resoluciones" Name="textBoxDirResoluciones" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirRes" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirRes_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                          TextBoxWidth="100" Label="Directorio Resoluciones" Name="textBoxDirResoluciones" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirRes" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirRes_Click" ContextMenu="{Binding null}"
+                                         ToolTipDescription="{StaticResource TooltipDirResEjercicios}" ToolTipTitle="Cambiar carpeta de creación de resoluciones de ejercicios" ToolTipFooterTitle="{StaticResource TooltipCambiosANivelGlobal}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Ejercicios Descargados" Name="textBoxDirEjDescargados" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirEjDescargados" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirEjDescargados_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                          TextBoxWidth="100" Label="Directorio Ejercicios Descargados" Name="textBoxDirEjDescargados" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirEjDescargados" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirEjDescargados_Click" ContextMenu="{Binding null}"
+                                         ToolTipDescription="{StaticResource TooltipDirDescargaEjercicios}" ToolTipTitle="Cambiar carpeta de descarga de ejercicios" ToolTipFooterTitle="{StaticResource TooltipCambiosANivelGlobal}" />
                 </StackPanel>
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Directorios Aplicación" Name="ribbonGroupDirAplicacion" ContextMenu="{Binding null}">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Temporales" Name="textBoxDirTemp" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirTemporales" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirTemporales_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" 
+                                          TextBoxWidth="100" Label="Directorio Temporales" Name="textBoxDirTemp" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirTemporales" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirTemporales_Click" ContextMenu="{Binding null}"
+                                         ToolTipDescription="{StaticResource TooltipDirTemporales}" ToolTipTitle="Cambiar carpeta de temporales" ToolTipFooterTitle="{StaticResource TooltipCambiosANivelGlobal}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTextBox IsEnabled="False"  TextBoxWidth="100" Label="Directorio Default Abrir" Name="textBoxDirAbrirDefault" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
-                    <ribbon:RibbonButton Name="bttnDirAbrirDefault" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirAbrirDefault_Click" ContextMenu="{Binding null}"></ribbon:RibbonButton>
+                    <ribbon:RibbonTextBox IsEnabled="False" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                          TextBoxWidth="100" Label="Directorio Default Abrir" Name="textBoxDirAbrirDefault" ContextMenu="{Binding null}"></ribbon:RibbonTextBox>
+                    <ribbon:RibbonButton Name="bttnDirAbrirDefault" SmallImageSource="/Resources/Images/OpenFolder.png" Click="bttnDirAbrirDefault_Click" ContextMenu="{Binding null}"
+                                         ToolTipDescription="{StaticResource TooltipDirDefaultAbrir}" ToolTipTitle="Cambiar carpeta predeterminada" ToolTipFooterTitle="{StaticResource TooltipCambiosANivelGlobal}" />
                 </StackPanel>
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>

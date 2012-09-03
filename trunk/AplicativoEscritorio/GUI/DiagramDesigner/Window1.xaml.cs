@@ -37,6 +37,8 @@ using LibreriaActividades;
 using ModoGrafico;
 using CompiladorGargar.Sintactico.ErroresManager.Errores;
 using SplashScreen;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace DiagramDesigner
 {
@@ -417,7 +419,12 @@ namespace DiagramDesigner
 
                         testWindow.Title = "Tests de Prueba - Ejecutar";
 
+                        testWindow.Owner = this;
+                        ApplyBlurEffect();
+
                         testWindow.ShowDialog();
+
+                        ClearBlurEffect();
 
                     }
                 }
@@ -450,6 +457,11 @@ namespace DiagramDesigner
 
                     testWindow.Title = "Tests de Prueba - Mis Tests";
 
+                    testWindow.Owner = this;
+                    ApplyBlurEffect();
+
+                    testWindow.ShowDialog();                    
+
                     bool? confirmado = testWindow.ShowDialog();
 
                     if (confirmado.HasValue && confirmado.Value)
@@ -470,6 +482,8 @@ namespace DiagramDesigner
                         archCargado.TestsPrueba.RemoveAll(x => idsRemover.Contains(x.Id));
                         
                     }
+
+                    ClearBlurEffect();
 
                 }
             }
@@ -516,6 +530,9 @@ namespace DiagramDesigner
 
                     testWindow.Title = "Tests de Prueba - Crear";
 
+                    testWindow.Owner = this;
+                    ApplyBlurEffect();
+
                     testWindow.ShowDialog();
 
                     if (testWindow.TestGenerado != null)
@@ -523,6 +540,7 @@ namespace DiagramDesigner
                         this.archCargado.TestsPrueba.Add(testWindow.TestGenerado);
                     }
 
+                    ClearBlurEffect();
                 }
             }
             
@@ -714,6 +732,10 @@ namespace DiagramDesigner
             if (res.ResEjecucion != null)
             {
                 ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+
+                resultadosDialog.Owner = this;
+                ApplyBlurEffect();
+
                 resultadosDialog.ShowDialog();
 
                 try
@@ -724,6 +746,9 @@ namespace DiagramDesigner
                 {                    
                     
                 }
+
+                ClearBlurEffect();
+
             }
         }
 
@@ -978,6 +1003,22 @@ namespace DiagramDesigner
             }
         }
 
-  
+
+        /// <summary>
+        /// Apply Blur Effect on the window
+        /// </summary>
+        public void ApplyBlurEffect()
+        {
+            System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+            objBlur.Radius = 20;
+            this.Effect = objBlur;
+        }
+        /// <summary>
+        /// Remove Blur Effects
+        /// </summary>
+        public void ClearBlurEffect()
+        {
+            this.Effect = null;
+        }
     }
 }

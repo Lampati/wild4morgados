@@ -130,6 +130,32 @@
         Abre el dialogo de busqueda y reemplazo
     </clr:String>
 
+    <!-- Configuracion-->
     
+    <clr:String x:Key="TooltipDirCreacionEjercicios">
+        Cambiar la carpeta de guardado por defecto al crear un ejercicio
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirResEjercicios">
+        Cambiar la carpeta de guardado por defecto al crear una resolución de ejercicio
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirDescargaEjercicios">
+        Cambiar la carpeta de guardado por defecto de los ejercicios descargados al sincronizar
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirTemporales">
+        Cambiar la carpeta que la aplicacion usará para sus archivos temporales
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirDefaultAbrir">
+        Cambiar la carpeta que se ofrece al usuario por defecto al seleccionar la opcion de abrir del menu
+    </clr:String>
+
+    <clr:String x:Key="TooltipCambiosANivelGlobal">
+        Los cambios a esta configuración se haran a nivel aplicación
+    </clr:String>
+
+
 
 </ResourceDictionary>
