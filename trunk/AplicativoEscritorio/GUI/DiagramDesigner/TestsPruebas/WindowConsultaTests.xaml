@@ -1,7 +1,10 @@
 ﻿<Window x:Class="DiagramDesigner.TestsPruebas.WindowConsultaTests"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mis Tests" Height="300" Width="500" ResizeMode="NoResize">
+        Title="Mis Tests" Height="300" Width="500" 
+        ShowInTaskbar="False" ShowActivated="True" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" 
+        >
     
     
     <Grid Margin="5">

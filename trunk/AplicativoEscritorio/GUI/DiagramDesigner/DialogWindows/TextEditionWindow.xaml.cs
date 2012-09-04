@@ -23,11 +23,23 @@ namespace DiagramDesigner.DialogWindows
         {
             get
             {
-                return (string)labelTitulo.Content;
+                return Title;
             }
             set
             {
-                labelTitulo.Content = value;
+                Title = value;
+            }
+        }
+
+        public string Copete
+        {
+            get
+            {
+                return (string)txtBlockCopete.Text;
+            }
+            set
+            {
+                txtBlockCopete.Text = value;
             }
         }
 

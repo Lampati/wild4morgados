@@ -44,7 +44,7 @@
     </Style>
     
 
-    <Style TargetType="Expander">
+    <Style TargetType="Expander" x:Key="ExpanderGrisLineal">
     <Setter Property="Control.Foreground" Value="#4C4C4C"/>
     <Setter Property="Template">
       <Setter.Value>

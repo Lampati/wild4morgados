@@ -9,6 +9,7 @@
 using InterfazTextoGrafico;
     using ModoGrafico.EventArgsClasses;
     using System.Collections.Generic;
+    using System.Windows;
 
     public class WorkAreaViewModel : BaseViewModel
     {
@@ -193,6 +194,8 @@ using InterfazTextoGrafico;
                 propiedades.Retorno = tabElegido.Retorno;
                 propiedades.TipoRetorno = tabElegido.TipoRetorno;
                 propiedades.Parametros = tabElegido.Parametros;
+                propiedades.Owner = Application.Current.MainWindow;
+                
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)

@@ -31,7 +31,8 @@
                         </StackPanel>
                     </StackPanel>
                     <Separator Margin="0,8,0,8"></Separator>
-                    <Expander Header="Detalles" Expanded="Expander_Expanded" Collapsed="Expander_Collapsed" IsExpanded="False" >
+                    <Expander Header="Detalles" Expanded="Expander_Expanded" Style="{StaticResource ExpanderGrisLineal}"
+                              Collapsed="Expander_Collapsed" IsExpanded="False" >
                         <TextBox IsReadOnly="True" Name="txtDetallesError" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
                                  Height="130" >                            
                         </TextBox>
