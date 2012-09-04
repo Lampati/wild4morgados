@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:userControls="clr-namespace:DiagramDesigner.UserControls"
-        Title="" Height="400" Width="450" ResizeMode="NoResize">
+        Title="" Height="400" Width="450" ShowInTaskbar="False" ShowActivated="True" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
     <ScrollViewer>
         <Grid Margin="5">
             <Grid.RowDefinitions>

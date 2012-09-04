@@ -223,7 +223,7 @@ namespace DiagramDesigner
 
             ToolbarAplicacion.Owner = this;
 
-            
+            Esquema.Owner = this;
           
         }
 

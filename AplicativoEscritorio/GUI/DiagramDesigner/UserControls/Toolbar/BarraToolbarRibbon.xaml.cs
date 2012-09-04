@@ -423,12 +423,12 @@ namespace DiagramDesigner.UserControls.Toolbar
         private void bttnEnunciado_Click(object sender, RoutedEventArgs e)
         {
             TextEditionWindow textEditorWindow = new TextEditionWindow();
-            textEditorWindow.Titulo = "Enunciado para este ejercicio";
+            textEditorWindow.Titulo = "Enunciado";
+            textEditorWindow.Copete = "Enunciado para este ejercicio";
             textEditorWindow.Texto = ArchCargado.Enunciado;
             textEditorWindow.EsEditable = esEjercicio;
             textEditorWindow.Owner = this.Owner;
 
-            textEditorWindow.Owner = this.Owner;
             this.Owner.ApplyBlurEffect();
 
             if (textEditorWindow.ShowDialog() == true)
@@ -826,7 +826,8 @@ namespace DiagramDesigner.UserControls.Toolbar
         {
 
             TextEditionWindow textEditorWindow = new TextEditionWindow();
-            textEditorWindow.Titulo = "Solución GarGar para este ejercicio";
+            textEditorWindow.Titulo = "Solución GarGar";
+            textEditorWindow.Copete = "Solución GarGar para este ejercicio";
             textEditorWindow.Texto = ArchCargado.SolucionGargar;
             textEditorWindow.EsEditable = esEjercicio;
             textEditorWindow.EsContenidoGarGar = true;
@@ -841,7 +842,8 @@ namespace DiagramDesigner.UserControls.Toolbar
         private void bttnSolTexto_Click(object sender, RoutedEventArgs e)
         {
             TextEditionWindow textEditorWindow = new TextEditionWindow();
-            textEditorWindow.Titulo = "Solución para este ejercicio";
+            textEditorWindow.Titulo = "Solución";
+            textEditorWindow.Copete = "Solución para este ejercicio";
             textEditorWindow.Texto = ArchCargado.SolucionTexto;
             textEditorWindow.EsEditable = esEjercicio;
             textEditorWindow.Owner = this.Owner;

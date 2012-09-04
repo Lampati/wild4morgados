@@ -62,27 +62,53 @@ namespace ModoGrafico.Views
 
                 if (tipoPropiedades == TipoContexto.Funcion)
                 {
-                    Grid.SetRow(lblNombre, 0);
-                    Grid.SetRow(txtNombre, 0);
+                    grdPropiedades.RowDefinitions.Clear();
+
+                    grdPropiedades.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+                    grdPropiedades.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+                    grdPropiedades.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+                    grdPropiedades.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+
+                    Grid.SetRow(lblEncabezado, 0);
+                    Grid.SetRow(lblEncabezadoTipo, 0);
+
+                    Grid.SetRow(lblNombre, 1);
+                    Grid.SetRow(txtNombre, 1);
+
+                    Grid.SetRow(lblRetorno, 2);
+                    Grid.SetRow(txtRetorno, 2);
+
+                    Grid.SetRow(lblTipoRetorno, 3);
+                    Grid.SetRow(cboTipoRetorno, 3);
 
                     lblRetorno.Visibility = System.Windows.Visibility.Visible;
                     lblTipoRetorno.Visibility = System.Windows.Visibility.Visible;
                     txtRetorno.Visibility = System.Windows.Visibility.Visible;
                     cboTipoRetorno.Visibility = System.Windows.Visibility.Visible;
 
-                    lblEncabezado.Content = "Funcion";
+                    lblEncabezadoTipo.Content = "Funcion";
                 }
                 else
                 {
+                    Height -= 45;
+
+                    grdPropiedades.RowDefinitions.Clear();
+
+                    grdPropiedades.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+                    grdPropiedades.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+
                     lblRetorno.Visibility = System.Windows.Visibility.Collapsed;
                     lblTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
                     txtRetorno.Visibility = System.Windows.Visibility.Collapsed;
                     cboTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
 
+                    Grid.SetRow(lblEncabezado, 0);
+                    Grid.SetRow(lblEncabezadoTipo, 0);
+
                     Grid.SetRow(lblNombre, 1);
                     Grid.SetRow(txtNombre, 1);
 
-                    lblEncabezado.Content = "Procedimiento";
+                    lblEncabezadoTipo.Content = "Procedimiento";
                 }
               
 
@@ -534,6 +560,16 @@ namespace ModoGrafico.Views
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+
+        private void expanderParametros_Expanded(object sender, RoutedEventArgs e)
+        {
+            //Height = 630;
+        }
+
+        private void expanderParametros_Collapsed(object sender, RoutedEventArgs e)
+        {
+            //Height = 290;
         }
 
      

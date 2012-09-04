@@ -20,7 +20,7 @@
                     <ComboBoxItem>Current Document</ComboBoxItem>
                     <ComboBoxItem>All Documents</ComboBoxItem>
                 </ComboBox>
-                <Expander Header="Opciones" IsExpanded="False">
+                    <Expander Header="Opciones" IsExpanded="False" Style="{StaticResource ExpanderGrisLineal}">
                         
                     <StackPanel>
                         

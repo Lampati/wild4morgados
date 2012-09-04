@@ -39,6 +39,8 @@ namespace DiagramDesigner.UserControls.Entorno
 
         FindReplaceMgr findAndReplaceManager;
 
+        public Window1 Owner { get; set; }
+
         public EsquemaCentral()
         {
             InitializeComponent();
@@ -47,6 +49,8 @@ namespace DiagramDesigner.UserControls.Entorno
 
             this.textEditor.TextArea.Caret.PositionChanged += new EventHandler(Caret_PositionChanged);
             this.modoGrafico.ModoGraficoModificadoEvent += new ModoGrafico.ProgramadorGrafico.ModoGraficoModificadoEventHandler(modoGrafico_ModoGraficoModificadoEvent);
+
+            this.modoGrafico.Owner = this.Owner;
         }
 
     

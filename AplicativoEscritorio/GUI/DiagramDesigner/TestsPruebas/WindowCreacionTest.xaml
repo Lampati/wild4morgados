@@ -4,7 +4,9 @@
         xmlns:aw="clr-namespace:AvalonWizard;assembly=AvalonWizard"
         xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:userControls="clr-namespace:DiagramDesigner.UserControls"
-        Title="WindowCreacionTest" Height="550" Width="450">
+        Title="WindowCreacionTest" Height="550" Width="450"
+        ShowInTaskbar="False" ShowActivated="True" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
     <Grid>
         <aw:Wizard Name="wizard" aw:Designer.PageIndex="0" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
             CancelButtonContent="Cancelar" FinishButtonContent="Finalizar" BackButtonContent="Atras" NextButtonContent="Siguiente">

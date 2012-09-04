@@ -36,6 +36,8 @@
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
 
+        public Window Owner { get; set; }
+
         public WorkAreaView()
         {
             InitializeComponent();
@@ -297,6 +299,7 @@
             {
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
+                propiedades.Owner = this.Owner;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)
@@ -309,6 +312,7 @@
             {
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
+                propiedades.Owner = this.Owner;
                 propiedades.ShowDialog();
 
                 if (propiedades.DialogResult.HasValue && propiedades.DialogResult.Value)

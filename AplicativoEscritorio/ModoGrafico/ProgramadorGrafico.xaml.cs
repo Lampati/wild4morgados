@@ -33,6 +33,8 @@ namespace ModoGrafico
         public delegate void ModoGraficoModificadoEventHandler(object o, ModoGraficoModificadoEventArgs e);
         public event ModoGraficoModificadoEventHandler ModoGraficoModificadoEvent;
 
+        public Window Owner { get; set; }
+
         public static void ReiniciarContadoresId()
         {
             ActividadViewModelBase.ReiniciarContadorGlobal();
@@ -43,6 +45,8 @@ namespace ModoGrafico
             InitializeComponent();
             this.WorkArea.CambioTabEvent += new Views.WorkAreaView.TipoTabCambiadoEventHandler(WorkArea_CambioTabEvent);
             this.WorkArea.WorkflowChangedEvent += new Views.WorkAreaView.WorkflowChangedEventHandler(WorkArea_WorkflowChangedEvent);
+
+            this.WorkArea.Owner = this.Owner;
 
             this.Loaded += new RoutedEventHandler(ProgramadorGrafico_Loaded);
             //ModoGrafico.Tabs.EditableTabHeaderControl.ClickEvento += new ModoGrafico.Tabs.EditableTabHeaderControl.ClickHandler(EditableTabHeaderControl_ClickEvento);
