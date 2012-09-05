@@ -38,9 +38,11 @@
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                        <Label x:Name="labelTitulo" />                        
-                    </Grid>
+                    <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                            BorderThickness="1.5" CornerRadius="10" Background="#C3D2FD">                        
+                        <Label x:Name="labelTitulo"  Foreground="White" FontSize="13" />                        
+                    </Border>
+                
                 </Grid>
             </Border>
         </Border>
