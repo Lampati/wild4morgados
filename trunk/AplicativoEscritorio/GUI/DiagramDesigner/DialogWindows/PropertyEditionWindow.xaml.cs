@@ -60,27 +60,31 @@ namespace DiagramDesigner.DialogWindows
         {
             StackPanel sp = new StackPanel();
             sp.Orientation = Orientation.Horizontal;
-            sp.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            sp.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             sp.VerticalAlignment = System.Windows.VerticalAlignment.Center;
 
             Button btnAceptar = new Button();
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Click += accionAceptar;
-            btnAceptar.Margin = new Thickness(20, 0, 0, 0);
-            btnAceptar.Width = 75;
+            btnAceptar.Margin = new Thickness(0, 0, 15, 0);
+            btnAceptar.Width = 70;
             btnAceptar.Content = "Aceptar";
             btnAceptar.IsDefault = true;
+            btnAceptar.Style =  Application.Current.Resources["BlueButton"] as Style;
 
             Button btnCancelar = new Button();
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Click += accionCancelar;
-            btnCancelar.Margin = new Thickness(0, 0, 20, 0);
-            btnCancelar.Width = 75;
+            btnCancelar.Margin = new Thickness(0, 0, 6, 0);
+            btnCancelar.Width = 70;
             btnCancelar.Content = "Cancelar";
             btnCancelar.IsCancel = true;
+            btnCancelar.Style =  Application.Current.Resources["BlueButton"] as Style;
+            
 
-            sp.Children.Add(btnCancelar);
+            
             sp.Children.Add(btnAceptar);
+            sp.Children.Add(btnCancelar);
 
             RowDefinition rd = new RowDefinition();
             rd.Height = new GridLength(50);
