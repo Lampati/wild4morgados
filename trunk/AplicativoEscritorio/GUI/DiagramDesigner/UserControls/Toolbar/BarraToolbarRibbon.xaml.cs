@@ -290,6 +290,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
             fd.InitialPath = textBoxDirEjCreados.Text;
             fd.Title = "Elija la carpeta por defecto para los ejercicios creados";
+            fd.WindowStartupLocation = WindowStartupLocation.CenterOwner;            
+            fd.Width = 700;
 
             fd.Owner = this.Owner;
             this.Owner.ApplyBlurEffect();
@@ -323,6 +325,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
             fd.InitialPath = textBoxDirEjDescargados.Text;
             fd.Title = "Elija la carpeta por defecto para los ejercicios descargados";
+            fd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            fd.Width = 700;
 
             fd.Owner = this.Owner;
             this.Owner.ApplyBlurEffect();
@@ -348,6 +352,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
             fd.InitialPath = textBoxDirResoluciones.Text;
             fd.Title = "Elija la carpeta por defecto para las resoluciones";
+            fd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            fd.Width = 700;
 
             fd.Owner = this.Owner;
             this.Owner.ApplyBlurEffect();
@@ -373,6 +379,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
             fd.InitialPath = textBoxDirTemp.Text;
             fd.Title = "Elija la carpeta donde se almacenaran los temporales de la aplicación";
+            fd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            fd.Width = 700;
 
             fd.Owner = this.Owner;
             this.Owner.ApplyBlurEffect();
@@ -399,6 +407,8 @@ namespace DiagramDesigner.UserControls.Toolbar
             FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
             fd.InitialPath = textBoxDirAbrirDefault.Text;
             fd.Title = "Elija la carpeta que se visualizara por defecto al elegir Abrir";
+            fd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            fd.Width = 700;
 
             fd.Owner = this.Owner;
             this.Owner.ApplyBlurEffect();
@@ -630,13 +640,25 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             propertyEditorWindow.AgregarSeparador();
 
+            propertyEditorWindow.AgregarPropiedad("Se descargaran los ejercicios del curso especificado. Podrá encontrar los identificadores en la web de programAr.");
+
+            propertyEditorWindow.AgregarSeparador(false);
+
             TextBox txtCurso = new TextBox();
             txtCurso.Height = 20;
             txtCurso.Width = 300;
             txtCurso.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             propertyEditorWindow.AgregarPropiedad("ID Curso", txtCurso);
 
-            propertyEditorWindow.AgregarSeparador(false);
+            //propertyEditorWindow.AgregarSeparador(false);
+
+            Label lblInfo = new Label();
+            lblInfo.Width = 400;
+            lblInfo.Height = 25;
+            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            //lblInfo.Margin = new Thickness(5, 0, 5, 0);
+            lblInfo.Foreground = new SolidColorBrush(Colors.SlateGray);
+            propertyEditorWindow.AgregarPropiedad(lblInfo);
 
             ProgressBar pBar = new ProgressBar();
             pBar.Orientation = Orientation.Horizontal;
@@ -644,13 +666,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             pBar.Height = 20;
             pBar.Maximum = 100;
             pBar.Visibility = System.Windows.Visibility.Hidden;
-            propertyEditorWindow.AgregarPropiedad(pBar);
-
-            Label lblInfo = new Label();
-            lblInfo.Width = 400;
-            lblInfo.Height = 25;
-            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            propertyEditorWindow.AgregarPropiedad(lblInfo);
+            propertyEditorWindow.AgregarPropiedad(pBar);          
 
             Sincronizacion.Servicio srv = this.Servicio;
 
@@ -698,13 +714,22 @@ namespace DiagramDesigner.UserControls.Toolbar
 
             propertyEditorWindow.AgregarSeparador();
 
+            propertyEditorWindow.AgregarPropiedad("Se descargará el ejercicio especificado. Podrá encontrar los identificadores en la web de programAr.");
+
+            propertyEditorWindow.AgregarSeparador(false);
+
             TextBox txtEjercicio = new TextBox();
             txtEjercicio.Height = 20;
             txtEjercicio.Width = 300;
             txtEjercicio.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             propertyEditorWindow.AgregarPropiedad("ID Ejercicio", txtEjercicio);
 
-            propertyEditorWindow.AgregarSeparador(false);
+            Label lblInfo = new Label();
+            lblInfo.Width = 400;
+            lblInfo.Height = 25;
+            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            lblInfo.Foreground = new SolidColorBrush(Colors.SlateGray);
+            propertyEditorWindow.AgregarPropiedad(lblInfo);
 
             ProgressBar pBar = new ProgressBar();
             pBar.Orientation = Orientation.Horizontal;
@@ -714,11 +739,7 @@ namespace DiagramDesigner.UserControls.Toolbar
             pBar.Visibility = System.Windows.Visibility.Hidden;
             propertyEditorWindow.AgregarPropiedad(pBar);
 
-            Label lblInfo = new Label();
-            lblInfo.Width = 400;
-            lblInfo.Height = 25;
-            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            propertyEditorWindow.AgregarPropiedad(lblInfo);
+         
 
             Sincronizacion.Servicio srv = this.Servicio;
 
