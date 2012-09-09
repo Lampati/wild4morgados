@@ -13,7 +13,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Win32;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     public enum VisualizacionActivada
     {

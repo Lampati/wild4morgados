@@ -1,4 +1,4 @@
-﻿namespace DiagramDesigner.DataContextsMenu
+﻿namespace Ragnarok.DataContextsMenu
 {
     /// <summary>
     /// DataModel for Tables Gallery

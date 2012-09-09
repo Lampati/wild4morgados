@@ -5,31 +5,31 @@ using CompiladorGargar;
 using System.Windows.Input;
 using System;
 using Utilidades;
-using DiagramDesigner.Enums;
+using Ragnarok.Enums;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using AplicativoEscritorio.DataAccess;
 using System.IO;
 using Microsoft.Windows.Controls.Ribbon;
-using DiagramDesigner.EventArgsClasses;
-using DiagramDesigner.UserControls.Mensajes;
-using DiagramDesigner.UserControls.Toolbar;
-using DiagramDesigner.UserControls.Entorno;
+using Ragnarok.EventArgsClasses;
+using Ragnarok.UserControls.Mensajes;
+using Ragnarok.UserControls.Toolbar;
+using Ragnarok.UserControls.Entorno;
 using AplicativoEscritorio.DataAccess.Interfases;
 using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
 using Microsoft.Win32;
-using DiagramDesigner.Helpers;
+using Ragnarok.Helpers;
 using System.Windows.Documents;
 using Globales;
 using System.Diagnostics;
 using CompiladorGargar.Resultado.Auxiliares;
 using EJEKOR;
-using DiagramDesigner.TestsPruebas;
+using Ragnarok.TestsPruebas;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using DiagramDesigner.DialogWindows;
+using Ragnarok.DialogWindows;
 using DataAccess.Entidades;
 using DataAccess;
 using InterfazTextoGrafico;
@@ -40,7 +40,7 @@ using SplashScreen;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     public partial class RagnarokWindow : RibbonWindow
     {

@@ -10,9 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DiagramDesigner.ModoTexto.Configuracion;
+using Ragnarok.ModoTexto.Configuracion;
 
-namespace DiagramDesigner.DialogWindows
+namespace Ragnarok.DialogWindows
 {
     /// <summary>
     /// Interaction logic for TextEditionWindow.xaml

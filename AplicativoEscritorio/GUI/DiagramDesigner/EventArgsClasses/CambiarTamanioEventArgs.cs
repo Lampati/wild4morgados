@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DiagramDesigner.UserControls.Entorno
+namespace Ragnarok.UserControls.Entorno
 {
     public class CambiarTamanioEventArgs
     {

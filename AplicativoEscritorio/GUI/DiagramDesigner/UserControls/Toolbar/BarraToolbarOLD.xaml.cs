@@ -11,11 +11,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiagramDesigner.Enums;
-using DiagramDesigner.EventArgsClasses;
+using Ragnarok.Enums;
+using Ragnarok.EventArgsClasses;
 using Globales.Enums;
 
-namespace DiagramDesigner.UserControls.Toolbar
+namespace Ragnarok.UserControls.Toolbar
 {
     /// <summary>
     /// Lógica de interacción para BarraToolbar.xaml

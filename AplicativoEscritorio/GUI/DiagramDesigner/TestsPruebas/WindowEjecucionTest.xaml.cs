@@ -20,7 +20,7 @@ using EJEKOR;
 using Utilidades;
 using System.IO;
 
-namespace DiagramDesigner.TestsPruebas
+namespace Ragnarok.TestsPruebas
 {
     /// <summary>
     /// Interaction logic for WindowCreacionTest.xaml

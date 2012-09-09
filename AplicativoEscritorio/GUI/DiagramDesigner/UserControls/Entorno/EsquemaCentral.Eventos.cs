@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using DiagramDesigner.EventArgsClasses;
+using Ragnarok.EventArgsClasses;
 
-namespace DiagramDesigner.UserControls.Entorno
+namespace Ragnarok.UserControls.Entorno
 {
     public partial class EsquemaCentral : UserControl
     {

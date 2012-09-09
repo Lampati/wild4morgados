@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     internal class SelectionService
     {

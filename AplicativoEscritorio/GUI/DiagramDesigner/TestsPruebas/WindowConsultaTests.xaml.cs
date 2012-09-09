@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 using AplicativoEscritorio.DataAccess.Entidades;
 using DataAccess.Entidades;
 
-namespace DiagramDesigner.TestsPruebas
+namespace Ragnarok.TestsPruebas
 {
     /// <summary>
     /// Interaction logic for WindowConsultaTests.xaml

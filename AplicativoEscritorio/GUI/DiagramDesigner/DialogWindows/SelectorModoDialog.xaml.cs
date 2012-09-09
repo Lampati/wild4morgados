@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
-namespace DiagramDesigner.DialogWindows
+namespace Ragnarok.DialogWindows
 {
     /// <summary>
     /// Interaction logic for SelectorModoDialog.xaml

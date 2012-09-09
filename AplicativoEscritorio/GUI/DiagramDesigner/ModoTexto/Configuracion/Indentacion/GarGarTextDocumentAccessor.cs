@@ -8,7 +8,7 @@ using System.IO;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
 
-namespace DiagramDesigner.ModoTexto.Configuracion.Indentacion
+namespace Ragnarok.ModoTexto.Configuracion.Indentacion
 {
 	
 	

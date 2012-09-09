@@ -2,7 +2,7 @@
 using System.Windows.Input;
 
 
-namespace DiagramDesigner.DataContextsMenu
+namespace Ragnarok.DataContextsMenu
 {
     public static class ViewModelData
     {

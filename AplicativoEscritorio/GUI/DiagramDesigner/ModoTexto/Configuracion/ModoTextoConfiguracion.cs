@@ -8,9 +8,9 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using System.IO;
 using System.Xml;
 using System.Windows.Input;
-using DiagramDesigner;
+using Ragnarok;
 
-namespace DiagramDesigner.ModoTexto.Configuracion
+namespace Ragnarok.ModoTexto.Configuracion
 {
     public static class ModoTextoConfiguracion
     {
@@ -20,7 +20,7 @@ namespace DiagramDesigner.ModoTexto.Configuracion
         {
             // Load our custom highlighting definition
             IHighlightingDefinition customHighlighting;
-            using (Stream s = typeof(DiagramDesigner.UserControls.Entorno.EsquemaCentral).Assembly.GetManifestResourceStream("DiagramDesigner.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
+            using (Stream s = typeof(Ragnarok.UserControls.Entorno.EsquemaCentral).Assembly.GetManifestResourceStream("Ragnarok.ModoTexto.Configuracion.Sintaxis.GarGar.xshd"))
             {
                 if (s == null)
                     throw new InvalidOperationException("Could not find embedded resource");

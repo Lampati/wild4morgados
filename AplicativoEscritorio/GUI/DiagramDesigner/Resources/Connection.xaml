@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:s="clr-namespace:DiagramDesigner"
-                    xmlns:c="clr-namespace:DiagramDesigner.Controls">
+                    xmlns:s="clr-namespace:Ragnarok"
+                    xmlns:c="clr-namespace:Ragnarok.Controls">
 
     <ContextMenu x:Key="ConnectionContextMenu">
         <MenuItem Header="Delete" Command="{x:Static ApplicationCommands.Delete}">

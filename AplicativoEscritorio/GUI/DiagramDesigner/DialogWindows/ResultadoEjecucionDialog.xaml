@@ -1,7 +1,7 @@
-﻿<Window x:Class="DiagramDesigner.DialogWindows.ResultadoEjecucionDialog"
+﻿<Window x:Class="Ragnarok.DialogWindows.ResultadoEjecucionDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:userControls="clr-namespace:DiagramDesigner.UserControls"
+        xmlns:userControls="clr-namespace:Ragnarok.UserControls"
         
         Title="Resultado de la ejecución" Height="Auto" MaxHeight="400" Width="Auto" MaxWidth="650">
     

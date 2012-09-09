@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using LibreriaActividades;
 
-namespace DiagramDesigner.EventArgsClasses
+namespace Ragnarok.EventArgsClasses
 {
     public class DoubleClickEventArgs
     {

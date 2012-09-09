@@ -9,20 +9,20 @@ using System.Windows.Documents;
 using System.Windows.Controls;
 using Globales.Enums;
 using AplicativoEscritorio.DataAccess.Entidades;
-using DiagramDesigner.Helpers;
+using Ragnarok.Helpers;
 using EJEKOR;
 using CompiladorGargar.Resultado;
 using DataAccess.Entidades;
-using DiagramDesigner.DialogWindows;
+using Ragnarok.DialogWindows;
 using CompiladorGargar.Semantico.TablaDeSimbolos;
 using System.Collections.ObjectModel;
-using DiagramDesigner.TestsPruebas;
+using Ragnarok.TestsPruebas;
 using System.IO;
 using AplicativoEscritorio.DataAccess;
 using DataAccess;
 using System.Windows.Resources;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     public partial class RagnarokWindow : RibbonWindow
     {

@@ -3,10 +3,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using DiagramDesigner.Controls;
+using Ragnarok.Controls;
 using System.Collections.Generic;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     //These attributes identify the types of the named parts that are used for templating
     [TemplatePart(Name = "PART_DragThumb", Type = typeof(DragThumb))]

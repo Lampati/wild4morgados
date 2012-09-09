@@ -6,7 +6,7 @@ using Microsoft.Windows.Controls.Ribbon;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace DiagramDesigner.Helpers
+namespace Ragnarok.Helpers
 {
     public class RibbonTextBoxFixedWidth : RibbonTextBox
     {

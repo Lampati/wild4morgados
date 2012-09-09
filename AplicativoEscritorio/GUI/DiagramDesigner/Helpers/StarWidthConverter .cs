@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace DiagramDesigner.Helpers
+namespace Ragnarok.Helpers
 {
     public class StarWidthConverter : IValueConverter
     {
@@ -17,14 +17,14 @@ namespace DiagramDesigner.Helpers
 
         //    //if (listview.Width == Double.NaN)
         //    //{
-        //    //    width = ((DiagramDesigner.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
+        //    //    width = ((Ragnarok.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
         //    //}
         //    //else
         //    //{            
         //    //    width = listview.Width;
         //    //}
 
-        //    width = ((DiagramDesigner.UserControls.Mensajes.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
+        //    width = ((Ragnarok.UserControls.Mensajes.BarraMensajes)((System.Windows.Controls.Grid)listview.Parent).Parent).ActualWidth;
             
         //    GridView gv = listview.View as GridView;
         //    for (int i = 0; i < gv.Columns.Count-1; i++)
