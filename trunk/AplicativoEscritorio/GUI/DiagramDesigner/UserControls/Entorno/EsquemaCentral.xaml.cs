@@ -39,7 +39,7 @@ namespace DiagramDesigner.UserControls.Entorno
 
         FindReplaceMgr findAndReplaceManager;
 
-        public Window1 Owner { get; set; }
+        public RagnarokWindow Owner { get; set; }
 
         public EsquemaCentral()
         {

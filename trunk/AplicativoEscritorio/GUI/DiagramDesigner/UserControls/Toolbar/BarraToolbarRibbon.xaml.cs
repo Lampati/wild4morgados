@@ -31,7 +31,7 @@ namespace DiagramDesigner.UserControls.Toolbar
     /// </summary>
     public partial class BarraToolbarRibbon : UserControl
     {
-        public Window1 Owner { get; set; }
+        public RagnarokWindow Owner { get; set; }
 
 
         private ModoVisual modo;

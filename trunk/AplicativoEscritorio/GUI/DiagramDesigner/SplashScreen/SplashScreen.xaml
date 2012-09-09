@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gif="http://wpfanimatedgif.codeplex.com"
     xmlns:local="clr-namespace:SplashScreen"    
-    Title="Cargando Ragnarok..." Height="530" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" 
-         BorderThickness="3" ShowInTaskbar="True" ResizeMode="NoResize">
+    Title="Cargando Ragnarok..." Height="Auto" Width="Auto" WindowStartupLocation="CenterScreen" WindowStyle="None" 
+         BorderThickness="8" ShowInTaskbar="True" ResizeMode="NoResize">
     <StackPanel>
-        <Image gif:ImageBehavior.AnimatedSource="/Resources/Images/loading-intro.gif" Margin="0,0,0,0" Height="450" />
+        <Image gif:ImageBehavior.AnimatedSource="/Images/SplashScreen_4.gif" Margin="0,0,0,0"  />
        
-        <Label Height="28" Margin="19,0,17,15" Name="label2" VerticalAlignment="Bottom"
-               Content="{Binding Source={x:Static local:MessageListener.Instance},Path=Message}" Foreground="Black"></Label>
+        <!--<Label Height="28" Margin="19,0,17,15" Name="label2" VerticalAlignment="Bottom"
+               Content="{Binding Source={x:Static local:MessageListener.Instance},Path=Message}" Foreground="Black"></Label>-->
     </StackPanel>
 </Window>

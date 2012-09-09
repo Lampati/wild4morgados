@@ -39,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>fenrir_trasnp.ico</ApplicationIcon>
+    <ApplicationIcon>axetribal.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AvalonWizard, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -260,7 +260,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="RagnarokWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -381,9 +381,9 @@
     <Compile Include="UserControls\VariablesConValoresPresenter.xaml.cs">
       <DependentUpon>VariablesConValoresPresenter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window1.MenuCommands.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="RagnarokWindow.MenuCommands.cs" />
+    <Compile Include="RagnarokWindow.xaml.cs">
+      <DependentUpon>RagnarokWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -557,6 +557,7 @@
     <Resource Include="Resources\Images\Search24.png" />
     <Resource Include="Resources\Images\SearchRep24.png" />
     <Resource Include="Resources\Images\Flow48.png" />
+    <Resource Include="axetribal.ico" />
     <Content Include="fenrir.ico" />
     <Resource Include="fenrir_trasnp.ico" />
     <Content Include="FolderBrowseLib\FolderPickerLib.dll" />
@@ -597,6 +598,15 @@
     <Resource Include="Resources\Images\ModosGrupo.png" />
     <Resource Include="Resources\Images\SearchReplaceGroup.png" />
     <Resource Include="Resources\Images\UndoRedoGrupo.png" />
+    <Resource Include="Images\SplashScreen_1.gif" />
+    <Resource Include="Images\Viking_Logo_by_dgeer_MASCHICA.png" />
+    <Resource Include="Images\viking.ico" />
+    <Resource Include="Images\axetribal.ico" />
+    <Resource Include="Images\axeTribal.png" />
+    <Resource Include="Images\tribal_sword_by_marpace.jpg" />
+    <Resource Include="Images\SplashScreen_2.gif" />
+    <Resource Include="Images\SplashScreen_4.gif" />
+    <Resource Include="Images\Tribal_R.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
