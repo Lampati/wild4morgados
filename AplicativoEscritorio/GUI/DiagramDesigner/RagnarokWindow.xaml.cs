@@ -42,7 +42,7 @@ using System.Windows.Media.Effects;
 
 namespace DiagramDesigner
 {
-    public partial class Window1 : RibbonWindow
+    public partial class RagnarokWindow : RibbonWindow
     {
         #region Hotkeys Definicion
         HotKey hotKeyCompilar;
@@ -165,7 +165,7 @@ namespace DiagramDesigner
             File.WriteAllText(@"D:\\Acustico\Ejercicios.txt", sb.ToString());
         }
 
-        public Window1()
+        public RagnarokWindow()
         {
             //ProbarCarga();
             InitializeComponent();
@@ -184,7 +184,7 @@ namespace DiagramDesigner
             this.ToolbarAplicacion.TestPruebaEvent += new BarraToolbarRibbon.TestPruebaHandler(ToolbarAplicacion_TestPruebaEvent);
             this.ToolbarAplicacion.IdentarEvent += new BarraToolbarRibbon.IdentarEventHandler(ToolbarAplicacion_IdentarEvent);
 
-            this.Loaded += new RoutedEventHandler(Window1_Loaded);
+            this.Loaded += new RoutedEventHandler(RagnarokWindow_Loaded);
 
             
 
@@ -242,7 +242,7 @@ namespace DiagramDesigner
 
         
 
-        void Window1_Loaded(object sender, RoutedEventArgs e)
+        void RagnarokWindow_Loaded(object sender, RoutedEventArgs e)
         {
             MessageListener.Instance.ReceiveMessage(string.Format("Finalizando carga del programa..."));
             

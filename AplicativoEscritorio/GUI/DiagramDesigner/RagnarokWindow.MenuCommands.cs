@@ -24,7 +24,7 @@ using System.Windows.Resources;
 
 namespace DiagramDesigner
 {
-    public partial class Window1 : RibbonWindow
+    public partial class RagnarokWindow : RibbonWindow
     {
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)
         {

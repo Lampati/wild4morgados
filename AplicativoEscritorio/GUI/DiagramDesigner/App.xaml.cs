@@ -39,7 +39,7 @@ namespace DiagramDesigner
         public App()
         {
             
-            StartupUri = new System.Uri("Window1.xaml", UriKind.Relative);
+            StartupUri = new System.Uri("RagnarokWindow.xaml", UriKind.Relative);
 
             
             InitializeComponent();
