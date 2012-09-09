@@ -54,6 +54,10 @@ namespace Sincronizacion
                         Eventos.Handler.ConectadoEventFire(str, this.LabelInfo);
                         return true;
                     }
+                    catch (NotSupportedException)
+                    {
+                        Eventos.Handler.ErrorConexionEventFire("URL mal formada. Error al conectar a " + str, this.LabelInfo);
+                    }
                     catch (System.Net.WebException)
                     {
                         Eventos.Handler.ErrorConexionEventFire("Error al conectar a " + str, this.LabelInfo);
