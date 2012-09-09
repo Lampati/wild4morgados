@@ -10,7 +10,7 @@ using System.Windows.Markup;
 using System.Xml;
 using System.Text.RegularExpressions;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     public partial class DesignerCanvas : Canvas
     {

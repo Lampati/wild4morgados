@@ -11,12 +11,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiagramDesigner.DTO;
-using DiagramDesigner.Enums;
+using Ragnarok.DTO;
+using Ragnarok.Enums;
 using Globales.Enums;
 using AplicativoEscritorio.DataAccess.Entidades;
 
-namespace DiagramDesigner.UserControls.Estado
+namespace Ragnarok.UserControls.Estado
 {
     /// <summary>
     /// Interaction logic for BarraMensajes.xaml

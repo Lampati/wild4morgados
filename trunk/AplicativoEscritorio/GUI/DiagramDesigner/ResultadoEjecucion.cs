@@ -5,7 +5,7 @@ using System.Text;
 using CompiladorGargar.Resultado;
 using DataAccess.Entidades;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     public class ResultadoEjecucion
     {

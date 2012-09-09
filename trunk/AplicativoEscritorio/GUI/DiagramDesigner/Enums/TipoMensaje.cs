@@ -1,4 +1,4 @@
-﻿namespace DiagramDesigner.Enums
+﻿namespace Ragnarok.Enums
 {
     public enum TipoMensaje
     {

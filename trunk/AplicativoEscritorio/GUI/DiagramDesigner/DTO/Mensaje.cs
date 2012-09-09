@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DiagramDesigner.Enums;
+using Ragnarok.Enums;
 using LibreriaActividades;
 
-namespace DiagramDesigner.DTO
+namespace Ragnarok.DTO
 {
     public class Mensaje
     {

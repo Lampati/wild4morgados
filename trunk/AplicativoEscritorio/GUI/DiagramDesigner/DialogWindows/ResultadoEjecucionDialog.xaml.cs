@@ -11,11 +11,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using DiagramDesigner.TestsPruebas;
+using Ragnarok.TestsPruebas;
 using System.Xml;
 using DataAccess.Entidades;
 
-namespace DiagramDesigner.DialogWindows
+namespace Ragnarok.DialogWindows
 {
     /// <summary>
     /// Interaction logic for ResultadoEjecucionDialog.xaml

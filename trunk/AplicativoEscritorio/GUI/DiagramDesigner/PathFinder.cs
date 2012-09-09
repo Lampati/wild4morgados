@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     // Note: I couldn't find a useful open source library that does
     // orthogonal routing so started to write something on my own.

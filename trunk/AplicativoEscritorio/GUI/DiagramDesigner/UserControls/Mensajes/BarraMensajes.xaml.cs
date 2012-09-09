@@ -11,13 +11,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiagramDesigner.DTO;
-using DiagramDesigner.Enums;
-using DiagramDesigner.EventArgsClasses;
+using Ragnarok.DTO;
+using Ragnarok.Enums;
+using Ragnarok.EventArgsClasses;
 using Globales.Enums;
 using LibreriaActividades;
 
-namespace DiagramDesigner.UserControls.Mensajes
+namespace Ragnarok.UserControls.Mensajes
 {
     /// <summary>
     /// Interaction logic for BarraMensajes.xaml

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Microsoft.Windows.Input;
 
-namespace DiagramDesigner.DataContextsMenu
+namespace Ragnarok.DataContextsMenu
 {
     /// <summary>
     ///     This class allows delegating the commanding logic to methods passed as parameters,

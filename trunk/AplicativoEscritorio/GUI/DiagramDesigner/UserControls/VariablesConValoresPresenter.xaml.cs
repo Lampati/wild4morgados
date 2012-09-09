@@ -11,12 +11,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiagramDesigner.TestsPruebas;
+using Ragnarok.TestsPruebas;
 using System.Collections.ObjectModel;
 using DataAccess.Entidades;
 using System.Data;
 
-namespace DiagramDesigner.UserControls
+namespace Ragnarok.UserControls
 {
     /// <summary>
     /// Interaction logic for VariablesConValoresPresenter.xaml

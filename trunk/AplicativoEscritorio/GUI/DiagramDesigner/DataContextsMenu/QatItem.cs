@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Media;
 
-namespace DiagramDesigner.DataContextsMenu
+namespace Ragnarok.DataContextsMenu
 {
     public class QatItem
     {

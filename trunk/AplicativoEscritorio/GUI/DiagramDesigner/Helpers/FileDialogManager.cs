@@ -6,7 +6,7 @@ using System.Windows;
 using Microsoft.Win32;
 
 
-namespace DiagramDesigner.Helpers
+namespace Ragnarok.Helpers
 {
     public static class FileDialogManager
     {

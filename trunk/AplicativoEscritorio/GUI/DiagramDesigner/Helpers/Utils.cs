@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace DiagramDesigner.Helpers
+namespace Ragnarok.Helpers
 {
 
     class Utils

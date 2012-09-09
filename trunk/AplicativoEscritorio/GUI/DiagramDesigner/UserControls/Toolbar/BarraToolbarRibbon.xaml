@@ -1,13 +1,13 @@
-﻿<UserControl x:Class="DiagramDesigner.UserControls.Toolbar.BarraToolbarRibbon"
+﻿<UserControl x:Class="Ragnarok.UserControls.Toolbar.BarraToolbarRibbon"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:s="clr-namespace:DiagramDesigner"
+             xmlns:s="clr-namespace:Ragnarok"
              xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"  
              xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
-             xmlns:custom="clr-namespace:DiagramDesigner.Helpers"
-             xmlns:data="clr-namespace:DiagramDesigner.DataContextsMenu"
+             xmlns:custom="clr-namespace:Ragnarok.Helpers"
+             xmlns:data="clr-namespace:Ragnarok.DataContextsMenu"
              mc:Ignorable="d" >
     
    

@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindReplace", "FindReplace\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationHotKey", "WpfApplicationHotKey\WpfApplicationHotKey.csproj", "{F32BAA9E-D765-4328-8031-1CDBB7A1BD72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagramDesigner", "GUI\DiagramDesigner\DiagramDesigner.csproj", "{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ragnarok", "GUI\DiagramDesigner\Ragnarok.csproj", "{B437DF5F-20E0-4082-A92E-5C1D9C31A8E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7F9DD2FC-B1FB-4CCE-AE6A-9F72DD296BC2}"
 EndProject

@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     public class ConnectorAdorner : Adorner
     {

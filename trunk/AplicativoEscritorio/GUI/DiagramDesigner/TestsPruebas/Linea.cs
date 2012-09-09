@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace DiagramDesigner.TestsPruebas
+namespace Ragnarok.TestsPruebas
 {
     public class Linea : INotifyPropertyChanged
     {

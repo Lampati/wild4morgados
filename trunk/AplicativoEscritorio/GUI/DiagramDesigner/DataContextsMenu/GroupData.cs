@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace DiagramDesigner.DataContextsMenu
+namespace Ragnarok.DataContextsMenu
 {
     public class GroupData : ControlData
     {

@@ -11,21 +11,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiagramDesigner.Enums;
+using Ragnarok.Enums;
 using FindReplace;
-using DiagramDesigner.ModoTexto.Configuracion;
+using Ragnarok.ModoTexto.Configuracion;
 using CompiladorGargar.Resultado;
 using Utilidades;
 using CompiladorGargar;
 using WpfApplicationHotKey.WinApi;
-using DiagramDesigner.EventArgsClasses;
+using Ragnarok.EventArgsClasses;
 using AplicativoEscritorio.DataAccess.Interfases;
 using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
 using LibreriaActividades;
 
 
-namespace DiagramDesigner.UserControls.Entorno
+namespace Ragnarok.UserControls.Entorno
 {
     /// <summary>
     /// Interaction logic for EsquemaCentral.xaml
@@ -163,7 +163,7 @@ namespace DiagramDesigner.UserControls.Entorno
 
         private void InicializarAvalon()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             ConfigurarModoTexto();
 

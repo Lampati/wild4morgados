@@ -1,17 +1,17 @@
-﻿<w:RibbonWindow x:Class="DiagramDesigner.RagnarokWindow"
+﻿<w:RibbonWindow x:Class="Ragnarok.RagnarokWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:s="clr-namespace:DiagramDesigner"
+        xmlns:s="clr-namespace:Ragnarok"
         xmlns:w="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        xmlns:c="clr-namespace:DiagramDesigner.Controls"
-        xmlns:mensajes="clr-namespace:DiagramDesigner.UserControls.Mensajes"
-        xmlns:estado="clr-namespace:DiagramDesigner.UserControls.Estado"                
-        xmlns:toolbar="clr-namespace:DiagramDesigner.UserControls.Toolbar"  
-        xmlns:entorno="clr-namespace:DiagramDesigner.UserControls.Entorno"  
+        xmlns:c="clr-namespace:Ragnarok.Controls"
+        xmlns:mensajes="clr-namespace:Ragnarok.UserControls.Mensajes"
+        xmlns:estado="clr-namespace:Ragnarok.UserControls.Estado"                
+        xmlns:toolbar="clr-namespace:Ragnarok.UserControls.Toolbar"  
+        xmlns:entorno="clr-namespace:Ragnarok.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"    
                 Closing="RibbonWindow_Closing" 
-                Icon="/DiagramDesigner;component/Images/Tribal_R.png">
+                Icon="/Ragnarok;component/Images/Tribal_R.png">
 
     <Window.Resources>
         <Style TargetType="{x:Type Image}">

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace DiagramDesigner.DataContextsMenu
+namespace Ragnarok.DataContextsMenu
 {
     public class ToggleButtonData : ControlData
     {

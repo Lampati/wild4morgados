@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace DiagramDesigner.DataContextsMenu
+namespace Ragnarok.DataContextsMenu
 {
     public class QatItemCollection : Collection<QatItem>
     {

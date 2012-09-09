@@ -11,9 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DiagramDesigner.Enums;
-using DiagramDesigner.DialogWindows;
-using DiagramDesigner.EventArgsClasses;
+using Ragnarok.Enums;
+using Ragnarok.DialogWindows;
+using Ragnarok.EventArgsClasses;
 using AplicativoEscritorio.DataAccess.Interfases;
 using AplicativoEscritorio.DataAccess.Entidades;
 using Globales.Enums;
@@ -24,7 +24,7 @@ using System.Diagnostics;
 using System.IO;
 using ModoGrafico.Views;
 
-namespace DiagramDesigner.UserControls.Toolbar
+namespace Ragnarok.UserControls.Toolbar
 {
     /// <summary>
     /// Lógica de interacción para BarraToolbar.xaml

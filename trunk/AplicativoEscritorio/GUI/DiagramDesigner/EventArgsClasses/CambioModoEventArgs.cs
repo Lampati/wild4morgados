@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DiagramDesigner.Enums;
+using Ragnarok.Enums;
 using Globales.Enums;
 using System.Windows;
 
-namespace DiagramDesigner.EventArgsClasses
+namespace Ragnarok.EventArgsClasses
 {
     public class CambioModoEventArgs
     {

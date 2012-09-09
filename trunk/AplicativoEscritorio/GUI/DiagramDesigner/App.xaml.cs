@@ -10,7 +10,7 @@ using System.Diagnostics;
 using SplashScreen;
 using System.Threading;
 
-namespace DiagramDesigner
+namespace Ragnarok
 {
     /// <summary>
     /// Interaction logic for App.xaml
