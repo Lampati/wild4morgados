@@ -51,7 +51,7 @@
 
 
             <Trigger Property="IsFocused" Value="true">
-                <Setter Property="Background" Value="#FFE8A5" />
+                <Setter Property="Background" Value="#FEFFBF" />
             </Trigger>
 
             <Trigger Property="IsMouseOver" Value="true">

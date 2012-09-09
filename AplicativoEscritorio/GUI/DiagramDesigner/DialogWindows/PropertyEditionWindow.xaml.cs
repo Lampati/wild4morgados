@@ -105,6 +105,7 @@ namespace DiagramDesigner.DialogWindows
 
             TextBlock txtBlock = new TextBlock();
             txtBlock.Text = titulo;
+            txtBlock.Margin = new Thickness(5, 0, 5, 0);
             txtBlock.TextWrapping = TextWrapping.Wrap;
 
             this.objetos.Add(new ObjetoVentana(txtBlock));
@@ -136,6 +137,7 @@ namespace DiagramDesigner.DialogWindows
             this.grdObjetos.RowDefinitions.Add(rd);
 
             TextBlock txtBlock = new TextBlock();
+            txtBlock.Margin = new Thickness(5,0,5,0);
             if (!String.IsNullOrEmpty(titulo))
                 txtBlock.Text = String.Concat(titulo, ":");
             txtBlock.TextWrapping = TextWrapping.Wrap;
