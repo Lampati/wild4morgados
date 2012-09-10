@@ -1,95 +1,96 @@
 ﻿<Window x:Class="Ragnarok.TestsPruebas.WindowConsultaTests"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mis Tests" Height="300" Width="500" 
+        Title="Mis Tests" Height="310" Width="483" 
         ShowInTaskbar="False" ShowActivated="True" 
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize" 
         >
-    
-    
-    <Grid Margin="5">
-        <Grid.RowDefinitions>            
-            <RowDefinition Height="220" MaxHeight="220" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Width="Auto">
-            <ListView  HorizontalAlignment="Left" Name="lstTests"   
+
+ 
+
+        <Grid Margin="5">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                    <GradientStop Color="#FCFEFD" Offset="0"/>
+                    <GradientStop Color="#EDF3F9" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="220" MaxHeight="220" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Width="Auto">
+                <ListView  HorizontalAlignment="Left" Name="lstTests"   
                        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                        
                        ItemsSource="{Binding TestsPrueba}" >
-                <ListView.Resources>
+                    <ListView.Resources>
 
-                    <Style  TargetType="ListViewItem">
-                        <Setter Property="ToolTip"
+                        <Style  TargetType="ListViewItem">
+                            <Setter Property="ToolTip"
                             Value="{Binding Path=MensajeError}" />
-                        
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
 
-                                    <Border x:Name="Border" SnapsToDevicePixels="true" >
-                                        <GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=EsValido}" Value="True">
-                                                        <Setter Property="Background" Value="Transparent"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=EsValido}" Value="False">
-                                                        <Setter Property="Background" Value="Red"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    
-                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridTests" >
-                        
-                        <GridView.Columns>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
 
-                            <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                            <GridViewColumn Header="Descripcion" Width="220" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                            <GridViewColumn Header="" Width="52">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Width="40px" Height="40px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
-                                            <Image Source="/Resources/Images/detail32.png" Width="32px" Height="32px"></Image>
-                                        </Button>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="" Width="52">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Width="40px" Height="40px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
-                                            <Image Source="/Resources/Images/remove32.png" Width="32px" Height="32px"></Image>
-                                        </Button>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView.Columns>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                                        <Border x:Name="Border" SnapsToDevicePixels="true" >
+                                            <GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=EsValido}" Value="True">
+                                                            <Setter Property="Background" Value="Transparent"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=EsValido}" Value="False">
+                                                            <Setter Property="Background" Value="Red"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
 
-        </StackPanel>
-        
-        <Grid Grid.Row="1"  Width="Auto" Margin="0,10,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="240" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Width="120px" Name="bttnCancelar" Content="Cancelar" HorizontalAlignment="Center"  Click="ButtonCancelar_Click"/>
-            <Button Grid.Column="1" Width="120px" Content="Aceptar" HorizontalAlignment="Center"  Click="ButtonAceptar_Click"/>
+                        <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" x:Name="gridTests" >
+
+                            <GridView.Columns>
+
+                                <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                <GridViewColumn Header="Descripcion" Width="220" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                                <GridViewColumn Header="" Width="52">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Width="40px" Height="40px" ToolTip="Detalles" DataContext="{Binding Path=Id}" Click="ButtonDetalles_Click">
+                                                <Image Source="/Resources/Images/detail32.png" Width="32px" Height="32px"></Image>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="" Width="52">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Width="40px" Height="40px" ToolTip="Eliminar" DataContext="{Binding Path=Id}" Click="ButtonEliminar_Click">
+                                                <Image Source="/Resources/Images/remove32.png" Width="32px" Height="32px"></Image>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1"  Width="Auto" Margin="0,10,6,0" HorizontalAlignment="Right">
+                <Button Width="60" Content="Aceptar"   Click="ButtonAceptar_Click" Style="BlueButton"/>
+                <Button Width="60" Name="bttnCancelar" Content="Cancelar" Margin="15,0,0,0"  Click="ButtonCancelar_Click" Style="BlueButton"/>
+            </StackPanel>
         </Grid>
-    </Grid>
+
 </Window>

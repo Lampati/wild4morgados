@@ -57,10 +57,6 @@
     <ApplicationIcon>axetribal.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AvalonWizard, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>WizardDLL\AvalonWizard.dll</HintPath>
-    </Reference>
     <Reference Include="FolderPickerLib, Version=1.0.4163.42504, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>FolderBrowseLib\FolderPickerLib.dll</HintPath>
@@ -479,6 +475,10 @@
     <Resource Include="Resources\Images\Workflow.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AvalonWizard\AvalonWizard.netfx40.csproj">
+      <Project>{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}</Project>
+      <Name>AvalonWizard.netfx40</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Compilador\Compilador\CompiladorGarGar.csproj">
       <Project>{4A889524-38EC-4DFB-8720-593422EC53DC}</Project>
       <Name>CompiladorGarGar</Name>
