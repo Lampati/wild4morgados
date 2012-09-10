@@ -60,7 +60,7 @@ namespace ModoGrafico.Views
                 else
                 {
                     parametro.Ip = paramFila.Ip;
-                    parametro.Puerto = paramFila.Puerto;
+                    //parametro.Puerto = paramFila.Puerto;
                 }
             }
         }
@@ -79,23 +79,21 @@ namespace ModoGrafico.Views
         {
             Servidor server = new Servidor();
             server.Ip = txtIP.Text;
-            server.Puerto = txtPuerto.Text;
 
             if (server.ValidarIpCorrecta())
             {
-                if (server.ValidarPuertoCorrecto())
-                {
+                //if (server.ValidarPuertoCorrecto())
+                //{
                     listaServidores.Add(server);
 
                     Servidores = listaServidores;
 
                     txtIP.Text = string.Empty;
-                    txtPuerto.Text = string.Empty;
-                }
-                else
-                {
-                    MessageBox.Show("El puerto que se intenta ingresar es incorrecto");
-                }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("El puerto que se intenta ingresar es incorrecto");
+                //}
             }
             else
             {
@@ -233,11 +231,12 @@ namespace ModoGrafico.Views
                     {
                         //string[] entrada = item.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
 
-                        string url = item.Substring(0, item.LastIndexOf(':'));
-                        string puerto = item.Substring(item.LastIndexOf(':') + 1);
+                        //string url = item.Substring(0, item.LastIndexOf(':'));
+                        //string puerto = item.Substring(item.LastIndexOf(':') + 1);
 
                         //listaServidores.Add(new Servidor() { Ip = entrada[0], Puerto = entrada[1] });
-                        listaServidores.Add(new Servidor() { Ip = url, Puerto = puerto });
+                        //listaServidores.Add(new Servidor() { Ip = url, Puerto = puerto });
+                        listaServidores.Add(new Servidor() { Ip = item });
                     }
 
                     dgData.ItemsSource = listaServidores;
@@ -264,7 +263,6 @@ namespace ModoGrafico.Views
 
         }
         public string Ip { get; set; }
-        public string Puerto { get; set; }
 
 
         public Servidor()
@@ -277,21 +275,27 @@ namespace ModoGrafico.Views
             return !string.IsNullOrWhiteSpace(Ip) ;
         }
 
-        public virtual bool ValidarPuertoCorrecto()
-        {
-            Regex regex = new Regex(@"^[0-9]+$");
-            
-            return !string.IsNullOrWhiteSpace(Puerto) && regex.IsMatch(Puerto);
-        }
+        //public virtual bool ValidarPuertoCorrecto()
+        //{
+        //    Regex regex = new Regex(@"^[0-9]+$");
+
+        //    return !string.IsNullOrWhiteSpace(Puerto) && regex.IsMatch(Puerto);
+        //}
 
         internal bool Validar()
         {
-            return ValidarIpCorrecta() && ValidarPuertoCorrecto();
+            //return ValidarIpCorrecta() && ValidarPuertoCorrecto();
+            return ValidarIpCorrecta() ;
         }
+
+        //public override string ToString()
+        //{
+        //    return string.Format("{0}:{1}", Ip, Puerto);
+        //}
 
         public override string ToString()
         {
-            return string.Format("{0}:{1}", Ip, Puerto);
+            return string.Format("{0}", Ip);
         }
     }
 

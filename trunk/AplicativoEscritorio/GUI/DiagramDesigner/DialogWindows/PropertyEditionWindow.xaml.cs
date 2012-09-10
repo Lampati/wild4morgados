@@ -130,6 +130,8 @@ namespace Ragnarok.DialogWindows
             this.grdObjetos.Children.Add(ctrl);
         }
 
+      
+
         public void AgregarPropiedad(string titulo, Control ctrl)
         {
             RowDefinition rd = new RowDefinition();

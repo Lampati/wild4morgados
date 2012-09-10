@@ -584,21 +584,23 @@ namespace Ragnarok.UserControls.Toolbar
 
             propertyEditorWindow.AgregarPropiedad("Los ejercicios a descargar son los ejercicios globales (disponibles para todos) sin importar curso/ejercicio.");
 
-            propertyEditorWindow.AgregarSeparador(false);
+
+            Label lblInfo = new Label();
+            lblInfo.Width = 420;
+            lblInfo.Height = 25;
+            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            lblInfo.Foreground = new SolidColorBrush(Colors.SlateGray);
+            propertyEditorWindow.AgregarPropiedad(lblInfo);
 
             ProgressBar pBar = new ProgressBar();
             pBar.Orientation = Orientation.Horizontal;
-            pBar.Width = 400;
+            pBar.Width = 420;
             pBar.Height = 20;
             pBar.Maximum = 100;
             pBar.Visibility = System.Windows.Visibility.Hidden;
             propertyEditorWindow.AgregarPropiedad(pBar);
 
-            Label lblInfo = new Label();
-            lblInfo.Width = 400;
-            lblInfo.Height = 25;
-            lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            propertyEditorWindow.AgregarPropiedad(lblInfo);
+           
 
             Sincronizacion.Servicio srv = this.Servicio;
 
@@ -653,7 +655,7 @@ namespace Ragnarok.UserControls.Toolbar
             //propertyEditorWindow.AgregarSeparador(false);
 
             Label lblInfo = new Label();
-            lblInfo.Width = 400;
+            lblInfo.Width = 420;
             lblInfo.Height = 25;
             lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             //lblInfo.Margin = new Thickness(5, 0, 5, 0);
@@ -662,7 +664,7 @@ namespace Ragnarok.UserControls.Toolbar
 
             ProgressBar pBar = new ProgressBar();
             pBar.Orientation = Orientation.Horizontal;
-            pBar.Width = 400;
+            pBar.Width = 420;
             pBar.Height = 20;
             pBar.Maximum = 100;
             pBar.Visibility = System.Windows.Visibility.Hidden;
@@ -725,7 +727,7 @@ namespace Ragnarok.UserControls.Toolbar
             propertyEditorWindow.AgregarPropiedad("ID Ejercicio", txtEjercicio);
 
             Label lblInfo = new Label();
-            lblInfo.Width = 400;
+            lblInfo.Width = 420;
             lblInfo.Height = 25;
             lblInfo.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             lblInfo.Foreground = new SolidColorBrush(Colors.SlateGray);
@@ -733,7 +735,7 @@ namespace Ragnarok.UserControls.Toolbar
 
             ProgressBar pBar = new ProgressBar();
             pBar.Orientation = Orientation.Horizontal;
-            pBar.Width = 400;
+            pBar.Width = 420;
             pBar.Height = 20;
             pBar.Maximum = 100;
             pBar.Visibility = System.Windows.Visibility.Hidden;

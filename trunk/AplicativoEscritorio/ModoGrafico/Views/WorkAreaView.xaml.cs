@@ -259,6 +259,7 @@
                             activ = new ProcedimientoViewModel();
                             activ.Nombre = item.Header;
                             activ.Tipo = InterfazTextoGrafico.Enums.TipoRutina.Salida;
+                            activ.Parametros = new List<ParametroViewModel>(item.Parametros);
                             if (item.SecuenciaInicialProcedimiento != null)
                             {
                                 activ.VariablesLocales = item.SecuenciaInicialDeclaraciones.Datos as SecuenciaViewModel;

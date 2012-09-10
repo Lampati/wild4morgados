@@ -116,77 +116,10 @@ namespace Ragnarok.TestsPruebas
             }
         }
 
-        //private ObservableCollection<VariableTest> variablesEntradaTest;
-        //public ObservableCollection<VariableTest> VariablesEntradaTest
-        //{
-        //    get
-        //    {
-        //        return variablesEntradaTest;
-        //    }
-
-        //    set
-        //    {
-        //        variablesEntradaTest = value;
-
-        //        //dataGridVarsEntrada.ItemsSource = variablesEntrada;
-        //        //dataGridVarsEntrada.Items.Refresh();
-
-        //        ObservableCollection<Variable> auxLista = new ObservableCollection<Variable>();
-
-        //        foreach (var item in variablesEntradaTest)
-        //        {
-        //            Variable variable = new Variable(item.Nombre, string.Empty, item.TipoDato, string.Empty, item.EsArreglo, item.ValorEsperado, null);
-        //            variable.Posiciones = new List<PosicionArreglo>();
-
-        //            foreach (var pos in item.Posiciones)
-        //            {
-        //                variable.Posiciones.Add(new PosicionArreglo(pos.Posicion,pos.Valor));
-        //            }
-
-        //            auxLista.Add(variable);
-                    
-        //        }
-
-
-
-
-
-
-        //        dataVarsEntrada.Variables = auxLista;
-        //    }
-        //}
-
-        //private ObservableCollection<VariableTest> variablesSalidaTest;
-        //public ObservableCollection<VariableTest> VariablesSalidaTest
-        //{
-        //    get
-        //    {
-        //        return variablesSalidaTest;
-        //    }
-
-        //    set
-        //    {
-        //        variablesSalidaTest = value;
-
-        //        ObservableCollection<Variable> auxLista = new ObservableCollection<Variable>();
-
-        //        foreach (var item in variablesSalidaTest)
-        //        {
-        //            Variable variable = new Variable(item.Nombre, string.Empty, item.TipoDato, string.Empty, item.EsArreglo, item.ValorEsperado, null);
-        //            variable.Posiciones = new List<PosicionArreglo>();
-
-        //            foreach (var pos in item.Posiciones)
-        //            {
-        //                variable.Posiciones.Add(new PosicionArreglo(pos.Posicion, pos.Valor));
-        //            }
-
-        //            auxLista.Add(variable);
-
-        //        }
-
-        //        dataVarsSalida.Variables = auxLista;
-        //    }
-        //}
+        private void buttonAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         public WindowDetalleConsultaTest()
         {

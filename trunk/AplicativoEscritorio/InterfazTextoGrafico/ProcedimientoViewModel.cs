@@ -90,7 +90,7 @@ namespace InterfazTextoGrafico
                         fin = "finproc;";
                         break;
                     case TipoRutina.Salida:
-                        strBldr.AppendLine("procedimiento SALIDA()");
+                        strBldr.AppendFormat("procedimiento SALIDA ( {0} )",  CadenaParametros).AppendLine();   
                         fin = "finproc;";
                         break;
             

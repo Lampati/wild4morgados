@@ -239,10 +239,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
                 }
             }
-           
-
-
-
 
             if (nombre.ToLower().Equals(GlobalesCompilador.NOMBRE_PROC_PRINCIPAL.ToLower()))
             {
