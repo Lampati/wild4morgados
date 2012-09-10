@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazTextoGrafico", "Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonControlsLibrary_v40", "Ribbon Source\RibbonControlsLibrary\v4.0\RibbonControlsLibrary_v40.csproj", "{2CA5E547-4567-45C9-8240-A408BCA5C714}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonWizard.netfx40", "AvalonWizard\AvalonWizard.netfx40.csproj", "{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -300,6 +302,21 @@ Global
 		{2CA5E547-4567-45C9-8240-A408BCA5C714}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2CA5E547-4567-45C9-8240-A408BCA5C714}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2CA5E547-4567-45C9-8240-A408BCA5C714}.Release|x86.ActiveCfg = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release with Code Analysis|Any CPU.ActiveCfg = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release with Code Analysis|Any CPU.Build.0 = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release with Code Analysis|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release with Code Analysis|Mixed Platforms.Build.0 = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release with Code Analysis|x86.ActiveCfg = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C77BABE4-5B91-4AF0-BA4A-C6D0CC355F40}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
