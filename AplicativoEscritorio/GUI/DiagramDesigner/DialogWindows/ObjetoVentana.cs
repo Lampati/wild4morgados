@@ -24,6 +24,8 @@ namespace Ragnarok.DialogWindows
             this.ctrls.Add(ctrl);
         }
 
+      
+
         public ObjetoVentana(System.Windows.Controls.TextBlock texto, List<System.Windows.Controls.Control> ctrls)
         {
             this.texto = texto;

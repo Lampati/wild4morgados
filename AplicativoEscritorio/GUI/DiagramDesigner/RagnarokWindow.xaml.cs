@@ -399,9 +399,28 @@ namespace Ragnarok
 
                 if (continuar)
                 {
-                    ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
+                    ResultadoCompilacion res = null;
 
-                    if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                    if (this.Modo == ModoVisual.Texto)
+                    {
+                        Compilar(this.Esquema.GarGarACompilar);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            ProgramaViewModel pvm = this.Esquema.RepresentacionGraficaActual;
+                            pvm.ValidarRepetidos();
+                            res = Compilar(pvm.Gargar);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+
+
+                    if (res != null && res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                     {
                         List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                         aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
@@ -439,9 +458,28 @@ namespace Ragnarok
             }
             else
             {
-                ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
+                ResultadoCompilacion res = null;
 
-                if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                if (this.Modo == ModoVisual.Texto)
+                {
+                    Compilar(this.Esquema.GarGarACompilar);
+                }
+                else
+                {
+                    try
+                    {
+                        ProgramaViewModel pvm = this.Esquema.RepresentacionGraficaActual;
+                        pvm.ValidarRepetidos();
+                        res= Compilar(pvm.Gargar);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+
+                if (res != null && res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                 {
                     List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                     aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());
@@ -459,8 +497,6 @@ namespace Ragnarok
 
                     testWindow.Owner = this;
                     ApplyBlurEffect();
-
-                    testWindow.ShowDialog();                    
 
                     bool? confirmado = testWindow.ShowDialog();
 
@@ -512,9 +548,28 @@ namespace Ragnarok
             if (continuar)
             {
 
-                ResultadoCompilacion res = Compilar(this.Esquema.GarGarACompilar);
+                ResultadoCompilacion res = null;
 
-                if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                if (this.Modo == ModoVisual.Texto)
+                {
+                    Compilar(this.Esquema.GarGarACompilar);
+                }
+                else
+                {
+                    try
+                    {
+                        ProgramaViewModel pvm = this.Esquema.RepresentacionGraficaActual;
+                        pvm.ValidarRepetidos();
+                        res = Compilar(pvm.Gargar);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+
+                if (res != null && res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
                 {
                     List<NodoTablaSimbolos> aux = res.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                     aux.AddRange(res.TablaSimbolos.ObtenerVariablesGlobales());

@@ -112,6 +112,7 @@ using System.Windows.Input;
                         Grid.SetColumn(this.contentDesigner, 1);
                         break;
                     case ModoGrafico.Enums.TipoTab.TabItemProcedimiento:
+                    case ModoGrafico.Enums.TipoTab.TabItemSalida:
 
                          this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
@@ -129,7 +130,7 @@ using System.Windows.Input;
                         Grid.SetColumn(this.contentDesigner, 1);
                         break;
                     case ModoGrafico.Enums.TipoTab.TabItemPrincipal:
-                    case ModoGrafico.Enums.TipoTab.TabItemSalida:
+                    
 
                         stackPanelParametros.Visibility = System.Windows.Visibility.Collapsed;
                         stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;

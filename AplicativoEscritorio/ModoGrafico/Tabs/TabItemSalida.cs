@@ -22,6 +22,14 @@ namespace ModoGrafico.Tabs
             Tipo = Enums.TipoTab.TabItemSalida;
             header = "SALIDA";
 
+            if (proc == null)
+            {
+                Parametros = new System.Collections.ObjectModel.ObservableCollection<ParametroViewModel>();
+            }
+            else
+            {
+                Parametros = new System.Collections.ObjectModel.ObservableCollection<ParametroViewModel>(proc.Parametros);
+            }
         }
 
     
