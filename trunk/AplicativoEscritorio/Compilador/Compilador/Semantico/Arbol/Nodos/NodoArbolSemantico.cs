@@ -73,6 +73,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public string Lexema { get; set; }
         public string NombreContextoLocal { get; set; }
         public bool EsArreglo { get; set; }
+        public bool EsReferencia { get; set; }
         public string RangoArreglo { get; set; }
         public string RangoArregloSinPrefijo { get; set; }
         public string NombreTipoArreglo { get; set; }
@@ -82,6 +83,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public TipoOperatoria Operacion { get; set; }
         public double ValorConstanteNumerica { get; set; }
         public string ValorConstanteTexto { get; set; }
+        public bool NoEsAptaPasajeReferencia { get; set; }
 
         public bool EsProcSalida { get; set; }
         public bool ProcSalidaLlamadoMasDeUnaVez { get; set; }

@@ -5,7 +5,7 @@
     xmlns:gif="http://wpfanimatedgif.codeplex.com"
     xmlns:local="clr-namespace:SplashScreen"    
     Title="Cargando Ragnarok..." Height="Auto" Width="Auto" WindowStartupLocation="CenterScreen" WindowStyle="None" 
-         BorderThickness="8" ShowInTaskbar="True" ResizeMode="NoResize">
+         BorderThickness="8" ShowInTaskbar="True" ResizeMode="NoResize" >
     <StackPanel>
         <Image gif:ImageBehavior.AnimatedSource="/Images/SplashScreen_4.gif" Margin="0,0,0,0"  />
        

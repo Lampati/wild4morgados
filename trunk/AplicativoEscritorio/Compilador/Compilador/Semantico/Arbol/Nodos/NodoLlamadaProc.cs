@@ -26,7 +26,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
 
-            List<Firma> listaFirmaComparar = this.hijosNodo[3].ListaFirma;
+            List<Firma> listaFirmaComparar = this.hijosNodo[3].ListaFirma;  
             this.ListaFirma = listaFirmaComparar;
             string nombre = this.hijosNodo[1].Lexema;
             this.Lexema = nombre;
@@ -45,15 +45,20 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
                     int i = 0;
                     bool igual = true;
+                    bool igualReferencia = true;
+                    
 
-                    while (i < firmaFuncion.Count && igual)
+                    while (i < firmaFuncion.Count && igual && igualReferencia)
                     {
                         igual = firmaFuncion[i].TipoDato == listaFirmaComparar[i].Tipo
                             && firmaFuncion[i].EsArreglo == listaFirmaComparar[i].EsArreglo;
+
+                        igualReferencia = firmaFuncion[i].EsPorReferencia == listaFirmaComparar[i].EsReferencia;
+
                         i++;
                     }
 
-                    if (igual)
+                    if (igual && igualReferencia)
                     {
                         this.TipoDato = this.TablaSimbolos.ObtenerTipoProcedimiento(nombre);
                         //this.Valor = 1;
@@ -62,7 +67,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         {
                             this.LlamaProcSalida = true;
                         }
-                    }
+                    }                 
                     else
                     {
                         List<ErrorSemanticoException> listaExcepciones = new List<ErrorSemanticoException>();
@@ -74,7 +79,17 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado al procedimiento ");
                             strbldr.Append(nombre).Append(" es de tipo incorrecto. Debe ser de tipo ").Append(EnumUtils.stringValueOf(firmaFuncion[i - 1].TipoDato));
                             listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
-                            
+
+
+                        }
+
+                        if (firmaFuncion[i - 1].EsPorReferencia != listaFirmaComparar[i - 1].EsReferencia)
+                        {
+
+                            strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado al procedimiento ");
+                            strbldr.Append(nombre).Append(" esta especificado como por referencia. No puede ser el resultado de una expresion o un valor constante o una función. De ser necesario, asigne el valor a una nueva variable para pasarla por parametro.");
+                            listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+
 
                         }
 

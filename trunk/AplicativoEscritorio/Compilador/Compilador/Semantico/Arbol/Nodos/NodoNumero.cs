@@ -27,6 +27,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ValorConstanteNumerica = Convert.ToDouble(hijoASintetizar.Lexema, new CultureInfo("en-US"));
             this.Lexema = hijoASintetizar.Lexema;
             this.Gargar = hijoASintetizar.Gargar;
+            this.NoEsAptaPasajeReferencia = true;
         }
 
        

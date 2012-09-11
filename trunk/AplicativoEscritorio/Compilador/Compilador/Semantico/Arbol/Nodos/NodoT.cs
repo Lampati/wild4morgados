@@ -26,7 +26,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 if (this.hijosNodo.Count > 3)
                 {
-                   
+                    this.NoEsAptaPasajeReferencia = true;
                     this.TipoDato = this.hijosNodo[2].TipoDato;
                     this.Lexema = this.hijosNodo[2].Lexema;
                     this.Gargar = string.Format("! ({0})", this.hijosNodo[2].Gargar);
@@ -46,8 +46,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                   
 
+                    this.NoEsAptaPasajeReferencia = this.hijosNodo[1].NoEsAptaPasajeReferencia;
                     this.TipoDato = this.hijosNodo[1].TipoDato;
                     this.Lexema = this.hijosNodo[1].Lexema;
                     this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
@@ -60,8 +60,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
             else
             {
-              
 
+                this.NoEsAptaPasajeReferencia = this.hijosNodo[0].NoEsAptaPasajeReferencia;
                 this.TipoDato = this.hijosNodo[0].TipoDato;
                 this.Lexema = this.hijosNodo[0].Lexema;
                 this.ValorConstanteNumerica = this.hijosNodo[0].ValorConstanteNumerica;

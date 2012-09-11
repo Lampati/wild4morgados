@@ -36,7 +36,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             foreach (Firma f in this.hijosNodo[3].ListaFirma)
             {
-                listaFirmas.Add(new FirmaProc(f.Lexema,f.Tipo, f.EsArreglo));
+                listaFirmas.Add(new FirmaProc(f.Lexema,f.Tipo, f.EsArreglo, f.EsReferencia));
             }
 
             if (!this.ProcPrincipalCrearUnaVez)
@@ -221,6 +221,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     param.EsArreglo = item.EsArreglo;
                     param.Nombre = item.Lexema;
                     param.TopeArreglo = item.RangoArregloSinPrefijo;
+                    param.EsReferencia = item.EsReferencia;
 
                     switch (item.Tipo)
                     {
@@ -287,6 +288,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     ParametroViewModel param = new InterfazTextoGrafico.ParametroViewModel();
                     param.EsArreglo = item.EsArreglo;
                     param.Nombre = item.Lexema;
+                    param.EsReferencia = item.EsReferencia;
+                    
                     param.TopeArreglo = item.RangoArregloSinPrefijo;
 
                     switch (item.Tipo)

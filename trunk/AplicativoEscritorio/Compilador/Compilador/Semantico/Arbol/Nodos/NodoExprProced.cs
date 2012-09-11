@@ -26,7 +26,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             if (this.hijosNodo.Count > 1)
             {
-                this.ListaFirma.Add(new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[0].TipoDato, this.hijosNodo[0].EsArregloEnParametro));
+                this.ListaFirma.Add(new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[0].TipoDato, this.hijosNodo[0].EsArregloEnParametro, !this.hijosNodo[0].NoEsAptaPasajeReferencia));
                 this.ListaFirma.AddRange(this.hijosNodo[1].ListaFirma);
 
                 this.UsaVariablesGlobales = this.hijosNodo[0].UsaVariablesGlobales || this.hijosNodo[1].UsaVariablesGlobales;

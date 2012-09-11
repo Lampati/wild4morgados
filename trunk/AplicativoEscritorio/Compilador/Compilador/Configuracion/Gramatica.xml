@@ -65,7 +65,7 @@
 		<NoTerminal>OPBOOLEANAS</NoTerminal>
 		
 		<NoTerminal>MOSTRAROP</NoTerminal>
-		<NoTerminal>REFERENCIA</NoTerminal>
+		
 		<NoTerminal>IDSOLO</NoTerminal>
 		
 		
@@ -377,16 +377,7 @@
 				</Der>
 			</Ders>
 		</Produccion>
-		
-		<Produccion>
-			<Izq>REFERENCIA</Izq>
-			<Ders>
-				<Der>
-					<Expresion>ref</Expresion>
-				</Der>				
-			</Ders>
-		</Produccion>
-		
+
 		<Produccion>
 			<Izq>IDSOLO</Izq>
 			<Ders>
