@@ -53,7 +53,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                         igual = firmaFuncion[i].TipoDato == listaFirmaComparar[i].Tipo
                             && firmaFuncion[i].EsArreglo == listaFirmaComparar[i].EsArreglo;
 
-                        igualReferencia = firmaFuncion[i].EsPorReferencia == listaFirmaComparar[i].EsReferencia;
+                        igualReferencia = !firmaFuncion[i].EsPorReferencia || firmaFuncion[i].EsPorReferencia == listaFirmaComparar[i].EsReferencia;
 
                         i++;
                     }
