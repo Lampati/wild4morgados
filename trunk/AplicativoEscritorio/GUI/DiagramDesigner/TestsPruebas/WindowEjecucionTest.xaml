@@ -18,6 +18,12 @@
             <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 0: Como funcionan los test" 
                            AllowNext="True" >
                 <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -35,7 +41,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -44,21 +50,23 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                        </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
-                        <ColumnDefinition Width="0" />
+                        <ColumnDefinition Width="435" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
                            Text="Por favor elija el test de prueba a ejecutar."
                            TextWrapping="Wrap"  />
 
-                    <ListView Grid.Row="1" Width="430" HorizontalAlignment="Left" Name="lstTests" ItemsSource="{Binding Tests}">
+                    <ListView Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="lstTests" ItemsSource="{Binding Tests}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 <GridView.Columns>
@@ -85,7 +93,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -94,14 +102,17 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
-                        <ColumnDefinition Width="0" />
+                        <ColumnDefinition Width="435" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
@@ -142,7 +153,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -150,6 +161,9 @@
                         </Style>
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
@@ -171,7 +185,7 @@
                         </TextBlock>
 
                     </StackPanel>
-                    <ListView  Width="430" Height="300" HorizontalAlignment="Left" Name="lstLineas" ItemsSource="{Binding Lineas}" Grid.Row="1">
+                    <ListView  Width="Auto" Height="300" HorizontalAlignment="Stretch" Name="lstLineas" ItemsSource="{Binding Lineas}" Grid.Row="1">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
 
@@ -202,7 +216,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -211,14 +225,16 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
-                        <ColumnDefinition Width="0" />
+                        <ColumnDefinition Width="435" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
@@ -269,6 +285,9 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                        </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -280,7 +299,7 @@
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="0">
+                    <StackPanel Grid.Row="0" Margin="0">
                         <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Deberá ejecutar la aplicacion para concluir el test de prueba.
                         </TextBlock>
@@ -289,20 +308,26 @@
                         </TextBlock>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1">
+                    <StackPanel Grid.Row="1" Margin="0">
                         <StackPanel Orientation="Horizontal" >
                             <Button Content="Ejecutar" Click="ButtonEjecutar_Click" Name="bttnEjecutar"></Button>
                             <TextBlock TextWrapping="Wrap" >Haga Click para ejecutar y complete la ejecución</TextBlock>
                         </StackPanel>                        
                     </StackPanel>
-                        
-                    <StackPanel Grid.Row="2"> 
+
+                    <StackPanel Grid.Row="2" Margin="110,100,0,0"> 
                         <StackPanel Orientation="Horizontal" Name="stackEjecucionSatisfactoria" Visibility="Collapsed">
-                            <TextBlock TextWrapping="Wrap" >Ejecucion satisfactoria</TextBlock>                        
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Center">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Ejecucion satisfactoria</TextBlock>
+                            </Border>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"  Name="stackEjecucionError" Visibility="Collapsed">
-                            <TextBlock TextWrapping="Wrap" >Error: No se pudo crear el test por un error en la ejecución</TextBlock>
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Center">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Error: Ocurrió un error en la ejecución del test</TextBlock>
+                            </Border>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -323,7 +348,11 @@
                             <Style TargetType="TextBox">
                                 <Setter Property="Margin" Value="5" />
                             </Style>
-                        </Grid.Resources>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
+                    </Grid.Resources>
                         <Grid.RowDefinitions>
 
                             <RowDefinition Height="Auto" />

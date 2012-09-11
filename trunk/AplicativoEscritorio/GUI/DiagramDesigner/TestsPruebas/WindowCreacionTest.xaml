@@ -27,7 +27,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                     </Grid.Resources>
@@ -44,10 +44,10 @@
             <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 1: Elija las variables de entrada de la lista" 
                            AllowNext="False" >
                 
-                <Grid>
+                <Grid  >
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -56,21 +56,23 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                        </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
-                        <ColumnDefinition Width="0" />
+                        <ColumnDefinition Width="435" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
                            Text="Las variables de entrada pueden ser variables globales o variables locales al procedimiento Principal"
                            TextWrapping="Wrap"  />
 
-                    <ListView Grid.Row="1" Width="430" HorizontalAlignment="Left" Name="lstVarsEntrada" ItemsSource="{Binding VariablesEntrada}">
+                    <ListView Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="lstVarsEntrada" ItemsSource="{Binding VariablesEntrada}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 <GridView.Columns>
@@ -84,7 +86,7 @@
                                     <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
                                     <GridViewColumn Header="Contexto" Width="70" DisplayMemberBinding="{Binding Path=Contexto}" />
                                     <GridViewColumn Header="Tipo de Variable" Width="100" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
-                                    <GridViewColumn Header="Tipo de Dato" Width="60" DisplayMemberBinding="{Binding Path=TipoDato}" />
+                                    <GridViewColumn Header="Tipo de Dato" Width="80" DisplayMemberBinding="{Binding Path=TipoDato}" />
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -99,7 +101,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -108,13 +110,19 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
+
+                        
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="435" />
                     </Grid.ColumnDefinitions>
                     
                     <Label Width="430" HorizontalAlignment="Left" Grid.Row="0"></Label>
@@ -140,7 +148,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -149,6 +157,9 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                        </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>                        
                         <RowDefinition Height="Auto" />
@@ -156,7 +167,6 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="430" />
-                        <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Grid.Row="0">
@@ -169,7 +179,7 @@
                         </TextBlock>
 
                     </StackPanel>
-                    <ListView  Width="430" Height="300" HorizontalAlignment="Left" Name="lstLineas" ItemsSource="{Binding Lineas}" Grid.Row="1">
+                    <ListView  Height="300" Width="Auto" HorizontalAlignment="Stretch" Name="lstLineas" ItemsSource="{Binding Lineas}" Grid.Row="1">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 
@@ -198,7 +208,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -206,6 +216,9 @@
                         </Style>
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
@@ -221,7 +234,7 @@
                            Text="Las variables de salida deben ser parametros del procedmiento Salida."
                            TextWrapping="Wrap"  />
 
-                    <ListView Grid.Row="1" Width="430" HorizontalAlignment="Left" Name="lstVarsSalida" ItemsSource="{Binding VariablesEntrada}">
+                    <ListView Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="lstVarsSalida" ItemsSource="{Binding VariablesEntrada}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
                                 <GridView.Columns>
@@ -249,7 +262,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -258,6 +271,11 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
+
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -289,7 +307,7 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Margin" Value="10,5,5,5" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="ComboBox">
@@ -297,6 +315,9 @@
                         </Style>
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
@@ -306,7 +327,6 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="430" />
-                        <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0">
@@ -325,13 +345,19 @@
                         </StackPanel>                        
                     </StackPanel>
                         
-                    <StackPanel Grid.Row="2"> 
+                    <StackPanel Grid.Row="2" Margin="110,100,0,0"> 
                         <StackPanel Orientation="Horizontal" Name="stackEjecucionSatisfactoria" Visibility="Collapsed">
-                            <TextBlock TextWrapping="Wrap" >Ejecucion satisfactoria</TextBlock>                        
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Center">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Ejecucion satisfactoria</TextBlock>
+                            </Border>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"  Name="stackEjecucionError" Visibility="Collapsed">
-                            <TextBlock TextWrapping="Wrap" >Error: No se pudo crear el test por un error en la ejecución</TextBlock>
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                            BorderThickness="1.5" CornerRadius="10" Background="#FF0000">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Error: No se pudo crear el test por un error en la ejecución</TextBlock>
+                            </Border>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -343,7 +369,7 @@
                     <Grid>
                         <Grid.Resources>
                             <Style TargetType="TextBlock">
-                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="Margin" Value="10,5,5,5" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                             <Style TargetType="ComboBox">
@@ -352,6 +378,7 @@
                             <Style TargetType="TextBox">
                                 <Setter Property="Margin" Value="5" />
                             </Style>
+                           
                         </Grid.Resources>
                         <Grid.RowDefinitions>
 
@@ -368,20 +395,20 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Row="0">
+                        <StackPanel Grid.Row="0" >
                             <TextBlock Width="430"  HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Elija un nombre y descripción para el test que acaba de crear:
                             </TextBlock>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1">
-                            <StackPanel Orientation="Horizontal">
+                        <StackPanel Grid.Row="1" >
+                            <StackPanel Orientation="Horizontal" Margin="0">
                                 <TextBlock HorizontalAlignment="Left" >
                                 Nombre:
                                 </TextBlock>
                                 <TextBox Name="txtNombre" TextChanged="txtNombre_TextChanged" Width="100"></TextBox>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Margin="0">
                                 <TextBlock  HorizontalAlignment="Left" >
                                 Descripcion:
                                 </TextBlock>
@@ -396,45 +423,12 @@
                         <TextBlock Width="430" Grid.Row="3" HorizontalAlignment="Left" >
                         Variables Entrada
                         </TextBlock>
-
-                        <userControls:VariablesConValoresPresenter Grid.Row="4" Width="410" HorizontalAlignment="Left" x:Name="dataVarsEntradaFinal" EsVersionReducida="False" />
-
-                        <!--<ListView Grid.Row="4" Width="430" HorizontalAlignment="Left" Name="lstVarsEntradaFinal" ItemsSource="{Binding VariablesEntradaSeleccionadas}">
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
-                                <GridView.Columns>                                    
-                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                                    <GridViewColumn Header="Contexto" Width="70" DisplayMemberBinding="{Binding Path=Contexto}" />
-                                    <GridViewColumn Header="Tipo de Variable" Width="100" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
-                                    <GridViewColumn Header="Tipo de Dato" Width="60" DisplayMemberBinding="{Binding Path=TipoDato}" />
-                                    <GridViewColumn Header="Descripcion" Width="200" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                                    <GridViewColumn Header="Valor" Width="100" DisplayMemberBinding="{Binding Path=Valor, Mode=TwoWay}" />
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
+                        <userControls:VariablesConValoresPresenter Margin="10,5,5,5" Grid.Row="4" Width="410" HorizontalAlignment="Left" x:Name="dataVarsEntradaFinal" EsVersionReducida="False" />
 
                         <TextBlock Width="430" Grid.Row="5" HorizontalAlignment="Left" >
                         Variables Salida
                         </TextBlock>
-
-                        <!--<ListView Grid.Row="6" Width="430" HorizontalAlignment="Left" Name="lstVarsSalidaFinal" ItemsSource="{Binding VariablesSalidaSeleccionadas}">
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
-                                <GridView.Columns>                                    
-                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                                    <GridViewColumn Header="Contexto" Width="70" DisplayMemberBinding="{Binding Path=Contexto}" />
-                                    <GridViewColumn Header="Tipo de Variable" Width="100" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
-                                    <GridViewColumn Header="Tipo de Dato" Width="60" DisplayMemberBinding="{Binding Path=TipoDato}" />
-                                    <GridViewColumn Header="Descripcion" Width="200" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                                    <GridViewColumn Header="Valor" Width="100" DisplayMemberBinding="{Binding Path=Valor, Mode=TwoWay}" />
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
-
-
-                        <userControls:VariablesConValoresPresenter Grid.Row="6" Width="410" HorizontalAlignment="Left" x:Name="dataVarsSalidaFinal" EsVersionReducida="False" />
+                        <userControls:VariablesConValoresPresenter Margin="10,5,5,5" Grid.Row="6" Width="410" HorizontalAlignment="Left" x:Name="dataVarsSalidaFinal" EsVersionReducida="False" />
                     </Grid>
                 </ScrollViewer>
             </aw:WizardPage>
