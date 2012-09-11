@@ -28,6 +28,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (this.hijosNodo.Count > 1)
             {
+                this.NoEsAptaPasajeReferencia = this.hijosNodo[0].NoEsAptaPasajeReferencia || this.hijosNodo[1].NoEsAptaPasajeReferencia;
 
                 this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);
 

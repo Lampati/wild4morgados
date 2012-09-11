@@ -36,6 +36,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
             if (esFuncion)
             {
+                this.NoEsAptaPasajeReferencia = true;
+
                 List<Firma> listaFirmaComparar = this.hijosNodo[1].ListaFirma;
 
                 if (this.TablaSimbolos.ExisteFuncion(nombre))
@@ -46,19 +48,20 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     {
                         int i = 0;
                         bool igual = true;
+                        bool igualReferencia = true;
 
-                        while (i < firmaFuncion.Count && igual)
+                        while (i < firmaFuncion.Count && igual && igualReferencia)
                         {
                             igual = firmaFuncion[i].TipoDato == listaFirmaComparar[i].Tipo 
                                 && firmaFuncion[i].EsArreglo == listaFirmaComparar[i].EsArreglo;
 
-                          
 
+                            igualReferencia = firmaFuncion[i].EsPorReferencia == listaFirmaComparar[i].EsReferencia;
 
                             i++;
                         }
 
-                        if (igual)
+                        if (igual && igualReferencia)
                         {
                             this.ListaFirma = this.hijosNodo[1].ListaFirma;
 
@@ -90,13 +93,23 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                             if (firmaFuncion[i - 1].TipoDato != listaFirmaComparar[i - 1].Tipo)
                             {
 
-                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la funcion ");
+                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la función ");
                                 strbldr.Append(nombre).Append(" es de tipo incorrecto. Debe ser de tipo ").Append(EnumUtils.stringValueOf(firmaFuncion[i - 1].TipoDato));
                                 listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
                                 
                             }
 
-                             if (firmaFuncion[i - 1].EsArreglo != listaFirmaComparar[i - 1].EsArreglo)
+                            if (firmaFuncion[i - 1].EsPorReferencia != listaFirmaComparar[i - 1].EsReferencia)
+                            {
+
+                                strbldr = new StringBuilder("El parametro ").Append(firmaFuncion[i - 1].Lexema).Append(" pasado a la función ");
+                                strbldr.Append(nombre).Append(" esta especificado como por referencia. No puede ser el resultado de una expresion o un valor constante o una función. De ser necesario, asigne el valor a una nueva variable para pasarla por parametro.");
+                                listaExcepciones.Add(new ErrorSemanticoException(strbldr.ToString()));
+
+
+                            }
+
+                            if (firmaFuncion[i - 1].EsArreglo != listaFirmaComparar[i - 1].EsArreglo)
                             {
                                 if (firmaFuncion[i - 1].EsArreglo)
                                 {

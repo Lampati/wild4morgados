@@ -34,6 +34,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     break;
             }
 
+            this.NoEsAptaPasajeReferencia = true;
+
             this.Gargar = hijoASintetizar.Gargar;
         }
 
