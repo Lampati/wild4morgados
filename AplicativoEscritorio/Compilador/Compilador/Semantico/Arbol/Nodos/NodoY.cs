@@ -48,7 +48,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                     case "[":
                         this.EsArreglo = true;
                         this.TipoDato = this.hijosNodo[1].TipoDato;
-                        this.Gargar = string.Format("({0})", this.hijosNodo[1].Gargar);
+                        this.Gargar = string.Format("[{0}]", this.hijosNodo[1].Gargar);
                         break;
                 }
             }
