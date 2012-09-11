@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using InterfazTextoGrafico;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace ModoGrafico.Views
 {
@@ -500,10 +501,12 @@ namespace ModoGrafico.Views
 
             bool valido = true;
 
-            valido &= !string.IsNullOrWhiteSpace(Nombre);
+            valido &= ValidarNombre();
 
             if (valido)
             {
+                
+
                 if (TipoPropiedades == TipoContexto.Funcion)
                 {
                     valido &= cboTipoRetorno.SelectedIndex != -1;
@@ -519,7 +522,7 @@ namespace ModoGrafico.Views
 
                     int i = 0;
 
-                    while (i < listaParametros.Count && listaParametros[i].Validar())
+                    while (i < listaParametros.Count && listaParametros[i].Validar() && listaParametros[i].ValidarNombre())
                     {
                         i++;
                     }
@@ -529,7 +532,7 @@ namespace ModoGrafico.Views
                     {
                         i = 0;
 
-                        while (i < listaParametrosArreglos.Count && listaParametrosArreglos[i].Validar())
+                        while (i < listaParametrosArreglos.Count && listaParametrosArreglos[i].Validar() && listaParametrosArreglos[i].ValidarNombre())
                         {
                             i++;
                         }
@@ -537,12 +540,29 @@ namespace ModoGrafico.Views
 
                         if (!valido)
                         {
-                            mensaje = string.Format("El parametro (arreglo) {0} no es valido. Debe tener nombre, tipo y tope definidos");
+                            if (listaParametrosArreglos[i].ValidarNombre())
+                            {
+                                mensaje = string.Format("El parametro (arreglo) {0} no es valido. Debe tener nombre, tipo y tope definidos", listaParametrosArreglos[i].Nombre);                                
+                            }
+                            else
+                            {
+                                mensaje = string.Format("El nombre del parametro {0} no es valido. Debe contener únicamente caracteres alfanumericos", listaParametrosArreglos[i].Nombre);
+                            }
+                            
                         }
                     }
                     else
                     {
-                        mensaje = string.Format("El parametro (variable) {0} no es valido. Debe tener nombre y tipo definidos");
+                        if (listaParametros[i].ValidarNombre())
+                        {
+                            mensaje = string.Format("El parametro (variable) {0} no es valido. Debe tener nombre y tipo definidos", listaParametros[i].Nombre);
+                        }
+                        else
+                        {
+                            mensaje = string.Format("El nombre del parametro {0} no es valido. Debe contener únicamente caracteres alfanumericos", listaParametros[i].Nombre);
+                            
+                        }
+                        
                     }
                 }
             }
@@ -550,17 +570,37 @@ namespace ModoGrafico.Views
             {
                 if (TipoPropiedades == TipoContexto.Funcion)
                 {
-                    mensaje = "La función debe tener un nombre";
+                    if (Nombre != string.Empty)
+                    {
+                        mensaje = string.Format("La función {0} debe tener un nombre que contenga solo caracteres alfanumericos", Nombre);
+                    }
+                    else
+                    {
+                        mensaje = "La funcion debe tener un nombre que contenga solo caracteres alfanumericos";
+                    }
                 }
                 else
                 {
-                    mensaje = "El procedimiento debe tener un nombre";
+                    if (Nombre != string.Empty)
+                    {
+                        mensaje = string.Format("El procedimiento {0} debe tener un nombre que contenga solo caracteres alfanumericos", Nombre);
+                    }
+                    else
+                    {
+                        mensaje = "El procedimiento debe tener un nombre que contenga solo caracteres alfanumericos";
+                    }
                 }
             }
 
 
             return valido;
 
+        }
+
+        public virtual bool ValidarNombre()
+        {
+            Regex regex = new Regex(@"^[a-zA-Z]+[a-zA-Z0-9]*$");
+            return regex.IsMatch(Nombre);
         }
 
         private void bttnCancelar_Click(object sender, RoutedEventArgs e)
@@ -632,6 +672,12 @@ namespace ModoGrafico.Views
         {
             return !string.IsNullOrWhiteSpace(Nombre);
 
+        }
+
+        public virtual bool ValidarNombre()
+        {
+            Regex regex = new Regex(@"^[a-zA-Z]+[a-zA-Z0-9]*$");                                     
+            return regex.IsMatch(Nombre) ;
         }
     }
 
