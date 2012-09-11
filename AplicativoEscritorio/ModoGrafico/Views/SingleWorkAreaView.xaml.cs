@@ -85,70 +85,73 @@ using System.Windows.Input;
             {
                 Tab tabCorrespondiente = this.DataContext as Tab;
 
-                this.grd.ColumnDefinitions.Clear();
-
-                switch (tabCorrespondiente.Tipo)
+                if (tabCorrespondiente != null)
                 {
+                    this.grd.ColumnDefinitions.Clear();
 
-                    case ModoGrafico.Enums.TipoTab.TabItemDeclaracionVariable:
-                    case ModoGrafico.Enums.TipoTab.TabItemDeclaracionConstante:
-                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Collapsed;
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(1050, System.Windows.GridUnitType.Star) });
-                        Grid.SetColumn(this.contentDesigner, 0);
-                        break;
-                    case ModoGrafico.Enums.TipoTab.TabItemFuncion:
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
+                    switch (tabCorrespondiente.Tipo)
+                    {
 
-                        PonerPrimerParametroComoActivo();
+                        case ModoGrafico.Enums.TipoTab.TabItemDeclaracionVariable:
+                        case ModoGrafico.Enums.TipoTab.TabItemDeclaracionConstante:
+                            stackPanelPropiedades.Visibility = System.Windows.Visibility.Collapsed;
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(1050, System.Windows.GridUnitType.Star) });
+                            Grid.SetColumn(this.contentDesigner, 0);
+                            break;
+                        case ModoGrafico.Enums.TipoTab.TabItemFuncion:
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
-                        stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
-                        stackPanelRetorno.Visibility = System.Windows.Visibility.Visible;
-                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Visible;
-                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
-                        
+                            PonerPrimerParametroComoActivo();
 
-                        Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
-                        Grid.SetColumn(this.contentDesigner, 1);
-                        break;
-                    case ModoGrafico.Enums.TipoTab.TabItemProcedimiento:
-                    case ModoGrafico.Enums.TipoTab.TabItemSalida:
+                            stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
+                            stackPanelRetorno.Visibility = System.Windows.Visibility.Visible;
+                            stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Visible;
+                            stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
 
-                         this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
-                        //cboBoxParametros.ItemsSource = tabCorrespondiente.Parametros;    
+                            Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
+                            Grid.SetColumn(this.contentDesigner, 1);
+                            break;
+                        case ModoGrafico.Enums.TipoTab.TabItemProcedimiento:
+                        case ModoGrafico.Enums.TipoTab.TabItemSalida:
 
-                        PonerPrimerParametroComoActivo();
-                      
-                        stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
-                        stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
-                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;                        
-                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
 
-                        Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
-                        Grid.SetColumn(this.contentDesigner, 1);
-                        break;
-                    case ModoGrafico.Enums.TipoTab.TabItemPrincipal:
-                    
+                            //cboBoxParametros.ItemsSource = tabCorrespondiente.Parametros;    
 
-                        stackPanelParametros.Visibility = System.Windows.Visibility.Collapsed;
-                        stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
-                        stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
-                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
+                            PonerPrimerParametroComoActivo();
 
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
-                        this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
+                            stackPanelParametros.Visibility = System.Windows.Visibility.Visible;
+                            stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                            stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                            stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
 
-                        Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
-                        Grid.SetColumn(this.contentDesigner, 1);
-                        break;
-                    case ModoGrafico.Enums.TipoTab.TabItemAgregarFuncion:                        
-                    case ModoGrafico.Enums.TipoTab.TabItemAgregarProcedimiento:
-                        stackPanelPropiedades.Visibility = System.Windows.Visibility.Collapsed;
-                        break;
-                    default:
-                        break;
+                            Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
+                            Grid.SetColumn(this.contentDesigner, 1);
+                            break;
+                        case ModoGrafico.Enums.TipoTab.TabItemPrincipal:
+
+
+                            stackPanelParametros.Visibility = System.Windows.Visibility.Collapsed;
+                            stackPanelRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                            stackPanelTipoRetorno.Visibility = System.Windows.Visibility.Collapsed;
+                            stackPanelPropiedades.Visibility = System.Windows.Visibility.Visible;
+
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(350, System.Windows.GridUnitType.Star) });
+                            this.grd.ColumnDefinitions.Add(new ColumnDefinition() { Width = new System.Windows.GridLength(850, System.Windows.GridUnitType.Star) });
+
+                            Grid.SetColumn(this.contentDesignerDeclaraciones, 0);
+                            Grid.SetColumn(this.contentDesigner, 1);
+                            break;
+                        case ModoGrafico.Enums.TipoTab.TabItemAgregarFuncion:
+                        case ModoGrafico.Enums.TipoTab.TabItemAgregarProcedimiento:
+                            stackPanelPropiedades.Visibility = System.Windows.Visibility.Collapsed;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }));
         }

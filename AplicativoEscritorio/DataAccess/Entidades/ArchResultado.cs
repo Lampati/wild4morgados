@@ -137,10 +137,11 @@ namespace DataAccess.Entidades
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Exception nuevaExcepcion = new Exception("La ejecucion no termino adecuadamente y no se pueden mostrar los resultados de la ejecución",ex);
 
-                throw;
+                throw nuevaExcepcion;
             }
         }
 

@@ -33,7 +33,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="40,0,0,0" VerticalAlignment="Center" Name="stackPanelParametros" Visibility="Collapsed" >
                 <TextBlock>Parametros:</TextBlock>
-                <ComboBox Name="cboBoxParametros" Margin="8,0,0,3" Width="100"
+                <ComboBox Name="cboBoxParametros" Margin="8,0,0,3" Width="120"
                           ItemsSource="{Binding Path=Parametros,  Mode=TwoWay}"
                             DisplayMemberPath="Gargar" 
                             SelectedValuePath="Gargar"  />
