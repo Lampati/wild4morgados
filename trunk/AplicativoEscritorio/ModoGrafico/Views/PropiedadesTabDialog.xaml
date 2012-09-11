@@ -61,8 +61,7 @@
                    Height="2" Fill="Gray" Stroke="Gray" HorizontalAlignment="Stretch" />-->
             <Separator Margin="0,8,0,8"></Separator>
 
-            <Expander  Name="expanderParametros" Height="Auto"
-                      Expanded="expanderParametros_Expanded" Collapsed="expanderParametros_Collapsed">
+            <Expander  Name="expanderParametros" Height="Auto">
                 <Expander.Header>
                     <TextBlock FontSize="16">Parametros</TextBlock>
                 </Expander.Header>
@@ -90,10 +89,12 @@
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="Nombre" Width="280"/>
+                                <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="Nombre" Width="240"/>
 
                                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Path=Tipo}" Header="Tipo" Width="80" 
                                     ItemsSource="{Binding Source={StaticResource TiposDeDato}}" />
+                                <DataGridCheckBoxColumn Binding="{Binding Path=EsReferencia}" Header="Ref" Width="40"   />
+                                
                                 <DataGridTemplateColumn  Header="" Width="32">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -134,10 +135,11 @@
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="Nombre" Width="140" />
-                                <DataGridComboBoxColumn SelectedValueBinding="{Binding Path=Tipo}" Header="Tipo" Width="100" 
+                                <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="Nombre" Width="120" />
+                                <DataGridComboBoxColumn SelectedValueBinding="{Binding Path=Tipo}" Header="Tipo" Width="90" 
                                     ItemsSource="{Binding Source={StaticResource TiposDeDato}}" />
-                                <DataGridTextColumn Binding="{Binding Path=Tope}" Header="Tope" Width="120" />
+                                <DataGridTextColumn Binding="{Binding Path=Tope}" Header="Tope" Width="110" />
+                                <DataGridCheckBoxColumn Binding="{Binding Path=EsReferencia}" Header="Ref" Width="40"   />
                                 <DataGridTemplateColumn  Header="" Width="30">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

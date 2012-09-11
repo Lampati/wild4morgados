@@ -12,6 +12,7 @@ namespace InterfazTextoGrafico
         public string Nombre { get; set; }
         public InterfazTextoGrafico.Enums.TipoDato Tipo { get; set; }
         public bool EsArreglo { get; set; }
+        public bool EsReferencia { get; set; }
         public string TopeArreglo { get; set; }
 
       
@@ -38,12 +39,20 @@ namespace InterfazTextoGrafico
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("{0} : ",Nombre);
-
+                if (EsReferencia)
+                {
+                    strBldr.AppendFormat("ref {0} : ", Nombre);
+                }
+                else
+                {
+                    strBldr.AppendFormat("{0} : ", Nombre);
+                }
 
                 if (EsArreglo)
                 {
-                    strBldr.AppendFormat("arreglo [ {0} ] de {1} ",TopeArreglo,Tipo.ToString());
+                   
+                        strBldr.AppendFormat("arreglo [ {0} ] de {1} ", TopeArreglo, Tipo.ToString());
+                    
                 }
                 else
                 {
@@ -77,6 +86,11 @@ namespace InterfazTextoGrafico
             xml.LevelUp();
 
             xml.AddElement();
+            xml.SetTitle("EsReferencia");
+            xml.SetValue(((bool)this.EsReferencia).ToString());
+            xml.LevelUp();
+
+            xml.AddElement();
             xml.SetTitle("TopeArreglo");
             xml.SetValue(this.TopeArreglo);
             xml.LevelUp();
@@ -89,6 +103,7 @@ namespace InterfazTextoGrafico
             this.Nombre = xmlElem.FindFirst("Nombre").value;
             this.Tipo = (TipoDato)int.Parse(xmlElem.FindFirst("Tipo").value);
             this.EsArreglo = bool.Parse(xmlElem.FindFirst("EsArreglo").value);
+            this.EsReferencia = bool.Parse(xmlElem.FindFirst("EsReferencia").value);
             this.TopeArreglo = xmlElem.FindFirst("TopeArreglo").value;
         }
 

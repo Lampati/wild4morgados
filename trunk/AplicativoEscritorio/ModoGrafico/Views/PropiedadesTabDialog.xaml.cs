@@ -216,12 +216,12 @@ namespace ModoGrafico.Views
 
                 foreach (var item in ParametrosVariables)
                 {
-                    listaRetorno.Add(new ParametroViewModel() { Nombre = item.Nombre, Tipo = item.Tipo, EsArreglo = false });
+                    listaRetorno.Add(new ParametroViewModel() { Nombre = item.Nombre, Tipo = item.Tipo, EsArreglo = false , EsReferencia = item.EsReferencia});
                 }
 
                 foreach (var item in ParametrosArreglos)
                 {
-                    listaRetorno.Add(new ParametroViewModel() { Nombre = item.Nombre, Tipo = item.Tipo, EsArreglo = true, TopeArreglo = item.Tope });
+                    listaRetorno.Add(new ParametroViewModel() { Nombre = item.Nombre, Tipo = item.Tipo, EsArreglo = true, TopeArreglo = item.Tope, EsReferencia = item.EsReferencia });
                 }
 
                 return listaRetorno;
@@ -236,11 +236,11 @@ namespace ModoGrafico.Views
                 {
                     if (item.EsArreglo)
                     {
-                        listaParametroArreglo.Add(new ParametroArreglo() { Nombre = item.Nombre, Tipo = item.Tipo, Tope = item.TopeArreglo });
+                        listaParametroArreglo.Add(new ParametroArreglo() { Nombre = item.Nombre, Tipo = item.Tipo, Tope = item.TopeArreglo , EsReferencia = item.EsReferencia});
                     }
                     else
                     {
-                        listaParametroVariable.Add(new Parametro() { Nombre = item.Nombre, Tipo = item.Tipo });
+                        listaParametroVariable.Add(new Parametro() { Nombre = item.Nombre, Tipo = item.Tipo, EsReferencia = item.EsReferencia });
                     }
                 }
 
@@ -423,7 +423,40 @@ namespace ModoGrafico.Views
                 parent = VisualTreeHelper.GetParent(parent) as UIElement;
             }
             return null;
-        }     
+        }
+
+        private void chkRefArreglo_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox chkBox = sender as CheckBox;
+            Parametro paramFila = ((FrameworkElement)sender).DataContext as Parametro;
+
+            var parametro = (from param in listaParametros
+                             where param.Id == paramFila.Id
+                             select param).SingleOrDefault();
+
+            if (parametro != null)
+            {
+                parametro.EsReferencia = chkBox.IsChecked.HasValue ? chkBox.IsChecked.Value : false;
+
+            }
+        }
+
+        private void chkRef_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox chkBox = sender as CheckBox;
+            Parametro paramFila = ((FrameworkElement)sender).DataContext as Parametro;
+
+            var parametro = (from param in listaParametros
+                             where param.Id == paramFila.Id
+                             select param).SingleOrDefault();
+
+            if (parametro != null)
+            {
+                parametro.EsReferencia = chkBox.IsChecked.HasValue ? chkBox.IsChecked.Value : false;
+
+            }
+        }
+
 
         private void ButtonEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -562,16 +595,10 @@ namespace ModoGrafico.Views
             }
         }
 
-        private void expanderParametros_Expanded(object sender, RoutedEventArgs e)
-        {
-            //Height = 630;
-        }
+   
+       
 
-        private void expanderParametros_Collapsed(object sender, RoutedEventArgs e)
-        {
-            //Height = 290;
-        }
-
+      
      
 
 
@@ -591,6 +618,8 @@ namespace ModoGrafico.Views
 
         }
         public string Nombre { get; set; }
+
+        public bool EsReferencia { get; set; }
 
         public InterfazTextoGrafico.Enums.TipoDato Tipo {get; set;}
 
