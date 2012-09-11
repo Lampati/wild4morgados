@@ -111,8 +111,24 @@ namespace Ragnarok.DialogWindows
             VariablesSalida = archRes.VariablesSalida;
             Errores = archRes.Errores;
             EsCorrectaEjecucion = archRes.EsCorrectaEjecucion;
-            
+
+            if (VariablesSalida.Count == 0)
+            {
+                dataVariables.Visibility = System.Windows.Visibility.Collapsed;
+                txtBlockSinVariablesSalida.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            if (Errores.Count == 0)
+            {
+
+                panelErrores.Visibility = System.Windows.Visibility.Collapsed;
+            }
            
+        }
+
+        private void bttnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
        
