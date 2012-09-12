@@ -622,6 +622,8 @@
     <Resource Include="Images\SplashScreen_2.gif" />
     <Resource Include="Images\SplashScreen_4.gif" />
     <Resource Include="Images\Tribal_R.png" />
+    <Resource Include="Resources\Images\GarGar128Large.png" />
+    <Resource Include="Resources\Images\GraficoLarge.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />

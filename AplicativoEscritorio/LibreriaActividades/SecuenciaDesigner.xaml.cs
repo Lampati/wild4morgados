@@ -22,7 +22,12 @@ namespace LibreriaActividades
         {
             InitializeComponent();
             base.PreviewDragOver += new DragEventHandler(SecuenciaDesigner_PreviewDragOver);
-            
+            base.PreviewDragEnter += new DragEventHandler(SecuenciaDesigner_PreviewDragEnter);
+        }
+
+        void SecuenciaDesigner_PreviewDragEnter(object sender, DragEventArgs e)
+        {
+            SecuenciaDesigner_PreviewDragOver(sender, e);
         }
 
         void SecuenciaDesigner_PreviewDragOver(object sender, DragEventArgs e)
