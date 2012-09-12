@@ -45,26 +45,31 @@ namespace Sincronizacion
         {
             if (Object.Equals(this.proxy, null))
             {
-                foreach (string str in this.wsdl)
+                if (Object.Equals(this.wsdl, null) || this.wsdl.Count.Equals(0))
+                    Eventos.Handler.ErrorConexionEventFire("No se ha establecido servidor para descargar ejercicios.", this.LabelInfo);
+                else
                 {
-                    try
+                    foreach (string str in this.wsdl)
                     {
-                        Eventos.Handler.ConectadoEventFire(str, this.LabelInfo);
-                        this.proxy = new Proxy.ProxyDinamico(str);
-                        Eventos.Handler.ConectadoEventFire(str, this.LabelInfo);
-                        return true;
-                    }
-                    catch (NotSupportedException)
-                    {
-                        Eventos.Handler.ErrorConexionEventFire("Error de conexión. Error al conectar a " + str, this.LabelInfo);
-                    }
+                        try
+                        {
+                            Eventos.Handler.ConectadoEventFire(str, this.LabelInfo);
+                            this.proxy = new Proxy.ProxyDinamico(str);
+                            Eventos.Handler.ConectadoEventFire(str, this.LabelInfo);
+                            return true;
+                        }
+                        catch (NotSupportedException)
+                        {
+                            Eventos.Handler.ErrorConexionEventFire("Error de conexión. Error al conectar a " + str, this.LabelInfo);
+                        }
                         catch (UriFormatException)
-                    {
-                        Eventos.Handler.ErrorConexionEventFire("Error de conexión. Error al conectar a " + str, this.LabelInfo);
-                    }
-                    catch (System.Net.WebException)
-                    {
-                        Eventos.Handler.ErrorConexionEventFire("Error al conectar a " + str, this.LabelInfo);
+                        {
+                            Eventos.Handler.ErrorConexionEventFire("Error de conexión. Error al conectar a " + str, this.LabelInfo);
+                        }
+                        catch (System.Net.WebException)
+                        {
+                            Eventos.Handler.ErrorConexionEventFire("Error al conectar a " + str, this.LabelInfo);
+                        }
                     }
                 }
                 return false;

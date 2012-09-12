@@ -464,7 +464,9 @@ namespace Ragnarok.UserControls.Toolbar
                 if (Object.Equals(this.servicio, null))
                     this.servicio = new Sincronizacion.Servicio();
 
-                List<string> wsdls = new List<string>(ConfiguracionAplicacion.UrlsDescargaEjercicios.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+                List<string> wsdls = null;
+                if (!Object.Equals(ConfiguracionAplicacion.UrlsDescargaEjercicios, null))
+                    wsdls = new List<string>(ConfiguracionAplicacion.UrlsDescargaEjercicios.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
                 this.servicio.Urls = wsdls;
                 this.servicio.Directorio = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
 
