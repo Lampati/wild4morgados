@@ -170,6 +170,23 @@ namespace DataAccess
 
             UrlsDescargaEjercicios = "http://www.program-ar.com.ar:8080/Ejercicios";
         }
+
+        public static void RecrearDirectorios()
+        {
+            try
+            {
+                Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(directorioAbrirDefault, false);
+                Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(directorioEjerciciosCreados, false);
+                Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(directorioEjerciciosDescargados, false);
+                Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(directorioResolucionesEjercicios, false);
+                Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(directorioTemporal, false);
+            }
+            catch (Exception)
+            {
+                
+            }
+            
+        }
         #endregion
     }
 }

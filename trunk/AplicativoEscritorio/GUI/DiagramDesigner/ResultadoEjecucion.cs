@@ -11,6 +11,7 @@ namespace Ragnarok
     {
         public ResultadoCompilacion ResCompilacion { get; set; }
         public ArchResultado ResEjecucion { get; set; }
+        
 
 
     }

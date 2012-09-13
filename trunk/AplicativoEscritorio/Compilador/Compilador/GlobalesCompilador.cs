@@ -28,6 +28,12 @@ namespace CompiladorGargar
             Ninguno
         }
 
+        public static void ReiniciarFilaYColumna()
+        {
+            GlobalesCompilador.UltFila = 0;
+            GlobalesCompilador.UltCol = 0;
+        }
+
         public static string ObtenerProgramaConEstructuraVacia()
         {
             StringBuilder strBldr = new StringBuilder();

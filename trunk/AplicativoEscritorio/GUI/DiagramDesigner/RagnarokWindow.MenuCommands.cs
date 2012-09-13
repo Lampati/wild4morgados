@@ -33,6 +33,8 @@ namespace Ragnarok
             {
                 try
                 {
+                    ConfiguracionAplicacion.RecrearDirectorios();
+
                     bool continuar = SalvarSiUsuarioQuiere();
 
                     if (continuar)
@@ -46,19 +48,14 @@ namespace Ragnarok
 
                                 if (!string.IsNullOrWhiteSpace(path))
                                 {
-                                    
-                                    Ejercicio ej = new Ejercicio();
-                                    string exePath = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;
-                                    string dir = Path.GetDirectoryName(exePath);
 
-                                    
-                                    //string pathTemplate = Path.Combine(dir, "ModoTexto", "Configuracion", "Template.txt").ToLower();
-                                    //if (pathTemplate.Contains(@"\bin\debug") || pathTemplate.Contains(@"\bin\release"))
-                                    //    pathTemplate = pathTemplate.Replace(@"bin\debug\", "").Replace(@"bin\release\", "");
-                                    //if (File.Exists(pathTemplate))
-                                    //    ej.Abrir(new FileInfo(pathTemplate));
+                                    Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(path,true);
+
+                                    Ejercicio ej = new Ejercicio();                                  
 
                                     SelectorModoDialog selectorModo = new SelectorModoDialog();
+                                    selectorModo.Owner = this;
+                                    this.ApplyBlurEffect();
                                     selectorModo.ShowDialog();
 
                                     switch (selectorModo.ModoElegido)
@@ -70,12 +67,13 @@ namespace Ragnarok
                                             ej.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
                                             break;
                                     }
+
+                                    this.ClearBlurEffect();
+
                                     ej.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                     ej.ModificadoDesdeUltimoGuardado = false;
                                     ej.PathGuardadoActual = path;
 
-
-                                    
 
                                     ej.Gargar = AsignarTemplate(); 
 
@@ -87,7 +85,7 @@ namespace Ragnarok
                                 break;
                             case 2:
 
-                                string pathEj = FileDialogManager.ElegirUbicacionNuevoEjercicio(this, "Elegir ejercicio a resolver", ConfiguracionAplicacion.DirectorioEjerciciosDescargados);
+                                string pathEj = FileDialogManager.ElegirEjercicioParaResolucion(this, "Elegir ejercicio a resolver", ConfiguracionAplicacion.DirectorioEjerciciosDescargados);
 
                                 if (!string.IsNullOrWhiteSpace(pathEj))
                                 {
@@ -95,46 +93,67 @@ namespace Ragnarok
                                     //chequeo de tipo de archivo
                                     if (pathEj.ToLower().EndsWith(string.Format(".{0}", AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)))
                                     {
-
+                                        bool aperturaEjercicioExitosa = false;
                                         Ejercicio ej = new Ejercicio();
-                                        ej.PathGuardadoActual = pathEj;
-                                        ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
-                                        //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                                        ej.ModificadoDesdeUltimoGuardado = false;
 
-                                        path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}", ej.Nombre), ConfiguracionAplicacion.DirectorioResolucionesEjercicios);
-
-                                        if (!string.IsNullOrWhiteSpace(path))
+                                        try
                                         {
-
-                                            ResolucionEjercicio res = new ResolucionEjercicio(ej);
-
-                                            SelectorModoDialog selectorModo = new SelectorModoDialog();
-                                            selectorModo.ShowDialog();
-
-                                            switch (selectorModo.ModoElegido)
-                                            {
-                                                case SelectorModoDialog.TiposModo.ModoGrafico:
-                                                    res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Flujo;
-                                                    break;
-                                                case SelectorModoDialog.TiposModo.ModoTexto:
-                                                    res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
-                                                    break;
-                                            }
-
-                                            res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
-                                            res.ModificadoDesdeUltimoGuardado = false;
-                                            res.PathGuardadoActual = path;
-                                            res.Guardar(res.PathGuardadoActual);
-                                            ArchCargado = res;
+                                            
+                                            ej.PathGuardadoActual = pathEj;
+                                            ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
                                             //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
-                                            res.ModificadoDesdeUltimoGuardado = false;
+                                            ej.ModificadoDesdeUltimoGuardado = false;
+                                            aperturaEjercicioExitosa = true;
                                         }
+                                        catch (Exception)
+                                        {
+                                            MessageBox.Show("El archivo elegido no es un archivo de ejercicio válido o está corrompido", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        }
+
+                                        if (aperturaEjercicioExitosa)
+                                        {
+                                            path = FileDialogManager.ElegirUbicacionNuevaResolucion(this, string.Format("Elegir nombre y ubicación para la nueva resolucón del ej {0}", ej.Nombre), ConfiguracionAplicacion.DirectorioResolucionesEjercicios);
+
+                                            if (!string.IsNullOrWhiteSpace(path))
+                                            {
+
+                                                Utilidades.DirectoriosManager.CrearDirectorioSiNoExiste(path, true);
+
+                                                ResolucionEjercicio res = new ResolucionEjercicio(ej);
+
+                                                SelectorModoDialog selectorModo = new SelectorModoDialog();
+                                                selectorModo.Owner = this;
+                                                this.ApplyBlurEffect();
+                                                selectorModo.ShowDialog();
+
+                                                switch (selectorModo.ModoElegido)
+                                                {
+                                                    case SelectorModoDialog.TiposModo.ModoGrafico:
+                                                        res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Flujo;
+                                                        break;
+                                                    case SelectorModoDialog.TiposModo.ModoTexto:
+                                                        res.UltimoModoGuardado = (AplicativoEscritorio.DataAccess.Enums.ModoVisual)ModoVisual.Texto;
+                                                        break;
+                                                }
+
+                                                this.ClearBlurEffect();
+
+                                                res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
+                                                res.ModificadoDesdeUltimoGuardado = false;
+                                                res.PathGuardadoActual = path;
+                                                res.Guardar(res.PathGuardadoActual);
+                                                ArchCargado = res;
+                                                //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
+                                                res.ModificadoDesdeUltimoGuardado = false;
+                                            }
+                                        }
+                                        
                                     }
                                     else
                                     {
-                                        //Error formato no soportado
+                                        MessageBox.Show("El archivo elegido no es un archivo de ejercicio válido. Debe tener la extension .gej", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                     }
+                                  
                                 }
                                 break;
                         }
@@ -142,7 +161,7 @@ namespace Ragnarok
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionCriptografia)
                 {
-                    MessageBox.Show("El contenido del archivo no puede ser leído por Program.AR", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El contenido del archivo no puede ser leído por Ragnarok", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionHashNoConcuerda)
                 {
@@ -155,21 +174,6 @@ namespace Ragnarok
             } //fin si
         }
 
-        private string AsignarTemplate()
-        {
-            Uri uri = new Uri("/ModoTexto/Configuracion/Template.txt", UriKind.Relative);
-            StreamResourceInfo info = Application.GetResourceStream(uri);
-
-            using (StreamReader txtRdr = new StreamReader(info.Stream))
-            {
-                return txtRdr.ReadToEnd();
-            }
-            
-            
-        }
-
-
-
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
@@ -177,6 +181,8 @@ namespace Ragnarok
             {
                 try
                 {
+                    ConfiguracionAplicacion.RecrearDirectorios();
+
                     bool continuar = SalvarSiUsuarioQuiere();
 
                     if (continuar)
@@ -235,14 +241,14 @@ namespace Ragnarok
             }
         }
 
-
-
         private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             string path;
             //Pregunto si no es un RibbonButton, pq esto es un error del framework, que dispara 2 veces el evento
             if (e.OriginalSource.GetType() != typeof(RibbonButton))
             {
+                ConfiguracionAplicacion.RecrearDirectorios();
+
                 switch (Convert.ToInt32(e.Parameter))
                 {
                     case 1:
@@ -364,17 +370,39 @@ namespace Ragnarok
                                 {
                                     //Muestro cual fue el error pq termino mal
                                     ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+                                    resultadosDialog.Owner = this;
+                                    this.ApplyBlurEffect();
                                     resultadosDialog.ShowDialog();
-
+                                    
                                     try
                                     {
-                                        File.Delete(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta);
+                                        if (File.Exists(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta))
+                                        {
+                                            File.Delete(res.ResCompilacion.ArchTemporalResultadosEjecucionConRuta);
+                                        }
                                     }
                                     catch
                                     {
 
                                     }
+
+                                    this.ClearBlurEffect();
                                 }
+                            }
+                            else
+                            {
+                                if (res != null &&
+                                    res.ResCompilacion != null && 
+                                    res.ResCompilacion.CompilacionGarGarCorrecta &&
+                                    res.ResCompilacion.ResultadoCompPascal != null && 
+                                    res.ResCompilacion.ResultadoCompPascal.CompilacionPascalCorrecta )
+                                    {
+                                        MessageBox.Show("No se pudo continuar con la ejecución porque el archivo que la contenia fue borrado",
+                                                        "Error",
+                                                        MessageBoxButton.OK,
+                                                        MessageBoxImage.Error);
+                                    }
+                                
                             }
                         }
                         
@@ -383,8 +411,6 @@ namespace Ragnarok
             }
 
         }
-
-        
 
         private void Print_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -459,6 +485,18 @@ namespace Ragnarok
             return retorno;
         }
 
+        private string AsignarTemplate()
+        {
+            Uri uri = new Uri("/ModoTexto/Configuracion/Template.txt", UriKind.Relative);
+            StreamResourceInfo info = Application.GetResourceStream(uri);
+
+            using (StreamReader txtRdr = new StreamReader(info.Stream))
+            {
+                return txtRdr.ReadToEnd();
+            }
+
+
+        }
 
         private void GuardarADiscoFormatoNormal()
         {

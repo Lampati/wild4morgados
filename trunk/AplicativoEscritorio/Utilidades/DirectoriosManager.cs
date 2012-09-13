@@ -27,6 +27,28 @@ namespace Utilidades
             }   
         }
 
-      
+
+        /// <summary>
+        /// Crea el directorio si no existe
+        /// </summary>
+        /// <param name="path">El path a crear</param>
+        /// <param name="esArchivo">Indica si el parametro path es un archivo</param>
+        public static void CrearDirectorioSiNoExiste(string path, bool esArchivo)
+        {
+            string dir = path;
+
+            if (esArchivo)
+            {
+                dir = Path.GetDirectoryName(path);
+            }
+           
+
+            bool existe = Directory.Exists(dir);
+
+            if (!existe)
+            {
+                Directory.CreateDirectory(dir);
+            }
+        }
     }
 }
