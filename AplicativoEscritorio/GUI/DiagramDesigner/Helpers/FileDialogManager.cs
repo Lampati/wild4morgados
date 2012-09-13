@@ -25,10 +25,9 @@ namespace Ragnarok.Helpers
 
         private static string ElegirUbicacionNuevoArchivo(Window padre, string titulo, string dirInicial, string filtro, string descFiltros)
         {
-            OpenFileDialog file = new OpenFileDialog();
+            SaveFileDialog file = new SaveFileDialog();
             file.CheckFileExists = false;
             file.CheckPathExists = false;
-            file.Multiselect = false;
             file.InitialDirectory = dirInicial;
             file.Title = titulo;
             file.Filter = descFiltros;
@@ -54,7 +53,8 @@ namespace Ragnarok.Helpers
         internal static string ElegirEjercicioParaResolucion(Window padre, string titulo, string dirInicial)
         {
             return ElegirArchivoAbrir (padre, titulo, dirInicial, 
-                string.Format("Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
+                //string.Format("Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
+                string.Format("Archivos de Ejercicio (*.{0})|*.{0}",
                 AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO)
                 );
         }

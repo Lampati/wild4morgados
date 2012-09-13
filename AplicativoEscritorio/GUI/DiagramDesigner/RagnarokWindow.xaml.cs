@@ -227,6 +227,8 @@ namespace Ragnarok
           
         }
 
+     
+
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
         {
             IdentarTexto();
@@ -403,7 +405,7 @@ namespace Ragnarok
 
                     if (this.Modo == ModoVisual.Texto)
                     {
-                        Compilar(this.Esquema.GarGarACompilar);
+                        res = Compilar(this.Esquema.GarGarACompilar);
                     }
                     else
                     {
@@ -462,7 +464,7 @@ namespace Ragnarok
 
                 if (this.Modo == ModoVisual.Texto)
                 {
-                    Compilar(this.Esquema.GarGarACompilar);
+                    res = Compilar(this.Esquema.GarGarACompilar);
                 }
                 else
                 {
@@ -552,7 +554,7 @@ namespace Ragnarok
 
                 if (this.Modo == ModoVisual.Texto)
                 {
-                    Compilar(this.Esquema.GarGarACompilar);
+                    res = Compilar(this.Esquema.GarGarACompilar);
                 }
                 else
                 {
@@ -720,30 +722,14 @@ namespace Ragnarok
         {
             if (IsActive && ArchCargado != null)
             {
-
                 switch (obj.Key)
                 {
                     case Keys.F3:
-                        if (this.Modo == ModoVisual.Texto)
-                        {
-                            Compilar(this.Esquema.GarGarACompilar);
-                        }
-                        else
-                        {
-                            Compilar(this.Esquema.RepresentacionGraficaActual.Gargar);
-                        }
+                        ToolbarAplicacion_CompilacionEvent(this, new CompilacionEventArgs(false));
                         break;
                     case Keys.F4:
-                        if (this.Modo == ModoVisual.Texto)
-                        {
-                            EjecutarConResultado(this.Esquema.GarGarACompilar);
-                        }
-                        else
-                        {
-                            EjecutarConResultado(this.Esquema.RepresentacionGraficaActual.Gargar);
-                        }
+                        ToolbarAplicacion_CompilacionEvent(this, new CompilacionEventArgs(true));
                         break;
-
                     default:
                         break;
                 }
@@ -805,6 +791,20 @@ namespace Ragnarok
                 ClearBlurEffect();
 
             }
+            else
+            {
+                if (res != null &&
+                    res.ResCompilacion != null &&
+                    res.ResCompilacion.CompilacionGarGarCorrecta &&
+                    res.ResCompilacion.ResultadoCompPascal != null &&
+                    res.ResCompilacion.ResultadoCompPascal.CompilacionPascalCorrecta)
+                {
+                    MessageBox.Show("No se pudo continuar con la ejecución porque el archivo que la contenia fue borrado",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                }
+            }
         }
 
         private ResultadoEjecucion Ejecutar(string programa)
@@ -836,7 +836,16 @@ namespace Ragnarok
 
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
 
-                resultadoEjecucion.ResEjecucion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
+                if (File.Exists(res.ArchTemporalResultadosEjecucionConRuta))
+                {
+                    resultadoEjecucion.ResEjecucion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
+                }
+                else
+                {
+                    
+
+                    resultadoEjecucion.ResEjecucion = null;
+                }
 
                 
             }

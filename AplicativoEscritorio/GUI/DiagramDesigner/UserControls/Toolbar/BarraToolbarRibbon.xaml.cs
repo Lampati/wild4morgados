@@ -578,6 +578,8 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void btnSincroGeneral_Click(object sender, RoutedEventArgs e)
         {
+            ConfiguracionAplicacion.RecrearDirectorios();
+
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
             propertyEditorWindow.Titulo = "Sincronización General (Ejercicios Globales)";
             propertyEditorWindow.Owner = this.Owner;
@@ -638,6 +640,8 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void btnSincroCurso_Click(object sender, RoutedEventArgs e)
         {
+            ConfiguracionAplicacion.RecrearDirectorios();
+
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
             propertyEditorWindow.Titulo = "Sincronización por Curso";
             propertyEditorWindow.Owner = this.Owner;
@@ -712,6 +716,8 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void btnSincroEjercicio_Click(object sender, RoutedEventArgs e)
         {
+            ConfiguracionAplicacion.RecrearDirectorios();
+
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
             propertyEditorWindow.Titulo = "Sincronización por Ejercicio";
             propertyEditorWindow.Owner = this.Owner;

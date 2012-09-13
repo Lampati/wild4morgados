@@ -45,7 +45,12 @@ namespace FindReplace
 
         private void ReplaceAllClick(object sender, RoutedEventArgs e)
         {
-            TheVM.ReplaceAll();
+            int cant = TheVM.ReplaceAll();
+
+            if (cant >= 0)
+            {
+                MessageBox.Show(string.Format("Se realizaron {0} reemplazos en el documento", cant), "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
   
         private void Window_KeyDown(object sender, KeyEventArgs e)

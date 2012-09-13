@@ -277,14 +277,18 @@ namespace FindReplace
             return r;
         }
 
-        public void ReplaceAll(bool AskBefore = true)
+        public int ReplaceAll(bool AskBefore = true)
         {
             IEditor CE = GetCurrentEditor();
-            if (CE == null) return;
+            if (CE == null) return -1;
+
+            int ocurrenciasReemplazadas = -1;
 
             if (!AskBefore || MessageBox.Show("¿Seguro que quiere reemplazar TODAS las ocurrencias de '" + TextToFind + "' por '" + ReplacementText + "'?",
                 "Reemplazar Todo", MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
             {
+                ocurrenciasReemplazadas = 0;
+
                 object InitialEditor = CurrentEditor;
                 // loop through all editors, until we are back at the starting editor                
                 do
@@ -296,11 +300,14 @@ namespace FindReplace
                     {
                         CE.Replace(offset + m.Index, m.Length, ReplacementText);
                         offset += ReplacementText.Length - m.Length;
+                        ocurrenciasReemplazadas++;
                     }
                     CE.EndChange();
                     CE = GetNextEditor();
                 } while (CurrentEditor != InitialEditor);
             }
+
+            return ocurrenciasReemplazadas;
         }
 
         /// <summary>
@@ -382,7 +389,7 @@ namespace FindReplace
                     else
                     {
                         // Failed to find the text
-                        //MessageBox.Show("No occurence found.", "Search");
+                        MessageBox.Show(string.Format("No se encontro el texto {0} en el documento",TextToFind), "Buscar");
                     }
                 } while (CurrentEditor != OldEditor);
             }
