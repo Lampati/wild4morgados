@@ -1065,6 +1065,15 @@ namespace Ragnarok
             {
                 e.Cancel = true;
             }
+
+            try
+            {
+                DirectoriosManager.BorrarArchivosDelDirPorExtension(ConfiguracionAplicacion.DirectorioTemporal, "*.*");
+            }
+            catch
+            {
+
+            }
         }
 
 

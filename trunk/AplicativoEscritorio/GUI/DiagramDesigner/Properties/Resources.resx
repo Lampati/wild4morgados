@@ -121,4 +121,10 @@
   <data name="fenrir" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fenrir.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ManualGarGar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Manuales\ManualGarGar.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ManualRagnarok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Manuales\ManualRagnarok.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

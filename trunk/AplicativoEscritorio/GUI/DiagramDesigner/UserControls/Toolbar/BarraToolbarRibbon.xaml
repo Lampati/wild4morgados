@@ -285,7 +285,10 @@
 
         <ribbon:RibbonTab Name="TabAyuda" Header="Ayuda" RenderOptions.ClearTypeHint="Enabled" ContextMenu="{Binding null}">
             <ribbon:RibbonGroup Header="Ayuda de Program.Ar" Name="ribbonGroupAyudaProgramar" ContextMenu="{Binding null}">
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Manual" Name="bttnAyudaManual" ContextMenu="{Binding null}" Click="bttnAyudaManual_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Manual Ragnarok" Name="bttnAyudaManual" ContextMenu="{Binding null}" Click="bttnAyudaManual_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Manual GarGar" Name="bttnAyudaGarGarManual" ContextMenu="{Binding null}" Click="bttnAyudaGarGarManual_Click"></ribbon:RibbonButton>
+                <ribbon:RibbonSeparator />
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/Workflow.png" Label="Acerca De" Name="bttnAcercaDe" ContextMenu="{Binding null}" Click="bttnAcercaDe_Click"></ribbon:RibbonButton>
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>
 

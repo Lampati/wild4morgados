@@ -21,6 +21,7 @@ using System.IO;
 using AplicativoEscritorio.DataAccess;
 using DataAccess;
 using System.Windows.Resources;
+using Utilidades;
 
 namespace Ragnarok
 {
@@ -455,6 +456,8 @@ namespace Ragnarok
             //{
             //    Close();
             //}
+
+            
 
             Close();
         }
