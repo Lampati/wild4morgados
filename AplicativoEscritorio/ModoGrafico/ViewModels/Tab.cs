@@ -176,7 +176,9 @@ using ModoGrafico.Interfaces;
                         else
                         {
                             SecuenciaInicialProcedimiento = new Secuencia() { AdmiteDeclaraciones = false };
-                            SecuenciaInicialProcedimiento.Activities.Add(new LlamarProcedimiento() { NombreProcedimiento = "SALIDA" });
+                            LlamarProcedimiento llamadaSalida = new LlamarProcedimiento() { NombreProcedimiento = "SALIDA" };
+                            llamadaSalida.ReasignarId();
+                            SecuenciaInicialProcedimiento.Activities.Add(llamadaSalida);
                         }
                     }
                     else if (this is TabItemSalida)
