@@ -10,6 +10,8 @@ namespace Utilidades
     public class DirectoriosManager
     {
 
+        
+
         public static void BorrarArchivosDelDirPorExtension(string dir, string extension)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(dir);

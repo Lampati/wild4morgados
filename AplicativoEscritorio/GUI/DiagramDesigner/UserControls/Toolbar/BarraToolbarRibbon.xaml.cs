@@ -23,6 +23,7 @@ using DataAccess;
 using System.Diagnostics;
 using System.IO;
 using ModoGrafico.Views;
+using Utilidades;
 
 namespace Ragnarok.UserControls.Toolbar
 {
@@ -942,22 +943,38 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void bttnAyudaManual_Click(object sender, RoutedEventArgs e)
         {
-            //Abre el manual
-
-            if (File.Exists(""))
-            {
-                System.Diagnostics.Process.Start(@"c:\file.pdf");
-            }
-            else
-            {
-                MessageBox.Show("El manual no se encuentra en la ubicación por defecto, y no puede ser abierto.");
-            }
-
-            
-
+            AbrirArchivoManual("ManualRagnarok.pdf", global::Ragnarok.Properties.Resources.ManualRagnarok, "El manual del aplicativo Ragnarok no se pudo abrir");
         }
 
-        
+        private void bttnAyudaGarGarManual_Click(object sender, RoutedEventArgs e)
+        {
+            AbrirArchivoManual("ManualGargar.pdf", global::Ragnarok.Properties.Resources.ManualGarGar, "El manual del lenguaje GarGar no se pudo abrir");
+        }
 
+        private void AbrirArchivoManual(string fileName, byte[] arch, string error)
+        {
+            try
+            {
+                DirectoriosManager.CrearDirectorioSiNoExiste(ConfiguracionAplicacion.DirectorioTemporal, false);
+                string pathEntero = System.IO.Path.Combine(ConfiguracionAplicacion.DirectorioTemporal, fileName);
+
+                if (File.Exists(pathEntero))
+                {
+                    File.Delete(pathEntero);
+                }
+
+                System.IO.File.WriteAllBytes(pathEntero, arch);
+
+                System.Diagnostics.Process.Start(pathEntero);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(error, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void bttnAcercaDe_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
