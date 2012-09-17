@@ -235,6 +235,7 @@ namespace WebProgramAR.Controllers
 
                 try
                 {
+                    
                     Ejercicio ejDeArchivo = EjercicioNegocio.ObtenerEjercicioDeArchivo(memStream);
 
                     return View("Create", ejDeArchivo);
@@ -275,13 +276,19 @@ namespace WebProgramAR.Controllers
             if (ModelState.IsValid)
             {
 
-                //flanzani
-                //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;
-                ejercicio.EstadoEjercicioId = 1; //lo coloco en pendiente
-                
-                EjercicioNegocio.Alta(ejercicio);
-                return View("EjercicioCreado", ejercicio);
+              
+
+                    //flanzani
+                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                    ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;
+                    ejercicio.EstadoEjercicioId = 1; //lo coloco en pendiente
+
+                    int id = EjercicioNegocio.Alta(ejercicio);
+
+
+
+                    return View("EjercicioCreado", ejercicio);
+              
             }
             else
             {

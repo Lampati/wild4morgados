@@ -9,6 +9,7 @@ namespace WebProgramAR.Entidades
     [MetadataType(typeof(EjercicioValidation))]
     public partial class Ejercicio : EntidadProgramARBase
     {
+         
     }
 
 

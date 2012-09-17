@@ -27,11 +27,11 @@ namespace WebProgramAR.Negocio
         //    return EjercicioDA.GetEjerciciosNotCurso(nombre,usuarioId, cursoId, estadoEjercicio, nivelEjercicio,global, userLogueado);
         //}
 
-        public static void Alta(Ejercicio Ejercicio)
+        public static int Alta(Ejercicio Ejercicio)
         {
             
             Ejercicio.FechaAlta = DateTime.Now;
-            EjercicioDA.Alta(Ejercicio);
+            return EjercicioDA.Alta(Ejercicio);
         }
 
         public static void Modificar(Ejercicio Ejercicio)
@@ -86,6 +86,7 @@ namespace WebProgramAR.Negocio
             {                
                 throw new CargarEjercicioArchivoException("No se pudo cargar el ejercicio. El contenido del archivo no corresponde con lo que deberia contener un ejercicio.");
             }
+            
 
             if (ej.EsValidoSubirWeb)
             {
