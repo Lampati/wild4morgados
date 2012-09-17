@@ -154,12 +154,14 @@ namespace WebProgramAR.DataAccess
             }
         }
 
-        public static void Alta(Ejercicio Ejercicio)
+        public static int Alta(Ejercicio ejercicio)
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                db.Ejercicios.AddObject(Ejercicio);
+                db.Ejercicios.AddObject(ejercicio);
                 db.SaveChanges();
+
+                return ejercicio.EjercicioId;
             }
         }
 
