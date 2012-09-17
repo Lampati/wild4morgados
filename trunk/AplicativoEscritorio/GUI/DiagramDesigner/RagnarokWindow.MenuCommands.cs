@@ -142,6 +142,7 @@ namespace Ragnarok
                                                 res.Modo = AplicativoEscritorio.DataAccess.Enums.ModoEjercicio.Normal;
                                                 res.ModificadoDesdeUltimoGuardado = false;
                                                 res.PathGuardadoActual = path;
+                                                res.Gargar = AsignarTemplate(); 
                                                 res.Guardar(res.PathGuardadoActual);
                                                 ArchCargado = res;
                                                 //Se lo coloco despues la modificacion pq despues de cargar modifica el texto

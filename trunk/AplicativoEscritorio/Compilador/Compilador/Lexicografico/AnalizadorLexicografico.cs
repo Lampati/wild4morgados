@@ -119,6 +119,7 @@ namespace CompiladorGargar.Lexicografico
                                 //componente.Fila = charBuffer.FilaUltChar;
                                 componente.Columna = charBuffer.Columna - componente.Lexema.Length;
                                 componente.Descripcion = "'"+componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
+                                componente.CaracterErroneo = this.charBuffer.PeekProximoChar().ToString();
                                 afd.ResetearAFD();
                                 return componente;
                             }
