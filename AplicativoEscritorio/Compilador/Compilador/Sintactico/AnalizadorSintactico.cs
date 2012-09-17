@@ -640,8 +640,16 @@ namespace CompiladorGargar.Sintactico
                     if (t.Equals(Terminal.ElementoError()))
                     {
                         //throw new ErrorLexicoException(string.Format("El caracter {0} no es reconocido por el lenguaje GarGar", t.Componente.Lexema), t.Componente.Fila, t.Componente.Columna);
-                        string lexemaError = t.Componente.Lexema.Split(new char[] { ' ' })[0];
-                        throw new ErrorLexicoException(string.Format("Error sintactico en {0}", lexemaError), t.Componente.Fila, t.Componente.Columna);
+                        string lexemaError;
+                        if (string.IsNullOrEmpty(t.Componente.CaracterErroneo))
+                        {
+                            lexemaError = t.Componente.Lexema.Split(new char[] { ' ' })[0];
+                        }
+                        else
+                        {
+                            lexemaError = t.Componente.CaracterErroneo;
+                        }
+                        throw new ErrorLexicoException(string.Format("El caracter {0} es invalido en este contexto", lexemaError), t.Componente.Fila, t.Componente.Columna);
                     }
 
                     if (t.Componente.Token == ComponenteLexico.TokenType.Numero)

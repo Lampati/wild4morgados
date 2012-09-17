@@ -9,6 +9,7 @@ using ModoGrafico.Views;
 using System.Diagnostics;
 using SplashScreen;
 using System.Threading;
+using System.Reflection;
 
 namespace Ragnarok
 {
@@ -53,7 +54,24 @@ namespace Ragnarok
         {
             // Global exception handling  
             Application.Current.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(AppDispatcherUnhandledException);
+            //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
         }
+
+        //System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        //{
+        //     String resourceName = "AssemblyLoadingAndReflection." +
+
+        //     new AssemblyName(args.Name).Name + ".dll";
+
+        //     using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+        //     {
+        //         Byte[] assemblyData = new Byte[stream.Length];
+
+        //         stream.Read(assemblyData, 0, assemblyData.Length);
+
+        //         return Assembly.Load(assemblyData);
+        //     }
+        //}
 
         void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {

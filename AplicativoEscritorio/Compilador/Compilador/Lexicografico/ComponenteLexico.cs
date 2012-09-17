@@ -189,6 +189,8 @@ namespace CompiladorGargar.Lexicografico
             set { lexema = value; }
         }
 
+        public string CaracterErroneo { get; set; }
+
         private int fila;
         public int Fila
         {
