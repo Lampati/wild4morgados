@@ -5,6 +5,9 @@ using System.Text;
 using WebProgramAR.Entidades;
 using WebProgramAR.DataAccess;
 using System.IO;
+using Utilidades.XML;
+using Utilidades.Criptografia;
+using System.Web;
 
 namespace WebProgramAR.Negocio
 {
@@ -93,11 +96,15 @@ namespace WebProgramAR.Negocio
                 
                 Ejercicio ejRetorno = new Ejercicio();
 
+                
                 ejRetorno.Nombre = ej.Nombre;
                 ejRetorno.SolucionTexto = ej.SolucionTexto;
                 ejRetorno.Enunciado = ej.Enunciado;
                 ejRetorno.NivelEjercicio = ej.NivelDificultad;
                 ejRetorno.SolucionGarGar = ej.SolucionGargar;
+                XMLCreator xml = new XMLCreator();
+                ej.ToXML(xml);
+                ejRetorno.XmlDelEjercicio = HttpUtility.HtmlEncode(xml.Get()); 
 
                 return ejRetorno;
             }
@@ -110,6 +117,22 @@ namespace WebProgramAR.Negocio
         public static bool ExisteEjercicioById(int ejercicioId)
         {
             return EjercicioDA.ExisteEjercicioById(ejercicioId);
+        }
+
+        public static void ActualizarXml(int id, string xml)
+        {
+            XMLCreator xmlCreator = new XMLCreator();
+            AplicativoEscritorio.DataAccess.Entidades.Ejercicio ej = new AplicativoEscritorio.DataAccess.Entidades.Ejercicio();
+            XMLReader xmlReader = new XMLReader();
+            XMLElement xmlElem = xmlReader.Read(xml);
+
+            ej.FromXML(xmlElem);
+            ej.EjercicioId = id;
+            ej.ToXML(xmlCreator);
+            
+            string xmlEncriptado = Crypto.Encriptar(xmlCreator.Get());
+
+            EjercicioDA.ModificarXml(id, xmlEncriptado);
         }
     }
 }
