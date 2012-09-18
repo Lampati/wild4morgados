@@ -13,7 +13,9 @@
                 <ResourceDictionary Source="Resources/Styles/ScrollBar.xaml" />
                 <ResourceDictionary Source="Resources/Styles/TextBox.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Button.xaml" />
-                
+
+                <ResourceDictionary Source="Resources/Styles/Ribbon.xaml" />
+
                 <ResourceDictionary Source="Resources/ApplicationToolbar.xaml" />
                 <ResourceDictionary Source="Resources/DesignerItem.xaml" />
                 <ResourceDictionary Source="Resources/ToolboxItem.xaml" />

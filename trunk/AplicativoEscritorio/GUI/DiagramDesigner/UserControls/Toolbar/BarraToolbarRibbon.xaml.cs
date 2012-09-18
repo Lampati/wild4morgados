@@ -104,6 +104,8 @@ namespace Ragnarok.UserControls.Toolbar
 
                     if (archCargado.GetType() == typeof(Ejercicio))
                     {
+                       
+
                         galleryDificultad.SelectedValue = archCargado.NivelDificultad.ToString();
 
                         cboBoxDificultad.Visibility = System.Windows.Visibility.Visible;    
@@ -117,7 +119,19 @@ namespace Ragnarok.UserControls.Toolbar
                         esEjercicio = true;
                     }
                     else
-                    {              
+                    {
+
+                        ResolucionEjercicio ejCargado = archCargado as ResolucionEjercicio;
+
+                        txtEjercicioId.Text = ejCargado.EjercicioId.ToString();
+                        txtEjercicioId.ToolTip = string.Format("Puede encontrar el ejercicio {0} en la web de Program.Ar", ejCargado.EjercicioId);
+
+                        if (ejCargado.EjercicioId == 0)
+                        {
+                            txtEjercicioId.Text = "--";
+                            txtEjercicioId.ToolTip = "El ejercicio no tiene un id asignado ya que no fue descargado de la web";
+                        }
+
                         txtBlockDificultad.Text = archCargado.NivelDificultad.ToString();
 
                         cboBoxDificultad.Visibility = System.Windows.Visibility.Collapsed;
