@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataAccess">
-      <HintPath>..\..\AplicativoEscritorio\DataAccess\bin\Debug\DataAccess.dll</HintPath>
+    <Reference Include="DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AplicativoEscritorio\DataAccess\bin\Release\DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,8 +45,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utilidades">
-      <HintPath>..\..\AplicativoEscritorio\Utilidades\bin\Debug\Utilidades.dll</HintPath>
+    <Reference Include="Utilidades, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AplicativoEscritorio\DataAccess\bin\Release\Utilidades.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

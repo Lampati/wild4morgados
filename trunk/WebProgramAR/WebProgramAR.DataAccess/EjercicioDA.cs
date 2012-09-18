@@ -388,5 +388,18 @@ namespace WebProgramAR.DataAccess
                 return query.ToList().Count == 1;
             }
         }
+
+        public static void ModificarXml(int id, string xmlEncriptado)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                Ejercicio ejercicioOrig = db.Ejercicios.Single(u => u.EjercicioId == id);
+
+                ejercicioOrig.XML = xmlEncriptado;
+
+                db.ObjectStateManager.ChangeObjectState(ejercicioOrig, EntityState.Modified);
+                db.SaveChanges();
+            }
+        }
     }
 }

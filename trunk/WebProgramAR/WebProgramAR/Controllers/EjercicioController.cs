@@ -276,18 +276,18 @@ namespace WebProgramAR.Controllers
             if (ModelState.IsValid)
             {
 
-              
+                //flanzani
+                //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
+                ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;
+                ejercicio.EstadoEjercicioId = 1; //lo coloco en pendiente
 
-                    //flanzani
-                    //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
-                    ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;
-                    ejercicio.EstadoEjercicioId = 1; //lo coloco en pendiente
+                int id = EjercicioNegocio.Alta(ejercicio);
 
-                    int id = EjercicioNegocio.Alta(ejercicio);
+                EjercicioNegocio.ActualizarXml(id, HttpUtility.HtmlDecode(ejercicio.XmlDelEjercicio)); 
+                
 
 
-
-                    return View("EjercicioCreado", ejercicio);
+                return View("EjercicioCreado", ejercicio);
               
             }
             else
