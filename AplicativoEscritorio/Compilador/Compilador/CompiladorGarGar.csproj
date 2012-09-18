@@ -1198,16 +1198,10 @@
     <None Include="Configuracion\CompiladorPascal\Compilador\msg\errorues.msg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Configuracion\test.gar">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <EmbeddedResource Include="Configuracion\validacionesSemanticasCorrectas.gar" />
-    <None Include="Configuracion\testEjecucion.gar">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configuracion\validacionesSemanticasIncorrectas.gar">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Configuracion\test.gar" />
+    <None Include="Configuracion\validacionesSemanticasCorrectas.gar" />
+    <None Include="Configuracion\testEjecucion.gar" />
+    <None Include="Configuracion\validacionesSemanticasIncorrectas.gar" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1350,9 +1344,7 @@
     <Compile Include="Sintactico\TablaPrimerosSiguientes\TablaPrimeros.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuracion\AFD_GARGAR.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Configuracion\AFD_GARGAR.txt" />
     <Content Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1552,7 +1544,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Configuracion\Gramatica.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

@@ -190,7 +190,11 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             
         }
 
-       
+
+        public int EjercicioId
+        {
+            get { return this.ejercicio.EjercicioId; }
+        }
 
         public override ModoEjercicio Modo
         {

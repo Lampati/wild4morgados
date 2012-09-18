@@ -35,6 +35,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
         public int EjercicioId
         {
             get { return this.ejercicioId; }
+            set { this.ejercicioId = value; }
         }
 
         public bool EsValidoSubirWeb

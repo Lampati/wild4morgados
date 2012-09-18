@@ -107,8 +107,6 @@ namespace CompiladorGargar.Lexicografico
 
                                     afd.ResetearAFD();
                                 }
-
-
                             }
 
                             else
