@@ -33,10 +33,34 @@ procedure CrearNuevoArregloEnResultado(pathCompletoArchivo : string;  nombre : s
  function ObtenerNodoEntradaCorrespondiente( NodoEntradasParciales : TDOMNode ; linea : integer) : TDOMNode;
  function CrearNodoValorArreglo( xdoc : TXMLDocument ;pos : string ; valor : string) : TDOMNode;
 
+ function EscribirReal( x : real) : string ;
+
  procedure ColocarResultadoIncorrectoEnArch(pathCompletoArchivo : string);
  procedure ColocarResultadoCorrectoEnArch(pathCompletoArchivo : string);
 
 implementation
+
+function EscribirReal( x : real) : string ;
+VAR
+aux : string;
+
+longitud : integer;
+begin
+aux :=  FormatFloat('#.###################################',x);
+
+longitud :=    Length(aux);
+while ((longitud > 0) and (aux[longitud] = '0')) do
+begin
+	Delete(aux, longitud, 1);
+	longitud := longitud - 1;
+end;
+longitud :=    Length(aux);
+if (aux[longitud] = ',') then
+begin
+	Delete(aux, longitud, 1);
+end;
+EscribirReal := aux;
+end;
 
 procedure CrearArchivoResultados(pathCompletoArchivo : string);
 var
@@ -171,7 +195,7 @@ end;
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : real );
 
 begin
-        CrearNuevaVariableEnEntradaEnLineaGenerico(pathCompletoArchivo, linea, nombre, contexto,'Integer', FloatToStr(variable));
+        CrearNuevaVariableEnEntradaEnLineaGenerico(pathCompletoArchivo, linea, nombre, contexto,'Integer', EscribirReal(variable));
 end;
 
 procedure CrearNuevaVariableEnEntradaEnLinea(pathCompletoArchivo : string; linea : integer; nombre : string; contexto : string; variable : string );
@@ -269,11 +293,11 @@ begin
                      TDOMElement(NodoPadre).SetAttribute('Tipo', 'Integer');
                      TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
                      TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-                     TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr) );
+                     TDOMElement(NodoPadre).SetAttribute('Tope', EscribirReal(topeArr) );
                      j := 0;
                      while (j < topeArr)  do
                      begin
-                          NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),FloatToStr(arreglo[j]));
+                          NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),EscribirReal(arreglo[j]));
                           NodoPadre.Appendchild(NodoValor);
                           j := j+1;
                      end;
@@ -315,7 +339,7 @@ begin
                      TDOMElement(NodoPadre).SetAttribute('Tipo', 'String');
                      TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
                      TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-                     TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
+                     TDOMElement(NodoPadre).SetAttribute('Tope', EscribirReal(topeArr));
                      j := 0;
                      while (j < topeArr)  do
                      begin
@@ -359,7 +383,7 @@ begin
                      TDOMElement(NodoPadre).SetAttribute('Tipo', 'Boolean');
                      TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
                      TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-                     TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
+                     TDOMElement(NodoPadre).SetAttribute('Tope', EscribirReal(topeArr));
                      j := 0;
                      while (j < topeArr)  do
                      begin
@@ -469,7 +493,7 @@ end;
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string; nombre : string; contexto : string; variable : real );
 
 begin
-        CrearNuevaVariableEnResultadoGenerico(pathCompletoArchivo,  nombre,  contexto,'Real', FloatToStr(variable));
+        CrearNuevaVariableEnResultadoGenerico(pathCompletoArchivo,  nombre,  contexto,'Real', EscribirReal(variable));
 end;
 
 procedure CrearNuevaVariableEnResultado(pathCompletoArchivo : string;  nombre : string; contexto : string; variable : string );
@@ -542,11 +566,11 @@ begin
         TDOMElement(NodoPadre).SetAttribute('Tipo', 'Integer');
         TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
         TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-        TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
+        TDOMElement(NodoPadre).SetAttribute('Tope', EscribirReal(topeArr));
         j := 0;
         while (j < topeArr)  do
         begin
-             NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),FloatToStr(arreglo[j]));
+             NodoValor := CrearNodoValorArreglo(xdoc, IntToStr(j+1),EscribirReal(arreglo[j]));
              NodoPadre.Appendchild(NodoValor);
              j := j+1;
         end;
@@ -580,7 +604,7 @@ begin
         TDOMElement(NodoPadre).SetAttribute('Tipo', 'String');
         TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
         TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-        TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
+        TDOMElement(NodoPadre).SetAttribute('Tope', EscribirReal(topeArr));
         j := 0;
         while (j < topeArr)  do
         begin
@@ -617,7 +641,7 @@ begin
         TDOMElement(NodoPadre).SetAttribute('Tipo', 'Boolean');
         TDOMElement(NodoPadre).SetAttribute('Nombre', nombre);
         TDOMElement(NodoPadre).SetAttribute('Contexto', contexto);
-        TDOMElement(NodoPadre).SetAttribute('Tope', FloatToStr(topeArr));
+        TDOMElement(NodoPadre).SetAttribute('Tope', EscribirReal(topeArr));
         j := 0;
         while (j < topeArr)  do
         begin
