@@ -356,7 +356,7 @@
                         <StackPanel Orientation="Horizontal"  Name="stackEjecucionError" Visibility="Collapsed">
                             <Border Grid.Row="0" Grid.ColumnSpan="2" 
                             BorderThickness="1.5" CornerRadius="10" Background="#FF0000">
-                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Error: No se pudo crear el test por un error en la ejecución</TextBlock>
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="16">Error: No se pudo crear el test por un error en la ejecución</TextBlock>
                             </Border>
                         </StackPanel>
                     </StackPanel>

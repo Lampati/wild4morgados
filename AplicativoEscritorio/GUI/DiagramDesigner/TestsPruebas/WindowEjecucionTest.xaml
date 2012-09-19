@@ -310,7 +310,7 @@
 
                     <StackPanel Grid.Row="1" Margin="0">
                         <StackPanel Orientation="Horizontal" >
-                            <Button Content="Ejecutar" Click="ButtonEjecutar_Click" Name="bttnEjecutar"></Button>
+                            <Button Content="Ejecutar" Click="ButtonEjecutar_Click" Name="bttnEjecutar" Style="{StaticResource BlueButton}"></Button>
                             <TextBlock TextWrapping="Wrap" >Haga Click para ejecutar y complete la ejecución</TextBlock>
                         </StackPanel>                        
                     </StackPanel>
@@ -325,8 +325,8 @@
 
                         <StackPanel Orientation="Horizontal"  Name="stackEjecucionError" Visibility="Collapsed">
                             <Border Grid.Row="0" Grid.ColumnSpan="2" 
-                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Center">
-                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Error: Ocurrió un error en la ejecución del test</TextBlock>
+                            BorderThickness="1.5" CornerRadius="10" Background="#FF0000" HorizontalAlignment="Center">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="16">Error: Ocurrió un error en la ejecución del test</TextBlock>
                             </Border>
                         </StackPanel>
                     </StackPanel>

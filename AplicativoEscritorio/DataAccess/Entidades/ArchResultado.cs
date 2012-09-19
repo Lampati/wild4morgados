@@ -54,14 +54,29 @@ namespace DataAccess.Entidades
                                 foreach (XmlNode pos in item.ChildNodes)
                                 {
                                     int posicion = Convert.ToInt32(pos.Attributes["posicion"].Value);
+
                                     string val = pos.InnerText;
+
+                                    if (tipo.ToUpper().Trim().Equals("NUMERO"))
+                                    {
+                                        val = val.Replace(",",".");
+                                    }
+
                                     listaPosiciones.Add(new PosicionArreglo(posicion, val));
                                 }
                             }
                             else
                             {
                                 valor = item.FirstChild.InnerText;
+
+                                if (tipo.ToUpper().Trim().Equals("NUMERO"))
+                                {
+                                    valor = valor.Replace(",", ".");
+                                }
+
                                 tipoVar = "Variable";
+
+                                 
                             }
 
                             VariablesSalida.Add(new Variable(nombre, contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
@@ -121,12 +136,24 @@ namespace DataAccess.Entidades
                                 {
                                     int posicion = Convert.ToInt32(pos.Attributes["posicion"].Value);
                                     string val = pos.InnerText;
+
+                                    if (tipo.ToUpper().Trim().Equals("NUMERO"))
+                                    {
+                                        val = val.Replace(",", ".");
+                                    }
+
                                     listaPosiciones.Add(new PosicionArreglo(posicion, val));
                                 }
                             }
                             else
                             {
                                 valor = item.FirstChild.InnerText;
+
+                                if (tipo.ToUpper().Trim().Equals("NUMERO"))
+                                {
+                                    valor = valor.Replace(",", ".");
+                                }
+
                                 tipoVar = "Variable";
                             }
 

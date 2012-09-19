@@ -75,7 +75,9 @@ namespace CompiladorGargar
             strBldr.AppendLine("aux : string; ");
             strBldr.AppendLine("longitud : integer; ");
             strBldr.AppendLine("begin ");
-            strBldr.AppendLine("aux := FloatToStrF(x, ffFixed,15, 15);");
+            //strBldr.AppendLine("aux := FloatToStrF(x, ffFixed,45, 15);");
+            strBldr.AppendLine("aux := FormatFloat('#.###################################',x);");
+              
             strBldr.AppendLine("longitud :=    Length(aux);");
             strBldr.AppendLine("while ((longitud > 0) and (aux[longitud] = '0')) do");
             strBldr.AppendLine("begin ");

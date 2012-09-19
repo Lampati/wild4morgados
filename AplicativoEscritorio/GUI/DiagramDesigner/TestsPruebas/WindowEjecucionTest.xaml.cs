@@ -466,8 +466,11 @@ namespace Ragnarok.TestsPruebas
             StringBuilder strBldrCodigoGarGarSalida = new StringBuilder();
 
 
-            string controladorValorVar = "si ({0} = {1}) entonces \r\n Mostrar('La variable {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La variable {0} debia contener el valor {2} pero contenia el valor ',{0}); \r\nfinsi;";
-            string controladorValorPosArr = "si ({0}[{3}] = {1}) entonces \r\n Mostrar('La posicion {3} del arreglo {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La posicion {3} del arreglo {0} debia contener el valor {2} pero contenia el valor ',{0}[{3}]); \r\nfinsi;";
+            //string controladorValorVar = "si ({0} = {1}) entonces \r\n Mostrar('La variable {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La variable {0} debia contener el valor {2} pero contenia el valor ',{0}); \r\nfinsi;";
+            //string controladorValorPosArr = "si ({0}[{3}] = {1}) entonces \r\n Mostrar('La posicion {3} del arreglo {0} contenia el valor correcto: {2}'); \r\n sino \r\n MostrarP('La posicion {3} del arreglo {0} debia contener el valor {2} pero contenia el valor ',{0}[{3}]); \r\nfinsi;";
+
+            string controladorValorVar = "Mostrar('La variable {0} debia contener el valor {2} y contenia el valor ',{0}); \r\n";
+            string controladorValorPosArr = "Mostrar('La posicion {3} del arreglo {0} debia contener el valor {2} y contenia el valor ',{0}[{3}]); \r\n";
 
             foreach (var item in list)
             {
