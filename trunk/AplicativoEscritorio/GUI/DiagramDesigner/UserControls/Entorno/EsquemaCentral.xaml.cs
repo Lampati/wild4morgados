@@ -41,6 +41,8 @@ namespace Ragnarok.UserControls.Entorno
 
         public RagnarokWindow Owner { get; set; }
 
+        public bool EstaIdentado { get; set; }
+
         public EsquemaCentral()
         {
             InitializeComponent();
@@ -185,6 +187,8 @@ namespace Ragnarok.UserControls.Entorno
                 ArchCargado.CompilacionCorrecta = false;
                 ArchCargado.EjecucionCorrecta = false;
                 ArchCargado.Gargar = textEditor.Text;
+
+                EstaIdentado = false;
             }
         }
 
