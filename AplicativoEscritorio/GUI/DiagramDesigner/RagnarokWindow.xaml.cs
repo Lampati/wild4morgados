@@ -232,6 +232,8 @@ namespace Ragnarok
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
         {
             IdentarTexto();
+
+            this.Esquema.EstaIdentado = true;
         }
 
         private void IdentarTexto()
@@ -240,6 +242,7 @@ namespace Ragnarok
             string codigoIdentado = ident.Identar();
 
             this.Esquema.GarGarACompilar = codigoIdentado;
+            this.Esquema.EstaIdentado = true;
         }
 
         
@@ -382,7 +385,7 @@ namespace Ragnarok
             {
                 bool continuar = true;
 
-                if (Modo == ModoVisual.Texto)
+                if (Modo == ModoVisual.Texto && !this.Esquema.EstaIdentado)
                 {
                     MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
 
@@ -530,7 +533,7 @@ namespace Ragnarok
         private void CrearTestPrueba()
         {
             bool continuar = true;
-            if (Modo == ModoVisual.Texto)
+            if (Modo == ModoVisual.Texto && !this.Esquema.EstaIdentado)
             {
                 MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
 
