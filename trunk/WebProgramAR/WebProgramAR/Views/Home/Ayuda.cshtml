@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Ayuda";
+}
+
+
+<!--<h1>@ViewBag.Message</h1>-->
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo se crea un usuario nuevo?</div>
+        <div class="helpContent">Para ver tu perfil...</div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo veo mi perfil?</div>
+        <div class="helpContent">Para ver tu perfil...</div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo cambio mi contraseña?</div>
+        <div class="helpContent">Para cambiar tu contraseña...</div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo se usan los filtros de busqueda en los listados?</div>
+        <div class="helpContent">Para cambiar tu contraseña...</div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Para qué sirven los ejercicios?</div>
+        <div class="helpContent"></div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo se crea un ejercicio?</div>
+        <div class="helpContent">Para crear un ejercicio...</div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Qué son los niveles de los ejercicios?</div>
+        <div class="helpContent"></div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Por qué en el listado de ejercicios no aparece mi ejercicio?</div>
+        <div class="helpContent">Explicacion pendiente de Moderacion.</div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Para qué sirven los cursos?</div>
+        <div class="helpContent"></div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo se crea un curso?</div>
+        <div class="helpContent"></div>
+    </div>
+    <div class="helpBlock">
+        <div class="helpTitle">Cómo se asocia un ejercicio a un curso?</div>
+        <div class="helpContent"></div>
+    </div>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "AYUDA") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
+        $(".helpContent").hide();
+        $(".helpTitle").live("click", function () {
+            $(this).parents(".helpBlock").find(".helpContent").slideToggle("fast");
+        });
+    });
+</script>

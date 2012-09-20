@@ -74,5 +74,10 @@ namespace WebProgramAR.Controllers
             ViewBag.Message = "Que Es?";
             return View();
         }
+        public ActionResult Ayuda()
+        {
+            ViewBag.Message = "Ayuda";
+            return View();
+        }
     }
 }
