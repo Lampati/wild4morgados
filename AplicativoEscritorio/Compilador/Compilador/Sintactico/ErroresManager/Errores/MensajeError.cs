@@ -54,8 +54,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 1;
-            MensajeModoTexto = "La declaración de la constante contiene un error sintactico.";
-            MensajeModoGrafico = "La declaración de la constante contiene un error sintactico.";
+            MensajeModoTexto = "La declaración de la constante contiene un error sintactico. La manera correcta de declarar una constante es: \"const EJEMPLO : TIPO = VALOR;\"\r\n(TIPO = \"numero|texto|booleano\")";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionConstante);
         }
     }
@@ -315,8 +315,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 22;
-            MensajeModoTexto = "La asignacion contiene un error sintactico";
-            MensajeModoGrafico = "La asignacion contiene un error sintactico";
+            MensajeModoTexto = "La asignacion contiene un error sintactico. La manera correcta de usar una asignación es la siguiente: \"VARIABLE := EXPRESION;\"\r\n(VARIABLE = variable o posición de arreglo)\r\n(EXPRESION = expresión de cualquier tipo)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
     }
@@ -327,8 +327,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 23;
-            MensajeModoTexto = "La declaración de la función contiene un error sintactico";
-            MensajeModoGrafico = "La declaración de la función contiene un error sintactico";
+            MensajeModoTexto = "La declaración de la función contiene un error sintactico. La manera correcta de declarar una función es la siguiente: \"funcion EJEMPLO ( PARAMETROS ) : TIPO comenzar BLOQUE finfunc RETORNO;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido de la función)\r\n(RETORNO = expresión conteniendo el retorno de la función)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionFuncion);
         }
     }
@@ -339,8 +339,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 24;
-            MensajeModoTexto = "La declaración del procedimiento contiene un error sintactico";
-            MensajeModoGrafico = "La declaración del procedimiento contiene un error sintactico";
+            MensajeModoTexto = "La declaración del procedimiento contiene un error sintactico. La manera correcta de declarar un procedimiento es la siguiente: \"procedimiento EJEMPLO ( PARAMETROS ) comenzar BLOQUE finproc;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido del procedimiento)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionProcedimiento);
         }
     }
@@ -351,8 +351,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 25;
-            MensajeModoTexto = "La declaración de la variable contiene un error sintactico";
-            MensajeModoGrafico = "La declaración de la variable contiene un error sintactico";
+            MensajeModoTexto = "La declaración de la variable contiene un error sintactico. La manera correcta de declarar una variable es la siguiente: \"var LISTA : TIPO\" o \"var LISTA : arreglo[MAX] de TIPO\"\r\n(LISTA = \"nombre1,nombre2,nombre3...\")\r\n(TIPO = \"numero|texto|booleano\")";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.DeclaracionVariable);
         }
     }
@@ -411,8 +411,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 30;
-            MensajeModoTexto = "El mientras contiene un error sintactico.";
-            MensajeModoGrafico = "El mientras contiene un error sintactico.";
+            MensajeModoTexto = "El mientras contiene un error sintactico. La manera correcta de usar un mientras es la siguiente: \"mientras ( EXPRBOOLEANA ) hacer BLOQUE finmientras;\"\r\n(EXPRBOOLEANA = expresión del tipo booleana)\r\n(BLOQUE = contenido del mientras)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.Mientras);
         }
     }
@@ -435,8 +435,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 32;
-            MensajeModoTexto = "La llamada al procedimiento contiene un error sintactico.";
-            MensajeModoGrafico = "La llamada al procedimiento contiene un error sintactico.";
+            MensajeModoTexto = "La llamada al procedimiento contiene un error sintactico. La manera correcta de usar una llamada a procedimiento es la siguiente: \"llamar NOMBREPROC ( EXPRESIONES );\"\r\n(EXPRESIONES = expresiones de cualquier tipo, separadas por coma)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.LlamarProcedimiento);
         }
     }
@@ -447,8 +447,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 33;
-            MensajeModoTexto = "La llamada a leer contiene un error sintactico.";
-            MensajeModoGrafico = "La llamada a leer contiene un error sintactico.";
+            MensajeModoTexto = "La llamada a leer contiene un error sintactico. La manera correcta de usar una llamada a leer es la siguiente: \"leer VARIABLE;\"\r\n(VARIABLE = variable o posición de arreglo)";
+            MensajeModoGrafico = MensajeModoTexto;
         }
     }
 
@@ -470,8 +470,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 35;
-            MensajeModoTexto = "La declaracion del bloque si contiene un error sintactico.";
-            MensajeModoGrafico = "La declaracion del bloque si contiene un error sintactico.";
+            MensajeModoTexto = "La declaracion del bloque si contiene un error sintactico.  La manera correcta de declarar un mientras es la siguiente: \"si ( EXPRBOOLEANA ) entonces BLOQUE sino BLOQUE finsi;\"\r\n(EXPRBOOLEANA = expresión del tipo booleana)\r\n(BLOQUE = contenido del si/sino)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.Si);
         }
     }
@@ -482,8 +482,8 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
             : base()
         {
             CodigoGlobal = 36;
-            MensajeModoTexto = "La llamada a mostrar contiene un error sintactico.";
-            MensajeModoGrafico = "La llamada a mostrar contiene un error sintactico.";
+            MensajeModoTexto = "La llamada a mostrar contiene un error sintactico. La manera correcta de usar una llamada a mostrar es la siguiente: \"mostrar ( EXPRESIONES );\" o \"mostrarp ( EXPRESIONES );\"\r\n(EXPRESIONES = expresiones de cualquier tipo, separadas por coma)";
+            MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.Mostrar);
         }
     }
