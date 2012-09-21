@@ -87,8 +87,23 @@ namespace DataAccess.Entidades
                     }
                     else if (nodo.Name == "res")
                     {
-                        EsCorrectaEjecucion = Convert.ToBoolean(nodo.InnerText);
+                        if (!string.IsNullOrEmpty(nodo.InnerText.Trim()))                            
+                        {
+                            bool resultadoConversion = false;
 
+                            if (Boolean.TryParse(nodo.InnerText, out resultadoConversion))
+                            {
+                                EsCorrectaEjecucion = resultadoConversion;
+                            }
+                            else
+                            {
+                                EsCorrectaEjecucion = false;
+                            }
+                        }
+                        else
+                        {
+                            EsCorrectaEjecucion = false;
+                        }
                     }
                 }
 
