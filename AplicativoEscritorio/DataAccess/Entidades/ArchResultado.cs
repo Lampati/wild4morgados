@@ -98,11 +98,13 @@ namespace DataAccess.Entidades
                             else
                             {
                                 EsCorrectaEjecucion = false;
+                                Errores.Add(new ErrorEjecucion() { Descripcion = "La ejecución no termino correctamente o fue cancelada por el usuario", Linea = 0, TipoError = "Error" });
                             }
                         }
                         else
                         {
                             EsCorrectaEjecucion = false;
+                            Errores.Add(new ErrorEjecucion() { Descripcion = "La ejecución no termino correctamente o fue cancelada por el usuario", Linea = 0, TipoError = "Error" });
                         }
                     }
                 }
