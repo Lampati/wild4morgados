@@ -238,6 +238,7 @@ namespace Sincronizacion
                     }
                     catch (ExcepcionCriptografia) { errorApertura = true; }
                     catch (ExcepcionHashNoConcuerda) { errorApertura = true; }
+                    catch (ArgumentOutOfRangeException) { errorApertura = true; }
                     if (!errorApertura && ej.TieneId)
                     {
                         sb.Append(ej.EjercicioId.ToString());
