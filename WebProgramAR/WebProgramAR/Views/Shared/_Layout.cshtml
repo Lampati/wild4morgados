@@ -129,6 +129,21 @@
                 <div class="contentSiteMap">@Html.ActionLink("Usuarios", "Index", "Usuario")</div>
                 <div class="contentSiteMap">@Html.ActionLink("Ejercicios", "Index", "Ejercicio")</div>
             </div>
+            <div class="content">
+                <div class="h8">MI CUENTA</div><br />
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="contentSiteMap">@Html.ActionLink("Mi Perfil","MiPerfil", "Usuario")</div>
+                    <div class="contentSiteMap"><a href="#" id="logOutFooter">Desloguearse </a></div>
+                }
+                else
+                {
+                    <div class="contentSiteMap">@Html.ActionLink("Registrese", "Register", "Usuario")</div>
+                    <div class="contentSiteMap"><a href="#" id="loginClickMeFooter">Loguearse </a></div>
+                    <div class="contentSiteMap"><a href="#" id="RecoverPasswordLinkFooter">Recuperar Contraseña</a></div>
+                }
+
+            </div>
             <div style="float:right;width:120px;margin-top:0px;padding-left:20px;padding-right:30px;">
                 <div>Desarrollado por</div>
                 <div><input type="image" src="@Url.Content("~/Content/images/logow4m.png")" alt=""/></div>
@@ -147,6 +162,32 @@
     </ul>
     <div id="disablingDiv"></div>    
     <div id="overDiv"></div>        
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#RecoverPasswordLinkFooter").live("click", function (event) {
+                RecoverPasswordPopUp(event);
+            });
+            $("#loginClickMeFooter").live("click",function (event) {
+                LoginPopUp(event);
+            });
+            $("#logOutFooter").click(function (event) {
+                $.ajax({
+                    url: '@Url.Action("LogOff", "Account")',
+                    contentType: 'application/json',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        window.location.reload();
+                    }
+                })
+
+            });
+        });
+        function LoginPopUp(event) {
+            OpenDialogLogin(event, '', '@Url.Action("../Account/LogOn")/', 500, 370);
+        }
+    </script>
 </body>
 
 </html>
