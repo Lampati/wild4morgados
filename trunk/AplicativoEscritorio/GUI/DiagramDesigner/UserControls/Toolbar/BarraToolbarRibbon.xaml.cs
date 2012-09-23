@@ -511,7 +511,13 @@ namespace Ragnarok.UserControls.Toolbar
         {
             Application.Current.Dispatcher.BeginInvoke(
                             System.Windows.Threading.DispatcherPriority.Background,
-                            new Action(() => pew.DialogResult = resultado));
+                            new Action(() => 
+                                {
+                                    if (!resultado)
+                                        MessageBox.Show(mensajeRet, "Error Sincronización", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    pew.DialogResult = resultado;
+                                }
+                                ));
         }
 
         #region Consumo Eventos
@@ -555,9 +561,12 @@ namespace Ragnarok.UserControls.Toolbar
             }
         }
 
+        static string mensajeRet;
+
         void Handler_ErrorConexionEvent(string txt, object lbl)
         {
             this.EscribirLabel((Label)lbl, txt);
+            mensajeRet = txt;
         }
         #endregion
 
@@ -566,8 +575,8 @@ namespace Ragnarok.UserControls.Toolbar
         {
             PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)propertyWindow;
 
-            if (this.Servicio.EjerciciosGlobales())
-                SetearResultadoDialog(propertyEditorWindow, true);
+            bool res = this.Servicio.EjerciciosGlobales();
+            SetearResultadoDialog(propertyEditorWindow, res);
         }
 
         void SincronizarCurso(object propiedades)
@@ -576,8 +585,8 @@ namespace Ragnarok.UserControls.Toolbar
             PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)props[0];
             int cursoId = (int)props[1];
 
-            if (this.Servicio.EjerciciosPorCurso(cursoId))
-                SetearResultadoDialog(propertyEditorWindow, true);
+            bool res = this.Servicio.EjerciciosPorCurso(cursoId);
+            SetearResultadoDialog(propertyEditorWindow, res);
         }
 
         void SincronizarEjercicio(object propiedades)
@@ -586,8 +595,8 @@ namespace Ragnarok.UserControls.Toolbar
             PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)props[0];
             int ejercicioId = (int)props[1];
 
-            if (this.Servicio.EjerciciosPorId(ejercicioId))
-                SetearResultadoDialog(propertyEditorWindow, true);
+            bool res = this.Servicio.EjerciciosPorId(ejercicioId);
+            SetearResultadoDialog(propertyEditorWindow, res);
         }
         #endregion
 
