@@ -332,19 +332,41 @@ namespace Ragnarok.TestsPruebas
 
                     archResultadoEjecucuion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
 
-                    ArmarListaResultadosFinales();
-
-                    stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
-                    this.wizard.CurrentPage.AllowBack = false;
-                    this.wizard.CurrentPage.AllowNext = true;
-
                     try
                     {
-                        File.Delete(res.ArchTemporalResultadosEjecucionConRuta);
-                    }
-                    catch
-                    {
+                        if (archResultadoEjecucuion.EsCorrectaEjecucion)
+                        {
+                            ArmarListaResultadosFinales();
 
+                            stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
+                            this.wizard.CurrentPage.AllowBack = false;
+                            this.wizard.CurrentPage.AllowNext = true;
+                        }
+                        else
+                        {
+                            stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+
+                            this.wizard.CurrentPage.AllowBack = false;
+                            this.wizard.CurrentPage.AllowNext = false; 
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+
+                        this.wizard.CurrentPage.AllowBack = false;
+                        this.wizard.CurrentPage.AllowNext = false;
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            File.Delete(res.ArchTemporalResultadosEjecucionConRuta);
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
                 catch (Exception)
@@ -352,7 +374,7 @@ namespace Ragnarok.TestsPruebas
                     //Mostrar error pq no se puede continuar
                     stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
                     this.wizard.CurrentPage.AllowBack = false;
-                    this.wizard.CurrentPage.AllowNext = true;
+                    this.wizard.CurrentPage.AllowNext = false;
                 }               
             }
             else
@@ -360,7 +382,7 @@ namespace Ragnarok.TestsPruebas
                 //Mostrar error pq no se puede continuar
                 stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
                 this.wizard.CurrentPage.AllowBack = false;
-                this.wizard.CurrentPage.AllowNext = true;
+                this.wizard.CurrentPage.AllowNext = false;
             }
 
             this.compilador.ReemplazarEntrada = false;
@@ -521,7 +543,10 @@ namespace Ragnarok.TestsPruebas
             return strBldrCodigoGarGarSalida.ToString();
         }
 
-       
+        protected void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var track = ((ListViewItem)sender).Content as CheckBox; //Casting back to the binded Track
+        }
 
         private void ComboBoxEntrada_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

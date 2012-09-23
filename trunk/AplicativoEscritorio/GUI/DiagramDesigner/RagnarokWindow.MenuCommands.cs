@@ -286,12 +286,12 @@ namespace Ragnarok
                                 strBldr.AppendLine("Falta cargar la solución en modo texto del ejercicio");
                             }
 
-                            MessageBox.Show(strBldr.ToString(), "ProgramAR", MessageBoxButton.OK);
+                            MessageBox.Show(strBldr.ToString(), "ProgramAR", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
 
-                            MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione OK para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK);
+                            MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione aceptar para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             ResultadoEjecucion res;
                             if (Modo == ModoVisual.Texto)
