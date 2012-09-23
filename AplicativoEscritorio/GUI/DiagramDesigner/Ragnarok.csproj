@@ -652,6 +652,7 @@
     <Resource Include="Resources\Images\GarGar128Large.png" />
     <Resource Include="Resources\Images\GraficoLarge.png" />
     <Resource Include="Resources\Images\BannerAcercaDe.png" />
+    <Resource Include="Resources\Images\Information.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
