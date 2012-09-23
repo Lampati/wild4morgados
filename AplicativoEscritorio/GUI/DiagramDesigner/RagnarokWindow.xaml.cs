@@ -867,10 +867,12 @@ namespace Ragnarok
         {
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
+                BarraEstado.ColocarResCompilacion(true);
                 BarraEstado.Estado = "Compilación Correcta";
             }
             else
             {
+                BarraEstado.ColocarResCompilacion(false);
                 BarraEstado.Estado = "Error en compilación";
 
                 if (Modo == ModoVisual.Flujo)

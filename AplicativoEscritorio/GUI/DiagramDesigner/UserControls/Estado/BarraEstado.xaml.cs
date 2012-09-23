@@ -60,7 +60,8 @@ namespace Ragnarok.UserControls.Estado
             }
         }
 
-        private string estado;
+      
+
         public string Estado
         {
             get
@@ -78,6 +79,20 @@ namespace Ragnarok.UserControls.Estado
         {
             InitializeComponent();
            
+        }
+
+        public void ColocarResCompilacion(bool res)
+        {
+            if (res)
+            {
+                this.imgEstadoActualCorrecta.Visibility = System.Windows.Visibility.Visible;
+                this.imgEstadoActualError.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.imgEstadoActualCorrecta.Visibility = System.Windows.Visibility.Collapsed;
+                this.imgEstadoActualError.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
 

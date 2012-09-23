@@ -50,8 +50,9 @@
                         <Style TargetType="TextBox">
                             <Setter Property="Margin" Value="5" />
                         </Style>
-                        <Style TargetType="ListView">
+                        <Style TargetType="ListView" >
                             <Setter Property="Margin" Value="10,5,5,5"/>
+                            
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
@@ -178,17 +179,18 @@
                     <StackPanel  Grid.Row="0">
                         <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
                             Para ejecutar el test de prueba, es necesario que especifique en que linea quiere que se seteen los valores a las variables elegidas.
-                            Por favor elija la linea de las posibles.
+                            Por favor elija la linea de las que se encuentran habilitadas, haciendo click en su recuadro en el lado izquierdo.
                         </TextBlock>
                         <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
                         NOTA: Se colocaran los valores justo antes de la linea elegida, no despues.
                         </TextBlock>
 
                     </StackPanel>
-                    <ListView  Width="Auto" Height="300" HorizontalAlignment="Stretch" Name="lstLineas" ItemsSource="{Binding Lineas}" Grid.Row="1">
+                    <ListView  Width="Auto" Height="300" HorizontalAlignment="Stretch" Name="lstLineas" 
+                               ItemsSource="{Binding Lineas}" Grid.Row="1"
+                               >
                         <ListView.View>
-                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
-
+                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" >
                                 <GridView.Columns>
                                     <GridViewColumn Header="">
                                         <GridViewColumn.CellTemplate>
@@ -315,19 +317,33 @@
                         </StackPanel>                        
                     </StackPanel>
 
-                    <StackPanel Grid.Row="2" Margin="110,100,0,0"> 
-                        <StackPanel Orientation="Horizontal" Name="stackEjecucionSatisfactoria" Visibility="Collapsed">
+                    <StackPanel Grid.Row="2" >
+                        <StackPanel Orientation="Vertical" Name="stackEjecucionSatisfactoria" Margin="0,200,0,0"  HorizontalAlignment="Left"
+                                    Visibility="Collapsed">
                             <Border Grid.Row="0" Grid.ColumnSpan="2" 
-                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Center">
+                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Left">
                                 <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Ejecucion satisfactoria</TextBlock>
                             </Border>
+                            <TextBlock  FontSize="12" Margin="10,5,5,0" HorizontalAlignment="Left">
+                                La ejecución del test de prueba se completo correctamente y se registraron
+                            </TextBlock>
+                            <TextBlock  FontSize="12" Margin="10,0,5,5"  HorizontalAlignment="Left">
+                                 los valores de las variables de entrada y salida.
+                            </TextBlock>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"  Name="stackEjecucionError" Visibility="Collapsed">
-                            <Border Grid.Row="0" Grid.ColumnSpan="2" 
-                            BorderThickness="1.5" CornerRadius="10" Background="#FF0000" HorizontalAlignment="Center">
-                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="16">Error: Ocurrió un error en la ejecución del test</TextBlock>
+                        <StackPanel Orientation="Vertical"  Name="stackEjecucionError" Margin="0,200,0,0" HorizontalAlignment="Left"
+                                    Visibility="Collapsed">
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" Width="320" HorizontalAlignment="Left"
+                            BorderThickness="1.5" CornerRadius="10" Background="#FF0000">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="16">Ocurrió un error en la ejecución del test</TextBlock>
                             </Border>
+                            <TextBlock  FontSize="12" Margin="10,5,5,0" HorizontalAlignment="Left">
+                                Por favor, salga de la ejecución de tests, y ejecute el programa
+                            </TextBlock>
+                            <TextBlock  FontSize="12" Margin="10,0,5,5"  HorizontalAlignment="Left">
+                                para conocer el detalle del error.
+                            </TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

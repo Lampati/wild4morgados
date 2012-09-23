@@ -116,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DialogWindows\AcercaDeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DialogWindows\ErrorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -297,6 +301,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DialogWindows\AcercaDeWindow.xaml.cs">
+      <DependentUpon>AcercaDeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogWindows\ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
@@ -644,6 +651,7 @@
     <Resource Include="Images\Tribal_R.png" />
     <Resource Include="Resources\Images\GarGar128Large.png" />
     <Resource Include="Resources\Images\GraficoLarge.png" />
+    <Resource Include="Resources\Images\BannerAcercaDe.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />

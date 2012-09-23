@@ -989,6 +989,13 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void bttnAcercaDe_Click(object sender, RoutedEventArgs e)
         {
+            AcercaDeWindow acercaDeWindow = new AcercaDeWindow();
+            acercaDeWindow.Owner = this.Owner;
+            this.Owner.ApplyBlurEffect();
+
+            acercaDeWindow.ShowDialog();
+
+            this.Owner.ClearBlurEffect();
         }
     }
 }

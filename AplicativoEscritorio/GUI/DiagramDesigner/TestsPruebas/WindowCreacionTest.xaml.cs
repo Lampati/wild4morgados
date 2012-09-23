@@ -37,6 +37,8 @@ namespace Ragnarok.TestsPruebas
 
         private CompiladorGargar.Compilador compilador;
 
+      
+
         private List<int> listaLineasValidas;
         public List<int> ListaLineasValidas
         {
@@ -351,7 +353,10 @@ namespace Ragnarok.TestsPruebas
             this.wizard.CurrentPage.AllowNext = i > 0;
         }
 
-
+        protected void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var track = ((ListViewItem)sender).Content as CheckBox; //Casting back to the binded Track
+        }
 
         private void CheckBoxSalida_Click(object sender, RoutedEventArgs e)
         {
@@ -399,32 +404,65 @@ namespace Ragnarok.TestsPruebas
 
                     archResultadoEjecucuion = new ArchResultado(res.ArchTemporalResultadosEjecucionConRuta);
 
-                    CompletarValoresVariablesSeleccionadas(variablesEntradaSeleccionadas, archResultadoEjecucuion.Entradas.First().Variables);
-                    CompletarValoresVariablesSeleccionadas(variablesSalidaSeleccionadas, archResultadoEjecucuion.VariablesSalida);
-
-                    VariablesEntradaSeleccionadas = variablesEntradaSeleccionadas;
-                    VariablesSalidaSeleccionadas = variablesSalidaSeleccionadas;
-
-                    stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
-                    this.wizard.CurrentPage.AllowBack = false;
-                    this.wizard.CurrentPage.AllowNext = true;
-
                     try
                     {
-                        File.Delete(res.ArchTemporalResultadosEjecucionConRuta);
-                    }
-                    catch
-                    {
+                        if (archResultadoEjecucuion.EsCorrectaEjecucion)
+                        {
+                            CompletarValoresVariablesSeleccionadas(variablesEntradaSeleccionadas, archResultadoEjecucuion.Entradas.First().Variables);
+                            CompletarValoresVariablesSeleccionadas(variablesSalidaSeleccionadas, archResultadoEjecucuion.VariablesSalida);
+
+                            VariablesEntradaSeleccionadas = variablesEntradaSeleccionadas;
+                            VariablesSalidaSeleccionadas = variablesSalidaSeleccionadas;
+
+                            stackEjecucionSatisfactoria.Visibility = System.Windows.Visibility.Visible;
+                            this.wizard.CurrentPage.AllowBack = false;
+                            this.wizard.CurrentPage.AllowNext = true;
+                        }
+                        else
+                        {
+                            stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+
+                            this.wizard.CurrentPage.AllowBack = false;
+                            this.wizard.CurrentPage.AllowNext = false;            
+                        }
 
                     }
+                    catch (Exception)
+                    {
+                        stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+
+                        this.wizard.CurrentPage.AllowBack = false;
+                        this.wizard.CurrentPage.AllowNext = false;            
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            File.Delete(res.ArchTemporalResultadosEjecucionConRuta);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                   
+                 
                 }
                 catch (Exception)
                 {
+                    
+                    stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+                    
+                    this.wizard.CurrentPage.AllowBack = false;
+                    this.wizard.CurrentPage.AllowNext = false;                    
                     //Mostrar error pq no se puede continuar
                 }               
             }
             else
             {
+                stackEjecucionError.Visibility = System.Windows.Visibility.Visible;
+                this.wizard.CurrentPage.AllowBack = false;
+                this.wizard.CurrentPage.AllowNext = false;        
                 //Mostrar error pq no se puede continuar
             }
 
