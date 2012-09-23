@@ -653,6 +653,8 @@
     <Resource Include="Resources\Images\GraficoLarge.png" />
     <Resource Include="Resources\Images\BannerAcercaDe.png" />
     <Resource Include="Resources\Images\Information.png" />
+    <Resource Include="Resources\Images\manualGarGar.png" />
+    <Resource Include="Resources\Images\manualRagnarok.png" />
     <Content Include="Resources\ReuxablesLegacy.dll" />
     <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
     <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
