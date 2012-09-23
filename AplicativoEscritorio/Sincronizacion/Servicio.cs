@@ -43,7 +43,7 @@ namespace Sincronizacion
 
         public bool Conectar()
         {
-            if (Object.Equals(this.proxy, null))
+            if (Object.Equals(this.proxy, null) || !this.wsdl.Contains(this.proxy.UrlWsdl))
             {
                 if (Object.Equals(this.wsdl, null) || this.wsdl.Count.Equals(0))
                     Eventos.Handler.ErrorConexionEventFire("No se ha establecido servidor para descargar ejercicios.", this.LabelInfo);
