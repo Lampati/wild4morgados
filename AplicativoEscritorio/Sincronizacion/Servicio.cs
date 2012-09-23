@@ -70,6 +70,10 @@ namespace Sincronizacion
                         {
                             Eventos.Handler.ErrorConexionEventFire("Error al conectar a " + str, this.LabelInfo);
                         }
+                        catch (InvalidOperationException)
+                        {
+                            Eventos.Handler.ErrorConexionEventFire("Error al conectar a " + str, this.LabelInfo);
+                        }
                     }
                 }
                 return false;
