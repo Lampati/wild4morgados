@@ -203,6 +203,11 @@ namespace Sincronizacion.Proxy
             }
         }
 
+        public string UrlWsdl
+        {
+            get { return this.urlWsdl; }
+        }
+
         public object InvocarMetodo(string nombreMetodo)
         {
             return this.InvocarMetodo(nombreMetodo, null);
