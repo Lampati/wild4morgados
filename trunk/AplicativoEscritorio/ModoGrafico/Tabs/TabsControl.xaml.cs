@@ -7,6 +7,7 @@
     using System;
     using ModoGrafico.EventArgsClasses;
     using InterfazTextoGrafico;
+    using ModoGrafico.Helpers;
 
     /// <summary>
     /// Interaction logic for FormattedTab.xaml
@@ -21,10 +22,91 @@
             typeof(TabsControl),
             new FrameworkPropertyMetadata(ItemSourceChangedCallback));
 
+        private bool estaCargando = false;
+
+        private static object padlock = new object();
+
         public TabsControl()
         {
             InitializeComponent();
         }
+
+
+        /// <summary>
+        /// Preloads tab items of a tab control in sequence.
+        /// </summary>
+        /// <param name="tabControl">The tab control.</param>
+        public static void PreloadTabs(TabControl tabControl)
+        {
+            // Evaluate
+            if (tabControl.Items != null)
+            {
+                // The first tab is already loaded
+                // so, we will start from the second tab.
+                if (tabControl.Items.Count > 1)
+                {
+                    // Hide tabs
+                    tabControl.Opacity = 0.0;
+
+                    // Last action
+                    Action onComplete = () =>
+                    {
+                        // Set index to first tab
+                        tabControl.SelectedIndex = 0;
+
+                        // Show tabs
+                        tabControl.Opacity = 1.0;
+                    };
+
+                    // Second tab
+                    var firstTab = (tabControl.Items[1] as TabItem);
+                    if (firstTab != null)
+                    {
+                        PreloadTab(tabControl, firstTab, onComplete);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Preloads an individual tab item.
+        /// </summary>
+        /// <param name="tabControl">The tab control.</param>
+        /// <param name="tabItem">The tab item.</param>
+        /// <param name="onComplete">The onComplete action.</param>
+        private static void PreloadTab(TabControl tabControl, TabItem tabItem, Action onComplete = null)
+        {
+            // On update complete
+            tabItem.Loaded += delegate
+            {
+                // Update if not the last tab
+                if (tabItem != tabControl.Items[tabControl.Items.Count-1])
+                {
+                    // Get next tab
+                    var nextIndex = tabControl.Items.IndexOf(tabItem) + 1;
+                    var nextTabItem = tabControl.Items[nextIndex] as TabItem;
+
+                    // Preload
+                    if (nextTabItem != null)
+                    {
+                        PreloadTab(tabControl, nextTabItem, onComplete);
+                    }
+                }
+
+                else
+                {
+                    if (onComplete != null)
+                    {
+                        onComplete();
+                    }
+                }
+            };
+
+            // Set current tab context
+            tabControl.SelectedItem = tabItem;
+        }
+
+
 
         public delegate void TipoTabCambiadoEventHandler(object o, TipoTabCambiadoEventArgs e);
         public event TipoTabCambiadoEventHandler CambioTabEvent;
@@ -70,76 +152,81 @@
 
         private void tc_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems != null && e.AddedItems.Count > 0 && e.AddedItems[0] != null)
+            lock (padlock)
             {
-                if (e.AddedItems[0].GetType() == typeof(TabItemAgregarProcedimiento))
-                {                   
-
-                    Application.Current.Dispatcher.BeginInvoke
-                    ((System.Action)delegate
+              
+                if (e.AddedItems != null && e.AddedItems.Count > 0 && e.AddedItems[0] != null)
+                {
+                    if (e.AddedItems[0].GetType() == typeof(TabItemAgregarProcedimiento))
                     {
-                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregarProcedimiento));
 
-                        if (e.AddedItems.Count > 0)
+                        Application.Current.Dispatcher.BeginInvoke
+                        ((System.Action)delegate
                         {
-                            if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregarProcedimiento"))
+                            CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregarProcedimiento));
+
+                            if (e.AddedItems.Count > 0)
                             {
-                                tc.SelectedIndex = tc.Items.Count - 3;
+                                if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregarProcedimiento"))
+                                {
+                                    tc.SelectedIndex = tc.Items.Count - 3;
+                                }
                             }
-                        }
-                    }, System.Windows.Threading.DispatcherPriority.Render, null);
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemAgregarFuncion))
-                {
-
-                    Application.Current.Dispatcher.BeginInvoke
-                    ((System.Action)delegate
+                        }, System.Windows.Threading.DispatcherPriority.Render, null);
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemAgregarFuncion))
                     {
-                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregarFuncion));
 
-                        if (e.AddedItems.Count > 0)
+                        Application.Current.Dispatcher.BeginInvoke
+                        ((System.Action)delegate
                         {
-                            if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregarFuncion"))
+                            CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemAgregarFuncion));
+
+                            if (e.AddedItems.Count > 0)
                             {
-                                tc.SelectedIndex = tc.Items.Count - 3;
+                                if (((object[])(e.AddedItems))[0].ToString().Contains("TabItemAgregarFuncion"))
+                                {
+                                    tc.SelectedIndex = tc.Items.Count - 3;
+                                }
                             }
-                        }
-                    }, System.Windows.Threading.DispatcherPriority.Render, null);
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemDeclaracionConstante))
-                {
-                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemDeclaracionConstante));
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemDeclaracionVariable))
-                {
-                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemDeclaracionVariable));
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemFuncion))
-                {
-                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemFuncion));
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemProcedimiento))
-                {
-                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemProcedimiento));
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemPrincipal))
-                {
-                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemPrincipal));
-                }
-                else if (e.AddedItems[0].GetType() == typeof(TabItemSalida))
-                {
-                    CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemSalida));
-                }
-            }
-            else
-            {
-                if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] != null)
-                {
-                    if (e.RemovedItems[0].GetType() != typeof(ParametroViewModel))
+                        }, System.Windows.Threading.DispatcherPriority.Render, null);
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemDeclaracionConstante))
                     {
-                        tc.SelectedIndex = 0;
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemDeclaracionConstante));
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemDeclaracionVariable))
+                    {
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemDeclaracionVariable));
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemFuncion))
+                    {
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemFuncion));
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemProcedimiento))
+                    {
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemProcedimiento));
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemPrincipal))
+                    {
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemPrincipal));
+                    }
+                    else if (e.AddedItems[0].GetType() == typeof(TabItemSalida))
+                    {
+                        CambioTabEventFire(e.AddedItems[0], new TipoTabCambiadoEventArgs(Enums.TipoTab.TabItemSalida));
                     }
                 }
+                else
+                {
+                    if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] != null)
+                    {
+                        if (e.RemovedItems[0].GetType() != typeof(ParametroViewModel))
+                        {
+                            tc.SelectedIndex = 0;
+                        }
+                    }
+                }
+                                
             }
         }
 

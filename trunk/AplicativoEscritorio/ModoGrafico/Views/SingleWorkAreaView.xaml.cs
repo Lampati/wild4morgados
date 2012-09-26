@@ -9,6 +9,7 @@ using System.ComponentModel;
     using LibreriaActividades;
     using System;
 using System.Windows.Input;
+    using ModoGrafico.Helpers;
 
     /// <summary>
     /// Interaction logic for SingleBrandView.xaml
