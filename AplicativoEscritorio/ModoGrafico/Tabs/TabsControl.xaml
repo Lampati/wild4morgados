@@ -88,6 +88,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="TabItemCloseButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="SnapsToDevicePixels" Value="false"/>
             <Setter Property="Height" Value="{StaticResource CloseButtonWidthAndHeight}"/>
@@ -202,6 +203,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="TabItemHeaderContainerStyle" TargetType="TabItem">            
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
@@ -246,6 +248,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="TabItemHeaderContainerSoloPropiedadesStyle" TargetType="TabItem">
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
@@ -255,7 +258,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Style="{StaticResource EditableTabHeaderControl}" >
+                            <local:EditableTabHeaderControl Grid.Column="0"  Height="16">
                                 <local:EditableTabHeaderControl.Content>
                                     <Binding Path="Header" Mode="TwoWay"/>
                                 </local:EditableTabHeaderControl.Content>
@@ -273,6 +276,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="TabItemHeaderContainerSinStyle" TargetType="TabItem">
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
@@ -281,9 +285,10 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <local:EditableTabHeaderControl Grid.Column="0" Height="20">
+                            <local:EditableTabHeaderControl Grid.Column="0" Height="16" VerticalAlignment="Center"
+                                                            VerticalContentAlignment="Center">
                                 <local:EditableTabHeaderControl.Content>
-                                    <Binding Path="Header" Mode="TwoWay" />
+                                    <Binding Path="Header" Mode="TwoWay" />                                   
                                 </local:EditableTabHeaderControl.Content>
                             </local:EditableTabHeaderControl>                            
                         </Grid>
@@ -291,12 +296,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
         <local:Selector 
             SinEstilo="{StaticResource TabItemHeaderContainerSinStyle}" 
             ConEstilo="{StaticResource TabItemHeaderContainerStyle}" 
             SoloPropiedadesEstilo="{StaticResource TabItemHeaderContainerSoloPropiedadesStyle}"
             x:Key="consinEstiloSelector" />
     </UserControl.Resources>
-    <TabControl x:Name="tc" ItemContainerStyleSelector="{StaticResource consinEstiloSelector}" SelectionChanged="tc_SelectionChanged" MouseLeftButtonDown="tc_MouseLeftButtonDown">
+    <TabControl x:Name="tc" ItemContainerStyleSelector="{StaticResource consinEstiloSelector}" 
+                SelectionChanged="tc_SelectionChanged" MouseLeftButtonDown="tc_MouseLeftButtonDown">
     </TabControl>
 </Controls:UserControl>

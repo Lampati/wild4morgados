@@ -22,6 +22,7 @@ using InterfazTextoGrafico;
 using ModoGrafico.EventArgsClasses;
 using ModoGrafico.Tabs;
 using System.Text.RegularExpressions;
+using ModoGrafico.Helpers;
 
 namespace ModoGrafico
 {
@@ -89,7 +90,9 @@ namespace ModoGrafico
             {
                 this.WorkArea.CargarPrograma(programa);
 
+                //TabsControl.PreloadTabs(this.WorkArea.tab.tc);
 
+                
             }
         }
 
@@ -137,6 +140,7 @@ namespace ModoGrafico
               ));
 
             thread.Start();
+
         }
 
    

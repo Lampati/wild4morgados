@@ -298,6 +298,7 @@
         {
             if (e.Tipo == TipoTab.TabItemAgregarProcedimiento)
             {
+
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Procedimiento;
                 propiedades.Owner = this.Owner;
@@ -311,6 +312,7 @@
             }
             else if (e.Tipo == TipoTab.TabItemAgregarFuncion)
             {
+
                 PropiedadesTabDialog propiedades = new PropiedadesTabDialog();
                 propiedades.TipoPropiedades = PropiedadesTabDialog.TipoContexto.Funcion;
                 propiedades.Owner = this.Owner;

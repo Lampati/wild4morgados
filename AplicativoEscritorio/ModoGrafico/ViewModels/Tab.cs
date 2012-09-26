@@ -25,9 +25,12 @@ using ModoGrafico.Interfaces;
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
 
-    public abstract class Tab : BaseViewModel, IPropiedadesContexto
+    public abstract class Tab : BaseViewModel, IPropiedadesContexto 
     {
         public static int _generadorId = 0;
+
+        private bool cargado = false;
+        private bool cargadoDeclaraciones = false;
 
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
@@ -120,13 +123,30 @@ using ModoGrafico.Interfaces;
 
         public Tab()
         {
+            
             parametros = new ObservableCollection<ParametroViewModel>();
             tabId = ++_generadorId;
+
+            if (!(this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion))
+            {
+
+                wd = new WorkflowDesigner();
+                wd.ModelChanged += new EventHandler(wd_ModelChanged);
+                cargado = false;
+
+                if (!(this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable))
+                {
+                    wdDecl = new WorkflowDesigner();
+                    wdDecl.ModelChanged += new EventHandler(wd_ModelChanged);
+                    cargadoDeclaraciones = false;
+                }
+            }
         }
 
         ~Tab()
         {
             this.wd = null;
+            this.wdDecl = null;
         }
 
         public WorkflowDesigner WorkflowDesigner
@@ -147,15 +167,14 @@ using ModoGrafico.Interfaces;
 
         public UIElement WF
         {
-            get {
+            get 
+            {
                 if (this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion)
                     return null;
 
-                if (Object.Equals(wd, null))
+                if (!cargado)
                 {
-                    wd = new WorkflowDesigner();
-                    wd.ModelChanged += new EventHandler(wd_ModelChanged);
-                    
+                    cargado = true;
                     
                     if (this is TabItemPrincipal)
                     {
@@ -165,8 +184,6 @@ using ModoGrafico.Interfaces;
                         if (actividadViewModel != null)
                         {
                             ProcedimientoViewModel procViewModel = actividadViewModel as ProcedimientoViewModel;
-
-                            
 
                             Secuencia aux = new Secuencia() { DisplayName = procViewModel.Nombre, AdmiteDeclaraciones = false };
                             aux.AsignarDatos(procViewModel.Cuerpo);
@@ -247,51 +264,32 @@ using ModoGrafico.Interfaces;
                           {
                               Application.Current.Dispatcher.Invoke(
                                 System.Windows.Threading.DispatcherPriority.Normal,
-                                new Action(
-                                  delegate()
-                                  {
-                                      
-                                      wd.Load(SecuenciaInicialProcedimiento);
-                                      wd.Flush();
-
-                                      ModelService ms = wd.Context.Services.GetService<ModelService>();
-                                      if (ms != null)
-                                      {
-                                          ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
-                                      }
-
-                                      this.ReconstruirContextMenu(wd);
-                                      if (((Grid)wd.View).Children.Count > 0)
-                                      {
-                                          System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
-                                          dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
-                                      }
-                                  }
-                              ));
+                                new Action(CargarWf)
+                                  
+                              );
                           }
                       ));
                     thread.Start();                    
                 }
-
-                
                 
                 return wd.View;
             }
         }
 
       
+        
 
         public UIElement WFDeclaraciones
         {
             get
             {
-                if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable)
+                if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable || this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion)
                     return null;
 
-                if (Object.Equals(wdDecl, null))
+                if (!cargadoDeclaraciones)
                 {
-                    wdDecl = new WorkflowDesigner();
-                    wdDecl.ModelChanged += new EventHandler(wd_ModelChanged);
+                    cargadoDeclaraciones = true;
+                  
 
                     if (actividadViewModel != null)
                     {
@@ -314,27 +312,8 @@ using ModoGrafico.Interfaces;
                           {
                               Application.Current.Dispatcher.Invoke(
                                 System.Windows.Threading.DispatcherPriority.Normal,
-                                new Action(
-                                  delegate()
-                                  {
-                                      
-                                      wdDecl.Load(SecuenciaInicialDeclaraciones);
-                                      wdDecl.Flush();
-
-                                      ModelService ms = wdDecl.Context.Services.GetService<ModelService>();
-                                      if (ms != null)
-                                      {
-                                          ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
-                                      }
-
-                                      this.ReconstruirContextMenu(wdDecl);                                      
-                                      if (((Grid)wdDecl.View).Children.Count > 0)
-                                      {
-                                          System.Activities.Presentation.View.DesignerView dv = ((Grid)wdDecl.View).Children[0] as System.Activities.Presentation.View.DesignerView;
-                                          dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
-                                      }
-                                  }
-                              ));
+                                new Action(CargarWfDeclaraciones)
+                                 );
                           }
                       ));
                      thread.Start();    
@@ -343,6 +322,75 @@ using ModoGrafico.Interfaces;
                 
 
                 return wdDecl.View;
+            }
+        }
+
+        private void CargarWf()
+        {
+            try
+            {
+
+                wd.Load(SecuenciaInicialProcedimiento);
+                //wd.Flush();
+
+                ModelService ms = wd.Context.Services.GetService<ModelService>();
+                if (ms != null)
+                {
+                    ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
+                }
+
+                this.ReconstruirContextMenu(wd);
+                if (((Grid)wd.View).Children.Count > 0)
+                {
+                    System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
+                    dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
+
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                int i = 1;
+                string mensaje = ex.Message;
+
+                Exception exNueva = new Exception("blabla");
+
+                i = 2;
+            }
+        }
+
+      
+
+        private void CargarWfDeclaraciones()
+        {
+            try
+            {
+                wdDecl.Load(SecuenciaInicialDeclaraciones);
+                //wdDecl.Flush();
+
+                ModelService ms = wdDecl.Context.Services.GetService<ModelService>();
+                if (ms != null)
+                {
+                    ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
+                }
+
+                this.ReconstruirContextMenu(wdDecl);
+                if (((Grid)wdDecl.View).Children.Count > 0)
+                {
+                    System.Activities.Presentation.View.DesignerView dv = ((Grid)wdDecl.View).Children[0] as System.Activities.Presentation.View.DesignerView;
+                    dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
+                }
+
+                
+             
+            }
+            catch (Exception ex)
+            {
+                string mensaje = ex.Message;
+
+                Exception exNueva = new Exception("blabla");
+
             }
         }
 
