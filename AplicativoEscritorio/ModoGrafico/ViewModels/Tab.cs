@@ -351,12 +351,7 @@ using ModoGrafico.Interfaces;
             }
             catch (Exception ex)
             {
-                int i = 1;
-                string mensaje = ex.Message;
-
-                Exception exNueva = new Exception("blabla");
-
-                i = 2;
+                
             }
         }
 
@@ -387,9 +382,7 @@ using ModoGrafico.Interfaces;
             }
             catch (Exception ex)
             {
-                string mensaje = ex.Message;
-
-                Exception exNueva = new Exception("blabla");
+             
 
             }
         }
