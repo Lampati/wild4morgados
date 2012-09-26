@@ -31,6 +31,16 @@
             InitializeComponent();
         }
 
+        public static void PreloadTabsSimple(TabControl tabControl)
+        {
+
+            for (var i = 0; i < tabControl.Items.Count-2; i++)
+            {
+                tabControl.SelectedIndex = i;
+                tabControl.UpdateLayout();
+            }
+
+        }
 
         /// <summary>
         /// Preloads tab items of a tab control in sequence.
