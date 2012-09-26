@@ -31,6 +31,7 @@
             InitializeComponent();
         }
 
+        //Esto se hace para salvarse del bug del workflow apenas cargas los WD y haces click rapido en los tabs
         public static void PreloadTabsSimple(TabControl tabControl)
         {
 
