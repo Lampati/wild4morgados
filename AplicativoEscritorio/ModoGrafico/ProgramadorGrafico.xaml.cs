@@ -92,6 +92,7 @@ namespace ModoGrafico
 
                 //TabsControl.PreloadTabs(this.WorkArea.tab.tc);
 
+                TabsControl.PreloadTabsSimple(this.WorkArea.tab.tc);
                 
             }
         }
