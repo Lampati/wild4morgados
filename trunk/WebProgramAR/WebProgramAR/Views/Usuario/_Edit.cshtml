@@ -88,9 +88,9 @@
                 {
                     Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
                     Value = option.TipoUsuarioId.ToString(),
-                    Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId)) 
-                }), new { @id = "TipoUsuarioCreate", @style = "display:none" })
-
+                    Selected = ((Model != null) && (option.TipoUsuarioId == Model.TipoUsuarioId))
+                }), new { @id = "TipoUsuarioCreate", @style = "display:none", @Name = "TipoUsuarioCreate" })
+                        @Html.HiddenFor(model => model.TipoUsuarioId)
                         @Html.ValidationMessageFor(m => m.TipoUsuarioId)
                 </div>
             }
@@ -219,6 +219,13 @@
             
             return;
         }
+        if (div.attr('id') == "TipoUsuarioCreate") {
+            if ((div.attr("rel")!=0)) {
+                $("#TipoUsuarioId").val((div.attr("rel")));
+            } 
+            return;
+        }
+        
     }
 
     $("#LocalidadIdAutoComplete").autocomplete({
@@ -291,6 +298,7 @@
         $("#LocalidadIdAutoComplete").keyup(function () { $("#LocalidadId").val(""); });
         $('#botonCambiarPassword').click(function (event) {
             OpenSubDialog(event, $(this).attr('data'), '@Url.Action("ChangePassword","Account")/', 450, 500);
+            $('#dialog').dialog("close");
         });
         $("#form0").find("input").live('click', function () {
             $(".update-message-box").hide();

@@ -57,7 +57,7 @@ namespace WebProgramAR.DataAccess
             usuarioOrig.Apellido = usuario.Apellido;
             usuarioOrig.FechaNacimiento = usuario.FechaNacimiento;
             //usuarioOrig.Email = usuario.Email;
-
+            usuarioOrig.TipoUsuarioId = usuario.TipoUsuarioId;
             usuarioOrig.PaisId = usuario.PaisId;
             usuarioOrig.ProvinciaId = usuario.ProvinciaId;
             usuarioOrig.LocalidadId = usuario.LocalidadId;

@@ -67,7 +67,7 @@ function initDialogs() {
         autoOpen: false,
         draggable: true,
         resizable: false,
-        position: 'center',
+        position: 'top',
         title: '',
         modal: true,
         overlay: { opacity: 1.5, background: "black" },

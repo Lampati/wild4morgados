@@ -40,6 +40,9 @@ function updateSuccess() {
     } else {
         $(".update-message-box").show();
         $(".buttonSectionOptions").show();
+        $("#dialog").animate({ height: "auto" });
+        $("#subDialog").animate({ height: "auto" });
+        
     }
 }
 function updateSuccessView() {

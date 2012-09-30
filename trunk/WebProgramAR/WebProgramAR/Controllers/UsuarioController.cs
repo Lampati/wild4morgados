@@ -228,6 +228,11 @@ namespace WebProgramAR.Controllers
             if (ModelState.IsValid){
                 if (UsuarioNegocio.ExisteUsuarioById(usuario.UsuarioId))
                 {
+                    if (usuario.TipoUsuario == null)
+                    {
+                        usuario.TipoUsuario = TipoUsuarioNegocio.GetTipoUsuarioById(usuario.TipoUsuarioId);
+                    }
+
                     ActualizarRolesSiCorresponde(usuario);
                     MembershipUser membUser = Membership.GetUser(usuario.UsuarioNombre);
 
@@ -240,6 +245,10 @@ namespace WebProgramAR.Controllers
                         error = true;
                         errorMensaje = "Debe seleccionar un pais";
                     }
+                    else
+                    {
+                        usuario.Pais = PaisNegocio.GetPaisById(usuario.PaisId);
+                    }
                     /*VALIDACION DE PROVINCIA CORRECTO*/
                     //flanzani 27/05/2012
                     //Modifico las validaciones pq el GetById tira excepcion
@@ -249,6 +258,10 @@ namespace WebProgramAR.Controllers
                         error = true;
                         errorMensaje = "Debe seleccionar una provincia";
                     }
+                    else
+                    {
+                        usuario.Provincia= ProvinciaNegocio.GetProvinciaById(usuario.ProvinciaId);
+                    }
                     /*VALIDACION DE LOCALIDAD CORRECTO*/
                     //flanzani 27/05/2012
                     //Modifico las validaciones pq el GetById tira excepcion
@@ -257,6 +270,10 @@ namespace WebProgramAR.Controllers
                     {
                         error = true;
                         errorMensaje = "Debe seleccionar una localidad correcta";
+                    }
+                    else
+                    {
+                        usuario.Localidad= LocalidadNegocio.GetLocalidadById(usuario.LocalidadId);
                     }
 
                     string mailViejo = membUser.Email;
