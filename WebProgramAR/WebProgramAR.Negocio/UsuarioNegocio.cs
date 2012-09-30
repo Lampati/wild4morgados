@@ -68,20 +68,27 @@ namespace WebProgramAR.Negocio
         {
             if (userActual.TipoUsuario.Descripcion.ToLower() == Globales.Globals.TiposRoles.profesor.ToString())
             {
-                Roles.RemoveUserFromRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.profesor.ToString());
+                if (Roles.IsUserInRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.profesor.ToString())){
+                    Roles.RemoveUserFromRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.profesor.ToString());
+                }
             }
             else if (userActual.TipoUsuario.Descripcion.ToLower() == Globales.Globals.TiposRoles.moderador.ToString())
             {
-                Roles.RemoveUserFromRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.moderador.ToString());
+                if (Roles.IsUserInRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.profesor.ToString())){
+                    Roles.RemoveUserFromRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.moderador.ToString());
+                }
             }
             else if (userActual.TipoUsuario.Descripcion.ToLower() == Globales.Globals.TiposRoles.administrador.ToString())
             {
-                Roles.RemoveUserFromRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.administrador.ToString());
+                if (Roles.IsUserInRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.profesor.ToString())){
+                    Roles.RemoveUserFromRole(userActual.UsuarioNombre, Globales.Globals.TiposRoles.administrador.ToString());
+                }
             }
         }
 
         public static void AgregarRolAUsuario(Usuario usuario)
         {
+            
             if (usuario.TipoUsuario.Descripcion.ToLower() == Globales.Globals.TiposRoles.profesor.ToString())
             {
                 Roles.AddUserToRole(usuario.UsuarioNombre, Globales.Globals.TiposRoles.profesor.ToString());

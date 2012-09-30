@@ -62,8 +62,10 @@
     <div class="tituloabm">Seleccion de Ejercicios</div>
 
     <div class="filtrosabm">
-        @using (Html.BeginForm("PendientesAprobacion", "Ejercicio", FormMethod.Post, new { id = "filterFormPendientes" }))
-        {    
+        @if (Model.ConLayout == false)
+        {
+            using (Html.BeginForm("PendientesAprobacion", "Ejercicio", new { page = 1, conLayout = Model.ConLayout, aplicarPermisos = Model.AplicarPermisos, usuarioId = Request.QueryString["usuarioId"] },FormMethod.Post, new { id = "filterFormPendientes" }))
+            {    
             @Html.ValidationSummary(true)
             <table>
                 <tr>
@@ -80,6 +82,29 @@
                 </tr>
             </table>
             <div id="filterSearchButtonPendientes" class="filterButton"></div>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("PendientesAprobacion", "Ejercicio", FormMethod.Post, new { id = "filterFormPendientes" }))
+            {    
+            @Html.ValidationSummary(true)
+            <table>
+                <tr>
+                    <td><div class="label">Identificador</div></td>
+                    <td valign="top">@Html.TextBox("nombre", null, new { maxlength = 50, autocomplete = "off" })</td>
+                    <td><div class="label">Nivel</div></td>
+                    <td valign="top">               
+                         @Html.DropDownList("nivelEjercicio", listaNivelesEjercicio.Select(option => new SelectListItem
+                    {
+                        Text = Html.DisplayTextFor(_ => option).ToString(),
+                        Value = option.ToString()
+                    }), "TODOS", new { @id = "nivelEjercicioPendientes", @style = "display:none" })
+                    </td>
+                </tr>
+            </table>
+            <div id="filterSearchButtonPendientes" class="filterButton"></div>
+            }
         }
     </div>
 </div>

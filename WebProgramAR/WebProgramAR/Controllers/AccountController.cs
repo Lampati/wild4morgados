@@ -216,8 +216,8 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    return Content(Boolean.FalseString);
+                    string errorMessage =  "La actual contraseña es incorrecta o la nueva contraseña es invalida";
+                    return Content(errorMessage);
                 }
                 //return RedirectToAction("Index");
                 return Content(Boolean.FalseString);
