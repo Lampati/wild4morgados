@@ -106,7 +106,7 @@ $(document).ready(function () {
 
     /*^FIN MANEJO MENU SUBMENU*/
     $("#btnCancelar").live('click', function () {
-        console.log("gil");
+        
         CerrarDialog();
     });
     $("#btnCancelarSubDialog").live('click', function () {
