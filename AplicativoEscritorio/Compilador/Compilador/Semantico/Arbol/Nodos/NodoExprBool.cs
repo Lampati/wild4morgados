@@ -32,6 +32,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             this.NoEsAptaPasajeReferencia = this.hijosNodo[0].NoEsAptaPasajeReferencia || this.hijosNodo[1].NoEsAptaPasajeReferencia;
+            this.EsConstante = this.hijosNodo[0].EsConstante;
 
             this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);         
 

@@ -13,22 +13,25 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos.Auxiliares
         public int Valor { get; set; }
         public bool EsArreglo { get; set; }
         public bool EsReferencia { get; set; }
+        public bool EsConstante { get; set; }
         public string RangoArregloSinPrefijo { get; set; }
 
 
-        public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo, bool esRef)
+        public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo, bool esRef, bool esConstante)
         {
             this.Lexema = lexema;
             this.Tipo = tipo;
             this.EsReferencia = esRef;
+            this.EsConstante = esConstante;
         }
 
-        public Firma(string lexema, NodoTablaSimbolos.TipoDeDato tipo, bool esArrglo, bool esRef)
+        public Firma(string lexema, bool esArrglo, NodoTablaSimbolos.TipoDeDato tipo, bool esRef, bool esConstante)
         {
             this.Lexema = lexema;
             this.Tipo = tipo;
             this.EsArreglo = esArrglo;
             this.EsReferencia = esRef;
+            this.EsConstante = esConstante;
         }
 
         public override bool Equals(object obj)

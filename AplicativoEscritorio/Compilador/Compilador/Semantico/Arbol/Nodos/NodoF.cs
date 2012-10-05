@@ -26,7 +26,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 EsReferencia = true;
 
-                f = new Firma(this.hijosNodo[1].Lexema, this.hijosNodo[3].TipoDato, EsReferencia);
+                f = new Firma(this.hijosNodo[1].Lexema, this.hijosNodo[3].TipoDato, EsReferencia, false);
                 f.EsArreglo = this.hijosNodo[3].EsArreglo;
                 f.RangoArregloSinPrefijo = this.hijosNodo[3].RangoArregloSinPrefijo;
 
@@ -36,7 +36,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
                 EsReferencia = false;
 
-                f = new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[2].TipoDato, EsReferencia);
+                f = new Firma(this.hijosNodo[0].Lexema, this.hijosNodo[2].TipoDato, EsReferencia, false);
                 f.EsArreglo = this.hijosNodo[2].EsArreglo;
                 f.RangoArregloSinPrefijo = this.hijosNodo[2].RangoArregloSinPrefijo;
             }

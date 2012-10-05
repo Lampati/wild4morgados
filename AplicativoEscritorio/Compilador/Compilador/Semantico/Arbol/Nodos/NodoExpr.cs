@@ -28,6 +28,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             //Hago la operacion igual, si los tipos no eran iguales, simplemente tiro la excepcion.
             //Por defecto uso el tipo1 para asignar el tipo de este nodo.
             this.NoEsAptaPasajeReferencia = this.hijosNodo[0].NoEsAptaPasajeReferencia || this.hijosNodo[1].NoEsAptaPasajeReferencia;
+            this.EsConstante = this.hijosNodo[0].EsConstante;
+
             this.Gargar = string.Format("{0} {1}", this.hijosNodo[0].Gargar, this.hijosNodo[1].Gargar);
 
             this.EsArregloEnParametro = this.hijosNodo[0].EsArregloEnParametro;
