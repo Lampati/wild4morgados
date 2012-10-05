@@ -48,6 +48,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 {
 
                     this.NoEsAptaPasajeReferencia = this.hijosNodo[1].NoEsAptaPasajeReferencia;
+                    
                     this.TipoDato = this.hijosNodo[1].TipoDato;
                     this.Lexema = this.hijosNodo[1].Lexema;
                     this.EsArregloEnParametro = this.hijosNodo[1].EsArregloEnParametro;
@@ -62,6 +63,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             {
 
                 this.NoEsAptaPasajeReferencia = this.hijosNodo[0].NoEsAptaPasajeReferencia;
+                this.EsConstante = this.hijosNodo[0].EsConstante;
                 this.TipoDato = this.hijosNodo[0].TipoDato;
                 this.Lexema = this.hijosNodo[0].Lexema;
                 this.ValorConstanteNumerica = this.hijosNodo[0].ValorConstanteNumerica;
