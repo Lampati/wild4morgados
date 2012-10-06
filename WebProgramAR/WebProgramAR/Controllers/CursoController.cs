@@ -52,7 +52,7 @@ namespace WebProgramAR.Controllers
             };
             datos.ConLayout = conLayout;
             datos.AplicarPermisos = aplicarPermisos;
-            
+            ViewBag.usuarioLogueado = GetUsuarioLogueado();
             return View(datos);
 
         }
@@ -76,6 +76,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -91,6 +92,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         } 
@@ -145,6 +147,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -159,19 +162,19 @@ namespace WebProgramAR.Controllers
                 {
                     if (CursoNegocio.ExisteCursoById(curso.CursoId))
                     {
+                            CursoNegocio.Modificar(curso);
+                            return Content(Boolean.TrueString);
+                    }
+                    else
+                    {
                         if (CursoNegocio.ExisteCursoByNombre(curso.Nombre))
                         {
                             return Content("Ya existe un curso con ese nombre.Modifica el nombre que has elegido e intenta nuevamente");
                         }
                         else
                         {
-                            CursoNegocio.Modificar(curso);
-                            return Content(Boolean.TrueString);
+                            throw new Exception("El curso sobre el cual se estaba trabajando fue borrado.");
                         }
-                    }
-                    else
-                    {
-                        throw new Exception("El curso sobre el cual se estaba trabajando fue borrado.");
                     }
                 }
                 else
@@ -216,6 +219,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -326,6 +330,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }

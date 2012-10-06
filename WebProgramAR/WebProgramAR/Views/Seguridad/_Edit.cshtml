@@ -1,4 +1,4 @@
-﻿@model WebProgramAR.Entidades.ReglasSeguridad
+﻿@model WebProgramAR.Sitio.Models.ReglaSeguridadViewModel
            
 @using WebProgramAR.Helpers           
 
@@ -17,7 +17,7 @@
         $(".input-integer-validation").change(function () { isValid(); });
         $(".input-string-validation").change(function () { isValid(); });
         $("input:radio[name=groupUsuario]").change(function () { checkedRadio(); });
-        $("#IsValorBool").click(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
+        $("#isValorBool").change(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
         $("#ValorInt").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
         $("#ValorText").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
         $("#ValorDate").change(function () { $("#Valor").val($(this).val()); isValid(); });
@@ -95,11 +95,7 @@
             isValid();
     }
     var $radios = $('input:radio[name=groupUsuario]');
-    if ($("#UsuarioId").val() != "") {
-        $radios.filter('[value=usuario]').attr('checked', true);
-    }else{
-        $radios.filter('[value=tipoUsuario]').attr('checked', true);
-    }
+    
     checkedRadio();
     convertSelect("SelectTablaId");
     convertSelect("SelectTipoUsuarioCreate");
@@ -391,7 +387,7 @@
     </div>
     <div id="valorBool" style="display:none;">
         <div class="editor-field">
-            @Html.EditorFor(m => m.IsValorBool, new { @id = "ValorBool" })
+            @Html.CheckBoxFor(m => m.IsValorBool, new { @id = "isValorBool" })
         </div>
     </div>
     <div id="valorInteger" style="display:none;">
@@ -475,6 +471,14 @@
     }
     getColumnsByAjax();
     isValid();
+    if ($("#UsuarioId").val() != "" && $("#UsuarioId").val() != 0) {
+        $radios.filter('[value=usuario]').attr('checked', true);
+        checkedRadio();
+    } else {
+        $radios.filter('[value=tipoUsuario]').attr('checked', true);
+        checkedRadio();
+        $("#TipoUsuarioId").val($("#selectBox_SelectTipoUsuarioCreate").attr("rel"));
+    }
 </script>
 
 

@@ -98,6 +98,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         } 
@@ -161,7 +162,7 @@ namespace WebProgramAR.Controllers
             {
                 ReglasSeguridad c = SeguridadNegocio.GetReglaSeguridadById(id);
                 ArmarViewBags(id);
-                ReglasSeguridad modelo = new ReglasSeguridad();
+                ReglaSeguridadViewModel modelo = new ReglaSeguridadViewModel();
                 modelo.ReglaId = c.ReglaId;
                 modelo.Activa = c.Activa;
                 modelo.ColumnaId = c.ColumnaId;
@@ -173,12 +174,13 @@ namespace WebProgramAR.Controllers
                 ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre.ToString() : "";
                 modelo.Valor = c.Valor;
 
-                //modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();
+                modelo.Tipo = c.Columna.Tipo.Nombre.ToUpper();
 
                 return View("Edit", modelo);
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -190,7 +192,7 @@ namespace WebProgramAR.Controllers
         public ActionResult Edit(ReglasSeguridad regla)
         {
             bool error = false;
-            string errorMensaje = "";
+            string errorMensaje = "Ha Ocurrido un error.";
             if (ModelState.IsValid)
             {
                 if (regla.TablaId == null || regla.TablaId.Equals("-1"))
@@ -215,9 +217,9 @@ namespace WebProgramAR.Controllers
                     {
                         SeguridadNegocio.Modificar(regla);
                     }
-                    catch (Exception)
+                    catch (Exception e )
                     {
-                        return Content(errorMensaje);
+                        return Content(errorMensaje + e.Data.ToString());
                     }
                 }
                 else
@@ -245,6 +247,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }

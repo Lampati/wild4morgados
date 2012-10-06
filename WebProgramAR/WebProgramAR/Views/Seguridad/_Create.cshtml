@@ -7,6 +7,7 @@
     List<WebProgramAR.Entidades.Columna> listaColumna = (List<WebProgramAR.Entidades.Columna>)ViewBag.Columnas;
     List<WebProgramAR.Entidades.Comparador> listaComparador = (List<WebProgramAR.Entidades.Comparador>)ViewBag.Comparadores;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.ListaTipoUsuarios;
+    bool flag;
 }
 
 <script type="text/javascript">
@@ -17,7 +18,7 @@
         $(".input-integer-validation").change(function () { isValid(); });
         $(".input-string-validation").change(function () { isValid(); });
         $("input:radio[name=groupUsuario]").change(function () { checkedRadio(); });
-        $("#IsValorBool").click(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
+        $("#IsValorBool").change(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
         $("#ValorInt").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
         $("#ValorText").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
         $("#ValorDate").change(function () { $("#Valor").val($(this).val()); isValid(); });
@@ -258,6 +259,7 @@
                 $("#valorText").hide();
                 $("#valorDate").hide();
                 $("#valorBool").show();
+                $("#Valor").val(0);
                 break;
             case "INT":
                 $("#valorInteger").show();
@@ -383,7 +385,7 @@
     </div>
     <div id="valorBool" style="display:none;">
         <div class="editor-field">
-            @Html.EditorFor(m => m.IsValorBool, new { @id = "ValorBool" })
+            @Html.CheckBoxFor(m => m.IsValorBool, new { @id = "IsValorBool" })
         </div>
     </div>
     <div id="valorInteger" style="display:none;">

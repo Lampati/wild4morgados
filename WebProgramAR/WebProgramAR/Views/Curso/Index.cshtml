@@ -5,7 +5,7 @@
     {
         Layout = null;
     }
-    
+
     ViewBag.Title = "Cursos";
 
 
@@ -15,10 +15,8 @@
 
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
+    WebProgramAR.Entidades.Usuario User = ViewBag.usuarioLogueado;
 }
-
-
-
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -84,19 +82,21 @@
 @Html.HiddenFor(m => m.AplicarPermisos)
 <input type="hidden" name="usuarioId" id="usuarioId" value="@Request.QueryString["usuarioId"]" />
 <div id="buttonSection" class="buttonSection">
-@if ((Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador"))) || !Model.AplicarPermisos)
+@if ((Request.IsAuthenticated) || !Model.AplicarPermisos)
 {
     <div id="btnNuevo" class="btn_nuevo boton" >Nuevo </div>
 }
+@if (Model.ConLayout != false)
+{
     <div id="btnFiltrosCursos" class="btn_filtros boton" >Filtros </div>
+}
     
 </div>    
 <div id="filtrosCursos" class="filtros">
     <div class="tituloabm">Seleccion de cursos</div>
 
     <div class="filtrosabm">
-        @if(Model.ConLayout==false){
-            using (Html.BeginForm("Index", "Curso", new { page=1,conLayout = Model.ConLayout, aplicarPermisos = Model.AplicarPermisos, usuarioId = Request.QueryString["usuarioId"] }, FormMethod.Post, new { id = "filterForm" }))
+            @using (Html.BeginForm("Index", "Curso", FormMethod.Post, new { id = "filterForm" }))
             {    
             @Html.ValidationSummary(true)
             <table>
@@ -113,27 +113,7 @@
                 
             </table>
             <div id="filterSearchButtonCursos" class="filterButton"></div>
-        }
-        }else{
-            using (Html.BeginForm("Index", "Curso", FormMethod.Post, new { id = "filterForm" }))
-            {    
-            @Html.ValidationSummary(true)
-            <table>
-                <tr>
-                    <td>
-                        <div class="label">
-                            Nombre
-                        </div>
-                    </td>
-                     <td valign="top">
-                            @Html.TextBox("Nombre", null, new { maxlength = 50, autocomplete = "off" })
-                    </td>
-                </tr>
-                
-            </table>
-            <div id="filterSearchButtonCursos" class="filterButton"></div>
-        }
-        }
+            }
         
     </div>
 </div>
@@ -150,7 +130,7 @@
     rowStyle: "gridRow",
     alternatingRowStyle: "gridAlternatingRow",
     headerStyle: "gridHeader",
-    footerStyle: "gridPager",    
+    footerStyle: "gridPager",
     mode: WebGridPagerModes.All,
            firstText: "Prim",
             previousText: "<< Ant",
@@ -210,6 +190,34 @@ else
           header: "",
           format: @<text>
                     <input type="image" alt="Detalles" src="@Url.Content("~/Content/images/preview-16.png")" data="@(item.CursoId)" class="botonDetalles hoverRel"/>
+                  </text>
+    ),
+    grid.Column("",
+          header:"",
+          format: @<text>
+                @if (item.UsuarioId == User.UsuarioId)
+                {
+                    
+                    <input type="image" alt="Editar" src="@Url.Content("~/Content/images/edit_modify.png")" data="@(item.CursoId)" class="botonEditar hoverRel"/>
+                }
+            </text>
+    ),
+    grid.Column("", 
+          header: "",
+          format: @<text>
+            @if (item.UsuarioId == User.UsuarioId)
+                {
+                    <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.CursoId)" class="botonEliminar hoverRel"/>
+              }   
+                  </text>
+    ),
+    grid.Column("", 
+          header: "",
+          format: @<text>
+            @if (item.UsuarioId == User.UsuarioId)
+                {
+                    <input type="image" alt="Asociaciones" src="@Url.Content("~/Content/images/list_task-16.png")" data="@(item.CursoId)" class="botonAsociar hoverRel"/>
+              }
                   </text>
     )
     })

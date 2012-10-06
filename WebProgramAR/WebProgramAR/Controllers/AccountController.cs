@@ -28,6 +28,8 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult LogOn(LogOnModel model)
         {
+            string errorMessage = "El nombe de usuario o la contraseña son incorrectos.";
+            
             if (ModelState.IsValid)
             {
                 
@@ -63,20 +65,19 @@ namespace WebProgramAR.Controllers
                     {
                         ModelState.AddModelError("", "The user name or password provided is incorrect.");
                         model.isAuthenticated = false;
-
-                        return Content(Boolean.FalseString);
+                        return Content(errorMessage);
                         //RedirectToAction("Index", "Home");
                     }
                 }
                 else
 	            {
-                    return Content(Boolean.FalseString);
+                    return Content(errorMessage);
 	            }
             }
             
             // If we got this far, something failed, redisplay form
             //return View(model);
-            return Content(Boolean.FalseString);
+            return Content(errorMessage);
         }
         //
         // POST: /Account/LogOn
@@ -142,6 +143,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -171,6 +173,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }

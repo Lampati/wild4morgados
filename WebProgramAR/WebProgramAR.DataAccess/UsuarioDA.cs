@@ -101,10 +101,10 @@ namespace WebProgramAR.DataAccess
 
                 IQueryable<Usuario> query = GetUsuarios(nombre, apellido, usuarioNombre, tipoUsuarioId, pais, provincia, localidad, db);
 
-                if (sortColumns.Contains("TipoUsuario"))
+                /*if (sortColumns.Contains("TipoUsuario"))
                 {
                     sortColumns = sortColumns.Replace("TipoUsuario", "TipoUsuario.TipoUsuarioId");
-                }
+                }*/
                 if (sortColumns.Contains("Pais"))
                 {
                     sortColumns = sortColumns.Replace("Pais", "Pais.PaisId");

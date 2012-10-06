@@ -284,7 +284,7 @@ footer .content
 }
 .contentSiteMap
 {text-align:right;margin-left:10px;width:-moz-fit-content}
-.contentSiteMap a,a:link
+.contentSiteMap a,.contentSiteMap a:link
 {color:#888; !important}
 .contentSiteMap a:hover
 {color:#fff; !important}
@@ -569,6 +569,7 @@ input[type="text"].textBoxForFilter
     position:relative;
     float:left;
     bottom:20px;
+    margin-top:10px;
 }
 .buttonSectionOptions div
 {
@@ -581,7 +582,6 @@ input[type="submit"], .submit
 	-webkit-border-radius:7px;
 	font-weight: bold;
 	border-radius:7px;
-	color:#fff;
 	margin-top:20px;
     font-size: 1em;
     padding: 10px;
@@ -706,7 +706,7 @@ table th {
     clear: both;
 }
 
-.update-message-box
+.update-message-box,.update-message-box-popUp
 {   
     opacity: .70;
     filter: alpha(opacity=70%);   
@@ -1845,7 +1845,7 @@ select:focus
 .tzSelect li span:hover{
 	color:#19F;
 }
-#divOperacionExitosa
+#divOperacionExitosa,#divOperacionExitosaPopUp
 {
     position:absolute;
     background:#000;   
@@ -2561,4 +2561,31 @@ ul.tabs
 .helpTitle:hover
 {
     cursor:pointer;
+}
+
+/*PAGINA DE ACCESO INCORRECTO*/
+.titlePageNotFound
+{
+    color:#EE4400;
+    font-size:4em;
+    font-family:Trebuchet MS, Calibri;
+}
+.subTitlePageNotFound
+{
+    color:#EE4400;
+    font-size:2em;
+    font-family:Trebuchet MS, Calibri;
+}
+.descriptionPageNotFound
+{
+    color:#333;
+    font-size:1em;
+    font-family:Trebuchet MS, Calibri;
+}
+.warning_msg
+{
+    border: 5px solid #EE4400;
+    margin-left:30%;
+    width:40%;
+    padding:20px;
 }

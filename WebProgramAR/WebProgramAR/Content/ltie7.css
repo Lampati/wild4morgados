@@ -547,6 +547,7 @@ input[type="text"].textBoxForFilter
     position:relative;
     float:left;
     bottom:20px;
+    margin-top:10px;
 }
 .buttonSectionOptions div
 {
@@ -1780,7 +1781,7 @@ input[type="text"].datosExtraTextBox
 .tzSelect li span:hover{
 	color:#19F;
 }
-#divOperacionExitosa
+#divOperacionExitosa,#divOperacionExitosaPopUp
 {
     position:absolute;
     background:#000;   
@@ -2480,4 +2481,30 @@ enfasis
 .helpTitle:hover
 {
     cursor:pointer;
+}
+/*PAGINA DE ACCESO INCORRECTO*/
+.titlePageNotFound
+{
+    color:#EE4400;
+    font-size:4em;
+    font-family:Trebuchet MS, Calibri;
+}
+.subTitlePageNotFound
+{
+    color:#EE4400;
+    font-size:2em;
+    font-family:Trebuchet MS, Calibri;
+}
+.descriptionPageNotFound
+{
+    color:#333;
+    font-size:1em;
+    font-family:Trebuchet MS, Calibri;
+}
+.warning_msg
+{
+    border: 5px solid #EE4400;
+    margin-left:30%;
+    width:40%;
+    padding:20px;
 }

@@ -203,6 +203,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");  
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -316,6 +317,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error"); 
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -366,6 +368,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error"); 
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -538,6 +541,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error"); 
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
