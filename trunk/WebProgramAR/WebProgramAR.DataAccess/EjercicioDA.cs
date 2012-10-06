@@ -234,10 +234,10 @@ namespace WebProgramAR.DataAccess
 
                 IQueryable<Ejercicio> query = GetEjercicios(nombre, usuarioId, cursoId, estadoEjercicio, nivelEjercicio, global, db);
 
-                if (sortColumns.Contains("Usuario"))
+                /*if (sortColumns.Contains("Usuario"))
                 {
                     sortColumns = sortColumns.Replace("Usuario", "Usuario.UsuarioId");
-                }
+                }*/
                 //if (sortColumns.Contains("Curso"))
                 //{
                 //    sortColumns = sortColumns.Replace("Curso", "Curso.CursoId");

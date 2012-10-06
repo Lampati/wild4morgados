@@ -54,7 +54,19 @@ function updateSuccessView() {
         $(".buttonSectionOptions").show();
     } 
 }
+function updateSuccessPopUp() {
+    if ($("#update-message-popUp").html() == "True") {
+        $("#divOperacionExitosaPopUp").fadeIn(300);
+        //$(".buttonSectionOptions").show();
+        updateWindow();
+    } else {
+        $(".update-message-box-popUp").show();
+        $(".buttonSectionOptions").show();
+        $("#dialog").animate({ height: "auto" });
+        $("#subDialog").animate({ height: "auto" });
 
+    }
+}
     /********para el manejo de select tags********/
     // The select element to be replaced:
 function convertSelect(id, selectFirstElement) {

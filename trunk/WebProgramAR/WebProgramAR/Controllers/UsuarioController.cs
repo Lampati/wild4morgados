@@ -36,7 +36,7 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "Nombre", "Apellido", "UsuarioNombre", "TipoUsuario", "Pais", "Provincia", "Localidad" };
+            var validColumns = new[] { "Nombre", "Apellido", "UsuarioNombre", "TipoUsuario.Descripcion", "Pais", "Provincia", "Localidad" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";
@@ -91,6 +91,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -108,6 +109,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -187,6 +189,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
         }
@@ -387,6 +390,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                return View("Error");
                 throw new Exception("No se puede acceder a esta pagina de ese modo. Por favor use la pagina para acceder");
             }
 

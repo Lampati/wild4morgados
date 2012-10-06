@@ -422,6 +422,27 @@
   <ItemGroup>
     <Content Include="Views\Home\Ayuda.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ejercicio\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Curso\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Seguridad\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\FileNotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\NoAccess.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
