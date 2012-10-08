@@ -538,6 +538,7 @@ input[type="text"], input[type="password"]
 	/* Preloading the background image for the dropdown */
 	background:url("images/dropdown_slice.png") no-repeat -99999px;
 	resize:none;
+	z-index:1100;
 }
 input:focus,textarea:focus
 {

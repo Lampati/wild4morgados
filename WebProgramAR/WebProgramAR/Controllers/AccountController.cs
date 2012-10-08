@@ -186,6 +186,8 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
+            string errorMessage = "La actual contraseña es incorrecta o la nueva contraseña es invalida";
+                    
             if (ModelState.IsValid)
             {
                 
@@ -196,9 +198,11 @@ namespace WebProgramAR.Controllers
                 {
                     if (model.EsResetPassword)
                     {
+                        errorMessage = "Ha ocurrido un error inesperado. Contactese con su administrador.";
                         MembershipUser usuarioAResetar = Membership.GetUser(model.UserName);
                         string passActual = usuarioAResetar.GetPassword();
                         changePasswordSucceeded = usuarioAResetar.ChangePassword(passActual, model.NewPassword);
+
                     }
                     else
                     {
@@ -219,7 +223,6 @@ namespace WebProgramAR.Controllers
                 }
                 else
                 {
-                    string errorMessage =  "La actual contraseña es incorrecta o la nueva contraseña es invalida";
                     return Content(errorMessage);
                 }
                 //return RedirectToAction("Index");

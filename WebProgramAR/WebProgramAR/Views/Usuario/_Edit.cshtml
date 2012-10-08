@@ -138,8 +138,9 @@
                     @Html.LabelFor(m => m.Localidad)
                 </div>
                  <div class="editor-field">
-                    @Html.TextBoxFor(model => model.LocalidadId, new { @rel = Model.LocalidadId, @Value = ViewBag.descripcionLocalidad, @id = "LocalidadIdAutoComplete", @Name = "LocalidadIdAutoComplete" })
+                    @Html.TextBoxFor(model => model.LocalidadId, new { @rel = Model.LocalidadId, @id = "LocalidadIdAutoComplete", @Name = "LocalidadIdAutoComplete" })
                     @Html.HiddenFor(model => model.LocalidadId)
+                    <input type="hidden" name="descripcionLocalidad" value="@ViewBag.descripcionLocalidad" id="descripcionLocalidad" />
                     @Html.ValidationMessageFor(m => m.LocalidadId)
                 </div>
             </div>
@@ -151,7 +152,8 @@
     convertSelect("SelectPaisId");
     convertSelect("SelectProvinciaId");
     convertSelect("TipoUsuarioCreate");
-
+    $("#LocalidadIdAutoComplete").text($("#descripcionLocalidad").val());
+    $("#LocalidadIdAutoComplete").val($("#descripcionLocalidad").val());
     $("#FechaNacimiento").datepicker({ onSelect: function () { $(this).parents(".editor-field").find(".field-validation-valid").hide() }, dateFormat: "yy-mm-dd", minDate: new Date(1920, 01, 01), changeMonth: true, changeYear: true, yearRange: "1920:1995", maxDate: new Date(new Date().getFullYear() - 17, new Date().getMonth(), new Date().getDay()) });
     $("#FechaNacimiento").keypress(function (event) {
         var charCode = (event.which) ? event.which : event.keyCode
@@ -167,7 +169,8 @@
     }
     function reInitLocalidad() {
         $("#LocalidadId").val("");
-        $("#LocalidadIdAutoComplete").val(" ");
+        $("#LocalidadIdAutoComplete").attr("rel", "");
+        $("#LocalidadIdAutoComplete").val("");
     }
     function OnChangeDo(div) {
         if (div.attr('id') == "SelectPaisId") {
@@ -191,7 +194,7 @@
                         $("<option value='0' selected='selected'>Seleccion una Opcion</option>").prependTo("#SelectProvinciaId");
                         convertSelect("SelectProvinciaId",1);
                         $("#PaisId").val((div.attr("rel")));
-                        
+                        $("#PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
                         
                     }
                 });
@@ -209,6 +212,7 @@
             if ((div.attr("rel")!=0)) {
                 $("#listLocalidades").show();
                 $("#ProvinciaId").val((div.attr("rel")));
+                $("#ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
             } else {
                 reInitProvincia();
                 $("#listLocalidades").hide();
@@ -254,17 +258,25 @@
         delay: 1,
         type: 'POST',
         selectFirst: false,
+        focus: function (event, ui) {
+            $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+            $("#LocalidadIdAutoComplete").val(ui.item.label);
+            $("#LocalidadIdAutoComplete").parents(".editor-field").find(".field-validation-valid").hide();
+            return false;
+        },
         select: function (event, ui) {
             $("#LocalidadId").val(ui.item.value);
-            $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+            $("#LocalidadIdAutoComplete").val(ui.item.label);
+            $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
             return false;
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
-                $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
+                $("#LocalidadIdAutoComplete").val(ui.item.label);
                 $("#LocalidadId").val(ui.item.value);
+                $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
                 return false;
             } else {
                 reInitLocalidad();
@@ -277,16 +289,22 @@
             $("#PaisId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
             $("#PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
             valid = false;
+        } else {
+            $("#PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
         }
         if ($("#ProvinciaId").val() == "" && $("#listProvincias").css("display") == "block") {
             $("#ProvinciaId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
             $("#ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
             valid = false;
+        } else {
+            $("#ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
         }
         if ($("#LocalidadId").val() == "" && $("#listLocalidades").css("display") == "block") {
             $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
             $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
             valid = false;
+        } else {
+            $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
         }
         return valid;
 
@@ -298,12 +316,10 @@
             OpenSubDialog(event, $(this).attr('data'), '@Url.Action("ChangePassword","Account")/', 450, 500);
             $('#dialog').dialog("close");
         });
-        $("#form0").find("input").live('click', function () {
+        $("#form0").find("#btnGuardarEdit").live('click', function () {
             $(".update-message-box").hide();
             verifyCombosOnTheFly();
         });
     });  
 
 </script>
-
-
