@@ -157,5 +157,18 @@
     </clr:String>
 
 
+    <!-- Ayuda-->
+
+    <clr:String x:Key="TooltipManualRagnarok">
+        Ejecuta el programa lector de pdf para abrir el manual del aplicativo Ragnarok
+    </clr:String>
+
+    <clr:String x:Key="TooltipManualGargar">
+        Ejecuta el programa lector de pdf para abrir el manual del lenguaje Gargar
+    </clr:String>
+
+    <clr:String x:Key="TooltipAcercaDe">
+        Muestra la informacion de Ragnarok
+    </clr:String>
 
 </ResourceDictionary>

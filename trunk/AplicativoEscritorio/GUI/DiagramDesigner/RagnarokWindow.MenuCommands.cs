@@ -215,21 +215,22 @@ namespace Ragnarok
                             else
                             {
                                 //Error formato no soportado
+                                MessageBox.Show("El archivo elegido no puede ser abierto por Ragnarok", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     }
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionCriptografia)
                 {
-                    MessageBox.Show("El contenido del archivo no puede ser leído por Program.AR", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El contenido del archivo no puede ser leído por Ragnarok", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionHashNoConcuerda)
                 {
-                    MessageBox.Show("El contenido del archivo ha sido alterado del original y no se puede abrir", "Hash Incoherente", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El contenido del archivo ha sido alterado del original y no se puede abrir", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Error inesperado de apertura", "Error Inesperado", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error inesperado de apertura", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
