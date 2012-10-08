@@ -212,6 +212,7 @@
             if ((div.attr("rel")!=0)) {
                 $("#listLocalidades").show();
                 $("#ProvinciaId").val((div.attr("rel")));
+                $("#SelectProvinciaId").val((div.attr("rel")));
                 $("#ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
             } else {
                 reInitProvincia();
@@ -262,6 +263,7 @@
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadIdAutoComplete").parents(".editor-field").find(".field-validation-valid").hide();
+            $("#descripcionLocalidad").val(ui.item.label);
             return false;
         },
         select: function (event, ui) {
@@ -269,12 +271,14 @@
             $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
             $("#LocalidadIdAutoComplete").val(ui.item.label);
             $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
+            $("#descripcionLocalidad").val(ui.item.label);
             return false;
         },
         change: function (event, ui) {
             if (ui.item != undefined) {
                 $("#LocalidadIdAutoComplete").attr("rel", ui.item.value);
                 $("#LocalidadIdAutoComplete").val(ui.item.label);
+                $("#descripcionLocalidad").val(ui.item.label);
                 $("#LocalidadId").val(ui.item.value);
                 $("#LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
                 return false;

@@ -56,6 +56,7 @@ function updateSuccessView() {
 }
 function updateSuccessPopUp() {
     if ($("#update-message-popUp").html() == "True") {
+        $("#update-message-popUp").hide();
         $("#divOperacionExitosaPopUp").fadeIn(300);
         //$(".buttonSectionOptions").show();
         updateWindow();
