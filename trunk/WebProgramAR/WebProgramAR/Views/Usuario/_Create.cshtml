@@ -177,7 +177,7 @@
         $('#select' + name + ' option[value="' + selectedElementRel + '"]').attr("selected", "selected");
     }
     function reInitProvincia() {
-        $("#ProvinciaId").val("");
+        $("#Usuario_ProvinciaId").val("");
     }
     function reInitLocalidad() {
         $("#Usuario_LocalidadId").val("");
@@ -229,6 +229,7 @@
                 selectElement("ProvinciaId");
             } else {
                 $("#listLocalidades").hide();
+                reInitProvincia();
             }
             reInitLocalidad();
             return;
@@ -259,8 +260,8 @@
 
         },
         scrollHeight: 10,
-        minChars: 2,
-        delay: 300,
+        minChars: 1,
+        delay: 1,
         type: 'POST',
         selectFirst: false,
         focus: function (event, ui) {
@@ -293,24 +294,33 @@
             $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
             $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
             valid = false;
+        } else {
+            $("#Usuario_PaisId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
         }
+        
         if ($("#Usuario_ProvinciaId").val() == "" && $("#listProvincias").css("display")=="block") {
             $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
             $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
             valid = false;
+        } else {
+            $("#Usuario_ProvinciaId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
         }
+        
         if ($("#Usuario_LocalidadId").val() == "" && $("#listLocalidades").css("display") == "block") {
             $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").html("Requerido");
             $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'block' });
             valid = false;
+        } else {
+            $("#Usuario_LocalidadId").parents(".editor-field").find(".field-validation-valid").css({ display: 'none' });
         }
+        
         return valid;
 
     }
 
     $(document).ready(function () {
         $("#LocalidadIdAutoComplete").keyup(function () { $("#Usuario_LocalidadId").val(""); });
-        $("#form0").find("input").live('click', function () {
+        $("#form0").find("#btnGuardarNuevo").live('click', function () {
             $(".update-message-box").hide();
             verifyCombosOnTheFly();
         });
