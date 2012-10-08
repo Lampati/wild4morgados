@@ -983,10 +983,13 @@ namespace Ragnarok.UserControls.Toolbar
 
                 if (File.Exists(pathEntero))
                 {
-                    File.Delete(pathEntero);
-                }
-
-                System.IO.File.WriteAllBytes(pathEntero, arch);
+                    if (!FileManager.IsFileLocked(new FileInfo(pathEntero)))
+                    {
+                        File.Delete(pathEntero);
+                        System.IO.File.WriteAllBytes(pathEntero, arch);
+                    }                
+                    
+                }              
 
                 System.Diagnostics.Process.Start(pathEntero);
             }
