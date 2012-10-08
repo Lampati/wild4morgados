@@ -106,7 +106,7 @@ $(document).ready(function () {
 
     /*^FIN MANEJO MENU SUBMENU*/
     $("#btnCancelar").live('click', function () {
-        
+
         CerrarDialog();
     });
     $("#btnCancelarSubDialog").live('click', function () {
@@ -123,7 +123,6 @@ $(document).ready(function () {
     }).mouseout(function () {
         nActiveDiv();
     });
-
 });
 
 function activeDiv() {
@@ -218,7 +217,6 @@ function OpenDialogRecoverPassword(event, id, accion, ancho, alto) {
         $(this).empty().html('<img class="loadingGif" src="../../Content/images/ajax-loader.gif" style="position:absolute;left:40%;top:40%;" />');
         $(this).load(accion + id, function () {
             //alert('Load was performed.');
-
         });
     });
     $("#disablingDiv").fadeIn("slow");

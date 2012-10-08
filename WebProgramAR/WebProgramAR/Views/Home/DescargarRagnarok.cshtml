@@ -2,13 +2,84 @@
     ViewBag.Title = "Descargar Ragnarok";
 }
 
-<h2>Descargar Ragnarok</h2>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "DESCARGAR RAGNAROK") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
+    });
+</script>
+<h1>Descargar Ragnarok</h1>
 
 @using (Html.BeginForm("DescargarInstaladorRagnarok","Home"))
 {
-   <div>
+    
+    <div class="queesSectionSpace">
+        <fieldset>
+            <h3>Que es?</h3>
+                <div class="queesContent">
+                    <div class="h7">Ragnarok</div> es un producto de SW que permite un entorno didáctico (principalmente gráfico) para el aprendizaje de lenguajes estructurados de programación. 
+                </div>
+            <h3>Funcionalidades</h3>
+                <div class="queesContent">
+                    <div class="h9">-Dos Modos de trabajo (Gráfico y Texto)</div>
+                    <div class="h9">-Creacion de Ejercicios</div>
+                    <div class="h9">-Resolución de Ejercicios</div>
+                    <div class="h9">-Administración de Tests de Pruebas</div>
+                    <div class="h9">-Sincronización de Ejercicios</div>
+                    <div class="h9">-y Muchas mas...</div>
+                </div>
+        </fieldset>
+    </div>
+    <div class="queesSectionSpace">
+        <fieldset style="width:700px;height:300px;">
+            <h3>Imagenes</h3>
+                <div class="queesContent">
+                    <div id="slides">
+		                <div class="slides_container">
+			                <div>
+                                <img class="imgBox" title="image1" src="@Url.Content("~/Content/images/imgsoft1.png")" width="700px" height="350px" /> 
+                            </div>
+                            <div>
+                                <img src="@Url.Content("~/Content/images/imgsoft2.png")"   width="700px" height="350px" /> 
+                            </div>
+                            <div>
+                                <img src="@Url.Content("~/Content/images/imgsoft3.png")"   width="700px" height="350px" /> 
+                            </div>
+                            <div>
+                                <img src="@Url.Content("~/Content/images/imgsoft4.png")"   width="700px" height="350px" /> 
+                            </div>
+                            <div>
+                                <img src="@Url.Content("~/Content/images/imgsoft5.png")"   width="700px" height="350px" /> 
+                            </div>
+                            <div>
+                                <img src="@Url.Content("~/Content/images/imgsoft6.png")"   width="700px" height="350px" /> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </fieldset>
+    </div>
+    <div class="queesSectionSpace" style="padding:10px;border:2px dotted #19f;width:10%;">
+          <img src="@Url.Content("~/Content/images/download.png")" />
             <input type="submit" value="Descargar" class="submit" id="btnGuardar"/>
     </div>
-
-
+   
 }
+	<script>
+	    $(function () {
+	        $('#slides').slides({
+	            preload: true,
+	            generateNextPrev: true,
+                pagination:true,
+                generatePagination:true,
+                next : "next",
+                prev : "prev",
+	        });
+	    });
+	</script>
