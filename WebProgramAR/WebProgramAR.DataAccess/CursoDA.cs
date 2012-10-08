@@ -15,7 +15,12 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                return db.Cursoes.Include("Usuario").Include("Ejercicios").Single(u => u.CursoId  == id);
+                Curso c = db.Cursoes.Include("Usuario").Include("Ejercicios").Single(u => u.CursoId  == id);
+
+                Curso copia = c.Clone() as Curso;
+                
+
+                return copia;
             }
         }
         
