@@ -576,6 +576,7 @@ namespace Ragnarok.UserControls.Toolbar
             PropertyEditionWindow propertyEditorWindow = (PropertyEditionWindow)propertyWindow;
 
             bool res = this.Servicio.EjerciciosGlobales();
+            mensajeRet = "No se han encontrado Ejercicios Globales para descargar." + Environment.NewLine + "Es posible que ya los tenga todos o que no haya ninguno disponible para descargar.";
             SetearResultadoDialog(propertyEditorWindow, res);
         }
 
@@ -586,6 +587,7 @@ namespace Ragnarok.UserControls.Toolbar
             int cursoId = (int)props[1];
 
             bool res = this.Servicio.EjerciciosPorCurso(cursoId);
+            mensajeRet = String.Format("No se han encontrado ejercicios del Curso {0} para descargar." + Environment.NewLine + "Es posible que ya los tenga todos o que el curso no exista.", cursoId);
             SetearResultadoDialog(propertyEditorWindow, res);
         }
 
@@ -596,6 +598,7 @@ namespace Ragnarok.UserControls.Toolbar
             int ejercicioId = (int)props[1];
 
             bool res = this.Servicio.EjerciciosPorId(ejercicioId);
+            mensajeRet = String.Format("No se ha encontrado el ejercicio {0} para descargar." + Environment.NewLine + "Es posible que ya lo tenga o que el ejercicio no exista.", ejercicioId);
             SetearResultadoDialog(propertyEditorWindow, res);
         }
         #endregion
