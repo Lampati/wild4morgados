@@ -95,7 +95,7 @@ namespace Sincronizacion
 
         private object InvocarMetodo(string nombre, object[] parametros)
         {
-            Eventos.Handler.InvocandoMetodoEventFire("Invocando metodo " + nombre + " ...", this.LabelInfo);
+            Eventos.Handler.InvocandoMetodoEventFire("Solicitando ejercicios para descarga... (" + nombre + ")", this.LabelInfo);
             try
             {
                 return this.proxy.InvocarMetodo(nombre, parametros);
@@ -139,7 +139,7 @@ namespace Sincronizacion
             {
                 string ids = this.ListadoIds;
                 object o = this.InvocarMetodo("EjerciciosGlobalesCount", new object[] { ids });
-                if (!Object.Equals(o, null))
+                if (!Object.Equals(o, null) && !String.IsNullOrEmpty(o.ToString()))
                     return (int)o;
             }
             return 0;
@@ -155,7 +155,7 @@ namespace Sincronizacion
                 {
                     string ids = this.ListadoIds;
                     object o = this.InvocarMetodo("EjerciciosXCurso", new object[] { ids, cursoId });
-                    if (!Object.Equals(o, null))
+                    if (!Object.Equals(o, null) && !String.IsNullOrEmpty(o.ToString()))
                         this.GuardarEjercicios(o.ToString());
                     else
                         return false;
@@ -173,7 +173,7 @@ namespace Sincronizacion
             {
                 string ids = this.ListadoIds;
                 object o = this.InvocarMetodo("EjerciciosXCursoCount", new object[] { ids, cursoId });
-                if (!Object.Equals(o, null))
+                if (!Object.Equals(o, null) && !String.IsNullOrEmpty(o.ToString()))
                     return (int)o;
             }
             return 0;
@@ -189,7 +189,7 @@ namespace Sincronizacion
                 {
                     string ids = this.ListadoIds;
                     object o = this.InvocarMetodo("EjerciciosXEjercicioId", new object[] { ids, ejercicioId });
-                    if (!Object.Equals(o, null))
+                    if (!Object.Equals(o, null) && !String.IsNullOrEmpty(o.ToString()))
                         this.GuardarEjercicios(o.ToString());
                     else
                         return false;
@@ -207,7 +207,7 @@ namespace Sincronizacion
             {
                 string ids = this.ListadoIds;
                 object o = this.InvocarMetodo("EjerciciosXEjercicioIdCount", new object[] { ids, ejercicioId });
-                if (!Object.Equals(o, null))
+                if (!Object.Equals(o, null) && !String.IsNullOrEmpty(o.ToString()))
                     return (int)o;
             }
             return 0;
@@ -278,6 +278,7 @@ namespace Sincronizacion
                         System.Threading.Thread.Sleep(r.Next(100, 500));
                     }
                     catch (ExcepcionHashNoConcuerda) { }
+                    catch (NullReferenceException) { }
                 }
                 Eventos.Handler.FinalizadoEventFire("Finalizada la descarga de ejercicios!", this.LabelInfo);
                 System.Threading.Thread.Sleep(1000);
