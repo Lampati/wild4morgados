@@ -2234,6 +2234,11 @@ ul.tabs
     color:#333;   
     width:220px;
 }
+.queesContent img
+{
+    border:3px solid #333;
+    padding:10px;
+}
 important
 {
     font-size:1.2em;
@@ -2508,4 +2513,72 @@ enfasis
     margin-left:30%;
     width:40%;
     padding:20px;
+}
+.slides_container {
+	width:700px;
+	height:350px;
+	display:none;
+}
+
+/*
+	Each slide
+	Important:
+	Set the width of your slides
+	If height not specified height will be set by the slide content
+	Set to display block
+*/
+.slides_container div {
+	width:700px;
+	height:350px;
+	display:block;
+}
+		
+#slides .next,#slides .prev {
+	position:relative;
+	left:-39px;
+	width:24px;
+	height:43px;
+	display:none;
+	z-index:101;
+}
+
+#slides .next {
+	left:385px;
+}
+
+/*
+	Pagination
+*/
+
+.pagination {
+	margin-left:60%;
+	margin-tOp:10px;
+	width:100px;
+}
+
+.pagination li {
+	float:left;
+	margin:0 1px;
+	list-style:none;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	height:0;
+	padding-top:12px;
+	background-image:url(images/pagination.png);
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -12px;
+}
+
+
+.slides_container img
+{
+    border:3px solid #333;
 }

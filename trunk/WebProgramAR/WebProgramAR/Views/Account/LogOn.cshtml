@@ -14,11 +14,43 @@
             CerrarDialogLogin();
             RecoverPasswordPopUp(event);
         });
+        $("#logonButtonDisabled").live('click', function () {
+            showErrorField();
+        });
+        $("#Password").live("keyup",function(){
+            showErrorField();
+        });
+        $("#UserName").live("keyup", function () {
+            showErrorField();
+        });
     });
     function updateWindow() {
         $("#divOperacionExitosa").delay(300).fadeOut(500);
         setTimeout("updateWin()", 1000);
     }
+    function showErrorField() {
+        var valid = 0;
+        $("#frmLogIn").find(".editor-field:visible").each(function () {
+            if ($(this).find("input").val() == "") {
+                $(this).find("span").html("Requerido");
+                $(this).find("span").css({ display: 'block' });
+                valid++;
+            } else {
+                $(this).find("span").hide();
+            }
+
+        });
+            if (valid==0) {
+                $("#logonButton").show();
+                $("#logonButtonDisabled").hide();
+            } else {
+                $("#logonButton").hide();
+                $("#logonButtonDisabled").show();
+            }
+            $("#dialogLogin").animate({ height: "420px" });
+            $("#dialogLogin").css("overflowY", "auto !important");
+
+        }
     function updateWin() {
         //var url = window.location.protocol + '//' + window.location.host + window.location.pathname;
 
@@ -80,7 +112,8 @@
             </div>
             <div id="divOperacionExitosaPopUp">Operacion Exitosa</div>
             <br style="height: 5px" />
-            <input type="submit" id="logonButton" value="Log On" />
+            <input type="submit" id="logonButton" value="Log On" style="display:none" />
+            <input type="button" value="Log On" class="submit submitDisabled" id="logonButtonDisabled"/>
         </fieldset>
         <p>En caso de no recordar su contraseña haga <a href="#" id="RecoverPasswordLink">click aqui</a></p>
         <p>@Html.ActionLink("Registrese", "Register","Usuario") si no posee una cuenta.</p>
