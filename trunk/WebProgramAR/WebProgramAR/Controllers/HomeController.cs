@@ -9,6 +9,8 @@ using WebProgramAR.Entidades;
 using WebProgramAR.Sitio.Models;
 using WebProgramAR.MailSender;
 using System.Text;
+using System.IO;
+using System.Web.Hosting;
 
 namespace WebProgramAR.Controllers
 {
@@ -78,6 +80,34 @@ namespace WebProgramAR.Controllers
         {
             ViewBag.Message = "Ayuda";
             return View();
+        }
+
+        public ActionResult DescargarRagnarok()
+        {
+            ViewBag.Message = "Descargar Ragnarok";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DescargarInstaladorRagnarok()
+        {
+            FileInfo fileInfo = new FileInfo(Path.Combine(HostingEnvironment.MapPath("~/Files"), "zsnesw151.zip"));
+             
+            
+            //var document = "";
+            //var cd = new System.Net.Mime.ContentDisposition
+            //{
+            //    // for example foo.bak
+            //    FileName = fileInfo.Name,
+
+            //    // always prompt the user for downloading, set to true if you want 
+            //    // the browser to try to show the file inline
+            //    Inline = false,
+            //};
+            //Response.AppendHeader("Content-Disposition", cd.ToString());
+
+
+            return File(fileInfo.FullName, "application/zip","Instalador.zip");
         }
     }
 }
