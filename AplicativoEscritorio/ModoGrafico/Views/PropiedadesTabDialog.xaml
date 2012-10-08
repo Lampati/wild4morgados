@@ -14,6 +14,8 @@
                 <x:Type TypeName="interfaz:TipoDato"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+      
+
     </Window.Resources>
     <Border Height="Auto">
         <Border.Background>
@@ -93,8 +95,15 @@
 
                                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Path=Tipo}" Header="Tipo" Width="80" 
                                     ItemsSource="{Binding Source={StaticResource TiposDeDato}}" />
-                                <DataGridCheckBoxColumn Binding="{Binding Path=EsReferencia}" Header="Ref" Width="40"   />
-                                
+                                <DataGridCheckBoxColumn Binding="{Binding Path=EsReferencia}" Header="Ref" Width="40"   >
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
+
                                 <DataGridTemplateColumn  Header="" Width="32">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -127,7 +136,7 @@
                                      CommandManager.PreviewExecuted="dgDataArreglos_PreviewExecuted" CanUserAddRows="False"
                               MaxHeight="100" MinHeight="100" ScrollViewer.CanContentScroll="True"
                                   CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" 
-                                  CanUserSortColumns="False">
+                                  CanUserSortColumns="False" VerticalContentAlignment="Center" VerticalAlignment="Center">
                             <DataGrid.Resources>
                                 <!-- SINGLE CLICK EDITING -->
                                 <Style TargetType="{x:Type DataGridCell}">
@@ -139,7 +148,14 @@
                                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Path=Tipo}" Header="Tipo" Width="90" 
                                     ItemsSource="{Binding Source={StaticResource TiposDeDato}}" />
                                 <DataGridTextColumn Binding="{Binding Path=Tope}" Header="Tope" Width="110" />
-                                <DataGridCheckBoxColumn Binding="{Binding Path=EsReferencia}" Header="Ref" Width="40"   />
+                                <DataGridCheckBoxColumn Binding="{Binding Path=EsReferencia}" Header="Ref" Width="40" >
+                                    <DataGridCheckBoxColumn.ElementStyle>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.ElementStyle>
+                                </DataGridCheckBoxColumn>
                                 <DataGridTemplateColumn  Header="" Width="30">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
