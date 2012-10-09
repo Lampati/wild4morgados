@@ -76,9 +76,9 @@ namespace LibreriaActividades
             //var padreTemplated = ((UserControl)e.OriginalSource).TemplatedParent;
             //var padre = ((UserControl)e.OriginalSource).Parent;
 
-            bool esDeclaracion = textoCopiado.Contains("<l:DeclaracionVariable)")
-                                || textoCopiado.Contains("<l:DeclaracionConstante)")
-                                || textoCopiado.Contains("<l:DeclaracionArreglo)");
+            bool esDeclaracion = textoCopiado.Contains("<l:DeclaracionVariable")
+                                || textoCopiado.Contains("<l:DeclaracionConstante")
+                                || textoCopiado.Contains("<l:DeclaracionArreglo");
 
             ModelProperty prop = this.ModelItem.Properties["AdmiteDeclaraciones"];
 
