@@ -992,7 +992,11 @@ namespace Ragnarok.UserControls.Toolbar
                         System.IO.File.WriteAllBytes(pathEntero, arch);
                     }                
                     
-                }              
+                }
+                else
+                {
+                    System.IO.File.WriteAllBytes(pathEntero, arch);
+                }
 
                 System.Diagnostics.Process.Start(pathEntero);
             }
