@@ -440,10 +440,10 @@
     <Content Include="Views\Account\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Error\FileNotFound.cshtml" />
+    <Content Include="Views\Error\FileNotFound.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Error\NoAccess.cshtml" />
+    <Content Include="Views\Error\NoAccess.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DescargarRagnarok.cshtml" />
