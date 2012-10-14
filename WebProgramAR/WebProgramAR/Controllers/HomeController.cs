@@ -91,7 +91,7 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult DescargarInstaladorRagnarok()
         {
-            FileInfo fileInfo = new FileInfo(Path.Combine(HostingEnvironment.MapPath("~/Files"), "zsnesw151.zip"));
+            FileInfo fileInfo = new FileInfo(Path.Combine(HostingEnvironment.MapPath("~/Files"), "Instalador.zip"));
              
             
             //var document = "";
