@@ -31,7 +31,7 @@ namespace WebProgramAR.Negocio
         {
             Usuario usuarioAEliminar = GetUsuarioById(u.UsuarioId);
             CursoNegocio.EliminarCursosDeUsuario(usuarioAEliminar.UsuarioId);
-
+            ReglasSeguridadDA.EliminarByUsuarioId(usuarioAEliminar.UsuarioId);
 
 
             UsuarioNegocio.QuitarRolesUsuario(usuarioAEliminar);

@@ -1,6 +1,7 @@
 ﻿@model WebProgramAR.Entidades.Ejercicio
 @{
-    
+     WebProgramAR.Entidades.Usuario localUser = Model.Usuario;
+     string localUserName  = (localUser != null) ? localUser.UsuarioNombre : "(usuario borrado)";
 }
 
 <script type="text/javascript">
@@ -29,26 +30,26 @@
         <h3><a href="#">@Html.LabelFor(model => model.Enunciado)</a></h3>
         <div>
             <p>
-                @Html.Raw(Html.Encode(Model.Enunciado).Replace("\r\n", "<br />"))
+                @Html.Raw(Html.Encode(Model.Enunciado).Replace("\r\n", "<br />").Replace("\t", "&emsp;"))
             </p>
         </div>
         <h3><a href="#">@Html.LabelFor(model => model.SolucionTexto)</a></h3>
         <div>
             <p>
-                @Html.Raw(Html.Encode(Model.SolucionTexto).Replace("\r\n", "<br />"))
+                @Html.Raw(Html.Encode(Model.SolucionTexto).Replace("\r\n", "<br />").Replace("\t", "&emsp;"))
             </p>
         </div>
         <h3><a href="#">@Html.LabelFor(model => model.SolucionGarGar)</a></h3>
         <div>
             <p>
-                @Html.Raw(Html.Encode(Model.SolucionGarGar).Replace("\r\n", "<br />"))
+                @Html.Raw(Html.Encode(Model.SolucionGarGar).Replace("\r\n", "<br />").Replace("\t","&emsp;"))
             </p>
         </div>
     </div>
 </div>
 <div class="fila">
     <div class="display-label-delete">Autor</div>
-    <div class="display-field-delete">@Model.Usuario.UsuarioNombre</div>
+    <div class="display-field-delete">@localUserName</div>
 </div>
 <div class="fila">
     <div class="display-label-delete">Estado</div>
