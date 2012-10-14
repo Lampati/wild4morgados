@@ -549,9 +549,6 @@
 			<Izq>L</Izq>
 			<Ders>
 				<Der>
-					<Expresion>literal</Expresion>
-				</Der>
-				<Der>
 					<Expresion>EXPRBOOLEANAS</Expresion>
 				</Der>
 			</Ders>
