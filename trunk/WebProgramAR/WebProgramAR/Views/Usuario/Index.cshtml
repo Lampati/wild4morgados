@@ -185,7 +185,7 @@ else
         $(".grid").find("tbody").append("No se han encontrado Resultados");
     }
 
-    convertSelect("tipoUsuarioFiltrado", 1);
+    convertSelect("tipoUsuarioFiltrado");
     function OnChangeDo(div) {
         if (div.attr('id') == "tipoUsuarioFiltrado") {
             $("#tipoUsuarioFiltrado").children().each(function () { $(this).removeAttr("selected"); });

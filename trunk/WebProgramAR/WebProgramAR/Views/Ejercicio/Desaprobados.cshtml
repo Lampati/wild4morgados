@@ -109,7 +109,7 @@
             grid.Column("EjercicioId", header: "Identificador"),
             grid.Column("Nombre", header: "Nombre"),
             grid.Column("NivelEjercicio", header: "Nivel"),
-            grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
+            grid.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
             grid.Column("", 
                   header: "",
                   format: @<text>
@@ -145,7 +145,7 @@ else
             grid.Column("EjercicioId", header: "Identificador"),
             grid.Column("Nombre", header: "Nombre"),
             grid.Column("NivelEjercicio", header: "Nivel"),
-            grid.Column("Usuario.UsuarioNombre", header: "Usuario"),
+            grid.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
             grid.Column("", 
                   header: "",
                   format: @<text>

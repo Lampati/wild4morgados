@@ -67,8 +67,11 @@
             }
         });
         $(".helpContent").hide();
+        $("body").css("overflow-y", "auto");
+            
         $(".helpTitle").live("click", function () {
             $(this).parents(".helpBlock").find(".helpContent").slideToggle("fast");
+            
         });
     });
 </script>

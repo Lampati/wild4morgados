@@ -139,6 +139,22 @@ namespace WebProgramAR.DataAccess
             return query;
         }
 
-      
+
+
+        public static void EliminarByUsuarioId(int usuarioId)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<ReglasSeguridad> query = from u in db.ReglasSeguridads
+                                                    where (u.UsuarioId == usuarioId)
+                                                    select u;
+                foreach (var item in query.ToList())
+                {
+                    db.ReglasSeguridads.DeleteObject(item);
+                }
+                db.SaveChanges();
+            }
+            
+        }
     }
 }

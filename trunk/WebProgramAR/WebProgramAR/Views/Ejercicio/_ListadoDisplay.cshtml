@@ -44,14 +44,12 @@
                     <div class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "nivel")"  style="display:block">  
                         @item.NivelEjercicio
                     </div>    
-                    
-            
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")')" style="display:block">
                         <div class="preElement toggle_off" id="@string.Format("pre_{0}{1}{2}", nombreDivCurso, i, "enunciado")"></div>Enunciado
                     </div>   
             
                     <div class="item"   id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "enunciado")"  style="display:block">  
-                        @item.Enunciado
+                        @Html.Raw(Html.Encode(item.Enunciado).Replace("\r\n", "<br />").Replace("\t", "&emsp;"))
                     </div>          
 
                     <div  class="collapseItem collapse" onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")')" style="display:block">
@@ -59,7 +57,7 @@
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionTexto")" style="display:block">  
-                        @item.SolucionTexto
+                        @Html.Raw(Html.Encode(item.SolucionTexto).Replace("\r\n", "<br />").Replace("\t", "&emsp;"))
                     </div>
 
                     <div class="collapseItem collapse"  onclick="colapseClick('@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")')"  style="display:block">
@@ -67,7 +65,7 @@
                     </div>   
             
                     <div  class="item"  id="@string.Format("{0}{1}{2}", nombreDivCurso, i, "solucionGargar")"  style="display:block">  
-                        @item.SolucionGarGar
+                        @Html.Raw(Html.Encode(item.SolucionGarGar).Replace("\r\n", "<br />").Replace("\t", "&emsp;"))
                     </div>
 
                 
