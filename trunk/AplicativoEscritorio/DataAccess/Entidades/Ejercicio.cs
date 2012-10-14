@@ -277,6 +277,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             sb.Append(esValidoSubirWeb);
             sb.Append(this.solucionTexto);
             sb.Append(this.solucionGargar);
+            sb.Append(this.gargar);
             if (!Object.Equals(this.testsPrueba, null))
                 foreach (TestPrueba test in this.testsPrueba)
                     sb.Append(test.ToString());
