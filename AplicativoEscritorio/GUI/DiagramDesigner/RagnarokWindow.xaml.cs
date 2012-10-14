@@ -320,27 +320,28 @@ namespace Ragnarok
                 }
                 else
                 {
-                    ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
-                    //string gargar = new Identador( programa.Gargar).Identar();
-
-                    //ActividadViewModelBase activ = programa.EncontrarActividadPorLinea(20);
-                    //ActividadViewModelBase activ2 = programa.EncontrarActividadPorLinea(24);
-                    //ActividadViewModelBase activ3 = programa.EncontrarActividadPorLinea(4);
-                    //ActividadViewModelBase activ4 = programa.EncontrarActividadPorLinea(1);
-                    //ActividadViewModelBase activ5 = programa.EncontrarActividadPorLinea(14);
-
-
-                    ResultadoCompilacion res = Compilar(programa.Gargar);
-
-                    if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                    try
                     {
-                        Modo = e.ModoSeleccionado;
+                        ProgramaViewModel programa = Esquema.RepresentacionGraficaActual;
 
-                        Esquema.GarGarACompilar = new Identador(programa.Gargar).Identar();
+                        ResultadoCompilacion res = Compilar(programa.Gargar);
+
+                        if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
+                        {
+                            Modo = e.ModoSeleccionado;
+
+                            Esquema.GarGarACompilar = new Identador(programa.Gargar).Identar();
+                        }
+                        else
+                        {
+                            //Pq no hago el cambio, mantengo el actual
+                            RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
+                            botonPresionado.IsChecked = false;
+                        }
                     }
-                    else
+                    catch (InterfazTextoGrafico.Excepciones.ExcepcionLlamadaCircular ex)
                     {
-                        //Pq no hago el cambio, mantengo el actual
+                        MessageBox.Show(ex.Message, "Llamada circular detectada", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         RibbonToggleButton botonPresionado = e.SourceEvent.Source as RibbonToggleButton;
                         botonPresionado.IsChecked = false;
                     }
