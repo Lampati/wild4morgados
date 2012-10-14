@@ -2558,7 +2558,8 @@ enfasis
 
 .pagination li {
 	float:left;
-	margin:0 1px;
+	margin:0 5px;
+	overflow:hidden !important;
 	list-style:none;
 }
 
@@ -2570,7 +2571,7 @@ enfasis
 	background-image:url(images/pagination.png);
 	background-position:0 0;
 	float:left;
-	overflow:hidden;
+	overflow:hidden !important;
 }
 
 .pagination li.current a {
