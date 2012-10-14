@@ -45,6 +45,7 @@
     <Compile Include="AsignacionViewModel.cs" />
     <Compile Include="Auxiliares\DetectorLoops.cs" />
     <Compile Include="Auxiliares\GlobalXMLTags.cs" />
+    <Compile Include="Excepciones\ExcepcionLlamadaCircular.cs" />
     <Compile Include="ParametroViewModel.cs" />
     <Compile Include="DeclaracionesGlobalesViewModel.cs" />
     <Compile Include="DeclaracionArregloViewModel.cs" />

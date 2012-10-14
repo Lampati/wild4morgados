@@ -199,7 +199,14 @@ namespace Ragnarok.UserControls.Entorno
                 ArchCargado.ModificadoDesdeUltimoGuardado = true;
                 ArchCargado.CompilacionCorrecta = false;
                 ArchCargado.EjecucionCorrecta = false;
-                ArchCargado.RepresentacionGrafica = modoGrafico.ObtenerProgramaEnModoGrafico();
+                try
+                {
+                    ArchCargado.RepresentacionGrafica = modoGrafico.ObtenerProgramaEnModoGrafico();
+                }
+                catch (InterfazTextoGrafico.Excepciones.ExcepcionLlamadaCircular ex)
+                {
+                    MessageBox.Show(ex.Message, "Llamada circular detectada", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
         }
 

@@ -47,7 +47,7 @@ namespace InterfazTextoGrafico
                 if (regex.IsMatch(codigo, ixComienzo))
                 {
                     this.detector.AgregarLlamada(invocador, key2);
-                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key2], ref orden, key2);
+                    this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key2);
                     if (!sl.ContainsValue(proc))
                     {
                         sl.Add(orden++, proc);
