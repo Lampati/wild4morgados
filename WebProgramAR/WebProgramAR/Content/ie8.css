@@ -2538,6 +2538,7 @@ ul.tabs
 	float:left;
 	margin:0 1px;
 	list-style:none;
+	overflow:hidden !important;
 }
 
 .pagination li a {
@@ -2548,7 +2549,7 @@ ul.tabs
 	background-image:url(images/pagination.png);
 	background-position:0 0;
 	float:left;
-	overflow:hidden;
+	overflow:hidden !important;
 }
 
 .pagination li.current a {
