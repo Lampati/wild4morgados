@@ -390,6 +390,8 @@ namespace Ragnarok
                                     }
 
                                     this.ClearBlurEffect();
+
+                                    Focus();
                                 }
                             }
                             else
