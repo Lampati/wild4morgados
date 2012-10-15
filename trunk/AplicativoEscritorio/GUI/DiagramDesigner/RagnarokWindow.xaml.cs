@@ -796,6 +796,7 @@ namespace Ragnarok
 
                 ClearBlurEffect();
 
+                Focus();
             }
             else
             {
@@ -840,8 +841,6 @@ namespace Ragnarok
                     ArchCargado.CompilacionCorrecta = true;
                 }
 
-               
-
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
 
                 if (File.Exists(res.ArchTemporalResultadosEjecucionConRuta))
@@ -864,21 +863,27 @@ namespace Ragnarok
             
         }
 
-        private void SetearCompilacionCorrecta()
+        private delegate void VoidHandler();
+
+        public static void DoEvents()
         {
-            
+            Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Background, new VoidHandler(() => { }));
         }
 
         private void MostrarResultadosCompilacion(ResultadoCompilacion res)
         {
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+                Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
                 {
                     BarraEstado.ColocarResCompilacion(true);
                     BarraEstado.Estado = "Compilación Correcta";
-                }));              
-               
+                }));
+
+                RagnarokWindow.DoEvents();
+
+                //BarraEstado.ColocarResCompilacion(true);
+                //BarraEstado.Estado = "Compilación Correcta";
             }
             else
             {
