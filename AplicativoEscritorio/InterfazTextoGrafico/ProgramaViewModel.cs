@@ -164,7 +164,7 @@ namespace InterfazTextoGrafico
 
             int lineaAux = lineaComienzo;
 
-            if (ConstantesGlobales != null)
+            if (ConstantesGlobales != null && ConstantesGlobales.ListaActividades != null && ConstantesGlobales.ListaActividades.Count > 0)
             {
                 //Por la linea constantes
                 lineaAux++;
@@ -172,7 +172,7 @@ namespace InterfazTextoGrafico
                 lineaAux = ConstantesGlobales.LineaFinal + 1;
             }
 
-            if (VariablesGlobales != null)
+            if (VariablesGlobales != null && VariablesGlobales.ListaActividades != null && VariablesGlobales.ListaActividades.Count > 0)
             {
                 //Por la linea variables
                 lineaAux++;
