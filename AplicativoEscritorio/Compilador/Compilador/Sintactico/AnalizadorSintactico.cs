@@ -148,6 +148,54 @@ namespace CompiladorGargar.Sintactico
                 retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, false));
                 //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
             }
+            //catch (ErrorLexicoException ex)
+            //{
+              
+            //    string mensajeAMostrar = ex.Descripcion;
+            //    int filaAMostrar = ex.Fila;
+            //    int colAMostrar = ex.Columna;
+
+            //    try
+            //    {
+            //        ErroresManager.AnalizadorErroresSintacticos analizador = new ErroresManager.AnalizadorErroresSintacticos(
+            //                                                                       EstadoSintactico.ListaLineaActual,
+            //                                                                       EstadoSintactico.ContextoGlobal,
+            //                                                                       EstadoSintactico.ContextoLinea,
+            //                                                                       this.CadenaEntrada.CadenaEntera);
+            //        try
+            //        {
+            //            analizador.Validar();
+            //        }
+            //        catch (CompiladorGargar.Sintactico.ErroresManager.ValidacionException excepVal)
+            //        {
+            //            mensajeAMostrar = excepVal.Message;
+            //            filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
+            //            colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
+            //            this.habilitarSemantico = false;
+
+            //            retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, true, excepVal.MensjError));
+            //        }
+            //    }
+            //    catch (ErroresManager.AnalizadorErroresException exAnaliz)
+            //    {
+            //        mensajeAMostrar = exAnaliz.Message;
+            //        filaAMostrar = exAnaliz.Fila != -1 ? exAnaliz.Fila : filaAMostrar;
+            //        colAMostrar = exAnaliz.Columna != -1 ? exAnaliz.Columna : colAMostrar;
+
+            //        CompiladorGargar.Sintactico.ErroresManager.Errores.MensajeError mensErr = new CompiladorGargar.Sintactico.ErroresManager.Errores.ErrorVacio();
+            //        mensErr.MensajeModoTexto = exAnaliz.Message;
+            //        mensErr.MensajeModoGrafico = exAnaliz.MensajeModoGrafico;
+            //        mensErr.EsErrorBienDefinido = false;
+
+            //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, true, mensErr)); //siempre paro la compilacion al primer error
+            //    }
+
+          
+            //    if (cantErroresSintacticos >= GlobalesCompilador.CANT_MAX_ERRORES_SINTACTICOS)
+            //    {
+            //        retorno.Add(new PasoAnalizadorSintactico("Se paró la compilacion por la cantidad de errores.", GlobalesCompilador.TipoError.Sintactico, 0, 0, true));
+            //    }
+            //}
             catch (ErrorSintacticoException ex)
             {
                 if (ex.Mostrar)
@@ -181,7 +229,7 @@ namespace CompiladorGargar.Sintactico
                         this.habilitarSemantico = false;
                         pararCompilacion = true; //siempre paro la compilacion al primer error
 
-                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion,excepVal.MensjError)); 
+                        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, excepVal.MensjError));
                     }
                 }
                 catch (ErroresManager.AnalizadorErroresException exAnaliz)
@@ -649,7 +697,15 @@ namespace CompiladorGargar.Sintactico
                         {
                             lexemaError = t.Componente.CaracterErroneo;
                         }
-                        throw new ErrorLexicoException(string.Format("El caracter {0} es invalido en este contexto", lexemaError), t.Componente.Fila, t.Componente.Columna);
+
+                        string errorMensaje = string.Format("El caracter {0} es invalido en este contexto", lexemaError);
+
+                        if (t.Componente.Descripcion != null)
+                        {
+                            errorMensaje = t.Componente.Descripcion;
+                        }                            
+
+                        throw new ErrorLexicoException(errorMensaje, t.Componente.Fila, t.Componente.Columna);
                     }
 
                     if (t.Componente.Token == ComponenteLexico.TokenType.Numero)

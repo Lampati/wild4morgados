@@ -890,6 +890,8 @@ namespace Ragnarok
                 BarraEstado.ColocarResCompilacion(false);
                 BarraEstado.Estado = "Error en compilación";
 
+                res.FiltrarListaErroresSintacticos();
+
                 if (Modo == ModoVisual.Flujo)
                 {
                     MostrarResultadosModoGrafico(res);

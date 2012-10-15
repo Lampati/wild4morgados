@@ -12,7 +12,12 @@ namespace CompiladorGargar.Auxiliares.AF
     {
         private List<Estado> estados;
         private List<FuncionTransicion> transiciones;
+
         private String alfabeto;
+        public String Alfabeto
+        {
+            get { return alfabeto; }
+        }
 
         private String pathArchAFD;
 
@@ -22,6 +27,7 @@ namespace CompiladorGargar.Auxiliares.AF
             get { return estadoActual; }
         }
 
+      
         
 
         public AFD(String path = null)

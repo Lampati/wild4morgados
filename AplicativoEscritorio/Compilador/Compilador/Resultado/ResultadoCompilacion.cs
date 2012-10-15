@@ -82,6 +82,43 @@ namespace CompiladorGargar.Resultado
 
             return strBldr.ToString();
         }
+
+        public void FiltrarListaErroresSintacticos()
+        {
+            List<int> listaPosicionesRemover = new List<int>();
+            List<PosicionErrorSintactico> listaErroresYaVistos = new List<PosicionErrorSintactico>();
+
+            for (int i = 0; i < this.ListaErrores.Count; i++)
+            {
+                if ( this.ListaErrores[i].TipoError == GlobalesCompilador.TipoError.Sintactico && this.ListaErrores[i].MensajeError != null)
+                {
+                    //Pregunto si el error ya aparece en la linea. Si aparece, con distinta columna, lo saco.
+                    if (listaErroresYaVistos.Find(x => x.CodigoGlobal == this.ListaErrores[i].MensajeError.CodigoGlobal && x.Fila == this.ListaErrores[i].Fila) == null)
+                    {
+                        listaErroresYaVistos.Add(new PosicionErrorSintactico() { CodigoGlobal = this.ListaErrores[i].MensajeError.CodigoGlobal, Fila = this.ListaErrores[i].Fila });
+                    }
+                    else
+                    {
+                        listaPosicionesRemover.Add(i);
+                    }
+                }
+            }
+
+            listaPosicionesRemover.Sort();
+            listaPosicionesRemover.Reverse();
+
+            foreach (var item in listaPosicionesRemover)
+            {
+                this.ListaErrores.RemoveAt(item);
+            }
+        }
+    }
+
+    public class PosicionErrorSintactico
+    {
+        public int Fila { get; set; }
+        public int CodigoGlobal { get; set; }
+
     }
 
     
