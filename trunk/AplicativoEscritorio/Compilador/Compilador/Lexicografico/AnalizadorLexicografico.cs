@@ -116,8 +116,19 @@ namespace CompiladorGargar.Lexicografico
                                 componente.Fila = charBuffer.Fila;
                                 //componente.Fila = charBuffer.FilaUltChar;
                                 componente.Columna = charBuffer.Columna - componente.Lexema.Length;
-                                componente.Descripcion = "'"+componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
+                                componente.Descripcion =string.Empty;
                                 componente.CaracterErroneo = this.charBuffer.PeekProximoChar().ToString();
+
+                                if (this.afd.EstadoActual.Nombre == "lit1" && componente.CaracterErroneo == "\r")
+                                {
+                                    componente.Descripcion = "Los literales deben comenzar y terminar en la misma linea con una comilla simple"; 
+                                }
+
+                                if (!afd.Alfabeto.Contains(componente.Lexema.Trim()))
+                                {
+                                    componente.Descripcion = string.Format("'{0}' no es un lexema valido en el lenguaje GarGar", componente.CaracterErroneo);
+                                }
+
                                 afd.ResetearAFD();
                                 return componente;
                             }
@@ -143,7 +154,23 @@ namespace CompiladorGargar.Lexicografico
                             componente.Fila = charBuffer.Fila;
                             //componente.Fila = this.charBuffer.FilaUltChar;
                             componente.Columna = charBuffer.Columna - componente.Lexema.Length;
-                            componente.Descripcion = "'" + componente.Lexema + "' no es un lexema valido en el lenguaje CPL";
+
+                            if (afd.Alfabeto.Contains(componente.Lexema.Trim()))
+                            {
+                                componente.Descripcion = string.Format("'{0}' no tiene lugar en la linea", componente.Lexema);
+                            }
+                            else
+                            {
+                                componente.Descripcion = string.Format("'{0}' no es un lexema valido en el lenguaje GarGar", componente.Lexema);
+                            }
+
+                            
+
+                            if (this.afd.EstadoActual.Nombre == "lit1" && componente.CaracterErroneo == "\r")
+                            {
+                                componente.Descripcion = "Los literales deben comenzar y terminar en la misma linea con una comilla simple";
+                            }
+
                             afd.ResetearAFD();
                             return componente;
                         }

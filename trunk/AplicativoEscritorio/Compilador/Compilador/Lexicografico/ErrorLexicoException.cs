@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CompiladorGargar.Sintactico.ErroresManager.Errores;
 
 namespace CompiladorGargar.Lexicografico
 {
@@ -13,5 +14,7 @@ namespace CompiladorGargar.Lexicografico
         {
             this.Tipo = "Lexico";
         }
+
+  
     }
 }

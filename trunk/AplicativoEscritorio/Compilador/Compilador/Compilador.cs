@@ -10,6 +10,7 @@ using CompiladorGargar.Resultado.Auxiliares;
 using CompiladorGargar.Resultado;
 using CompiladorGargar.Lexicografico;
 using EJEKOR;
+using CompiladorGargar.Sintactico.ErroresManager;
 
 namespace CompiladorGargar
 {
@@ -288,7 +289,8 @@ namespace CompiladorGargar
                         GlobalesCompilador.TipoError.Sintactico,
                         ex.Fila,
                         ex.Columna));
-                }
+                }             
+
                 catch (Exception ex)
                 {
                     res.CompilacionGarGarCorrecta = false;
