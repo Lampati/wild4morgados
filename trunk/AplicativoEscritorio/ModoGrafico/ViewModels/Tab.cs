@@ -24,13 +24,13 @@ using ModoGrafico.Interfaces;
     using System.Activities.Presentation.Model;
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
+    using System.Activities.Presentation.View;
 
     public abstract class Tab : BaseViewModel, IPropiedadesContexto 
     {
         public static int _generadorId = 0;
 
-        private bool cargado = false;
-        private bool cargadoDeclaraciones = false;
+       
 
         public delegate void WorkflowChangedEventHandler(object o, WorkflowChangedEventArgs args);
         public event WorkflowChangedEventHandler WorkflowChangedEvent;
@@ -127,20 +127,7 @@ using ModoGrafico.Interfaces;
             parametros = new ObservableCollection<ParametroViewModel>();
             tabId = ++_generadorId;
 
-            if (!(this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion))
-            {
-
-                wd = new WorkflowDesigner();
-                wd.ModelChanged += new EventHandler(wd_ModelChanged);
-                cargado = false;
-
-                if (!(this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable))
-                {
-                    wdDecl = new WorkflowDesigner();
-                    wdDecl.ModelChanged += new EventHandler(wd_ModelChanged);
-                    cargadoDeclaraciones = false;
-                }
-            }
+           
         }
 
         ~Tab()
@@ -172,9 +159,11 @@ using ModoGrafico.Interfaces;
                 if (this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion)
                     return null;
 
-                if (!cargado)
+                if (Object.Equals(wd, null))
                 {
-                    cargado = true;
+                    wd = new WorkflowDesigner();
+                    wd.ModelChanged += new EventHandler(wd_ModelChanged);
+                    
                     
                     if (this is TabItemPrincipal)
                     {
@@ -264,8 +253,27 @@ using ModoGrafico.Interfaces;
                           {
                               Application.Current.Dispatcher.Invoke(
                                 System.Windows.Threading.DispatcherPriority.Normal,
-                                new Action(CargarWf)
-                                  
+                                new Action(delegate()
+                                    {
+                                        wd.Load(SecuenciaInicialProcedimiento);
+                                        wd.Flush();
+
+                                        ModelService ms = wd.Context.Services.GetService<ModelService>();
+                                        if (ms != null)
+                                        {
+                                            ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
+                                        }
+
+                                        this.ReconstruirContextMenu(wd);
+                                        if (((Grid)wd.View).Children.Count > 0)
+                                        {
+                                            System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
+                                            dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.None;
+
+                                        }
+
+                                    })
+
                               );
                           }
                       ));
@@ -286,9 +294,11 @@ using ModoGrafico.Interfaces;
                 if (this is TabItemDeclaracionConstante || this is TabItemDeclaracionVariable || this is TabItemAgregarProcedimiento || this is TabItemAgregarFuncion)
                     return null;
 
-                if (!cargadoDeclaraciones)
+                if (Object.Equals(wdDecl, null))
                 {
-                    cargadoDeclaraciones = true;
+                    wdDecl = new WorkflowDesigner();
+                    wdDecl.ModelChanged += new EventHandler(wd_ModelChanged);
+
                   
 
                     if (actividadViewModel != null)
@@ -312,7 +322,24 @@ using ModoGrafico.Interfaces;
                           {
                               Application.Current.Dispatcher.Invoke(
                                 System.Windows.Threading.DispatcherPriority.Normal,
-                                new Action(CargarWfDeclaraciones)
+                                new Action(delegate()
+                                    {
+                                        wdDecl.Load(SecuenciaInicialDeclaraciones);
+                                        wdDecl.Flush();
+
+                                        ModelService ms = wdDecl.Context.Services.GetService<ModelService>();
+                                        if (ms != null)
+                                        {
+                                            ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
+                                        }
+
+                                        this.ReconstruirContextMenu(wdDecl);
+                                        if (((Grid)wdDecl.View).Children.Count > 0)
+                                        {
+                                            System.Activities.Presentation.View.DesignerView dv = ((Grid)wdDecl.View).Children[0] as System.Activities.Presentation.View.DesignerView;
+                                            dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.None;
+                                        }
+                                    })
                                  );
                           }
                       ));
@@ -322,68 +349,6 @@ using ModoGrafico.Interfaces;
                 
 
                 return wdDecl.View;
-            }
-        }
-
-        private void CargarWf()
-        {
-            try
-            {
-
-                wd.Load(SecuenciaInicialProcedimiento);
-                //wd.Flush();
-
-                ModelService ms = wd.Context.Services.GetService<ModelService>();
-                if (ms != null)
-                {
-                    ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
-                }
-
-                this.ReconstruirContextMenu(wd);
-                if (((Grid)wd.View).Children.Count > 0)
-                {
-                    System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
-                    dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
-
-                }
-
-                
-            }
-            catch (Exception ex)
-            {
-                
-            }
-        }
-
-      
-
-        private void CargarWfDeclaraciones()
-        {
-            try
-            {
-                wdDecl.Load(SecuenciaInicialDeclaraciones);
-                //wdDecl.Flush();
-
-                ModelService ms = wdDecl.Context.Services.GetService<ModelService>();
-                if (ms != null)
-                {
-                    ms.ModelChanged += new EventHandler<ModelChangedEventArgs>(wdModel_ModelChanged);
-                }
-
-                this.ReconstruirContextMenu(wdDecl);
-                if (((Grid)wdDecl.View).Children.Count > 0)
-                {
-                    System.Activities.Presentation.View.DesignerView dv = ((Grid)wdDecl.View).Children[0] as System.Activities.Presentation.View.DesignerView;
-                    dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.MiniMap | System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
-                }
-
-                
-             
-            }
-            catch (Exception ex)
-            {
-             
-
             }
         }
 
@@ -451,63 +416,113 @@ using ModoGrafico.Interfaces;
             MenuItem cortar = null;
             MenuItem copiar = null;
             MenuItem pegar = null;
-            for (int i = 0; i < wd.ContextMenu.Items.Count; i++)
+            MenuItem salvarComoImagen = null;
+            MenuItem copiarComoImagen = null;
+
+            if (wd.ContextMenu.Items.Count > 0)
             {
-                MenuItem mi = wd.ContextMenu.Items[i] as MenuItem;
-                if (mi != null && (mi.InputGestureText == "Del" || mi.InputGestureText == "Supr"))
+                StringBuilder strBldr = new StringBuilder();
+                for (int i = 0; i < wd.ContextMenu.Items.Count; i++)
                 {
-                    borrar = (MenuItem)wd.ContextMenu.Items[i];
+                    MenuItem mi = wd.ContextMenu.Items[i] as MenuItem;
+
+                    if (mi != null && mi.Command == DesignerView.PasteCommand)
+                    {
+                        pegar = (MenuItem)wd.ContextMenu.Items[i];
+                    }
+
+                    if (mi != null && mi.Command == DesignerView.CopyCommand)
+                    {
+                        copiar = (MenuItem)wd.ContextMenu.Items[i];
+                    }
+
+                    if (mi != null && mi.Command == DesignerView.CutCommand)
+                    {
+                        cortar = (MenuItem)wd.ContextMenu.Items[i];
+                    }
+
+                    if (mi != null && mi.Command == DesignerView.SaveAsImageCommand)
+                    {
+                        salvarComoImagen = (MenuItem)wd.ContextMenu.Items[i];
+                    }
+
+                    if (mi != null && mi.Command == DesignerView.CopyAsImageCommand)
+                    {
+                        copiarComoImagen = (MenuItem)wd.ContextMenu.Items[i];
+                    }
+
+                    if (mi != null && (mi.InputGestureText == "Del" || mi.InputGestureText == "Supr"))
+                    {
+                        borrar = (MenuItem)wd.ContextMenu.Items[i];
+                    }
+
+
+
+                    //if (mi != null && mi.InputGestureText == "Ctrl+X")
+                    //{
+                    //    cortar = (MenuItem)wd.ContextMenu.Items[i];
+                    //}
+                    //if (mi != null && mi.InputGestureText == "Ctrl+C")
+                    //{
+                    //    copiar = (MenuItem)wd.ContextMenu.Items[i];
+                    //}
+                    //if (mi != null && mi.InputGestureText == "Ctrl+V")
+                    //{
+                    //    pegar = (MenuItem)wd.ContextMenu.Items[i];
+                    //}
                 }
-                if (mi != null && mi.InputGestureText == "Ctrl+X")
-                {
-                    cortar = (MenuItem)wd.ContextMenu.Items[i];
-                }
-                if (mi != null && mi.InputGestureText == "Ctrl+C")
-                {
-                    copiar = (MenuItem)wd.ContextMenu.Items[i];
-                }
-                if (mi != null && mi.InputGestureText == "Ctrl+V")
-                {
-                    pegar = (MenuItem)wd.ContextMenu.Items[i];
-                }
+
+                wd.ContextMenu.Items.Clear();
+
+                MenuItem m2 = new MenuItem();
+
+                //Uri uri = new Uri("Resources/Cut.png", UriKind.Relative);
+                //BitmapImage imagen = new BitmapImage(uri);
+                //System.Windows.Media.Imaging.CachedBitmap bitmap = new CachedBitmap( imagen, BitmapCreateOptions.None, BitmapCacheOption.Default);
+                //m2.Icon = new System.Windows.Controls.Image()
+                //{
+                //    Source = bitmap
+                //};
+                m2.Icon = cortar.Icon;
+                m2.Header = "Cortar";
+                m2.Command = ApplicationCommands.Cut;
+                wd.ContextMenu.Items.Add(m2);
+
+                MenuItem m3 = new MenuItem();
+                m3.Icon = copiar.Icon;
+                m3.Header = "Copiar";
+                m3.Command = ApplicationCommands.Copy;
+                wd.ContextMenu.Items.Add(m3);
+
+                MenuItem m4 = new MenuItem();
+                m4.Icon = pegar.Icon;
+                m4.Header = "Pegar";
+                m4.Command = ApplicationCommands.Paste;
+                wd.ContextMenu.Items.Add(m4);
+
+                Separator s = new Separator();
+                wd.ContextMenu.Items.Add(s);
+
+                MenuItem m = new MenuItem();
+                m.Icon = borrar.Icon;
+                m.Header = "Eliminar";
+                m.Command = ApplicationCommands.Delete;
+                wd.ContextMenu.Items.Add(m);
+
+                s = new Separator();
+                wd.ContextMenu.Items.Add(s);
+
+                m = new MenuItem();
+                m.Header = "Copiar imagen";
+                m.Command = DesignerView.CopyAsImageCommand;
+                wd.ContextMenu.Items.Add(m);
+
+                m = new MenuItem();
+                m.Header = "Salvar como imagen...";
+                m.Command = DesignerView.SaveAsImageCommand;
+                wd.ContextMenu.Items.Add(m);
+
             }
-            
-            wd.ContextMenu.Items.Clear();
-
-            MenuItem m2 = new MenuItem();
-
-            //Uri uri = new Uri("Resources/Cut.png", UriKind.Relative);
-            //BitmapImage imagen = new BitmapImage(uri);
-            //System.Windows.Media.Imaging.CachedBitmap bitmap = new CachedBitmap( imagen, BitmapCreateOptions.None, BitmapCacheOption.Default);
-            //m2.Icon = new System.Windows.Controls.Image()
-            //{
-            //    Source = bitmap
-            //};
-            m2.Icon = cortar.Icon;
-            m2.Header = "Cortar";
-            m2.Command = ApplicationCommands.Cut;
-            wd.ContextMenu.Items.Add(m2);
-
-            MenuItem m3 = new MenuItem();
-            m3.Icon = copiar.Icon;
-            m3.Header = "Copiar";
-            m3.Command = ApplicationCommands.Copy;
-            wd.ContextMenu.Items.Add(m3);
-
-            MenuItem m4 = new MenuItem();
-            m4.Icon = pegar.Icon;
-            m4.Header = "Pegar";
-            m4.Command = ApplicationCommands.Paste;
-            wd.ContextMenu.Items.Add(m4);
-
-            Separator s = new Separator();
-            wd.ContextMenu.Items.Add(s);
-
-            MenuItem m = new MenuItem();
-            m.Icon = borrar.Icon;
-            m.Header = "Eliminar";
-            m.Command = ApplicationCommands.Delete;            
-            wd.ContextMenu.Items.Add(m);
         }
 
      

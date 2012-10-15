@@ -39,6 +39,8 @@ using CompiladorGargar.Sintactico.ErroresManager.Errores;
 using SplashScreen;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
+using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace Ragnarok
 {
@@ -826,7 +828,7 @@ namespace Ragnarok
 
             if (!string.IsNullOrEmpty(res.Error))
             {
-                MessageBox.Show(res.Error);
+                MessageBox.Show(res.Error); 
             }
 
             resultadoEjecucion.ResCompilacion = res;
@@ -838,6 +840,8 @@ namespace Ragnarok
                     ArchCargado.CompilacionCorrecta = true;
                 }
 
+               
+
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
 
                 if (File.Exists(res.ArchTemporalResultadosEjecucionConRuta))
@@ -846,12 +850,8 @@ namespace Ragnarok
                 }
                 else
                 {
-                    
-
                     resultadoEjecucion.ResEjecucion = null;
                 }
-
-                
             }
 
             return resultadoEjecucion;
@@ -864,12 +864,21 @@ namespace Ragnarok
             
         }
 
+        private void SetearCompilacionCorrecta()
+        {
+            
+        }
+
         private void MostrarResultadosCompilacion(ResultadoCompilacion res)
         {
             if (res.CompilacionGarGarCorrecta && res.ResultadoCompPascal != null && res.ResultadoCompPascal.CompilacionPascalCorrecta)
             {
-                BarraEstado.ColocarResCompilacion(true);
-                BarraEstado.Estado = "Compilación Correcta";
+                this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+                {
+                    BarraEstado.ColocarResCompilacion(true);
+                    BarraEstado.Estado = "Compilación Correcta";
+                }));              
+               
             }
             else
             {
