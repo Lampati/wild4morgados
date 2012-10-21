@@ -149,7 +149,7 @@
     grid.Column("Tabla.Nombre", header: "Entidad"),
     grid.Column("Columna.Nombre", header: "Campo"),
     grid.Column("Comparador.Nombre", header: "Comparador"),
-    grid.Column("Valor", header: "Valor"),
+    grid.Column("Valor", header: "Valor", format: x => x.Valor.Length >20 ? x.Valor.Substring(0,20) + "..." : x.Valor ),
     grid.Column("Usuario", header: "Usuario", format: x => x.Usuario != null ? x.Usuario.UsuarioNombre : "Todos" ),
     grid.Column("TipoUsuario", header: "Tipo Usuario", format: x => x.TipoUsuario != null ? x.TipoUsuario.Descripcion : "Todos"),    
     grid.Column("Activa", header: "Habilitada", format: x => x.Activa ? "Si" : "No"),
