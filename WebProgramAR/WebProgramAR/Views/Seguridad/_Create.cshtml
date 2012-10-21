@@ -19,14 +19,23 @@
         $(".input-string-validation").change(function () { isValid(); });
         $("input:radio[name=groupUsuario]").change(function () { checkedRadio(); });
         $("#IsValorBool").change(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
-        $("#ValorInt").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
-        $("#ValorText").keyup(function () { $("#Valor").val($(this).val()); isValid(); });
+        $("#ValorInt").keydown(function (event) { if ($(this).val().length < 20) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9]/)) return false; } });
+        $("#ValorInt").keyup(function (event) { if ($(this).val().length < 20) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9]/)) return false; } });
+        $("#ValorText").keydown(function (event) { if ($(this).val().length < 50) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9]/)) return false; } });
+        $("#ValorText").keyup(function (event) { if ($(this).val().length < 50) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[a-zA-Z _-]/)) return false; } });
         $("#ValorDate").change(function () { $("#Valor").val($(this).val()); isValid(); });
         isValid();
         $("#btnGuardarDisabled").live('click', function () {
             showErrorField();
         });
     });
+    function checkRegexp(o, regexp) {
+        if (!(regexp.test(o))) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     function showErrorField() {
         $("#form0").find(".editor-field:visible").each(function () {
             if ($(this).find("input").attr("id") != "TipoUsuarioId") {

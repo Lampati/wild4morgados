@@ -517,7 +517,6 @@ input[type="text"], input[type="password"],textarea
 	/* Preloading the background image for the dropdown */
 	background:url("images/dropdown_slice.png") no-repeat -99999px;
 	resize:none;
-	z-index:1100;
 }
 input:focus,textarea:focus
 {
@@ -1984,7 +1983,8 @@ ul.tabs
 {
     background:#19f;
     border:3px solid #fff;
-	width:100px;
+	min-width:100px;
+	max-width:300px;
 	position:absolute;
 	right:0px;
 	top:-5px;
@@ -2041,7 +2041,8 @@ ul.tabs
 #logoutClickMe
 {
  width:100px;
- height:30px;   
+ min-height:30px;   
+ width:auto;
 }
 .logOutCandado
 {
@@ -2053,7 +2054,7 @@ ul.tabs
     height:auto;
     line-height:70%;
     margin-top:16px;
-    margin-left:40px;
+    margin-left:60px;
     padding-top:10px;
     padding-bottom:10px;
     position:absolute;
