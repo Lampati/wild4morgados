@@ -33,11 +33,14 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    bool res = this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal, f.RangoArregloSinPrefijo);
-
-                    if (!res)
+                    if (this.RangoArregloSinPrefijo != null)
                     {
-                        throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                        bool res = this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal, f.RangoArregloSinPrefijo);
+
+                        if (!res)
+                        {
+                            throw new ErrorSemanticoException(new StringBuilder("El tope de un arreglo no puede ser decimal").ToString());
+                        }
                     }
                 }
             }
