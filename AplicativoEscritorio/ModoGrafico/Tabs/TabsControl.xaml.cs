@@ -231,7 +231,7 @@
                 {
                     if (e.RemovedItems != null && e.RemovedItems.Count > 0 && e.RemovedItems[0] != null)
                     {
-                        if (e.RemovedItems[0].GetType() != typeof(ParametroViewModel))
+                        if (e.RemovedItems[0].GetType() != typeof(ParametroViewModel) && e.RemovedItems[0].GetType() != typeof(string))
                         {
                             tc.SelectedIndex = 0;
                         }
