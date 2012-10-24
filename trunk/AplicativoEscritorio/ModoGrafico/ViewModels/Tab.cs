@@ -268,7 +268,7 @@ using ModoGrafico.Interfaces;
                                         if (((Grid)wd.View).Children.Count > 0)
                                         {
                                             System.Activities.Presentation.View.DesignerView dv = ((Grid)wd.View).Children[0] as System.Activities.Presentation.View.DesignerView;
-                                            dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.None;
+                                            dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
 
                                         }
 
@@ -337,7 +337,7 @@ using ModoGrafico.Interfaces;
                                         if (((Grid)wdDecl.View).Children.Count > 0)
                                         {
                                             System.Activities.Presentation.View.DesignerView dv = ((Grid)wdDecl.View).Children[0] as System.Activities.Presentation.View.DesignerView;
-                                            dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.None;
+                                            dv.WorkflowShellBarItemVisibility = System.Activities.Presentation.View.ShellBarItemVisibility.Zoom;
                                         }
                                     })
                                  );
