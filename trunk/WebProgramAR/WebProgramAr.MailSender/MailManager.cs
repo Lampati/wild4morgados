@@ -29,13 +29,13 @@ namespace WebProgramAR.MailSender
                 mail.FechaEnvio = null;
                 //Set IsBodyHtml to true means you can send HTML email.
 
-                mail.Body = body;
+                mail.Body = Utilidades.Criptografia.Crypto.Encriptar(body);
                 mail.To = to;
             
                 MailNegocio.Alta(mail);
                 return true;
             }
-            catch
+            catch (Exception e)
             {
                 //Error, could not send the message
                 throw;
