@@ -61,7 +61,17 @@ namespace BibliotecaMails.Procesamiento
             {
                 foreach (Mail mail in WebProgramAR.DataAccess.MailDA.MailsPendientesDeEnvio())
                 {
-                    MailMessage msg = new MailMessage(mail.From, mail.To, mail.Subject, mail.Body);
+                    string body = String.Empty;
+                    try { body = Utilidades.Criptografia.Crypto.Desencriptar(mail.Body); }
+                    catch (Exception ex)
+                    {
+                        //si hubo algun error al desencriptar, lo marcamos como enviado y continuamos con el siguiente mail.
+                        this.log.Loguear("Error al desencriptar el cuerpo del mensaje --> " + ex.Message + Environment.NewLine + "Stack:" + Environment.NewLine + ex.StackTrace,
+                            NivelLog.Normal, ClaseLog.Error);
+                        WebProgramAR.DataAccess.MailDA.ActualizarEstadoMail(mail);
+                        continue;
+                    }
+                    MailMessage msg = new MailMessage(mail.From, mail.To, mail.Subject, body);
                     try
                     {
                         this.log.Loguear(String.Format("Enviando mail {0}...", mail.id.ToString()), NivelLog.Debug, ClaseLog.Informacion);
