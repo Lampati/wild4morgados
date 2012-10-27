@@ -12,7 +12,7 @@ using WebProgramAR.Negocio;
 
 namespace WebProgramAR.Controllers
 {
-    public class AccountController : ControllerBase
+    public class ErrorController : ControllerBase
     {
         
         //

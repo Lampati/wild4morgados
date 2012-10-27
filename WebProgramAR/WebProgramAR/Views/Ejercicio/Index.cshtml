@@ -32,6 +32,11 @@
                 $(this).removeClass("selected");
             }
         });
+        $("#nombre").keydown(function (event) {
+            if ($(this).val().length == 255) {
+                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
+            }
+        });
         $('#btnFiltrosEjercicios').live('click', function (event) {
             if ($('#filtrosEjercicios').css('display') == 'block') {
                 $('#filtrosEjercicios').fadeOut('slow');

@@ -83,8 +83,9 @@
                             @Html.DropDownList("tabla", listaTabla.Select(option => new SelectListItem
                            {
                                Text = Html.DisplayTextFor(_ => option.Nombre).ToString(),
-                               Value = option.TablaId.ToString()
-                           }), "TODOS", new { @id = "tabla", @style = "display:none" })
+                               Value = option.TablaId.ToString(),
+                               Selected = ((Model != null) && (option.TablaId.ToString() == ViewBag.selectedTabla.ToString()))
+                           }), "TODOS", new {  @style = "display:none" })
                            <input type="hidden" name="tablaId" id="tablaId" value="" />
                     </td>
                     <td>
@@ -96,8 +97,9 @@
                             @Html.DropDownList("tipoUsuario", listaTipoUsuario.Select(option => new SelectListItem
                             {
                                 Text = Html.DisplayTextFor(_ => option.Descripcion).ToString(),
-                                Value = option.TipoUsuarioId.ToString()
-                            }), "TODOS", new { @id = "tipoUsuario", @style = "display:none" })
+                                Value = option.TipoUsuarioId.ToString(),
+                                Selected = ((Model != null) && (option.TipoUsuarioId.ToString() == ViewBag.selectedTipoUsuario.ToString()))
+                            }), "TODOS", new {@style = "display:none" })
                            <input type="hidden" name="tipoUsuarioId" id="tipoUsuarioId" value="" />
                     </td>
                     <td>
@@ -116,7 +118,7 @@
                         </div>
                     </td>
                      <td valign="top">
-                            @Html.DropDownList("habilitada", new[] { new SelectListItem { Value = "0", Text = "No" }, new SelectListItem { Value = "1", Text = "Si" } }, "TODOS", new { @id = "habilitada", @style = "display:none" })
+                            @Html.DropDownList("habilitada", new[] { new SelectListItem { Value = "0", Text = "No" }, new SelectListItem { Value = "1", Text = "Si" } }, "TODOS", new {  @style = "display:none" })
                            <input type="hidden" name="activa" id="activa" value="-1" />
                     </td>
 
@@ -189,15 +191,23 @@
     function OnChangeDo(div) {
         if (div.attr('id') == "tabla") {
             var tablaId = $("#selectBox_tabla").attr("rel");
+            $("#tabla").children().each(function () { $(this).removeAttr("selected"); });
             $("#tablaId").val(tablaId);
+            $('#tabla option[value="' + tablaId + '"]').attr("selected", "selected");
+            
         }
         if (div.attr('id') == "tipoUsuario") {
             var tipoUsuarioId = $("#selectBox_tipoUsuario").attr("rel");
+            $("#tipoUsuario").children().each(function () { $(this).removeAttr("selected"); });
             $("#tipoUsuarioId").val(tipoUsuarioId);
+            $('#tipoUsuario option[value="' + tipoUsuarioId + '"]').attr("selected", "selected");
         }
         if (div.attr('id') == "habilitada") {
             var habilitadaId = $("#selectBox_habilitada").attr("rel");
+            $("#habilitada").children().each(function () { $(this).removeAttr("selected"); });
             $("#activa").val(habilitadaId);
+            $('#habilitada option[value="' + habilitadaId + '"]').attr("selected", "selected");
+
         }
     }
 

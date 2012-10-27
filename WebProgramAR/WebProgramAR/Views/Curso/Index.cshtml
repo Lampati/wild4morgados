@@ -24,6 +24,11 @@
         $("#filterSearchButtonCursos").live('click', function () {
             $("#filterForm").submit();
         });
+        $("#Nombre").keydown(function (event) {
+            if ($(this).val().length == 50) {
+                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
+            }
+        });
         //para el manejo del menu
         $("#menu li").each(function (index) {
             if ($(this).children().html().toUpperCase() == "CURSOS") {

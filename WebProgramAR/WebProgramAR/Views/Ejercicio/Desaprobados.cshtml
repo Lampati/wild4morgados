@@ -30,6 +30,11 @@
                 $(this).removeClass("selected");
             }
         });
+        $("#nombre").keydown(function (event) {
+            if ($(this).val().length == 255) {
+                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
+            }
+        });
         $('#btnFiltrosDesaprobados').live('click', function (event) {
             if ($('#filtrosDesaprobados').css('display') == 'block') {
                 $('#filtrosDesaprobados').fadeOut('slow');
