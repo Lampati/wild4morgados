@@ -21,7 +21,7 @@
         $("#IsValorBool").change(function () { $("#Valor").val($(this).attr('checked') ? 1 : 0); isValid(); });
         $("#ValorInt").keydown(function (event) { if ($(this).val().length < 20) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9]/)) return false; } });
         $("#ValorInt").keyup(function (event) { if ($(this).val().length < 20) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9]/)) return false; } });
-        $("#ValorText").keydown(function (event) { if ($(this).val().length < 50) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9]/)) return false; } });
+        $("#ValorText").keydown(function (event) { if ($(this).val().length < 50) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[a-zA-Z _-]/)) return false; } });
         $("#ValorText").keyup(function (event) { if ($(this).val().length < 50) { $("#Valor").val($(this).val()); isValid(); } else { if (checkRegexp(String.fromCharCode(event.keyCode), /[a-zA-Z _-]/)) return false; } });
         $("#ValorDate").change(function () { $("#Valor").val($(this).val()); isValid(); });
         isValid();

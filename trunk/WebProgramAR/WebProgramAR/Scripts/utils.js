@@ -17,6 +17,13 @@ function SetFiltroOpenClose() {
 }
 
 SetFiltroOpenClose();
+function checkRegexp(o, regexp) {
+    if (!(regexp.test(o))) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function GetPosition() {
     return position;

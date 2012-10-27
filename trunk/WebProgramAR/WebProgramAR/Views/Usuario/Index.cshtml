@@ -16,6 +16,23 @@
         $("#filterSearchButton").click(function () {
             $("#filterForm").submit();
         });
+
+        $("#usuarioNombre").keydown(function (event) {
+            if ($(this).val().length == 20) {
+                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
+            }
+        });
+        $("#Nombre").keydown(function (event) {
+            if ($(this).val().length == 20) {
+                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
+            }
+        });
+        $("#Apellido").keydown(function (event) {
+            if ($(this).val().length == 20) {
+                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
+            }
+        });
+
         //para el manejo del menu
         $("#menu li").each(function (index) {
             if ($(this).children().html().toUpperCase() == "USUARIOS") {
@@ -56,6 +73,7 @@
 
         //FuncionesAutorizadas('@funcionesAutorizadas');
     });
+   
 </script>
 
 <h1>Usuarios</h1>

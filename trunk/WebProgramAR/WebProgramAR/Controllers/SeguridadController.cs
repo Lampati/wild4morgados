@@ -73,6 +73,9 @@ namespace WebProgramAR.Controllers
             listaTipo.AddRange(TipoUsuarioNegocio.GetTiposUsuario());
             ViewBag.ListaTipoUsuarios = listaTipo;
             ViewBag.listaHabilitado = new []{new SelectListItem{Value="0",Text="No"},new SelectListItem{Value="1",Text="Si"}};
+            ViewBag.selectedTipoUsuario = tipoUsuarioId;
+            ViewBag.selectedTabla = tablaId;
+            ViewBag.selectedHabilitado = activa;
             return View(datos);
 
         }
