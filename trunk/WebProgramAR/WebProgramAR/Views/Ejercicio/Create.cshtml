@@ -31,14 +31,13 @@
     @Html.HiddenFor(model => model.SolucionGarGar)
     @Html.HiddenFor(model => model.XmlDelEjercicio)
 
-        
-            <div class="editor-label" style="width: 100px;">
-                    @Html.LabelFor(model => model.Nombre)
-            </div>
-            <div class="editor-field"style="width: 100px;">
-                @Html.EditorFor(model => model.Nombre, new { style = "width:100px;" })
-                @Html.ValidationMessageFor(model => model.Nombre)
-            </div>
+        <div class="editor-label" style="width: 100px;">
+                @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field"style="width: 100px;">
+            @Html.EditorFor(model => model.Nombre, new { style = "width:100px;" })
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
 
     if (HttpContext.Current.User.IsInRole("administrador"))
     {
