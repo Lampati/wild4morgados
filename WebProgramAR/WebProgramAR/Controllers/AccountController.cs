@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
-using WebProgramAR.Models;
 using WebProgramAR.Entidades;
 using WebProgramAR.MailSender;
+using WebProgramAR.Models;
 using WebProgramAR.Negocio;
 
 namespace WebProgramAR.Controllers
 {
-    public class ErrorController : ControllerBase
+    public class AccountController : ControllerBase
     {
-        
         //
         // GET: /Account/LogOn
 

@@ -5,7 +5,7 @@
     ViewBag.Title = "Ejercicios";
 }
 
-<h2>Creacion Correcta</h2>
+<h1>Creacion Correcta</h1>
         
 
 
@@ -19,4 +19,12 @@
     });
 </script>
    
-   El ejercicio fue creado correctamente.
+   <img src="@Url.Content("~/Content/images/ok_icon.png")" style="top:10px;" />El ejercicio fue creado correctamente.
+   <br />
+   <br />
+   <br />
+   <br />
+   <div >
+      @Html.ActionLink("Ir a Ejercicios Pendientes", "PendientesAprobacion", "Home", new { @class = "submit", @style = "color:#fff" })
+    </div>
+   
