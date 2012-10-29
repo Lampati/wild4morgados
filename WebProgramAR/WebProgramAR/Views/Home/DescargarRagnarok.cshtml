@@ -6,7 +6,7 @@
     $(document).ready(function () {
         //para el manejo del menu
         $("#menu li").each(function (index) {
-            if ($(this).children().html().toUpperCase() == "DESCARGAR RAGNAROK") {
+            if ($(this).children().html().toUpperCase() == "RAGNAROK") {
                 $(this).addClass("selected");
             } else {
                 $(this).removeClass("selected");
@@ -37,37 +37,37 @@
         </fieldset>
     </div>
     <div class="queesSectionSpace">
-        <fieldset style="width:700px;height:300px;">
+        <fieldset style="width:600px;height:300px;">
             <h3>Imagenes</h3>
                 <div class="queesContent">
                     <div id="slides">
 		                <div class="slides_container">
 			                <div>
-                                <img class="imgBox" title="image1" src="@Url.Content("~/Content/images/imgsoft1.png")" width="700px" height="350px" /> 
+                                <img class="imgBox" title="image1" src="@Url.Content("~/Content/images/imgsoft1.png")" width="600px" height="350px" /> 
                             </div>
                             <div>
-                                <img src="@Url.Content("~/Content/images/imgsoft2.png")"   width="700px" height="350px" /> 
+                                <img src="@Url.Content("~/Content/images/imgsoft2.png")"   width="600px" height="350px" /> 
                             </div>
                             <div>
-                                <img src="@Url.Content("~/Content/images/imgsoft3.png")"   width="700px" height="350px" /> 
+                                <img src="@Url.Content("~/Content/images/imgsoft3.png")"   width="600px" height="350px" /> 
                             </div>
                             <div>
-                                <img src="@Url.Content("~/Content/images/imgsoft4.png")"   width="700px" height="350px" /> 
+                                <img src="@Url.Content("~/Content/images/imgsoft4.png")"   width="600px" height="350px" /> 
                             </div>
                             <div>
-                                <img src="@Url.Content("~/Content/images/imgsoft5.png")"   width="700px" height="350px" /> 
+                                <img src="@Url.Content("~/Content/images/imgsoft5.png")"   width="600px" height="350px" /> 
                             </div>
                             <div>
-                                <img src="@Url.Content("~/Content/images/imgsoft6.png")"   width="700px" height="350px" /> 
+                                <img src="@Url.Content("~/Content/images/imgsoft6.png")"   width="600px" height="350px" /> 
                             </div>
                         </div>
                     </div>
                 </div>
         </fieldset>
     </div>
-    <div class="queesSectionSpace" style="padding:10px;border:2px dotted #19f;width:10%;">
+    <div class="queesSectionSpace" style="padding:10px;border:2px dotted #19f;width:12%;">
           <img src="@Url.Content("~/Content/images/download.png")" />
-            <input type="submit" value="Descargar" class="submit" id="btnGuardar"/>
+            <input type="submit" value="Descargar" class="submit" id="btnGuardar" style="margin-left:12%"/>
     </div>
    
 }
@@ -75,11 +75,6 @@
 	    $(function () {
 	        $('#slides').slides({
 	            preload: true,
-	            generateNextPrev: true,
-                pagination:true,
-                generatePagination:true,
-                next : "next",
-                prev : "prev",
 	        });
 	    });
 	</script>

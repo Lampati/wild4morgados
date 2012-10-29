@@ -2516,7 +2516,7 @@ enfasis
     padding:20px;
 }
 .slides_container {
-	width:700px;
+	width:600px;
 	height:350px;
 	display:none;
 }
@@ -2529,7 +2529,7 @@ enfasis
 	Set to display block
 */
 .slides_container div {
-	width:700px;
+	width:600px;
 	height:350px;
 	display:block;
 }
@@ -2552,7 +2552,7 @@ enfasis
 */
 
 .pagination {
-	margin-left:60%;
+	margin-left:115%;
 	margin-tOp:10px;
 	width:100px;
 }
@@ -2572,7 +2572,6 @@ enfasis
 	background-image:url(images/pagination.png);
 	background-position:0 0;
 	float:left;
-	overflow:hidden !important;
 }
 
 .pagination li.current a {
