@@ -315,6 +315,7 @@ ul#menu li
 {
     display: inline;
     list-style: none;
+    z-index:12;
     padding-right:10px;
 }
 
@@ -2593,7 +2594,7 @@ ul.tabs
 
 
 .slides_container {
-	width:700px;
+	width:600px;
 	height:350px;
 	display:none;
 }
@@ -2606,7 +2607,7 @@ ul.tabs
 	Set to display block
 */
 .slides_container div {
-	width:700px;
+	width:600px;
 	height:350px;
 	display:block;
 }
@@ -2629,7 +2630,7 @@ ul.tabs
 */
 
 .pagination {
-	margin-left:60%;
+	margin-left:115%;
 	margin-tOp:10px;
 	width:100px;
 }
@@ -2638,7 +2639,6 @@ ul.tabs
 	float:left;
 	margin:0 1px;
 	list-style:none;
-	overflow:hidden !important;
 }
 
 .pagination li a {
@@ -2649,7 +2649,6 @@ ul.tabs
 	background-image:url(images/pagination.png);
 	background-position:0 0;
 	float:left;
-	overflow:hidden !important;
 }
 
 .pagination li.current a {

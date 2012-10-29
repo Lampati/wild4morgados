@@ -152,7 +152,7 @@
             gridCurso.Column("EjercicioId", header: "Identificador",style:"gridRowShort"),
             gridCurso.Column("Nombre", header: "Nombre",style:"gridRowLarge"),
             gridCurso.Column("NivelEjercicio", header: "Nivel",style:"gridRowShort"),
-            gridCurso.Column("Usuario.UsuarioNombre", header: "Usuario",style:"gridRowMedium"),
+            gridCurso.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
             gridCurso.Column("", 
               header: "",
               format: @<text>
@@ -223,7 +223,7 @@
             gridNotCurso.Column("EjercicioId", header: "Identificador",style:"gridRowShort"),
             gridNotCurso.Column("Nombre", header: "Nombre",style:"gridRowLarge"),
             gridNotCurso.Column("NivelEjercicio", header: "Nivel",style:"gridRowShort"),
-            gridNotCurso.Column("Usuario.UsuarioNombre", header: "Usuario",style:"gridRowMedium"),
+            gridCurso.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
             gridNotCurso.Column("", 
               header: "",
               format: @<text>
@@ -244,7 +244,7 @@
     <div id="dialog" class="dialogDiv" ></div>
 
     <script type="text/javascript">
-        convertSelect("nivelEjercicioNA", 1);
+        convertSelect("nivelEjercicioNA");
 //        convertSelect("estadoEjercicioNA", 1);
 
 
