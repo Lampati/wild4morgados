@@ -458,6 +458,7 @@ namespace WebProgramAR.Controllers
             }
             else
             {
+                Initilization();
                 ViewBag.EsRegister = true;
                 // If we got this far, something failed, redisplay form
                 return View(model);
