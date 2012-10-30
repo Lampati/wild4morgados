@@ -54,7 +54,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("Gargar");
-            xml.SetValue(this.Gargar);
+            xml.SetValue(Utilidades.XML.XMLReader.Escape(this.Gargar));
             xml.LevelUp();
 
             if (Object.Equals(this.representacionGrafica, null))
@@ -66,13 +66,21 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.SetTitle("EjercicioCorrespondiente");
             this.ejercicio.ToXML(xml);
             xml.LevelUp();
-            xml.AddElement();
-            xml.SetTitle("RepresentacionGrafica");
-            MemoryStream strm = new MemoryStream();
-            XmlSerializer serializador = new XmlSerializer(this.representacionGrafica.GetType());
-            serializador.Serialize(strm, this.representacionGrafica);
-            xml.SetValue(new StreamReader(strm).ReadToEnd());
-            xml.LevelUp();
+            //xml.AddElement();
+            //xml.SetTitle("RepresentacionGrafica");
+            //MemoryStream strm = new MemoryStream();
+            //XmlSerializer serializador = new XmlSerializer(this.representacionGrafica.GetType());
+            //serializador.Serialize(strm, this.representacionGrafica);
+            //xml.SetValue(new StreamReader(strm).ReadToEnd());
+            //xml.LevelUp();
+
+            //30-10-2012 flanzani
+            //Lo pongo tal cual esta en Ejercicio.cs
+            if (Object.Equals(this.representacionGrafica, null))
+                this.representacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
+
+            this.representacionGrafica.ToXML(xml);
+
             xml.AddElement();
             xml.SetTitle("HashResolucionEjercicio");
             xml.SetValue(this.Hash);
