@@ -151,7 +151,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("Enunciado");
-            xml.SetValue(this.enunciado);
+            xml.SetValue(Utilidades.XML.XMLReader.Escape(this.enunciado));
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("NivelDificultad");
@@ -159,7 +159,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("SolucionTexto");
-            xml.SetValue(this.solucionTexto);
+            xml.SetValue(Utilidades.XML.XMLReader.Escape(this.solucionTexto));
             xml.LevelUp();
             xml.AddElement();
             xml.SetTitle("SolucionGargar");
@@ -209,11 +209,11 @@ namespace AplicativoEscritorio.DataAccess.Entidades
 
             this.ejercicioId = int.Parse(xmlElem.FindFirst("EjercicioId").value);
             this.EsValidoSubirWeb = bool.Parse(xmlElem.FindFirst("EsValidoSubirWeb").value);
-            this.Enunciado = xmlElem.FindFirst("Enunciado").value;
+            this.Enunciado = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Enunciado").value);
             this.NivelDificultad = short.Parse(xmlElem.FindFirst("NivelDificultad").value);
             this.solucionGargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("SolucionGargar").value);
           
-            this.SolucionTexto = xmlElem.FindFirst("SolucionTexto").value;
+            this.SolucionTexto = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("SolucionTexto").value);
             this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             this.Modo = (ModoEjercicio)int.Parse(xmlElem.FindFirst("Modo").value);
 
