@@ -19,7 +19,7 @@ namespace WebProgramAR.Sitio.Models
         [AllowHtml]
         [Display(Name = "Enunciado")]
         [Required(ErrorMessage = "Requerido")]
-        public string Enunciado { get; set; }
+        public string Enunciadooo { get; set; }
 
         [AllowHtml]
         [Display(Name = "Solucion")]
