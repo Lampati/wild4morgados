@@ -21,6 +21,14 @@
     //window.alert('Height = ' + myHeight);
 }
 /*para muestra de operacion satisfactoria u operacion no satisfactoria*/
+function failure() {
+    
+    alert('Ha intentado ingresar algo potencialmente peligroso para el sitio. Por favor, no lo haga.');
+    $(".buttonSectionOptions").show();
+    $("#dialog").animate({ height: "auto" });
+    $("#subDialog").animate({ height: "auto" });
+}
+
 function disableButtons() {
     $(".buttonSectionOptions").hide();
 }

@@ -12,7 +12,7 @@
 <h2>Editar</h2>
 <h4>Curso</h4>
 
-@using (Ajax.BeginForm("Edit", "Curso", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+@using (Ajax.BeginForm("Edit", "Curso", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST", OnFailure = "failure" }, new { autocomplete = "off" }))
 { 
     @Html.ValidationSummary(true)
         @Html.Partial("_CreateOrEdit", Model)

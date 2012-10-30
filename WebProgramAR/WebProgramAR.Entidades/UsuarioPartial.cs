@@ -72,11 +72,13 @@ namespace WebProgramAR.Entidades
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Requerido")]
         [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
+        //[RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Solo se admiten letras del alfabeto")]
         public string Nombre { get; set; }
 
         [Display(Name = "Apellido")]
         [Required(ErrorMessage = "Requerido")]
         [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
+        //[RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Solo se admiten letras del alfabeto")]
         public string Apellido { get; set; }
 
         [Display(Name = "E-mail")]
@@ -90,6 +92,7 @@ namespace WebProgramAR.Entidades
 
         [Display(Name = "Nombre de Usuario")]
         [Required(ErrorMessage = "Requerido")]
+        //[RegularExpression(@"^[a-zA-Z0-9_\-.]*$", ErrorMessage = "Solo se admiten caracteres alfanumericos, guiones, guiones bajos y puntos")]
         [StringLength(20, ErrorMessage = "Máximo 20 caracteres")]
         public string UsuarioNombre { get; set; }
         

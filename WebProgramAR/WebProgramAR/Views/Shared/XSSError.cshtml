@@ -1,0 +1,31 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error de Validacion de datos";
+}
+<!--<h1>@ViewBag.Message</h1>-->
+<br />
+<div class="warning_msg">
+    <div class="titlePageNotFound"><img src="@Url.Content("~/Content/images/warning_icon.png")" />OOOOOOOPS!!!</div>
+    <br />
+    <div class="subTitlePageNotFound">Lo sentimos, no nos divierten los ataques XSS en el sitio.</div>
+    <br />
+    <div class="descriptionPageNotFound">Has intentado ingresar algo potencialmente peligroso para el sitio.</div>
+    <br />
+<div >
+      @Html.ActionLink("Ir a Home", "Index", "Home",new {@class="submit",@style="color:#fff"})
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "HOME") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
+    });
+</script>
+

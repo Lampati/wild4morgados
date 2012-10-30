@@ -87,6 +87,7 @@
     <Compile Include="Models\ContactModels.cs" />
     <Compile Include="Models\ColumnaJsonModel.cs" />
     <Compile Include="Models\ContactoJsonModel.cs" />
+    <Compile Include="Models\EjercicioModel.cs" />
     <Compile Include="Models\EjercicioUploadModel.cs" />
     <Compile Include="Models\EjercicioCreacionModel.cs" />
     <Compile Include="Models\ReglaSeguridadViewModel.cs" />
@@ -448,6 +449,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\DescargarRagnarok.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\XSSError.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -50,6 +50,7 @@ namespace WebProgramAR.Models
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         [StringLength(20, ErrorMessage = "La contraseña debe tener entre 6 y 20 caracteres", MinimumLength = 6)]
+        
         public string Password { get; set; }
 
       

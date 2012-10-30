@@ -52,6 +52,7 @@ namespace WebProgramAR.Entidades
         [Display(Name="Nombre")]
         [Required( ErrorMessage="Requerido")]
         [StringLength(50, ErrorMessage = "El nombre de curso debe tener como maximo 50 caracteres")]
+        //[RegularExpression(@"^[a-zA-Z0-9_\-.]*$", ErrorMessage = "Solo se admiten caracteres alfanumericos, guiones, guiones bajos y puntos")]
         public string Nombre { get; set; }
     }
 }

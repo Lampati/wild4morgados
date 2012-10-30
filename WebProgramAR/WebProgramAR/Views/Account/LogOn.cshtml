@@ -78,12 +78,13 @@
         }
 
     }
+
     
 </script>
 <h2>Informacion de Cuenta</h2>
 <h4>Log On</h4>
 
-@using (Ajax.BeginForm("LogOn", "Account", new AjaxOptions { UpdateTargetId = "update-message-popUp", OnSuccess = "updateSuccessPopUp", HttpMethod = "POST" }, new { id = "frmLogIn" }))
+@using (Ajax.BeginForm("LogOn", "Account", new AjaxOptions { UpdateTargetId = "update-message-popUp", OnSuccess = "updateSuccessPopUp", HttpMethod = "POST", OnFailure = "failure" }, new { id = "frmLogIn" }))
 {
     
     @Html.ValidationSummary(true, "Login no satisfactorio. Verifique los datos ingresados e intente nuevamente.")

@@ -56,7 +56,7 @@ namespace WebProgramAR.Entidades
         [Required(ErrorMessage = "Requerido")]
         [StringLength(50, ErrorMessage = "El nombre de ejercicio debe tener como maximo 50 caracteres")]
         public string Nombre { get; set; }
-
+        
         [Display(Name = "Enunciado")]
         [Required(ErrorMessage = "Requerido")]
         public string Enunciado { get; set; }
