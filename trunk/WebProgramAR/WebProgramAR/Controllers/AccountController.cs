@@ -5,6 +5,7 @@ using WebProgramAR.Entidades;
 using WebProgramAR.MailSender;
 using WebProgramAR.Models;
 using WebProgramAR.Negocio;
+using System.Web;
 
 namespace WebProgramAR.Controllers
 {
@@ -23,7 +24,9 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult LogOn(LogOnModel model)
         {
-            string errorMessage = "El nombe de usuario o la contraseña son incorrectos.";
+            string errorMessage = "El nombre de usuario o la contraseña son incorrectos.";
+
+          
             
             if (ModelState.IsValid)
             {

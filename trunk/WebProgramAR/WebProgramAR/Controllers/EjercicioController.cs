@@ -239,7 +239,17 @@ namespace WebProgramAR.Controllers
                     
                     Ejercicio ejDeArchivo = EjercicioNegocio.ObtenerEjercicioDeArchivo(memStream);
 
-                    return View("Create", ejDeArchivo);
+                    EjercicioModel ejModel = new EjercicioModel();
+                    ejModel.Global = ejDeArchivo.Global;
+                    ejModel.SolucionTexto = ejDeArchivo.SolucionTexto;
+                    ejModel.SolucionGarGar = ejDeArchivo.SolucionGarGar;
+                    ejModel.NivelEjercicio = ejDeArchivo.NivelEjercicio;
+                    ejModel.Enunciado = ejDeArchivo.Enunciado;
+                    ejModel.Nombre = ejDeArchivo.Nombre;
+                    ejModel.XmlDelEjercicio = ejDeArchivo.XmlDelEjercicio;
+
+
+                    return View("Create", ejModel);
                 }
                 catch (CargarEjercicioArchivoException ex)
                 {
@@ -272,11 +282,19 @@ namespace WebProgramAR.Controllers
       
 
         [HttpPost]
-        public ActionResult Create(Ejercicio ejercicio)
+        public ActionResult Create(EjercicioModel ej)
         {
+
             if (ModelState.IsValid)
             {
-
+                Ejercicio ejercicio = new Ejercicio();
+                ejercicio.Global = ej.Global;
+                ejercicio.SolucionTexto = ej.SolucionTexto;
+                ejercicio.SolucionGarGar = ej.SolucionGarGar;
+                ejercicio.NivelEjercicio = ej.NivelEjercicio;
+                ejercicio.Enunciado = ej.Enunciado;
+                ejercicio.Nombre = ej.Nombre;
+                ejercicio.XmlDelEjercicio = ej.XmlDelEjercicio;
                 //flanzani
                 //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
                 ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;

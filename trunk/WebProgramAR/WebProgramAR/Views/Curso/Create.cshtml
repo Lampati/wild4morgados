@@ -9,10 +9,14 @@
     ViewBag.Title = "Cursos";
 }
 
+<script>
+   
+</script>
+
 <h2>Nuevo</h2>
 <h4>Curso</h4>
    
-@using (Ajax.BeginForm("Create", "Curso", FormMethod.Post, new AjaxOptions { OnBegin="disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+@using (Ajax.BeginForm("Create", "Curso", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST", OnFailure = "failure" }, new { autocomplete = "off" }))
 { 
     @Html.ValidationSummary(true)
 

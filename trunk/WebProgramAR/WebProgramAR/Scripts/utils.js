@@ -2,6 +2,9 @@
 var position = 'top';
 var initOpenTab = true;
 
+
+
+
 function SetFiltroOpenClose() {
     $(document).ready(function () {
         $('.filtro .header').click(function () {
@@ -168,6 +171,8 @@ function OpenDialogLogin(event, id, accion, ancho, alto) {
     else {
         $("#dialogLogin").dialog("option", "height", 'auto');
     }
+
+   
 
     $("#dialogLogin").unbind("dialogopen");
     $("#dialogLogin").bind("dialogopen", function (event, ui) {

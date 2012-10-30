@@ -14,6 +14,13 @@ namespace WebProgramAR.Controllers
     public class ControllerBase : Controller
     {
 
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            base.OnException(filterContext);
+
+            
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);

@@ -27,7 +27,7 @@
 </script>
 
    
-@using (Ajax.BeginForm("Edit", "Ejercicio", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }, new { autocomplete = "off" }))
+@using (Ajax.BeginForm("Edit", "Ejercicio", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST", OnFailure = "failure" }, new { autocomplete = "off" }))
 { 
     <fieldset class="fieldsetAncho">
         @Html.ValidationSummary(true)

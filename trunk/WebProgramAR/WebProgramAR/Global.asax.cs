@@ -14,6 +14,14 @@ namespace WebProgramAR
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+
+            filters.Add(new HandleErrorAttribute
+            {
+                ExceptionType = typeof(HttpRequestValidationException),
+                // DbError.cshtml is a view in the Shared folder.
+                View = "XSSError",
+                Order = 2
+            });
             filters.Add(new HandleErrorAttribute());
         }
 
