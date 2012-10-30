@@ -241,12 +241,12 @@ namespace WebProgramAR.Controllers
 
                     EjercicioModel ejModel = new EjercicioModel();
                     ejModel.Global = ejDeArchivo.Global;
-                    ejModel.SolucionTexto = ejDeArchivo.SolucionTexto;
-                    ejModel.SolucionGarGar = ejDeArchivo.SolucionGarGar;
+                    ejModel.SolucionTexto = HttpUtility.HtmlEncode( ejDeArchivo.SolucionTexto );
+                    ejModel.SolucionGarGar = HttpUtility.HtmlEncode( ejDeArchivo.SolucionGarGar);
                     ejModel.NivelEjercicio = ejDeArchivo.NivelEjercicio;
-                    ejModel.Enunciado = ejDeArchivo.Enunciado;
+                    ejModel.Enunciadooo = HttpUtility.HtmlEncode( ejDeArchivo.Enunciado);
                     ejModel.Nombre = ejDeArchivo.Nombre;
-                    ejModel.XmlDelEjercicio = ejDeArchivo.XmlDelEjercicio;
+                    ejModel.XmlDelEjercicio = HttpUtility.HtmlEncode( ejDeArchivo.XmlDelEjercicio);
 
 
                     return View("Create", ejModel);
@@ -284,17 +284,17 @@ namespace WebProgramAR.Controllers
         [HttpPost]
         public ActionResult Create(EjercicioModel ej)
         {
-
+            
             if (ModelState.IsValid)
             {
                 Ejercicio ejercicio = new Ejercicio();
                 ejercicio.Global = ej.Global;
-                ejercicio.SolucionTexto = ej.SolucionTexto;
-                ejercicio.SolucionGarGar = ej.SolucionGarGar;
+                ejercicio.SolucionTexto = HttpUtility.HtmlDecode(ej.SolucionTexto);
+                ejercicio.SolucionGarGar = HttpUtility.HtmlDecode(ej.SolucionGarGar);
                 ejercicio.NivelEjercicio = ej.NivelEjercicio;
-                ejercicio.Enunciado = ej.Enunciado;
+                ejercicio.Enunciado = HttpUtility.HtmlDecode( ej.Enunciadooo);
                 ejercicio.Nombre = ej.Nombre;
-                ejercicio.XmlDelEjercicio = ej.XmlDelEjercicio;
+                ejercicio.XmlDelEjercicio = HttpUtility.HtmlDecode(ej.XmlDelEjercicio);
                 //flanzani
                 //Una vez que tengamos el usuarioId en sesion, lo ponemos aca. Mientras tanto, usamos 1.
                 ejercicio.UsuarioId = GetUsuarioLogueado().UsuarioId;
@@ -302,12 +302,9 @@ namespace WebProgramAR.Controllers
 
                 int id = EjercicioNegocio.Alta(ejercicio);
 
-                EjercicioNegocio.ActualizarXml(id, HttpUtility.HtmlDecode(ejercicio.XmlDelEjercicio)); 
-                
+                EjercicioNegocio.ActualizarXml(id, HttpUtility.HtmlDecode(ejercicio.XmlDelEjercicio));
 
-
-                return View("EjercicioCreado", ejercicio);
-              
+                return View("EjercicioCreado");
             }
             else
             {

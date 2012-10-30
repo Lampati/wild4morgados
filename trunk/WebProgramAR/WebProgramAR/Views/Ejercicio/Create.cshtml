@@ -26,7 +26,7 @@
         @Html.ValidationSummary(true)
 
     @Html.HiddenFor(model => model.NivelEjercicio)
-    @Html.HiddenFor(model => model.Enunciado)
+    @Html.HiddenFor(model => model.Enunciadooo)
     @Html.HiddenFor(model => model.SolucionTexto)
     @Html.HiddenFor(model => model.SolucionGarGar)
     @Html.HiddenFor(model => model.XmlDelEjercicio)
@@ -65,22 +65,22 @@
                 <p>Detalles del ejercicio</p>
 
                 <div id="accordion">
-                    <h3><a href="#">@Html.LabelFor(model => model.Enunciado)</a></h3>
+                    <h3><a href="#">@Html.LabelFor(model => model.Enunciadooo)</a></h3>
                     <div>
                         <p>
-                            @Html.Raw(Html.Encode(Model.Enunciado).Replace("\r\n", "<br />"))
+                            @Html.Raw(Model.Enunciadooo.Replace("\r\n", "<br />"))
                         </p>
                     </div>
                     <h3><a href="#">@Html.LabelFor(model => model.SolucionTexto)</a></h3>
                     <div>
                         <p>
-                            @Html.Raw(Html.Encode(Model.SolucionTexto).Replace("\r\n", "<br />"))
+                            @Html.Raw(Model.SolucionTexto.Replace("\r\n", "<br />"))
                         </p>
                     </div>
                     <h3><a href="#">@Html.LabelFor(model => model.SolucionGarGar)</a></h3>
                     <div>
                         <p>
-                            @Html.Raw(Html.Encode(Model.SolucionGarGar).Replace("\r\n", "<br />"))
+                            @Html.Raw(Model.SolucionGarGar.Replace("\r\n", "<br />"))
                         </p>
                     </div>
                 </div>
