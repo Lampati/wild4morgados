@@ -10,6 +10,16 @@
         
 
 
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        $("#accordion").accordion(
+        {
+            autoHeight: false
+        }
+        );
+    });
+</script>
    
 @using (Html.BeginForm("Create", "Ejercicio", new { autocomplete = "off" }))
 { 
@@ -89,14 +99,3 @@
     <div class="pointerBox"></div>
 </div>
 <div id="divOperacionExitosa">Operacion Exitosa</div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("input#Nombre").addClass("normalStringValidation");
-        loadValidationsInput();
-        $("#accordion").accordion(
-        {
-            autoHeight: false
-        }
-        );
-    });
-</script>

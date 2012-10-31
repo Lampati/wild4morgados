@@ -17,13 +17,12 @@
         $("#logonButtonDisabled").live('click', function () {
             showErrorField();
         });
-        $("#Password").live("keyup", function () {
+        $("#Password").live("keyup",function(){
             showErrorField();
         });
         $("#UserName").live("keyup", function () {
             showErrorField();
         });
-        loadValidationsInput();
     });
     function updateWindow() {
         $("#divOperacionExitosa").delay(300).fadeOut(500);
@@ -97,7 +96,7 @@
                 @Html.LabelFor(m => m.UserName)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName, new { Class = "required normalStringValidation" })
+                @Html.TextBoxFor(m => m.UserName, new { Class = "required" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
 
@@ -105,7 +104,7 @@
                 @Html.LabelFor(m => m.Password)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(m => m.Password, new { Class = "required normalStringValidation" })
+                @Html.PasswordFor(m => m.Password, new { Class = "required" })
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
             <div class="update-message-box-popUp">

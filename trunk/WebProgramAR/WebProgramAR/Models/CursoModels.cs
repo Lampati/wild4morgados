@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WebProgramAR.Globales;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Web.Mvc;
+using System.Web.Security;
+using System.Web;
 
 namespace WebProgramAR.Models
 {
@@ -8,7 +13,6 @@ namespace WebProgramAR.Models
     {
         [Required]
         [Display(Name = "Nombre")]
-        [RegularExpression(Globals.MATCH_NORMAL_STRING_EXTENDED_PATTERN, ErrorMessage = "Formato de curso incorrecto")]
         public string Nombre { get; set; }
 
     }
