@@ -16,6 +16,8 @@ namespace WebProgramAR.Globales
            + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
 
 
+     
+
         public enum TiposRoles
         {
             administrador,
