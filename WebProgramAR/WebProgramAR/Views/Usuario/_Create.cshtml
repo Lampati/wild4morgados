@@ -319,14 +319,6 @@
     }
 
     $(document).ready(function () {
-
-        $("input#Usuario_UsuarioNombre").addClass("normalStringValidation");
-        $("input#Contrasena").addClass("normalStringValidation");
-        $("input#ConfirmarContrasena").addClass("normalStringValidation");
-        $("input#Usuario_Email").addClass("normalStringEmailValidation");
-        $("input#Usuario_Nombre").addClass("normalStringExtendedValidation");
-        $("input#Usuario_Apellido").addClass("normalStringExtendedValidation");
-        loadValidationsInput();
         $("#LocalidadIdAutoComplete").keyup(function () { $("#Usuario_LocalidadId").val(""); });
         $("#form0").find("#btnGuardarNuevo").live('click', function () {
             $(".update-message-box").hide();
