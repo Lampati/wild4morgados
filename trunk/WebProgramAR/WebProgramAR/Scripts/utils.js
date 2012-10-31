@@ -133,8 +133,15 @@ $(document).ready(function () {
     }).mouseout(function () {
         nActiveDiv();
     });
+    loadValidationsInput();
 });
 
+function loadValidationsInput() {
+    $(".normalStringValidation").limitkeypress({ rexp: /^[\w àèìòùÀÈÌÒÙ ._-`]*$/ });
+    $(".normalStringExtendedValidation").limitkeypress({ rexp: /^[\w àèìòùÀÈÌÒÙ ._-`]*$/ });
+    $(".normalStringEmailValidation").limitkeypress({ rexp: /^[@\w àèìòùÀÈÌÒÙ ._-`]*$/ });
+    
+}
 function activeDiv() {
     $("#overDiv").show();
 }
