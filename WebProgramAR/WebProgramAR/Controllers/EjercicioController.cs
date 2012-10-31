@@ -282,8 +282,11 @@ namespace WebProgramAR.Controllers
       
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(EjercicioModel ej)
         {
+
+        
             
             if (ModelState.IsValid)
             {
@@ -341,6 +344,7 @@ namespace WebProgramAR.Controllers
         // POST: /Ejercicio/Edit/5
         [Authorize]
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(Ejercicio ejercicio)
         {
             // TODO: Add update logic here
@@ -392,6 +396,7 @@ namespace WebProgramAR.Controllers
         // POST: /Ejercicio/Delete/5
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Delete(Ejercicio ejercicio)
         {
             try

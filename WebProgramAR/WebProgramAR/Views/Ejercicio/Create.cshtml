@@ -36,7 +36,7 @@
         </div>
         <div class="editor-field"style="width: 100px;">
             @Html.EditorFor(model => model.Nombre, new { style = "width:100px;" })
-            @Html.ValidationMessageFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre, "Solo se admiten caracteres alfanumericos, guiones, guiones bajos y puntos", new { style = "width:374px;" })
         </div>
 
     if (HttpContext.Current.User.IsInRole("administrador"))
