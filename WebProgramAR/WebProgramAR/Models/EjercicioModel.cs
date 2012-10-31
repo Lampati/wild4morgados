@@ -5,6 +5,7 @@ using System.Web;
 using WebProgramAR.Entidades;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using WebProgramAR.Globales;
 
 
 namespace WebProgramAR.Sitio.Models
@@ -14,6 +15,7 @@ namespace WebProgramAR.Sitio.Models
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Requerido")]
         [StringLength(50, ErrorMessage = "El nombre de ejercicio debe tener como maximo 50 caracteres")]
+        [RegularExpression(Globals.MATCH_NORMAL_STRING_EXTENDED_PATTERN, ErrorMessage = "Formato de Nombre de Ejercicio incorrecto")]
         public string Nombre { get; set; }
 
         [AllowHtml]

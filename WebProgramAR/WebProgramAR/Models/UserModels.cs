@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web;
+using WebProgramAR.Globales;
 
 namespace WebProgramAR.Models
 {
@@ -12,6 +13,7 @@ namespace WebProgramAR.Models
     {
         [Required]
         [Display(Name = "Usuario")]
+        [RegularExpression(Globals.MATCH_NORMAL_STRING_EXTENDED_PATTERN, ErrorMessage = "Formato de nombre de usuario incorrecto")]
         public string UserName { get; set; }
 
         [Required]
@@ -23,19 +25,23 @@ namespace WebProgramAR.Models
         [StringLength(100, ErrorMessage = "Debe tener como minimo {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
+        [RegularExpression(Globals.MATCH_NORMAL_STRING_PATTERN, ErrorMessage = "Formato de nombre de contraseña incorrecto")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion son distintas.")]
+        [RegularExpression(Globals.MATCH_NORMAL_STRING_PATTERN, ErrorMessage = "Formato de nombre de contraseña incorrecto")]
         public string ConfirmPassword { get; set; }
 
         [Required]
         [Display(Name = "Nombre")]
+        [RegularExpression(Globals.MATCH_NORMAL_STRING_EXTENDED_PATTERN, ErrorMessage = "Formato de nombre de nombre incorrecto")]
         public string Nombre { get; set; }
 
         [Required]
         [Display(Name = "Apellido")]
+        [RegularExpression(Globals.MATCH_NORMAL_STRING_EXTENDED_PATTERN, ErrorMessage = "Formato de nombre de apellido incorrecto")]
         public string Apellido { get; set; }
 
         [Required]
