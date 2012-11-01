@@ -63,7 +63,8 @@ namespace WebProgramAR.Controllers
                 PaginaActual = page
             };
 
-            ViewBag.TipoUsuarios = new SelectList(Negocio.TipoUsuarioNegocio.GetTiposUsuarioSinGuest(), "TipoUsuarioId", "Descripcion"); 
+            ViewBag.TipoUsuarios = new SelectList(Negocio.TipoUsuarioNegocio.GetTiposUsuarioSinGuest(), "TipoUsuarioId", "Descripcion");
+            ViewBag.usuarioLogueado = GetUsuarioLogueado();
             return View(datos);
 
         }

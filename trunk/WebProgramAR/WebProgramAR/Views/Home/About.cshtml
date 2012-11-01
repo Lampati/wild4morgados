@@ -23,7 +23,7 @@
 <p>
     Use el siguiente formulario para comunicarse con nosotros. 
 </p>
-@using (Ajax.BeginForm("About", "Home", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST" }))
+@using (Ajax.BeginForm("About", "Home", FormMethod.Post, new AjaxOptions { OnBegin = "disableButtons", UpdateTargetId = "update-message", OnSuccess = "updateSuccess", HttpMethod = "POST", OnFailure = "failure" }, new { id = "frmContacto" }))
 { 
         @Html.ValidationSummary(true)
 
