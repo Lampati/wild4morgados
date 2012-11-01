@@ -36,6 +36,7 @@ namespace WebProgramAR.Negocio
 
             UsuarioNegocio.QuitarRolesUsuario(usuarioAEliminar);
 
+            Membership.DeleteUser(u.UsuarioNombre);
             UsuarioDA.Eliminar(u.UsuarioId);
         }
 
