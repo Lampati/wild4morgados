@@ -81,6 +81,14 @@ namespace Ragnarok.UserControls.Estado
            
         }
 
+        public void RefrescarNombre()
+        {
+            if (archCargado != null)
+            {
+                Archivo.Text = archCargado.PathGuardadoActual;
+            }
+        }
+
         public void ColocarResCompilacion(bool res)
         {
             if (res)

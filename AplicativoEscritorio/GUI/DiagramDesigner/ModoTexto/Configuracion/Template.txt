@@ -6,7 +6,7 @@ VARIABLES
 	
 PROCEDIMIENTO SALIDA()
 COMENZAR
-	{Mostrar los elementos para que concuerden con el/los tests de prueba}
+	{Mostrar los resultados finales de las variables de salida del programa}
 FINPROC;
 
 PROCEDIMIENTO PRINCIPAL()

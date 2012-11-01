@@ -70,10 +70,6 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FolderPickerLib, Version=1.0.4163.42504, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>FolderBrowseLib\FolderPickerLib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Microsoft.Practices.Prism.dll</HintPath>
@@ -521,6 +517,10 @@
       <Project>{F6237B7D-9A3B-4F55-961B-72035B0DEA4D}</Project>
       <Name>FindReplace</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\FolderPickerLib\FolderPickerLib.csproj">
+      <Project>{F53582DB-02B7-4864-B7AA-AAD055A591E4}</Project>
+      <Name>FolderPickerLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Globales\Globales.csproj">
       <Project>{3C75DCB5-024F-434F-BE26-B4AEA828B140}</Project>
       <Name>Globales</Name>
@@ -548,10 +548,6 @@
     <ProjectReference Include="..\..\Sincronizacion\Sincronizacion.csproj">
       <Project>{2EFA7594-245C-41BA-A4D6-C1579ABE85C9}</Project>
       <Name>Sincronizacion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\TesterCompilador\TesterCompilador.csproj">
-      <Project>{449AD090-26E6-496B-B93C-7309E2A29FA0}</Project>
-      <Name>TesterCompilador</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilidades\Utilidades.csproj">
       <Project>{E49532C0-201D-45C9-A5B5-5B7589FD4123}</Project>

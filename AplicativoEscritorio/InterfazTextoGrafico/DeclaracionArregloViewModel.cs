@@ -85,6 +85,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle("DeclaracionArreglo");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("DeclaracionArregloViewModel");
+            xml.LevelUp(); 
+
+            xml.AddElement();
             xml.SetTitle("Nombre");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Nombre));
             xml.LevelUp();
@@ -99,10 +104,7 @@ namespace InterfazTextoGrafico
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Tope));
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("DeclaracionArregloViewModel");
-            xml.LevelUp();            
+                      
 
             xml.LevelUp();
         }

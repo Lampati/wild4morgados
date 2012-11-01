@@ -74,6 +74,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle("LlamarProcedimiento");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("LlamarProcedimientoViewModel");
+            xml.LevelUp();     
+
+            xml.AddElement();
             xml.SetTitle("NombreProcedimiento");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(NombreProcedimiento));
             xml.LevelUp();
@@ -83,10 +88,7 @@ namespace InterfazTextoGrafico
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Parametros));
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("LlamarProcedimientoViewModel");
-            xml.LevelUp();            
+               
 
 
             xml.LevelUp();

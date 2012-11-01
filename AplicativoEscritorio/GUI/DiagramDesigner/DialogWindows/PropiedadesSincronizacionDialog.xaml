@@ -75,7 +75,7 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,6,0">
                 <Button  Width="60" Name="bttnAceptar" Click="bttnAceptar_Click" Style="{StaticResource BlueButton}" >Aceptar</Button>
-                <Button  Width="60" Name="bttnCancelar" Margin="15,0,0,0" Click="bttnCancelar_Click" Style="{StaticResource BlueButton}">Cancelar</Button>
+                <Button  Width="60" Name="bttnCancelar" Margin="10,0,0,0" Click="bttnCancelar_Click" Style="{StaticResource BlueButton}">Cancelar</Button>
             </StackPanel>
         </StackPanel>
     </Border>

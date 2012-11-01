@@ -14,17 +14,11 @@
                 <ContentPresenter Content="{Binding }" />
                 <StackPanel DataContext="{Binding DataContext}" Name="stackPanelWhereToSearch">
                     <TextBlock Margin="3" Visibility="{Binding ShowSearchIn,Converter={StaticResource boolToVis}}">Search in:</TextBlock>
-                    <ComboBox SelectedIndex="{Binding SearchIn, Mode=TwoWay,Converter={StaticResource searchScopeToInt}}" Margin="0 0 0 3" 
-                              Visibility="{Binding ShowSearchIn,Converter={StaticResource boolToVis}}"
-                              HorizontalAlignment="Stretch">
-                    <ComboBoxItem>Current Document</ComboBoxItem>
-                    <ComboBoxItem>All Documents</ComboBoxItem>
-                </ComboBox>
-                    <Expander Header="Opciones" IsExpanded="False" Style="{StaticResource ExpanderGrisLineal}">
-                        
+                    
+                    <Expander Header="Opciones" IsExpanded="False" Style="{StaticResource ExpanderGrisLineal}">                        
                     <StackPanel>
                         
-                        <TextBlock Text="&#xD;"/>
+                        <!--<TextBlock Text="&#xD;"/>-->
                         <CheckBox Margin="1" Name="chkCaseSensitive" IsChecked="{Binding CaseSensitive, Mode=TwoWay}">Distinguir entre Mayusculas y Minusculas</CheckBox>
                         <CheckBox Margin="1" Name="chkSearchUp" IsChecked="{Binding SearchUp, Mode=TwoWay}">Buscar Hacia Arriba</CheckBox>
                         <CheckBox Margin="1" Name="chkWholeWord" IsChecked="{Binding WholeWord, Mode=TwoWay}">Matchear la Palabra Completa</CheckBox>
@@ -41,7 +35,7 @@
             <TabItem Header="Buscar" Name="tabFind"  ContentTemplate="{StaticResource FindPageTemplate}" Visibility="{Binding AllowReplace, Converter={StaticResource boolToVis}}">
                 <StackPanel>
                     <TextBox Margin="3" Name="txtFind" AcceptsReturn="{Binding AcceptsReturn}" Text="{Binding TextToFind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button Margin="3" IsDefault="True" HorizontalAlignment="Right" Width="110" Click="FindNextClick">Buscar Siguiente</Button>
+                    <Button Margin="3" IsDefault="True" HorizontalAlignment="Right" Width="110" Click="FindNextClick" Style="{StaticResource BlueButton}">Buscar Siguiente</Button>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Buscar y Reemplazar" Name="tabReplace"  ContentTemplate="{StaticResource FindPageTemplate}" Visibility="{Binding AllowReplace, Converter={StaticResource boolToVis}}">
@@ -50,12 +44,12 @@
                     <TextBlock Margin="3">Reemplazar con:</TextBlock>
                     <TextBox Margin="3" Name="txtReplace" AcceptsReturn="{Binding AcceptsReturn}" Text="{Binding ReplacementText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button IsDefault="True" Margin="3" HorizontalAlignment="Right" Width="90" Click="FindNextClick">Buscar Sig.</Button>
-                        <Button Margin="3" HorizontalAlignment="Right" Width="110" Click="ReplaceClick">Reemplazar</Button>
+                        <Button IsDefault="True" Margin="3" HorizontalAlignment="Right" Width="90" Click="FindNextClick" Style="{StaticResource BlueButton}">Buscar Sig.</Button>
+                        <Button Margin="3" HorizontalAlignment="Right" Width="110" Click="ReplaceClick" Style="{StaticResource BlueButton}">Reemplazar</Button>
                         
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Margin="3" HorizontalAlignment="Right" Width="110" Click="ReplaceAllClick">Reemplazar Todas</Button>
+                        <Button Margin="3" HorizontalAlignment="Right" Width="110" Click="ReplaceAllClick" Style="{StaticResource BlueButton}">Reemplazar Todas</Button>
                     </StackPanel>
                 </StackPanel>
             </TabItem>

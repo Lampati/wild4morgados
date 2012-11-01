@@ -94,6 +94,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle(string.Format("Mientras{0}",GlobalXMLTags.Instance.CantMientras));
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("MientrasViewModel");
+            xml.LevelUp();          
+
+            xml.AddElement();
             xml.SetTitle("Condicion");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(this.Condicion));
             xml.LevelUp();
@@ -103,10 +108,7 @@ namespace InterfazTextoGrafico
             this.Cuerpo.ToXML(xml);
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("MientrasViewModel");
-            xml.LevelUp();            
+           
 
             
             xml.LevelUp();

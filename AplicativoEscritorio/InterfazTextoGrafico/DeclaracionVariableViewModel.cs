@@ -86,6 +86,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle("DeclaracionVariable");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("DeclaracionVariableViewModel");
+            xml.LevelUp();     
+
+            xml.AddElement();
             xml.SetTitle("Nombre");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Nombre));
             xml.LevelUp();
@@ -95,10 +100,7 @@ namespace InterfazTextoGrafico
             xml.SetValue(((int)Tipo).ToString());
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("DeclaracionVariableViewModel");
-            xml.LevelUp();            
+                 
 
 
             xml.LevelUp();

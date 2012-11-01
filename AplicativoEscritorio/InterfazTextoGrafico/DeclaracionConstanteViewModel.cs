@@ -97,6 +97,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle("DeclaracionConstante");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("DeclaracionConstanteViewModel");
+            xml.LevelUp();     
+
+            xml.AddElement();
             xml.SetTitle("Nombre");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Nombre));
             xml.LevelUp();
@@ -111,10 +116,7 @@ namespace InterfazTextoGrafico
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Valor));
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("DeclaracionConstanteViewModel");
-            xml.LevelUp();            
+                 
 
 
             xml.LevelUp();

@@ -338,6 +338,7 @@ namespace Ragnarok.UserControls.Toolbar
             //}
 
             FolderPickerLib.FolderPickerDialog fd = new FolderPickerLib.FolderPickerDialog();
+            
             fd.InitialPath = textBoxDirEjDescargados.Text;
             fd.Title = "Elija la carpeta por defecto para los ejercicios descargados";
             fd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -940,31 +941,31 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void bttnTestBatch_Click(object sender, RoutedEventArgs e)
         {
-            TesterCompilador.TesterBatchWindow window = null;
+            //TesterCompilador.TesterBatchWindow window = null;
 
-            RibbonButton botonPresionado = (RibbonButton)e.Source;             
-            switch (Convert.ToInt32(botonPresionado.CommandParameter))
-            {
-                case 1:
-                    window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.EjerciciosCorrectos);
-                    break;
+            //RibbonButton botonPresionado = (RibbonButton)e.Source;             
+            //switch (Convert.ToInt32(botonPresionado.CommandParameter))
+            //{
+            //    case 1:
+            //        window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.EjerciciosCorrectos);
+            //        break;
 
-                case 2:
-                    window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.ErroresSintacticos);
-                    break;
+            //    case 2:
+            //        window = new TesterCompilador.TesterBatchWindow(TesterCompilador.ModoTest.ErroresSintacticos);
+            //        break;
 
-            }
-            if (window != null)
-            {
-                window.Show();
-            }
+            //}
+            //if (window != null)
+            //{
+            //    window.Show();
+            //}
         }
 
         private void bttnMostrarMensajesError_Click(object sender, RoutedEventArgs e)
         {
-            TesterCompilador.ErroresMensajeDisplayerWindow window = new TesterCompilador.ErroresMensajeDisplayerWindow();
+            //TesterCompilador.ErroresMensajeDisplayerWindow window = new TesterCompilador.ErroresMensajeDisplayerWindow();
 
-            window.Show();
+            //window.Show();
         }
 
         private void bttnAyudaManual_Click(object sender, RoutedEventArgs e)

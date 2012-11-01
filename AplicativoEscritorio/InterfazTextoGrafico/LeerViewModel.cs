@@ -72,14 +72,16 @@ namespace InterfazTextoGrafico
             xml.SetTitle("Leer");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("LeerViewModel");
+            xml.LevelUp();            
+
+            xml.AddElement();
             xml.SetTitle("Parametro");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(Parametro));
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("LeerViewModel");
-            xml.LevelUp();            
+       
 
 
             xml.LevelUp();

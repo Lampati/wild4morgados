@@ -88,6 +88,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle("Asignacion");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("AsignacionViewModel");
+            xml.LevelUp();    
+
+            xml.AddElement();
             xml.SetTitle("LadoIzquierdo");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(LadoIzquierdo));
             xml.LevelUp();
@@ -99,10 +104,7 @@ namespace InterfazTextoGrafico
             xml.SetValue(Utilidades.XML.XMLReader.Escape(LadoDerecho));
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("AsignacionViewModel");
-            xml.LevelUp();            
+                   
 
             xml.LevelUp();
         }
