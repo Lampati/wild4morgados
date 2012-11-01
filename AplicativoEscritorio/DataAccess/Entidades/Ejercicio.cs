@@ -216,18 +216,14 @@ namespace AplicativoEscritorio.DataAccess.Entidades
             this.SolucionTexto = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("SolucionTexto").value);
             this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             this.Modo = (ModoEjercicio)int.Parse(xmlElem.FindFirst("Modo").value);
+            this.gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
 
             if (UltimoModoGuardado == ModoVisual.Texto)
-            {
-                this.gargar = Utilidades.XML.XMLReader.Unescape(xmlElem.FindFirst("Gargar").value);
                 this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
-            }
             else
             {
-                
                 this.RepresentacionGrafica = new InterfazTextoGrafico.ProgramaViewModel();
                 this.RepresentacionGrafica.FromXML(xmlElem.FindFirst("ProgramaViewModel"));
-                this.gargar = string.Empty;
             }
             
 
