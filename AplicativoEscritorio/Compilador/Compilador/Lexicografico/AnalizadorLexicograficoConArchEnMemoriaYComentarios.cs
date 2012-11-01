@@ -11,57 +11,22 @@ using System.Runtime.InteropServices;
 
 namespace CompiladorGargar.Lexicografico
 {
-    class AnalizadorLexicografico
+    class AnalizadorLexicograficoConArchEnMemoriaYComentarios : AnalizadorLexicograficoConArchEnMemoria
     {
-
-        protected String path;
-
-        protected AFD afd;
-
-        protected CharBuffer charBuffer;
-
-        protected bool dentroComentario;
-
-        public AnalizadorLexicografico()
-        {
-
-        }
-
+        private string texto;       
+     
         //Inicializo lo estrictamente necesario. Creo el buffer a partir del archivo y el AFD a partir de otro archivo
-        public AnalizadorLexicografico(String pathArch)
+        public AnalizadorLexicograficoConArchEnMemoriaYComentarios(string texto)
+            : base(texto)
         {
-            try
-            {                
-                this.path = pathArch;                              
-
-                this.dentroComentario = false;
-
-                
-                long timeStamp = Stopwatch.GetTimestamp();
-                
-                //this.afd = new AFD(Path.Combine(CompiladorForm.directorioActual, System.Configuration.ConfigurationManager.AppSettings["archAFD"].ToString()));
-                this.afd = new AFD();
-
-                float num = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
-                String hola = (String.Format("{0} segundos", num.ToString()));
-
-                
-                this.charBuffer = new CharBuffer(pathArch);
-
-            }
-            catch (Exception ex)
-            {
-                Utils.Log.AddError(ex.Message);
-                throw new Exception("Error al crear el analizador lexicografico"+"\r\n"+ex.Message);
-            }
+           
         }
 
-        
-        public virtual ComponenteLexico ObtenerProximoToken()
+        public override ComponenteLexico ObtenerProximoToken()
         {
             ComponenteLexico componente = new ComponenteLexico();
             while (!charBuffer.FinArchivo)
-            {    
+            {
                 //Me va a devolver cualquier caracter menos un \r o \n... esos los saltea.                
                 char x = charBuffer.ObtenerProximoCaracterValido();
 
@@ -69,6 +34,13 @@ namespace CompiladorGargar.Lexicografico
                 //Puede haber sido el ultimo caracter del archivo un \r o \n, asi que chequeo
                 if (x != char.MinValue)
                 {
+                    if (dentroComentario)
+                    {
+                        if (charBuffer.HabiaEspacio)
+                        {
+                            componente.Lexema += " ";
+                        }
+                    }
                     componente.Lexema += x;
                     if (afd.TryAvanzar(x))
                     {
@@ -78,17 +50,18 @@ namespace CompiladorGargar.Lexicografico
                         while (LookAhead())
                         {
                             x = charBuffer.ObtenerProximoChar();
+                          
                             componente.Lexema += x;
                             afd.Avanzar(x);
                         }
 
-                        
+
                         if (!dentroComentario)
                         {
 
                             if (afd.EstadoActual.EsFinal)
                             {
-                                
+
                                 if (!(afd.EstadoActual.Token == ComponenteLexico.TokenType.ComentarioApertura))
                                 {
                                     componente.Token = afd.EstadoActual.Token;
@@ -103,7 +76,7 @@ namespace CompiladorGargar.Lexicografico
                                 else
                                 {
                                     dentroComentario = true;
-                                    componente = new ComponenteLexico();
+                                    //componente = new ComponenteLexico();
 
                                     afd.ResetearAFD();
                                 }
@@ -116,12 +89,12 @@ namespace CompiladorGargar.Lexicografico
                                 componente.Fila = charBuffer.Fila;
                                 //componente.Fila = charBuffer.FilaUltChar;
                                 componente.Columna = charBuffer.Columna - componente.Lexema.Length;
-                                componente.Descripcion =string.Empty;
+                                componente.Descripcion = string.Empty;
                                 componente.CaracterErroneo = this.charBuffer.PeekProximoChar().ToString();
 
                                 if (this.afd.EstadoActual.Nombre == "lit1" && componente.CaracterErroneo == "\r")
                                 {
-                                    componente.Descripcion = "Los literales deben comenzar y terminar en la misma linea con una comilla simple"; 
+                                    componente.Descripcion = "Los literales deben comenzar y terminar en la misma linea con una comilla simple";
                                 }
 
                                 if (!afd.Alfabeto.Contains(componente.Lexema.Trim()))
@@ -135,14 +108,28 @@ namespace CompiladorGargar.Lexicografico
                         }
                         else
                         {
+                            
+
                             //Si estoy dentro de un comentario, me fijo si el token armado es el de salida.
                             if ((afd.EstadoActual.Token == ComponenteLexico.TokenType.ComentarioClausura))
                             {
                                 dentroComentario = false;
-                                componente = new ComponenteLexico();
+                                //componente = new ComponenteLexico();
+
+                                componente.Token = ComponenteLexico.TokenType.Comentario;
+                                componente.Fila = charBuffer.Fila;
+                                componente.Columna = charBuffer.Columna - componente.Lexema.Length;
+
+                                afd.ResetearAFD();
+
+                                return componente;
                             }
-                            afd.ResetearAFD();
-                        }  
+                            else
+                            {
+                                afd.ResetearAFD();
+                            }
+                            
+                        }
                     }
                     else
                     {
@@ -164,7 +151,7 @@ namespace CompiladorGargar.Lexicografico
                                 componente.Descripcion = string.Format("'{0}' no es un lexema valido en el lenguaje GarGar", componente.Lexema);
                             }
 
-                            
+
 
                             if (this.afd.EstadoActual.Nombre == "lit1" && componente.CaracterErroneo == "\r")
                             {
@@ -175,7 +162,7 @@ namespace CompiladorGargar.Lexicografico
                             return componente;
                         }
                     }
-                }                
+                }
             }
 
             //Se devuelve EOF si no se hizo retorno dentro del while.
@@ -186,26 +173,9 @@ namespace CompiladorGargar.Lexicografico
             componente.Lexema = "$";
             afd.ResetearAFD();
             return componente;
-            
+
         }
 
-        protected bool LookAhead()
-        {
-            char x = this.charBuffer.PeekProximoChar();
-
-            return this.afd.TryAvanzar(x);
-            
-        }
-
-        public int FilaActual()
-        {
-            return this.charBuffer.Fila;
-        }
-
-        public int ColumnaActual()
-        {
-            return this.charBuffer.Columna;
-        }
     }
 
     

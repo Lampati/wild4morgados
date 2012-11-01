@@ -18,7 +18,7 @@ namespace CompiladorGargar
 
         public Identador(string codigo)
         {
-            analizadorLexico = new AnalizadorLexicograficoConArchEnMemoria(codigo);
+            analizadorLexico = new AnalizadorLexicograficoConArchEnMemoriaYComentarios(codigo);
             cantTabs = 0;
             esNuevaLinea = false;
             generaLineaSeparadora = false;
@@ -119,6 +119,7 @@ namespace CompiladorGargar
               || tokenType == Lexicografico.ComponenteLexico.TokenType.MientrasHacer
               || tokenType == Lexicografico.ComponenteLexico.TokenType.Variables
               || tokenType == Lexicografico.ComponenteLexico.TokenType.Constantes
+              || tokenType == Lexicografico.ComponenteLexico.TokenType.Comentario
               );
         }
 

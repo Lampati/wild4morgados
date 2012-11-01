@@ -166,7 +166,10 @@ namespace CompiladorGargar.Lexicografico
             [DescriptionAttribute("{")]
             ComentarioApertura, // {
             [DescriptionAttribute("}")]
-            ComentarioClausura // }
+            ComentarioClausura, // }
+
+             [DescriptionAttribute("comentario")]
+            Comentario // 
 
             //Llamar, //llamar
             //Leer,

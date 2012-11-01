@@ -599,9 +599,9 @@
     <Resource Include="Resources\Images\SearchRep24.png" />
     <Resource Include="Resources\Images\Flow48.png" />
     <Resource Include="axetribal.ico" />
-    <Content Include="fenrir.ico" />
+    <None Include="fenrir.ico" />
     <Resource Include="fenrir_trasnp.ico" />
-    <Content Include="FolderBrowseLib\FolderPickerLib.dll" />
+    <None Include="FolderBrowseLib\FolderPickerLib.dll" />
     <Resource Include="Resources\Images\accepted_48.png" />
     <Resource Include="Resources\Images\cancel_48.png" />
     <Resource Include="Resources\Images\detail32.png" />
@@ -614,7 +614,7 @@
     <Resource Include="Images\fenrir_512x512x32.png" />
     <Resource Include="Images\loboTribal.png" />
     <Resource Include="Images\loboTribal1.png" />
-    <Content Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
+    <None Include="FolderBrowser\Lib\Microsoft.Practices.Prism.dll" />
     <Resource Include="Resources\Images\loading-intro.gif" />
     <Resource Include="Resources\Images\search.png" />
     <Resource Include="Resources\Images\search_replace.png" />
@@ -655,10 +655,10 @@
     <Resource Include="Resources\Images\Information.png" />
     <Resource Include="Resources\Images\manualGarGar.png" />
     <Resource Include="Resources\Images\manualRagnarok.png" />
-    <Content Include="Resources\ReuxablesLegacy.dll" />
-    <Content Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
-    <Content Include="RibbonDLL\RibbonControlsLibrary.dll" />
-    <Content Include="RibbonDLL\RibbonControlsLibrary.pdb" />
+    <Resource Include="Resources\ReuxablesLegacy.dll" />
+    <Resource Include="RibbonDLL\Microsoft.Windows.Shell.dll" />
+    <Resource Include="RibbonDLL\RibbonControlsLibrary.dll" />
+    <Resource Include="RibbonDLL\RibbonControlsLibrary.pdb" />
     <Resource Include="RibbonDLL\RibbonControlsLibrary.xml" />
   </ItemGroup>
   <ItemGroup>
