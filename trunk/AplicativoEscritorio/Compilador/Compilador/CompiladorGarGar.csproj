@@ -95,7 +95,6 @@
     <Compile Include="Lexicografico\CharBufferEnMemoria.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoria.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoriaYComentarios.cs" />
-    <Compile Include="Lexicografico\CharBufferEnMemoriaConComentarios.cs" />
     <Compile Include="Lexicografico\ErrorLexicoException.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
