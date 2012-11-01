@@ -56,6 +56,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle("Mostrar");
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("MostrarViewModel");
+            xml.LevelUp();    
+
+            xml.AddElement();
             xml.SetTitle("ElementosAMostrar");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(ElementosAMostrar));
             xml.LevelUp();
@@ -65,10 +70,7 @@ namespace InterfazTextoGrafico
             xml.SetValue(((bool)ConPausa).ToString());
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("MostrarViewModel");
-            xml.LevelUp();            
+                  
 
 
             xml.LevelUp();

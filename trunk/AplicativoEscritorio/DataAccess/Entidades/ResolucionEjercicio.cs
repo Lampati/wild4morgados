@@ -99,7 +99,7 @@ namespace AplicativoEscritorio.DataAccess.Entidades
                 throw new NullReferenceException("El XML no contiene el tag <ResolucionEjercicioProgramAr>");
 
             this.ModificadoDesdeUltimoGuardado = bool.Parse(xmlElem.FindFirst("ModificadoDesdeUltimoGuardado").value);
-            this.PathGuardadoActual = this.Enunciado = xmlElem.FindFirst("PathGuardadoActual").value;
+            this.PathGuardadoActual =  xmlElem.FindFirst("PathGuardadoActual").value;
             this.UltimoModoGuardado = (ModoVisual)int.Parse(xmlElem.FindFirst("UltimoModoGuardado").value);
             
 

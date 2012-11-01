@@ -96,15 +96,17 @@ namespace InterfazTextoGrafico
             xml.AddElement();
             xml.SetTitle(string.Format("Secuencia{0}",InterfazTextoGrafico.Auxiliares.GlobalXMLTags.Instance.CantSecuencias));
 
-            foreach (ActividadViewModelBase actividad in ListaActividades)
-            {
-                actividad.ToXML(xml);
-            }
 
             xml.AddElement();
             xml.SetTitle("NombreTipo");
             xml.SetValue("SecuenciaViewModel");
-            xml.LevelUp();            
+            xml.LevelUp();          
+
+            foreach (ActividadViewModelBase actividad in ListaActividades)
+            {
+                actividad.ToXML(xml);
+            }
+  
 
 
             xml.LevelUp();
@@ -124,6 +126,7 @@ namespace InterfazTextoGrafico
                     {
                         if (xmlProc.title != "NombreTipo")
                         {
+                            
                             string nombre = xmlProc.FindFirst("NombreTipo").value;
 
                             ActividadViewModelBase tp = ActividadViewModelFactory.CrearActividadViewModel(nombre);

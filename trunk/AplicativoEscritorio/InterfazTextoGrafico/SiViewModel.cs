@@ -131,6 +131,11 @@ namespace InterfazTextoGrafico
             xml.SetTitle(string.Format("Si{0}",InterfazTextoGrafico.Auxiliares.GlobalXMLTags.Instance.CantSi));
 
             xml.AddElement();
+            xml.SetTitle("NombreTipo");
+            xml.SetValue("SiViewModel");
+            xml.LevelUp();       
+
+            xml.AddElement();
             xml.SetTitle("Condicion");
             xml.SetValue(Utilidades.XML.XMLReader.Escape(this.Condicion));
             xml.LevelUp();
@@ -145,10 +150,7 @@ namespace InterfazTextoGrafico
             this.BranchFalso.ToXML(xml);
             xml.LevelUp();
 
-            xml.AddElement();
-            xml.SetTitle("NombreTipo");
-            xml.SetValue("SiViewModel");
-            xml.LevelUp();            
+               
 
 
             xml.LevelUp();

@@ -22,6 +22,7 @@ using AplicativoEscritorio.DataAccess;
 using DataAccess;
 using System.Windows.Resources;
 using Utilidades;
+using Globales;
 
 namespace Ragnarok
 {
@@ -101,6 +102,9 @@ namespace Ragnarok
                                         {
                                             
                                             ej.PathGuardadoActual = pathEj;
+
+                                            
+
                                             ej.Abrir(new System.IO.FileInfo(ej.PathGuardadoActual));
                                             //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                             ej.ModificadoDesdeUltimoGuardado = false;
@@ -261,6 +265,7 @@ namespace Ragnarok
                         {
                                         
                             GuardarADiscoFormatoNormal(path);
+
                         }
                         break;
 
@@ -537,10 +542,22 @@ namespace Ragnarok
 
         private void GuardarADisco(string pathNuevo)
         {
-            ArchCargado.PathGuardadoActual = pathNuevo;            
+            ArchCargado.PathGuardadoActual = pathNuevo;
+
+            ActualizarCambioDeArchivo();
 
             ArchCargado.Guardar(ArchCargado.PathGuardadoActual);
             ArchCargado.ModificadoDesdeUltimoGuardado = false;
+        }
+
+        private void ActualizarCambioDeArchivo()
+        {
+            if (archCargado != null)
+            {
+              
+                Title = string.Format("{0} -- {1}", ConstantesGlobales.NOMBRE_APLICACION, archCargado.Nombre);
+                BarraEstado.RefrescarNombre();
+            }           
         }
 
         
