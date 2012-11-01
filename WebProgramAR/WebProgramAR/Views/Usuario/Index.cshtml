@@ -9,28 +9,13 @@
     grid.Bind(Model.Usuarios, autoSortAndPage: false, rowCount: Model.Cantidad);
 
     string funcionesAutorizadas = ViewBag.FuncionesAutorizadas;
+    WebProgramAR.Entidades.Usuario User = ViewBag.usuarioLogueado;
 }
 <script type="text/javascript">
     $(document).ready(function () {
 
         $("#filterSearchButton").click(function () {
             $("#filterForm").submit();
-        });
-
-        $("#usuarioNombre").keydown(function (event) {
-            if ($(this).val().length == 20) {
-                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
-            }
-        });
-        $("#Nombre").keydown(function (event) {
-            if ($(this).val().length == 20) {
-                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
-            }
-        });
-        $("#Apellido").keydown(function (event) {
-            if ($(this).val().length == 20) {
-                if (checkRegexp(String.fromCharCode(event.keyCode), /[0-9a-zA-Z _-]/)) return false;
-            }
         });
 
         //para el manejo del menu
@@ -160,8 +145,10 @@
         grid.Column("", 
               header: "",
               format: @<text>
+                @if (item.UsuarioId != User.UsuarioId)
+                {
                         <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.UsuarioId)" class="botonEliminar hoverRel"/>
-                    
+                  }   
                       </text>
         )
     })
