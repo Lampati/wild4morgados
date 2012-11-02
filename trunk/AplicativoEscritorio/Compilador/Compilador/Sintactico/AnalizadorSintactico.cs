@@ -310,7 +310,7 @@ namespace CompiladorGargar.Sintactico
 
                 #endregion
 
-                if (cantErroresSintacticos >= GlobalesCompilador.CANT_MAX_ERRORES_SINTACTICOS)
+                if (cantErroresSintacticos >= GlobalesCompilador.CantMaxErroresSintacticos)
                 {
                     retorno.Add(new PasoAnalizadorSintactico("Se paró la compilacion por la cantidad de errores.", GlobalesCompilador.TipoError.Sintactico, 0, 0, true));
                 }

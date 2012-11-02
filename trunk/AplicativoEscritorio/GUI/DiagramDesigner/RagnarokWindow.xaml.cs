@@ -194,6 +194,9 @@ namespace Ragnarok
             ConfiguracionAplicacion.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
 
+            GlobalesCompilador.CantMaxErroresSintacticos = ConfiguracionAplicacion.CantMaxErroresSintacticos;
+            GlobalesCompilador.CantMaxIteraciones = ConfiguracionAplicacion.CantMaxIteraciones;
+
             ToolbarAplicacion.DirEjCreados = ConfiguracionAplicacion.DirectorioEjerciciosCreados;
             ToolbarAplicacion.DirEjDescargados = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
             ToolbarAplicacion.DirResoluciones = ConfiguracionAplicacion.DirectorioResolucionesEjercicios;
