@@ -19,6 +19,9 @@ namespace DataAccess
         private static string directorioEjerciciosCreados;
         private static string directorioResolucionesEjercicios;
         private static string urlsDescargaEjercicios;
+
+        private static int cantMaxIteraciones;
+        private static int cantMaxErroresSintacticos;
         #endregion
 
         #region Propiedades
@@ -44,7 +47,7 @@ namespace DataAccess
         {
             get { return directorioEjerciciosDescargados; }
             set { directorioEjerciciosDescargados = value; }
-        }
+        }     
 
         public static string DirectorioEjerciciosCreados
         {
@@ -57,6 +60,20 @@ namespace DataAccess
             get { return directorioResolucionesEjercicios; }
             set { directorioResolucionesEjercicios = value; }
         }
+
+        public static int CantMaxIteraciones
+        {
+            get { return cantMaxIteraciones; }
+            set { cantMaxIteraciones = value; }
+        }
+
+        public static int CantMaxErroresSintacticos
+        {
+            get { return cantMaxErroresSintacticos; }
+            set { cantMaxErroresSintacticos = value; }
+        }
+
+        
         #endregion
 
         #region Métodos
@@ -84,6 +101,10 @@ namespace DataAccess
                         DirectorioAbrirDefault = xmlElem.FindFirst("DirectorioAbrirDefault").value;
                     if (!Object.Equals(xmlElem.FindFirst("UrlsDescargaEjercicios"), null))
                         UrlsDescargaEjercicios = xmlElem.FindFirst("UrlsDescargaEjercicios").value;
+                    if (!Object.Equals(xmlElem.FindFirst("CantMaxErroresSintacticos"), null))
+                        CantMaxErroresSintacticos = int.Parse(xmlElem.FindFirst("CantMaxErroresSintacticos").value);
+                    if (!Object.Equals(xmlElem.FindFirst("CantMaxIteraciones"), null))
+                        CantMaxIteraciones = int.Parse(xmlElem.FindFirst("CantMaxIteraciones").value);
                 }
                 else
                     CargarDefaults();
@@ -125,6 +146,14 @@ namespace DataAccess
             xml.SetTitle("DirectorioResolucionesEjercicios");
             xml.SetValue(DirectorioResolucionesEjercicios);
             xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("CantMaxErroresSintacticos");
+            xml.SetValue(CantMaxErroresSintacticos.ToString());
+            xml.LevelUp();
+            xml.AddElement();
+            xml.SetTitle("CantMaxIteraciones");
+            xml.SetValue(CantMaxIteraciones.ToString());
+            xml.LevelUp();
             xml.LevelUp();
 
             File.WriteAllText(path, xml.Get());
@@ -132,6 +161,9 @@ namespace DataAccess
 
         private static void CargarDefaults()
         {
+            CantMaxErroresSintacticos = 5;
+            CantMaxIteraciones = 15000;
+
             string misDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string pathProgramAR = Path.Combine(misDocs, "Program.AR");
             string path = String.Empty;
@@ -168,7 +200,7 @@ namespace DataAccess
                 throw new Excepciones.ExcepcionCreacionDirectorios("Error al crear los directorios por defecto", e);
             }
 
-            UrlsDescargaEjercicios = "http://www.program-ar.com.ar:8080/Ejercicios";
+            UrlsDescargaEjercicios = "http://www.program-ar.com.ar:8080/WS/SvcProgramar.asmx";
         }
 
         public static void RecrearDirectorios()
