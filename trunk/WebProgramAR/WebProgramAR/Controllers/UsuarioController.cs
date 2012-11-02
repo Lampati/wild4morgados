@@ -407,14 +407,22 @@ namespace WebProgramAR.Controllers
             
                 try
                 {
-                    if (UsuarioNegocio.ExisteUsuarioById(u.UsuarioId))
+                    Usuario userLogueado = GetUsuarioLogueado();
+                    if (userLogueado.UsuarioId != u.UsuarioId)
                     {
-                        UsuarioNegocio.Eliminar(u);
-                        return RedirectToAction("Index");
+                        if (UsuarioNegocio.ExisteUsuarioById(u.UsuarioId))
+                        {
+                            UsuarioNegocio.Eliminar(u);
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            throw new Exception("El usuario sobre el cual se estaba trabajando fue borrado.");
+                        }
                     }
                     else
                     {
-                        throw new Exception("El usuario sobre el cual se estaba trabajando fue borrado.");
+                        throw new Exception("No es posible eliminarte porque estas logueado.");
                     }
                 }
                 catch
