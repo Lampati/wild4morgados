@@ -11,18 +11,20 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="17*"/>
             <ColumnDefinition Width="102*"/>
             <!--<ColumnDefinition Width="20*"/>-->
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0">
             <StackPanel>
                 <sapt:ToolboxControl Name="Toolbox" >
+                  
                 </sapt:ToolboxControl>
                 <!--<Button Name="btnEjecutar" Height="50" Content="Ejecutar" Margin="5" ></Button>-->
             </StackPanel>
         </Border>
         <Border Grid.Column="1" Name="DesignerBorder">
+            
             <local:WorkAreaView x:Name="WorkArea" />
         </Border>
         <!--<Border Grid.Column="2" Name="PropertyBorder"/>-->
