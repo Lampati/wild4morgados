@@ -79,7 +79,8 @@ namespace CompiladorGargar.Auxiliares.AF
                 StreamReader arch;
                 if (pathArchAFD == null)
                 {
-                    byte[] a = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(CompiladorGargar.Properties.Resources.AFD_GARGAR);
+                    //byte[] a = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(CompiladorGargar.Properties.Resources.AFD_GARGAR);
+                    byte[] a = Encoding.UTF8.GetBytes(CompiladorGargar.Properties.Resources.AFD_GARGAR);
                     System.IO.MemoryStream m = new System.IO.MemoryStream(a);
                     arch = new StreamReader(m);
                     
