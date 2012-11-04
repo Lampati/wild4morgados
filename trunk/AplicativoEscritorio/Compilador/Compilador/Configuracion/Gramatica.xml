@@ -266,10 +266,10 @@
 			<Izq>VALORCONST</Izq>
 			<Ders>
 				<Der>
-					<Expresion>int</Expresion>
+					<Expresion>NUMERO</Expresion>
 				</Der>		
 				<Der>
-					<Expresion>literal</Expresion>
+					<Expresion>TEXTO</Expresion>
 				</Der>	
 				<Der>
 					<Expresion>BOOL</Expresion>

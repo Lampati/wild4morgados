@@ -187,7 +187,7 @@ namespace CompiladorGargar
                     case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Texto:
                         if (item.EsArreglo)
                         {
-                            for (int i = 1; i <= item.Valor; i++)
+                            for (double i = 1; i <= item.Valor; i++)
                             {
                                 strBldr.AppendLine(string.Format("{0}[{1}] := '';", item.NombreParaCodigo,i));
                             }
@@ -203,7 +203,7 @@ namespace CompiladorGargar
                     case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Numero:
                         if (item.EsArreglo)
                         {
-                            for (int i = 1; i <= item.Valor; i++)
+                            for (double i = 1; i <= item.Valor; i++)
                             {
                                 strBldr.AppendLine(string.Format("{0}[{1}] := 0;", item.NombreParaCodigo,i));
                             }
@@ -219,7 +219,7 @@ namespace CompiladorGargar
                     case CompiladorGargar.Semantico.TablaDeSimbolos.NodoTablaSimbolos.TipoDeDato.Booleano:
                         if (item.EsArreglo)
                         {
-                            for (int i = 1; i <= item.Valor; i++)
+                            for (double i = 1; i <= item.Valor; i++)
                             {
                                 strBldr.AppendLine(string.Format("{0}[{1}] := true;", item.NombreParaCodigo,i));
                             }

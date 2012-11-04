@@ -172,7 +172,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("end;");            
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
-            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicación."));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicacion."));
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("end;");

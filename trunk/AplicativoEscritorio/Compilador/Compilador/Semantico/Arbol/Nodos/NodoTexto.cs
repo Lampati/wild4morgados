@@ -22,10 +22,17 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             this.Lexema = hijoASintetizar.Lexema;
+          
             this.TipoDato = hijoASintetizar.TipoDato;
 
             this.Gargar = hijoASintetizar.Gargar;
             this.NoEsAptaPasajeReferencia = true;
+
+            if (Lexema.Length > GlobalesCompilador.MAX_LONG_CADENA)
+            {
+                throw new ErrorSemanticoException("No se pueden manejar cadenas de texto mayores a 250 caracteres en tiempo de compilación", GlobalesCompilador.UltFila, GlobalesCompilador.UltCol);
+            }
+
         }
 
         public override void ChequearAtributos(Terminal t)

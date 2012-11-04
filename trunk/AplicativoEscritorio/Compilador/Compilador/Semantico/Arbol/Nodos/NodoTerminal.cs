@@ -161,10 +161,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.VariablesACrear = new List<Variable>();
             this.ListaFirma = new List<Firma>();
 
-            if (t.Componente.Token == ComponenteLexico.TokenType.Numero)
-            {
-                this.ValorConstanteNumerica = Convert.ToDouble(t.Componente.Lexema, new CultureInfo("en-US")); 
-            }
+          
 
             return this;
         }
