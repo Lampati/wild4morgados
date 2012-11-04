@@ -104,6 +104,12 @@ namespace CompiladorGargar.Resultado.Auxiliares
                 ErrorTraducido = string.Format("Error Fatal: Indice de arreglo fuera de rango en la linea {0}",Fila);
                 Mostrar = true;
             }
+
+            if (errorNativo.Contains("Overflow in arithmetic operation"))
+            {
+                ErrorTraducido = string.Format("Error Fatal: La operacion aritmetica en la linea {0} causa un desbordamiento de valores", Fila);
+                Mostrar = true;
+            }
         }
     }
 
