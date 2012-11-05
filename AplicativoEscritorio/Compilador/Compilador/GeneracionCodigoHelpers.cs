@@ -333,7 +333,7 @@ namespace CompiladorGargar
                 {
                     string tipo = ObtenerTipoParaParametroPascal(item.EsArreglo, item.TipoDato);
 
-                    strBldrEncabezado.AppendFormat("{0} : {1};", item.Nombre, tipo);
+                    strBldrEncabezado.AppendFormat("{0} : {1};", item.NombreParaCodigo, tipo);
                     strBldrLlamado.AppendFormat("{0},", item.NombreParaCodigo);
                 }
             }
@@ -354,15 +354,15 @@ namespace CompiladorGargar
                         {
                             case NodoTablaSimbolos.TipoDeDato.Texto:
                                 strBldrTotal.AppendFormat("  CrearNuevoArregloTextoEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo, item.Valor, item.NombreContextoLocal).AppendLine();
                                 break;
                             case NodoTablaSimbolos.TipoDeDato.Numero:
                                 strBldrTotal.AppendFormat("  CrearNuevoArregloNumeroEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo, item.Valor, item.NombreContextoLocal).AppendLine();
                                 break;
                             case NodoTablaSimbolos.TipoDeDato.Booleano:
                                 strBldrTotal.AppendFormat("  CrearNuevoArregloBooleanoEnEntradaEnLinea('{0}', {1},'{2}','{4}', {2},{3}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo, item.Valor, item.NombreContextoLocal).AppendLine();
                                 break;
                         }
                         
@@ -371,7 +371,7 @@ namespace CompiladorGargar
                     else
                     {
                         strBldrTotal.AppendFormat("  CrearNuevaVariableEnEntradaEnLinea('{0}', {1},'{2}','{3}',{2}); ",
-                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.Nombre, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, variableContadoraLineas, item.NombreParaCodigo, item.NombreContextoLocal).AppendLine();
                     }
                 }
             }
@@ -444,7 +444,7 @@ namespace CompiladorGargar
                 {
                     string tipo = ObtenerTipoParaParametroPascal(item.EsArreglo, item.TipoDato);
 
-                    strBldrEncabezado.AppendFormat("{0} : {1};", item.Nombre, tipo);
+                    strBldrEncabezado.AppendFormat("{0} : {1};", item.NombreParaCodigo, tipo);
                 }
             }
 
@@ -459,13 +459,13 @@ namespace CompiladorGargar
                     {
 
                         strBldrTotal.AppendFormat("  CrearNuevoArregloEnResultado('{0}', '{1}','{3}',{1},{2}); ",
-                                    archivoTemporalEstaEjecucion, item.Nombre, item.Valor, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, item.NombreParaCodigo, item.Valor, item.NombreContextoLocal).AppendLine();
 
                     }
                     else
                     {
                         strBldrTotal.AppendFormat("  CrearNuevaVariableEnResultado('{0}', '{1}','{2}',{1}); ",
-                                    archivoTemporalEstaEjecucion, item.Nombre, item.NombreContextoLocal).AppendLine();
+                                    archivoTemporalEstaEjecucion, item.NombreParaCodigo, item.NombreContextoLocal).AppendLine();
                     }
                 }
             }
