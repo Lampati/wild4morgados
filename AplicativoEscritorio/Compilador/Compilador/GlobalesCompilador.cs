@@ -13,7 +13,7 @@ namespace CompiladorGargar
 
         internal const string PREFIJO_VARIABLES = "ProgramArVariable__00__";
 
-        internal const double MIN_VALOR_NUMERO = 2.9e-39;
+        internal const double MIN_VALOR_NUMERO = -2.9e39;
         internal const double MAX_VALOR_NUMERO = 1.7e38;
 
         internal const double MAX_LONG_CADENA = 250;        
