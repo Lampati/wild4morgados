@@ -79,7 +79,7 @@ namespace DataAccess.Entidades
                                  
                             }
 
-                            VariablesSalida.Add(new Variable(nombre, contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
+                            VariablesSalida.Add(new Variable(nombre.Replace("ProgramArVariable__00__",""), contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
 
                         }
 
