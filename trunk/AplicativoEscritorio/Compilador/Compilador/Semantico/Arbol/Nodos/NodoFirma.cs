@@ -33,7 +33,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 }
                 else
                 {
-                    if (this.RangoArregloSinPrefijo != null)
+                    if (f.RangoArregloSinPrefijo != null)
                     {
                         bool res = this.TablaSimbolos.AgregarArregloParametroDeProc(f.Lexema, f.Tipo, this.ContextoActual, this.NombreContextoLocal, f.RangoArregloSinPrefijo);
 
