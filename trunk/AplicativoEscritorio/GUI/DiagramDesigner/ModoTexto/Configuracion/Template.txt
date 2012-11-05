@@ -1,16 +1,14 @@
-CONSTANTES
-	{Declarar aqui las constantes globales de programa}
+CONSTANTES	
 	
-VARIABLES
-	{Declarar aqui las variables globales de programa}
+VARIABLES	
 	
 PROCEDIMIENTO SALIDA()
 COMENZAR
-	{Mostrar los resultados finales de las variables de salida del programa}
+	
 FINPROC;
 
 PROCEDIMIENTO PRINCIPAL()
 COMENZAR
-	{El codigo de la aplicacion va aqui}
+	
 	LLAMAR SALIDA();
 FINPROC;
