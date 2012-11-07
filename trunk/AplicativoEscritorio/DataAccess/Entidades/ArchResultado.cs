@@ -48,7 +48,13 @@ namespace DataAccess.Entidades
 
                             if (esArreglo)
                             {
-                                int tope = Convert.ToInt32(item.Attributes["Tope"].Value);
+                                string topeVar = item.Attributes["Tope"].Value;
+                                if (topeVar.EndsWith("."))
+                                {
+                                    topeVar = topeVar.Substring(0, topeVar.Length - 1);
+                                }
+
+                                int tope = Convert.ToInt32(topeVar);
                                 tipoVar = string.Format("Arreglo con tope {0}", tope);
 
                                 foreach (XmlNode pos in item.ChildNodes)
@@ -59,6 +65,11 @@ namespace DataAccess.Entidades
 
                                     if (tipo.ToUpper().Trim().Equals("NUMERO"))
                                     {
+                                        if (val.EndsWith("."))
+                                        {
+                                            val = val.Substring(0, val.Length - 1);
+                                        }
+
                                         val = val.Replace(",",".");
                                     }
 
@@ -71,6 +82,11 @@ namespace DataAccess.Entidades
 
                                 if (tipo.ToUpper().Trim().Equals("NUMERO"))
                                 {
+                                    if (valor.EndsWith("."))
+                                    {
+                                        valor = valor.Substring(0, valor.Length - 1);
+                                    }
+
                                     valor = valor.Replace(",", ".");
                                 }
 
@@ -146,7 +162,16 @@ namespace DataAccess.Entidades
 
                             if (esArreglo)
                             {
-                                int tope = Convert.ToInt32(item.Attributes["Tope"].Value);
+                                string topeVar = item.Attributes["Tope"].Value;
+
+                                if (topeVar.EndsWith("."))
+                                {
+                                    topeVar = topeVar.Substring(0, topeVar.Length - 1);
+                                }
+
+                                int tope = Convert.ToInt32(topeVar);
+                              
+
                                 tipoVar = string.Format("Arreglo con tope {0}", tope);
 
                                 foreach (XmlNode pos in item.ChildNodes)
@@ -156,6 +181,11 @@ namespace DataAccess.Entidades
 
                                     if (tipo.ToUpper().Trim().Equals("NUMERO"))
                                     {
+                                        if (val.EndsWith("."))
+                                        {
+                                            val = val.Substring(0, val.Length - 1);
+                                        }
+
                                         val = val.Replace(",", ".");
                                     }
 
@@ -168,13 +198,18 @@ namespace DataAccess.Entidades
 
                                 if (tipo.ToUpper().Trim().Equals("NUMERO"))
                                 {
+                                    if (valor.EndsWith("."))
+                                    {
+                                        valor = valor.Substring(0, valor.Length - 1);
+                                    }
+
                                     valor = valor.Replace(",", ".");
                                 }
 
                                 tipoVar = "Variable";
                             }
 
-                            variablesEntrada.Add(new Variable(nombre, contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
+                            variablesEntrada.Add(new Variable(nombre.Replace("ProgramArVariable__00__", ""), contexto, tipo, tipoVar, esArreglo, valor, listaPosiciones));
                         }
 
                         Entradas.Add(new Entrada() { Linea = linea, Variables = variablesEntrada });
