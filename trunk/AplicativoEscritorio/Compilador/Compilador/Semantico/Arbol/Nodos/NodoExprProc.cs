@@ -54,7 +54,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             
         }
-
+        
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {
             return this;

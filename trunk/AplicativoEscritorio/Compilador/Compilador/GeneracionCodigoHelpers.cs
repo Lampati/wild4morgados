@@ -85,10 +85,19 @@ namespace CompiladorGargar
             strBldr.AppendLine("\tlongitud := longitud - 1;");            
             strBldr.AppendLine("end; ");
             strBldr.AppendLine("longitud :=    Length(aux);");
-            strBldr.AppendLine("if (aux[longitud] = ',') then");
+            strBldr.AppendLine("if (aux[longitud] = ',' ) then");
             strBldr.AppendLine("begin ");
             strBldr.AppendLine("\tDelete(aux, longitud, 1);");            
-            strBldr.AppendLine("end; ");
+            strBldr.AppendLine("end");
+            strBldr.AppendLine("else");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("\tif (aux[longitud] = '.') then");
+            strBldr.AppendLine("\tbegin");
+            strBldr.AppendLine("\t\tDelete(aux, longitud, 1);");
+            strBldr.AppendLine("\tend;");
+            
+            strBldr.AppendLine("end;");
+            
             strBldr.AppendLine("FrameworkProgramArProgramAr0000001EscribirReal := aux; ");
             strBldr.AppendLine("end; ");
             strBldr.AppendLine();
