@@ -528,9 +528,164 @@ namespace CompiladorGargar
         }
 
 
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion del codigo pascal para la funcion potencia
+        internal static string ArmarFuncionPotencia(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ; exponente : real) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("res : real; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("if ( x = 0 ) then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tres := 0; ");
+            strBldr.AppendLine("end ");
+            strBldr.AppendLine("else ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tres :=  Exp(exponente*Ln(Abs(x)));");
+            strBldr.AppendLine("end; ");
+            strBldr.Append(nombreFunc).AppendLine(" := res;");
+            //strBldr.Append(nombreFunc).AppendLine(" := power(x,exponente);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion del codigo pascal para la funcion raiz
+        internal static string ArmarFuncionRaiz(string nombreFunc)
+        {
+
+            //Si el exponetne es 0, tiene que dar error
+
+            //Si la base es negativa, tirar error
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ; exponente : real) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("res : real; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("if ( exponente = 0 ) then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\traise EMatematicaRaizException.Create('Se paso 0 como raiz a aplicar. No se admite 0 en el exponente de la raiz');");
+            //excepcion por exponente = 0
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine("if ( x > 0 ) then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\tres :=  Exp((1/exponente)*Ln(Abs(x)));");
+            strBldr.AppendLine("end ");
+            strBldr.AppendLine("else ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\traise EMatematicaRaizException.Create('Se paso una base negativa en la raiz. El resultado seria un numero complejo y no estan admitidos en el lenguaje GarGar');");
+            //excepcion por base negativa            
+            strBldr.AppendLine("end; ");
+            strBldr.Append(nombreFunc).AppendLine(" := res;");
+            //strBldr.Append(nombreFunc).AppendLine(" := power(x,exponente);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion del codigo pascal para la funcion esPar
+        internal static string ArmarFuncionEsPar(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : boolean ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : integer; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("aux := trunc(x); ");
+
+            strBldr.Append(nombreFunc).AppendLine(" := Not Odd(aux);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion del codigo pascal para la funcion EsImpar
+        internal static string ArmarFuncionEsImpar(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : boolean ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : integer; ");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("aux := trunc(x); ");
+
+            strBldr.Append(nombreFunc).AppendLine(" := Odd(aux);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion del codigo pascal para la funcion truncar
+        internal static string ArmarFuncionTruncar(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : real ;");
+            strBldr.AppendLine("begin ");
+            strBldr.Append(nombreFunc).AppendLine(" := trunc(x);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion del codigo pascal para la funcion redondearAEntero
+        internal static string ArmarFuncionRedondearAEntero(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : real ;");
+            strBldr.AppendLine("begin ");
+            strBldr.Append(nombreFunc).AppendLine(" := round(x);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
 
 
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Agregado de las funciones del framework para ser creadas en codigo pascal
+        internal static string DefinirFuncionesFramework(Semantico.TablaDeSimbolos.TablaSimbolos tabla)
+        {
+            StringBuilder strBldr = new StringBuilder();
 
-       
+            foreach (NodoTablaSimbolos item in tabla.ListaNodos.FindAll(x => x.EsDelFramework))
+            {
+                strBldr.AppendLine(item.CodigoPascalParaElFramework);
+                strBldr.AppendLine();
+            }
+
+            return strBldr.ToString();
+        }
     }
 }
