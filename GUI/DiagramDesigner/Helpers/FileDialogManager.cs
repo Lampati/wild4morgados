@@ -78,7 +78,7 @@ namespace Ragnarok.Helpers
             file.Title = titulo;
             file.Filter = filtros;
 
-            file.ShowDialog(padre);
+            bool? resultado = file.ShowDialog(padre);
             
 
             return file.FileName;

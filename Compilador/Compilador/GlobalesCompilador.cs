@@ -59,6 +59,81 @@ namespace CompiladorGargar
             return strBldr.ToString();
         }
 
-        
+        public static void AgregarLibreriasFramework(TablaSimbolos tablaSimbolos)
+        {
+            AgregarLibreriaNormal(tablaSimbolos);
+            AgregarLibreriaMatematica(tablaSimbolos);
+
+        }
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion de la libreria de funciones Normal
+        private static void AgregarLibreriaNormal(TablaSimbolos tablaSimbolos)
+        {
+            string nombre;
+            string nombreFunc;
+            string codigo;
+            List<FirmaProc> parametros;
+
+            nombre = "EsPar";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionEsPar(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Booleano, codigo, nombreFunc);
+
+            nombre = "EsImpar";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionEsImpar(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Booleano, codigo, nombreFunc);
+
+            nombre = "Redondear";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionRedondearAEntero(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            nombre = "Truncar";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionTruncar(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+        }
+
+
+        // flanzani 8/11/2012
+        // IDC_APP_2
+        // Agregar funciones por defecto en el framework
+        // Creacion de la libreria de funciones matematicas
+        private static void AgregarLibreriaMatematica(TablaSimbolos tablaSimbolos)
+        {
+            string nombre;
+            string nombreFunc;
+            string codigo;
+            List<FirmaProc> parametros;
+
+            nombre = "Potencia";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            parametros.Add(new FirmaProc("exp", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionPotencia(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            nombre = "Raiz";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            parametros.Add(new FirmaProc("exp", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionRaiz(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+        }
     }
 }
