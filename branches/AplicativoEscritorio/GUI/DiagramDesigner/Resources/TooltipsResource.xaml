@@ -1,0 +1,174 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:clr="clr-namespace:System;assembly=mscorlib">
+    
+    <clr:String x:Key="TooltipCompilarDesc">
+        Compilar el codigo armado a un ejecutable
+    </clr:String>
+
+    <clr:String x:Key="TooltipEjecutarDesc">
+        Ejecutar el codigo armado en una ventana aparte, y chequear los resultados del procedimiento salida en pantalla
+    </clr:String>
+
+    <clr:String x:Key="TooltipCambiarATexto">
+        Cambiar el modo actual y mostrar el diagrama en texto GarGar
+    </clr:String>
+
+    <clr:String x:Key="TooltipCambiarAGrafico">
+        Cambiar el modo actual y mostrar el codigo GarGar como un diagrama
+    </clr:String>
+
+    <clr:String x:Key="TooltipFooterDebeCompilar">
+        El codigo debe compilar para poder cambiar de modo
+    </clr:String>
+
+    <clr:String x:Key="TooltipIdentación">
+        Identa el codigo GarGar a al formato estandarizado para facilitar su lectura y orden. Se recomienda mantener el codigo identado.
+    </clr:String>
+
+    <clr:String x:Key="TooltipAdvertenciaIdentación">
+        La identación puede no funcionar correctamente si se encuentran bloques de codigo sin cerrar (ejemplo: bloques si, bloques mientras, funcion, etc) 
+    </clr:String>
+
+    <clr:String x:Key="TooltipEnunciado">
+        El enunciado es la explicación en un lenguaje simple de aquello que se espera resolver mediante el armado de un programa
+    </clr:String>
+
+    <clr:String x:Key="TooltipSolucionGarGar">
+        Muestra a fines informativos la solucion GarGar a la que llego el creador del ejercicio
+    </clr:String>
+
+    <clr:String x:Key="TooltipSolucionExplicacion">
+        La solución explicada es la explicacion en un lenguaje simple de como se debe encarar el ejercicio para solucionarlo. Es la respuesta natural al enunciado del ejercicio.
+    </clr:String>
+
+    <clr:String x:Key="TooltipDificultadEjercicio">
+        La dificultad en escala 1 a 10 que el ejercicio presenta para un usuario nuevo. Es importante el seteo correcto de esta propiedad para que aquellos que lo descarguen sepan su dificultad
+    </clr:String>
+
+    <clr:String x:Key="TooltipMisTests">
+        Listar los test de prueba creados por el usuario y marca aquellos que han dejado de ser validos por modificaciones hechas al programa (para ser valido debe seguir manteniendo su estructura original en el codigo)
+    </clr:String>
+
+    <clr:String x:Key="TooltipCrearTestDePrueba">
+        Crear un test de prueba que tome como referencia valores de entrada y los vincule con valores finales del procedimiento SALIDA. El test se guardara para futuro uso del creador o de quien decida resolverlo.
+    </clr:String>
+
+    <clr:String x:Key="TooltipEjecutarTestDePrueba">
+        Ejecutar un test de prueba asociado a este ejercicio para verificar que la solucion sea correcta desde el punto de vista de lo que resuelve. Tiene como requisito que el procedimiento SALIDA tenga los mismos parametros que los del test. Por esta razon, puede que sea necesario modificar el programa para poder ejecutar un test de prueba.
+    </clr:String>
+
+    <clr:String x:Key="TooltipAdvertenciaIdentacionTest">
+        Se recomienda identar el codigo si se encuentra trabajando en modo texto antes de usar esta funcionalidad
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizar">
+        Bajar del servidor especificado en propiedades, todos aquellos ejercicios catalogados como globales en la Web de ProgramAr
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizarPorCurso">
+        Bajar del servidor especificado en propiedades, todos aquellos ejercicios pertenecientes al curso especificado por el usuario. Esta funcionalidad sirve cuando se quiere bajar un grupo de ejercicios agrupados por sus caracteristicas en comun.
+    </clr:String> 
+
+    <clr:String x:Key="TooltipSincronizarPorEjercicio">
+        Bajar del servidor especificado en propiedades, el ejercicio especificado por el usuario. Esta funcionalidad sirve cuando se quiere sincronizar un ejercicio en particular visto en la web.
+    </clr:String>
+
+    <clr:String x:Key="TooltipDondeEncontrarIdEjercicio">
+        El id de ejercicio es el identificador unico que le da ProgramAr a cada ejercicio. Puede consultar los id de ejercicios en la web de ProgramAr
+    </clr:String>
+
+    <clr:String x:Key="TooltipDondeEncontrarIdCurso">
+        El id de curso es el identificador unico que le da ProgramAr a cada curso. Puede consultar los id de ejercicios en la web de ProgramAr
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizarPropiedades">
+        Configurar las propiedades de sincronización, como el nombre del servidor.
+    </clr:String>
+
+    <clr:String x:Key="TooltipSincronizarPropiedadesWarning">
+        Consulte la página de ProgramAr para configurar la sincronización
+    </clr:String>
+
+    <clr:String x:Key="TooltipPegar">
+        Pegar los contenidos del portapapeles
+    </clr:String>
+
+    <clr:String x:Key="TooltipCortar">
+        Cortar la selección al portapapeles
+    </clr:String>
+    
+    <clr:String x:Key="TooltipCopiar">
+        Copiar la selección al portapapeles
+    </clr:String>
+
+    <clr:String x:Key="TooltipEliminar">
+        Eliminar la selección
+    </clr:String>
+
+    <clr:String x:Key="TooltipUndoGargar">
+        Deshacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipRedoGargar">
+        Rehacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipUndoFlujo">
+        Deshacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipRedoFlujo">
+        Rehacer una acción de escritura de código
+    </clr:String>
+
+    <clr:String x:Key="TooltipBuscar">
+        Abre el dialogo de busqueda
+    </clr:String>
+
+    <clr:String x:Key="TooltipBuscaryReemplazar">
+        Abre el dialogo de busqueda y reemplazo
+    </clr:String>
+
+    <!-- Configuracion-->
+    
+    <clr:String x:Key="TooltipDirCreacionEjercicios">
+        Cambiar la carpeta de guardado por defecto al crear un ejercicio
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirResEjercicios">
+        Cambiar la carpeta de guardado por defecto al crear una resolución de ejercicio
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirDescargaEjercicios">
+        Cambiar la carpeta de guardado por defecto de los ejercicios descargados al sincronizar
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirTemporales">
+        Cambiar la carpeta que la aplicacion usará para sus archivos temporales
+    </clr:String>
+
+    <clr:String x:Key="TooltipDirDefaultAbrir">
+        Cambiar la carpeta que se ofrece al usuario por defecto al seleccionar la opcion de abrir del menu
+    </clr:String>
+
+    <clr:String x:Key="TooltipCambiosANivelGlobal">
+        Los cambios a esta configuración se haran a nivel aplicación
+    </clr:String>
+
+
+    <!-- Ayuda-->
+
+    <clr:String x:Key="TooltipManualRagnarok">
+        Ejecuta el programa lector de pdf para abrir el manual del aplicativo Ragnarok
+    </clr:String>
+
+    <clr:String x:Key="TooltipManualGargar">
+        Ejecuta el programa lector de pdf para abrir el manual del lenguaje Gargar
+    </clr:String>
+
+    <clr:String x:Key="TooltipAcercaDe">
+        Muestra la informacion de Ragnarok
+    </clr:String>
+
+</ResourceDictionary>
