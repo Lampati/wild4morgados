@@ -1093,7 +1093,8 @@ namespace Ragnarok
 
             try
             {
-                DirectoriosManager.BorrarArchivosDelDirPorExtension(ConfiguracionAplicacion.DirectorioTemporal, "*.*");
+                //ET (11/11/2012): Si el directorio de los archivos temporales es el mismo que el de los archivos creados/descargados/resoluciones, se borran todos y no es lo que se busca
+                DirectoriosManager.BorrarArchivosDelDirPorExtensionExcluida(ConfiguracionAplicacion.DirectorioTemporal, new List<string>() { ".gej", ".gres" });
             }
             catch
             {

@@ -8,10 +8,12 @@ using System.IO;
 namespace Utilidades
 {
     public class DirectoriosManager
-    {
-
-        
-
+    {       
+        /// <summary>
+        /// Borra todos los archivos de un directorio en particular según la extensión definida por parámetro
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="extension"></param>
         public static void BorrarArchivosDelDirPorExtension(string dir, string extension)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(dir);
@@ -27,6 +29,31 @@ namespace Utilidades
 
                 }
             }   
+        }
+
+        /// <summary>
+        /// Borra todos los archivos de un directorio en particular EXCEPTUANDO los de la extensión definida por parámetro
+        /// </summary>
+        /// <param name="dir">Directorio donde borrar los archivos</param>
+        /// <param name="extensiones">Extensiones que no se desean eliminar</param>
+        public static void BorrarArchivosDelDirPorExtensionExcluida(string dir, List<string> extensiones)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(dir);
+
+            foreach (FileInfo item in dirInfo.GetFiles())
+            {
+                if (extensiones.Contains(item.Extension.ToLower()))
+                    continue;
+
+                try
+                {
+                    item.Delete();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
 
