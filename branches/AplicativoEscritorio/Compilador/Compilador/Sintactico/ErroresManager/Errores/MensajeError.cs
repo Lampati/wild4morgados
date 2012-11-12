@@ -191,9 +191,13 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         public ErrorAsignacionRepetido()
             : base()
         {
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
             CodigoGlobal = 12;
-            MensajeModoTexto = "El := esta especificado mas de una vez en la asignacion";
-            MensajeModoGrafico = "El := esta especificado mas de una vez en la asignacion";
+            MensajeModoTexto = "El = esta especificado mas de una vez en la asignacion";
+            MensajeModoGrafico = "El = esta especificado mas de una vez en la asignacion";
 
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
@@ -204,9 +208,13 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         public ErrorAsignacionFaltante()
             : base()
         {
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
             CodigoGlobal = 13;
-            MensajeModoTexto = ":= faltante en la asignacion";
-            MensajeModoGrafico = ":= faltante en la asignacion";
+            MensajeModoTexto = "= faltante en la asignacion";
+            MensajeModoGrafico = "= faltante en la asignacion";
 
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
@@ -314,8 +322,12 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         public ErrorAsignacionValidacionPorDefault()
             : base()
         {
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
             CodigoGlobal = 22;
-            MensajeModoTexto = "La asignacion contiene un error sintactico. La manera correcta de usar una asignación es la siguiente: \"VARIABLE := EXPRESION;\"\r\n(VARIABLE = variable o posición de arreglo)\r\n(EXPRESION = expresión de cualquier tipo)";
+            MensajeModoTexto = "La asignacion contiene un error sintactico. La manera correcta de usar una asignación es la siguiente: \"VARIABLE = EXPRESION;\"\r\n(VARIABLE = variable o posición de arreglo)\r\n(EXPRESION = expresión de cualquier tipo)";
             MensajeModoGrafico = MensajeModoTexto;
             SentenciasQueTienenElError.Add(Sentencias.Asignacion);
         }
@@ -326,6 +338,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Errores
         public ErrorDeclaracionFuncionValidacionPorDefault()
             : base()
         {
+
             CodigoGlobal = 23;
             MensajeModoTexto = "La declaración de la función contiene un error sintactico. La manera correcta de declarar una función es la siguiente: \"funcion EJEMPLO ( PARAMETROS ) : TIPO comenzar BLOQUE finfunc RETORNO;\"\r\n(PARAMETROS = \"param1 : TIPO, param2 : arreglo[MAX] de TIPO\")\r\n(TIPO = \"numero|texto|booleano\")\r\n(BLOQUE = contenido de la función)\r\n(RETORNO = expresión conteniendo el retorno de la función)";
             MensajeModoGrafico = MensajeModoTexto;

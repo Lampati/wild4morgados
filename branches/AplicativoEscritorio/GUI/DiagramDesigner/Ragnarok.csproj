@@ -116,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DialogWindows\FuncionesPredefConsultaWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DialogWindows\ErrorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -183,6 +187,10 @@
     <Page Include="Themes\ExpressionDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\PopUpGlobo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Mensajes\BarraMensajes.xaml">
       <SubType>Designer</SubType>
@@ -301,9 +309,14 @@
     <Compile Include="DialogWindows\AcercaDeWindow.xaml.cs">
       <DependentUpon>AcercaDeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogWindows\FuncionesPredefConsultaWindow.xaml.cs">
+      <DependentUpon>FuncionesPredefConsultaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DialogWindows\ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogWindows\FuncionesPredef\ParametroPredefData.cs" />
+    <Compile Include="DialogWindows\FuncionesPredef\RutinaPredefData.cs" />
     <Compile Include="DialogWindows\ObjetoVentana.cs" />
     <Compile Include="DialogWindows\PropertyEditionWindow.xaml.cs">
       <DependentUpon>PropertyEditionWindow.xaml</DependentUpon>
@@ -347,6 +360,10 @@
       <DependentUpon>WindowDetalleConsultaTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventArgsClasses\CambiarTamanioEventArgs.cs" />
+    <Compile Include="Tutorial\PopUpGlobo.xaml.cs">
+      <DependentUpon>PopUpGlobo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\TutorialManager.cs" />
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">
@@ -449,6 +466,7 @@
     <Compile Include="SelectionService.cs" />
     <Compile Include="Toolbox.cs" />
     <Compile Include="ToolboxItem.cs" />
+    <Resource Include="Resources\Images\Funciones48.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -458,6 +476,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
+    <Content Include="DialogWindows\FuncionesPredef\rutinasPredef.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Manuales\ManualGarGar.pdf" />
     <Content Include="Manuales\ManualRagnarok.pdf" />
     <None Include="packages.config" />

@@ -30,11 +30,15 @@ namespace InterfazTextoGrafico
 
         public override string Gargar
         {
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion y modifico su lexema
             get
             {
                 StringBuilder strBldr = new StringBuilder();
 
-                strBldr.AppendFormat("{0} := {1} ;",
+                strBldr.AppendFormat("{0} = {1} ;",
                     LadoIzquierdo,
                     LadoDerecho).AppendLine();
 

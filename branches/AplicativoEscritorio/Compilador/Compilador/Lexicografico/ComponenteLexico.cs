@@ -105,8 +105,11 @@ namespace CompiladorGargar.Lexicografico
 
             [DescriptionAttribute("mostrarp")]
             MostrarConPausa,
-         
 
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Borro la asignacion, ya que va a ser lo mismo que el igual
             [DescriptionAttribute(":=")]
             Asignacion, // :=
 

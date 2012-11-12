@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.IO;
 using ModoGrafico.Views;
 using Utilidades;
+using Ragnarok.Tutorial;
 
 namespace Ragnarok.UserControls.Toolbar
 {
@@ -104,8 +105,11 @@ namespace Ragnarok.UserControls.Toolbar
 
                     if (archCargado.GetType() == typeof(Ejercicio))
                     {
-                       
-
+                        // flanzani 11/11/2012
+                        // Issue 111
+                        // Vuelvo a setear la parte grafica en null cuando cargo un ejercicio
+                        galleryDificultad.SelectedValue = null;
+                        cboBoxDificultad.Text = "";
                         galleryDificultad.SelectedValue = archCargado.NivelDificultad.ToString();
 
                         cboBoxDificultad.Visibility = System.Windows.Visibility.Visible;    
@@ -298,6 +302,18 @@ namespace Ragnarok.UserControls.Toolbar
         private void ButtonBuscarYReemplazar_Click(object sender, RoutedEventArgs e)
         {
             AbrirBusquedaEventFire(sender, new AbrirBusquedaEventArgs(true));
+        }
+
+        // flanzani 10/11/2012
+        // IDC_APP_4
+        // Mostrar las funciones predefinidas por el framework
+        // Agrego el handler del boton
+        private void ButtonFuncPredef_Click(object sender, RoutedEventArgs e)
+        {
+            FuncionesPredefConsultaWindow window = new FuncionesPredefConsultaWindow();
+            window.Owner = this.Owner;
+            window.ShowDialog();
+
         }
 
         private void bttnDirEjCreados_Click(object sender, RoutedEventArgs e)
@@ -1017,5 +1033,24 @@ namespace Ragnarok.UserControls.Toolbar
 
             this.Owner.ClearBlurEffect();
         }
+
+		// flanzani 11/11/2012
+	    // IDC_APP_5
+		// Tutorial para la aplicacion
+        // Activo y desactivo el tutorial mediante el checkbox
+        private void chkTutorial_Click(object sender, RoutedEventArgs e)
+        {
+            TutorialManager.Activado = chkTutorial.IsChecked.Value;
+            
+
+            if (TutorialManager.Activado)
+            {
+                TutorialManager.MostrarTutorialAperturaAplicacion(this.Owner);
+            }
+
+            SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
+        }
+
+
     }
 }
