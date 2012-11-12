@@ -28,10 +28,14 @@ namespace LibreriaActividades
 
         public override void Ejecutar(StringBuilder sb)
         {
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion y modifico su lexema
             if (String.IsNullOrEmpty(this.LadoIzquierdo) || String.IsNullOrEmpty(this.LadoDerecho))
                 return;
 
-            sb.AppendLine(String.Format(Extension.Tabs + "{0} := {1};", this.LadoIzquierdo, this.LadoDerecho));
+            sb.AppendLine(String.Format(Extension.Tabs + "{0} = {1};", this.LadoIzquierdo, this.LadoDerecho));
         }
 
         protected override void Execute(System.Activities.NativeActivityContext context) { }

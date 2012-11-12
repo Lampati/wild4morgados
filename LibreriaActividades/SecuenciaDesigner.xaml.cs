@@ -28,7 +28,7 @@ namespace LibreriaActividades
         static TextBlock textoPopup = new TextBlock();
         static Border grilla = new Border();
 
-        string textoNoArrastrarActividades = "Solo se pueden arrastrar actividades que no sean declaraciones al espacio de declaraciones";
+        string textoNoArrastrarActividades = "No se pueden arrastrar actividades que no sean declaraciones al espacio de declaraciones del procedimiento o función";
         string textoNoArrastrarDeclaraciones = "No se pueden arrastrar declaraciones al cuerpo de un procedimiento o función";
         string textoNoArrastrarSecuencia = "No se pueden arrastrar actividades del tipo secuencia";
 

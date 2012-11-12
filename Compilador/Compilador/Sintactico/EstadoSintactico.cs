@@ -319,7 +319,7 @@ namespace CompiladorGargar.Sintactico
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.TipoTexto:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.TipoBooleano:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SiEntonces:
-                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Asignacion:
+                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Igual:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Concatenacion:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.SumaEntero:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.RestaEntero:
@@ -327,7 +327,7 @@ namespace CompiladorGargar.Sintactico
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.DivisionEntero:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Mayor:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MayorIgual:
-                case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Igual:
+                
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.MenorIgual:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Menor:
                 case CompiladorGargar.Lexicografico.ComponenteLexico.TokenType.Distinto:

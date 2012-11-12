@@ -9,13 +9,24 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
 {
     class Asignacion : TipoBase
     {
+
+        // flanzani 9/11/2012
+        // IDC_APP_3
+        // Cambiar el := por =
+        // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion EN TODO EL DOCUMENTO
         public Asignacion(List<Terminal> lista, int fila, int col) 
             : base(fila,col)
         {
             listaLineaEntera = lista;
 
-            AgregarValidacionAsignacionRepetido();
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Esta validaciones queda comentada ya que al ser compartido el lexema de asignacion, es correcto que quede repetido
+            //AgregarValidacionAsignacionRepetido();
+
             AgregarValidacionAsignacionFaltante();
+
             AgregarValidacionCorchetesBalanceadosParteDer();
             AgregarValidacionCorchetesBalanceadosParteIzq();
             AgregarValidacionParentesisBalanceadosParteDer();
@@ -59,7 +70,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionTerminaCorrectamente();
             short importancia = 8;
 
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.AsignacionTerminaCorrectamente, FilaDelError, ColumnaDelError);
 
@@ -71,7 +82,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionParteIzqCorrecta();
             short importancia = 7;
 
-            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.AsignacionParteIzqCorrecta, FilaDelError, ColumnaDelError);
 
@@ -83,7 +94,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionParentesisBalanceadosParteIzq();
             short importancia = 6;
 
-            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);            
@@ -96,7 +107,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionParentesisBalanceadosParteDer();
             short importancia = 6;
 
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ParentesisBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -107,7 +118,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionCorchetesBalanceadosParteIzq();
             short importancia = 5;
 
-            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -118,7 +129,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionCorchetesBalanceadosParteDer();
             short importancia = 5;
 
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.CorchetesBalanceados, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -129,7 +140,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionElementosConValorNoContiguosParteIzq();
             short importancia = 4;
 
-            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion); 
+            List<Terminal> parteIzq = ArmarSubListaIzquierdaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual); 
 
             Validacion valRep = new Validacion(parteIzq, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);
@@ -140,7 +151,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager.Tipos
             MensajeError mensajeError = new ErrorAsignacionElementosConValorNoContiguosParteDer();
             short importancia = 4;
 
-            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Asignacion);            
+            List<Terminal> parteDer = ArmarSubListaDerechaDe(listaLineaEntera, Lexicografico.ComponenteLexico.TokenType.Igual);            
 
             Validacion valRep = new Validacion(parteDer, mensajeError, importancia, ValidacionesFactory.ElementosConValorNoContiguos, FilaDelError, ColumnaDelError);
             listaValidaciones.Add(valRep);

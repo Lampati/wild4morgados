@@ -433,8 +433,12 @@ namespace Ragnarok.TestsPruebas
         private string ArmarCodigoParteEntrada(List<VariableTest> list)
         {
             StringBuilder strBldrCodigoGarGarEntrada = new StringBuilder();
-            string controladorVar = "{0} := {1};";
-            string controladorPosArr = "{0}[{2}] := {1};";
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
+            string controladorVar = "{0} = {1};";
+            string controladorPosArr = "{0}[{2}] = {1};";
 
             foreach (var item in list)
             {

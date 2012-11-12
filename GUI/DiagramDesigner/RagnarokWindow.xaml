@@ -10,6 +10,7 @@
         xmlns:entorno="clr-namespace:Ragnarok.UserControls.Entorno"  
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"    
+                
                 Closing="RibbonWindow_Closing" 
                 Icon="/Ragnarok;component/Images/axeTribal.png">
 

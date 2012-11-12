@@ -22,6 +22,12 @@ namespace DataAccess
 
         private static int cantMaxIteraciones;
         private static int cantMaxErroresSintacticos;
+
+        // flanzani 11/11/2012
+        // IDC_APP_5
+        // Tutorial para la aplicacion
+        // Se agrega la propiedad tutorial activo al arch de config
+        private static bool tutorialActivo;
         #endregion
 
         #region Propiedades
@@ -73,6 +79,17 @@ namespace DataAccess
             set { cantMaxErroresSintacticos = value; }
         }
 
+        // flanzani 11/11/2012
+        // IDC_APP_5
+        // Tutorial para la aplicacion
+        // Se agrega la propiedad tutorial activo al arch de config
+        public static bool TutorialActivo
+        {
+            get { return tutorialActivo; }
+            set { tutorialActivo = value; }
+        }
+         
+
         
         #endregion
 
@@ -80,7 +97,9 @@ namespace DataAccess
      
 
         public static void Abrir(string pathCompleto)
-        {           
+        {      
+             CargarDefaults();
+
             if (File.Exists(pathCompleto))
             {
                 XMLReader xmlReader = new XMLReader();
@@ -102,16 +121,34 @@ namespace DataAccess
                     if (!Object.Equals(xmlElem.FindFirst("UrlsDescargaEjercicios"), null))
                         UrlsDescargaEjercicios = xmlElem.FindFirst("UrlsDescargaEjercicios").value;
                     if (!Object.Equals(xmlElem.FindFirst("CantMaxErroresSintacticos"), null))
-                        CantMaxErroresSintacticos = int.Parse(xmlElem.FindFirst("CantMaxErroresSintacticos").value);
+                    {
+                        int i;
+                        if (int.TryParse(xmlElem.FindFirst("CantMaxErroresSintacticos").value, out i))
+                        {
+                            CantMaxErroresSintacticos = i;
+                        }
+                    }
                     if (!Object.Equals(xmlElem.FindFirst("CantMaxIteraciones"), null))
-                        CantMaxIteraciones = int.Parse(xmlElem.FindFirst("CantMaxIteraciones").value);
-                }
-                else
-                    CargarDefaults();
-            }
-            else
-            {
-                CargarDefaults();
+                    {
+                        int i;
+                        if (int.TryParse(xmlElem.FindFirst("CantMaxIteraciones").value, out i))
+                        {
+                            CantMaxIteraciones = i;
+                        }
+                    }
+                    // flanzani 10/11/2012
+                    // IDC_APP_5
+                    // Tutorial para la aplicacion
+                    // Se agrega la propiedad tutorial activo al arch de config
+                    if (!Object.Equals(xmlElem.FindFirst("TutorialActivo"), null))
+                    {
+                        bool i;
+                        if (bool.TryParse(xmlElem.FindFirst("TutorialActivo").value, out i))
+                        {
+                            TutorialActivo = i;
+                        }
+                    }
+                }         
             }
         }
 
@@ -154,6 +191,15 @@ namespace DataAccess
             xml.SetTitle("CantMaxIteraciones");
             xml.SetValue(CantMaxIteraciones.ToString());
             xml.LevelUp();
+            // flanzani 11/11/2012
+            // IDC_APP_5
+            // Tutorial para la aplicacion
+            // Se agrega la propiedad tutorial activo al arch de config
+            xml.AddElement();
+            xml.SetTitle("TutorialActivo");
+            xml.SetValue(TutorialActivo.ToString());
+            xml.LevelUp();
+
             xml.LevelUp();
 
             File.WriteAllText(path, xml.Get());
@@ -163,6 +209,8 @@ namespace DataAccess
         {
             CantMaxErroresSintacticos = 5;
             CantMaxIteraciones = 15000;
+
+            TutorialActivo = true;
 
             string misDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string pathProgramAR = Path.Combine(misDocs, "Program.AR");
