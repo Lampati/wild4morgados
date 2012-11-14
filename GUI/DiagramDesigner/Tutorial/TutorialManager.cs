@@ -110,13 +110,13 @@ namespace Ragnarok.Tutorial
                         switch (_pasoActual)
 	                    {
                             case 1:
-                                popUp = new PopUpGlobo("¡Bienvenido a Ragnarok! El tutorial se encuentra activado, asi que veras distintas indicaciones a lo largo del programa. Puedes cerrar cualquiera de estas indicaciones haciendo click sobre ella. Puedes desactivar este tutorial en cualquier momento yendo a solapa de Configuración y desactivando la funcion de \"Activar Tutorial\".", true);
+                                popUp = new PopUpGlobo("¡Bienvenido a Ragnarok! El tutorial se encuentra activado, asi que verás distintas indicaciones a lo largo del programa. Podés cerrar cualquiera de estas indicaciones haciendo click sobre ella. Podés desactivar este tutorial en cualquier momento si vas a la solapa de Configuración y desactivas la funcion de \"Activar Tutorial\".", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.menuAplicacion, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 2:
                                 punto = _ragnarokWindow.ToolbarAplicacion.menuAplicacion.TranslatePoint(new Point(0, 0), _ragnarokWindow);
 
-                                popUp = new PopUpGlobo("En este espacio podrás acceder a todas las funcionalidades de la aplicacion. Ragnarok agrupa en solapas las funcionalidades similares. Abrir o crear un ejercicio o resolución de ejercicio, hara que más solapas aparezcan disponibles.", true);
+                                popUp = new PopUpGlobo("En este espacio podrás acceder a todas las funcionalidades de la aplicacion. Ragnarok agrupa en solapas las funcionalidades similares. Abrir o crear un ejercicio o resolución de ejercicio, hará que más solapas aparezcan disponibles.", true);
                                 popUp.ColocarPosicion(new Point(punto.X + 60, punto.Y + 14), UbicacionVentanaRagnarok);
                                 break;
 
@@ -130,11 +130,11 @@ namespace Ragnarok.Tutorial
                             case 4:
                                 punto = _ragnarokWindow.ToolbarAplicacion.menuAplicacion.TranslatePoint(new Point(0, 0), _ragnarokWindow);
 
-                                popUp = new PopUpGlobo("Este espacio es el area de trabajo que brinda la aplicación para trabajar con los ejercicios. Si no hay ejercicio abierto, este area se encontrará vacia.", true);
+                                popUp = new PopUpGlobo("Este espacio es el area de trabajo que brinda la aplicación para trabajar con los ejercicios. Si no hay ejercicio abierto, este area se encontrará vacía.", true);
                                 popUp.ColocarPosicion(new Point(_ragnarokWindow.ActualWidth / 2, _ragnarokWindow.ActualHeight / 2), UbicacionVentanaRagnarok);
                                 break;
                             case 5:
-                                 popUp = new PopUpGlobo("¡Haga click aqui en el menu, y seleccione la primer opcion para crear un ejercicio y empezar a programar!",false);
+                                 popUp = new PopUpGlobo("¡Haga click aqui en el menu, y seleccione la primer opción para crear un ejercicio y empezar a programar!",false);
                                  popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.menuAplicacion, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             default:
@@ -150,7 +150,7 @@ namespace Ragnarok.Tutorial
                         switch (_pasoActual)
                         {
                             case 1:
-                                popUp = new PopUpGlobo("Este es el modo texto para programacion que tiene Ragnarok. Sirve para programar código GarGar desde tu teclado.", true);
+                                popUp = new PopUpGlobo("Este es el modo texto para programación que tiene Ragnarok. Sirve para programar código GarGar desde tu teclado.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonTexto, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 2:
@@ -160,7 +160,7 @@ namespace Ragnarok.Tutorial
                                 popUp.ColocarPosicion(new Point(_ragnarokWindow.ActualWidth / 2, _ragnarokWindow.ActualHeight / 2), UbicacionVentanaRagnarok);
                                 break;
                             case 3:
-                                popUp = new PopUpGlobo("Para compilar el programa que estas escribiendo en modo texto se puede usar este boton, o la tecla F3 del teclado. Los errores de compilacion se muestran en la parte inferior de la pantalla.", true);
+                                popUp = new PopUpGlobo("Para compilar el programa que estas escribiendo en modo texto se puede usar este boton, o la tecla F3 del teclado. Los errores de compilación se muestran en la parte inferior de la pantalla.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonCompilacion, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 4:
@@ -180,7 +180,7 @@ namespace Ragnarok.Tutorial
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonIdentar, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 8:
-                                popUp = new PopUpGlobo("¡Es posible transformar todo el codigo que escribas en un diagrama de flujo al hacer click en el boton para cambiar a modo gráfico. Para poder cambiar de modo, el codigo escrito debe compilar correctamente.", false);
+                                popUp = new PopUpGlobo("¡Es posible transformar todo el codigo que escribas en un diagrama de flujo al hacer click en el boton para cambiar a modo gráfico. Para poder cambiar de modo, el código escrito debe compilar correctamente.", false);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonFlujo, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             default:
@@ -208,7 +208,7 @@ namespace Ragnarok.Tutorial
                             case 3:
                                 punto = _ragnarokWindow.ToolbarAplicacion.menuAplicacion.TranslatePoint(new Point(0, 0), _ragnarokWindow);
 
-                                popUp = new PopUpGlobo("En este area se encuentra la lista de todas las figuras que se pueden arrastrar al area de trabajo. Cada figura representa una instruccion en lenguaje GarGar. Las figuras de mientras y si, admiten que se le arrastren otras figuras dentro de ellas", true);
+                                popUp = new PopUpGlobo("En este area se encuentra la lista de todas las figuras que se pueden arrastrar al area de trabajo. Cada figura representa una instrucción en lenguaje GarGar. Las figuras de mientras y si, admiten que se le arrastren otras figuras dentro de ellas", true);
                                 popUp.ColocarPosicion(new Point(_ragnarokWindow.ActualWidth / 10, _ragnarokWindow.ActualHeight / 4), UbicacionVentanaRagnarok);
                                 break;
                             case 4:
@@ -232,15 +232,15 @@ namespace Ragnarok.Tutorial
                             case 7:
                                 punto = _ragnarokWindow.ToolbarAplicacion.menuAplicacion.TranslatePoint(new Point(0, 0), _ragnarokWindow);
 
-                                popUp = new PopUpGlobo("Las solapas de PROC + y FUNC +, sirven para agregar un procedimiento o una funcion respectivamente", true);
+                                popUp = new PopUpGlobo("Las solapas de PROC + y FUNC +, sirven para agregar un procedimiento o una función respectivamente", true);
                                 popUp.ColocarPosicion(new Point(_ragnarokWindow.ActualWidth / 2.2, _ragnarokWindow.ActualHeight / 4.2), UbicacionVentanaRagnarok);
                                 break;
                             case 8:
-                                popUp = new PopUpGlobo("Para compilar el programa que estas diagramando en modo gráfico se puede usar este boton, o la tecla F3 del teclado. Los errores de compilacion se muestran en la parte inferior de la pantalla.", true);
+                                popUp = new PopUpGlobo("Para compilar el programa que estas diagramando en modo gráfico se puede usar este boton, o la tecla F3 del teclado. Los errores de compilación se muestran en la parte inferior de la pantalla.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonCompilacion, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 9:
-                                popUp = new PopUpGlobo("Para ejecutar el programa que estas  diagramando en modo gráfico se puede usar este boton, o la tecla F4 del teclado.", true);
+                                popUp = new PopUpGlobo("Para ejecutar el programa que estas diagramando en modo gráfico se puede usar este boton, o la tecla F4 del teclado.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonEjecucion, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 10:
@@ -252,7 +252,7 @@ namespace Ragnarok.Tutorial
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonRehacer, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 12:
-                                popUp = new PopUpGlobo("¡Es posible transformar todo lo que diagramas en codigo GarGar al hacer click en el boton para cambiar a modo texto. Para poder cambiar de modo, el codigo diagramado debe compilar correctamente.", false);
+                                popUp = new PopUpGlobo("¡Es posible transformar todo lo que diagramas en codigo GarGar al hacer click en el boton para cambiar a modo texto. Para poder cambiar de modo, el código diagramado debe compilar correctamente.", false);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonTexto, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             default:
