@@ -311,6 +311,13 @@ namespace Ragnarok
 
             Splasher.CloseSplash();
 
+
+			// flanzani 14/11/2012
+            // IDC_APP_7
+            // Desactivar el tutorial desde el popup
+            // Me subscribo al evento estatico de tutorial desactivado
+            PopUpGlobo.TutorialDesativadoEvent += new PopUpGlobo.TutorialDesativadoEventHandler(PopUpGlobo_TutorialDesativadoEvent);
+
 			// flanzani 11/11/2012
 	        // IDC_APP_5
     	    // Tutorial para la aplicacion
@@ -323,6 +330,19 @@ namespace Ragnarok
          
         }
 
+		// flanzani 14/11/2012
+        // IDC_APP_7
+        // Desactivar el tutorial desde el popup
+        // Modifico la configuracion al desactivar el tutorial desde el popup
+        void PopUpGlobo_TutorialDesativadoEvent(object o, EventArgs e)
+        {
+            TutorialManager.Activado = false;
+            ConfiguracionAplicacion.TutorialActivo = false;
+            ToolbarAplicacion.chkTutorial.IsChecked = false;
+
+            SalvarConfiguracion();
+        }
+
 
 
        
@@ -331,15 +351,20 @@ namespace Ragnarok
 
         void ToolbarAplicacion_SalvarConfiguracionEvent(object o, SalvarConfiguracionEventArgs e)
         {
+            SalvarConfiguracion();
+        }
+
+        private void SalvarConfiguracion()
+        {
             ConfiguracionAplicacion.DirectorioEjerciciosCreados = ToolbarAplicacion.DirEjCreados;
             ConfiguracionAplicacion.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
             ConfiguracionAplicacion.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
             ConfiguracionAplicacion.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
             ConfiguracionAplicacion.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;
-			// flanzani 11/11/2012
-	        // IDC_APP_5
-    	    // Tutorial para la aplicacion
-        	// Agregamos que se salve en el arch de config si el tutorial esta activo o no
+            // flanzani 11/11/2012
+            // IDC_APP_5
+            // Tutorial para la aplicacion
+            // Agregamos que se salve en el arch de config si el tutorial esta activo o no
             ConfiguracionAplicacion.TutorialActivo = ToolbarAplicacion.chkTutorial.IsChecked.Value;
 
             ConfiguracionAplicacion.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,

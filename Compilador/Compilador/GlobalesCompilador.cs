@@ -16,7 +16,8 @@ namespace CompiladorGargar
         internal const double MIN_VALOR_NUMERO = -2.9e39;
         internal const double MAX_VALOR_NUMERO = 1.7e38;
 
-        internal const double MAX_LONG_CADENA = 250;        
+        internal const double MAX_LONG_CADENA = 250;
+
 
         //internal const int CANT_MAX_ITERACIONES = 32000;
 
@@ -104,6 +105,8 @@ namespace CompiladorGargar
             parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
             codigo = GeneracionCodigoHelpers.ArmarFuncionTruncar(nombreFunc);
             tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+
         }
 
 
@@ -132,6 +135,93 @@ namespace CompiladorGargar
             parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
             parametros.Add(new FirmaProc("exp", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
             codigo = GeneracionCodigoHelpers.ArmarFuncionRaiz(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "PI";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            codigo = GeneracionCodigoHelpers.ArmarFuncionPI(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "ValAbs";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));            
+            codigo = GeneracionCodigoHelpers.ArmarFuncionValorAbsoluto(nombreFunc);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "Seno";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionSeno(nombreFunc,false);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "Coseno";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionCoseno(nombreFunc, false);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "Tangente";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionTangente(nombreFunc, false);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "rSeno";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionSeno(nombreFunc, true);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "rCoseno";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionCoseno(nombreFunc, true);
+            tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
+
+            // flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la funcion a la libreria matematica
+            nombre = "rTangente";
+            nombreFunc = string.Format("FrameworkProgramArProgramAr0000001{0}", nombre);
+            parametros = new List<FirmaProc>();
+            parametros.Add(new FirmaProc("num", NodoTablaSimbolos.TipoDeDato.Numero, false, false));
+            codigo = GeneracionCodigoHelpers.ArmarFuncionTangente(nombreFunc, true);
             tablaSimbolos.AgregarFuncionDelFramework(nombre, parametros, NodoTablaSimbolos.TipoDeDato.Numero, codigo, nombreFunc);
 
         }
