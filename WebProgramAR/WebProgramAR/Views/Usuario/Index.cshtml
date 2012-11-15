@@ -145,7 +145,7 @@
         grid.Column("", 
               header: "",
               format: @<text>
-                @if (item.UsuarioId != User.UsuarioId)
+                @if (item.UsuarioId != User.UsuarioId && !item.UsuarioNombre.ToLower().Trim().Equals("sa"))
                 {
                         <input type="image" alt="Eliminar" src="@Url.Content("~/Content/images/cancel_delete-16.png")" data="@(item.UsuarioId)" class="botonEliminar hoverRel"/>
                   }   
