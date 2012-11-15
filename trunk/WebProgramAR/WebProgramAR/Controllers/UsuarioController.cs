@@ -412,6 +412,7 @@ namespace WebProgramAR.Controllers
                     {
                         if (UsuarioNegocio.ExisteUsuarioById(u.UsuarioId))
                         {
+                            
                             UsuarioNegocio.Eliminar(u);
                             return RedirectToAction("Index");
                         }
