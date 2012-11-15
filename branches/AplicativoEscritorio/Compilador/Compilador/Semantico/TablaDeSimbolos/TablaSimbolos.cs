@@ -165,8 +165,8 @@ namespace CompiladorGargar.Semantico.TablaDeSimbolos
                     //flanzani 23/10/2010
                     //Faltaba agregar el nombre del contexto local, pq sino puede traer de cualquiera.
                     return (
-                            _nodo.Contexto == NodoTablaSimbolos.TipoContexto.Local &&                            
-                            _nodo.Nombre.Equals(nombre) &&
+                            _nodo.Contexto == NodoTablaSimbolos.TipoContexto.Local &&
+                            _nodo.Nombre.Equals(nombre,StringComparison.InvariantCultureIgnoreCase) &&
                             _nodo.EsArreglo == false &&
                             ((_nodo.NombreContextoLocal == nombreContexto &&
                             (_nodo.TipoEntrada == NodoTablaSimbolos.TipoDeEntrada.Variable)) ||
