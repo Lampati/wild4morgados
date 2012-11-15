@@ -902,7 +902,6 @@ div#title
 }
 .display-label-delete-group
 {
-    float:left;
     font-size:1.3em;
     width:80%;
     background:#666;
@@ -910,6 +909,7 @@ div#title
     text-transform:uppercase;
     font-family:Calibri;
     border:1px solid #ccc;
+	display:inline;
 }
 .display-field-details
 {
@@ -917,7 +917,6 @@ div#title
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    float:left;
     font-size:1em;
     color:#19f;
     padding-top:3px;
@@ -925,7 +924,7 @@ div#title
     font-family:Calibri;
     text-align:left;
     padding:5px; 
-    display:inline-block ;
+    display:inline;
 }
 div.fila
 {
