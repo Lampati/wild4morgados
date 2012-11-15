@@ -468,6 +468,7 @@
     <Compile Include="ToolboxItem.cs" />
     <Content Include="rutinasPredef.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Resource Include="Resources\Images\Funciones48.png" />
     <EmbeddedResource Include="Properties\Resources.resx">

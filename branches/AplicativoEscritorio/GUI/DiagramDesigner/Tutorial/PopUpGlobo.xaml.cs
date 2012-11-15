@@ -27,9 +27,16 @@ namespace Ragnarok.Tutorial
         double posXInicial;
         double posYInicial;
 
-     
+		// flanzani 14/11/2012
+        // IDC_APP_7
+        // Desactivar el tutorial desde el popup
+        // Creo el handler y el evento para desactivar el tutorial
 
-        public PopUpGlobo(string mensaje, bool continua)
+        public delegate void TutorialDesativadoEventHandler(object o, EventArgs e);
+     
+        public static event TutorialDesativadoEventHandler TutorialDesativadoEvent;
+
+        public PopUpGlobo(string mensaje, bool continua, bool muestraDesactivarTutorial)
         {
             InitializeComponent();
 
@@ -40,7 +47,20 @@ namespace Ragnarok.Tutorial
                 txbMessage.Inlines.Add(new Run("Haga click para continuar"));
                 
             }
-            
+            if (muestraDesactivarTutorial)
+            {
+                stckPnlCerrarTutorial.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                stckPnlCerrarTutorial.Visibility = System.Windows.Visibility.Collapsed;
+            }            
+        }
+
+        public PopUpGlobo(string mensaje, bool continua) 
+            : this(mensaje, continua, true)
+        {
+
         }
 
         public void ColocarPosicion(Control controlDondeMostrar, Window ventanaPadre)
@@ -109,9 +129,22 @@ namespace Ragnarok.Tutorial
         }
 
 
-        internal void ReposicionarsePorResize(double anchoActual, double alturaActual)
+      	// flanzani 14/11/2012
+        // IDC_APP_7
+        // Desactivar el tutorial desde el popup
+        // Manejo del boton y el evento de desactivar tutorial
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            TutorialDesativadoEventFire(sender, new EventArgs());
+        }
+
+        private void TutorialDesativadoEventFire(object sender, EventArgs eventArgs)
+        {
+            if (TutorialDesativadoEvent != null)
+            {
+                TutorialDesativadoEvent(sender, eventArgs);
+            }
         }
     }
 }

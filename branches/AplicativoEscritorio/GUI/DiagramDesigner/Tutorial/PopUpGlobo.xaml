@@ -29,14 +29,45 @@
                 <DropShadowEffect
               Color="#FF474747" />
             </Border.Effect>
-            <Grid  Name="grid1" Margin="8">
-                <TextBlock HorizontalAlignment="Center" Padding="3"
+
+<!--
+			// flanzani 14/11/2012
+            // IDC_APP_7
+            // Desactivar el tutorial desde el popup
+            // Modifico la estetica del popup para incluir el link a desactivar tutorial
+
+-->
+            <StackPanel  Name="grid1" Margin="8">
+               
+                <TextBlock HorizontalAlignment="Center" Padding="3" Grid.Row="0"
                            VerticalAlignment="Center" TextWrapping="Wrap"
                             Name="txbMessage" 
                            Width="285"
                            />
-                
-            </Grid>
+                <StackPanel Name="stckPnlCerrarTutorial">
+                    <Button Content="Desactivar Tutorial" Click="Button_Click"
+                            Cursor="Hand" HorizontalAlignment="Right">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <TextBlock TextDecorations="Underline">
+                                    <ContentPresenter />
+                                </TextBlock>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Foreground" Value="Blue" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+
+            </StackPanel>
         </Border>
 
         <Path Data="M10402.99154,55.5381L10.9919,0.64 0.7,54.9" Fill="#FFFFFFE1" 

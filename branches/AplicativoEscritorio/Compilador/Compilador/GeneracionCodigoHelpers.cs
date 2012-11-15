@@ -687,5 +687,131 @@ namespace CompiladorGargar
 
             return strBldr.ToString();
         }
+
+        // flanzani 15/11/2012
+        // IDC_APP_6
+        // Agregar funciones matematicas al framework
+        // Agregado de las funciones del framework para ser creadas en codigo pascal
+        internal static string ArmarFuncionPI(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("() : real ;");
+            strBldr.AppendLine("begin ");
+            strBldr.Append(nombreFunc).AppendLine(" := Pi();");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 15/11/2012
+        // IDC_APP_6
+        // Agregar funciones matematicas al framework
+        // Agregado de las funciones del framework para ser creadas en codigo pascal
+        internal static string ArmarFuncionValorAbsoluto(string nombreFunc)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : real ;");
+            strBldr.AppendLine("begin ");
+            strBldr.Append(nombreFunc).AppendLine(" := abs(x);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 15/11/2012
+        // IDC_APP_6
+        // Agregar funciones matematicas al framework
+        // Agregado de las funciones del framework para ser creadas en codigo pascal
+        internal static string ArmarFuncionSeno(string nombreFunc, bool esRadianes)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : real; ");
+            strBldr.AppendLine("begin ");
+            if (esRadianes)
+            {
+                strBldr.AppendLine("aux := x ;");
+            }
+            else
+            {
+                strBldr.AppendLine("aux := x / 57.2957795 ;");
+            }
+            
+            strBldr.Append(nombreFunc).AppendLine(" := sin(aux);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 15/11/2012
+        // IDC_APP_6
+        // Agregar funciones matematicas al framework
+        // Agregado de las funciones del framework para ser creadas en codigo pascal
+        internal static string ArmarFuncionCoseno(string nombreFunc, bool esRadianes)
+        {
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : real; ");
+            strBldr.AppendLine("begin ");
+            if (esRadianes)
+            {
+                strBldr.AppendLine("aux := x ;");
+            }
+            else
+            {
+                strBldr.AppendLine("aux := x / 57.2957795 ;");
+            }
+            strBldr.Append(nombreFunc).AppendLine(" := cos(aux);");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
+
+        // flanzani 15/11/2012
+        // IDC_APP_6
+        // Agregar funciones matematicas al framework
+        // Agregado de las funciones del framework para ser creadas en codigo pascal
+        internal static string ArmarFuncionTangente(string nombreFunc, bool esRadianes)
+        {
+            //Si el coseno de x es 0, tiene que dar error
+            
+            StringBuilder strBldr = new StringBuilder();
+
+            strBldr.Append("function ").Append(nombreFunc).AppendLine("( x : real ) : real ;");
+            strBldr.AppendLine("VAR ");
+            strBldr.AppendLine("aux : real; ");
+            strBldr.AppendLine("res : real; ");
+            strBldr.AppendLine("resCos : real; ");
+            strBldr.AppendLine("begin ");
+            if (esRadianes)
+            {
+                strBldr.AppendLine("aux := x ;");
+            }
+            else
+            {
+                strBldr.AppendLine("aux := x / 57.2957795 ;");
+            }
+            strBldr.AppendLine("resCos := cos(aux);");
+            strBldr.AppendLine("if ( resCos = 0 ) then");
+            strBldr.AppendLine("begin ");
+            strBldr.AppendLine("\traise EMatematicaTangenteException.Create('Se paso 0 como raiz a aplicar. No se admite 0 en el exponente de la raiz');");
+            //excepcion por exponente = 0
+            strBldr.AppendLine("end; ");
+            strBldr.Append(nombreFunc).AppendLine(" := sin (aux) / resCos;");
+            strBldr.AppendLine("end; ");
+            strBldr.AppendLine();
+
+            return strBldr.ToString();
+        }
     }
 }
