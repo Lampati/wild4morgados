@@ -209,7 +209,6 @@ namespace WebProgramAR.Controllers
                 u.Email = membUser.Email;
 
                 ViewBag.EsMiPerfil = false;
-
                 Initilization();
                 return View("MiPerfil", u);
             }

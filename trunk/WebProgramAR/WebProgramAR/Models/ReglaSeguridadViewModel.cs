@@ -24,7 +24,7 @@ namespace WebProgramAR.Sitio.Models
         public int ComparadorId { get; set; }
 
         [Display(Name = "Usuario")]
-        public int UsuarioId { get; set; }
+        public Nullable<int> UsuarioId { get; set; }
 
         [Display(Name = "Tipo de Usuario")]
         public int TipoUsuarioId { get; set; }

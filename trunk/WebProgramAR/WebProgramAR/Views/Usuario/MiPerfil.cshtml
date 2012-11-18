@@ -5,14 +5,11 @@
     List<WebProgramAR.Entidades.Localidad> listaLocalidades = (List<WebProgramAR.Entidades.Localidad>)ViewBag.Localidades;
     List<WebProgramAR.Entidades.TipoUsuario> listaTipoUsuario = (List<WebProgramAR.Entidades.TipoUsuario>)ViewBag.TipoUsuarios;
     ViewBag.Title = "Mi Perfil";
-
     int valorAprobado = Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Aprobado);
     int valorDesprobado = Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Desaprobado);
     int valorPendiente = Convert.ToInt32(WebProgramAR.Globales.Globals.EstadosEjercicios.Pendiente);
         
 }
-
-
 
 <h1>Mi Perfil</h1>
 <ul class="tabs">
@@ -33,8 +30,17 @@
 <div id="divOperacionExitosa">Operacion Exitosa</div>
    <div id="subDialog" class="dialogDiv"></div>
 <script language="javascript">
+    
     OpenTab(null, $("#UsuarioId").val() + '?esMiPerfil=true', '@Url.Action("Edit")/', "content");
     $(document).ready(function () {
+        //para el manejo del menu
+        $("#menu li").each(function (index) {
+            if ($(this).children().html().toUpperCase() == "USUARIOS") {
+                $(this).addClass("selected");
+            } else {
+                $(this).removeClass("selected");
+            }
+        });
         $(".tabs li").click(function (event) {
             if (initOpenTab) {
                 var actual = $(this).attr("id");
