@@ -58,13 +58,13 @@
        
         <li id="userOption" class="miPerfil">
             <div style="width:100%;float:left;display:inline;">
-                <div style="float:left"><img src="../../Content/images/perfil.png" /></div>
+                <div style="float:left"><img src="@Url.Content("~/Content/images/perfil.png")" /></div>
                 <div style="float:left"><div id="miPerfil" class="miPerfilButton" >Mi Perfil</div></div>
             </div>
         </li>
          <li id="userOption" class="logOutCandado">
             <div style="width:100%;float:left;display:inline;">
-                <div style="float:left"><img  src="../../Content/images/logout.png" alt="LogOff" /></div>
+                <div style="float:left"><img  src="@Url.Content("~/Content/images/logout.png")" alt="LogOff" /></div>
                 <div style="float:left">Salir</div>
             </div>
         </li>
@@ -73,7 +73,7 @@
 else
 {
     <div id="loginClickMe">
-        <img class="logOnCandado" src="../../Content/images/lock_icon_close.png" style="float:center" />
+        <img class="logOnCandado" src="@Url.Content("~/Content/images/lock_icon_close.png")" style="float:center" />
         <div id="logOn">Log On </div>
     </div>
 }
