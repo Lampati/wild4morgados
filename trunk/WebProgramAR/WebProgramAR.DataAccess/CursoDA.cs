@@ -143,7 +143,7 @@ namespace WebProgramAR.DataAccess
 
         private static IQueryable<Curso> GetCursos(int idCurso, string nom, int usuarioId , WebProgramAREntities db)
         {
-            IQueryable<Curso> query = from u in db.Cursoes
+            IQueryable<Curso> query = from u in db.Cursoes.Include("Usuario")
                                       where (idCurso == -1 || u.CursoId == idCurso)
                                       && (usuarioId == -1 || u.UsuarioId == usuarioId)
                                       && ( nom.Equals(string.Empty) ||u.Nombre.ToUpper().Contains(nom.ToUpper()))
