@@ -144,7 +144,7 @@
     columns: new[] {
     grid.Column("CursoId", header: "Identificador"),
     grid.Column("Nombre", header: "Nombre"),
-   
+    grid.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
    
     grid.Column("", 
           header: "",
@@ -191,7 +191,7 @@ else
     columns: new[] {
     grid.Column("CursoId", header: "Identificador"),
     grid.Column("Nombre", header: "Nombre"),
-   
+    grid.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
    
     grid.Column("", 
           header: "",

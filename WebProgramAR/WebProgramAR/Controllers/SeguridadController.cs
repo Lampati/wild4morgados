@@ -172,7 +172,8 @@ namespace WebProgramAR.Controllers
                 modelo.ComparadorId = c.ComparadorId;
                 modelo.TablaId = c.TablaId;
                 modelo.TipoUsuarioId = c.TipoUsuarioId.HasValue ? c.TipoUsuarioId.Value : -1;
-                if (c.UsuarioId.HasValue) modelo.UsuarioId = c.UsuarioId.Value;
+                modelo.UsuarioId = null;
+                if (c.UsuarioId.HasValue) modelo.UsuarioId = c.UsuarioId.Value ;
                 //ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre : "";
                 ViewBag.usuarioDescripcion = c.UsuarioId.HasValue ? c.Usuario.UsuarioNombre.ToString() : "";
                 modelo.Valor = c.Valor;
