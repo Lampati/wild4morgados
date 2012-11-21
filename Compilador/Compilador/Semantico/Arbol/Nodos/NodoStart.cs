@@ -193,6 +193,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("end;");
+            strBldr.AppendLine(string.Format("WriteLn('<<presione cualquier tecla para finalizar el programa>>');")); 
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
             strBldr.AppendLine("end.");
             
