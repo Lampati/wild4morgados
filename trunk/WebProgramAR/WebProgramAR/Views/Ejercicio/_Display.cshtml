@@ -22,6 +22,21 @@
     <div class="display-label-delete">Nivel Ejercicio: </div>
     <div class="display-field-delete">@Model.NivelEjercicio</div>
 </div>
+@if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador")))
+{
+<div class="fila">
+    <div class="display-label-delete">Es Global: </div>
+    <div class="display-field-delete">@if (Model.Global == true)
+                                      {
+                                          <text>Si</text>
+                                      }
+                                      else
+                                      {
+                                          <text>No</text>
+                                      } 
+    </div>
+</div>
+}
 <div class="fila" >
 
     <p>Detalles del ejercicio</p>
@@ -42,7 +57,7 @@
         <h3><a href="#">@Html.LabelFor(model => model.SolucionGarGar)</a></h3>
         <div>
             <p>
-                @Html.Raw(Html.Encode(Model.SolucionGarGar).Replace("\r\n", "<br />").Replace("\t","&emsp;"))
+                @Html.Raw(Html.Encode(Model.SolucionGarGar).Replace("\r\n", "<br />").Replace("\t", "&emsp;"))
             </p>
         </div>
     </div>
