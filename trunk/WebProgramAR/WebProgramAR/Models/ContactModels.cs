@@ -10,11 +10,11 @@ namespace WebProgramAR.Sitio.Models
 {
     public class ContactModel
     {
-        [Required]
+        [Required(ErrorMessage = "Requerido")]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Requerido")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -22,7 +22,7 @@ namespace WebProgramAR.Sitio.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Requerido")]
         [Display(Name = "Descripcion")]
         public string Descripcion{ get; set; }
     }
