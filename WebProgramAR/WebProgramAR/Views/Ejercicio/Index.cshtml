@@ -129,6 +129,7 @@
         grid.Column("EjercicioId", header: "Identificador"),
         grid.Column("Nombre", header: "Nombre"),
         grid.Column("NivelEjercicio", header: "Nivel"),
+        grid.Column("Global", header: "Global",format: x=> x.Global==true ? "Si":"No"),        
         grid.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
         grid.Column("", 
               header: "",
