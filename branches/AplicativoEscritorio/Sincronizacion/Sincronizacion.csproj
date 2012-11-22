@@ -39,6 +39,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebProgramAR.EntidadesDTO">
+      <HintPath>..\..\..\WebProgramAR\WebProgramAR.EntidadesDTO\bin\Release\WebProgramAR.EntidadesDTO.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Eventos\Handler.cs" />
