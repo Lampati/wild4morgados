@@ -335,8 +335,8 @@ namespace Sincronizacion
                     try
                     {
                         ej.Abrir(ejercicioConNombre[0]);
-                        ej.Guardar(Path.Combine(this.Directorio, String.Format("{0}_{1}.{2}", ej.EjercicioId, ejercicioConNombre[1], "gej")));
-                        cant++;
+                        ej.Guardar(Path.Combine(this.Directorio, String.Format("{0}_{1}.{2}", ej.EjercicioId, NombreSinCaracteresInvalidos(ref ejercicioConNombre[1]), "gej")));
+                        cant++;                        
                         Eventos.Handler.GuardarEjercicioEventFire(this.BarraProgreso, this.LabelInfo, cant, ejerciciosEncriptadosStr.Length);
                         System.Threading.Thread.Sleep(r.Next(100, 500));
                     }
@@ -346,6 +346,15 @@ namespace Sincronizacion
                 Eventos.Handler.FinalizadoEventFire("Finalizada la descarga de ejercicios!", this.LabelInfo);
                 System.Threading.Thread.Sleep(1000);
             }
+        }
+
+        private string NombreSinCaracteresInvalidos(ref string nombre)
+        {
+            foreach (char c in Path.GetInvalidFileNameChars())
+                if (nombre.Contains(c))
+                    nombre = nombre.Replace(c.ToString(), String.Empty);
+
+            return nombre;
         }
     }
 }
