@@ -346,6 +346,21 @@ namespace WebProgramAR.DataAccess
             return query;
         }
 
+        public static IEnumerable<Ejercicio> GetEjercicios(int ejercicioId, string usuario, string nombre, int nivelEjercicio)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Ejercicio> query = from u in db.Ejercicios.Include("Usuario").Include("EstadoEjercicio")
+                                              where (ejercicioId == -1 || u.EjercicioId == ejercicioId)
+                                              && (String.IsNullOrEmpty(usuario) || u.Usuario.UsuarioNombre.ToUpper().Contains(usuario.ToUpper()))
+                                              && (String.IsNullOrEmpty(nombre) || u.Nombre.ToUpper().Contains(nombre.ToUpper()))
+                                              && (nivelEjercicio == -1 || u.NivelEjercicio == nivelEjercicio)
+                                              && (u.EstadoEjercicio.EstadoEjercicioId == 2) //solo ejercicios en estado APROBADO
+                                              select u;
+                return query.ToList();
+            }
+        }
+
         #region IFiltrablePorSeguridadPorValor Members
 
         public static List<EntidadProgramARBase> Filtrar(List<EntidadProgramARBase> lista, Usuario user, TipoUsuario tipo)
