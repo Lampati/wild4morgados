@@ -289,7 +289,7 @@ namespace Sincronizacion
             }
         }
 
-        private string ListadoIds
+        public string ListadoIds
         {
             get
             {
@@ -330,11 +330,12 @@ namespace Sincronizacion
             {
                 foreach (string ejercicioEncriptadoStr in ejerciciosEncriptadosStr)
                 {
+                    string[] ejercicioConNombre = ejercicioEncriptadoStr.Split(new string[] { "!#!" }, StringSplitOptions.RemoveEmptyEntries);
                     Ejercicio ej = new Ejercicio();
                     try
                     {
-                        ej.Abrir(ejercicioEncriptadoStr);
-                        ej.Guardar(Path.Combine(this.Directorio, ej.EjercicioId.ToString() + ".gej"));
+                        ej.Abrir(ejercicioConNombre[0]);
+                        ej.Guardar(Path.Combine(this.Directorio, String.Format("{0}_{1}.{2}", ej.EjercicioId, ejercicioConNombre[1], "gej")));
                         cant++;
                         Eventos.Handler.GuardarEjercicioEventFire(this.BarraProgreso, this.LabelInfo, cant, ejerciciosEncriptadosStr.Length);
                         System.Threading.Thread.Sleep(r.Next(100, 500));
