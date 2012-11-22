@@ -44,11 +44,19 @@ namespace WebProgramAR.EntidadesDTO
         public static CursoDetalleDTO Proxy(object o)
         {
             CursoDetalleDTO cd = new CursoDetalleDTO();
-            cd.cursoId = (int)o.GetType().GetProperty("CursoId").GetValue(o, null);
+            cd.cursoId = (int)o.GetType().GetField("CursoId").GetValue(o);
 
-            object ob = o.GetType().GetProperty("Ejercicios").GetValue(o, null);
+            object ob = o.GetType().GetField("Ejercicios").GetValue(o);
             if (!Object.Equals(ob, null))
-                cd.ejercicios = (List<EjercicioDetalleDTO>)ob;
+            {
+                object[] obs = ob as object[];
+                if (!Object.Equals(obs, null))
+                {
+                    cd.ejercicios = new List<EjercicioDetalleDTO>();
+                    foreach (object oo in obs)
+                        cd.ejercicios.Add(EjercicioDetalleDTO.Proxy(oo));
+                }
+            }
 
             return cd;
         }
