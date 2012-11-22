@@ -66,6 +66,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntidadesDTO\CursoDetalleDTO.cs" />
+    <Compile Include="EntidadesDTO\CursoDTO.cs" />
+    <Compile Include="EntidadesDTO\EjercicioDetalleDTO.cs" />
+    <Compile Include="EntidadesDTO\EjercicioDTO.cs" />
     <Compile Include="SvcProgramar.asmx.cs">
       <DependentUpon>SvcProgramar.asmx</DependentUpon>
       <SubType>Component</SubType>
