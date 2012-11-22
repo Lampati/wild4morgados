@@ -34,6 +34,8 @@ namespace WebProgramAR.DataAccess
                 foreach (Ejercicio ej in query)
                 {
                     sb.Append(ej.XML);
+                    sb.Append("!#!");
+                    sb.Append(ej.Nombre);
                     sb.Append(",");
                 }
 
@@ -75,6 +77,8 @@ namespace WebProgramAR.DataAccess
                 foreach (Ejercicio ej in query)
                 {
                     sb.Append(ej.XML);
+                    sb.Append("!#!");
+                    sb.Append(ej.Nombre);
                     sb.Append(",");
                 }
 
@@ -115,6 +119,8 @@ namespace WebProgramAR.DataAccess
                 foreach (Ejercicio ej in query)
                 {
                     sb.Append(ej.XML);
+                    sb.Append("!#!");
+                    sb.Append(ej.Nombre);
                     sb.Append(",");
                 }
 
