@@ -10,6 +10,7 @@ namespace WebProgramAR.WebService.EntidadesDTO
         #region Atributos
         private int id;
         private string nombre;
+        private string creador;
         #endregion
 
         #region Propiedades
@@ -24,15 +25,22 @@ namespace WebProgramAR.WebService.EntidadesDTO
             get { return this.nombre; }
             set { this.nombre = value; }
         }
+
+        public string Creador
+        {
+            get { return this.creador; }
+            set { this.creador = value; }
+        }
         #endregion
 
         #region Constructores
         public CursoDTO() { }
 
-        public CursoDTO(int id, string nombre)
+        public CursoDTO(int id, string nombre, string creador)
         {
             this.id = id;
             this.nombre = nombre;
+            this.creador = creador;
         }
         #endregion
     }
