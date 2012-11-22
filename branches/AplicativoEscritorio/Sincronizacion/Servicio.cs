@@ -208,6 +208,8 @@ namespace Sincronizacion
                 List<CursoDTO> cursos = new List<CursoDTO>();
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.CursoDTO>
                 object[] o = this.InvocarMetodo("Cursos", new object[] { (cursoId.HasValue) ? cursoId.Value.ToString() : String.Empty, nombre, creador }) as object[];
+                if (Object.Equals(o, null))
+                    return null;
 
                 foreach (object ob in o)
                     cursos.Add(CursoDTO.Proxy(ob));
@@ -227,6 +229,8 @@ namespace Sincronizacion
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.EjercicioDTO>
                 object[] o = this.InvocarMetodo("Ejercicios", new object[] { (ejercicioId.HasValue) ? ejercicioId.Value.ToString() : String.Empty, 
                     usuario, nombre, (nivel.HasValue) ? nivel.Value.ToString() : String.Empty }) as object[];
+                if (Object.Equals(o, null))
+                    return null;
 
                 foreach (object ob in o)
                     ejercicios.Add(EjercicioDTO.Proxy(ob));
@@ -244,6 +248,9 @@ namespace Sincronizacion
             {
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.CursoDetalleDTO>
                 object o = this.InvocarMetodo("CursoDetalle", new object[] { cursoId });
+                if (Object.Equals(o, null))
+                    return null;
+
                 CursoDetalleDTO cursoDetalle = CursoDetalleDTO.Proxy(o);
                 return cursoDetalle;
             }
@@ -258,6 +265,9 @@ namespace Sincronizacion
             {
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.EjercicioDetalleDTO>
                 object o = this.InvocarMetodo("EjercicioDetalle", new object[] { ejercicioId });
+                if (Object.Equals(o, null))
+                    return null;
+
                 EjercicioDetalleDTO ejercicioDetalle = EjercicioDetalleDTO.Proxy(o);
                 return ejercicioDetalle;
             }
