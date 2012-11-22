@@ -70,6 +70,7 @@ namespace WebProgramAR.WebService
             return EjercicioDA.GetEjercicioByIdCount(this.Ids(cursosLocales), ejercicioId);
         }
 
+        //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
         public List<CursoDTO> Cursos(int id, string nombre, string creador)
         {
@@ -79,6 +80,7 @@ namespace WebProgramAR.WebService
             return c;
         }
 
+        //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
         public List<EjercicioDTO> Ejercicios(int id, string usuario, string nombre, int nivel)
         {
@@ -88,12 +90,14 @@ namespace WebProgramAR.WebService
             return e;
         }
 
+        //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
         public CursoDetalleDTO CursoDetalle(int cursoId)
         {
             return new CursoDetalleDTO(cursoId);
         }
 
+        //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
         public EjercicioDetalleDTO EjercicioDetalle(int ejercicioId)
         {
