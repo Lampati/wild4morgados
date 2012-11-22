@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using WebProgramAR.DataAccess;
-using WebProgramAR.WebService.EntidadesDTO;
+using WebProgramAR.EntidadesDTO;
 
 namespace WebProgramAR.WebService
 {
