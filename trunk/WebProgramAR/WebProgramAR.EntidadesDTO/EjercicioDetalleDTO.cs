@@ -116,6 +116,20 @@ namespace WebProgramAR.EntidadesDTO
             ed.fechaAlta = (DateTime)o.GetType().GetField("FechaAlta").GetValue(o);
             return ed;
         }
+
+        public static EjercicioDetalleDTO DesdeEntidad(Entidades.Ejercicio ejercicio)
+        {
+            EjercicioDetalleDTO e = new EjercicioDetalleDTO();
+            e.ejercicioId = ejercicio.EjercicioId;
+            e.nombre = ejercicio.Nombre;
+            e.usuario = ejercicio.Usuario.UsuarioNombre;
+            e.enunciado = ejercicio.Enunciado;
+            e.solucionGarGar = ejercicio.SolucionGarGar;
+            e.solucionTexto = ejercicio.SolucionTexto;
+            e.global = ejercicio.Global;
+            e.fechaAlta = ejercicio.FechaAlta;
+            return e;
+        }
         #endregion
     }
 }

@@ -70,6 +70,16 @@ namespace WebProgramAR.EntidadesDTO
             e.nivel = (int)o.GetType().GetField("Nivel").GetValue(o);
             return e;
         }
+
+        public static EjercicioDTO DesdeEntidad(Entidades.Ejercicio ejercicio)
+        {
+            EjercicioDTO e = new EjercicioDTO();
+            e.id = ejercicio.EjercicioId;
+            e.nombre = ejercicio.Nombre;
+            e.usuario = ejercicio.Usuario.UsuarioNombre;
+            e.nivel = ejercicio.NivelEjercicio;
+            return e;
+        }
         #endregion
     }
 }

@@ -60,6 +60,15 @@ namespace WebProgramAR.EntidadesDTO
 
             return c;
         }
+
+        public static CursoDTO DesdeEntidad(Entidades.Curso curso)
+        {
+            CursoDTO c = new CursoDTO();
+            c.id = curso.CursoId;
+            c.nombre = curso.Nombre;
+            c.creador = curso.Usuario.UsuarioNombre;
+            return c;
+        }
         #endregion
     }
 }

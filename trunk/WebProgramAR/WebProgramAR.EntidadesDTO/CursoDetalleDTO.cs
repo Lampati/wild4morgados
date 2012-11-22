@@ -84,6 +84,18 @@ namespace WebProgramAR.EntidadesDTO
 
             return cd;
         }
+
+        public static CursoDetalleDTO DesdeEntidad(Entidades.Curso curso)
+        {
+            CursoDetalleDTO c = new CursoDetalleDTO();
+            c.cursoId = curso.CursoId;
+            c.nombre = curso.Nombre;
+            c.creador = curso.Usuario.UsuarioNombre;
+            c.Ejercicios = new List<EjercicioDetalleDTO>();
+            foreach (Entidades.Ejercicio ej in curso.Ejercicios)
+                c.Ejercicios.Add(EjercicioDetalleDTO.DesdeEntidad(ej));
+            return c;
+        }
         #endregion
     }
 }
