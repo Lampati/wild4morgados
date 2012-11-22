@@ -151,6 +151,20 @@ namespace WebProgramAR.DataAccess
             return query;
         }
 
+        public static IEnumerable<Curso> GetCursos(int idCurso, string nom, string creador)
+        {
+            using (WebProgramAREntities db = new WebProgramAREntities())
+            {
+                IQueryable<Curso> query = from u in db.Cursoes.Include("Usuario")
+                                          where (idCurso == -1 || u.CursoId == idCurso)
+                                          && (String.IsNullOrEmpty(creador) || u.Usuario.UsuarioNombre.ToUpper().Contains(creador.ToUpper()))
+                                          && (String.IsNullOrEmpty(nom) || u.Nombre.ToUpper().Contains(nom.ToUpper()))
+                                          select u;
+
+                return query.ToList();
+            }
+        }
+
         
         #region IFiltrarPorSeguridadXValor Members
 
