@@ -9,6 +9,8 @@ namespace WebProgramAR.EntidadesDTO
     {
         #region Atributos
         private int ejercicioId;
+        private string nombre;
+        private string usuario;
         private string enunciado;
         private string solucionGarGar;
         private string solucionTexto;
@@ -23,6 +25,18 @@ namespace WebProgramAR.EntidadesDTO
         {
             get { return this.ejercicioId; }
             set { this.ejercicioId = value; }
+        }
+
+        public string Nombre
+        {
+            get { return this.nombre; }
+            set { this.nombre = value; }
+        }
+
+        public string Usuario
+        {
+            get { return this.usuario; }
+            set { this.usuario = value; }
         }
 
         public string Enunciado
@@ -62,6 +76,8 @@ namespace WebProgramAR.EntidadesDTO
         public EjercicioDetalleDTO(int ejercicioId)
         {
             this.ejercicioId = ejercicioId;
+            this.nombre = String.Format("Nombre del Ejercicio {0}", this.ejercicioId);
+            this.usuario = String.Format("Creador del Ejercicio {0}", this.ejercicioId); ;
             this.enunciado = String.Format("Enunciado del Ejercicio {0}", this.ejercicioId);
             this.solucionGarGar = String.Format("Solucion GarGar del Ejercicio {0}", this.ejercicioId);
             this.solucionTexto = String.Format("Solucion Texto del Ejercicio {0}", this.ejercicioId);
@@ -76,7 +92,15 @@ namespace WebProgramAR.EntidadesDTO
             EjercicioDetalleDTO ed = new EjercicioDetalleDTO();
             ed.ejercicioId = (int)o.GetType().GetField("EjercicioId").GetValue(o);
 
-            object ob = o.GetType().GetField("Enunciado").GetValue(o);
+            object ob = o.GetType().GetField("Nombre").GetValue(o);
+            if (!Object.Equals(ob, null))
+                ed.nombre = ob.ToString();
+
+            ob = o.GetType().GetField("Usuario").GetValue(o);
+            if (!Object.Equals(ob, null))
+                ed.usuario = ob.ToString();
+
+            ob = o.GetType().GetField("Enunciado").GetValue(o);
             if (!Object.Equals(ob, null))
                 ed.enunciado = ob.ToString();
 

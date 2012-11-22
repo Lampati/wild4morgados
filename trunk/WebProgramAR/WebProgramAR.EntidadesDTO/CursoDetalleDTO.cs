@@ -9,6 +9,8 @@ namespace WebProgramAR.EntidadesDTO
     {
         #region Atributos
         private int cursoId;
+        private string nombre;
+        private string creador;
         private List<EjercicioDetalleDTO> ejercicios;
         #endregion
 
@@ -17,6 +19,18 @@ namespace WebProgramAR.EntidadesDTO
         {
             get { return this.cursoId; }
             set { this.cursoId = value; }
+        }
+
+        public string Nombre
+        {
+            get { return this.nombre; }
+            set { this.nombre = value; }
+        }
+
+        public string Creador
+        {
+            get { return this.creador; }
+            set { this.creador = value; }
         }
 
         public List<EjercicioDetalleDTO> Ejercicios
@@ -32,6 +46,8 @@ namespace WebProgramAR.EntidadesDTO
         public CursoDetalleDTO(int cursoId)
         {
             this.cursoId = cursoId;
+            this.nombre = String.Format("Curso Detalle del Curso {0}", cursoId);
+            this.creador = String.Format("Creador del Curso Detalle del Curso {0}", cursoId);
             this.ejercicios = new List<EjercicioDetalleDTO>();
 
             Random r = new Random();
@@ -46,7 +62,15 @@ namespace WebProgramAR.EntidadesDTO
             CursoDetalleDTO cd = new CursoDetalleDTO();
             cd.cursoId = (int)o.GetType().GetField("CursoId").GetValue(o);
 
-            object ob = o.GetType().GetField("Ejercicios").GetValue(o);
+            object ob = o.GetType().GetField("Nombre").GetValue(o);
+            if (!Object.Equals(ob, null))
+                cd.nombre = ob.ToString();
+
+            ob = o.GetType().GetField("Creador").GetValue(o);
+            if (!Object.Equals(ob, null))
+                cd.creador = ob.ToString();
+
+            ob = o.GetType().GetField("Ejercicios").GetValue(o);
             if (!Object.Equals(ob, null))
             {
                 object[] obs = ob as object[];
