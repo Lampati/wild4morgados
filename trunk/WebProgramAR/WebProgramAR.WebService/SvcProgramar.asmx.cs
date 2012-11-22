@@ -80,8 +80,9 @@ namespace WebProgramAR.WebService
                     return null; //Si no se puede castear devolvemos una lista vacía, dar Exception por SOAP es un garron
 
             List<CursoDTO> c = new List<CursoDTO>();
-            for (int i = 0; i < 10; i++)
-                c.Add(new CursoDTO(i + 1, String.Format("Curso {0}", i), String.Format("Creador del curso {0}", i)));
+            foreach (Entidades.Curso curso in CursoDA.GetCursos(id, nombre, creador))
+                c.Add(CursoDTO.DesdeEntidad(curso));
+
             return c;
         }
 
@@ -100,8 +101,9 @@ namespace WebProgramAR.WebService
                     return null;
 
             List<EjercicioDTO> e = new List<EjercicioDTO>();
-            for (int i = 0; i < 10; i++)
-                e.Add(new EjercicioDTO(i+1));
+            foreach (Entidades.Ejercicio ejercicio in EjercicioDA.GetEjercicios(id, usuario, nombre, nivel))
+                e.Add(EjercicioDTO.DesdeEntidad(ejercicio));
+
             return e;
         }
 
@@ -109,14 +111,16 @@ namespace WebProgramAR.WebService
         [WebMethod]
         public CursoDetalleDTO CursoDetalle(int cursoId)
         {
-            return new CursoDetalleDTO(cursoId);
+            Entidades.Curso curso = CursoDA.GetCursoById(cursoId);
+            return CursoDetalleDTO.DesdeEntidad(curso);
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
         public EjercicioDetalleDTO EjercicioDetalle(int ejercicioId)
         {
-            return new EjercicioDetalleDTO(ejercicioId);
+            Entidades.Ejercicio ejercicio = EjercicioDA.GetEjercicioById(ejercicioId);
+            return EjercicioDetalleDTO.DesdeEntidad(ejercicio);
         }
     }
 }
