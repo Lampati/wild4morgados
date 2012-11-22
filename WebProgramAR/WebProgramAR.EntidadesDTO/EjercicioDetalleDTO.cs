@@ -16,6 +16,7 @@ namespace WebProgramAR.EntidadesDTO
         private string solucionTexto;
         private bool global;
         private DateTime fechaAlta;
+        private int nivelDificultad;
 
         private static Random r = new Random();
         #endregion
@@ -68,6 +69,12 @@ namespace WebProgramAR.EntidadesDTO
             get { return this.fechaAlta; }
             set { this.fechaAlta = value; }
         }
+
+        public int NivelDificultad
+        {
+            get { return this.nivelDificultad; }
+            set { this.nivelDificultad = value; }
+        }
         #endregion
 
         #region Constructores
@@ -114,6 +121,7 @@ namespace WebProgramAR.EntidadesDTO
 
             ed.global = (bool)o.GetType().GetField("Global").GetValue(o);
             ed.fechaAlta = (DateTime)o.GetType().GetField("FechaAlta").GetValue(o);
+            ed.nivelDificultad = (int)o.GetType().GetField("NivelDificultad").GetValue(o);
             return ed;
         }
 
@@ -128,6 +136,7 @@ namespace WebProgramAR.EntidadesDTO
             e.solucionTexto = ejercicio.SolucionTexto;
             e.global = ejercicio.Global;
             e.fechaAlta = ejercicio.FechaAlta;
+            e.nivelDificultad = ejercicio.NivelEjercicio;
             return e;
         }
         #endregion
