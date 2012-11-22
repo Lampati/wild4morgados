@@ -201,58 +201,68 @@ namespace Sincronizacion
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
-        public int Cursos(Nullable<int> cursoId, string nombre, string creador)
+        public List<CursoDTO> Cursos(Nullable<int> cursoId, string nombre, string creador)
         {
             if (this.Conectar())
             {
-                //Este object que devuelve en realidad es un List<WebProgramAR.WebService.EntidadesDTO.CursoDTO>
-                object o = this.InvocarMetodo("Cursos", new object[] { (cursoId.HasValue) ? cursoId.Value.ToString() : String.Empty, nombre, creador });
-                CursoDTO cursos = CursoDTO.Proxy(o);
-                //Podría devolver la cantidad de cursos que trajo, no se si serviria para algo...
-                return 0;
+                List<CursoDTO> cursos = new List<CursoDTO>();
+                //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.CursoDTO>
+                object[] o = this.InvocarMetodo("Cursos", new object[] { (cursoId.HasValue) ? cursoId.Value.ToString() : String.Empty, nombre, creador }) as object[];
+
+                foreach (object ob in o)
+                    cursos.Add(CursoDTO.Proxy(ob));
+
+                return cursos;
             }
 
-            return 0;
+            return null;
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
-        public int Ejercicios(Nullable<int> ejercicioId, string usuario, string nombre, Nullable<int> nivel)
+        public List<EjercicioDTO> Ejercicios(Nullable<int> ejercicioId, string usuario, string nombre, Nullable<int> nivel)
         {
             if (this.Conectar())
             {
-                //Este object que devuelve en realidad es un List<WebProgramAR.WebService.EntidadesDTO.EjercicioDTO>
-                object o = this.InvocarMetodo("Ejercicios", new object[] { (ejercicioId.HasValue) ? ejercicioId.Value.ToString() : String.Empty, 
-                    usuario, nombre, (nivel.HasValue) ? nivel.Value.ToString() : String.Empty });
-                EjercicioDTO ejercicios = EjercicioDTO.Proxy(o);
-                //Idem Cursos, podría devolver la cantidad de ejercicios que trajo...
-                return 0;
+                List<EjercicioDTO> ejercicios = new List<EjercicioDTO>();
+                //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.EjercicioDTO>
+                object[] o = this.InvocarMetodo("Ejercicios", new object[] { (ejercicioId.HasValue) ? ejercicioId.Value.ToString() : String.Empty, 
+                    usuario, nombre, (nivel.HasValue) ? nivel.Value.ToString() : String.Empty }) as object[];
+
+                foreach (object ob in o)
+                    ejercicios.Add(EjercicioDTO.Proxy(ob));
+
+                return ejercicios;
             }
 
-            return 0;
+            return null;
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
-        public void CursoDetalle(int cursoId)
+        public CursoDetalleDTO CursoDetalle(int cursoId)
         {
-            //QUE TIPO DE DATO DEBERIA DEVOLVER ESTE METODO?
             if (this.Conectar())
             {
-                //Este object que devuelve en realidad es un List<WebProgramAR.WebService.EntidadesDTO.CursoDetalleDTO>
+                //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.CursoDetalleDTO>
                 object o = this.InvocarMetodo("CursoDetalle", new object[] { cursoId });
                 CursoDetalleDTO cursoDetalle = CursoDetalleDTO.Proxy(o);
+                return cursoDetalle;
             }
+
+            return null;
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
-        public void EjercicioDetalle(int ejercicioId)
+        public EjercicioDetalleDTO EjercicioDetalle(int ejercicioId)
         {
-            //QUE TIPO DE DATO DEBERIA DEVOLVER ESTE METODO?
             if (this.Conectar())
             {
-                //Este object que devuelve en realidad es un List<WebProgramAR.WebService.EntidadesDTO.EjercicioDetalleDTO>
+                //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.EjercicioDetalleDTO>
                 object o = this.InvocarMetodo("EjercicioDetalle", new object[] { ejercicioId });
                 EjercicioDetalleDTO ejercicioDetalle = EjercicioDetalleDTO.Proxy(o);
+                return ejercicioDetalle;
             }
+
+            return null;
         }
 
         public string Directorio
