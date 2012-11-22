@@ -72,8 +72,13 @@ namespace WebProgramAR.WebService
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
-        public List<CursoDTO> Cursos(int id, string nombre, string creador)
+        public List<CursoDTO> Cursos(string sId, string nombre, string creador)
         {
+            int id = -1; //Si vino cargado este parámetro lo intentamos castear
+            if (!String.IsNullOrEmpty(sId))
+                if (!int.TryParse(sId, out id))
+                    return null; //Si no se puede castear devolvemos una lista vacía, dar Exception por SOAP es un garron
+
             List<CursoDTO> c = new List<CursoDTO>();
             for (int i = 0; i < 10; i++)
                 c.Add(new CursoDTO(i+1, String.Format("Curso {0}", i)));
@@ -82,8 +87,18 @@ namespace WebProgramAR.WebService
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
-        public List<EjercicioDTO> Ejercicios(int id, string usuario, string nombre, int nivel)
+        public List<EjercicioDTO> Ejercicios(string sId, string usuario, string nombre, string sNivel)
         {
+            int id = -1;
+            if (!String.IsNullOrEmpty(sId))
+                if (!int.TryParse(sId, out id))
+                    return null;
+
+            int nivel = -1;
+            if (!String.IsNullOrEmpty(sNivel))
+                if (!int.TryParse(sNivel, out nivel))
+                    return null;
+
             List<EjercicioDTO> e = new List<EjercicioDTO>();
             for (int i = 0; i < 10; i++)
                 e.Add(new EjercicioDTO(i+1));
