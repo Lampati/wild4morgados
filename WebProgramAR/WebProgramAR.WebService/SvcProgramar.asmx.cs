@@ -81,7 +81,7 @@ namespace WebProgramAR.WebService
 
             List<CursoDTO> c = new List<CursoDTO>();
             for (int i = 0; i < 10; i++)
-                c.Add(new CursoDTO(i+1, String.Format("Curso {0}", i)));
+                c.Add(new CursoDTO(i + 1, String.Format("Curso {0}", i), String.Format("Creador del curso {0}", i)));
             return c;
         }
 
