@@ -66,10 +66,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntidadesDTO\CursoDetalleDTO.cs" />
-    <Compile Include="EntidadesDTO\CursoDTO.cs" />
-    <Compile Include="EntidadesDTO\EjercicioDetalleDTO.cs" />
-    <Compile Include="EntidadesDTO\EjercicioDTO.cs" />
     <Compile Include="SvcProgramar.asmx.cs">
       <DependentUpon>SvcProgramar.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -83,6 +79,10 @@
     <ProjectReference Include="..\WebProgramAR.DataAccess\WebProgramAR.DataAccess.csproj">
       <Project>{9E46F2A1-ED97-4BCF-98C1-2B73FDC060F3}</Project>
       <Name>WebProgramAR.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebProgramAR.EntidadesDTO\WebProgramAR.EntidadesDTO.csproj">
+      <Project>{DE493BC3-E68B-415F-B84A-BD07C6141D33}</Project>
+      <Name>WebProgramAR.EntidadesDTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebProgramAR.Entidades\WebProgramAR.Entidades.csproj">
       <Project>{EFAE4217-3F3A-42D6-AD00-583A5D72073A}</Project>
