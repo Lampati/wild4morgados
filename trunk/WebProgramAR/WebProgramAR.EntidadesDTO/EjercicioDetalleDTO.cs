@@ -74,22 +74,22 @@ namespace WebProgramAR.EntidadesDTO
         public static EjercicioDetalleDTO Proxy(object o)
         {
             EjercicioDetalleDTO ed = new EjercicioDetalleDTO();
-            ed.ejercicioId = (int)o.GetType().GetProperty("EjercicioId").GetValue(o, null);
+            ed.ejercicioId = (int)o.GetType().GetField("EjercicioId").GetValue(o);
 
-            object ob = o.GetType().GetProperty("Enunciado").GetValue(o, null);
+            object ob = o.GetType().GetField("Enunciado").GetValue(o);
             if (!Object.Equals(ob, null))
                 ed.enunciado = ob.ToString();
 
-            ob = o.GetType().GetProperty("SolucionGarGar").GetValue(o, null);
+            ob = o.GetType().GetField("SolucionGarGar").GetValue(o);
             if (!Object.Equals(ob, null))
                 ed.solucionGarGar = ob.ToString();
 
-            ob = o.GetType().GetProperty("SolucionTexto").GetValue(o, null);
+            ob = o.GetType().GetField("SolucionTexto").GetValue(o);
             if (!Object.Equals(ob, null))
                 ed.solucionTexto = ob.ToString();
 
-            ed.global = (bool)o.GetType().GetProperty("Global").GetValue(o, null);
-            ed.fechaAlta = (DateTime)o.GetType().GetProperty("FechaAlta").GetValue(o, null);
+            ed.global = (bool)o.GetType().GetField("Global").GetValue(o);
+            ed.fechaAlta = (DateTime)o.GetType().GetField("FechaAlta").GetValue(o);
             return ed;
         }
         #endregion

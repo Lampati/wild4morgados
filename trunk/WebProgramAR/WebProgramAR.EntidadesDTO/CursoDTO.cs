@@ -48,13 +48,13 @@ namespace WebProgramAR.EntidadesDTO
         public static CursoDTO Proxy(object o)
         {
             CursoDTO c = new CursoDTO();
-            c.id = (int)o.GetType().GetProperty("Id").GetValue(o, null);
+            c.id = (int)o.GetType().GetField("Id").GetValue(o);
 
-            object ob = o.GetType().GetProperty("Nombre").GetValue(o, null);
+            object ob = o.GetType().GetField("Nombre").GetValue(o);
             if (!Object.Equals(ob, null))
                 c.nombre = ob.ToString();
 
-            ob = o.GetType().GetProperty("Creador").GetValue(o, null);
+            ob = o.GetType().GetField("Creador").GetValue(o);
             if (!Object.Equals(ob, null))
                 c.creador = ob.ToString();
 

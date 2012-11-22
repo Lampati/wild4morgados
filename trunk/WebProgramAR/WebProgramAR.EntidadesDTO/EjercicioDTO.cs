@@ -58,16 +58,16 @@ namespace WebProgramAR.EntidadesDTO
         public static EjercicioDTO Proxy(object o)
         {
             EjercicioDTO e = new EjercicioDTO();
-            e.id = (int)o.GetType().GetProperty("Id").GetValue(o, null);
+            e.id = (int)o.GetType().GetField("Id").GetValue(o);
 
-            object ob = o.GetType().GetProperty("Nombre").GetValue(o, null);
+            object ob = o.GetType().GetField("Nombre").GetValue(o);
             if (!Object.Equals(ob, null))
                 e.nombre = ob.ToString();
 
-            ob = o.GetType().GetProperty("Usuario").GetValue(o, null).ToString();
+            ob = o.GetType().GetField("Usuario").GetValue(o);
             if (!Object.Equals(ob, null))
                 e.usuario = ob.ToString();
-            e.nivel = (int)o.GetType().GetProperty("Nivel").GetValue(o, null);
+            e.nivel = (int)o.GetType().GetField("Nivel").GetValue(o);
             return e;
         }
         #endregion
