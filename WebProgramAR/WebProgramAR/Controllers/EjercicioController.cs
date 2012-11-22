@@ -95,7 +95,10 @@ namespace WebProgramAR.Controllers
 
             sortDir = sortDir.Equals("desc", StringComparison.CurrentCultureIgnoreCase) ? sortDir : "asc";
 
-            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario.UsuarioNombre", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global" };
+            // flanzani 21/11/2012
+            // IDC_WEB_1
+            // Agregado de fecha a ejercicios pendientes
+            var validColumns = new[] { "EjercicioId", "Nombre", "Usuario.UsuarioNombre", "Curso", "EstadoEjercicio", "NivelEjercicio", "Global", "FechaAlta" };
 
             if (!validColumns.Any(c => c.Equals(sort, StringComparison.CurrentCultureIgnoreCase)))
                 sort = "Nombre";

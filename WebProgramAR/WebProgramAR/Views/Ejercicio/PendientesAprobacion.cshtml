@@ -97,6 +97,14 @@
 @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("administrador") || HttpContext.Current.User.IsInRole("moderador")))
 {
 
+    @*
+
+        // flanzani 21/11/2012
+        // IDC_WEB_1
+        // Agregado de fecha a ejercicios pendientes
+
+    *@
+    
     <div id="contenedor-grid">
     @grid.GetHtml(
         tableStyle: "grid",
@@ -115,6 +123,7 @@
         grid.Column("Nombre", header: "Nombre"),
         grid.Column("NivelEjercicio", header: "Nivel"),
         grid.Column("Usuario", header: "Usuario",format: x=> x.Usuario!=null ? x.Usuario.UsuarioNombre:"(usuario borrado)"),        
+        grid.Column("FechaAlta", header: "Pendiente Desde", format: x=> x.FechaAlta!=null ? x.FechaAlta.ToString("dd/MM/yyyy") :"(no disponible)"),
         grid.Column("", 
               header: "",
               format: @<text>
