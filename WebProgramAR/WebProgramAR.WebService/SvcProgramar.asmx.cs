@@ -72,23 +72,36 @@ namespace WebProgramAR.WebService
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
-        public List<CursoDTO> Cursos(string sId, string nombre, string creador)
+        public List<CursoDTO> Cursos(string ejerciciosLocales, string sId, string nombre, string creador)
         {
             int id = -1; //Si vino cargado este parámetro lo intentamos castear
             if (!String.IsNullOrEmpty(sId))
                 if (!int.TryParse(sId, out id))
                     return null; //Si no se puede castear devolvemos una lista vacía, dar Exception por SOAP es un garron
 
+            List<int> ids = this.Ids(ejerciciosLocales);
             List<CursoDTO> c = new List<CursoDTO>();
             foreach (Entidades.Curso curso in CursoDA.GetCursos(id, nombre, creador))
-                c.Add(CursoDTO.DesdeEntidad(curso));
+            {
+                bool loTieneLocal = true;
+                foreach (Entidades.Ejercicio ej in curso.Ejercicios)
+                    if (!ids.Contains(ej.EjercicioId))
+                    {
+                        loTieneLocal = false;
+                        break;
+                    }
+
+                CursoDTO cursoDTO = CursoDTO.DesdeEntidad(curso);
+                cursoDTO.LoTieneLocal = loTieneLocal;
+                c.Add(cursoDTO);
+            }
 
             return c;
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
-        public List<EjercicioDTO> Ejercicios(string sId, string usuario, string nombre, string sNivel)
+        public List<EjercicioDTO> Ejercicios(string ejerciciosLocales, string sId, string usuario, string nombre, string sNivel)
         {
             int id = -1;
             if (!String.IsNullOrEmpty(sId))
@@ -101,26 +114,31 @@ namespace WebProgramAR.WebService
                     return null;
 
             List<EjercicioDTO> e = new List<EjercicioDTO>();
+            List<int> ids = this.Ids(ejerciciosLocales);
             foreach (Entidades.Ejercicio ejercicio in EjercicioDA.GetEjercicios(id, usuario, nombre, nivel))
-                e.Add(EjercicioDTO.DesdeEntidad(ejercicio));
+            {
+                EjercicioDTO ejDTO = EjercicioDTO.DesdeEntidad(ejercicio);
+                ejDTO.LoTieneLocal = ids.Contains(ejercicio.EjercicioId);
+                e.Add(ejDTO);
+            }
 
             return e;
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
-        public CursoDetalleDTO CursoDetalle(int cursoId)
+        public CursoDetalleDTO CursoDetalle(string ejerciciosLocales, int cursoId)
         {
             Entidades.Curso curso = CursoDA.GetCursoById(cursoId);
-            return CursoDetalleDTO.DesdeEntidad(curso);
+            return CursoDetalleDTO.DesdeEntidad(curso, this.Ids(ejerciciosLocales));
         }
 
         //IDC_WEB_2: EHT (21/11/2012) -> Metodo agregado por cambio solicitado por Tomassini, A.
         [WebMethod]
-        public EjercicioDetalleDTO EjercicioDetalle(int ejercicioId)
+        public EjercicioDetalleDTO EjercicioDetalle(string ejerciciosLocales, int ejercicioId)
         {
             Entidades.Ejercicio ejercicio = EjercicioDA.GetEjercicioById(ejercicioId);
-            return EjercicioDetalleDTO.DesdeEntidad(ejercicio);
+            return EjercicioDetalleDTO.DesdeEntidad(ejercicio, this.Ids(ejerciciosLocales));
         }
     }
 }
