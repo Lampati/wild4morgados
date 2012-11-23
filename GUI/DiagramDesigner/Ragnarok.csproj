@@ -98,6 +98,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebProgramAR.EntidadesDTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dlls\WebProgramAR.EntidadesDTO.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -137,6 +141,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DialogWindows\SelectorModoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EjercicioBrowser\BrowserCursosUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EjercicioBrowser\BrowserMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EjercicioBrowser\BrowserEjerciciosUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EjercicioBrowser\EjercicioDetallesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EjercicioBrowser\CursoDetallesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,6 +354,23 @@
     <Compile Include="DialogWindows\SelectorModoDialog.xaml.cs">
       <DependentUpon>SelectorModoDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EjercicioBrowser\BrowserCursosUserControl.xaml.cs">
+      <DependentUpon>BrowserCursosUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\BrowserMainWindow.xaml.cs">
+      <DependentUpon>BrowserMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\BrowserUserControlBase.cs" />
+    <Compile Include="EjercicioBrowser\BrowserEjerciciosUserControl.xaml.cs">
+      <DependentUpon>BrowserEjerciciosUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\EjercicioDetallesWindow.xaml.cs">
+      <DependentUpon>EjercicioDetallesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\CursoDetallesWindow.xaml.cs">
+      <DependentUpon>CursoDetallesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\EventArgsClasses\MensajeEstadoEventArgs.cs" />
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
@@ -466,6 +507,8 @@
     <Compile Include="SelectionService.cs" />
     <Compile Include="Toolbox.cs" />
     <Compile Include="ToolboxItem.cs" />
+    <Resource Include="Resources\Images\download16.png" />
+    <Resource Include="Resources\Images\database32.png" />
     <Content Include="rutinasPredef.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

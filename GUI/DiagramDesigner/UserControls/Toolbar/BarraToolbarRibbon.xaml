@@ -246,6 +246,20 @@
                                      ToolTipTitle="Sincronizacion por ID de ejercicio" ToolTipDescription="{StaticResource TooltipSincronizarPorEjercicio}" ToolTipFooterTitle="{StaticResource TooltipDondeEncontrarIdEjercicio}" />
             </ribbon:RibbonGroup>
 
+            <!--
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Agrego el boton para acceder al repositorio
+
+            -->
+
+            <ribbon:RibbonGroup Header="Repo Sincro" Name="ribbonGroupRepoSincro"  LargeImageSource="/Resources/Images/Sync.png">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/database32.png" SmallImageSource="/Resources/Images/SyncGlobal.png" 
+                                     Label="Sincro por Repositorio"  Click="btnSincroRepo_Click" 
+                                     ToolTipTitle="Sincronización por Repositorio" ToolTipDescription="{StaticResource TooltipSincronizarPorRepositorio}" />
+            </ribbon:RibbonGroup>
+
             <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro"  LargeImageSource="/Resources/Images/SyncConfig.png">
                 <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncConfig.png" SmallImageSource="/Resources/Images/SyncConfig.png"
                                      Label="Propiedades" Click="btnPropiedadesSincro_Click" 

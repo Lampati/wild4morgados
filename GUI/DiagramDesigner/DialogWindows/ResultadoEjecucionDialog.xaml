@@ -27,9 +27,20 @@
                 <StackPanel Orientation="Horizontal" Name="panelEjecucionIncorrecta" Visibility="Collapsed" VerticalAlignment="Center">
                     <Image Source="/Resources/Images/cancel_48.png" />
                     <TextBlock Text="Ejecucion Incorrecta" Margin="10,0,0,0" FontSize="22" VerticalAlignment="Center"/>
-                </StackPanel>
+                </StackPanel>               
+               
             </StackPanel>
+            
             <StackPanel Orientation="Vertical" Grid.Row="1" Margin="10,10,0,30">
+                <!--
+                
+                // flanzani 22/11/2012
+                // IDC_APP_8
+                // Agregar el tiempo de ejecucion 
+                // Agrego el textblock
+                
+                -->
+                <TextBlock Name="txtBlckTiempoEjecucion" FontSize="13" Margin="0,0,0,10">Blablabla</TextBlock>
                 <StackPanel Name="panelVariablesSalida">
 
                     <Border  Grid.Row="0" Grid.ColumnSpan="2" Padding="10,5,0,0" Margin="0,8" Height="35"  Width="320" HorizontalAlignment="Left" 
@@ -41,7 +52,7 @@
                     <TextBlock Margin="5,8,0,0" x:Name="txtBlockSinVariablesSalida" FontSize="15"
                                Visibility="Collapsed">
                         No se encontraron variables de salida declaradas en el procedimiento Salida
-                    </TextBlock>
+                    </TextBlock >
                 </StackPanel>
                 <StackPanel Name="panelErrores" Margin="0,20,0,0">
                     <Border  Grid.Row="0" Grid.ColumnSpan="2" Padding="10,5,0,0" Margin="0,8" Height="35"  Width="80" HorizontalAlignment="Left" 

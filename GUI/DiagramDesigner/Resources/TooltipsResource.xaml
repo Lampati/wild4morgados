@@ -66,6 +66,16 @@
         Bajar del servidor especificado en propiedades, todos aquellos ejercicios catalogados como globales en la Web de ProgramAr
     </clr:String>
 
+    <!--
+    // flanzani 22/11/2012
+    // IDC_APP_9
+    // Repositorio de ejercicios
+    // Agrego el tooltip
+    -->
+    <clr:String x:Key="TooltipSincronizarPorRepositorio">
+        Buscar del servidor especificado en propiedades, cursos y ejercicios provenientes de la Web de ProgramAr para su descarga
+    </clr:String>
+
     <clr:String x:Key="TooltipSincronizarPorCurso">
         Bajar del servidor especificado en propiedades, todos aquellos ejercicios pertenecientes al curso especificado por el usuario. Esta funcionalidad sirve cuando se quiere bajar un grupo de ejercicios agrupados por sus caracteristicas en comun.
     </clr:String> 
