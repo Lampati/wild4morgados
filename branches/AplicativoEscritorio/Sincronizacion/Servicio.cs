@@ -205,9 +205,10 @@ namespace Sincronizacion
         {
             if (this.Conectar())
             {
+                string ids = this.ListadoIds;
                 List<CursoDTO> cursos = new List<CursoDTO>();
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.CursoDTO>
-                object[] o = this.InvocarMetodo("Cursos", new object[] { (cursoId.HasValue) ? cursoId.Value.ToString() : String.Empty, nombre, creador }) as object[];
+                object[] o = this.InvocarMetodo("Cursos", new object[] { ids, (cursoId.HasValue) ? cursoId.Value.ToString() : String.Empty, nombre, creador }) as object[];
                 if (Object.Equals(o, null))
                     return null;
 
@@ -225,9 +226,10 @@ namespace Sincronizacion
         {
             if (this.Conectar())
             {
+                string ids = this.ListadoIds;
                 List<EjercicioDTO> ejercicios = new List<EjercicioDTO>();
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.EjercicioDTO>
-                object[] o = this.InvocarMetodo("Ejercicios", new object[] { (ejercicioId.HasValue) ? ejercicioId.Value.ToString() : String.Empty, 
+                object[] o = this.InvocarMetodo("Ejercicios", new object[] { ids, (ejercicioId.HasValue) ? ejercicioId.Value.ToString() : String.Empty, 
                     usuario, nombre, (nivel.HasValue) ? nivel.Value.ToString() : String.Empty }) as object[];
                 if (Object.Equals(o, null))
                     return null;
@@ -246,8 +248,9 @@ namespace Sincronizacion
         {
             if (this.Conectar())
             {
+                string ids = this.ListadoIds;
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.CursoDetalleDTO>
-                object o = this.InvocarMetodo("CursoDetalle", new object[] { cursoId });
+                object o = this.InvocarMetodo("CursoDetalle", new object[] { ids, cursoId });
                 if (Object.Equals(o, null))
                     return null;
 
@@ -263,8 +266,9 @@ namespace Sincronizacion
         {
             if (this.Conectar())
             {
+                string ids = this.ListadoIds;
                 //Este object que devuelve en realidad es un List<WebProgramAR.EntidadesDTO.EjercicioDetalleDTO>
-                object o = this.InvocarMetodo("EjercicioDetalle", new object[] { ejercicioId });
+                object o = this.InvocarMetodo("EjercicioDetalle", new object[] { ids, ejercicioId });
                 if (Object.Equals(o, null))
                     return null;
 
