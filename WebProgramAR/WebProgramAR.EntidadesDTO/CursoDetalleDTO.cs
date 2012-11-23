@@ -12,6 +12,7 @@ namespace WebProgramAR.EntidadesDTO
         private string nombre;
         private string creador;
         private List<EjercicioDetalleDTO> ejercicios;
+        private bool loTieneLocal;
         #endregion
 
         #region Propiedades
@@ -37,6 +38,12 @@ namespace WebProgramAR.EntidadesDTO
         {
             get { return this.ejercicios; }
             set { this.ejercicios = value; }
+        }
+
+        public bool LoTieneLocal
+        {
+            get { return this.loTieneLocal; }
+            set { this.loTieneLocal = value; }
         }
         #endregion
 
@@ -82,10 +89,12 @@ namespace WebProgramAR.EntidadesDTO
                 }
             }
 
+            cd.loTieneLocal = (bool)o.GetType().GetField("LoTieneLocal").GetValue(o);
+
             return cd;
         }
 
-        public static CursoDetalleDTO DesdeEntidad(Entidades.Curso curso)
+        public static CursoDetalleDTO DesdeEntidad(Entidades.Curso curso, List<int> ejerciciosLocales)
         {
             CursoDetalleDTO c = new CursoDetalleDTO();
             c.cursoId = curso.CursoId;
@@ -93,7 +102,11 @@ namespace WebProgramAR.EntidadesDTO
             c.creador = curso.Usuario.UsuarioNombre;
             c.Ejercicios = new List<EjercicioDetalleDTO>();
             foreach (Entidades.Ejercicio ej in curso.Ejercicios)
-                c.Ejercicios.Add(EjercicioDetalleDTO.DesdeEntidad(ej));
+            {
+                EjercicioDetalleDTO ejercicioDTO = EjercicioDetalleDTO.DesdeEntidad(ej, ejerciciosLocales);
+                c.Ejercicios.Add(ejercicioDTO);
+            }
+            c.loTieneLocal = c.Ejercicios.TrueForAll(e => e.LoTieneLocal);
             return c;
         }
         #endregion

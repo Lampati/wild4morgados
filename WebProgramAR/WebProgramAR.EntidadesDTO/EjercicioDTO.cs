@@ -12,6 +12,7 @@ namespace WebProgramAR.EntidadesDTO
         private string nombre;
         private string usuario;
         private int nivel;
+        private bool loTieneLocal;
 
         private static Random r = new Random();
         #endregion
@@ -39,6 +40,12 @@ namespace WebProgramAR.EntidadesDTO
         {
             get { return this.nivel; }
             set { this.nivel = value; }
+        }
+
+        public bool LoTieneLocal
+        {
+            get { return this.loTieneLocal; }
+            set { this.loTieneLocal = value; }
         }
         #endregion
 
@@ -68,6 +75,7 @@ namespace WebProgramAR.EntidadesDTO
             if (!Object.Equals(ob, null))
                 e.usuario = ob.ToString();
             e.nivel = (int)o.GetType().GetField("Nivel").GetValue(o);
+            e.loTieneLocal = (bool)o.GetType().GetField("LoTieneLocal").GetValue(o);
             return e;
         }
 

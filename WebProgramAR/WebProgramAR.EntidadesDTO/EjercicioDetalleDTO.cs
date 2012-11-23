@@ -17,6 +17,7 @@ namespace WebProgramAR.EntidadesDTO
         private bool global;
         private DateTime fechaAlta;
         private int nivelDificultad;
+        private bool loTieneLocal;
 
         private static Random r = new Random();
         #endregion
@@ -75,6 +76,12 @@ namespace WebProgramAR.EntidadesDTO
             get { return this.nivelDificultad; }
             set { this.nivelDificultad = value; }
         }
+
+        public bool LoTieneLocal
+        {
+            get { return this.loTieneLocal; }
+            set { this.loTieneLocal = value; }
+        }
         #endregion
 
         #region Constructores
@@ -122,10 +129,11 @@ namespace WebProgramAR.EntidadesDTO
             ed.global = (bool)o.GetType().GetField("Global").GetValue(o);
             ed.fechaAlta = (DateTime)o.GetType().GetField("FechaAlta").GetValue(o);
             ed.nivelDificultad = (int)o.GetType().GetField("NivelDificultad").GetValue(o);
+            ed.loTieneLocal = (bool)o.GetType().GetField("LoTieneLocal").GetValue(o);
             return ed;
         }
 
-        public static EjercicioDetalleDTO DesdeEntidad(Entidades.Ejercicio ejercicio)
+        public static EjercicioDetalleDTO DesdeEntidad(Entidades.Ejercicio ejercicio, List<int> ejerciciosLocales)
         {
             EjercicioDetalleDTO e = new EjercicioDetalleDTO();
             e.ejercicioId = ejercicio.EjercicioId;
@@ -137,6 +145,7 @@ namespace WebProgramAR.EntidadesDTO
             e.global = ejercicio.Global;
             e.fechaAlta = ejercicio.FechaAlta;
             e.nivelDificultad = ejercicio.NivelEjercicio;
+            e.loTieneLocal = ejerciciosLocales.Contains(e.ejercicioId);
             return e;
         }
         #endregion

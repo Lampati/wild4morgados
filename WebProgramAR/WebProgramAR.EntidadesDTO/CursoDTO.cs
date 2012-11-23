@@ -11,6 +11,7 @@ namespace WebProgramAR.EntidadesDTO
         private int id;
         private string nombre;
         private string creador;
+        private bool loTieneLocal;
         #endregion
 
         #region Propiedades
@@ -30,6 +31,12 @@ namespace WebProgramAR.EntidadesDTO
         {
             get { return this.creador; }
             set { this.creador = value; }
+        }
+
+        public bool LoTieneLocal
+        {
+            get { return this.loTieneLocal; }
+            set { this.loTieneLocal = value; }
         }
         #endregion
 
@@ -58,6 +65,7 @@ namespace WebProgramAR.EntidadesDTO
             if (!Object.Equals(ob, null))
                 c.creador = ob.ToString();
 
+            c.loTieneLocal = (bool)o.GetType().GetField("LoTieneLocal").GetValue(o);
             return c;
         }
 
