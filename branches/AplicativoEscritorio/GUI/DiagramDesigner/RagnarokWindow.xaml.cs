@@ -884,8 +884,15 @@ namespace Ragnarok
             ResultadoEjecucion res = Ejecutar(programa);
 
             if (res.ResEjecucion != null)
-            {
+            {                
                 ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+
+                // flanzani 22/11/2012
+                // IDC_APP_8
+                // Agregar el tiempo de ejecucion 
+                // Agrego el tiempo
+                resultadosDialog.TiempoEjecucion = res.Segundos;
+
 
                 resultadosDialog.Owner = this;
                 ApplyBlurEffect();
@@ -948,7 +955,11 @@ namespace Ragnarok
                     ArchCargado.CompilacionCorrecta = true;
                 }
 
+                Stopwatch stp = Stopwatch.StartNew();
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
+                stp.Stop();
+
+                resultadoEjecucion.Segundos = stp.Elapsed.TotalSeconds;
 
                 if (File.Exists(res.ArchTemporalResultadosEjecucionConRuta))
                 {

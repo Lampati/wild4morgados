@@ -63,6 +63,19 @@ namespace Ragnarok.DialogWindows
             }
         }
 
+        // flanzani 22/11/2012
+        // IDC_APP_8
+        // Agregar el tiempo de ejecucion 
+        // Agrego la propiedad para el tiempo
+        public double TiempoEjecucion
+        {
+            set
+            {
+                txtBlckTiempoEjecucion.Text = string.Format("Tiempo de ejecución: {0} segundos",value.ToString("0.##"));
+            }
+
+        }
+
         private bool esCorrectaEjecucion;
         public bool EsCorrectaEjecucion
         {
@@ -123,6 +136,8 @@ namespace Ragnarok.DialogWindows
 
                 panelErrores.Visibility = System.Windows.Visibility.Collapsed;
             }
+
+
            
         }
 
