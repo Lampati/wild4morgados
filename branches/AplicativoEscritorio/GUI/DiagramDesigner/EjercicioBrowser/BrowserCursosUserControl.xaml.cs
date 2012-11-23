@@ -131,7 +131,14 @@ namespace Ragnarok.EjercicioBrowser
             CursoDetallesWindow windowCurso = new CursoDetallesWindow();
             windowCurso.Curso = cursoDetalleSincronizado;
 
-            windowCurso.ShowDialog();
+            bool? res = windowCurso.ShowDialog();
+
+            if (res.HasValue && res.Value)
+            {
+                ColocarComoDescargado(idDescarga);
+            }
+
+
         }
     
         private void ButtonDescargar_Click(object sender, RoutedEventArgs e)
@@ -163,11 +170,20 @@ namespace Ragnarok.EjercicioBrowser
             if (resultadoSincro)
             {
                 MensajesEstadoEventFire("¡Descarga completa!", true);
+
+                ColocarComoDescargado(idDescarga);
             }
             else
             {
                 MensajesEstadoEventFire("El curso que se intento descargar no existe más", false);
             }
+        }
+
+        private void ColocarComoDescargado(int id)
+        {
+            listaDatos.First(x => x.Id == id).LoTieneLocal = true;
+
+            ListaDatos = listaDatos;
         }
 
         private void bttnBuscar_Click(object sender, RoutedEventArgs e)

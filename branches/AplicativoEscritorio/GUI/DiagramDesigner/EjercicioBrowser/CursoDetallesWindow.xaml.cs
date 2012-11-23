@@ -107,6 +107,19 @@ namespace Ragnarok.EjercicioBrowser
             workerDetalles.DoWork += new DoWorkEventHandler(workerDetalles_DoWork);
             workerDetalles.RunWorkerCompleted += new RunWorkerCompletedEventHandler(workerDetalles_RunWorkerCompleted);
 
+            Closing += new CancelEventHandler(CursoDetallesWindow_Closing);
+        }
+
+        void CursoDetallesWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (curso.LoTieneLocal)
+            {
+                DialogResult = true;
+            }
+            else
+            {
+                DialogResult = false;
+            }
         }
 
 
@@ -135,7 +148,12 @@ namespace Ragnarok.EjercicioBrowser
             EjercicioDetallesWindow windowEj = new EjercicioDetallesWindow();
             windowEj.Ejercicio = ejercicioDetalleSincronizado;
 
-            windowEj.ShowDialog();
+            bool? res = windowEj.ShowDialog();
+
+            if (res.HasValue && res.Value)
+            {
+                ColocarComoDescargado(idDescarga);
+            }
         }
 
         void workerSincronizacion_DoWork(object sender, DoWorkEventArgs e)
@@ -187,6 +205,8 @@ namespace Ragnarok.EjercicioBrowser
                         imgEstadoActualError.Visibility = System.Windows.Visibility.Collapsed;
 
                         statusBarMensaje.Text = "¡Descarga completa!";
+
+                        ColocarComoDescargado(idDescarga);
                     }
                     else
                     {
@@ -205,6 +225,18 @@ namespace Ragnarok.EjercicioBrowser
                     }
                 }
             }
+        }
+
+        private void ColocarComoDescargado(int idDescarga)
+        {
+            curso.Ejercicios.Find(x => x.EjercicioId == idDescarga).LoTieneLocal = true;
+
+            if (curso.Ejercicios.FindAll(x => x.LoTieneLocal == true).Count == curso.Ejercicios.Count)
+            {
+                curso.LoTieneLocal = true;
+            }
+
+            Curso = curso;
         }
 
        

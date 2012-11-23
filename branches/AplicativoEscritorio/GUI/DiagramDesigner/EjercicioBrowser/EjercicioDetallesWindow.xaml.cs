@@ -97,8 +97,21 @@ namespace Ragnarok.EjercicioBrowser
 
             ModoTextoConfiguracion.ConfigurarAvalonEdit(txtBxSolucionGarGar);
 
+            Closing += new CancelEventHandler(EjercicioDetallesWindow_Closing);
+
         }
 
+        void EjercicioDetallesWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (ejercicio.LoTieneLocal)
+            {
+                DialogResult = true;
+            }
+            else
+            {
+                DialogResult = false;
+            }
+        }
 
         void workerSincronizacion_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -139,6 +152,8 @@ namespace Ragnarok.EjercicioBrowser
                         imgEstadoActualError.Visibility = System.Windows.Visibility.Collapsed;
 
                         statusBarMensaje.Text = "¡Descarga completa!";
+
+                        ColocarComoDescargado(idDescarga);
                     }
                     else
                     {
@@ -151,6 +166,14 @@ namespace Ragnarok.EjercicioBrowser
                 }
             }
         }
+
+        private void ColocarComoDescargado(int idDescarga)
+        {
+            ejercicio.LoTieneLocal = true;
+
+            Ejercicio = ejercicio;
+        }
+
 
         private void ComenzarDescarga(string mens)
         {

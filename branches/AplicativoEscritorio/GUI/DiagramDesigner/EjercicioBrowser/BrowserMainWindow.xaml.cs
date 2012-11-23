@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DataAccess;
 
 namespace Ragnarok.EjercicioBrowser
 {
@@ -37,6 +38,9 @@ namespace Ragnarok.EjercicioBrowser
             browserEjercicios.FinalizadaCargaDatosEvent += new BrowserUserControlBase.CargandoDatosEventHandler(browserEjercicios_FinalizadaCargaDatosEvent);
 
             browserCursos.MensajesEstadoEvent += new BrowserUserControlBase.MensajeEstadoEventHandler(browser_MensajesEstadoEvent);
+
+            txtDirDescarga.Text = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
+            txtUrlDescarga.Text = ConfiguracionAplicacion.UrlsDescargaEjercicios;
         }
 
         void browserCursos_ComienzoCargaDatosEvent(object sender, EventArgs e)
