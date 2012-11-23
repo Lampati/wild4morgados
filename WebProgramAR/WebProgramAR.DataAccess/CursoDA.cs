@@ -155,7 +155,7 @@ namespace WebProgramAR.DataAccess
         {
             using (WebProgramAREntities db = new WebProgramAREntities())
             {
-                IQueryable<Curso> query = from u in db.Cursoes.Include("Usuario")
+                IQueryable<Curso> query = from u in db.Cursoes.Include("Usuario").Include("Ejercicios")
                                           where (idCurso == -1 || u.CursoId == idCurso)
                                           && (String.IsNullOrEmpty(creador) || u.Usuario.UsuarioNombre.ToUpper().Contains(creador.ToUpper()))
                                           && (String.IsNullOrEmpty(nom) || u.Nombre.ToUpper().Contains(nom.ToUpper()))
