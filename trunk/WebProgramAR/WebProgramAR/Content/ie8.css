@@ -462,8 +462,25 @@ fieldset.details
 
 textarea
 {
-    min-height: 160px;
-    min-width:200px;
+    margin-top:4px;
+    -moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	color:#333;
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1em;
+    font-family:Calibri;
+    color: #333;
+    
+    height:60px;
+	display:inline-block;
+	min-width:250px;
+	position:relative;
+	
+	/* Preloading the background image for the dropdown */
+	background:#fff;
+	resize:none;
 }
 
 input[type="text"], input[type="password"],textarea
@@ -472,8 +489,7 @@ input[type="text"], input[type="password"],textarea
     -moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
-	color:#fff;
-    border: 1px solid #ccc;
+	border: 1px solid #ccc;
     padding: 2px;
     font-size: 1em;
     font-family:Calibri;
@@ -485,7 +501,7 @@ input[type="text"], input[type="password"],textarea
 	position:relative;
 	
 	/* Preloading the background image for the dropdown */
-	background:url("images/dropdown_slice.png") no-repeat -99999px;
+	background:#fff;
 	resize:none;
 }
 input:focus,textarea:focus
@@ -496,10 +512,7 @@ input:focus,textarea:focus
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;  
-	background:url('images/dropdown_slice.png') repeat-x #222;
-	background-image:url('images/dropdown_slice.png'),url('images/dropdown_slice.png'),url('images/dropdown_slice.png');
-	background-position: 50% -171px, 0 -85px, 0 0;
-	background-repeat: no-repeat, no-repeat, repeat-x;
+	border:1px solid #EE4000;
 	color:#fff;
 }
 input[type="text"].textBoxForFilter
