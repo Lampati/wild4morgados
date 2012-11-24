@@ -229,11 +229,23 @@ namespace Ragnarok.EjercicioBrowser
 
         private void ColocarComoDescargado(int idDescarga)
         {
-            curso.Ejercicios.Find(x => x.EjercicioId == idDescarga).LoTieneLocal = true;
-
-            if (curso.Ejercicios.FindAll(x => x.LoTieneLocal == true).Count == curso.Ejercicios.Count)
+            if (descargarEsteCurso)
             {
+                foreach (var item in curso.Ejercicios)
+                {
+                    item.LoTieneLocal = true;
+                }
+
                 curso.LoTieneLocal = true;
+            }
+            else
+            {
+                curso.Ejercicios.Find(x => x.EjercicioId == idDescarga).LoTieneLocal = true;
+
+                if (curso.Ejercicios.FindAll(x => x.LoTieneLocal == true).Count == curso.Ejercicios.Count)
+                {
+                    curso.LoTieneLocal = true;
+                }
             }
 
             Curso = curso;

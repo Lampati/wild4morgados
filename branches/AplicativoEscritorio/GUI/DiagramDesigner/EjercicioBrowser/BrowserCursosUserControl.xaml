@@ -70,10 +70,25 @@
                                         <Style TargetType="Border">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Path=LoTieneLocal}" Value="True">
-                                                    <Setter Property="Background" Value="LightGreen"/>
+                                                    <Setter Property="Background" >
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                                                <GradientStop Color="#EFFDD3" Offset="0"/>
+                                                                <GradientStop Color="#DDFCC1" Offset="0.5"/>
+                                                                <GradientStop Color="#81D765" Offset="0.95"/>
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding Path=LoTieneLocal}" Value="False">
-                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="Background" >
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                                                <GradientStop Color="#FCFEFD" Offset="0"/>
+                                                                <GradientStop Color="#EDF3F9" Offset="0.5"/>
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>

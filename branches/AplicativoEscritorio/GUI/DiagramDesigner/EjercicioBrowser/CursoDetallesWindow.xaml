@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Ragnarok.EjercicioBrowser.CursoDetallesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CursoDetallesWindow" Height="421" Width="476">
+        Title="Descargar Curso" Height="421" Width="476">
     <Border >
         <Border.Background>
             <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
@@ -12,7 +12,7 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="55" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="12" />
                 <RowDefinition Height="25" />
                 <RowDefinition Height="25" />
@@ -38,10 +38,10 @@
                 Este curso ya fue descargado 
             </Label>
 
-
             <Button HorizontalAlignment="Right" Margin="5" Name="bttnDescargar"
-                     Grid.Column="1" Grid.Row="0" Click="bttnDescargar_Click">
-                Descargar
+                     Grid.Column="1" Grid.Row="0" Click="bttnDescargar_Click"
+                    ToolTip="Descargar" Width="55" Height="55">
+                <Image Source="/Resources/Images/download48.png" Width="38px" Height="38px"></Image>
             </Button>
 
             <Separator Grid.ColumnSpan="99" Grid.Row="1" Margin="4,0"></Separator>
@@ -90,10 +90,25 @@
                                             <Style TargetType="Border">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=LoTieneLocal}" Value="True">
-                                                        <Setter Property="Background" Value="LightGreen"/>
+                                                        <Setter Property="Background" >
+                                                            <Setter.Value>
+                                                                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                                                    <GradientStop Color="#EFFDD3" Offset="0"/>
+                                                                    <GradientStop Color="#DDFCC1" Offset="0.5"/>
+                                                                    <GradientStop Color="#81D765" Offset="0.95"/>
+                                                                </LinearGradientBrush>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=LoTieneLocal}" Value="False">
-                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Background" >
+                                                            <Setter.Value>
+                                                                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                                                    <GradientStop Color="#FCFEFD" Offset="0"/>
+                                                                    <GradientStop Color="#EDF3F9" Offset="0.5"/>
+                                                                </LinearGradientBrush>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                     </DataTrigger>
                                                 </Style.Triggers> 
                                             </Style>
