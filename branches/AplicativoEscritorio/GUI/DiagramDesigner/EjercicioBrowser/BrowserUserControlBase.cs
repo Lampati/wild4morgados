@@ -29,6 +29,8 @@ namespace Ragnarok.EjercicioBrowser
 
         protected Sincronizacion.Servicio servicio;
 
+        protected static bool errorDeConexion;
+
         protected Sincronizacion.Servicio Servicio
         {
             get
@@ -74,6 +76,8 @@ namespace Ragnarok.EjercicioBrowser
                 BloquearPantalla(false, true);
 
                 FinalizadaCargaDatosEventFire();
+
+            
             }
         }
 
@@ -158,6 +162,11 @@ namespace Ragnarok.EjercicioBrowser
                 BloquearPantalla(false, true);
 
                 FinalizadaCargaDatosEventFire();
+
+                if (errorDeConexion)
+                {
+                    ManejarErrorConexion();
+                }
             }
         }
 
@@ -203,5 +212,7 @@ namespace Ragnarok.EjercicioBrowser
         protected abstract void ConsultarDetalle();
 
         protected abstract void FinalizadaConsultarDetalle();
+
+        protected abstract void ManejarErrorConexion();
     }
 }

@@ -79,11 +79,13 @@ namespace Ragnarok.EjercicioBrowser
                 if (bloquear)
                 {
                     txtCargando.Visibility = System.Windows.Visibility.Visible;
+                    txtNoSePudoConectar.Visibility = System.Windows.Visibility.Hidden;
                     lstCursos.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
                     txtCargando.Visibility = System.Windows.Visibility.Hidden;
+                    txtNoSePudoConectar.Visibility = System.Windows.Visibility.Hidden;
                     lstCursos.Visibility = System.Windows.Visibility.Visible;
                 }
             }
@@ -99,12 +101,23 @@ namespace Ragnarok.EjercicioBrowser
         protected override void TraerDatos()
         {
             ejerciciosSincronizados = Servicio.Ejercicios(idActual, usuarioActual, nombreActual, nivelActual);
+
+            errorDeConexion = ejerciciosSincronizados == null;
         }
 
         protected override void CargarDatosEnPantalla()
         {
-            ObservableCollection<EjercicioDTO> listaAux = new ObservableCollection<EjercicioDTO>(ejerciciosSincronizados);
-            ListaDatos = listaAux;
+            if (ejerciciosSincronizados != null)
+            {
+                ObservableCollection<EjercicioDTO> listaAux = new ObservableCollection<EjercicioDTO>(ejerciciosSincronizados);
+                ListaDatos = listaAux;
+            }                 
+        }
+
+        protected override void ManejarErrorConexion()
+        {
+            txtNoSePudoConectar.Visibility = System.Windows.Visibility.Visible;
+            lstCursos.Visibility = System.Windows.Visibility.Hidden;
         }
   
         private void ButtonDetalles_Click(object sender, RoutedEventArgs e)
@@ -135,14 +148,21 @@ namespace Ragnarok.EjercicioBrowser
 
         protected override void FinalizadaConsultarDetalle()
         {
-            EjercicioDetallesWindow windowEj = new EjercicioDetallesWindow();
-            windowEj.Ejercicio = ejercicioDetalleSincronizado;          
-
-            bool? res = windowEj.ShowDialog();
-
-            if (res.HasValue && res.Value)
+            if (ejercicioDetalleSincronizado != null)
             {
-                ColocarComoDescargado(idDescarga);
+                EjercicioDetallesWindow windowEj = new EjercicioDetallesWindow();
+                windowEj.Ejercicio = ejercicioDetalleSincronizado;
+
+                bool? res = windowEj.ShowDialog();
+
+                if (res.HasValue && res.Value)
+                {
+                    ColocarComoDescargado(idDescarga);
+                }
+            }
+            else
+            {
+                MensajesEstadoEventFire(string.Format("Error al intentar obtener el detalle del ejercicio {0}",idDescarga), false);
             }
         }
     
