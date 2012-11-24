@@ -548,7 +548,7 @@ input:focus,textarea:focus
 	-webkit-border-radius:3px;
 	border-radius:3px;  
 	border:1px solid #EE4000;
-	color:#fff;
+	color:#333;
 }
 input[type="text"].textBoxForFilter
 {
@@ -1732,11 +1732,8 @@ select:focus
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;  
-	background:url('images/dropdown_slice.png') repeat-x #222;
-	background-image:url('images/dropdown_slice.png'),url('images/dropdown_slice.png'),url('images/dropdown_slice.png');
-	background-position: 50% -171px, 0 -85px, 0 0;
-	background-repeat: no-repeat, no-repeat, repeat-x;
-	color:#fff;
+	border:1px solid 
+	color:#333;
 }
 /*para el manejo de selectbox convertidos*/
 .tzSelect{
