@@ -49,11 +49,26 @@
                                                 <Style TargetType="Border">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Path=EsValido}" Value="True">
-                                                            <Setter Property="Background" Value="Transparent"/>
-                                                        </DataTrigger>
+                                                                <Setter Property="Background" >
+                                                                    <Setter.Value>
+                                                                        <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                                                            <GradientStop Color="#EFFDD3" Offset="0"/>
+                                                                            <GradientStop Color="#B2E54C" Offset="0.5"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
                                                         <DataTrigger Binding="{Binding Path=EsValido}" Value="False">
-                                                            <Setter Property="Background" Value="Red"/>
-                                                        </DataTrigger>
+                                                                <Setter Property="Background" >
+                                                                    <Setter.Value>
+                                                                        <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                                                            <GradientStop Color="#FDC3B5" Offset="0"/>
+                                                                            <GradientStop Color="#EA8066" Offset="0.5"/>
+                                                                            <GradientStop Color="#D83D18" Offset="0.95"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </Border.Style>

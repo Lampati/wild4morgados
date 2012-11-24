@@ -4,7 +4,7 @@
         xmlns:aw="clr-namespace:AvalonWizard;assembly=AvalonWizard"
         xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:userControls="clr-namespace:Ragnarok.UserControls"
-        Title="WindowCreacionTest" Height="550" Width="450"
+        Title="WindowCreacionTest" Height="550" Width="650"
         ShowInTaskbar="False" ShowActivated="True" 
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
 
@@ -65,7 +65,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="435" />
+                        <ColumnDefinition Width="635" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
@@ -83,10 +83,10 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                                    <GridViewColumn Header="Contexto" Width="70" DisplayMemberBinding="{Binding Path=Contexto}" />
-                                    <GridViewColumn Header="Tipo de Variable" Width="100" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
-                                    <GridViewColumn Header="Tipo de Dato" Width="80" DisplayMemberBinding="{Binding Path=TipoDato}" />
+                                    <GridViewColumn Header="Nombre" Width="220" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                    <GridViewColumn Header="Contexto" Width="100" DisplayMemberBinding="{Binding Path=Contexto}" />
+                                    <GridViewColumn Header="Tipo de Variable" Width="110" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
+                                    <GridViewColumn Header="Tipo de Dato" Width="90" DisplayMemberBinding="{Binding Path=TipoDato}" />
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -122,7 +122,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="435" />
+                        <ColumnDefinition Width="635" />
                     </Grid.ColumnDefinitions>
                     
                     <Label Width="430" HorizontalAlignment="Left" Grid.Row="0"></Label>
@@ -135,7 +135,7 @@
                         
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Descripción" Width="Auto" MinWidth="200" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="False"/>
+                            <DataGridTextColumn Header="Descripción" Width="Auto" MinWidth="450" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="False"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -167,15 +167,15 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="630" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Grid.Row="0">
-                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                        <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap">
                         Para que el test de prueba tenga sentido, es necesario que informe a partir de que linea tomamos como valores de entrada.
                         Por favor elija la linea de las que se encuentran habilitadas, haciendo click en su recuadro en el lado izquierdo.
                         </TextBlock>
-                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                        <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap">
                         NOTA: Se tomara el valor HASTA la linea que elija, SIN incluirla.
                         </TextBlock>
 
@@ -192,7 +192,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="" Width="300" DisplayMemberBinding="{Binding Path=Codigo}" />
+                                    <GridViewColumn Header="" Width="500" DisplayMemberBinding="{Binding Path=Codigo}" />
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -227,7 +227,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="630" />
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
@@ -246,10 +246,10 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                                    <GridViewColumn Header="Contexto" Width="70" DisplayMemberBinding="{Binding Path=Contexto}" />
-                                    <GridViewColumn Header="Tipo de Variable" Width="100" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
-                                    <GridViewColumn Header="Tipo de Dato" Width="60" DisplayMemberBinding="{Binding Path=TipoDato}" />
+                                    <GridViewColumn Header="Nombre" Width="220" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                    <GridViewColumn Header="Contexto" Width="100" DisplayMemberBinding="{Binding Path=Contexto}" />
+                                    <GridViewColumn Header="Tipo de Variable" Width="110" DisplayMemberBinding="{Binding Path=TamanioTipo}" />
+                                    <GridViewColumn Header="Tipo de Dato" Width="90" DisplayMemberBinding="{Binding Path=TipoDato}" />
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -283,7 +283,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="630" />
                     </Grid.ColumnDefinitions>
 
 
@@ -295,7 +295,7 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Descripción" Width="Auto" MinWidth="200" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="False"/>
+                            <DataGridTextColumn Header="Descripción" Width="Auto" MinWidth="450" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="False"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -327,11 +327,11 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="630" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0">
-                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                        <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Deberá ejecutar la aplicacion para concluir el test de prueba.
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" >
@@ -411,39 +411,41 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Row="0" >
-                            <TextBlock Width="430"  HorizontalAlignment="Left" TextWrapping="Wrap" >
+                            <TextBlock Width="630"  HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Elija un nombre y descripción para el test que acaba de crear:
                             </TextBlock>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" >
                             <StackPanel Orientation="Horizontal" Margin="0">
-                                <TextBlock HorizontalAlignment="Left" >
+                                <TextBlock HorizontalAlignment="Left" Margin="0,0,0,5">
                                 Nombre:
                                 </TextBlock>
-                                <TextBox Name="txtNombre" TextChanged="txtNombre_TextChanged" Width="100"></TextBox>
+                                <TextBox Name="txtNombre" TextChanged="txtNombre_TextChanged" Width="450" Margin="19,0,0,5"></TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0">
                                 <TextBlock  HorizontalAlignment="Left" >
                                 Descripcion:
                                 </TextBlock>
-                                <TextBox Name="txtDescripcion" TextChanged="txtDescripcion_TextChanged" Width="100"></TextBox>
+                                <TextBox Name="txtDescripcion" TextChanged="txtDescripcion_TextChanged" 
+                                         Width="450" Height="75" TextWrapping="Wrap" Margin="0,0,0,0"
+                                         VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
 
-                        <TextBlock Width="430" Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                        <TextBlock Width="630" Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" >
                         El test quedará guardado de la siguiente manera:
                         </TextBlock>
 
-                        <TextBlock Width="430" Grid.Row="3" HorizontalAlignment="Left" >
+                        <TextBlock Width="630" Grid.Row="3" HorizontalAlignment="Left" >
                         Variables Entrada
                         </TextBlock>
-                        <userControls:VariablesConValoresPresenter Margin="10,5,5,5" Grid.Row="4" Width="410" HorizontalAlignment="Left" x:Name="dataVarsEntradaFinal" EsVersionReducida="False" />
+                        <userControls:VariablesConValoresPresenter Margin="10,5,5,5" Grid.Row="4" Width="610" HorizontalAlignment="Left" x:Name="dataVarsEntradaFinal" EsVersionReducida="False" />
 
-                        <TextBlock Width="430" Grid.Row="5" HorizontalAlignment="Left" >
+                        <TextBlock Width="630" Grid.Row="5" HorizontalAlignment="Left" >
                         Variables Salida
                         </TextBlock>
-                        <userControls:VariablesConValoresPresenter Margin="10,5,5,5" Grid.Row="6" Width="410" HorizontalAlignment="Left" x:Name="dataVarsSalidaFinal" EsVersionReducida="False" />
+                        <userControls:VariablesConValoresPresenter Margin="10,5,5,5" Grid.Row="6" Width="610" HorizontalAlignment="Left" x:Name="dataVarsSalidaFinal" EsVersionReducida="False" />
                     </Grid>
                 </ScrollViewer>
             </aw:WizardPage>

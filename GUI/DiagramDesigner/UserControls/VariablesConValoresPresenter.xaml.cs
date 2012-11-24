@@ -98,11 +98,11 @@ namespace Ragnarok.UserControls
                 
                 if (variable.EsValida)
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.White);
+                    e.Row.Background = new LinearGradientBrush(Color.FromRgb(239, 253, 211), Color.FromRgb(178, 229, 76), new Point(0.5, 0), new Point(0.5, 1));
                 }
                 else
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.Red);
+                    e.Row.Background = new LinearGradientBrush(Color.FromRgb( 253, 195, 181), Color.FromRgb( 223, 87, 55), new Point(0.5, 0), new Point(0.5, 1));
                 }
                 
                 // Access cell values values if needed...
