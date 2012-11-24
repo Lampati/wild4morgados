@@ -509,6 +509,7 @@
     <Compile Include="ToolboxItem.cs" />
     <Resource Include="Resources\Images\download16.png" />
     <Resource Include="Resources\Images\database32.png" />
+    <Resource Include="Resources\Images\download48.png" />
     <Content Include="rutinasPredef.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

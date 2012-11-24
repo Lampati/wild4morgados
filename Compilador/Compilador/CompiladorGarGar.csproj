@@ -123,6 +123,7 @@
     </Compile>
     <EmbeddedResource Include="Formularios\SelectorModoPruebas.resx">
       <DependentUpon>SelectorModoPruebas.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ginstall.exe.manifest">
