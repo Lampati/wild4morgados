@@ -543,7 +543,7 @@ input:focus,textarea:focus
 	-webkit-border-radius:3px;
 	border-radius:3px;  
 	border:1px solid #EE4000;
-	color:#fff;
+	color:#333;
 }
 input[type="text"].textBoxForFilter
 {
