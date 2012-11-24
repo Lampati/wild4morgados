@@ -44,6 +44,11 @@
                 Cargando, por favor espere...
         </TextBlock>
 
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="99" Visibility="Collapsed" Name="txtNoSePudoConectar"
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                No se pudo conectar con el servidor
+        </TextBlock>
+
         <ListView Grid.Row="2" Name="lstCursos" Grid.ColumnSpan="99"  Margin="4"
                        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                        SelectionMode="Single"

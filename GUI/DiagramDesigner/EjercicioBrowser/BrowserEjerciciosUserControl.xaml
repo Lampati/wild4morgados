@@ -52,6 +52,10 @@
                     HorizontalAlignment="Right" HorizontalContentAlignment="Center"></Button>
         </StackPanel>
 
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="99" Visibility="Collapsed" Name="txtNoSePudoConectar"
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                No se pudo conectar con el servidor
+        </TextBlock>
 
         <TextBlock Grid.Row="2" Grid.ColumnSpan="99" Visibility="Collapsed" Name="txtCargando"
                        HorizontalAlignment="Center" VerticalAlignment="Center">

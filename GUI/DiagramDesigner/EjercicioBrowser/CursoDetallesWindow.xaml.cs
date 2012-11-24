@@ -144,15 +144,23 @@ namespace Ragnarok.EjercicioBrowser
 
         private void FinalizadaConsultarDetalle()
         {
-
-            EjercicioDetallesWindow windowEj = new EjercicioDetallesWindow();
-            windowEj.Ejercicio = ejercicioDetalleSincronizado;
-
-            bool? res = windowEj.ShowDialog();
-
-            if (res.HasValue && res.Value)
+            if (ejercicioDetalleSincronizado != null)
             {
-                ColocarComoDescargado(idDescarga);
+                EjercicioDetallesWindow windowEj = new EjercicioDetallesWindow();
+                windowEj.Ejercicio = ejercicioDetalleSincronizado;
+
+                bool? res = windowEj.ShowDialog();
+
+                if (res.HasValue && res.Value)
+                {
+                    ColocarComoDescargado(idDescarga);
+                }
+            }
+            else
+            {
+                imgEstadoActualCorrecta.Visibility = System.Windows.Visibility.Collapsed;
+                imgEstadoActualError.Visibility = System.Windows.Visibility.Visible;
+                statusBarMensaje.Text = string.Format("Error al intentar obtener el detalle del ejercicio {0}", idDescarga);
             }
         }
 

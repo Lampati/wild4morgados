@@ -71,11 +71,13 @@ namespace Ragnarok.EjercicioBrowser
                 if (bloquear)
                 {
                     txtCargando.Visibility = System.Windows.Visibility.Visible;
+                    txtNoSePudoConectar.Visibility = System.Windows.Visibility.Hidden;
                     lstCursos.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
                     txtCargando.Visibility = System.Windows.Visibility.Hidden;
+                    txtNoSePudoConectar.Visibility = System.Windows.Visibility.Hidden;
                     lstCursos.Visibility = System.Windows.Visibility.Visible;
                 }
             }
@@ -90,12 +92,24 @@ namespace Ragnarok.EjercicioBrowser
         protected override void TraerDatos()
         {
             cursosSincronizados = Servicio.Cursos(idActual, nombreActual, usuarioActual);
+
+            errorDeConexion = cursosSincronizados == null;
         }
 
         protected override void CargarDatosEnPantalla()
         {
-            ObservableCollection<CursoDTO> listaAux = new ObservableCollection<CursoDTO>(cursosSincronizados);
-            ListaDatos = listaAux;
+            if (cursosSincronizados != null)
+            {
+                ObservableCollection<CursoDTO> listaAux = new ObservableCollection<CursoDTO>(cursosSincronizados);
+                ListaDatos = listaAux;
+            }
+           
+        }
+
+        protected override void ManejarErrorConexion()
+        {
+            txtNoSePudoConectar.Visibility = System.Windows.Visibility.Visible;
+            lstCursos.Visibility = System.Windows.Visibility.Hidden;  
         }
   
         private void ButtonDetalles_Click(object sender, RoutedEventArgs e)
@@ -126,18 +140,22 @@ namespace Ragnarok.EjercicioBrowser
 
         protected override void FinalizadaConsultarDetalle()
         {
-          
-
-            CursoDetallesWindow windowCurso = new CursoDetallesWindow();
-            windowCurso.Curso = cursoDetalleSincronizado;
-
-            bool? res = windowCurso.ShowDialog();
-
-            if (res.HasValue && res.Value)
+            if (cursoDetalleSincronizado != null)
             {
-                ColocarComoDescargado(idDescarga);
-            }
+                CursoDetallesWindow windowCurso = new CursoDetallesWindow();
+                windowCurso.Curso = cursoDetalleSincronizado;
 
+                bool? res = windowCurso.ShowDialog();
+
+                if (res.HasValue && res.Value)
+                {
+                    ColocarComoDescargado(idDescarga);
+                }
+            }
+            else
+            {
+                MensajesEstadoEventFire(string.Format("Error al intentar obtener el detalle del curso {0}", idDescarga), false);
+            }
 
         }
     
