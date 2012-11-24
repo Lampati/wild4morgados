@@ -4,7 +4,7 @@
         xmlns:aw="clr-namespace:AvalonWizard;assembly=AvalonWizard"
         xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:userControls="clr-namespace:Ragnarok.UserControls"
-        Title="WindowCreacionTest" Height="550" Width="450"
+        Title="WindowCreacionTest" Height="550" Width="650"
         ShowInTaskbar="False" ShowActivated="True" 
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
     <Grid>
@@ -60,7 +60,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="435" />
+                        <ColumnDefinition Width="635" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
@@ -79,7 +79,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
-                                    <GridViewColumn Header="Descripcion" Width="200" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                                    <GridViewColumn Header="Descripcion" Width="450" DisplayMemberBinding="{Binding Path=Descripcion}" />
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -113,7 +113,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="435" />
+                        <ColumnDefinition Width="635" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
@@ -172,16 +172,16 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="630" />
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel  Grid.Row="0">
-                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                        <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap">
                             Para ejecutar el test de prueba, es necesario que especifique en que linea quiere que se seteen los valores a las variables elegidas.
                             Por favor elija la linea de las que se encuentran habilitadas, haciendo click en su recuadro en el lado izquierdo.
                         </TextBlock>
-                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                        <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap">
                         NOTA: Se colocaran los valores justo antes de la linea elegida, no despues.
                         </TextBlock>
 
@@ -199,7 +199,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="" Width="300" DisplayMemberBinding="{Binding Path=Codigo}" />
+                                    <GridViewColumn Header="" Width="500" DisplayMemberBinding="{Binding Path=Codigo}" />
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -236,7 +236,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="435" />
+                        <ColumnDefinition Width="635" />
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
@@ -297,12 +297,12 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="630" />
                         <ColumnDefinition Width="0" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0" Margin="0">
-                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                        <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap" >
                             Deberá ejecutar la aplicacion para concluir el test de prueba.
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" >
@@ -377,7 +377,7 @@
                      
 
                         <StackPanel Grid.Row="0">
-                            <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                            <TextBlock Width="630" HorizontalAlignment="Left" TextWrapping="Wrap" >
                             A continuacion se mostrarán los resultados del test de prueba. Haga click en finalizar para concluir con el test.
                             </TextBlock>
                             <TextBlock TextWrapping="Wrap" >
@@ -399,11 +399,12 @@
                           RowHeight="20" >
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Valor Real" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorReal, Mode=TwoWay}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Valor Esperado" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorEsperado, Mode=TwoWay}"  IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Descripcion" Width="200" Binding="{Binding Path=Descripcion}"  IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Tipo de Variable" Width="120" MinWidth="120" Binding="{Binding Path=TipoVariable, Mode=TwoWay}"  IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="200" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Valor Real" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorReal, Mode=TwoWay}"  IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Valor Esperado" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorEsperado, Mode=TwoWay}"  IsReadOnly="True"/>
+                                    
                                 </DataGrid.Columns>
                                 <DataGrid.RowDetailsTemplate>
                                     <DataTemplate>

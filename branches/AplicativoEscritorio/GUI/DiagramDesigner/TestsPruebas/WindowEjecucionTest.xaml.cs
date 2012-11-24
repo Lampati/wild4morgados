@@ -399,30 +399,34 @@ namespace Ragnarok.TestsPruebas
 
                     VariableTest variableDelTest = testElegido.VariablesSalida.Find(x => x.VariableMapeada == item.Nombre);
 
-                    List<PosicionesResultadoFinal> posiciones = new List<PosicionesResultadoFinal>();
-                    if (item.EsArreglo)
+                    if (variableDelTest != null)
                     {
-                        for (int i = 0; i < item.Posiciones.Count; i++)
-	                    {
-                            posiciones.Add(new PosicionesResultadoFinal() { Posicion = item.Posiciones[i].Posicion, ValorReal = item.Posiciones[i].Valor, ValorEsperado = variableDelTest.Posiciones[i].Valor });
-	                    }
-                        
 
-                    }
-
-                    listaResultadosFinales.Add(
-                        new ResultadoFinal()
+                        List<PosicionesResultadoFinal> posiciones = new List<PosicionesResultadoFinal>();
+                        if (item.EsArreglo)
                         {
-                            Posiciones = posiciones,
-                            Nombre = item.Nombre,
-                            Descripcion = item.Descripcion,
-                            TipoDato = item.TipoDato.ToString(),
-                            TipoVariable = item.TamanioTipo,
-                            ValorReal = item.Valor,
-                            ValorEsperado = variableDelTest.ValorEsperado
+                            for (int i = 0; i < item.Posiciones.Count; i++)
+                            {
+                                posiciones.Add(new PosicionesResultadoFinal() { Posicion = item.Posiciones[i].Posicion, ValorReal = item.Posiciones[i].Valor, ValorEsperado = variableDelTest.Posiciones[i].Valor });
+                            }
+
 
                         }
-                    );
+
+                        listaResultadosFinales.Add(
+                            new ResultadoFinal()
+                            {
+                                Posiciones = posiciones,
+                                Nombre = item.Nombre,
+                                Descripcion = item.Descripcion,
+                                TipoDato = item.TipoDato.ToString(),
+                                TipoVariable = item.TamanioTipo,
+                                ValorReal = item.Valor,
+                                ValorEsperado = variableDelTest.ValorEsperado
+
+                            }
+                        );
+                    }
 	            }
 
                 dataGridResultadoFinal.ItemsSource = listaResultadosFinales;
@@ -607,11 +611,11 @@ namespace Ragnarok.TestsPruebas
 
                 if (variable.EsCorrecta)
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.Green);
+                    e.Row.Background = new LinearGradientBrush(Color.FromRgb(239, 253, 211), Color.FromRgb(178, 229, 76), new Point(0.5, 0), new Point(0.5, 1));
                 }
                 else
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.Red);
+                    e.Row.Background = new LinearGradientBrush(Color.FromRgb(253, 195, 181), Color.FromRgb(223, 87, 55), new Point(0.5, 0), new Point(0.5, 1));
                 }
 
                 // Access cell values values if needed...
@@ -629,11 +633,11 @@ namespace Ragnarok.TestsPruebas
 
                 if (variable.EsCorrecta)
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.Green);
+                    e.Row.Background = new LinearGradientBrush(Color.FromRgb(239, 253, 211), Color.FromRgb(178, 229, 76), new Point(0.5, 0), new Point(0.5, 1));
                 }
                 else
                 {
-                    e.Row.Background = new SolidColorBrush(Colors.Red);
+                    e.Row.Background = new LinearGradientBrush(Color.FromRgb(253, 195, 181), Color.FromRgb(223, 87, 55), new Point(0.5, 0), new Point(0.5, 1));
                 }
 
                 // Access cell values values if needed...
