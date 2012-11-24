@@ -98,7 +98,7 @@ namespace Ragnarok.EjercicioBrowser
 
         protected override void TraerDatos()
         {
-            ejerciciosSincronizados = Servicio.Ejercicios(idActual, nombreActual, usuarioActual,nivelActual);
+            ejerciciosSincronizados = Servicio.Ejercicios(idActual, usuarioActual, nombreActual, nivelActual);
         }
 
         protected override void CargarDatosEnPantalla()
