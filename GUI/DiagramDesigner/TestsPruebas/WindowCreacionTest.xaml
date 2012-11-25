@@ -418,7 +418,7 @@
 
                         <StackPanel Grid.Row="1" >
                             <StackPanel Orientation="Horizontal" Margin="0">
-                                <TextBlock HorizontalAlignment="Left" Margin="0,0,0,5">
+                                <TextBlock HorizontalAlignment="Left" >
                                 Nombre:
                                 </TextBlock>
                                 <TextBox Name="txtNombre" TextChanged="txtNombre_TextChanged" Width="450" Margin="19,0,0,5"></TextBox>
