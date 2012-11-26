@@ -272,7 +272,7 @@
 
            
 
-            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 5: Ejecutar!" 
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 5: Ejecutar!" 
                            AllowNext="False" >
 
                 <Grid>
