@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Ragnarok.UserControls.VariablesConValoresPresenter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             >
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+        
+                <DataGrid Grid.Row="0" Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaCompleta"
+                          AutoGenerateColumns="False" 
+                          ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
+                          LoadingRow="dataGridVariablesSalida_LoadingRow"                  
+                          RowHeight="20">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Contexto" Width="70" Binding="{Binding Path=Contexto}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tipo de Variable" Width="120" MinWidth="120" Binding="{Binding Path=TamanioTipo, Mode=TwoWay}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="200" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Descripcion" Width="200" Binding="{Binding Path=Descripcion}" />
+                        <DataGridTextColumn Header="Valor" Width="Auto" MinWidth="200" Binding="{Binding Path=Valor, Mode=TwoWay}"  IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel Height="Auto" Background="Gray">
+                                <StackPanel Margin="10,0,0,0" Height="Auto" >
+                                    <DataGrid  Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaPosiciones" AutoGenerateColumns="False" 
+                                               ItemsSource="{Binding Path=Posiciones}" RowHeight="20" HeadersVisibility="None">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Posicion" Width="120" MinWidth="120" Binding="{Binding Path=Posicion}"  IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="Valor" Width="Auto" MinWidth="200" Binding="{Binding Path=Valor, Mode=TwoWay}"  IsReadOnly="True"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+
+                <DataGrid Grid.Row="0" Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaReducida" 
+                          AutoGenerateColumns="False" 
+                          ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
+                          LoadingRow="dataGridVariablesSalida_LoadingRow"                 
+                          RowHeight="20" Visibility="Collapsed">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tipo de Variable" Width="120" MinWidth="120" Binding="{Binding Path=TamanioTipo, Mode=TwoWay}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="200" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Valor" Width="Auto" MinWidth="200" Binding="{Binding Path=Valor, Mode=TwoWay}"  IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel Height="Auto" Background="Gray">
+                                <StackPanel Margin="10,0,0,0" Height="Auto" >
+                                    <DataGrid  Width="Auto" HorizontalAlignment="Left" Name="dataGridVariablesSalidaPosiciones" 
+                                               AutoGenerateColumns="False" ItemsSource="{Binding Path=Posiciones}" 
+                                               RowHeight="20" HeadersVisibility="None">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Posicion" Width="20" Binding="{Binding Path=Posicion}"  IsReadOnly="True"/>
+                                            <DataGridTextColumn Header="Valor" Width="Auto" MinWidth="200" Binding="{Binding Path=Valor, Mode=TwoWay}"  IsReadOnly="True"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

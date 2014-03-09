@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ModoGrafico.ProgramadorGrafico"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sapt="clr-namespace:System.Activities.Presentation.Toolbox;assembly=System.Activities.Presentation"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:ModoGrafico.Views"
+        >
+    <UserControl.Resources>
+        <sys:String x:Key="AssemblyName">System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</sys:String>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="102*"/>
+            <!--<ColumnDefinition Width="20*"/>-->
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0">
+            <StackPanel>
+                <sapt:ToolboxControl Name="Toolbox" >
+                  
+                </sapt:ToolboxControl>
+                <!--<Button Name="btnEjecutar" Height="50" Content="Ejecutar" Margin="5" ></Button>-->
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Name="DesignerBorder">
+            
+            <local:WorkAreaView x:Name="WorkArea" />
+        </Border>
+        <!--<Border Grid.Column="2" Name="PropertyBorder"/>-->
+    </Grid>
+</UserControl>

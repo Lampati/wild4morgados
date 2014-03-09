@@ -1,0 +1,435 @@
+﻿<Window x:Class="Ragnarok.TestsPruebas.WindowEjecucionTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:aw="clr-namespace:AvalonWizard;assembly=AvalonWizard"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:userControls="clr-namespace:Ragnarok.UserControls"
+        Title="WindowCreacionTest" Height="550" Width="450"
+        ShowInTaskbar="False" ShowActivated="True" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
+    <Grid>
+        <aw:Wizard Name="wizard" aw:Designer.PageIndex="6" WizardStyle="Auto" Finished="wizard_Finished" Cancelled="wizard_Cancelled"
+            CancelButtonContent="Cancelar" FinishButtonContent="Finalizar" BackButtonContent="Atras" NextButtonContent="Siguiente">
+            <aw:Wizard.Resources>
+                <Style TargetType="aw:WizardPage">
+                    <Setter Property="Padding" Value="14" />
+                </Style>
+            </aw:Wizard.Resources>
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 0: Como funcionan los test" 
+                           AllowNext="True" >
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Height="93" Name="textBlock1" Grid.Row="0"
+                           Text="Para que el test funcione recomendamos tener correctamente identado el programa, y todas las sentencias en lineas diferentes. Lineas dejadas en blanco no influyen."
+                           TextWrapping="Wrap"   />
+                </Grid>
+            </aw:WizardPage>
+
+
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 1: Elija el test de prueba a ejecutar" 
+                           AllowNext="False" >
+
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="ListView" >
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                            
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="435" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Por favor elija el test de prueba a ejecutar."
+                           TextWrapping="Wrap"  />
+
+                    <ListView Grid.Row="1" Width="Auto" HorizontalAlignment="Stretch" Name="lstTests" ItemsSource="{Binding Tests}">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables">
+                                <GridView.Columns>
+                                    <GridViewColumn Header="">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EsSeleccionada, Mode=TwoWay}"  Click="CheckBoxTest_Click" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Nombre" Width="120" DisplayMemberBinding="{Binding Path=Nombre}" />
+                                    <GridViewColumn Header="Descripcion" Width="200" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+            </aw:WizardPage>
+
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 2: Elija las variables de entrada que corresponden con las del test" 
+                           AllowNext="False" >
+                
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="435" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Por favor elija las variables de la lista desplegable. Solo se mostraran aquellas variables que coinciden con el tipo de dato y variable de la variable del test."
+                           TextWrapping="Wrap"  />
+
+                    <DataGrid Grid.Row="1" Width="Auto" 
+                              HorizontalAlignment="Left" Name="dataGridVariablesEntradaTest" 
+                              AutoGenerateColumns="False" ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
+                              RowHeight="35" CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Descripción" Width="120" MinWidth="150" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Variable" Width="90" MinWidth="80" Binding="{Binding Path=TipoVariable}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Dato" Width="70" MinWidth="50" Binding="{Binding Path=TipoDato}"  IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="Variable a Mapear"  Width="120" MinWidth="120" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox SelectedValuePath="NombreCodigo" 
+                                                  
+                                                    DisplayMemberPath="NombreConContexto"   
+                                                    ItemsSource="{Binding  Path=PosiblesMapeos, Mode=TwoWay}"                                                    
+                                                    IsReadOnly="True" SelectionChanged="ComboBoxEntrada_SelectionChanged" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </aw:WizardPage>
+
+
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 3: Setear valores iniciales de variables de entrada" 
+                           AllowNext="False" >
+
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="0" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel  Grid.Row="0">
+                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                            Para ejecutar el test de prueba, es necesario que especifique en que linea quiere que se seteen los valores a las variables elegidas.
+                            Por favor elija la linea de las que se encuentran habilitadas, haciendo click en su recuadro en el lado izquierdo.
+                        </TextBlock>
+                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap">
+                        NOTA: Se colocaran los valores justo antes de la linea elegida, no despues.
+                        </TextBlock>
+
+                    </StackPanel>
+                    <ListView  Width="Auto" Height="300" HorizontalAlignment="Stretch" Name="lstLineas" 
+                               ItemsSource="{Binding Lineas}" Grid.Row="1"
+                               >
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Variables" >
+                                <GridView.Columns>
+                                    <GridViewColumn Header="">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox HorizontalAlignment="Center"  IsChecked="{Binding Path=EsSeleccionada, Mode=TwoWay}" IsEnabled="{Binding Path=EsHabilitada, Mode=TwoWay}" Click="CheckBoxLinea_Click" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="" Width="300" DisplayMemberBinding="{Binding Path=Codigo}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+
+                </Grid>
+
+            </aw:WizardPage>
+
+
+
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 4: Elija las variables de salida que corresponden con las del test" 
+                           AllowNext="False" >
+
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="435" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Height="Auto" HorizontalAlignment="Left" Grid.Row="0"
+                           Text="Por favor elija las variables de la lista desplegable. Solo se mostraran aquellas variables que coinciden con el tipo de dato y variable de la variable del test."
+                           TextWrapping="Wrap"  />
+
+                    <DataGrid Grid.Row="1" Width="Auto" 
+                              HorizontalAlignment="Left" Name="dataGridVariablesSalidaTest" 
+                              AutoGenerateColumns="False" ItemsSource="{Binding VariablesSalidaSeleccionadas}" 
+                              RowHeight="35" CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Descripción" Width="120" MinWidth="150" Binding="{Binding Path=Descripcion, Mode=TwoWay}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Variable" Width="90" MinWidth="80" Binding="{Binding Path=TipoVariable}"  IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tipo de Dato" Width="70" MinWidth="50" Binding="{Binding Path=TipoDato}"  IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="Variable a Mapear"  Width="120" MinWidth="120" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox SelectedValuePath="NombreCodigo" 
+                                                  
+                                                    DisplayMemberPath="NombreConContexto"   
+                                                    ItemsSource="{Binding  Path=PosiblesMapeos, Mode=TwoWay}"                                                    
+                                                    IsReadOnly="True" SelectionChanged="ComboBoxSalida_SelectionChanged" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                </Grid>
+            </aw:WizardPage>
+
+           
+
+            <aw:WizardPage Header="Crear un Test de Prueba" aw:Wizard97.Subtitle="Paso 5: Ejecutar!" 
+                           AllowNext="False" >
+
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="10,5,5,5"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="0" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0">
+                        <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                            Deberá ejecutar la aplicacion para concluir el test de prueba.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" >
+                            Atención: Una vez ejecutado, no podrá volver a modificar las variables de entrada/salida.
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="0">
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Content="Ejecutar" Click="ButtonEjecutar_Click" Name="bttnEjecutar" Style="{StaticResource BlueButton}"></Button>
+                            <TextBlock TextWrapping="Wrap" >Haga Click para ejecutar y complete la ejecución</TextBlock>
+                        </StackPanel>                        
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" >
+                        <StackPanel Orientation="Vertical" Name="stackEjecucionSatisfactoria" Margin="0,200,0,0"  HorizontalAlignment="Left"
+                                    Visibility="Collapsed">
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                            BorderThickness="1.5" CornerRadius="10" Background="#009933" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="21">Ejecucion satisfactoria</TextBlock>
+                            </Border>
+                            <TextBlock  FontSize="12" Margin="10,5,5,0" HorizontalAlignment="Left">
+                                La ejecución del test de prueba se completo correctamente y se registraron
+                            </TextBlock>
+                            <TextBlock  FontSize="12" Margin="10,0,5,5"  HorizontalAlignment="Left">
+                                 los valores de las variables de entrada y salida.
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical"  Name="stackEjecucionError" Margin="0,200,0,0" HorizontalAlignment="Left"
+                                    Visibility="Collapsed">
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" Width="320" HorizontalAlignment="Left"
+                            BorderThickness="1.5" CornerRadius="10" Background="#FF0000">
+                                <TextBlock TextWrapping="Wrap" Foreground="#FFFFFF" FontSize="16">Ocurrió un error en la ejecución del test</TextBlock>
+                            </Border>
+                            <TextBlock  FontSize="12" Margin="10,5,5,0" HorizontalAlignment="Left">
+                                Por favor, salga de la ejecución de tests, y ejecute el programa
+                            </TextBlock>
+                            <TextBlock  FontSize="12" Margin="10,0,5,5"  HorizontalAlignment="Left">
+                                para conocer el detalle del error.
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </aw:WizardPage>
+
+            <aw:WizardPage Header="Ejecutar un Test de Prueba" aw:Wizard97.Subtitle="Paso 6: Resultados" 
+                           AllowFinish="True" ShowCancel="False" ShowBack="False">
+                
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Margin" Value="5" />
+                            </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Margin" Value="10,5,5,5" />
+                        </Style>
+                    </Grid.Resources>
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                     
+
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Width="430" HorizontalAlignment="Left" TextWrapping="Wrap" >
+                            A continuacion se mostrarán los resultados del test de prueba. Haga click en finalizar para concluir con el test.
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" >
+                            Leyenda:
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" >
+                            Rojo   = El valor final no corresponde con el que esperaba el test.
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" >
+                            Verde = El valor final corresponde con el que esperaba el test.
+                            </TextBlock>
+                        </StackPanel>
+
+
+                            <DataGrid Grid.Row="1" Width="Auto" HorizontalAlignment="Left" Name="dataGridResultadoFinal" 
+                          AutoGenerateColumns="False"  CanUserAddRows="False"
+                          ItemsSource="{Binding VariablesEntradaSeleccionadas}" 
+                          LoadingRow="dataGridResultadoFinal_LoadingRow"                 
+                          RowHeight="20" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Descripcion" Width="200" Binding="{Binding Path=Descripcion}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tipo de Variable" Width="120" MinWidth="120" Binding="{Binding Path=TipoVariable, Mode=TwoWay}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="200" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Valor Real" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorReal, Mode=TwoWay}"  IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Valor Esperado" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorEsperado, Mode=TwoWay}"  IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Height="Auto" Background="Gray">
+                                            <StackPanel Margin="10,0,0,0" Height="Auto" >
+                                                <DataGrid  Width="Auto" HorizontalAlignment="Left" Name="dataGridResultadoFinalPosiciones" 
+                                               AutoGenerateColumns="False" ItemsSource="{Binding Path=Posiciones}" 
+                                               RowHeight="20" HeadersVisibility="Column" CanUserAddRows="False"
+                                               LoadingRow="dataGridResultadoFinalPosiciones_LoadingRow" >
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Posicion" Width="20" Binding="{Binding Path=Posicion}"  IsReadOnly="True"/>
+                                                        <DataGridTextColumn Header="Valor Real" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorReal, Mode=TwoWay}"  IsReadOnly="True"/>
+                                                        <DataGridTextColumn Header="Valor Esperado" Width="Auto" MinWidth="200" Binding="{Binding Path=ValorEsperado, Mode=TwoWay}"  IsReadOnly="True"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+                            </DataGrid>
+
+                    </Grid>
+                
+            </aw:WizardPage>
+
+        </aw:Wizard>
+        
+    </Grid>
+</Window>

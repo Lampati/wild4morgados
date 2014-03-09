@@ -1,0 +1,63 @@
+﻿<Window x:Class="Ragnarok.DialogWindows.TextEditionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        Title="TextEditionWindow" Height="600" Width="450"  
+        ShowInTaskbar="False" ShowActivated="True" 
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" 
+        >
+    <Border >
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="#FCFEFD" Offset="0"/>
+                <GradientStop Color="#EDF3F9" Offset="0.5"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <StackPanel Margin="5">
+
+            <!--<Label Margin="0,0,0,0" FontSize="18" Name="lblEncabezado"
+                   Background="#0E62E9" Foreground="White" FontWeight="Bold">
+                Propiedades Sincronización
+            </Label>-->
+            <StackPanel Margin="0,10,4,5">  
+                <TextBlock Name="txtBlockCopete" Width="400" > </TextBlock>
+            </StackPanel>
+            <Separator Margin="0,0,0,5"></Separator>
+        
+            <Grid Margin="3px" >
+                <Grid.RowDefinitions>                    
+                    <RowDefinition Height="480"/>
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"  Margin="0,0,0,8" >
+                    <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch">
+                    
+                        <avalonedit:TextEditor HorizontalAlignment="Stretch" 
+                                               Name="textEditor" WordWrap="True" >                            
+                            <avalonedit:TextEditor.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Command="Undo" Header="Deshacer" />
+                                    <Separator />
+                                    <MenuItem Command="Cut" Header="Cortar"/>
+                                    <MenuItem Command="Copy" Header="Copiar"/>
+                                    <MenuItem Command="Paste" Header="Pegar"/>
+                                    <MenuItem Command="Delete" Header="Eliminar"/>
+                                    <Separator />
+                                    <MenuItem Command="SelectAll" Header="Seleccionar todo"/>
+                                </ContextMenu>
+                            </avalonedit:TextEditor.ContextMenu>
+                        </avalonedit:TextEditor>
+                    </Border>
+                </Grid>
+                    
+                <Grid Grid.Row="1" Margin="0,0,0,8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="bttnAceptar" Style="{StaticResource BlueButton}" Click="bttnAceptar_Click" Margin="0,0,5,0" Width="75">Aceptar</Button>
+                        <Button Name="bttnCancelar" Style="{StaticResource BlueButton}" Click="bttnCancelar_Click" IsCancel="True" Margin="0,0,15,0" Width="75">Cancelar</Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
