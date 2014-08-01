@@ -211,7 +211,10 @@ namespace Ragnarok
             this.LocationChanged += new EventHandler(RagnarokWindow_LocationChanged);
 
 
-            ConfiguracionAplicacion.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+
+            string pathAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+            ConfiguracionAplicacion.Abrir(Path.Combine(pathAppData,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
 
             GlobalesCompilador.CantMaxErroresSintacticos = ConfiguracionAplicacion.CantMaxErroresSintacticos;
@@ -367,7 +370,9 @@ namespace Ragnarok
             // Agregamos que se salve en el arch de config si el tutorial esta activo o no
             ConfiguracionAplicacion.TutorialActivo = ToolbarAplicacion.chkTutorial.IsChecked.Value;
 
-            ConfiguracionAplicacion.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+            string pathAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+            ConfiguracionAplicacion.Guardar(Path.Combine(pathAppData,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
         }
 

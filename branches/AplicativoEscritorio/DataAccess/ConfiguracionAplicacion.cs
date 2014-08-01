@@ -97,8 +97,8 @@ namespace DataAccess
      
 
         public static void Abrir(string pathCompleto)
-        {      
-             CargarDefaults();
+        {
+            CargarDefaults();
 
             if (File.Exists(pathCompleto))
             {
@@ -215,6 +215,11 @@ namespace DataAccess
             string misDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string pathProgramAR = Path.Combine(misDocs, "Program.AR");
             string path = String.Empty;
+
+            string pathAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+            if (!Directory.Exists(pathAppData))
+                Directory.CreateDirectory(pathAppData);
 
             try
             {
