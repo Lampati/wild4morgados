@@ -967,7 +967,10 @@ namespace Ragnarok.UserControls.Toolbar
                 if (dialog.Servidores.Count > 0)
                 {
                     ConfiguracionAplicacion.UrlsDescargaEjercicios = string.Join("\r\n",dialog.Servidores);
-                    ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+
+                    string pathAppData = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+                    ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(pathAppData,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
                 }
             }
