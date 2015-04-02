@@ -86,12 +86,6 @@
     <Compile Include="Lexicografico\CharBuffer.cs" />
     <Compile Include="Lexicografico\CharHelper.cs" />
     <Compile Include="Lexicografico\ComponenteLexico.cs" />
-    <Compile Include="Formularios\CompiladorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\CompiladorForm.Designer.cs">
-      <DependentUpon>CompiladorForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Lexicografico\CharBufferEnMemoria.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoria.cs" />
     <Compile Include="Lexicografico\AnalizadorLexicograficoConArchEnMemoriaYComentarios.cs" />
@@ -107,10 +101,6 @@
     <Compile Include="Sintactico\ErroresManager\Errores\MensajeErrorFactory.cs" />
     <Compile Include="Sintactico\ErroresManager\Errores\MensajeError.cs" />
     <Compile Include="Sintactico\TerminalesHelpers.cs" />
-    <EmbeddedResource Include="Formularios\CompiladorForm.resx">
-      <DependentUpon>CompiladorForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -121,9 +111,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Formularios\SelectorModoPruebas.resx">
-      <DependentUpon>SelectorModoPruebas.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Configuracion\CompiladorPascal\Compilador\bin\fpc\ginstall.exe.manifest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1203,6 +1190,7 @@
     <None Include="Configuracion\validacionesSemanticasCorrectas.gar" />
     <None Include="Configuracion\testEjecucion.gar" />
     <None Include="Configuracion\validacionesSemanticasIncorrectas.gar" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1217,12 +1205,6 @@
     <Compile Include="Resultado\Auxiliares\PasoCompilacion.cs" />
     <Compile Include="Resultado\Auxiliares\ResultadoCompilacionPascal.cs" />
     <Compile Include="Resultado\ResultadoCompilacion.cs" />
-    <Compile Include="Formularios\SelectorModoPruebas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\SelectorModoPruebas.Designer.cs">
-      <DependentUpon>SelectorModoPruebas.cs</DependentUpon>
-    </Compile>
     <Compile Include="Semantico\Arbol\ArbolSemantico.cs" />
     <Compile Include="Semantico\Arbol\Interfases\ITipificable.cs" />
     <Compile Include="Semantico\Arbol\Interfases\IValorizable.cs" />
@@ -1246,9 +1228,7 @@
     <Compile Include="Semantico\Arbol\Nodos\NodoBloqueSiCont.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoBlq.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoC.cs" />
-    <Compile Include="Semantico\Arbol\Nodos\NodoCon.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoConstantes.cs" />
-    <Compile Include="Semantico\Arbol\Nodos\NodoConsts.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoDeclaraciones.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoEx.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoExp.cs" />
@@ -1289,9 +1269,7 @@
     <Compile Include="Semantico\Arbol\Nodos\NodoTerminal.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoTipoDato.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoV.cs" />
-    <Compile Include="Semantico\Arbol\Nodos\NodoVar.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoVariables.cs" />
-    <Compile Include="Semantico\Arbol\Nodos\NodoVars.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoVis.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoVisualizar.cs" />
     <Compile Include="Semantico\Arbol\Nodos\NodoY.cs" />
@@ -1549,6 +1527,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\commandline-master\src\CommandLine\CommandLine.csproj">
+      <Project>{E1BD3C65-49C3-49E7-BABA-C60980CB3F20}</Project>
+      <Name>CommandLine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\EJEKOR\EJEKOR.csproj">
       <Project>{A9F69EB3-5235-4B36-ADC6-D99FBEB7A512}</Project>
       <Name>EJEKOR</Name>
@@ -1587,6 +1569,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Formularios\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,14 +25,14 @@ namespace Ragnarok
             Splasher.ShowSplash();
 
             //MessageListener.Instance.ReceiveMessage(string.Format("Cargando interfaz de usuario..."));
-
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 2000; i++)
             {
                 MessageListener.Instance.ReceiveMessage(string.Format("Cargando Ragnarok, por favor espere..."));
                 Thread.Sleep(1);
             }
 
             new App();
+            
         }
         /// <summary>
         /// 

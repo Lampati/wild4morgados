@@ -22,6 +22,10 @@ namespace SplashScreen
         {
             InitializeComponent ( );
 
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            Version version = assembly.GetName().Version;
+
+            txtVersion.Text = string.Format("Versión: {0}", version.ToString());
              
         }
     }

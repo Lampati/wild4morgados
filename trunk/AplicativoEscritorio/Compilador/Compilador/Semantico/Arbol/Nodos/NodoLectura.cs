@@ -17,11 +17,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.TieneLecturas = true;
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-
-        }
-
+     
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             string nombre = this.hijosNodo[1].Lexema;
@@ -139,21 +135,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             ActividadViewModel = activ;
         }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-
-
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
+     
 
         public override void CalcularCodigo()
         {

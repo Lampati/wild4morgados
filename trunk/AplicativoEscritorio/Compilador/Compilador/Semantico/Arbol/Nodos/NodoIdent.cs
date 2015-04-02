@@ -15,26 +15,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.VariablesACrear = new  List<Variable>();
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
-        }
-
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             //Falta hacer cosas con los arreglos aca.
             this.VariablesACrear.AddRange(hijoASintetizar.VariablesACrear);            
         }
 
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
+    
 
         public override void CalcularCodigo()
         {

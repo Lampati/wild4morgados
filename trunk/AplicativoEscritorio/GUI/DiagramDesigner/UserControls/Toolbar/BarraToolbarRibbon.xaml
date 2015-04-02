@@ -214,7 +214,7 @@
             </ribbon:RibbonGroup>
         </ribbon:RibbonTab>
 
-        <ribbon:RibbonTab Name="TabSincronización" Header="Sincronización"  >
+        <!--<ribbon:RibbonTab Name="TabSincronización" Header="Sincronización"  >
             <ribbon:RibbonGroup Header="Sincronizador" Name="ribbonGroupSincro"  LargeImageSource="/Resources/Images/Sync.png">
                 <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncGlobal.png" SmallImageSource="/Resources/Images/SyncGlobal.png" 
                                      Label="Sincro General"  Click="btnSincroGeneral_Click" 
@@ -234,7 +234,7 @@
             </ribbon:RibbonGroup>
 
 
-        </ribbon:RibbonTab>
+        </ribbon:RibbonTab>-->
 
         <ribbon:RibbonTab Name="TabConfiguracion" Header="Configuración"  >
             <ribbon:RibbonGroup Header="Directorios Ejercicios" Name="ribbonGroupDirEjercicios" >
@@ -276,9 +276,9 @@
         </ribbon:RibbonTab>
 
         <ribbon:RibbonTab Name="TabAyuda" Header="Ayuda"  >
-            <ribbon:RibbonGroup Header="Ayuda de Ragnarok" Name="ribbonGroupAyudaProgramar" >
-                <ribbon:RibbonButton LargeImageSource="/Resources/Images/manualRagnarok.png" Label="Manual Ragnarok" Name="bttnAyudaManual"  Click="bttnAyudaManual_Click"
-                                     ToolTipDescription="{StaticResource TooltipManualRagnarok}" ToolTipTitle="Ayuda de Ragnarok" ></ribbon:RibbonButton>
+            <ribbon:RibbonGroup Header="Ayuda de GarGar Dev" Name="ribbonGroupAyudaProgramar" >
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/manualRagnarok.png" Label="Manual GarGar Dev" Name="bttnAyudaManual"  Click="bttnAyudaManual_Click"
+                                     ToolTipDescription="{StaticResource TooltipManualRagnarok}" ToolTipTitle="Ayuda de GarGar Dev" ></ribbon:RibbonButton>
                 <ribbon:RibbonButton LargeImageSource="/Resources/Images/manualGarGar.png" Label="Manual GarGar" Name="bttnAyudaGarGarManual"  Click="bttnAyudaGarGarManual_Click"
                                      ToolTipDescription="{StaticResource TooltipManualGargar}" ToolTipTitle="Ayuda de GarGar" ></ribbon:RibbonButton>
                 <ribbon:RibbonSeparator />

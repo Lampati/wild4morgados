@@ -327,22 +327,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             hijoAHeredar.NombreContextoLocal = this.NombreContextoLocal;
         }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-            
-            
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
-
+      
         public override void CalcularCodigo()
         {
             bool esFuncion = (this.hijosNodo[0].Lexema.ToUpper() == "FUNCION");

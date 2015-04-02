@@ -78,11 +78,11 @@ namespace CompiladorGargar.Sintactico
         {
             gramatica = new Gramatica.Gramatica(path);
 
-            tabla = this.gramatica.ArmarTablaAnalisis();
+            tabla = gramatica.ArmarTablaAnalisis();
 
-            //this.ArchEntrada = archEntrada;
+            //ArchEntrada = archEntrada;
 
-            //this.CargarAnalizadorLexicografico();
+            //CargarAnalizadorLexicografico();
 
             cantElementosCadenaEntrada = Convert.ToInt32(CompiladorGargar.Properties.Resources.CantElementosCadenaEntrada);
             finArch = false;
@@ -91,7 +91,7 @@ namespace CompiladorGargar.Sintactico
             cantParentesisAbiertos = 0;
            
 
-            //this.RellenarCadenaEntrada();
+            //RellenarCadenaEntrada();
 
         }
 
@@ -99,40 +99,29 @@ namespace CompiladorGargar.Sintactico
         {
             EstadoSintactico.Reiniciar();
 
-            this.pila = new PilaGramatica(this.gramatica.SimboloInicial);
-            this.cadenaEntrada = new CadenaEntrada();
+            pila = new PilaGramatica(gramatica.SimboloInicial);
+            cadenaEntrada = new CadenaEntrada();
 
-            this.arbolSemantico = new ArbolSemantico(this.gramatica.SimboloInicial);
-            this.pila.ArbolSemantico = this.arbolSemantico;
+            arbolSemantico = new ArbolSemantico(gramatica.SimboloInicial);
+            pila.ArbolSemantico = arbolSemantico;
 
-            this.finArch = false;
+            finArch = false;
             cantErroresSintacticos = 0;
             cantParentesisAbiertos = 0;
 
             habilitarSemantico = true;
         }
-
-
-        private void CargarAnalizadorLexicografico()
+     
+        internal void CargarAnalizadorLexicografico(string texto)
         {
-            analizadorLexico = new AnalizadorLexicograficoConArchEnMemoria(ArchEntrada);
+            analizadorLexico = new AnalizadorLexicograficoConArchEnMemoria(texto);
+            RellenarCadenaEntrada();
         }
 
-        private void CargarAnalizadorLexicografico(string texto)
+        public bool EsFinAnalisisSintactico()
         {
-            this.analizadorLexico = new AnalizadorLexicograficoConArchEnMemoria(texto);
-            this.RellenarCadenaEntrada();
-        }
-
-        internal void ResetearAnalizadorLexicografico()
-        {
-            this.CargarAnalizadorLexicografico();
-        }
-
-        public bool esFinAnalisisSintactico()
-        {
-            //return !(!this.cadenaEntrada.esFinDeCadena() && !this.pila.esFinDePila());
-            return (this.cadenaEntrada.EsFinDeCadena() && this.pila.esFinDePila());
+            //return !(!cadenaEntrada.esFinDeCadena() && !pila.esFinDePila());
+            return (cadenaEntrada.EsFinDeCadena() && pila.EsFinDePila());
         }      
 
         public List<PasoAnalizadorSintactico> AnalizarSintacticamenteUnPaso()
@@ -140,13 +129,13 @@ namespace CompiladorGargar.Sintactico
             List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();
             try
             {
-                retorno = this.AnalizarUnSoloPaso();
+                retorno = AnalizarUnSoloPaso();
             }
             catch (ErrorLexicoException ex)
             {
                 cantErroresSintacticos++;
                 retorno.Add(new PasoAnalizadorSintactico(ex.Descripcion, GlobalesCompilador.TipoError.Sintactico, ex.Fila, ex.Columna, false));
-                //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
+                //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, false));
             }
             //catch (ErrorLexicoException ex)
             //{
@@ -161,7 +150,7 @@ namespace CompiladorGargar.Sintactico
             //                                                                       EstadoSintactico.ListaLineaActual,
             //                                                                       EstadoSintactico.ContextoGlobal,
             //                                                                       EstadoSintactico.ContextoLinea,
-            //                                                                       this.CadenaEntrada.CadenaEntera);
+            //                                                                       CadenaEntrada.CadenaEntera);
             //        try
             //        {
             //            analizador.Validar();
@@ -171,7 +160,7 @@ namespace CompiladorGargar.Sintactico
             //            mensajeAMostrar = excepVal.Message;
             //            filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
             //            colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
-            //            this.habilitarSemantico = false;
+            //            habilitarSemantico = false;
 
             //            retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, true, excepVal.MensjError));
             //        }
@@ -215,7 +204,7 @@ namespace CompiladorGargar.Sintactico
                                                                                    EstadoSintactico.ListaLineaActual,
                                                                                    EstadoSintactico.ContextoGlobal,
                                                                                    EstadoSintactico.ContextoLinea,
-                                                                                   this.CadenaEntrada.CadenaEntera);
+                                                                                   CadenaEntrada.CadenaEntera);
 
                     try
                     {
@@ -226,7 +215,7 @@ namespace CompiladorGargar.Sintactico
                         mensajeAMostrar = excepVal.Message;
                         filaAMostrar = excepVal.Fila != -1 ? excepVal.Fila : filaAMostrar;
                         colAMostrar = excepVal.Columna != -1 ? excepVal.Columna : colAMostrar;
-                        this.habilitarSemantico = false;
+                        habilitarSemantico = false;
                         pararCompilacion = true; //siempre paro la compilacion al primer error
 
                         retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion, excepVal.MensjError));
@@ -251,24 +240,24 @@ namespace CompiladorGargar.Sintactico
 
                 //if (ex.DescartarTopeCadena)
                 //{
-                //    if (!this.CadenaEntrada.EsFinDeCadena())
+                //    if (!CadenaEntrada.EsFinDeCadena())
                 //    {
-                //        this.CadenaEntrada.EliminarPrimerTerminal();
+                //        CadenaEntrada.EliminarPrimerTerminal();
                 //    }
                 //    try
                 //    {
-                //        this.RellenarCadenaEntrada();
+                //        RellenarCadenaEntrada();
                 //    }
                 //    catch (ErrorLexicoException exx)
                 //    {
                 //        retorno.Add(new PasoAnalizadorSintactico(exx.Descripcion, GlobalesCompilador.TipoError.Sintactico, exx.Fila, exx.Columna, false));
-                //        //this.MostrarError(new ErrorCompiladorEventArgs(exx.Tipo, exx.Descripcion, exx.Fila, exx.Columna, false));
+                //        //MostrarError(new ErrorCompiladorEventArgs(exx.Tipo, exx.Descripcion, exx.Fila, exx.Columna, false));
                 //    }
                 //    if (ex.Mostrar)
                 //    {
                 //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
                 //    }
-                //    //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
+                //    //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 //}
 
                 //if (ex.DescartarTopePila)
@@ -276,28 +265,28 @@ namespace CompiladorGargar.Sintactico
                 //    if (ex.TerminalHastaDondeDescartarPila != null)
                 //    {
                 //        bool parar = false;
-                //        while (!this.Pila.esFinDePila() && !parar)
+                //        while (!Pila.esFinDePila() && !parar)
                 //        {
-                //            if (this.Pila.ObtenerTope().GetType() != typeof(Terminal))
+                //            if (Pila.ObtenerTope().GetType() != typeof(Terminal))
                 //            {
-                //                this.Pila.DescartarTope();
+                //                Pila.DescartarTope();
                 //            }
-                //            else if (!(((Terminal)this.Pila.ObtenerTope()).Equals(Terminal.ElementoFinSentencia())))
+                //            else if (!(((Terminal)Pila.ObtenerTope()).Equals(Terminal.ElementoFinSentencia())))
                 //            {
-                //                this.Pila.DescartarTope();
+                //                Pila.DescartarTope();
                 //            }
                 //            else
                 //            {
-                //                this.Pila.DescartarTope();
+                //                Pila.DescartarTope();
                 //                parar = true;
                 //            }
                 //        }
                 //    }
                 //    else
                 //    {
-                //        if (!this.Pila.esFinDePila())
+                //        if (!Pila.esFinDePila())
                 //        {
-                //            this.Pila.DescartarTope();
+                //            Pila.DescartarTope();
                 //        }
                 //    }
 
@@ -305,7 +294,7 @@ namespace CompiladorGargar.Sintactico
                 //    {
                 //        retorno.Add(new PasoAnalizadorSintactico(mensajeAMostrar, GlobalesCompilador.TipoError.Sintactico, filaAMostrar, colAMostrar, pararCompilacion));
                 //    }
-                //    //this.MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
+                //    //MostrarError(new ErrorCompiladorEventArgs(ex.Tipo, ex.Descripcion, ex.Fila, ex.Columna, ex.pararAnalisis));
                 //}
 
                 #endregion
@@ -323,16 +312,16 @@ namespace CompiladorGargar.Sintactico
         {
             List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();
 
-            if (!(this.cadenaEntrada.EsFinDeCadena() && this.pila.esFinDePila()))
+            if (!(cadenaEntrada.EsFinDeCadena() && pila.EsFinDePila()))
             {
 
-                this.RellenarCadenaEntrada();
+                RellenarCadenaEntrada();
 
-                if (this.pila.ObtenerTope().GetType() == typeof(Terminal))
+                if (pila.ObtenerTope().GetType() == typeof(Terminal))
                 {
-                    Terminal term = (Terminal)this.pila.ObtenerTope();
+                    Terminal term = (Terminal)pila.ObtenerTope();
 
-                    if (this.cadenaEntrada.ObtenerPrimerTerminal().Equals(this.pila.ObtenerTope()))
+                    if (cadenaEntrada.ObtenerPrimerTerminal().Equals(pila.ObtenerTope()))
                     {                       
 
                         if (term.Componente.Token == ComponenteLexico.TokenType.ParentesisApertura)
@@ -351,19 +340,19 @@ namespace CompiladorGargar.Sintactico
                         //Esto puede arrojar una excepcion sintactica
                         ChequearTokensRepetidosEnCadena(term);
                         
-                        if (this.habilitarSemantico)
+                        if (habilitarSemantico)
                         {
-                            retorno = this.arbolSemantico.CalcularAtributos(this.cadenaEntrada.ObtenerPrimerTerminal());
+                            retorno = arbolSemantico.CalcularAtributos(cadenaEntrada.ObtenerPrimerTerminal());
                         }
 
-                        this.pila.DescartarTope();
+                        pila.DescartarTope();
 
-                        GlobalesCompilador.UltFila = this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Fila;
-                        GlobalesCompilador.UltCol = this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Columna;
+                        GlobalesCompilador.UltFila = cadenaEntrada.ObtenerPrimerTerminal().Componente.Fila;
+                        GlobalesCompilador.UltCol = cadenaEntrada.ObtenerPrimerTerminal().Componente.Columna;
 
                         EstadoSintactico.AgregarTerminal(term);
 
-                        this.cadenaEntrada.EliminarPrimerTerminal();
+                        cadenaEntrada.EliminarPrimerTerminal();
                     }
                     else
                     {
@@ -373,7 +362,7 @@ namespace CompiladorGargar.Sintactico
                             strbldr.Append("Se esperaba ");
                             strbldr.Append(EnumUtils.stringValueOf(term.Componente.Token));
                             strbldr.Append(" pero se encontro ");
-                            strbldr.Append(EnumUtils.stringValueOf(this.cadenaEntrada.ObtenerPrimerTerminal().Componente.Token));
+                            strbldr.Append(EnumUtils.stringValueOf(cadenaEntrada.ObtenerPrimerTerminal().Componente.Token));
                             strbldr.Append(".");
 
                             if (term.Equals(Terminal.ElementoFinSentencia()))
@@ -385,21 +374,21 @@ namespace CompiladorGargar.Sintactico
                             }
               
                             throw new ErrorSintacticoException(strbldr.ToString(),
-                                    this.AnalizadorLexico.FilaActual(),
-                                    this.AnalizadorLexico.ColumnaActual(),
+                                    AnalizadorLexico.FilaActual(),
+                                    AnalizadorLexico.ColumnaActual(),
                                     true,
                                     false,
                                     false);
                         }
                         else
                         {
-                            retorno= this.AnalizarPila();
+                            retorno= AnalizarPila();
                         }
                     }
                 }
                 else
                 {
-                    retorno= this.AnalizarPila();
+                    retorno= AnalizarPila();
 
                 }
             }
@@ -409,7 +398,7 @@ namespace CompiladorGargar.Sintactico
 
         private void ChequearTokensRepetidosEnCadena(Terminal term)
         {
-           if (this.cadenaEntrada.TieneTerminalRepetidoEnPrimerLugarErroneo( this.cantParentesisAbiertos))
+           if (cadenaEntrada.TieneTerminalRepetidoEnPrimerLugarErroneo( cantParentesisAbiertos))
             {
 
                 if (term.Equals(Terminal.ElementoParentesisClausura()))
@@ -422,8 +411,8 @@ namespace CompiladorGargar.Sintactico
                 strbldr.Append(" repetido.");
 
                 throw new ErrorSintacticoException(strbldr.ToString(),
-                        this.AnalizadorLexico.FilaActual(),
-                        this.AnalizadorLexico.ColumnaActual(),
+                        AnalizadorLexico.FilaActual(),
+                        AnalizadorLexico.ColumnaActual(),
                         false,
                         true,
                         false);
@@ -435,22 +424,22 @@ namespace CompiladorGargar.Sintactico
         {
             List<PasoAnalizadorSintactico> retorno = new List<PasoAnalizadorSintactico>();
 
-            if (this.pila.ObtenerTope().GetType() == typeof(NoTerminal))
+            if (pila.ObtenerTope().GetType() == typeof(NoTerminal))
             {
                 
-                Terminal t = this.cadenaEntrada.ObtenerPrimerTerminal();
-                NoTerminal nt = (NoTerminal)this.pila.ObtenerTope();
+                Terminal t = cadenaEntrada.ObtenerPrimerTerminal();
+                NoTerminal nt = (NoTerminal)pila.ObtenerTope();
 
                 bool generaProdVacia = false;
 
                 //Que es esto??
-                if (!this.PerteneceNoTerminalesNoEscapeables(nt))
+                if (!PerteneceNoTerminalesNoEscapeables(nt))
                 {
-                    generaProdVacia = this.gramatica.NoTerminalGeneraProduccionVacia(nt);
+                    generaProdVacia = gramatica.NoTerminalGeneraProduccionVacia(nt);
                 }
 
                 //Buscar en la tabla arroja excepciones sintacticas si encuentra errores.
-                Produccion prod = this.tabla.BuscarEnTablaProduccion(nt, t, true, generaProdVacia);
+                Produccion prod = tabla.BuscarEnTablaProduccion(nt, t, true, generaProdVacia);
 
                 if (prod != null)
                 {
@@ -471,26 +460,26 @@ namespace CompiladorGargar.Sintactico
                         
                     }
 
-                    this.pila.TransformarProduccion(prod);
+                    pila.TransformarProduccion(prod);
                 }
                
 
             }
             else
             {
-                if (!((Terminal)this.pila.ObtenerTope()).NoEsLambda())
+                if (!((Terminal)pila.ObtenerTope()).NoEsLambda())
                 {                    
                     Terminal t = Terminal.ElementoVacio();
-                    t.Componente.Fila = this.AnalizadorLexico.FilaActual();
-                    t.Componente.Columna = this.AnalizadorLexico.ColumnaActual();
+                    t.Componente.Fila = AnalizadorLexico.FilaActual();
+                    t.Componente.Columna = AnalizadorLexico.ColumnaActual();
 
                     if (habilitarSemantico)
                     {
-                        retorno = this.arbolSemantico.CalcularAtributos(t);
+                        retorno = arbolSemantico.CalcularAtributos(t);
                     }
 
                    
-                    this.pila.DescartarTope();
+                    pila.DescartarTope();
 
                 }
             }
@@ -504,7 +493,7 @@ namespace CompiladorGargar.Sintactico
 
             //string error = CaptarMensajeErrorApropiado(nt, t);
 
-            Produccion prod = this.tabla.BuscarEnTablaProduccion(nt, termBuscar, false, generaProdVacia);
+            Produccion prod = tabla.BuscarEnTablaProduccion(nt, termBuscar, false, generaProdVacia);
 
             if (prod != null)
             {
@@ -513,8 +502,8 @@ namespace CompiladorGargar.Sintactico
                 strbldr.Append(termBuscar.Componente.Lexema);
 
                 throw new ErrorSintacticoException(strbldr.ToString(),
-                        this.AnalizadorLexico.FilaActual(),
-                        this.AnalizadorLexico.ColumnaActual(),
+                        AnalizadorLexico.FilaActual(),
+                        AnalizadorLexico.ColumnaActual(),
                         true,
                         false,
                         true,
@@ -531,8 +520,8 @@ namespace CompiladorGargar.Sintactico
                 strbldr.Append(" no tiene lugar en la sentencia.");
 
                 throw new ErrorSintacticoException(strbldr.ToString(),
-                        this.AnalizadorLexico.FilaActual(),
-                        this.AnalizadorLexico.ColumnaActual(),
+                        AnalizadorLexico.FilaActual(),
+                        AnalizadorLexico.ColumnaActual(),
                         false,
                         true,
                         false);
@@ -555,7 +544,7 @@ namespace CompiladorGargar.Sintactico
                 case "MULTS":
                 case "EXP":
                 case "EXPR":
-                    if (this.cantParentesisAbiertos > 0)
+                    if (cantParentesisAbiertos > 0)
                     {
                         retorno = Terminal.ElementoParentesisClausura();
                     }
@@ -591,14 +580,14 @@ namespace CompiladorGargar.Sintactico
             if (prod.ProduceElementoVacio())
             {
                 int posPila = 1;
-                while (!(this.cadenaEntrada.EsFinDeCadena() && this.pila.esFinDePila()) && (this.pila.Count > posPila) && !pararChequeo)
+                while (!(cadenaEntrada.EsFinDeCadena() && pila.EsFinDePila()) && (pila.Count > posPila) && !pararChequeo)
                 {
                     
-                    if (this.pila.ObtenerPosicion(posPila).GetType() == typeof(Terminal))
+                    if (pila.ObtenerPosicion(posPila).GetType() == typeof(Terminal))
                     {
-                        Terminal term = (Terminal)this.pila.ObtenerPosicion(posPila);
+                        Terminal term = (Terminal)pila.ObtenerPosicion(posPila);
 
-                        if (this.cadenaEntrada.ObtenerPrimerTerminal().Equals(this.pila.ObtenerPosicion(posPila)))
+                        if (cadenaEntrada.ObtenerPrimerTerminal().Equals(pila.ObtenerPosicion(posPila)))
                         {
                             //No hay error pq coincide el terminal, y se va a poder descartar en el proximo paso.
                             retorno = false;
@@ -617,18 +606,18 @@ namespace CompiladorGargar.Sintactico
                     }
                     else
                     {
-                        Terminal t = this.cadenaEntrada.ObtenerPrimerTerminal();
-                        NoTerminal nt = (NoTerminal)this.pila.ObtenerPosicion(posPila);
+                        Terminal t = cadenaEntrada.ObtenerPrimerTerminal();
+                        NoTerminal nt = (NoTerminal)pila.ObtenerPosicion(posPila);
 
                         bool generaProdVacia = false;
 
                         //Que es esto??
-                        if (!this.PerteneceNoTerminalesNoEscapeables(nt))
+                        if (!PerteneceNoTerminalesNoEscapeables(nt))
                         {
-                            generaProdVacia = this.gramatica.NoTerminalGeneraProduccionVacia(nt);
+                            generaProdVacia = gramatica.NoTerminalGeneraProduccionVacia(nt);
                         }
 
-                        Produccion prodAux = this.tabla.BuscarEnTablaProduccion(nt, t, false, generaProdVacia);
+                        Produccion prodAux = tabla.BuscarEnTablaProduccion(nt, t, false, generaProdVacia);
 
                         if (prodAux != null)
                         {
@@ -653,7 +642,7 @@ namespace CompiladorGargar.Sintactico
                     }
                 }
 
-                if (posPila > this.pila.Count)
+                if (posPila > pila.Count)
                 {
                     //Hubo error pq el terminal tope no servia para nada de la pila
                     retorno = true;
@@ -668,8 +657,6 @@ namespace CompiladorGargar.Sintactico
             return (nt.Nombre.Equals("EXPR") || nt.Nombre.Equals("BLQ") || nt.Nombre.Equals("PROCEDIMIENTO") || nt.Nombre.Equals("PROCED"));
 
         }
-        
-     
 
         private void RellenarCadenaEntrada()
         {
@@ -677,11 +664,11 @@ namespace CompiladorGargar.Sintactico
             {
                 Terminal t = Terminal.ElementoVacio();
 
-                while ((this.cadenaEntrada.Count < cantElementosCadenaEntrada) && (!t.Equals(Terminal.ElementoEOF())))
+                while ((cadenaEntrada.Count < cantElementosCadenaEntrada) && (!t.Equals(Terminal.ElementoEOF())))
                 {
                     
                     t = new Terminal();
-                    t.Componente = this.AnalizadorLexico.ObtenerProximoToken();
+                    t.Componente = AnalizadorLexico.ObtenerProximoToken();
 
                     //Controlo que no haya un error lexico en el token que acabo de traer.
                     //Si hay error directamente me salteo el paso, no se inserta en la cadena, y no toco la pila.
@@ -725,7 +712,7 @@ namespace CompiladorGargar.Sintactico
                                 comp.Lexema = "-";
                                 comp.Token = ComponenteLexico.TokenType.RestaEntero;
 
-                                this.cadenaEntrada.InsertarTerminal(new Terminal() { Componente = comp });
+                                cadenaEntrada.InsertarTerminal(new Terminal() { Componente = comp });
 
                                 //Le sumo uno pq el menos ya no pertenece mas.
                                 t.Componente.Columna++;
@@ -738,7 +725,7 @@ namespace CompiladorGargar.Sintactico
 
                    
 
-                    this.cadenaEntrada.InsertarTerminal(t);                       
+                    cadenaEntrada.InsertarTerminal(t);                       
                     
                 }
                 if (t.Equals(Terminal.ElementoEOF()))
@@ -748,10 +735,6 @@ namespace CompiladorGargar.Sintactico
             }
         }
 
-        internal void CargarAnalizadorLexico(string texto)
-        {
-            this.CargarAnalizadorLexicografico(texto);
-            
-        }
+     
     }
 }

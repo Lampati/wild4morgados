@@ -19,7 +19,7 @@
 
             <StackPanel Margin="4,10,4,5">
                 <TextBlock>Utilice esta pantalla para ver y eliminar los test de prueba creados.</TextBlock>
-                <TextBlock>Además, Ragnarok realizará la comprobacion de validez de los test de prueba,</TextBlock> 
+                <TextBlock>Además, GarGar Dev realizará la comprobacion de validez de los test de prueba,</TextBlock> 
                 <TextBlock>mostrando en rojo aquellos tests invalidos</TextBlock>
             </StackPanel>
         <Separator Margin="0,0,0,8"></Separator>

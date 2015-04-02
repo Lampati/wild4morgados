@@ -42,28 +42,17 @@ namespace CompiladorGargar
         {
             MarcarEntrada = false;
             LineaEntrada = -1;
-            this.modoDebug = modo;
+            modoDebug = modo;
             //this.ArchivoGramatica = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, System.Configuration.ConfigurationManager.AppSettings["archGramatica"].ToString());
-            this.ArchivoGramatica = "Gramatica.xml";
-            this.DirectorioTemporales = dirTemp;
-            this.DirectorioEjecutables = dirEjec;
-            this.NombreEjecutable = nombre;
+            ArchivoGramatica = "Gramatica.xml";
+            DirectorioTemporales = dirTemp;
+            DirectorioEjecutables = dirEjec;
+            NombreEjecutable = nombre;
 
             DirectoriosManager.CrearDirectorioSiNoExiste(DirectorioTemporales,false);
             DirectoriosManager.CrearDirectorioSiNoExiste(DirectorioEjecutables,false);
 
             GeneracionCodigoHelpers.DirectorioTemporales = dirTemp;
-
-            CargarAnalizadorSintactico();
-        }
-
-        public Compilador(string gramatica, bool modo, string dirTemp, string dirEjec, string nombre)
-        {
-            this.modoDebug = modo;
-            this.ArchivoGramatica = gramatica;
-            this.DirectorioTemporales = dirTemp;
-            this.DirectorioEjecutables = dirEjec;
-            this.NombreEjecutable = nombre;
 
             CargarAnalizadorSintactico();
         }
@@ -78,13 +67,12 @@ namespace CompiladorGargar
             catch (Exception ex)
             {
                 throw new Exception("Error fatal al iniciar el analizador sintactico:" + "\r\n" + ex.Message);
-
             }
         }
 
         private void CargarAnalizadorLexico(string texto)
         {
-            this.analizadorSintactico.CargarAnalizadorLexico(texto);
+            analizadorSintactico.CargarAnalizadorLexicografico(texto);
         }
 
         public ResultadoCompilacion Compilar(string texto)
@@ -96,7 +84,7 @@ namespace CompiladorGargar
 
             GeneracionCodigoHelpers.ReiniciarValoresVariablesAleatorias();
 
-            this.analizadorSintactico.ReiniciarAnalizadorSintactico();
+            analizadorSintactico.ReiniciarAnalizadorSintactico();
             float tiempoCargarSint = ((float)(Stopwatch.GetTimestamp() - timeStamp)) / ((float)Stopwatch.Frequency);
 
             List<PasoDebugTiempos> tiempos = new List<PasoDebugTiempos>();
@@ -106,13 +94,8 @@ namespace CompiladorGargar
 
             if (texto != string.Empty)
             {
-
-
-
                 if (this.ReemplazarEntrada)
                 {
-
-
                     texto = StringUtils.InsertarLineaEnTexto(texto,
                             this.CodigoReemplazoEntrada,
                             this.LineaEntrada);
@@ -120,8 +103,6 @@ namespace CompiladorGargar
 
                 if (this.ReemplazarSalida)
                 {
-
-
                     texto = StringUtils.InsertarLineaEnTextoEntreLineas(texto,
                             this.CodigoReemplazoSalida,
                             this.LineaComienzoReemplazoSalida,
@@ -135,21 +116,18 @@ namespace CompiladorGargar
                     long timeStampLex = Stopwatch.GetTimestamp();
                     CargarAnalizadorLexico(texto);
                     float tiempoCargarLexico = ((float)(Stopwatch.GetTimestamp() - timeStampLex)) / ((float)Stopwatch.Frequency);
-
-
-
+                    
                     try
                     {
                         bool pararComp = false;
                         GlobalesCompilador.TipoError tipoError = GlobalesCompilador.TipoError.Ninguno;
 
-                        while (!this.analizadorSintactico.esFinAnalisisSintactico() && !pararComp)
+                        while (!this.analizadorSintactico.EsFinAnalisisSintactico() && !pararComp)
                         {
 
                             timeStampPaso = Stopwatch.GetTimestamp();
                             List<PasoAnalizadorSintactico> retorno = this.analizadorSintactico.AnalizarSintacticamenteUnPaso();
                             float tiempoAnalizSint = ((float)(Stopwatch.GetTimestamp() - timeStampPaso)) / ((float)Stopwatch.Frequency);
-
 
                             if (retorno.Count > 0)
                             {
@@ -191,7 +169,7 @@ namespace CompiladorGargar
                             i++;
                         }
 
-                        if (this.analizadorSintactico.esFinAnalisisSintactico() && res.ListaErrores.Count == 0)
+                        if (this.analizadorSintactico.EsFinAnalisisSintactico() && res.ListaErrores.Count == 0)
                         {
                             res.CompilacionGarGarCorrecta = true;
                         }
@@ -210,77 +188,9 @@ namespace CompiladorGargar
                         }
                     }
 
-
-
-
-                    if (res.CompilacionGarGarCorrecta)
-                    {
-                        res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
-                        res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
-
-                        res.ListaLineasValidas = EstadoSintactico.ListaLineasValidasParaInsertarCodigo;
-                        res.ListaLineasContenidoProcSalida = EstadoSintactico.ListaLineasContenidoProcSalida;
-
-                        long timeStampCod = Stopwatch.GetTimestamp();
-                        res.ArbolSemanticoResultado.CalcularExpresiones();
-                        res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
-                        res.RepresentacionGrafica = res.ArbolSemanticoResultado.ObtenerProgramaViewModel();
-
-                        Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
-
-                        //Esto se usa en la parte de los test de ejecucion. Le agrego que marque el valor de las var de entrada en la linea.
-
-
-                        res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-
-                        timeStampCod = Stopwatch.GetTimestamp();
-                        res.ArchTemporalCodigoPascal = CrearArchivoTemporal(res.CodigoPascal);
-                        res.ArchTemporalCodigoPascalConRuta = Path.Combine(DirectorioTemporales, res.ArchTemporalCodigoPascal);
-                        res.TiempoGeneracionTemporalCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-
-                        try
-                        {
-                            timeStampCod = Stopwatch.GetTimestamp();
-
-                            // Aca van las operaciones especiales con el compilador
-                            if (this.MarcarEntrada)
-                            {
-                                int lineaEnPascal = bindeoLineasEntrePascalYGarGar.First(x => x.Value == this.LineaEntrada).Key;
-
-
-                                StringUtils.InsertarLineaEnArchivo(res.ArchTemporalCodigoPascalConRuta,
-                                    GeneracionCodigoHelpers.LlamarCrearEntradaEnArchResultado,
-                                    lineaEnPascal);
-
-                            }
-
-
-
-
-                            ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta, bindeoLineasEntrePascalYGarGar);
-
-
-
-                            res.ResultadoCompPascal = resPas;
-                            res.ArchEjecutable = resPas.NombreEjecutable;
-                            res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
-                            res.ArchTemporalResultadosEjecucionConRuta = GeneracionCodigoHelpers.ArchivoTemporalEstaEjecucion;
-                            res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
-
-                            res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
-
-                        }
-                        catch
-                        {
-                            res.GeneracionEjectuableCorrecto = false;
-                        }
-
-                        BorrarTemporales();
-
-                    }
-
-
                     res.TiempoGeneracionAnalizadorLexico = tiempoCargarLexico;
+
+                    CompilarCodigoIntermedio(res);
                 }
                 catch (ErrorLexicoException ex)
                 {
@@ -325,6 +235,68 @@ namespace CompiladorGargar
             return res;
         }
 
+        private void CompilarCodigoIntermedio(ResultadoCompilacion res)
+        {
+            if (res.CompilacionGarGarCorrecta)
+            {
+                res.ArbolSemanticoResultado = this.analizadorSintactico.ArbolSemantico;
+                res.TablaSimbolos = res.ArbolSemanticoResultado.TablaDeSimbolos;
+
+                res.ListaLineasValidas = EstadoSintactico.ListaLineasValidasParaInsertarCodigo;
+                res.ListaLineasContenidoProcSalida = EstadoSintactico.ListaLineasContenidoProcSalida;
+
+                long timeStampCod = Stopwatch.GetTimestamp();
+                res.CodigoPascal = res.ArbolSemanticoResultado.CalcularCodigo();
+                res.RepresentacionGrafica = res.ArbolSemanticoResultado.ObtenerProgramaViewModel();
+
+                Dictionary<int, int> bindeoLineasEntrePascalYGarGar = BindearLineas(res.CodigoPascal.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+
+                //Esto se usa en la parte de los test de ejecucion. Le agrego que marque el valor de las var de entrada en la linea.
+
+
+                res.TiempoGeneracionCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                timeStampCod = Stopwatch.GetTimestamp();
+                res.ArchTemporalCodigoPascal = CrearArchivoTemporal(res.CodigoPascal);
+                res.ArchTemporalCodigoPascalConRuta = Path.Combine(DirectorioTemporales, res.ArchTemporalCodigoPascal);
+                res.TiempoGeneracionTemporalCodigo = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                try
+                {
+                    timeStampCod = Stopwatch.GetTimestamp();
+
+                    // Aca van las operaciones especiales con el compilador
+                    if (this.MarcarEntrada)
+                    {
+                        int lineaEnPascal = bindeoLineasEntrePascalYGarGar.First(x => x.Value == this.LineaEntrada).Key;
+
+
+                        StringUtils.InsertarLineaEnArchivo(res.ArchTemporalCodigoPascalConRuta,
+                            GeneracionCodigoHelpers.LlamarCrearEntradaEnArchResultado,
+                            lineaEnPascal);
+
+                    }
+
+                    ResultadoCompilacionPascal resPas = CompilarPascal(res.ArchTemporalCodigoPascalConRuta, bindeoLineasEntrePascalYGarGar);
+
+                    res.ResultadoCompPascal = resPas;
+                    res.ArchEjecutable = resPas.NombreEjecutable;
+                    res.ArchEjecutableConRuta = Path.Combine(DirectorioEjecutables, res.ArchEjecutable);
+                    res.ArchTemporalResultadosEjecucionConRuta = GeneracionCodigoHelpers.ArchivoTemporalEstaEjecucion;
+                    res.TiempoGeneracionEjecutable = ((float)(Stopwatch.GetTimestamp() - timeStampCod)) / ((float)Stopwatch.Frequency);
+
+                    res.GeneracionEjectuableCorrecto = resPas.CompilacionPascalCorrecta;
+
+                }
+                catch
+                {
+                    res.GeneracionEjectuableCorrecto = false;
+                }
+
+                BorrarTemporales();
+            }
+        }
+
         private Dictionary<int, int> BindearLineas(string[] lineas)
         {
             Dictionary<int, int> dict = new Dictionary<int, int>();
@@ -363,8 +335,6 @@ namespace CompiladorGargar
                 DirectoriosManager.BorrarArchivosDelDirPorExtension(DirectorioTemporales, "*.o");
             }
         }
-
-
 
         private ResultadoCompilacionPascal CompilarPascal(string archTemporalPascal, Dictionary<int, int> bindeoLineas)
         {
@@ -423,13 +393,5 @@ namespace CompiladorGargar
 
             return nombreArch;
         }
-
-
-
-
-
-
-
-        
     }
 }

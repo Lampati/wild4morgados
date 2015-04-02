@@ -30,10 +30,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ProcSalidaCrearUnaVez = hijoASintetizar.ProcSalidaCrearUnaVez;
         }
 
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
+       
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {

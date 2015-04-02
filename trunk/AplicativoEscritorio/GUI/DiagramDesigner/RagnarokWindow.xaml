@@ -11,7 +11,9 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"    
                 Closing="RibbonWindow_Closing" 
-                Icon="/Ragnarok;component/Images/axeTribal.png">
+                Icon="/Ragnarok;component/Images/GarGarDev.png"
+                
+                >
 
     <Window.Resources>
         <Style TargetType="{x:Type Image}">

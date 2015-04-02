@@ -160,6 +160,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SplashScreen\Control\Block.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SplashScreen\Control\LoadingAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SplashScreen\SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -327,6 +335,12 @@
     <Compile Include="EventArgsClasses\SalvarConfiguracionEventArgs.cs" />
     <Compile Include="Helpers\FileDialogManager.cs" />
     <Compile Include="ResultadoEjecucion.cs" />
+    <Compile Include="SplashScreen\Control\Block.xaml.cs">
+      <DependentUpon>Block.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen\Control\LoadingAnimation.xaml.cs">
+      <DependentUpon>LoadingAnimation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SplashScreen\DispatcherHelper.cs" />
     <Compile Include="SplashScreen\MessageListener.cs" />
     <Compile Include="SplashScreen\Splasher.cs" />
@@ -458,6 +472,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
+    <Resource Include="Images\GarGarDev.png" />
+    <Resource Include="Images\GarGarDevLargeSplash.png" />
+    <Resource Include="Images\ajax-loader.gif" />
+    <Resource Include="Images\716.GIF" />
+    <Resource Include="Images\bouncy.gif" />
+    <Resource Include="Images\GarGarDevLargeLogo.png" />
     <Content Include="Manuales\ManualGarGar.pdf" />
     <Content Include="Manuales\ManualRagnarok.pdf" />
     <None Include="packages.config" />

@@ -11,8 +11,7 @@
 		<NoTerminal>VARIABLES</NoTerminal>
 		<NoTerminal>C</NoTerminal>
 		<NoTerminal>TIPODATO</NoTerminal>
-		<NoTerminal>NUMERO</NoTerminal>
-		<NoTerminal>VARS</NoTerminal>
+		<NoTerminal>NUMERO</NoTerminal>		
 		<NoTerminal>V</NoTerminal>
 		<NoTerminal>IDENT</NoTerminal>
 		<NoTerminal>ID</NoTerminal>

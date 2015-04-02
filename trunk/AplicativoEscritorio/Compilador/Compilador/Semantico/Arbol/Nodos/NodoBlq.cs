@@ -14,17 +14,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
-        }
-
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-
-        }
-
-        public override NodoArbolSemantico CalcularAtributos(Terminal t)
+      public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (this.hijosNodo.Count > 1)
             {
@@ -81,16 +71,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
 
             ActividadViewModel = activ;
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
         }
 
         public override void CalcularCodigo()

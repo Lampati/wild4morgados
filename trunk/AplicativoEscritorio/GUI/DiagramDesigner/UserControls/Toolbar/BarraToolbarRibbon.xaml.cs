@@ -970,7 +970,7 @@ namespace Ragnarok.UserControls.Toolbar
 
         private void bttnAyudaManual_Click(object sender, RoutedEventArgs e)
         {
-            AbrirArchivoManual("ManualRagnarok.pdf", global::Ragnarok.Properties.Resources.ManualRagnarok, "El manual del aplicativo Ragnarok no se pudo abrir");
+            AbrirArchivoManual("ManualRagnarok.pdf", global::Ragnarok.Properties.Resources.ManualRagnarok, "El manual del aplicativo GarGar Dev no se pudo abrir");
         }
 
         private void bttnAyudaGarGarManual_Click(object sender, RoutedEventArgs e)

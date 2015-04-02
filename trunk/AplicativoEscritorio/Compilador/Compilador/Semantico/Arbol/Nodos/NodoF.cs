@@ -16,6 +16,8 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             : base(nodoPadre,elem)
         {
             this.ListaFirma = new List<Firma>();
+
+            EsFirma = true;
         }
 
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
@@ -52,22 +54,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
     
         }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-            
-            
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-      
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-           
-            return this;
-        }
 
         public override void CalcularCodigo()
         {
