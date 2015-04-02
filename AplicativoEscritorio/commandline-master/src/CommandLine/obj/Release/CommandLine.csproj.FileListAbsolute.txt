@@ -1,4 +1,0 @@
-D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\bin\Release\CommandLine.dll
-D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\bin\Release\CommandLine.pdb
-D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\obj\Release\CommandLine.dll
-D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\obj\Release\CommandLine.pdb

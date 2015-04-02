@@ -12,7 +12,7 @@
         WindowState="Maximized"    
                 
                 Closing="RibbonWindow_Closing" 
-                Icon="/Ragnarok;component/Images/GarGarDev.png"
+                Icon="/GarGarDev;component/Images/GarGarDev.png"
                 
                 >
 
