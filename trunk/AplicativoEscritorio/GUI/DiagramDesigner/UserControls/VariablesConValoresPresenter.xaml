@@ -16,11 +16,12 @@
                           RowHeight="20">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre" Width="120" MinWidth="120" Binding="{Binding Path=Nombre}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Valor" Width="Auto" MinWidth="200" Binding="{Binding Path=Valor, Mode=TwoWay}"  IsReadOnly="True"/>
                         <DataGridTextColumn Header="Contexto" Width="70" Binding="{Binding Path=Contexto}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Tipo de Variable" Width="120" MinWidth="120" Binding="{Binding Path=TamanioTipo, Mode=TwoWay}"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="200" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tipo de Dato" Width="60" MinWidth="100" Binding="{Binding Path=TipoDato, Mode=TwoWay}"  IsReadOnly="True"/>
                         <DataGridTextColumn Header="Descripcion" Width="200" Binding="{Binding Path=Descripcion}" />
-                        <DataGridTextColumn Header="Valor" Width="Auto" MinWidth="200" Binding="{Binding Path=Valor, Mode=TwoWay}"  IsReadOnly="True"/>
+                        
                     </DataGrid.Columns>
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>

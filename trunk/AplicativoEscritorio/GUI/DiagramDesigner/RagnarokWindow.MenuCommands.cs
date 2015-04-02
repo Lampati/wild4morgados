@@ -23,6 +23,7 @@ using DataAccess;
 using System.Windows.Resources;
 using Utilidades;
 using Globales;
+using Ragnarok.Tutorial;
 
 namespace Ragnarok
 {
@@ -83,6 +84,8 @@ namespace Ragnarok
                                     ArchCargado = ej;
                                     //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                     ej.ModificadoDesdeUltimoGuardado = false;
+
+                             
                                 }
                                 break;
                             case 2:
@@ -151,6 +154,9 @@ namespace Ragnarok
                                                 ArchCargado = res;
                                                 //Se lo coloco despues la modificacion pq despues de cargar modifica el texto
                                                 res.ModificadoDesdeUltimoGuardado = false;
+
+                                                
+
                                             }
                                         }
                                         

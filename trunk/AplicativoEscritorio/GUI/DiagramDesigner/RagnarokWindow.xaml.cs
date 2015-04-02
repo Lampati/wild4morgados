@@ -41,6 +41,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using System.ComponentModel;
+using Ragnarok.Tutorial;
 
 namespace Ragnarok
 {
@@ -72,6 +73,19 @@ namespace Ragnarok
                 {
                     BarraMsgs.Visibility = System.Windows.Visibility.Visible;                    
                     Modo = (ModoVisual)archCargado.UltimoModoGuardado;
+
+  					// flanzani 11/11/2012
+        			// IDC_APP_5
+        			// Tutorial para la aplicacion
+        			// Al cargar un archivo, disparo el tutorial para modo grafico o texto
+                    if (Modo == ModoVisual.Texto)
+                    {
+                        TutorialManager.MostrarTutorialModoTexto(this);
+                    }
+                    else
+                    {
+                        TutorialManager.MostrarTutorialModoGrafico(this);
+                    }
 
                     Title = string.Format("{0} -- {1}", ConstantesGlobales.NOMBRE_APLICACION, archCargado.Nombre);
                     
@@ -172,6 +186,8 @@ namespace Ragnarok
             //ProbarCarga();
             InitializeComponent();
 
+            
+
             Title = ConstantesGlobales.NOMBRE_APLICACION;
 
             this.BarraMsgs.DoubleClickEvent += new BarraMensajes.DobleClickEnBarraMensajesEventHandler(BarraMsgs_DoubleClickEvent);
@@ -187,15 +203,26 @@ namespace Ragnarok
             this.ToolbarAplicacion.IdentarEvent += new BarraToolbarRibbon.IdentarEventHandler(ToolbarAplicacion_IdentarEvent);
 
             this.Loaded += new RoutedEventHandler(RagnarokWindow_Loaded);
+			// flanzani 11/11/2012
+	        // IDC_APP_5
+    	    // Tutorial para la aplicacion
+        	// Controlo estos eventos para poder reposicionar el globo del tutorial si muevo o cambio de tamaño la app
+            this.SizeChanged += new SizeChangedEventHandler(RagnarokWindow_SizeChanged);
+            this.LocationChanged += new EventHandler(RagnarokWindow_LocationChanged);
 
-            
 
 
-            ConfiguracionAplicacion.Abrir(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+            string pathAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+            ConfiguracionAplicacion.Abrir(Path.Combine(pathAppData,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
 
             GlobalesCompilador.CantMaxErroresSintacticos = ConfiguracionAplicacion.CantMaxErroresSintacticos;
             GlobalesCompilador.CantMaxIteraciones = ConfiguracionAplicacion.CantMaxIteraciones;
+
+
+       
+            
 
             ToolbarAplicacion.DirEjCreados = ConfiguracionAplicacion.DirectorioEjerciciosCreados;
             ToolbarAplicacion.DirEjDescargados = ConfiguracionAplicacion.DirectorioEjerciciosDescargados;
@@ -232,7 +259,32 @@ namespace Ragnarok
           
         }
 
-     
+		// flanzani 11/11/2012
+        // IDC_APP_5
+    	// Tutorial para la aplicacion
+        //Logica de reposicionamiento del globo del tutorial si muevo o cambio la pagina
+
+        Point locationActual = new Point(0, 0);
+
+        void RagnarokWindow_LocationChanged(object sender, EventArgs e)
+        {
+			// flanzani 11/11/2012
+	        // IDC_APP_5
+    	    // Tutorial para la aplicacion
+        	// Guardo la posicion en este evento, ya que el sizeChanged 
+			//no tengo la ubicacion correcta de la ventana al maximizarla 
+            RagnarokWindow wind = sender as RagnarokWindow;
+            locationActual = new Point(wind.Left, wind.Top);
+            TutorialManager.UbicacionVentanaRagnarok = locationActual;
+            TutorialManager.Reposicionar();
+        }
+
+        void RagnarokWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            TutorialManager.Reposicionar();
+            
+        }     
 
         void ToolbarAplicacion_IdentarEvent(object o, IdentarEventArgs e)
         {
@@ -261,7 +313,40 @@ namespace Ragnarok
             ArchCargado = null;
 
             Splasher.CloseSplash();
+
+
+			// flanzani 14/11/2012
+            // IDC_APP_7
+            // Desactivar el tutorial desde el popup
+            // Me subscribo al evento estatico de tutorial desactivado
+            PopUpGlobo.TutorialDesativadoEvent += new PopUpGlobo.TutorialDesativadoEventHandler(PopUpGlobo_TutorialDesativadoEvent);
+
+			// flanzani 11/11/2012
+	        // IDC_APP_5
+    	    // Tutorial para la aplicacion
+        	// Configuracion inicial de la parte del tutorial en la app
+            this.ToolbarAplicacion.chkTutorial.IsChecked = ConfiguracionAplicacion.TutorialActivo;
+            TutorialManager.UbicacionVentanaRagnarok = new Point(0, 0);
+            TutorialManager.Activado = ConfiguracionAplicacion.TutorialActivo;
+            TutorialManager.MostrarTutorialAperturaAplicacion(this);
+       
+         
         }
+
+		// flanzani 14/11/2012
+        // IDC_APP_7
+        // Desactivar el tutorial desde el popup
+        // Modifico la configuracion al desactivar el tutorial desde el popup
+        void PopUpGlobo_TutorialDesativadoEvent(object o, EventArgs e)
+        {
+            TutorialManager.Activado = false;
+            ConfiguracionAplicacion.TutorialActivo = false;
+            ToolbarAplicacion.chkTutorial.IsChecked = false;
+
+            SalvarConfiguracion();
+        }
+
+
 
        
 
@@ -269,13 +354,25 @@ namespace Ragnarok
 
         void ToolbarAplicacion_SalvarConfiguracionEvent(object o, SalvarConfiguracionEventArgs e)
         {
+            SalvarConfiguracion();
+        }
+
+        private void SalvarConfiguracion()
+        {
             ConfiguracionAplicacion.DirectorioEjerciciosCreados = ToolbarAplicacion.DirEjCreados;
             ConfiguracionAplicacion.DirectorioEjerciciosDescargados = ToolbarAplicacion.DirEjDescargados;
             ConfiguracionAplicacion.DirectorioResolucionesEjercicios = ToolbarAplicacion.DirResoluciones;
             ConfiguracionAplicacion.DirectorioTemporal = ToolbarAplicacion.DirTemporales;
             ConfiguracionAplicacion.DirectorioAbrirDefault = ToolbarAplicacion.DirDefaultAbrir;
+            // flanzani 11/11/2012
+            // IDC_APP_5
+            // Tutorial para la aplicacion
+            // Agregamos que se salve en el arch de config si el tutorial esta activo o no
+            ConfiguracionAplicacion.TutorialActivo = ToolbarAplicacion.chkTutorial.IsChecked.Value;
 
-            ConfiguracionAplicacion.Guardar(Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+            string pathAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+            ConfiguracionAplicacion.Guardar(Path.Combine(pathAppData,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
         }
 
@@ -314,6 +411,12 @@ namespace Ragnarok
                         Modo = e.ModoSeleccionado;
                         
                         Esquema.RepresentacionGraficaActual = res.RepresentacionGrafica;
+
+						// flanzani 11/11/2012
+	        			// IDC_APP_5
+			    	    // Tutorial para la aplicacion
+        				// Muestro el tutorial de modo grafico al cambiar a ese modo
+                        TutorialManager.MostrarTutorialModoGrafico(this);
                     }
                     else
                     {
@@ -336,6 +439,12 @@ namespace Ragnarok
                             Modo = e.ModoSeleccionado;
 
                             Esquema.GarGarACompilar = new Identador(programa.Gargar).Identar();
+
+							// flanzani 11/11/2012
+	        				// IDC_APP_5
+			    	    	// Tutorial para la aplicacion
+        					// Muestro el tutorial de modo texto al cambiar a ese modo
+                            TutorialManager.MostrarTutorialModoTexto(this);
                         }
                         else
                         {
@@ -780,8 +889,15 @@ namespace Ragnarok
             ResultadoEjecucion res = Ejecutar(programa);
 
             if (res.ResEjecucion != null)
-            {
+            {                
                 ResultadoEjecucionDialog resultadosDialog = new ResultadoEjecucionDialog(res.ResEjecucion);
+
+                // flanzani 22/11/2012
+                // IDC_APP_8
+                // Agregar el tiempo de ejecucion 
+                // Agrego el tiempo
+                resultadosDialog.TiempoEjecucion = res.Segundos;
+
 
                 resultadosDialog.Owner = this;
                 ApplyBlurEffect();
@@ -844,7 +960,11 @@ namespace Ragnarok
                     ArchCargado.CompilacionCorrecta = true;
                 }
 
+                Stopwatch stp = Stopwatch.StartNew();
                 EjecucionManager.EjecutarConVentana(res.ArchEjecutableConRuta);
+                stp.Stop();
+
+                resultadoEjecucion.Segundos = stp.Elapsed.TotalSeconds;
 
                 if (File.Exists(res.ArchTemporalResultadosEjecucionConRuta))
                 {
@@ -1093,7 +1213,8 @@ namespace Ragnarok
 
             try
             {
-                DirectoriosManager.BorrarArchivosDelDirPorExtension(ConfiguracionAplicacion.DirectorioTemporal, "*.*");
+                //ET (11/11/2012): Si el directorio de los archivos temporales es el mismo que el de los archivos creados/descargados/resoluciones, se borran todos y no es lo que se busca
+                DirectoriosManager.BorrarArchivosDelDirPorExtensionExcluida(ConfiguracionAplicacion.DirectorioTemporal, new List<string>() { ".gej", ".gres" });
             }
             catch
             {

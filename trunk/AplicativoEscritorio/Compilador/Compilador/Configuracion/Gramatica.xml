@@ -440,7 +440,7 @@
 			<Izq>ASIGNACION</Izq>
 			<Ders>
 				<Der>
-					<Expresion>IDASIGNACION := EXPRBOOLEANAS ;</Expresion>
+					<Expresion>IDASIGNACION = EXPRBOOLEANAS ;</Expresion>
 				</Der>
 			</Ders>
 		</Produccion>

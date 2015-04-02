@@ -14,7 +14,7 @@
         <ribbon:Ribbon Name="ToolbarAplicacion" ShowQuickAccessToolBarOnTop="False"   >
         
         <ribbon:Ribbon.ApplicationMenu>
-            <ribbon:RibbonApplicationMenu SmallImageSource="/Resources/Images/Copy.png" >                
+            <ribbon:RibbonApplicationMenu SmallImageSource="/Resources/Images/Copy.png" x:Name="menuAplicacion">                
                 <ribbon:RibbonApplicationSplitMenuItem Header="Nuevo" x:Name="MenuItem1" ImageSource="/Resources/Images/GenericDocument.png" Command="New" CommandTarget="{Binding ElementName=RagnarokWindow}" CommandParameter="0"  >
                     <ribbon:RibbonApplicationMenuItem x:Name="menuBttnNuevoEjercicio" ImageSource="/Resources/Images/Oxygen_new.png" HeaderTemplate="{StaticResource DataTemplateNuevoEjercicio}" Command="New" CommandTarget="{Binding ElementName=RagnarokWindow}" CommandParameter="1" />
                     <ribbon:RibbonApplicationMenuItem  x:Name="menuBttnNuevaResolucionEjercicio" ImageSource="/Resources/Images/Oxygen_new.png" HeaderTemplate="{StaticResource DataTemplateNuevaResolucion}" Command="New" CommandTarget="{Binding ElementName=RagnarokWindow}" CommandParameter="2" />
@@ -54,7 +54,7 @@
                         ToolTipDescription="{StaticResource TooltipCortar}" />
                     
                 
-                <ribbon:RibbonButton
+                <ribbon:RibbonButton Name="ButtonCopiar" 
                         Command="{x:Static ApplicationCommands.Copy}"
                         SmallImageSource="/Resources/Images/Copy.png"                                     
                         Label="Copiar" ToolTipTitle="Copiar" 
@@ -78,7 +78,7 @@
                     Label="Deshacer" ToolTipTitle="Deshacer" 
                     ToolTipDescription="{StaticResource TooltipUndoGargar}"/>
                     
-                <ribbon:RibbonButton 
+                    <ribbon:RibbonButton Name="ButtonRehacer" 
                     Command="{x:Static ApplicationCommands.Redo}"
                     CommandTarget="{Binding ElementName=TextEditor}"
                     SmallImageSource="/Resources/Images/redo.png"
@@ -90,14 +90,14 @@
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Compilación"  Name="ribbonGroupCompilacion" LargeImageSource="/Resources/Images/CompilarGroup.png"  >
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton Name="ButtonCompilacion" 
                         Click="ButtonCompilacion_Click"
                         SmallImageSource="/Resources/Images/Compile1.png"
                         LargeImageSource="/Resources/Images/Compile1.png"
                         Label="Compilar" 
                         ToolTipDescription="{StaticResource TooltipCompilarDesc}" ToolTipTitle="Compilar"/>
 
-                <ribbon:RibbonButton 
+                <ribbon:RibbonButton Name="ButtonEjecucion" 
                         Click="ButtonEjecucion_Click"
                         SmallImageSource="/Resources/Images/Ejecutar1.png"
                         LargeImageSource="/Resources/Images/Ejecutar1.png"
@@ -121,6 +121,24 @@
                         LargeImageSource="/Resources/Images/Gargar128.png"
                         Label="Gargar" 
                         ToolTipDescription="{StaticResource TooltipCambiarATexto}" ToolTipTitle="Pasar a Modo Texto" ToolTipFooterTitle="{StaticResource TooltipFooterDebeCompilar}" />
+            </ribbon:RibbonGroup>
+
+            <!-- 
+            // flanzani 10/11/2012
+            // IDC_APP_4
+            // Mostrar las funciones predefinidas por el framework
+            // Agrego en la barra de ribbons el boton y el espacio
+            
+            -->
+
+            <ribbon:RibbonGroup Header="Funciones"  Name="ribbonGroupFuncPredef" LargeImageSource="/Resources/Images/Funciones48.png"  >
+                <ribbon:RibbonButton Name="ButtonFuncPredef" 
+                        Click="ButtonFuncPredef_Click"
+                        SmallImageSource="/Resources/Images/Funciones48.png"
+                        LargeImageSource="/Resources/Images/Funciones48.png"
+                        Label="Funciones Predef." 
+                        ToolTipDescription="{StaticResource TooltipFuncionesPredefinidas}" ToolTipTitle="Funciones Predefinidas"   />
+
             </ribbon:RibbonGroup>
 
             <ribbon:RibbonGroup Header="Busqueda"   Name="ribbonGroupBusqueda" LargeImageSource="/Resources/Images/SearchReplaceGroup.png" >
@@ -164,7 +182,8 @@
                                          x:Name="bttnSolTexto"  Label="Solución Explicada"  Click="bttnSolTexto_Click" ToolTipDescription="{StaticResource TooltipSolucionExplicacion}" ToolTipTitle="Solucion Explicada" />
                     <ribbon:RibbonButton LargeImageSource="/Resources/Images/solucionGarGar.png"  SmallImageSource="/Resources/Images/solucionGarGar.png" 
                                          x:Name="bttnSolGarGar" Label="Solución GarGar"  Click="bttnSolGarGar_Click" ToolTipDescription="{StaticResource TooltipSolucionGarGar}" ToolTipTitle="Solucion GarGar del creador" />
-                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center"  SelectionBoxWidth="35" ToolTipDescription="{StaticResource TooltipDificultadEjercicio}" ToolTipTitle="Dificultad del Ejercicio">
+                    <ribbon:RibbonComboBox Label="Dificultad: " Name="cboBoxDificultad" VerticalAlignment="Center"  SelectionBoxWidth="35" ToolTipDescription="{StaticResource TooltipDificultadEjercicio}" ToolTipTitle="Dificultad del Ejercicio"
+                                            IsEditable="True" IsReadOnly="True" >
                         <ribbon:RibbonGallery x:Name="galleryDificultad" SelectionChanged="galleryDificultad_SelectionChanged"  ColumnsStretchToFill="True" MaxColumnCount="1" SelectedValuePath="Content">
                             <ribbon:RibbonGalleryCategory  VerticalContentAlignment="Center">
                                 <ribbon:RibbonGalleryItem Tag="10" >10</ribbon:RibbonGalleryItem>
@@ -227,6 +246,21 @@
                                      ToolTipTitle="Sincronizacion por ID de ejercicio" ToolTipDescription="{StaticResource TooltipSincronizarPorEjercicio}" ToolTipFooterTitle="{StaticResource TooltipDondeEncontrarIdEjercicio}" />
             </ribbon:RibbonGroup>
 
+            
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Agrego el boton para acceder al repositorio
+
+            
+
+            <ribbon:RibbonGroup Header="Repo Sincro" Name="ribbonGroupRepoSincro"  LargeImageSource="/Resources/Images/Sync.png">
+                <ribbon:RibbonButton LargeImageSource="/Resources/Images/database32.png" SmallImageSource="/Resources/Images/SyncGlobal.png" 
+                                     Label="Sincro por Repositorio"  Click="btnSincroRepo_Click" 
+                                     ToolTipTitle="Sincronización por Repositorio" ToolTipDescription="{StaticResource TooltipSincronizarPorRepositorio}" />
+            </ribbon:RibbonGroup>
+            
+
             <ribbon:RibbonGroup Header="Configuracion" Name="ribbonGroupConfigSincro"  LargeImageSource="/Resources/Images/SyncConfig.png">
                 <ribbon:RibbonButton LargeImageSource="/Resources/Images/SyncConfig.png" SmallImageSource="/Resources/Images/SyncConfig.png"
                                      Label="Propiedades" Click="btnPropiedadesSincro_Click" 
@@ -273,7 +307,24 @@
                                          ToolTipDescription="{StaticResource TooltipDirDefaultAbrir}" ToolTipTitle="Cambiar carpeta predeterminada" ToolTipFooterTitle="{StaticResource TooltipCambiosANivelGlobal}" />
                 </StackPanel>
             </ribbon:RibbonGroup>
+
+            <!--
+            // flanzani 11/11/2012
+            // IDC_APP_5
+            // Tutorial para la aplicacion
+            // Se agrega en el ribbon el control para activar y desactivar el tutorial
+            -->
+            <ribbon:RibbonGroup Header="Tutorial" Name="ribbonGroupTutorial"  >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,25,0,0">
+                    <ribbon:RibbonCheckBox Name="chkTutorial" Click="chkTutorial_Click" 
+                        ToolTipDescription="{StaticResource TooltipChkTutorial}" ToolTipTitle="Activar/Desactivar Tutorial" ToolTipFooterTitle="{StaticResource TooltipResetearTutorial}" />
+                    <ribbon:RibbonTwoLineText LineStackingStrategy="BlockLineHeight" Text="Activar Tutorial"/>
+                </StackPanel>
+            </ribbon:RibbonGroup>
         </ribbon:RibbonTab>
+
+      
+        
 
         <ribbon:RibbonTab Name="TabAyuda" Header="Ayuda"  >
             <ribbon:RibbonGroup Header="Ayuda de GarGar Dev" Name="ribbonGroupAyudaProgramar" >

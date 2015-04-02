@@ -73,6 +73,15 @@
 	  <Word>Truncar</Word>
 	  <Word>Redondear</Word>
 	  <Word>Potencia</Word>
+    <Word>Raiz</Word>
+    <Word>ValAbs</Word>
+    <Word>Seno</Word>
+    <Word>Coseno</Word>
+    <Word>Tangente</Word>
+    <Word>rSeno</Word>
+    <Word>rCoseno</Word>
+    <Word>rTangente</Word>
+    <Word>Pi</Word>
     </Keywords>
 
     <!-- Digits -->

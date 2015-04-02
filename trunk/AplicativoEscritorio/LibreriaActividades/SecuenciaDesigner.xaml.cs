@@ -12,12 +12,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Activities.Presentation.Model;
+using System.Windows.Controls.Primitives;
 
 namespace LibreriaActividades
 {
     // Interaction logic for SecuenciaDesigner.xaml
     public partial class SecuenciaDesigner
     {
+
+        // flanzani 8/11/2012
+        // IDC_APP_1
+        // Agregar tooltips de error al intentar arrastrar
+        // Creo el popup
+        static Popup popup = new Popup();
+        static TextBlock textoPopup = new TextBlock();
+        static Border grilla = new Border();
+
+        string textoNoArrastrarActividades = "No se pueden arrastrar actividades que no sean declaraciones al espacio de declaraciones del procedimiento o función";
+        string textoNoArrastrarDeclaraciones = "No se pueden arrastrar declaraciones al cuerpo de un procedimiento o función";
+        string textoNoArrastrarSecuencia = "No se pueden arrastrar actividades del tipo secuencia";
+
         public SecuenciaDesigner()
         {
             InitializeComponent();

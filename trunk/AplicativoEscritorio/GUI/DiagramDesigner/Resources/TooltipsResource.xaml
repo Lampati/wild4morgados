@@ -66,6 +66,16 @@
         Bajar del servidor especificado en propiedades, todos aquellos ejercicios catalogados como globales en la Web de ProgramAr
     </clr:String>
 
+    <!--
+    // flanzani 22/11/2012
+    // IDC_APP_9
+    // Repositorio de ejercicios
+    // Agrego el tooltip
+    -->
+    <clr:String x:Key="TooltipSincronizarPorRepositorio">
+        Buscar del servidor especificado en propiedades, cursos y ejercicios provenientes de la Web de ProgramAr para su descarga
+    </clr:String>
+
     <clr:String x:Key="TooltipSincronizarPorCurso">
         Bajar del servidor especificado en propiedades, todos aquellos ejercicios pertenecientes al curso especificado por el usuario. Esta funcionalidad sirve cuando se quiere bajar un grupo de ejercicios agrupados por sus caracteristicas en comun.
     </clr:String> 
@@ -122,6 +132,20 @@
         Rehacer una acción de escritura de código
     </clr:String>
 
+    <!-- Funciones Predefinidas -->
+
+    <!--
+       // flanzani 10/11/2012
+        // IDC_APP_4
+        // Mostrar las funciones predefinidas por el framework
+        // Agrego el tooltip para la descripcion del nuevo boton
+    -->
+    <clr:String x:Key="TooltipFuncionesPredefinidas">
+        Muestra una ventana donde se describen todas las funciones predefinidas con las que cuenta GarGar, y una descripcion de la sintaxis y como se usa cada una.
+    </clr:String>
+
+    <!-- Busqueda -->
+
     <clr:String x:Key="TooltipBuscar">
         Abre el dialogo de busqueda
     </clr:String>
@@ -154,6 +178,19 @@
 
     <clr:String x:Key="TooltipCambiosANivelGlobal">
         Los cambios a esta configuración se haran a nivel aplicación
+    </clr:String>
+    <!--
+    // flanzani 11/11/2012
+    // IDC_APP_5
+    // Tutorial para la aplicacion
+    // Se agregan los tooltips para la parte de tutorial del ribbon
+    -->
+    <clr:String x:Key="TooltipChkTutorial">
+        Activar o desactivar el tutorial sobre las funcionalidades de Ragnarok. La ayuda aparece en forma de globos en distintos puntos de la aplicación.
+    </clr:String>
+
+    <clr:String x:Key="TooltipResetearTutorial">
+        Para volver a ver los tutoriales ya vistos, desactive y vuelva a activar la funcionalidad.
     </clr:String>
 
 

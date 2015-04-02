@@ -1,0 +1,136 @@
+﻿<Window x:Class="Ragnarok.DialogWindows.FuncionesPredefConsultaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"        
+        Title="Funciones Predefinidas" Width="750" Height="560"
+        MinWidth="720" MinHeight="560"
+        ShowInTaskbar="False" ShowActivated="True" WindowStyle="SingleBorderWindow" 
+        WindowStartupLocation="CenterOwner" ResizeMode="CanResize" 
+        >
+    <Window.Resources>
+        <Style x:Key="VerticalSeparatorStyle" 
+           TargetType="{x:Type Separator}"
+           BasedOn="{StaticResource {x:Type Separator}}">
+            <Setter Property="Margin" Value="6,0,6,0"/>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <TransformCollection>
+                                <RotateTransform Angle="90"/>
+                            </TransformCollection>
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+        </Style>
+       
+    </Window.Resources>
+    <Border >
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="#FCFEFD" Offset="0"/>
+                <GradientStop Color="#EDF3F9" Offset="0.5"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*" MinWidth="150"/>                
+                <ColumnDefinition Width="300*" MinWidth="300"/>                
+                <ColumnDefinition Width="250*" MinWidth="250"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="99" Margin="5"
+                       TextWrapping="Wrap" >
+                En esta pantalla se pueden ver y consultar todas aquellas funciones y procedimientos que ya vienen incluidos en el lenguaje GarGar para su uso. <LineBreak />
+                Elija la función/procedimiento del listado en la parte izquierda de la pantalla y se mostrarán todas las caracteristicas de la rutina seleccionada, desde el nombre hasta la cantidad de parametros junsto con sus descripciones.
+            </TextBlock>
+
+
+            <ListBox Margin="5" Name="lstBxRutinas" Grid.Row="2" Grid.Column="0" SelectionChanged="lstBxRutinas_SelectionChanged"
+                    SelectionMode="Single"  ItemsSource="{Binding Path=ListaRutinas}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <Border Name="border" Padding="5">
+                            <StackPanel>
+                                    <Label Content="{Binding Path=Nombre}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Separator Grid.Row="1" Grid.ColumnSpan="99"/>
+
+            <Grid Margin="5" Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />                    
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="105" />
+                    <RowDefinition Height="30"  />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="30"  />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.ColumnSpan="99" Grid.Row="0"  Name="lblEncabezado" FontSize="16"></Label>
+                
+                <Label Grid.Column="0" Grid.Row="1"  Name="lblTipo">Tipo:</Label>
+                <Label Grid.Column="1" Grid.Row="1"  Name="lblTipoContenido" Content="{Binding Path=SelectedItem.Tipo, ElementName=lstBxRutinas}"></Label>
+                <Label Grid.Column="0" Grid.Row="2"  Name="lblDescripcion" VerticalAlignment="Center" >Descripción:</Label>
+                <TextBox Grid.Column="1" Grid.Row="2"  Name="txtDescripcionContenido" Margin="0,10"
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True"
+                         Text="{Binding Path=SelectedItem.Descripcion, ElementName=lstBxRutinas}" IsReadOnly="True"/>
+                <Label Grid.ColumnSpan="99" Grid.Row="3"  Name="lblParametros" VerticalAlignment="Center" Margin="0,5,0,0">Parametros:</Label>
+                <ListBox Grid.ColumnSpan="99" Grid.Row="4"  Name="lstBxParametros" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                         SelectionMode="Single" ItemsSource="{Binding Path=SelectedItem.ListaParams, ElementName=lstBxRutinas}" 
+                         SelectionChanged="lstBxParametros_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate >
+                            <Border Name="border" Padding="5">
+                                <StackPanel>
+                                    <Label Content="{Binding Path=Texto}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Separator Grid.ColumnSpan="99" Grid.Row="5"  Name="separadorHoriz"/>
+                <Label Grid.ColumnSpan="99" Grid.Row="6"  Name="lblDescripcionParam" VerticalAlignment="Center" Margin="0,0,0,0">Descripción:</Label>
+                <TextBox Grid.ColumnSpan="99" Grid.Row="7"  Name="txtDescripcionParamContenido" TextWrapping="Wrap" AcceptsReturn="True"
+                         Text="{Binding Path=SelectedItem.Descripcion, ElementName=lstBxParametros}"
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsReadOnly="True" />
+            </Grid>                
+          
+            <Grid Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  Grid.Row="2" Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="*" /> 
+                </Grid.RowDefinitions>
+              
+                <Label Grid.Row="0"  Name="lblUso">Ejemplo de uso:</Label>
+
+                <avalonedit:TextEditor HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       Grid.Row="1" Name="txtEjemplo" WordWrap="True" IsReadOnly="True" />
+            </Grid>
+           
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Right" Margin="0,10,6,5"
+                        Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="99">
+                <Button Name="bttnAceptar" Style="{StaticResource BlueButton}" Click="bttnAceptar_Click" Margin="0,0,5,0" Width="75">Aceptar</Button>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

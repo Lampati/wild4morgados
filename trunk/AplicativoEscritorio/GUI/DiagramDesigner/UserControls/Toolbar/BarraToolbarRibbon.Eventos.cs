@@ -77,7 +77,6 @@ namespace Ragnarok.UserControls.Toolbar
             {
                 SalvarConfiguracionEvent(sender, e);
             }
-
         }
 
         private void ModificarPropiedadesEjercicioEventFire(object sender, ModificarPropiedadesEjercicioEventArgs e)
@@ -86,9 +85,7 @@ namespace Ragnarok.UserControls.Toolbar
             {
                 ModificarPropiedadesEjercicioEvent(sender, e);
             }
-
         }
-
      
     }
 }

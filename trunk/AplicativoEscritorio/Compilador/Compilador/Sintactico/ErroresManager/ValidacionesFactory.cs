@@ -169,7 +169,11 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static bool AsignacionRepetido(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
             return cantidad < 2;
         }
@@ -178,7 +182,11 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static bool AsignacionFaltante(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
             return cantidad > 0;
         }
@@ -187,7 +195,7 @@ namespace CompiladorGargar.Sintactico.ErroresManager
 
         internal static bool AsignacionTerminaCorrectamente(List<Terminal> lista)
         {
-            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Asignacion).Count;
+            int cantidad = lista.FindAll(x => x.Componente.Token == Lexicografico.ComponenteLexico.TokenType.Igual).Count;
 
             return cantidad > 0;
         }
