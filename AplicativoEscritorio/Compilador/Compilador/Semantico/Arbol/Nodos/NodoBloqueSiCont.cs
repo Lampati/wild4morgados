@@ -16,11 +16,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             //Aca no hago nada con los labels, se hace todo en el padre
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
-        }
-
+  
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (hijosNodo.Count > 2)
@@ -37,22 +33,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-     
-
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-            
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
 
         public override void CalcularCodigo()
         {

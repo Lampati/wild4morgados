@@ -41,16 +41,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
-
+      
         public override void CalcularCodigo()
         {
             this.VariablesProcPrincipal = this.hijosNodo[0].VariablesProcPrincipal;

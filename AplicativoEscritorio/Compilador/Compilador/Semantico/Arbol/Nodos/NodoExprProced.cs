@@ -16,12 +16,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.EsPasajeParametrosAProcOFunc = true;
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
     
-        }
-
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (this.hijosNodo.Count > 1)
@@ -36,21 +31,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-            this.ListaFirma.AddRange(hijoASintetizar.ListaFirma);
-            
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
+   
 
         public override void CalcularCodigo()
         {

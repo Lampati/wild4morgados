@@ -13,12 +13,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         {
             
         }
-
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
-        }
-
+   
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             this.TipoDato = hijoASintetizar.TipoDato;          
@@ -41,16 +36,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.EsArreglo = false;
             }
 
-            return this;
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-           
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
             return this;
         }
 

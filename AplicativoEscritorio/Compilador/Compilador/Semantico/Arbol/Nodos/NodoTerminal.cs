@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace CompiladorGargar.Semantico.Arbol.Nodos
 {
-    class NodoTerminal : NodoArbolSemantico, IValorizable, ITipificable
+    class NodoTerminal : NodoArbolSemantico, ITipificable
     {
         public NodoTerminal(NodoArbolSemantico nodoPadre, ElementoGramatica elem)
             : base(nodoPadre,elem)
@@ -22,19 +22,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         #region IValorizable Members
 
-        public int ObtenerValor(Terminal t)
-        {
-            switch (t.Componente.Token)
-            {
-                case ComponenteLexico.TokenType.Numero:
-                    return Convert.ToInt32(t.Componente.Lexema);                    
-
-        
-                default:
-                    return int.MinValue;
-            }
-            
-        }
+       
 
         #endregion
 
@@ -166,20 +154,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        public override void ChequearAtributos(Terminal t)
-        {
-
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
-
-        public override void HeredarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
-        {
-
-        }
+   
 
         public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
         {

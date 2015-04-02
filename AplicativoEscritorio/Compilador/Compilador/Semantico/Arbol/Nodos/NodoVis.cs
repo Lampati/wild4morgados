@@ -16,11 +16,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-
-        }
-
+     
         public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
         {
             if (hijoASintetizar.Lexema.ToUpper() == "VISUALIZARLN")
@@ -33,14 +29,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }           
         }
 
-        public override void ChequearAtributos(Terminal t)
-        {
-
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
+      
     }
 }

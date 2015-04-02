@@ -85,14 +85,14 @@ namespace CompiladorGargar.Sintactico
         }
 
 
-        internal bool esVacia()
+        internal bool EsVacia()
         {
             return this.elementosPila.Count == 0;
         }
 
-        internal bool esFinDePila()
+        internal bool EsFinDePila()
         {
-            if (!esVacia())
+            if (!EsVacia())
             {
                 if (this.ObtenerTope().GetType() == typeof(Terminal))
                 {

@@ -167,7 +167,7 @@ namespace Ragnarok
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionCriptografia)
                 {
-                    MessageBox.Show("El contenido del archivo no puede ser leído por Ragnarok", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El contenido del archivo no puede ser leído por GarGar Dev", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionHashNoConcuerda)
                 {
@@ -219,14 +219,14 @@ namespace Ragnarok
                             else
                             {
                                 //Error formato no soportado
-                                MessageBox.Show("El archivo elegido no puede ser abierto por Ragnarok", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("El archivo elegido no puede ser abierto por GarGar Dev", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     }
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionCriptografia)
                 {
-                    MessageBox.Show("El contenido del archivo no puede ser leído por Ragnarok", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("El contenido del archivo no puede ser leído por GarGar Dev", "Error Apertura", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch (AplicativoEscritorio.DataAccess.Excepciones.ExcepcionHashNoConcuerda)
                 {

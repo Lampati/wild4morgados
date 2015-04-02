@@ -62,7 +62,7 @@ namespace Ragnarok.Helpers
         internal static string ElegirArchivoParaAbrir(Window padre, string titulo, string dirInicial)
         {
             return ElegirArchivoAbrir (padre, titulo, dirInicial,
-                string.Format("Archivos de Ragnarok (*.{1} o *.{0})|*.{1};*.{0}|Archivos de Resolución (*.{1})|*.{1}|Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
+                string.Format("Archivos de GarGar Dev (*.{1} o *.{0})|*.{1};*.{0}|Archivos de Resolución (*.{1})|*.{1}|Archivos de Ejercicio (*.{0})|*.{0}|Todos los archivos (*.*)|*.*",
                 AplicativoEscritorio.DataAccess.Entidades.Ejercicio.EXTENSION_EJERCICIO,
                 AplicativoEscritorio.DataAccess.Entidades.ResolucionEjercicio.EXTENSION_RESOLUCION)
                 );

@@ -255,7 +255,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
                 this.DeclaracionesPermitidas = nodoPadre.DeclaracionesPermitidas;
                 this.EsProcSalida = nodoPadre.EsProcSalida;
                 this.EsPasajeParametrosAProcOFunc = nodoPadre.EsPasajeParametrosAProcOFunc;
-                
             }
         }
 
@@ -296,7 +295,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             }
         }
 
-        #region Controladores para calcular atributos, temporales, labels y codigo
 
         private bool AtributosCalculadosEnNodo()
         {
@@ -322,11 +320,6 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return retorno;
         }
 
-        #endregion
-
-
-
-
         internal NodoArbolSemantico ObtenerPrimerHijo()
         {
             this.hijosNodo[0].TablaSimbolos = this.TablaSimbolos;
@@ -343,12 +336,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ProcSalidaYaCreadoyCorrecto = nodo.ProcSalidaYaCreadoyCorrecto;
             this.ProcSalidaCrearUnaVez = nodo.ProcSalidaCrearUnaVez;
 
-
-            //PRUEBA
-            //this.Lugar = nodo.Lugar;
-
  	        int i = this.hijosNodo.IndexOf(nodo);
-
             this.atributosCalculados[i] = true;
 
             this.hijosNodo[i] = nodo;
@@ -400,38 +388,32 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
+        public virtual void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
+        {
+            
+        }
 
-        public abstract void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar);
+        public virtual void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
+        {
+            
+        }
 
-        public abstract void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar);
+        public virtual void ChequearAtributos(Terminal t)
+        {
+            
+        }
 
-        public abstract void ChequearAtributos(Terminal t);
-        
-        public abstract NodoArbolSemantico SalvarAtributosParaContinuar();
-
-
+        public virtual NodoArbolSemantico SalvarAtributosParaContinuar()
+        {
+            return this;
+        }
 
         public override string ToString()
         {
             return this.elemento.ToString();
         }
-
         
-
-     
-
-
-
-        //Entrega 4 -- Generacion de codigo
-
-
         public virtual void CalcularCodigo()
-        {
-            
-        }
-
-
-        public virtual void CalcularExpresiones()
         {
             
         }

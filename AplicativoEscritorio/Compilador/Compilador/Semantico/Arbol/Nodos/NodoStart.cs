@@ -62,15 +62,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
-        {
-            
-        }
-
-        public override void SintetizarAtributosANodo(NodoArbolSemantico nodoArbolSemantico)
-        {
-        }
-
+   
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (this.hijosNodo.Count > 1)

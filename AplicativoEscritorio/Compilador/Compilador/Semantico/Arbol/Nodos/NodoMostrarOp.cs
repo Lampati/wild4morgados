@@ -17,11 +17,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             
         }
 
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
-        }
-
+     
         public override NodoArbolSemantico CalcularAtributos(Terminal t)
         {
             if (this.hijosNodo[0].Lexema.ToUpper().Equals("MOSTRARP"))
@@ -32,21 +28,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             return this;
         }
 
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-
-            
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
-
-        public override NodoArbolSemantico SalvarAtributosParaContinuar()
-        {
-            return this;
-        }
+     
 
         public override void CalcularCodigo()
         {

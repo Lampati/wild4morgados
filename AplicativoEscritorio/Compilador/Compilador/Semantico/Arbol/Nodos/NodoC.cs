@@ -88,22 +88,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             this.ActividadViewModel = act;
         }
 
-   
-
-        public override void HeredarAtributosANodo(NodoArbolSemantico hijoAHeredar)
-        {
-            
-        }
-
-        public override void SintetizarAtributosANodo(NodoArbolSemantico hijoASintetizar)
-        {
-            
-        }
-
-        public override void ChequearAtributos(Terminal t)
-        {
-            
-        }
+     
 
         public override NodoArbolSemantico SalvarAtributosParaContinuar()
         {

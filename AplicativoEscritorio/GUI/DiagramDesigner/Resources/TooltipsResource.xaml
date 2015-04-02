@@ -160,7 +160,7 @@
     <!-- Ayuda-->
 
     <clr:String x:Key="TooltipManualRagnarok">
-        Ejecuta el programa lector de pdf para abrir el manual del aplicativo Ragnarok
+        Ejecuta el programa lector de pdf para abrir el manual del aplicativo GarGar Dev
     </clr:String>
 
     <clr:String x:Key="TooltipManualGargar">
