@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ArrayOfRutinaPredefData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RutinaPredefData>
+    <Nombre>COSENO</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que calcula el coseno en grados</Descripcion>
+    <Ejemplo>
+      x = COSENO(0); {Esto devuelve 1}
+      x = COSENO(45); {Esto devuelve 0.7071067}
+      x = COSENO(90); {Esto devuelve 0}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número en grados a calcular el coseno</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+
+  <RutinaPredefData>
+    <Nombre>ESIMPAR</Nombre>
+    <Tipo>Booleano</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que chequea si la parte entera de un número es impar</Descripcion>
+    <Ejemplo>
+      x = ESIMPAR(3); {Esto da verdadero}
+      x = ESIMPAR(4.15); {Esto da falso}
+      x = ESIMPAR(17.14); {Esto da verdadero}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número con o sin decimales a chequear si es impar</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>ESPAR</Nombre>
+    <Tipo>Booleano</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que chequea si la parte entera de un número es par</Descripcion>
+    <Ejemplo>
+      x = ESPAR(2); {Esto da verdadero}
+      x = ESPAR(3.14); {Esto da falso}
+      x = ESPAR(4.14); {Esto da verdadero}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número con o sin decimales a chequear si es par</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>PI</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que devuelve el número PI</Descripcion>
+    <Ejemplo>x = PI(); {Esto devuelve 3.1415926535}</Ejemplo>
+    <ListaParams></ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>POTENCIA</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que permite realizar calculos de potencia sobre una base y un exponente que se pasan por parametro</Descripcion>
+    <Ejemplo>x = POTENCIA(2, 8 ); {Esto da 64}</Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>base : número</Texto>
+        <Descripcion>Número base sobre el cual se hace la potencia</Descripcion>
+      </ParametroPredefData>
+      <ParametroPredefData>
+        <Texto>exp : número</Texto>
+        <Descripcion>Número exponente el que se eleva la base</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>RAIZ</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que permite realizar calculos de raiz sobre una base y un exponente que se pasan por parametro</Descripcion>
+    <Ejemplo>
+      x = RAIZ(9, 2 ); {Esto da 3}
+      x = RAIZ(-9, 2 ); {Esto arroja error. No se pueden calcular raices con base negativa}
+      x = RAIZ(9, -2 ); {Esto arroja error. No se pueden calcular raices con exponente negativo}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>base : número</Texto>
+        <Descripcion>Número base sobre el cual se hace la raiz</Descripcion>
+      </ParametroPredefData>
+      <ParametroPredefData>
+        <Texto>raiz : número</Texto>
+        <Descripcion>Número exponente sobre el que se realiza la raiz</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>RCOSENO</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que calcula el coseno en radianes</Descripcion>
+    <Ejemplo>
+      x = RCOSENO(0); {Esto devuelve 1}
+      x = RCOSENO(PI()/4); {Esto devuelve 0.7071067}
+      x = RCOSENO(PI()/2); {Esto devuelve 0}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número en radianes a calcular el coseno</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>REDONDEAR</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que redondea el número pasado por parametro</Descripcion>
+    <Ejemplo>
+      x = REDONDEAR(3); {Esto devuelve 3}
+      x = REDONDEAR(4.15); {Esto devuelve 4}
+      x = REDONDEAR(17.74); {Esto devuelve 18}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número con o sin decimales a redondear</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>RSENO</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que calcula el seno en radianes</Descripcion>
+    <Ejemplo>
+      x = RSENO(0); {Esto devuelve 0}
+      x = RSENO(PI()/4); {Esto devuelve 0.7071067}
+      x = RSENO(PI()/2); {Esto devuelve 1}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número en radianes a calcular el seno</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>RTANGENTE</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que calcula la tangente en radianes</Descripcion>
+    <Ejemplo>
+      x = RTANGENTE(0); {Esto devuelve 0}
+      x = RTANGENTE(PI()/4); {Esto devuelve 1}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número en radianes a calcular la tangente</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>SENO</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que calcula el seno en grados</Descripcion>
+    <Ejemplo>
+      x = SENO(0); {Esto devuelve 0}
+      x = SENO(45); {Esto devuelve 0.7071067}
+      x = SENO(90); {Esto devuelve 1}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número en grados a calcular el seno</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>TANGENTE</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que calcula la tangente en grados</Descripcion>
+    <Ejemplo>x = TANGENTE(0); {Esto devuelve 0}
+    x = TANGENTE(45); {Esto devuelve 1}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número en grados a calcular la tangente</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>TRUNCAR</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que trunca la parte decimal de un número, si esta tuviere</Descripcion>
+    <Ejemplo>
+    x = TRUNCAR(3); {Esto devuelve 3}
+    x = TRUNCAR(4.15); {Esto devuelve 4}
+    x = TRUNCAR(17.14); {Esto devuelve 17}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número con o sin decimales a truncar</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+  <RutinaPredefData>
+    <Nombre>VALABS</Nombre>
+    <Tipo>número</Tipo>
+    <EsFunc>true</EsFunc>
+    <Descripcion>Función que devuelve el valor absoluto de un número</Descripcion>
+    <Ejemplo>
+      x = VALABS(3); {Esto devuelve 3}
+      x = VALABS(-4.15); {Esto devuelve 4.15}
+      x = VALABS(-17.14); {Esto devuelve 17.14}
+    </Ejemplo>
+    <ListaParams>
+      <ParametroPredefData>
+        <Texto>num : número</Texto>
+        <Descripcion>Número con o sin decimales a calcular el valor absoluto</Descripcion>
+      </ParametroPredefData>
+    </ListaParams>
+  </RutinaPredefData>
+</ArrayOfRutinaPredefData>
+
+
+
+
+
+
+

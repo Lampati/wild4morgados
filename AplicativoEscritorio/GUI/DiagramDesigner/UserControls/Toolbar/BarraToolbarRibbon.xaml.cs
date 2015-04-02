@@ -24,6 +24,8 @@ using System.Diagnostics;
 using System.IO;
 using ModoGrafico.Views;
 using Utilidades;
+using Ragnarok.Tutorial;
+using Ragnarok.EjercicioBrowser;
 
 namespace Ragnarok.UserControls.Toolbar
 {
@@ -104,8 +106,11 @@ namespace Ragnarok.UserControls.Toolbar
 
                     if (archCargado.GetType() == typeof(Ejercicio))
                     {
-                       
-
+                        // flanzani 11/11/2012
+                        // Issue 111
+                        // Vuelvo a setear la parte grafica en null cuando cargo un ejercicio
+                        galleryDificultad.SelectedValue = null;
+                        cboBoxDificultad.Text = "";
                         galleryDificultad.SelectedValue = archCargado.NivelDificultad.ToString();
 
                         cboBoxDificultad.Visibility = System.Windows.Visibility.Visible;    
@@ -242,12 +247,6 @@ namespace Ragnarok.UserControls.Toolbar
         {
             InitializeComponent();
 
-            Sincronizacion.Eventos.Handler.GuardarEjercicioEvent += new Sincronizacion.Eventos.Handler.GuardarEjercicioHandler(Handler_GuardarEjercicioEvent);
-            Sincronizacion.Eventos.Handler.ConectandoEvent += new Sincronizacion.Eventos.Handler.ConectandoHandler(Handler_ConectandoEvent);
-            Sincronizacion.Eventos.Handler.ConectadoEvent += new Sincronizacion.Eventos.Handler.ConectadoHandler(Handler_ConectadoEvent);
-            Sincronizacion.Eventos.Handler.FinalizadoEvent += new Sincronizacion.Eventos.Handler.FinalizadoHandler(Handler_FinalizadoEvent);
-            Sincronizacion.Eventos.Handler.InvocandoMetodoEvent += new Sincronizacion.Eventos.Handler.InvocandoMetodoHandler(Handler_InvocandoMetodoEvent);
-            Sincronizacion.Eventos.Handler.ErrorConexionEvent += new Sincronizacion.Eventos.Handler.ErrorConexionHandler(Handler_ErrorConexionEvent);
 
             #if (DEBUG)
             
@@ -261,6 +260,34 @@ namespace Ragnarok.UserControls.Toolbar
             #endif
 
         }
+
+        // flanzani 22/11/2012
+        // IDC_APP_9
+        // Repositorio de ejercicios
+        // Puse que los eventos de sincronizacion se carguen unicamente por parametro cuando se abre un popup
+        private void SubscribirAEventosSincronizacion(bool darAlta)
+        {
+            if (darAlta)
+            {
+                Sincronizacion.Eventos.Handler.GuardarEjercicioEvent += new Sincronizacion.Eventos.Handler.GuardarEjercicioHandler(Handler_GuardarEjercicioEvent);
+                Sincronizacion.Eventos.Handler.ConectandoEvent += new Sincronizacion.Eventos.Handler.ConectandoHandler(Handler_ConectandoEvent);
+                Sincronizacion.Eventos.Handler.ConectadoEvent += new Sincronizacion.Eventos.Handler.ConectadoHandler(Handler_ConectadoEvent);
+                Sincronizacion.Eventos.Handler.FinalizadoEvent += new Sincronizacion.Eventos.Handler.FinalizadoHandler(Handler_FinalizadoEvent);
+                Sincronizacion.Eventos.Handler.InvocandoMetodoEvent += new Sincronizacion.Eventos.Handler.InvocandoMetodoHandler(Handler_InvocandoMetodoEvent);
+                Sincronizacion.Eventos.Handler.ErrorConexionEvent += new Sincronizacion.Eventos.Handler.ErrorConexionHandler(Handler_ErrorConexionEvent);
+            }
+            else
+            {
+                Sincronizacion.Eventos.Handler.GuardarEjercicioEvent -= new Sincronizacion.Eventos.Handler.GuardarEjercicioHandler(Handler_GuardarEjercicioEvent);
+                Sincronizacion.Eventos.Handler.ConectandoEvent -= new Sincronizacion.Eventos.Handler.ConectandoHandler(Handler_ConectandoEvent);
+                Sincronizacion.Eventos.Handler.ConectadoEvent -= new Sincronizacion.Eventos.Handler.ConectadoHandler(Handler_ConectadoEvent);
+                Sincronizacion.Eventos.Handler.FinalizadoEvent -= new Sincronizacion.Eventos.Handler.FinalizadoHandler(Handler_FinalizadoEvent);
+                Sincronizacion.Eventos.Handler.InvocandoMetodoEvent -= new Sincronizacion.Eventos.Handler.InvocandoMetodoHandler(Handler_InvocandoMetodoEvent);
+                Sincronizacion.Eventos.Handler.ErrorConexionEvent -= new Sincronizacion.Eventos.Handler.ErrorConexionHandler(Handler_ErrorConexionEvent);
+            }
+        }
+
+        
 
         private void ButtonCompilacion_Click(object sender, RoutedEventArgs e)
         {
@@ -298,6 +325,18 @@ namespace Ragnarok.UserControls.Toolbar
         private void ButtonBuscarYReemplazar_Click(object sender, RoutedEventArgs e)
         {
             AbrirBusquedaEventFire(sender, new AbrirBusquedaEventArgs(true));
+        }
+
+        // flanzani 10/11/2012
+        // IDC_APP_4
+        // Mostrar las funciones predefinidas por el framework
+        // Agrego el handler del boton
+        private void ButtonFuncPredef_Click(object sender, RoutedEventArgs e)
+        {
+            FuncionesPredefConsultaWindow window = new FuncionesPredefConsultaWindow();
+            window.Owner = this.Owner;
+            window.ShowDialog();
+
         }
 
         private void bttnDirEjCreados_Click(object sender, RoutedEventArgs e)
@@ -604,8 +643,33 @@ namespace Ragnarok.UserControls.Toolbar
         }
         #endregion
 
+        // flanzani 22/11/2012
+        // IDC_APP_9
+        // Repositorio de ejercicios
+        // Apertura del repositorio de ejercicios
+        private void btnSincroRepo_Click(object sender, RoutedEventArgs e)
+        {
+            ConfiguracionAplicacion.RecrearDirectorios();
+
+            BrowserMainWindow browser = new BrowserMainWindow();
+            browser.Owner = this.Owner;
+
+            this.Owner.ApplyBlurEffect();
+
+            browser.ShowDialog();
+
+            this.Owner.ClearBlurEffect();
+
+        }
+
         private void btnSincroGeneral_Click(object sender, RoutedEventArgs e)
         {
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Puse que los eventos de sincronizacion se carguen/descarguen unicamente por parametro cuando se abre un popup
+            SubscribirAEventosSincronizacion(true);
+
             ConfiguracionAplicacion.RecrearDirectorios();
 
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
@@ -664,10 +728,22 @@ namespace Ragnarok.UserControls.Toolbar
             propertyEditorWindow.ShowDialog();
 
             this.Owner.ClearBlurEffect();
+
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Puse que los eventos de sincronizacion se carguen/descarguen unicamente por parametro cuando se abre un popup
+            SubscribirAEventosSincronizacion(false);
         }
 
         private void btnSincroCurso_Click(object sender, RoutedEventArgs e)
         {
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Puse que los eventos de sincronizacion se carguen/descarguen unicamente por parametro cuando se abre un popup
+            SubscribirAEventosSincronizacion(true);
+
             ConfiguracionAplicacion.RecrearDirectorios();
 
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
@@ -740,10 +816,22 @@ namespace Ragnarok.UserControls.Toolbar
             propertyEditorWindow.ShowDialog();
 
             this.Owner.ClearBlurEffect();
+
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Puse que los eventos de sincronizacion se carguen/descarguen unicamente por parametro cuando se abre un popup
+            SubscribirAEventosSincronizacion(false);
         }
 
         private void btnSincroEjercicio_Click(object sender, RoutedEventArgs e)
         {
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Puse que los eventos de sincronizacion se carguen/descarguen unicamente por parametro cuando se abre un popup
+            SubscribirAEventosSincronizacion(true);
+
             ConfiguracionAplicacion.RecrearDirectorios();
 
             PropertyEditionWindow propertyEditorWindow = new PropertyEditionWindow();
@@ -815,6 +903,12 @@ namespace Ragnarok.UserControls.Toolbar
             propertyEditorWindow.ShowDialog();
 
             this.Owner.ClearBlurEffect();
+
+            // flanzani 22/11/2012
+            // IDC_APP_9
+            // Repositorio de ejercicios
+            // Puse que los eventos de sincronizacion se carguen/descarguen unicamente por parametro cuando se abre un popup
+            SubscribirAEventosSincronizacion(false);
         }
 
         private void btnPropiedadesSincro_Click(object sender, RoutedEventArgs e)
@@ -873,7 +967,10 @@ namespace Ragnarok.UserControls.Toolbar
                 if (dialog.Servidores.Count > 0)
                 {
                     ConfiguracionAplicacion.UrlsDescargaEjercicios = string.Join("\r\n",dialog.Servidores);
-                    ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(Globales.ConstantesGlobales.PathEjecucionAplicacion,
+
+                    string pathAppData = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Program.AR");
+
+                    ConfiguracionAplicacion.Guardar(System.IO.Path.Combine(pathAppData,
                                          Globales.ConstantesGlobales.NOMBRE_ARCH_CONFIG_APLICACION));
                 }
             }
@@ -1017,5 +1114,24 @@ namespace Ragnarok.UserControls.Toolbar
 
             this.Owner.ClearBlurEffect();
         }
+
+		// flanzani 11/11/2012
+	    // IDC_APP_5
+		// Tutorial para la aplicacion
+        // Activo y desactivo el tutorial mediante el checkbox
+        private void chkTutorial_Click(object sender, RoutedEventArgs e)
+        {
+            TutorialManager.Activado = chkTutorial.IsChecked.Value;
+            
+
+            if (TutorialManager.Activado)
+            {
+                TutorialManager.MostrarTutorialAperturaAplicacion(this.Owner);
+    }
+
+            SalvarConfiguracionEventFire(this, new SalvarConfiguracionEventArgs());
+}
+
+
     }
 }

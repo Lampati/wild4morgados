@@ -77,10 +77,14 @@ namespace CompiladorGargar.Sintactico.Gramatica
 
         internal static Terminal ElementoAsignacion()
         {
+            // flanzani 9/11/2012
+            // IDC_APP_3
+            // Cambiar el := por =
+            // Cambio el componenteLexico por el Igual, ya que ahora es el que indica asignacion y modifico su lexema
             Terminal t = new Terminal();
             t.componente = new ComponenteLexico();
-            t.componente.Token = ComponenteLexico.TokenType.Asignacion;
-            t.componente.Lexema = ":=";
+            t.componente.Token = ComponenteLexico.TokenType.Igual;
+            t.componente.Lexema = "=";
             return t;
         }
 

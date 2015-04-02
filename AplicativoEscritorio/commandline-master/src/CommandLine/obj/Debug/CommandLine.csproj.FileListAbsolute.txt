@@ -3,3 +3,8 @@ D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-mas
 D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\obj\Debug\CommandLine.dll
 D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\obj\Debug\CommandLine.pdb
 D:\DESARROLLO\PROYECTOS\ProyectoFinal\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\bin\Debug\CommandLine.XML
+D:\DESARROLLO\PROYECTOS\ProyectoFinal USAR WILD4MORGADOS\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\bin\Debug\CommandLine.XML
+D:\DESARROLLO\PROYECTOS\ProyectoFinal USAR WILD4MORGADOS\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\bin\Debug\CommandLine.dll
+D:\DESARROLLO\PROYECTOS\ProyectoFinal USAR WILD4MORGADOS\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\bin\Debug\CommandLine.pdb
+D:\DESARROLLO\PROYECTOS\ProyectoFinal USAR WILD4MORGADOS\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\obj\Debug\CommandLine.dll
+D:\DESARROLLO\PROYECTOS\ProyectoFinal USAR WILD4MORGADOS\trunk\AplicativoEscritorio\commandline-master\src\CommandLine\obj\Debug\CommandLine.pdb

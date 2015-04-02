@@ -95,7 +95,14 @@ namespace InterfazTextoGrafico
             int orden = 10;
             foreach (string key in codigosFuncProc.Keys)
             {
-                this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key);
+                //ET (11/11/2012): No se quitaba el "_" lo que hacía que muestre mal la llamada circular cuando era anidada entre 3 o mas procedimientos
+                string key_aux = String.Empty;
+                if (key.Contains("_"))
+                    key_aux = key.Substring(0, key.IndexOf("_"));
+                else
+                    key_aux = key;
+                //FIN CAMBIO
+                this.ConstruirOrdenRecursivo(codigosFuncProc, sl, codigosFuncProc[key], ref orden, key_aux);
             }
 
             if (!Object.Equals(salida, null))

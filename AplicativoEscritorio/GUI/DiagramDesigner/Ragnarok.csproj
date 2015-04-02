@@ -69,6 +69,13 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -98,6 +105,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebProgramAR.EntidadesDTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dlls\WebProgramAR.EntidadesDTO.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -116,6 +127,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DialogWindows\FuncionesPredefConsultaWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DialogWindows\ErrorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,6 +148,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DialogWindows\SelectorModoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EjercicioBrowser\BrowserCursosUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EjercicioBrowser\BrowserMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EjercicioBrowser\BrowserEjerciciosUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EjercicioBrowser\EjercicioDetallesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EjercicioBrowser\CursoDetallesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +226,10 @@
     <Page Include="Themes\ExpressionDark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\PopUpGlobo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Mensajes\BarraMensajes.xaml">
       <SubType>Designer</SubType>
@@ -309,9 +348,14 @@
     <Compile Include="DialogWindows\AcercaDeWindow.xaml.cs">
       <DependentUpon>AcercaDeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogWindows\FuncionesPredefConsultaWindow.xaml.cs">
+      <DependentUpon>FuncionesPredefConsultaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DialogWindows\ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogWindows\FuncionesPredef\ParametroPredefData.cs" />
+    <Compile Include="DialogWindows\FuncionesPredef\RutinaPredefData.cs" />
     <Compile Include="DialogWindows\ObjetoVentana.cs" />
     <Compile Include="DialogWindows\PropertyEditionWindow.xaml.cs">
       <DependentUpon>PropertyEditionWindow.xaml</DependentUpon>
@@ -325,6 +369,23 @@
     <Compile Include="DialogWindows\SelectorModoDialog.xaml.cs">
       <DependentUpon>SelectorModoDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EjercicioBrowser\BrowserCursosUserControl.xaml.cs">
+      <DependentUpon>BrowserCursosUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\BrowserMainWindow.xaml.cs">
+      <DependentUpon>BrowserMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\BrowserUserControlBase.cs" />
+    <Compile Include="EjercicioBrowser\BrowserEjerciciosUserControl.xaml.cs">
+      <DependentUpon>BrowserEjerciciosUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\EjercicioDetallesWindow.xaml.cs">
+      <DependentUpon>EjercicioDetallesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\CursoDetallesWindow.xaml.cs">
+      <DependentUpon>CursoDetallesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EjercicioBrowser\EventArgsClasses\MensajeEstadoEventArgs.cs" />
     <Compile Include="EventArgsClasses\AbrirBusquedaEventArgs.cs" />
     <Compile Include="EventArgsClasses\CambioModoEventArgs.cs" />
     <Compile Include="EventArgsClasses\CompilacionEventArgs.cs" />
@@ -361,6 +422,10 @@
       <DependentUpon>WindowDetalleConsultaTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventArgsClasses\CambiarTamanioEventArgs.cs" />
+    <Compile Include="Tutorial\PopUpGlobo.xaml.cs">
+      <DependentUpon>PopUpGlobo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\TutorialManager.cs" />
     <Compile Include="UserControls\Entorno\EsquemaCentral.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.Eventos.cs" />
     <Compile Include="UserControls\Mensajes\BarraMensajes.xaml.cs">
@@ -463,6 +528,14 @@
     <Compile Include="SelectionService.cs" />
     <Compile Include="Toolbox.cs" />
     <Compile Include="ToolboxItem.cs" />
+    <Resource Include="Resources\Images\download16.png" />
+    <Resource Include="Resources\Images\database32.png" />
+    <Resource Include="Resources\Images\download48.png" />
+    <Content Include="rutinasPredef.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Resources\Images\Funciones48.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -481,6 +554,7 @@
     <Content Include="Manuales\ManualGarGar.pdf" />
     <Content Include="Manuales\ManualRagnarok.pdf" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

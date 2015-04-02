@@ -54,7 +54,7 @@ namespace InterfazTextoGrafico.Auxiliares
 
                 if (this.llamadas.ContainsKey(llam))
                     if (cadenaInvocaciones.Contains(invocador))
-                        throw new Excepciones.ExcepcionLlamadaCircular(String.Format("Se ha detectado una llamada circular en {0} ({1})", llamador, invocador));
+                        throw new Excepciones.ExcepcionLlamadaCircular(String.Format("Se ha detectado una llamada circular en {0}", invocador));
                     else
                         this.ValidarLoopsRecursivo(this.llamadas[llam], invocador, cadenaInvocaciones, llam);
             }

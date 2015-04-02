@@ -205,7 +205,8 @@ namespace Ragnarok.UserControls.Entorno
                 }
                 catch (InterfazTextoGrafico.Excepciones.ExcepcionLlamadaCircular ex)
                 {
-                    MessageBox.Show(ex.Message, "Llamada circular detectada", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    //ET (11/11/2012): Saco este show porque se notifica 2 veces
+                    //MessageBox.Show(ex.Message, "Llamada circular detectada", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
             }
         }

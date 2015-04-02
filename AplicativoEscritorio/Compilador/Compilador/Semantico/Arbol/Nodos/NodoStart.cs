@@ -95,6 +95,10 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
 
         public override void CalcularCodigo()
         {
+			// flanzani 15/11/2012
+            // IDC_APP_6
+            // Agregar funciones matematicas al framework
+            // Agrego la excepcion en pascal para cuando la tangente es invalida y da excepcion
             StringBuilder strBldr = new StringBuilder();
 
             strBldr.AppendLine("program temporal;");
@@ -111,6 +115,7 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("EIteracionInfinitaException = class(Exception);");
             strBldr.AppendLine("EIndiceArregloInvalido = class(Exception);");
             strBldr.AppendLine("EMatematicaRaizException = class(Exception);");      
+            strBldr.AppendLine("EMatematicaTangenteException = class(Exception);");      
             strBldr.AppendLine(ArmarTiposDeArreglo(this.TablaSimbolos.ListaTiposArreglos));
             strBldr.AppendLine("Var");
             strBldr.AppendLine(string.Format("{0} : integer;",GeneracionCodigoHelpers.VariableContadoraLineas));
@@ -162,12 +167,19 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Error al operar con una raiz", "ERaiz.Message"));
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");            
+            strBldr.AppendLine("on ETangente: EMatematicaTangenteException do");
+            strBldr.AppendLine("begin");
+            strBldr.AppendLine("WriteLn(ETangente.Message);");
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArchConVariable("Error al operar con una tangente", "ETangente.Message"));
+            strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
+            strBldr.AppendLine("end;"); 
             strBldr.AppendLine("on ETotal: Exception do");
             strBldr.AppendLine("begin");
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearErrorEnArch("Error fatal", "Error fatal no controlable al ejecutar la aplicacion."));
             strBldr.AppendLine(GeneracionCodigoHelpers.CrearProcedimientoResultadoIncorrectoEnArchivo());
             strBldr.AppendLine("end;");
             strBldr.AppendLine("end;");
+            strBldr.AppendLine(string.Format("WriteLn('<<presione cualquier tecla para finalizar el programa>>');")); 
             strBldr.AppendLine(GeneracionCodigoHelpers.PausarHastaEntradaTeclado());
             strBldr.AppendLine("end.");
             
