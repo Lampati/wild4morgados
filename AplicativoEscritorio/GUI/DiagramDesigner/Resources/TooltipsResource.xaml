@@ -63,7 +63,7 @@
     </clr:String>
 
     <clr:String x:Key="TooltipSincronizar">
-        Bajar del servidor especificado en propiedades, todos aquellos ejercicios catalogados como globales en la Web de ProgramAr
+        Bajar del servidor especificado en propiedades, todos aquellos ejercicios catalogados como globales en la Web de GarGar Dev
     </clr:String>
 
     <!--
@@ -73,7 +73,7 @@
     // Agrego el tooltip
     -->
     <clr:String x:Key="TooltipSincronizarPorRepositorio">
-        Buscar del servidor especificado en propiedades, cursos y ejercicios provenientes de la Web de ProgramAr para su descarga
+        Buscar del servidor especificado en propiedades, cursos y ejercicios provenientes de la Web de GarGar Dev para su descarga
     </clr:String>
 
     <clr:String x:Key="TooltipSincronizarPorCurso">
@@ -85,11 +85,11 @@
     </clr:String>
 
     <clr:String x:Key="TooltipDondeEncontrarIdEjercicio">
-        El id de ejercicio es el identificador unico que le da ProgramAr a cada ejercicio. Puede consultar los id de ejercicios en la web de ProgramAr
+        El id de ejercicio es el identificador unico que le da GarGar Dev a cada ejercicio. Puede consultar los id de ejercicios en la web de GarGar Dev
     </clr:String>
 
     <clr:String x:Key="TooltipDondeEncontrarIdCurso">
-        El id de curso es el identificador unico que le da ProgramAr a cada curso. Puede consultar los id de ejercicios en la web de ProgramAr
+        El id de curso es el identificador unico que le da GarGar Dev a cada curso. Puede consultar los id de ejercicios en la web de GarGar Dev
     </clr:String>
 
     <clr:String x:Key="TooltipSincronizarPropiedades">
@@ -186,7 +186,7 @@
     // Se agregan los tooltips para la parte de tutorial del ribbon
     -->
     <clr:String x:Key="TooltipChkTutorial">
-        Activar o desactivar el tutorial sobre las funcionalidades de Ragnarok. La ayuda aparece en forma de globos en distintos puntos de la aplicación.
+        Activar o desactivar el tutorial sobre las funcionalidades de GarGar Dev. La ayuda aparece en forma de globos en distintos puntos de la aplicación.
     </clr:String>
 
     <clr:String x:Key="TooltipResetearTutorial">
@@ -205,7 +205,7 @@
     </clr:String>
 
     <clr:String x:Key="TooltipAcercaDe">
-        Muestra la informacion de Ragnarok
+        Muestra la informacion de GarGar Dev
     </clr:String>
 
 </ResourceDictionary>

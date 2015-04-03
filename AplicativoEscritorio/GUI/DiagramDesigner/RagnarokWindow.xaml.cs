@@ -494,7 +494,7 @@ namespace Ragnarok
         {
             if (archCargado.TestsPrueba == null || archCargado.TestsPrueba.Count == 0)
             {
-                MessageBox.Show("El ejercicio no tiene test de prueba para ejecutar", "ProgramAR", MessageBoxButton.OK);
+                MessageBox.Show("El ejercicio no tiene test de prueba para ejecutar", "GarGar Dev", MessageBoxButton.OK);
             }
             else
             {
@@ -502,7 +502,7 @@ namespace Ragnarok
 
                 if (Modo == ModoVisual.Texto && !this.Esquema.EstaIdentado)
                 {
-                    MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
+                    MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "GarGar Dev", MessageBoxButton.YesNoCancel);
 
                     if (result != MessageBoxResult.Cancel)
                     {
@@ -574,7 +574,7 @@ namespace Ragnarok
         {
             if (archCargado.TestsPrueba == null || archCargado.TestsPrueba.Count == 0)
             {
-                MessageBox.Show("No ha creado ningun test de prueba aun. No hay tests de prueba para mostrar", "ProgramAR", MessageBoxButton.OK);
+                MessageBox.Show("No ha creado ningun test de prueba aun. No hay tests de prueba para mostrar", "GarGar Dev", MessageBoxButton.OK);
             }
             else
             {
@@ -650,7 +650,7 @@ namespace Ragnarok
             bool continuar = true;
             if (Modo == ModoVisual.Texto && !this.Esquema.EstaIdentado)
             {
-                MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "ProgramAR", MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show("Para que los test de prueba funcionen correctamente, es necesario que el codigo este correctamente identado. ¿Desea identar el codigo ahora?", "GarGar Dev", MessageBoxButton.YesNoCancel);
 
                 if (result != MessageBoxResult.Cancel)
                 {

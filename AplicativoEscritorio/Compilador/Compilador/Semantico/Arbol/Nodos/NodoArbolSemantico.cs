@@ -202,7 +202,13 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
         internal void CrearTablaSimbolos()
         {
             this.TablaSimbolos = new TablaSimbolos();
-            
+
+
+            // flanzani 8/11/2012
+            // IDC_APP_2
+            // Agregar funciones por defecto en el framework
+            // Se agregan las librerias
+            GlobalesCompilador.AgregarLibreriasFramework(this.TablaSimbolos);	
         }
 
         public NodoArbolSemantico(NodoArbolSemantico nodoPadre, ElementoGramatica elem)

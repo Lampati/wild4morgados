@@ -125,6 +125,12 @@ namespace CompiladorGargar.Semantico.Arbol.Nodos
             strBldr.AppendLine("");
             strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesBasicas());
             
+            // flanzani 8/11/2012
+            // IDC_APP_2
+            // Agregar funciones por defecto en el framework
+            // Agrego la definicion de las funciones del framework para que aparezcan en pascal
+            strBldr.AppendLine(GeneracionCodigoHelpers.DefinirFuncionesFramework(this.TablaSimbolos));       
+     
             strBldr.AppendLine(GeneracionCodigoHelpers.ArmarProcedimientoMarcarEntradaEnArchivo(this.TablaSimbolos));
             strBldr.AppendLine(GeneracionCodigoHelpers.ArmarProcedimientoResFinalEnArchivo(this.TablaSimbolos));
 

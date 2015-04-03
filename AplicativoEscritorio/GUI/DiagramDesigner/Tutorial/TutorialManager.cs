@@ -110,13 +110,13 @@ namespace Ragnarok.Tutorial
                         switch (_pasoActual)
 	                    {
                             case 1:
-                                popUp = new PopUpGlobo("¡Bienvenido a Ragnarok! El tutorial se encuentra activado, asi que verás distintas indicaciones a lo largo del programa. Podés cerrar cualquiera de estas indicaciones haciendo click sobre ella. Podés desactivar este tutorial en cualquier momento si vas a la solapa de Configuración y desactivas la funcion de \"Activar Tutorial\".", true);
+                                popUp = new PopUpGlobo("¡Bienvenido a GarGar Dev! El tutorial se encuentra activado, asi que verás distintas indicaciones a lo largo del programa. Podés cerrar cualquiera de estas indicaciones haciendo click sobre ella. Podés desactivar este tutorial en cualquier momento si vas a la solapa de Configuración y desactivas la funcion de \"Activar Tutorial\".", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.menuAplicacion, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 2:
                                 punto = _ragnarokWindow.ToolbarAplicacion.menuAplicacion.TranslatePoint(new Point(0, 0), _ragnarokWindow);
 
-                                popUp = new PopUpGlobo("En este espacio podrás acceder a todas las funcionalidades de la aplicacion. Ragnarok agrupa en solapas las funcionalidades similares. Abrir o crear un ejercicio o resolución de ejercicio, hará que más solapas aparezcan disponibles.", true);
+                                popUp = new PopUpGlobo("En este espacio podrás acceder a todas las funcionalidades de la aplicacion. GarGar Dev agrupa en solapas las funcionalidades similares. Abrir o crear un ejercicio o resolución de ejercicio, hará que más solapas aparezcan disponibles.", true);
                                 popUp.ColocarPosicion(new Point(punto.X + 60, punto.Y + 14), UbicacionVentanaRagnarok);
                                 break;
 
@@ -150,7 +150,7 @@ namespace Ragnarok.Tutorial
                         switch (_pasoActual)
                         {
                             case 1:
-                                popUp = new PopUpGlobo("Este es el modo texto para programación que tiene Ragnarok. Sirve para programar código GarGar desde tu teclado.", true);
+                                popUp = new PopUpGlobo("Este es el modo texto para programación que tiene GarGar Dev. Sirve para programar código GarGar desde tu teclado.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonTexto, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 2:
@@ -172,7 +172,7 @@ namespace Ragnarok.Tutorial
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonCopiar, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 6:
-                                popUp = new PopUpGlobo("En este area podrás usar la funcionalidad de deshacer y rehacer lo que vayas escrito en el editor de texto.", true);
+                                popUp = new PopUpGlobo("En este area podrás usar la funcionalidad de deshacer y rehacer lo que hayas escrito en el editor de texto.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonRehacer, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 7:
@@ -196,7 +196,7 @@ namespace Ragnarok.Tutorial
                         switch (_pasoActual)
                         {
                             case 1:
-                                popUp = new PopUpGlobo("Este es el modo gráfico de programacion que tiene Ragnarok. En este modo, se programa arrastrando figuras al espacio de trabajo.", true);
+                                popUp = new PopUpGlobo("Este es el modo gráfico de programacion que tiene GarGar Dev. En este modo, se programa arrastrando figuras al espacio de trabajo.", true);
                                 popUp.ColocarPosicion(_ragnarokWindow.ToolbarAplicacion.ButtonFlujo, _ragnarokWindow, UbicacionVentanaRagnarok);
                                 break;
                             case 2:

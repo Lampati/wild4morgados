@@ -45,7 +45,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <AccessText Grid.Row="0" FontWeight="Bold" Text="Formato Aplicación" />
-            <TextBlock Grid.Row="1" Text="Guardar en formato compatible con la aplicación ProgramAR" TextWrapping="Wrap" />            
+            <TextBlock Grid.Row="1" Text="Guardar en formato compatible con la aplicación GarGar Dev" TextWrapping="Wrap" />            
         </Grid>
     </DataTemplate>
 
@@ -62,7 +62,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <AccessText Grid.Row="0" FontWeight="Bold" Text="Formato Web" />            
-            <TextBlock Grid.Row="1" Text="Guardar en formato compatible para subir a la web programAR" TextWrapping="Wrap" />
+            <TextBlock Grid.Row="1" Text="Guardar en formato compatible para subir a la web GarGar Dev" TextWrapping="Wrap" />
         </Grid>
     </DataTemplate>
 

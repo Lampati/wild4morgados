@@ -37,6 +37,51 @@ namespace LibreriaActividades
             InitializeComponent();
             base.PreviewDragOver += new DragEventHandler(SecuenciaDesigner_PreviewDragOver);
             base.PreviewDragEnter += new DragEventHandler(SecuenciaDesigner_PreviewDragEnter);
+
+
+            // flanzani 8/11/2012
+            // IDC_APP_1
+            // Agregar tooltips de error al intentar arrastrar
+            // Agrego estos eventos para poder tener mejor control de cuando mostrar y enconder el popup
+            base.PreviewDragLeave += new DragEventHandler(SecuenciaDesigner_PreviewDragLeave);
+            base.MouseMove += new MouseEventHandler(SecuenciaDesigner_MouseMove);
+
+
+
+            popup.Placement = System.Windows.Controls.Primitives.PlacementMode.Mouse;
+
+            textoPopup = new TextBlock()
+            {                
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFFE1")),
+                Padding = new Thickness(3, 0, 3, 0),
+                Foreground = new SolidColorBrush(Colors.Black)              
+            };
+       
+            grilla.Child = new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(1),
+                Child = textoPopup
+            };
+                     
+
+            
+
+
+        }
+
+        void SecuenciaDesigner_PreviewDragLeave(object sender, DragEventArgs e)
+        {
+            popup.IsOpen = false;
+        }
+
+        void SecuenciaDesigner_MouseMove(object sender, MouseEventArgs e)
+        {
+            // flanzani 8/11/2012
+            // IDC_APP_1
+            // Agregar tooltips de error al intentar arrastrar
+            // Escondo el popup en cada movimiento del mouse para que el popup se mueva al ser arrastrado
+            popup.IsOpen = false;
         }
 
         void SecuenciaDesigner_PreviewDragEnter(object sender, DragEventArgs e)
@@ -59,14 +104,42 @@ namespace LibreriaActividades
                 if ((bool)this.ModelItem.Properties["AdmiteDeclaraciones"].ComputedValue)
                 {
                     if (!actividad.Contains("DeclaracionVariable") && !actividad.Contains("DeclaracionConstante") && !actividad.Contains("DeclaracionArreglo"))
+                    {
+                        // flanzani 8/11/2012
+                        // IDC_APP_1
+                        // Agregar tooltips de error al intentar arrastrar
+                        // Asigno el mensaje correspondiente y muestro el popup
+                        textoPopup.Text = textoNoArrastrarActividades;
+                        popup.Child = grilla;
+                        popup.IsOpen = true;
+
                         e.Effects = DragDropEffects.None;
                 }
                 else
                 {
-                    if (actividad.Contains("DeclaracionVariable") || actividad.Contains("DeclaracionConstante") || actividad.Contains("DeclaracionArreglo"))
-                        e.Effects = DragDropEffects.None;
+                        popup.IsOpen = false;
+                    }
                 }
-                
+                else
+                {
+                    if (actividad.Contains("DeclaracionVariable") || actividad.Contains("DeclaracionConstante") || actividad.Contains("DeclaracionArreglo"))
+                    {
+                        // flanzani 8/11/2012
+                        // IDC_APP_1
+                        // Agregar tooltips de error al intentar arrastrar
+                        // Asigno el mensaje correspondiente y muestro el popup
+                        textoPopup.Text = textoNoArrastrarDeclaraciones;
+                        popup.Child = grilla;
+                        popup.IsOpen = true;
+
+                        e.Effects = DragDropEffects.None;
+                        
+                    }
+                    else
+                    {
+                        popup.IsOpen = false;
+                    }
+                }
             }
             else
             {
@@ -77,7 +150,58 @@ namespace LibreriaActividades
 
                 if (act.GetType() == typeof(Secuencia))
                 {
+                    // flanzani 8/11/2012
+                    // IDC_APP_1
+                    // Agregar tooltips de error al intentar arrastrar
+                    // Asigno el mensaje correspondiente y muestro el popup
+                    textoPopup.Text = textoNoArrastrarSecuencia;
+                    popup.Child = grilla;
+                    popup.IsOpen = true;
+
                     e.Effects = DragDropEffects.None;
+                }
+                else
+                {
+                    if ((bool)this.ModelItem.Properties["AdmiteDeclaraciones"].ComputedValue)
+                    {
+                        if (act.GetType() != typeof(DeclaracionVariable) && act.GetType() != typeof(DeclaracionConstante) && act.GetType() != typeof(DeclaracionArreglo))
+                        {
+                            // flanzani 8/11/2012
+                            // IDC_APP_1
+                            // Agregar tooltips de error al intentar arrastrar
+                            // Asigno el mensaje correspondiente y muestro el popup
+                            textoPopup.Text = textoNoArrastrarActividades;
+                            popup.Child = grilla;
+                            popup.IsOpen = true;
+
+                            e.Effects = DragDropEffects.None;
+                        }
+                        else
+                        {
+                            popup.IsOpen = false;
+                        }
+                    }
+                    else
+                    {
+                        if (act.GetType() == typeof(DeclaracionVariable) || act.GetType() == typeof(DeclaracionConstante) || act.GetType() == typeof(DeclaracionArreglo))
+                        {
+                            // flanzani 8/11/2012
+                            // IDC_APP_1
+                            // Agregar tooltips de error al intentar arrastrar
+                            // Asigno el mensaje correspondiente y muestro el popup
+                            textoPopup.Text = textoNoArrastrarDeclaraciones;
+                            popup.Child = grilla;
+                            popup.IsOpen = true;                           
+
+                    e.Effects = DragDropEffects.None;
+
+                        }
+                        else
+                        {
+                            popup.IsOpen = false;
+                        }
+                    }
+
                 }
             }
         }
@@ -158,5 +282,7 @@ namespace LibreriaActividades
         //        e.Handled = System.Activities.Presentation.View.DesignerView.PasteCommand.CanExecute(null);
         //    }
         //}
+
+        
     }
 }

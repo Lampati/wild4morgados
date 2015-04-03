@@ -181,7 +181,7 @@ namespace Ragnarok
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Error apertura", "Error de lectura de archivo. Por favor corrobore que el archivo sea un ejercicio o resolución de ProgramAr", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error apertura", "Error de lectura de archivo. Por favor corrobore que el archivo sea un ejercicio o resolución de GarGar Dev", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             } //fin si
         }
@@ -298,12 +298,12 @@ namespace Ragnarok
                                 strBldr.AppendLine("Falta cargar la solución en modo texto del ejercicio");
                             }
 
-                            MessageBox.Show(strBldr.ToString(), "ProgramAR", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(strBldr.ToString(), "GarGar Dev", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
 
-                            MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione aceptar para ejecutar el programa.", "ProgramAR", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Es necesario ejecutar el programa para ver que sea correcto. Presione aceptar para ejecutar el programa.", "GarGar Dev", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             ResultadoEjecucion res;
                             if (Modo == ModoVisual.Texto)
@@ -323,7 +323,7 @@ namespace Ragnarok
 
                                     if (archCargado.TestsPrueba.Count > 0)
                                     {
-                                        MessageBox.Show("Es necesario validar todos los test de prueba del programa. Presione OK para validar los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+                                        MessageBox.Show("Es necesario validar todos los test de prueba del programa. Presione OK para validar los test de prueba.", "GarGar Dev", MessageBoxButton.OK);
 
                                         List<NodoTablaSimbolos> aux = res.ResCompilacion.TablaSimbolos.ObtenerVariablesDelProcPrincipal();
                                         aux.AddRange(res.ResCompilacion.TablaSimbolos.ObtenerVariablesGlobales());
@@ -343,7 +343,7 @@ namespace Ragnarok
 
                                         if (todosValidos)
                                         {
-                                            //MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "ProgramAR", MessageBoxButton.OK);
+                                            //MessageBox.Show("Es necesario ejecutar todos los test de prueba del programa. Presione OK para ejecutar uno por uno los test de prueba.", "GarGar Dev", MessageBoxButton.OK);
 
                                             ////PONER ACA LA EJECUCION
 
@@ -483,7 +483,7 @@ namespace Ragnarok
 
             if (ArchCargado != null && ArchCargado.ModificadoDesdeUltimoGuardado)
             {
-                MessageBoxResult result = MessageBox.Show("¿Desea guardar los cambios efectuados?", "ProgramAR", MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show("¿Desea guardar los cambios efectuados?", "GarGar Dev", MessageBoxButton.YesNoCancel);
 
                 switch (result)
                 {

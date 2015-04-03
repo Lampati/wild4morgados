@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ragnarok")]
+[assembly: AssemblyTitle("GarGar Dev")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Organisation")]
-[assembly: AssemblyProduct("Ragnarok")]
-[assembly: AssemblyCopyright("Copyright © Organisation 2008")]
+[assembly: AssemblyCompany("Cohen, Lanzani, Tolstanov")]
+[assembly: AssemblyProduct("GarGar Dev")]
+[assembly: AssemblyCopyright("Copyright © Cohen, Lanzani, Tolstanov 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.6.*")]
-[assembly: AssemblyFileVersion("1.6.*")]
+[assembly: AssemblyVersion("1.9.*")]
+[assembly: AssemblyFileVersion("1.9.*")]
